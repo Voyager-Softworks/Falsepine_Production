@@ -8,11 +8,18 @@ public class PlayerMovement : MonoBehaviour
 {
     public InputAction moveAction;
     public Camera cam;
+    CharacterController controller;
     public float speed = 6f;
 
     // Start is called before the first frame update
     void Start()
     {
+        controller = GetComponent<CharacterController>();
+
+        if (cam == null){
+            cam = Camera.main;
+        }
+
         moveAction.Enable();
     }
 
@@ -24,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
-        if (cam == null) return;
+        if (cam == null || controller == null) return;
 
         //get cam direction
         Vector3 camForward = cam.transform.forward;
@@ -40,7 +47,8 @@ public class PlayerMovement : MonoBehaviour
         moveDir.Normalize();
 
         //apply movement
-        transform.position += (moveDir * speed * Time.deltaTime);
+        //transform.position += (moveDir * speed * Time.deltaTime);
+        controller.Move(moveDir * speed * Time.deltaTime);
 
         //mouse raycast to get direction
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
