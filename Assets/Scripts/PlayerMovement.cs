@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     CharacterController controller;
     public float speed = 6f;
 
+    public Vector3 mouseAimPoint = Vector3.zero;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,15 +52,26 @@ public class PlayerMovement : MonoBehaviour
         //transform.position += (moveDir * speed * Time.deltaTime);
         controller.Move(moveDir * speed * Time.deltaTime);
 
+        //calc the direction to look
+        Vector3 lookDir = GetMouseAimPoint() - transform.position;
+        //remove vertical
+        lookDir.y = 0;
+        lookDir.Normalize();
+        //apply rotation
+        transform.rotation = Quaternion.LookRotation(lookDir);
+    }
+
+    public Vector3 GetMouseAimPoint(){
         //mouse raycast to get direction
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
-        {
-            Vector3 lookDir = hit.point - transform.position;
-            lookDir.y = 0;
-            lookDir.Normalize();
-            transform.rotation = Quaternion.LookRotation(lookDir);
+        //find where ray intersects on the plane of the player
+        Plane playerPlane = new Plane(Vector3.up, transform.position);
+        float rayDistance;
+        if (playerPlane.Raycast(ray, out rayDistance)){
+            //get mouse hit pos
+            Vector3 hitPoint = ray.GetPoint(rayDistance);
+            mouseAimPoint = hitPoint;
         }
+        return mouseAimPoint;
     }
 }
