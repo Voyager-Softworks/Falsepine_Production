@@ -11,4 +11,9 @@ public class UIScript : MonoBehaviour
     public TextMeshProUGUI _ammoText;
     public Image _healthBG;
     public Image _healthBar;
+
+    private void Start() {
+        if (_cursorScript == null) _cursorScript = GetComponent<CursorScript>();
+        if (_cursorScript == null) _cursorScript = FindObjectOfType<CursorScript>();
+    }
 }

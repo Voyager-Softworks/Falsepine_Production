@@ -13,7 +13,7 @@ public class BossChargingState : CustomState
     Vector3 arenaEdgeGoalPosition;
     public override void DoCustomState(NodeAI_Agent agent)
     {
-        Debug.Log("DoCustomState");
+        //Debug.Log("DoCustomState");
         
         if(agent.agent.remainingDistance < 0.1f && !agent.agent.isStopped)
         {
@@ -26,7 +26,7 @@ public class BossChargingState : CustomState
 
     public override void OnStateEnter(NodeAI_Agent agent)
     {
-        Debug.Log("OnStateEnter");
+        //Debug.Log("OnStateEnter");
         agent.SetBool("Arrived", false);
         agentTransform = agent.transform;
         agentGameObject = agent.gameObject;
@@ -48,12 +48,12 @@ public class BossChargingState : CustomState
 
     public override void OnStateExit(NodeAI_Agent agent)
     {
-        Debug.Log("OnStateExit");
+        //Debug.Log("OnStateExit");
     }
 
     public override void DrawStateGizmos(NodeAI_Agent agent)
     {
-        Debug.Log("DrawStateGizmos");
+        //Debug.Log("DrawStateGizmos");
         Gizmos.color = Color.red;
         Gizmos.DrawSphere(agent.agent.destination, 1);
         Gizmos.DrawWireSphere(arenaController.arenaCentre.position, arenaController.arenaRadius);

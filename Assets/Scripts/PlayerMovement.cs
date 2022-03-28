@@ -50,10 +50,12 @@ public class PlayerMovement : MonoBehaviour
         Vector2 move = moveAction.ReadValue<Vector2>();
         Vector3 moveDir = move.x * camRight + move.y * camForward;
         moveDir.Normalize();
+        moveDir *= speed;
+        moveDir.y = -2.0f;
 
         //apply movement
         //transform.position += (moveDir * speed * Time.deltaTime);
-        controller.Move(moveDir * speed * Time.deltaTime);
+        controller.Move(moveDir * Time.deltaTime);
 
         //calc the direction to look
         Vector3 lookDir = GetMouseAimPoint() - transform.position;

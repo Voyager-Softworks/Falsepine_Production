@@ -99,8 +99,8 @@ CharacterController:
   serializedVersion: 2
   m_Height: 2
   m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_SlopeLimit: 0
+  m_StepOffset: 0
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -310,6 +310,9 @@ MonoBehaviour:
   damage: 10
   clipSize: 10
   currentClip: 10
+  shootMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
   aimAction:
     m_Name: Aim
     m_Type: 0
@@ -327,9 +330,9 @@ MonoBehaviour:
       m_Action: Aim
       m_Flags: 0
     m_Flags: 0
-  maxAimSize: 3
-  minAimSize: 0.3
-  currentAimSize: 1
+  maxAimAngle: 25
+  minAimAngle: 5
+  currentAimAngle: 5
   aimTime: 0.5
   reloadAction:
     m_Name: Reload
