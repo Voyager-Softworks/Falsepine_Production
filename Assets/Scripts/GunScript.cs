@@ -18,9 +18,9 @@ public class GunScript : MonoBehaviour
 
     [Header("Aim")]
     public InputAction aimAction;
-    public float maxAimSize = 3.0f;
-    public float minAimSize = 1.0f;
-    public float currentAimSize = 1.0f;
+    public float maxAimAngle = 25.0f;
+    public float minAimAngle = 5.0f;
+    public float currentAimAngle = 5.0f;
     public float aimTime = 1.0f;
     float currentAimTime = 0.0f;
     private Vector3 mouseAimPoint = Vector3.zero;
@@ -31,8 +31,22 @@ public class GunScript : MonoBehaviour
     public float reloadTime = 1.0f;
 
     private void OnDrawGizmos() {
+        //draw aim point
         Gizmos.color = Color.red;
-        Gizmos.DrawSphere(mouseAimPoint, currentAimSize);
+        Gizmos.DrawSphere(mouseAimPoint, 0.1f);
+
+        //draw aim vec
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(transform.position, mouseAimPoint);
+
+        //draw current aim angle
+        Gizmos.color = Color.blue;
+        Vector3 rightAngle = Quaternion.AngleAxis(currentAimAngle, Vector3.up) * transform.forward;
+        Gizmos.DrawLine(transform.position, transform.position + rightAngle * 5.0f);
+        Gizmos.color = Color.yellow;
+        Vector3 leftAngle = Quaternion.AngleAxis(-currentAimAngle, Vector3.up) * transform.forward;
+        Gizmos.DrawLine(transform.position, transform.position + leftAngle * 5.0f);
+
     }
 
 
@@ -61,8 +75,7 @@ public class GunScript : MonoBehaviour
         else currentAimTime -= Time.deltaTime;
         currentAimTime = Mathf.Clamp(currentAimTime, 0.0f, aimTime);
 
-        currentAimSize = Mathf.Lerp(maxAimSize, minAimSize, currentAimTime/aimTime);
-        currentAimSize += Vector3.Distance(transform.position, mouseAimPoint)/20.0f;
+        currentAimAngle = Mathf.Lerp(maxAimAngle, minAimAngle, currentAimTime/aimTime);
     }
 
     private void LookAtCursor()
