@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.AI;
 
 namespace NodeAI
 {
@@ -22,6 +23,17 @@ public class NodeAI_AgentEditor : Editor
         agent = (NodeAI_Agent)target;
         controller = agent.controller;
         serializedAgent = new SerializedObject(agent);
+        if(agent.agent == null)
+        {
+            if(agent.gameObject.GetComponent<NavMeshAgent>() != null)
+            {
+                agent.agent = agent.gameObject.GetComponent<NavMeshAgent>();
+            }
+            else
+            {
+                agent.agent = agent.gameObject.AddComponent<NavMeshAgent>();
+            }
+        }
         if(controller != null)
         {
             controller.parameters.Clear();
@@ -65,6 +77,9 @@ public class NodeAI_AgentEditor : Editor
             case Node.StateType.Wander:
                 EditorGUILayout.LabelField("Current State: Wander");
                 break;
+            case Node.StateType.Custom:
+                EditorGUILayout.LabelField("Current State: " + agent.currentStateEntryNode.stateVars.name);
+                break;
         }
         
         if(controller != null)
@@ -102,10 +117,33 @@ public class NodeAI_AgentEditor : Editor
             Handles.color = Color.red;
             
             if(!agent || !agent.agent) return;
-            Handles.Label(agent.transform.position - Vector3.up, "State: " + agent.currentState.ToString(), textStyle);
-            Handles.DrawSolidDisc(agent.transform.position, Vector3.up, agent.agent.radius);
+            
+            switch(agent.currentState)
+        {
+            case Node.StateType.Flee:
+                
+                Handles.Label(agent.transform.position - Vector3.up, "State: Flee", textStyle);
+                break;
+            case Node.StateType.Idle:
+                
+                Handles.Label(agent.transform.position - Vector3.up, "State: " + agent.currentState.ToString(), textStyle);
+                break;
+            case Node.StateType.Seek:
+                
+                Handles.Label(agent.transform.position - Vector3.up, "State: Idle", textStyle);
+                break;
+            case Node.StateType.Wander:
+            EditorGUILayout.LabelField("Current State: Wander");
+                Handles.Label(agent.transform.position - Vector3.up, "State: Seek", textStyle);
+                break;
+            case Node.StateType.Custom:
+                
+                Handles.Label(agent.transform.position - Vector3.up, "Current State: " + agent.currentStateEntryNode.stateVars.name, textStyle);
+                break;
+        }
+            Handles.DrawSolidDisc(agent.agent.transform.position - (agent.agent.height/2.0f * Vector3.up), Vector3.up, agent.agent.radius);
             Handles.DrawLine(agent.transform.position, agent.transform.position + agent.agent.velocity);
-            Handles.DrawLine(agent.transform.position, agent.transform.position +  (Vector3.up * agent.agent.height));
+            Handles.DrawLine(agent.agent.transform.position - (agent.agent.height/2.0f * Vector3.up), agent.transform.position +  (Vector3.up * agent.agent.height));
             
             Handles.SphereHandleCap(0, agent.transform.position +  (Vector3.up * agent.agent.height), Quaternion.identity, agent.agent.radius, EventType.Repaint);
             

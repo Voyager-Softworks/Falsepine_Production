@@ -550,7 +550,18 @@ public class NodeAI_Agent : MonoBehaviour
 
 
 
-    
+    private void OnDrawGizmos() {
+        if(currentStateEntryNode != null && currentStateEntryNode.stateType == Node.StateType.Custom)
+        {
+            foreach(CustomAIState state in customStates)
+            {
+                if(state.name == currentStateEntryNode.stateVars.name)
+                {
+                    state.state.DrawStateGizmos(this);
+                }
+            }
+        }
+    }
 
 
 }
