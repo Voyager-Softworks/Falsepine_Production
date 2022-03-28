@@ -23,6 +23,11 @@ public class CursorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (cursorImage == null || aimCursor == null || reloadCursor == null) {
+            Debug.LogError("CursorScript: Missing cursor image or cursor sprites");
+            return;
+        }
+
         Cursor.visible = false;
         //get mouse pos
         Vector2 mousePos = Mouse.current.position.ReadValue();
@@ -33,7 +38,6 @@ public class CursorScript : MonoBehaviour
         if (Mouse.current.rightButton.isPressed)
         {
             currentAimSize = Mathf.Lerp(currentAimSize, minAimSize, Time.deltaTime * 5.0f);
-            
         }
         else
         {

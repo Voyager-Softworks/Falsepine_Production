@@ -28,13 +28,16 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (cam == null || controller == null) {
+            Debug.LogError("PlayerMovement: Missing camera or controller");
+            return;
+        }
+
         Move();
     }
 
     void Move()
     {
-        if (cam == null || controller == null) return;
-
         //get cam direction
         Vector3 camForward = cam.transform.forward;
         camForward.y = 0;
