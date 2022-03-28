@@ -20,7 +20,7 @@ public class GunScript : MonoBehaviour
 
         mouseAimPoint = playerMovement.GetMouseAimPoint();
 
-        if (Vector3.Distance(playerMovement.transform.position, mouseAimPoint) > 0.75f)
+        if (Vector3.Distance(playerMovement.transform.position, mouseAimPoint) > 1.5f)
         {
             transform.LookAt(mouseAimPoint);
         }
