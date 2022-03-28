@@ -290,6 +290,65 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32178081b0a21944f96d71118a919ca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootAction:
+    m_Name: Shoot
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 7de0835d-1ccf-453e-a786-116500df4cb1
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 51c001e1-02f1-443a-95d7-f2b02db6f9a7
+      m_Path: <Mouse>/leftButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Shoot
+      m_Flags: 0
+    m_Flags: 0
+  damage: 10
+  clipSize: 10
+  currentClip: 10
+  aimAction:
+    m_Name: Aim
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: bafc8272-f3d9-4f8c-888a-79b307e8e4af
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: aa4c48f8-7f20-4a68-bffa-f717ac1b7132
+      m_Path: <Mouse>/rightButton
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Aim
+      m_Flags: 0
+    m_Flags: 0
+  maxAimSize: 3
+  minAimSize: 0.3
+  currentAimSize: 1
+  aimTime: 0.5
+  reloadAction:
+    m_Name: Reload
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 9f9d775d-e492-4b10-8b82-5104298ffc39
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 745130c1-03d5-48c0-8f51-11aceed0ccb1
+      m_Path: <Keyboard>/r
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Reload
+      m_Flags: 0
+    m_Flags: 0
+  reloadTime: 1
 --- !u!1 &1545178376625084976
 GameObject:
   m_ObjectHideFlags: 0
