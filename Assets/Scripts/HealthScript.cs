@@ -14,7 +14,7 @@ public class HealthScript : MonoBehaviour
     public bool isInvincible = false;
     //public bool isRegenerating = false;
 
-    public UnityEvent onDeath;
+    public UnityEvent OnDeath;
 
 
     // Start is called before the first frame update
@@ -60,7 +60,7 @@ public class HealthScript : MonoBehaviour
         isDead = true;
         currentHealth = 0;
 
-        onDeath.Invoke();
+        OnDeath.Invoke();
     }
 
     public void Heal(float heal)
