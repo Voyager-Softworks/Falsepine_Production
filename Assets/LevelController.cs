@@ -19,6 +19,7 @@ public class LevelController : MonoBehaviour
 
     public void LoadMenu()
     {
+        Cursor.visible = true;
         SceneManager.LoadScene(0);
     }
 
