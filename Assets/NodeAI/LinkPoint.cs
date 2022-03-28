@@ -2,12 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine.Events;
 
 namespace NodeAI
 {
-
+    
     [System.Serializable]
     public class LinkPointEvent : UnityEvent<LinkPoint> { };
     [System.Serializable]
@@ -37,13 +39,15 @@ namespace NodeAI
         public string NodeID;
         [NonSerialized]
         public Node node;
+        #if UNITY_EDITOR
         [SerializeField]
         public GUIStyle style;
+        #endif
         [SerializeField]
         public List<string> linkIDs;
         [SerializeField]
         public LinkPointEvent OnClickEvent;
-
+        #if UNITY_EDITOR
         //LinkPoint
         //Parameters:
         //   string NodeID: The ID of the node this link point belongs to.
@@ -62,7 +66,7 @@ namespace NodeAI
             this.OnClickEvent = OnClickEvent;
             rect = new Rect(0, 0, 10, 20);
         }
-
+        #endif
         //ReconnectEvents
         //Parameters:
         //   LinkPointEvent OnClickEvent: The event to be called when the link point is clicked.
@@ -96,7 +100,7 @@ namespace NodeAI
                 }
             }
         }
-
+        #if UNITY_EDITOR
         //Draw
         //Parameters:
         //   int line: The line the link point is on.
@@ -126,8 +130,10 @@ namespace NodeAI
                 }
             }
         }
+        #endif
 
         
         
     }
+    
 }

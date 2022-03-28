@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ using UnityEngine.Events;
 //namespace NodeAI;
 namespace NodeAI
 {
+
 public class NodeAIEditor : EditorWindow
 {
     //Node UI
@@ -730,10 +732,8 @@ public class NodeAIEditor : EditorWindow
             controller.nodeDictionary.Remove(node.ID);
         }
     }
-    
-
-
-    
 }
+
 }
+#endif
 

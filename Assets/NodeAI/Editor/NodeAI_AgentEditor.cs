@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ using UnityEngine.AI;
 
 namespace NodeAI
 {
+
 [CustomEditor(typeof(NodeAI_Agent))]
 public class NodeAI_AgentEditor : Editor
 {
@@ -151,4 +153,6 @@ public class NodeAI_AgentEditor : Editor
             
     }
 }
+
 }
+#endif

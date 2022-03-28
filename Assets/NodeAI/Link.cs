@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 using UnityEngine.Events;
 
 namespace NodeAI
@@ -46,6 +48,7 @@ namespace NodeAI
             this.OnClickEvent = OnClickEvent;
         }
     
+        #if UNITY_EDITOR
         //Draw
         //Description:
         //    Draws the link.
@@ -74,6 +77,7 @@ namespace NodeAI
                 OnClickEvent.Invoke(this);
             }
         }
+        #endif
 
         
     

@@ -27,12 +27,14 @@ public class Node
     public string title; //Title of the node
     public bool isDragging; //Is the node being dragged?
     public bool selected; //Is the node selected?
+    #if UNITY_EDITOR
     [SerializeField]
     public GUIStyle style; //Style of the node
     [SerializeField]
     public GUIStyle defaultStyle; //Default style of the node
     [SerializeField]
     public GUIStyle selectedStyle; //Selected style of the node
+    #endif
     [SerializeField]
     public LinkPoint seqInput; //Sequence input
     [SerializeField]
@@ -94,7 +96,7 @@ public class Node
             this.index = index;
             
         }
-
+        #if UNITY_EDITOR
         //NodeField constructor
         //Parameters:
         //      string ID: Unique ID of the parent Node
@@ -190,7 +192,7 @@ public class Node
                 this.output.fieldIndex = index;
             }
         }
-
+        #endif
         //RelinkEvents
         //Parameters:
         //      LinkPointEvent OnClickInput: Event for when the input is clicked
@@ -211,7 +213,7 @@ public class Node
             Float,
             Bool
         }
-
+        #if UNITY_EDITOR
         //Draw
         //Parameters:
         //      int line: Which line the field is on
@@ -248,6 +250,7 @@ public class Node
                 output.Draw(line+1, rect);
             }
         }
+        #endif
     }
 
 
@@ -336,7 +339,7 @@ public class Node
             if(field.output != null) field.output.ReconnectLinks(controller);
         }
     }
-
+    #if UNITY_EDITOR
     //Node Constructor
     //Parameters:
     //        Vector2 position: Position of the node
@@ -495,7 +498,7 @@ public class Node
         type = NodeType.Entry;
         OnRemove = null;
     }
-
+    
     //Move
     //Parameters:
     //        Vector2 delta: The amount to move the node
@@ -698,7 +701,7 @@ public class Node
         }
     }
 
-    
+    #endif
 
     
 }
