@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
+using System;
 
 public class GunScript : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class GunScript : MonoBehaviour
     public float damage = 10.0f;
     public int clipSize = 10;
     public int currentClip = 10;
+    public LayerMask shootMask;
 
 
     [Header("Aim")]
@@ -25,28 +27,19 @@ public class GunScript : MonoBehaviour
     float currentAimTime = 0.0f;
     private Vector3 mouseAimPoint = Vector3.zero;
 
+    private Vector3 rightAimAngle = Vector3.zero;
+    private Vector3 leftAimAngle = Vector3.zero;
+
 
     [Header("Reload")]
     public InputAction reloadAction;
     public float reloadTime = 1.0f;
 
     private void OnDrawGizmos() {
-        //draw aim point
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(mouseAimPoint, 0.1f);
-
-        //draw aim vec
-        Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, mouseAimPoint);
-
         //draw current aim angle
-        Gizmos.color = Color.blue;
-        Vector3 rightAngle = Quaternion.AngleAxis(currentAimAngle, Vector3.up) * transform.forward;
-        Gizmos.DrawLine(transform.position, transform.position + rightAngle * 5.0f);
-        Gizmos.color = Color.yellow;
-        Vector3 leftAngle = Quaternion.AngleAxis(-currentAimAngle, Vector3.up) * transform.forward;
-        Gizmos.DrawLine(transform.position, transform.position + leftAngle * 5.0f);
-
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + rightAimAngle * 5.0f);
+        Gizmos.DrawLine(transform.position, transform.position + leftAimAngle * 5.0f);
     }
 
 
@@ -64,18 +57,83 @@ public class GunScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (playerMovement == null || uiScript == null) {
+        if (playerMovement == null || uiScript == null)
+        {
             Debug.LogError("GunScript: Missing player movement or ui script");
             return;
         }
 
         LookAtCursor();
 
+        UpdateAimAngle();
+
+        if (shootAction.triggered)
+        {
+            TryShoot();
+        }
+    }
+
+    private void TryShoot()
+    {
+        if (currentClip > 0)
+        {
+            Shoot();
+        }
+        else
+        {
+            Reload();
+        }
+
+        UpdateUI();
+    }
+
+    private void Shoot()
+    {
+        //get random angle using current aim angle
+        float randomAngle = UnityEngine.Random.Range(-currentAimAngle, currentAimAngle);
+        Vector3 shootDirection = Quaternion.AngleAxis(randomAngle, Vector3.up) * transform.forward;
+
+        //shoot ray using shootmask
+        Ray ray = new Ray(transform.position, shootDirection);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 100.0f, shootMask))
+        {
+            //if hit something, apply damage
+            HealthScript healthScript = hit.collider.GetComponent<HealthScript>();
+            if (healthScript != null)
+            {
+                healthScript.TakeDamage(damage);
+            }
+        }
+
+        currentClip--;
+    }
+
+    private void Reload()
+    {
+        currentClip = clipSize;
+    }
+
+    private void UpdateUI(){
+        uiScript._ammoText.text = currentClip.ToString() + " / " + clipSize.ToString();
+    }
+
+    private void UpdateAimAngle()
+    {
         if (aimAction.ReadValue<float>() > 0.0f) currentAimTime += Time.deltaTime;
         else currentAimTime -= Time.deltaTime;
         currentAimTime = Mathf.Clamp(currentAimTime, 0.0f, aimTime);
 
-        currentAimAngle = Mathf.Lerp(maxAimAngle, minAimAngle, currentAimTime/aimTime);
+        currentAimAngle = Mathf.Lerp(maxAimAngle, minAimAngle, currentAimTime / aimTime);
+        rightAimAngle = Quaternion.AngleAxis(currentAimAngle, Vector3.up) * transform.forward;
+        leftAimAngle = Quaternion.AngleAxis(-currentAimAngle, Vector3.up) * transform.forward;
+
+        CursorScript cs = uiScript._cursorScript;
+        if (cs)
+        {
+            cs.SetCursor(cs.aimCursor, 1.5f - (currentAimTime / aimTime) / 2.0f);
+            cs.cursorImage.color = new Color(1, 1, 1, (currentAimTime / aimTime) * 0.85f + 0.15f);
+        }
     }
 
     private void LookAtCursor()

@@ -10,10 +10,6 @@ public class CursorScript : MonoBehaviour
     public Sprite aimCursor;
     public Sprite reloadCursor;
 
-    float maxAimSize = 3.0f;
-    float minAimSize = 1.0f;
-    float currentAimSize = 1.0f;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -33,20 +29,6 @@ public class CursorScript : MonoBehaviour
         Vector2 mousePos = Mouse.current.position.ReadValue();
         //set cursor pos
         cursorImage.transform.position = mousePos;
-
-        //if holding right click, set cursor to reload
-        if (Mouse.current.rightButton.isPressed)
-        {
-            currentAimSize = Mathf.Lerp(currentAimSize, minAimSize, Time.deltaTime * 5.0f);
-        }
-        else
-        {
-            currentAimSize = Mathf.Lerp(currentAimSize, maxAimSize, Time.deltaTime * 1.0f);
-        }
-
-        SetCursor(reloadCursor, currentAimSize);
-        //make transparent the larger the aim size
-        cursorImage.color = new Color(1, 1, 1, 1 - ((currentAimSize - minAimSize) / (maxAimSize - minAimSize)) * 0.85f);
     }
 
     public void SetCursor(Sprite _cursor, float _size = 1.0f)
