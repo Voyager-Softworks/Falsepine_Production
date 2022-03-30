@@ -10,7 +10,7 @@ public class CameraZoom : MonoBehaviour
     CinemachineVirtualCamera cam;
     public float currentZoom = 10f;
     public float minZoom = 9.0f;
-    public float maxZoom = 15.0f;
+    public float maxZoom = 9.0f;
     public float zoomAmount = 10.0f;
     public float zoomSpeed = 1.0f;
 
