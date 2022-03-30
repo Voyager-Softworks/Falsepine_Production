@@ -43,6 +43,11 @@ public class CameraZoom : MonoBehaviour
         
         currentZoom = Mathf.Clamp(currentZoom, minZoom, maxZoom);
 
+        //if ortho set size
         cam.m_Lens.OrthographicSize = Mathf.Lerp(cam.m_Lens.OrthographicSize, currentZoom, Time.deltaTime * zoomSpeed);
+
+        //if perspective set fov
+        cam.m_Lens.FieldOfView = Mathf.Lerp(cam.m_Lens.FieldOfView, currentZoom, Time.deltaTime * zoomSpeed);
+
     }
 }
