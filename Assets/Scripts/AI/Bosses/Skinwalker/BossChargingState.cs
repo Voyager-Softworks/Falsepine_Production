@@ -36,7 +36,7 @@ public class BossChargingState : CustomState
         Vector3 playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
         arenaEdgeGoalPosition = ComputeB(arenaController.arenaCentre.position, Vector3.up, arenaController.arenaRadius, agent.transform.position, (playerPos - agentTransform.position).normalized);
         agent.agent.SetDestination(arenaEdgeGoalPosition);
-        agent.agent.speed = 100;
+        agent.agent.speed = 70;
         agent.agent.velocity =  (arenaEdgeGoalPosition - agent.transform.position).normalized * agent.agent.speed;
         
         agent.agent.acceleration = 150;

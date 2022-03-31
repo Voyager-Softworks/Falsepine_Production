@@ -184,6 +184,21 @@ public class NodeAIEditor : EditorWindow
             {
                 Node node = new Node(new Vector2(200, 200), 200, 50, startNodeStyle, startNodeSelectedStyle, outputStyle, OnOutputEvent);
                 controller.AddNode(node);
+                Node node2 = new Node(new Vector2(200, 400), 200, 50, startNodeStyle, startNodeSelectedStyle, inputStyle, outputStyle, null, OnOutputEvent, null, Node.NodeType.AnyState);
+                controller.AddNode(node2);
+            }
+            bool foundAnyState = false;
+            foreach(Node n in controller.nodes)
+            {
+                if(n.type == Node.NodeType.AnyState)
+                {
+                    foundAnyState = true;
+                }
+            }
+            if(!foundAnyState)
+            {
+                Node node = new Node(new Vector2(200, 400), 200, 50, startNodeStyle, startNodeSelectedStyle, inputStyle, outputStyle, null, OnOutputEvent, null, Node.NodeType.AnyState);
+                controller.AddNode(node);
             }
             foreach(Node node in controller.nodes)
             {
@@ -612,6 +627,13 @@ public class NodeAIEditor : EditorWindow
             Node newNode = new Node(mousePosition, 200, 100, style, selectedStyle, inputStyle, outputStyle, OnInputEvent, OnOutputEvent, OnNodeEvent, Node.NodeType.Comparison, false);
             
             newNode.comparisonType = Node.ComparisonType.Equal;
+            
+            controller.AddNode(newNode);
+        });
+        genericMenu.AddItem(new GUIContent("Add Node/Animation"), false, () =>
+        {
+            if(controller.nodes == null) controller.nodes = new List<Node>();
+            Node newNode = new Node(mousePosition, 200, 100, style, selectedStyle, inputStyle, outputStyle, OnInputEvent, OnOutputEvent, OnNodeEvent, Node.NodeType.Animator, true);
             
             controller.AddNode(newNode);
         });

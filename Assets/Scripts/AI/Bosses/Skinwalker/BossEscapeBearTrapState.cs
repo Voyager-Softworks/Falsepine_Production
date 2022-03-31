@@ -16,4 +16,9 @@ public class BossEscapeBearTrapState : NodeAI.CustomState
     {
         agent.SetBool("HitBearTrap", false);
     }
+
+    public override void DrawStateGizmos(NodeAI_Agent agent)
+    {
+        Gizmos.color = Color.red;
+    }
 }

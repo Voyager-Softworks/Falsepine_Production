@@ -19,6 +19,17 @@ public class AIController : ScriptableObject
     }
 
     [System.Serializable]
+    public class AnimatorVars
+    {
+        public string paramName = "";
+        public bool paramBool = false;
+        public float paramFloat = 0.0f;
+        public int paramInt = 0;
+        public enum ParamType { Bool, Float, Int, Trigger }
+        public ParamType paramType = ParamType.Bool;
+    }
+
+    [System.Serializable]
     public class Parameter
     {
         public string name = "s";

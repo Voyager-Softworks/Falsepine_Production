@@ -41,12 +41,11 @@ public class BossAttackPlayer : NodeAI.CustomState
         {
             
             agent.agent.SetDestination( playerTransform.position);
-            if(Vector3.Distance(agent.transform.position, playerTransform.position) < attackDistance && currAttackAmount < attackAmount)
+            if(Vector3.Distance(agent.transform.position, playerTransform.position) < attackDistance && currAttackAmount < attackAmount && Vector3.Dot(agent.transform.forward, playerTransform.position - agent.transform.position) > 0)
             {
+                agent.animator.SetTrigger("Attack");
                 attacking = true;
                 agent.agent.isStopped = true;
-                agent.agent.velocity = Vector3.zero;
-                
                 attackTimer = attackDuration;
             }
             

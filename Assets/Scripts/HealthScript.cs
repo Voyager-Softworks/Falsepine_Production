@@ -50,6 +50,7 @@ public class HealthScript : MonoBehaviour
         if (isDead) return;
 
         currentHealth -= damage;
+        GetComponent<NodeAI.NodeAI_Agent>().SetFloat("Health", currentHealth);
         if (currentHealth <= 0)
         {
             Die();

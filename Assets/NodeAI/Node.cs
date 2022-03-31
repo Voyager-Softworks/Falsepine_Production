@@ -42,6 +42,8 @@ public class Node
     [SerializeField]
     public LinkPoint miscOutput; //Misc output
     [SerializeField]
+    public LinkPoint miscInput; //Misc input
+    [SerializeField]
     public LinkPoint conditionTrueOutput, conditionFalseOutput; //Condition outputs
     [SerializeField]
     public NodeEvent OnRemove; //Event for when the node is removed
@@ -58,7 +60,9 @@ public class Node
         Delay, //Delay node: Used to delay the execution of a node
         Parameter, //Parameter node: Used to store a value
         Entry, //Entry node: Used to start the execution
-        Comparison //Comparison node: Used to compare two values
+        Comparison, //Comparison node: Used to compare two values
+        AnyState, //AnyState node: entry point for execution from any state
+        Animator //Animator node: Used to control the animator of an object
     }
 
     //Class: NodeField
@@ -273,6 +277,9 @@ public class Node
     }
     public LogicType logicType;
 
+    //Animator Node:
+    public AIController.AnimatorVars animatorVars;
+
     //Comparison Node:
     public enum ComparisonType
     {
@@ -312,6 +319,7 @@ public class Node
         if(seqInput != null) seqInput.ReconnectEvents(OnClickInput);
         if(seqOutput != null) seqOutput.ReconnectEvents(OnClickOutput);
         if(miscOutput != null) miscOutput.ReconnectEvents(OnClickOutput);
+        if(miscInput != null) miscInput.ReconnectEvents(OnClickInput);
         if(conditionTrueOutput != null) conditionTrueOutput.ReconnectEvents(OnClickOutput);
         if(conditionFalseOutput != null) conditionFalseOutput.ReconnectEvents(OnClickOutput);
         foreach(NodeField field in fields)
@@ -331,6 +339,7 @@ public class Node
         if(seqInput != null) seqInput.ReconnectLinks(controller);
         if(seqOutput != null) seqOutput.ReconnectLinks(controller);
         if(miscOutput != null) miscOutput.ReconnectLinks(controller);
+        if(miscInput != null) miscInput.ReconnectLinks(controller);
         if(conditionTrueOutput != null) conditionTrueOutput.ReconnectLinks(controller);
         if(conditionFalseOutput != null) conditionFalseOutput.ReconnectLinks(controller);
         foreach(NodeField field in fields)
@@ -453,6 +462,16 @@ public class Node
                 };
                 this.miscOutput = new LinkPoint(this.ID, LinkType.Output, LinkDataType.Bool, outputStyle, OnClickOutput);
                 this.comparisonType = ComparisonType.Equal;
+                break;
+            case NodeType.AnyState:
+                this.type = NodeType.AnyState;
+                this.title = "Any State";
+                break;
+            case NodeType.Animator:
+                this.type = NodeType.Animator;
+                this.title = "Animator";
+                this.animatorVars = new AIController.AnimatorVars();
+                this.miscInput = new LinkPoint(this.ID, LinkType.Input, LinkDataType.Bool, inputStyle, OnClickInput);
                 break;
         }
 
@@ -613,6 +632,43 @@ public class Node
                 conditionFalseOutput.Draw(3, rect);
                 EditorGUI.LabelField(new Rect(rect.x + (rect.width - 45), (rect.y - 5) + ( EditorGUIUtility.singleLineHeight * 4), 80, 20), "False:");
                 break;
+            case NodeType.Animator:
+                EditorGUI.LabelField(new Rect(rect.x + 15 , rect.y + 5 + EditorGUIUtility.singleLineHeight, 80, 20), "Type:");
+                animatorVars.paramType = (AIController.AnimatorVars.ParamType)EditorGUI.EnumPopup(new Rect(rect.x + 85, rect.y + 5 + EditorGUIUtility.singleLineHeight, rect.width - 100, 20), animatorVars.paramType);
+                switch(animatorVars.paramType)
+                {
+                    case AIController.AnimatorVars.ParamType.Bool:
+                        EditorGUI.LabelField(new Rect(rect.x + 15 , rect.y + 5 + (EditorGUIUtility.singleLineHeight * 2), 80, 20), "Name:");
+                        animatorVars.paramName = EditorGUI.TextField(new Rect(rect.x + 85, rect.y + 5 + ( EditorGUIUtility.singleLineHeight * 2), rect.width - 100, 20), animatorVars.paramName);
+                        EditorGUI.LabelField(new Rect(rect.x + 15 , rect.y + 5 + (EditorGUIUtility.singleLineHeight * 3), 80, 20), "Value:");
+                        animatorVars.paramBool = EditorGUI.Toggle(new Rect(rect.x + 85, rect.y + 5 + ( EditorGUIUtility.singleLineHeight * 3), rect.width - 100, 20), animatorVars.paramBool);
+                        miscInput.dataType = LinkDataType.Bool;
+                        miscInput.Draw(2, rect);
+                        break;
+                    case AIController.AnimatorVars.ParamType.Float:
+                        EditorGUI.LabelField(new Rect(rect.x + 15 , rect.y + 5 + (EditorGUIUtility.singleLineHeight * 2), 80, 20), "Name:");
+                        animatorVars.paramName = EditorGUI.TextField(new Rect(rect.x + 85, rect.y + 5 + ( EditorGUIUtility.singleLineHeight * 2), rect.width - 100, 20), animatorVars.paramName);
+                        EditorGUI.LabelField(new Rect(rect.x + 15 , rect.y + 5 + (EditorGUIUtility.singleLineHeight * 3), 80, 20), "Value:");
+                        animatorVars.paramFloat = EditorGUI.FloatField(new Rect(rect.x + 85, rect.y + 5 + ( EditorGUIUtility.singleLineHeight * 3), rect.width - 100, 20), animatorVars.paramFloat);
+                        miscInput.dataType = LinkDataType.Float;
+                        miscInput.Draw(2, rect);
+                        break;
+                    case AIController.AnimatorVars.ParamType.Int:
+                        EditorGUI.LabelField(new Rect(rect.x + 15 , rect.y + 5 + (EditorGUIUtility.singleLineHeight * 2), 80, 20), "Name:");
+                        animatorVars.paramName = EditorGUI.TextField(new Rect(rect.x + 85, rect.y + 5 + ( EditorGUIUtility.singleLineHeight * 2), rect.width - 100, 20), animatorVars.paramName);
+                        EditorGUI.LabelField(new Rect(rect.x + 15 , rect.y + 5 + (EditorGUIUtility.singleLineHeight * 3), 80, 20), "Value:");
+                        animatorVars.paramInt = EditorGUI.IntField(new Rect(rect.x + 85, rect.y + 5 + ( EditorGUIUtility.singleLineHeight * 3), rect.width - 100, 20), animatorVars.paramInt);
+                        miscInput.dataType = LinkDataType.Int;
+                        miscInput.Draw(2, rect);
+                        break;
+                    case AIController.AnimatorVars.ParamType.Trigger:
+                        EditorGUI.LabelField(new Rect(rect.x + 15 , rect.y + 5 + (EditorGUIUtility.singleLineHeight * 2), 80, 20), "Name:");
+                        animatorVars.paramName = EditorGUI.TextField(new Rect(rect.x + 85, rect.y + 5 + ( EditorGUIUtility.singleLineHeight * 2), rect.width - 100, 20), animatorVars.paramName);
+                        break;
+                }
+                
+                break;
+                
         }
         if(fields != null)
         {
