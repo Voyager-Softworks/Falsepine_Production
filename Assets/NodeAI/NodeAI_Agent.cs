@@ -18,6 +18,11 @@ public class NodeAI_Agent : MonoBehaviour
     private float delayTimer; // The delay timer for the agent
     [HideInInspector]
     public Node currentSequenceNode; // The current node in the sequence
+
+    [HideInInspector]
+    public Node currentAnyStateSequenceNode; // The current node in the sequence
+    [HideInInspector]
+    public Node currentAnyStateSequenceNodeEntry; // The node that the agent entered the current state from
     [HideInInspector]
     public Node previousSequenceNode; // The previous node in the sequence
     [SerializeField]
@@ -27,6 +32,10 @@ public class NodeAI_Agent : MonoBehaviour
     public List<CustomAIState> customStates; // The list of custom states for the agent
 
     public NavMeshAgent agent; // The navmesh agent for the agent
+
+    public Animator animator; // The animator for the agent
+
+    bool isCalculatingAnyState = false; // Is the agent calculating any state?
 
 
     //Action
@@ -69,6 +78,14 @@ public class NodeAI_Agent : MonoBehaviour
         currentStateEntryNode = controller.nodes[0]; // Set the current state entry node to the first node
         currentSequenceNode = currentStateEntryNode; // Set the current sequence node to the current state entry node
         previousSequenceNode = currentStateEntryNode; // Set the previous sequence node to the current state entry node
+        foreach(Node n in controller.nodes)
+        {
+            if(n.type == Node.NodeType.AnyState) // If the node is an any state node
+            {
+                currentAnyStateSequenceNode = n; // Set the current any state sequence node to the node
+                currentAnyStateSequenceNodeEntry = n; // Set the current any state sequence node entry to the node
+            }
+        }
         
     }
 
@@ -82,8 +99,11 @@ public class NodeAI_Agent : MonoBehaviour
         }
         else
         {
+            isCalculatingAnyState = false; // Set the is calculating any state to false
             if(currentSequenceNode != null) HandleNode(currentSequenceNode); // Handle the current sequence node
         }
+        isCalculatingAnyState = true; // Set the is calculating any state to true
+        if(currentAnyStateSequenceNode != null) HandleNode(currentAnyStateSequenceNode); // Handle the current any state sequence node
 
         //State Logic
         switch(currentState) 
@@ -232,8 +252,15 @@ public class NodeAI_Agent : MonoBehaviour
     //Sets the current sequence node to the given node
     private void SetCurrentSequenceNode(Node node)
     {
-        previousSequenceNode = currentSequenceNode;
-        currentSequenceNode = node;
+        if(!isCalculatingAnyState)
+        {
+            previousSequenceNode = currentSequenceNode;
+            currentSequenceNode = node;
+        }
+        else
+        {
+            currentAnyStateSequenceNode = node;
+        }
     }
 
     //HandleNode
@@ -287,6 +314,9 @@ public class NodeAI_Agent : MonoBehaviour
             case Node.NodeType.Entry:
                 SetCurrentSequenceNode(FindNextSequenceNode());
                 break;
+            case Node.NodeType.AnyState:
+                SetCurrentSequenceNode(FindNextSequenceNode());
+                break;
             case Node.NodeType.Delay:
                 if(node.fields[0].input.linkIDs.Count > 0)
                 {
@@ -296,6 +326,10 @@ public class NodeAI_Agent : MonoBehaviour
                 {
                     delayTimer = node.fields[0].fvalue;
                 }
+                SetCurrentSequenceNode(FindNextSequenceNode());
+                break;
+            case Node.NodeType.Animator:
+                HandleAnimatorNode(node);
                 SetCurrentSequenceNode(FindNextSequenceNode());
                 break;
             
@@ -308,14 +342,30 @@ public class NodeAI_Agent : MonoBehaviour
     //Finds the next sequence node
     public Node FindNextSequenceNode()
     {
-        if(currentSequenceNode.seqOutput.linkIDs.Count > 0)
+        if(isCalculatingAnyState)
         {
-            return controller.GetNodeFromID(controller.GetLinkFromID(currentSequenceNode.seqOutput.linkIDs[0]).output.NodeID);
+            if(currentAnyStateSequenceNode.seqOutput.linkIDs.Count > 0)
+            {
+                return controller.GetNodeFromID(controller.GetLinkFromID(currentAnyStateSequenceNode.seqOutput.linkIDs[0]).output.NodeID);
+            }
+            else
+            {
+                
+                return currentAnyStateSequenceNodeEntry;
+            }
         }
         else
         {
-            return currentStateEntryNode;
+            if(currentSequenceNode.seqOutput.linkIDs.Count > 0)
+            {
+                return controller.GetNodeFromID(controller.GetLinkFromID(currentSequenceNode.seqOutput.linkIDs[0]).output.NodeID);
+            }
+            else
+            {
+                return currentStateEntryNode;
+            }
         }
+        
     }
 
     //SetBool
@@ -387,6 +437,66 @@ public class NodeAI_Agent : MonoBehaviour
         }
     }
 
+    private void HandleAnimatorNode(Node node)
+    {
+        if(animator == null)
+        {
+            Debug.LogWarning("Animator is null! Please check the NodeAI_Agent");
+            return;
+        }
+        if(node.miscInput.linkIDs.Count > 0)
+        {
+            Node n = controller.GetNodeFromID(controller.GetLinkFromID(node.miscInput.linkIDs[0]).input.NodeID);
+            if(n == null) Debug.LogError("Node with Name: " + node.animatorVars.paramName + " causing issue for some reason");
+            if(n.type == Node.NodeType.Parameter)
+            {
+                if(n.parameter.type == AIController.Parameter.ParameterType.Bool)
+                {
+                    animator.SetBool(node.animatorVars.paramName, n.parameter.bvalue);
+                }
+                else if(n.parameter.type == AIController.Parameter.ParameterType.Float)
+                {
+                    animator.SetFloat(node.animatorVars.paramName, n.parameter.fvalue);
+                }
+                else if(n.parameter.type == AIController.Parameter.ParameterType.Int)
+                {
+                    animator.SetInteger(node.animatorVars.paramName, n.parameter.ivalue);
+                }
+            }
+            else if(n.type == Node.NodeType.Logic)
+            {
+                animator.SetBool(node.animatorVars.paramName, ComputeLogicNode(n));
+            }
+            else if(n.type == Node.NodeType.Comparison)
+            {
+                animator.SetBool(node.animatorVars.paramName, ComputeComparisonNode(n));
+            }
+            
+        }
+        else
+        {
+            switch(node.animatorVars.paramType)
+            {
+                case AIController.AnimatorVars.ParamType.Bool:
+                    animator.SetBool(node.animatorVars.paramName, node.animatorVars.paramBool);
+                    break;
+                case AIController.AnimatorVars.ParamType.Float:
+                    animator.SetFloat(node.animatorVars.paramName, node.animatorVars.paramFloat);
+                    break;
+                case AIController.AnimatorVars.ParamType.Int:
+                    animator.SetInteger(node.animatorVars.paramName, node.animatorVars.paramInt);
+                    break;
+                case AIController.AnimatorVars.ParamType.Trigger:
+                    animator.SetTrigger(node.animatorVars.paramName);
+                    break;
+                
+            }
+        }
+        
+    }
+
+
+
     //HandleParameterNode
     //Parameters:
     //Node node - The node to handle
@@ -440,7 +550,15 @@ public class NodeAI_Agent : MonoBehaviour
             }
             else
             {
-                currentSequenceNode = previousSequenceNode;
+                if(isCalculatingAnyState) //If we are calculating an any state
+                {
+                    isCalculatingAnyState = false;
+                    currentAnyStateSequenceNode = currentAnyStateSequenceNodeEntry;
+                }
+                else
+                {
+                    currentSequenceNode = currentStateEntryNode;
+                }
             }
             
         }
@@ -452,7 +570,16 @@ public class NodeAI_Agent : MonoBehaviour
             }
             else
             {
-                currentSequenceNode = previousSequenceNode;
+                
+                if(isCalculatingAnyState) //If we are calculating an any state
+                {
+                    isCalculatingAnyState = false;
+                    currentAnyStateSequenceNode = currentAnyStateSequenceNodeEntry;
+                }
+                else
+                {
+                    currentSequenceNode = currentStateEntryNode;
+                }
             }
         }
 
