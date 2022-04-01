@@ -30,6 +30,7 @@ public class FadeScript : MonoBehaviour
     void Start()
     {
         fadeImage = GetComponent<Image>();
+        if (fadeImage) fadeImage.color = startColor;
     }
 
     // Update is called once per frame
