@@ -18,7 +18,7 @@ public class BossChargingState : CustomState
 
     bool hasDamagedPlayer = false;
 
-    AudioClip chargeSoundPhaseOne, chargeSoundPhaseTwo;
+    public AudioClip chargeSoundPhaseOne, chargeSoundPhaseTwo;
     public override void DoCustomState(NodeAI_Agent agent)
     {
         //Debug.Log("DoCustomState");
