@@ -43,10 +43,54 @@ public class BossAttackPlayer : NodeAI.CustomState
             agent.agent.SetDestination( playerTransform.position);
             if(Vector3.Distance(agent.transform.position, playerTransform.position) < attackDistance && currAttackAmount < attackAmount && Vector3.Dot(agent.transform.forward, playerTransform.position - agent.transform.position) > 0)
             {
-                agent.animator.SetTrigger("Attack");
+                int rand = Random.Range(0, 3);
+                switch(rand)
+                {
+                    case 0:
+                        if(agent.GetBool("SecondPhase"))
+                        {
+                            agent.animator.SetTrigger("Attack");
+                            agent.gameObject.GetComponent<DamageDealer>().EnableHurtBox("AttkS");
+                        }
+                        else
+                        {
+                            agent.animator.SetTrigger("Attack");
+                            agent.gameObject.GetComponent<DamageDealer>().EnableHurtBox("AttkC");
+                        }
+                        break;
+                    case 1:
+                        if(agent.GetBool("SecondPhase"))
+                        {
+                            agent.animator.SetTrigger("Combo1");
+                            agent.gameObject.GetComponent<DamageDealer>().EnableHurtBox("AttkS1");
+                        }
+                        else
+                        {
+                            agent.animator.SetTrigger("Combo1");
+                            agent.gameObject.GetComponent<DamageDealer>().EnableHurtBox("AttkC1");
+                            agent.gameObject.GetComponent<DamageDealer>().EnableHurtBox("AttkC12");
+                        }
+                        break;
+                    case 2:
+                        if(agent.GetBool("SecondPhase"))
+                        {
+                            agent.animator.SetTrigger("Combo2");
+                            agent.gameObject.GetComponent<DamageDealer>().EnableHurtBox("AttkS2");
+                            
+                        }
+                        else
+                        {
+                            agent.animator.SetTrigger("Combo2");
+                            agent.gameObject.GetComponent<DamageDealer>().EnableHurtBox("AttkC2");
+                            
+                        }
+                        break;
+                }
+                
                 attacking = true;
                 agent.agent.isStopped = true;
                 attackTimer = attackDuration;
+
             }
             
         }
@@ -72,4 +116,6 @@ public class BossAttackPlayer : NodeAI.CustomState
         Gizmos.DrawWireSphere(agent.transform.position, attackDistance);
         Gizmos.DrawLine(agent.transform.position, playerTransform.position);
     }
+
+    
 }
