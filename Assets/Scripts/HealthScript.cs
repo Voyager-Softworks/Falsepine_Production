@@ -62,6 +62,8 @@ public class HealthScript : MonoBehaviour
         currentHealth = 0;
 
         OnDeath.Invoke();
+        GetComponent<NodeAI.NodeAI_Agent>().SetState("Dead");
+
     }
 
     public void Heal(float heal)

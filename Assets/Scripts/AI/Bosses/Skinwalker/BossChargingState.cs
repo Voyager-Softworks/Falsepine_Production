@@ -17,6 +17,8 @@ public class BossChargingState : CustomState
     public GameObject debrisPrefab;
 
     bool hasDamagedPlayer = false;
+
+    AudioClip chargeSoundPhaseOne, chargeSoundPhaseTwo;
     public override void DoCustomState(NodeAI_Agent agent)
     {
         //Debug.Log("DoCustomState");
@@ -60,7 +62,16 @@ public class BossChargingState : CustomState
         Vector3 playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
         arenaEdgeGoalPosition = ComputeB(arenaController.arenaCentre.position, Vector3.up, arenaController.arenaRadius, agent.transform.position, (playerPos - agentTransform.position).normalized);
         agent.agent.SetDestination(arenaEdgeGoalPosition);
-        agent.agent.speed = 50;
+        
+        if(agent.GetBool("SecondPhase")) {
+            agent.GetComponent<AudioSource>().PlayOneShot(chargeSoundPhaseTwo);
+            agent.agent.speed = 80;
+        }
+        else {
+            agent.GetComponent<AudioSource>().PlayOneShot(chargeSoundPhaseOne);
+            agent.agent.speed = 50;
+        }
+
         agent.agent.velocity =  (arenaEdgeGoalPosition - agent.transform.position).normalized * agent.agent.speed;
         
         agent.agent.acceleration = 150;
