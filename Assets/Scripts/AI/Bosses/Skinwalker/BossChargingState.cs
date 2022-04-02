@@ -11,6 +11,14 @@ public class BossChargingState : CustomState
     BossArenaController arenaController;
 
     Vector3 arenaEdgeGoalPosition;
+
+    public float chargeSpeed = 50f;
+    public float chargeDamage = 10f;
+    public GameObject debrisPrefab;
+
+    bool hasDamagedPlayer = false;
+
+    AudioClip chargeSoundPhaseOne, chargeSoundPhaseTwo;
     public override void DoCustomState(NodeAI_Agent agent)
     {
         //Debug.Log("DoCustomState");
@@ -21,6 +29,24 @@ public class BossChargingState : CustomState
             agent.agent.isStopped = true;
             agent.agent.velocity = Vector3.zero;
             agent.agent.SetDestination(GameObject.FindGameObjectWithTag("Player").transform.position);
+            hasDamagedPlayer = false;
+        }
+        else
+        {
+            RaycastHit[] hits = Physics.SphereCastAll(agent.transform.position, 1.0f, agent.transform.forward, 1.0f);
+            foreach(RaycastHit hit in hits)
+            {
+                if(hit.collider.gameObject.tag == "DestructibleProp")
+                {
+                    Destroy(Instantiate(debrisPrefab, hit.point, Quaternion.identity), 5.0f);
+                    Destroy(hit.collider.gameObject);
+                }
+                else if(hit.collider.gameObject.tag == "Player" && !hasDamagedPlayer)
+                {
+                    hit.collider.gameObject.GetComponent<PlayerHealth>().TakeDamage(chargeDamage);
+                    hasDamagedPlayer = true;
+                }
+            }
         }
     }
 
@@ -36,7 +62,16 @@ public class BossChargingState : CustomState
         Vector3 playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
         arenaEdgeGoalPosition = ComputeB(arenaController.arenaCentre.position, Vector3.up, arenaController.arenaRadius, agent.transform.position, (playerPos - agentTransform.position).normalized);
         agent.agent.SetDestination(arenaEdgeGoalPosition);
-        agent.agent.speed = 70;
+        
+        if(agent.GetBool("SecondPhase")) {
+            agent.GetComponent<AudioSource>().PlayOneShot(chargeSoundPhaseTwo);
+            agent.agent.speed = 80;
+        }
+        else {
+            agent.GetComponent<AudioSource>().PlayOneShot(chargeSoundPhaseOne);
+            agent.agent.speed = 50;
+        }
+
         agent.agent.velocity =  (arenaEdgeGoalPosition - agent.transform.position).normalized * agent.agent.speed;
         
         agent.agent.acceleration = 150;

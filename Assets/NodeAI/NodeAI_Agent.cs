@@ -391,6 +391,24 @@ public class NodeAI_Agent : MonoBehaviour
         }
     }
 
+    public bool GetBool(string name)
+    {
+        foreach(Node n in controller.nodes)
+        {
+            if(n.type == Node.NodeType.Parameter)
+            {
+                if(n.parameter.type == AIController.Parameter.ParameterType.Bool)
+                {
+                    if(n.parameter.name == name)
+                    {
+                        return n.parameter.bvalue;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
     //SetFloat
     //Parameters:
     //string name - The name of the float to set
@@ -414,6 +432,24 @@ public class NodeAI_Agent : MonoBehaviour
         }
     }
 
+    public float GetFloat(string name)
+    {
+        foreach(Node n in controller.nodes)
+        {
+            if(n.type == Node.NodeType.Parameter)
+            {
+                if(n.parameter.type == AIController.Parameter.ParameterType.Float)
+                {
+                    if(n.parameter.name == name)
+                    {
+                        return n.parameter.fvalue;
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+
     //SetInt
     //Parameters:
     //string name - The name of the int to set
@@ -434,6 +470,59 @@ public class NodeAI_Agent : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    public int GetInt(string name)
+    {
+        foreach(Node n in controller.nodes)
+        {
+            if(n.type == Node.NodeType.Parameter)
+            {
+                if(n.parameter.type == AIController.Parameter.ParameterType.Int)
+                {
+                    if(n.parameter.name == name)
+                    {
+                        return n.parameter.ivalue;
+                    }
+                }
+            }
+        }
+        return 0;
+    }
+
+    public void SetState(string stateName)
+    {
+        bool foundState = false;
+        foreach(Node n in controller.nodes)
+        {
+            if(n.type == Node.NodeType.State)
+            {
+                if(n.stateType == Node.StateType.Custom)
+                {
+                    if(n.stateVars.name == stateName)
+                    {
+                        currentState = Node.StateType.Custom;
+                        currentStateEntryNode = n;
+                        currentSequenceNode = n;
+                        foundState = true;
+                        break;
+                    }
+                }
+            }
+        }
+        if(!foundState) Debug.LogWarning("State of name: \"" + stateName + "\" could not be found! Please check the NodeAI_Agent");
+    }
+
+    public string GetState()
+    {
+        if(currentState == Node.StateType.Custom)
+        {
+            return currentStateEntryNode.stateVars.name;
+        }
+        else
+        {
+            return currentState.ToString();
         }
     }
 
