@@ -15,6 +15,8 @@ public class BossAttackPlayer : NodeAI.CustomState
     public float attackDuration;
     public int attackAmount;
 
+    public AudioClip AttkC, AttkC1, AttkC2, AttkS, AttkS1, AttkS2;
+
     int currAttackAmount = 0;
     float attackTimer;
     Transform playerTransform;
@@ -51,13 +53,15 @@ public class BossAttackPlayer : NodeAI.CustomState
                         {
                             agent.animator.SetTrigger("Attack");
                             agent.gameObject.GetComponent<DamageDealer>().EnableHurtBox("AttkS");
-                            
+                            agent.gameObject.GetComponent<RotateTowardsPlayer>().RotateToPlayer(0.2f, 15.0f, 1.1f);
+                            agent.gameObject.GetComponent<AudioSource>().PlayOneShot(AttkS);
                         }
                         else
                         {
                             agent.animator.SetTrigger("Attack");
                             agent.gameObject.GetComponent<DamageDealer>().EnableHurtBox("AttkC");
                             agent.gameObject.GetComponent<RotateTowardsPlayer>().RotateToPlayer(0.2f, 15.0f, 1.1f);
+                            agent.gameObject.GetComponent<AudioSource>().PlayOneShot(AttkC);
                         }
                         break;
                     case 1:
@@ -65,6 +69,8 @@ public class BossAttackPlayer : NodeAI.CustomState
                         {
                             agent.animator.SetTrigger("Combo1");
                             agent.gameObject.GetComponent<DamageDealer>().EnableHurtBox("AttkS1");
+                            agent.gameObject.GetComponent<RotateTowardsPlayer>().RotateToPlayer(0.2f, 15.0f, 1.1f);
+                            agent.gameObject.GetComponent<AudioSource>().PlayOneShot(AttkS1);
                         }
                         else
                         {
@@ -72,6 +78,7 @@ public class BossAttackPlayer : NodeAI.CustomState
                             agent.gameObject.GetComponent<DamageDealer>().EnableHurtBox("AttkC1");
                             agent.gameObject.GetComponent<DamageDealer>().EnableHurtBox("AttkC12");
                             agent.gameObject.GetComponent<RotateTowardsPlayer>().RotateToPlayer(0.2f, 15.0f, 1.1f);
+                            agent.gameObject.GetComponent<AudioSource>().PlayOneShot(AttkC1);
                         }
                         break;
                     case 2:
@@ -79,7 +86,9 @@ public class BossAttackPlayer : NodeAI.CustomState
                         {
                             agent.animator.SetTrigger("Combo2");
                             agent.gameObject.GetComponent<DamageDealer>().EnableHurtBox("AttkS2");
-                            
+                            agent.gameObject.GetComponent<RotateTowardsPlayer>().RotateToPlayer(2.0f, 2.0f, 0.5f);
+                            agent.gameObject.GetComponent<RotateTowardsPlayer>().MoveToPlayer(1.5f, 1.5f, 0.5f);
+                            agent.gameObject.GetComponent<AudioSource>().PlayOneShot(AttkS2);
                         }
                         else
                         {
@@ -87,6 +96,7 @@ public class BossAttackPlayer : NodeAI.CustomState
                             agent.gameObject.GetComponent<DamageDealer>().EnableHurtBox("AttkC2");
                             agent.gameObject.GetComponent<RotateTowardsPlayer>().RotateToPlayer(2.0f, 2.0f, 0.5f);
                             agent.gameObject.GetComponent<RotateTowardsPlayer>().MoveToPlayer(1.5f, 1.5f, 0.5f);
+                            agent.gameObject.GetComponent<AudioSource>().PlayOneShot(AttkC2);
                             
                         }
                         break;
