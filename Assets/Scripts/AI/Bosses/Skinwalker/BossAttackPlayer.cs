@@ -55,6 +55,7 @@ public class BossAttackPlayer : NodeAI.CustomState
                             agent.gameObject.GetComponent<DamageDealer>().EnableHurtBox("AttkS");
                             agent.gameObject.GetComponent<RotateTowardsPlayer>().RotateToPlayer(0.2f, 15.0f, 1.1f);
                             agent.gameObject.GetComponent<AudioSource>().PlayOneShot(AttkS);
+                            attackTimer = agent.gameObject.GetComponent<DamageDealer>().GetAttackDuration("AttkS");
                         }
                         else
                         {
@@ -62,6 +63,7 @@ public class BossAttackPlayer : NodeAI.CustomState
                             agent.gameObject.GetComponent<DamageDealer>().EnableHurtBox("AttkC");
                             agent.gameObject.GetComponent<RotateTowardsPlayer>().RotateToPlayer(0.2f, 15.0f, 1.1f);
                             agent.gameObject.GetComponent<AudioSource>().PlayOneShot(AttkC);
+                            attackTimer = agent.gameObject.GetComponent<DamageDealer>().GetAttackDuration("AttkC");
                         }
                         break;
                     case 1:
@@ -71,6 +73,7 @@ public class BossAttackPlayer : NodeAI.CustomState
                             agent.gameObject.GetComponent<DamageDealer>().EnableHurtBox("AttkS1");
                             agent.gameObject.GetComponent<RotateTowardsPlayer>().RotateToPlayer(0.2f, 15.0f, 1.1f);
                             agent.gameObject.GetComponent<AudioSource>().PlayOneShot(AttkS1);
+                            attackTimer = agent.gameObject.GetComponent<DamageDealer>().GetAttackDuration("AttkS1");
                         }
                         else
                         {
@@ -79,6 +82,7 @@ public class BossAttackPlayer : NodeAI.CustomState
                             agent.gameObject.GetComponent<DamageDealer>().EnableHurtBox("AttkC12");
                             agent.gameObject.GetComponent<RotateTowardsPlayer>().RotateToPlayer(0.2f, 15.0f, 1.1f);
                             agent.gameObject.GetComponent<AudioSource>().PlayOneShot(AttkC1);
+                            attackTimer = agent.gameObject.GetComponent<DamageDealer>().GetAttackDuration("AttkC1");
                         }
                         break;
                     case 2:
@@ -89,6 +93,7 @@ public class BossAttackPlayer : NodeAI.CustomState
                             agent.gameObject.GetComponent<RotateTowardsPlayer>().RotateToPlayer(2.0f, 2.0f, 0.5f);
                             agent.gameObject.GetComponent<RotateTowardsPlayer>().MoveToPlayer(1.5f, 1.5f, 0.5f);
                             agent.gameObject.GetComponent<AudioSource>().PlayOneShot(AttkS2);
+                            attackTimer = agent.gameObject.GetComponent<DamageDealer>().GetAttackDuration("AttkS2");
                         }
                         else
                         {
@@ -97,6 +102,7 @@ public class BossAttackPlayer : NodeAI.CustomState
                             agent.gameObject.GetComponent<RotateTowardsPlayer>().RotateToPlayer(2.0f, 2.0f, 0.5f);
                             agent.gameObject.GetComponent<RotateTowardsPlayer>().MoveToPlayer(1.5f, 1.5f, 0.5f);
                             agent.gameObject.GetComponent<AudioSource>().PlayOneShot(AttkC2);
+                            attackTimer = agent.gameObject.GetComponent<DamageDealer>().GetAttackDuration("AttkC2");
                             
                         }
                         break;
@@ -104,7 +110,7 @@ public class BossAttackPlayer : NodeAI.CustomState
                 
                 attacking = true;
                 agent.agent.isStopped = true;
-                attackTimer = attackDuration;
+                
 
             }
             

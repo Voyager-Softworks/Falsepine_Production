@@ -14,6 +14,7 @@ public class DamageDealer : MonoBehaviour
         public float damage;
         public string name;
         public float delay;
+        public float duration;
     }
     [SerializeField]
     public List<HurtBox> hurtBoxes = new List<HurtBox>();
@@ -21,6 +22,18 @@ public class DamageDealer : MonoBehaviour
     public void EnableHurtBox(string name)
     {
         StartCoroutine(EnableHurtBoxRoutine(name));
+    }
+
+    public float GetAttackDuration(string name)
+    {
+        foreach (HurtBox hb in hurtBoxes)
+        {
+            if (hb.name == name)
+            {
+                return hb.duration;
+            }
+        }
+        return 0;
     }
     
     
