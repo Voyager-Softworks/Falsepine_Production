@@ -30,7 +30,7 @@ public class NotesManager : MonoBehaviour
 
     //dictionary of clues and their short descriptions
     public Dictionary<ClueType, string> clueShortDesc = new Dictionary<ClueType, string>() {
-        { ClueType.WallClawMarks5, "5 fingered Claw marks" },
+        { ClueType.WallClawMarks5, "Claw marks" },
         { ClueType.FloorHollowBones, "Broken bones" },
         { ClueType.FloorDeerCarcass, "Deer carcass" }
     };
