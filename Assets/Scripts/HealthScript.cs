@@ -63,6 +63,7 @@ public class HealthScript : MonoBehaviour
 
         OnDeath.Invoke();
         GetComponent<NodeAI.NodeAI_Agent>().SetState("Dead");
+        GetComponentInChildren<Animator>().SetBool("Dead", true);
 
     }
 
