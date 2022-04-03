@@ -83,7 +83,7 @@ public class BossChargingState : CustomState
 
     public override void OnStateExit(NodeAI_Agent agent)
     {
-        //Debug.Log("OnStateExit");
+        agent.GetComponent<RotateTowardsPlayer>().RotateToPlayer(1.5f, 4.0f, 0.2f);
     }
 
     public override void DrawStateGizmos(NodeAI_Agent agent)

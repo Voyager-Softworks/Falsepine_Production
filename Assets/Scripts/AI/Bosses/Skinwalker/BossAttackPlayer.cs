@@ -51,11 +51,13 @@ public class BossAttackPlayer : NodeAI.CustomState
                         {
                             agent.animator.SetTrigger("Attack");
                             agent.gameObject.GetComponent<DamageDealer>().EnableHurtBox("AttkS");
+                            
                         }
                         else
                         {
                             agent.animator.SetTrigger("Attack");
                             agent.gameObject.GetComponent<DamageDealer>().EnableHurtBox("AttkC");
+                            agent.gameObject.GetComponent<RotateTowardsPlayer>().RotateToPlayer(0.2f, 15.0f, 1.1f);
                         }
                         break;
                     case 1:
@@ -69,6 +71,7 @@ public class BossAttackPlayer : NodeAI.CustomState
                             agent.animator.SetTrigger("Combo1");
                             agent.gameObject.GetComponent<DamageDealer>().EnableHurtBox("AttkC1");
                             agent.gameObject.GetComponent<DamageDealer>().EnableHurtBox("AttkC12");
+                            agent.gameObject.GetComponent<RotateTowardsPlayer>().RotateToPlayer(0.2f, 15.0f, 1.1f);
                         }
                         break;
                     case 2:
@@ -82,6 +85,8 @@ public class BossAttackPlayer : NodeAI.CustomState
                         {
                             agent.animator.SetTrigger("Combo2");
                             agent.gameObject.GetComponent<DamageDealer>().EnableHurtBox("AttkC2");
+                            agent.gameObject.GetComponent<RotateTowardsPlayer>().RotateToPlayer(2.0f, 2.0f, 0.5f);
+                            agent.gameObject.GetComponent<RotateTowardsPlayer>().MoveToPlayer(1.5f, 1.5f, 0.5f);
                             
                         }
                         break;
