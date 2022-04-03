@@ -115,7 +115,7 @@ public class GunScript : MonoBehaviour
     }
 
     private void UpdateUI(){
-        uiScript._ammoText.text = currentClip.ToString() + " / " + clipSize.ToString();
+        uiScript.ammoText.text = currentClip.ToString() + " / " + clipSize.ToString();
     }
 
     private void UpdateAimAngle()
@@ -128,7 +128,7 @@ public class GunScript : MonoBehaviour
         rightAimAngle = Quaternion.AngleAxis(currentAimAngle, Vector3.up) * transform.forward;
         leftAimAngle = Quaternion.AngleAxis(-currentAimAngle, Vector3.up) * transform.forward;
 
-        CursorScript cs = uiScript._cursorScript;
+        CursorScript cs = uiScript.cursorScript;
         if (cs)
         {
             cs.SetCursor(cs.aimCursor, 1.5f - (currentAimTime / aimTime) / 2.0f);

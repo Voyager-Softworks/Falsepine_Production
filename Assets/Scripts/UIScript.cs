@@ -8,26 +8,26 @@ using UnityEngine.Events;
 
 public class UIScript : MonoBehaviour
 {
-    public CursorScript _cursorScript;
+    public CursorScript cursorScript;
 
     [Header("Game UI")]
-    public TextMeshProUGUI _ammoText;
-    public Image _healthBG;
-    public Image _healthBar;
-    [HideInInspector] public float _healthBarMaxWidth;
+    public TextMeshProUGUI ammoText;
+    public Image healthBG;
+    public Image healthBar;
+    [HideInInspector] public float healthBarMaxWidth;
 
     [Header("Inventory UI")]
-    public GameObject _journalPanel;
-    public TextMeshProUGUI _notesText;
+    public BagUIList bagUIList;
+    public JournalUIList journalUIList;
 
 
     public UnityEvent OnStart;
 
     private void Start() {
-        if (_cursorScript == null) _cursorScript = GetComponent<CursorScript>();
-        if (_cursorScript == null) _cursorScript = FindObjectOfType<CursorScript>();
+        if (cursorScript == null) cursorScript = GetComponent<CursorScript>();
+        if (cursorScript == null) cursorScript = FindObjectOfType<CursorScript>();
 
-        if (_healthBar != null) _healthBarMaxWidth = _healthBar.rectTransform.sizeDelta.x;
+        if (healthBar != null) healthBarMaxWidth = healthBar.rectTransform.sizeDelta.x;
 
         OnStart.Invoke();
     }

@@ -7,42 +7,47 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.Events;
 
-public class ClueScript : MonoBehaviour
+public class Interactable : MonoBehaviour
 {
-    [Header("Clue")]
-    public NotesManager.ClueType clueType;
+    public enum InteractEffect {
+        NONE,
+        DISABLE_INTERACT,
+        DISABLE,
+        DESTROY
+    }
 
     [Header("Interact")]
-    public InputAction inspectAction;
+    public InputAction interactAction;
+    public string interactText = "Interact";
 
     public Transform _transToCheck = null;
     public float interactDistance = 1f;
     public float fadeDistance = 2f;
-
-    public bool hideOnInteract = true;
+    public InteractEffect onInteractEffect = InteractEffect.NONE;
 
     [HideInInspector] public NotesManager _notesManager = null;
 
     [Header("UI")]
     public TextMeshProUGUI _text;
 
-    //[Header("Events")]
-    //public UnityEvent OnInspect;
+    [Header("Events")]
+    public UnityEvent OnInteract;
 
     // Start is called before the first frame update
-    void Start()
+    virtual public void Start()
     {
-        inspectAction.Enable();
+        interactAction.Enable();
 
         if (_transToCheck == null && FindObjectOfType<PlayerMovement>()) _transToCheck = FindObjectOfType<PlayerMovement>().transform;
 
         if (_text == null) _text = GetComponentInChildren<TextMeshProUGUI>();
+        if (_text != null) _text.text = /* "[" + interactAction.ToString() + "] " + */ interactText;
 
         if (_notesManager == null) _notesManager = FindObjectOfType<NotesManager>();
     }
 
     // Update is called once per frame
-    void Update()
+    virtual public void Update()
     {
         if (_transToCheck == null) return;
 
@@ -50,25 +55,39 @@ public class ClueScript : MonoBehaviour
 
         if (Vector3.Distance(transform.position, _transToCheck.position) <= interactDistance)
         {
-            if (inspectAction.triggered)
+            if (interactAction.triggered)
             {
-                //OnInspect.Invoke();
-                if (_notesManager != null) _notesManager.ClueInspected(this);
-
-                if (hideOnInteract){
-                    HideClue();
-                }
+                DoInteract();   
             }
         }
     }
 
-    private void HideClue()
+    virtual public void DoInteract(){
+        switch (onInteractEffect)
+        {
+            case InteractEffect.NONE:
+                break;
+            case InteractEffect.DISABLE_INTERACT:
+                DisableInteract();
+                break;
+            case InteractEffect.DISABLE:
+                gameObject.SetActive(false);
+                break;
+            case InteractEffect.DESTROY:
+                Destroy(gameObject);
+                break;
+        }
+
+        OnInteract.Invoke();
+    }
+
+    virtual public void DisableInteract()
     {
         if (_text) _text.enabled = false;
         this.enabled = false;
     }
 
-    private void UpdateUI()
+    virtual public void UpdateUI()
     {
         if (_text)
         {

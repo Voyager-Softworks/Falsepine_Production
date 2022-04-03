@@ -43,7 +43,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (uiScript == null) return;
 
-        uiScript._healthBar.rectTransform.sizeDelta = new Vector2(uiScript._healthBarMaxWidth * (currentHealth / maxHealth), uiScript._healthBar.rectTransform.sizeDelta.y);
+        uiScript.healthBar.rectTransform.sizeDelta = new Vector2(uiScript.healthBarMaxWidth * (currentHealth / maxHealth), uiScript.healthBar.rectTransform.sizeDelta.y);
     }
 
     public void TakeDamage(float damage)
