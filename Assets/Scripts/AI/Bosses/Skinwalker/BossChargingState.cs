@@ -46,6 +46,10 @@ public class BossChargingState : CustomState
                     hit.collider.gameObject.GetComponent<PlayerHealth>().TakeDamage(chargeDamage);
                     hasDamagedPlayer = true;
                 }
+                else if(hit.collider.gameObject.tag == "BearTrap")
+                {
+                    agent.SetBool("HitBearTrap", true);
+                }
             }
         }
     }
