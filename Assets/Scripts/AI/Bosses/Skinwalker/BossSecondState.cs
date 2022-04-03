@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BossSecondState : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class BossSecondState : MonoBehaviour
             GetComponentInChildren<Animator>().SetBool("Charging", false);
             GetComponent<NodeAI.NodeAI_Agent>().SetState("SecondPhaseTransform");
             GetComponent<AudioSource>().PlayOneShot(transformSoundClip);
+            GetComponent<NavMeshAgent>().isStopped = true;
             
         }
         
