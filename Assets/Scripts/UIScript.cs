@@ -19,6 +19,7 @@ public class UIScript : MonoBehaviour
     [Header("Inventory UI")]
     public BagUIList bagUIList;
     public JournalUIList journalUIList;
+    public HotbarUIList hotbarUIList;
 
 
     public UnityEvent OnStart;

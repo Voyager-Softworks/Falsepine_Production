@@ -49,6 +49,7 @@ public class InventoryManager : MonoBehaviour
     void Update()
     {
         UpdateBagUI();
+        UpdateHotbarUI();
     }
 
     private void UpdateBagUI(){
@@ -85,6 +86,40 @@ public class InventoryManager : MonoBehaviour
             _uiScript.bagUIList.GetBagSlotText(currentSlot).text = baitBird.amount.ToString();
             currentSlot++;
         }
+    }
+
+    private void UpdateHotbarUI()
+    {
+        if (_uiScript == null || _uiScript.hotbarUIList == null || _uiScript.hotbarUIList.hotbarPanel == null || !_uiScript.hotbarUIList.hotbarPanel.activeSelf) return;
+
+        //clear slots
+        _uiScript.hotbarUIList.ClearSlots();
+
+        int currentSlot = 0;
+
+        //bear traps
+        if (bearTraps.amount > 0){
+            _uiScript.hotbarUIList.GetHotbarSlotIcon(currentSlot).enabled = true;
+            _uiScript.hotbarUIList.GetHotbarSlotIcon(currentSlot).sprite = bearTraps.icon;
+            _uiScript.hotbarUIList.GetHotbarSlotCountText(currentSlot).text = bearTraps.amount.ToString();
+            currentSlot++;
+        }
+
+        //bait meat
+        if (baitMeat.amount > 0){
+            _uiScript.hotbarUIList.GetHotbarSlotIcon(currentSlot).enabled = true;
+            _uiScript.hotbarUIList.GetHotbarSlotIcon(currentSlot).sprite = baitMeat.icon;
+            _uiScript.hotbarUIList.GetHotbarSlotCountText(currentSlot).text = baitMeat.amount.ToString();
+            currentSlot++;
+        }
+
+        //bait bird
+        if (baitBird.amount > 0){
+            _uiScript.hotbarUIList.GetHotbarSlotIcon(currentSlot).enabled = true;
+            _uiScript.hotbarUIList.GetHotbarSlotIcon(currentSlot).sprite = baitBird.icon;
+            _uiScript.hotbarUIList.GetHotbarSlotCountText(currentSlot).text = baitBird.amount.ToString();
+            currentSlot++;
+        }   
     }
 
     public void AddBearTrap(int amount){
