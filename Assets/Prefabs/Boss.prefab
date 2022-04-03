@@ -71,6 +71,8 @@ GameObject:
   m_Component:
   - component: {fileID: 756930299677336942}
   - component: {fileID: 3163830807478695968}
+  - component: {fileID: 4922804730840975253}
+  - component: {fileID: 3866097356724609765}
   m_Layer: 0
   m_Name: BoneStag
   m_TagString: Untagged
@@ -113,6 +115,122 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4922804730840975253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129188992474103764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ef50cba338e46f699dd7787d4df4326, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepSounds1:
+  - {fileID: 8300000, guid: 285804e18e2dffb4fa4fac4121dbcdef, type: 3}
+  - {fileID: 8300000, guid: 2074031e5139b37488ec0ecaac61d7d1, type: 3}
+  - {fileID: 8300000, guid: 604d85b11d1f3a24894aaffca23a3e17, type: 3}
+  footstepSounds2:
+  - {fileID: 8300000, guid: e57e4a23106fa5442a6cfd8ceb7683fb, type: 3}
+  - {fileID: 8300000, guid: 774f993ccbdbda346bc4f5a966d1c311, type: 3}
+  - {fileID: 8300000, guid: 514c834348425134ebeb3da14362a21c, type: 3}
+--- !u!82 &3866097356724609765
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 129188992474103764}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 100
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &201025595791781373
 GameObject:
   m_ObjectHideFlags: 0
@@ -6655,6 +6773,10 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+  - name: MoveToBait
+    action:
+      m_PersistentCalls:
+        m_Calls: []
   customStates:
   - name: ChargePlayer
     state: {fileID: 11400000, guid: 7c3b7034d28d737389fd4e9faea7ddc8, type: 2}
@@ -6784,36 +6906,43 @@ MonoBehaviour:
     damage: 20
     name: AttkC
     delay: 1.06
+    duration: 2
   - position: {fileID: 227140228692818159}
     radius: 3.19
     damage: 20
     name: AttkS
     delay: 1.06
+    duration: 2
   - position: {fileID: 1379123579914525250}
     radius: 2.77
     damage: 20
     name: AttkC1
     delay: 1.06
+    duration: 3
   - position: {fileID: 5472945747086573722}
     radius: 2.79
     damage: 20
     name: AttkC12
     delay: 1.23
+    duration: 3
   - position: {fileID: 7633757501461710328}
     radius: 8.98
     damage: 20
     name: AttkC2
     delay: 2
+    duration: 3
   - position: {fileID: 7800347234720130261}
     radius: 3.21
     damage: 20
     name: AttkS1
     delay: 1.06
+    duration: 3
   - position: {fileID: 7167840372598412327}
     radius: 9.04
     damage: 20
     name: AttkS2
     delay: 1.17
+    duration: 3
 --- !u!114 &4994529633457169633
 MonoBehaviour:
   m_ObjectHideFlags: 0
