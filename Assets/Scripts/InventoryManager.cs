@@ -13,12 +13,17 @@ public class InventoryManager : MonoBehaviour
     public InputAction openJournalAction;
     public InputAction closeAction;
 
+    public InputAction hotkey1Action;
+    public InputAction hotkey2Action;
+    public InputAction hotkey3Action;
+
     private UIScript _uiScript;
 
     //this should be replaced with more complicated system if doing full prod
     [Serializable]
     public struct InventoryItem{
         public string name;
+        public int hotkey;
         public int amount;
         public int maxAmount;
         public Sprite icon;
@@ -37,10 +42,18 @@ public class InventoryManager : MonoBehaviour
         openBagAction.Enable();
         openJournalAction.Enable();
         closeAction.Enable();
+        
+        hotkey1Action.Enable();
+        hotkey2Action.Enable();
+        hotkey3Action.Enable();
 
         openBagAction.performed += ctx => ToggleBag();
         openJournalAction.performed += ctx => ToggleJournal();
         closeAction.performed += ctx => CloseAll();
+
+        hotkey1Action.performed += HotkeyPressed;
+        hotkey2Action.performed += HotkeyPressed;
+        hotkey3Action.performed += HotkeyPressed;
 
         if (_uiScript == null) _uiScript = FindObjectOfType<UIScript>();
     }
@@ -102,24 +115,88 @@ public class InventoryManager : MonoBehaviour
             _uiScript.hotbarUIList.GetHotbarSlotIcon(currentSlot).enabled = true;
             _uiScript.hotbarUIList.GetHotbarSlotIcon(currentSlot).sprite = bearTraps.icon;
             _uiScript.hotbarUIList.GetHotbarSlotCountText(currentSlot).text = bearTraps.amount.ToString();
-            currentSlot++;
         }
+        currentSlot++;
 
         //bait meat
         if (baitMeat.amount > 0){
             _uiScript.hotbarUIList.GetHotbarSlotIcon(currentSlot).enabled = true;
             _uiScript.hotbarUIList.GetHotbarSlotIcon(currentSlot).sprite = baitMeat.icon;
             _uiScript.hotbarUIList.GetHotbarSlotCountText(currentSlot).text = baitMeat.amount.ToString();
-            currentSlot++;
         }
+        currentSlot++;
 
         //bait bird
         if (baitBird.amount > 0){
             _uiScript.hotbarUIList.GetHotbarSlotIcon(currentSlot).enabled = true;
             _uiScript.hotbarUIList.GetHotbarSlotIcon(currentSlot).sprite = baitBird.icon;
             _uiScript.hotbarUIList.GetHotbarSlotCountText(currentSlot).text = baitBird.amount.ToString();
-            currentSlot++;
-        }   
+        }
+        currentSlot++;
+    }
+
+    public void HotkeyPressed(InputAction.CallbackContext ctx){
+        if (ctx.performed)
+        {
+            if (ctx.action == hotkey1Action)
+            {
+                UseHotkey(1);
+            }
+            else if (ctx.action == hotkey2Action)
+            {
+                UseHotkey(2);
+            }
+            else if (ctx.action == hotkey3Action)
+            {
+                UseHotkey(3);
+            }
+        }
+    }
+
+    public void UseHotkey(int hotkey){
+        InventoryItem item = GetHotkeyItem(hotkey);
+
+        if (item.amount > 0){
+            item.amount--;
+            if (item.prefab != null){
+                GameObject obj = Instantiate(item.prefab, transform.position + transform.forward, Quaternion.identity);
+                if (obj.GetComponent<Rigidbody>()) obj.GetComponent<Rigidbody>().AddForce(transform.forward * 10, ForceMode.Impulse);
+            }
+        }
+    }
+
+    private InventoryItem GetHotkeyItem(int hotkey)
+    {
+        if (hotkey == bearTraps.hotkey) return bearTraps;
+        else if (hotkey == baitMeat.hotkey) return baitMeat;
+        else if (hotkey == baitBird.hotkey) return baitBird;
+        else return new InventoryItem();
+    }
+
+    public void SetHotkey(int slot, int hotkey){
+        RemoveBind(hotkey);
+
+        if (slot == 0){
+            bearTraps.hotkey = hotkey;
+        }
+        else if (slot == 1){
+            baitMeat.hotkey = hotkey;
+        }
+        else if (slot == 2){
+            baitBird.hotkey = hotkey;
+        }
+    }
+
+    public void RemoveBind(int hotkey){
+        if (bearTraps.hotkey == hotkey){
+            bearTraps.hotkey = -1;
+        }
+        else if (baitMeat.hotkey == hotkey){
+            baitMeat.hotkey = -1;
+        }
+        else if (baitBird.hotkey == hotkey){
+            baitBird.hotkey = -1;
+        }
     }
 
     public void AddBearTrap(int amount){
