@@ -13,7 +13,7 @@ public class InventoryManager : MonoBehaviour
     public InputAction openJournalAction;
     public InputAction closeAction;
 
-    public UIScript _uiScript;
+    private UIScript _uiScript;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +26,7 @@ public class InventoryManager : MonoBehaviour
         openJournalAction.performed += ctx => ToggleJournal();
         closeAction.performed += ctx => CloseAll();
 
-        if (_uiScript == null) _uiScript = GetComponent<UIScript>();
+        if (_uiScript == null) _uiScript = FindObjectOfType<UIScript>();
     }
 
     // Update is called once per frame

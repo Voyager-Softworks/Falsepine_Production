@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     public InputAction moveAction;
-    public Camera cam;
+    private Camera cam;
     CharacterController controller;
     public float speed = 6f;
 

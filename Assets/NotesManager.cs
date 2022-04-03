@@ -36,7 +36,7 @@ public class NotesManager : MonoBehaviour
     };
 
 
-    public UIScript _uiScript;
+    private UIScript _uiScript;
 
     public List<ClueType> cluesFound = new List<ClueType>();
 

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 88532429}
   - component: {fileID: 88532428}
   - component: {fileID: 88532427}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 189597305}
   - component: {fileID: 189597304}
   - component: {fileID: 189597303}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,7 @@ GameObject:
   - component: {fileID: 216932375}
   - component: {fileID: 216932374}
   - component: {fileID: 216932373}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: L_Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 820737103}
   - component: {fileID: 820737102}
   - component: {fileID: 820737101}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: R_Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -394,7 +394,7 @@ GameObject:
   - component: {fileID: 1240388206}
   - component: {fileID: 1240388205}
   - component: {fileID: 1240388204}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Mouth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -490,7 +490,7 @@ GameObject:
   - component: {fileID: 1364005262}
   - component: {fileID: 1364005261}
   - component: {fileID: 1364005260}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cylinder (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -583,7 +583,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1404211344}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Hat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -615,7 +615,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1422040633}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -656,7 +656,8 @@ GameObject:
   - component: {fileID: 1545178375750917920}
   - component: {fileID: 1244257062}
   - component: {fileID: 1244257067}
-  m_Layer: 0
+  - component: {fileID: 1491458206277020774}
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -823,7 +824,6 @@ MonoBehaviour:
       m_Action: Move
       m_Flags: 8
     m_Flags: 0
-  cam: {fileID: 0}
   speed: 10
   mouseAimPoint: {x: 0, y: 0, z: 0}
 --- !u!114 &1244257062
@@ -838,7 +838,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41d44dbef7686e641be8f3aafa549758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _uiScript: {fileID: 0}
   cluesFound: 
 --- !u!114 &1244257067
 MonoBehaviour:
@@ -857,6 +856,69 @@ MonoBehaviour:
   isInvulnerable: 0
   isDead: 0
   uiScript: {fileID: 0}
+--- !u!114 &1491458206277020774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1545178375750917925}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 238ac7a2c4ad8154dac888fe8869b5e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openBagAction:
+    m_Name: Open Bag
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: bcaae617-32dd-4ab5-996d-e0ec560380cc
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 6c1dc8fe-41eb-404a-855f-ecaa0ec64437
+      m_Path: <Keyboard>/i
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Open Bag
+      m_Flags: 0
+    m_Flags: 0
+  openJournalAction:
+    m_Name: Open Journal
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 3823d154-7c8e-4d0c-b90b-46f5ec30c447
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 3f070bc9-7ef6-4920-9fe6-e3aa602f35c3
+      m_Path: <Keyboard>/j
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Open Journal
+      m_Flags: 0
+    m_Flags: 0
+  closeAction:
+    m_Name: Close
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: b248d55c-149d-4416-97b5-27308d50ca3b
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 7044ca94-8dce-42c8-90e2-0e68b90b36bd
+      m_Path: <Keyboard>/escape
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Close
+      m_Flags: 0
+    m_Flags: 0
 --- !u!1 &1545178376142562917
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,7 +932,7 @@ GameObject:
   - component: {fileID: 1545178376142562918}
   - component: {fileID: 1545178376142562919}
   - component: {fileID: 1408084567}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1038,7 +1100,7 @@ GameObject:
   - component: {fileID: 1545178376625084979}
   - component: {fileID: 1545178376625084989}
   - component: {fileID: 1545178376625084978}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
