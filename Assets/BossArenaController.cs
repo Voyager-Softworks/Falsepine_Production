@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class BossArenaController : MonoBehaviour
 {
@@ -10,10 +11,15 @@ public class BossArenaController : MonoBehaviour
     public AudioClip baitedSound;
 
     public AudioClip bossMusic;
+
+    public InputAction correctBait, incorrectBait;
     // Start is called before the first frame update
     void Start()
     {
-        
+        correctBait.performed += ctx => UseCorrectBait();
+        incorrectBait.performed += ctx => UseWrongBait();
+        correctBait.Enable();
+        incorrectBait.Enable();
     }
 
     // Update is called once per frame

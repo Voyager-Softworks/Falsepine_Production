@@ -15,6 +15,7 @@ public class DamageDealer : MonoBehaviour
         public string name;
         public float delay;
         public float duration;
+        public ParticleSystem particle;
     }
     [SerializeField]
     public List<HurtBox> hurtBoxes = new List<HurtBox>();
@@ -52,6 +53,11 @@ public class DamageDealer : MonoBehaviour
                 Debug.Log("Hit player");
                 break;
             }
+        }
+
+        if(hb.particle != null)
+        {
+            hb.particle.Play();
         }
         
     }
