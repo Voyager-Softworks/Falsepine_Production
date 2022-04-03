@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using System;
 
 public class GunScript : MonoBehaviour
@@ -29,6 +30,9 @@ public class GunScript : MonoBehaviour
 
     private Vector3 rightAimAngle = Vector3.zero;
     private Vector3 leftAimAngle = Vector3.zero;
+
+    public Image leftAimLineImage;
+    public Image rightAimLineImage;
 
 
     [Header("Reload")]
@@ -67,10 +71,34 @@ public class GunScript : MonoBehaviour
 
         UpdateAimAngle();
 
+        UpdateAimLineUI();
+
         if (shootAction.triggered)
         {
             TryShoot();
         }
+    }
+
+    private void UpdateAimLineUI()
+    {
+        if (leftAimLineImage == null || rightAimLineImage == null)
+        {
+            Debug.LogError("GunScript: Missing aim line UI");
+            return;
+        }
+
+        float opacity = (currentAimTime / aimTime) * 0.5f;
+
+        leftAimLineImage.color = new Color(1.0f, 1.0f, 1.0f, opacity);
+        rightAimLineImage.color = new Color(1.0f, 1.0f, 1.0f, opacity);
+
+        float length = Vector3.Distance(transform.position, mouseAimPoint);
+
+        leftAimLineImage.rectTransform.sizeDelta = new Vector2(leftAimLineImage.rectTransform.sizeDelta.x, length);
+        rightAimLineImage.rectTransform.sizeDelta = new Vector2(rightAimLineImage.rectTransform.sizeDelta.x, length);
+
+        leftAimLineImage.transform.localRotation = Quaternion.Euler(0, 0, -currentAimAngle);
+        rightAimLineImage.transform.localRotation = Quaternion.Euler(0, 0, currentAimAngle);
     }
 
     private void TryShoot()
@@ -139,7 +167,7 @@ public class GunScript : MonoBehaviour
     private void LookAtCursor()
     {
         mouseAimPoint = playerMovement.GetMouseAimPoint();
-        if (Vector3.Distance(playerMovement.transform.position, mouseAimPoint) > 1.5f)
+        if (Vector3.Distance(playerMovement.transform.position, mouseAimPoint) > 1.5f && !playerMovement.isRolling)
         {
             transform.LookAt(mouseAimPoint);
         }

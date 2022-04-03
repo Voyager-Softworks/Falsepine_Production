@@ -6,23 +6,41 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public InputAction moveAction;
-    private Camera cam;
+    [Header("Movement")]
     CharacterController controller;
+    public InputAction moveAction;
     public float speed = 6f;
+    private Vector3 lastMoveDir = Vector3.zero;
+
+    [Header("Roll")]
+    public InputAction rollAction;
+    private Vector3 rollDir = Vector3.zero;
+    public float rollSpeed = 10f;
+    public float rollTime = 1f;
+    private float rollTimer = 0f;
+    public bool isRolling = false;
+    private PlayerHealth playerHealth;
+
+
 
     public Vector3 mouseAimPoint = Vector3.zero;
+    private Camera cam;
 
     // Start is called before the first frame update
     void Start()
     {
+        moveAction.Enable();
+        rollAction.Enable();
+
+        rollAction.performed += ctx => StartRoll();
+
         controller = GetComponent<CharacterController>();
 
         if (cam == null){
             cam = Camera.main;
         }
 
-        moveAction.Enable();
+        playerHealth = GetComponent<PlayerHealth>();
     }
 
     // Update is called once per frame
@@ -49,21 +67,79 @@ public class PlayerMovement : MonoBehaviour
         //get movement direction using input and cam direction
         Vector2 move = moveAction.ReadValue<Vector2>();
         Vector3 moveDir = move.x * camRight + move.y * camForward;
+        moveDir.y = 0;
         moveDir.Normalize();
         moveDir *= speed;
         moveDir.y = -2.0f;
 
-        //apply movement
-        //transform.position += (moveDir * speed * Time.deltaTime);
-        controller.Move(moveDir * Time.deltaTime);
+        //roll
+        if (rollTimer > 0)
+        {
+            rollTimer -= Time.deltaTime;
 
-        //calc the direction to look
-        Vector3 lookDir = GetMouseAimPoint() - transform.position;
-        //remove vertical
-        lookDir.y = 0;
-        lookDir.Normalize();
-        //apply rotation
-        transform.rotation = Quaternion.LookRotation(lookDir);
+            //make invulnerable
+            playerHealth.isInvulnerable = true;
+            isRolling = true;
+
+            //calc roll direction
+            moveDir = rollDir * rollSpeed;
+            moveDir.y = -2.0f;
+
+            //roll
+            controller.Move(moveDir * Time.deltaTime);
+
+            lastMoveDir = rollDir;
+        }
+        else{
+            rollTimer = 0;
+
+            //make vulnerable
+            playerHealth.isInvulnerable = false;
+            isRolling = false;
+
+            //apply movement
+            //transform.position += (moveDir * speed * Time.deltaTime);
+            controller.Move(moveDir * Time.deltaTime);
+
+            //calc the direction to look
+            Vector3 lookDir = GetMouseAimPoint() - transform.position;
+            //remove vertical
+            lookDir.y = 0;
+            lookDir.Normalize();
+            //apply rotation
+            transform.rotation = Quaternion.LookRotation(lookDir);
+
+            lastMoveDir = moveDir;
+        }
+    }
+
+    public void StartRoll(){
+        //get cam direction
+        Vector3 camForward = cam.transform.forward;
+        camForward.y = 0;
+        camForward.Normalize();
+        Vector3 camRight = cam.transform.right;
+        camRight.y = 0;
+        camRight.Normalize();
+
+        //get movement direction using input and cam direction
+        Vector2 move = moveAction.ReadValue<Vector2>();
+        Vector3 moveDir = move.x * camRight + move.y * camForward;
+        moveDir.y = 0;
+        moveDir.Normalize();
+
+        if (move != Vector2.zero){
+            rollDir = moveDir;
+        }
+        else{
+            rollDir = mouseAimPoint - transform.position;
+            rollDir.y = 0;
+            rollDir.Normalize();
+        }
+
+        transform.rotation = Quaternion.LookRotation(rollDir);
+
+        rollTimer = rollTime;
     }
 
     public Vector3 GetMouseAimPoint(){
