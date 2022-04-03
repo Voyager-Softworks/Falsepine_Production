@@ -33,7 +33,7 @@ public class GunScript : MonoBehaviour
     public float currentAimAngle = 5.0f;
     public float aimTime = 1.0f;
     float currentAimTime = 0.0f;
-    private bool startedAiming = false;
+    public bool isAiming = false;
     private Vector3 mouseAimPoint = Vector3.zero;
     private Vector3 rightAimAngle = Vector3.zero;
     private Vector3 leftAimAngle = Vector3.zero;
@@ -128,7 +128,7 @@ public class GunScript : MonoBehaviour
             transform.LookAt(playerMovement.transform.position + playerMovement.transform.forward*2.0f + playerMovement.transform.up);
         }
 
-        if (reloadTimer <= 0.0f && shootTimer <= 0.0f)
+        if (reloadTimer <= 0.0f && shootTimer <= 0.0f && !playerMovement.isRolling)
         {
             LookAtCursor();
 
@@ -207,8 +207,8 @@ public class GunScript : MonoBehaviour
     private void UpdateAimAngle()
     {
         if (aimAction.ReadValue<float>() > 0.0f) {
-            if (!startedAiming){
-                startedAiming = true;
+            if (!isAiming){
+                isAiming = true;
 
                 audioSource.PlayOneShot(startAimClip);
             }
@@ -216,8 +216,8 @@ public class GunScript : MonoBehaviour
             currentAimTime += Time.deltaTime;
         }
         else {
-            if (startedAiming){
-                startedAiming = false;
+            if (isAiming){
+                isAiming = false;
 
                 audioSource.PlayOneShot(endAimClip);
             }

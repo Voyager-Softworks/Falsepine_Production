@@ -20,6 +20,7 @@ public class PlayerMovement : MonoBehaviour
     private float rollTimer = 0f;
     public bool isRolling = false;
     private PlayerHealth playerHealth;
+    private GunScript gunScript;
 
 
 
@@ -41,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         playerHealth = GetComponent<PlayerHealth>();
+
+        gunScript = GetComponentInChildren<GunScript>();
     }
 
     // Update is called once per frame
@@ -97,9 +100,13 @@ public class PlayerMovement : MonoBehaviour
             playerHealth.isInvulnerable = false;
             isRolling = false;
 
-            //apply movement
-            //transform.position += (moveDir * speed * Time.deltaTime);
-            controller.Move(moveDir * Time.deltaTime);
+            if (!gunScript.isAiming){
+                //apply movement
+                //transform.position += (moveDir * speed * Time.deltaTime);
+                controller.Move(moveDir * Time.deltaTime);
+            }
+
+            
 
             //calc the direction to look
             Vector3 lookDir = GetMouseAimPoint() - transform.position;
