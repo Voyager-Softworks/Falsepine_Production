@@ -19,4 +19,10 @@ public class BossArenaController : MonoBehaviour
     {
         
     }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(arenaCentre.position, arenaRadius);
+    }
 }

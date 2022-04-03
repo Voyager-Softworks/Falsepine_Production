@@ -65,11 +65,11 @@ public class BossChargingState : CustomState
         
         if(agent.GetBool("SecondPhase")) {
             agent.GetComponent<AudioSource>().PlayOneShot(chargeSoundPhaseTwo);
-            agent.agent.speed = 80;
+            agent.agent.speed = 50;
         }
         else {
             agent.GetComponent<AudioSource>().PlayOneShot(chargeSoundPhaseOne);
-            agent.agent.speed = 50;
+            agent.agent.speed = 30;
         }
 
         agent.agent.velocity =  (arenaEdgeGoalPosition - agent.transform.position).normalized * agent.agent.speed;
