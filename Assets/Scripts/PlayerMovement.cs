@@ -114,6 +114,8 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void StartRoll(){
+        isRolling = true;
+
         //get cam direction
         Vector3 camForward = cam.transform.forward;
         camForward.y = 0;

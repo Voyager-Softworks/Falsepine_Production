@@ -8,36 +8,44 @@ using System;
 
 public class GunScript : MonoBehaviour
 {
-    PlayerMovement playerMovement;
-    UIScript uiScript;
+    private PlayerMovement playerMovement;
+    private UIScript uiScript;
+    private AudioSource audioSource;
 
     [Header("Shoot")]
     public InputAction shootAction;
+    public AudioClip shootClip;
+    public AudioClip failedShootClip;
     public float damage = 10.0f;
     public int clipSize = 10;
     public int currentClip = 10;
+    public float shootTime = 0.1f;
+    public float shootTimer = 0.0f;
     public LayerMask shootMask;
 
 
     [Header("Aim")]
     public InputAction aimAction;
+    public AudioClip startAimClip;
+    public AudioClip endAimClip;
     public float maxAimAngle = 25.0f;
     public float minAimAngle = 5.0f;
     public float currentAimAngle = 5.0f;
     public float aimTime = 1.0f;
     float currentAimTime = 0.0f;
+    private bool startedAiming = false;
     private Vector3 mouseAimPoint = Vector3.zero;
-
     private Vector3 rightAimAngle = Vector3.zero;
     private Vector3 leftAimAngle = Vector3.zero;
-
     public Image leftAimLineImage;
     public Image rightAimLineImage;
 
 
     [Header("Reload")]
     public InputAction reloadAction;
+    public AudioClip reloadClip;
     public float reloadTime = 1.0f;
+    private float reloadTimer = 0.0f;
 
     private void OnDrawGizmos() {
         //draw current aim angle
@@ -50,12 +58,15 @@ public class GunScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerMovement = FindObjectOfType<PlayerMovement>();
-        uiScript = FindObjectOfType<UIScript>();
-
         shootAction.Enable();
         aimAction.Enable();
         reloadAction.Enable();
+
+        playerMovement = FindObjectOfType<PlayerMovement>();
+        uiScript = FindObjectOfType<UIScript>();
+        audioSource = GetComponent<AudioSource>();
+
+        UpdateUI();
     }
 
     // Update is called once per frame
@@ -67,16 +78,13 @@ public class GunScript : MonoBehaviour
             return;
         }
 
-        LookAtCursor();
-
         UpdateAimAngle();
 
         UpdateAimLineUI();
 
-        if (shootAction.triggered)
-        {
-            TryShoot();
-        }
+        TimedActions();
+
+        UpdateUI();
     }
 
     private void UpdateAimLineUI()
@@ -87,7 +95,13 @@ public class GunScript : MonoBehaviour
             return;
         }
 
-        float opacity = (currentAimTime / aimTime) * 0.5f;
+        float opacity = 1.0f;
+        if (reloadTimer <= 0.0f && shootTimer <= 0.0f){
+            opacity = (currentAimTime / aimTime) * 0.5f;
+        }
+        else{
+            opacity = 0f;
+        }
 
         leftAimLineImage.color = new Color(1.0f, 1.0f, 1.0f, opacity);
         rightAimLineImage.color = new Color(1.0f, 1.0f, 1.0f, opacity);
@@ -101,6 +115,34 @@ public class GunScript : MonoBehaviour
         rightAimLineImage.transform.localRotation = Quaternion.Euler(0, 0, currentAimAngle);
     }
 
+    private void TimedActions()
+    {
+        if (reloadTimer > 0.0f)
+        {
+            reloadTimer -= Time.deltaTime;
+            transform.LookAt(playerMovement.transform.position + playerMovement.transform.forward*2.0f - playerMovement.transform.up);
+        }
+        else if (shootTimer > 0.0f)
+        {
+            shootTimer -= Time.deltaTime;
+            transform.LookAt(playerMovement.transform.position + playerMovement.transform.forward*2.0f + playerMovement.transform.up);
+        }
+
+        if (reloadTimer <= 0.0f && shootTimer <= 0.0f)
+        {
+            LookAtCursor();
+
+            if (reloadAction.triggered)
+            {
+                TryReload();
+            }
+            if (shootAction.triggered)
+            {
+                TryShoot();
+            }
+        }
+    }
+
     private void TryShoot()
     {
         if (currentClip > 0)
@@ -109,7 +151,7 @@ public class GunScript : MonoBehaviour
         }
         else
         {
-            Reload();
+            audioSource.PlayOneShot(failedShootClip);
         }
 
         UpdateUI();
@@ -117,6 +159,8 @@ public class GunScript : MonoBehaviour
 
     private void Shoot()
     {
+        shootTimer = shootTime;
+
         //get random angle using current aim angle
         float randomAngle = UnityEngine.Random.Range(-currentAimAngle, currentAimAngle);
         Vector3 shootDirection = Quaternion.AngleAxis(randomAngle, Vector3.up) * transform.forward;
@@ -134,12 +178,26 @@ public class GunScript : MonoBehaviour
             }
         }
 
+        audioSource.PlayOneShot(shootClip);
+
         currentClip--;
     }
 
-    private void Reload()
+    private void TryReload()
     {
-        currentClip = clipSize;
+        if (currentClip < clipSize)
+        {
+            reloadTimer = reloadTime;
+            currentClip = clipSize;
+
+            audioSource.PlayOneShot(reloadClip);
+        }
+        else
+        {
+            //do nothing
+        }
+
+        UpdateUI();
     }
 
     private void UpdateUI(){
@@ -148,8 +206,25 @@ public class GunScript : MonoBehaviour
 
     private void UpdateAimAngle()
     {
-        if (aimAction.ReadValue<float>() > 0.0f) currentAimTime += Time.deltaTime;
-        else currentAimTime -= Time.deltaTime;
+        if (aimAction.ReadValue<float>() > 0.0f) {
+            if (!startedAiming){
+                startedAiming = true;
+
+                audioSource.PlayOneShot(startAimClip);
+            }
+
+            currentAimTime += Time.deltaTime;
+        }
+        else {
+            if (startedAiming){
+                startedAiming = false;
+
+                audioSource.PlayOneShot(endAimClip);
+            }
+
+            currentAimTime -= Time.deltaTime;
+        }
+
         currentAimTime = Mathf.Clamp(currentAimTime, 0.0f, aimTime);
 
         currentAimAngle = Mathf.Lerp(maxAimAngle, minAimAngle, currentAimTime / aimTime);
