@@ -23,9 +23,9 @@ public class NotesManager : MonoBehaviour
 
     //dictionary of clues and their long descriptions
     public Dictionary<ClueType, string> clueLongDesc = new Dictionary<ClueType, string>() {
-        { ClueType.WallClawMarks5, "Five fingered claw marks on the wall" },
-        { ClueType.FloorHollowBones, "Broken hollow bones on the ground" },
-        { ClueType.FloorDeerCarcass, "Deer carcass on the ground" }
+        { ClueType.WallClawMarks5, "Claw Marks" },
+        { ClueType.FloorHollowBones, "Broken Bones" },
+        { ClueType.FloorDeerCarcass, "Deer Carcass" }
     };
 
     //dictionary of clues and their short descriptions
