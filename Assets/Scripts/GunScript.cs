@@ -14,7 +14,7 @@ public class GunScript : MonoBehaviour
 
     [Header("Shoot")]
     public InputAction shootAction;
-    public AudioClip shootClip;
+    public List<AudioClip> shootClip;
     public AudioClip failedShootClip;
     public float damage = 10.0f;
     public int clipSize = 10;
@@ -178,7 +178,7 @@ public class GunScript : MonoBehaviour
             }
         }
 
-        audioSource.PlayOneShot(shootClip);
+        audioSource.PlayOneShot(shootClip[UnityEngine.Random.Range(0, shootClip.Count)]);
 
         currentClip--;
     }
