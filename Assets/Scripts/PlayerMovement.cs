@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
+    private Animator _animator;
     CharacterController controller;
     public InputAction moveAction;
     public float speed = 6f;
@@ -44,6 +45,8 @@ public class PlayerMovement : MonoBehaviour
         playerHealth = GetComponent<PlayerHealth>();
 
         gunScript = GetComponentInChildren<GunScript>();
+
+        _animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -100,10 +103,29 @@ public class PlayerMovement : MonoBehaviour
             playerHealth.isInvulnerable = false;
             isRolling = false;
 
+            _animator.SetBool("Walking", false);
+            _animator.SetBool("Aiming", false);
+
             if (!gunScript.isAiming){
                 //apply movement
                 //transform.position += (moveDir * speed * Time.deltaTime);
                 controller.Move(moveDir * Time.deltaTime);
+
+                //calc signed magnitude of movement for right and forward
+                float rightMag = Vector3.Dot(transform.right, moveDir.normalized);
+                float forwardMag = Vector3.Dot(transform.forward, moveDir.normalized);
+
+                _animator.SetFloat("MoveX", rightMag);
+                _animator.SetFloat("MoveZ", forwardMag);
+                if (move.magnitude > 0.1f)
+                {
+                    _animator.SetBool("Walking", true);
+                }
+            }
+            else{
+                _animator.SetFloat("MoveX", 0);
+                _animator.SetFloat("MoveZ", 0);
+                _animator.SetBool("Aiming", true);
             }
 
             
@@ -149,6 +171,8 @@ public class PlayerMovement : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(rollDir);
 
         rollTimer = rollTime;
+
+        _animator.SetTrigger("Dodge");
     }
 
     public Vector3 GetMouseAimPoint(){

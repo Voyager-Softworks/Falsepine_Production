@@ -11,17 +11,28 @@ public class GunScript : MonoBehaviour
     private PlayerMovement playerMovement;
     private UIScript uiScript;
     private AudioSource audioSource;
+    private Animator _animator;
 
     [Header("Shoot")]
     public InputAction shootAction;
     public List<AudioClip> shootClip;
     public AudioClip failedShootClip;
+    public Transform shootPoint;
     public float damage = 10.0f;
     public int clipSize = 10;
     public int currentClip = 10;
     public float shootTime = 0.1f;
     public float shootTimer = 0.0f;
     public LayerMask shootMask;
+
+    private struct Line
+    {
+        public Vector3 start;
+        public Vector3 end;
+        public float time;
+    }
+
+    private List<Line> lines = new List<Line>();
 
 
     [Header("Aim")]
@@ -39,6 +50,7 @@ public class GunScript : MonoBehaviour
     private Vector3 leftAimAngle = Vector3.zero;
     public Image leftAimLineImage;
     public Image rightAimLineImage;
+    public GameObject canvas;
 
 
     [Header("Reload")]
@@ -50,8 +62,14 @@ public class GunScript : MonoBehaviour
     private void OnDrawGizmos() {
         //draw current aim angle
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(transform.position, transform.position + rightAimAngle * 5.0f);
-        Gizmos.DrawLine(transform.position, transform.position + leftAimAngle * 5.0f);
+        Gizmos.DrawLine(shootPoint.transform.position, shootPoint.transform.position + rightAimAngle * 5.0f);
+        Gizmos.DrawLine(shootPoint.transform.position, shootPoint.transform.position + leftAimAngle * 5.0f);
+
+        //draw every line
+        Gizmos.color = Color.blue;
+        foreach (Line line in lines) {
+            Gizmos.DrawLine(line.start, line.end);
+        }
     }
 
 
@@ -65,6 +83,7 @@ public class GunScript : MonoBehaviour
         playerMovement = FindObjectOfType<PlayerMovement>();
         uiScript = FindObjectOfType<UIScript>();
         audioSource = GetComponent<AudioSource>();
+        _animator = GetComponentInChildren<Animator>();
 
         UpdateUI();
     }
@@ -106,7 +125,7 @@ public class GunScript : MonoBehaviour
         leftAimLineImage.color = new Color(1.0f, 1.0f, 1.0f, opacity);
         rightAimLineImage.color = new Color(1.0f, 1.0f, 1.0f, opacity);
 
-        float length = Vector3.Distance(transform.position, mouseAimPoint);
+        float length = Vector3.Distance(shootPoint.transform.position, mouseAimPoint) * 0.9f;
 
         leftAimLineImage.rectTransform.sizeDelta = new Vector2(leftAimLineImage.rectTransform.sizeDelta.x, length);
         rightAimLineImage.rectTransform.sizeDelta = new Vector2(rightAimLineImage.rectTransform.sizeDelta.x, length);
@@ -120,12 +139,12 @@ public class GunScript : MonoBehaviour
         if (reloadTimer > 0.0f)
         {
             reloadTimer -= Time.deltaTime;
-            transform.LookAt(playerMovement.transform.position + playerMovement.transform.forward*2.0f - playerMovement.transform.up);
+            //transform.LookAt(playerMovement.transform.position + playerMovement.transform.forward*2.0f - playerMovement.transform.up);
         }
         else if (shootTimer > 0.0f)
         {
             shootTimer -= Time.deltaTime;
-            transform.LookAt(playerMovement.transform.position + playerMovement.transform.forward*2.0f + playerMovement.transform.up);
+            //transform.LookAt(playerMovement.transform.position + playerMovement.transform.forward*2.0f + playerMovement.transform.up);
         }
 
         if (reloadTimer <= 0.0f && shootTimer <= 0.0f && !playerMovement.isRolling)
@@ -166,10 +185,17 @@ public class GunScript : MonoBehaviour
         Vector3 shootDirection = Quaternion.AngleAxis(randomAngle, Vector3.up) * transform.forward;
 
         //shoot ray using shootmask
-        Ray ray = new Ray(transform.position, shootDirection);
+        Ray ray = new Ray(shootPoint.transform.position, shootDirection);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, 100.0f, shootMask))
         {
+            //store line
+            Line line = new Line();
+            line.start = shootPoint.transform.position;
+            line.end = hit.point;
+            line.time = 0.0f;
+            lines.Add(line);
+
             //if hit something, apply damage
             HealthScript healthScript = hit.collider.GetComponent<HealthScript>();
             if (healthScript != null)
@@ -179,6 +205,7 @@ public class GunScript : MonoBehaviour
         }
 
         audioSource.PlayOneShot(shootClip[UnityEngine.Random.Range(0, shootClip.Count)]);
+        _animator.SetTrigger("Shoot");
 
         currentClip--;
     }
@@ -191,6 +218,7 @@ public class GunScript : MonoBehaviour
             currentClip = clipSize;
 
             audioSource.PlayOneShot(reloadClip);
+            _animator.SetTrigger("Reload");
         }
         else
         {
@@ -244,7 +272,10 @@ public class GunScript : MonoBehaviour
         mouseAimPoint = playerMovement.GetMouseAimPoint();
         if (Vector3.Distance(playerMovement.transform.position, mouseAimPoint) > 1.5f && !playerMovement.isRolling)
         {
-            transform.LookAt(mouseAimPoint);
+            canvas.transform.LookAt(mouseAimPoint);
+            //rotate canvas 90 along right axis
+            canvas.transform.RotateAround(canvas.transform.position, transform.right, 90.0f);
+            //transform.LookAt(mouseAimPoint);
         }
     }
 }
