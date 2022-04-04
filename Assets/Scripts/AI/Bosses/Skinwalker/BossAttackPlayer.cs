@@ -125,6 +125,7 @@ public class BossAttackPlayer : NodeAI.CustomState
                 currAttackAmount++;
                 if(currAttackAmount >= attackAmount)
                 {
+                    agent.animator.SetTrigger("AttackingFinished");
                     agent.SetBool("AttackFinished", true);
                 }
             }

@@ -30,6 +30,7 @@ public class BossChargingState : CustomState
             agent.agent.velocity = Vector3.zero;
             agent.agent.SetDestination(GameObject.FindGameObjectWithTag("Player").transform.position);
             hasDamagedPlayer = false;
+            agent.transform.position = RandomPointOnCircle(arenaController.arenaCentre.position, Vector3.up, arenaController.arenaRadius);
             
         }
         else
@@ -89,7 +90,7 @@ public class BossChargingState : CustomState
     public override void OnStateExit(NodeAI_Agent agent)
     {
         agent.GetComponent<RotateTowardsPlayer>().RotateToPlayer(1.5f, 4.0f, 0.2f);
-        agent.transform.position = RandomPointOnCircle(arenaController.arenaCentre.position, Vector3.up, arenaController.arenaRadius);
+        
     }
 
     public override void DrawStateGizmos(NodeAI_Agent agent)
