@@ -31,10 +31,10 @@ public class BossArenaController : MonoBehaviour
     public void UseCorrectBait()
     {
         GameObject boss = FindObjectOfType<NodeAI.NodeAI_Agent>().gameObject;
-        boss.transform.position = arenaCentre.position;
-        boss.SetActive(true);
-        FindObjectOfType<NodeAI.NodeAI_Agent>().SetBool("UseCorrectBait", true);
+        boss.transform.position = arenaCentre.position + Vector3.back;
+        FindObjectOfType<NodeAI.NodeAI_Agent>().SetBool("CorrectBait", true);
         FindObjectOfType<NodeAI.NodeAI_Agent>().SetBool("BossStarted", true);
+        FindObjectOfType<NodeAI.NodeAI_Agent>().agent.isStopped = true;
         boss.GetComponent<AudioSource>().PlayOneShot(baitedSound);
         GetComponent<AudioSource>().clip = bossMusic;
         GetComponent<AudioSource>().Play();
@@ -44,8 +44,7 @@ public class BossArenaController : MonoBehaviour
     public void UseWrongBait()
     {
         GameObject boss = FindObjectOfType<NodeAI.NodeAI_Agent>().gameObject;
-        boss.SetActive(true);
-        FindObjectOfType<NodeAI.NodeAI_Agent>().SetBool("UseCorrectBait", false);
+        FindObjectOfType<NodeAI.NodeAI_Agent>().SetBool("CorrectBait", false);
         FindObjectOfType<NodeAI.NodeAI_Agent>().SetBool("BossStarted", true);
         GetComponent<AudioSource>().clip = bossMusic;
         GetComponent<AudioSource>().Play();
