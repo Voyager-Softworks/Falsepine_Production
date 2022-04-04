@@ -21,7 +21,7 @@ public class InventoryManager : MonoBehaviour
 
     //this should be replaced with more complicated system if doing full prod
     [Serializable]
-    public struct InventoryItem{
+    public class InventoryItem{
         public string name;
         public int hotkey;
         public int amount;
