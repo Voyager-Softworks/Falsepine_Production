@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Events;
 
 public class BossArenaController : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class BossArenaController : MonoBehaviour
     public AudioClip baitedSound;
 
     public AudioClip bossMusic;
+
+    public UnityEvent onBattleStart;
 
     public InputAction correctBait, incorrectBait;
     // Start is called before the first frame update
@@ -38,6 +41,7 @@ public class BossArenaController : MonoBehaviour
         boss.GetComponent<AudioSource>().PlayOneShot(baitedSound);
         GetComponent<AudioSource>().clip = bossMusic;
         GetComponent<AudioSource>().Play();
+        onBattleStart.Invoke();
 
     }
 
@@ -48,6 +52,7 @@ public class BossArenaController : MonoBehaviour
         FindObjectOfType<NodeAI.NodeAI_Agent>().SetBool("BossStarted", true);
         GetComponent<AudioSource>().clip = bossMusic;
         GetComponent<AudioSource>().Play();
+        onBattleStart.Invoke();
     }
 
     void OnDrawGizmos()

@@ -13214,6 +13214,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3233762382904841660, guid: d35ee062165218743bf286024c0dae18, type: 3}
   m_PrefabInstance: {fileID: 1345575381}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1015926923
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1015926925}
+  - component: {fileID: 1015926924}
+  m_Layer: 0
+  m_Name: EscapePreventionCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!65 &1015926924
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015926923}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 5.16, y: 4.84, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1015926925
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1015926923}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.855, y: 3.06, z: 57.35}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 25
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1016388008
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26425,6 +26469,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4dc877dfa8e92dc4abc10f7f38ba6906, type: 3}
+--- !u!1 &1979343019 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 651583774327395453, guid: 850804784264f1344a23d96dac3ad7bc, type: 3}
+  m_PrefabInstance: {fileID: 651583776146293287}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1986836638
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27759,6 +27808,33 @@ MonoBehaviour:
   arenaRadius: 16.7
   baitedSound: {fileID: 8300000, guid: 135777741f8531840aaeceb2a011c3a2, type: 3}
   bossMusic: {fileID: 8300000, guid: 4383a8a80fba0d7459d90e56c9005618, type: 3}
+  onBattleStart:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1015926923}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1979343019}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   correctBait:
     m_Name: Correct Bait
     m_Type: 0
@@ -28701,6 +28777,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fog
       objectReference: {fileID: 0}
+    - target: {fileID: 651583774327395453, guid: 850804784264f1344a23d96dac3ad7bc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 850804784264f1344a23d96dac3ad7bc, type: 3}
 --- !u!1001 &2849189904137225854
@@ -28824,6 +28904,10 @@ PrefabInstance:
     - target: {fileID: 3197503416638130366, guid: 0aa787dc03142e44e9b9d17a1591eaf4, type: 3}
       propertyPath: m_Name
       value: FogALT
+      objectReference: {fileID: 0}
+    - target: {fileID: 3197503416638130366, guid: 0aa787dc03142e44e9b9d17a1591eaf4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0aa787dc03142e44e9b9d17a1591eaf4, type: 3}
