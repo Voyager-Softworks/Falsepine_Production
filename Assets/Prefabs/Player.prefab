@@ -17,7 +17,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &88532426
 Transform:
@@ -113,7 +113,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &189597302
 Transform:
@@ -209,7 +209,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &216932372
 Transform:
@@ -556,7 +556,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &820737100
 Transform:
@@ -651,7 +651,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1240388203
 Transform:
@@ -747,7 +747,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1364005259
 Transform:
@@ -840,7 +840,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1404211344
 Transform:
@@ -872,7 +872,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1422040633
 Transform:
@@ -989,7 +989,7 @@ GameObject:
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1545178375750917921
 Transform:
@@ -1151,7 +1151,7 @@ MonoBehaviour:
       m_Action: Move
       m_Flags: 8
     m_Flags: 0
-  speed: 10
+  speed: 5
   rollAction:
     m_Name: Roll
     m_Type: 0
@@ -1357,7 +1357,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1545178376142562916
 Transform:
@@ -1465,12 +1465,15 @@ MonoBehaviour:
       m_Action: Shoot
       m_Flags: 0
     m_Flags: 0
-  shootClip: {fileID: 8300000, guid: 27f8e0d87faff90468bdba0fb79101c3, type: 3}
-  failedShootClip: {fileID: 8300000, guid: 6c9cd83137b81ce4fbd74b5d1c9e98ae, type: 3}
+  shootClip:
+  - {fileID: 8300000, guid: ef9768ddb35ad9e4b999a5ea58e903bf, type: 3}
+  - {fileID: 8300000, guid: f0a3391c0e9e10245baa6cb133d9d1b4, type: 3}
+  - {fileID: 8300000, guid: 32cb4e865c968ca46a6e17f4c81c6155, type: 3}
+  failedShootClip: {fileID: 8300000, guid: b4d73eab6d135c54aa084dd7536d5a1d, type: 3}
   damage: 10
   clipSize: 10
   currentClip: 10
-  shootTime: 1
+  shootTime: 0.75
   shootTimer: 0
   shootMask:
     serializedVersion: 2
@@ -1492,8 +1495,8 @@ MonoBehaviour:
       m_Action: Aim
       m_Flags: 0
     m_Flags: 0
-  startAimClip: {fileID: 8300000, guid: c59f9c902c449914085c42cc276a98b3, type: 3}
-  endAimClip: {fileID: 8300000, guid: 84f1b8a603090f142b1a322f02dd78fe, type: 3}
+  startAimClip: {fileID: 8300000, guid: 05ad82ecb9abaec488ea5bbc1ab05faa, type: 3}
+  endAimClip: {fileID: 8300000, guid: c06b5e39398baca4dbfa9664a5d9c303, type: 3}
   maxAimAngle: 25
   minAimAngle: 5
   currentAimAngle: 5
@@ -1518,8 +1521,8 @@ MonoBehaviour:
       m_Action: Reload
       m_Flags: 0
     m_Flags: 0
-  reloadClip: {fileID: 8300000, guid: 7ea8e2e8a2caa5945b1c1df0041c191c, type: 3}
-  reloadTime: 1
+  reloadClip: {fileID: 8300000, guid: 4b4efdb37d922d04792f7c1d69093d2a, type: 3}
+  reloadTime: 3.5
 --- !u!82 &731014897
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1632,7 +1635,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1545178376625084979
 Transform:
@@ -1642,7 +1645,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1545178376625084976}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0.83, y: -0.078, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1545178375750917921}
@@ -1660,8 +1663,8 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 79.57747
-  m_Range: 10
+  m_Intensity: 20.188347
+  m_Range: 8.8
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -1703,7 +1706,7 @@ Light:
   m_LightShadowCasterMode: 2
   m_AreaSize: {x: 0.5, y: 0.5}
   m_BounceIntensity: 0
-  m_ColorTemperature: 6570
+  m_ColorTemperature: 4318
   m_UseColorTemperature: 1
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
@@ -1730,7 +1733,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 1000
+  m_Intensity: 253.69426
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
