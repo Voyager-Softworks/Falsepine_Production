@@ -30,6 +30,7 @@ public class BossChargingState : CustomState
             agent.agent.velocity = Vector3.zero;
             agent.agent.SetDestination(GameObject.FindGameObjectWithTag("Player").transform.position);
             hasDamagedPlayer = false;
+            
         }
         else
         {
@@ -88,6 +89,7 @@ public class BossChargingState : CustomState
     public override void OnStateExit(NodeAI_Agent agent)
     {
         agent.GetComponent<RotateTowardsPlayer>().RotateToPlayer(1.5f, 4.0f, 0.2f);
+        agent.transform.position = RandomPointOnCircle(arenaController.arenaCentre.position, Vector3.up, arenaController.arenaRadius);
     }
 
     public override void DrawStateGizmos(NodeAI_Agent agent)
@@ -105,6 +107,13 @@ public class BossChargingState : CustomState
         if ( a >= 0 ) w = 180 - 2 * a; // because w + a + a = 180;
         else w = -( 180 + 2 * a );
         Vector3 BO = Quaternion.AngleAxis(w, -circleNormal) * ((point - circleCenter).normalized * circleRadius);
+        return circleCenter + BO;
+    }
+
+    private Vector3 RandomPointOnCircle( Vector3 circleCenter, Vector3 circleNormal, float circleRadius )
+    {
+        float angle = Random.Range( 0, 360 );
+        Vector3 BO = Quaternion.AngleAxis( angle, -circleNormal ) * ((circleCenter - circleNormal * circleRadius).normalized * circleRadius);
         return circleCenter + BO;
     }
 
