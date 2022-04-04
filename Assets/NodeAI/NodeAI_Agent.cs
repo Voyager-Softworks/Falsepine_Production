@@ -86,6 +86,8 @@ public class NodeAI_Agent : MonoBehaviour
                 currentAnyStateSequenceNodeEntry = n; // Set the current any state sequence node entry to the node
             }
         }
+
+        
         
     }
 
