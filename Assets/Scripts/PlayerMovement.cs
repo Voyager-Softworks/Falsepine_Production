@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
 
 
     public Vector3 mouseAimPoint = Vector3.zero;
+    public Transform shootPoint;
     private Camera cam;
 
     // Start is called before the first frame update
@@ -189,7 +190,7 @@ public class PlayerMovement : MonoBehaviour
         //mouse raycast to get direction
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         //find where ray intersects on the plane of the player
-        Plane playerPlane = new Plane(Vector3.up, transform.position);
+        Plane playerPlane = new Plane(Vector3.up, shootPoint.position);
         float rayDistance;
         if (playerPlane.Raycast(ray, out rayDistance)){
             //get mouse hit pos
