@@ -199,6 +199,19 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
+    internal void AddItem(string itemName, int amount)
+    {
+        if (itemName.ToLower() == bearTraps.name.ToLower()){
+            AddBearTrap(amount);
+        }
+        else if (itemName.ToLower() == baitMeat.name.ToLower()){
+            AddBaitMeat(amount);
+        }
+        else if (itemName.ToLower() == baitBird.name.ToLower()){
+            AddBaitBird(amount);
+        }
+    }
+
     public void AddBearTrap(int amount){
         bearTraps.amount += amount;
         bearTraps.amount = Mathf.Clamp(bearTraps.amount, 0, bearTraps.maxAmount);

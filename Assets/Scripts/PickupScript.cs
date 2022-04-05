@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class PickupScript : Interactable
 {
+    [Header("Pickup Settings")]
+    public string itemToAdd;
+    public int amountToAdd;
+
     // Start is called before the first frame update
     override public void Start()
     {
         base.Start();
+
+        OnInteract.AddListener(() => AddToInventory(itemToAdd));
     }
 
     // Update is called once per frame
     override public void Update()
     {
         base.Update();
+    }
+
+    public void AddToInventory(string _itemName, int _amount = 1)
+    {
+        InventoryManager inventoryManager = FindObjectOfType<InventoryManager>();
+
+        if (inventoryManager == null) return;
+
+        inventoryManager.AddItem(_itemName, _amount);
     }
 }

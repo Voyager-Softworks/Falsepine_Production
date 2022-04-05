@@ -4,32 +4,19 @@ using UnityEngine;
 
 public class SpawnBaitScript : MonoBehaviour
 {
-    static bool hasPlacedBait = false;
-    public bool isCorrect = false;
+    public bool isCorrectBait = false;
+
+    private BaitLocationScript placeBaitScript;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (SpawnBaitScript.hasPlacedBait)
-        {
-            return;
-        }
-        else{
-            SpawnBaitScript.hasPlacedBait = true;
-        }
+        placeBaitScript = GameObject.FindObjectOfType<BaitLocationScript>();
+        if (placeBaitScript == null) return;
 
-        BossArenaController bossArenaController = FindObjectOfType<BossArenaController>();
-
-        if (bossArenaController != null)
+        if (Vector3.Distance(transform.position, placeBaitScript.transform.position) < placeBaitScript.placeDistance)
         {
-            if (isCorrect)
-            {
-                bossArenaController.UseCorrectBait();
-            }
-            else
-            {
-                bossArenaController.UseWrongBait();
-            }
+            placeBaitScript.PlaceBait(this);
         }
     }
 
