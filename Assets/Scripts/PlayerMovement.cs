@@ -13,6 +13,8 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 6f;
     private Vector3 lastMoveDir = Vector3.zero;
 
+    private Vector3 animVelocity = Vector3.zero;
+
     [Header("Roll")]
     public InputAction rollAction;
     private Vector3 rollDir = Vector3.zero;
@@ -77,7 +79,9 @@ public class PlayerMovement : MonoBehaviour
         moveDir.Normalize();
         moveDir *= speed;
         moveDir.y = -2.0f;
-
+        
+        animVelocity = Vector3.Lerp(animVelocity, moveDir, Time.deltaTime * 10f);
+        
         //roll
         if (rollTimer > 0)
         {
@@ -106,14 +110,20 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("Walking", false);
             _animator.SetBool("Aiming", false);
 
+
+
             if (!gunScript.isAiming){
                 //apply movement
                 //transform.position += (moveDir * speed * Time.deltaTime);
                 controller.Move(moveDir * Time.deltaTime);
 
+                
+
                 //calc signed magnitude of movement for right and forward
-                float rightMag = Vector3.Dot(transform.right, moveDir.normalized);
-                float forwardMag = Vector3.Dot(transform.forward, moveDir.normalized);
+                float rightMag = Vector3.Dot(transform.right, animVelocity.normalized);
+                float forwardMag = Vector3.Dot(transform.forward, animVelocity.normalized);
+
+                
 
                 _animator.SetFloat("MoveX", rightMag);
                 _animator.SetFloat("MoveZ", forwardMag);
