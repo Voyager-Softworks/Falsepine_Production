@@ -48,6 +48,8 @@ public class GunScript : MonoBehaviour
     private Vector3 mouseAimPoint = Vector3.zero;
     private Vector3 rightAimAngle = Vector3.zero;
     private Vector3 leftAimAngle = Vector3.zero;
+    public Color unAimedColor = Color.clear;
+    public Color aimedColor = Color.red;
     public Image leftAimLineImage;
     public Image rightAimLineImage;
     public GameObject canvas;
@@ -122,8 +124,10 @@ public class GunScript : MonoBehaviour
             opacity = 0f;
         }
 
-        leftAimLineImage.color = new Color(1.0f, 1.0f, 1.0f, opacity);
-        rightAimLineImage.color = new Color(1.0f, 1.0f, 1.0f, opacity);
+        Color aimCol = Color.Lerp(unAimedColor, aimedColor, (currentAimTime / aimTime));
+
+        leftAimLineImage.color = aimCol;
+        rightAimLineImage.color = aimCol;
 
         float length = Vector3.Distance(shootPoint.transform.position, mouseAimPoint) * 0.9f;
 

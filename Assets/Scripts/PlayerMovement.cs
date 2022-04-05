@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
     public float rollSpeed = 10f;
     public float rollTime = 1f;
     private float rollTimer = 0f;
+    public float rollDelay = 1.5f;
+    private float rollDelayTimer = 0f;
     public bool isRolling = false;
     private PlayerHealth playerHealth;
     private GunScript gunScript;
@@ -103,6 +105,9 @@ public class PlayerMovement : MonoBehaviour
         }
         else{
             rollTimer = 0;
+            if (rollDelayTimer > 0){
+                rollDelayTimer -= Time.deltaTime;
+            }
 
             //make vulnerable
             playerHealth.isInvulnerable = false;
@@ -154,7 +159,15 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void StartRoll(){
+        if (rollDelayTimer > 0){
+            return;
+        }
+        if (isRolling){
+            return;
+        }
+
         isRolling = true;
+        rollDelayTimer = rollDelay;
 
         //get cam direction
         Vector3 camForward = cam.transform.forward;
