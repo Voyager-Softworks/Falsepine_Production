@@ -64,8 +64,8 @@ public class GunScript : MonoBehaviour
     private void OnDrawGizmos() {
         //draw current aim angle
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(shootPoint.transform.position, shootPoint.transform.position + rightAimAngle * 5.0f);
-        Gizmos.DrawLine(shootPoint.transform.position, shootPoint.transform.position + leftAimAngle * 5.0f);
+        //Gizmos.DrawLine(shootPoint.transform.position, shootPoint.transform.position + rightAimAngle * 5.0f);
+        //Gizmos.DrawLine(shootPoint.transform.position, shootPoint.transform.position + leftAimAngle * 5.0f);
 
         //draw every line
         Gizmos.color = Color.blue;
@@ -86,6 +86,11 @@ public class GunScript : MonoBehaviour
         uiScript = FindObjectOfType<UIScript>();
         audioSource = GetComponent<AudioSource>();
         _animator = GetComponentInChildren<Animator>();
+
+        if (canvas != null){
+            //if canvas, set scale to be 1 in relation to world
+            canvas.transform.localScale = Vector3.one * (1.0f / transform.lossyScale.x);
+        }
 
         UpdateUI();
     }
@@ -116,15 +121,13 @@ public class GunScript : MonoBehaviour
             return;
         }
 
-        float opacity = 1.0f;
+        Color aimCol = isAiming ? aimedColor : unAimedColor;
         if (reloadTimer <= 0.0f && shootTimer <= 0.0f){
-            opacity = (currentAimTime / aimTime) * 0.5f;
+            aimCol = Color.Lerp(unAimedColor, aimedColor, (currentAimTime / aimTime));
         }
         else{
-            opacity = 0f;
+            aimCol = unAimedColor;
         }
-
-        Color aimCol = Color.Lerp(unAimedColor, aimedColor, (currentAimTime / aimTime));
 
         leftAimLineImage.color = aimCol;
         rightAimLineImage.color = aimCol;
@@ -278,7 +281,7 @@ public class GunScript : MonoBehaviour
         {
             canvas.transform.LookAt(mouseAimPoint);
             //rotate canvas 90 along right axis
-            canvas.transform.RotateAround(canvas.transform.position, transform.right, 90.0f);
+            canvas.transform.RotateAround(canvas.transform.position, canvas.transform.right, 90.0f);
             //transform.LookAt(mouseAimPoint);
         }
     }
