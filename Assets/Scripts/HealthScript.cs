@@ -7,22 +7,23 @@ public class HealthScript : MonoBehaviour
 {
     public float currentHealth = 100f;
     public float maxHealth = 100f;
-    // public float healthRegen = 0.5f;
-    // public float healthRegenDelay = 5.0f;
-    // public float healthRegenDelayTimer = 0f;
     public bool isDead = false;
     public bool isInvincible = false;
-    //public bool isRegenerating = false;
 
     public bool endScreenOnDeath = true;
 
+    public AudioClip deathSound;
+    public AudioClip hurtSound;
+
     public UnityEvent OnDeath;
+
+    private AudioSource _audioSource;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -53,6 +54,7 @@ public class HealthScript : MonoBehaviour
 
         currentHealth -= damage;
         GetComponent<NodeAI.NodeAI_Agent>().SetFloat("Health", currentHealth);
+        if (_audioSource && hurtSound) _audioSource.PlayOneShot(hurtSound);
         if (currentHealth <= 0)
         {
             Die();
@@ -66,6 +68,8 @@ public class HealthScript : MonoBehaviour
         OnDeath.Invoke();
         GetComponent<NodeAI.NodeAI_Agent>().SetState("Dead");
         GetComponentInChildren<Animator>().SetBool("Dead", true);
+
+        if (_audioSource && deathSound) _audioSource.PlayOneShot(deathSound);
 
         if (endScreenOnDeath)
         {

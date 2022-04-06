@@ -17,7 +17,15 @@ public class InventoryManager : MonoBehaviour
     public InputAction hotkey2Action;
     public InputAction hotkey3Action;
 
+
+    [Header("UI Sounds")]
+    public AudioClip openBagSound;
+    public AudioClip closeBagSound;
+    public AudioClip openJournalSound;
+    public AudioClip closeJournalSound;
+
     private UIScript _uiScript;
+    private AudioSource _audioSource;
 
     //this should be replaced with more complicated system if doing full prod
     [Serializable]
@@ -28,6 +36,7 @@ public class InventoryManager : MonoBehaviour
         public int maxAmount;
         public Sprite icon;
         public GameObject prefab;
+        public Transform transOnPlayer;
     }
 
     public InventoryItem bearTraps = new InventoryItem();
@@ -56,13 +65,27 @@ public class InventoryManager : MonoBehaviour
         hotkey3Action.performed += HotkeyPressed;
 
         if (_uiScript == null) _uiScript = FindObjectOfType<UIScript>();
+        if (_audioSource == null) _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //UpdatePlayerPrefab();
         UpdateBagUI();
         UpdateHotbarUI();
+    }
+
+    private void UpdatePlayerPrefab()
+    {
+        if (bearTraps.amount <= 0)
+        {
+            if (bearTraps.transOnPlayer) bearTraps.transOnPlayer.localScale = Vector3.zero;
+        }
+        else
+        {
+            if (bearTraps.transOnPlayer) bearTraps.transOnPlayer.localScale = Vector3.one;
+        }
     }
 
     private void UpdateBagUI(){
@@ -264,12 +287,16 @@ public class InventoryManager : MonoBehaviour
         CloseAll();
 
         _uiScript.journalUIList.journalPanel.SetActive(true);
+
+        if (_audioSource) _audioSource.PlayOneShot(openJournalSound);
     }
     public void CloseJournal()
     {
         if (_uiScript == null || _uiScript.journalUIList == null || _uiScript.journalUIList.journalPanel == null) return;
 
         _uiScript.journalUIList.journalPanel.SetActive(false);
+
+        if (_audioSource) _audioSource.PlayOneShot(closeJournalSound);
     }
     public void ToggleJournal()
     {
@@ -286,12 +313,16 @@ public class InventoryManager : MonoBehaviour
         CloseAll();
 
         _uiScript.bagUIList.bagPanel.SetActive(true);
+
+        if (_audioSource) _audioSource.PlayOneShot(openBagSound);
     }
     public void CloseBag()
     {
         if (_uiScript == null || _uiScript.bagUIList == null || _uiScript.bagUIList.bagPanel == null) return;
 
         _uiScript.bagUIList.bagPanel.SetActive(false);
+
+        if (_audioSource) _audioSource.PlayOneShot(closeBagSound);
     }
     public void ToggleBag()
     {

@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     public float rollDelay = 1.5f;
     private float rollDelayTimer = 0f;
     public bool isRolling = false;
+    public AudioClip rollSound;
     private PlayerHealth playerHealth;
     private GunScript gunScript;
 
@@ -32,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 mouseAimPoint = Vector3.zero;
     public Transform shootPoint;
     private Camera cam;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +54,8 @@ public class PlayerMovement : MonoBehaviour
         gunScript = GetComponentInChildren<GunScript>();
 
         _animator = GetComponentInChildren<Animator>();
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -197,6 +201,7 @@ public class PlayerMovement : MonoBehaviour
         rollTimer = rollTime;
 
         _animator.SetTrigger("Dodge");
+        audioSource.PlayOneShot(rollSound);
     }
 
     public Vector3 GetMouseAimPoint(){
