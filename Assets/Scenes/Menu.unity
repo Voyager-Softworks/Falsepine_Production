@@ -3678,7 +3678,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4073824832640849436}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f7c4fb7dd56b2264eb382f4bef0c2030, type: 3}
   m_Name: 
@@ -3687,6 +3687,9 @@ MonoBehaviour:
   maxHealth: 100
   isDead: 0
   isInvincible: 0
+  endScreenOnDeath: 1
+  deathSound: {fileID: 0}
+  hurtSound: {fileID: 0}
   OnDeath:
     m_PersistentCalls:
       m_Calls:
@@ -12787,7 +12790,7 @@ NavMeshAgent:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4073824832640849436}
-  m_Enabled: 1
+  m_Enabled: 0
   m_AgentTypeID: 0
   m_Radius: 0.5
   m_Speed: 3.5
@@ -12809,7 +12812,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4073824832640849436}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f4b3d6b1a9a44e2980cb3987622ba66, type: 3}
   m_Name: 
@@ -17408,7 +17411,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4951128616278561382}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87fe1ef4621dfc044bd295e9ddbdafef, type: 3}
   m_Name: 
@@ -17484,6 +17487,7 @@ MonoBehaviour:
   rollTime: 0.5
   rollDelay: 1.5
   isRolling: 0
+  rollSound: {fileID: 0}
   mouseAimPoint: {x: 0, y: 0, z: 0}
   shootPoint: {fileID: 5891942742604136171}
 --- !u!23 &4951128616278561380
@@ -17953,7 +17957,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4951128616278561382}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 238ac7a2c4ad8154dac888fe8869b5e4, type: 3}
   m_Name: 
@@ -18060,27 +18064,37 @@ MonoBehaviour:
       m_Action: Hotkey 3
       m_Flags: 0
     m_Flags: 0
+  openBagSound: {fileID: 0}
+  closeBagSound: {fileID: 0}
+  openJournalSound: {fileID: 0}
+  closeJournalSound: {fileID: 0}
   bearTraps:
     name: Bear Trap
     hotkey: 1
     amount: 0
     maxAmount: 3
+    currentSlot: 0
     icon: {fileID: 21300000, guid: abf1702e8ed21ff4ab0e5f1aea0ef54f, type: 3}
     prefab: {fileID: 0}
+    transOnPlayer: {fileID: 0}
   baitMeat:
     name: Raw Meat Bait
     hotkey: 2
     amount: 1
     maxAmount: 1
+    currentSlot: 0
     icon: {fileID: 21300000, guid: 391b279f4b7d1d34298eb5e902d94e6b, type: 3}
     prefab: {fileID: 9109181826084227206, guid: dfecf928df3c8a0459213dec6193f8b5, type: 3}
+    transOnPlayer: {fileID: 0}
   baitBird:
     name: Live Bird Bait
     hotkey: 3
     amount: 1
     maxAmount: 1
+    currentSlot: 0
     icon: {fileID: 21300000, guid: d05cf91c1c302ec4da8f6f32f2264e5b, type: 3}
     prefab: {fileID: 2921793268086988636, guid: a7d6b24f626b5264dbab4b77a7cd8d13, type: 3}
+    transOnPlayer: {fileID: 0}
 --- !u!1 &5037420577520186590
 GameObject:
   m_ObjectHideFlags: 0
@@ -18195,13 +18209,13 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -5203880203745153036, guid: 7bc2b4fc4146cbe489bf77879528aca2, type: 3}
-  - {fileID: -8856150139927994995, guid: 7bc2b4fc4146cbe489bf77879528aca2, type: 3}
+  - {fileID: 2100000, guid: 7c276d5c8005bfe488a9a9d26ee245a7, type: 2}
+  - {fileID: 2100000, guid: d8c0e2e8ce00b3740bedbee6cb0f6110, type: 2}
   - {fileID: -3124701784269717128, guid: 7bc2b4fc4146cbe489bf77879528aca2, type: 3}
-  - {fileID: 1527049210833786555, guid: 7bc2b4fc4146cbe489bf77879528aca2, type: 3}
-  - {fileID: -7523593405509827574, guid: 7bc2b4fc4146cbe489bf77879528aca2, type: 3}
+  - {fileID: 2100000, guid: 35beea16228271342806ee78679fe68d, type: 2}
+  - {fileID: 2100000, guid: acea1a912705db046bc30ed03e22f02a, type: 2}
   - {fileID: -9037768675768780285, guid: 7bc2b4fc4146cbe489bf77879528aca2, type: 3}
-  - {fileID: 5561349426305759274, guid: 7bc2b4fc4146cbe489bf77879528aca2, type: 3}
+  - {fileID: 2100000, guid: fd1f38d5c3607d147b0e5cd2446e3ff9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -19176,11 +19190,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4951128616278561382}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 41d44dbef7686e641be8f3aafa549758, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clueFoundSound: {fileID: 0}
   cluesFound: 
 --- !u!114 &5891942742197032552
 MonoBehaviour:
@@ -19189,7 +19204,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4951128616278561382}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c549bdcfa910ca14eb69b4c35a03d1a3, type: 3}
   m_Name: 
@@ -19198,7 +19213,12 @@ MonoBehaviour:
   currentHealth: 100
   isInvulnerable: 0
   isDead: 0
+  deathSound: {fileID: 0}
+  hurtSound: {fileID: 0}
   uiScript: {fileID: 0}
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5891942742310528788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19206,7 +19226,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4951128616691182374}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32178081b0a21944f96d71118a919ca4, type: 3}
   m_Name: 
@@ -19523,7 +19543,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4951128616278561382}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32178081b0a21944f96d71118a919ca4, type: 3}
   m_Name: 

@@ -204,7 +204,7 @@ public class GunScript : MonoBehaviour
             lines.Add(line);
 
             //if hit something, apply damage
-            HealthScript healthScript = hit.collider.GetComponent<HealthScript>();
+            HealthScript healthScript = hit.collider.GetComponentInChildren<HealthScript>();
             if (healthScript != null)
             {
                 healthScript.TakeDamage(damage);

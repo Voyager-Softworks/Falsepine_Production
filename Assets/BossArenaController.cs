@@ -15,6 +15,8 @@ public class BossArenaController : MonoBehaviour
 
     public UnityEvent onBattleStart;
 
+    private UIScript _uiScript;
+
     public InputAction correctBait, incorrectBait;
     // Start is called before the first frame update
     void Start()
@@ -23,12 +25,28 @@ public class BossArenaController : MonoBehaviour
         incorrectBait.performed += ctx => UseWrongBait();
         correctBait.Enable();
         incorrectBait.Enable();
+
+        _uiScript = FindObjectOfType<UIScript>();
+
+        if (_uiScript != null){
+            onBattleStart.AddListener(EnableBossUI);
+        }
+    }
+
+    private void OnDestroy() {
+        onBattleStart.RemoveListener(EnableBossUI);
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void EnableBossUI(){
+        if (_uiScript != null){
+            _uiScript.bossUI.SetActive(true);
+        }
     }
 
     public void UseCorrectBait()
