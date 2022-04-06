@@ -37,6 +37,9 @@ public class NotesManager : MonoBehaviour
 
 
     private UIScript _uiScript;
+    private AudioSource _audioSource;
+
+    public AudioClip clueFoundSound;
 
     public List<ClueType> cluesFound = new List<ClueType>();
 
@@ -48,6 +51,8 @@ public class NotesManager : MonoBehaviour
         if (_messageManager == null) _messageManager = FindObjectOfType<MessageManager>();
 
         if (_uiScript == null) _uiScript = FindObjectOfType<UIScript>();
+
+        if (_audioSource == null) _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -73,5 +78,7 @@ public class NotesManager : MonoBehaviour
         cluesFound.Add(_clue.clueType);
 
         if (_messageManager != null) _messageManager.AddMessage("Clue Found!\n" + clueLongDesc[_clue.clueType]);
+
+        if (_audioSource != null && clueFoundSound != null) _audioSource.PlayOneShot(clueFoundSound);
     }
 }
