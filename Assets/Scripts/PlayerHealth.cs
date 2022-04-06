@@ -22,6 +22,11 @@ public class PlayerHealth : MonoBehaviour
     public bool isInvulnerable = false;
     public bool isDead = false;
 
+    [Header("Sounds")]
+    public AudioClip deathSound;
+    public AudioClip hurtSound;
+    private AudioSource _audioSource;
+
     [Header("UI")]
     [HideInInspector] public UIScript uiScript;
 
@@ -32,6 +37,7 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         if (uiScript == null) uiScript = FindObjectOfType<UIScript>();
+        if (_audioSource == null) _audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -54,7 +60,9 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (isInvulnerable) return;
+        if (isInvulnerable || isDead) return;
+
+        if (_audioSource && hurtSound) _audioSource.PlayOneShot(hurtSound);
 
         currentHealth -= damage;
         if (currentHealth <= 0)
@@ -68,6 +76,8 @@ public class PlayerHealth : MonoBehaviour
 
         isDead = true;
         currentHealth = 0;
+
+        if (_audioSource && deathSound) _audioSource.PlayOneShot(deathSound);
 
         FadeScript fadeScript = FindObjectOfType<FadeScript>();
         if (fadeScript){
