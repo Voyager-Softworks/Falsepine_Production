@@ -51,6 +51,26 @@ public class BossChargingState : CustomState
                 else if(hit.collider.gameObject.tag == "BearTrap")
                 {
                     agent.SetBool("HitBearTrap", true);
+
+                    //do closing anim
+                    Transform trapRoot = hit.transform.root;
+                    Animator trapAnim = trapRoot.GetComponentInChildren<Animator>();
+                    if (trapAnim != null)
+                    {
+                        trapAnim.SetTrigger("Close");
+                    }
+                    //disable interaction
+                    Interactable interactable = trapRoot.GetComponent<Interactable>();
+                    if (interactable){
+                        interactable._text.enabled = false;
+                        interactable.enabled = false;
+                    }
+                    //disable all colliders
+                    Collider[] colliders = trapRoot.GetComponentsInChildren<Collider>();
+                    foreach (Collider collider in colliders)
+                    {
+                        collider.enabled = false;
+                    }
                 }
             }
         }

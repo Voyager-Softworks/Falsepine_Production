@@ -1,6 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using TMPro;
+using UnityEngine.UI;
+using System;
+using UnityEngine.Events;
 
 //NOTES:
 // Player has health from 0-100, Starting at 100.
@@ -20,7 +25,8 @@ public class PlayerHealth : MonoBehaviour
     [Header("UI")]
     [HideInInspector] public UIScript uiScript;
 
-
+    [Header("Events")]
+    public UnityEvent OnDeath;
 
     // Start is called before the first frame update
     void Start()
@@ -58,8 +64,17 @@ public class PlayerHealth : MonoBehaviour
     }
 
     public void Die(){
+        if (isDead) return;
+
         isDead = true;
         currentHealth = 0;
+
+        FadeScript fadeScript = FindObjectOfType<FadeScript>();
+        if (fadeScript){
+            fadeScript.EndScreen();
+        }
+
+        OnDeath.Invoke();
     }
 
     public void Heal(float heal)
