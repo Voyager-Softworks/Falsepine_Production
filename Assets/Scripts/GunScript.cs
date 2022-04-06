@@ -23,6 +23,7 @@ public class GunScript : MonoBehaviour
     public int currentClip = 10;
     public float shootTime = 0.1f;
     public float shootTimer = 0.0f;
+    public GameObject muzzleFlash;
     public LayerMask shootMask;
 
     private struct Line
@@ -213,6 +214,8 @@ public class GunScript : MonoBehaviour
 
         audioSource.PlayOneShot(shootClip[UnityEngine.Random.Range(0, shootClip.Count)]);
         _animator.SetTrigger("Shoot");
+        GameObject flash = Instantiate(muzzleFlash, shootPoint.transform.position, shootPoint.transform.rotation, shootPoint);
+        Destroy(flash, 2.0f);
 
         currentClip--;
     }
