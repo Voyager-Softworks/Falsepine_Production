@@ -13,7 +13,7 @@ public class PickupScript : Interactable
     {
         base.Start();
 
-        OnInteract.AddListener(() => AddToInventory(itemToAdd));
+        OnInteract.AddListener(() => AddToInventory(itemToAdd, amountToAdd));
     }
 
     // Update is called once per frame
@@ -22,7 +22,7 @@ public class PickupScript : Interactable
         base.Update();
     }
 
-    public void AddToInventory(string _itemName, int _amount = 1)
+    public void AddToInventory(string _itemName, int _amount)
     {
         InventoryManager inventoryManager = FindObjectOfType<InventoryManager>();
 

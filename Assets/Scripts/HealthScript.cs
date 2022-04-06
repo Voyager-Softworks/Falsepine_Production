@@ -14,6 +14,8 @@ public class HealthScript : MonoBehaviour
     public bool isInvincible = false;
     //public bool isRegenerating = false;
 
+    public bool endScreenOnDeath = true;
+
     public UnityEvent OnDeath;
 
 
@@ -64,6 +66,15 @@ public class HealthScript : MonoBehaviour
         OnDeath.Invoke();
         GetComponent<NodeAI.NodeAI_Agent>().SetState("Dead");
         GetComponentInChildren<Animator>().SetBool("Dead", true);
+
+        if (endScreenOnDeath)
+        {
+            FadeScript fadeScript = FindObjectOfType<FadeScript>();
+            if (fadeScript)
+            {
+                fadeScript.EndScreen();
+            }
+        }
 
     }
 

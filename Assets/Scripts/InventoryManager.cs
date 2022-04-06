@@ -159,8 +159,33 @@ public class InventoryManager : MonoBehaviour
         if (item.amount > 0){
             item.amount--;
             if (item.prefab != null){
-                GameObject obj = Instantiate(item.prefab, transform.position + transform.forward, Quaternion.identity);
-                if (obj.GetComponent<Rigidbody>()) obj.GetComponent<Rigidbody>().AddForce(transform.forward * 10, ForceMode.Impulse);
+                Vector3 forwardPos = transform.position + transform.forward * 2.0f;
+                Vector3 groundPos = forwardPos;
+                //raycast to find ground
+                RaycastHit hit;
+                if (Physics.Raycast(forwardPos, Vector3.down, out hit, 100f))
+                {
+                    groundPos = hit.point;
+                }
+
+                //get lowest point on mesh
+                MeshFilter meshFilter = item.prefab.GetComponentInChildren<MeshFilter>();
+                if (meshFilter != null)
+                {
+                    Vector3[] vertices = meshFilter.sharedMesh.vertices;
+                    float lowestY = float.MaxValue;
+                    foreach (Vector3 vertex in vertices)
+                    {
+                        if (vertex.y < lowestY)
+                        {
+                            lowestY = vertex.y;
+                        }
+                    }
+                    groundPos.y += Mathf.Abs(lowestY) * item.prefab.transform.localScale.y;
+                }
+
+                GameObject obj = Instantiate(item.prefab, groundPos, Quaternion.identity);
+                //if (obj.GetComponent<Rigidbody>()) obj.GetComponent<Rigidbody>().AddForce(transform.forward * 10, ForceMode.Impulse);
             }
         }
     }
