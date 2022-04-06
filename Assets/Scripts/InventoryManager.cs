@@ -28,6 +28,7 @@ public class InventoryManager : MonoBehaviour
         public int maxAmount;
         public Sprite icon;
         public GameObject prefab;
+        public Transform transOnPlayer;
     }
 
     public InventoryItem bearTraps = new InventoryItem();
@@ -61,8 +62,21 @@ public class InventoryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //UpdatePlayerPrefab();
         UpdateBagUI();
         UpdateHotbarUI();
+    }
+
+    private void UpdatePlayerPrefab()
+    {
+        if (bearTraps.amount <= 0)
+        {
+            if (bearTraps.transOnPlayer) bearTraps.transOnPlayer.localScale = Vector3.zero;
+        }
+        else
+        {
+            if (bearTraps.transOnPlayer) bearTraps.transOnPlayer.localScale = Vector3.one;
+        }
     }
 
     private void UpdateBagUI(){
