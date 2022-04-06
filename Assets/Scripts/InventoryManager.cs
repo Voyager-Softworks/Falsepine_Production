@@ -34,6 +34,7 @@ public class InventoryManager : MonoBehaviour
         public int hotkey;
         public int amount;
         public int maxAmount;
+        public int currentSlot;
         public Sprite icon;
         public GameObject prefab;
         public Transform transOnPlayer;
@@ -97,30 +98,71 @@ public class InventoryManager : MonoBehaviour
         int currentSlot = 0;
 
         //bear traps
+        bearTraps.currentSlot = -1;
         if (bearTraps.amount > 0){
             _uiScript.bagUIList.SwitchBagSlotBackground(currentSlot, true);
             _uiScript.bagUIList.GetBagSlotIcon(currentSlot).enabled = true;
             _uiScript.bagUIList.GetBagSlotIcon(currentSlot).sprite = bearTraps.icon;
             _uiScript.bagUIList.GetBagSlotText(currentSlot).text = bearTraps.amount.ToString();
             currentSlot++;
+            bearTraps.currentSlot = currentSlot;
         }
 
         //bait meat
+        baitMeat.currentSlot = -1;
         if (baitMeat.amount > 0){
             _uiScript.bagUIList.SwitchBagSlotBackground(currentSlot, true);
             _uiScript.bagUIList.GetBagSlotIcon(currentSlot).enabled = true;
             _uiScript.bagUIList.GetBagSlotIcon(currentSlot).sprite = baitMeat.icon;
             _uiScript.bagUIList.GetBagSlotText(currentSlot).text = baitMeat.amount.ToString();
             currentSlot++;
+            baitMeat.currentSlot = currentSlot;
         }
 
         //bait bird
+        baitBird.currentSlot = -1;
         if (baitBird.amount > 0){
             _uiScript.bagUIList.SwitchBagSlotBackground(currentSlot, true);
             _uiScript.bagUIList.GetBagSlotIcon(currentSlot).enabled = true;
             _uiScript.bagUIList.GetBagSlotIcon(currentSlot).sprite = baitBird.icon;
             _uiScript.bagUIList.GetBagSlotText(currentSlot).text = baitBird.amount.ToString();
             currentSlot++;
+            baitBird.currentSlot = currentSlot;
+        }
+
+        //loop through inventory slots and check if mouse is over any
+        int hoveredSlot = -1;
+        for (int i = 0; i < _uiScript.bagUIList.bagSlots.Count; i++){
+            RectTransform itemRect = _uiScript.bagUIList.bagSlots[i].GetComponent<RectTransform>();
+            Vector2 localMousePosition = itemRect.InverseTransformPoint(Mouse.current.position.ReadValue());
+            if (itemRect.rect.Contains(localMousePosition)){
+                hoveredSlot = i+1;
+                break;
+            }
+        }
+        UpdateInfoBox(hoveredSlot);
+    }
+
+    private void UpdateInfoBox(int slot){
+        bool display = false;
+        _uiScript.infoPannel.SetActive(false);
+        if (slot == -1) return;
+
+        if (slot == bearTraps.currentSlot){
+            _uiScript.infoText.text = bearTraps.name + ": " + bearTraps.amount + "/" + bearTraps.maxAmount;
+            display = true;
+        }
+        else if (slot == baitMeat.currentSlot){
+            _uiScript.infoText.text = baitMeat.name + ": " + baitMeat.amount + "/" + baitMeat.maxAmount;
+            display = true;
+        }
+        else if (slot == baitBird.currentSlot){
+            _uiScript.infoText.text = baitBird.name + ": " + baitBird.amount + "/" + baitBird.maxAmount;
+            display = true;
+        }
+
+        if (display){
+            _uiScript.infoPannel.SetActive(true);
         }
     }
 

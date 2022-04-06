@@ -20,6 +20,8 @@ public class UIScript : MonoBehaviour
     public BagUIList bagUIList;
     public JournalUIList journalUIList;
     public HotbarUIList hotbarUIList;
+    public GameObject infoPannel;
+    public TextMeshProUGUI infoText;
 
     [Header("Boss UI")]
     public GameObject bossUI;
