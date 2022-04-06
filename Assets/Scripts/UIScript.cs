@@ -21,6 +21,13 @@ public class UIScript : MonoBehaviour
     public JournalUIList journalUIList;
     public HotbarUIList hotbarUIList;
 
+    [Header("Boss UI")]
+    public GameObject bossUI;
+    public Image bossHealthBG;
+    public Image bossHealthBar;
+    [HideInInspector] public float bossHealthBarMaxWidth;
+    public TextMeshProUGUI bossNameText;
+
 
     public UnityEvent OnStart;
 
@@ -29,6 +36,7 @@ public class UIScript : MonoBehaviour
         if (cursorScript == null) cursorScript = FindObjectOfType<CursorScript>();
 
         if (healthBar != null) healthBarMaxWidth = healthBar.rectTransform.sizeDelta.x;
+        if (bossHealthBar != null) bossHealthBarMaxWidth = bossHealthBar.rectTransform.sizeDelta.x;
 
         OnStart.Invoke();
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,32 +20,35 @@ public class HealthScript : MonoBehaviour
 
     private AudioSource _audioSource;
 
+    private UIScript _uiScript;
+
 
     // Start is called before the first frame update
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
+
+        if (_uiScript == null) _uiScript = FindObjectOfType<UIScript>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        // if (isRegenerating)
-        // {
-        //     if (healthRegenDelayTimer < healthRegenDelay)
-        //     {
-        //         healthRegenDelayTimer += Time.deltaTime;
-        //     }
-        //     else
-        //     {
-        //         healthRegenDelayTimer = 0f;
-        //         currentHealth += healthRegen;
-        //         if (currentHealth > maxHealth)
-        //         {
-        //             currentHealth = maxHealth;
-        //         }
-        //     }
-        // }
+        UpdateUI();
+
+        //check for health and dead
+        if (!isDead && currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void UpdateUI()
+    {
+        //boss health bar
+        if (_uiScript == null) return;
+
+        _uiScript.bossHealthBar.rectTransform.sizeDelta = new Vector2(_uiScript.bossHealthBarMaxWidth * (currentHealth / maxHealth), _uiScript.bossHealthBar.rectTransform.sizeDelta.y);
     }
 
     public void TakeDamage(float damage)
