@@ -73,6 +73,16 @@ public class InventoryManager : MonoBehaviour
         if (_animator == null) _animator = GetComponentInChildren<Animator>();
     }
 
+    private void OnDestroy() {
+        openBagAction.Disable();
+        openJournalAction.Disable();
+        closeAction.Disable();
+
+        hotkey1Action.Disable();
+        hotkey2Action.Disable();
+        hotkey3Action.Disable();
+    }
+
     // Update is called once per frame
     void Update()
     {

@@ -58,6 +58,11 @@ public class PlayerMovement : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
+    private void OnDestroy() {
+        moveAction.Disable();
+        rollAction.Disable();
+    }
+
     // Update is called once per frame
     void Update()
     {
