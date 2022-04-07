@@ -59,6 +59,14 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void OnDestroy() {
+        DisableInput();
+    }
+
+    private void OnDisable() {
+        DisableInput();
+    }
+
+    public void DisableInput(){
         moveAction.Disable();
         rollAction.Disable();
     }
@@ -95,7 +103,8 @@ public class PlayerMovement : MonoBehaviour
         animVelocity = Vector3.Lerp(animVelocity, moveDir, Time.deltaTime * 10f);
 
         //check if placing bear trap anim is playing
-        if (_animator.GetCurrentAnimatorStateInfo(3).IsName("Player|PLACE TRAP (ALL)"))
+        if (_animator.GetCurrentAnimatorStateInfo(3).IsName("Player|PLACE TRAP (ALL)") ||
+            _animator.GetCurrentAnimatorStateInfo(3).IsName("Player|PAIN (ALL)"))
         {
             return;
         }
@@ -181,7 +190,8 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
         //check if placing bear trap anim is playing
-        if (_animator.GetCurrentAnimatorStateInfo(3).IsName("Player|PLACE TRAP (ALL)"))
+        if (_animator.GetCurrentAnimatorStateInfo(3).IsName("Player|PLACE TRAP (ALL)") ||
+            _animator.GetCurrentAnimatorStateInfo(3).IsName("Player|PAIN (ALL)"))
         {
             return;
         }
