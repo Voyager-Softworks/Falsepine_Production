@@ -88,6 +88,12 @@ public class PlayerMovement : MonoBehaviour
         moveDir.y = -2.0f;
         
         animVelocity = Vector3.Lerp(animVelocity, moveDir, Time.deltaTime * 10f);
+
+        //check if placing bear trap anim is playing
+        if (_animator.GetCurrentAnimatorStateInfo(3).IsName("Player|PLACE TRAP (ALL)"))
+        {
+            return;
+        }
         
         //roll
         if (rollTimer > 0)
@@ -169,6 +175,12 @@ public class PlayerMovement : MonoBehaviour
         if (isRolling){
             return;
         }
+        //check if placing bear trap anim is playing
+        if (_animator.GetCurrentAnimatorStateInfo(3).IsName("Player|PLACE TRAP (ALL)"))
+        {
+            return;
+        }
+        
 
         isRolling = true;
         rollDelayTimer = rollDelay;
