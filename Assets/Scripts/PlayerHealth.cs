@@ -33,11 +33,14 @@ public class PlayerHealth : MonoBehaviour
     [Header("Events")]
     public UnityEvent OnDeath;
 
+    private Animator _animator;
+
     // Start is called before the first frame update
     void Start()
     {
         if (uiScript == null) uiScript = FindObjectOfType<UIScript>();
         if (_audioSource == null) _audioSource = GetComponent<AudioSource>();
+        if (_animator == null) _animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -63,6 +66,7 @@ public class PlayerHealth : MonoBehaviour
         if (isInvulnerable || isDead) return;
 
         if (_audioSource && hurtSound) _audioSource.PlayOneShot(hurtSound);
+        if (_animator) _animator.SetTrigger("Impact");
 
         currentHealth -= damage;
         if (currentHealth <= 0)
@@ -83,6 +87,26 @@ public class PlayerHealth : MonoBehaviour
         if (fadeScript){
             fadeScript.EndScreen();
         }
+
+        //disable player movement, shooting, inventory, etc.
+        PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
+        if (playerMovement) playerMovement.enabled = false;
+        GunScript gunScript = FindObjectOfType<GunScript>();
+        if (gunScript) gunScript.enabled = false;
+        InventoryManager inventoryScript = FindObjectOfType<InventoryManager>();
+        if (inventoryScript) inventoryScript.enabled = false;
+
+        //set die trigger
+        if (_animator) _animator.SetTrigger("Die");
+        //set aim move x and z to 0
+        if (_animator) _animator.SetFloat("MoveX", 0);
+        if (_animator) _animator.SetFloat("MoveZ", 0);
+        //set walking to false
+        if (_animator) _animator.SetBool("Walking", false);
+        //set aiming to false
+        if (_animator) _animator.SetBool("Aiming", false);
+
+
 
         OnDeath.Invoke();
     }

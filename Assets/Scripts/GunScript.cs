@@ -131,6 +131,13 @@ public class GunScript : MonoBehaviour
             aimCol = unAimedColor;
         }
 
+        //check if placing bear trap anim is playing
+        if (_animator.GetCurrentAnimatorStateInfo(3).IsName("Player|PLACE TRAP (ALL)") ||
+            _animator.GetCurrentAnimatorStateInfo(3).IsName("Player|PAIN (ALL)"))
+        {
+            aimCol = Color.clear;
+        }
+
         leftAimLineImage.color = aimCol;
         rightAimLineImage.color = aimCol;
 
@@ -154,6 +161,13 @@ public class GunScript : MonoBehaviour
         {
             shootTimer -= Time.deltaTime;
             //transform.LookAt(playerMovement.transform.position + playerMovement.transform.forward*2.0f + playerMovement.transform.up);
+        }
+
+        //check if placing bear trap anim is playing
+        if (_animator.GetCurrentAnimatorStateInfo(3).IsName("Player|PLACE TRAP (ALL)") ||
+            _animator.GetCurrentAnimatorStateInfo(3).IsName("Player|PAIN (ALL)"))
+        {
+            return;
         }
 
         if (reloadTimer <= 0.0f && shootTimer <= 0.0f && !playerMovement.isRolling)

@@ -73,7 +73,17 @@ public class InventoryManager : MonoBehaviour
         if (_animator == null) _animator = GetComponentInChildren<Animator>();
     }
 
-    private void OnDestroy() {
+    private void OnDestroy()
+    {
+        DisableInput();
+    }
+
+    private void OnDisable() {
+        DisableInput();
+    }
+
+    public void DisableInput()
+    {
         openBagAction.Disable();
         openJournalAction.Disable();
         closeAction.Disable();
@@ -216,7 +226,9 @@ public class InventoryManager : MonoBehaviour
 
     public void HotkeyPressed(InputAction.CallbackContext ctx){
         //check if placing bear trap anim is playing or dodge anim is playing
-        if (_animator.GetCurrentAnimatorStateInfo(3).IsName("Player|PLACE TRAP (ALL)") || _animator.GetCurrentAnimatorStateInfo(3).IsName("Player|DODGE (ALL)"))
+        if (_animator.GetCurrentAnimatorStateInfo(3).IsName("Player|PLACE TRAP (ALL)") || 
+            _animator.GetCurrentAnimatorStateInfo(3).IsName("Player|DODGE (ALL)") ||
+            _animator.GetCurrentAnimatorStateInfo(3).IsName("Player|PAIN (ALL)"))
         {
             return;
         }
