@@ -24,8 +24,8 @@ public class PlayerStepSound : MonoBehaviour
     {
         if (_audioSource)
         {
-            _audioSource.clip = stepSounds[Random.Range(0, stepSounds.Count)];
-            _audioSource.Play();
+            AudioClip clip = stepSounds[Random.Range(0, stepSounds.Count)];
+            _audioSource.PlayOneShot(clip);
         }
     }
 }
