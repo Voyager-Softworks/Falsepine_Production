@@ -27,6 +27,10 @@ public class LevelController : MonoBehaviour
         SceneManager.LoadScene(1);
     }
 
+    public void Quit(){
+        Application.Quit();
+    }
+
     // public void LoadWin()
     // {
     //     SceneManager.LoadScene(2);
