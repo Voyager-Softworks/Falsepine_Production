@@ -18076,6 +18076,8 @@ MonoBehaviour:
     currentSlot: 0
     icon: {fileID: 21300000, guid: abf1702e8ed21ff4ab0e5f1aea0ef54f, type: 3}
     prefab: {fileID: 0}
+    placeDistance: 0
+    placeDelay: 0
     transOnPlayer: {fileID: 0}
   baitMeat:
     name: Raw Meat Bait
@@ -18085,6 +18087,8 @@ MonoBehaviour:
     currentSlot: 0
     icon: {fileID: 21300000, guid: 391b279f4b7d1d34298eb5e902d94e6b, type: 3}
     prefab: {fileID: 9109181826084227206, guid: dfecf928df3c8a0459213dec6193f8b5, type: 3}
+    placeDistance: 0
+    placeDelay: 0
     transOnPlayer: {fileID: 0}
   baitBird:
     name: Live Bird Bait
@@ -18094,6 +18098,8 @@ MonoBehaviour:
     currentSlot: 0
     icon: {fileID: 21300000, guid: d05cf91c1c302ec4da8f6f32f2264e5b, type: 3}
     prefab: {fileID: 2921793268086988636, guid: a7d6b24f626b5264dbab4b77a7cd8d13, type: 3}
+    placeDistance: 0
+    placeDelay: 0
     transOnPlayer: {fileID: 0}
 --- !u!1 &5037420577520186590
 GameObject:
@@ -18211,7 +18217,7 @@ SkinnedMeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: 7c276d5c8005bfe488a9a9d26ee245a7, type: 2}
   - {fileID: 2100000, guid: d8c0e2e8ce00b3740bedbee6cb0f6110, type: 2}
-  - {fileID: -3124701784269717128, guid: 7bc2b4fc4146cbe489bf77879528aca2, type: 3}
+  - {fileID: 2100000, guid: ced51de1a972b3e4a8f2675537532b37, type: 2}
   - {fileID: 2100000, guid: 35beea16228271342806ee78679fe68d, type: 2}
   - {fileID: 2100000, guid: acea1a912705db046bc30ed03e22f02a, type: 2}
   - {fileID: -9037768675768780285, guid: 7bc2b4fc4146cbe489bf77879528aca2, type: 3}
@@ -19259,6 +19265,8 @@ MonoBehaviour:
   currentClip: 10
   shootTime: 0.75
   shootTimer: 0
+  muzzleFlash: {fileID: 0}
+  hitEffect: {fileID: 0}
   shootMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -19576,6 +19584,8 @@ MonoBehaviour:
   currentClip: 10
   shootTime: 0.75
   shootTimer: 0
+  muzzleFlash: {fileID: 0}
+  hitEffect: {fileID: 0}
   shootMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -21450,49 +21460,64 @@ MonoBehaviour:
     name: AttkC
     delay: 1.06
     duration: 2
-    particle: {fileID: 0}
+    particle:
+    - {fileID: 0}
+    spawnedParticle: {fileID: 0}
   - position: {fileID: 227140229444720805}
     radius: 3.19
     damage: 20
     name: AttkS
     delay: 1.06
     duration: 2
-    particle: {fileID: 0}
+    particle:
+    - {fileID: 0}
+    spawnedParticle: {fileID: 0}
   - position: {fileID: 1379123579693890056}
     radius: 2.77
     damage: 20
     name: AttkC1
     delay: 1.06
     duration: 3
-    particle: {fileID: 0}
+    particle:
+    - {fileID: 0}
+    spawnedParticle: {fileID: 0}
   - position: {fileID: 5472945745260437712}
     radius: 2.79
     damage: 20
     name: AttkC12
     delay: 1.23
     duration: 3
-    particle: {fileID: 0}
+    particle:
+    - {fileID: 0}
+    spawnedParticle: {fileID: 0}
   - position: {fileID: 7633757502923220402}
     radius: 8.98
     damage: 20
     name: AttkC2
     delay: 2
     duration: 3
-    particle: {fileID: 0}
+    particle:
+    - {fileID: 0}
+    spawnedParticle: {fileID: 0}
   - position: {fileID: 7800347233427047583}
     radius: 3.21
     damage: 20
     name: AttkS1
     delay: 1.06
     duration: 3
-    particle: {fileID: 0}
+    particle:
+    - {fileID: 0}
+    spawnedParticle: {fileID: 0}
   - position: {fileID: 7167840374357095533}
     radius: 9.04
     damage: 20
     name: AttkS2
     delay: 1.17
     duration: 3
-    particle: {fileID: 0}
+    particle:
+    - {fileID: 0}
+    spawnedParticle: {fileID: 0}
+  hurtPlayerEffect: {fileID: 0}
 --- !u!1 &7502659594224628535
 GameObject:
   m_ObjectHideFlags: 0
@@ -23376,6 +23401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transformSoundClip: {fileID: 8300000, guid: 1ff5174fad2bec94fb7101ecbb2039e0, type: 3}
+  particle: {fileID: 0}
 --- !u!1 &9167961374524781304
 GameObject:
   m_ObjectHideFlags: 0
