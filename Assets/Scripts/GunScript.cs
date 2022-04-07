@@ -24,6 +24,7 @@ public class GunScript : MonoBehaviour
     public float shootTime = 0.1f;
     public float shootTimer = 0.0f;
     public GameObject muzzleFlash;
+    public GameObject hitEffect;
     public LayerMask shootMask;
 
     private struct Line
@@ -209,6 +210,7 @@ public class GunScript : MonoBehaviour
             if (healthScript != null)
             {
                 healthScript.TakeDamage(damage);
+                Destroy(Instantiate(hitEffect, hit.point,Quaternion.FromToRotation(Vector3.up, hit.normal)), 2.0f);
             }
         }
 

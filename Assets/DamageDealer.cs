@@ -16,9 +16,12 @@ public class DamageDealer : MonoBehaviour
         public float delay;
         public float duration;
         public ParticleSystem[] particle;
+        public GameObject spawnedParticle;
     }
     [SerializeField]
     public List<HurtBox> hurtBoxes = new List<HurtBox>();
+
+    public GameObject hurtPlayerEffect;
 
     public void EnableHurtBox(string name)
     {
@@ -51,6 +54,7 @@ public class DamageDealer : MonoBehaviour
             {
                 hit.collider.gameObject.GetComponent<PlayerHealth>().TakeDamage(hb.damage);
                 Debug.Log("Hit player");
+                Destroy(Instantiate(hurtPlayerEffect, hit.point, Quaternion.LookRotation(hit.normal, Vector3.up)), 5.0f);
                 break;
             }
         }
@@ -61,6 +65,10 @@ public class DamageDealer : MonoBehaviour
             {
                 ps.Play();
             }
+        }
+        if(hb.spawnedParticle != null)
+        {
+            Destroy(Instantiate(hb.spawnedParticle, hb.position.position, Quaternion.identity), 5.0f);
         }
         
     }
