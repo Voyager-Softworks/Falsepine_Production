@@ -38,6 +38,8 @@ public class InventoryManager : MonoBehaviour
         public int currentSlot;
         public Sprite icon;
         public GameObject prefab;
+        public float placeDistance;
+        public float placeDelay;
         public Transform transOnPlayer;
     }
 
@@ -69,6 +71,16 @@ public class InventoryManager : MonoBehaviour
         if (_uiScript == null) _uiScript = FindObjectOfType<UIScript>();
         if (_audioSource == null) _audioSource = GetComponent<AudioSource>();
         if (_animator == null) _animator = GetComponentInChildren<Animator>();
+    }
+
+    private void OnDestroy() {
+        openBagAction.Disable();
+        openJournalAction.Disable();
+        closeAction.Disable();
+
+        hotkey1Action.Disable();
+        hotkey2Action.Disable();
+        hotkey3Action.Disable();
     }
 
     // Update is called once per frame
@@ -203,6 +215,12 @@ public class InventoryManager : MonoBehaviour
     }
 
     public void HotkeyPressed(InputAction.CallbackContext ctx){
+        //check if placing bear trap anim is playing or dodge anim is playing
+        if (_animator.GetCurrentAnimatorStateInfo(3).IsName("Player|PLACE TRAP (ALL)") || _animator.GetCurrentAnimatorStateInfo(3).IsName("Player|DODGE (ALL)"))
+        {
+            return;
+        }
+
         if (ctx.performed)
         {
             if (ctx.action == hotkey1Action)
@@ -226,7 +244,7 @@ public class InventoryManager : MonoBehaviour
         if (item.amount > 0){
             item.amount--;
             if (item.prefab != null){
-                Vector3 forwardPos = transform.position + transform.forward * 2.0f;
+                Vector3 forwardPos = transform.position + transform.forward * item.placeDistance;
                 Vector3 groundPos = forwardPos;
                 //raycast to find ground
                 RaycastHit hit;
@@ -251,7 +269,7 @@ public class InventoryManager : MonoBehaviour
                     groundPos.y += Mathf.Abs(lowestY) * item.prefab.transform.localScale.y;
                 }
 
-                GameObject obj = Instantiate(item.prefab, groundPos, Quaternion.identity);
+                StartCoroutine(SpawnItemTrapWithDelay(item, groundPos, Quaternion.identity, item.placeDelay));
 
                 //if beartrap, do animation
                 if (item.name == "Bear Trap"){
@@ -260,6 +278,11 @@ public class InventoryManager : MonoBehaviour
                 //if (obj.GetComponent<Rigidbody>()) obj.GetComponent<Rigidbody>().AddForce(transform.forward * 10, ForceMode.Impulse);
             }
         }
+    }
+
+    private IEnumerator SpawnItemTrapWithDelay(InventoryItem item, Vector3 pos, Quaternion rot, float delay){
+        yield return new WaitForSeconds(delay);
+        Instantiate(item.prefab, pos, Quaternion.identity);
     }
 
     private InventoryItem GetHotkeyItem(int hotkey)
