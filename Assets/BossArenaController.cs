@@ -11,7 +11,9 @@ public class BossArenaController : MonoBehaviour
 
     public AudioClip baitedSound;
 
-    public AudioClip bossMusic;
+    public AudioClip bossMusic, bossMusicSecondPhase;
+    public float fadeOutTime;
+
 
     public UnityEvent onBattleStart;
 
@@ -63,6 +65,11 @@ public class BossArenaController : MonoBehaviour
 
     }
 
+    public void StartSecondPhase()
+    {
+        StartCoroutine(FadeToSecondPhaseCoroutine(fadeOutTime));
+    }
+
     public void UseWrongBait()
     {
         GameObject boss = FindObjectOfType<NodeAI.NodeAI_Agent>().gameObject;
@@ -78,4 +85,22 @@ public class BossArenaController : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(arenaCentre.position, arenaRadius);
     }
+
+    IEnumerator FadeToSecondPhaseCoroutine(float fadeOutTime)
+    {
+        float startVolume = GetComponent<AudioSource>().volume;
+        float currentTime = 0f;
+        while (currentTime < fadeOutTime)
+        {
+            currentTime += Time.deltaTime;
+            GetComponent<AudioSource>().volume = Mathf.Lerp(startVolume, 0.1f, currentTime / fadeOutTime);
+            yield return null;
+        }
+        GetComponent<AudioSource>().Stop();
+        GetComponent<AudioSource>().clip = bossMusicSecondPhase;
+        GetComponent<AudioSource>().Play();
+        GetComponent<AudioSource>().volume = startVolume;
+        yield break;
+    }
+    
 }
