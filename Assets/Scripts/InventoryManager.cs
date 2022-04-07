@@ -26,6 +26,7 @@ public class InventoryManager : MonoBehaviour
 
     private UIScript _uiScript;
     private AudioSource _audioSource;
+    private Animator _animator;
 
     //this should be replaced with more complicated system if doing full prod
     [Serializable]
@@ -67,6 +68,7 @@ public class InventoryManager : MonoBehaviour
 
         if (_uiScript == null) _uiScript = FindObjectOfType<UIScript>();
         if (_audioSource == null) _audioSource = GetComponent<AudioSource>();
+        if (_animator == null) _animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
@@ -250,6 +252,11 @@ public class InventoryManager : MonoBehaviour
                 }
 
                 GameObject obj = Instantiate(item.prefab, groundPos, Quaternion.identity);
+
+                //if beartrap, do animation
+                if (item.name == "Bear Trap"){
+                    _animator.SetTrigger("PlaceTrap");
+                }
                 //if (obj.GetComponent<Rigidbody>()) obj.GetComponent<Rigidbody>().AddForce(transform.forward * 10, ForceMode.Impulse);
             }
         }
