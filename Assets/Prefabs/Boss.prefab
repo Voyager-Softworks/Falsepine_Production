@@ -3209,8 +3209,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.75, z: 1}
-  m_Center: {x: 0, y: 0.35, z: 0}
+  m_Size: {x: 1.0739828, y: 1.75, z: 1}
+  m_Center: {x: -0.036991097, y: 0.35, z: 8.52106e-15}
 --- !u!114 &4073824831346734676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6920,6 +6920,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+        - m_Target: {fileID: 0}
+          m_TargetAssemblyTypeName: BossArenaController, Assembly-CSharp
+          m_MethodName: StartSecondPhase
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
   - name: MoveToBait
     action:
       m_PersistentCalls:
@@ -7052,53 +7064,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hurtBoxes:
   - position: {fileID: 868137138641948282}
-    radius: 3.77
-    damage: 20
+    radius: 3
+    damage: 10
     name: AttkC
     delay: 1.06
     duration: 2
     particle: {fileID: 0}
   - position: {fileID: 227140228692818159}
     radius: 3.19
-    damage: 20
+    damage: 10
     name: AttkS
     delay: 1.06
     duration: 2
     particle: {fileID: 0}
   - position: {fileID: 1379123579914525250}
     radius: 2.77
-    damage: 20
+    damage: 10
     name: AttkC1
     delay: 1.06
     duration: 3
     particle: {fileID: 0}
   - position: {fileID: 5472945747086573722}
     radius: 2.79
-    damage: 20
+    damage: 10
     name: AttkC12
-    delay: 1.23
+    delay: 1.9
     duration: 3
     particle: {fileID: 0}
   - position: {fileID: 7633757501461710328}
-    radius: 8.98
-    damage: 20
+    radius: 6
+    damage: 10
     name: AttkC2
     delay: 2
     duration: 3
     particle: {fileID: 0}
   - position: {fileID: 7800347234720130261}
     radius: 3.21
-    damage: 20
+    damage: 10
     name: AttkS1
     delay: 1.06
     duration: 3
     particle: {fileID: 0}
   - position: {fileID: 7167840372598412327}
     radius: 9.04
-    damage: 20
+    damage: 15
     name: AttkS2
     delay: 1.17
-    duration: 3
+    duration: 5
     particle: {fileID: 0}
 --- !u!114 &4994529633457169633
 MonoBehaviour:
@@ -7227,7 +7239,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4073824831651167520
 Transform:
   m_ObjectHideFlags: 0
