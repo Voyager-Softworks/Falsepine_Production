@@ -132,7 +132,8 @@ public class GunScript : MonoBehaviour
         }
 
         //check if placing bear trap anim is playing
-        if (_animator.GetCurrentAnimatorStateInfo(3).IsName("Player|PLACE TRAP (ALL)") ||
+        if (_animator.GetCurrentAnimatorStateInfo(3).IsName("Player|PLACE TRAP (ALL)") || 
+            _animator.GetCurrentAnimatorStateInfo(3).IsName("Player|DODGE (ALL)") ||
             _animator.GetCurrentAnimatorStateInfo(3).IsName("Player|PAIN (ALL)"))
         {
             aimCol = Color.clear;
@@ -164,7 +165,8 @@ public class GunScript : MonoBehaviour
         }
 
         //check if placing bear trap anim is playing
-        if (_animator.GetCurrentAnimatorStateInfo(3).IsName("Player|PLACE TRAP (ALL)") ||
+        if (_animator.GetCurrentAnimatorStateInfo(3).IsName("Player|PLACE TRAP (ALL)") || 
+            _animator.GetCurrentAnimatorStateInfo(3).IsName("Player|DODGE (ALL)") ||
             _animator.GetCurrentAnimatorStateInfo(3).IsName("Player|PAIN (ALL)"))
         {
             return;

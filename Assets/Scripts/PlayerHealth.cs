@@ -68,6 +68,9 @@ public class PlayerHealth : MonoBehaviour
         if (_audioSource && hurtSound) _audioSource.PlayOneShot(hurtSound);
         if (_animator) _animator.SetTrigger("Impact");
 
+        VignetteScript vs = FindObjectOfType<VignetteScript>();
+        if (vs) vs.StartVignette();
+
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
