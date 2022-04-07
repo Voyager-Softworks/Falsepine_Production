@@ -7,6 +7,7 @@ public class BossSecondState : MonoBehaviour
 {
     bool isSecondState = false;
     public AudioClip transformSoundClip;
+    public GameObject particle;
     public void OnSecondStateEnter()
     {
         if(!isSecondState)
@@ -19,6 +20,7 @@ public class BossSecondState : MonoBehaviour
             GetComponent<NodeAI.NodeAI_Agent>().SetState("SecondPhaseTransform");
             GetComponent<AudioSource>().PlayOneShot(transformSoundClip);
             GetComponent<NavMeshAgent>().isStopped = true;
+            Destroy(Instantiate(particle, transform.position, Quaternion.identity), 10.0f);
             
         }
         
