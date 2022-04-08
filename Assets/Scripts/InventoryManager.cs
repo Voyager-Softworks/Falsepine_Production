@@ -62,7 +62,7 @@ public class InventoryManager : MonoBehaviour
 
         openBagAction.performed += ctx => ToggleBag();
         openJournalAction.performed += ctx => ToggleJournal();
-        closeAction.performed += ctx => CloseAll();
+        closeAction.performed += ctx => CloseAll(true);
 
         hotkey1Action.performed += HotkeyPressed;
         hotkey2Action.performed += HotkeyPressed;
@@ -416,11 +416,52 @@ public class InventoryManager : MonoBehaviour
         else OpenBag();
     }
 
-    public void CloseAll()
+    public void CloseAll(bool openPause = false)
     {
-        CloseJournal();
-        CloseBag();
+        if (_uiScript == null) return;
+
+        //if no UI is open, toggle pause menu
+        if (openPause &&
+            !_uiScript.journalUIList.journalPanel.activeSelf &&
+            !_uiScript.bagUIList.bagPanel.activeSelf)
+        {
+            TogglePauseMenu();
+        }
+        else
+        {
+            CloseJournal();
+            CloseBag();
+            ClosePauseMenu();
+        }
     }
 
-#endregion
+    private void TogglePauseMenu()
+    {
+        if (_uiScript == null || _uiScript.pauseUI == null || _uiScript.pauseUI == null) return;
+
+        if (_uiScript.pauseUI.activeSelf)
+        {
+            ClosePauseMenu();
+        }
+        else
+        {
+            OpenPauseMenu();
+        }
+    }
+
+    private void OpenPauseMenu(){
+        if (_uiScript == null || _uiScript.pauseUI == null || _uiScript.pauseUI == null) return;
+
+        CloseAll();
+
+        _uiScript.pauseUI.SetActive(true);
+    }
+
+    private void ClosePauseMenu(){
+        if (_uiScript == null || _uiScript.pauseUI == null || _uiScript.pauseUI == null) return;
+
+        _uiScript.pauseUI.SetActive(false);
+    }
+
+    #endregion
 }

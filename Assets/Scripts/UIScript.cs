@@ -30,6 +30,9 @@ public class UIScript : MonoBehaviour
     [HideInInspector] public float bossHealthBarMaxWidth;
     public TextMeshProUGUI bossNameText;
 
+    [Header("Pause UI")]
+    public GameObject pauseUI;
+
 
     public UnityEvent OnStart;
 
