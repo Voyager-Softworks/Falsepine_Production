@@ -3118,9 +3118,9 @@ GameObject:
   - component: {fileID: 4073824831346734667}
   - component: {fileID: 4073824831346734666}
   - component: {fileID: 4073824831346734677}
+  - component: {fileID: 3906221961975269412}
   - component: {fileID: 4073824831346734679}
   - component: {fileID: 1124076941}
-  - component: {fileID: 9164288701386015754}
   - component: {fileID: 7500680383744065261}
   - component: {fileID: 4994529633457169633}
   - component: {fileID: 7675273446768421799}
@@ -3212,6 +3212,45 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0739828, y: 1.75, z: 1}
   m_Center: {x: -0.036991097, y: 0.35, z: 8.52106e-15}
+--- !u!114 &3906221961975269412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4073824831346734678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b31cddfd229080bbc8f108a7752a9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AI_Behaviour: {fileID: 11400000, guid: 97d4e4db60345fa6ca0bbb4a91599356, type: 2}
+  nodeTree:
+    rootNode:
+      GUID: 
+      parentGUID: 
+      title: 
+      childGUIDs: []
+      nodeType: 0
+      position: {x: 0, y: 0}
+      runtime: {fileID: 0}
+      properties: []
+      runtimeLogicType: 
+      noLogic: 0
+    rootLeaf:
+      nodeData:
+        GUID: 
+        parentGUID: 
+        title: 
+        childGUIDs: []
+        nodeType: 0
+        position: {x: 0, y: 0}
+        runtime: {fileID: 0}
+        properties: []
+        runtimeLogicType: 
+        noLogic: 0
+      children: []
+    nodes: []
 --- !u!195 &4073824831346734679
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3280,20 +3319,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &9164288701386015754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4073824831346734678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0561eba34b2ff6f288c48954819335c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  transformSoundClip: {fileID: 8300000, guid: 1ff5174fad2bec94fb7101ecbb2039e0, type: 3}
-  particle: {fileID: 906613630111261276, guid: 3b5267333862bd74db0257567e802e65, type: 3}
 --- !u!114 &7500680383744065261
 MonoBehaviour:
   m_ObjectHideFlags: 0

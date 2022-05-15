@@ -14,7 +14,8 @@ namespace NodeAI
     {
         private GraphView graphView;
         private NodeAI_Behaviour behaviour;
-
+        private NodeAI_Behaviour runtimeBehaviour;
+        private bool hasResetAfterRuntime = true;
         private ObjectField behaviourField;
 
         [MenuItem("Window/NodeAI/Graph")]
@@ -52,6 +53,78 @@ namespace NodeAI
             {
                 Serializer.GetInstance(graphView).Deserialize(behaviour);
             }
+        }
+
+        private void OnGUI()
+        {
+            
+            if(Selection.activeGameObject != null)
+            {
+                if(runtimeBehaviour == null && Selection.activeGameObject.GetComponent<NodeAI_Agent>())
+                {
+                    runtimeBehaviour = Selection.activeGameObject.GetComponent<NodeAI_Agent>().behaviour;
+                    //Debug.Log("runtime behaviour set");
+                }
+                else
+                {
+                    runtimeBehaviour = null;
+                    //Debug.Log("runtime behaviour unset");
+                }
+            }
+            else
+            {
+                runtimeBehaviour = null;
+                //Debug.Log("runtime behaviour reset");
+            }
+            if(Time.frameCount % 4 == 0)
+            {
+                if(runtimeBehaviour != null)
+                {
+                    hasResetAfterRuntime = false;
+                    foreach(NodeData data in runtimeBehaviour.nodeData)
+                    {
+                        if(data.runtimeLogic != null)
+                        {
+                            //Find node with matching GUID
+                            Node n = (Node)graphView.nodes.ToList().Where(x => ((Node)x).GUID == data.GUID).First();
+                            n.mainContainer.style.borderBottomWidth = 3;
+                            switch(data.runtimeLogic.state)
+                            {
+                                case NodeData.State.Running:
+                                    n.mainContainer.style.borderBottomColor = Color.yellow;
+                                    break;
+                                case NodeData.State.Success:
+                                    n.mainContainer.style.borderBottomColor = Color.green;
+                                    break;
+                                case NodeData.State.Failure:
+                                    n.mainContainer.style.borderBottomColor = Color.red;
+                                    break;
+                                case NodeData.State.Idle:
+                                    n.mainContainer.style.borderBottomColor = Color.white;
+                                    break;
+                            }
+                        }
+                    }
+                }
+
+                if(!Application.isPlaying)
+                {
+                    foreach(var n in graphView.nodes.ToList())
+                    {
+                        if(n is Node)
+                        {
+                            ((Node)n).mainContainer.style.borderBottomColor = Color.black;
+                            ((Node)n).mainContainer.style.borderBottomWidth = 0;
+                        }
+                    }
+                }
+            }
+            
+        }
+
+        private void OnSceneGUI() 
+        {
+            
         }
 
         

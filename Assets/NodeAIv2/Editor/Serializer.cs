@@ -40,6 +40,10 @@ namespace NodeAI
                     title = node.title,
                     runtimeLogic = (node.runtimeLogic == null ? null : node.runtimeLogic)
                 };
+                if(nodeData.runtimeLogic != null)
+                {
+                    nodeData.runtimeLogic.state = NodeData.State.Idle;
+                }
                 if(node.nodeType == NodeData.Type.Parameter) nodeData.parentGUID = node.paramReference;
                 foreach (var input in node.inputPorts)
                 {

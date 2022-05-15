@@ -9,16 +9,22 @@ namespace NodeAI
     public class NodeAI_Agent_Editor : Editor
     {
         NodeAI_Agent agent;
+        SerializedObject serializedAgent;
+        SerializedProperty behaviour;
         bool paramFoldOut = true;
         public void OnEnable()
         {
             agent = (NodeAI_Agent)target;
+            serializedAgent = new SerializedObject(agent);
+            behaviour = serializedAgent.FindProperty("AI_Behaviour");
         }
         public override void OnInspectorGUI()
         {
             
-            agent.AI_Behaviour = (NodeAI_Behaviour)EditorGUILayout.ObjectField("Behaviour", agent.AI_Behaviour, typeof(NodeAI_Behaviour), false);
             
+            EditorGUILayout.PropertyField(behaviour);
+            serializedAgent.ApplyModifiedProperties();
+
             if(agent.behaviour)
             {
                 paramFoldOut = EditorGUILayout.BeginFoldoutHeaderGroup(paramFoldOut, "Parameters");
@@ -69,6 +75,7 @@ namespace NodeAI
                 }
                 
             }
+            serializedAgent.ApplyModifiedProperties();
         }
     }
 }

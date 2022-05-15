@@ -188,7 +188,7 @@ namespace NodeAI
                     Debug.LogError("nodedata is null for node");
                     continue;
                 }
-                child.nodeData.runtimeLogic.Init(child);
+                child.nodeData.runtimeLogic.state = NodeData.State.Idle;
             }
         }
     }
@@ -223,8 +223,10 @@ namespace NodeAI
         {
             if (GetProperty<bool>("Condition"))
             {
+                state = NodeData.State.Success;
                 return NodeData.State.Success;
             }
+            state = NodeData.State.Failure;
             return NodeData.State.Failure;
         }
     }
@@ -235,7 +237,12 @@ namespace NodeAI
         public virtual NodeData.State ApplyDecorator(NodeAI_Agent agent, NodeTree.Leaf child) => child.nodeData.Eval(agent, child);
         public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
         {
-            return ApplyDecorator(agent, current.children[0]);
+            if(current.children[0].nodeData.runtimeLogic.state != NodeData.State.Running)
+            {
+                current.children[0].nodeData.Init(current.children[0]);
+            }
+            state = ApplyDecorator(agent, current.children[0]);
+            return state;
         }
 
         
@@ -260,10 +267,7 @@ namespace NodeAI
             }
         }
 
-        public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
-        {
-            return ApplyDecorator(agent, current.children[0]);
-        }
+        
     }
     [System.Serializable]
     public class Succeeder : DecoratorBase
@@ -273,10 +277,7 @@ namespace NodeAI
             return NodeData.State.Success;
         }
 
-        public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
-        {
-            return ApplyDecorator(agent, current.children[0]);
-        }
+        
     }
     [System.Serializable]
     public class Repeater : DecoratorBase
@@ -315,10 +316,7 @@ namespace NodeAI
 
         }
 
-        public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
-        {
-            return ApplyDecorator(agent, current.children[0]);
-        }
+        
     }
 
     public class RepeatUntilFail : DecoratorBase
@@ -332,7 +330,7 @@ namespace NodeAI
             }
             else if (childState == NodeData.State.Failure)
             {
-                return NodeData.State.Success;
+                return NodeData.State.Failure;
             }
             else
             {
@@ -341,10 +339,7 @@ namespace NodeAI
             }
         }
 
-        public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
-        {
-            return ApplyDecorator(agent, current.children[0]);
-        }
+        
     }
 
     public class Chance : DecoratorBase
@@ -367,10 +362,7 @@ namespace NodeAI
             }
         }
 
-        public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
-        {
-            return ApplyDecorator(agent, current.children[0]);
-        }
+        
 
         public override void OnInit()
         {
@@ -388,16 +380,25 @@ namespace NodeAI
             {
                 if(child.nodeData.runtimeLogic.state != NodeData.State.Running)
                 {
-                    if(child.nodeData.runtimeLogic.state == NodeData.State.Success)
+                    if(child.nodeData.runtimeLogic.state != NodeData.State.Idle)
                     {
-                        successCount++;
+                        if(child.nodeData.runtimeLogic.state == NodeData.State.Success)
+                        {
+                            successCount++;
+                        }
+                        else
+                        {
+                            state = NodeData.State.Failure;
+                            return NodeData.State.Failure;
+                        }
+                        continue;
                     }
                     else
                     {
-                        return NodeData.State.Failure;
+                        child.nodeData.Init(child);
                     }
-                    continue;
                 }
+                
                 switch (child.nodeData.Eval(agent, child))
                 {
                     case NodeData.State.Failure:
@@ -434,6 +435,9 @@ namespace NodeAI
             bool success = false;
             foreach (NodeTree.Leaf child in current.children)
             {
+                if(child.nodeData.runtimeLogic.state == NodeData.State.Idle) {
+                    child.nodeData.Init(child);
+                }
                 switch (child.nodeData.Eval(agent, child))
                 {
                     case NodeData.State.Failure:
@@ -472,6 +476,9 @@ namespace NodeAI
         {
             foreach (NodeTree.Leaf child in current.children)
             {
+                if(child.nodeData.runtimeLogic.state == NodeData.State.Idle) {
+                    child.nodeData.Init(child);
+                }
                 switch (child.nodeData.Eval(agent, child))
                 {
                     case NodeData.State.Failure:

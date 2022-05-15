@@ -18,7 +18,7 @@ namespace NodeAI.Animation
         {
             if (animator == null)
             {
-                animator = agent.GetComponent<Animator>();
+                animator = agent.GetComponentInChildren<Animator>();
                 if (animator == null)
                 {
                     Debug.LogError("SetAnimatorFloat: No animator found on agent");

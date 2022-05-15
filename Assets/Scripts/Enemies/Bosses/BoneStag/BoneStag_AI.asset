@@ -43,7 +43,7 @@ MonoBehaviour:
       svalue: 
       ivalue: 0
       fvalue: 0
-      bvalue: 0
+      bvalue: 1
       cvalue: {r: 0, g: 0, b: 0, a: 0}
       v2value: {x: 0, y: 0}
       v3value: {x: 0, y: 0, z: 0}
@@ -62,30 +62,6 @@ MonoBehaviour:
     runtime: {fileID: 0}
     properties: []
     runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    noLogic: 0
-  - GUID: 624b27f3-fa8a-4fab-bd81-c380f7238e48
-    parentGUID: 8d603b5f-3d1d-4567-af45-c81c027a5d45
-    title: IfTrue
-    childGUIDs: []
-    nodeType: 2
-    position: {x: 420, y: 0}
-    runtime: {fileID: 0}
-    properties:
-    - name: CONDITION
-      GUID: 04128507-afab-4885-b8e0-05992ce6af8e
-      paramReference: 0c992cf5-8e5f-46d4-90af-f936c548f37b
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-    runtimeLogicType: NodeAI.IfTrue, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
     noLogic: 0
   - GUID: a7051ff5-c4da-4c3c-8dec-33f708b2088f
@@ -237,7 +213,6 @@ MonoBehaviour:
     title: Selector
     childGUIDs:
     - 8263b227-3f47-42d2-abdb-fe053823ceff
-    - 02f87ede-4cdf-4db0-97ec-f7eab8c394a0
     - aa17294c-ee09-4486-9bcf-8d690f12853e
     nodeType: 5
     position: {x: 770, y: 469}
@@ -341,17 +316,6 @@ MonoBehaviour:
     properties: []
     runtimeLogicType: NodeAI.RepeatUntilFail, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-    noLogic: 0
-  - GUID: 02f87ede-4cdf-4db0-97ec-f7eab8c394a0
-    parentGUID: e8611c77-c04c-453b-bbff-bc4409e14f2e
-    title: WaitUntilAnimationComplete
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 1054, y: 728}
-    runtime: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Animation.WaitUntilAnimationComplete, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     noLogic: 0
   - GUID: aa17294c-ee09-4486-9bcf-8d690f12853e
     parentGUID: e8611c77-c04c-453b-bbff-bc4409e14f2e
@@ -736,6 +700,30 @@ MonoBehaviour:
       v3value: {x: 0, y: 0, z: 0}
       v4value: {x: 0, y: 0, z: 0, w: 0}
     runtimeLogicType: NodeAI.Chance, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    noLogic: 0
+  - GUID: 624b27f3-fa8a-4fab-bd81-c380f7238e48
+    parentGUID: 8d603b5f-3d1d-4567-af45-c81c027a5d45
+    title: IfTrue
+    childGUIDs: []
+    nodeType: 2
+    position: {x: 420, y: 0}
+    runtime: {fileID: 0}
+    properties:
+    - name: CONDITION
+      GUID: 04128507-afab-4885-b8e0-05992ce6af8e
+      paramReference: 0c992cf5-8e5f-46d4-90af-f936c548f37b
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+    runtimeLogicType: NodeAI.IfTrue, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
     noLogic: 0
   exposedProperties:

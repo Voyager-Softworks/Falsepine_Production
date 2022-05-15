@@ -25,7 +25,7 @@ namespace Boss.Bonestag
         {
             if (animator == null)
             {
-                animator = agent.GetComponent<Animator>();
+                animator = agent.GetComponentInChildren<Animator>();
                 if (animator == null)
                 {
                     Debug.LogError("Bonestag_Charge: No animator found on agent");
@@ -34,7 +34,7 @@ namespace Boss.Bonestag
             }
             if (navAgent == null)
             {
-                navAgent = agent.GetComponent<NavMeshAgent>();
+                navAgent = agent.GetComponentInChildren<NavMeshAgent>();
                 if (navAgent == null)
                 {
                     Debug.LogError("Bonestag_Charge: No navAgent found on agent");
