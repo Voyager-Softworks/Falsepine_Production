@@ -21,6 +21,7 @@ namespace NodeAI
             else
             {
                 timer += Time.timeSinceLevelLoad - sceneTime;
+                sceneTime = Time.timeSinceLevelLoad;
                 state = NodeData.State.Running;
             }
 

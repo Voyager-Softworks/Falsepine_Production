@@ -48,7 +48,7 @@ namespace NodeAI
         private string runtimeLogicType;
 
         [SerializeField]
-        private bool noLogic = false;
+        public bool noLogic = false;
 
         public void Reset()
         {

@@ -15,7 +15,7 @@ namespace NodeAI
         private GraphView graphView;
         private NodeAI_Behaviour behaviour;
         private NodeAI_Behaviour runtimeBehaviour;
-        private bool hasResetAfterRuntime = true;
+        
         private ObjectField behaviourField;
 
         [MenuItem("Window/NodeAI/Graph")]
@@ -55,9 +55,8 @@ namespace NodeAI
             }
         }
 
-        private void OnGUI()
+        void Update()
         {
-            
             if(Selection.activeGameObject != null)
             {
                 if(runtimeBehaviour == null && Selection.activeGameObject.GetComponent<NodeAI_Agent>())
@@ -80,7 +79,6 @@ namespace NodeAI
             {
                 if(runtimeBehaviour != null)
                 {
-                    hasResetAfterRuntime = false;
                     foreach(NodeData data in runtimeBehaviour.nodeData)
                     {
                         if(data.runtimeLogic != null)
@@ -119,6 +117,14 @@ namespace NodeAI
                     }
                 }
             }
+            Repaint();
+        }
+
+        private void OnGUI()
+        {
+            
+            
+            
             
         }
 

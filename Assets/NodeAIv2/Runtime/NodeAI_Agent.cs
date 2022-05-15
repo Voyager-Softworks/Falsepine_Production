@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace NodeAI
 {
@@ -31,16 +32,13 @@ namespace NodeAI
             }
             _behaviour = Instantiate(AI_Behaviour);
             
+            _behaviour.nodeData.Where(x => !x.noLogic).All(x => x.runtimeLogic = (RuntimeBase)ScriptableObject.Instantiate(x.runtimeLogic));
+            
             nodeTree = NodeTree.CreateFromNodeData(_behaviour.nodeData.Find(x => x.nodeType == NodeData.Type.EntryPoint), _behaviour.nodeData);;
             nodeTree.rootLeaf.nodeData.runtimeLogic.Init(nodeTree.rootLeaf);
         }
 
-        private void OnDisable() {
-            foreach(NodeData nodeData in _behaviour.nodeData)
-            {
-                nodeData.Reset();
-            }
-        }
+    
 
         // Update is called once per frame
         void Update()
