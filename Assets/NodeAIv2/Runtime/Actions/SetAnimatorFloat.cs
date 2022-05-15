@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NodeAI
+namespace NodeAI.Animation
 {
     public class SetAnimatorFloat : ActionBase
     {
