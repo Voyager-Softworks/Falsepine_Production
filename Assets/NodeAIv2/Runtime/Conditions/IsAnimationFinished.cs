@@ -17,16 +17,19 @@ namespace NodeAI.Animation
                 if (animator == null)
                 {
                     Debug.LogError("IsAnimationFinished: No animator found on agent");
+                    state = NodeData.State.Failure;
                     return NodeData.State.Failure;
                 }
                 
             }
             if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
             {
+                state = NodeData.State.Success;
                 return NodeData.State.Success;
             }
             else
             {
+                state = NodeData.State.Failure;
                 return NodeData.State.Failure;
             }
         }

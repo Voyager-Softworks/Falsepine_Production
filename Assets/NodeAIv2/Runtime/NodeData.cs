@@ -41,6 +41,7 @@ namespace NodeAI
         public void Init(NodeTree.Leaf current) => runtimeLogic.Init(current);
         [SerializeField]
         RuntimeBase runtime;
+        
         [SerializeField]
         private List<SerializableProperty> properties;
         [SerializeField]
@@ -48,6 +49,13 @@ namespace NodeAI
 
         [SerializeField]
         private bool noLogic = false;
+
+        public void Reset()
+        {
+            if(noLogic) return;
+            runtime = (RuntimeBase)ScriptableObject.CreateInstance(System.Type.GetType(runtimeLogicType));
+            runtime.RepopulateProperties(properties == null ? new List<SerializableProperty>() : properties);
+        }
         public RuntimeBase runtimeLogic
         {
             get
@@ -102,6 +110,23 @@ namespace NodeAI
         [System.Serializable]
         public class SerializableProperty
         {
+            public SerializableProperty(){}
+            
+            public SerializableProperty(SerializableProperty copy)
+            {
+                name = copy.name;
+                GUID = copy.GUID;
+                paramReference = copy.paramReference;
+                serializedTypename = copy.serializedTypename;
+                ivalue = copy.ivalue;
+                fvalue = copy.fvalue;
+                bvalue = copy.bvalue;
+                svalue = copy.svalue;
+                v2value = copy.v2value;
+                v3value = copy.v3value;
+                v4value = copy.v4value;
+                cvalue = copy.cvalue;
+            }
             public static implicit operator SerializableProperty(Property property)
             {
                 var serializableProperty = new SerializableProperty();

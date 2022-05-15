@@ -22,9 +22,11 @@ namespace NodeAI
                 var distance = Vector3.Distance(agent.transform.position, target.transform.position);
                 if (distance < range)
                 {
+                    state = NodeData.State.Success;
                     return NodeData.State.Success;
                 }
             }
+            state = NodeData.State.Failure;
             return NodeData.State.Failure;
         }
 

@@ -51,7 +51,8 @@ namespace Boss.Bonestag
             }
             else
             {
-                if(Vector3.Distance(agent.transform.position, target) < 0.5f)
+                target = GameObject.FindGameObjectWithTag("Player").transform.position;
+                if(Vector3.Distance(agent.transform.position, target) < 1.0f)
                 {
                     navAgent.SetDestination(agent.transform.position);
                     navAgent.isStopped = true;

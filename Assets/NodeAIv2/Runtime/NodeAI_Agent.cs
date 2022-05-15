@@ -9,6 +9,8 @@ namespace NodeAI
         public NodeAI_Behaviour AI_Behaviour;
         NodeAI_Behaviour _behaviour;
 
+        
+
         public NodeAI_Behaviour behaviour{
             get{
                 return _behaviour;
@@ -28,8 +30,16 @@ namespace NodeAI
                 return;
             }
             _behaviour = Instantiate(AI_Behaviour);
+            
             nodeTree = NodeTree.CreateFromNodeData(_behaviour.nodeData.Find(x => x.nodeType == NodeData.Type.EntryPoint), _behaviour.nodeData);;
             nodeTree.rootLeaf.nodeData.runtimeLogic.Init(nodeTree.rootLeaf);
+        }
+
+        private void OnDisable() {
+            foreach(NodeData nodeData in _behaviour.nodeData)
+            {
+                nodeData.Reset();
+            }
         }
 
         // Update is called once per frame
