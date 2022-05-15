@@ -57,7 +57,7 @@ public class HealthScript : MonoBehaviour
         if (isDead) return;
 
         currentHealth -= damage;
-        GetComponent<NodeAI.NodeAI_Agent>().SetFloat("Health", currentHealth);
+        GetComponent<NodeAI.NodeAI_Agent>().SetParameter<float>("Health", currentHealth);
         if (_audioSource && hurtSound) _audioSource.PlayOneShot(hurtSound);
         if (currentHealth <= 0)
         {
@@ -70,7 +70,7 @@ public class HealthScript : MonoBehaviour
         currentHealth = 0;
 
         OnDeath.Invoke();
-        GetComponent<NodeAI.NodeAI_Agent>().SetState("Dead");
+        //GetComponent<NodeAI.NodeAI_Agent>().SetState("Dead"); Legacy code
         GetComponentInChildren<Animator>().SetBool("Dead", true);
 
         if (_audioSource && deathSound) _audioSource.PlayOneShot(deathSound);

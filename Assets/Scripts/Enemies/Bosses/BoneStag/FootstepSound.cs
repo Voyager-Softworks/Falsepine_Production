@@ -7,7 +7,7 @@ public class FootstepSound : MonoBehaviour
     public AudioClip[] footstepSounds1, footstepSounds2;
     public void PlayFootstepSound()
     {
-        if (GetComponentInParent<NodeAI.NodeAI_Agent>().GetBool("SecondPhase"))
+        if (GetComponentInParent<NodeAI.NodeAI_Agent>().GetParameter<bool>("SecondPhase"))
         {
             GetComponent<AudioSource>().PlayOneShot(footstepSounds2[Random.Range(0, footstepSounds2.Length)]);
         }
