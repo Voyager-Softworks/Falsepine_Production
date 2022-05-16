@@ -8,6 +8,13 @@ using System;
 
 public class TownBuilding : ClickableObject
 {
+    public enum BuildingType {
+        BANK,
+        HOME,
+        INN,
+        SHOP
+    }
+
     public GameObject uiPanel;
     public GameObject objectPanel;
 
