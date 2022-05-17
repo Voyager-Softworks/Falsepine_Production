@@ -42,6 +42,7 @@ namespace NodeAI
                         propertyToChange.v3value = property.v3value;
                         propertyToChange.v4value = property.v4value;
                         propertyToChange.cvalue = property.cvalue;
+                        propertyToChange.ovalue = property.ovalue;
                     }
                 }
                 foreach (var child in children)

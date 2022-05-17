@@ -58,6 +58,7 @@ namespace NodeAI
                 new SearchTreeEntry(new GUIContent("Vector2")){userData = typeof(Vector2), level = 1},
                 new SearchTreeEntry(new GUIContent("Vector3")){userData = typeof(Vector3), level = 1},
                 new SearchTreeEntry(new GUIContent("Vector4")){userData = typeof(Vector4), level = 1},
+                new SearchTreeEntry(new GUIContent("Color")){userData = typeof(Color), level = 1},
                 
             };
             

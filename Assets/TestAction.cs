@@ -16,6 +16,7 @@ public class TestAction : NodeAI.ActionBase
     }
     public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
     {
+        Debug.Log(GetProperty<GameObject>("Target").name);
         return base.Eval(agent, current);
     }
 }

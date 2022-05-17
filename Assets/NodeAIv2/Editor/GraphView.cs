@@ -679,7 +679,7 @@ namespace NodeAI
                 var objField = new ObjectField
                 {
                     name = property.name,
-                    value = (property).ovalue
+                    value = (UnityEngine.Object)(property).ovalue
                 };
                 objField.objectType = property.type;
                 

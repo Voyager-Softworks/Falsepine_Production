@@ -38,12 +38,43 @@ namespace NodeAI
                     return;
                 }
             }
-            properties.Add(new NodeData.Property()
+            NodeData.SerializableProperty newProp = new NodeData.SerializableProperty()
             {
                 name = name.ToUpper(),
-                type = typeof(T),
-                value = initialValue
-            });
+                serializedTypename = typeof(T).AssemblyQualifiedName,
+            };
+            switch(newProp.type.Name)
+                    {
+                        case "Int32":
+                            newProp.ivalue = (int)(object)initialValue;
+                            break;
+                        case "Single":
+                            newProp.fvalue = (float)(object)initialValue;
+                            break;
+                        case "Boolean":
+                            newProp.bvalue = (bool)(object)initialValue;
+                            break;
+                        case "String":
+                            newProp.svalue = (string)(object)initialValue;
+                            break;
+                        case "Vector2":
+                            newProp.v2value = (Vector2)(object)initialValue;
+                            break;
+                        case "Vector3":
+                            newProp.v3value = (Vector3)(object)initialValue;
+                            break;
+                        case "Vector4":
+                            newProp.v4value = (Vector4)(object)initialValue;
+                            break;
+                        case "Color":
+                            newProp.cvalue = (Color)(object)initialValue;
+                            break;
+                        default:
+                            newProp.ovalue = (Object)(object)initialValue;
+                            break;
+                    }
+                    
+            properties.Add(newProp);
         }
 
         public void SetProperty<T>(string name, T value)
@@ -193,7 +224,15 @@ namespace NodeAI
                         case "Color":
                             return (T)(object)property.cvalue;
                         default:
-                            return (T)(object)property.ovalue;
+                            if(property.ovalue != null)
+                            {
+                                return (T)(object)property.ovalue;
+                            }
+                            else
+                            {
+                                return default(T);
+                            }
+                            
                             
                     }
                 }
