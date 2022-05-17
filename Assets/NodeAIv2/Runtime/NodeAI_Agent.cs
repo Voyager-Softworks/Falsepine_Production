@@ -33,6 +33,7 @@ namespace NodeAI
             _behaviour = Instantiate(AI_Behaviour);
             
             _behaviour.nodeData.Where(x => !x.noLogic).All(x => x.runtimeLogic = (RuntimeBase)ScriptableObject.Instantiate(x.runtimeLogic));
+            _behaviour.nodeData.Where(x => !x.noLogic).ToList().ForEach(x => x.runtimeLogic.state = NodeData.State.Idle);
             
             nodeTree = NodeTree.CreateFromNodeData(_behaviour.nodeData.Find(x => x.nodeType == NodeData.Type.EntryPoint), _behaviour.nodeData);;
             nodeTree.rootLeaf.nodeData.runtimeLogic.Init(nodeTree.rootLeaf);
@@ -140,6 +141,7 @@ namespace NodeAI
 
         void OnDrawGizmos()
         {
+            Gizmos.DrawIcon(transform.position, "Profiler.Memory", true, Color.magenta);
             if (_behaviour != null)
             {
                 nodeTree.DrawGizmos(this);

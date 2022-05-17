@@ -18,6 +18,9 @@ namespace NodeAI
         
         private ObjectField behaviourField;
 
+        private float timeSinceLastDraw = 0f;
+        private int lastChildIndex = 0;
+
         [MenuItem("Window/NodeAI/Graph")]
         public static void OpenGraphWindow()
         {
@@ -115,6 +118,44 @@ namespace NodeAI
                             ((Node)n).mainContainer.style.borderBottomWidth = 0;
                         }
                     }
+                }
+            }
+            timeSinceLastDraw += Time.deltaTime;
+            if(graphView.currHoveredNode != null)
+            {
+                if(graphView.currHoveredNode is Node)
+                {
+                    Node n = (Node)graphView.currHoveredNode;
+                    if(timeSinceLastDraw < 0.5f) return;
+                    if(n.nodeType == NodeData.Type.Selector || n.nodeType == NodeData.Type.Sequence)
+                    {
+                        int childCount = n.outputPort.connections.Count();
+                        List<Node> children = n.outputPort.connections.Select(x => (Node)x.input.node).ToList().OrderBy(x => x.GetPosition().y).ToList();
+                        if(childCount > 0)
+                        {
+                            int currChildToAnimate = Mathf.FloorToInt(Time.realtimeSinceStartup / 0.5f) % childCount;
+                            for(int i = 0; i < childCount; i++)
+                            {
+                                if(i == currChildToAnimate)
+                                {
+                                    children[i].mainContainer.style.backgroundColor = Color.white;
+                                }
+                                else
+                                {
+                                    children[i].mainContainer.style.backgroundColor = Color.gray;
+                                }
+                            }
+                        }
+                        
+
+                        
+                    }
+                    else if(n.nodeType == NodeData.Type.Parallel)
+                    {
+                        n.outputPort.connections.ToList().ForEach(x => ((Node)x.input.node).mainContainer.style.backgroundColor = Color.white);
+                    }
+
+                    
                 }
             }
             Repaint();
