@@ -16,6 +16,8 @@ namespace NodeAI
         public List<NodeData.Property> exposedProperties = new List<NodeData.Property>();
         public Blackboard blackboard;
 
+        public Node currHoveredNode;
+
         public GraphView()
         {
             styleSheets.Add(Resources.Load<StyleSheet>("GraphStyle"));
@@ -26,7 +28,11 @@ namespace NodeAI
             this.AddManipulator(new RectangleSelector());
             this.AddManipulator(new SelectionDropper());
             
-            RegisterCallback<MouseDownEvent>(HandleMouseEvents);
+            RegisterCallback<MouseDownEvent>(HandleMouseDownEvents);
+            RegisterCallback<MouseOverEvent>(HandleMouseOverEvent);
+            RegisterCallback<MouseLeaveEvent>(HandleMouseLeaveEvent);
+            RegisterCallback<DragPerformEvent>(HandleDragEndEvent);
+            
 
             var g = new Group();
             
@@ -109,7 +115,18 @@ namespace NodeAI
             ClearSelection();
         }
 
-        private void HandleMouseEvents(MouseDownEvent e)
+
+        private void HandleDragEndEvent(DragPerformEvent e)
+        {
+            
+            if (selection.First() is BlackboardField)
+            {
+                var pill = selection.First() as BlackboardField;
+                NodeData.SerializableProperty prop = exposedProperties.Find(p => p.name == pill.text);
+                AddElement(GenerateParameterNode(prop.GUID, prop.type, e.localMousePosition - (Vector2)viewTransform.position));
+            }
+        }
+        private void HandleMouseDownEvents(MouseDownEvent e)
         {
             if (e.button == 1)
             {
@@ -127,6 +144,34 @@ namespace NodeAI
                     }
                     menu.ShowAsContext();
                 }
+            }
+        }
+
+        private void HandleMouseOverEvent(MouseOverEvent e)
+        {
+            if (e.target is Node)
+            {
+                currHoveredNode = e.target as Node;
+                currHoveredNode.mainContainer.style.backgroundColor = Color.white;
+            }
+            else
+            {
+                if(currHoveredNode != null)
+                {
+                    currHoveredNode.mainContainer.style.backgroundColor = Color.gray;
+                    if(currHoveredNode.outputPort != null && currHoveredNode.outputPort.connections.Count() > 0)
+                        currHoveredNode.outputPort.connections.ToList().ForEach(c => c.input.node.mainContainer.style.backgroundColor = Color.gray);
+                }
+                currHoveredNode = null;
+            }
+        }
+
+        private void HandleMouseLeaveEvent(MouseLeaveEvent e)
+        {
+            if(currHoveredNode == e.target)
+            {
+                currHoveredNode.mainContainer.style.backgroundColor = Color.white;
+                currHoveredNode = null;
             }
         }
 
@@ -655,6 +700,7 @@ namespace NodeAI
 
             var container = new VisualElement();
             var blackboardField = new BlackboardField{ text = p.name, typeText = p.type.Name };
+            
             var delButton = new Button(() =>
             {
                 nodes.ForEach(x =>
@@ -678,13 +724,10 @@ namespace NodeAI
             });
             delButton.text = "X";
             blackboardField.Add(delButton);
-            var newButton = new Button(() =>
-            {
-                AddElement(GenerateParameterNode(p.GUID, p.type, blackboard.GetGlobalCenter()));
-            });
-            newButton.text = "==>";
-            blackboardField.Add(newButton);
+            
             container.Add(blackboardField);
+            
+            
             
             //container.Add(newButton);
             blackboard.Add(container);

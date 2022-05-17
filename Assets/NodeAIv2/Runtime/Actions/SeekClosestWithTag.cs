@@ -59,6 +59,10 @@ namespace NodeAI
 
         public override void DrawGizmos(NodeAI_Agent agent)
         {
+            if(state != NodeData.State.Running)
+            {
+                return;
+            }
             var tag = GetProperty<string>("Tag");
             var range = GetProperty<float>("Range");
             var targets = GameObject.FindGameObjectsWithTag(tag);
@@ -69,6 +73,7 @@ namespace NodeAI
                 {
                     Gizmos.color = Color.green;
                     Gizmos.DrawLine(agent.transform.position, target.transform.position);
+                    Gizmos.DrawIcon(target.transform.position, "Download-Available", true, Color.green);
                 }
             }
         }
