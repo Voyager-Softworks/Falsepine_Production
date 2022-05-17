@@ -158,9 +158,9 @@ namespace NodeAI
             {
                 if(currHoveredNode != null)
                 {
-                    currHoveredNode.mainContainer.style.backgroundColor = Color.gray;
+                    currHoveredNode.mainContainer.style.backgroundColor = Color.clear;
                     if(currHoveredNode.outputPort != null && currHoveredNode.outputPort.connections.Count() > 0)
-                        currHoveredNode.outputPort.connections.ToList().ForEach(c => c.input.node.mainContainer.style.backgroundColor = Color.gray);
+                        currHoveredNode.outputPort.connections.ToList().ForEach(c => c.input.node.mainContainer.style.backgroundColor = Color.clear);
                 }
                 currHoveredNode = null;
             }
@@ -240,6 +240,7 @@ namespace NodeAI
         public Node ContextCreateNode(Node parent, NodeData.Type type, string name, RuntimeBase logic)
         {
             Node newNode = GenerateNode(type, name, logic);
+            newNode.tooltip = logic.tooltip;
             newNode.styleSheets.Add(Resources.Load<StyleSheet>("NodeStyle"));
             switch(type)
             {
@@ -308,6 +309,7 @@ namespace NodeAI
             newNode.title = data.title;
             newNode.GUID = data.GUID;
             newNode.nodeType = data.nodeType;
+            if(!data.noLogic) newNode.tooltip = data.runtimeLogic.tooltip;
             newNode.SetPosition(new Rect(data.position, new Vector2(800, 200)));
             newNode.styleSheets.Add(Resources.Load<StyleSheet>("NodeStyle"));
             switch (data.nodeType)

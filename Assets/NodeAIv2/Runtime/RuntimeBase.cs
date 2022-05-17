@@ -14,6 +14,8 @@ namespace NodeAI
         }
         [SerializeField]
         public NodeData.State state;
+
+        public string tooltip = "";
         [SerializeField]
         List<NodeData.SerializableProperty> properties = new List<NodeData.SerializableProperty>();
 
@@ -217,6 +219,7 @@ namespace NodeAI
         public IfTrue()
         {
             AddProperty<bool>("Condition", false);
+            tooltip = "Succeeds if the condition is true, fails otherwise";
         }
 
         public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
@@ -272,6 +275,10 @@ namespace NodeAI
     [System.Serializable]
     public class Succeeder : DecoratorBase
     {
+        public Succeeder()
+        {
+            tooltip = "Always returns success regardless of the child's state.";
+        }
         public override NodeData.State ApplyDecorator(NodeAI_Agent agent, NodeTree.Leaf child)
         {
             return NodeData.State.Success;
@@ -288,6 +295,7 @@ namespace NodeAI
         {
             AddProperty<int>("RepeatCount", 1);
             AddProperty<bool>("RepeatForever", false);
+            tooltip = "Repeats the child node a set number of times, or forever if RepeatForever is true";
         }
 
         public override void OnInit()
@@ -348,6 +356,7 @@ namespace NodeAI
         public Chance()
         {
             AddProperty<float>("Chance", 0.5f);
+            tooltip = "Has a chance of running its child node (0.0 - 1.0), or immediately failing.";
         }
 
         public override NodeData.State ApplyDecorator(NodeAI_Agent agent, NodeTree.Leaf child)
@@ -372,6 +381,10 @@ namespace NodeAI
 
     public class Sequence : RuntimeBase
     {
+        public Sequence()
+        {
+            tooltip = "Runs all children in order (top to bottom), until one fails, or all have succeeded.";
+        }
         public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
         {
             
@@ -429,6 +442,10 @@ namespace NodeAI
 
     public class Parallel : RuntimeBase
     {
+        public Parallel()
+        {
+            tooltip = "Runs all children simultaneously, until all have failed or one has succeeded.";
+        }
         public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
         {
             int failCount = 0;
@@ -472,6 +489,10 @@ namespace NodeAI
 
     public class Selector : RuntimeBase
     {
+        public Selector()
+        {
+            tooltip = "Runs all children in order (top to bottom), until one succeeds, or all have failed.";
+        }
         public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
         {
             foreach (NodeTree.Leaf child in current.children)

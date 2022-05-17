@@ -62,7 +62,7 @@ namespace NodeAI
         {
             if(Selection.activeGameObject != null)
             {
-                if(runtimeBehaviour == null && Selection.activeGameObject.GetComponent<NodeAI_Agent>())
+                if(runtimeBehaviour == null && Selection.activeGameObject.GetComponent<NodeAI_Agent>() && Selection.activeGameObject.GetComponent<NodeAI_Agent>().AI_Behaviour == behaviour)
                 {
                     runtimeBehaviour = Selection.activeGameObject.GetComponent<NodeAI_Agent>().behaviour;
                     //Debug.Log("runtime behaviour set");
@@ -125,6 +125,11 @@ namespace NodeAI
             {
                 if(graphView.currHoveredNode is Node)
                 {
+                    //Tooltip
+
+
+
+                    //Animation.
                     Node n = (Node)graphView.currHoveredNode;
                     if(timeSinceLastDraw < 0.5f) return;
                     if(n.nodeType == NodeData.Type.Selector || n.nodeType == NodeData.Type.Sequence)
@@ -255,9 +260,12 @@ namespace NodeAI
 
         }
 
+        
+
         private void GenerateBlackboard()
         {
             var blackboard = new Blackboard(graphView);
+            blackboard.title = "Parameters:";
             blackboard.Add(new BlackboardSection{ title = "Exposed Properties" });
             blackboard.addItemRequested = _blackboard =>
             {
