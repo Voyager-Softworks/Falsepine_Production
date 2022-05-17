@@ -79,6 +79,49 @@ namespace NodeAI
                             property.cvalue = (Color)(object)value;
                             break;
                         default:
+                            property.ovalue = (Object)(object)value;
+                            break;
+                    }
+                    return;
+                }
+            }
+            Debug.LogError("Property with name " + name + " does not exist");
+        }
+
+        public void SetProperty(string name, Object value, System.Type type)
+        {
+            foreach (NodeData.SerializableProperty property in properties)
+            {
+                if (property.name == name.ToUpper() && (property).type == type)
+                {
+                    switch(property.type.Name)
+                    {
+                        case "Int32":
+                            property.ivalue = (int)(object)value;
+                            break;
+                        case "Single":
+                            property.fvalue = (float)(object)value;
+                            break;
+                        case "Boolean":
+                            property.bvalue = (bool)(object)value;
+                            break;
+                        case "String":
+                            property.svalue = (string)(object)value;
+                            break;
+                        case "Vector2":
+                            property.v2value = (Vector2)(object)value;
+                            break;
+                        case "Vector3":
+                            property.v3value = (Vector3)(object)value;
+                            break;
+                        case "Vector4":
+                            property.v4value = (Vector4)(object)value;
+                            break;
+                        case "Color":
+                            property.cvalue = (Color)(object)value;
+                            break;
+                        default:
+                            property.ovalue = (Object)(object)value;
                             break;
                     }
                     return;
@@ -149,9 +192,9 @@ namespace NodeAI
                             
                         case "Color":
                             return (T)(object)property.cvalue;
-                            
                         default:
-                            break;
+                            return (T)(object)property.ovalue;
+                            
                     }
                 }
             }

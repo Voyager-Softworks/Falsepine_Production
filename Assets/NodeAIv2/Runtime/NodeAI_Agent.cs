@@ -10,7 +10,7 @@ namespace NodeAI
         public NodeAI_Behaviour AI_Behaviour;
         NodeAI_Behaviour _behaviour;
 
-        
+        public List<NodeData.SerializableProperty> inspectorProperties = null;
 
         public NodeAI_Behaviour behaviour{
             get{
@@ -34,9 +34,22 @@ namespace NodeAI
             
             _behaviour.nodeData.Where(x => !x.noLogic).All(x => x.runtimeLogic = (RuntimeBase)ScriptableObject.Instantiate(x.runtimeLogic));
             _behaviour.nodeData.Where(x => !x.noLogic).ToList().ForEach(x => x.runtimeLogic.state = NodeData.State.Idle);
-            
+            foreach(NodeData.SerializableProperty p in inspectorProperties)
+            {
+                NodeData.SerializableProperty  other = _behaviour.exposedProperties.Where(x => x.GUID == p.GUID).First();
+                other.ivalue = p.ivalue;
+                other.fvalue = p.fvalue;
+                other.svalue = p.svalue;
+                other.bvalue = p.bvalue;
+                other.ovalue = p.ovalue;
+                other.v2value = p.v2value;
+                other.v3value = p.v3value;
+                other.v4value = p.v4value;
+                other.cvalue = p.cvalue;
+            }
             nodeTree = NodeTree.CreateFromNodeData(_behaviour.nodeData.Find(x => x.nodeType == NodeData.Type.EntryPoint), _behaviour.nodeData);;
             nodeTree.rootLeaf.nodeData.runtimeLogic.Init(nodeTree.rootLeaf);
+            nodeTree.PropogateExposedProperties(_behaviour.exposedProperties);
         }
 
     

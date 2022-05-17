@@ -83,6 +83,19 @@ namespace NodeAI
         [System.Serializable]
         public class Property
         {
+            public Property()
+            {
+                name = "";
+                value = "";
+                GUID = System.Guid.NewGuid().ToString();
+            }
+            public Property(string name, object value, System.Type type)
+            {
+                this.name = name;
+                this.value = value;
+                this.type = type;
+                GUID = System.Guid.NewGuid().ToString();
+            }
             [SerializeField]
             public string name;
             [SerializeField]
@@ -126,6 +139,7 @@ namespace NodeAI
                 v3value = copy.v3value;
                 v4value = copy.v4value;
                 cvalue = copy.cvalue;
+                ovalue = copy.ovalue;
             }
             public static implicit operator SerializableProperty(Property property)
             {
@@ -161,6 +175,7 @@ namespace NodeAI
                             serializableProperty.cvalue = (Color)(object)property.value;
                             break;
                         default:
+                            serializableProperty.ovalue = (UnityEngine.Object)property.value;
                             break;
                     }
                 return serializableProperty;
@@ -200,6 +215,7 @@ namespace NodeAI
                             property.value = serializableProperty.cvalue;
                             break;
                         default:
+                            property.value = serializableProperty.ovalue;
                             break;
                     }
                 return property;
@@ -218,6 +234,7 @@ namespace NodeAI
             public Vector2 v2value;
             public Vector3 v3value;
             public Vector4 v4value;
+            [SerializeReference]public UnityEngine.Object ovalue;
 
         }
         [System.Serializable]

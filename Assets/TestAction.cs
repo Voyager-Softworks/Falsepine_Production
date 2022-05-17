@@ -5,6 +5,15 @@ using NodeAI;
 
 public class TestAction : NodeAI.ActionBase
 {
+    public TestAction()
+    {
+        AddProperty<GameObject>("Target", null);
+        AddProperty<Color>("Color", Color.white);
+        AddProperty<AudioClip>("Audio", null);
+        AddProperty<Transform>("Transform", null);
+        AddProperty<Vector3>("Position", Vector3.zero);
+        AddProperty<Animator>("Animator", null);
+    }
     public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
     {
         return base.Eval(agent, current);
