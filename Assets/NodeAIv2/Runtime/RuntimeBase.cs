@@ -516,7 +516,7 @@ namespace NodeAI
             }
             else
             {
-                state = NodeData.State.Failure;
+                state = NodeData.State.Running;
             }
             return state;
         }
@@ -581,6 +581,10 @@ namespace NodeAI
             {
                 if(child.nodeData.runtimeLogic.state == NodeData.State.Idle) {
                     child.nodeData.Init(child);
+                }
+                if(child.nodeData.runtimeLogic.state == NodeData.State.Failure)
+                {
+                    continue;
                 }
                 switch (child.nodeData.Eval(agent, child))
                 {

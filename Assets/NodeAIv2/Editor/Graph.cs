@@ -78,7 +78,7 @@ namespace NodeAI
                 runtimeBehaviour = null;
                 //Debug.Log("runtime behaviour reset");
             }
-            if(Time.frameCount % 4 == 0)
+            if(Time.frameCount % 1 == 0)
             {
                 if(runtimeBehaviour != null)
                 {

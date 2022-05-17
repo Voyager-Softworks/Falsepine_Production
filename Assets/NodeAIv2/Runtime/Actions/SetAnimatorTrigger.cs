@@ -25,6 +25,7 @@ namespace NodeAI.Animation
                 hash = Animator.StringToHash(GetProperty<string>("Name"));
             }
             animator.SetTrigger(hash);
+            state = NodeData.State.Success;
             return NodeData.State.Success;
         }
     }
