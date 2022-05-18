@@ -39,6 +39,7 @@ namespace Boss.Bonestag
             chargeSoundPhaseTwo = GetProperty<AudioClip>("ChargeSoundPhaseTwo");
             debrisPrefab = GetProperty<GameObject>("DebrisPrefab");
             initialized = false;
+            hasDamagedPlayer = false;
         }
 
         public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)

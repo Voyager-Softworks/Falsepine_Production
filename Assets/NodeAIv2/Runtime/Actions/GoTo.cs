@@ -13,7 +13,10 @@ namespace NodeAI
             AddProperty<Transform>("Position", null);
             AddProperty<bool>("Interrupt", false);
         }
-        
+        public override void OnInit()
+        {
+            SetProperty<bool>("Interrupt", false);
+        }
         public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
         {
             if(navAgent == null)
