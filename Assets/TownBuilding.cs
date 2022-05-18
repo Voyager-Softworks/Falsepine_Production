@@ -15,8 +15,7 @@ public class TownBuilding : ClickableObject
         SHOP
     }
 
-    public GameObject uiPanel;
-    public GameObject objectPanel;
+    public GameObject UI;
 
     // Start is called before the first frame update
     void Start()
@@ -45,19 +44,17 @@ public class TownBuilding : ClickableObject
 
     public void OpenUI()
     {
-        uiPanel.SetActive(true);
-        objectPanel.SetActive(true);
+        UI.SetActive(true);
     }
 
     public void CloseUI()
     {
-        uiPanel.SetActive(false);
-        objectPanel.SetActive(false);
+        UI.SetActive(false);
     }
 
     public void ToggleUI()
     {
-        if (uiPanel.activeSelf)
+        if (UI.activeSelf)
         {
             CloseUI();
         }
