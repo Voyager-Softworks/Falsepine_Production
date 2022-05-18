@@ -140,7 +140,7 @@ namespace Boss.Bonestag
                         }
                     }
                 }
-                if(Vector3.Distance(agent.transform.position, arenaEdgeGoalPosition) < 2.0f)
+                if(navAgent.remainingDistance <= 1.0f)
                 {
                     navAgent.SetDestination(agent.transform.position);
                     navAgent.isStopped = true;
