@@ -45,7 +45,7 @@ namespace NodeAI
             //     }
             // }
 
-            Type[] supportedTypes = {typeof(GameObject), typeof(AudioClip)};
+            Type[] supportedTypes = {typeof(GameObject), typeof(AudioClip), typeof(Transform), typeof(Animator)};
 
 
             var tree = new List<SearchTreeEntry>

@@ -144,6 +144,7 @@ namespace NodeAI
                         }
                     }
                     EditorGUI.indentLevel--;
+                    if(GUI.changed) EditorUtility.SetDirty(agent);
                 }
             }
             else if(agent.AI_Behaviour != null)
@@ -151,7 +152,7 @@ namespace NodeAI
                 agent.inspectorProperties = new List<NodeData.SerializableProperty>();
                 agent.AI_Behaviour.exposedProperties.ForEach(property => agent.inspectorProperties.Add(new NodeData.SerializableProperty(property)));
             }
-
+            
             serializedAgent.ApplyModifiedProperties();
         }
     }

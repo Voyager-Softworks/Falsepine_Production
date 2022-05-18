@@ -10,7 +10,8 @@ namespace NodeAI
         public NodeAI_Behaviour AI_Behaviour;
         NodeAI_Behaviour _behaviour;
 
-        public List<NodeData.SerializableProperty> inspectorProperties = null;
+        [SerializeField]
+        public List<NodeData.SerializableProperty> inspectorProperties;
 
         public NodeAI_Behaviour behaviour{
             get{
