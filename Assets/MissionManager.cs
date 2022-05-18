@@ -21,11 +21,24 @@ public class MissionManager : MonoBehaviour
     [SerializeField] public int currentMissionIndex;
 
     /// <summary>
+    /// Serializable version of the mission class from Mission.cs
+    /// </summary>
+    [Serializable]
+    public class SerializableMission{
+
+        [SerializeField] public string title;
+
+        [SerializeField] public string description;
+
+        [SerializeField] public bool isCompleted;
+    }
+
+    /// <summary>
     /// Serializable class that holds the mission data to be saved
     /// </summary>
     [Serializable]
     public class MissionData{
-        [SerializeField] public List<Mission> missionList;
+        [SerializeField] public List<SerializableMission> missionList;
         [SerializeField] public int currentMissionIndex;
     }
 
@@ -83,7 +96,18 @@ public class MissionManager : MonoBehaviour
         FileStream file = File.Create(Application.persistentDataPath + "/missions.dat");
 
         MissionData data = new MissionData();
-        data.missionList = missionList;
+
+        //copy mission list to serializable mission list
+        data.missionList = new List<SerializableMission>();
+        foreach (Mission m in missionList)
+        {
+            SerializableMission sm = new SerializableMission();
+            sm.title = m.title;
+            sm.description = m.description;
+            sm.isCompleted = m.isCompleted;
+            data.missionList.Add(sm);
+        }
+
         data.currentMissionIndex = currentMissionIndex;
 
         bf.Serialize(file, data);
@@ -101,9 +125,21 @@ public class MissionManager : MonoBehaviour
             MissionData data = (MissionData)bf.Deserialize(file);
             file.Close();
 
-            missionList = data.missionList;
+            //copy serializable mission list to mission list
+            missionList = new List<Mission>();
+            foreach (SerializableMission sm in data.missionList)
+            {
+                Mission m = ScriptableObject.CreateInstance<Mission>();
+                m.title = sm.title;
+                m.description = sm.description;
+                m.isCompleted = sm.isCompleted;
+                missionList.Add(m);
+            }
+
             currentMissionIndex = data.currentMissionIndex;
         }
+
+        UpdateAllMissionCards();
     }
 
     /// <summary>
