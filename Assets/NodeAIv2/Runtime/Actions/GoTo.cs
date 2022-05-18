@@ -36,6 +36,9 @@ namespace NodeAI
                 if(navAgent.SetDestination(GetProperty<Transform>("Position").position))
                 {
                     navAgent.isStopped = false;
+                    navAgent.speed = 3.5f;
+                    navAgent.angularSpeed = 120;
+                    navAgent.acceleration = 8;
                     state = NodeData.State.Running;
                     return NodeData.State.Running;
                 }
