@@ -34,6 +34,11 @@ public class MissionManager : MonoBehaviour
     /// </summary>
     [Serializable]
     public class SerializableMission{
+        [SerializeField] public Mission.MissionSize size;
+
+        [SerializeField] public Mission.MissionZone zone;
+
+        [SerializeField] public Mission.MissionType type;
 
         [SerializeField] public string title;
 
@@ -111,6 +116,9 @@ public class MissionManager : MonoBehaviour
         foreach (Mission m in lesserMissionList)
         {
             SerializableMission sm = new SerializableMission();
+            sm.size = m.size;
+            sm.zone = m.zone;
+            sm.type = m.type;
             sm.title = m.title;
             sm.description = m.description;
             sm.isCompleted = m.isCompleted;
@@ -139,6 +147,9 @@ public class MissionManager : MonoBehaviour
             foreach (SerializableMission sm in data.missionList)
             {
                 Mission m = ScriptableObject.CreateInstance<Mission>();
+                m.size = sm.size;
+                m.zone = sm.zone;
+                m.type = sm.type;
                 m.title = sm.title;
                 m.description = sm.description;
                 m.isCompleted = sm.isCompleted;
