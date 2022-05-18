@@ -88,7 +88,7 @@ public class Attack : NodeAI.ActionBase
             return NodeData.State.Failure;
         }
         timeSinceInitialized += Time.deltaTime;
-        if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1 && timeSinceInitialized >= 0.1f)
+        if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1 && timeSinceInitialized >= 0.3f)
         {
             state = NodeData.State.Success;
             navAgent.isStopped = false;

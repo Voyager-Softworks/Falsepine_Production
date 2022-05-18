@@ -20,7 +20,7 @@ namespace NodeAI
         }
         public NodeTree nodeTree = null;
 
-        const float tickRate = 0.1f;
+        const float tickRate = 0.01f;
         float tickTimer = 0f;
 
         // Start is called before the first frame update
