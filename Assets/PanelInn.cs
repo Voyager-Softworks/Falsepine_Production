@@ -52,14 +52,14 @@ public class PanelInn : MonoBehaviour
 
         
 
-        for (int i = 0; i < missionCardUIList.Count; i++)
-        {
-            MissionCardUI missionCardUI = missionCardUIList[i].GetComponent<MissionCardUI>();
-            if (missionCardUI == null) continue;
+        // for (int i = 0; i < missionCardUIList.Count; i++)
+        // {
+        //     MissionCardUI missionCardUI = missionCardUIList[i].GetComponent<MissionCardUI>();
+        //     if (missionCardUI == null) continue;
 
-            //bind associated mission to the UI
-            missionCardUI.associatedMission = missionManager.missionList[i];
-        }
+        //     //bind associated mission to the UI
+        //     missionCardUI.associatedMission = missionManager.lesserMissionList[i];
+        // }jj
 
         missionManager.UpdateAllMissionCards();
     }

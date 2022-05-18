@@ -15,9 +15,18 @@ using System.IO;
 /// </summary>
 public class MissionManager : MonoBehaviour
 {
+    public enum MissionRefernceType
+    {
+        CURRENT,
+        LESSER1,
+        LESSER2,
+        LESSER3,
+        BOSS
+    }
+
     public static MissionManager instance;
 
-    [SerializeField] public List<Mission> missionList;
+    [SerializeField] public List<Mission> lesserMissionList;
     [SerializeField] public int currentMissionIndex;
 
     /// <summary>
@@ -25,6 +34,11 @@ public class MissionManager : MonoBehaviour
     /// </summary>
     [Serializable]
     public class SerializableMission{
+        [SerializeField] public Mission.MissionSize size;
+
+        [SerializeField] public Mission.MissionZone zone;
+
+        [SerializeField] public Mission.MissionType type;
 
         [SerializeField] public string title;
 
@@ -99,9 +113,12 @@ public class MissionManager : MonoBehaviour
 
         //copy mission list to serializable mission list
         data.missionList = new List<SerializableMission>();
-        foreach (Mission m in missionList)
+        foreach (Mission m in lesserMissionList)
         {
             SerializableMission sm = new SerializableMission();
+            sm.size = m.size;
+            sm.zone = m.zone;
+            sm.type = m.type;
             sm.title = m.title;
             sm.description = m.description;
             sm.isCompleted = m.isCompleted;
@@ -126,14 +143,17 @@ public class MissionManager : MonoBehaviour
             file.Close();
 
             //copy serializable mission list to mission list
-            missionList = new List<Mission>();
+            lesserMissionList = new List<Mission>();
             foreach (SerializableMission sm in data.missionList)
             {
                 Mission m = ScriptableObject.CreateInstance<Mission>();
+                m.size = sm.size;
+                m.zone = sm.zone;
+                m.type = sm.type;
                 m.title = sm.title;
                 m.description = sm.description;
                 m.isCompleted = sm.isCompleted;
-                missionList.Add(m);
+                lesserMissionList.Add(m);
             }
 
             currentMissionIndex = data.currentMissionIndex;
@@ -146,9 +166,9 @@ public class MissionManager : MonoBehaviour
     /// Replace missions in list with new copies of the missions
     /// </summary>
     public void ReinstantiateMissions(){
-        for (int i = 0; i < missionList.Count; i++)
+        for (int i = 0; i < lesserMissionList.Count; i++)
         {
-            missionList[i] = Instantiate(missionList[i]);
+            lesserMissionList[i] = Instantiate(lesserMissionList[i]);
         }
     }
 
@@ -158,7 +178,7 @@ public class MissionManager : MonoBehaviour
     public void TryStartMission(Mission mission){
         if (mission == null) return;
 
-        int missionIndex = missionList.IndexOf(mission);
+        int missionIndex = lesserMissionList.IndexOf(mission);
 
         if (missionIndex == -1) return;
 
@@ -177,7 +197,37 @@ public class MissionManager : MonoBehaviour
             MissionCardUI missionCardUI = missionCardUIList[i];
             if (missionCardUI == null) continue;
 
-            missionCardUI.UpdateUI();
+            missionCardUI.UpdateCard();
         }
+    }
+
+    public Mission GetMissionByRefernceType(MissionRefernceType refernceType){
+        switch (refernceType)
+        {
+            case MissionRefernceType.CURRENT:
+                //if current mission is within range of the list, else return null
+                if (WithinRange(currentMissionIndex)) return lesserMissionList[currentMissionIndex];
+                else return null;
+            case MissionRefernceType.LESSER1:
+                //if lesser1 mission is within range of the list, else return null
+                if (WithinRange(0)) return lesserMissionList[0];
+                else return null;
+            case MissionRefernceType.LESSER2:
+                //if lesser2 mission is within range of the list, else return null
+                if (WithinRange(1)) return lesserMissionList[1];
+                else return null;
+            case MissionRefernceType.LESSER3:
+                //if lesser3 mission is within range of the list, else return null
+                if (WithinRange(2)) return lesserMissionList[2];
+                else return null;
+            case MissionRefernceType.BOSS:
+                return null;
+            default:
+                return null;
+        }
+    }
+
+    public bool WithinRange(int index){
+        return index >= 0 && index < lesserMissionList.Count;
     }
 }
