@@ -2,15 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Singleton donotdestroy script that handles the mission system
+/// </summary>
 public class MissionManager : MonoBehaviour
 {
+    public static MissionManager instance;
+
     public List<Mission> missionList;
     public int currentMissionIndex;
+
+    void Awake() {
+        if (instance == null) {
+            instance = this;
+            //do not destroy this object
+            DontDestroyOnLoad(this);
+        } else {
+            Destroy(this);
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        ReinstantiateMissions();
     }
 
     // Update is called once per frame
@@ -19,43 +35,13 @@ public class MissionManager : MonoBehaviour
         
     }
 
-    public void UpdateTownUI(){
-        //update the town UI
-        PanelInn panelInn = FindObjectOfType<PanelInn>();
-
-        if (panelInn == null)
+    /// <summary>
+    /// Replace missions in list with new copies of the missions
+    /// </summary>
+    public void ReinstantiateMissions(){
+        for (int i = 0; i < missionList.Count; i++)
         {
-            Debug.Log("No PanelInn found in the scene");
-            return;
-        }
-
-        for (int i = 0; i < panelInn.missionCardUIList.Count; i++)
-        {
-            MissionCardUI missionCardUI = panelInn.missionCardUIList[i].GetComponent<MissionCardUI>();
-            if (missionCardUI == null) continue;
-
-            //bind associated mission to the UI
-            missionCardUI.associatedMission = missionList[i];
-
-            missionCardUI.gameObject.SetActive(false);
-
-            if (i == currentMissionIndex) continue;
-
-            if (i < missionList.Count)
-            {
-                missionCardUI.gameObject.SetActive(true);
-                missionCardUI.missionTitle.text = missionList[i].title;
-                missionCardUI.missionDescription.text = missionList[i].description;
-
-                if (currentMissionIndex == -1)
-                {
-                    missionCardUI.buttonText.text = "Accept";
-                }
-                else
-                {
-                    missionCardUI.buttonText.text = "Switch";
-                }
-            }
+            missionList[i] = Instantiate(missionList[i]);
         }
     }
 
@@ -71,7 +57,20 @@ public class MissionManager : MonoBehaviour
 
         currentMissionIndex = missionIndex;
 
-        //update the town UI
-        UpdateTownUI();
+        UpdateAllMissionCards();
+    }
+
+    public void UpdateAllMissionCards(){
+        MissionCardUI[] missionCardUIList = FindObjectsOfType<MissionCardUI>(true);
+
+        if (missionCardUIList == null) return;
+
+        for (int i = 0; i < missionCardUIList.Length; i++)
+        {
+            MissionCardUI missionCardUI = missionCardUIList[i];
+            if (missionCardUI == null) continue;
+
+            missionCardUI.UpdateUI();
+        }
     }
 }

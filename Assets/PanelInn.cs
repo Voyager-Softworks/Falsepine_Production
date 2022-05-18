@@ -27,12 +27,40 @@ public class PanelInn : MonoBehaviour
             return;
         }
 
-        missionManager.UpdateTownUI();
+        UpdateUI();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    /// <summary>
+    /// Update the UI with the current missions
+    /// </summary>
+    public void UpdateUI(){
+        MissionManager missionManager = FindObjectOfType<MissionManager>();
+
+        if (missionManager == null)
+        {
+            Debug.Log("No MissionManager found in the scene");
+            return;
+        }
+
+        if (missionCardUIList.Count <= 0) return;
+
+        
+
+        for (int i = 0; i < missionCardUIList.Count; i++)
+        {
+            MissionCardUI missionCardUI = missionCardUIList[i].GetComponent<MissionCardUI>();
+            if (missionCardUI == null) continue;
+
+            //bind associated mission to the UI
+            missionCardUI.associatedMission = missionManager.missionList[i];
+        }
+
+        missionManager.UpdateAllMissionCards();
     }
 }

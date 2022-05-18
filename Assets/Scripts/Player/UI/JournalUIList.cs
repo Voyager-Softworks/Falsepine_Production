@@ -8,18 +8,12 @@ using System;
 
 public class JournalUIList : MonoBehaviour
 {
+    [Header("Self")]
     public GameObject journalPanel;
+
+    [Header("Notes")]
     public TextMeshProUGUI notesText;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [Header("Mission")]
+    public GameObject missionCard;
 }
