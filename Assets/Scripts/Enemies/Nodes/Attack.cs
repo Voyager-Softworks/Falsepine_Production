@@ -79,7 +79,7 @@ public class Attack : NodeAI.ActionBase
             audioSource.PlayOneShot(GetProperty<AudioClip>("Audio"));
             rotateTowardsPlayer.RotateToPlayer(GetProperty<float>("TurnDuration"), GetProperty<float>("TurnSpeed"), GetProperty<float>("TurnDelay"));
             navAgent.isStopped = true;
-            rotateTowardsPlayer.enabled = false;
+            
         }
 
         if(GetProperty<bool>("Interrupted"))
@@ -88,8 +88,10 @@ public class Attack : NodeAI.ActionBase
             return NodeData.State.Failure;
         }
         timeSinceInitialized += Time.deltaTime;
-        if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1 && timeSinceInitialized >= 0.3f)
+        
+        if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1 && timeSinceInitialized >= 1.0f)
         {
+            animator.ResetTrigger(GetProperty<string>("AttackName"));
             state = NodeData.State.Success;
             navAgent.isStopped = false;
             return NodeData.State.Success;

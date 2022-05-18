@@ -395,7 +395,7 @@ MonoBehaviour:
     title: Selector
     childGUIDs:
     - 725a9ee8-b482-4cda-94ae-954d8257e841
-    - 42dbeb14-7bdd-4ad1-a7a8-245da0490df1
+    - 52f7df38-74ff-4060-a0ad-84458e15c844
     nodeType: 5
     position: {x: 2215, y: 1120}
     runtime: {fileID: 0}
@@ -530,7 +530,7 @@ MonoBehaviour:
       PublicKeyToken=null
     noLogic: 0
   - GUID: 42dbeb14-7bdd-4ad1-a7a8-245da0490df1
-    parentGUID: 02abd8c4-0783-4ade-b345-d5d1ee1c7b33
+    parentGUID: 52f7df38-74ff-4060-a0ad-84458e15c844
     title: Chance
     childGUIDs:
     - 0d2b8d28-c442-4ee3-a148-c45034647f88
@@ -708,7 +708,7 @@ MonoBehaviour:
       svalue: 
       ivalue: 0
       fvalue: 0
-      bvalue: 0
+      bvalue: 1
       cvalue: {r: 0, g: 0, b: 0, a: 0}
       v2value: {x: 0, y: 0}
       v3value: {x: 0, y: 0, z: 0}
@@ -2548,6 +2548,66 @@ MonoBehaviour:
     runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
     noLogic: 0
+  - GUID: 8f764227-3610-4e7d-881a-1f7548364f02
+    parentGUID: a19c06ad-ad3d-47f6-ac7a-0a4d247d07b4
+    title: IfTrue
+    childGUIDs: []
+    nodeType: 2
+    position: {x: 2579, y: 1365}
+    runtime: {fileID: 0}
+    properties:
+    - name: CONDITION
+      GUID: a34823f2-5700-4c46-88ce-bb01bce290e6
+      paramReference: 79350c65-c1be-44df-8afd-add18ae1cd10
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+    runtimeLogicType: NodeAI.IfTrue, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    noLogic: 0
+  - GUID: a34823f2-5700-4c46-88ce-bb01bce290e6
+    parentGUID: 79350c65-c1be-44df-8afd-add18ae1cd10
+    title: SecondPhase
+    childGUIDs: []
+    nodeType: 7
+    position: {x: 2429, y: 1313}
+    runtime: {fileID: 0}
+    properties: []
+    runtimeLogicType: 
+    noLogic: 1
+  - GUID: a19c06ad-ad3d-47f6-ac7a-0a4d247d07b4
+    parentGUID: 52f7df38-74ff-4060-a0ad-84458e15c844
+    title: Inverter
+    childGUIDs:
+    - 8f764227-3610-4e7d-881a-1f7548364f02
+    nodeType: 3
+    position: {x: 2431, y: 1389}
+    runtime: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Inverter, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    noLogic: 0
+  - GUID: 52f7df38-74ff-4060-a0ad-84458e15c844
+    parentGUID: 02abd8c4-0783-4ade-b345-d5d1ee1c7b33
+    title: Sequence
+    childGUIDs:
+    - a19c06ad-ad3d-47f6-ac7a-0a4d247d07b4
+    - 42dbeb14-7bdd-4ad1-a7a8-245da0490df1
+    nodeType: 4
+    position: {x: 2274, y: 1389}
+    runtime: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    noLogic: 0
   exposedProperties:
   - name: BossStarted
     GUID: 0c992cf5-8e5f-46d4-90af-f936c548f37b
@@ -2673,6 +2733,10 @@ MonoBehaviour:
     - 2885db5d-aa11-4e23-b2af-d126e58b44cd
     - 74ec00c4-7c41-4ec7-b94c-1350d7b31045
     - 0d2b8d28-c442-4ee3-a148-c45034647f88
+    - 52f7df38-74ff-4060-a0ad-84458e15c844
+    - a19c06ad-ad3d-47f6-ac7a-0a4d247d07b4
+    - 8f764227-3610-4e7d-881a-1f7548364f02
+    - a34823f2-5700-4c46-88ce-bb01bce290e6
   - title: Trapped while Walking
     childGUIDs:
     - 3fb52624-6312-4895-b5e4-0b23bce0b6f6
