@@ -24,7 +24,7 @@ public class MissionCardUI : MonoBehaviour
 
     public Mission associatedMission;
 
-    public bool trackCurrentMission = false;
+    public MissionManager.MissionRefernceType missionReferenceType;
 
 
     // Start is called before the first frame update
@@ -51,12 +51,22 @@ public class MissionCardUI : MonoBehaviour
         missionManager.TryStartMission(associatedMission);
     }
 
-    public void UpdateUI(){
-        if (trackCurrentMission){
+    public void UpdateCard(){
+        MissionManager missionManager = FindObjectOfType<MissionManager>();
+        if (missionManager == null)
+        {
+            Debug.Log("No MissionManager found in the scene");
+            return;
+        }
+
+        Mission desiredMission = missionManager.GetMissionByRefernceType(missionReferenceType);
+        associatedMission = desiredMission;
+
+        if (missionReferenceType == MissionManager.MissionRefernceType.CURRENT){
             Mission currentMission = null;
             //if current mission index is within range, then get the mission from the list
-            if (MissionManager.instance != null && MissionManager.instance.currentMissionIndex >= 0 && MissionManager.instance.currentMissionIndex < MissionManager.instance.missionList.Count){
-                currentMission = MissionManager.instance.missionList[MissionManager.instance.currentMissionIndex];
+            if (MissionManager.instance != null && MissionManager.instance.currentMissionIndex >= 0 && MissionManager.instance.currentMissionIndex < MissionManager.instance.lesserMissionList.Count){
+                currentMission = MissionManager.instance.lesserMissionList[MissionManager.instance.currentMissionIndex];
             }
 
             if (currentMission)
@@ -69,14 +79,6 @@ public class MissionCardUI : MonoBehaviour
             }
         }
 
-        MissionManager missionManager = FindObjectOfType<MissionManager>();
-
-        if (missionManager == null)
-        {
-            Debug.Log("No MissionManager found in the scene");
-            return;
-        }
-
         //if no mission associated, disable the mission card
         if (associatedMission == null)
         {
@@ -85,7 +87,7 @@ public class MissionCardUI : MonoBehaviour
         }
 
         //if not tracking current mission, and the mission is the current mission, disable the mission card
-        if (!trackCurrentMission && missionManager.currentMissionIndex != -1 && associatedMission == missionManager.missionList[missionManager.currentMissionIndex])
+        if (!(missionReferenceType == MissionManager.MissionRefernceType.CURRENT) && missionManager.currentMissionIndex != -1 && associatedMission == missionManager.lesserMissionList[missionManager.currentMissionIndex])
         {
             HideCard();
             return;
@@ -104,7 +106,7 @@ public class MissionCardUI : MonoBehaviour
         //update button
 
         //if tracking current or completed, hide button
-        if (trackCurrentMission || associatedMission.isCompleted)
+        if ((missionReferenceType == MissionManager.MissionRefernceType.CURRENT) || associatedMission.isCompleted)
         {
             button.SetActive(false);
         }
