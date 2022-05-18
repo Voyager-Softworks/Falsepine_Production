@@ -11,7 +11,9 @@ namespace NodeAI
         public GoTo()
         {
             AddProperty<Transform>("Position", null);
+            AddProperty<bool>("Interrupt", false);
         }
+        
         public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
         {
             if(navAgent == null)
@@ -24,10 +26,16 @@ namespace NodeAI
                     return NodeData.State.Failure;
                 }
             }
+            if(GetProperty<bool>("Interrupt"))
+            {
+                navAgent.isStopped = true;
+                state = NodeData.State.Failure;
+                return NodeData.State.Failure;
+            }
             if(navAgent.isOnNavMesh)
             {
                 navAgent.SetDestination(GetProperty<Transform>("Position").position);
-                if(navAgent.remainingDistance <= navAgent.stoppingDistance)
+                if(Vector3.Distance(agent.transform.position, GetProperty<Transform>("Position").position) <= navAgent.stoppingDistance + 1.0f)
                 {
                     navAgent.isStopped = true;
                     state = NodeData.State.Success;
@@ -38,7 +46,7 @@ namespace NodeAI
                     navAgent.isStopped = false;
                     navAgent.speed = 3.5f;
                     navAgent.angularSpeed = 120;
-                    navAgent.acceleration = 8;
+                    navAgent.acceleration = 15;
                     state = NodeData.State.Running;
                     return NodeData.State.Running;
                 }

@@ -118,7 +118,7 @@ namespace Boss.Bonestag
                     else if(hit.collider.gameObject.tag == "BearTrap")
                     {
                         SetProperty<bool>("InBearTrap", true);
-
+                        agent.transform.position = hit.collider.gameObject.transform.position;
                         //do closing anim
                         Transform trapRoot = hit.transform.root;
                         Animator trapAnim = trapRoot.GetComponentInChildren<Animator>();
@@ -140,8 +140,10 @@ namespace Boss.Bonestag
                         }
                     }
                 }
-                if(navAgent.remainingDistance <= 1.0f)
+                if(Vector3.Distance(agent.transform.position, arenaEdgeGoalPosition) < 4.0f)
                 {
+                    agent.transform.position = RandomPointOnCircle(arenaController.arenaCentre.position, Vector3.up, arenaController.arenaRadius);
+                    agent.gameObject.GetComponent<RotateTowardsPlayer>().RotateToPlayer(0.5f, 10.0f, 0.0f);
                     navAgent.SetDestination(agent.transform.position);
                     navAgent.isStopped = true;
                     animator.SetBool("Charging", false);
