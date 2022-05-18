@@ -65,19 +65,6 @@ public class JournalManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if pressed 0,1,2, go to that scene
-        if (Keyboard.current.numpad0Key.wasPressedThisFrame)
-        {
-            SceneManager.LoadScene(0);
-        }
-        if (Keyboard.current.numpad1Key.wasPressedThisFrame)
-        {
-            SceneManager.LoadScene(1);
-        }
-        if (Keyboard.current.numpad2Key.wasPressedThisFrame)
-        {
-            SceneManager.LoadScene(2);
-        }
 
     }
 
