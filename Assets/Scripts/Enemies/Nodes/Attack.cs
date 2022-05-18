@@ -26,6 +26,7 @@ public class Attack : NodeAI.ActionBase
     public override void OnInit()
     {
         initialized = false;
+        SetProperty<bool>("Interrupted", false);
         timeSinceInitialized = 0;
     }
     public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
@@ -87,7 +88,7 @@ public class Attack : NodeAI.ActionBase
             return NodeData.State.Failure;
         }
         timeSinceInitialized += Time.deltaTime;
-        if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1 && timeSinceInitialized >= 0.3f)
+        if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1 && timeSinceInitialized >= 0.1f)
         {
             state = NodeData.State.Success;
             navAgent.isStopped = false;
