@@ -4,13 +4,16 @@ using UnityEngine;
 using System;
 
 [CreateAssetMenu(fileName = "New Mission", menuName = "Missions/New Mission")]
+[Serializable]
 public class Mission : ScriptableObject
 {
+    [Serializable]
     public enum MissionSize {
         LESSER,
         MAJOR
-    }
+    };
 
+    [Serializable]
     public enum MissionZone {
         SNOW,
         DESERT,
@@ -19,6 +22,7 @@ public class Mission : ScriptableObject
         FOREST
     }
 
+    [Serializable]
     public enum MissionType {
         COLLECTION,
         EXTERMINATION,
