@@ -22,11 +22,13 @@ namespace NodeAI.Animation
                 if (animator == null)
                 {
                     Debug.LogError("SetAnimatorInt: No animator found on agent");
+                    state = NodeData.State.Failure;
                     return NodeData.State.Failure;
                 }
                 hash = Animator.StringToHash(GetProperty<string>("Name"));
             }
             animator.SetInteger(hash, GetProperty<int>("Value"));
+            state = NodeData.State.Success;
             return NodeData.State.Success;
         }
     }
