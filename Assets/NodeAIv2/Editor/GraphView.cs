@@ -627,7 +627,10 @@ namespace NodeAI
                     (property).v2value = vectorField.value;
                     logic.SetProperty<Vector2>(property.name, vectorField.value);
                 });
-                vectorField.style.maxWidth = 200;
+                node.style.minWidth = 250;
+                
+                vectorField.style.width = 50;
+                vectorField.style.overflow = Overflow.Visible;
                 newPort.contentContainer.Add(vectorField);
             }
             else if(property.type == typeof(Vector3))
@@ -642,7 +645,11 @@ namespace NodeAI
                     (property).v3value = vectorField.value;
                     logic.SetProperty<Vector3>(property.name, vectorField.value);
                 });
-                vectorField.style.maxWidth = 200;
+                node.style.minWidth = 250;
+                
+                vectorField.style.width = 50;
+                vectorField.style.overflow = Overflow.Visible;
+                
                 newPort.contentContainer.Add(vectorField);
             }
             else if(property.type == typeof(Vector4))
@@ -657,7 +664,10 @@ namespace NodeAI
                     (property).v4value = vectorField.value;
                     logic.SetProperty<Vector4>(property.name, vectorField.value);
                 });
-                vectorField.style.maxWidth = 200;
+                node.style.minWidth = 300;
+                
+                vectorField.style.width = 50;
+                vectorField.style.overflow = Overflow.Visible;
                 newPort.contentContainer.Add(vectorField);
             }
             else if(property.type == typeof(Color))

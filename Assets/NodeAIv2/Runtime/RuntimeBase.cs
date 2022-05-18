@@ -453,6 +453,16 @@ namespace NodeAI
             }
         }
 
+        public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
+        {
+            if(current.children[0].nodeData.runtimeLogic.state != NodeData.State.Running && randValue < GetProperty<float>("Chance"))
+            {
+                current.children[0].nodeData.Init(current.children[0]);
+            }
+            state = ApplyDecorator(agent, current.children[0]);
+            return state;
+        }
+
         
 
         public override void OnInit()
