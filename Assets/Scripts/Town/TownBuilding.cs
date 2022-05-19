@@ -18,7 +18,7 @@ public class TownBuilding : ClickableObject
     public GameObject UI;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
         CloseUI();
     }
@@ -42,18 +42,21 @@ public class TownBuilding : ClickableObject
         OpenUI();
     }
 
-    public void OpenUI()
+    public virtual void OpenUI()
     {
+        if (!UI) return;
         UI.SetActive(true);
     }
 
-    public void CloseUI()
+    public virtual void CloseUI()
     {
+        if (!UI) return;
         UI.SetActive(false);
     }
 
-    public void ToggleUI()
+    public virtual void ToggleUI()
     {
+        if (!UI) return;
         if (UI.activeSelf)
         {
             CloseUI();

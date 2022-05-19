@@ -39,6 +39,10 @@ public class MissionCardUI : MonoBehaviour
         
     }
 
+    private void OnEnable() {
+        UpdateCard();
+    }
+
     public void ButtonClicked(){
         MissionManager missionManager = FindObjectOfType<MissionManager>();
 
@@ -48,7 +52,16 @@ public class MissionCardUI : MonoBehaviour
             return;
         }
 
-        missionManager.TryStartMission(associatedMission);
+        //if the current mission is this mission, return the mission
+        if (associatedMission == missionManager.GetMissionByIndex(missionManager.currentMissionIndex))
+        {
+            missionManager.TryReturnMission();
+        }
+        else
+        {
+            //otherwise, start the mission
+            missionManager.TryStartMission(associatedMission);
+        }
     }
 
     public void UpdateCard(){
@@ -86,39 +99,70 @@ public class MissionCardUI : MonoBehaviour
             return;
         }
 
-        //if not tracking current mission, and the mission is the current mission, disable the mission card
+        //if not tracking current mission, and the mission is the current mission, say so
         if (!(missionReferenceType == MissionManager.MissionRefernceType.CURRENT) && missionManager.currentMissionIndex != -1 && associatedMission == missionManager.lesserMissionList[missionManager.currentMissionIndex])
         {
-            HideCard();
-            return;
-        }
+            ShowCard();
 
-        //otherwise show card
-        ShowCard();
+            missionTitle.text = "Mission Taken";
+            if (associatedMission.isCompleted){
+                missionDescription.text = "The mission is completed, turn it in.";
+            }
+            else{
+                missionDescription.text = "Check the journal.\nEmbark to complete the mission.";
+            }
 
-        //update text
-        missionTitle.text = associatedMission.title;
-        missionDescription.text = associatedMission.description;
+            //set title and descript to be white
+            missionTitle.color = Color.white;
+            missionDescription.color = Color.white;
 
-        //update stamp
-        missionStamp.enabled = associatedMission.isCompleted;
+            //hide stamp
+            missionStamp.enabled = false;
 
-        //update button
+            //hide background image
+            backgroundImage.enabled = false;
 
-        //if tracking current or completed, hide button
-        if ((missionReferenceType == MissionManager.MissionRefernceType.CURRENT) || associatedMission.isCompleted)
-        {
-            button.SetActive(false);
-        }
-        else{
-            //else, show button and update text
-            if (missionManager && missionManager.currentMissionIndex != -1)
+            //button
+            button.SetActive(true);
+            //if complete
+            if (associatedMission.isCompleted)
             {
-                buttonText.text = "Switch";
+                buttonText.text = "Turn In";
             }
             else
             {
-                buttonText.text = "Accept";
+                buttonText.text = "Return";
+            }
+            return;
+        }
+        else {
+            //otherwise show card
+            ShowCard();
+
+            //update text
+            missionTitle.text = associatedMission.title;
+            missionDescription.text = associatedMission.description;
+
+            //update stamp
+            missionStamp.enabled = associatedMission.isCompleted;
+
+            //update button
+
+            //if tracking current or completed, hide button
+            if ((missionReferenceType == MissionManager.MissionRefernceType.CURRENT) || associatedMission.isCompleted)
+            {
+                button.SetActive(false);
+            }
+            else{
+                //else, show button and update text
+                if (missionManager && missionManager.currentMissionIndex != -1)
+                {
+                    buttonText.text = "Switch";
+                }
+                else
+                {
+                    buttonText.text = "Accept";
+                }
             }
         }
     }
@@ -127,6 +171,10 @@ public class MissionCardUI : MonoBehaviour
     {
         missionTitle.enabled = true;
         missionDescription.enabled = true;
+        //set title and descript to be black
+        missionTitle.color = Color.black;
+        missionDescription.color = Color.black;
+
         missionStamp.enabled = true;
         backgroundImage.enabled = true;
         button.SetActive(true);

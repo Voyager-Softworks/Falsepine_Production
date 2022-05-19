@@ -71,6 +71,8 @@ public class MissionManager : MonoBehaviour
     void Start()
     {
         ReinstantiateMissions();
+
+        UpdateAllMissionCards();
     }
 
     // Update is called once per frame
@@ -187,6 +189,15 @@ public class MissionManager : MonoBehaviour
         UpdateAllMissionCards();
     }
 
+    /// <summary>
+    /// Try to return the mission
+    /// </summary>
+    public void TryReturnMission(){
+        currentMissionIndex = -1;
+
+        UpdateAllMissionCards();
+    }
+
     public void UpdateAllMissionCards(){
         MissionCardUI[] missionCardUIList = FindObjectsOfType<MissionCardUI>(true);
 
@@ -199,6 +210,12 @@ public class MissionManager : MonoBehaviour
 
             missionCardUI.UpdateCard();
         }
+    }
+
+    public Mission GetMissionByIndex(int index){
+        if (index < 0 || index >= lesserMissionList.Count) return null;
+
+        return lesserMissionList[index];
     }
 
     public Mission GetMissionByRefernceType(MissionRefernceType refernceType){

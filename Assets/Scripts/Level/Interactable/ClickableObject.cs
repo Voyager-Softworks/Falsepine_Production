@@ -13,7 +13,9 @@ using UnityEngine.Events;
 public class ClickableObject : MonoBehaviour
 {
     //collider to check for click
-    public Collider collider;
+    new public Collider collider;
+
+    public TextMeshProUGUI worldText;
 
     //can the object be clicked on?
     public bool m_canBeClicked = true;
@@ -22,7 +24,7 @@ public class ClickableObject : MonoBehaviour
     public UnityEvent OnClickEvent;
 
     // Start is called before the first frame update
-    void Start()
+    protected virtual void Start()
     {
         if (collider == null)
         {
@@ -33,23 +35,36 @@ public class ClickableObject : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        if (m_canBeClicked && collider != null)
+        if (worldText != null)
         {
-            if (Mouse.current.leftButton.isPressed)
-            {
-                //raycast to see if we clicked on this object
-                RaycastHit hit;
-                Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-                if (Physics.Raycast(ray, out hit))
-                {
-                    if (hit.collider == collider)
-                    {
-                        //if we clicked on this object, call the click function
-                        OnClick();
-                    }
-                }
+            if (CheckMouseOver()){
+                worldText.gameObject.SetActive(true);
+            }
+            else{
+                worldText.gameObject.SetActive(false);
             }
         }
+
+        if (m_canBeClicked && collider != null)
+        {
+            if (Mouse.current.leftButton.isPressed && CheckMouseOver())
+            {
+                OnClick();
+            }
+        }
+    }
+
+    public bool CheckMouseOver(){
+        RaycastHit hit;
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.collider == collider)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public virtual void OnClick()
