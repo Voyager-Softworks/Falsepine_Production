@@ -18921,6 +18921,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3746648093614830358, guid: 57fa0cdb8dc503f499bd179654715c0f, type: 3}
   m_PrefabInstance: {fileID: 1079947867}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1081861052 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4073824831346734678, guid: 004ee1ef85bda374bbc44b305d762cfd, type: 3}
+  m_PrefabInstance: {fileID: 1536487687}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1081861053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1081861052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ee1b237e44a7754da5a6ec4362b097a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1084878921
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27154,20 +27171,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1124076941, guid: 004ee1ef85bda374bbc44b305d762cfd, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124076941, guid: 004ee1ef85bda374bbc44b305d762cfd, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1124076941, guid: 004ee1ef85bda374bbc44b305d762cfd, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
-      objectReference: {fileID: 1536487688}
+      objectReference: {fileID: 1081861053}
+    - target: {fileID: 1124076941, guid: 004ee1ef85bda374bbc44b305d762cfd, type: 3}
+      propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1124076941, guid: 004ee1ef85bda374bbc44b305d762cfd, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: SetActive
+      value: TryCompleteMission
       objectReference: {fileID: 0}
     - target: {fileID: 1124076941, guid: 004ee1ef85bda374bbc44b305d762cfd, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: UnityEngine.GameObject, UnityEngine
+      value: DebugMissionCompleter, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 1124076941, guid: 004ee1ef85bda374bbc44b305d762cfd, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgument
@@ -28642,11 +28667,6 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 9164288701386015754, guid: 004ee1ef85bda374bbc44b305d762cfd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 004ee1ef85bda374bbc44b305d762cfd, type: 3}
---- !u!1 &1536487688 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4073824831651167523, guid: 004ee1ef85bda374bbc44b305d762cfd, type: 3}
-  m_PrefabInstance: {fileID: 1536487687}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1537712164
 PrefabInstance:
   m_ObjectHideFlags: 0
