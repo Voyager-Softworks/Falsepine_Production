@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TownBuilding_Emark : TownBuilding
 {
@@ -27,5 +28,16 @@ public class TownBuilding_Emark : TownBuilding
         }
 
         base.Update();
+    }
+
+    public override void OnClick()
+    {
+        base.OnClick();
+
+        //load level 1 if valid
+        if (MissionManager.instance.currentMission != null && !MissionManager.instance.currentMission.isCompleted){
+            SceneManager.LoadScene(1);
+        }
+        
     }
 }

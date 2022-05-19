@@ -30,8 +30,6 @@ public class TownBuilding_Saloon : TownBuilding
     {
         base.Start();
 
-        if (MissionManager.instance) MissionManager.instance.SaveMissions();
-
         LoadSaloon();
     }
 
@@ -45,10 +43,6 @@ public class TownBuilding_Saloon : TownBuilding
         {
             UpdateUI();
         }
-    }
-
-    private void OnDestroy() {
-        if (MissionManager.instance) MissionManager.instance.SaveMissions();
     }
 
     public void SaveSaloon(){
