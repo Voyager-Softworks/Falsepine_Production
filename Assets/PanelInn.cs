@@ -50,17 +50,6 @@ public class PanelInn : MonoBehaviour
 
         if (missionCardUIList.Count <= 0) return;
 
-        
-
-        // for (int i = 0; i < missionCardUIList.Count; i++)
-        // {
-        //     MissionCardUI missionCardUI = missionCardUIList[i].GetComponent<MissionCardUI>();
-        //     if (missionCardUI == null) continue;
-
-        //     //bind associated mission to the UI
-        //     missionCardUI.associatedMission = missionManager.lesserMissionList[i];
-        // }jj
-
         missionManager.UpdateAllMissionCards();
     }
 }
