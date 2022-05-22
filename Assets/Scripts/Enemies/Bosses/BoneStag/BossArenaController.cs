@@ -76,6 +76,7 @@ public class BossArenaController : MonoBehaviour
         FindObjectOfType<NodeAI.NodeAI_Agent>().SetParameter<bool>("BossStarted", true);
         GetComponent<AudioSource>().clip = bossMusic;
         GetComponent<AudioSource>().Play();
+        Debug.Log("Please recompile");
         onBattleStart.Invoke();
     }
 

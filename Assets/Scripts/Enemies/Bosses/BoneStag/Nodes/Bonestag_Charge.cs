@@ -98,6 +98,7 @@ namespace Boss.Bonestag
                 navAgent.isStopped = true;
                 navAgent.velocity =  Vector3.zero;
                 animator.SetTrigger("Trapped");
+                animator.SetBool("Charging", false);
                 state = NodeData.State.Failure;
                 return state;
             }
@@ -118,8 +119,11 @@ namespace Boss.Bonestag
                     }
                     else if(hit.collider.gameObject.tag == "BearTrap")
                     {
+                        animator.ResetTrigger("AttackingFinished");
                         SetProperty<bool>("InBearTrap", true);
+                        navAgent.enabled = false;
                         agent.transform.position = hit.collider.gameObject.transform.position;
+                        navAgent.enabled = true;
                         //do closing anim
                         Transform trapRoot = hit.transform.root;
                         Animator trapAnim = trapRoot.GetComponentInChildren<Animator>();
