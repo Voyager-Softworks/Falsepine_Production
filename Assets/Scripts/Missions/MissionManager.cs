@@ -15,19 +15,11 @@ using System.IO;
 /// </summary>
 public class MissionManager : MonoBehaviour
 {
-    public enum MissionRefernceType
-    {
-        CURRENT,
-        LESSER1,
-        LESSER2,
-        LESSER3,
-        BOSS
-    }
-
     public static MissionManager instance;
 
     [SerializeField] public List<Mission> lesserMissionList;
-    [SerializeField] public int currentMissionIndex;
+    [SerializeField] public List<Mission> greaterMissionList;
+    [SerializeField] public Mission currentMission;
 
     /// <summary>
     /// Serializable version of the mission class from Mission.cs
@@ -45,6 +37,28 @@ public class MissionManager : MonoBehaviour
         [SerializeField] public string description;
 
         [SerializeField] public bool isCompleted;
+
+        //constructor that converts the mission to a serializable mission
+        public SerializableMission(Mission mission){
+            size = mission.size;
+            zone = mission.zone;
+            type = mission.type;
+            title = mission.title;
+            description = mission.description;
+            isCompleted = mission.isCompleted;
+        }
+
+        //converts the serializable mission to a mission
+        public Mission ToMission(){
+            Mission mission = ScriptableObject.CreateInstance<Mission>();
+            mission.size = size;
+            mission.zone = zone;
+            mission.type = type;
+            mission.title = title;
+            mission.description = description;
+            mission.isCompleted = isCompleted;
+            return mission;
+        }
     }
 
     /// <summary>
@@ -52,8 +66,12 @@ public class MissionManager : MonoBehaviour
     /// </summary>
     [Serializable]
     public class MissionData{
-        [SerializeField] public List<SerializableMission> missionList;
-        [SerializeField] public int currentMissionIndex;
+        [SerializeField] public List<SerializableMission> lesserMissionList;
+        [SerializeField] public List<SerializableMission> greaterMissionList;
+
+        //current
+        [SerializeField] public Mission.MissionSize currentMissionSize = Mission.MissionSize.LESSER;
+        [SerializeField] public int currentMissionIndex = -1;
     }
 
     void Awake() {
@@ -61,6 +79,8 @@ public class MissionManager : MonoBehaviour
             instance = this;
             //do not destroy this object
             DontDestroyOnLoad(this);
+
+            LoadMissions();
         } else {
             Destroy(this);
             Destroy(gameObject);
@@ -78,20 +98,7 @@ public class MissionManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if pressed 0,1,2, go to that scene
-        if (Keyboard.current.numpad0Key.wasPressedThisFrame)
-        {
-            SceneManager.LoadScene(0);
-        }
-        if (Keyboard.current.numpad1Key.wasPressedThisFrame)
-        {
-            SceneManager.LoadScene(1);
-        }
-        if (Keyboard.current.numpad2Key.wasPressedThisFrame)
-        {
-            SceneManager.LoadScene(2);
-        }
-
+        //DEBUG
         //keypad + to save
         if (Keyboard.current.numpadPlusKey.wasPressedThisFrame)
         {
@@ -101,6 +108,11 @@ public class MissionManager : MonoBehaviour
         if (Keyboard.current.numpadMinusKey.wasPressedThisFrame)
         {
             LoadMissions();
+        }
+        //keypad 9 to delete save
+        if (Keyboard.current.numpad9Key.wasPressedThisFrame)
+        {
+            DeleteMissionSave();
         }
     }
 
@@ -113,21 +125,26 @@ public class MissionManager : MonoBehaviour
 
         MissionData data = new MissionData();
 
-        //copy mission list to serializable mission list
-        data.missionList = new List<SerializableMission>();
+        //copy lesser mission list to serializable mission list
+        data.lesserMissionList = new List<SerializableMission>();
         foreach (Mission m in lesserMissionList)
         {
-            SerializableMission sm = new SerializableMission();
-            sm.size = m.size;
-            sm.zone = m.zone;
-            sm.type = m.type;
-            sm.title = m.title;
-            sm.description = m.description;
-            sm.isCompleted = m.isCompleted;
-            data.missionList.Add(sm);
+            SerializableMission sm = new SerializableMission(m);
+            data.lesserMissionList.Add(sm);
         }
 
-        data.currentMissionIndex = currentMissionIndex;
+        //copy greater mission list to serializable mission list
+        data.greaterMissionList = new List<SerializableMission>();
+        foreach (Mission m in greaterMissionList)
+        {
+            SerializableMission sm = new SerializableMission(m);
+            data.greaterMissionList.Add(sm);
+        }
+
+        if (currentMission){
+            data.currentMissionSize = currentMission.size;
+            data.currentMissionIndex = GetMissionIndex(currentMission);
+        }
 
         bf.Serialize(file, data);
         file.Close();
@@ -144,34 +161,79 @@ public class MissionManager : MonoBehaviour
             MissionData data = (MissionData)bf.Deserialize(file);
             file.Close();
 
-            //copy serializable mission list to mission list
+            //copy lesser serializable mission list to mission list
             lesserMissionList = new List<Mission>();
-            foreach (SerializableMission sm in data.missionList)
+            foreach (SerializableMission sm in data.lesserMissionList)
             {
-                Mission m = ScriptableObject.CreateInstance<Mission>();
-                m.size = sm.size;
-                m.zone = sm.zone;
-                m.type = sm.type;
-                m.title = sm.title;
-                m.description = sm.description;
-                m.isCompleted = sm.isCompleted;
+                Mission m = sm.ToMission();
                 lesserMissionList.Add(m);
             }
 
-            currentMissionIndex = data.currentMissionIndex;
+            //copy greater serializable mission list to mission list
+            greaterMissionList = new List<Mission>();
+            foreach (SerializableMission sm in data.greaterMissionList)
+            {
+                Mission m = sm.ToMission();
+                greaterMissionList.Add(m);
+            }
+
+            currentMission = GetMission(data.currentMissionSize, data.currentMissionIndex);
         }
 
         UpdateAllMissionCards();
+    }
+
+    public void DeleteMissionSave(){
+        if (File.Exists(Application.persistentDataPath + "/missions.dat")){
+            File.Delete(Application.persistentDataPath + "/missions.dat");
+        }
     }
 
     /// <summary>
     /// Replace missions in list with new copies of the missions
     /// </summary>
     public void ReinstantiateMissions(){
+        //store current mission info
+        Mission.MissionSize currentSize = Mission.MissionSize.LESSER;
+        int currentIndex = -1;
+        if (currentMission){
+            currentSize = currentMission.size;
+            currentIndex = GetMissionIndex(currentMission);
+        }
+
+        //lesser
         for (int i = 0; i < lesserMissionList.Count; i++)
         {
             lesserMissionList[i] = Instantiate(lesserMissionList[i]);
         }
+
+        //greater
+        for (int i = 0; i < greaterMissionList.Count; i++)
+        {
+            greaterMissionList[i] = Instantiate(greaterMissionList[i]);
+        }
+
+        //set current mission
+        currentMission = GetMission(currentSize, currentIndex);
+    }
+
+    public void RestartMissions(){
+        //loop through lesser missions and set them to not completed
+        foreach (Mission m in lesserMissionList)
+        {
+            m.isCompleted = false;
+        }
+
+        //loop through greater missions and set them to not completed
+        foreach (Mission m in greaterMissionList)
+        {
+            m.isCompleted = false;
+        }
+
+        //set current mission to null
+        currentMission = null;
+
+        UpdateAllMissionCards();
     }
 
     /// <summary>
@@ -180,11 +242,12 @@ public class MissionManager : MonoBehaviour
     public void TryStartMission(Mission mission){
         if (mission == null) return;
 
-        int missionIndex = lesserMissionList.IndexOf(mission);
+        //check if mission is in list
+        int lesserIndex = lesserMissionList.IndexOf(mission);
+        int greaterIndex = greaterMissionList.IndexOf(mission);
+        if (lesserIndex == -1 && greaterIndex == -1) return;
 
-        if (missionIndex == -1) return;
-
-        currentMissionIndex = missionIndex;
+        currentMission = mission;
 
         UpdateAllMissionCards();
     }
@@ -193,7 +256,7 @@ public class MissionManager : MonoBehaviour
     /// Try to return the mission
     /// </summary>
     public void TryReturnMission(){
-        currentMissionIndex = -1;
+        currentMission = null;
 
         UpdateAllMissionCards();
     }
@@ -212,35 +275,31 @@ public class MissionManager : MonoBehaviour
         }
     }
 
-    public Mission GetMissionByIndex(int index){
-        if (index < 0 || index >= lesserMissionList.Count) return null;
-
-        return lesserMissionList[index];
-    }
-
-    public Mission GetMissionByRefernceType(MissionRefernceType refernceType){
-        switch (refernceType)
+    public Mission GetMission(Mission.MissionSize _size, int _index){
+        switch (_size)
         {
-            case MissionRefernceType.CURRENT:
-                //if current mission is within range of the list, else return null
-                if (WithinRange(currentMissionIndex)) return lesserMissionList[currentMissionIndex];
-                else return null;
-            case MissionRefernceType.LESSER1:
-                //if lesser1 mission is within range of the list, else return null
-                if (WithinRange(0)) return lesserMissionList[0];
-                else return null;
-            case MissionRefernceType.LESSER2:
-                //if lesser2 mission is within range of the list, else return null
-                if (WithinRange(1)) return lesserMissionList[1];
-                else return null;
-            case MissionRefernceType.LESSER3:
-                //if lesser3 mission is within range of the list, else return null
-                if (WithinRange(2)) return lesserMissionList[2];
-                else return null;
-            case MissionRefernceType.BOSS:
-                return null;
+            case Mission.MissionSize.LESSER:
+                //check if index is valid
+                if (_index < 0 || _index >= lesserMissionList.Count) return null;
+                return lesserMissionList[_index];
+            case Mission.MissionSize.GREATER:
+                //check if index is valid
+                if (_index < 0 || _index >= greaterMissionList.Count) return null;
+                return greaterMissionList[_index];
             default:
                 return null;
+        }
+    }
+
+    public int GetMissionIndex(Mission _mission){
+        switch (_mission.size)
+        {
+            case Mission.MissionSize.LESSER:
+                return lesserMissionList.IndexOf(_mission);
+            case Mission.MissionSize.GREATER:
+                return greaterMissionList.IndexOf(_mission);
+            default:
+                return -1;
         }
     }
 

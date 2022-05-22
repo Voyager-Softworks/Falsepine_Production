@@ -10,7 +10,7 @@ public class Mission : ScriptableObject
     [Serializable]
     public enum MissionSize {
         LESSER,
-        MAJOR
+        GREATER
     };
 
     [Serializable]
@@ -26,7 +26,8 @@ public class Mission : ScriptableObject
     public enum MissionType {
         COLLECTION,
         EXTERMINATION,
-        INVESTIGATION
+        INVESTIGATION,
+        BOSS
     }
 
     [SerializeField] public MissionSize size;
