@@ -6,7 +6,30 @@ using UnityEngine.Events;
 
 public class BossArenaController : MonoBehaviour
 {
-    public Transform arenaCentre;
+    public Transform arenaCentre {
+        get {
+            float health = FindObjectOfType<NodeAI.NodeAI_Agent>().gameObject.GetComponent<HealthScript>().currentHealth;
+            if(health <= 75.0f)
+            {
+                return arenaCentreTransforms[1];
+            }
+            else if(health <= 50.0f)
+            {
+                return arenaCentreTransforms[2];
+            }
+            else if(health <= 25.0f)
+            {
+                return arenaCentreTransforms[3];
+            }
+            else
+            {
+                return arenaCentreTransforms[0];
+            }
+            
+        }
+    }
+
+    public List<Transform> arenaCentreTransforms = new List<Transform>();
     public float arenaRadius;
 
     public AudioClip baitedSound;

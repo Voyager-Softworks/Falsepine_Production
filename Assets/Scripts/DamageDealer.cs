@@ -5,82 +5,121 @@ using UnityEngine;
 public class DamageDealer : MonoBehaviour
 {
 
-    [System.Serializable]
-    public struct HurtBox
-    {
-        [SerializeField]
-        public Transform position;
-        public float radius;
-        public float damage;
-        public string name;
-        public float delay;
-        public float duration;
-        public ParticleSystem[] particle;
-        public GameObject spawnedParticle;
-    }
-    [SerializeField]
-    public List<HurtBox> hurtBoxes = new List<HurtBox>();
+    public List<Collider> HurtBoxes = new List<Collider>();
 
     public GameObject hurtPlayerEffect;
 
-    public void EnableHurtBox(string name)
+    public float damage = 10f;
+    public int attkNum = 1;
+    int currAttkNum = 0;
+
+    IEnumerator MeleeAttackCoroutine(float dmg, float delay, float duration)
     {
-        StartCoroutine(EnableHurtBoxRoutine(name));
+        yield return new WaitForSeconds(delay);
+        foreach (Collider hurtBox in HurtBoxes)
+        {
+            hurtBox.enabled = true;
+        }
+        float timer = 0f;
+        bool playerHit = false;
+        while(timer < duration && !playerHit)
+        {
+            timer += Time.deltaTime;
+            foreach (Collider hurtBox in HurtBoxes)
+            {
+                if (hurtBox.enabled)
+                {
+                    RaycastHit[] hits = Physics.BoxCastAll(hurtBox.bounds.center, hurtBox.bounds.extents, hurtBox.transform.forward, hurtBox.transform.rotation, 0.5f);
+                    foreach (RaycastHit hit in hits)
+                    {
+                        if (hit.collider.CompareTag("Player"))
+                        {
+                            hit.collider.GetComponent<PlayerHealth>().TakeDamage(damage);
+                            Instantiate(hurtPlayerEffect, hit.point, Quaternion.identity);
+                            playerHit = true;
+                        }
+                    }
+                }
+            }
+            yield return null;
+        }
+        foreach (Collider hurtBox in HurtBoxes)
+        {
+            hurtBox.enabled = false;
+        }
     }
 
-    public float GetAttackDuration(string name)
+    IEnumerator AOEAttackCoroutine(float dmg, float delay, float radius, GameObject effect)
     {
-        foreach (HurtBox hb in hurtBoxes)
+        yield return new WaitForSeconds(delay);
+        Destroy(Instantiate(effect, transform.position, Quaternion.identity), 20.0f);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius);
+        foreach (Collider hitCollider in hitColliders)
         {
-            if (hb.name == name)
+            if (hitCollider.GetComponent<PlayerHealth>() != null)
             {
-                return hb.duration;
+                hitCollider.GetComponent<PlayerHealth>().TakeDamage(dmg);
             }
         }
-        return 0;
+    }
+
+    IEnumerator RangedAttackCoroutine(GameObject projectile, float delay, float speed, Transform spawnpoint, bool aimAtPlayer = false)
+    {
+        yield return new WaitForSeconds(delay);
+        GameObject proj = Instantiate(projectile, spawnpoint.position, spawnpoint.rotation);
+        if(!aimAtPlayer)
+            proj.GetComponent<Rigidbody>().velocity = proj.transform.forward * speed;
+        else
+        {
+            Vector3 dir = (GameObject.FindGameObjectWithTag("Player").transform.position - proj.transform.position).normalized;
+            proj.GetComponent<Rigidbody>().velocity = dir * speed;
+        }
+        Destroy(proj, 20.0f);
+    }
+
+    IEnumerator RangedAttackCoroutine(GameObject projectile, float delay, float speed, Transform spawnPoint, float duration, float waitBetweenSpawns)
+    {
+        yield return new WaitForSeconds(delay);
+        for (int i = 0; i < duration / waitBetweenSpawns; i++)
+        {
+            GameObject proj = Instantiate(projectile, spawnPoint.position, spawnPoint.rotation);
+            proj.GetComponent<Rigidbody>().velocity = proj.transform.forward * speed;
+            Destroy(proj, 20.0f);
+            yield return new WaitForSeconds(waitBetweenSpawns);
+        }
+    }
+
+    public void MeleeAttack(float dmg, float delay, float duration)
+    {
+        StartCoroutine(MeleeAttackCoroutine(dmg, delay, duration));
+    }
+
+    public void AOEAttack(float dmg, float delay, float radius, GameObject effect)
+    {
+        StartCoroutine(AOEAttackCoroutine(dmg, delay, radius, effect));
+    }
+
+    public void RangedAttack(GameObject projectile, float delay, float speed, Transform spawnpoint, bool aimAtPlayer = false)
+    {
+        StartCoroutine(RangedAttackCoroutine(projectile, delay, speed, spawnpoint, aimAtPlayer));
+    }
+
+    public void RangedAttack(GameObject projectile, float delay, float speed, Transform spawnPoint, float duration, float waitBetweenSpawns)
+    {
+        StartCoroutine(RangedAttackCoroutine(projectile, delay, speed, spawnPoint, duration, waitBetweenSpawns));
+    }
+
+    public void Update()
+    {
+        if(currAttkNum > 0)
+        {
+            
+        }
     }
     
     
 
-    IEnumerator EnableHurtBoxRoutine(string name)
-    {
-        HurtBox hb = hurtBoxes.Find(x => x.name == name);
-        yield return new WaitForSeconds(hb.delay);
-        
-        RaycastHit[] hits = Physics.SphereCastAll(hb.position.position, hb.radius, Vector3.forward, hb.radius,LayerMask.GetMask("Player"));
-        foreach (RaycastHit hit in hits)
-        {
-            if (hit.collider.gameObject.tag == "Player")
-            {
-                hit.collider.gameObject.GetComponent<PlayerHealth>().TakeDamage(hb.damage);
-                Debug.Log("Hit player");
-                Destroy(Instantiate(hurtPlayerEffect, hit.point, Quaternion.LookRotation(hit.normal, Vector3.up)), 5.0f);
-                break;
-            }
-        }
-
-        if(hb.particle != null)
-        {
-            foreach (ParticleSystem ps in hb.particle)
-            {
-                ps.Play();
-            }
-        }
-        if(hb.spawnedParticle != null)
-        {
-            Destroy(Instantiate(hb.spawnedParticle, hb.position.position, Quaternion.identity), 5.0f);
-        }
-        
-    }
-
-    private void OnDrawGizmosSelected() {
-        
-        foreach (HurtBox hb in hurtBoxes)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(hb.position.position, hb.radius);
-        }
-    }
+    
 
 
 }

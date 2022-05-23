@@ -21,7 +21,7 @@ namespace Boss.Bonestag
                 {
                     SetProperty<bool>("IsSecondPhase", true);
                     agent.SetParameter("SecondPhase", true);
-                    
+                    FindObjectOfType<BossArenaController>().StartSecondPhase();
                     state = NodeData.State.Success;
                     return NodeData.State.Success;
                 }

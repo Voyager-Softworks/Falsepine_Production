@@ -10,17 +10,14 @@ public class Attack : NodeAI.ActionBase
     NavMeshAgent navAgent;
     RotateTowardsPlayer rotateTowardsPlayer;
     AudioSource audioSource;
+    AttackData attackData;
     bool initialized = false;
     float timeSinceInitialized = 0;
 
     public Attack()
     {
-        AddProperty<GameObject>("Target", null);
-        AddProperty<AudioClip>("Audio", null);
-        AddProperty<string>("AttackName", "");
-        AddProperty<float>("TurnDuration", 0);
-        AddProperty<float>("TurnDelay", 0);
-        AddProperty<float>("TurnSpeed", 0);
+        AddProperty<AttackData>("Attack Data", null);
+        AddProperty<Transform>("Projectile spawn bone", null);
         AddProperty<bool>("Interrupted", false);
     }
     public override void OnInit()
@@ -28,6 +25,7 @@ public class Attack : NodeAI.ActionBase
         initialized = false;
         SetProperty<bool>("Interrupted", false);
         timeSinceInitialized = 0;
+        attackData = GetProperty<AttackData>("Attack Data");
     }
     public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
     {
@@ -75,9 +73,32 @@ public class Attack : NodeAI.ActionBase
         if(!initialized)
         {
             initialized = true;
-            animator.SetTrigger(GetProperty<string>("AttackName"));
-            audioSource.PlayOneShot(GetProperty<AudioClip>("Audio"));
-            rotateTowardsPlayer.RotateToPlayer(GetProperty<float>("TurnDuration"), GetProperty<float>("TurnSpeed"), GetProperty<float>("TurnDelay"));
+            animator.SetTrigger(attackData.animationTrigger);
+            audioSource.PlayOneShot(attackData.attackSound);
+            foreach(AttackData.AttackPhase phase in attackData.attackPhases)
+            {
+                if(phase.attackType == AttackData.AttackType.Melee)
+                {
+                    agent.GetComponent<DamageDealer>().MeleeAttack(phase.attackDamage, phase.attackDelay, phase.attackDuration);
+                }
+                else if(phase.attackType == AttackData.AttackType.Ranged)
+                {
+                    if(!phase.projectileContinuousFire)
+                    {
+                        agent.GetComponent<DamageDealer>().RangedAttack(phase.projectile, phase.attackDelay, phase.projectileSpeed, GetProperty<Transform>("Projectile spawn bone"), true);
+                    }
+                    else
+                    {
+                        agent.GetComponent<DamageDealer>().RangedAttack(phase.projectile, phase.attackDelay, phase.projectileSpeed, GetProperty<Transform>("Projectile spawn bone"), phase.attackDuration, phase.projectileFireDelay);
+                    }
+                }
+                else if(phase.attackType == AttackData.AttackType.AOE)
+                {
+                    agent.GetComponent<DamageDealer>().AOEAttack(phase.attackDamage, phase.attackDelay, phase.attackDuration, phase.AOEeffect);
+                }
+                rotateTowardsPlayer.RotateToPlayer(phase.turnDuration, phase.turnSpeed, phase.turnDelay);
+                rotateTowardsPlayer.MoveToPlayer(phase.translationDuration, phase.translationSpeed, phase.translationDelay);
+            }
             navAgent.isStopped = true;
             
         }
