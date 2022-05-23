@@ -1491,6 +1491,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2060785306716778794}
+  - component: {fileID: 3213331812353643931}
   m_Layer: 0
   m_Name: Hand.L
   m_TagString: Untagged
@@ -1514,9 +1515,23 @@ Transform:
   - {fileID: 2073153007232137184}
   - {fileID: 541495363704838661}
   - {fileID: 7808336409431800128}
+  - {fileID: 8534679003498926682}
   m_Father: {fileID: 583969667217910796}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3213331812353643931
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544064585504420302}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.36, y: 0.91, z: 0.44}
+  m_Center: {x: -0.06, y: 0.05, z: 0.03}
 --- !u!1 &1551861526793530604
 GameObject:
   m_ObjectHideFlags: 0
@@ -1589,6 +1604,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7206832680793970160}
+  - component: {fileID: 6645633545692881987}
   m_Layer: 0
   m_Name: Head.001
   m_TagString: Untagged
@@ -1611,6 +1627,19 @@ Transform:
   m_Father: {fileID: 8833119818559029199}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &6645633545692881987
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592560762399011510}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.6, y: 0.6, z: 0.6}
+  m_Center: {x: 0, y: 0, z: -0.09}
 --- !u!1 &1646125229166029534
 GameObject:
   m_ObjectHideFlags: 0
@@ -2352,6 +2381,36 @@ Transform:
   m_Father: {fileID: 2862935517238462367}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0.1432874, y: -6.1790323, z: 6.3862348}
+--- !u!1 &2518182388653492578
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5387918482686823211}
+  m_Layer: 0
+  m_Name: BloodBreathSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5387918482686823211
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2518182388653492578}
+  m_LocalRotation: {x: -0.99777246, y: 0, z: 0, w: 0.06670928}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6937838353057970097}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2558429810190799334
 GameObject:
   m_ObjectHideFlags: 0
@@ -8493,6 +8552,7 @@ GameObject:
   - component: {fileID: 4073824831346734666}
   - component: {fileID: 4073824831346734677}
   - component: {fileID: 3906221961975269412}
+  - component: {fileID: 3614460409907946256}
   - component: {fileID: 4073824831346734679}
   - component: {fileID: 1124076941}
   - component: {fileID: 7500680383744065261}
@@ -8687,6 +8747,34 @@ MonoBehaviour:
     v3value: {x: 0, y: 0, z: 0}
     v4value: {x: 0, y: 0, z: 0, w: 0}
     ovalue: {fileID: 0}
+  - name: BloodbreathSpawnTransform
+    GUID: 8a9dba71-0057-491f-8765-1af86356dd42
+    paramReference: 
+    serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    svalue: 
+    ivalue: 0
+    fvalue: 0
+    bvalue: 0
+    cvalue: {r: 0, g: 0, b: 0, a: 0}
+    v2value: {x: 0, y: 0}
+    v3value: {x: 0, y: 0, z: 0}
+    v4value: {x: 0, y: 0, z: 0, w: 0}
+    ovalue: {fileID: 6937838353057970097}
+  - name: SpikethrowSpawnTransform
+    GUID: 75a0919d-8cd3-447c-84d5-cb5e18826362
+    paramReference: 
+    serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    svalue: 
+    ivalue: 0
+    fvalue: 0
+    bvalue: 0
+    cvalue: {r: 0, g: 0, b: 0, a: 0}
+    v2value: {x: 0, y: 0}
+    v3value: {x: 0, y: 0, z: 0}
+    v4value: {x: 0, y: 0, z: 0, w: 0}
+    ovalue: {fileID: 2060785306716778794}
   nodeTree:
     rootNode:
       GUID: 
@@ -8713,6 +8801,22 @@ MonoBehaviour:
         noLogic: 0
       children: []
     nodes: []
+--- !u!114 &3614460409907946256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4073824831346734678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e196a347754e74e0ca26934429658e04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eyesBone: {fileID: 7206832680793970160}
+  eyeDirection: 4
+  sightDistance: 20
+  sightAngle: 100
 --- !u!195 &4073824831346734679
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -8793,64 +8897,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6f027a942edfcaf98e9ac2361b68d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hurtBoxes:
-  - position: {fileID: 868137138641948282}
-    radius: 3
-    damage: 15
-    name: AttkC
-    delay: 1.06
-    duration: 2
-    particle: []
-    spawnedParticle: {fileID: 0}
-  - position: {fileID: 227140228692818159}
-    radius: 3.19
-    damage: 15
-    name: AttkS
-    delay: 1.06
-    duration: 2
-    particle: []
-    spawnedParticle: {fileID: 0}
-  - position: {fileID: 1379123579914525250}
-    radius: 2.77
-    damage: 15
-    name: AttkC1
-    delay: 1.06
-    duration: 3
-    particle: []
-    spawnedParticle: {fileID: 0}
-  - position: {fileID: 5472945747086573722}
-    radius: 2.79
-    damage: 15
-    name: AttkC12
-    delay: 1.9
-    duration: 3
-    particle: []
-    spawnedParticle: {fileID: 0}
-  - position: {fileID: 7633757501461710328}
-    radius: 6
-    damage: 20
-    name: AttkC2
-    delay: 2
-    duration: 3
-    particle: []
-    spawnedParticle: {fileID: 5368337816207375849, guid: 7422e8f668d1bf54dbfcbc47e01defed, type: 3}
-  - position: {fileID: 7800347234720130261}
-    radius: 3.21
-    damage: 20
-    name: AttkS1
-    delay: 1.06
-    duration: 3
-    particle: []
-    spawnedParticle: {fileID: 0}
-  - position: {fileID: 7167840372598412327}
-    radius: 9.04
-    damage: 20
-    name: AttkS2
-    delay: 1.8
-    duration: 3
-    particle: []
-    spawnedParticle: {fileID: 5368337816207375849, guid: 7422e8f668d1bf54dbfcbc47e01defed, type: 3}
+  HurtBoxes:
+  - {fileID: 3213331812353643931}
+  - {fileID: 3833506082791088772}
+  - {fileID: 6645633545692881987}
   hurtPlayerEffect: {fileID: 906613630111261276, guid: 035c7f8b389e1f340903030517c35684, type: 3}
+  damage: 10
+  attkNum: 1
 --- !u!114 &4994529633457169633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16764,6 +16817,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6519122229780343064}
+  - component: {fileID: 3833506082791088772}
   m_Layer: 0
   m_Name: Hand.R
   m_TagString: Untagged
@@ -16790,6 +16844,19 @@ Transform:
   m_Father: {fileID: 2178291468830447930}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3833506082791088772
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7124252236200486065}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.38, y: 0.9, z: 0.44}
+  m_Center: {x: 0.06, y: 0.08, z: 0}
 --- !u!1 &7125815461356367056
 GameObject:
   m_ObjectHideFlags: 0
@@ -17556,6 +17623,36 @@ Transform:
   m_Father: {fileID: 4258846163414722616}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -3.4236693, y: 7.511804, z: 8.42302}
+--- !u!1 &7673079111761606965
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8534679003498926682}
+  m_Layer: 0
+  m_Name: SpikeThrowSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8534679003498926682
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7673079111761606965}
+  m_LocalRotation: {x: -0.5813395, y: -0.35781595, z: 0.603369, w: -0.41225982}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2060785306716778794}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7746897765543425506
 GameObject:
   m_ObjectHideFlags: 0
@@ -17582,7 +17679,8 @@ Transform:
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0.14862135, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 5387918482686823211}
   m_Father: {fileID: 7206832680793970160}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
