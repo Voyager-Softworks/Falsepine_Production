@@ -94,7 +94,7 @@ public class Attack : NodeAI.ActionBase
                 }
                 else if(phase.attackType == AttackData.AttackType.AOE)
                 {
-                    agent.GetComponent<DamageDealer>().AOEAttack(phase.attackDamage, phase.attackDelay, phase.attackDuration, phase.AOEeffect);
+                    agent.GetComponent<DamageDealer>().AOEAttack(phase.attackDamage, phase.attackDelay, phase.attackRange, phase.AOEeffect);
                 }
                 rotateTowardsPlayer.RotateToPlayer(phase.turnDuration, phase.turnSpeed, phase.turnDelay);
                 rotateTowardsPlayer.MoveToPlayer(phase.translationDuration, phase.translationSpeed, phase.translationDelay);
@@ -110,7 +110,7 @@ public class Attack : NodeAI.ActionBase
         }
         timeSinceInitialized += Time.deltaTime;
         
-        if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1 && timeSinceInitialized >= 1.0f)
+        if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1 && timeSinceInitialized >= 0.3f)
         {
             animator.ResetTrigger(GetProperty<string>("AttackName"));
             state = NodeData.State.Success;
