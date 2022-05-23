@@ -21,13 +21,13 @@ public class HealthScript : MonoBehaviour
     private AudioSource _audioSource;
 
     private UIScript _uiScript;
-
+    private NodeAI.NodeAI_Senses _senses;
 
     // Start is called before the first frame update
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-
+        _senses = GetComponent<NodeAI.NodeAI_Senses>();
         if (_uiScript == null) _uiScript = FindObjectOfType<UIScript>();
     }
 
@@ -51,13 +51,13 @@ public class HealthScript : MonoBehaviour
         _uiScript.bossHealthBar.rectTransform.sizeDelta = new Vector2(_uiScript.bossHealthBarMaxWidth * (currentHealth / maxHealth), _uiScript.bossHealthBar.rectTransform.sizeDelta.y);
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, GameObject source)
     {
         if (isInvincible) return;
         if (isDead) return;
 
         currentHealth -= damage;
-        GetComponent<NodeAI.NodeAI_Agent>().SetParameter<float>("Health", currentHealth);
+        _senses?.RegisterSensoryEvent(source, this.gameObject, damage, NodeAI.SensoryEvent.SenseType.SOMATIC);
         if (_audioSource && hurtSound) _audioSource.PlayOneShot(hurtSound);
         if (currentHealth <= 0)
         {
@@ -71,6 +71,7 @@ public class HealthScript : MonoBehaviour
 
         OnDeath.Invoke();
         //GetComponent<NodeAI.NodeAI_Agent>().SetState("Dead"); Legacy code
+
         GetComponentInChildren<Animator>().SetBool("Dead", true);
 
         if (_audioSource && deathSound) _audioSource.PlayOneShot(deathSound);

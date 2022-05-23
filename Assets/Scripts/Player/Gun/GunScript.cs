@@ -225,12 +225,22 @@ public class GunScript : MonoBehaviour
             HealthScript healthScript = hit.collider.GetComponentInChildren<HealthScript>();
             if (healthScript != null)
             {
-                healthScript.TakeDamage(damage);
+                healthScript.TakeDamage(damage, this.transform.root.gameObject);
                 Destroy(Instantiate(hitEffect, hit.point,Quaternion.FromToRotation(Vector3.up, hit.normal)), 2.0f);
             }
         }
 
         audioSource.PlayOneShot(shootClip[UnityEngine.Random.Range(0, shootClip.Count)]);
+
+        //Trigger auditory event on all sensors in range
+        foreach (NodeAI.NodeAI_Senses sensor in FindObjectsOfType<NodeAI.NodeAI_Senses>())
+        {
+            if (Vector3.Distance(sensor.gameObject.transform.position, shootPoint.transform.position) < sensor.maxHearingRange)
+            {
+                sensor.RegisterSensoryEvent(this.transform.root.gameObject, sensor.gameObject, 10.0f, NodeAI.SensoryEvent.SenseType.AURAL);
+            }
+        }
+
         _animator.SetTrigger("Shoot");
         GameObject flash = Instantiate(muzzleFlash, shootPoint.transform.position, shootPoint.transform.rotation, shootPoint);
         Destroy(flash, 2.0f);

@@ -253,7 +253,7 @@ namespace NodeAI
             return properties.FindAll(x => (x).paramReference == paramReference);
         }
 
-
+        
         public virtual NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current) => NodeData.State.Failure;
 
         public virtual void DrawGizmos(NodeAI_Agent agent){}  // Draw Gizmos for this node;
