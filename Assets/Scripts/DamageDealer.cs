@@ -53,12 +53,13 @@ public class DamageDealer : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         Destroy(Instantiate(effect, transform.position, Quaternion.identity), 20.0f);
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, radius);
-        foreach (Collider hitCollider in hitColliders)
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, radius, transform.forward, 0.5f);
+        foreach (RaycastHit hit in hits)
         {
-            if (hitCollider.GetComponent<PlayerHealth>() != null)
+            if (hit.collider.CompareTag("Player"))
             {
-                hitCollider.GetComponent<PlayerHealth>().TakeDamage(dmg);
+                hit.collider.GetComponent<PlayerHealth>().TakeDamage(damage);
+                Instantiate(hurtPlayerEffect, hit.point, Quaternion.identity);
             }
         }
     }
