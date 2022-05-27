@@ -13,7 +13,7 @@ using UnityEngine.Events;
 public class ClickableObject : MonoBehaviour
 {
     //collider to check for click
-    new public Collider collider;
+    public Collider[] colliders;
 
     public TextMeshProUGUI worldText;
 
@@ -26,9 +26,9 @@ public class ClickableObject : MonoBehaviour
     // Start is called before the first frame update
     protected virtual void Start()
     {
-        if (collider == null)
+        if (colliders == null || colliders.Length <= 0)
         {
-            collider = GetComponentInChildren<Collider>();
+            colliders = GetComponentsInChildren<Collider>();
         }
     }
 
@@ -45,7 +45,7 @@ public class ClickableObject : MonoBehaviour
             }
         }
 
-        if (m_canBeClicked && collider != null)
+        if (m_canBeClicked && colliders != null)
         {
             if (Mouse.current.leftButton.isPressed && CheckMouseOver())
             {
@@ -59,9 +59,12 @@ public class ClickableObject : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         if (Physics.Raycast(ray, out hit))
         {
-            if (hit.collider == collider)
+            for (int i = 0; i < colliders.Length; i++)
             {
-                return true;
+                if (colliders[i] == hit.collider)
+                {
+                    return true;
+                }
             }
         }
         return false;
