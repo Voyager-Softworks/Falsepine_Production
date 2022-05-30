@@ -28,7 +28,7 @@ namespace NodeAI
         public void Serialize(NodeAI_Behaviour nodeAI_Behaviour)
         {
             nodeAI_Behaviour.nodeData = new List<NodeData>();
-            
+            nodeAI_Behaviour.queries = new List<Query>();
             foreach (var node in nodes)
             {
                 var nodeData = new NodeData
@@ -44,6 +44,10 @@ namespace NodeAI
                 if(nodeData.runtimeLogic != null)
                 {
                     nodeData.runtimeLogic.state = NodeData.State.Idle;
+                }
+                if(nodeData.query != null)
+                {
+                    nodeAI_Behaviour.queries.Add(nodeData.query);
                 }
                 if(node.nodeType == NodeData.Type.Parameter) nodeData.parentGUID = node.paramReference;
                 foreach (var input in node.inputPorts)
@@ -90,6 +94,7 @@ namespace NodeAI
                             nodeData.query.SetPropertyParamReference(input.portName, "null");
                             nodeData.query.SetPropertyGUID(input.portName, "null");
                         }
+                        
                     }
                 }
                 nodeAI_Behaviour.nodeData.Add(nodeData);
@@ -99,7 +104,8 @@ namespace NodeAI
             {
                 if(((Node)edge.output.node).nodeType == NodeData.Type.Parameter)
                 {
-                    ((Node)edge.input.node).runtimeLogic.SetPropertyGUID(edge.input.portName, ((Node)edge.output.node).GUID);
+                    ((Node)edge.input.node).runtimeLogic?.SetPropertyGUID(edge.input.portName, ((Node)edge.output.node).GUID);
+                    ((Node)edge.input.node).query?.SetPropertyGUID(edge.input.portName, ((Node)edge.output.node).GUID);
                 }
                 else if(((Node)edge.output.node).nodeType == NodeData.Type.Query)
                 {

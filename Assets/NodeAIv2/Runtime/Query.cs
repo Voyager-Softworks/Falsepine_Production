@@ -258,10 +258,26 @@ namespace NodeAI
         public TestQuery()
         {
             AddProperty<float>("TestFloat", 0.0f, true);
+            AddProperty<int>("TestInt", 0, false);
         }
         public override void GetNewValues(NodeAI_Agent agent)
         {
             SetProperty("TestFloat", 4f);
+        }
+    }
+
+    public class Add : Query
+    {
+        public Add()
+        {
+            AddProperty<float>("Float1", 0.0f, false);
+            AddProperty<float>("Float2", 0.0f, false);
+            AddProperty<float>("Result", 0.0f, true);
+        }
+        public override void GetNewValues(NodeAI_Agent agent)
+        {
+            Debug.Log(GetProperty<float>("Float1") + GetProperty<float>("Float2"));
+            SetProperty("Result", GetProperty<float>("Float1") + GetProperty<float>("Float2"));
         }
     }
 }

@@ -5117,6 +5117,128 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a87ad24339082b4cbf97cd04f75195b, type: 3}
+--- !u!1 &1148178845
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1148178847}
+  - component: {fileID: 1148178846}
+  m_Layer: 0
+  m_Name: test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1148178846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148178845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b31cddfd229080bbc8f108a7752a9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AI_Behaviour: {fileID: 11400000, guid: ebcce0bde93c024898a532159ec96b61, type: 2}
+  inspectorProperties:
+  - name: String
+    GUID: 386021f8-e8bf-4499-8e91-235842074a52
+    paramReference: 
+    serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+      PublicKeyToken=b77a5c561934e089
+    svalue: HAHAHAH
+    ivalue: 0
+    fvalue: 0
+    bvalue: 0
+    cvalue: {r: 0, g: 0, b: 0, a: 0}
+    v2value: {x: 0, y: 0}
+    v3value: {x: 0, y: 0, z: 0}
+    v4value: {x: 0, y: 0, z: 0, w: 0}
+    ovalue: {fileID: 0}
+    output: 0
+  - name: Val1
+    GUID: 230dd871-9124-4585-b11b-e70a61d352b7
+    paramReference: 
+    serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+      PublicKeyToken=b77a5c561934e089
+    svalue: 
+    ivalue: 0
+    fvalue: 2
+    bvalue: 0
+    cvalue: {r: 0, g: 0, b: 0, a: 0}
+    v2value: {x: 0, y: 0}
+    v3value: {x: 0, y: 0, z: 0}
+    v4value: {x: 0, y: 0, z: 0, w: 0}
+    ovalue: {fileID: 0}
+    output: 0
+  - name: Val2
+    GUID: 1c56dd5b-9339-4519-9bc6-758d5c0dca0f
+    paramReference: 
+    serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+      PublicKeyToken=b77a5c561934e089
+    svalue: 
+    ivalue: 0
+    fvalue: 1
+    bvalue: 0
+    cvalue: {r: 0, g: 0, b: 0, a: 0}
+    v2value: {x: 0, y: 0}
+    v3value: {x: 0, y: 0, z: 0}
+    v4value: {x: 0, y: 0, z: 0, w: 0}
+    ovalue: {fileID: 0}
+    output: 0
+  nodeTree:
+    rootNode:
+      GUID: 
+      parentGUID: 
+      title: 
+      childGUIDs: []
+      nodeType: 0
+      position: {x: 0, y: 0}
+      runtime: {fileID: 0}
+      runtimequery: {fileID: 0}
+      properties: []
+      runtimeLogicType: 
+      queryType: 
+      noLogic: 0
+      noQuery: 0
+    rootLeaf:
+      nodeData:
+        GUID: 
+        parentGUID: 
+        title: 
+        childGUIDs: []
+        nodeType: 0
+        position: {x: 0, y: 0}
+        runtime: {fileID: 0}
+        runtimequery: {fileID: 0}
+        properties: []
+        runtimeLogicType: 
+        queryType: 
+        noLogic: 0
+        noQuery: 0
+      children: []
+    nodes: []
+--- !u!4 &1148178847
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148178845}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 12.026955, y: 6.2734594, z: 51.99407}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1159635140
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21834,71 +21956,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6f027a942edfcaf98e9ac2361b68d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hurtBoxes:
-  - position: {fileID: 868137138325859888}
-    radius: 3.77
-    damage: 20
-    name: AttkC
-    delay: 1.06
-    duration: 2
-    particle:
-    - {fileID: 0}
-    spawnedParticle: {fileID: 0}
-  - position: {fileID: 227140229444720805}
-    radius: 3.19
-    damage: 20
-    name: AttkS
-    delay: 1.06
-    duration: 2
-    particle:
-    - {fileID: 0}
-    spawnedParticle: {fileID: 0}
-  - position: {fileID: 1379123579693890056}
-    radius: 2.77
-    damage: 20
-    name: AttkC1
-    delay: 1.06
-    duration: 3
-    particle:
-    - {fileID: 0}
-    spawnedParticle: {fileID: 0}
-  - position: {fileID: 5472945745260437712}
-    radius: 2.79
-    damage: 20
-    name: AttkC12
-    delay: 1.23
-    duration: 3
-    particle:
-    - {fileID: 0}
-    spawnedParticle: {fileID: 0}
-  - position: {fileID: 7633757502923220402}
-    radius: 8.98
-    damage: 20
-    name: AttkC2
-    delay: 2
-    duration: 3
-    particle:
-    - {fileID: 0}
-    spawnedParticle: {fileID: 0}
-  - position: {fileID: 7800347233427047583}
-    radius: 3.21
-    damage: 20
-    name: AttkS1
-    delay: 1.06
-    duration: 3
-    particle:
-    - {fileID: 0}
-    spawnedParticle: {fileID: 0}
-  - position: {fileID: 7167840374357095533}
-    radius: 9.04
-    damage: 20
-    name: AttkS2
-    delay: 1.17
-    duration: 3
-    particle:
-    - {fileID: 0}
-    spawnedParticle: {fileID: 0}
+  HurtBoxes: []
   hurtPlayerEffect: {fileID: 0}
+  damage: 10
+  attkNum: 1
 --- !u!1 &7502659594224628535
 GameObject:
   m_ObjectHideFlags: 0
