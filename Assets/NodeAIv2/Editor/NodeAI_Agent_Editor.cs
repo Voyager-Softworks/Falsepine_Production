@@ -7,7 +7,7 @@
  * (c) 2022 Media Design School
  * 
  * File Name: NodeAI_Agent_Editor.cs
- * Description: 
+ * Description: Editor script for the NodeAI_Agent.
  * Author: Nerys Thamm
  * Mail: nerysthamm@gmail.com
  */

@@ -25,6 +25,11 @@ public class NamespaceParser
         public List<NamespaceEntry> Subnamespaces;
     }
     
+    /// <summary>
+    ///  Parses the namespace and returns a tree.
+    /// </summary>
+    /// <param name="types"></param>
+    /// <returns></returns>
     public static NamespaceEntry TreeFromTypes(System.Type[] types)
     {
         var tree = new NamespaceEntry();
