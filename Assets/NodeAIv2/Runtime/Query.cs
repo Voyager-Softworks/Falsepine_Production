@@ -4,24 +4,31 @@ using UnityEngine;
 
 namespace NodeAI
 {
+    /// <summary>
+    /// A query is a node that can take inputs and produce outputs based on the scene.
+    /// </summary>
     [System.Serializable]
     public class Query : ScriptableObject
     {
+        /// <summary>
+        /// Executes when object is enabled
+        /// </summary>
         public void OnEnable()
         {
-            hideFlags = HideFlags.HideAndDontSave;
+            hideFlags = HideFlags.HideAndDontSave; // Stop it from resetting when the inspector serialises
         }
 
-        public string tooltip = "";
+        public string tooltip = ""; // Tooltip to display in the inspector
+        
         [SerializeField]
-        List<NodeData.SerializableProperty> properties = new List<NodeData.SerializableProperty>();
+        List<NodeData.SerializableProperty> properties = new List<NodeData.SerializableProperty>(); // Properties
 
-        public void RepopulateProperties(List<NodeData.SerializableProperty> properties)
+        public void RepopulateProperties(List<NodeData.SerializableProperty> properties) // Repopulates properties when they are lost in serialisation
         {
             this.properties = properties;
         }
 
-        public void AddProperty<T>(string name, T initialValue, bool isOutput)
+        public void AddProperty<T>(string name, T initialValue, bool isOutput) //Adds a property
         {
             if(properties == null)
             {
@@ -75,7 +82,7 @@ namespace NodeAI
             properties.Add(newProp);
         }
 
-        public void SetProperty<T>(string name, T value)
+        public void SetProperty<T>(string name, T value) //Sets the value of a property
         {
             foreach (NodeData.SerializableProperty property in properties)
             {
@@ -253,31 +260,261 @@ namespace NodeAI
         public virtual void GetNewValues(NodeAI_Agent agent){}
     }
 
-    public class TestQuery : Query
+    
+    namespace Math
     {
-        public TestQuery()
+        public class Add : Query
         {
-            AddProperty<float>("TestFloat", 0.0f, true);
-            AddProperty<int>("TestInt", 0, false);
+            public Add()
+            {
+                AddProperty<float>("Float1", 0.0f, false);
+                AddProperty<float>("Float2", 0.0f, false);
+                AddProperty<float>("Result", 0.0f, true);
+            }
+            public override void GetNewValues(NodeAI_Agent agent)
+            {
+                
+                SetProperty("Result", GetProperty<float>("Float1") + GetProperty<float>("Float2"));
+            }
         }
-        public override void GetNewValues(NodeAI_Agent agent)
+
+        public class Subtract : Query
         {
-            SetProperty("TestFloat", 4f);
+            public Subtract()
+            {
+                AddProperty<float>("Float1", 0.0f, false);
+                AddProperty<float>("Float2", 0.0f, false);
+                AddProperty<float>("Result", 0.0f, true);
+            }
+            public override void GetNewValues(NodeAI_Agent agent)
+            {
+                
+                SetProperty("Result", GetProperty<float>("Float1") - GetProperty<float>("Float2"));
+            }
+        }
+
+        public class Multiply : Query
+        {
+            public Multiply()
+            {
+                AddProperty<float>("Float1", 0.0f, false);
+                AddProperty<float>("Float2", 0.0f, false);
+                AddProperty<float>("Result", 0.0f, true);
+            }
+            public override void GetNewValues(NodeAI_Agent agent)
+            {
+                
+                SetProperty("Result", GetProperty<float>("Float1") * GetProperty<float>("Float2"));
+            }
+        }
+
+        public class Divide : Query
+        {
+            public Divide()
+            {
+                AddProperty<float>("Float1", 0.0f, false);
+                AddProperty<float>("Float2", 0.0f, false);
+                AddProperty<float>("Result", 0.0f, true);
+            }
+            public override void GetNewValues(NodeAI_Agent agent)
+            {
+                
+                SetProperty("Result", GetProperty<float>("Float1") / GetProperty<float>("Float2"));
+            }
+        }
+
+        public class GreaterThan : Query
+        {
+            public GreaterThan()
+            {
+                AddProperty<float>("Float1", 0.0f, false);
+                AddProperty<float>("Float2", 0.0f, false);
+                AddProperty<bool>("Result", false, true);
+            }
+            public override void GetNewValues(NodeAI_Agent agent)
+            {
+                
+                SetProperty("Result", GetProperty<float>("Float1") > GetProperty<float>("Float2"));
+            }
+        }
+
+        public class LessThan : Query
+        {
+            public LessThan()
+            {
+                AddProperty<float>("Float1", 0.0f, false);
+                AddProperty<float>("Float2", 0.0f, false);
+                AddProperty<bool>("Result", false, true);
+            }
+            public override void GetNewValues(NodeAI_Agent agent)
+            {
+                
+                SetProperty("Result", GetProperty<float>("Float1") < GetProperty<float>("Float2"));
+            }
+        }
+
+        public class EqualTo : Query
+        {
+            public EqualTo()
+            {
+                AddProperty<float>("Float1", 0.0f, false);
+                AddProperty<float>("Float2", 0.0f, false);
+                AddProperty<bool>("Result", false, true);
+            }
+            public override void GetNewValues(NodeAI_Agent agent)
+            {
+                
+                SetProperty("Result", GetProperty<float>("Float1") == GetProperty<float>("Float2"));
+            }
+        }
+
+        public class NotEqualTo : Query
+        {
+            public NotEqualTo()
+            {
+                AddProperty<float>("Float1", 0.0f, false);
+                AddProperty<float>("Float2", 0.0f, false);
+                AddProperty<bool>("Result", false, true);
+            }
+            public override void GetNewValues(NodeAI_Agent agent)
+            {
+                
+                SetProperty("Result", GetProperty<float>("Float1") != GetProperty<float>("Float2"));
+            }
+        }
+
+        public class GreaterThanOrEqualTo : Query
+        {
+            public GreaterThanOrEqualTo()
+            {
+                AddProperty<float>("Float1", 0.0f, false);
+                AddProperty<float>("Float2", 0.0f, false);
+                AddProperty<bool>("Result", false, true);
+            }
+            public override void GetNewValues(NodeAI_Agent agent)
+            {
+                
+                SetProperty("Result", GetProperty<float>("Float1") >= GetProperty<float>("Float2"));
+            }
+        }
+
+    }
+    namespace Logic
+    {
+        public class And : Query
+        {
+            public And()
+            {
+                AddProperty<bool>("Bool1", false, false);
+                AddProperty<bool>("Bool2", false, false);
+                AddProperty<bool>("Result", false, true);
+            }
+            public override void GetNewValues(NodeAI_Agent agent)
+            {
+                SetProperty("Result", GetProperty<bool>("Bool1") && GetProperty<bool>("Bool2"));
+            }
+        }
+
+        public class Or : Query
+        {
+            public Or()
+            {
+                AddProperty<bool>("Bool1", false, false);
+                AddProperty<bool>("Bool2", false, false);
+                AddProperty<bool>("Result", false, true);
+            }
+            public override void GetNewValues(NodeAI_Agent agent)
+            {
+                SetProperty("Result", GetProperty<bool>("Bool1") || GetProperty<bool>("Bool2"));
+            }
+        }
+
+        public class Not : Query
+        {
+            public Not()
+            {
+                AddProperty<bool>("Bool", false, false);
+                AddProperty<bool>("Result", false, true);
+            }
+            public override void GetNewValues(NodeAI_Agent agent)
+            {
+                SetProperty("Result", !GetProperty<bool>("Bool"));
+            }
+        }
+
+        public class Xor : Query
+        {
+            public Xor()
+            {
+                AddProperty<bool>("Bool1", false, false);
+                AddProperty<bool>("Bool2", false, false);
+                AddProperty<bool>("Result", false, true);
+            }
+            public override void GetNewValues(NodeAI_Agent agent)
+            {
+                SetProperty("Result", GetProperty<bool>("Bool1") ^ GetProperty<bool>("Bool2"));
+            }
+        }
+
+        public class Nand : Query
+        {
+            public Nand()
+            {
+                AddProperty<bool>("Bool1", false, false);
+                AddProperty<bool>("Bool2", false, false);
+                AddProperty<bool>("Result", false, true);
+            }
+            public override void GetNewValues(NodeAI_Agent agent)
+            {
+                SetProperty("Result", !(GetProperty<bool>("Bool1") && GetProperty<bool>("Bool2")));
+            }
+        }
+
+        public class Nor : Query
+        {
+            public Nor()
+            {
+                AddProperty<bool>("Bool1", false, false);
+                AddProperty<bool>("Bool2", false, false);
+                AddProperty<bool>("Result", false, true);
+            }
+            public override void GetNewValues(NodeAI_Agent agent)
+            {
+                SetProperty("Result", !(GetProperty<bool>("Bool1") || GetProperty<bool>("Bool2")));
+            }
+        }
+
+        public class Xnor : Query
+        {
+            public Xnor()
+            {
+                AddProperty<bool>("Bool1", false, false);
+                AddProperty<bool>("Bool2", false, false);
+                AddProperty<bool>("Result", false, true);
+            }
+            public override void GetNewValues(NodeAI_Agent agent)
+            {
+                SetProperty("Result", !(GetProperty<bool>("Bool1") ^ GetProperty<bool>("Bool2")));
+            }
+        }
+
+
+    }
+    
+    namespace Utility
+    {
+        public class GetObjectTransform : Query
+        {
+            public GetObjectTransform()
+            {
+                AddProperty<GameObject>("Object", null, false);
+                AddProperty<Transform>("Transform", null, true);
+            }
+            public override void GetNewValues(NodeAI_Agent agent)
+            {
+                SetProperty("Transform", GetProperty<GameObject>("Object").transform);
+            }
         }
     }
 
-    public class Add : Query
-    {
-        public Add()
-        {
-            AddProperty<float>("Float1", 0.0f, false);
-            AddProperty<float>("Float2", 0.0f, false);
-            AddProperty<float>("Result", 0.0f, true);
-        }
-        public override void GetNewValues(NodeAI_Agent agent)
-        {
-            Debug.Log(GetProperty<float>("Float1") + GetProperty<float>("Float2"));
-            SetProperty("Result", GetProperty<float>("Float1") + GetProperty<float>("Float2"));
-        }
-    }
 }

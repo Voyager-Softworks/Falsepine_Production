@@ -1,3 +1,15 @@
+// Bachelor of Software Engineering
+// Media Design School
+// Auckland
+// New Zealand
+// 
+// (c) 2021 Media Design School
+//
+// File Name   : 
+// Description : 
+// Author       : Name
+// Mail           : @mds.ac.nz
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

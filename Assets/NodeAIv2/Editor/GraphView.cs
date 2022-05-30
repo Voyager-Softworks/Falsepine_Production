@@ -1,3 +1,17 @@
+/*
+ * Bachelor of Software Engineering
+ * Media Design School
+ * Auckland
+ * New Zealand
+ * 
+ * (c) 2022 Media Design School
+ * 
+ * File Name: GraphView.cs
+ * Description: 
+ * Author: Nerys Thamm
+ * Mail: nerysthamm@gmail.com
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -954,7 +968,7 @@ namespace NodeAI
                 node.outputContainer.Add(newPort);
                 node.outputPorts.Add(newPort);
             }
-            if(paramNode != null)
+            if(paramNode != null && paramNode.outputPort != null)
             {
                 var newEdge = paramNode.outputPort.ConnectTo(newPort);
                 AddElement(newEdge);
@@ -962,7 +976,9 @@ namespace NodeAI
             }
             else if(queryNode != null)
             {
-                var newEdge = queryNode.outputPorts[queryNode.query.GetProperties().FindIndex(x => x.GUID == property.paramReference)].ConnectTo(newPort);
+                int index = queryNode.query.GetProperties().FindIndex(x => x.GUID == property.paramReference);
+                if(index == -1) return;
+                var newEdge = queryNode.outputPorts[index].ConnectTo(newPort);
                 AddElement(newEdge);
 
             }
