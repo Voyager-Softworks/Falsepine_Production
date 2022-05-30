@@ -38,7 +38,8 @@ namespace NodeAI
                     position = node.GetPosition().position,
                     childGUIDs = new List<string>(),
                     title = node.title,
-                    runtimeLogic = (node.runtimeLogic == null ? null : node.runtimeLogic)
+                    runtimeLogic = (node.runtimeLogic == null ? null : node.runtimeLogic),
+                    query = (node.query == null ? null : node.query)
                 };
                 if(nodeData.runtimeLogic != null)
                 {
@@ -47,14 +48,48 @@ namespace NodeAI
                 if(node.nodeType == NodeData.Type.Parameter) nodeData.parentGUID = node.paramReference;
                 foreach (var input in node.inputPorts)
                 {
-                    if (input.connections.Count() > 0)
+                    if(nodeData.runtimeLogic != null)
                     {
-                        nodeData.runtimeLogic.SetPropertyParamReference(input.portName, ((Node)input.connections.First().output.node).paramReference);
-                        nodeData.runtimeLogic.SetPropertyGUID(input.portName, ((Node)input.connections.First().output.node).GUID);
+                        
+                        if (input.connections.Count() > 0)
+                        {
+                            if(((Node)input.connections.First().output.node).nodeType == NodeData.Type.Parameter)
+                            {
+                                nodeData.runtimeLogic.SetPropertyParamReference(input.portName, ((Node)input.connections.First().output.node).paramReference);
+                                
+                            }
+                            else
+                            {
+                                nodeData.runtimeLogic.SetPropertyParamReference(input.portName, ((Node)input.connections.First().output.node).query.GetProperties().Find(x => x.name == input.connections.First().output.portName).GUID);
+                            }
+                            nodeData.runtimeLogic.SetPropertyGUID(input.portName, ((Node)input.connections.First().output.node).GUID);
+                        }
+                        else
+                        {
+                            nodeData.runtimeLogic.SetPropertyParamReference(input.portName, "null");
+                            nodeData.runtimeLogic.SetPropertyGUID(input.portName, "null");
+                        }
                     }
-                    else
+                    else if(nodeData.query != null)
                     {
-                        nodeData.runtimeLogic.SetPropertyParamReference(input.portName, "null");
+                        if (input.connections.Count() > 0)
+                        {
+                            if(((Node)input.connections.First().output.node).nodeType == NodeData.Type.Parameter)
+                            {
+                                nodeData.query.SetPropertyParamReference(input.portName, ((Node)input.connections.First().output.node).paramReference);
+                                
+                            }
+                            else
+                            {
+                                nodeData.query.SetPropertyParamReference(input.portName, ((Node)input.connections.First().output.node).query.GetProperties().Find(x => x.name == input.connections.First().output.portName).GUID);
+                            }
+                            nodeData.query.SetPropertyGUID(input.portName, ((Node)input.connections.First().output.node).GUID);
+                        }
+                        else
+                        {
+                            nodeData.query.SetPropertyParamReference(input.portName, "null");
+                            nodeData.query.SetPropertyGUID(input.portName, "null");
+                        }
                     }
                 }
                 nodeAI_Behaviour.nodeData.Add(nodeData);
@@ -65,6 +100,10 @@ namespace NodeAI
                 if(((Node)edge.output.node).nodeType == NodeData.Type.Parameter)
                 {
                     ((Node)edge.input.node).runtimeLogic.SetPropertyGUID(edge.input.portName, ((Node)edge.output.node).GUID);
+                }
+                else if(((Node)edge.output.node).nodeType == NodeData.Type.Query)
+                {
+                    continue;
                 }
                 else
                 {
@@ -131,7 +170,7 @@ namespace NodeAI
             foreach (var nodeData in nodeAI_Behaviour.nodeData)
             {
                 var node = nodes.Find(x => x.GUID == nodeData.GUID);
-                if (nodeData.nodeType != NodeData.Type.EntryPoint && nodeData.nodeType != NodeData.Type.Parameter)
+                if (nodeData.nodeType != NodeData.Type.EntryPoint && nodeData.nodeType != NodeData.Type.Parameter && nodeData.nodeType != NodeData.Type.Query)
                 {
                     var parent = nodes.Find(x => x.GUID == nodeData.parentGUID);
                     var edge = parent.outputPort.ConnectTo(node.inputPort);
@@ -145,13 +184,50 @@ namespace NodeAI
                 }
                 foreach(Port input in node.inputPorts)
                 {
-                    string connGUID = nodeData.runtimeLogic.GetProperties().Find(x => x.name == input.portName).GUID;
-                    var conn = nodes.Find(x => x.GUID == connGUID);
-                    if (conn != null)
+                    if(nodeData.runtimeLogic != null)
                     {
-                        var edge = conn.outputPort.ConnectTo(input);
-                        edges.Add(edge);
-                        target.AddElement(edge);
+                        NodeData.Property property = nodeData.runtimeLogic.GetProperties().Find(x => x.name == input.portName);
+                        string connGUID = property.GUID;
+                        var conn = nodes.Find(x => x.GUID == connGUID);
+                        if (conn != null)
+                        {
+                            if(conn.nodeType == NodeData.Type.Query)
+                            {
+                                var outputPort = conn.outputPorts.Find(x => x.portName == conn.query.GetProperties().Find(y => y.GUID == property.paramReference).name);
+                                var edge = outputPort.ConnectTo(input);
+                                edges.Add(edge);
+                                target.AddElement(edge);
+                            }
+                            else
+                            {
+                                var edge = conn.outputPort.ConnectTo(input);
+                                edges.Add(edge);
+                                target.AddElement(edge);
+                            }
+                            
+                        }
+                    }
+                    else if(nodeData.query != null)
+                    {
+                        NodeData.Property property = nodeData.query.GetProperties().Find(x => x.name == input.portName);
+                        string connGUID = property.GUID;
+                        var conn = nodes.Find(x => x.GUID == connGUID);
+                        if (conn != null)
+                        {
+                            if(conn.nodeType == NodeData.Type.Query)
+                            {
+                                var outputPort = conn.outputPorts.Find(x => x.portName == conn.query.GetProperties().Find(y => y.GUID == property.paramReference).name);
+                                var edge = outputPort.ConnectTo(input);
+                                edges.Add(edge);
+                                target.AddElement(edge);
+                            }
+                            else
+                            {
+                                var edge = conn.outputPort.ConnectTo(input);
+                                edges.Add(edge);
+                                target.AddElement(edge);
+                            }
+                        }
                     }
                 }
                 

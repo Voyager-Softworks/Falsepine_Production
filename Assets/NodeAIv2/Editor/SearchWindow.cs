@@ -69,19 +69,21 @@ namespace NodeAI
                 new SearchTreeGroupEntry(new GUIContent("Control Node"), 1),
                 new SearchTreeEntry(new GUIContent("Sequence"))
                 {
-                    userData = typeof(Sequence), level = 2
+                    userData = typeof(Sequence),
+                    level = 2
                 },
                 new SearchTreeEntry(new GUIContent("Selector"))
                 {
-                    userData = typeof(Selector), level = 2
+                    userData = typeof(Selector),
+                    level = 2
                 },
                 new SearchTreeEntry(new GUIContent("Parallel"))
                 {
-                    userData = typeof(Parallel), level = 2
+                    userData = typeof(Parallel),
+                    level = 2
                 },
-                
+                new SearchTreeGroupEntry(new GUIContent("Decorators"), 2)
             };
-            tree.Add(new SearchTreeGroupEntry(new GUIContent("Decorators"), 2));
             foreach (var n in namespaces)
             {
                 if(n == "NodeAI")
@@ -99,7 +101,7 @@ namespace NodeAI
                 }
                 else
                 {
-                    tree.Add(new SearchTreeGroupEntry(new GUIContent(n == null ? "Custom" : n), 3));
+                    tree.Add(new SearchTreeGroupEntry(new GUIContent(n ?? "Custom"), 3));
                     foreach (var decorator in decorators)
                     {
                         if (decorator.Namespace == n)
@@ -130,7 +132,7 @@ namespace NodeAI
                 }
                 else
                 {
-                    tree.Add(new SearchTreeGroupEntry(new GUIContent(n == null ? "Custom" : n), 2));
+                    tree.Add(new SearchTreeGroupEntry(new GUIContent(n ?? "Custom"), 2));
                     foreach (var action in actions)
                     {
                         if (action.Namespace == n)
@@ -161,7 +163,7 @@ namespace NodeAI
                 }
                 else
                 {
-                    tree.Add(new SearchTreeGroupEntry(new GUIContent(n == null ? "Custom" : n), 2));
+                    tree.Add(new SearchTreeGroupEntry(new GUIContent(n ?? "Custom"), 2));
                     foreach (var condition in conditions)
                     {
                         if (condition.Namespace == n)
@@ -179,35 +181,35 @@ namespace NodeAI
 
         public bool OnSelectEntry(SearchTreeEntry entry, SearchWindowContext context)
         {
-            Node newNode = null;
-            if(((Type)entry.userData) == typeof(Sequence))
+            
+            if (((Type)entry.userData) == typeof(Sequence))
             {
-                newNode = graphView.ContextCreateNode(selectedNode, NodeData.Type.Sequence, ((Type)entry.userData).Name, ScriptableObject.CreateInstance<Sequence>());
+                graphView.ContextCreateNode(selectedNode, NodeData.Type.Sequence, ((Type)entry.userData).Name, ScriptableObject.CreateInstance<Sequence>());
                 
             }
             else if(((Type)entry.userData) == typeof(Selector))
             {
-                newNode = graphView.ContextCreateNode(selectedNode, NodeData.Type.Selector, ((Type)entry.userData).Name, ScriptableObject.CreateInstance<Selector>());
+                graphView.ContextCreateNode(selectedNode, NodeData.Type.Selector, ((Type)entry.userData).Name, ScriptableObject.CreateInstance<Selector>());
                 
             }
             else if(((Type)entry.userData) == typeof(Parallel))
             {
-                newNode = graphView.ContextCreateNode(selectedNode, NodeData.Type.Parallel, ((Type)entry.userData).Name, ScriptableObject.CreateInstance<Parallel>());
+                graphView.ContextCreateNode(selectedNode, NodeData.Type.Parallel, ((Type)entry.userData).Name, ScriptableObject.CreateInstance<Parallel>());
                 
             }
             else if(((Type)entry.userData).BaseType == typeof(DecoratorBase))
             {
-                newNode = graphView.ContextCreateNode(selectedNode, NodeData.Type.Decorator, ((Type)entry.userData).Name, (DecoratorBase)ScriptableObject.CreateInstance(((Type)entry.userData)));
+                graphView.ContextCreateNode(selectedNode, NodeData.Type.Decorator, ((Type)entry.userData).Name, (DecoratorBase)ScriptableObject.CreateInstance(((Type)entry.userData)));
                 
             }
             else if(((Type)entry.userData).BaseType == typeof(ActionBase))
             {
-                newNode = graphView.ContextCreateNode(selectedNode, NodeData.Type.Action, ((Type)entry.userData).Name, (RuntimeBase)ScriptableObject.CreateInstance(((Type)entry.userData)));
+                graphView.ContextCreateNode(selectedNode, NodeData.Type.Action, ((Type)entry.userData).Name, (RuntimeBase)ScriptableObject.CreateInstance(((Type)entry.userData)));
                 
             }
             else if(((Type)entry.userData).BaseType == typeof(ConditionBase))
             {
-                newNode = graphView.ContextCreateNode(selectedNode, NodeData.Type.Condition, ((Type)entry.userData).Name, (RuntimeBase)ScriptableObject.CreateInstance(((Type)entry.userData)));
+                graphView.ContextCreateNode(selectedNode, NodeData.Type.Condition, ((Type)entry.userData).Name, (RuntimeBase)ScriptableObject.CreateInstance(((Type)entry.userData)));
             }
             return true;
         }

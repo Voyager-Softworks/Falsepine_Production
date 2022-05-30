@@ -26,7 +26,8 @@ namespace NodeAI
                 Sequence,
                 Selector,
                 Parallel,
-                Parameter
+                Parameter,
+                Query
             }
 
         public enum State
@@ -38,17 +39,25 @@ namespace NodeAI
         }
 
         public State Eval(NodeAI_Agent agent, NodeTree.Leaf current) => runtimeLogic.Eval(agent, current);
+
         public void Init(NodeTree.Leaf current) => runtimeLogic.Init(current);
         [SerializeField]
         RuntimeBase runtime;
+        [SerializeField]
+        Query runtimequery;
         
         [SerializeField]
         private List<SerializableProperty> properties;
+        
         [SerializeField]
         private string runtimeLogicType;
+        [SerializeField]
+        private string queryType;
 
         [SerializeField]
         public bool noLogic = false;
+        [SerializeField]
+        public bool noQuery = false;
 
         public void Reset()
         {
@@ -75,6 +84,29 @@ namespace NodeAI
                 {
                     properties = runtime.GetProperties().ConvertAll(x => (SerializableProperty)x);
                     runtimeLogicType = runtime.GetType().AssemblyQualifiedName;
+                }
+            }
+        }
+
+        public Query query
+        {
+            get
+            {
+                if (runtimequery == null && !noQuery)
+                {
+                    runtimequery = (Query)ScriptableObject.CreateInstance(System.Type.GetType(queryType));
+                    runtimequery.RepopulateProperties(properties == null ? new List<SerializableProperty>() : properties);
+                }
+                return runtimequery;
+            }
+            set
+            {
+                noQuery = (value == null);
+                runtimequery = value;
+                if (runtimequery != null)
+                {
+                    properties = runtimequery.GetProperties().ConvertAll(x => (SerializableProperty)x);
+                    queryType = runtimequery.GetType().AssemblyQualifiedName;
                 }
             }
         }
@@ -106,6 +138,8 @@ namespace NodeAI
             public System.Type type;
 
             public object value;
+
+            public bool output = false;
         }
 
         [System.Serializable]
@@ -123,7 +157,7 @@ namespace NodeAI
         [System.Serializable]
         public class SerializableProperty
         {
-            public SerializableProperty(){}
+            public SerializableProperty(){ GUID = System.Guid.NewGuid().ToString(); }
             
             public SerializableProperty(SerializableProperty copy)
             {
@@ -140,6 +174,7 @@ namespace NodeAI
                 v4value = copy.v4value;
                 cvalue = copy.cvalue;
                 ovalue = copy.ovalue;
+                output = copy.output;
             }
             public static implicit operator SerializableProperty(Property property)
             {
@@ -148,6 +183,7 @@ namespace NodeAI
                 serializableProperty.GUID = property.GUID;
                 serializableProperty.paramReference = property.paramReference;
                 serializableProperty.serializedTypename = property.type.AssemblyQualifiedName;
+                serializableProperty.output = property.output;
                 switch(property.type.Name)
                     {
                         case "Int32":
@@ -188,6 +224,7 @@ namespace NodeAI
                 property.GUID = serializableProperty.GUID;
                 property.type = System.Type.GetType(serializableProperty.serializedTypename);
                 property.paramReference = serializableProperty.paramReference;
+                property.output = serializableProperty.output;
                 switch(property.type.Name)
                     {
                         case "Int32":
@@ -235,7 +272,7 @@ namespace NodeAI
             public Vector3 v3value;
             public Vector4 v4value;
             [SerializeReference]public UnityEngine.Object ovalue;
-
+            public bool output = false;
         }
         [System.Serializable]
         public struct NodeGroup

@@ -149,6 +149,20 @@ namespace NodeAI
             return GetVisibleObjects().Any(o => o.CompareTag(tag));
         }
 
+        public bool IsAwareOf(GameObject target)
+        {
+            if(target == null)
+            {
+                return false;
+            }
+            return noticedObjects.Contains(target);
+        }
+
+        public bool IsAwareOfTag(string tag)
+        {
+            return noticedObjects.Any(o => o.CompareTag(tag));
+        }
+
         public GameObject[] GetVisibleObjects()
         {
             RaycastHit[] hits = Physics.SphereCastAll(eyesBone.position, sightDistance/2, eyesForward, sightDistance/2);
