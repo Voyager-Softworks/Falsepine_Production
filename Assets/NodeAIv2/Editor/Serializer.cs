@@ -140,7 +140,8 @@ namespace NodeAI
                 }
                 else if(((Node)edge.output.node).nodeType == NodeData.Type.Query) //Query specific logic
                 {
-                    continue;
+                    ((Node)edge.input.node).runtimeLogic?.SetPropertyParamReference(edge.input.portName, ((Node)edge.output.node).query.GetProperties().Find(x => x.name == edge.output.portName).GUID);
+                    ((Node)edge.input.node).query?.SetPropertyParamReference(edge.input.portName, ((Node)edge.output.node).query.GetProperties().Find(x => x.name == edge.output.portName).GUID);
                 }
                 else
                 {

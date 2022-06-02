@@ -110,7 +110,7 @@ public class Attack : NodeAI.ActionBase
         }
         timeSinceInitialized += Time.deltaTime;
         
-        if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1 && timeSinceInitialized >= 0.3f)
+        if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9 && timeSinceInitialized >= 0.3f)
         {
             animator.ResetTrigger(GetProperty<string>("AttackName"));
             state = NodeData.State.Success;

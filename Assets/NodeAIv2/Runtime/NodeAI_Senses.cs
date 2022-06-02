@@ -104,6 +104,21 @@ namespace NodeAI
         // Update is called once per frame
         void Update()
         {
+            switch (eyeDirection)
+            {
+                case BoneDirection.Forward:
+                    eyesForward = eyesBone.forward;
+                    break;
+                case BoneDirection.Right:
+                    eyesForward = eyesBone.right;
+                    break;
+                case BoneDirection.Up:
+                    eyesForward = eyesBone.up;
+                    break;
+                case BoneDirection.Back:
+                    eyesForward = -eyesBone.forward;
+                    break;
+            }
             sensoryEvents.Sort((a, b) => a.salience.CompareTo(b.salience));
             if(sensoryEvents.Count > 20)
             {
@@ -206,21 +221,7 @@ namespace NodeAI
 
         public void OnDrawGizmos()
         {
-            switch (eyeDirection)
-            {
-                case BoneDirection.Forward:
-                    eyesForward = eyesBone.forward;
-                    break;
-                case BoneDirection.Right:
-                    eyesForward = eyesBone.right;
-                    break;
-                case BoneDirection.Up:
-                    eyesForward = eyesBone.up;
-                    break;
-                case BoneDirection.Back:
-                    eyesForward = -eyesBone.forward;
-                    break;
-            }
+            
             Gizmos.color = Color.yellow;
             CustomGizmos.DrawCone(eyesBone, eyesForward, sightAngle, sightDistance);
             

@@ -11,6 +11,9 @@ namespace NodeAI
         public GoTo()
         {
             AddProperty<Transform>("Position", null);
+            AddProperty<float>("Stopping distance", 0.5f);
+            AddProperty<float>("Speed", 1);
+            AddProperty<float>("Acceleration", 15);
             AddProperty<bool>("Interrupt", false);
         }
         public override void OnInit()
@@ -35,9 +38,9 @@ namespace NodeAI
                 state = NodeData.State.Failure;
                 return NodeData.State.Failure;
             }
-            if(navAgent.isOnNavMesh)
+            if(navAgent.isOnNavMesh && GetProperty<Transform>("Position"))
             {
-                navAgent.SetDestination(GetProperty<Transform>("Position").position);
+                //navAgent.SetDestination(GetProperty<Transform>("Position").position);
                 if(Vector3.Distance(agent.transform.position, GetProperty<Transform>("Position").position) <= navAgent.stoppingDistance + 1.0f)
                 {
                     navAgent.isStopped = true;
@@ -47,9 +50,13 @@ namespace NodeAI
                 if(navAgent.SetDestination(GetProperty<Transform>("Position").position))
                 {
                     navAgent.isStopped = false;
-                    navAgent.speed = 3.5f;
+                    navAgent.speed = GetProperty<float>("Speed");
                     navAgent.angularSpeed = 120;
-                    navAgent.acceleration = 15;
+                    navAgent.acceleration = GetProperty<float>("Acceleration");
+                    if(GetProperty<float>("Stopping distance") > 0)
+                    {
+                        navAgent.stoppingDistance = GetProperty<float>("Stopping distance");
+                    }
                     state = NodeData.State.Running;
                     return NodeData.State.Running;
                 }
@@ -62,7 +69,6 @@ namespace NodeAI
             }
             else
             {
-                Debug.LogError("NavMeshAgent is not on NavMesh");
                 state = NodeData.State.Failure;
                 return NodeData.State.Failure;
             }

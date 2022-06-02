@@ -751,7 +751,7 @@ namespace NodeAI
             newPort.portName = property.name;
             newPort.portType = property.type;
             newPort.portColor = Color.green;
-            Node paramNode = nodes.ToList().ConvertAll(x => x as Node).Find(x => x.GUID == property.GUID);
+            Node paramNode = nodes.ToList().ConvertAll(x => x as Node).Find(x => x.GUID == property.GUID && x.nodeType == NodeData.Type.Parameter);
             Node queryNode = nodes.ToList().ConvertAll(x => x as Node).Find(x => x.nodeType == NodeData.Type.Query && x.query.GetProperties().Find(y => y.GUID == property.paramReference) != null);
             if(property.type == typeof(bool))
             {
@@ -924,7 +924,7 @@ namespace NodeAI
         /// <param name="query"></param>
         void AddPropertyField(Node node, NodeData.SerializableProperty property, Query query)
         {
-            var newPort = GeneratePort(node,property.output ? Direction.Output : Direction.Input);
+            var newPort = GeneratePort(node,property.output ? Direction.Output : Direction.Input, property.output ? Port.Capacity.Multi : Port.Capacity.Single);
             newPort.portName = property.name;
             newPort.portType = property.type;
             newPort.portColor = Color.green;
@@ -1092,10 +1092,10 @@ namespace NodeAI
             }
             else if(queryNode != null)
             {
-                int index = queryNode.query.GetProperties().FindIndex(x => x.GUID == property.paramReference);
-                if(index == -1) return;
-                var newEdge = queryNode.outputPorts[index].ConnectTo(newPort);
-                AddElement(newEdge);
+                // int index = queryNode.query.GetProperties().FindIndex(x => x.GUID == property.paramReference);
+                // if(index == -1) return;
+                // var newEdge = queryNode.outputPorts[index].ConnectTo(newPort);
+                // AddElement(newEdge);
 
             }
         }
