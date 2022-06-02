@@ -249,6 +249,12 @@ namespace NodeAI
             return properties.ConvertAll(x => (NodeData.Property)x);
         }
 
+        public List<NodeData.SerializableProperty> GetSerializableProperties()
+        {
+            if (properties == null) properties = new List<NodeData.SerializableProperty>();
+            return properties;
+        }
+
         public List<NodeData.SerializableProperty> GetPropertiesWhereParamReference(string paramReference)
         {
             if (properties == null) properties = new List<NodeData.SerializableProperty>();
@@ -469,7 +475,7 @@ namespace NodeAI
 
         public override void OnInit()
         {
-            randValue = Random.value;
+            randValue = UnityEngine.Random.value;
         }
     }
 

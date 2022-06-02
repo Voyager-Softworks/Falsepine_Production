@@ -9,9 +9,12 @@ namespace NodeAI
     {
         public NodeAI_Behaviour AI_Behaviour;
         NodeAI_Behaviour _behaviour;
+        public string faction = "";
 
         [SerializeField]
         public List<NodeData.SerializableProperty> inspectorProperties;
+
+        Dictionary<NodeData.SerializableProperty, List<NodeData.SerializableProperty>> _propertyMap;
 
         public NodeAI_Behaviour behaviour{
             get{
@@ -51,6 +54,36 @@ namespace NodeAI
             nodeTree = NodeTree.CreateFromNodeData(_behaviour.nodeData.Find(x => x.nodeType == NodeData.Type.EntryPoint), _behaviour.nodeData);;
             nodeTree.rootLeaf.nodeData.runtimeLogic.Init(nodeTree.rootLeaf);
             nodeTree.PropogateExposedProperties(_behaviour.exposedProperties);
+
+            _propertyMap = new Dictionary<NodeData.SerializableProperty, List<NodeData.SerializableProperty>>();
+            foreach(NodeData.SerializableProperty p in _behaviour.exposedProperties)
+            {
+                if(!_propertyMap.ContainsKey(p))
+                {
+                    _propertyMap[p] = new List<NodeData.SerializableProperty>();
+                    
+                }
+                _propertyMap[p].AddRange(nodeTree.nodes.Where(x => !x.noLogic).SelectMany(x => x.runtimeLogic.GetPropertiesWhereParamReference(p.GUID)));
+                _propertyMap[p].AddRange(nodeTree.nodes.Where(x => !x.noQuery).SelectMany(x => x.query.GetPropertiesWhereParamReference(p.GUID)));
+                
+                
+            }
+            foreach(Query q in _behaviour.queries)
+            {
+                q.GetSerializableProperties().Where(x => x.output).ToList().ForEach(x => 
+                {
+                    if(!_propertyMap.ContainsKey(x))
+                    {
+                        _propertyMap[x] = new List<NodeData.SerializableProperty>();
+                        
+                    }
+                    _propertyMap[x].AddRange(nodeTree.nodes.Where(n => !n.noQuery).SelectMany(n => n.query.GetPropertiesWhereParamReference(x.GUID)));
+                    _propertyMap[x].AddRange(nodeTree.nodes.Where(n => !n.noLogic).SelectMany(n => n.runtimeLogic.GetPropertiesWhereParamReference(x.GUID)));
+                    
+                });
+            }
+            
+
         }
 
     
@@ -68,27 +101,25 @@ namespace NodeAI
                 tickTimer = 0f;
                 nodeTree.rootNode.Eval(this, nodeTree.rootLeaf);
             }
-            foreach (var property in _behaviour.exposedProperties)
-            {
-                foreach (var query in _behaviour.queries)
-                {
-                    query.GetPropertiesWhereParamReference(property.GUID).ForEach(x => x.CopyValues(property));
-                }
-            }
             foreach (var query in _behaviour.queries)
             {
                 query.GetNewValues(this);
-                foreach (var node in nodeTree.nodes)
-                {
-                    if(node.runtimeLogic)
-                    {
-                        query.GetProperties().Where(x => x.output = true).ToList().ForEach(x => node.runtimeLogic.GetPropertiesWhereParamReference(x.GUID).ForEach(y => y.CopyValues(x)));
-                    }
-                }
             }
-            
-            
-            
+            _propertyMap.Keys.ToList().ForEach(x =>
+            {
+                foreach(NodeData.SerializableProperty p in _propertyMap[x])
+                {
+                    p.ivalue = x.ivalue;
+                    p.fvalue = x.fvalue;
+                    p.svalue = x.svalue;
+                    p.bvalue = x.bvalue;
+                    p.ovalue = x.ovalue;
+                    p.v2value = x.v2value;
+                    p.v3value = x.v3value;
+                    p.v4value = x.v4value;
+                    p.cvalue = x.cvalue;
+                }
+            });
         }
 
         public void SetParameter<T>(string name, T value)

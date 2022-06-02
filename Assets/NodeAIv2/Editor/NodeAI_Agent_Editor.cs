@@ -57,7 +57,8 @@ namespace NodeAI
             
             EditorGUILayout.PropertyField(behaviour);
             serializedAgent.ApplyModifiedProperties();
-
+            //Field for editing faction
+            agent.faction = EditorGUILayout.TextField("Faction", agent.faction);
             if(agent.behaviour)
             {
                 paramFoldOut = EditorGUILayout.BeginFoldoutHeaderGroup(paramFoldOut, "Parameters");
