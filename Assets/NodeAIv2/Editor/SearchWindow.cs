@@ -1,3 +1,17 @@
+/*
+ * Bachelor of Software Engineering
+ * Media Design School
+ * Auckland
+ * New Zealand
+ * 
+ * (c) 2022 Media Design School
+ * 
+ * File Name: SearchWindow.cs
+ * Description: Search window for creating new nodes
+ * Author: Nerys Thamm
+ * Mail: nerysthamm@gmail.com
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.GraphView;
@@ -8,29 +22,43 @@ using System;
 
 namespace NodeAI
 {
+    /// <summary>
+    /// A search window provider for the NodeAI graph.
+    /// </summary>
     public class SearchWindow : ScriptableObject, ISearchWindowProvider
     {
         private GraphView graphView;
 
         private Node selectedNode;
 
+        /// <summary>
+        /// Initializes the search window provider.
+        /// </summary>
         public void Init(GraphView graphView)
         {
             this.graphView = graphView;
         }
 
+        /// <summary>
+        /// Sets the selected node.
+        /// </summary>
         public void SetSelectedNode(Node node)
         {
             selectedNode = node;
         }
 
 
-
+        /// <summary>
+        /// Gets all child classes of the given type.
+        /// </summary>
         Type[] GetInheritedClasses(Type MyType) 
         {
             return Assembly.GetAssembly(MyType).GetTypes().Where(TheType => TheType.IsClass && !TheType.IsAbstract && TheType.IsSubclassOf(MyType)).ToArray();
         }
 
+        /// <summary>
+        /// Creates the search tree for the search window.
+        /// </summary>
         public List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context)
         {
             // Split inherited classes into lists based on their namespace
@@ -62,7 +90,7 @@ namespace NodeAI
                 }
             }
 
-
+            // Create the tree
             var tree = new List<SearchTreeEntry>
             {
                 new SearchTreeGroupEntry(new GUIContent("New Node"), 0),
@@ -179,6 +207,9 @@ namespace NodeAI
             return tree;
         }
 
+        /// <summary>
+        /// Creates a new node.
+        /// </summary>
         public bool OnSelectEntry(SearchTreeEntry entry, SearchWindowContext context)
         {
             

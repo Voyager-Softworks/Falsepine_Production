@@ -24,6 +24,8 @@ namespace NodeAI
             this.properties = properties;
         }
 
+        
+
         public void AddProperty<T>(string name, T initialValue)
         {
             if(properties == null)

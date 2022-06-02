@@ -1,3 +1,17 @@
+/*
+ * Bachelor of Software Engineering
+ * Media Design School
+ * Auckland
+ * New Zealand
+ * 
+ * (c) 2022 Media Design School
+ * 
+ * File Name: GraphView.cs
+ * Description: 
+ * Author: Nerys Thamm
+ * Mail: nerysthamm@gmail.com
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -50,7 +64,11 @@ namespace NodeAI
             querySearchWindow.Init(this);
             
         }
-
+    
+        /// <summary>
+        /// Add the search window
+        /// </summary>
+        /// <param name="position"></param>
         private void AddSearchWindow(Vector2 position)
         {
             
@@ -58,11 +76,19 @@ namespace NodeAI
 
         }
 
+        /// <summary>
+        /// Adds the blackboard search window
+        /// </summary>
+        /// <param name="position"></param>
         public void AddBlackboardSearchWindow(Vector2 position)
         {
             UnityEditor.Experimental.GraphView.SearchWindow.Open(new SearchWindowContext(position), blackboardSearchWindow);
         }
 
+
+        /// <summary>
+        /// Group selected nodes
+        /// </summary>
         private void GroupNodes()
         {
             if (selection.Count() > 1)
@@ -82,6 +108,11 @@ namespace NodeAI
             }
         }
 
+        /// <summary>
+        /// Greate a Group
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="nodes"></param>
         public void CreateGroup(string name, List<Node> nodes)
         {
             var group = new Group
@@ -96,6 +127,9 @@ namespace NodeAI
             AddElement(group);
         }
 
+        /// <summary>
+        /// Ungroup selected nodes
+        /// </summary>
         private void UngroupNodes()
         {
             if (selection.Count() > 0)
@@ -112,6 +146,11 @@ namespace NodeAI
                 }
             }
         }
+
+        /// <summary>
+        /// Unlink selected nodes from each other and remove them from the graph
+        /// </summary>
+        /// <param name="n"></param>
         private void UnlinkAndRemove(Node n)
         {
             foreach (var port in n.outputContainer.Children().OfType<Port>())
@@ -124,23 +163,41 @@ namespace NodeAI
             }
             RemoveElement(n);
         }
+
+        /// <summary>
+        ///  Remove selected edges from the graph
+        /// </summary>
+        /// <param name="e"></param>
         private void UnlinkAndRemove(Edge e)
         {
             e.input.Disconnect(e);
             e.output.Disconnect(e);
             RemoveElement(e);
         }
+
+        /// <summary>
+        /// Remove selected nodes from the graph
+        /// </summary>
         private void RemoveSelectedNodes()
         {
             selection.OfType<Node>().ToList().ForEach(n => UnlinkAndRemove(n));
             ClearSelection();
         }
+
+        /// <summary>
+        ///  Remove selected edges from the graph
+        /// </summary>
         private void RemoveSelectedEdges()
         {
             selection.OfType<Edge>().ToList().ForEach(e => UnlinkAndRemove(e));
             ClearSelection();
         }
 
+
+        /// <summary>
+        ///  Handles event called when an element is dragged and dropped
+        /// </summary>
+        /// <param name="e"></param>
         private void HandleDragEndEvent(DragPerformEvent e)
         {
             
@@ -151,6 +208,11 @@ namespace NodeAI
                 AddElement(GenerateParameterNode(prop.GUID, prop.type, e.localMousePosition - (Vector2)viewTransform.position));
             }
         }
+
+        /// <summary>
+        /// Handles right click events
+        /// </summary>
+        /// <param name="e"></param>
         private void HandleMouseDownEvents(MouseDownEvent e)
         {
             if (e.button == 1)
@@ -180,6 +242,10 @@ namespace NodeAI
             }
         }
 
+        /// <summary>
+        /// Handles mouse hover events
+        /// </summary>
+        /// <param name="e"></param>
         private void HandleMouseOverEvent(MouseOverEvent e)
         {
             if (e.target is Node)
@@ -199,6 +265,10 @@ namespace NodeAI
             }
         }
 
+        /// <summary>
+        ///  Handles event called when the mouse leaves an element
+        /// </summary>
+        /// <param name="e"></param>
         private void HandleMouseLeaveEvent(MouseLeaveEvent e)
         {
             if(currHoveredNode == e.target)
@@ -208,16 +278,33 @@ namespace NodeAI
             }
         }
 
+        /// <summary>
+        /// Adds an entrypoint to the graph
+        /// </summary>
         public void AddEntryNode()
         {
             AddElement(GenerateEntryPointNode());
         }
 
+        /// <summary>
+        ///  Generates a port for a node
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="dir"></param>
+        /// <param name="capacity"></param>
+        /// <returns></returns>
         private Port GeneratePort(Node node, Direction dir, Port.Capacity capacity = Port.Capacity.Single)
         {
             return node.InstantiatePort(Orientation.Horizontal, dir, capacity, typeof(float));
         }
 
+        /// <summary>
+        ///  Generates a node for a parameter
+        /// </summary>
+        /// <param name="paramReference"></param>
+        /// <param name="paramType"></param>
+        /// <param name="position"></param>
+        /// <returns></returns>
         private Node GenerateParameterNode(string paramReference, System.Type paramType, Vector2 position)
         {
             Node node = new Node
@@ -237,6 +324,13 @@ namespace NodeAI
             return node;
         }
 
+        /// <summary>
+        ///  Generates a Query node
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="query"></param>
+        /// <param name="position"></param>
+        /// <returns></returns>
         public Node GenerateQueryNode(string name, Query query, Vector2 position)
         {
             Node node = new Node
@@ -257,6 +351,10 @@ namespace NodeAI
             return node;
         }
 
+        /// <summary>
+        ///  Generates an entrypoint node
+        /// </summary>
+        /// <returns></returns>
         private Node GenerateEntryPointNode()
         {
             Node entryPointNode = new Node
@@ -294,6 +392,14 @@ namespace NodeAI
             return entryPointNode;
         }
 
+        /// <summary>
+        ///  Creates a node from the context menu
+        /// </summary>
+        /// <param name="parent"></param>
+        /// <param name="type"></param>
+        /// <param name="name"></param>
+        /// <param name="logic"></param>
+        /// <returns></returns>
         public Node ContextCreateNode(Node parent, NodeData.Type type, string name, RuntimeBase logic)
         {
             Node newNode = GenerateNode(type, name, logic);
@@ -360,6 +466,11 @@ namespace NodeAI
             
         }
 
+        /// <summary>
+        /// Generates a node from serialized data
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         public Node GenerateNode(NodeData data)
         {
             Node newNode = new Node();
@@ -510,6 +621,13 @@ namespace NodeAI
             return newNode;
         }
 
+        /// <summary>
+        /// Generate a Node
+        /// </summary>
+        /// <param name="nodeType"></param>
+        /// <param name="name"></param>
+        /// <param name="logic"></param>
+        /// <returns></returns>
         public Node GenerateNode(NodeData.Type nodeType, string name, RuntimeBase logic)
         {
             Node node = new Node
@@ -621,6 +739,12 @@ namespace NodeAI
             return node;
         }
 
+        /// <summary>
+        /// Adds a Property Field to a Node
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="property"></param>
+        /// <param name="logic"></param>
         void AddPropertyField(Node node, NodeData.SerializableProperty property, RuntimeBase logic)
         {
             var newPort = GeneratePort(node, Direction.Input);
@@ -792,6 +916,12 @@ namespace NodeAI
             }
         }
 
+        /// <summary>
+        ///  Add a property field to a node
+        /// </summary>
+        /// <param name="node"></param>
+        /// <param name="property"></param>
+        /// <param name="query"></param>
         void AddPropertyField(Node node, NodeData.SerializableProperty property, Query query)
         {
             var newPort = GeneratePort(node,property.output ? Direction.Output : Direction.Input);
@@ -954,7 +1084,7 @@ namespace NodeAI
                 node.outputContainer.Add(newPort);
                 node.outputPorts.Add(newPort);
             }
-            if(paramNode != null)
+            if(paramNode != null && paramNode.outputPort != null)
             {
                 var newEdge = paramNode.outputPort.ConnectTo(newPort);
                 AddElement(newEdge);
@@ -962,12 +1092,20 @@ namespace NodeAI
             }
             else if(queryNode != null)
             {
-                var newEdge = queryNode.outputPorts[queryNode.query.GetProperties().FindIndex(x => x.GUID == property.paramReference)].ConnectTo(newPort);
+                int index = queryNode.query.GetProperties().FindIndex(x => x.GUID == property.paramReference);
+                if(index == -1) return;
+                var newEdge = queryNode.outputPorts[index].ConnectTo(newPort);
                 AddElement(newEdge);
 
             }
         }
 
+        /// <summary>
+        ///  Gets a list of all compatible ports in the graph
+        /// </summary>
+        /// <param name="startPort"></param>
+        /// <param name="nodeAdapter"></param>
+        /// <returns></returns>
         public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
         {
             List<Port> compatiblePorts = new List<Port>();
@@ -983,6 +1121,10 @@ namespace NodeAI
             return compatiblePorts;
         }
 
+        /// <summary>
+        ///  Adds a property to the blackboard
+        /// </summary>
+        /// <param name="exposedProperty"></param>
         public void AddPropertyToBlackboard(NodeData.Property exposedProperty)
         {
             if(exposedProperties == null)
@@ -1038,15 +1180,5 @@ namespace NodeAI
             blackboard.Add(container);
 
         }
-
-        
-
-        
-
-        
-
-        
-
-        
     }
 }
