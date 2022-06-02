@@ -11,11 +11,13 @@ namespace NodeAI
         public NodeData.Type nodeType;
 
         public RuntimeBase runtimeLogic;
+        public Query query;
         public string paramReference;
 
         public Port inputPort;
         public List<Port> inputPorts = new List<Port>();
         public Port outputPort;
+        public List<Port> outputPorts = new List<Port>();
 
         public List<NodeData.Property> properties;
 

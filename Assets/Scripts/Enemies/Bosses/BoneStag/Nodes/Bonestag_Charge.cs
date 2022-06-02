@@ -30,6 +30,7 @@ namespace Boss.Bonestag
             AddProperty<AudioClip>("ChargeSoundPhaseTwo", null);
             AddProperty<GameObject>("DebrisPrefab", null);
             initialized = false;
+            tooltip = "Charge at the player";
             
         }
         public override void OnInit()
