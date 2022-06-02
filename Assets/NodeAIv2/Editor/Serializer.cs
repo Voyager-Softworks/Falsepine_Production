@@ -1,3 +1,18 @@
+/*
+ * Bachelor of Software Engineering
+ * Media Design School
+ * Auckland
+ * New Zealand
+ * 
+ * (c) 2022 Media Design School
+ * 
+ * File Name: Serializer.cs
+ * Description: Responsible for serializing and deserializing NodeAI Graphs
+ * Author: Nerys Thamm
+ * Mail: nerysthamm@gmail.com
+ */
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,14 +24,16 @@ namespace NodeAI
 {
     public class Serializer
     {
-        private GraphView target;
+        private GraphView target; // The graph to serialize
 
-        private List<Edge> edges => target.edges.ToList();
-        private List<Node> nodes => target.nodes.ToList().ConvertAll(x => x as Node);
+        private List<Edge> edges => target.edges.ToList(); // The edges of the graph
+        private List<Node> nodes => target.nodes.ToList().ConvertAll(x => x as Node); // The nodes of the graph
 
         
-
-        public static Serializer GetInstance(GraphView target)
+        /// <summary>
+        /// Initializes the serializer.
+        /// </summary>
+        public static Serializer GetInstance(GraphView target) 
         {
             return new Serializer
             {
@@ -25,83 +42,103 @@ namespace NodeAI
             
         }
 
+        /// <summary>
+        /// Serializes the graph.
+        /// </summary>
         public void Serialize(NodeAI_Behaviour nodeAI_Behaviour)
         {
-            nodeAI_Behaviour.nodeData = new List<NodeData>();
-            
+            nodeAI_Behaviour.nodeData = new List<NodeData>(); // Initialize the node data list
+            nodeAI_Behaviour.queries = new List<Query>(); // Initialize the query list
+
+            // Serialize the nodes
             foreach (var node in nodes)
             {
-                var nodeData = new NodeData
+                // Create a new node data
+                var nodeData = new NodeData 
                 {
-                    GUID = node.GUID,
-                    nodeType = node.nodeType,
-                    position = node.GetPosition().position,
-                    childGUIDs = new List<string>(),
-                    title = node.title,
-                    runtimeLogic = (node.runtimeLogic == null ? null : node.runtimeLogic),
-                    query = (node.query == null ? null : node.query)
+                    GUID = node.GUID, // Set the GUID
+                    nodeType = node.nodeType, // Set the node type
+                    position = node.GetPosition().position, // Set the position
+                    childGUIDs = new List<string>(), // Initialize the child GUID list
+                    title = node.title, // Set the title
+                    runtimeLogic = (node.runtimeLogic ?? null), // Set the runtime logic
+                    query = (node.query ?? null) // Set the query
                 };
+
+                // Setup ScriptableObject components if they are not null
                 if(nodeData.runtimeLogic != null)
                 {
                     nodeData.runtimeLogic.state = NodeData.State.Idle;
                 }
+                if(nodeData.query != null)
+                {
+                    nodeAI_Behaviour.queries.Add(nodeData.query);
+                }
+
+                // Store the parameter reference
                 if(node.nodeType == NodeData.Type.Parameter) nodeData.parentGUID = node.paramReference;
+
+                // Serialise connections
                 foreach (var input in node.inputPorts)
                 {
-                    if(nodeData.runtimeLogic != null)
+                    if(nodeData.runtimeLogic != null) //If this node has runtime logic
                     {
-                        
-                        if (input.connections.Count() > 0)
+                        if (input.connections.Count() > 0) //If this node is connected to anything
                         {
-                            if(((Node)input.connections.First().output.node).nodeType == NodeData.Type.Parameter)
+                            if(((Node)input.connections.First().output.node).nodeType == NodeData.Type.Parameter) // If the connected node is a parameter
                             {
+                                // Set the properties parameter reference as the nodes' parameter reference
                                 nodeData.runtimeLogic.SetPropertyParamReference(input.portName, ((Node)input.connections.First().output.node).paramReference);
-                                
                             }
                             else
                             {
+                                // Set the properties parameter reference as the nodes' GUID
                                 nodeData.runtimeLogic.SetPropertyParamReference(input.portName, ((Node)input.connections.First().output.node).query.GetProperties().Find(x => x.name == input.connections.First().output.portName).GUID);
                             }
-                            nodeData.runtimeLogic.SetPropertyGUID(input.portName, ((Node)input.connections.First().output.node).GUID);
+                            nodeData.runtimeLogic.SetPropertyGUID(input.portName, ((Node)input.connections.First().output.node).GUID); // Set the properties GUID
                         }
                         else
                         {
-                            nodeData.runtimeLogic.SetPropertyParamReference(input.portName, "null");
-                            nodeData.runtimeLogic.SetPropertyGUID(input.portName, "null");
+                            nodeData.runtimeLogic.SetPropertyParamReference(input.portName, "null"); // Set the properties parameter reference to null
+                            nodeData.runtimeLogic.SetPropertyGUID(input.portName, "null"); // Set the properties GUID to null
                         }
                     }
-                    else if(nodeData.query != null)
+                    else if(nodeData.query != null) 
                     {
-                        if (input.connections.Count() > 0)
+                        if (input.connections.Count() > 0) 
                         {
-                            if(((Node)input.connections.First().output.node).nodeType == NodeData.Type.Parameter)
+                            if(((Node)input.connections.First().output.node).nodeType == NodeData.Type.Parameter) //If a parameter is connected
                             {
+                                // Set the properties parameter reference as the nodes' parameter reference
                                 nodeData.query.SetPropertyParamReference(input.portName, ((Node)input.connections.First().output.node).paramReference);
-                                
                             }
                             else
                             {
+                                // Set the properties parameter reference as the nodes' GUID
                                 nodeData.query.SetPropertyParamReference(input.portName, ((Node)input.connections.First().output.node).query.GetProperties().Find(x => x.name == input.connections.First().output.portName).GUID);
                             }
+                            // Set the properties GUID
                             nodeData.query.SetPropertyGUID(input.portName, ((Node)input.connections.First().output.node).GUID);
                         }
                         else
                         {
-                            nodeData.query.SetPropertyParamReference(input.portName, "null");
-                            nodeData.query.SetPropertyGUID(input.portName, "null");
+                            nodeData.query.SetPropertyParamReference(input.portName, "null"); // Set the properties parameter reference to null
+                            nodeData.query.SetPropertyGUID(input.portName, "null"); // Set the properties GUID to null
                         }
+                        
                     }
                 }
-                nodeAI_Behaviour.nodeData.Add(nodeData);
+                nodeAI_Behaviour.nodeData.Add(nodeData); // Add the node data to the list
             }
 
-            foreach (var edge in edges)
+            foreach (var edge in edges) 
             {
-                if(((Node)edge.output.node).nodeType == NodeData.Type.Parameter)
+                if(((Node)edge.output.node).nodeType == NodeData.Type.Parameter) //Parameter specific logic
                 {
-                    ((Node)edge.input.node).runtimeLogic.SetPropertyGUID(edge.input.portName, ((Node)edge.output.node).GUID);
+                    ((Node)edge.input.node).runtimeLogic?.SetPropertyGUID(edge.input.portName, ((Node)edge.output.node).GUID); 
+                    ((Node)edge.input.node).query?.SetPropertyGUID(edge.input.portName, ((Node)edge.output.node).GUID);
                 }
-                else if(((Node)edge.output.node).nodeType == NodeData.Type.Query)
+                else if(((Node)edge.output.node).nodeType == NodeData.Type.Query) //Query specific logic
                 {
                     continue;
                 }
@@ -116,12 +153,14 @@ namespace NodeAI
             }
             
             
-
+            //Repopulate exposed properties
             nodeAI_Behaviour.exposedProperties.Clear();
             foreach(var p in target.exposedProperties)
             {
                 nodeAI_Behaviour.exposedProperties.Add(p);
             }
+
+            //Serialise Groups
             if(nodeAI_Behaviour.nodeGroups == null) nodeAI_Behaviour.nodeGroups = new List<NodeData.NodeGroup>();
             nodeAI_Behaviour.nodeGroups.Clear();
             foreach(var g in target.graphElements.ToList().OfType<Group>())
@@ -142,15 +181,22 @@ namespace NodeAI
         }
 
 
+        /// <summary>
+        /// Deserializes the graph.
+        /// </summary>
         public void Deserialize(NodeAI_Behaviour nodeAI_Behaviour)
         {
+            // Clear the graph
             target.exposedProperties.Clear();
             target.blackboard.Clear();
+
+            // Deserialise exposed properties
             foreach (var property in nodeAI_Behaviour.exposedProperties)
             {
                 target.AddPropertyToBlackboard(property);
             }
             
+            // Clear nodes and edges
             foreach (var node in nodes)
             {
                 target.RemoveElement(node);
@@ -160,6 +206,7 @@ namespace NodeAI
                 target.RemoveElement(edge);
             }
 
+            // Deserialise nodes
             foreach (var nodeData in nodeAI_Behaviour.nodeData)
             {
                 var node = target.GenerateNode(nodeData);
@@ -167,22 +214,27 @@ namespace NodeAI
                 nodes.Add(node);
             }
 
+            // Deserialise edges
             foreach (var nodeData in nodeAI_Behaviour.nodeData)
             {
                 var node = nodes.Find(x => x.GUID == nodeData.GUID);
-                if (nodeData.nodeType != NodeData.Type.EntryPoint && nodeData.nodeType != NodeData.Type.Parameter && nodeData.nodeType != NodeData.Type.Query)
+
+                // If the node can have sequence inputs, then apply them
+                if (nodeData.nodeType != NodeData.Type.EntryPoint && 
+                    nodeData.nodeType != NodeData.Type.Parameter && 
+                    nodeData.nodeType != NodeData.Type.Query)
                 {
                     var parent = nodes.Find(x => x.GUID == nodeData.parentGUID);
                     var edge = parent.outputPort.ConnectTo(node.inputPort);
                     edges.Add(edge);
                     target.AddElement(edge);
                 }
-                else if(nodeData.nodeType == NodeData.Type.Parameter)
+                else if(nodeData.nodeType == NodeData.Type.Parameter) // If the node is a parameter then deserialize its parameter reference
                 {
                     node.paramReference = nodeData.parentGUID;
                     
                 }
-                foreach(Port input in node.inputPorts)
+                foreach(Port input in node.inputPorts) //Reconnect edges
                 {
                     if(nodeData.runtimeLogic != null)
                     {

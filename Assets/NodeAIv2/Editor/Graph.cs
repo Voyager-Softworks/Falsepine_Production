@@ -1,3 +1,17 @@
+/*
+ * Bachelor of Software Engineering
+ * Media Design School
+ * Auckland
+ * New Zealand
+ * 
+ * (c) 2022 Media Design School
+ * 
+ * File Name: Graph.cs
+ * Description: 
+ * Author: Nerys Thamm
+ * Mail: nerysthamm@gmail.com
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +35,9 @@ namespace NodeAI
         private float timeSinceLastDraw = 0f;
         private int lastChildIndex = 0;
 
+        /// <summary>
+        /// 
+        /// </summary>
         [MenuItem("Window/NodeAI/Graph")]
         public static void OpenGraphWindow()
         {
@@ -29,6 +46,12 @@ namespace NodeAI
             window.Show();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="instanceId"></param>
+        /// <param name="line"></param>
+        /// <returns></returns>
         [OnOpenAsset]
         public static bool OnOpenAsset(int instanceId, int line) {
             if(Selection.activeObject is NodeAI_Behaviour)
@@ -45,6 +68,9 @@ namespace NodeAI
             return false;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void OnEnable()
         {
             graphView = new GraphView();
@@ -58,6 +84,9 @@ namespace NodeAI
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         void Update()
         {
             if(Selection.activeGameObject != null)
@@ -166,26 +195,9 @@ namespace NodeAI
             Repaint();
         }
 
-        private void OnGUI()
-        {
-            
-            
-            
-            
-        }
-
-        private void OnSceneGUI() 
-        {
-            
-        }
-
-        
-
-        private void DrawUI()
-        {
-            
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
         private void CreateNewBehaviour()
         {
             GraphView newGraph = new GraphView();
@@ -203,23 +215,18 @@ namespace NodeAI
             Serializer.GetInstance(graphView).Deserialize(behaviour);
         }
 
-        
-        private void ProcessEvents(Event e)
-        {
-            
-        }
-
-        private void ProcessContextMenu(Vector2 mousePosition)
-        {
-            
-        }
-
+        /// <summary>
+        /// 
+        /// </summary>
         private void OnDisable()
         {
             //GraphView graphView = rootVisualElement.GetFirstAncestorOfType<GraphView>();
             graphView.RemoveFromHierarchy();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void GenerateToolbar()
         {
             var toolbar = new Toolbar();
@@ -261,7 +268,9 @@ namespace NodeAI
         }
 
         
-
+        /// <summary>
+        /// 
+        /// </summary>
         private void GenerateBlackboard()
         {
             var blackboard = new Blackboard(graphView);

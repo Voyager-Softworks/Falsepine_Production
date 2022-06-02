@@ -68,6 +68,26 @@ namespace NodeAI
                 tickTimer = 0f;
                 nodeTree.rootNode.Eval(this, nodeTree.rootLeaf);
             }
+            foreach (var property in _behaviour.exposedProperties)
+            {
+                foreach (var query in _behaviour.queries)
+                {
+                    query.GetPropertiesWhereParamReference(property.GUID).ForEach(x => x.CopyValues(property));
+                }
+            }
+            foreach (var query in _behaviour.queries)
+            {
+                query.GetNewValues(this);
+                foreach (var node in nodeTree.nodes)
+                {
+                    if(node.runtimeLogic)
+                    {
+                        query.GetProperties().Where(x => x.output = true).ToList().ForEach(x => node.runtimeLogic.GetPropertiesWhereParamReference(x.GUID).ForEach(y => y.CopyValues(x)));
+                    }
+                }
+            }
+            
+            
             
         }
 

@@ -17,7 +17,7 @@ MonoBehaviour:
     parentGUID: 
     title: Repeater
     childGUIDs:
-    - 9e2885d5-9a9a-4618-8d2e-19bc467510c9
+    - e0222f9e-3d57-4d49-a8db-0c57e9d8a26b
     nodeType: 0
     position: {x: 0, y: 0}
     runtime: {fileID: 0}
@@ -58,23 +58,23 @@ MonoBehaviour:
     queryType: 
     noLogic: 0
     noQuery: 1
-  - GUID: 9e2885d5-9a9a-4618-8d2e-19bc467510c9
-    parentGUID: 375d0d8e-f1c3-436c-95ce-665227c019a2
-    title: WaitFor
+  - GUID: bbbfaf99-3fa5-44d2-a44e-867279207cb4
+    parentGUID: e0222f9e-3d57-4d49-a8db-0c57e9d8a26b
+    title: GoTo
     childGUIDs: []
     nodeType: 1
-    position: {x: 235, y: 0}
+    position: {x: 420, y: 0}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
-    - name: TIME
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
+    - name: POSITION
+      GUID: fc077163-e4de-45a5-8a03-13932cf5eb9d
+      paramReference: 2803e6cd-a8e9-49bd-a3bf-33b2ca597387
+      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
       svalue: 
       ivalue: 0
-      fvalue: 1
+      fvalue: 0
       bvalue: 0
       cvalue: {r: 0, g: 0, b: 0, a: 0}
       v2value: {x: 0, y: 0}
@@ -82,17 +82,104 @@ MonoBehaviour:
       v4value: {x: 0, y: 0, z: 0, w: 0}
       ovalue: {fileID: 0}
       output: 0
-    runtimeLogicType: NodeAI.WaitFor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    - name: INTERRUPT
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.GoTo, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
     queryType: 
     noLogic: 0
     noQuery: 1
+  - GUID: e0222f9e-3d57-4d49-a8db-0c57e9d8a26b
+    parentGUID: 375d0d8e-f1c3-436c-95ce-665227c019a2
+    title: Sequence
+    childGUIDs:
+    - bbbfaf99-3fa5-44d2-a44e-867279207cb4
+    nodeType: 4
+    position: {x: 235, y: 0}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: fc077163-e4de-45a5-8a03-13932cf5eb9d
+    parentGUID: 
+    title: GetObjectTransform
+    childGUIDs: []
+    nodeType: 8
+    position: {x: 66, y: 147}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: OBJECT
+      GUID: 6a4b3012-a9bb-49bd-b2f4-c652c0e223a3
+      paramReference: f826adc7-de53-4f50-9ad5-d4938c5b10df
+      serializedTypename: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: TRANSFORM
+      GUID: 2803e6cd-a8e9-49bd-a3bf-33b2ca597387
+      paramReference: 
+      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 1
+    runtimeLogicType: 
+    queryType: NodeAI.Utility.GetObjectTransform, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    noLogic: 1
+    noQuery: 0
+  - GUID: 6a4b3012-a9bb-49bd-b2f4-c652c0e223a3
+    parentGUID: f826adc7-de53-4f50-9ad5-d4938c5b10df
+    title: Player
+    childGUIDs: []
+    nodeType: 7
+    position: {x: -52, y: 147}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: 
+    queryType: 
+    noLogic: 1
+    noQuery: 1
   exposedProperties:
-  - name: New Property
-    GUID: 386021f8-e8bf-4499-8e91-235842074a52
+  - name: Player
+    GUID: f826adc7-de53-4f50-9ad5-d4938c5b10df
     paramReference: 
-    serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-      PublicKeyToken=b77a5c561934e089
+    serializedTypename: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
     svalue: 
     ivalue: 0
     fvalue: 0
@@ -104,3 +191,5 @@ MonoBehaviour:
     ovalue: {fileID: 0}
     output: 0
   nodeGroups: []
+  queries:
+  - {fileID: 0}

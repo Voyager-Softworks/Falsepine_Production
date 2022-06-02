@@ -15,6 +15,7 @@ namespace NodeAI
         {
             rootLeaf.PropogateExposedProperties(properties);
         }
+        
         public void DrawGizmos(NodeAI_Agent agent)
         {
             rootLeaf.DrawGizmos(agent);
@@ -31,7 +32,8 @@ namespace NodeAI
                 foreach (var property in properties)
                 {
                     List<NodeData.SerializableProperty> propertiesToChange = new List<NodeData.SerializableProperty>();
-                    propertiesToChange.AddRange(nodeData.runtimeLogic.GetPropertiesWhereParamReference(property.GUID));
+                    if(!nodeData.noLogic) propertiesToChange.AddRange(nodeData.runtimeLogic.GetPropertiesWhereParamReference(property.GUID));
+                    if(!nodeData.noQuery) propertiesToChange.AddRange(nodeData.query.GetPropertiesWhereParamReference(property.GUID));
                     foreach (var propertyToChange in propertiesToChange)
                     {
                         propertyToChange.ivalue = property.ivalue;
@@ -50,6 +52,8 @@ namespace NodeAI
                     child.PropogateExposedProperties(properties);
                 }
             }
+
+            
 
             public void DrawGizmos(NodeAI_Agent agent)
             {

@@ -1,3 +1,17 @@
+/*
+ * Bachelor of Software Engineering
+ * Media Design School
+ * Auckland
+ * New Zealand
+ * 
+ * (c) 2022 Media Design School
+ * 
+ * File Name: NodeAI_Agent_Editor.cs
+ * Description: Editor script for the NodeAI_Agent.
+ * Author: Nerys Thamm
+ * Mail: nerysthamm@gmail.com
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

@@ -176,6 +176,18 @@ namespace NodeAI
                 ovalue = copy.ovalue;
                 output = copy.output;
             }
+            public void CopyValues(SerializableProperty from)
+            {
+                ivalue = from.ivalue;
+                fvalue = from.fvalue;
+                bvalue = from.bvalue;
+                svalue = from.svalue;
+                v2value = from.v2value;
+                v3value = from.v3value;
+                v4value = from.v4value;
+                cvalue = from.cvalue;
+                ovalue = from.ovalue;
+            }
             public static implicit operator SerializableProperty(Property property)
             {
                 var serializableProperty = new SerializableProperty();
