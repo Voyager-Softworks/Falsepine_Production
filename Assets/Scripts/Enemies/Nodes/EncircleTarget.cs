@@ -145,10 +145,7 @@ public class EncircleTarget : NodeAI.ActionBase
         {
             return;
         }
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(GetProperty<GameObject>("Target").transform.position, GetProperty<float>("Encircle radius"));
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(GetLeastAllyDensePosition(GetProperty<GameObject>("Target").transform.position, agent), GetProperty<float>("Ally avoidance radius"));
+        
     }
             
 

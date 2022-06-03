@@ -73,7 +73,7 @@ namespace NodeAI
             {
                 get
                 {
-                    return urgency / (distance + age);
+                    return urgency / ((distance + age) * 0.01f);
                 }
             }
             public enum SenseType
@@ -276,6 +276,14 @@ namespace NodeAI
             {
                 Gizmos.color = Color.white;
                 Gizmos.DrawIcon(o.transform.position + (Vector3.up*2.0f), "d_animationvisibilitytoggleon", true, Color.magenta);
+            }
+            if(sensoryEvents.Count > 0)
+            {
+                for(int i = 0; i < sensoryEvents.Count; i++)
+                {
+                    Gizmos.color = Color.magenta * (1.0f -(i/ (float)sensoryEvents.Count));
+                    Gizmos.DrawLine(eyesBone.position, sensoryEvents[i].source.transform.position);
+                }
             }
         }
 
