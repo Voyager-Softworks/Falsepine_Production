@@ -8,6 +8,8 @@ public class EncircleTarget : NodeAI.ActionBase
 {
     NavMeshAgent navAgent;
     bool initialized = false;
+    Vector3 velocity = Vector3.zero;
+    float timeInitialized = 0;
     public EncircleTarget()
     {
         AddProperty<GameObject>("Target", null);
@@ -19,6 +21,7 @@ public class EncircleTarget : NodeAI.ActionBase
     public override void OnInit()
     {
         initialized = false;
+        timeInitialized = Time.time;
     }
 
     public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
@@ -52,25 +55,30 @@ public class EncircleTarget : NodeAI.ActionBase
                                                         agent.transform.position
                                                         );
         
-        if(steeringVector.magnitude > 0)
-        {
-            navAgent.SetDestination(agent.transform.position + steeringVector);
-        }
+        velocity += steeringVector.normalized * GetProperty<float>("Encircle speed");
+        velocity = Vector3.ClampMagnitude(velocity, GetProperty<float>("Encircle speed"));
+        //navAgent.SetDestination(agent.transform.position + (velocity.normalized * 3.0f));
+        //Rotate towards velocity smoothly
+        agent.transform.rotation = Quaternion.Slerp(agent.transform.rotation, Quaternion.LookRotation(velocity), Time.deltaTime * 1.0f);
+        //Move forward
+        agent.transform.position += agent.transform.forward * Time.deltaTime * GetProperty<float>("Encircle speed");
         
 
         if(Vector3.Distance(agent.transform.position, targetPosition) <= GetProperty<float>("Encircle radius") &&
-            Vector3.Distance(agent.transform.position, targetPosition) > GetProperty<float>("Encircle radius") - 2.0f)
+            Vector3.Distance(agent.transform.position, targetPosition) > GetProperty<float>("Encircle radius") - 1.0f &&
+            Time.time - timeInitialized > 0.1f)
         {
             agent.GetComponent<RotateTowardsPlayer>().RotateToPlayer(1.0f, 2.0f, 0.1f);
-            navAgent.SetDestination(agent.transform.position);
-            navAgent.isStopped = true;
+            //navAgent.SetDestination(agent.transform.position);
+            //navAgent.isStopped = true;
             state = NodeData.State.Success;
             return NodeData.State.Success;
         }
         else
         {
-            navAgent.isStopped = false;
-            navAgent.stoppingDistance = 0.1f;
+            // navAgent.isStopped = false;
+            // navAgent.stoppingDistance = 0.1f;
+            // navAgent.speed = GetProperty<float>("Encircle speed");
             state = NodeData.State.Running;
             return NodeData.State.Running;
         }
@@ -135,9 +143,7 @@ public class EncircleTarget : NodeAI.ActionBase
             return;
         }
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(GetProperty<GameObject>("Target").transform.position, GetProperty<float>("Encircle radius"));
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(GetLeastAllyDensePosition(GetProperty<GameObject>("Target").transform.position, agent), GetProperty<float>("Ally avoidance radius"));
+        Gizmos.DrawRay(agent.transform.position, velocity);
     }
             
 

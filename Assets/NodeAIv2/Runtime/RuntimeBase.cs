@@ -567,8 +567,7 @@ namespace NodeAI
                         state = NodeData.State.Running;
                         continue;
                     default:
-                        state = NodeData.State.Success;
-                        return state;
+                        continue;
                 }
             }
             if (failCount == current.children.Count)
@@ -578,6 +577,7 @@ namespace NodeAI
             else if(success)
             {
                 state = NodeData.State.Success;
+                return state;
             }
             else
             {

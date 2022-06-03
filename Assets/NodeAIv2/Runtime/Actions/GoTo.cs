@@ -12,7 +12,7 @@ namespace NodeAI
         {
             AddProperty<Transform>("Position", null);
             AddProperty<float>("Stopping distance", 0.5f);
-            AddProperty<float>("Speed", 1);
+            AddProperty<float>("Speed", 1.0f);
             AddProperty<float>("Acceleration", 15);
             AddProperty<bool>("Interrupt", false);
         }
@@ -41,9 +41,10 @@ namespace NodeAI
             if(navAgent.isOnNavMesh && GetProperty<Transform>("Position"))
             {
                 //navAgent.SetDestination(GetProperty<Transform>("Position").position);
-                if(Vector3.Distance(agent.transform.position, GetProperty<Transform>("Position").position) <= navAgent.stoppingDistance + 1.0f)
+                if(Vector3.Distance(agent.transform.position, GetProperty<Transform>("Position").position) <= GetProperty<float>("Stopping distance"))
                 {
                     navAgent.isStopped = true;
+                    navAgent.velocity = Vector3.zero;
                     state = NodeData.State.Success;
                     return NodeData.State.Success;
                 }
@@ -63,6 +64,7 @@ namespace NodeAI
                 else
                 {
                     navAgent.isStopped = true;
+                    navAgent.velocity = Vector3.zero;
                     state = NodeData.State.Failure;
                     return NodeData.State.Failure;
                 }
