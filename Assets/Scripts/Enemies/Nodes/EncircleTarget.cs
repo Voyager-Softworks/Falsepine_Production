@@ -61,6 +61,7 @@ public class EncircleTarget : NodeAI.ActionBase
             agent.GetComponent<RotateTowardsPlayer>().RotateToPlayer(1.0f, 2.0f, 0.1f);
             navAgent.SetDestination(agent.transform.position);
             navAgent.isStopped = true;
+            navAgent.velocity = Vector3.zero;
             state = NodeData.State.Success;
             return NodeData.State.Success;
         }
@@ -73,6 +74,7 @@ public class EncircleTarget : NodeAI.ActionBase
             agent.GetComponent<RotateTowardsPlayer>().RotateToPlayer(1.0f, 2.0f, 0.1f);
             navAgent.SetDestination(agent.transform.position);
             navAgent.isStopped = true;
+            navAgent.velocity = Vector3.zero;
             state = NodeData.State.Success;
             return NodeData.State.Success;
         }
@@ -105,10 +107,10 @@ public class EncircleTarget : NodeAI.ActionBase
             }
         }
         //Avoid player
-        Vector3 playerToAgent = agentPosition - playerPosition;
-        if (playerToAgent.magnitude < playerAvoidanceRadius)
+        Vector3 playerToAgent = (agentPosition + (navAgent.gameObject.transform.forward * GetProperty<float>("Encircle speed"))) - playerPosition;
+        if (playerToAgent.magnitude < (playerAvoidanceRadius * 2.0f))
         {
-            steeringVector += (playerToAgent * (playerAvoidanceRadius - playerToAgent.magnitude));
+            steeringVector += playerToAgent.normalized * playerAvoidanceRadius;
         }
         //Move to destination
         steeringVector += (destination - agentPosition);

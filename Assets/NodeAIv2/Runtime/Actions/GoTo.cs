@@ -41,7 +41,7 @@ namespace NodeAI
             if(navAgent.isOnNavMesh && GetProperty<Transform>("Position"))
             {
                 //navAgent.SetDestination(GetProperty<Transform>("Position").position);
-                if(Vector3.Distance(agent.transform.position, GetProperty<Transform>("Position").position) <= navAgent.stoppingDistance + 1.0f)
+                if(Vector3.Distance(agent.transform.position, GetProperty<Transform>("Position").position) <= navAgent.stoppingDistance)
                 {
                     navAgent.isStopped = true;
                     state = NodeData.State.Success;
