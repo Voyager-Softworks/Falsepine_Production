@@ -34,9 +34,10 @@ public class DamageDealer : MonoBehaviour
                     {
                         if (hit.collider.CompareTag("Player"))
                         {
-                            hit.collider.GetComponent<PlayerHealth>().TakeDamage(damage);
+                            hit.collider.GetComponent<PlayerHealth>().TakeDamage(dmg);
                             Instantiate(hurtPlayerEffect, hit.point, Quaternion.identity);
                             playerHit = true;
+                            break;
                         }
                     }
                 }
@@ -58,7 +59,7 @@ public class DamageDealer : MonoBehaviour
         {
             if (hit.collider.CompareTag("Player"))
             {
-                hit.collider.GetComponent<PlayerHealth>().TakeDamage(damage);
+                hit.collider.GetComponent<PlayerHealth>().TakeDamage(dmg);
                 Instantiate(hurtPlayerEffect, hit.point, Quaternion.identity);
             }
         }

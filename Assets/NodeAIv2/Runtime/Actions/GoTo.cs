@@ -55,7 +55,6 @@ namespace NodeAI
                 {
                     navAgent.isStopped = false;
                     navAgent.speed = GetProperty<float>("Speed");
-                    navAgent.angularSpeed = 120;
                     navAgent.acceleration = GetProperty<float>("Acceleration");
                     if(GetProperty<float>("Stopping distance") > 0)
                     {
