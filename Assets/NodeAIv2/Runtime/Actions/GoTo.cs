@@ -40,10 +40,15 @@ namespace NodeAI
             }
             if(navAgent.isOnNavMesh && GetProperty<Transform>("Position"))
             {
+                if(GetProperty<float>("Stopping distance") > 0)
+                {
+                    navAgent.stoppingDistance = GetProperty<float>("Stopping distance");
+                }
                 //navAgent.SetDestination(GetProperty<Transform>("Position").position);
                 if(Vector3.Distance(agent.transform.position, GetProperty<Transform>("Position").position) <= navAgent.stoppingDistance)
                 {
                     navAgent.isStopped = true;
+                    Debug.Log("Reached destination");
                     state = NodeData.State.Success;
                     return NodeData.State.Success;
                 }
@@ -64,12 +69,14 @@ namespace NodeAI
                 {
                     navAgent.isStopped = true;
                     state = NodeData.State.Failure;
+                    Debug.Log("Failed to set destination");
                     return NodeData.State.Failure;
                 }
             }
             else
             {
                 state = NodeData.State.Failure;
+                Debug.Log("Not on NavMesh");
                 return NodeData.State.Failure;
             }
         }
