@@ -142,6 +142,8 @@ namespace NodeAI
                 {
                     ((Node)edge.input.node).runtimeLogic?.SetPropertyParamReference(edge.input.portName, ((Node)edge.output.node).query.GetProperties().Find(x => x.name == edge.output.portName).GUID);
                     ((Node)edge.input.node).query?.SetPropertyParamReference(edge.input.portName, ((Node)edge.output.node).query.GetProperties().Find(x => x.name == edge.output.portName).GUID);
+                    ((Node)edge.input.node).runtimeLogic?.SetPropertyGUID(edge.input.portName, ((Node)edge.output.node).GUID); 
+                    ((Node)edge.input.node).query?.SetPropertyGUID(edge.input.portName, ((Node)edge.output.node).GUID);
                 }
                 else
                 {

@@ -910,8 +910,15 @@ namespace NodeAI
             }
             else if(queryNode != null)
             {
-                var newEdge = queryNode.outputPorts[queryNode.query.GetProperties().FindIndex(x => x.GUID == property.paramReference)].ConnectTo(newPort);
-                AddElement(newEdge);
+                //var newEdge = queryNode.outputPorts[queryNode.query.GetProperties().FindIndex(x => x.GUID == property.paramReference)].ConnectTo(newPort);
+                
+                var ports = queryNode.outputPorts.Where(x => x.portName == queryNode.query.GetProperties().Find(y => y.GUID == property.paramReference).name).ToList();
+                if(ports.Count > 0)
+                {
+                    var newEdge = ports[0].ConnectTo(newPort);
+                    AddElement(newEdge);
+                }
+                
 
             }
         }
@@ -1084,7 +1091,7 @@ namespace NodeAI
                 node.outputContainer.Add(newPort);
                 node.outputPorts.Add(newPort);
             }
-            if(paramNode != null && paramNode.outputPort != null)
+            if(paramNode != null && paramNode.outputPort != null && paramNode.nodeType == NodeData.Type.Parameter)
             {
                 var newEdge = paramNode.outputPort.ConnectTo(newPort);
                 AddElement(newEdge);
