@@ -58,8 +58,10 @@ public class EncircleTarget : NodeAI.ActionBase
         }
         
 
-        if(Vector3.Distance(agent.transform.position, targetPosition) <= GetProperty<float>("Encircle radius"))
+        if(Vector3.Distance(agent.transform.position, targetPosition) <= GetProperty<float>("Encircle radius") &&
+            Vector3.Distance(agent.transform.position, targetPosition) > GetProperty<float>("Encircle radius") - 2.0f)
         {
+            agent.GetComponent<RotateTowardsPlayer>().RotateToPlayer(1.0f, 2.0f, 0.1f);
             navAgent.SetDestination(agent.transform.position);
             navAgent.isStopped = true;
             state = NodeData.State.Success;
@@ -97,7 +99,7 @@ public class EncircleTarget : NodeAI.ActionBase
         Vector3 playerToAgent = agentPosition - playerPosition;
         if (playerToAgent.magnitude < playerAvoidanceRadius)
         {
-            steeringVector += playerToAgent;
+            steeringVector += (playerToAgent * (playerAvoidanceRadius - playerToAgent.magnitude));
         }
         //Move to destination
         steeringVector += (destination - agentPosition);
