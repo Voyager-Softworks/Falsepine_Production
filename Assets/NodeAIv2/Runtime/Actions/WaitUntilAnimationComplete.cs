@@ -7,6 +7,10 @@ namespace NodeAI.Animation
     public class WaitUntilAnimationComplete : ActionBase
     {
         Animator animator;
+        public WaitUntilAnimationComplete()
+        {
+            AddProperty<string>("State Name", "");
+        }
         public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
         {
             if (animator == null)
@@ -19,7 +23,7 @@ namespace NodeAI.Animation
                     return NodeData.State.Failure;
                 }
             }
-            if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName(GetProperty<string>("State Name")) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
             {
                 state = NodeData.State.Success;
                 return NodeData.State.Success;
@@ -32,17 +36,4 @@ namespace NodeAI.Animation
         }
     }
 }
-public class WaitUntilAnimationComplete : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-}

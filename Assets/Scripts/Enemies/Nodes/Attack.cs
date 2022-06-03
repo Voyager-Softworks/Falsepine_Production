@@ -100,6 +100,7 @@ public class Attack : NodeAI.ActionBase
                 rotateTowardsPlayer.MoveToPlayer(phase.translationDuration, phase.translationSpeed, phase.translationDelay);
             }
             navAgent.isStopped = true;
+            navAgent.SetDestination(agent.transform.position);
             
         }
 
