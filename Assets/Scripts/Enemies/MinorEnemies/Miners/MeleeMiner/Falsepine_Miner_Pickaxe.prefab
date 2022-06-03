@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 645155185163173035}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Chest.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40,7 +40,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8406182147434429394}
-  m_Layer: 0
+  - component: {fileID: 6499320851431453187}
+  - component: {fileID: 2959862890045130484}
+  - component: {fileID: 1888855444336653611}
+  m_Layer: 11
   m_Name: Miner01_UpperLeg.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62,6 +65,82 @@ Transform:
   m_Father: {fileID: 2721477659473132368}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &6499320851431453187
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220857817440356814}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.12541232
+  m_Height: 0.41804105
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.20902053, z: 0}
+--- !u!54 &2959862890045130484
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220857817440356814}
+  serializedVersion: 2
+  m_Mass: 6.09375
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!144 &1888855444336653611
+CharacterJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220857817440356814}
+  m_ConnectedBody: {fileID: 7405678553145056895}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -0.10345104, y: 0.0076795816, z: 0.076843254}
+  serializedVersion: 2
+  m_SwingAxis: {x: 0, y: 1, z: 0}
+  m_TwistLimitSpring:
+    spring: 0
+    damper: 0
+  m_LowTwistLimit:
+    limit: -20
+    bounciness: 0
+    contactDistance: 0
+  m_HighTwistLimit:
+    limit: 70
+    bounciness: 0
+    contactDistance: 0
+  m_SwingLimitSpring:
+    spring: 0
+    damper: 0
+  m_Swing1Limit:
+    limit: 30
+    bounciness: 0
+    contactDistance: 0
+  m_Swing2Limit:
+    limit: 0
+    bounciness: 0
+    contactDistance: 0
+  m_EnableProjection: 0
+  m_ProjectionDistance: 0.1
+  m_ProjectionAngle: 180
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 0
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &287887574941758364
 GameObject:
   m_ObjectHideFlags: 0
@@ -71,7 +150,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6716371528702824842}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_ArmIK.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,7 +180,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6235281002429797202}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_LegTarget.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -131,7 +210,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7678587159938840341}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_LegTarget.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +241,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3265778321840680287}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0103.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -192,7 +271,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8993327607751586302}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Spine01.001_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +301,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8591279716458807350}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Palm.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -253,7 +332,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3004619650939977518}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Toe.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -283,7 +362,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6166600454899333314}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Spine03.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -314,7 +393,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7562756635384248310}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0302.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +424,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6023368123392431122}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Neck02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -376,7 +455,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2027884763714016969}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Thumb02.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -406,7 +485,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8584519299459613628}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0103.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -436,7 +515,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5152637131792222656}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0301.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -467,7 +546,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2446564334778496238}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_UpperArm.R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -498,7 +577,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8244551951988100895}
-  m_Layer: 0
+  - component: {fileID: 2511916970032941596}
+  - component: {fileID: 968586731175845574}
+  - component: {fileID: 5729639930989355247}
+  m_Layer: 11
   m_Name: Miner01_UpperArm.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -520,6 +602,82 @@ Transform:
   m_Father: {fileID: 645155185163173035}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &2511916970032941596
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665102113620294412}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.06095485
+  m_Height: 0.2438194
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.1219097, z: 0}
+--- !u!54 &968586731175845574
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665102113620294412}
+  serializedVersion: 2
+  m_Mass: 4.0625
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!144 &5729639930989355247
+CharacterJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1665102113620294412}
+  m_ConnectedBody: {fileID: 6948667363853191474}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Axis: {x: 0, y: -1, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -0.1710644, y: 0.22845979, z: 0.008039574}
+  serializedVersion: 2
+  m_SwingAxis: {x: -1, y: 0, z: 0}
+  m_TwistLimitSpring:
+    spring: 0
+    damper: 0
+  m_LowTwistLimit:
+    limit: -70
+    bounciness: 0
+    contactDistance: 0
+  m_HighTwistLimit:
+    limit: 10
+    bounciness: 0
+    contactDistance: 0
+  m_SwingLimitSpring:
+    spring: 0
+    damper: 0
+  m_Swing1Limit:
+    limit: 50
+    bounciness: 0
+    contactDistance: 0
+  m_Swing2Limit:
+    limit: 0
+    bounciness: 0
+    contactDistance: 0
+  m_EnableProjection: 0
+  m_ProjectionDistance: 0.1
+  m_ProjectionAngle: 180
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 0
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &1704805779193074060
 GameObject:
   m_ObjectHideFlags: 0
@@ -529,7 +687,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3004065131124128074}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_LegIK.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -559,7 +717,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1744136516928576334}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0103.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -590,7 +748,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7289091253739203064}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_ArmIK.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -621,7 +779,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3849055089238784802}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Toe.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -651,7 +809,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3864092827788441040}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0403.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -681,7 +839,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5501663121621588328}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0303.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -712,7 +870,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8893212976665419902}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0201.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -743,7 +901,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2125562990761144806}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0102.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -774,7 +932,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 50230036728482325}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Thumb01.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -805,7 +963,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2350149244362469796}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Neck01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -836,7 +994,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 548501157197374036}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Rig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -875,7 +1033,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 38240756270420214}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Hand.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -910,7 +1068,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5805258998176666866}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0102.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -941,7 +1099,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3850588581748605861}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_LegIK.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -972,7 +1130,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3587238448119131477}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Spine01.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1003,7 +1161,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7245750360966352100}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Thumb02.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1034,7 +1192,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7766434094780145294}
-  m_Layer: 0
+  - component: {fileID: 9073712458365988124}
+  - component: {fileID: 5473377976611586206}
+  - component: {fileID: 6843715341129112601}
+  m_Layer: 11
   m_Name: Miner01_UpperArm.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1057,6 +1218,82 @@ Transform:
   m_Father: {fileID: 4733149504057121733}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &9073712458365988124
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3473303773237619705}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.06095477
+  m_Height: 0.24381907
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.12190954, z: 0}
+--- !u!54 &5473377976611586206
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3473303773237619705}
+  serializedVersion: 2
+  m_Mass: 4.0625
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!144 &6843715341129112601
+CharacterJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3473303773237619705}
+  m_ConnectedBody: {fileID: 6948667363853191474}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Axis: {x: 0, y: 0, z: 1}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 0.16639481, y: 0.23490322, z: 0.00531828}
+  serializedVersion: 2
+  m_SwingAxis: {x: 0, y: 1, z: 0}
+  m_TwistLimitSpring:
+    spring: 0
+    damper: 0
+  m_LowTwistLimit:
+    limit: -70
+    bounciness: 0
+    contactDistance: 0
+  m_HighTwistLimit:
+    limit: 10
+    bounciness: 0
+    contactDistance: 0
+  m_SwingLimitSpring:
+    spring: 0
+    damper: 0
+  m_Swing1Limit:
+    limit: 50
+    bounciness: 0
+    contactDistance: 0
+  m_Swing2Limit:
+    limit: 0
+    bounciness: 0
+    contactDistance: 0
+  m_EnableProjection: 0
+  m_ProjectionDistance: 0.1
+  m_ProjectionAngle: 180
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 0
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &3570455908985617801
 GameObject:
   m_ObjectHideFlags: 0
@@ -1066,7 +1303,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2911137908949561743}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Foot.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1097,7 +1334,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 369945441513696547}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Hand.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1133,7 +1370,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2748287268045045466}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Toe.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1164,7 +1401,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4241368543337977084}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Spine01.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1195,7 +1432,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8629760835517434325}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_UpperArm.R.001_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1225,7 +1462,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6831971883066653838}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Pickaxe_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1255,7 +1492,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2604076458376407217}
-  m_Layer: 0
+  - component: {fileID: 870083421863974313}
+  - component: {fileID: 8418272962771411973}
+  - component: {fileID: 8468888801041960890}
+  m_Layer: 11
   m_Name: Miner01_LowerArm.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1277,6 +1517,82 @@ Transform:
   m_Father: {fileID: 8244551951988100895}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &870083421863974313
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4282134052971195007}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.0029955804
+  m_Height: 0.014977902
+  m_Direction: 0
+  m_Center: {x: 0.007488951, y: 0, z: 0}
+--- !u!54 &8418272962771411973
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4282134052971195007}
+  serializedVersion: 2
+  m_Mass: 4.0625
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!144 &8468888801041960890
+CharacterJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4282134052971195007}
+  m_ConnectedBody: {fileID: 968586731175845574}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Axis: {x: 0, y: 1, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 0.00000008940698, y: 0.2438194, z: -0.00000008940698}
+  serializedVersion: 2
+  m_SwingAxis: {x: -1, y: 0, z: 0}
+  m_TwistLimitSpring:
+    spring: 0
+    damper: 0
+  m_LowTwistLimit:
+    limit: -90
+    bounciness: 0
+    contactDistance: 0
+  m_HighTwistLimit:
+    limit: 0
+    bounciness: 0
+    contactDistance: 0
+  m_SwingLimitSpring:
+    spring: 0
+    damper: 0
+  m_Swing1Limit:
+    limit: 0
+    bounciness: 0
+    contactDistance: 0
+  m_Swing2Limit:
+    limit: 0
+    bounciness: 0
+    contactDistance: 0
+  m_EnableProjection: 0
+  m_ProjectionDistance: 0.1
+  m_ProjectionAngle: 180
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 0
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &4332274563597987813
 GameObject:
   m_ObjectHideFlags: 0
@@ -1286,7 +1602,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9207670615146919098}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Thumb02.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1316,7 +1632,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2953616059471292775}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0403.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1347,7 +1663,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7860768961725618596}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0201.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1378,7 +1694,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5033945884319174828}
-  m_Layer: 0
+  - component: {fileID: 4905569229559261905}
+  - component: {fileID: 6948667363853191474}
+  - component: {fileID: 4073701905525044846}
+  m_Layer: 11
   m_Name: Miner01_Spine02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1400,6 +1719,81 @@ Transform:
   m_Father: {fileID: 4822010620788673793}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4905569229559261905
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4443314667295239129}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3374592, y: 0.23490335, z: 0.22508131}
+  m_Center: {x: -0.0023348033, y: 0.11745154, z: 0.043402605}
+--- !u!54 &6948667363853191474
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4443314667295239129}
+  serializedVersion: 2
+  m_Mass: 10.15625
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!144 &4073701905525044846
+CharacterJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4443314667295239129}
+  m_ConnectedBody: {fileID: 7405678553145056895}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -0.00000004842878, y: 0.21536371, z: -0.026785973}
+  serializedVersion: 2
+  m_SwingAxis: {x: 0, y: 0, z: 1}
+  m_TwistLimitSpring:
+    spring: 0
+    damper: 0
+  m_LowTwistLimit:
+    limit: -20
+    bounciness: 0
+    contactDistance: 0
+  m_HighTwistLimit:
+    limit: 20
+    bounciness: 0
+    contactDistance: 0
+  m_SwingLimitSpring:
+    spring: 0
+    damper: 0
+  m_Swing1Limit:
+    limit: 10
+    bounciness: 0
+    contactDistance: 0
+  m_Swing2Limit:
+    limit: 0
+    bounciness: 0
+    contactDistance: 0
+  m_EnableProjection: 0
+  m_ProjectionDistance: 0.1
+  m_ProjectionAngle: 180
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 0
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &4632862945361258916
 GameObject:
   m_ObjectHideFlags: 0
@@ -1409,7 +1803,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1195605982571510268}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Jaw_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1439,7 +1833,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3645235506375168454}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0202.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1470,7 +1864,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3763616436201946064}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Toe.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1501,7 +1895,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4979465728637662581}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1531,7 +1925,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6996700495395149282}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0402.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1562,7 +1956,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4453080393520716100}
-  m_Layer: 0
+  - component: {fileID: 7693698621931343464}
+  - component: {fileID: 1673456666152904409}
+  - component: {fileID: 8295620378575676621}
+  m_Layer: 11
   m_Name: Miner01_LowerLeg.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1584,6 +1981,82 @@ Transform:
   m_Father: {fileID: 8406182147434429394}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &7693698621931343464
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5074176761141487459}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.04646973
+  m_Height: 0.18587892
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: -0.09293946}
+--- !u!54 &1673456666152904409
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5074176761141487459}
+  serializedVersion: 2
+  m_Mass: 6.09375
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!144 &8295620378575676621
+CharacterJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5074176761141487459}
+  m_ConnectedBody: {fileID: 2959862890045130484}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -0.00000005960462, y: 0.41804105, z: 0.00000014901106}
+  serializedVersion: 2
+  m_SwingAxis: {x: 0, y: 0, z: -1}
+  m_TwistLimitSpring:
+    spring: 0
+    damper: 0
+  m_LowTwistLimit:
+    limit: -80
+    bounciness: 0
+    contactDistance: 0
+  m_HighTwistLimit:
+    limit: 0
+    bounciness: 0
+    contactDistance: 0
+  m_SwingLimitSpring:
+    spring: 0
+    damper: 0
+  m_Swing1Limit:
+    limit: 0
+    bounciness: 0
+    contactDistance: 0
+  m_Swing2Limit:
+    limit: 0
+    bounciness: 0
+    contactDistance: 0
+  m_EnableProjection: 0
+  m_ProjectionDistance: 0.1
+  m_ProjectionAngle: 180
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 0
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &5322116091583521027
 GameObject:
   m_ObjectHideFlags: 0
@@ -1600,9 +2073,9 @@ GameObject:
   - component: {fileID: 5322116091583521028}
   - component: {fileID: 5322116091583521029}
   - component: {fileID: 5322116091583521034}
-  - component: {fileID: 5322116091583521035}
   - component: {fileID: 5322116091583521032}
   - component: {fileID: -8634661534189729754}
+  - component: {fileID: 6735390497553997317}
   m_Layer: 0
   m_Name: Falsepine_Miner_Pickaxe
   m_TagString: Untagged
@@ -1663,7 +2136,7 @@ MonoBehaviour:
       PublicKeyToken=b77a5c561934e089
     svalue: 
     ivalue: 0
-    fvalue: 3
+    fvalue: 6
     bvalue: 0
     cvalue: {r: 0, g: 0, b: 0, a: 0}
     v2value: {x: 0, y: 0}
@@ -1678,7 +2151,7 @@ MonoBehaviour:
       PublicKeyToken=b77a5c561934e089
     svalue: 
     ivalue: 0
-    fvalue: 7
+    fvalue: 8
     bvalue: 0
     cvalue: {r: 0, g: 0, b: 0, a: 0}
     v2value: {x: 0, y: 0}
@@ -1693,7 +2166,7 @@ MonoBehaviour:
       PublicKeyToken=b77a5c561934e089
     svalue: 
     ivalue: 0
-    fvalue: 5
+    fvalue: 6
     bvalue: 0
     cvalue: {r: 0, g: 0, b: 0, a: 0}
     v2value: {x: 0, y: 0}
@@ -1708,7 +2181,7 @@ MonoBehaviour:
       PublicKeyToken=b77a5c561934e089
     svalue: 
     ivalue: 0
-    fvalue: 5
+    fvalue: 8
     bvalue: 0
     cvalue: {r: 0, g: 0, b: 0, a: 0}
     v2value: {x: 0, y: 0}
@@ -1723,7 +2196,37 @@ MonoBehaviour:
       PublicKeyToken=b77a5c561934e089
     svalue: 
     ivalue: 0
-    fvalue: 5
+    fvalue: 10
+    bvalue: 0
+    cvalue: {r: 0, g: 0, b: 0, a: 0}
+    v2value: {x: 0, y: 0}
+    v3value: {x: 0, y: 0, z: 0}
+    v4value: {x: 0, y: 0, z: 0, w: 0}
+    ovalue: {fileID: 0}
+    output: 0
+  - name: AttackCooldown
+    GUID: f34a0f98-6338-4e4c-b68b-bd7ce59b4f62
+    paramReference: 
+    serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+      PublicKeyToken=b77a5c561934e089
+    svalue: 
+    ivalue: 0
+    fvalue: 3
+    bvalue: 0
+    cvalue: {r: 0, g: 0, b: 0, a: 0}
+    v2value: {x: 0, y: 0}
+    v3value: {x: 0, y: 0, z: 0}
+    v4value: {x: 0, y: 0, z: 0, w: 0}
+    ovalue: {fileID: 0}
+    output: 0
+  - name: ShortAttackRadius
+    GUID: ff169296-74e1-4450-8fae-4975ec4fe587
+    paramReference: 
+    serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+      PublicKeyToken=b77a5c561934e089
+    svalue: 
+    ivalue: 0
+    fvalue: 4
     bvalue: 0
     cvalue: {r: 0, g: 0, b: 0, a: 0}
     v2value: {x: 0, y: 0}
@@ -1780,6 +2283,9 @@ MonoBehaviour:
   eyeDirection: 0
   sightDistance: 10
   sightAngle: 90
+  sightMask:
+    serializedVersion: 2
+    m_Bits: 9
 --- !u!95 &5322116091583521030
 Animator:
   serializedVersion: 3
@@ -1809,13 +2315,13 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5
-  m_Acceleration: 8
+  m_Speed: 7
+  m_Acceleration: 10
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 300
   m_StoppingDistance: 0.1
   m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
+  m_AutoBraking: 0
   m_AutoRepath: 1
   m_Height: 2
   m_BaseOffset: 0
@@ -1939,26 +2445,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
+  m_Radius: 0.26
+  m_Height: 1.55
   m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!208 &5322116091583521035
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5322116091583521027}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 0.8, y: 1, z: 0.8}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 1, z: 0}
-  m_TimeToStationary: 0.5
+  m_Center: {x: 0, y: 0.93, z: 0}
 --- !u!114 &5322116091583521032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1971,16 +2461,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7c4fb7dd56b2264eb382f4bef0c2030, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 100
-  maxHealth: 100
+  currentHealth: 7
+  maxHealth: 7
   isDead: 0
   isInvincible: 0
-  endScreenOnDeath: 1
-  deathSound: {fileID: 0}
-  hurtSound: {fileID: 0}
+  endScreenOnDeath: 0
+  deathSound: {fileID: 8300000, guid: 0d0c21a1982bf3c4cb3b6a49b05de72f, type: 3}
+  hurtSound: {fileID: 8300000, guid: 6955f7a9a4e8c394fbd860e149cf5fb7, type: 3}
   OnDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5322116091583521025}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5322116091583521024}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 5322116091583521031}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6735390497553997317}
+        m_TargetAssemblyTypeName: Ragdoll, Assembly-CSharp
+        m_MethodName: EnableRagdoll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &-8634661534189729754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1994,10 +2532,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HurtBoxes:
-  - {fileID: 2625327791953788360}
+  - {fileID: 8082339850277576217}
   hurtPlayerEffect: {fileID: 906613630111261276, guid: 035c7f8b389e1f340903030517c35684, type: 3}
   damage: 10
   attkNum: 1
+--- !u!114 &6735390497553997317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5322116091583521027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85be51e9b9e231b8e8ba9d2478e7145f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5359032759198430872
 GameObject:
   m_ObjectHideFlags: 0
@@ -2007,7 +2557,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4733149504057121733}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Chest.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2038,7 +2588,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7910279743993159108}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_LegTarget.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2069,7 +2619,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5864051305896565087}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Thumb01.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2100,7 +2650,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4822010620788673793}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Spine01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2133,7 +2683,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7144758682955156684}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0101.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2164,7 +2714,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 954189737520866454}
-  m_Layer: 0
+  - component: {fileID: 2118211031125078958}
+  - component: {fileID: 5306142377127094613}
+  - component: {fileID: 5345829538211262991}
+  m_Layer: 11
   m_Name: Miner01_UpperLeg.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2186,6 +2739,82 @@ Transform:
   m_Father: {fileID: 2721477659473132368}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &2118211031125078958
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5748542339899224210}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.12541239
+  m_Height: 0.41804126
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.20902063, z: 0}
+--- !u!54 &5306142377127094613
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5748542339899224210}
+  serializedVersion: 2
+  m_Mass: 6.09375
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!144 &5345829538211262991
+CharacterJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5748542339899224210}
+  m_ConnectedBody: {fileID: 7405678553145056895}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 0.10345115, y: 0.007679563, z: 0.076843135}
+  serializedVersion: 2
+  m_SwingAxis: {x: 0, y: 0, z: -1}
+  m_TwistLimitSpring:
+    spring: 0
+    damper: 0
+  m_LowTwistLimit:
+    limit: -20
+    bounciness: 0
+    contactDistance: 0
+  m_HighTwistLimit:
+    limit: 70
+    bounciness: 0
+    contactDistance: 0
+  m_SwingLimitSpring:
+    spring: 0
+    damper: 0
+  m_Swing1Limit:
+    limit: 30
+    bounciness: 0
+    contactDistance: 0
+  m_Swing2Limit:
+    limit: 0
+    bounciness: 0
+    contactDistance: 0
+  m_EnableProjection: 0
+  m_ProjectionDistance: 0.1
+  m_ProjectionAngle: 180
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 0
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &5785498755229893637
 GameObject:
   m_ObjectHideFlags: 0
@@ -2195,7 +2824,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7324961329035751328}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_ArmIK.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2225,7 +2854,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5430138697219856978}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0303.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2255,8 +2884,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 611803062517957557}
-  - component: {fileID: 2625327791953788360}
-  m_Layer: 0
+  - component: {fileID: 8082339850277576217}
+  m_Layer: 11
   m_Name: Miner01_Pickaxe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2278,7 +2907,7 @@ Transform:
   m_Father: {fileID: 369945441513696547}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &2625327791953788360
+--- !u!65 &8082339850277576217
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2286,11 +2915,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5847247393941615480}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.32, y: 0.48, z: 0.59}
-  m_Center: {x: 0, y: 0.39, z: 0}
+  m_Size: {x: 0.52, y: 0.87, z: 0.74}
+  m_Center: {x: 0, y: 0.3, z: 0}
 --- !u!1 &5929864342041864935
 GameObject:
   m_ObjectHideFlags: 0
@@ -2300,7 +2929,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2474131605795931900}
-  m_Layer: 0
+  - component: {fileID: 4229443347705283112}
+  - component: {fileID: 7053562489977361671}
+  - component: {fileID: 3640305791985970990}
+  m_Layer: 11
   m_Name: Miner01_LowerArm.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2322,6 +2954,82 @@ Transform:
   m_Father: {fileID: 7766434094780145294}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &4229443347705283112
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5929864342041864935}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.00900993
+  m_Height: 0.045049652
+  m_Direction: 0
+  m_Center: {x: -0.022524826, y: 0, z: 0}
+--- !u!54 &7053562489977361671
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5929864342041864935}
+  serializedVersion: 2
+  m_Mass: 4.0625
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!144 &3640305791985970990
+CharacterJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5929864342041864935}
+  m_ConnectedBody: {fileID: 5473377976611586206}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Axis: {x: 0, y: 1, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -0.00000009872019, y: 0.24381907, z: -0.00000019185241}
+  serializedVersion: 2
+  m_SwingAxis: {x: 0, y: 0, z: 1}
+  m_TwistLimitSpring:
+    spring: 0
+    damper: 0
+  m_LowTwistLimit:
+    limit: -90
+    bounciness: 0
+    contactDistance: 0
+  m_HighTwistLimit:
+    limit: 0
+    bounciness: 0
+    contactDistance: 0
+  m_SwingLimitSpring:
+    spring: 0
+    damper: 0
+  m_Swing1Limit:
+    limit: 0
+    bounciness: 0
+    contactDistance: 0
+  m_Swing2Limit:
+    limit: 0
+    bounciness: 0
+    contactDistance: 0
+  m_EnableProjection: 0
+  m_ProjectionDistance: 0.1
+  m_ProjectionAngle: 180
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 0
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &5950694313545069437
 GameObject:
   m_ObjectHideFlags: 0
@@ -2331,7 +3039,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2481066378309451399}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0303.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2362,7 +3070,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1648020013753845379}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0403.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2392,7 +3100,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1026068754894821868}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_LegIK.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2422,7 +3130,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1242744446732234770}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0402.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2453,7 +3161,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6832779741932786186}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0401.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2484,7 +3192,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5006744359874067689}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0403.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2515,7 +3223,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4560909889913816575}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0203.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2545,7 +3253,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7921875514294892505}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Spine03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2579,7 +3287,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4114660050286234202}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Spine01.002_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2609,7 +3317,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3740877637740105939}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0401.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2640,7 +3348,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2276630619072839092}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_ArmTarget.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2671,7 +3379,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 508868677917599044}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_ArmIK.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2702,7 +3410,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8442706967325262585}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Jaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2733,7 +3441,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2721477659473132368}
-  m_Layer: 0
+  - component: {fileID: 3403160341624362126}
+  - component: {fileID: 7405678553145056895}
+  m_Layer: 11
   m_Name: Miner01_Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2757,6 +3467,35 @@ Transform:
   m_Father: {fileID: 548501157197374036}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3403160341624362126
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7489041870692725664}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.33745927, y: 0.21536371, z: 0.22497366}
+  m_Center: {x: -0.0023347884, y: 0.107681856, z: 0.018350013}
+--- !u!54 &7405678553145056895
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7489041870692725664}
+  serializedVersion: 2
+  m_Mass: 10.15625
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7580486957146819805
 GameObject:
   m_ObjectHideFlags: 0
@@ -2766,7 +3505,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6190388742221678192}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0103.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2797,7 +3536,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6442697093025909028}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0203.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2828,7 +3567,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7386238607922084331}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Thumb02.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2859,7 +3598,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6121945097412240707}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0101.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2890,7 +3629,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5290686682688260486}
-  m_Layer: 0
+  - component: {fileID: 7966658287729002757}
+  - component: {fileID: 3234969171547569099}
+  - component: {fileID: 9077414237080801532}
+  m_Layer: 11
   m_Name: Miner01_LowerLeg.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2912,6 +3654,82 @@ Transform:
   m_Father: {fileID: 954189737520866454}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &7966658287729002757
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7766955414706280556}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.046562478
+  m_Height: 0.18624991
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: -0.093124956}
+--- !u!54 &3234969171547569099
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7766955414706280556}
+  serializedVersion: 2
+  m_Mass: 6.09375
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!144 &9077414237080801532
+CharacterJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7766955414706280556}
+  m_ConnectedBody: {fileID: 5306142377127094613}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -0.00000008940698, y: 0.41804126, z: -0.00000011920933}
+  serializedVersion: 2
+  m_SwingAxis: {x: 0, y: 0, z: -1}
+  m_TwistLimitSpring:
+    spring: 0
+    damper: 0
+  m_LowTwistLimit:
+    limit: -80
+    bounciness: 0
+    contactDistance: 0
+  m_HighTwistLimit:
+    limit: 0
+    bounciness: 0
+    contactDistance: 0
+  m_SwingLimitSpring:
+    spring: 0
+    damper: 0
+  m_Swing1Limit:
+    limit: 0
+    bounciness: 0
+    contactDistance: 0
+  m_Swing2Limit:
+    limit: 0
+    bounciness: 0
+    contactDistance: 0
+  m_EnableProjection: 0
+  m_ProjectionDistance: 0.1
+  m_ProjectionAngle: 180
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 0
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &7770864046250612487
 GameObject:
   m_ObjectHideFlags: 0
@@ -2921,7 +3739,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2514765580385550028}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0303.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3102,7 +3920,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7925226717392054685}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0302.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3133,7 +3951,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8798740877038640815}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Palm.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3164,7 +3982,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6350408472110530365}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_LegIK.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3195,7 +4013,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7533906830459685001}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_ArmTarget.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3225,7 +4043,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1296219048111050153}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Spine03.001_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3255,7 +4073,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 506600587755634016}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0203.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3286,7 +4104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9159657966445342146}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_ArmTarget.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3316,7 +4134,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2967188445024067621}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_LegTarget.R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3346,7 +4164,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4000298429954125825}
-  m_Layer: 0
+  - component: {fileID: 6830743212015217905}
+  - component: {fileID: 2716970685384712822}
+  - component: {fileID: 8408077537119597560}
+  m_Layer: 11
   m_Name: Miner01_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3369,6 +4190,81 @@ Transform:
   m_Father: {fileID: 6023368123392431122}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &6830743212015217905
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8515282674658297576}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.16876586
+  m_Center: {x: 0, y: 0.16876586, z: 0}
+--- !u!54 &2716970685384712822
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8515282674658297576}
+  serializedVersion: 2
+  m_Mass: 4.0625
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!144 &8408077537119597560
+CharacterJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8515282674658297576}
+  m_ConnectedBody: {fileID: 6948667363853191474}
+  m_ConnectedArticulationBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Axis: {x: 1, y: 0, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: -0.0048492174, y: 0.37910032, z: 0.043939214}
+  serializedVersion: 2
+  m_SwingAxis: {x: 0, y: 0, z: 1}
+  m_TwistLimitSpring:
+    spring: 0
+    damper: 0
+  m_LowTwistLimit:
+    limit: -40
+    bounciness: 0
+    contactDistance: 0
+  m_HighTwistLimit:
+    limit: 25
+    bounciness: 0
+    contactDistance: 0
+  m_SwingLimitSpring:
+    spring: 0
+    damper: 0
+  m_Swing1Limit:
+    limit: 25
+    bounciness: 0
+    contactDistance: 0
+  m_Swing2Limit:
+    limit: 0
+    bounciness: 0
+    contactDistance: 0
+  m_EnableProjection: 0
+  m_ProjectionDistance: 0.1
+  m_ProjectionAngle: 180
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 0
+  m_EnablePreprocessing: 0
+  m_MassScale: 1
+  m_ConnectedMassScale: 1
 --- !u!1 &8614253413329490866
 GameObject:
   m_ObjectHideFlags: 0
@@ -3378,7 +4274,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7087219898492808919}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0301.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3409,7 +4305,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7838319964035623196}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_ArmTarget.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3440,7 +4336,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6302141618018889564}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0203.L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3470,7 +4366,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3377754361325098020}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Foot.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3501,7 +4397,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1082597558212814157}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Miner01_Finger0202.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}

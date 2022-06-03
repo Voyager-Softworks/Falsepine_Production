@@ -52,16 +52,29 @@ public class EncircleTarget : NodeAI.ActionBase
                                                         agent.transform.position
                                                         );
         
-        if(steeringVector.magnitude > 0)
+        if(steeringVector.magnitude > 0.1f)
         {
-            navAgent.SetDestination(agent.transform.position + steeringVector);
+            navAgent.SetDestination(agent.transform.position + (steeringVector.normalized * GetProperty<float>("Encircle speed")));
         }
-        
-
-        if(Vector3.Distance(agent.transform.position, targetPosition) <= GetProperty<float>("Encircle radius"))
+        else
         {
+            agent.GetComponent<RotateTowardsPlayer>().RotateToPlayer(1.0f, 2.0f, 0.1f);
             navAgent.SetDestination(agent.transform.position);
             navAgent.isStopped = true;
+            navAgent.velocity = Vector3.zero;
+            state = NodeData.State.Success;
+            return NodeData.State.Success;
+        }
+
+        
+
+        if(Vector3.Distance(agent.transform.position, targetPosition) <= GetProperty<float>("Encircle radius") &&
+            Vector3.Distance(agent.transform.position, targetPosition) > GetProperty<float>("Encircle radius") - 2.0f)
+        {
+            agent.GetComponent<RotateTowardsPlayer>().RotateToPlayer(1.0f, 2.0f, 0.1f);
+            navAgent.SetDestination(agent.transform.position);
+            navAgent.isStopped = true;
+            navAgent.velocity = Vector3.zero;
             state = NodeData.State.Success;
             return NodeData.State.Success;
         }
@@ -86,7 +99,7 @@ public class EncircleTarget : NodeAI.ActionBase
             if (ally.gameObject.GetComponent<NodeAI_Agent>() != null)
             {
                 Vector3 allyPosition = ally.gameObject.transform.position;
-                Vector3 allyToAgent = agentPosition - allyPosition;
+                Vector3 allyToAgent = (agentPosition + (navAgent.gameObject.transform.forward * GetProperty<float>("Encircle speed"))) - allyPosition;
                 if (allyToAgent.magnitude < allyAvoidanceRadius)
                 {
                     steeringVector += allyToAgent.normalized * allyAvoidanceRadius;
@@ -94,14 +107,14 @@ public class EncircleTarget : NodeAI.ActionBase
             }
         }
         //Avoid player
-        Vector3 playerToAgent = agentPosition - playerPosition;
-        if (playerToAgent.magnitude < playerAvoidanceRadius)
+        Vector3 playerToAgent = (agentPosition + (navAgent.gameObject.transform.forward * GetProperty<float>("Encircle speed"))) - playerPosition;
+        if (playerToAgent.magnitude < (playerAvoidanceRadius * 2.0f))
         {
-            steeringVector += playerToAgent;
+            steeringVector += playerToAgent.normalized * playerAvoidanceRadius;
         }
         //Move to destination
         steeringVector += (destination - agentPosition);
-        return steeringVector.normalized * GetProperty<float>("Encircle speed");
+        return steeringVector;
     }
 
     Vector3 GetLeastAllyDensePosition(Vector3 targetPosition, NodeAI_Agent agent)

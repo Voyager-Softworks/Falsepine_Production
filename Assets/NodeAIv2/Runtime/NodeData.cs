@@ -61,9 +61,17 @@ namespace NodeAI
 
         public void Reset()
         {
-            if(noLogic) return;
-            runtime = (RuntimeBase)ScriptableObject.CreateInstance(System.Type.GetType(runtimeLogicType));
-            runtime.RepopulateProperties(properties == null ? new List<SerializableProperty>() : properties);
+            if(!noLogic)
+            {
+                runtime = (RuntimeBase)ScriptableObject.CreateInstance(System.Type.GetType(runtimeLogicType));
+                runtime.RepopulateProperties(properties == null ? new List<SerializableProperty>() : properties);
+            }
+            else if(!noQuery)
+            {
+                runtimequery = (Query)ScriptableObject.CreateInstance(System.Type.GetType(queryType));
+                runtimequery.RepopulateProperties(properties == null ? new List<SerializableProperty>() : properties);
+            }
+
         }
         public RuntimeBase runtimeLogic
         {

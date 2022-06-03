@@ -37,6 +37,7 @@ namespace NodeAI
             _behaviour = Instantiate(AI_Behaviour);
             
             _behaviour.nodeData.Where(x => !x.noLogic).All(x => x.runtimeLogic = (RuntimeBase)ScriptableObject.Instantiate(x.runtimeLogic));
+            _behaviour.nodeData.Where(x => !x.noQuery).All(x => x.query = (Query)ScriptableObject.Instantiate(x.query));
             _behaviour.nodeData.Where(x => !x.noLogic).ToList().ForEach(x => x.runtimeLogic.state = NodeData.State.Idle);
             foreach(NodeData.SerializableProperty p in inspectorProperties)
             {
@@ -79,6 +80,7 @@ namespace NodeAI
                     }
                     _propertyMap[x].AddRange(nodeTree.nodes.Where(n => !n.noQuery).SelectMany(n => n.query.GetPropertiesWhereParamReference(x.GUID)));
                     _propertyMap[x].AddRange(nodeTree.nodes.Where(n => !n.noLogic).SelectMany(n => n.runtimeLogic.GetPropertiesWhereParamReference(x.GUID)));
+                    _propertyMap[x].AddRange(_behaviour.queries.SelectMany(n => n.GetPropertiesWhereParamReference(x.GUID)));
                     
                 });
             }
@@ -96,11 +98,7 @@ namespace NodeAI
                 return;
             }
             tickTimer += Time.deltaTime;
-            if (tickTimer > tickRate)
-            {
-                tickTimer = 0f;
-                nodeTree.rootNode.Eval(this, nodeTree.rootLeaf);
-            }
+            
             foreach (var query in _behaviour.queries)
             {
                 query.GetNewValues(this);
@@ -120,6 +118,11 @@ namespace NodeAI
                     p.cvalue = x.cvalue;
                 }
             });
+            if (tickTimer > tickRate)
+            {
+                tickTimer = 0f;
+                nodeTree.rootNode.Eval(this, nodeTree.rootLeaf);
+            }
         }
 
         public void SetParameter<T>(string name, T value)

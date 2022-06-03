@@ -201,6 +201,7 @@ public class GunScript : MonoBehaviour
         UpdateUI();
     }
 
+
     private void Shoot()
     {
         shootTimer = shootTime;

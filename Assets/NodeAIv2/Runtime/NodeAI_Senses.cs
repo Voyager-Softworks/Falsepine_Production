@@ -89,6 +89,8 @@ namespace NodeAI
         public float sightDistance = 10f;
         public float sightAngle = 90f;
 
+        public LayerMask sightMask;
+
 
         // Start is called before the first frame update
         void Start()
@@ -180,7 +182,7 @@ namespace NodeAI
 
         public GameObject[] GetVisibleObjects()
         {
-            RaycastHit[] hits = Physics.SphereCastAll(eyesBone.position, sightDistance/2, eyesForward, sightDistance/2);
+            RaycastHit[] hits = Physics.SphereCastAll(eyesBone.position, sightDistance/2, eyesForward, sightDistance/2, sightMask);
             List<GameObject> visibleObjects = new List<GameObject>();
             foreach(RaycastHit hit in hits)
             {
