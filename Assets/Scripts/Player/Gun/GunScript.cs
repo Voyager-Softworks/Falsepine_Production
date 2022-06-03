@@ -229,6 +229,13 @@ public class GunScript : MonoBehaviour
                 healthScript.TakeDamage(damage, this.transform.root.gameObject);
                 Destroy(Instantiate(hitEffect, hit.point,Quaternion.FromToRotation(Vector3.up, hit.normal)), 2.0f);
             }
+            hit.collider.GetComponentInChildren<NodeAI.NodeAI_Senses>()?.RegisterSensoryEvent(
+                                                                                            this.transform.root.gameObject, 
+                                                                                            hit.collider.gameObject, 
+                                                                                            20.0f, 
+                                                                                            NodeAI.SensoryEvent.SenseType.SOMATIC
+                                                                                            );
+            
         }
 
         audioSource.PlayOneShot(shootClip[UnityEngine.Random.Range(0, shootClip.Count)]);

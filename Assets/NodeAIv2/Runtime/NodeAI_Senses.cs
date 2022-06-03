@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace NodeAI
 {
-    [System.Serializable]
+        [System.Serializable]
         public class SensoryEvent
         {
             public SensoryEvent(GameObject _source, GameObject _target, float _urgency, SenseType _senseType)
@@ -51,12 +51,43 @@ namespace NodeAI
             }
         }
 
+        public class AwarenessEvent
+        {
+            public AwarenessEvent(GameObject _source, GameObject _target, float _urgency, SenseType _senseType, string _name)
+            {
+                source = _source;
+                target = _target;
+                urgency = _urgency;
+                type = _senseType;
+                eventName = _name;
+            }
+            public GameObject source{get;}
+            public GameObject target{get;}
+            public string eventName{get;}
+            public float distance{get => Vector3.Distance(source.transform.position, target.transform.position);}
+            public Vector3 direction { get { return source.transform.position - target.transform.position; } }
+            public float time{get;}
+            public float age{get{return Time.time - time;}}
+            public float urgency{get;}
+            public float salience
+            {
+                get
+                {
+                    return urgency / (distance + age);
+                }
+            }
+            public enum SenseType
+            {
+                VISUAL,
+                AURAL,
+                SOMATIC
+            }
+            public SenseType type{get;}
+        }
+
 
     public class NodeAI_Senses : MonoBehaviour
     {
-        
-
-        
         public delegate void SensoryEventHandler(SensoryEvent e);
 
         public event SensoryEventHandler OnSensoryEvent;
@@ -132,6 +163,8 @@ namespace NodeAI
             }
             //noticedObjects.Clear();
 
+            
+
             GameObject[] visible = GetVisibleObjects();
             foreach(GameObject o in visible)
             {
@@ -154,7 +187,19 @@ namespace NodeAI
                 }
             }
             if(noticedObjects.Count >= visible.Length) noticedObjects.RemoveRange(visible.Length, noticedObjects.Count - visible.Length);
+            sensoryEvents.ForEach(e =>
+            {
+                if (e.salience > 0)
+                {
+                    if(!noticedObjects.Contains(e.source))
+                    {
+                        noticedObjects.Insert(0, e.source);
+                    }
+                }
+            });
         }
+
+
 
         public bool CanSee(GameObject target)
         {
@@ -221,7 +266,7 @@ namespace NodeAI
             return visibleObjects.ToArray();
         }
 
-        public void OnDrawGizmos()
+        public void OnDrawGizmosSelected()
         {
             
             Gizmos.color = Color.yellow;
@@ -233,5 +278,6 @@ namespace NodeAI
                 Gizmos.DrawIcon(o.transform.position + (Vector3.up*2.0f), "d_animationvisibilitytoggleon", true, Color.magenta);
             }
         }
+
     }
 }

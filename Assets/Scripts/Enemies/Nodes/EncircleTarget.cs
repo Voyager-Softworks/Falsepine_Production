@@ -74,7 +74,7 @@ public class EncircleTarget : NodeAI.ActionBase
             agent.GetComponent<RotateTowardsPlayer>().RotateToPlayer(1.0f, 2.0f, 0.1f);
             navAgent.SetDestination(agent.transform.position);
             navAgent.isStopped = true;
-            navAgent.velocity = Vector3.zero;
+            
             state = NodeData.State.Success;
             return NodeData.State.Success;
         }

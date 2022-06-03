@@ -2106,6 +2106,7 @@ GameObject:
   - component: {fileID: 5322116091583521032}
   - component: {fileID: -8634661534189729754}
   - component: {fileID: 6735390497553997317}
+  - component: {fileID: 2922373346786966056}
   m_Layer: 0
   m_Name: Falsepine_Miner_Pickaxe
   m_TagString: Untagged
@@ -2311,7 +2312,7 @@ MonoBehaviour:
   eyesBone: {fileID: 4979465728637662581}
   maxHearingRange: 10
   eyeDirection: 0
-  sightDistance: 10
+  sightDistance: 6
   sightAngle: 90
   sightMask:
     serializedVersion: 2
@@ -2549,6 +2550,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5322116091583521034}
+        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &-8634661534189729754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2578,6 +2591,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85be51e9b9e231b8e8ba9d2478e7145f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2922373346786966056
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5322116091583521027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60cf5e2df78cb0e90bc78458b99c160d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 5322116091583521030}
+  navAgent: {fileID: 5322116091583521031}
+  hasForwardSpeed: 1
+  forwardVelocityParameter: ForwardSpeed
 --- !u!1 &5359032759198430872
 GameObject:
   m_ObjectHideFlags: 0
