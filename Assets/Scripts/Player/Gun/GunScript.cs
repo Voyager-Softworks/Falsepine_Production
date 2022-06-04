@@ -208,7 +208,7 @@ public class GunScript : MonoBehaviour
 
         //get random angle using current aim angle
         float randomAngle = UnityEngine.Random.Range(-currentAimAngle, currentAimAngle);
-        Vector3 shootDirection = Quaternion.AngleAxis(randomAngle, Vector3.up) * transform.forward;
+        Vector3 shootDirection = Quaternion.AngleAxis(randomAngle, Vector3.up) * (mouseAimPoint - shootPoint.transform.position).normalized;
 
         //shoot ray using shootmask
         Ray ray = new Ray(shootPoint.transform.position, shootDirection);
