@@ -21,6 +21,8 @@ public class PlayerHealth : MonoBehaviour
     public float currentHealth = 100f;
     public bool isInvulnerable = false;
     public bool isDead = false;
+    public bool isStunned = false;
+    float stunTimer = 0f;
 
     [Header("Sounds")]
     public AudioClip deathSound;
@@ -47,7 +49,15 @@ public class PlayerHealth : MonoBehaviour
     void Update()
     {
         UpdateUI();
-
+        if (isStunned)
+        {
+            stunTimer -= Time.deltaTime;
+            if (stunTimer <= 0f)
+            {
+                isStunned = false;
+                
+            }
+        }
         //check for health and dead
         if (!isDead && currentHealth <= 0){
             Die();
@@ -76,6 +86,12 @@ public class PlayerHealth : MonoBehaviour
         {
             Die();
         }
+    }
+
+    public void Stun(float duration)
+    {
+        stunTimer = Mathf.Max(stunTimer, duration);
+        isStunned = true;
     }
 
     public void Die(){

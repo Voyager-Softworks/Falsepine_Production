@@ -13,7 +13,7 @@ public class DamageDealer : MonoBehaviour
     public int attkNum = 1;
     int currAttkNum = 0;
 
-    IEnumerator MeleeAttackCoroutine(float dmg, float delay, float duration)
+    IEnumerator MeleeAttackCoroutine(float dmg, float delay, float duration, float stunDuration)
     {
         yield return new WaitForSeconds(delay);
         foreach (Collider hurtBox in HurtBoxes)
@@ -35,6 +35,7 @@ public class DamageDealer : MonoBehaviour
                         if (hit.collider.CompareTag("Player"))
                         {
                             hit.collider.GetComponent<PlayerHealth>().TakeDamage(dmg);
+                            hit.collider.GetComponent<PlayerHealth>().Stun(stunDuration);
                             Instantiate(hurtPlayerEffect, hit.point, Quaternion.identity);
                             playerHit = true;
                             break;
@@ -50,7 +51,7 @@ public class DamageDealer : MonoBehaviour
         }
     }
 
-    IEnumerator AOEAttackCoroutine(float dmg, float delay, float radius, GameObject effect)
+    IEnumerator AOEAttackCoroutine(float dmg, float delay, float radius, GameObject effect, float stunDuration)
     {
         yield return new WaitForSeconds(delay);
         Destroy(Instantiate(effect, transform.position, Quaternion.identity), 20.0f);
@@ -60,7 +61,9 @@ public class DamageDealer : MonoBehaviour
             if (hit.collider.CompareTag("Player"))
             {
                 hit.collider.GetComponent<PlayerHealth>().TakeDamage(dmg);
+                hit.collider.GetComponent<PlayerHealth>().Stun(stunDuration);
                 Instantiate(hurtPlayerEffect, hit.point, Quaternion.identity);
+                break;
             }
         }
     }
@@ -91,14 +94,14 @@ public class DamageDealer : MonoBehaviour
         }
     }
 
-    public void MeleeAttack(float dmg, float delay, float duration)
+    public void MeleeAttack(float dmg, float delay, float duration, float stunDuration)
     {
-        StartCoroutine(MeleeAttackCoroutine(dmg, delay, duration));
+        StartCoroutine(MeleeAttackCoroutine(dmg, delay, duration, stunDuration));
     }
 
-    public void AOEAttack(float dmg, float delay, float radius, GameObject effect)
+    public void AOEAttack(float dmg, float delay, float radius, GameObject effect, float stunDuration)
     {
-        StartCoroutine(AOEAttackCoroutine(dmg, delay, radius, effect));
+        StartCoroutine(AOEAttackCoroutine(dmg, delay, radius, effect, stunDuration));
     }
 
     public void RangedAttack(GameObject projectile, float delay, float speed, Transform spawnpoint, bool aimAtPlayer = false)

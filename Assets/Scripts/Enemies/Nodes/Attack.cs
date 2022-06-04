@@ -79,7 +79,7 @@ public class Attack : NodeAI.ActionBase
             {
                 if(phase.attackType == AttackData.AttackType.Melee)
                 {
-                    agent.GetComponent<DamageDealer>().MeleeAttack(phase.attackDamage, phase.attackDelay, phase.attackDuration);
+                    agent.GetComponent<DamageDealer>().MeleeAttack(phase.attackDamage, phase.attackDelay, phase.attackDuration, phase.attackStunDuration);
                 }
                 else if(phase.attackType == AttackData.AttackType.Ranged)
                 {
@@ -94,7 +94,7 @@ public class Attack : NodeAI.ActionBase
                 }
                 else if(phase.attackType == AttackData.AttackType.AOE)
                 {
-                    agent.GetComponent<DamageDealer>().AOEAttack(phase.attackDamage, phase.attackDelay, phase.attackRange, phase.AOEeffect);
+                    agent.GetComponent<DamageDealer>().AOEAttack(phase.attackDamage, phase.attackDelay, phase.attackRange, phase.AOEeffect, phase.attackStunDuration);
                 }
                 rotateTowardsPlayer.RotateToPlayer(phase.turnDuration, phase.turnSpeed, phase.turnDelay);
                 rotateTowardsPlayer.MoveToPlayer(phase.translationDuration, phase.translationSpeed, phase.translationDelay);
