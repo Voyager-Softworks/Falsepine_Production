@@ -38,6 +38,8 @@ namespace NodeAI
             
             _behaviour.nodeData.Where(x => !x.noLogic).All(x => x.runtimeLogic = (RuntimeBase)ScriptableObject.Instantiate(x.runtimeLogic));
             _behaviour.nodeData.Where(x => !x.noQuery).All(x => x.query = (Query)ScriptableObject.Instantiate(x.query));
+            _behaviour.queries.Clear();
+            _behaviour.queries.AddRange(_behaviour.nodeData.Where(x => !x.noQuery).Select(x => x.query));
             _behaviour.nodeData.Where(x => !x.noLogic).ToList().ForEach(x => x.runtimeLogic.state = NodeData.State.Idle);
             foreach(NodeData.SerializableProperty p in inspectorProperties)
             {

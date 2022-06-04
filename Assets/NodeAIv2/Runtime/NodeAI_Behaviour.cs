@@ -16,7 +16,7 @@ namespace NodeAI
         [HideInInspector]public List<NodeData.NodeGroup> nodeGroups;
 
         [SerializeField]
-        [HideInInspector]public List<Query> queries;
+        [HideInInspector]public List<Query> queries = new List<Query>();
 
         
     }
