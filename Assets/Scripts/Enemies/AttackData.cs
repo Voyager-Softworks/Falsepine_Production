@@ -24,6 +24,7 @@ public class AttackData : ScriptableObject
         public float attackDelay;
         public float attackDuration;
         public float attackDamage;
+        public float attackStunDuration;
         [Header("Projectile")]
         public float projectileSpeed;
         public bool projectileContinuousFire;
