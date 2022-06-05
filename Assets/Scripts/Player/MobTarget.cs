@@ -32,7 +32,7 @@ public class MobTarget : MonoBehaviour
     void Update()
     {
         attackers.Where(
-            a => a.GetComponent<HealthScript>().isDead || Vector3.Distance(a.transform.position, transform.position) > influenceRadius).ToList().ForEach(
+            a => a == null || a.GetComponent<HealthScript>().isDead || Vector3.Distance(a.transform.position, transform.position) > influenceRadius).ToList().ForEach(
                 a => attackers.Remove(a));
     }
 }
