@@ -306,8 +306,9 @@ public class Inventory : MonoBehaviour
     {
         if (allInventories.Contains(inventory))
         {
-            // remove
-            allInventories.Remove(inventory);
+            // replace existing inventory
+            allInventories[allInventories.IndexOf(inventory)] = inventory;
+            return;
         }
         allInventories.Add(inventory);
     }
@@ -507,6 +508,9 @@ public class Inventory : MonoBehaviour
                 inventory.m_slots.Add(new InventorySlot());
                 EditorUtility.SetDirty(inventory);
             }
+
+            // show total inventory count
+            EditorGUILayout.LabelField("Total Inventory Count: " + allInventories.Count());
 
             // save on change
             if (GUI.changed)
