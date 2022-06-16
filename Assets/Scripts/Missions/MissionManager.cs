@@ -21,6 +21,16 @@ public class MissionManager : MonoBehaviour
     [SerializeField] public List<Mission> greaterMissionList;
     [SerializeField] public Mission currentMission;
 
+    public static string GetSaveFolderPath(int saveSlot = 0)
+    {
+        return Application.dataPath + "/saves/save" + saveSlot + "/missions/";
+    }
+
+    public static string GetSaveFilePath(int saveSlot = 0)
+    {
+        return GetSaveFolderPath(saveSlot) + "missions.json";
+    }
+
     /// <summary>
     /// Serializable version of the mission class from Mission.cs
     /// </summary>
@@ -120,8 +130,14 @@ public class MissionManager : MonoBehaviour
     /// Serialize the missions and save them to file
     /// </summary>
     public void SaveMissions(){
+        // if the save folder doesn't exist, create it
+        if (!Directory.Exists(GetSaveFolderPath()))
+        {
+            Directory.CreateDirectory(GetSaveFolderPath());
+        }
+
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/missions.dat");
+        FileStream file = File.Create(GetSaveFilePath());
 
         MissionData data = new MissionData();
 
@@ -154,9 +170,9 @@ public class MissionManager : MonoBehaviour
     /// Deserialize the missions from file and load them
     /// </summary>
     public void LoadMissions(){
-        if (File.Exists(Application.persistentDataPath + "/missions.dat")){
+        if (File.Exists(GetSaveFilePath())){
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/missions.dat", FileMode.Open);
+            FileStream file = File.Open(GetSaveFilePath(), FileMode.Open);
 
             MissionData data = (MissionData)bf.Deserialize(file);
             file.Close();
@@ -184,8 +200,8 @@ public class MissionManager : MonoBehaviour
     }
 
     public void DeleteMissionSave(){
-        if (File.Exists(Application.persistentDataPath + "/missions.dat")){
-            File.Delete(Application.persistentDataPath + "/missions.dat");
+        if (File.Exists(GetSaveFilePath())){
+            File.Delete(GetSaveFilePath());
         }
     }
 
