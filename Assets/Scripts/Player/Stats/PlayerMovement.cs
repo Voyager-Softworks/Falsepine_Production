@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public GameObject rock;
 
     [Header("Movement")]
     private Animator _animator;
@@ -97,11 +96,8 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        // get shared material of rock
-        Material rockMaterial = rock.GetComponent<Renderer>().sharedMaterial;
-
         //set the _WorldCutPos of the shader to the player's position
-        rockMaterial.SetVector("_WorldCutPos", transform.position);
+        Shader.SetGlobalVector("WorldCutPos", transform.position);
 
         Move();
     }
