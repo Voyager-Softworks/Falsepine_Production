@@ -19,6 +19,7 @@ public class CursorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Cursor.visible = false;
         if(Gamepad.current != null)
         {
             cursorImage.enabled = false;
@@ -32,7 +33,7 @@ public class CursorScript : MonoBehaviour
                 return;
             }
 
-            Cursor.visible = false;
+            
             //get mouse pos
             Vector2 mousePos = Mouse.current.position.ReadValue();
             //set cursor pos

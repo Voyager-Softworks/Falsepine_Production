@@ -10,7 +10,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator _animator;
     CharacterController controller;
     public InputAction moveAction;
-    //public InputAction sprintAction;
+    public InputAction sprintAction;
     public float walkSpeed = 6f;
     public float jogSpeed = 10f;
     public float sprintSpeed = 14f;
@@ -38,12 +38,16 @@ public class PlayerMovement : MonoBehaviour
     private Camera cam;
     private AudioSource audioSource;
 
+    Vector3 camForward;
+    Vector3 camRight;
+
+
     // Start is called before the first frame update
     void Start()
     {
         moveAction.Enable();
         rollAction.Enable();
-        //sprintAction.Enable();
+        sprintAction.Enable();
 
         rollAction.performed += ctx => StartRoll();
 
@@ -60,6 +64,14 @@ public class PlayerMovement : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
 
         audioSource = GetComponent<AudioSource>();
+
+        //get cam direction
+        camForward = cam.transform.forward;
+        camForward.y = 0;
+        camForward.Normalize();
+        camRight = cam.transform.right;
+        camRight.y = 0;
+        camRight.Normalize();
     }
 
     private void OnDestroy() {
@@ -88,13 +100,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
-        //get cam direction
-        Vector3 camForward = cam.transform.forward;
-        camForward.y = 0;
-        camForward.Normalize();
-        Vector3 camRight = cam.transform.right;
-        camRight.y = 0;
-        camRight.Normalize();
+        
 
         //get movement direction using input and cam direction
         Vector2 move = moveAction.ReadValue<Vector2>();
@@ -105,7 +111,7 @@ public class PlayerMovement : MonoBehaviour
         { 
             moveDir *= walkSpeed;
         }
-        else if(Keyboard.current.leftShiftKey.isPressed)
+        else if(sprintAction.ReadValue<float>() > 0.1f)
         {
             moveDir *= sprintSpeed;
         }
@@ -158,7 +164,7 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("Walking", false);
             _animator.SetBool("Aiming", gunScript.isAiming);
             _animator.SetBool("Jogging", !gunScript.isAiming && move.magnitude > 0.1f);
-            _animator.SetBool("Sprinting", Keyboard.current.leftShiftKey.isPressed);
+            _animator.SetBool("Running", sprintAction.ReadValue<float>() > 0.1f);
 
             controller.Move(moveDir * Time.deltaTime);
             if (gunScript.isAiming){
@@ -186,8 +192,7 @@ public class PlayerMovement : MonoBehaviour
                 Vector3 lookDir;
                 if(Gamepad.current != null)
                 {
-                    Vector2 look = Gamepad.current.rightStick.ReadValue();
-                    lookDir = new Vector3(look.x, 0, look.y);
+                    lookDir = GetGamepadAimPoint() - transform.position;
                 }
                 else
                 {
@@ -287,7 +292,7 @@ public class PlayerMovement : MonoBehaviour
         //Get the right stick value
         Vector2 rightStick = Gamepad.current.rightStick.ReadValue();
         //Get the direction of the right stick
-        Vector3 rightStickDir = new Vector3(rightStick.x, 0, rightStick.y);
+        Vector3 rightStickDir = rightStick.x * camRight + rightStick.y * camForward;
         
         Vector3 aimPoint = rightStickDir * 10f + transform.position;
         aimPoint.y = shootPoint.position.y;
