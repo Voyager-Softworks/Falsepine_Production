@@ -129,14 +129,13 @@ public class MissionManager : MonoBehaviour
     /// <summary>
     /// Serialize the missions and save them to file
     /// </summary>
-    public void SaveMissions(){
+    public void SaveMissions(bool serialize = false){
         // if the save folder doesn't exist, create it
         if (!Directory.Exists(GetSaveFolderPath()))
         {
             Directory.CreateDirectory(GetSaveFolderPath());
         }
 
-        BinaryFormatter bf = new BinaryFormatter();
         FileStream file = File.Create(GetSaveFilePath());
 
         MissionData data = new MissionData();
@@ -162,19 +161,47 @@ public class MissionManager : MonoBehaviour
             data.currentMissionIndex = GetMissionIndex(currentMission);
         }
 
-        bf.Serialize(file, data);
+        if (serialize){
+            BinaryFormatter bf = new BinaryFormatter();
+            bf.Serialize(file, data);
+        }
+
+        else{
+            //json serialize the data
+            string json = JsonUtility.ToJson(data);
+
+            StreamWriter writer = new StreamWriter(file);
+            writer.Write(json);
+            writer.Close();
+        }
+
+
+
         file.Close();
     }
 
     /// <summary>
     /// Deserialize the missions from file and load them
     /// </summary>
-    public void LoadMissions(){
+    public void LoadMissions(bool isSerialize = false){
         if (File.Exists(GetSaveFilePath())){
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(GetSaveFilePath(), FileMode.Open);
 
-            MissionData data = (MissionData)bf.Deserialize(file);
+            MissionData data = new MissionData();
+
+            if (isSerialize){
+                data = (MissionData)bf.Deserialize(file);
+            }
+            else{
+                string json = "";
+                using (StreamReader reader = new StreamReader(file))
+                {
+                    json = reader.ReadToEnd();
+                }
+                data = JsonUtility.FromJson<MissionData>(json);
+            }
+
             file.Close();
 
             //copy lesser serializable mission list to mission list
