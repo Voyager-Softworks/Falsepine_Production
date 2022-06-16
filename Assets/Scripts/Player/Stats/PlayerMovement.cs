@@ -6,6 +6,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public GameObject rock;
+
     [Header("Movement")]
     private Animator _animator;
     CharacterController controller;
@@ -94,6 +96,12 @@ public class PlayerMovement : MonoBehaviour
             Debug.LogError("PlayerMovement: Missing camera or controller");
             return;
         }
+
+        // get shared material of rock
+        Material rockMaterial = rock.GetComponent<Renderer>().sharedMaterial;
+
+        //set the _WorldCutPos of the shader to the player's position
+        rockMaterial.SetVector("_WorldCutPos", transform.position);
 
         Move();
     }
