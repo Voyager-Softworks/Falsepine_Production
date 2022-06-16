@@ -35,7 +35,6 @@ namespace Boss.Bonestag
         }
         public override void OnInit()
         {
-            SetProperty<bool>("InBearTrap", false);
             chargeSoundPhaseOne = GetProperty<AudioClip>("ChargeSoundPhaseOne");
             chargeSoundPhaseTwo = GetProperty<AudioClip>("ChargeSoundPhaseTwo");
             debrisPrefab = GetProperty<GameObject>("DebrisPrefab");
