@@ -19,16 +19,25 @@ public class CursorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (cursorImage == null || aimCursor == null || reloadCursor == null) {
-            Debug.LogError("CursorScript: Missing cursor image or cursor sprites");
-            return;
+        if(Gamepad.current != null)
+        {
+            cursorImage.enabled = false;
         }
+        else
+        {
+            cursorImage.enabled = true;
+            
+            if (cursorImage == null || aimCursor == null || reloadCursor == null) {
+                Debug.LogError("CursorScript: Missing cursor image or cursor sprites");
+                return;
+            }
 
-        Cursor.visible = false;
-        //get mouse pos
-        Vector2 mousePos = Mouse.current.position.ReadValue();
-        //set cursor pos
-        cursorImage.transform.position = mousePos;
+            Cursor.visible = false;
+            //get mouse pos
+            Vector2 mousePos = Mouse.current.position.ReadValue();
+            //set cursor pos
+            cursorImage.transform.position = mousePos;
+        }
     }
 
     public void SetCursor(Sprite _cursor, float _size = 1.0f)

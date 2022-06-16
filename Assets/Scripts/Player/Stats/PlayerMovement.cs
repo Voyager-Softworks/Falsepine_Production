@@ -10,7 +10,10 @@ public class PlayerMovement : MonoBehaviour
     private Animator _animator;
     CharacterController controller;
     public InputAction moveAction;
-    public float speed = 6f;
+    //public InputAction sprintAction;
+    public float walkSpeed = 6f;
+    public float jogSpeed = 10f;
+    public float sprintSpeed = 14f;
     private Vector3 lastMoveDir = Vector3.zero;
 
     private Vector3 animVelocity = Vector3.zero;
@@ -40,6 +43,7 @@ public class PlayerMovement : MonoBehaviour
     {
         moveAction.Enable();
         rollAction.Enable();
+        //sprintAction.Enable();
 
         rollAction.performed += ctx => StartRoll();
 
@@ -97,7 +101,19 @@ public class PlayerMovement : MonoBehaviour
         Vector3 moveDir = move.x * camRight + move.y * camForward;
         moveDir.y = 0;
         moveDir.Normalize();
-        moveDir *= speed;
+        if(gunScript.isAiming)
+        { 
+            moveDir *= walkSpeed;
+        }
+        else if(Keyboard.current.leftShiftKey.isPressed)
+        {
+            moveDir *= sprintSpeed;
+        }
+        else
+        {
+            moveDir *= jogSpeed;
+        }
+        
         moveDir.y = -2.0f;
         
         animVelocity = Vector3.Lerp(animVelocity, moveDir, Time.deltaTime * 10f);
@@ -122,6 +138,8 @@ public class PlayerMovement : MonoBehaviour
             moveDir = rollDir * rollSpeed;
             moveDir.y = -2.0f;
 
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(rollDir), Time.deltaTime * 15f);
+
             //roll
             controller.Move(moveDir * Time.deltaTime);
 
@@ -138,14 +156,17 @@ public class PlayerMovement : MonoBehaviour
             isRolling = false;
 
             _animator.SetBool("Walking", false);
-            _animator.SetBool("Aiming", false);
+            _animator.SetBool("Aiming", gunScript.isAiming);
+            _animator.SetBool("Jogging", !gunScript.isAiming && move.magnitude > 0.1f);
+            _animator.SetBool("Sprinting", Keyboard.current.leftShiftKey.isPressed);
 
-
-
-            if (!gunScript.isAiming){
+            controller.Move(moveDir * Time.deltaTime);
+            if (gunScript.isAiming){
                 //apply movement
                 //transform.position += (moveDir * speed * Time.deltaTime);
-                controller.Move(moveDir * Time.deltaTime);
+                _animator.SetLayerWeight(1, Mathf.Lerp(_animator.GetLayerWeight(1), 1, Time.deltaTime * 10f));
+                _animator.SetLayerWeight(2, Mathf.Lerp(_animator.GetLayerWeight(2), 1, Time.deltaTime * 10f));
+                
 
                 
 
@@ -155,28 +176,43 @@ public class PlayerMovement : MonoBehaviour
 
                 
 
-                _animator.SetFloat("MoveX", rightMag);
-                _animator.SetFloat("MoveZ", forwardMag);
+                _animator.SetFloat("MoveSide", rightMag);
+                _animator.SetFloat("MoveForward", forwardMag);
                 if (move.magnitude > 0.1f)
                 {
                     _animator.SetBool("Walking", true);
                 }
+                //calc the direction to look
+                Vector3 lookDir;
+                if(Gamepad.current != null)
+                {
+                    Vector2 look = Gamepad.current.rightStick.ReadValue();
+                    lookDir = new Vector3(look.x, 0, look.y);
+                }
+                else
+                {
+                    lookDir = GetMouseAimPoint() - transform.position;
+                }
+                
+
+                //remove vertical
+                lookDir.y = 0;
+                lookDir.Normalize();
+                //apply rotation
+                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDir), Time.deltaTime * 20f);
             }
             else{
-                _animator.SetFloat("MoveX", 0);
-                _animator.SetFloat("MoveZ", 0);
-                _animator.SetBool("Aiming", true);
+                _animator.SetFloat("MoveSide", 0);
+                _animator.SetFloat("MoveForward", 0);
+                _animator.SetLayerWeight(1, Mathf.Lerp(_animator.GetLayerWeight(1), 0, Time.deltaTime * 10f));
+                _animator.SetLayerWeight(2, Mathf.Lerp(_animator.GetLayerWeight(2), 0, Time.deltaTime * 10f));
+                if(move.magnitude > 0.1f)
+                    transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(new Vector3(moveDir.x, 0.0f, moveDir.z)), Time.deltaTime * 10f);
             }
 
             
 
-            //calc the direction to look
-            Vector3 lookDir = GetMouseAimPoint() - transform.position;
-            //remove vertical
-            lookDir.y = 0;
-            lookDir.Normalize();
-            //apply rotation
-            transform.rotation = Quaternion.LookRotation(lookDir);
+            
 
             lastMoveDir = moveDir;
         }
@@ -223,11 +259,13 @@ public class PlayerMovement : MonoBehaviour
             rollDir.Normalize();
         }
 
-        transform.rotation = Quaternion.LookRotation(rollDir);
+        //transform.rotation = Quaternion.LookRotation(rollDir);
 
         rollTimer = rollTime;
 
         _animator.SetTrigger("Dodge");
+        _animator.SetLayerWeight(1, 0);
+        _animator.SetLayerWeight(2, 0);
         audioSource.PlayOneShot(rollSound);
     }
 
@@ -244,4 +282,18 @@ public class PlayerMovement : MonoBehaviour
         }
         return mouseAimPoint;
     }
+
+    public Vector3 GetGamepadAimPoint(){
+        //Get the right stick value
+        Vector2 rightStick = Gamepad.current.rightStick.ReadValue();
+        //Get the direction of the right stick
+        Vector3 rightStickDir = new Vector3(rightStick.x, 0, rightStick.y);
+        
+        Vector3 aimPoint = rightStickDir * 10f + transform.position;
+        aimPoint.y = shootPoint.position.y;
+        return aimPoint;
+        
+    }
+
+    
 }
