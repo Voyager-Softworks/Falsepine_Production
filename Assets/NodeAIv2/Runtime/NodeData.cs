@@ -102,8 +102,15 @@ namespace NodeAI
             {
                 if (runtimequery == null && !noQuery)
                 {
-                    runtimequery = (Query)ScriptableObject.CreateInstance(System.Type.GetType(queryType));
-                    runtimequery.RepopulateProperties(properties == null ? new List<SerializableProperty>() : properties);
+                    try
+                    {
+                        runtimequery = (Query)ScriptableObject.CreateInstance(System.Type.GetType(queryType));
+                        runtimequery.RepopulateProperties(properties == null ? new List<SerializableProperty>() : properties);
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogError(e.Message);
+                    }
                 }
                 return runtimequery;
             }
