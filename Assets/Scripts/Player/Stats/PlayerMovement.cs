@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+
     [Header("Movement")]
     private Animator _animator;
     CharacterController controller;
@@ -94,6 +95,9 @@ public class PlayerMovement : MonoBehaviour
             Debug.LogError("PlayerMovement: Missing camera or controller");
             return;
         }
+
+        //set the _WorldCutPos of the shader to the player's position
+        Shader.SetGlobalVector("WorldCutPos", transform.position);
 
         Move();
     }
