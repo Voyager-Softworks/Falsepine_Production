@@ -148,9 +148,6 @@ public class Console : MonoBehaviour
             string inventoryID = split[1];
 
             Inventory inventory = Inventory.allInventories.Find(x => x.id == inventoryID);
-            Debug.Log(inventory);
-            Debug.Log(inventory.id);
-            Debug.Log(inventory.name);
             if (!inventory){
                 Log("- Inventory not found");
 
