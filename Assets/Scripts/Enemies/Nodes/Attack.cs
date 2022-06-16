@@ -113,7 +113,7 @@ public class Attack : NodeAI.ActionBase
         
         if(animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9 && timeSinceInitialized >= 0.3f)
         {
-            animator.ResetTrigger(GetProperty<string>("AttackName"));
+            animator.ResetTrigger(attackData.animationTrigger);
             state = NodeData.State.Success;
             navAgent.isStopped = false;
             return NodeData.State.Success;

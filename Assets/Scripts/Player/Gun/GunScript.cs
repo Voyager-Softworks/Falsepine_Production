@@ -156,6 +156,7 @@ public class GunScript : MonoBehaviour
         if (reloadTimer > 0.0f)
         {
             reloadTimer -= Time.deltaTime;
+            _animator.SetLayerWeight(2, 1.0f);
             //transform.LookAt(playerMovement.transform.position + playerMovement.transform.forward*2.0f - playerMovement.transform.up);
         }
         else if (shootTimer > 0.0f)
@@ -189,6 +190,7 @@ public class GunScript : MonoBehaviour
 
     private void TryShoot()
     {
+        if(!isAiming) return;
         if (currentClip > 0)
         {
             Shoot();
@@ -280,7 +282,7 @@ public class GunScript : MonoBehaviour
 
     private void UpdateAimAngle()
     {
-        if (aimAction.ReadValue<float>() > 0.0f) {
+        if (aimAction.ReadValue<float>() > 0.0f || (Gamepad.current != null && Gamepad.current.rightStick.ReadValue().magnitude > 0.0f)) {
             if (!isAiming){
                 isAiming = true;
 
@@ -315,7 +317,12 @@ public class GunScript : MonoBehaviour
 
     private void LookAtCursor()
     {
-        mouseAimPoint = playerMovement.GetMouseAimPoint();
+        if(Gamepad.current == null)
+            mouseAimPoint = playerMovement.GetMouseAimPoint();
+        else
+        {
+            mouseAimPoint = playerMovement.GetGamepadAimPoint();
+        }
         if (Vector3.Distance(playerMovement.transform.position, mouseAimPoint) > 1.5f && !playerMovement.isRolling)
         {
             canvas.transform.LookAt(mouseAimPoint);
