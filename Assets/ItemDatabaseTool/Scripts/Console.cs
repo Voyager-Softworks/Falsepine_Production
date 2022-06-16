@@ -88,6 +88,8 @@ public class Console : MonoBehaviour
         {
             view.SetActive(true);
             input.SetActive(true);
+
+            StartTyping();
         }
     }
 

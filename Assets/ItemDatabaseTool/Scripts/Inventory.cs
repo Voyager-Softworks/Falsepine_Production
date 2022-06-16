@@ -216,6 +216,18 @@ public class Inventory : MonoBehaviour
     /// </summary>
     public void LoadInventory()
     {
+        // if save path doesn't exist, create it
+        if (!Directory.Exists(GetSavePath()))
+        {
+            Directory.CreateDirectory(GetSavePath());
+        }
+        // if save file doesn't exist, return
+        if (!File.Exists(GetSaveFilePath()))
+        {
+            Debug.Log("Save file does not exist.");
+            return;
+        }
+
         // get file name
         string file = System.IO.File.ReadAllText(GetSaveFilePath());
 
