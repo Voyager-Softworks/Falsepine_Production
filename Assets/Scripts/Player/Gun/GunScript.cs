@@ -91,7 +91,7 @@ public class GunScript : MonoBehaviour
 
         if (canvas != null){
             //if canvas, set scale to be 1 in relation to world
-            canvas.transform.localScale = Vector3.one * (1.0f / transform.lossyScale.x);
+            //canvas.transform.localScale = Vector3.one * (1.0f / transform.lossyScale.x);
         }
 
         UpdateUI();
