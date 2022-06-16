@@ -76,8 +76,8 @@ public class PlayerHealth : MonoBehaviour
         if (isInvulnerable || isDead) return;
 
         if (_audioSource && hurtSound) _audioSource.PlayOneShot(hurtSound);
-        if (_animator) _animator.SetTrigger("Impact");
-
+        if (_animator) _animator.SetTrigger("Injured");
+        _animator?.SetLayerWeight(2, 1);
         VignetteScript vs = FindObjectOfType<VignetteScript>();
         if (vs) vs.StartVignette();
 
