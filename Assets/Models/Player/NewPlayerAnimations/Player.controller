@@ -39,7 +39,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Player_Rig_RUN_Shotgun
-  m_Speed: 1.3
+  m_Speed: 1.8
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 5875327946619143658}
@@ -392,7 +392,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 'Player_Rig_Dodgeroll_Shotgun '
-  m_Speed: 2
+  m_Speed: 2.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -4525837560578676990}
@@ -455,7 +455,7 @@ BlendTree:
     m_Motion: {fileID: 7400000, guid: 0b83be782ea562b41ae7d190ce500554, type: 2}
     m_Threshold: 0
     m_Position: {x: -0.5, y: 0.5}
-    m_TimeScale: 1
+    m_TimeScale: 0.8
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
@@ -463,7 +463,7 @@ BlendTree:
     m_Motion: {fileID: 7400000, guid: 98e5f673fb849104f9db3425e41d1bb9, type: 2}
     m_Threshold: 0.16666667
     m_Position: {x: 0, y: 0.5}
-    m_TimeScale: 1
+    m_TimeScale: 0.8
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
@@ -471,7 +471,7 @@ BlendTree:
     m_Motion: {fileID: 7400000, guid: ad1ebf658e9ec6c4f85b9d18c2a31982, type: 2}
     m_Threshold: 0.33333334
     m_Position: {x: 0.5, y: 0.5}
-    m_TimeScale: 1
+    m_TimeScale: 0.8
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
@@ -479,7 +479,7 @@ BlendTree:
     m_Motion: {fileID: 7400000, guid: 21e3af5f2f110aa4a850484f28afe293, type: 2}
     m_Threshold: 0.5
     m_Position: {x: 0, y: 0}
-    m_TimeScale: 1
+    m_TimeScale: 0.8
     m_CycleOffset: 0
     m_DirectBlendParameter: MoveForward
     m_Mirror: 0
@@ -487,7 +487,7 @@ BlendTree:
     m_Motion: {fileID: 7400000, guid: 6646e6c11e617a440975dbdfc9baff19, type: 2}
     m_Threshold: 0.6666667
     m_Position: {x: -0.5, y: -0.5}
-    m_TimeScale: 1
+    m_TimeScale: 0.8
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
@@ -495,7 +495,7 @@ BlendTree:
     m_Motion: {fileID: 7400000, guid: 112fd6d3a71f07c4895e790899f11d01, type: 2}
     m_Threshold: 0.8333333
     m_Position: {x: 0, y: -0.5}
-    m_TimeScale: 1
+    m_TimeScale: 0.8
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
@@ -503,7 +503,7 @@ BlendTree:
     m_Motion: {fileID: 7400000, guid: 449877d84f2491c49b5f646bc7f784eb, type: 2}
     m_Threshold: 1
     m_Position: {x: 0.5, y: -0.5}
-    m_TimeScale: 1
+    m_TimeScale: 0.8
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
@@ -572,14 +572,6 @@ AnimatorStateMachine:
   - {fileID: 2121576278002914341}
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 1674045860926489329}
-    second:
-    - {fileID: 6115962697398447567}
-    - {fileID: 6928628360251195037}
-  - first: {fileID: -4547240125745737681}
-    second:
-    - {fileID: -873455677846292803}
-    - {fileID: -2376836262600086975}
   - first: {fileID: -8890820667564793745}
     second:
     - {fileID: 8129384875087268861}
@@ -587,15 +579,23 @@ AnimatorStateMachine:
   - first: {fileID: -4549030740288846795}
     second:
     - {fileID: -7219326525597318795}
+  - first: {fileID: -4547240125745737681}
+    second:
+    - {fileID: -873455677846292803}
+    - {fileID: -2376836262600086975}
+  - first: {fileID: -3698499038460962043}
+    second:
+    - {fileID: -7347672680498426304}
   - first: {fileID: 5910326519606577}
     second:
     - {fileID: -7907621965387234407}
   - first: {fileID: 1562942159070476559}
     second:
     - {fileID: 4756571445504594784}
-  - first: {fileID: -3698499038460962043}
+  - first: {fileID: 1674045860926489329}
     second:
-    - {fileID: -7347672680498426304}
+    - {fileID: 6115962697398447567}
+    - {fileID: 6928628360251195037}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: -150, y: 140, z: 0}
@@ -1772,7 +1772,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Player_Rig_JOG_Revolver
-  m_Speed: 1.2
+  m_Speed: 1.7
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -7845621888794323774}
@@ -1806,91 +1806,91 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: MoveSide
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Revolver
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 1
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Shotgun
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Rifle
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Injured
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Aiming
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Running
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Jogging
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: CheckClue
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: ThrowDynamite
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Dodge
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: PlaceBeartrap
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Reload
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: Shoot
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -2266,7 +2266,7 @@ AnimatorStateMachine:
   - {fileID: 3037121695101757698}
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 110, y: 20, z: 0}
+  m_AnyStatePosition: {x: 50, y: 80, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 870, y: 140, z: 0}
   m_ParentStateMachinePosition: {x: 700, y: 20, z: 0}
@@ -2481,7 +2481,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Player_Rig_JOG_Rifle
-  m_Speed: 1.2
+  m_Speed: 1.7
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -8549861818260827958}
@@ -2598,7 +2598,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Player_Rig_JOG_Shotgun
-  m_Speed: 1.2
+  m_Speed: 1.7
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 2099843005790934971}
@@ -2626,7 +2626,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Player_Rig_RUN_Rifle
-  m_Speed: 1.3
+  m_Speed: 1.8
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 2225724070381365518}
@@ -2951,7 +2951,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Player_Rig_Dodgeroll_Rifle
-  m_Speed: 2
+  m_Speed: 2.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 4978568174916980894}
@@ -3536,7 +3536,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Player_Rig_Dodgeroll_Revolver
-  m_Speed: 2
+  m_Speed: 2.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 4454832824938420432}
@@ -3589,15 +3589,15 @@ AnimatorStateMachine:
   - {fileID: 4769049957495763871}
   - {fileID: 3992521426152869298}
   m_StateMachineTransitions:
+  - first: {fileID: -3903278155084775317}
+    second:
+    - {fileID: -1278280282264650889}
   - first: {fileID: -427811223205350776}
     second:
     - {fileID: -1467883720284519065}
   - first: {fileID: 1471072520732718988}
     second:
     - {fileID: 5879505082869428574}
-  - first: {fileID: -3903278155084775317}
-    second:
-    - {fileID: -1278280282264650889}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 80, y: 50, z: 0}
   m_EntryPosition: {x: -60, y: 140, z: 0}
@@ -3704,7 +3704,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Player_Rig_RUN_Revolver
-  m_Speed: 1.3
+  m_Speed: 1.8
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -2211329319374560704}
