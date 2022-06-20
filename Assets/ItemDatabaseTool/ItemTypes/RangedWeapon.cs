@@ -138,6 +138,12 @@ public class RangedWeapon : Item
 
             //end red box
             GUILayout.EndVertical();
+
+            // on change, save the changes
+            if (GUI.changed)
+            {
+                EditorUtility.SetDirty(rangedWeapon);
+            }
         }
     }
     #endif
