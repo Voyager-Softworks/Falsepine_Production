@@ -24,7 +24,7 @@ public class PickupScript : Interactable
 
     public void AddToInventory(string _itemName, int _amount)
     {
-        InventoryManager inventoryManager = FindObjectOfType<InventoryManager>();
+        old_InventoryManager inventoryManager = FindObjectOfType<old_InventoryManager>();
 
         if (inventoryManager == null) return;
 
