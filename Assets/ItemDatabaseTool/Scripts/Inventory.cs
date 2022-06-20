@@ -18,6 +18,11 @@ public class Inventory : MonoBehaviour
 
     private void Awake() {
         AddInventory(this);
+
+        // if game is not running, convert items to instances.
+        if (Application.isPlaying){
+            ConvertItemsToInstances();
+        }
     }
 
     private void OnDestroy() {
@@ -59,6 +64,9 @@ public class Inventory : MonoBehaviour
 
                 if (m_item.instanceID == "")
                 {
+                    // if game is not running, return
+                    if (!Application.isPlaying) return;
+
                     m_item = m_item.CreateInstance();
                 }
             }
@@ -153,6 +161,22 @@ public class Inventory : MonoBehaviour
         if (item == null) return true;
 
         return false;
+    }
+
+    /// <summary>
+    /// Convert all items to instances.
+    /// </summary>
+    public void ConvertItemsToInstances()
+    {
+        for (int i = 0; i < m_slots.Count; i++)
+        {
+            InventorySlot slot = m_slots[i];
+
+            if (slot.item != null)
+            {
+                slot.item = slot.item.CreateInstance();
+            }
+        }
     }
 
     public static string GetInventoryFolder(int saveSlot = 0){

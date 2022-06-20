@@ -112,7 +112,7 @@ public class PlayerHealth : MonoBehaviour
         if (playerMovement) playerMovement.enabled = false;
         GunScript gunScript = FindObjectOfType<GunScript>();
         if (gunScript) gunScript.enabled = false;
-        InventoryManager inventoryScript = FindObjectOfType<InventoryManager>();
+        old_InventoryManager inventoryScript = FindObjectOfType<old_InventoryManager>();
         if (inventoryScript) inventoryScript.enabled = false;
 
         //set die trigger
