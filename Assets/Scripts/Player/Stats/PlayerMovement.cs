@@ -208,7 +208,8 @@ public class PlayerMovement : MonoBehaviour
                 lookDir.y = 0;
                 lookDir.Normalize();
                 //apply rotation
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDir), Time.deltaTime * 20f);
+                //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDir), Time.deltaTime * 20f);
+                transform.rotation = Quaternion.LookRotation(lookDir);
             }
             else{
                 _animator.SetFloat("MoveSide", 0);
@@ -281,8 +282,12 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 GetMouseAimPoint(){
         //mouse raycast to get direction
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        PlayerInventoryInterface pii = GetComponent<PlayerInventoryInterface>();
+        if (!pii) return mouseAimPoint;
+        GameObject weaponFirepoint = pii.GetWeaponFirepoint(pii.selectedWeapon);
+        if (!weaponFirepoint) return mouseAimPoint;
         //find where ray intersects on the plane of the player
-        Plane playerPlane = new Plane(Vector3.up, shootPoint.position);
+        Plane playerPlane = new Plane(Vector3.up, weaponFirepoint.transform.position);
         float rayDistance;
         if (playerPlane.Raycast(ray, out rayDistance)){
             //get mouse hit pos
