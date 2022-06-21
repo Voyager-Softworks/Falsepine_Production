@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 using UnityEngine.InputSystem;
 
 [Serializable]
@@ -21,14 +22,20 @@ public class PlayerInventoryInterface : MonoBehaviour
     public string playerInventoryName = "player";
     public Inventory playerInventory;
 
-    public enum SelectedWeaponType{ None, Primary, Secondary }
+    public enum SelectedWeaponType{ Primary, Secondary, None }
     [SerializeField] public SelectedWeaponType selectedWeaponType = SelectedWeaponType.None;
+    public Item selectedWeapon;
+
+    public LineRenderer aimLines;
 
 
     // Start is called before the first frame update
     void Start()
     {
         playerInventory = InventoryManager.instance?.GetInventory(playerInventoryName);
+
+        // select weapon
+        SelectWeapon(selectedWeaponType);
     }
 
     // Update is called once per frame
@@ -42,15 +49,39 @@ public class PlayerInventoryInterface : MonoBehaviour
     }
 
     public void SwapWeapon(){
+        // if inventory is null, return
+        if (playerInventory == null) return;
+
         // toggle between primary and secondary weapon
-        if (selectedWeaponType == SelectedWeaponType.Primary){
-            selectedWeaponType = SelectedWeaponType.Secondary;
-        } else if (selectedWeaponType == SelectedWeaponType.Secondary){
-            selectedWeaponType = SelectedWeaponType.Primary;
+        if (selectedWeaponType == SelectedWeaponType.Primary)
+        {
+            SelectWeapon(SelectedWeaponType.Secondary);
+        } 
+        else if (selectedWeaponType == SelectedWeaponType.Secondary)
+        {
+            SelectWeapon(SelectedWeaponType.Primary);
         }
-        else {
-            selectedWeaponType = SelectedWeaponType.Primary;
+
+        // if selected weapon is null, try to select primary, secondary, then none
+        if (selectedWeapon == null){
+            SelectWeapon(SelectedWeaponType.Primary);
+            if (selectedWeapon == null){
+                SelectWeapon(SelectedWeaponType.Secondary);
+                if (selectedWeapon == null){
+                    SelectWeapon(SelectedWeaponType.None);
+                }
+            }
         }
+    }
+
+    public void SelectWeapon(SelectedWeaponType _type){
+        selectedWeaponType = _type;
+
+        // if inventory is null, return
+        if (playerInventory == null) return;
+
+        // get selected weapon
+        selectedWeapon = playerInventory.slots.ElementAtOrDefault((int)selectedWeaponType)?.item;
     }
 
     private void OnEnable() {
