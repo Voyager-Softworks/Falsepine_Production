@@ -24,14 +24,40 @@ public class InventoryManager : MonoBehaviour
             Destroy(this);
             Destroy(gameObject);
         }
+
+        Inventory[] invs = GetComponentsInChildren<Inventory>();
+        foreach (Inventory inv in invs) {
+            AddInventory(inv);
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        Inventory[] invs = GetComponentsInChildren<Inventory>();
-        foreach (Inventory inv in invs) {
-            inventories.Add(inv);
+        
+    }
+
+    public void AddInventory(Inventory inv) {
+        // if inventory is already on this object, remove it first
+        if (inventories.Contains(inv)) {
+            inventories.Remove(inv);
         }
+        
+        inventories.Add(inv);
+    }
+
+    public void RemoveInventory(Inventory inv) {
+        if (inventories.Contains(inv)) {
+            inventories.Remove(inv);
+        }
+    }
+
+    public Inventory GetInventory(string _id) {
+        foreach (Inventory inv in inventories) {
+            if (inv.id == _id) {
+                return inv;
+            }
+        }
+        return null;
     }
 }
