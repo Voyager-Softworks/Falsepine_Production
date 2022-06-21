@@ -81,6 +81,7 @@ public class PlayerInventoryInterface : MonoBehaviour
 
     public GameObject GetWeaponFirepoint(Item weapon)
     {
+        if (!weapon) return null;
         foreach (WeaponModelLink link in weaponFirepointLinks)
         {
             if (link.weapon.id == weapon.id)
