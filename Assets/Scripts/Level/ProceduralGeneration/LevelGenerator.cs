@@ -7,6 +7,7 @@ public class LevelGenerator : MonoBehaviour
 {
     public Tile[] tiles;
 
+    [System.Serializable]
     public struct Tile
     {
         public GameObject tile;
