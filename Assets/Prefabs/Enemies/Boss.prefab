@@ -8560,6 +8560,7 @@ GameObject:
   - component: {fileID: 7675273446768421799}
   - component: {fileID: 6372584593471867872}
   - component: {fileID: 5893823174673977283}
+  - component: {fileID: 6997043509876742857}
   m_Layer: 0
   m_Name: Boss
   m_TagString: Untagged
@@ -8662,6 +8663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AI_Behaviour: {fileID: 11400000, guid: 97d4e4db60345fa6ca0bbb4a91599356, type: 2}
+  faction: 
   inspectorProperties:
   - name: BossStarted
     GUID: 0c992cf5-8e5f-46d4-90af-f936c548f37b
@@ -8677,6 +8679,7 @@ MonoBehaviour:
     v3value: {x: 0, y: 0, z: 0}
     v4value: {x: 0, y: 0, z: 0, w: 0}
     ovalue: {fileID: 0}
+    output: 0
   - name: CorrectBait
     GUID: 20478355-2f55-4d78-ba87-33c114085344
     paramReference: 
@@ -8691,6 +8694,7 @@ MonoBehaviour:
     v3value: {x: 0, y: 0, z: 0}
     v4value: {x: 0, y: 0, z: 0, w: 0}
     ovalue: {fileID: 0}
+    output: 0
   - name: InBearTrap
     GUID: 518bfffd-1db0-4339-b131-78b5898defe4
     paramReference: 
@@ -8705,6 +8709,7 @@ MonoBehaviour:
     v3value: {x: 0, y: 0, z: 0}
     v4value: {x: 0, y: 0, z: 0, w: 0}
     ovalue: {fileID: 0}
+    output: 0
   - name: PlayerPos
     GUID: 4f85eccc-0ed1-4403-8206-58989cd6bdb2
     paramReference: 
@@ -8719,6 +8724,7 @@ MonoBehaviour:
     v3value: {x: 0, y: 0, z: 0}
     v4value: {x: 0, y: 0, z: 0, w: 0}
     ovalue: {fileID: 0}
+    output: 0
   - name: Player
     GUID: e0c135ee-fb8d-4915-a500-668936b4c606
     paramReference: 
@@ -8733,6 +8739,7 @@ MonoBehaviour:
     v3value: {x: 0, y: 0, z: 0}
     v4value: {x: 0, y: 0, z: 0, w: 0}
     ovalue: {fileID: 0}
+    output: 0
   - name: SecondPhase
     GUID: 79350c65-c1be-44df-8afd-add18ae1cd10
     paramReference: 
@@ -8747,6 +8754,7 @@ MonoBehaviour:
     v3value: {x: 0, y: 0, z: 0}
     v4value: {x: 0, y: 0, z: 0, w: 0}
     ovalue: {fileID: 0}
+    output: 0
   - name: BloodbreathSpawnTransform
     GUID: 8a9dba71-0057-491f-8765-1af86356dd42
     paramReference: 
@@ -8761,6 +8769,7 @@ MonoBehaviour:
     v3value: {x: 0, y: 0, z: 0}
     v4value: {x: 0, y: 0, z: 0, w: 0}
     ovalue: {fileID: 6937838353057970097}
+    output: 0
   - name: SpikethrowSpawnTransform
     GUID: 75a0919d-8cd3-447c-84d5-cb5e18826362
     paramReference: 
@@ -8775,6 +8784,7 @@ MonoBehaviour:
     v3value: {x: 0, y: 0, z: 0}
     v4value: {x: 0, y: 0, z: 0, w: 0}
     ovalue: {fileID: 2060785306716778794}
+    output: 0
   nodeTree:
     rootNode:
       GUID: 
@@ -8784,9 +8794,12 @@ MonoBehaviour:
       nodeType: 0
       position: {x: 0, y: 0}
       runtime: {fileID: 0}
+      runtimequery: {fileID: 0}
       properties: []
       runtimeLogicType: 
+      queryType: 
       noLogic: 0
+      noQuery: 0
     rootLeaf:
       nodeData:
         GUID: 
@@ -8796,9 +8809,12 @@ MonoBehaviour:
         nodeType: 0
         position: {x: 0, y: 0}
         runtime: {fileID: 0}
+        runtimequery: {fileID: 0}
         properties: []
         runtimeLogicType: 
+        queryType: 
         noLogic: 0
+        noQuery: 0
       children: []
     nodes: []
 --- !u!114 &3614460409907946256
@@ -8817,7 +8833,10 @@ MonoBehaviour:
   maxHearingRange: 10
   eyeDirection: 4
   sightDistance: 20
-  sightAngle: 100
+  sightAngle: 74.6
+  sightMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!195 &4073824831346734679
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -8832,7 +8851,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 5
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -8878,6 +8897,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6997043509876742857}
+        m_TargetAssemblyTypeName: DebugMissionCompleter, Assembly-CSharp
+        m_MethodName: TryCompleteMission
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -9052,6 +9083,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: e57e4a23106fa5442a6cfd8ceb7683fb, type: 3}
   - {fileID: 8300000, guid: 774f993ccbdbda346bc4f5a966d1c311, type: 3}
   - {fileID: 8300000, guid: 514c834348425134ebeb3da14362a21c, type: 3}
+  audioSource: {fileID: 0}
+--- !u!114 &6997043509876742857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4073824831346734678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ee1b237e44a7754da5a6ec4362b097a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4073824831651167523
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,31 +6,23 @@ using UnityEngine.Events;
 
 public class BossArenaController : MonoBehaviour
 {
+    public NodeAI.NodeAI_Agent boss;
+    HealthScript bossHealth;
     public Transform arenaCentre {
         get {
-            float health = FindObjectOfType<NodeAI.NodeAI_Agent>().gameObject.GetComponent<HealthScript>().currentHealth;
-            if(health <= 75.0f)
-            {
-                return arenaCentreTransforms[1];
-            }
-            else if(health <= 50.0f)
-            {
-                return arenaCentreTransforms[2];
-            }
-            else if(health <= 25.0f)
-            {
-                return arenaCentreTransforms[3];
-            }
-            else
-            {
-                return arenaCentreTransforms[0];
-            }
+            return arenaCentreTransforms[phase];
             
         }
     }
 
     public List<Transform> arenaCentreTransforms = new List<Transform>();
-    public float arenaRadius;
+    public List<float> arenaRadiuses = new List<float>();
+    public float arenaRadius{
+        get {
+            return arenaRadiuses[phase];
+            
+        }
+    }
 
     public AudioClip baitedSound;
 
@@ -43,6 +35,11 @@ public class BossArenaController : MonoBehaviour
     private UIScript _uiScript;
 
     public InputAction correctBait, incorrectBait;
+
+    public int phase = 0;
+    public float phase1Threshold = 75f;
+    public float phase2Threshold = 50f;
+    public float phase3Threshold = 25f;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,6 +49,8 @@ public class BossArenaController : MonoBehaviour
         incorrectBait.Enable();
 
         _uiScript = FindObjectOfType<UIScript>();
+
+        bossHealth = boss.GetComponent<HealthScript>();
 
         if (_uiScript != null){
             onBattleStart.AddListener(EnableBossUI);
@@ -65,7 +64,19 @@ public class BossArenaController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(bossHealth.currentHealth < phase1Threshold && phase == 0)
+        {
+            phase = 1;
+        }
+        if(bossHealth.currentHealth < phase2Threshold && phase == 1)
+        {
+            phase = 2;
+        }
+        if(bossHealth.currentHealth < phase3Threshold && phase == 2)
+        {
+            phase = 3;
+        }
+
     }
 
     public void EnableBossUI(){
@@ -106,7 +117,11 @@ public class BossArenaController : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(arenaCentre.position, arenaRadius);
+        for(int i = 0; i < arenaCentreTransforms.Count; i++)
+        {
+            Gizmos.DrawWireSphere(arenaCentreTransforms[i].position, arenaRadiuses[i]);
+        }
+        
     }
 
     IEnumerator FadeToSecondPhaseCoroutine(float fadeOutTime)

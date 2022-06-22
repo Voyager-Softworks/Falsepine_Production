@@ -72,7 +72,17 @@ namespace Boss.Bonestag
                     arenaController = FindObjectOfType<BossArenaController>();
                 Vector3 playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
                 arenaEdgeGoalPosition = ComputeB(arenaController.arenaCentre.position, Vector3.up, arenaController.arenaRadius, agent.transform.position, (playerPos - agentTransform.position).normalized);
+                NavMeshHit goalPosHit;
+                if(!NavMesh.FindClosestEdge(arenaEdgeGoalPosition, out goalPosHit, NavMesh.AllAreas))
+                {
+                    arenaEdgeGoalPosition.y = agentTransform.position.y;
+                }
+                else
+                {
+                    arenaEdgeGoalPosition = goalPosHit.position;
+                }
                 navAgent.SetDestination(arenaEdgeGoalPosition);
+                
                 
                 if(GetProperty<bool>("SecondPhase")) {
                     agent.GetComponent<AudioSource>().PlayOneShot(chargeSoundPhaseTwo);
@@ -145,7 +155,7 @@ namespace Boss.Bonestag
                         }
                     }
                 }
-                if(Vector3.Distance(agent.transform.position, arenaEdgeGoalPosition) < 4.0f)
+                if(Vector3.Distance(agent.transform.position, arenaEdgeGoalPosition) < 3.0f)
                 {
                     agent.transform.position = RandomPointOnCircle(arenaController.arenaCentre.position, Vector3.up, arenaController.arenaRadius);
                     agent.gameObject.GetComponent<RotateTowardsPlayer>().RotateToPlayer(0.5f, 10.0f, 0.0f);
