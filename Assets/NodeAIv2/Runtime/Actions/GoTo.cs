@@ -51,7 +51,9 @@ namespace NodeAI
                     state = NodeData.State.Success;
                     return NodeData.State.Success;
                 }
-                if(navAgent.SetDestination(GetProperty<Transform>("Position").position))
+                NavMeshHit nhit;
+                NavMesh.SamplePosition(GetProperty<Transform>("Position").position, out nhit, 3.0f, NavMesh.AllAreas);
+                if(navAgent.SetDestination(nhit.position))
                 {
                     navAgent.isStopped = false;
                     navAgent.speed = GetProperty<float>("Speed");

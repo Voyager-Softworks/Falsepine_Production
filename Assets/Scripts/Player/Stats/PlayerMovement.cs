@@ -146,8 +146,8 @@ public class PlayerMovement : MonoBehaviour
         animVelocity = Vector3.Lerp(animVelocity, moveDir, Time.deltaTime * 10f);
         if(playerHealth.isStunned) return;
         //check if placing bear trap anim is playing
-        if (_animator.GetCurrentAnimatorStateInfo(3).IsName("Player|PLACE TRAP (ALL)") ||
-            _animator.GetCurrentAnimatorStateInfo(3).IsName("Player|PAIN (ALL)"))
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Player|PLACE TRAP (ALL)") ||
+            _animator.GetCurrentAnimatorStateInfo(0).IsName("Player|PAIN (ALL)"))
         {
             return;
         }
@@ -183,7 +183,7 @@ public class PlayerMovement : MonoBehaviour
             isRolling = false;
             
 
-            _animator.SetBool("Walking", false);
+            
             _animator.SetBool("Aiming", isAiming);
             _animator.SetBool("Jogging", !isAiming && move.magnitude > 0.1f);
             _animator.SetBool("Running", sprintAction.ReadValue<float>() > 0.1f);
@@ -206,10 +206,6 @@ public class PlayerMovement : MonoBehaviour
 
                 _animator.SetFloat("MoveSide", rightMag);
                 _animator.SetFloat("MoveForward", forwardMag);
-                if (move.magnitude > 0.1f)
-                {
-                    _animator.SetBool("Walking", true);
-                }
                 //calc the direction to look
                 Vector3 lookDir;
                 if(Gamepad.current != null)

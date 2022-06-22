@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Linq;
 
 public class LevelGenerator : MonoBehaviour
 {
@@ -28,35 +29,59 @@ public class LevelGenerator : MonoBehaviour
         
     }
 
+    Tile[] ShuffleTiles()
+    {
+        return tiles.OrderBy(x => Random.value).ToArray();
+    }
+
     Tile[] PickRandomTiles(int count)
     {
         List<Tile> pickedTiles = new List<Tile>();
-        for (int i = 0; i < count; i++)
+        foreach (Tile tile in tiles)
         {
-            float totalChance = 0;
-            foreach (Tile tile in tiles)
+            if(tile.spawnChance == 1.0f)
             {
-                totalChance += tile.spawnChance;
+                pickedTiles.Add(tile);
             }
-            float randomPoint = Random.value * totalChance;
-            float currentChance = 0;
-            foreach (Tile tile in tiles)
+            else
             {
-                currentChance += tile.spawnChance;
-                if (randomPoint <= currentChance)
+                float random = Random.Range(0f, 1f);
+                if(random < tile.spawnChance)
                 {
                     pickedTiles.Add(tile);
-                    break;
                 }
             }
         }
+        while(pickedTiles.Count < count)
+        {
+            foreach (Tile tile in tiles)
+            {
+                if(pickedTiles.Count == count)
+                {
+                    break;
+                }
+                if(tile.spawnChance < 1.0f)
+                {
+                    float random = Random.Range(0f, 1f);
+                    if(random < tile.spawnChance)
+                    {
+                        pickedTiles.Add(tile);
+                    }
+                }
+                else
+                {
+                    continue;
+                }
+            }
+        }
+        Debug.Log(pickedTiles.Count);
         return pickedTiles.ToArray();
     }
 
     IEnumerator GenerateLevel()
     {
         List<NavMeshSurface> surfaces = new List<NavMeshSurface>();
-        Tile[] pickedTiles = PickRandomTiles(9);
+        Tile[] pickedTiles = ShuffleTiles();
         int k = 0;
         for(int i = -1; i <= 1; i++)
         {
@@ -64,9 +89,9 @@ public class LevelGenerator : MonoBehaviour
             {
                 Vector3 pos = new Vector3(i * (tileRadius * 2.0f), 0, j * (tileRadius * 2.0f));
                 //Instantiate tiles with random rotation
-                surfaces.Add(Instantiate(tiles[k].tile, pos, tiles[k].canRotate ? Quaternion.Euler(0,  Random.Range(0, 3) * 90, 0)  : Quaternion.identity).GetComponent<NavMeshSurface>());
+                surfaces.Add(Instantiate(pickedTiles[k].tile, pos, pickedTiles[k].canRotate ? Quaternion.Euler(0,  Random.Range(0, 3) * 90, 0)  : Quaternion.identity).GetComponent<NavMeshSurface>());
                 k++;
-                yield return new WaitForEndOfFrame();
+                yield return new WaitForSeconds(.2f);
             }
         }
         foreach(NavMeshSurface surface in surfaces)

@@ -7,7 +7,7 @@ using System.Linq;
 public class EncircleTarget : NodeAI.ActionBase
 {
     NavMeshAgent navAgent;
-    bool initialized = false;
+    
     public EncircleTarget()
     {
         AddProperty<GameObject>("Target", null);
@@ -18,7 +18,7 @@ public class EncircleTarget : NodeAI.ActionBase
 
     public override void OnInit()
     {
-        initialized = false;
+        
     }
 
     public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
@@ -52,9 +52,11 @@ public class EncircleTarget : NodeAI.ActionBase
                                                         agent.transform.position
                                                         );
         
-        if(steeringVector.magnitude > 0.1f)
+        if(steeringVector.magnitude > 0.01f)
         {
-            navAgent.SetDestination(agent.transform.position + (steeringVector.normalized * GetProperty<float>("Encircle speed")));
+            NavMeshHit nhit;
+            NavMesh.SamplePosition(agent.transform.position + (steeringVector.normalized * GetProperty<float>("Encircle speed")), out nhit, 3.0f, NavMesh.AllAreas);
+            navAgent.SetDestination(nhit.position);
         }
         else
         {
