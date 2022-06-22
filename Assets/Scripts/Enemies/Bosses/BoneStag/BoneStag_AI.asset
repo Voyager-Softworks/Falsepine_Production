@@ -419,112 +419,6 @@ MonoBehaviour:
     queryType: 
     noLogic: 0
     noQuery: 1
-  - GUID: 697764e2-499d-4dcc-9fd0-b3675d88f685
-    parentGUID: 8b230599-6486-4f55-9735-fa7521ca2e94
-    title: Selector
-    childGUIDs:
-    - d3178502-d701-4028-b0c0-2b2b8c8a3554
-    - 73b40e22-fbbf-4e03-8b67-785248a83074
-    - cebd829d-b7dd-4e23-aded-7f06fadaf2dd
-    nodeType: 5
-    position: {x: 1436, y: 1864}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Selector, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: aa17294c-ee09-4486-9bcf-8d690f12853e
-    parentGUID: 61dd29e2-07e5-4bb9-9ada-225736546c27
-    title: Repeater
-    childGUIDs:
-    - 8b230599-6486-4f55-9735-fa7521ca2e94
-    nodeType: 3
-    position: {x: 1081, y: 1864}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: REPEATCOUNT
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 6
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: REPEATFOREVER
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Repeater, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 8b230599-6486-4f55-9735-fa7521ca2e94
-    parentGUID: aa17294c-ee09-4486-9bcf-8d690f12853e
-    title: Sequence
-    childGUIDs:
-    - 697764e2-499d-4dcc-9fd0-b3675d88f685
-    nodeType: 4
-    position: {x: 1266, y: 1864}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 0e3f4fc1-a896-49c0-878b-d502cba04dfd
-    parentGUID: 61dd29e2-07e5-4bb9-9ada-225736546c27
-    title: SetAnimatorTrigger
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 1081, y: 2130}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: NAME
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: AttackingFinished
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Animation.SetAnimatorTrigger, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
   - GUID: 9172273b-b134-442a-8be7-588b16d16245
     parentGUID: 61dd29e2-07e5-4bb9-9ada-225736546c27
     title: PlaySound
@@ -921,11 +815,11 @@ MonoBehaviour:
     parentGUID: e8611c77-c04c-453b-bbff-bc4409e14f2e
     title: Sequence
     childGUIDs:
-    - aa17294c-ee09-4486-9bcf-8d690f12853e
-    - 0e3f4fc1-a896-49c0-878b-d502cba04dfd
     - 9172273b-b134-442a-8be7-588b16d16245
     - 28ef16bb-a476-4736-9a29-db712977fbc7
     - 2c9f3ba8-bc12-4362-84de-e2a6cad72ca3
+    - e4558bd6-adf1-4ecf-a40b-cb9f6d5f3488
+    - 0e3f4fc1-a896-49c0-878b-d502cba04dfd
     nodeType: 4
     position: {x: 915, y: 1326}
     runtime: {fileID: 0}
@@ -1618,7 +1512,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       svalue: 
       ivalue: 0
-      fvalue: 0.25
+      fvalue: 0.15
       bvalue: 0
       cvalue: {r: 0, g: 0, b: 0, a: 0}
       v2value: {x: 0, y: 0}
@@ -1898,7 +1792,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       svalue: 
       ivalue: 0
-      fvalue: 0.25
+      fvalue: 0.15
       bvalue: 0
       cvalue: {r: 0, g: 0, b: 0, a: 0}
       v2value: {x: 0, y: 0}
@@ -2092,7 +1986,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       svalue: 
       ivalue: 0
-      fvalue: 0.2
+      fvalue: 0.5
       bvalue: 0
       cvalue: {r: 0, g: 0, b: 0, a: 0}
       v2value: {x: 0, y: 0}
@@ -2746,6 +2640,245 @@ MonoBehaviour:
     queryType: 
     noLogic: 0
     noQuery: 1
+  - GUID: 697764e2-499d-4dcc-9fd0-b3675d88f685
+    parentGUID: 8b230599-6486-4f55-9735-fa7521ca2e94
+    title: Selector
+    childGUIDs:
+    - d3178502-d701-4028-b0c0-2b2b8c8a3554
+    - 73b40e22-fbbf-4e03-8b67-785248a83074
+    - cebd829d-b7dd-4e23-aded-7f06fadaf2dd
+    nodeType: 5
+    position: {x: 1725, y: 1884}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Selector, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: aa17294c-ee09-4486-9bcf-8d690f12853e
+    parentGUID: e4558bd6-adf1-4ecf-a40b-cb9f6d5f3488
+    title: Repeater
+    childGUIDs:
+    - 8b230599-6486-4f55-9735-fa7521ca2e94
+    nodeType: 3
+    position: {x: 1370, y: 1884}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: REPEATCOUNT
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 6
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: REPEATFOREVER
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Repeater, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 8b230599-6486-4f55-9735-fa7521ca2e94
+    parentGUID: aa17294c-ee09-4486-9bcf-8d690f12853e
+    title: Sequence
+    childGUIDs:
+    - 697764e2-499d-4dcc-9fd0-b3675d88f685
+    nodeType: 4
+    position: {x: 1555, y: 1884}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: e4558bd6-adf1-4ecf-a40b-cb9f6d5f3488
+    parentGUID: 61dd29e2-07e5-4bb9-9ada-225736546c27
+    title: Parallel
+    childGUIDs:
+    - aa17294c-ee09-4486-9bcf-8d690f12853e
+    - 961e5817-ab05-4c8d-8d51-6676c9fd69a2
+    nodeType: 6
+    position: {x: 1081, y: 1884}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Parallel, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 0e3f4fc1-a896-49c0-878b-d502cba04dfd
+    parentGUID: 61dd29e2-07e5-4bb9-9ada-225736546c27
+    title: SetAnimatorTrigger
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 1081, y: 2008}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: NAME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: AttackingFinished
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Animation.SetAnimatorTrigger, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 63ccfdce-56ae-4f58-977e-d2744f5bcf9c
+    parentGUID: 961e5817-ab05-4c8d-8d51-6676c9fd69a2
+    title: Sequence
+    childGUIDs:
+    - 898da118-4a22-430c-be45-161d59a9521d
+    - 0ede59de-431d-4a3e-8aa3-0535139e2eed
+    nodeType: 4
+    position: {x: 1389, y: 2294}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 898da118-4a22-430c-be45-161d59a9521d
+    parentGUID: 63ccfdce-56ae-4f58-977e-d2744f5bcf9c
+    title: IfTrue
+    childGUIDs: []
+    nodeType: 2
+    position: {x: 1573, y: 2294}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: CONDITION
+      GUID: 90866170-fd5e-4ea6-a998-bd0524b7b70e
+      paramReference: 751da48b-e23e-4b79-953d-ed720a113860
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.IfTrue, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 90866170-fd5e-4ea6-a998-bd0524b7b70e
+    parentGUID: 751da48b-e23e-4b79-953d-ed720a113860
+    title: PhaseChange
+    childGUIDs: []
+    nodeType: 7
+    position: {x: 1389, y: 2370}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: 
+    queryType: 
+    noLogic: 1
+    noQuery: 1
+  - GUID: 0ede59de-431d-4a3e-8aa3-0535139e2eed
+    parentGUID: 63ccfdce-56ae-4f58-977e-d2744f5bcf9c
+    title: SetBoolParameter
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 1573, y: 2404}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: PARAMETERNAME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: PhaseChange
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: VALUE
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: SetBoolParameter, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 961e5817-ab05-4c8d-8d51-6676c9fd69a2
+    parentGUID: e4558bd6-adf1-4ecf-a40b-cb9f6d5f3488
+    title: RepeatUntilSuccess
+    childGUIDs:
+    - 63ccfdce-56ae-4f58-977e-d2744f5bcf9c
+    nodeType: 3
+    position: {x: 1174, y: 2294}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.RepeatUntilSuccess, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
   exposedProperties:
   - name: BossStarted
     GUID: 0c992cf5-8e5f-46d4-90af-f936c548f37b
@@ -2857,6 +2990,21 @@ MonoBehaviour:
     paramReference: 
     serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+    svalue: 
+    ivalue: 0
+    fvalue: 0
+    bvalue: 0
+    cvalue: {r: 0, g: 0, b: 0, a: 0}
+    v2value: {x: 0, y: 0}
+    v3value: {x: 0, y: 0, z: 0}
+    v4value: {x: 0, y: 0, z: 0, w: 0}
+    ovalue: {fileID: 0}
+    output: 0
+  - name: PhaseChange
+    GUID: 751da48b-e23e-4b79-953d-ed720a113860
+    paramReference: 
+    serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+      PublicKeyToken=b77a5c561934e089
     svalue: 
     ivalue: 0
     fvalue: 0

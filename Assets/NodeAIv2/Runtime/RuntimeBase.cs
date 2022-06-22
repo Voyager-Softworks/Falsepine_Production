@@ -440,6 +440,27 @@ namespace NodeAI
         
     }
 
+    public class RepeatUntilSuccess : DecoratorBase
+    {
+        public override NodeData.State ApplyDecorator(NodeAI_Agent agent, NodeTree.Leaf child)
+        {
+            NodeData.State childState = child.nodeData.Eval(agent, child);
+            if (childState == NodeData.State.Running)
+            {
+                return NodeData.State.Running;
+            }
+            else if (childState == NodeData.State.Success)
+            {
+                return NodeData.State.Success;
+            }
+            else
+            {
+                child.nodeData.Init(child);
+                return NodeData.State.Running;
+            }
+        }
+    }
+
     public class Chance : DecoratorBase
     {
         float randValue = 0;

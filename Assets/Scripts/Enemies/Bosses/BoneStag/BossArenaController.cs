@@ -67,14 +67,17 @@ public class BossArenaController : MonoBehaviour
         if(bossHealth.currentHealth < phase1Threshold && phase == 0)
         {
             phase = 1;
+            boss.SetParameter<bool>("PhaseChange", true);
         }
         if(bossHealth.currentHealth < phase2Threshold && phase == 1)
         {
             phase = 2;
+            boss.SetParameter<bool>("PhaseChange", true);
         }
         if(bossHealth.currentHealth < phase3Threshold && phase == 2)
         {
             phase = 3;
+            boss.SetParameter<bool>("PhaseChange", true);
         }
 
     }
