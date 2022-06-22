@@ -128,7 +128,7 @@ public class Item : ScriptableObject
     /// <summary>
     /// Update function for the item
     /// </summary>
-    public virtual void Update(GameObject _owner)
+    public virtual void ManualUpdate(GameObject _owner)
     {
         // Update the item
     }

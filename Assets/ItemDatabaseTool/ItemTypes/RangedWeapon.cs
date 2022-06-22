@@ -95,8 +95,8 @@ public class RangedWeapon : Item
         return newItem;
     }
 
-    public override void Update(GameObject _owner){
-        base.Update(_owner);
+    public override void ManualUpdate(GameObject _owner){
+        base.ManualUpdate(_owner);
         
         if (!_owner) return;
 

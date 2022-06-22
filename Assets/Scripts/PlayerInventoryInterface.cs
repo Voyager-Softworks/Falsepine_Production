@@ -18,6 +18,7 @@ public class PlayerInventoryInterface : MonoBehaviour
     public InputAction fireWeaponAction;
     // aim weapon
     public InputAction aimWeaponAction;
+    public InputAction useEquipmentAction;
 
     [Header("Inventory")]
     public string playerInventoryName = "player";
@@ -26,6 +27,7 @@ public class PlayerInventoryInterface : MonoBehaviour
     public enum SelectedWeaponType{ Primary, Secondary, None }
     [SerializeField] public SelectedWeaponType selectedWeaponType = SelectedWeaponType.None;
     public Item selectedWeapon;
+    public Item selectedEquipment;
 
     [Serializable]
     public class WeaponModelLink
@@ -52,6 +54,9 @@ public class PlayerInventoryInterface : MonoBehaviour
         SwapWeapon();
         // select weapon
         SelectWeapon(selectedWeaponType);
+
+        // select equipment
+        SelectEquipment();
     }
 
     // Update is called once per frame
@@ -64,7 +69,7 @@ public class PlayerInventoryInterface : MonoBehaviour
         }
 
         if (selectedWeapon){
-            selectedWeapon.Update(gameObject);
+            selectedWeapon.ManualUpdate(gameObject);
 
             GameObject weaponFirepoint = GetWeaponFirepoint(selectedWeapon);
             Vector3 weaponFirepointPosition = weaponFirepoint.transform.position;
@@ -76,7 +81,10 @@ public class PlayerInventoryInterface : MonoBehaviour
                 // if fire weapon action is pressed and is not auto and is not shooting, shoot weapon || if fire weapon action is current down and is auto, shoot weapon
                 if ((fireWeaponAction.triggered && !rangedWeapon.m_isAutomnatic) || (fireWeaponAction.ReadValue<float>() > 0 && rangedWeapon.m_isAutomnatic))
                 {
-                    rangedWeapon.TryShoot(weaponFirepointPosition, fireDirection, gameObject);
+                    if (rangedWeapon.TryShoot(weaponFirepointPosition, fireDirection, gameObject)){
+                        // play shoot animation
+                        playerAnimator.SetTrigger("Shoot");
+                    }
                 }
 
                 // if reload action is pressed, reload weapon
@@ -106,6 +114,22 @@ public class PlayerInventoryInterface : MonoBehaviour
             }
 
             UpdateAimLines();
+        }
+
+        if (selectedEquipment){
+            selectedEquipment.ManualUpdate(gameObject);
+
+            if (useEquipmentAction.triggered)
+            {
+                Equipment equipment = selectedEquipment as Equipment;
+                if (equipment)
+                {
+                    Vector3 spawnDirection = (GetComponent<PlayerMovement>().GetMouseAimPoint() - transform.position).normalized;
+                    Vector3 spawnPostion = transform.position + spawnDirection * 1.5f;
+
+                    equipment.TossPrefab(spawnPostion, spawnDirection * 0.5f, gameObject);
+                }
+            }
         }
     }
 
@@ -234,6 +258,17 @@ public class PlayerInventoryInterface : MonoBehaviour
         }
     }
 
+    public void SelectEquipment(){
+        // if inventory is null, return
+        if (playerInventory == null) return;
+
+        // get selected equipment
+        selectedEquipment = playerInventory.slots.ElementAtOrDefault(2)?.item;
+
+        // if selected equipment is null, return
+        if (selectedEquipment == null) return;
+    }
+
     public void DisableAllAnimatorWeapons(){
         if (playerAnimator == null) return;
 
@@ -261,6 +296,7 @@ public class PlayerInventoryInterface : MonoBehaviour
         reloadAction.Enable();
         fireWeaponAction.Enable();
         aimWeaponAction.Enable();
+        useEquipmentAction.Enable();
     }
 
     public void DisableInput()
@@ -269,5 +305,6 @@ public class PlayerInventoryInterface : MonoBehaviour
         reloadAction.Disable();
         fireWeaponAction.Disable();
         aimWeaponAction.Disable();
+        useEquipmentAction.Disable();
     }
 }

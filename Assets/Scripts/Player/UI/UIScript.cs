@@ -44,5 +44,43 @@ public class UIScript : MonoBehaviour
         if (bossHealthBar != null) bossHealthBarMaxWidth = bossHealthBar.rectTransform.sizeDelta.x;
 
         OnStart.Invoke();
+
+        // close pause
+        ClosePauseMenu();
     }
+
+    private void Update() {
+        // if escape is pressed, toggle pause
+        if (Keyboard.current.escapeKey.wasPressedThisFrame) {
+            TogglePauseMenu();
+        }
+    }
+
+    private void TogglePauseMenu()
+    {
+        if (pauseUI == null) return;
+
+        if (pauseUI.activeSelf)
+        {
+            ClosePauseMenu();
+        }
+        else
+        {
+            OpenPauseMenu();
+        }
+    }
+
+    private void OpenPauseMenu(){
+        if (pauseUI == null) return;
+
+        pauseUI.SetActive(true);
+    }
+
+    private void ClosePauseMenu(){
+        if (pauseUI == null) return;
+
+        pauseUI.SetActive(false);
+    }
+
+
 }
