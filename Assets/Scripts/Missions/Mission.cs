@@ -41,4 +41,11 @@ public class Mission : ScriptableObject
     [SerializeField] public string description;
 
     [SerializeField] public bool isCompleted;
+
+    // equality check
+    public bool Equals(Mission other)
+    {
+        return this.size == other.size && this.zone == other.zone && this.type == other.type && this.title == other.title && this.description == other.description;
+    }
+
 }
