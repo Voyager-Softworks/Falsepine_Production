@@ -69,6 +69,7 @@ MonoBehaviour:
     - f1bdc78a-c119-4a90-b80b-d3405224f0f3
     - 8f6894e6-97c5-4593-a169-0fe59e7a733d
     - 0d3aca3f-30c1-4152-8bc9-79a37c1fa1bd
+    - 07203438-4790-4f12-a2f9-29a763e208d4
     nodeType: 4
     position: {x: 235, y: 0}
     runtime: {fileID: 0}
@@ -214,7 +215,7 @@ MonoBehaviour:
     title: SetAnimatorTrigger
     childGUIDs: []
     nodeType: 1
-    position: {x: 406, y: 466}
+    position: {x: 397, y: 628}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -243,7 +244,7 @@ MonoBehaviour:
     title: WaitFor
     childGUIDs: []
     nodeType: 1
-    position: {x: 406, y: 576}
+    position: {x: 397, y: 738}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -273,7 +274,7 @@ MonoBehaviour:
     childGUIDs:
     - b422d5c6-ec77-45c1-b2dd-6349ecb8465f
     nodeType: 3
-    position: {x: 406, y: 772}
+    position: {x: 397, y: 934}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -1377,7 +1378,7 @@ MonoBehaviour:
     - 7130317e-3727-4a1d-bda1-8532fa7faafb
     - 2dd2ae1e-da72-4375-aae0-a805133436bd
     nodeType: 6
-    position: {x: 406, y: 676}
+    position: {x: 397, y: 838}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -1391,7 +1392,7 @@ MonoBehaviour:
     title: WaitUntilAnimationComplete
     childGUIDs: []
     nodeType: 1
-    position: {x: 546, y: 702}
+    position: {x: 537, y: 864}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -1420,7 +1421,7 @@ MonoBehaviour:
     title: WaitUntilAnimationComplete
     childGUIDs: []
     nodeType: 1
-    position: {x: 547, y: 611}
+    position: {x: 538, y: 773}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -1528,8 +1529,82 @@ MonoBehaviour:
       ovalue: {fileID: 0}
       output: 0
     - name: PITCH
-      GUID: 8e855910-c645-41b9-a62e-05330b0f10d2
-      paramReference: 9cf89370-68fa-4b57-8432-0493b106e0b8
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 1
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: DELAY
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Audio.PlaySound, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 07203438-4790-4f12-a2f9-29a763e208d4
+    parentGUID: d69fa4e9-1ab3-434f-bc4c-c396802c3093
+    title: PlaySound
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 397, y: 456}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: SOUND
+      GUID: null
+      paramReference: null
+      serializedTypename: UnityEngine.AudioClip, UnityEngine.AudioModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 8300000, guid: 59791918df569d94bad00887bf9ed3c0, type: 3}
+      output: 0
+    - name: VOLUME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 1
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: PITCH
+      GUID: null
+      paramReference: null
       serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       svalue: 
@@ -1701,6 +1776,7 @@ MonoBehaviour:
     - 0d3aca3f-30c1-4152-8bc9-79a37c1fa1bd
     - 2dd2ae1e-da72-4375-aae0-a805133436bd
     - 7130317e-3727-4a1d-bda1-8532fa7faafb
+    - 07203438-4790-4f12-a2f9-29a763e208d4
   - title: Attack
     childGUIDs:
     - 90265fd9-35ff-4a9a-bcdd-618bbc876d74
