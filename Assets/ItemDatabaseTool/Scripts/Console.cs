@@ -303,6 +303,14 @@ public class Console : MonoBehaviour
             return;
         }
 
+        // "scene sceneNumber"
+        if (split.Length == 2 && split[0] == "scene")
+        {
+            int sceneNumber = int.Parse(split[1]);
+            SceneManager.LoadScene(sceneNumber);
+            return;
+        }
+
         // command not found
         Log("- Command not found");
     }
