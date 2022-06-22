@@ -88,7 +88,7 @@ public class DamageDealer : MonoBehaviour
         for (int i = 0; i < duration / waitBetweenSpawns; i++)
         {
             GameObject proj = Instantiate(projectile, spawnPoint.position, spawnPoint.rotation);
-            proj.GetComponent<Rigidbody>().velocity = proj.transform.forward * speed;
+            proj.GetComponent<Rigidbody>().velocity = proj.transform.forward * -speed;
             Destroy(proj, 20.0f);
             yield return new WaitForSeconds(waitBetweenSpawns);
         }
