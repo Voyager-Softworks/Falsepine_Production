@@ -417,7 +417,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 'Player_Rig_Dodgeroll_Shotgun '
-  m_Speed: 2.5
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -4525837560578676990}
@@ -486,7 +486,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 98e5f673fb849104f9db3425e41d1bb9, type: 2}
-    m_Threshold: 0.16666667
+    m_Threshold: 0.125
     m_Position: {x: 0, y: 0.5}
     m_TimeScale: 0.8
     m_CycleOffset: 0
@@ -494,7 +494,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: ad1ebf658e9ec6c4f85b9d18c2a31982, type: 2}
-    m_Threshold: 0.33333334
+    m_Threshold: 0.25
     m_Position: {x: 0.5, y: 0.5}
     m_TimeScale: 0.8
     m_CycleOffset: 0
@@ -502,7 +502,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 21e3af5f2f110aa4a850484f28afe293, type: 2}
-    m_Threshold: 0.5
+    m_Threshold: 0.375
     m_Position: {x: 0, y: 0}
     m_TimeScale: 0.8
     m_CycleOffset: 0
@@ -510,7 +510,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 6646e6c11e617a440975dbdfc9baff19, type: 2}
-    m_Threshold: 0.6666667
+    m_Threshold: 0.5
     m_Position: {x: -0.5, y: -0.5}
     m_TimeScale: 0.8
     m_CycleOffset: 0
@@ -518,7 +518,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 112fd6d3a71f07c4895e790899f11d01, type: 2}
-    m_Threshold: 0.8333333
+    m_Threshold: 0.625
     m_Position: {x: 0, y: -0.5}
     m_TimeScale: 0.8
     m_CycleOffset: 0
@@ -526,7 +526,7 @@ BlendTree:
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 449877d84f2491c49b5f646bc7f784eb, type: 2}
-    m_Threshold: 1
+    m_Threshold: 0.75
     m_Position: {x: 0.5, y: -0.5}
     m_TimeScale: 0.8
     m_CycleOffset: 0
@@ -535,7 +535,7 @@ BlendTree:
   m_BlendParameter: MoveSide
   m_BlendParameterY: MoveForward
   m_MinThreshold: 0
-  m_MaxThreshold: 1
+  m_MaxThreshold: 0.75
   m_UseAutomaticThresholds: 1
   m_NormalizedBlendValues: 0
   m_BlendType: 3
@@ -597,14 +597,6 @@ AnimatorStateMachine:
   - {fileID: 2121576278002914341}
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 1674045860926489329}
-    second:
-    - {fileID: 6115962697398447567}
-    - {fileID: 6928628360251195037}
-  - first: {fileID: -4547240125745737681}
-    second:
-    - {fileID: -873455677846292803}
-    - {fileID: -2376836262600086975}
   - first: {fileID: -8890820667564793745}
     second:
     - {fileID: 8129384875087268861}
@@ -612,15 +604,23 @@ AnimatorStateMachine:
   - first: {fileID: -4549030740288846795}
     second:
     - {fileID: -7219326525597318795}
+  - first: {fileID: -4547240125745737681}
+    second:
+    - {fileID: -873455677846292803}
+    - {fileID: -2376836262600086975}
+  - first: {fileID: -3698499038460962043}
+    second:
+    - {fileID: -7347672680498426304}
   - first: {fileID: 5910326519606577}
     second:
     - {fileID: -7907621965387234407}
   - first: {fileID: 1562942159070476559}
     second:
     - {fileID: 4756571445504594784}
-  - first: {fileID: -3698499038460962043}
+  - first: {fileID: 1674045860926489329}
     second:
-    - {fileID: -7347672680498426304}
+    - {fileID: 6115962697398447567}
+    - {fileID: 6928628360251195037}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: -150, y: 140, z: 0}
@@ -1813,7 +1813,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: a10006b835afafe4cafaf8be5a2a5da2, type: 2}
+  m_Motion: {fileID: 3878074327305435576, guid: 23eb15b6f56f8e040bf11a5dbd406bcd, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -2286,7 +2286,7 @@ AnimatorStateMachine:
     m_Position: {x: 370, y: 120, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -7279310417876091610}
-    m_Position: {x: 380, y: 180, z: 0}
+    m_Position: {x: 380, y: 170, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions:
@@ -3080,7 +3080,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Player_Rig_Dodgeroll_Rifle
-  m_Speed: 2.5
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 4978568174916980894}
@@ -3692,7 +3692,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Player_Rig_Dodgeroll_Revolver
-  m_Speed: 2.5
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 4454832824938420432}
@@ -3745,15 +3745,15 @@ AnimatorStateMachine:
   - {fileID: 4769049957495763871}
   - {fileID: 3992521426152869298}
   m_StateMachineTransitions:
-  - first: {fileID: 1471072520732718988}
-    second:
-    - {fileID: 5879505082869428574}
   - first: {fileID: -3903278155084775317}
     second:
     - {fileID: -1278280282264650889}
   - first: {fileID: -427811223205350776}
     second:
     - {fileID: -1467883720284519065}
+  - first: {fileID: 1471072520732718988}
+    second:
+    - {fileID: 5879505082869428574}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 80, y: 50, z: 0}
   m_EntryPosition: {x: -60, y: 140, z: 0}
