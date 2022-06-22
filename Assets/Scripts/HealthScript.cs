@@ -6,6 +6,7 @@ using UnityEngine.Events;
 
 public class HealthScript : MonoBehaviour
 {
+    public bool isBoss = false;
     public float currentHealth = 100f;
     public float maxHealth = 100f;
     public bool isDead = false;
@@ -48,7 +49,7 @@ public class HealthScript : MonoBehaviour
         //boss health bar
         if (_uiScript == null) return;
 
-        _uiScript.bossHealthBar.rectTransform.sizeDelta = new Vector2(_uiScript.bossHealthBarMaxWidth * (currentHealth / maxHealth), _uiScript.bossHealthBar.rectTransform.sizeDelta.y);
+        if (isBoss) _uiScript.bossHealthBar.rectTransform.sizeDelta = new Vector2(_uiScript.bossHealthBarMaxWidth * (currentHealth / maxHealth), _uiScript.bossHealthBar.rectTransform.sizeDelta.y);
     }
 
     public void TakeDamage(float damage, GameObject source)

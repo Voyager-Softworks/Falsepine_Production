@@ -128,6 +128,8 @@ public class PlayerInventoryInterface : MonoBehaviour
                     Vector3 spawnPostion = transform.position + spawnDirection * 1.5f;
 
                     equipment.TossPrefab(spawnPostion, spawnDirection * 0.5f, gameObject);
+
+                    playerAnimator.SetTrigger("PlaceTrap");
                 }
             }
         }
