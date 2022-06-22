@@ -113,7 +113,7 @@ public class RangedWeapon : Item
     /// </summary>
     public void TryShoot(Vector3 _origin, Vector3 _direction, GameObject _source)
     {
-        if (m_shootTimer <= 0 && m_waitTimer <= 0)
+        if (m_isAiming && m_shootTimer <= 0 && m_waitTimer <= 0)
         {
             if (m_clipAmmo > 0)
             {
@@ -159,7 +159,7 @@ public class RangedWeapon : Item
                 if (healthScript != null)
                 {
                     healthScript.TakeDamage(m_damage, _source);
-                    Destroy(Instantiate(m_hitEffect, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal)), 2.0f);
+                    if (m_hitEffect) Destroy(Instantiate(m_hitEffect, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal)), 2.0f);
                 }
                 hit.collider.GetComponentInChildren<NodeAI.NodeAI_Senses>()?.RegisterSensoryEvent(
                                                                                                 _source,
@@ -173,13 +173,20 @@ public class RangedWeapon : Item
             if (m_trailEffect != null)
             {
                 GameObject trail = Instantiate(m_trailEffect, _origin, Quaternion.identity);
-                LineRenderer lineRenderer = trail.GetComponent<LineRenderer>();
-                if (lineRenderer != null)
+                // LineRenderer lineRenderer = trail.GetComponent<LineRenderer>();
+                // if (lineRenderer != null)
+                // {
+                //     lineRenderer.SetPosition(0, _origin);
+                //     lineRenderer.SetPosition(1, (hit.distance > 0 ? hit.point : _origin + currentDirection * m_range));
+                // }
+                BulletTrail bulletTrail = trail.GetComponent<BulletTrail>();
+                if (bulletTrail != null)
                 {
-                    lineRenderer.SetPosition(0, _origin);
-                    lineRenderer.SetPosition(1, (hit.distance > 0 ? hit.point : _origin + currentDirection * m_range));
+                    bulletTrail.SetPositions(
+                        _origin,
+                        (hit.distance > 0 ? hit.point : _origin + currentDirection * m_range)
+                    );
                 }
-                Destroy(trail, 1.0f);
             }
         }
 
@@ -233,16 +240,26 @@ public class RangedWeapon : Item
     /// <summary>
     /// Tries to set aim bool.
     /// </summary>
-    public void TrySetAim(bool _aim)
+    public void TrySetAim(bool _aim, GameObject _source)
     {
         // TODO: check if we can aim, or if other things are blocking it
-        if (_aim)
+        if (_aim && !m_isAiming)
         {
             m_isAiming = true;
+            // play start aim sound:
+            if (m_startAimSound != null)
+            {
+                GameObject sound = Instantiate(m_startAimSound, _source.transform.position, Quaternion.identity);
+            }
         }
-        else
+        else if (!_aim && m_isAiming)
         {
             m_isAiming = false;
+            // play stop aim sound:
+            if (m_stopAimSound != null)
+            {
+                GameObject sound = Instantiate(m_stopAimSound, _source.transform.position, Quaternion.identity);
+            }
         }
     }
 

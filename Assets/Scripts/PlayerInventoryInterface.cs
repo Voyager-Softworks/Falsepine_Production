@@ -87,11 +87,11 @@ public class PlayerInventoryInterface : MonoBehaviour
                 // if aim weapon action is down, aim weapon
                 if (aimWeaponAction.ReadValue<float>() > 0)
                 {
-                    rangedWeapon.TrySetAim(true);
+                    rangedWeapon.TrySetAim(true, gameObject);
                 }
                 else
                 {
-                    rangedWeapon.TrySetAim(false);
+                    rangedWeapon.TrySetAim(false, gameObject);
                 }
 
             }
