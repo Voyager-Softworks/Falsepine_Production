@@ -102,8 +102,8 @@ public class GunScript : MonoBehaviour
     {
         if (playerMovement == null || uiScript == null)
         {
-            Debug.LogError("GunScript: Missing player movement or ui script");
-            return;
+            //Debug.LogError("GunScript: Missing player movement or ui script");
+            //return;
         }
 
         UpdateAimAngle();
@@ -277,7 +277,7 @@ public class GunScript : MonoBehaviour
     }
 
     private void UpdateUI(){
-        uiScript.ammoText.text = currentClip.ToString() + " / " + clipSize.ToString();
+        if (uiScript) uiScript.ammoText.text = currentClip.ToString() + " / " + clipSize.ToString();
     }
 
     private void UpdateAimAngle()
@@ -307,6 +307,7 @@ public class GunScript : MonoBehaviour
         rightAimAngle = Quaternion.AngleAxis(currentAimAngle, Vector3.up) * transform.forward;
         leftAimAngle = Quaternion.AngleAxis(-currentAimAngle, Vector3.up) * transform.forward;
 
+        if (!uiScript) return;
         CursorScript cs = uiScript.cursorScript;
         if (cs)
         {

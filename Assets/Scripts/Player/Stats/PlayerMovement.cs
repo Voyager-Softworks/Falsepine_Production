@@ -39,8 +39,17 @@ public class PlayerMovement : MonoBehaviour
     private Camera cam;
     private AudioSource audioSource;
 
+    public AudioClip dodgeSound;
+    public AudioClip[] footstepSounds;
+
     Vector3 camForward;
     Vector3 camRight;
+
+    public void DoFootstep()
+    {
+        int random = Random.Range(0, footstepSounds.Length);
+        audioSource.PlayOneShot(footstepSounds[random]);
+    }
 
 
     // Start is called before the first frame update
