@@ -62,7 +62,76 @@ public class PlayerInventoryInterface : MonoBehaviour
             SwapWeapon();
         }
 
-        if (aimLines){
+        if (selectedWeapon){
+            selectedWeapon.Update();
+
+            GameObject weaponFirepoint = GetWeaponFirepoint(selectedWeapon);
+            Vector3 weaponFirepointPosition = weaponFirepoint.transform.position;
+            Vector3 fireDirection = GetComponent<PlayerMovement>().GetMouseAimPoint() - weaponFirepointPosition;
+
+            RangedWeapon rangedWeapon = selectedWeapon as RangedWeapon;
+            if (rangedWeapon)
+            {
+                // if fire weapon action is pressed and is not auto and is not shooting, shoot weapon || if fire weapon action is current down and is auto, shoot weapon
+                if ((fireWeaponAction.triggered && !rangedWeapon.m_isAutomnatic) || (fireWeaponAction.ReadValue<float>() > 0 && rangedWeapon.m_isAutomnatic))
+                {
+                    rangedWeapon.TryShoot(weaponFirepointPosition, fireDirection, gameObject);
+                }
+
+                // if reload action is pressed, reload weapon
+                if (reloadAction.triggered)
+                {
+                    rangedWeapon.TryReload(gameObject);
+                }
+
+                // if aim weapon action is down, aim weapon
+                if (aimWeaponAction.ReadValue<float>() > 0)
+                {
+                    rangedWeapon.TrySetAim(true);
+                }
+                else
+                {
+                    rangedWeapon.TrySetAim(false);
+                }
+
+            }
+
+            UpdateAimLines();
+        }
+    }
+
+    private void UpdateAimLines()
+    {
+        if (aimLines)
+        {
+            if (!selectedWeapon) return;
+
+            RangedWeapon rangedWeapon = selectedWeapon as RangedWeapon;
+            if (!rangedWeapon) return;
+
+            if (!rangedWeapon.m_isAiming){
+                // fade to transparent over time
+                Color currentColor = aimLines.startColor;
+                // subtract alpha from current color using time
+                currentColor.a -= Time.deltaTime * 10.0f;
+                // clamp aplpha between 0 and 1
+                currentColor.a = Mathf.Clamp01(currentColor.a);
+                // set color
+                aimLines.startColor = currentColor;
+                aimLines.endColor = currentColor;
+            }
+            else{
+                // fade to opaque over time
+                Color currentColor = aimLines.startColor;
+                // add alpha to current color using time
+                currentColor.a += Time.deltaTime * 2.0f;
+                // clamp aplpha between 0 and 1
+                currentColor.a = Mathf.Clamp01(currentColor.a);
+                // set color
+                aimLines.startColor = currentColor;
+                aimLines.endColor = currentColor;
+            }
+
             PlayerMovement playerMovement = GetComponent<PlayerMovement>();
 
             Vector3 aimPoint = playerMovement.GetMouseAimPoint();
@@ -70,9 +139,13 @@ public class PlayerInventoryInterface : MonoBehaviour
             GameObject firepointObj = GetWeaponFirepoint(selectedWeapon);
             if (!firepointObj) return;
 
-            Vector3 aimpointL = Quaternion.Euler(0, -15, 0) * (aimPoint - firepointObj.transform.position) + firepointObj.transform.position;
-            Vector3 aimpointR = Quaternion.Euler(0, 15, 0) * (aimPoint - firepointObj.transform.position) + firepointObj.transform.position;
-            
+            float currentAimAngle = rangedWeapon.CalcCurrentAimAngle();
+            // if nan or inf, set to 0
+            if (float.IsNaN(currentAimAngle) || float.IsInfinity(currentAimAngle)) currentAimAngle = 0; ;
+
+            Vector3 aimpointL = Quaternion.Euler(0, -currentAimAngle, 0) * (aimPoint - firepointObj.transform.position) + firepointObj.transform.position;
+            Vector3 aimpointR = Quaternion.Euler(0, currentAimAngle, 0) * (aimPoint - firepointObj.transform.position) + firepointObj.transform.position;
+
             aimLines.SetPosition(0, aimpointL);
             aimLines.SetPosition(1, firepointObj.transform.position);
             aimLines.SetPosition(2, aimpointR);

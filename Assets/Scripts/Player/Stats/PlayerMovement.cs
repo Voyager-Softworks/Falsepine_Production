@@ -113,14 +113,22 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
-        
-
         //get movement direction using input and cam direction
         Vector2 move = moveAction.ReadValue<Vector2>();
         Vector3 moveDir = move.x * camRight + move.y * camForward;
         moveDir.y = 0;
         moveDir.Normalize();
-        if(gunScript.isAiming)
+
+        bool isAiming = false;
+        PlayerInventoryInterface pii = GetComponent<PlayerInventoryInterface>();
+        if (pii){
+            RangedWeapon rangedWeapon = pii.selectedWeapon as RangedWeapon;
+            if (rangedWeapon){
+                isAiming = rangedWeapon.m_isAiming;
+            }
+        }
+
+        if(isAiming)
         { 
             moveDir *= walkSpeed;
         }
@@ -173,14 +181,15 @@ public class PlayerMovement : MonoBehaviour
             //make vulnerable
             playerHealth.isInvulnerable = false;
             isRolling = false;
+            
 
             _animator.SetBool("Walking", false);
-            _animator.SetBool("Aiming", gunScript.isAiming);
-            _animator.SetBool("Jogging", !gunScript.isAiming && move.magnitude > 0.1f);
+            _animator.SetBool("Aiming", isAiming);
+            _animator.SetBool("Jogging", !isAiming && move.magnitude > 0.1f);
             _animator.SetBool("Running", sprintAction.ReadValue<float>() > 0.1f);
 
             controller.Move(moveDir * Time.deltaTime);
-            if (gunScript.isAiming){
+            if (isAiming){
                 //apply movement
                 //transform.position += (moveDir * speed * Time.deltaTime);
                 _animator.SetLayerWeight(1, Mathf.Lerp(_animator.GetLayerWeight(1), 1, Time.deltaTime * 10f));
