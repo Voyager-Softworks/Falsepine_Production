@@ -33,7 +33,7 @@ namespace NodeAI
         private ObjectField behaviourField;
 
         private float timeSinceLastDraw = 0f;
-        private int lastChildIndex = 0;
+        
 
         /// <summary>
         /// 

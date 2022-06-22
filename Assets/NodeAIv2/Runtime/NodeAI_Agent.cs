@@ -26,6 +26,8 @@ namespace NodeAI
         const float tickRate = 0.01f;
         float tickTimer = 0f;
 
+        bool initialized = false;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -34,13 +36,24 @@ namespace NodeAI
                 Debug.LogError("No AI_Behaviour assigned to NodeAI_Agent " + gameObject.name);
                 return;
             }
-            _behaviour = Instantiate(AI_Behaviour);
             
+            StartCoroutine(Initialize());
+
+        }
+
+        IEnumerator Initialize()
+        {
+            _behaviour = Instantiate(AI_Behaviour);
+            yield return new WaitForEndOfFrame();
             _behaviour.nodeData.Where(x => !x.noLogic).All(x => x.runtimeLogic = (RuntimeBase)ScriptableObject.Instantiate(x.runtimeLogic));
+            yield return new WaitForEndOfFrame();
             _behaviour.nodeData.Where(x => !x.noQuery).All(x => x.query = (Query)ScriptableObject.Instantiate(x.query));
             _behaviour.queries.Clear();
+            yield return new WaitForEndOfFrame();
             _behaviour.queries.AddRange(_behaviour.nodeData.Where(x => !x.noQuery).Select(x => x.query));
+            yield return new WaitForEndOfFrame();
             _behaviour.nodeData.Where(x => !x.noLogic).ToList().ForEach(x => x.runtimeLogic.state = NodeData.State.Idle);
+            yield return new WaitForEndOfFrame();
             foreach(NodeData.SerializableProperty p in inspectorProperties)
             {
                 NodeData.SerializableProperty  other = _behaviour.exposedProperties.Where(x => x.GUID == p.GUID).First();
@@ -53,11 +66,14 @@ namespace NodeAI
                 other.v3value = p.v3value;
                 other.v4value = p.v4value;
                 other.cvalue = p.cvalue;
+                yield return new WaitForEndOfFrame();
             }
             nodeTree = NodeTree.CreateFromNodeData(_behaviour.nodeData.Find(x => x.nodeType == NodeData.Type.EntryPoint), _behaviour.nodeData);;
+            yield return new WaitForEndOfFrame();
             nodeTree.rootLeaf.nodeData.runtimeLogic.Init(nodeTree.rootLeaf);
+            yield return new WaitForEndOfFrame();
             nodeTree.PropogateExposedProperties(_behaviour.exposedProperties);
-
+            yield return new WaitForEndOfFrame();
             _propertyMap = new Dictionary<NodeData.SerializableProperty, List<NodeData.SerializableProperty>>();
             foreach(NodeData.SerializableProperty p in _behaviour.exposedProperties)
             {
@@ -68,7 +84,7 @@ namespace NodeAI
                 }
                 _propertyMap[p].AddRange(nodeTree.nodes.Where(x => !x.noLogic).SelectMany(x => x.runtimeLogic.GetPropertiesWhereParamReference(p.GUID)));
                 _propertyMap[p].AddRange(nodeTree.nodes.Where(x => !x.noQuery).SelectMany(x => x.query.GetPropertiesWhereParamReference(p.GUID)));
-                
+                yield return new WaitForEndOfFrame();
                 
             }
             foreach(Query q in _behaviour.queries)
@@ -85,22 +101,34 @@ namespace NodeAI
                     _propertyMap[x].AddRange(_behaviour.queries.SelectMany(n => n.GetPropertiesWhereParamReference(x.GUID)));
                     
                 });
+                yield return new WaitForEndOfFrame();
             }
-            
 
+            initialized = true;
+            StartCoroutine(UpdateValues());
+            yield return null;
         }
-
-    
 
         // Update is called once per frame
         void Update()
         {
-            if(_behaviour == null)
+            if(_behaviour == null || !initialized)
             {
                 return;
             }
             tickTimer += Time.deltaTime;
             
+            
+            if (tickTimer > tickRate)
+            {
+                tickTimer = 0f;
+                nodeTree.rootNode.Eval(this, nodeTree.rootLeaf);
+            }
+        }
+
+        IEnumerator UpdateValues()
+        {
+            yield return new WaitForSeconds(0.1f);
             foreach (var query in _behaviour.queries)
             {
                 query.GetNewValues(this);
@@ -120,11 +148,11 @@ namespace NodeAI
                     p.cvalue = x.cvalue;
                 }
             });
-            if (tickTimer > tickRate)
-            {
-                tickTimer = 0f;
-                nodeTree.rootNode.Eval(this, nodeTree.rootLeaf);
-            }
+        }
+
+        void OnDisable()
+        {
+            StopAllCoroutines();
         }
 
         public void SetParameter<T>(string name, T value)

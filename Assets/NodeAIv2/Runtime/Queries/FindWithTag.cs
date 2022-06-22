@@ -6,6 +6,7 @@ namespace NodeAI
 {
     public class FindWithTag : Query
     {
+        GameObject foundObject;
         public FindWithTag()
         {
             AddProperty<string>("Tag", "", false);
@@ -14,7 +15,11 @@ namespace NodeAI
 
         public override void GetNewValues(NodeAI_Agent agent)
         {
-            SetProperty<GameObject>("Result", GameObject.FindGameObjectWithTag(GetProperty<string>("Tag")));
+            if (foundObject == null)
+            {
+                foundObject = GameObject.FindGameObjectWithTag(GetProperty<string>("Tag"));
+            }
+            SetProperty<GameObject>("Result", foundObject);
         }
     }
 }
