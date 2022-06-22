@@ -17,6 +17,8 @@ public class TownBuilding : ClickableObject
 
     public GameObject UI;
 
+    public Camera uiCamera;
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -48,12 +50,14 @@ public class TownBuilding : ClickableObject
     {
         if (!UI) return;
         UI.SetActive(true);
+        uiCamera.enabled = true;
     }
 
     public virtual void CloseUI()
     {
         if (!UI) return;
         UI.SetActive(false);
+        uiCamera.enabled = false;
     }
 
     public virtual void ToggleUI()

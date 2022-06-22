@@ -305,7 +305,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1647746582}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 100, z: 0}
+  m_LocalPosition: {x: 0, y: 200, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 9102352753263557177}
@@ -418,7 +418,7 @@ MonoBehaviour:
   clearDepth: 1
   volumeLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 0
   volumeAnchorOverride: {fileID: 0}
   antialiasing: 0
   SMAAQuality: 2
@@ -446,7 +446,7 @@ MonoBehaviour:
   invertFaceCulling: 0
   probeLayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 32
   hasPersistentHistory: 0
   exposureTarget: {fileID: 0}
   m_RenderingPathCustomFrameSettings:
@@ -522,6 +522,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   UI: {fileID: 862027555008696870}
+  uiCamera: {fileID: 1647746585}
   lesserMissionCardUIList:
   - {fileID: 862027553351380996}
   - {fileID: 3113881360609450860}
@@ -631,10 +632,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Saloon_UI
       objectReference: {fileID: 0}
+    - target: {fileID: 3087652660456403639, guid: 279fdb59958b94f448cc82cfc64f4140, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3087652660456403639, guid: 279fdb59958b94f448cc82cfc64f4140, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 3284688460604070551, guid: 279fdb59958b94f448cc82cfc64f4140, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 64033147}
+    - target: {fileID: 8859286561469480427, guid: 279fdb59958b94f448cc82cfc64f4140, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9116353353604077726, guid: 279fdb59958b94f448cc82cfc64f4140, type: 3}
+      propertyPath: m_Color.a
+      value: 0.7058824
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 279fdb59958b94f448cc82cfc64f4140, type: 3}
 --- !u!1 &862027555008696870 stripped
