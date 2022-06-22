@@ -126,6 +126,14 @@ public class Item : ScriptableObject
     [SerializeField] public List<TagManager.Tag> m_tags = new List<TagManager.Tag>();
 
     /// <summary>
+    /// Update function for the item
+    /// </summary>
+    public virtual void Update()
+    {
+        // Update the item
+    }
+
+    /// <summary>
     /// Destroys the item instance, and deletes it from file.
     /// </summary>
     public void DestroyInstance()
