@@ -128,26 +128,29 @@ namespace NodeAI
 
         IEnumerator UpdateValues()
         {
-            yield return new WaitForSeconds(0.1f);
-            foreach (var query in _behaviour.queries)
+            while(true)
             {
-                query.GetNewValues(this);
-            }
-            _propertyMap.Keys.ToList().ForEach(x =>
-            {
-                foreach(NodeData.SerializableProperty p in _propertyMap[x])
+                yield return new WaitForSeconds(0.1f);
+                foreach (var query in _behaviour.queries)
                 {
-                    p.ivalue = x.ivalue;
-                    p.fvalue = x.fvalue;
-                    p.svalue = x.svalue;
-                    p.bvalue = x.bvalue;
-                    p.ovalue = x.ovalue;
-                    p.v2value = x.v2value;
-                    p.v3value = x.v3value;
-                    p.v4value = x.v4value;
-                    p.cvalue = x.cvalue;
+                    query.GetNewValues(this);
                 }
-            });
+                _propertyMap.Keys.ToList().ForEach(x =>
+                {
+                    foreach(NodeData.SerializableProperty p in _propertyMap[x])
+                    {
+                        p.ivalue = x.ivalue;
+                        p.fvalue = x.fvalue;
+                        p.svalue = x.svalue;
+                        p.bvalue = x.bvalue;
+                        p.ovalue = x.ovalue;
+                        p.v2value = x.v2value;
+                        p.v3value = x.v3value;
+                        p.v4value = x.v4value;
+                        p.cvalue = x.cvalue;
+                    }
+                });
+            }
         }
 
         void OnDisable()

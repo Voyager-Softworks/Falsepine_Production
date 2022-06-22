@@ -45,7 +45,7 @@ namespace NodeAI
                     navAgent.stoppingDistance = GetProperty<float>("Stopping distance");
                 }
                 //navAgent.SetDestination(GetProperty<Transform>("Position").position);
-                if(Vector3.Distance(agent.transform.position, GetProperty<Transform>("Position").position) <= navAgent.stoppingDistance)
+                if(Vector3.Distance(agent.transform.position, GetProperty<Transform>("Position").position) <= navAgent.stoppingDistance + 0.01f)
                 {
                     navAgent.isStopped = true;
                     state = NodeData.State.Success;
@@ -53,7 +53,7 @@ namespace NodeAI
                 }
                 NavMeshHit nhit;
                 NavMesh.SamplePosition(GetProperty<Transform>("Position").position, out nhit, 3.0f, NavMesh.AllAreas);
-                if(navAgent.SetDestination(nhit.position))
+                if(navAgent.SetDestination(GetProperty<Transform>("Position").position))
                 {
                     navAgent.isStopped = false;
                     navAgent.speed = GetProperty<float>("Speed");
@@ -68,12 +68,14 @@ namespace NodeAI
                 else
                 {
                     navAgent.isStopped = true;
+                    Debug.LogError("Could not set destination to " + GetProperty<Transform>("Position").position);
                     state = NodeData.State.Failure;
                     return NodeData.State.Failure;
                 }
             }
             else
             {
+                Debug.Log("No NavMeshAgent found on " + agent.gameObject.name);
                 state = NodeData.State.Failure;
                 return NodeData.State.Failure;
             }
