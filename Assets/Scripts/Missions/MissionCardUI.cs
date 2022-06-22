@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.InputSystem;
 using System;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
 public class MissionCardUI : MonoBehaviour
 {
@@ -16,7 +17,9 @@ public class MissionCardUI : MonoBehaviour
     public TextMeshProUGUI missionTitle;
     public TextMeshProUGUI missionDescription;
     public Image backgroundImage;
+    public GameObject takenGroup;
     public Image missionStamp;
+    public Image dropShadow;
 
     [Header("Button")]
     public GameObject button;
@@ -65,6 +68,9 @@ public class MissionCardUI : MonoBehaviour
             //otherwise, start the mission
             MissionManager.instance.TryStartMission(associatedMission);
         }
+
+        // deselect the button
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
     public void UpdateCard(){
@@ -110,7 +116,8 @@ public class MissionCardUI : MonoBehaviour
             missionStamp.enabled = false;
 
             //hide background image
-            backgroundImage.enabled = false;
+            //backgroundImage.enabled = false;
+            takenGroup.SetActive(true);
 
             //button
             button.SetActive(true);
@@ -135,6 +142,10 @@ public class MissionCardUI : MonoBehaviour
 
             //update stamp
             missionStamp.enabled = associatedMission.isCompleted;
+
+            //update background image
+            //backgroundImage.enabled = true;
+            takenGroup.SetActive(false);
 
             //update button
 
@@ -167,6 +178,7 @@ public class MissionCardUI : MonoBehaviour
 
         missionStamp.enabled = true;
         backgroundImage.enabled = true;
+        dropShadow.enabled = true;
         button.SetActive(true);
     }
 
@@ -176,6 +188,8 @@ public class MissionCardUI : MonoBehaviour
         missionDescription.enabled = false;
         missionStamp.enabled = false;
         backgroundImage.enabled = false;
+        dropShadow.enabled = false;
+        takenGroup.SetActive(false);
         button.SetActive(false);
     }
 }

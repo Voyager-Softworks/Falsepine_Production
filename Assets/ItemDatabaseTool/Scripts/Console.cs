@@ -292,6 +292,8 @@ public class Console : MonoBehaviour
         // "quit"
         if (split.Length == 1 && split[0] == "quit")
         {
+            Log("- Quitting");
+
             Application.Quit();
             return;
         }
@@ -299,6 +301,8 @@ public class Console : MonoBehaviour
         // "restart"
         if (split.Length == 1 && split[0] == "restart")
         {
+            Log("- Restarting");
+
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             return;
         }
@@ -308,6 +312,19 @@ public class Console : MonoBehaviour
         {
             int sceneNumber = int.Parse(split[1]);
             SceneManager.LoadScene(sceneNumber);
+
+            Log("- Scene " + sceneNumber + " loaded");
+
+            return;
+        }
+
+        // "delete_mission_save"
+        if (split.Length == 1 && split[0] == "delete_mission_save")
+        {
+            MissionManager.instance?.DeleteMissionSave();
+
+            Log("- Mission save deleted");
+
             return;
         }
 
@@ -325,7 +342,9 @@ public class Console : MonoBehaviour
         "load inventoryID",
         "list_database",
         "quit",
-        "restart"
+        "restart",
+        "scene sceneNumber",
+        "delete_mission_save"
     };
 
     /// <summary>
