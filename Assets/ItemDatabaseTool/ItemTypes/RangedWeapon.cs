@@ -84,6 +84,7 @@ public class RangedWeapon : Item
         newItem.m_equipTime = m_equipTime;
         newItem.m_shootEffect = m_shootEffect;
         newItem.m_hitEffect = m_hitEffect;
+        newItem.m_trailEffect = m_trailEffect;
         newItem.m_shootSound = m_shootSound;
         newItem.m_emptySound = m_emptySound;
         newItem.m_reloadSound = m_reloadSound;

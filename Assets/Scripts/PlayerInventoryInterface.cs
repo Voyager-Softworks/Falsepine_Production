@@ -67,7 +67,7 @@ public class PlayerInventoryInterface : MonoBehaviour
 
             GameObject weaponFirepoint = GetWeaponFirepoint(selectedWeapon);
             Vector3 weaponFirepointPosition = weaponFirepoint.transform.position;
-            Vector3 weaponFirepointDirection = weaponFirepoint.transform.forward;
+            Vector3 fireDirection = GetComponent<PlayerMovement>().GetMouseAimPoint() - weaponFirepointPosition;
 
             RangedWeapon rangedWeapon = selectedWeapon as RangedWeapon;
             if (rangedWeapon)
@@ -75,7 +75,7 @@ public class PlayerInventoryInterface : MonoBehaviour
                 // if fire weapon action is pressed and is not auto and is not shooting, shoot weapon || if fire weapon action is current down and is auto, shoot weapon
                 if ((fireWeaponAction.triggered && !rangedWeapon.m_isAutomnatic) || (fireWeaponAction.ReadValue<float>() > 0 && rangedWeapon.m_isAutomnatic))
                 {
-                    rangedWeapon.TryShoot(weaponFirepointPosition, weaponFirepointDirection, gameObject);
+                    rangedWeapon.TryShoot(weaponFirepointPosition, fireDirection, gameObject);
                 }
 
                 // if reload action is pressed, reload weapon
