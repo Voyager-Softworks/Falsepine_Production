@@ -77,10 +77,17 @@ namespace NodeAI
         {
             get
             {
-                if (runtime == null && !noLogic)
+                try
                 {
-                    runtime = (RuntimeBase)ScriptableObject.CreateInstance(System.Type.GetType(runtimeLogicType));
-                    runtime.RepopulateProperties(properties == null ? new List<SerializableProperty>() : properties);
+                    if (runtime == null && !noLogic)
+                    {
+                        runtime = (RuntimeBase)ScriptableObject.CreateInstance(System.Type.GetType(runtimeLogicType));
+                        runtime.RepopulateProperties(properties == null ? new List<SerializableProperty>() : properties);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError(e.Message);
                 }
                 return runtime;
             }
