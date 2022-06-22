@@ -40,7 +40,7 @@ public class RangedWeapon : Item
     
     // Reloading:
     [SerializeField] public float m_reloadTime = 0;
-    [SerializeField] private float m_reloadTimer = 0;
+    [SerializeField] public float m_reloadTimer = 0;
     [SerializeField] private float m_reloadAmount = 0;
 
     // Other:
@@ -95,8 +95,10 @@ public class RangedWeapon : Item
         return newItem;
     }
 
-    public override void Update(){
-        base.Update();
+    public override void Update(GameObject _owner){
+        base.Update(_owner);
+        
+        if (!_owner) return;
 
         // update all timers and ensure they are never negative:
         m_shootTimer = Mathf.Max(0, m_shootTimer - Time.deltaTime);
@@ -111,13 +113,14 @@ public class RangedWeapon : Item
     /// <summary>
     /// Tries to shoot the weapon.
     /// </summary>
-    public void TryShoot(Vector3 _origin, Vector3 _direction, GameObject _source)
+    public bool TryShoot(Vector3 _origin, Vector3 _direction, GameObject _owner)
     {
         if (m_isAiming && m_shootTimer <= 0 && m_waitTimer <= 0)
         {
             if (m_clipAmmo > 0)
             {
-                Shoot(_origin, _direction, _source);
+                Shoot(_origin, _direction, _owner);
+                return true;
             }
             else {
                 // play empty sound:
@@ -127,12 +130,13 @@ public class RangedWeapon : Item
                 }
             }
         }
+        return false;
     }
 
     /// <summary>
     /// Shoots the weapon using raycasts. Uses wait timer.
     /// </summary>
-    private void Shoot(Vector3 _origin, Vector3 _direction, GameObject _source)
+    private void Shoot(Vector3 _origin, Vector3 _direction, GameObject _owner)
     {
         m_shootTimer = m_shootTime;
         UpdateWaitTimer(m_shootTime);
@@ -158,11 +162,11 @@ public class RangedWeapon : Item
                 HealthScript healthScript = hit.collider.GetComponentInChildren<HealthScript>();
                 if (healthScript != null)
                 {
-                    healthScript.TakeDamage(m_damage, _source);
+                    healthScript.TakeDamage(m_damage, _owner);
                     if (m_hitEffect) Destroy(Instantiate(m_hitEffect, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal)), 2.0f);
                 }
                 hit.collider.GetComponentInChildren<NodeAI.NodeAI_Senses>()?.RegisterSensoryEvent(
-                                                                                                _source,
+                                                                                                _owner,
                                                                                                 hit.collider.gameObject,
                                                                                                 20.0f,
                                                                                                 NodeAI.SensoryEvent.SenseType.SOMATIC
@@ -209,21 +213,23 @@ public class RangedWeapon : Item
     /// <summary>
     /// Tries to reload the weapon
     /// </summary>
-    public void TryReload(GameObject _source)
+    public bool TryReload(GameObject _owner)
     {
         if (m_reloadTimer <= 0 && m_waitTimer <= 0)
         {
             if (m_clipAmmo < m_clipSize)
             {
-                Reload(_source);
+                Reload(_owner);
+                return true;
             }
         }
+        return false;
     }
 
     /// <summary>
     /// Reloads the weapon. Uses wait timer
     /// </summary>
-    private void Reload(GameObject _source)
+    private void Reload(GameObject _owner)
     {
         m_reloadTimer = m_reloadTime;
         UpdateWaitTimer(m_reloadTime);
@@ -231,7 +237,7 @@ public class RangedWeapon : Item
         // play reload sound:
         if (m_reloadSound != null)
         {
-            GameObject sound = Instantiate(m_reloadSound, _source.transform.position, Quaternion.identity, _source.transform);
+            GameObject sound = Instantiate(m_reloadSound, _owner.transform.position, Quaternion.identity, _owner.transform);
         }
 
         m_clipAmmo = m_clipSize;
@@ -240,7 +246,7 @@ public class RangedWeapon : Item
     /// <summary>
     /// Tries to set aim bool.
     /// </summary>
-    public void TrySetAim(bool _aim, GameObject _source)
+    public bool TrySetAim(bool _aim, GameObject _owner)
     {
         // TODO: check if we can aim, or if other things are blocking it
         if (_aim && !m_isAiming)
@@ -249,8 +255,9 @@ public class RangedWeapon : Item
             // play start aim sound:
             if (m_startAimSound != null)
             {
-                GameObject sound = Instantiate(m_startAimSound, _source.transform.position, Quaternion.identity);
+                GameObject sound = Instantiate(m_startAimSound, _owner.transform.position, Quaternion.identity);
             }
+            return true;
         }
         else if (!_aim && m_isAiming)
         {
@@ -258,9 +265,11 @@ public class RangedWeapon : Item
             // play stop aim sound:
             if (m_stopAimSound != null)
             {
-                GameObject sound = Instantiate(m_stopAimSound, _source.transform.position, Quaternion.identity);
+                GameObject sound = Instantiate(m_stopAimSound, _owner.transform.position, Quaternion.identity);
             }
+            return true;
         }
+        return false;
     }
 
     public float UpdateWaitTimer(float _time){
@@ -271,7 +280,7 @@ public class RangedWeapon : Item
     public float CalcCurrentAimAngle()
     {
         // calculate new direction using inaccuracy
-        return Mathf.Lerp(m_aimedInaccuracy, m_unaimedInaccuracy, m_aimTimer / m_aimTime);
+        return Mathf.Lerp(m_unaimedInaccuracy, m_aimedInaccuracy, m_aimTimer / m_aimTime);
     }
 
     

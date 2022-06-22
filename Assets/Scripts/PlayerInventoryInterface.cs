@@ -49,6 +49,7 @@ public class PlayerInventoryInterface : MonoBehaviour
     {
         playerInventory = InventoryManager.instance?.GetInventory(playerInventoryName);
 
+        SwapWeapon();
         // select weapon
         SelectWeapon(selectedWeaponType);
     }
@@ -63,7 +64,7 @@ public class PlayerInventoryInterface : MonoBehaviour
         }
 
         if (selectedWeapon){
-            selectedWeapon.Update();
+            selectedWeapon.Update(gameObject);
 
             GameObject weaponFirepoint = GetWeaponFirepoint(selectedWeapon);
             Vector3 weaponFirepointPosition = weaponFirepoint.transform.position;
@@ -81,7 +82,9 @@ public class PlayerInventoryInterface : MonoBehaviour
                 // if reload action is pressed, reload weapon
                 if (reloadAction.triggered)
                 {
-                    rangedWeapon.TryReload(gameObject);
+                    if (rangedWeapon.TryReload(gameObject)){
+                        playerAnimator.SetTrigger("Reload");
+                    }
                 }
 
                 // if aim weapon action is down, aim weapon
@@ -90,6 +93,12 @@ public class PlayerInventoryInterface : MonoBehaviour
                     rangedWeapon.TrySetAim(true, gameObject);
                 }
                 else
+                {
+                    rangedWeapon.TrySetAim(false, gameObject);
+                }
+
+                // stop aiming
+                if (swapWeaponAction.triggered)
                 {
                     rangedWeapon.TrySetAim(false, gameObject);
                 }
@@ -109,7 +118,10 @@ public class PlayerInventoryInterface : MonoBehaviour
             RangedWeapon rangedWeapon = selectedWeapon as RangedWeapon;
             if (!rangedWeapon) return;
 
-            if (!rangedWeapon.m_isAiming){
+            PlayerMovement playerMovement = GetComponent<PlayerMovement>();
+            if (!playerMovement) return;
+
+            if (!rangedWeapon.m_isAiming || rangedWeapon.m_reloadTimer > 0 || playerMovement.isRolling){
                 // fade to transparent over time
                 Color currentColor = aimLines.startColor;
                 // subtract alpha from current color using time
@@ -131,8 +143,6 @@ public class PlayerInventoryInterface : MonoBehaviour
                 aimLines.startColor = currentColor;
                 aimLines.endColor = currentColor;
             }
-
-            PlayerMovement playerMovement = GetComponent<PlayerMovement>();
 
             Vector3 aimPoint = playerMovement.GetMouseAimPoint();
 
