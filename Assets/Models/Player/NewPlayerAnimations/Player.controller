@@ -479,24 +479,24 @@ BlendTree:
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 0b83be782ea562b41ae7d190ce500554, type: 2}
     m_Threshold: 0
-    m_Position: {x: -0.5, y: 0.5}
-    m_TimeScale: 0.8
+    m_Position: {x: -0.65, y: 0.65}
+    m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 98e5f673fb849104f9db3425e41d1bb9, type: 2}
     m_Threshold: 0.125
-    m_Position: {x: 0, y: 0.5}
-    m_TimeScale: 0.8
+    m_Position: {x: 0, y: 0.65}
+    m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: ad1ebf658e9ec6c4f85b9d18c2a31982, type: 2}
     m_Threshold: 0.25
-    m_Position: {x: 0.5, y: 0.5}
-    m_TimeScale: 0.8
+    m_Position: {x: 0.65, y: 0.65}
+    m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
@@ -504,31 +504,31 @@ BlendTree:
     m_Motion: {fileID: 7400000, guid: 21e3af5f2f110aa4a850484f28afe293, type: 2}
     m_Threshold: 0.375
     m_Position: {x: 0, y: 0}
-    m_TimeScale: 0.8
+    m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: MoveForward
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 6646e6c11e617a440975dbdfc9baff19, type: 2}
     m_Threshold: 0.5
-    m_Position: {x: -0.5, y: -0.5}
-    m_TimeScale: 0.8
+    m_Position: {x: -0.65, y: -0.65}
+    m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 112fd6d3a71f07c4895e790899f11d01, type: 2}
     m_Threshold: 0.625
-    m_Position: {x: 0, y: -0.5}
-    m_TimeScale: 0.8
+    m_Position: {x: 0, y: -0.65}
+    m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
   - serializedVersion: 2
     m_Motion: {fileID: 7400000, guid: 449877d84f2491c49b5f646bc7f784eb, type: 2}
     m_Threshold: 0.75
-    m_Position: {x: 0.5, y: -0.5}
-    m_TimeScale: 0.8
+    m_Position: {x: 0.65, y: -0.65}
+    m_TimeScale: 1
     m_CycleOffset: 0
     m_DirectBlendParameter: Blend
     m_Mirror: 0
@@ -538,7 +538,7 @@ BlendTree:
   m_MaxThreshold: 0.75
   m_UseAutomaticThresholds: 1
   m_NormalizedBlendValues: 0
-  m_BlendType: 3
+  m_BlendType: 1
 --- !u!1109 &-6135159819638351815
 AnimatorTransition:
   m_ObjectHideFlags: 1
@@ -597,6 +597,14 @@ AnimatorStateMachine:
   - {fileID: 2121576278002914341}
   m_EntryTransitions: []
   m_StateMachineTransitions:
+  - first: {fileID: 1674045860926489329}
+    second:
+    - {fileID: 6115962697398447567}
+    - {fileID: 6928628360251195037}
+  - first: {fileID: -4547240125745737681}
+    second:
+    - {fileID: -873455677846292803}
+    - {fileID: -2376836262600086975}
   - first: {fileID: -8890820667564793745}
     second:
     - {fileID: 8129384875087268861}
@@ -604,23 +612,15 @@ AnimatorStateMachine:
   - first: {fileID: -4549030740288846795}
     second:
     - {fileID: -7219326525597318795}
-  - first: {fileID: -4547240125745737681}
-    second:
-    - {fileID: -873455677846292803}
-    - {fileID: -2376836262600086975}
-  - first: {fileID: -3698499038460962043}
-    second:
-    - {fileID: -7347672680498426304}
   - first: {fileID: 5910326519606577}
     second:
     - {fileID: -7907621965387234407}
   - first: {fileID: 1562942159070476559}
     second:
     - {fileID: 4756571445504594784}
-  - first: {fileID: 1674045860926489329}
+  - first: {fileID: -3698499038460962043}
     second:
-    - {fileID: 6115962697398447567}
-    - {fileID: 6928628360251195037}
+    - {fileID: -7347672680498426304}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 50, y: 20, z: 0}
   m_EntryPosition: {x: -150, y: 140, z: 0}
@@ -3745,15 +3745,15 @@ AnimatorStateMachine:
   - {fileID: 4769049957495763871}
   - {fileID: 3992521426152869298}
   m_StateMachineTransitions:
+  - first: {fileID: 1471072520732718988}
+    second:
+    - {fileID: 5879505082869428574}
   - first: {fileID: -3903278155084775317}
     second:
     - {fileID: -1278280282264650889}
   - first: {fileID: -427811223205350776}
     second:
     - {fileID: -1467883720284519065}
-  - first: {fileID: 1471072520732718988}
-    second:
-    - {fileID: 5879505082869428574}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 80, y: 50, z: 0}
   m_EntryPosition: {x: -60, y: 140, z: 0}
