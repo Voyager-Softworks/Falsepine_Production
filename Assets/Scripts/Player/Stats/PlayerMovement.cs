@@ -146,8 +146,9 @@ public class PlayerMovement : MonoBehaviour
         animVelocity = Vector3.Lerp(animVelocity, moveDir, Time.deltaTime * 10f);
         if(playerHealth.isStunned) return;
         //check if placing bear trap anim is playing
-        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Player|PLACE TRAP (ALL)") ||
-            _animator.GetCurrentAnimatorStateInfo(0).IsName("Player|PAIN (ALL)"))
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Player_Rig_BearTrap_Revolver") ||
+            _animator.GetCurrentAnimatorStateInfo(0).IsName("Player_Rig_BearTrap_Rifle") ||
+            _animator.GetCurrentAnimatorStateInfo(0).IsName("Player_Rig_BearTrap_Shotgun"))
         {
             return;
         }
