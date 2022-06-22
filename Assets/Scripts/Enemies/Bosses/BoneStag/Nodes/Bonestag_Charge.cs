@@ -14,6 +14,7 @@ namespace Boss.Bonestag
         Vector3 target;
         Transform agentTransform;
         GameObject agentGameObject;
+        Transform targetTransform;
         BossArenaController arenaController;
         Vector3 arenaEdgeGoalPosition;
         public float chargeSpeed = 50f;
@@ -70,8 +71,9 @@ namespace Boss.Bonestag
                 
                 if(arenaController == null)
                     arenaController = FindObjectOfType<BossArenaController>();
+                targetTransform = arenaController.arenaCentre;
                 Vector3 playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
-                arenaEdgeGoalPosition = ComputeB(arenaController.arenaCentre.position, Vector3.up, arenaController.arenaRadius, agent.transform.position, (playerPos - agentTransform.position).normalized);
+                arenaEdgeGoalPosition = ComputeB(targetTransform.position, Vector3.up, arenaController.arenaRadius, agent.transform.position, (playerPos - agentTransform.position).normalized);
                 NavMeshHit goalPosHit;
                 if(!NavMesh.FindClosestEdge(arenaEdgeGoalPosition, out goalPosHit, NavMesh.AllAreas))
                 {
@@ -157,7 +159,7 @@ namespace Boss.Bonestag
                 }
                 if(Vector3.Distance(agent.transform.position, arenaEdgeGoalPosition) < 3.0f)
                 {
-                    agent.transform.position = RandomPointOnCircle(arenaController.arenaCentre.position, Vector3.up, arenaController.arenaRadius);
+                    agent.transform.position = RandomPointOnCircle(targetTransform.position, Vector3.up, arenaController.arenaRadius);
                     agent.gameObject.GetComponent<RotateTowardsPlayer>().RotateToPlayer(0.5f, 10.0f, 0.0f);
                     navAgent.SetDestination(agent.transform.position);
                     navAgent.isStopped = true;
