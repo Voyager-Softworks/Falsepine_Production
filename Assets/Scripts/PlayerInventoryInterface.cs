@@ -129,7 +129,7 @@ public class PlayerInventoryInterface : MonoBehaviour
 
                     equipment.TossPrefab(spawnPostion, spawnDirection * 0.5f, gameObject);
 
-                    playerAnimator.SetTrigger("PlaceTrap");
+                    playerAnimator.SetTrigger("PlaceBeartrap");
                 }
             }
         }
