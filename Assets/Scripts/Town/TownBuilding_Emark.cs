@@ -36,8 +36,12 @@ public class TownBuilding_Emark : TownBuilding
 
         //load level 1 if valid
         if (MissionManager.instance.currentMission != null && !MissionManager.instance.currentMission.isCompleted){
-            SceneManager.LoadScene(1);
+            if (MissionManager.instance.currentMission.size == Mission.MissionSize.LESSER){
+                LevelController.LoadSnow();
+            }
+            else if (MissionManager.instance.currentMission.size == Mission.MissionSize.GREATER){
+                LevelController.LoadSnowBoss();
+            }
         }
-        
     }
 }

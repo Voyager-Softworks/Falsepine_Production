@@ -17,11 +17,13 @@ public class TownBuilding_MissionBoard : TownBuilding
     public int greatersNeeded = 1;
 
     public GameObject bossUnlockButton;
+    public GameObject bossIconLocked;
+    public GameObject bossIconUnlocked;
 
     public Mission.MissionSize currentPage = Mission.MissionSize.LESSER;
 
     [Serializable]
-    public class SaloonData{
+    public class MissionBoardData{
         public Mission.MissionSize currentPage = Mission.MissionSize.LESSER;
     }
 
@@ -30,7 +32,7 @@ public class TownBuilding_MissionBoard : TownBuilding
     {
         base.Start();
 
-        LoadSaloon();
+        LoadMissionBoard();
     }
 
     // Update is called once per frame
@@ -45,22 +47,22 @@ public class TownBuilding_MissionBoard : TownBuilding
         }
     }
 
-    public void SaveSaloon(){
-        //save the saloon current page
+    public void SaveMissionBoard(){
+        //save the missionboard current page
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/saloon.dat");
-        SaloonData data = new SaloonData();
+        FileStream file = File.Create(Application.persistentDataPath + "/missionboard.dat");
+        MissionBoardData data = new MissionBoardData();
         data.currentPage = currentPage;
         bf.Serialize(file, data);
         file.Close();
     }
 
-    public void LoadSaloon(){
-        if (File.Exists(Application.persistentDataPath + "/saloon.dat"))
+    public void LoadMissionBoard(){
+        if (File.Exists(Application.persistentDataPath + "/missionboard.dat"))
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/saloon.dat", FileMode.Open);
-            SaloonData data = (SaloonData)bf.Deserialize(file);
+            FileStream file = File.Open(Application.persistentDataPath + "/missionboard.dat", FileMode.Open);
+            MissionBoardData data = (MissionBoardData)bf.Deserialize(file);
             file.Close();
 
             currentPage = data.currentPage;
@@ -143,7 +145,7 @@ public class TownBuilding_MissionBoard : TownBuilding
     public void SetPage(Mission.MissionSize _page){
         currentPage = _page;
 
-        SaveSaloon();
+        SaveMissionBoard();
     }
 
     public void DrawGreaterPage(){
@@ -153,6 +155,8 @@ public class TownBuilding_MissionBoard : TownBuilding
         {
             bossUnlockButton.SetActive(true);
             bossUnlockButton.GetComponentInChildren<TextMeshProUGUI>().text = "Unlock Next Zone";
+            bossIconUnlocked.SetActive(true);
+            bossIconLocked.SetActive(false);
         }
         else
         {
@@ -173,8 +177,18 @@ public class TownBuilding_MissionBoard : TownBuilding
     public void DrawLesserPage(){
 
         bossUnlockButton.GetComponentInChildren<TextMeshProUGUI>().text = "Unlock Greater Missions (" + CountTurnedIn(Mission.MissionSize.LESSER) + "/" + lessersNeeded + ")";
-        if (CountTurnedIn(Mission.MissionSize.LESSER) < lessersNeeded) bossUnlockButton.GetComponentInChildren<Button>().interactable = false;
-        else bossUnlockButton.GetComponentInChildren<Button>().interactable = true;
+        if (CountTurnedIn(Mission.MissionSize.LESSER) < lessersNeeded) {
+            bossUnlockButton.GetComponentInChildren<Button>().interactable = false;
+            bossIconLocked.SetActive(true);
+            bossIconUnlocked.SetActive(false);
+            bossUnlockButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
+        }
+        else {
+            bossUnlockButton.GetComponentInChildren<Button>().interactable = true;
+            bossIconUnlocked.SetActive(true);
+            bossIconLocked.SetActive(false);
+            bossUnlockButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
+        }
 
         for (int i = 0; i < lesserMissionCardUIList.Count; i++)
         {
