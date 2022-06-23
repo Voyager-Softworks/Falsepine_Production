@@ -8,6 +8,7 @@ public class LevelGenerator : MonoBehaviour
 {
     public Tile[] tiles;
 
+
     [System.Serializable]
     public struct Tile
     {
@@ -80,7 +81,7 @@ public class LevelGenerator : MonoBehaviour
 
     IEnumerator GenerateLevel()
     {
-        List<NavMeshSurface> surfaces = new List<NavMeshSurface>();
+        //List<NavMeshSurface> surfaces = new List<NavMeshSurface>();
         Tile[] pickedTiles = ShuffleTiles();
         int k = 0;
         for(int i = -1; i <= 1; i++)
@@ -89,16 +90,20 @@ public class LevelGenerator : MonoBehaviour
             {
                 Vector3 pos = new Vector3(i * (tileRadius * 2.0f), 0, j * (tileRadius * 2.0f));
                 //Instantiate tiles with random rotation
-                surfaces.Add(Instantiate(pickedTiles[k].tile, pos, pickedTiles[k].canRotate ? Quaternion.Euler(0,  Random.Range(0, 3) * 90, 0)  : Quaternion.identity).GetComponent<NavMeshSurface>());
+                Instantiate(pickedTiles[k].tile, 
+                pos, 
+                pickedTiles[k].canRotate ? Quaternion.Euler(0,  Random.Range(0, 3) * 90, 0)  : Quaternion.identity,
+                this.transform
+                );
                 k++;
                 yield return new WaitForSeconds(.2f);
             }
         }
-        foreach(NavMeshSurface surface in surfaces)
-        {
-            surface.BuildNavMesh();
-            yield return new WaitForEndOfFrame();
-        }
+        
+        yield return new WaitForEndOfFrame();
+
+        GetComponent<NavMeshSurface>().BuildNavMesh();
+        
         yield return null;
     }
 

@@ -57,7 +57,7 @@ namespace NodeAI
 
             public void DrawGizmos(NodeAI_Agent agent)
             {
-                if(nodeData.runtimeLogic)
+                if(!nodeData.noLogic && nodeData.runtimeLogic)
                 {
                     nodeData.runtimeLogic.DrawGizmos(agent);
                 }
