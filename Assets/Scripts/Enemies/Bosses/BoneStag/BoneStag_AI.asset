@@ -105,35 +105,6 @@ MonoBehaviour:
     queryType: 
     noLogic: 0
     noQuery: 1
-  - GUID: d87b0e0d-bbf6-43f9-89d5-96ae3186d5d5
-    parentGUID: fbfae120-f7dc-454c-95ca-6735e62ef84f
-    title: SetAnimatorTrigger
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 793, y: 143}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: NAME
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: Baited
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Animation.SetAnimatorTrigger, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
   - GUID: 06a6fe24-26ef-412e-9f77-bc3dbca4c9ce
     parentGUID: 20478355-2f55-4d78-ba87-33c114085344
     title: CorrectBait
@@ -208,23 +179,23 @@ MonoBehaviour:
     queryType: 
     noLogic: 0
     noQuery: 1
-  - GUID: 6258c192-1607-4287-9725-d704e2ca4482
+  - GUID: d48d05e2-ba9d-4482-aa59-95718cc75a59
     parentGUID: fbfae120-f7dc-454c-95ca-6735e62ef84f
-    title: WaitFor
+    title: IfTrue
     childGUIDs: []
-    nodeType: 1
-    position: {x: 793, y: 243}
+    nodeType: 2
+    position: {x: 808, y: -84}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
-    - name: TIME
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+    - name: CONDITION
+      GUID: 06a6fe24-26ef-412e-9f77-bc3dbca4c9ce
+      paramReference: 20478355-2f55-4d78-ba87-33c114085344
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       svalue: 
       ivalue: 0
-      fvalue: 0.3
+      fvalue: 0
       bvalue: 0
       cvalue: {r: 0, g: 0, b: 0, a: 0}
       v2value: {x: 0, y: 0}
@@ -232,7 +203,141 @@ MonoBehaviour:
       v4value: {x: 0, y: 0, z: 0, w: 0}
       ovalue: {fileID: 0}
       output: 0
-    runtimeLogicType: NodeAI.WaitFor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    runtimeLogicType: NodeAI.IfTrue, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 292d405b-71b6-4cec-90d4-d47b7c796b84
+    parentGUID: a7051ff5-c4da-4c3c-8dec-33f708b2088f
+    title: Repeater
+    childGUIDs:
+    - e8611c77-c04c-453b-bbff-bc4409e14f2e
+    nodeType: 3
+    position: {x: 585, y: 469}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: REPEATCOUNT
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 1
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: REPEATFOREVER
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 1
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Repeater, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: fcd4d430-6e21-4b09-8681-37dc42fcffda
+    parentGUID: fb4a55c4-df3b-4381-8324-6570d286b5fb
+    title: Chance
+    childGUIDs:
+    - 73f0207c-c023-46fe-ab3b-54a669e52ca9
+    nodeType: 3
+    position: {x: 2155, y: 3220}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: CHANCE
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 1
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Chance, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 73f0207c-c023-46fe-ab3b-54a669e52ca9
+    parentGUID: fcd4d430-6e21-4b09-8681-37dc42fcffda
+    title: Attack
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 2391, y: 3220}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: ATTACK DATA
+      GUID: null
+      paramReference: null
+      serializedTypename: AttackData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 11400000, guid: 8b54e8c7d767fd2c1aec7bb58998294e, type: 2}
+      output: 0
+    - name: PROJECTILE SPAWN BONE
+      GUID: null
+      paramReference: null
+      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: INTERRUPTED
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
     queryType: 
     noLogic: 0
@@ -244,7 +349,7 @@ MonoBehaviour:
     - 4380702f-d785-4a8b-bf06-473208d43848
     - 1ddcbee3-d8e5-4265-b23f-2ebee1102bbf
     nodeType: 4
-    position: {x: 1289, y: 776}
+    position: {x: 1313, y: 480}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -259,7 +364,7 @@ MonoBehaviour:
     childGUIDs:
     - f3baaaa6-d52d-4e4c-bc07-20fc41188859
     nodeType: 3
-    position: {x: 1123, y: 776}
+    position: {x: 1147, y: 480}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -273,7 +378,7 @@ MonoBehaviour:
     title: Bonestag_Charge
     childGUIDs: []
     nodeType: 1
-    position: {x: 1475, y: 895}
+    position: {x: 1499, y: 599}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -362,7 +467,7 @@ MonoBehaviour:
     title: WaitFor
     childGUIDs: []
     nodeType: 1
-    position: {x: 1475, y: 1106}
+    position: {x: 1499, y: 810}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -393,7 +498,7 @@ MonoBehaviour:
     - 98aef8f4-db45-4af6-9788-ed2eb151a651
     - 02abd8c4-0783-4ade-b345-d5d1ee1c7b33
     nodeType: 4
-    position: {x: 2093, y: 1041}
+    position: {x: 2117, y: 745}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -409,7 +514,7 @@ MonoBehaviour:
     - cb059f8d-1623-4dd8-9fbd-236026cbd865
     - fb4a55c4-df3b-4381-8324-6570d286b5fb
     nodeType: 4
-    position: {x: 1871, y: 2066}
+    position: {x: 1895, y: 1770}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -423,7 +528,7 @@ MonoBehaviour:
     title: PlaySound
     childGUIDs: []
     nodeType: 1
-    position: {x: 1081, y: 1326}
+    position: {x: 1105, y: 1030}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -497,7 +602,7 @@ MonoBehaviour:
     title: SetAnimatorTrigger
     childGUIDs: []
     nodeType: 1
-    position: {x: 2405, y: 2307}
+    position: {x: 2429, y: 2011}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -526,7 +631,7 @@ MonoBehaviour:
     title: PlaySound
     childGUIDs: []
     nodeType: 1
-    position: {x: 2405, y: 2417}
+    position: {x: 2429, y: 2121}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -604,7 +709,7 @@ MonoBehaviour:
     - b14c629d-e8e3-4289-87b5-9ed44f352516
     - 31090e56-9965-4dd1-a6d5-707f43b5ab7e
     nodeType: 4
-    position: {x: 2220, y: 2307}
+    position: {x: 2244, y: 2011}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -620,7 +725,7 @@ MonoBehaviour:
     - 515b0fed-e26a-45c6-bbc9-3c4892d23354
     - 04e23b7c-aa5c-49cd-986a-e027b91def00
     nodeType: 5
-    position: {x: 2064, y: 2066}
+    position: {x: 2088, y: 1770}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -634,7 +739,7 @@ MonoBehaviour:
     title: PlayerPos
     childGUIDs: []
     nodeType: 7
-    position: {x: 2215, y: 1963}
+    position: {x: 2239, y: 1667}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -647,7 +752,7 @@ MonoBehaviour:
     title: InBearTrap
     childGUIDs: []
     nodeType: 7
-    position: {x: 2215, y: 2039}
+    position: {x: 2239, y: 1743}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -665,7 +770,7 @@ MonoBehaviour:
     - fcd4d430-6e21-4b09-8681-37dc42fcffda
     - a0f32c3f-3c72-484e-9fcb-0274fc7ec490
     nodeType: 5
-    position: {x: 1985, y: 2867}
+    position: {x: 2009, y: 2571}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -681,7 +786,7 @@ MonoBehaviour:
     - 0fa7e8ae-8ccb-43b9-a847-40ec8fa69a43
     - 8376fd88-6949-4762-999e-d4cc41a61095
     nodeType: 4
-    position: {x: 2842, y: 2876}
+    position: {x: 2866, y: 2580}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -695,7 +800,7 @@ MonoBehaviour:
     title: IfTrue
     childGUIDs: []
     nodeType: 2
-    position: {x: 3044, y: 2876}
+    position: {x: 3068, y: 2580}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -728,7 +833,7 @@ MonoBehaviour:
     - 52963282-1b2e-479f-a01d-046ef0ab07c2
     - db0f7d7c-082a-433d-9f77-f7b1a1059437
     nodeType: 5
-    position: {x: 3021, y: 3016}
+    position: {x: 3045, y: 2720}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -742,7 +847,7 @@ MonoBehaviour:
     title: SecondPhase
     childGUIDs: []
     nodeType: 7
-    position: {x: 2887, y: 2778}
+    position: {x: 2911, y: 2482}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -756,7 +861,7 @@ MonoBehaviour:
     childGUIDs:
     - 1f246937-09ff-437d-b4de-df8b1138032a
     nodeType: 3
-    position: {x: 2132, y: 3328}
+    position: {x: 2156, y: 3032}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -786,7 +891,7 @@ MonoBehaviour:
     childGUIDs:
     - 3b7f71a9-0c05-4282-9f3f-c6d17512cd6b
     nodeType: 3
-    position: {x: 2151, y: 3077}
+    position: {x: 2175, y: 2781}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -820,7 +925,7 @@ MonoBehaviour:
     - e4558bd6-adf1-4ecf-a40b-cb9f6d5f3488
     - 0e3f4fc1-a896-49c0-878b-d502cba04dfd
     nodeType: 4
-    position: {x: 915, y: 1326}
+    position: {x: 939, y: 1030}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -839,7 +944,7 @@ MonoBehaviour:
     - ad1cac6a-154d-47b4-99a2-f832fb5ab1fd
     - 404ec0e7-e52f-41bd-9184-a3a1e9a49b8c
     nodeType: 4
-    position: {x: 2210, y: 253}
+    position: {x: 2234, y: -43}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -853,7 +958,7 @@ MonoBehaviour:
     title: PlaySound
     childGUIDs: []
     nodeType: 1
-    position: {x: 2395, y: 387}
+    position: {x: 2419, y: 91}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -927,7 +1032,7 @@ MonoBehaviour:
     title: SetAnimatorTrigger
     childGUIDs: []
     nodeType: 1
-    position: {x: 2395, y: 569}
+    position: {x: 2419, y: 273}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -951,86 +1056,12 @@ MonoBehaviour:
     queryType: 
     noLogic: 0
     noQuery: 1
-  - GUID: d48d05e2-ba9d-4482-aa59-95718cc75a59
-    parentGUID: fbfae120-f7dc-454c-95ca-6735e62ef84f
-    title: IfTrue
-    childGUIDs: []
-    nodeType: 2
-    position: {x: 808, y: -84}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: CONDITION
-      GUID: 06a6fe24-26ef-412e-9f77-bc3dbca4c9ce
-      paramReference: 20478355-2f55-4d78-ba87-33c114085344
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.IfTrue, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 292d405b-71b6-4cec-90d4-d47b7c796b84
-    parentGUID: a7051ff5-c4da-4c3c-8dec-33f708b2088f
-    title: Repeater
-    childGUIDs:
-    - e8611c77-c04c-453b-bbff-bc4409e14f2e
-    nodeType: 3
-    position: {x: 585, y: 469}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: REPEATCOUNT
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 1
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: REPEATFOREVER
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 1
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Repeater, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
   - GUID: 242f1793-11d9-4bdb-95c4-dd484e6f890f
     parentGUID: cebd829d-b7dd-4e23-aded-7f06fadaf2dd
     title: Bonestag_CheckPhaseChange
     childGUIDs: []
     nodeType: 2
-    position: {x: 2395, y: 147}
+    position: {x: 2419, y: -149}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -1074,7 +1105,7 @@ MonoBehaviour:
     title: SecondPhase
     childGUIDs: []
     nodeType: 7
-    position: {x: 2218, y: 147}
+    position: {x: 2242, y: -149}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -1087,7 +1118,7 @@ MonoBehaviour:
     title: SetAnimatorBool
     childGUIDs: []
     nodeType: 1
-    position: {x: 2403, y: 269}
+    position: {x: 2427, y: -27}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -1126,43 +1157,13 @@ MonoBehaviour:
     queryType: 
     noLogic: 0
     noQuery: 1
-  - GUID: fcd4d430-6e21-4b09-8681-37dc42fcffda
-    parentGUID: fb4a55c4-df3b-4381-8324-6570d286b5fb
-    title: Chance
-    childGUIDs:
-    - 73f0207c-c023-46fe-ab3b-54a669e52ca9
-    nodeType: 3
-    position: {x: 2131, y: 3824}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: CHANCE
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 1
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Chance, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
   - GUID: a0f32c3f-3c72-484e-9fcb-0274fc7ec490
     parentGUID: fb4a55c4-df3b-4381-8324-6570d286b5fb
     title: Chance
     childGUIDs:
     - f0206aad-0e8e-46c1-a6d1-d0168f5ceb91
     nodeType: 3
-    position: {x: 2133, y: 3580}
+    position: {x: 2157, y: 3284}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -1191,7 +1192,7 @@ MonoBehaviour:
     title: Attack
     childGUIDs: []
     nodeType: 1
-    position: {x: 3432, y: 2878}
+    position: {x: 3456, y: 2582}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -1250,7 +1251,7 @@ MonoBehaviour:
     title: BloodbreathSpawnTransform
     childGUIDs: []
     nodeType: 7
-    position: {x: 3190, y: 2782}
+    position: {x: 3214, y: 2486}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -1263,7 +1264,7 @@ MonoBehaviour:
     title: Attack
     childGUIDs: []
     nodeType: 1
-    position: {x: 2367, y: 3077}
+    position: {x: 2391, y: 2781}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -1322,7 +1323,7 @@ MonoBehaviour:
     title: Attack
     childGUIDs: []
     nodeType: 1
-    position: {x: 2367, y: 3328}
+    position: {x: 2391, y: 3032}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -1381,7 +1382,7 @@ MonoBehaviour:
     title: Attack
     childGUIDs: []
     nodeType: 1
-    position: {x: 2367, y: 3580}
+    position: {x: 2391, y: 3284}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -1435,72 +1436,13 @@ MonoBehaviour:
     queryType: 
     noLogic: 0
     noQuery: 1
-  - GUID: 73f0207c-c023-46fe-ab3b-54a669e52ca9
-    parentGUID: fcd4d430-6e21-4b09-8681-37dc42fcffda
-    title: Attack
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 2367, y: 3824}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: ATTACK DATA
-      GUID: null
-      paramReference: null
-      serializedTypename: AttackData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 11400000, guid: 8b54e8c7d767fd2c1aec7bb58998294e, type: 2}
-      output: 0
-    - name: PROJECTILE SPAWN BONE
-      GUID: null
-      paramReference: null
-      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: INTERRUPTED
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
   - GUID: fdbc0e00-c133-4c7e-855e-c3215be59ab1
     parentGUID: 8376fd88-6949-4762-999e-d4cc41a61095
     title: Chance
     childGUIDs:
     - 85e882b9-3add-4102-b959-d165ad7cc56e
     nodeType: 3
-    position: {x: 3210, y: 3042}
+    position: {x: 3234, y: 2746}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -1529,7 +1471,7 @@ MonoBehaviour:
     title: Attack
     childGUIDs: []
     nodeType: 1
-    position: {x: 3432, y: 3042}
+    position: {x: 3456, y: 2746}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -1588,7 +1530,7 @@ MonoBehaviour:
     title: Attack
     childGUIDs: []
     nodeType: 1
-    position: {x: 3432, y: 3216}
+    position: {x: 3456, y: 2920}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -1648,7 +1590,7 @@ MonoBehaviour:
     childGUIDs:
     - 70c07038-1fd6-4974-b3d0-342c9eb3110d
     nodeType: 3
-    position: {x: 3210, y: 3216}
+    position: {x: 3234, y: 2920}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -1678,7 +1620,7 @@ MonoBehaviour:
     childGUIDs:
     - 7fff19f7-f93b-45fa-a7f6-6ccc5e28f456
     nodeType: 3
-    position: {x: 3210, y: 3414}
+    position: {x: 3234, y: 3118}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -1707,7 +1649,7 @@ MonoBehaviour:
     title: Attack
     childGUIDs: []
     nodeType: 1
-    position: {x: 3432, y: 3414}
+    position: {x: 3456, y: 3118}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -1766,7 +1708,7 @@ MonoBehaviour:
     title: BloodbreathSpawnTransform
     childGUIDs: []
     nodeType: 7
-    position: {x: 3210, y: 2966}
+    position: {x: 3234, y: 2670}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -1780,7 +1722,7 @@ MonoBehaviour:
     childGUIDs:
     - 30e7e09d-1495-449d-a771-89479d156aa9
     nodeType: 3
-    position: {x: 3210, y: 2878}
+    position: {x: 3234, y: 2582}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -1809,7 +1751,7 @@ MonoBehaviour:
     title: CheckTagInRange
     childGUIDs: []
     nodeType: 2
-    position: {x: 2260, y: 1132}
+    position: {x: 2284, y: 836}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -1855,7 +1797,7 @@ MonoBehaviour:
     - 725a9ee8-b482-4cda-94ae-954d8257e841
     - 52f7df38-74ff-4060-a0ad-84458e15c844
     nodeType: 5
-    position: {x: 2260, y: 1276}
+    position: {x: 2284, y: 980}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -1871,7 +1813,7 @@ MonoBehaviour:
     - 9a3d9b05-49ce-40f8-92f2-9e7f0d0f9e17
     - 2885db5d-aa11-4e23-b2af-d126e58b44cd
     nodeType: 4
-    position: {x: 2451, y: 1276}
+    position: {x: 2475, y: 980}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -1885,7 +1827,7 @@ MonoBehaviour:
     title: IfTrue
     childGUIDs: []
     nodeType: 2
-    position: {x: 2624, y: 1271}
+    position: {x: 2648, y: 975}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -1915,7 +1857,7 @@ MonoBehaviour:
     childGUIDs:
     - fde7b774-9b7e-4066-95ed-6ba7413a0643
     nodeType: 3
-    position: {x: 2624, y: 1389}
+    position: {x: 2648, y: 1093}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -1945,7 +1887,7 @@ MonoBehaviour:
     childGUIDs:
     - a6421340-aecd-4ba5-a2d8-3ea2d0ef319d
     nodeType: 3
-    position: {x: 2624, y: 1633}
+    position: {x: 2648, y: 1337}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -1974,7 +1916,7 @@ MonoBehaviour:
     title: IfTrue
     childGUIDs: []
     nodeType: 2
-    position: {x: 2624, y: 1521}
+    position: {x: 2648, y: 1225}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -2003,7 +1945,7 @@ MonoBehaviour:
     title: SecondPhase
     childGUIDs: []
     nodeType: 7
-    position: {x: 2474, y: 1469}
+    position: {x: 2498, y: 1173}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -2017,7 +1959,7 @@ MonoBehaviour:
     childGUIDs:
     - 8f764227-3610-4e7d-881a-1f7548364f02
     nodeType: 3
-    position: {x: 2476, y: 1545}
+    position: {x: 2500, y: 1249}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -2033,7 +1975,7 @@ MonoBehaviour:
     - 42dbeb14-7bdd-4ad1-a7a8-245da0490df1
     - a19c06ad-ad3d-47f6-ac7a-0a4d247d07b4
     nodeType: 4
-    position: {x: 2319, y: 1545}
+    position: {x: 2343, y: 1249}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -2047,7 +1989,7 @@ MonoBehaviour:
     title: Attack
     childGUIDs: []
     nodeType: 1
-    position: {x: 2979, y: 1389}
+    position: {x: 3003, y: 1093}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -2106,7 +2048,7 @@ MonoBehaviour:
     title: Attack
     childGUIDs: []
     nodeType: 1
-    position: {x: 2964, y: 1633}
+    position: {x: 2988, y: 1337}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -2165,7 +2107,7 @@ MonoBehaviour:
     title: SpikethrowSpawnTransform
     childGUIDs: []
     nodeType: 7
-    position: {x: 2757, y: 1314}
+    position: {x: 2781, y: 1018}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -2178,7 +2120,7 @@ MonoBehaviour:
     title: SecondPhase
     childGUIDs: []
     nodeType: 7
-    position: {x: 2474, y: 1180}
+    position: {x: 2498, y: 884}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -2186,56 +2128,12 @@ MonoBehaviour:
     queryType: 
     noLogic: 1
     noQuery: 1
-  - GUID: b07191ba-24a7-4216-8d55-27e2fb0c0a5e
-    parentGUID: fbfae120-f7dc-454c-95ca-6735e62ef84f
-    title: Inverter
-    childGUIDs:
-    - 247a26d6-cb00-4660-9e4d-36ff5db9fc51
-    nodeType: 3
-    position: {x: 651, y: 343}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Inverter, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 247a26d6-cb00-4660-9e4d-36ff5db9fc51
-    parentGUID: b07191ba-24a7-4216-8d55-27e2fb0c0a5e
-    title: WaitUntilAnimationComplete
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 788, y: 343}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: STATE NAME
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: C_BAITED
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Animation.WaitUntilAnimationComplete, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
   - GUID: 404ec0e7-e52f-41bd-9184-a3a1e9a49b8c
     parentGUID: cebd829d-b7dd-4e23-aded-7f06fadaf2dd
     title: WaitUntilAnimationComplete
     childGUIDs: []
     nodeType: 1
-    position: {x: 2395, y: 779}
+    position: {x: 2419, y: 483}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -2264,7 +2162,7 @@ MonoBehaviour:
     title: WaitUntilAnimationComplete
     childGUIDs: []
     nodeType: 1
-    position: {x: 2540, y: 2699}
+    position: {x: 2564, y: 2403}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -2293,7 +2191,7 @@ MonoBehaviour:
     title: WaitUntilAnimationComplete
     childGUIDs: []
     nodeType: 1
-    position: {x: 2540, y: 2799}
+    position: {x: 2564, y: 2503}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -2322,7 +2220,7 @@ MonoBehaviour:
     title: InBearTrap
     childGUIDs: []
     nodeType: 7
-    position: {x: 1289, y: 932}
+    position: {x: 1313, y: 636}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -2335,7 +2233,7 @@ MonoBehaviour:
     title: GoTo
     childGUIDs: []
     nodeType: 1
-    position: {x: 2371, y: 1963}
+    position: {x: 2395, y: 1667}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -2424,7 +2322,7 @@ MonoBehaviour:
     title: SetBoolParameter
     childGUIDs: []
     nodeType: 1
-    position: {x: 2405, y: 2589}
+    position: {x: 2429, y: 2293}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -2470,7 +2368,7 @@ MonoBehaviour:
     - ab410bc5-3f59-4f81-acb1-ee787e654fd1
     - a9598bec-63e4-4795-ab0c-175c6599c1e6
     nodeType: 6
-    position: {x: 2405, y: 2713}
+    position: {x: 2429, y: 2417}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -2486,7 +2384,7 @@ MonoBehaviour:
     - bcbb50ec-8991-471f-b84e-c075946a9851
     - 09db0be2-66c3-438f-a84f-12f29182445e
     nodeType: 6
-    position: {x: 1102, y: 1532}
+    position: {x: 1126, y: 1236}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -2500,7 +2398,7 @@ MonoBehaviour:
     title: WaitUntilAnimationComplete
     childGUIDs: []
     nodeType: 1
-    position: {x: 1267, y: 1447}
+    position: {x: 1291, y: 1151}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -2529,7 +2427,7 @@ MonoBehaviour:
     title: WaitUntilAnimationComplete
     childGUIDs: []
     nodeType: 1
-    position: {x: 1272, y: 1557}
+    position: {x: 1296, y: 1261}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -2558,7 +2456,7 @@ MonoBehaviour:
     title: SetBoolParameter
     childGUIDs: []
     nodeType: 1
-    position: {x: 1075, y: 1678}
+    position: {x: 1099, y: 1382}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -2605,7 +2503,7 @@ MonoBehaviour:
     - 73b40e22-fbbf-4e03-8b67-785248a83074
     - cebd829d-b7dd-4e23-aded-7f06fadaf2dd
     nodeType: 5
-    position: {x: 1725, y: 1884}
+    position: {x: 1749, y: 1588}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -2620,7 +2518,7 @@ MonoBehaviour:
     childGUIDs:
     - 8b230599-6486-4f55-9735-fa7521ca2e94
     nodeType: 3
-    position: {x: 1370, y: 1884}
+    position: {x: 1394, y: 1588}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -2665,7 +2563,7 @@ MonoBehaviour:
     childGUIDs:
     - 697764e2-499d-4dcc-9fd0-b3675d88f685
     nodeType: 4
-    position: {x: 1555, y: 1884}
+    position: {x: 1579, y: 1588}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -2681,7 +2579,7 @@ MonoBehaviour:
     - aa17294c-ee09-4486-9bcf-8d690f12853e
     - 961e5817-ab05-4c8d-8d51-6676c9fd69a2
     nodeType: 6
-    position: {x: 1081, y: 1884}
+    position: {x: 1105, y: 1588}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -2695,7 +2593,7 @@ MonoBehaviour:
     title: SetAnimatorTrigger
     childGUIDs: []
     nodeType: 1
-    position: {x: 1081, y: 2008}
+    position: {x: 1105, y: 1712}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -2726,7 +2624,7 @@ MonoBehaviour:
     - 898da118-4a22-430c-be45-161d59a9521d
     - a3b791c1-744b-4dcf-8383-a15debef8e18
     nodeType: 4
-    position: {x: 1389, y: 2294}
+    position: {x: 1413, y: 1998}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -2740,7 +2638,7 @@ MonoBehaviour:
     title: IfTrue
     childGUIDs: []
     nodeType: 2
-    position: {x: 1573, y: 2294}
+    position: {x: 1597, y: 1998}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -2769,7 +2667,7 @@ MonoBehaviour:
     title: PhaseChange
     childGUIDs: []
     nodeType: 7
-    position: {x: 1389, y: 2370}
+    position: {x: 1413, y: 2074}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -2783,7 +2681,7 @@ MonoBehaviour:
     childGUIDs:
     - 63ccfdce-56ae-4f58-977e-d2744f5bcf9c
     nodeType: 3
-    position: {x: 1174, y: 2294}
+    position: {x: 1198, y: 1998}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -2797,7 +2695,7 @@ MonoBehaviour:
     title: SetBoolParameter
     childGUIDs: []
     nodeType: 1
-    position: {x: 1574, y: 2404}
+    position: {x: 1598, y: 2108}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -2833,6 +2731,108 @@ MonoBehaviour:
       output: 0
     runtimeLogicType: SetBoolParameter, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: d87b0e0d-bbf6-43f9-89d5-96ae3186d5d5
+    parentGUID: fbfae120-f7dc-454c-95ca-6735e62ef84f
+    title: SetAnimatorTrigger
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 808, y: 8}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: NAME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: Baited
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Animation.SetAnimatorTrigger, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 6258c192-1607-4287-9725-d704e2ca4482
+    parentGUID: fbfae120-f7dc-454c-95ca-6735e62ef84f
+    title: WaitFor
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 808, y: 111}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: TIME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0.3
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.WaitFor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: b07191ba-24a7-4216-8d55-27e2fb0c0a5e
+    parentGUID: fbfae120-f7dc-454c-95ca-6735e62ef84f
+    title: Inverter
+    childGUIDs:
+    - 247a26d6-cb00-4660-9e4d-36ff5db9fc51
+    nodeType: 3
+    position: {x: 808, y: 211}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Inverter, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 247a26d6-cb00-4660-9e4d-36ff5db9fc51
+    parentGUID: b07191ba-24a7-4216-8d55-27e2fb0c0a5e
+    title: WaitUntilAnimationComplete
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 965, y: 211}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: STATE NAME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: C_BAITED
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Animation.WaitUntilAnimationComplete, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     queryType: 
     noLogic: 0
     noQuery: 1
