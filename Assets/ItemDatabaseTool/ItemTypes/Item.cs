@@ -281,6 +281,27 @@ public class Item : ScriptableObject
                 }
             }
         }
+
+        // get all sprite varibles from item
+        fields = new List<FieldInfo>(this.GetType().GetFields());
+        foreach (FieldInfo field in fields)
+        {
+            if (field.FieldType == typeof(Sprite))
+            {
+                Sprite sprite = (Sprite)field.GetValue(this);
+                if (sprite != null)
+                {
+                    m_resources.Add(sprite.name);
+
+                    // add resource link
+                    FieldResourceLink link = new FieldResourceLink();
+                    link.fieldName = field.Name;
+                    link.resourceName = sprite.name;
+                    m_resourceLinks.Add(link);
+                }
+            }
+        }
+
     }
 
     public void ResourceListToPrefabs(){
@@ -311,6 +332,21 @@ public class Item : ScriptableObject
                 {
                     // move prefab to resources folder
                     UnityEditor.AssetDatabase.MoveAsset(UnityEditor.AssetDatabase.GetAssetPath(prefab), "Assets/Resources/" + prefab.name + ".prefab");
+                }
+            }
+        }
+
+        // get all sprite varibles from item
+        fields = new List<FieldInfo>(this.GetType().GetFields());
+        foreach (FieldInfo field in fields)
+        {
+            if (field.FieldType == typeof(Sprite))
+            {
+                Sprite sprite = (Sprite)field.GetValue(this);
+                if (sprite != null)
+                {
+                    // move sprite to resources folder
+                    UnityEditor.AssetDatabase.MoveAsset(UnityEditor.AssetDatabase.GetAssetPath(sprite), "Assets/Resources/" + sprite.name + ".png");
                 }
             }
         }
