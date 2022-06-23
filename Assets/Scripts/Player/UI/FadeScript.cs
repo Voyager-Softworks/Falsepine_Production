@@ -9,6 +9,8 @@ using UnityEngine.Events;
 
 public class FadeScript : MonoBehaviour
 {
+    private bool m_trueCompleteFalseOver = true;
+
     public Image fadeImage;
     public Color startColor = Color.clear;
     private Color currentColor = Color.clear;
@@ -74,6 +76,16 @@ public class FadeScript : MonoBehaviour
         }
     }
 
+    public void GotoDestination()
+    {
+        if (m_trueCompleteFalseOver){
+            LevelController.LoadComplete();
+        }
+        else{
+            LevelController.LoadGameOver();
+        }
+    }
+
     public void FadeFromAToB(Color _a, Color _b, float _time = 1.0f, float _delay = 0.0f)
     {
         startColor = _a;
@@ -100,8 +112,9 @@ public class FadeScript : MonoBehaviour
         FadeFromBlackToClear(3.0f, 2.0f);
     }
 
-    public void EndScreen(){
+    public void EndScreen(bool _trueCompleteFalseOver = true){
         isEndFade = true;
         FadeFromClearToBlack(3.0f, 2.0f);
+        m_trueCompleteFalseOver = _trueCompleteFalseOver;
     }
 }

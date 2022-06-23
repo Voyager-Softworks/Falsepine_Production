@@ -7,7 +7,7 @@ public class TownSceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (MissionManager.instance) MissionManager.instance.SaveMissions();
+        //if (MissionManager.instance) MissionManager.instance.SaveMissions();
 
         //unlock and unhide cursor
         Cursor.lockState = CursorLockMode.None;
@@ -21,6 +21,6 @@ public class TownSceneManager : MonoBehaviour
     }
 
     private void OnDestroy() {
-        if (MissionManager.instance) MissionManager.instance.SaveMissions();
+        //if (MissionManager.instance) MissionManager.instance.SaveMissions();
     }
 }

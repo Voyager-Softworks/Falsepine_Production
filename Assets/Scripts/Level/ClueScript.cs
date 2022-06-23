@@ -12,10 +12,14 @@ public class ClueScript : Interactable
     [Header("Clue")]
     public NotesManager.ClueType clueType;
 
+    [HideInInspector] public NotesManager _notesManager = null;
+
     // Start is called before the first frame update
     override public void Start()
     {
         base.Start();
+
+        if (_notesManager == null) _notesManager = FindObjectOfType<NotesManager>();
     }
 
     // Update is called once per frame

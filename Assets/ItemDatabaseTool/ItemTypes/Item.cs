@@ -310,6 +310,7 @@ public class Item : ScriptableObject
 
         //deserialize item as type
         ScriptableObject item = ScriptableObject.CreateInstance(itemType);
+        
 
         // cast to item type
         JsonUtility.FromJsonOverwrite(json, item);

@@ -290,6 +290,17 @@ public class Inventory : MonoBehaviour
     }
 
     /// <summary>
+    /// Delete save file
+    /// </summary>
+    public void DeleteSaveFile()
+    {
+        if (File.Exists(GetSaveFilePath()))
+        {
+            File.Delete(GetSaveFilePath());
+        }
+    }
+
+    /// <summary>
     /// Clears all items from the inventory.
     /// </summary>
     public void ClearInventory()

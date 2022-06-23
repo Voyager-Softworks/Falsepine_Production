@@ -108,22 +108,7 @@ public class MissionManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //DEBUG
-        //keypad + to save
-        if (Keyboard.current.numpadPlusKey.wasPressedThisFrame)
-        {
-            SaveMissions();
-        }
-        //keypad - to load
-        if (Keyboard.current.numpadMinusKey.wasPressedThisFrame)
-        {
-            LoadMissions();
-        }
-        //keypad 9 to delete save
-        if (Keyboard.current.numpad9Key.wasPressedThisFrame)
-        {
-            DeleteMissionSave();
-        }
+        
     }
 
     /// <summary>
@@ -168,7 +153,7 @@ public class MissionManager : MonoBehaviour
 
         else{
             //json serialize the data
-            string json = JsonUtility.ToJson(data);
+            string json = JsonUtility.ToJson(data, true);
 
             StreamWriter writer = new StreamWriter(file);
             writer.Write(json);
