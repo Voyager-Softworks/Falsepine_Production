@@ -28,15 +28,15 @@ public class InventoryManager : MonoBehaviour
             //do not destroy this object
             DontDestroyOnLoad(this);
 
+            Inventory[] invs = GetComponentsInChildren<Inventory>();
+            foreach (Inventory inv in invs) {
+                AddInventory(inv);
+            }
+
             LoadInventories();
         } else {
             Destroy(this);
             Destroy(gameObject);
-        }
-
-        Inventory[] invs = GetComponentsInChildren<Inventory>();
-        foreach (Inventory inv in invs) {
-            AddInventory(inv);
         }
     }
 
@@ -74,6 +74,14 @@ public class InventoryManager : MonoBehaviour
         foreach (Inventory inv in inventories) {
             inv.SaveInventory();
         }
+    }
+
+    public void MoveItem(Inventory source, Inventory target, int index) {
+        Item item = source.RemoveItemFromInventory(index);
+        if (!item) return;
+        item = target.AddItemToInventory(item);
+        if (!item) return;
+        source.AddItemToInventory(item);
     }
 
     public void LoadInventories() {

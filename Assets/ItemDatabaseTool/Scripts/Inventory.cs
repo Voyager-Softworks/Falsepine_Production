@@ -104,6 +104,20 @@ public class Inventory : MonoBehaviour
     }
 
     [SerializeField] private string m_id = "";
+
+    public int GetItemIndex(Item item)
+    {
+        for (int i = 0; i < slots.Count; i++)
+        {
+            if (slots[i].item == item)
+            {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
     [SerializeField] public string id
     {
         get { return m_id; }
@@ -161,6 +175,17 @@ public class Inventory : MonoBehaviour
         if (item == null) return true;
 
         return false;
+    }
+
+    public Item RemoveItemFromInventory(int _index){
+        if (_index < 0 || _index >= m_slots.Count) return null;
+
+        InventorySlot slot = m_slots[_index];
+        Item item = slot.item;
+
+        slot.item = null;
+
+        return item;
     }
 
     /// <summary>
@@ -256,6 +281,9 @@ public class Inventory : MonoBehaviour
         string file = System.IO.File.ReadAllText(GetSaveFilePath());
 
         string[] fileNames = file.Split('\n');
+
+        // clear inventory
+        ClearInventory();
 
         for (int i = 0; i < fileNames.Length; i++)
         {
