@@ -125,6 +125,16 @@ public class Item : ScriptableObject
 
     [SerializeField] public List<TagManager.Tag> m_tags = new List<TagManager.Tag>();
 
+
+    [Serializable]
+    public class FieldResourceLink{
+        [SerializeField] public string fieldName = "";
+        [SerializeField] public string resourceName = "";
+    }
+    [SerializeField] public List<FieldResourceLink> m_resourceLinks = new List<FieldResourceLink>();
+
+    [SerializeField] public List<String> m_resources = new List<String>();
+
     /// <summary>
     /// Update function for the item
     /// </summary>
@@ -251,6 +261,62 @@ public class Item : ScriptableObject
         return item;
     }
 
+    public void PrefabsToResourceList(){
+        // get all GameObject varibles from item
+        List<FieldInfo> fields = new List<FieldInfo>(this.GetType().GetFields());
+        foreach (FieldInfo field in fields)
+        {
+            if (field.FieldType == typeof(GameObject))
+            {
+                GameObject prefab = (GameObject)field.GetValue(this);
+                if (prefab != null)
+                {
+                    m_resources.Add(prefab.name);
+
+                    // add resource link
+                    FieldResourceLink link = new FieldResourceLink();
+                    link.fieldName = field.Name;
+                    link.resourceName = prefab.name;
+                    m_resourceLinks.Add(link);
+                }
+            }
+        }
+    }
+
+    public void ResourceListToPrefabs(){
+        foreach (FieldResourceLink link in m_resourceLinks)
+        {
+            GameObject prefab = Resources.Load<GameObject>(link.resourceName);
+            if (prefab != null)
+            {
+                FieldInfo field = this.GetType().GetField(link.fieldName);
+                if (field != null)
+                {
+                    field.SetValue(this, prefab);
+                }
+            }
+        }
+    }
+
+    public void MovePrefabsToResourceFolder(){
+        #if UNITY_EDITOR
+        // get all GameObject varibles from item    
+        List<FieldInfo> fields = new List<FieldInfo>(this.GetType().GetFields());
+        foreach (FieldInfo field in fields)
+        {
+            if (field.FieldType == typeof(GameObject))
+            {
+                GameObject prefab = (GameObject)field.GetValue(this);
+                if (prefab != null)
+                {
+                    // move prefab to resources folder
+                    UnityEditor.AssetDatabase.MoveAsset(UnityEditor.AssetDatabase.GetAssetPath(prefab), "Assets/Resources/" + prefab.name + ".prefab");
+                }
+            }
+        }
+        #endif
+    }
+
     /// <summary>
     /// Saves item to file
     /// </summary>
@@ -264,6 +330,8 @@ public class Item : ScriptableObject
         }
 
         FileStream file = File.Create(_path + _fileName);
+
+        _item.PrefabsToResourceList();
 
         //serialize item
         string json = JsonUtility.ToJson(_item, true);
@@ -310,7 +378,6 @@ public class Item : ScriptableObject
 
         //deserialize item as type
         ScriptableObject item = ScriptableObject.CreateInstance(itemType);
-        
 
         // cast to item type
         JsonUtility.FromJsonOverwrite(json, item);
@@ -321,6 +388,8 @@ public class Item : ScriptableObject
         {
             ((Item)item).name = ((Item)item).id;
         }
+
+        ((Item)item).ResourceListToPrefabs();
 
         // cast to item type
         return item as Item;
@@ -458,6 +527,12 @@ public class Item : ScriptableObject
                     }
                 }
                 GUILayout.EndVertical();
+            }
+
+            // move prefabs to resources
+            if (GUILayout.Button("Move Prefabs to Resources"))
+            {
+                item.MovePrefabsToResourceFolder();
             }
 
             //end green box

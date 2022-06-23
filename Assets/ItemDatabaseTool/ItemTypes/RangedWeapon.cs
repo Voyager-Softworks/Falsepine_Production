@@ -161,6 +161,7 @@ public class RangedWeapon : Item
 
                 //if hit something, apply damage
                 HealthScript healthScript = hit.collider.GetComponentInChildren<HealthScript>();
+                if (!healthScript) healthScript = hit.collider.GetComponentInParent<HealthScript>();
                 if (healthScript != null)
                 {
                     healthScript.TakeDamage(m_damage, _owner);

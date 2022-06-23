@@ -28,6 +28,6 @@ public class PickupScript : Interactable
 
         if (inventoryManager == null) return;
 
-        inventoryManager.AddItem(_itemName, _amount);
+        //inventoryManager.AddItem(_itemName, _amount);
     }
 }
