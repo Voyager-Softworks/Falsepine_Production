@@ -10,10 +10,17 @@ public class CursorScript : MonoBehaviour
     public Sprite aimCursor;
     public Sprite reloadCursor;
 
+    public bool setOnStart = true; 
+
     // Start is called before the first frame update
     void Start()
     {
         Cursor.visible = false;
+
+        if (setOnStart)
+        {
+            SetCursor(aimCursor);
+        }
     }
 
     // Update is called once per frame
