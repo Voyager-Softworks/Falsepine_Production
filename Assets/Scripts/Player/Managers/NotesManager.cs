@@ -62,13 +62,13 @@ public class NotesManager : MonoBehaviour
     }
 
     public void UpdateNotesPaper(){
-        if (_uiScript == null || _uiScript.journalUIList == null || _uiScript.journalUIList.notesText == null) return;
+        // if (_uiScript == null || _uiScript.journalUIList == null || _uiScript.journalUIList.notesText == null) return;
 
-        string text = "";
-        foreach (ClueType clue in cluesFound){
-            text += clueShortDesc[clue] + "\n\n";
-        }
-        _uiScript.journalUIList.notesText.text = text;
+        // string text = "";
+        // foreach (ClueType clue in cluesFound){
+        //     text += clueShortDesc[clue] + "\n\n";
+        // }
+        // _uiScript.journalUIList.notesText.text = text;
     }
 
     public void ClueInspected(ClueScript _clue)

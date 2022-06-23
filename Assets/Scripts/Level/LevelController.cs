@@ -9,56 +9,47 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class LevelController : MonoBehaviour
 {
-    static public void LoadMenu()
-    {
+    static public void SaveAll(){
         // save all inventories
         if (InventoryManager.instance != null) InventoryManager.instance.SaveInventories();
 
         // save missions
         if (MissionManager.instance != null) MissionManager.instance.SaveMissions();
+
+        // save journal
+        if (JournalManager.instance != null) JournalManager.instance.SaveJournal();
+    }
+
+    static public void LoadMenu()
+    {
+        SaveAll();
 
         SceneManager.LoadScene(0);
     }
 
     static public void LoadTown(){
-        // save all inventories
-        if (InventoryManager.instance != null) InventoryManager.instance.SaveInventories();
-
-        // save missions
-        if (MissionManager.instance != null) MissionManager.instance.SaveMissions();
+        SaveAll();
 
         SceneManager.LoadScene(1);
     }
 
     static public void LoadSnow()
     {
-        // save all inventories
-        if (InventoryManager.instance != null) InventoryManager.instance.SaveInventories();
-
-        // save missions
-        if (MissionManager.instance != null) MissionManager.instance.SaveMissions();
+        SaveAll();
 
         SceneManager.LoadScene(2);
     }
 
     static public void LoadSnowBoss()
     {
-        // save all inventories
-        if (InventoryManager.instance != null) InventoryManager.instance.SaveInventories();
-
-        // save missions
-        if (MissionManager.instance != null) MissionManager.instance.SaveMissions();
+        SaveAll();
 
         SceneManager.LoadScene(3);
     }
 
     static public void LoadComplete()
     {
-        // save all inventories
-        if (InventoryManager.instance != null) InventoryManager.instance.SaveInventories();
-
-        // save missions
-        if (MissionManager.instance != null) MissionManager.instance.SaveMissions();
+        SaveAll();
 
         SceneManager.LoadScene("Scene_Complete");
     }
@@ -91,6 +82,7 @@ public class LevelController : MonoBehaviour
         }
 
         // destroy journal
+        Destroy(JournalManager.instance.gameObject);
 
         SceneManager.LoadScene("Scene_GameOver");
     }
@@ -99,7 +91,7 @@ public class LevelController : MonoBehaviour
         Application.Quit();
     }
 
-    static public void LoadScene(int _index){
-        SceneManager.LoadScene(_index);
-    }
+    // static public void LoadScene(int _index){
+    //     SceneManager.LoadScene(_index);
+    // }
 }
