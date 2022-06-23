@@ -45,23 +45,22 @@ namespace NodeAI
                     navAgent.stoppingDistance = GetProperty<float>("Stopping distance");
                 }
                 //navAgent.SetDestination(GetProperty<Transform>("Position").position);
+                NavMeshHit nhit;
+                NavMesh.SamplePosition(GetProperty<Transform>("Position").position, out nhit, 4.0f, NavMesh.AllAreas);
                 if(Vector3.Distance(agent.transform.position, GetProperty<Transform>("Position").position) <= navAgent.stoppingDistance + 0.01f)
                 {
                     navAgent.isStopped = true;
                     state = NodeData.State.Success;
                     return NodeData.State.Success;
                 }
-                NavMeshHit nhit;
-                NavMesh.SamplePosition(GetProperty<Transform>("Position").position, out nhit, 3.0f, NavMesh.AllAreas);
-                if(navAgent.SetDestination(GetProperty<Transform>("Position").position))
+                
+                if(navAgent.SetDestination(nhit.position))
                 {
+                    
                     navAgent.isStopped = false;
                     navAgent.speed = GetProperty<float>("Speed");
                     navAgent.acceleration = GetProperty<float>("Acceleration");
-                    if(GetProperty<float>("Stopping distance") > 0)
-                    {
-                        navAgent.stoppingDistance = GetProperty<float>("Stopping distance");
-                    }
+                    
                     state = NodeData.State.Running;
                     return NodeData.State.Running;
                 }
