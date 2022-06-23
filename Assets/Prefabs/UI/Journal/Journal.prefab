@@ -553,7 +553,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4016091126408603658}
-  - {fileID: 711444239739905282}
   - {fileID: 9192277277222878105}
   - {fileID: 6019236648534343528}
   m_Father: {fileID: 4572584152757288723}
@@ -667,7 +666,7 @@ RectTransform:
   m_GameObject: {fileID: 1033255760021620627}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.25, y: 1.25, z: 1}
   m_Children:
   - {fileID: 3140602705044745291}
   - {fileID: 4455411438599564024}
@@ -997,7 +996,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 5427287575382761672}
+      - m_Target: {fileID: 1033255760021620627}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
@@ -1039,7 +1038,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 555016222656207189}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
@@ -1233,7 +1232,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4455411438599564024
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1979,13 +1978,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4520166425180556691}
+  - component: {fileID: 790779627}
   m_Layer: 5
   m_Name: BoneStag Clues
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4520166425180556691
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2011,6 +2011,31 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &790779627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3414041474876148188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0872673a5ee8b3c429bca5f54709dea6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monsterName: bonestag
+  lore:
+  - {fileID: 2865176672116032619}
+  - {fileID: 4918193220731513183}
+  - {fileID: 4869788494050597916}
+  - {fileID: 1674936525812884992}
+  - {fileID: 789714948832908256}
+  clue:
+  - {fileID: 7994368511867896844}
+  - {fileID: 9184352010614928623}
+  - {fileID: 2227073872827870711}
+  - {fileID: 8564604211491981938}
+  - {fileID: 8077720785013522087}
 --- !u!1 &3415358061990485425
 GameObject:
   m_ObjectHideFlags: 0
@@ -2413,150 +2438,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1 &3721746891907361896
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8027348323840923826}
-  - component: {fileID: 1410393114455828774}
-  - component: {fileID: 9007933230357451926}
-  - component: {fileID: 412351787069189259}
-  m_Layer: 5
-  m_Name: Button Previous Page
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &8027348323840923826
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3721746891907361896}
-  m_LocalRotation: {x: -0, y: -0, z: 1, w: -0.000000029802326}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6090707249669481068}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -379, y: 35}
-  m_SizeDelta: {x: 40, y: 50}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &1410393114455828774
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3721746891907361896}
-  m_CullTransparentMesh: 1
---- !u!114 &9007933230357451926
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3721746891907361896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9ac3830fae27c9248889dd36ad8799b5, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!114 &412351787069189259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3721746891907361896}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.8490566, g: 0.8490566, b: 0.8490566, a: 1}
-    m_PressedColor: {r: 0.5754717, g: 0.5754717, b: 0.5754717, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 21300000, guid: 37734d81286c5ea439fbc262128afdb2, type: 3}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 9007933230357451926}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4733683470143126061}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1591301360223989662}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!1 &3806693961300332308
 GameObject:
   m_ObjectHideFlags: 0
@@ -3211,7 +3092,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3587826104666643713
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3268,7 +3149,6 @@ RectTransform:
   - {fileID: 7768497702092189851}
   - {fileID: 9080320554229419288}
   - {fileID: 4865510935909485080}
-  - {fileID: 8027348323840923826}
   m_Father: {fileID: 4520166425180556691}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3382,12 +3262,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 555016222656207189}
-  m_RootOrder: 1
+  m_Father: {fileID: 4016091126408603658}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 414, y: -30}
+  m_AnchoredPosition: {x: 499, y: 12}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1031445792908859113
@@ -3418,14 +3298,11 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "-Damn right! Anyways I got close, looked like a sack or cargo sheet, maybe
-    a really shitty blanket? Anyway, I asked if he was alright and after I saw its
-    face I made smoke and put boot to dirt. \r\n\r\n-No Sheriff, looked like it was
-    trying to hide its face, almost looked ashamed, it croaked at me, sounded a bit
-    like Anna? Yeah, the name. Honestly, I ain\u2019t going back out there, swear
-    I can still hear it in my head, doc says there's nothing wrong with me, but still\u2026
-    I\u2026\r\n\r\n-Yeah, sure thing Sheriff\u2026\u201D -Field report transcript,
-    Douglas Kerkwood."
+  m_text: "-No Sheriff, looked like it was trying to hide its face, almost looked
+    ashamed, it croaked at me, sounded a bit like Anna? Yeah, the name. Honestly,
+    I ain\u2019t going back out there, swear I can still hear it in my head, doc
+    says there's nothing wrong with me, but still\u2026 I\u2026\r\n\r\n-Yeah, sure
+    thing Sheriff\u2026\u201D -Field report transcript, Douglas Kerkwood."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d4909a723f165cc46a9f81d8c5da0b34, type: 2}
   m_sharedMaterial: {fileID: 1981243289313481776, guid: d4909a723f165cc46a9f81d8c5da0b34, type: 2}
@@ -3792,7 +3669,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1413699511411156431
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4234,7 +4111,13 @@ MonoBehaviour:
     m_Flags: 0
   openJournalSound: {fileID: 8300000, guid: 93a8937944094094c883be006f8448c4, type: 3}
   closeJournalSound: {fileID: 8300000, guid: 2acf19066093ead40bb90e6a38c00d1b, type: 3}
+  addInfoSound: {fileID: 8300000, guid: aaa10fbb01bd50a429d85fd114930c13, type: 3}
   journalPanel: {fileID: 1033255760021620627}
+  monsterCluesList:
+  - monsterName: bonestag
+    monsterCluesUI: {fileID: 790779627}
+    loreFound: 0
+    cluesFound: 0
 --- !u!82 &5427287575382761666
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4421,7 +4304,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4572584152757288723
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5048,7 +4931,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 5153166393133092617}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: 
+        m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5060,7 +4943,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 4567298902121851524}
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: 
+        m_MethodName: SetActive
         m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5234,11 +5117,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 555016222656207189}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -119, y: -76.9}
+  m_AnchoredPosition: {x: -119, y: -35}
   m_SizeDelta: {x: 10, y: 12.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1053356528356857338
@@ -5296,7 +5179,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5727791460461803658
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5885,7 +5768,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8497782847096366473
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6649,7 +6532,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 7315638417592162516}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3414041474876148188}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1591301360223989662}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8077720785013522087
 GameObject:
   m_ObjectHideFlags: 0
@@ -6753,7 +6660,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Unknown Beast
+  m_text: Bonestag
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1fa4b3edb4c36cd4fa15838c8e2a0b9c, type: 2}
   m_sharedMaterial: {fileID: 3138107799243547728, guid: 1fa4b3edb4c36cd4fa15838c8e2a0b9c, type: 2}
@@ -7113,13 +7020,14 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 711444239739905282}
   m_Father: {fileID: 555016222656207189}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 15, y: -42}
+  m_AnchoredPosition: {x: 15, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7055475708205280921
@@ -7155,7 +7063,7 @@ MonoBehaviour:
     sir, the lawmen told me that was the case,  leaving folk in need is a pagans
     duty. \r\n\r\n-Damn right! Anyways I got close, looked like a sack or cargo sheet,
     maybe a really shitty blanket? Anyway, I asked if he was alright and after I
-    saw its face I made smoke and put boot to dirt. \r\n\r\n"
+    saw its face I made smoke and put boot to dirt. \r\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d4909a723f165cc46a9f81d8c5da0b34, type: 2}
   m_sharedMaterial: {fileID: 1981243289313481776, guid: d4909a723f165cc46a9f81d8c5da0b34, type: 2}
@@ -7218,7 +7126,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -12.501846, y: 0, z: -106.59021, w: -151.38162}
+  m_margin: {x: -12.501846, y: 0, z: -106.59021, w: -338.6474}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

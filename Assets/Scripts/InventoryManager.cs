@@ -2,6 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Reflection;
+using System.Linq;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 
 /// <summary>
 /// Singleton donotdestroy script that handles the mission system
@@ -72,4 +81,43 @@ public class InventoryManager : MonoBehaviour
             inv.LoadInventory();
         }
     }
+
+    // custom unity editor
+    // #if UNITY_EDITOR
+    // [CustomEditor(typeof(InventoryManager))]
+    // public class InventoryManagerEditor : Editor
+    // {
+    //     public override void OnInspectorGUI()
+    //     {
+    //         DrawDefaultInspector();
+
+    //         InventoryManager myScript = (InventoryManager)target;
+
+    //         // list of prefabs
+    //         UnityEditor.EditorGUILayout.LabelField("Prefabs", EditorStyles.boldLabel);
+    //         foreach (GameObject obj in prefabInstances)
+    //         {
+    //             UnityEditor.EditorGUILayout.LabelField(obj.name);
+    //         }
+
+    //         // add prefabs to list
+    //         if (GUILayout.Button("Add Prefabs to List"))
+    //         {
+    //             myScript.AddPrefabsToListList();
+    //         }
+
+    //         // clear prefab list
+    //         if (GUILayout.Button("Clear Prefab List"))
+    //         {
+    //             InventoryManager.prefabInstances.Clear();
+    //         }
+
+    //         // on change, set dirty
+    //         if (GUI.changed)
+    //         {
+    //             EditorUtility.SetDirty(target);
+    //         }
+    //     }
+    // }
+    // #endif
 }

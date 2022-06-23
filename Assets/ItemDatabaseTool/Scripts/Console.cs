@@ -45,8 +45,6 @@ public class Console : MonoBehaviour
 
             TrySendCommand(text);
 
-            consoleInput.text = "";
-
             StartTyping();
         }
 
@@ -83,11 +81,15 @@ public class Console : MonoBehaviour
         {
             view.SetActive(false);
             input.SetActive(false);
+
+            consoleInput.text = "";
         }
         else
         {
             view.SetActive(true);
             input.SetActive(true);
+
+            consoleInput.text = "";
 
             StartTyping();
         }
@@ -338,6 +340,43 @@ public class Console : MonoBehaviour
             return;
         }
 
+        // "inspect inventoryID slotNumber"
+        if (split.Length == 3 && split[0] == "inspect")
+        {
+            string inventoryID = split[1];
+            int slotNumber = int.Parse(split[2]);
+
+            Inventory inventory = Inventory.allInventories.Find(x => x.id == inventoryID);
+            if (!inventory){
+                Log("- Inventory not found");
+
+                Log();
+                return;
+            }
+
+            // inspect the item
+            Item item = inventory.slots[slotNumber].item;
+            if (!item) 
+            {
+                Log("- Slot " + slotNumber + " is empty");
+                return;
+            }
+            else{
+                Log("- Slot " + slotNumber + " contains " + item.name);
+                // cast ro rangedweapon
+                if (item is RangedWeapon)
+                {
+                    RangedWeapon rangedWeapon = item as RangedWeapon;
+
+                    Log("- - Damage: " + rangedWeapon.id);
+                    Log("- - Damage: " + rangedWeapon.m_damage);
+                    Log("- - Aim Sound: " + rangedWeapon.m_startAimSound);
+                }
+
+                return;
+            }
+        }
+
         // command not found
         Log("- Command not found");
     }
@@ -354,7 +393,9 @@ public class Console : MonoBehaviour
         "quit",
         "restart",
         "scene sceneNumber",
-        "delete_mission_save"
+        "delete_mission_save",
+        "complete_mission",
+        "inspect inventoryID slotNumber"
     };
 
     /// <summary>

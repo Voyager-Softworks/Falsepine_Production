@@ -201,10 +201,7 @@ public class ItemDatabase
     [RuntimeInitializeOnLoadMethod]
     public static void Initialize()
     {
-        if (database.Count == 0)
-        {
-            LoadListFromFile();
-        }
+        LoadListFromFile();
 
         
         CleanUpFiles();
