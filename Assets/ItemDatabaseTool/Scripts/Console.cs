@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
+using System.Reflection;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
@@ -44,6 +45,8 @@ public class Console : MonoBehaviour
             if (text == "") return;
 
             TrySendCommand(text);
+
+            consoleInput.text = "";
 
             StartTyping();
         }
@@ -363,14 +366,16 @@ public class Console : MonoBehaviour
             }
             else{
                 Log("- Slot " + slotNumber + " contains " + item.name);
-                // cast ro rangedweapon
-                if (item is RangedWeapon)
+                
+                // get all fields of item
+                FieldInfo[] fields = item.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance);
+                foreach (FieldInfo field in fields)
                 {
-                    RangedWeapon rangedWeapon = item as RangedWeapon;
-
-                    Log("- - Damage: " + rangedWeapon.id);
-                    Log("- - Damage: " + rangedWeapon.m_damage);
-                    Log("- - Aim Sound: " + rangedWeapon.m_startAimSound);
+                    object value = field.GetValue(item);
+                    if (value != null)
+                    {
+                        Log("- - " + field.Name + ": " + value);
+                    }
                 }
 
                 return;
