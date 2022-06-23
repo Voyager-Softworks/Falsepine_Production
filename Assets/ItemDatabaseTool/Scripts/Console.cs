@@ -328,6 +328,16 @@ public class Console : MonoBehaviour
             return;
         }
 
+        // "complete_mission"
+        if (split.Length == 1 && split[0] == "complete_mission")
+        {
+            MissionManager.instance?.currentMission.SetComplete(true);
+
+            Log("- Mission completed");
+
+            return;
+        }
+
         // command not found
         Log("- Command not found");
     }

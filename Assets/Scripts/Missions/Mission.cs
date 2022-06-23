@@ -42,6 +42,10 @@ public class Mission : ScriptableObject
 
     [SerializeField] public bool isCompleted;
 
+    public void SetComplete(bool _val){
+        isCompleted = _val;
+    }
+
     // equality check
     public bool Equals(Mission other)
     {
