@@ -23,7 +23,7 @@ public class EnemyManager : MonoBehaviour
 
     bool getPlayerInBounds()
     {
-        return Physics.BoxCast(transform.position, new Vector3(extents.width, extents.height, extents.width), transform.forward, Quaternion.identity, extents.width, LayerMask.GetMask("Player"));
+        return Physics.OverlapBox(transform.position, extents.size, Quaternion.identity, LayerMask.GetMask("Player")).Length > 0;
     }
 
     void Update()
