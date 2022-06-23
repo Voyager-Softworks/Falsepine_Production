@@ -130,10 +130,11 @@ public class Item : ScriptableObject
     public class FieldResourceLink{
         [SerializeField] public string fieldName = "";
         [SerializeField] public string resourceName = "";
+        [SerializeField] public Type resourceType = typeof(Item);
     }
     [SerializeField] public List<FieldResourceLink> m_resourceLinks = new List<FieldResourceLink>();
 
-    [SerializeField] public List<String> m_resources = new List<String>();
+    //[SerializeField] public List<String> m_resources = new List<String>();
 
     /// <summary>
     /// Update function for the item
@@ -262,6 +263,9 @@ public class Item : ScriptableObject
     }
 
     public void PrefabsToResourceList(){
+        m_resourceLinks.Clear();
+        //m_resources.Clear();
+
         // get all GameObject varibles from item
         List<FieldInfo> fields = new List<FieldInfo>(this.GetType().GetFields());
         foreach (FieldInfo field in fields)
@@ -271,12 +275,13 @@ public class Item : ScriptableObject
                 GameObject prefab = (GameObject)field.GetValue(this);
                 if (prefab != null)
                 {
-                    m_resources.Add(prefab.name);
+                    //m_resources.Add(prefab.name);
 
                     // add resource link
                     FieldResourceLink link = new FieldResourceLink();
                     link.fieldName = field.Name;
                     link.resourceName = prefab.name;
+                    link.resourceType = typeof(GameObject);
                     m_resourceLinks.Add(link);
                 }
             }
@@ -291,12 +296,13 @@ public class Item : ScriptableObject
                 Sprite sprite = (Sprite)field.GetValue(this);
                 if (sprite != null)
                 {
-                    m_resources.Add(sprite.name);
+                    //m_resources.Add(sprite.name);
 
                     // add resource link
                     FieldResourceLink link = new FieldResourceLink();
                     link.fieldName = field.Name;
                     link.resourceName = sprite.name;
+                    link.resourceType = typeof(Sprite);
                     m_resourceLinks.Add(link);
                 }
             }
@@ -307,13 +313,15 @@ public class Item : ScriptableObject
     public void ResourceListToPrefabs(){
         foreach (FieldResourceLink link in m_resourceLinks)
         {
-            GameObject prefab = Resources.Load<GameObject>(link.resourceName);
-            if (prefab != null)
-            {
-                FieldInfo field = this.GetType().GetField(link.fieldName);
+            FieldInfo field = this.GetType().GetField(link.fieldName);
+
+            UnityEngine.Object value = Resources.Load(link.resourceName, field.FieldType);
+
+            if (value != null)
+            {   
                 if (field != null)
                 {
-                    field.SetValue(this, prefab);
+                    field.SetValue(this, value);
                 }
             }
         }
