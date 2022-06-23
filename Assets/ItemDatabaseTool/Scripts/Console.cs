@@ -331,7 +331,7 @@ public class Console : MonoBehaviour
         // "complete_mission"
         if (split.Length == 1 && split[0] == "complete_mission")
         {
-            MissionManager.instance?.currentMission.SetComplete(true);
+            MissionManager.instance?.currentMission.SetCompleted(true);
 
             Log("- Mission completed");
 

@@ -92,6 +92,7 @@ public class RangedWeapon : Item
         newItem.m_startAimSound = m_startAimSound;
         newItem.m_stopAimSound = m_stopAimSound;
 
+
         return newItem;
     }
 

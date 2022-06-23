@@ -82,7 +82,7 @@ public class HealthScript : MonoBehaviour
             FadeScript fadeScript = FindObjectOfType<FadeScript>();
             if (fadeScript)
             {
-                fadeScript.EndScreen();
+                fadeScript.EndScreen(true);
             }
         }
 

@@ -25,25 +25,29 @@ public class Interactable : MonoBehaviour
     public float fadeDistance = 2f;
     public InteractEffect onInteractEffect = InteractEffect.NONE;
 
-    [HideInInspector] public NotesManager _notesManager = null;
-
     [Header("UI")]
     public TextMeshProUGUI _text;
 
     [Header("Events")]
     public UnityEvent OnInteract;
 
+    private void OnEnable() {
+        
+        interactAction.Enable();
+    }
+
+    private void OnDisable() {
+        interactAction.Disable();
+    }
+
     // Start is called before the first frame update
     virtual public void Start()
     {
-        interactAction.Enable();
 
         if (_transToCheck == null && FindObjectOfType<PlayerMovement>()) _transToCheck = FindObjectOfType<PlayerMovement>().transform;
 
         if (_text == null) _text = GetComponentInChildren<TextMeshProUGUI>();
         if (_text != null) _text.text = /* "[" + interactAction.ToString() + "] " + */ interactText;
-
-        if (_notesManager == null) _notesManager = FindObjectOfType<NotesManager>();
     }
 
     // Update is called once per frame

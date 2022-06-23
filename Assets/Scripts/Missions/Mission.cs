@@ -42,7 +42,7 @@ public class Mission : ScriptableObject
 
     [SerializeField] public bool isCompleted;
 
-    public void SetComplete(bool _val){
+    public void SetCompleted(bool _val){
         isCompleted = _val;
     }
 

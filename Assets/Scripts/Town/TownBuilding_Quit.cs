@@ -9,7 +9,6 @@ public class TownBuilding_Quit : TownBuilding
     {
         base.OnClick();
 
-        LevelController lc = FindObjectOfType<LevelController>();
-        if (lc) FindObjectOfType<LevelController>().LoadMenu();
+        LevelController.LoadMenu();
     }
 }

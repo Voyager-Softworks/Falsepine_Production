@@ -125,8 +125,6 @@ public class PlayerHealth : MonoBehaviour
         //set aiming to false
         if (_animator) _animator.SetBool("Aiming", false);
 
-
-
         OnDeath.Invoke();
     }
 

@@ -5,71 +5,101 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Singleton donotdestroy script that is used to manage the scene transitions.
+/// The primary way to travel and load levels.
+/// </summary>
 public class LevelController : MonoBehaviour
 {
-    public static LevelController instance;
-
-    // void Awake() {
-    //     if (instance == null) {
-    //         instance = this;
-    //         //do not destroy this object
-    //         DontDestroyOnLoad(this);
-    //     } else {
-    //         Destroy(this);
-    //         Destroy(gameObject);
-    //     }
-    // }
-
-    // Start is called before the first frame update
-    void Start()
+    static public void LoadMenu()
     {
-        
-    }
+        // save all inventories
+        if (InventoryManager.instance != null) InventoryManager.instance.SaveInventories();
 
-    // Update is called once per frame
-    void Update()
-    {
-        //DEBUG
-        //if pressed 0,1,2, go to that scene
-        if (Keyboard.current.numpad0Key.wasPressedThisFrame)
-        {
-            SceneManager.LoadScene(0);
-        }
-        if (Keyboard.current.numpad1Key.wasPressedThisFrame)
-        {
-            SceneManager.LoadScene(1);
-        }
-        if (Keyboard.current.numpad2Key.wasPressedThisFrame)
-        {
-            SceneManager.LoadScene(2);
-        }
-    }
+        // save missions
+        if (MissionManager.instance != null) MissionManager.instance.SaveMissions();
 
-    public void LoadMenu()
-    {
         SceneManager.LoadScene(0);
     }
 
-    public void LoadGame()
-    {
+    static public void LoadTown(){
+        // save all inventories
+        if (InventoryManager.instance != null) InventoryManager.instance.SaveInventories();
+
+        // save missions
+        if (MissionManager.instance != null) MissionManager.instance.SaveMissions();
+
         SceneManager.LoadScene(1);
     }
 
-    public void LoadTown(){
+    static public void LoadSnow()
+    {
+        // save all inventories
+        if (InventoryManager.instance != null) InventoryManager.instance.SaveInventories();
+
+        // save missions
+        if (MissionManager.instance != null) MissionManager.instance.SaveMissions();
+
         SceneManager.LoadScene(2);
     }
 
-    public void Quit(){
+    static public void LoadSnowBoss()
+    {
+        // save all inventories
+        if (InventoryManager.instance != null) InventoryManager.instance.SaveInventories();
+
+        // save missions
+        if (MissionManager.instance != null) MissionManager.instance.SaveMissions();
+
+        SceneManager.LoadScene(3);
+    }
+
+    static public void LoadComplete()
+    {
+        // save all inventories
+        if (InventoryManager.instance != null) InventoryManager.instance.SaveInventories();
+
+        // save missions
+        if (MissionManager.instance != null) MissionManager.instance.SaveMissions();
+
+        SceneManager.LoadScene("Scene_Complete");
+    }
+
+    static public void LoadGameOver()
+    {
+        // delete misison save file
+        if (MissionManager.instance != null)
+        {
+            MissionManager.instance.DeleteMissionSave();
+
+            // destroy mission manager
+            Destroy(MissionManager.instance.gameObject);
+        }
+
+        // delete inventory save file for player, home, and shop
+        if (InventoryManager.instance != null)
+        {
+            foreach (Inventory inv in InventoryManager.instance.inventories)
+            {
+                if (inv.id == "player" || inv.id == "home" || inv.id == "shop")
+                {
+                    inv.ClearInventory();
+                    inv.DeleteSaveFile();
+                }
+            }
+
+            // destroy inventory manager
+            Destroy(InventoryManager.instance.gameObject);
+        }
+
+        // destroy journal
+
+        SceneManager.LoadScene("Scene_GameOver");
+    }
+
+    static public void Quit(){
         Application.Quit();
     }
 
-    public void LoadScene(int _index){
+    static public void LoadScene(int _index){
         SceneManager.LoadScene(_index);
     }
-
-    // public void LoadWin()
-    // {
-    //     SceneManager.LoadScene(2);
-    // }
 }

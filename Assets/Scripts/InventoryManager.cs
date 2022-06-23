@@ -19,7 +19,7 @@ public class InventoryManager : MonoBehaviour
             //do not destroy this object
             DontDestroyOnLoad(this);
 
-            //LoadMissions();
+            LoadInventories();
         } else {
             Destroy(this);
             Destroy(gameObject);
@@ -59,5 +59,17 @@ public class InventoryManager : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void SaveInventories() {
+        foreach (Inventory inv in inventories) {
+            inv.SaveInventory();
+        }
+    }
+
+    public void LoadInventories() {
+        foreach (Inventory inv in inventories) {
+            inv.LoadInventory();
+        }
     }
 }
