@@ -11,5 +11,13 @@ using System.IO;
 
 public class TownBuilding_Home : TownBuilding
 {
-    
+    GameObject gridPanel;
+
+    //update
+    protected override void Update()
+    {
+        base.Update();
+
+        
+    }
 }
