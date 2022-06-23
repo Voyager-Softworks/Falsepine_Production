@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using UnityEngine.AI;
 
 public class BossArenaController : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class BossArenaController : MonoBehaviour
 
     public List<Transform> arenaCentreTransforms = new List<Transform>();
     public List<float> arenaRadiuses = new List<float>();
+
+    public Transform wrongBaitSpawn;
     public float arenaRadius{
         get {
             return arenaRadiuses[phase];
@@ -51,6 +54,7 @@ public class BossArenaController : MonoBehaviour
         _uiScript = FindObjectOfType<UIScript>();
 
         bossHealth = boss.GetComponent<HealthScript>();
+        
 
         if (_uiScript != null){
             onBattleStart.AddListener(EnableBossUI);
@@ -90,6 +94,7 @@ public class BossArenaController : MonoBehaviour
 
     public void UseCorrectBait()
     {
+        
         boss.transform.position = arenaCentre.position + Vector3.back;
         boss.SetParameter<bool>("CorrectBait", true);
         boss.SetParameter<bool>("BossStarted", true);
@@ -107,6 +112,8 @@ public class BossArenaController : MonoBehaviour
 
     public void UseWrongBait()
     {
+        boss.GetComponent<NavMeshAgent>()?.Warp(wrongBaitSpawn.position);
+        //boss.transform.position = wrongBaitSpawn.position;
         boss.SetParameter<bool>("CorrectBait", false);
         boss.SetParameter<bool>("BossStarted", true);
         GetComponent<AudioSource>().clip = bossMusic;
