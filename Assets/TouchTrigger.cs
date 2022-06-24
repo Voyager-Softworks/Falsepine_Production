@@ -30,8 +30,9 @@ public class TouchTrigger : MonoBehaviour
         {
             other.gameObject.GetComponent<NodeAI.NodeAI_Agent>().SetParameter<bool>(triggerName, true);
             
-            triggered = true;
+            
         }
+        triggered = true;
         onTrigger.Invoke();
         
     }
