@@ -37,7 +37,7 @@ public class TownMusic : MonoBehaviour
         if (fadeTimer > 0.0f)
         {
             fadeTimer -= Time.deltaTime;
-            audioSource.volume = fadeTimer / fadeTime;
+            audioSource.volume = (fadeTimer / fadeTime) * maxVolume;
             if (fadeTimer <= 0.0f)
             {
                 audioSource.Stop();
