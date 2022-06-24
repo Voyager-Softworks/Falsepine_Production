@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0121310055, g: 0.008564093, b: 0.007927982, a: 1}
+  m_IndirectSpecularColor: {r: 0.012130959, g: 0.008564102, b: 0.007927889, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -37862,6 +37862,7 @@ MonoBehaviour:
   m_Script: {fileID: 2037276591}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Entries: []
 --- !u!4 &1112354547
 Transform:
   m_ObjectHideFlags: 19
@@ -49858,6 +49859,34 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5309027522250778172, guid: 50b00e7db9020f74ba46a5ed3b4363f8, type: 3}
   m_PrefabInstance: {fileID: 1476952116}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1476952121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1476952117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a55bdb3bdeb45df01b0c7ffecc13ce13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerName: 
+  onTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1592391621}
+        m_TargetAssemblyTypeName: BossArenaController, Assembly-CSharp
+        m_MethodName: UseCorrectBait
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1477070689
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50316,6 +50345,79 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 907d8c5587354904a957b8c7afe100f3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a3c3670b5e40d2544865840073a31db9, type: 3}
+--- !u!1 &1484995752
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1484995755}
+  - component: {fileID: 1484995754}
+  - component: {fileID: 1484995753}
+  m_Layer: 0
+  m_Name: BossBattleStartTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1484995753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484995752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a55bdb3bdeb45df01b0c7ffecc13ce13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerName: 
+  onTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1592391621}
+        m_TargetAssemblyTypeName: BossArenaController, Assembly-CSharp
+        m_MethodName: UseCorrectBait
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!65 &1484995754
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484995752}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 10, z: 5}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1484995755
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484995752}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.43, y: 4.08, z: 56.06}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 25
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1485616580
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54391,15 +54493,7 @@ MonoBehaviour:
     m_Id: 4d58879d-55f0-447a-b831-8bf009b1ede9
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 10c00eb6-678e-4ba2-b4fd-f0c7c90623ba
-      m_Path: <Keyboard>/b
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Correct Bait
-      m_Flags: 0
+    m_SingletonActionBindings: []
     m_Flags: 0
   incorrectBait:
     m_Name: Incorrect Bait
@@ -54408,15 +54502,7 @@ MonoBehaviour:
     m_Id: 845cc1d8-78ea-4a47-a530-e9054467016c
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 8b83d0f4-f57a-4759-883b-da82cb36e050
-      m_Path: <Keyboard>/n
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Incorrect Bait
-      m_Flags: 0
+    m_SingletonActionBindings: []
     m_Flags: 0
   phase: 0
   phase1Threshold: 300
