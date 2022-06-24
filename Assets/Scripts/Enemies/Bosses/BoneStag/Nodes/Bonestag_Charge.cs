@@ -116,7 +116,7 @@ namespace Boss.Bonestag
             }
             else
             {
-                RaycastHit[] hits = Physics.SphereCastAll(agent.transform.position, 1.0f, agent.transform.forward, 1.0f);
+                RaycastHit[] hits = Physics.SphereCastAll(agent.transform.position, 2.0f, agent.transform.forward, 2.0f);
                 foreach(RaycastHit hit in hits)
                 {
                     if(hit.collider.gameObject.tag == "DestructibleProp")
