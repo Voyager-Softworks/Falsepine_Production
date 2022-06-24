@@ -32,10 +32,10 @@ public class JournalPickupLimiter : MonoBehaviour
             return;
         }
 
-        if (frameCount > 600 && enabledClues.Count == clueAmount && enabledLore.Count == loreAmount)
-        {
-            return;
-        }
+        // if (frameCount > 600 && enabledClues.Count == clueAmount && enabledLore.Count == loreAmount)
+        // {
+        //     return;
+        // }
 
         // find all pickups in the scene
         all = FindObjectsOfType<JournalPickupInteract>(false).ToList();
