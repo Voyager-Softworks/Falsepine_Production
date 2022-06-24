@@ -95,7 +95,7 @@ public class BossArenaController : MonoBehaviour
     public void UseCorrectBait()
     {
         
-        boss.transform.position = arenaCentre.position + Vector3.back;
+        boss.GetComponent<NavMeshAgent>()?.Warp(arenaCentre.position + Vector3.back);
         boss.SetParameter<bool>("CorrectBait", true);
         boss.SetParameter<bool>("BossStarted", true);
         boss.GetComponent<AudioSource>().PlayOneShot(baitedSound);
