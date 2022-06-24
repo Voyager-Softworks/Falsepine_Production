@@ -8,6 +8,9 @@ public class TouchTrigger : MonoBehaviour
     public string triggerName;
     public UnityEvent onTrigger;
     bool triggered = false;
+
+    public bool ignorePlayer = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +25,12 @@ public class TouchTrigger : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+
+        if (ignorePlayer && (other.GetComponentInChildren<PlayerMovement>() != null || other.GetComponentsInParent<PlayerMovement>() != null))
+        {
+            return;
+        }
+
         if(triggered)
         {
             return;
