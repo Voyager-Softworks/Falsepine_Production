@@ -12,7 +12,7 @@ public class JournalPickupLimiter : MonoBehaviour
 
     public List<JournalPickupInteract> enabledLore = new List<JournalPickupInteract>(); 
     public List<JournalPickupInteract> enabledClues = new List<JournalPickupInteract>();
-    private List<JournalPickupInteract> all = new List<JournalPickupInteract>();
+    public List<JournalPickupInteract> all = new List<JournalPickupInteract>();
 
     int frameCount = 0;
 
