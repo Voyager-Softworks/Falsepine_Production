@@ -49,6 +49,7 @@ public class Mission : ScriptableObject
     // equality check
     public bool Equals(Mission other)
     {
+        if (other == null) return false;
         return this.size == other.size && this.zone == other.zone && this.type == other.type && this.title == other.title && this.description == other.description;
     }
 
