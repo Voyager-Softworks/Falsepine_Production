@@ -13,13 +13,29 @@ MonoBehaviour:
   m_Name: BoneStag_AI
   m_EditorClassIdentifier: 
   nodeData:
-  - GUID: eeecb009-4609-49f7-9cff-9d05f949a2b2
-    parentGUID: 
+  - GUID: e8611c77-c04c-453b-bbff-bc4409e14f2e
+    parentGUID: 292d405b-71b6-4cec-90d4-d47b7c796b84
+    title: Selector
+    childGUIDs:
+    - 8263b227-3f47-42d2-abdb-fe053823ceff
+    - 61dd29e2-07e5-4bb9-9ada-225736546c27
+    nodeType: 5
+    position: {x: 770, y: 469}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Selector, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 292d405b-71b6-4cec-90d4-d47b7c796b84
+    parentGUID: a7051ff5-c4da-4c3c-8dec-33f708b2088f
     title: Repeater
     childGUIDs:
-    - 8d603b5f-3d1d-4567-af45-c81c027a5d45
-    nodeType: 0
-    position: {x: 0, y: 0}
+    - e8611c77-c04c-453b-bbff-bc4409e14f2e
+    nodeType: 3
+    position: {x: 585, y: 469}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -54,6 +70,57 @@ MonoBehaviour:
       ovalue: {fileID: 0}
       output: 0
     runtimeLogicType: NodeAI.Repeater, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 73b40e22-fbbf-4e03-8b67-785248a83074
+    parentGUID: 697764e2-499d-4dcc-9fd0-b3675d88f685
+    title: Sequence
+    childGUIDs:
+    - cb059f8d-1623-4dd8-9fbd-236026cbd865
+    - fb4a55c4-df3b-4381-8324-6570d286b5fb
+    nodeType: 4
+    position: {x: 1895, y: 1770}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: cb059f8d-1623-4dd8-9fbd-236026cbd865
+    parentGUID: 73b40e22-fbbf-4e03-8b67-785248a83074
+    title: Selector
+    childGUIDs:
+    - 515b0fed-e26a-45c6-bbc9-3c4892d23354
+    - 04e23b7c-aa5c-49cd-986a-e027b91def00
+    nodeType: 5
+    position: {x: 2088, y: 1770}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Selector, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: fb4a55c4-df3b-4381-8324-6570d286b5fb
+    parentGUID: 73b40e22-fbbf-4e03-8b67-785248a83074
+    title: Selector
+    childGUIDs:
+    - fcd4d430-6e21-4b09-8681-37dc42fcffda
+    - dab1bcd9-21d0-4b22-95c2-ee6890d0dd54
+    - 58508c02-72cb-464b-bb24-70cb776f8c8c
+    - 62d658cf-ff6f-43f1-86ad-6a84d552704d
+    - a0f32c3f-3c72-484e-9fcb-0274fc7ec490
+    nodeType: 5
+    position: {x: 2009, y: 2571}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Selector, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
     queryType: 
     noLogic: 0
@@ -117,22 +184,6 @@ MonoBehaviour:
     runtimeLogicType: 
     queryType: 
     noLogic: 1
-    noQuery: 1
-  - GUID: e8611c77-c04c-453b-bbff-bc4409e14f2e
-    parentGUID: 292d405b-71b6-4cec-90d4-d47b7c796b84
-    title: Selector
-    childGUIDs:
-    - 8263b227-3f47-42d2-abdb-fe053823ceff
-    - 61dd29e2-07e5-4bb9-9ada-225736546c27
-    nodeType: 5
-    position: {x: 770, y: 469}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Selector, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
     noQuery: 1
   - GUID: 624b27f3-fa8a-4fab-bd81-c380f7238e48
     parentGUID: 8d603b5f-3d1d-4567-af45-c81c027a5d45
@@ -208,23 +259,22 @@ MonoBehaviour:
     queryType: 
     noLogic: 0
     noQuery: 1
-  - GUID: 292d405b-71b6-4cec-90d4-d47b7c796b84
-    parentGUID: a7051ff5-c4da-4c3c-8dec-33f708b2088f
-    title: Repeater
-    childGUIDs:
-    - e8611c77-c04c-453b-bbff-bc4409e14f2e
-    nodeType: 3
-    position: {x: 585, y: 469}
+  - GUID: d87b0e0d-bbf6-43f9-89d5-96ae3186d5d5
+    parentGUID: fbfae120-f7dc-454c-95ca-6735e62ef84f
+    title: SetAnimatorTrigger
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 808, y: 8}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
-    - name: REPEATCOUNT
+    - name: NAME
       GUID: null
       paramReference: null
-      serializedTypename: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 1
+      svalue: Baited
+      ivalue: 0
       fvalue: 0
       bvalue: 0
       cvalue: {r: 0, g: 0, b: 0, a: 0}
@@ -233,44 +283,28 @@ MonoBehaviour:
       v4value: {x: 0, y: 0, z: 0, w: 0}
       ovalue: {fileID: 0}
       output: 0
-    - name: REPEATFOREVER
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 1
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Repeater, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
+    runtimeLogicType: NodeAI.Animation.SetAnimatorTrigger, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
     queryType: 
     noLogic: 0
     noQuery: 1
-  - GUID: fcd4d430-6e21-4b09-8681-37dc42fcffda
-    parentGUID: fb4a55c4-df3b-4381-8324-6570d286b5fb
-    title: Chance
-    childGUIDs:
-    - 73f0207c-c023-46fe-ab3b-54a669e52ca9
-    nodeType: 3
-    position: {x: 2155, y: 3220}
+  - GUID: 6258c192-1607-4287-9725-d704e2ca4482
+    parentGUID: fbfae120-f7dc-454c-95ca-6735e62ef84f
+    title: WaitFor
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 808, y: 111}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
-    - name: CHANCE
+    - name: TIME
       GUID: null
       paramReference: null
       serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       svalue: 
       ivalue: 0
-      fvalue: 1
+      fvalue: 0.3
       bvalue: 0
       cvalue: {r: 0, g: 0, b: 0, a: 0}
       v2value: {x: 0, y: 0}
@@ -278,56 +312,41 @@ MonoBehaviour:
       v4value: {x: 0, y: 0, z: 0, w: 0}
       ovalue: {fileID: 0}
       output: 0
-    runtimeLogicType: NodeAI.Chance, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    runtimeLogicType: NodeAI.WaitFor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
     queryType: 
     noLogic: 0
     noQuery: 1
-  - GUID: 73f0207c-c023-46fe-ab3b-54a669e52ca9
-    parentGUID: fcd4d430-6e21-4b09-8681-37dc42fcffda
-    title: Attack
+  - GUID: b07191ba-24a7-4216-8d55-27e2fb0c0a5e
+    parentGUID: fbfae120-f7dc-454c-95ca-6735e62ef84f
+    title: Inverter
+    childGUIDs:
+    - 247a26d6-cb00-4660-9e4d-36ff5db9fc51
+    nodeType: 3
+    position: {x: 808, y: 211}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Inverter, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 247a26d6-cb00-4660-9e4d-36ff5db9fc51
+    parentGUID: b07191ba-24a7-4216-8d55-27e2fb0c0a5e
+    title: WaitUntilAnimationComplete
     childGUIDs: []
     nodeType: 1
-    position: {x: 2391, y: 3220}
+    position: {x: 965, y: 211}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
-    - name: ATTACK DATA
+    - name: STATE NAME
       GUID: null
       paramReference: null
-      serializedTypename: AttackData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 11400000, guid: 8b54e8c7d767fd2c1aec7bb58998294e, type: 2}
-      output: 0
-    - name: PROJECTILE SPAWN BONE
-      GUID: null
-      paramReference: null
-      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: INTERRUPTED
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
-      svalue: 
+      svalue: C_BAITED
       ivalue: 0
       fvalue: 0
       bvalue: 0
@@ -337,8 +356,8 @@ MonoBehaviour:
       v4value: {x: 0, y: 0, z: 0, w: 0}
       ovalue: {fileID: 0}
       output: 0
-    runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
+    runtimeLogicType: NodeAI.Animation.WaitUntilAnimationComplete, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     queryType: 
     noLogic: 0
     noQuery: 1
@@ -491,14 +510,30 @@ MonoBehaviour:
     queryType: 
     noLogic: 0
     noQuery: 1
-  - GUID: d3178502-d701-4028-b0c0-2b2b8c8a3554
-    parentGUID: 697764e2-499d-4dcc-9fd0-b3675d88f685
+  - GUID: 2adc7a75-f9d9-4fa5-8cdf-9fd97e035a6b
+    parentGUID: 518bfffd-1db0-4339-b131-78b5898defe4
+    title: InBearTrap
+    childGUIDs: []
+    nodeType: 7
+    position: {x: 1313, y: 636}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: 
+    queryType: 
+    noLogic: 1
+    noQuery: 1
+  - GUID: 61dd29e2-07e5-4bb9-9ada-225736546c27
+    parentGUID: e8611c77-c04c-453b-bbff-bc4409e14f2e
     title: Sequence
     childGUIDs:
-    - 98aef8f4-db45-4af6-9788-ed2eb151a651
-    - 02abd8c4-0783-4ade-b345-d5d1ee1c7b33
+    - 9172273b-b134-442a-8be7-588b16d16245
+    - 28ef16bb-a476-4736-9a29-db712977fbc7
+    - 2c9f3ba8-bc12-4362-84de-e2a6cad72ca3
+    - e4558bd6-adf1-4ecf-a40b-cb9f6d5f3488
+    - 0e3f4fc1-a896-49c0-878b-d502cba04dfd
     nodeType: 4
-    position: {x: 2224, y: 673}
+    position: {x: 939, y: 1030}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -507,18 +542,136 @@ MonoBehaviour:
     queryType: 
     noLogic: 0
     noQuery: 1
-  - GUID: 73b40e22-fbbf-4e03-8b67-785248a83074
-    parentGUID: 697764e2-499d-4dcc-9fd0-b3675d88f685
+  - GUID: 697764e2-499d-4dcc-9fd0-b3675d88f685
+    parentGUID: 8b230599-6486-4f55-9735-fa7521ca2e94
+    title: Selector
+    childGUIDs:
+    - d3178502-d701-4028-b0c0-2b2b8c8a3554
+    - 73b40e22-fbbf-4e03-8b67-785248a83074
+    - cebd829d-b7dd-4e23-aded-7f06fadaf2dd
+    nodeType: 5
+    position: {x: 1749, y: 1588}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Selector, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 63ccfdce-56ae-4f58-977e-d2744f5bcf9c
+    parentGUID: 961e5817-ab05-4c8d-8d51-6676c9fd69a2
     title: Sequence
     childGUIDs:
-    - cb059f8d-1623-4dd8-9fbd-236026cbd865
-    - fb4a55c4-df3b-4381-8324-6570d286b5fb
+    - 898da118-4a22-430c-be45-161d59a9521d
+    - a3b791c1-744b-4dcf-8383-a15debef8e18
     nodeType: 4
-    position: {x: 1895, y: 1770}
+    position: {x: 1413, y: 1998}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
     runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 898da118-4a22-430c-be45-161d59a9521d
+    parentGUID: 63ccfdce-56ae-4f58-977e-d2744f5bcf9c
+    title: IfTrue
+    childGUIDs: []
+    nodeType: 2
+    position: {x: 1597, y: 1998}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: CONDITION
+      GUID: 90866170-fd5e-4ea6-a998-bd0524b7b70e
+      paramReference: 751da48b-e23e-4b79-953d-ed720a113860
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.IfTrue, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 90866170-fd5e-4ea6-a998-bd0524b7b70e
+    parentGUID: 751da48b-e23e-4b79-953d-ed720a113860
+    title: PhaseChange
+    childGUIDs: []
+    nodeType: 7
+    position: {x: 1413, y: 2074}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: 
+    queryType: 
+    noLogic: 1
+    noQuery: 1
+  - GUID: 961e5817-ab05-4c8d-8d51-6676c9fd69a2
+    parentGUID: e4558bd6-adf1-4ecf-a40b-cb9f6d5f3488
+    title: RepeatUntilSuccess
+    childGUIDs:
+    - 63ccfdce-56ae-4f58-977e-d2744f5bcf9c
+    nodeType: 3
+    position: {x: 1198, y: 1998}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.RepeatUntilSuccess, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: a3b791c1-744b-4dcf-8383-a15debef8e18
+    parentGUID: 63ccfdce-56ae-4f58-977e-d2744f5bcf9c
+    title: SetBoolParameter
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 1598, y: 2108}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: PARAMETERNAME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: PhaseChange
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: VALUE
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: SetBoolParameter, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
     queryType: 
     noLogic: 0
@@ -593,6 +746,344 @@ MonoBehaviour:
       ovalue: {fileID: 0}
       output: 0
     runtimeLogicType: NodeAI.Audio.PlaySound, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 28ef16bb-a476-4736-9a29-db712977fbc7
+    parentGUID: 61dd29e2-07e5-4bb9-9ada-225736546c27
+    title: Parallel
+    childGUIDs:
+    - bcbb50ec-8991-471f-b84e-c075946a9851
+    - 09db0be2-66c3-438f-a84f-12f29182445e
+    nodeType: 6
+    position: {x: 1126, y: 1236}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Parallel, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: bcbb50ec-8991-471f-b84e-c075946a9851
+    parentGUID: 28ef16bb-a476-4736-9a29-db712977fbc7
+    title: WaitUntilAnimationComplete
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 1291, y: 1151}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: STATE NAME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: S_TRAPPED
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Animation.WaitUntilAnimationComplete, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 09db0be2-66c3-438f-a84f-12f29182445e
+    parentGUID: 28ef16bb-a476-4736-9a29-db712977fbc7
+    title: WaitUntilAnimationComplete
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 1296, y: 1261}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: STATE NAME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: C_TRAPPED
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Animation.WaitUntilAnimationComplete, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 2c9f3ba8-bc12-4362-84de-e2a6cad72ca3
+    parentGUID: 61dd29e2-07e5-4bb9-9ada-225736546c27
+    title: SetBoolParameter
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 1099, y: 1382}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: PARAMETERNAME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: InBearTrap
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: VALUE
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: SetBoolParameter, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: aa17294c-ee09-4486-9bcf-8d690f12853e
+    parentGUID: e4558bd6-adf1-4ecf-a40b-cb9f6d5f3488
+    title: Repeater
+    childGUIDs:
+    - 8b230599-6486-4f55-9735-fa7521ca2e94
+    nodeType: 3
+    position: {x: 1394, y: 1588}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: REPEATCOUNT
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 6
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: REPEATFOREVER
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Repeater, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 8b230599-6486-4f55-9735-fa7521ca2e94
+    parentGUID: aa17294c-ee09-4486-9bcf-8d690f12853e
+    title: Sequence
+    childGUIDs:
+    - 697764e2-499d-4dcc-9fd0-b3675d88f685
+    nodeType: 4
+    position: {x: 1579, y: 1588}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: e4558bd6-adf1-4ecf-a40b-cb9f6d5f3488
+    parentGUID: 61dd29e2-07e5-4bb9-9ada-225736546c27
+    title: Parallel
+    childGUIDs:
+    - aa17294c-ee09-4486-9bcf-8d690f12853e
+    - 961e5817-ab05-4c8d-8d51-6676c9fd69a2
+    nodeType: 6
+    position: {x: 1105, y: 1588}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Parallel, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 0e3f4fc1-a896-49c0-878b-d502cba04dfd
+    parentGUID: 61dd29e2-07e5-4bb9-9ada-225736546c27
+    title: SetAnimatorTrigger
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 1105, y: 1712}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: NAME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: AttackingFinished
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Animation.SetAnimatorTrigger, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: ca0bee4a-e5b6-4004-98e9-dfed7507ba0f
+    parentGUID: 4f85eccc-0ed1-4403-8206-58989cd6bdb2
+    title: PlayerPos
+    childGUIDs: []
+    nodeType: 7
+    position: {x: 2239, y: 1667}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: 
+    queryType: 
+    noLogic: 1
+    noQuery: 1
+  - GUID: 078eb8f8-a9ff-4c53-87e4-063765133745
+    parentGUID: 518bfffd-1db0-4339-b131-78b5898defe4
+    title: InBearTrap
+    childGUIDs: []
+    nodeType: 7
+    position: {x: 2239, y: 1743}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: 
+    queryType: 
+    noLogic: 1
+    noQuery: 1
+  - GUID: 04e23b7c-aa5c-49cd-986a-e027b91def00
+    parentGUID: cb059f8d-1623-4dd8-9fbd-236026cbd865
+    title: GoTo
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 2395, y: 1667}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: POSITION
+      GUID: ca0bee4a-e5b6-4004-98e9-dfed7507ba0f
+      paramReference: 4f85eccc-0ed1-4403-8206-58989cd6bdb2
+      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: STOPPING DISTANCE
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 5
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: SPEED
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 4
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: ACCELERATION
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 8
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: INTERRUPT
+      GUID: 078eb8f8-a9ff-4c53-87e4-063765133745
+      paramReference: 518bfffd-1db0-4339-b131-78b5898defe4
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.GoTo, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
     queryType: 
     noLogic: 0
@@ -718,95 +1209,91 @@ MonoBehaviour:
     queryType: 
     noLogic: 0
     noQuery: 1
-  - GUID: cb059f8d-1623-4dd8-9fbd-236026cbd865
-    parentGUID: 73b40e22-fbbf-4e03-8b67-785248a83074
-    title: Selector
-    childGUIDs:
-    - 515b0fed-e26a-45c6-bbc9-3c4892d23354
-    - 04e23b7c-aa5c-49cd-986a-e027b91def00
-    nodeType: 5
-    position: {x: 2088, y: 1770}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Selector, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: ca0bee4a-e5b6-4004-98e9-dfed7507ba0f
-    parentGUID: 4f85eccc-0ed1-4403-8206-58989cd6bdb2
-    title: PlayerPos
+  - GUID: ab410bc5-3f59-4f81-acb1-ee787e654fd1
+    parentGUID: 31090e56-9965-4dd1-a6d5-707f43b5ab7e
+    title: WaitUntilAnimationComplete
     childGUIDs: []
-    nodeType: 7
-    position: {x: 2239, y: 1667}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: 
-    queryType: 
-    noLogic: 1
-    noQuery: 1
-  - GUID: 078eb8f8-a9ff-4c53-87e4-063765133745
-    parentGUID: 518bfffd-1db0-4339-b131-78b5898defe4
-    title: InBearTrap
-    childGUIDs: []
-    nodeType: 7
-    position: {x: 2239, y: 1743}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: 
-    queryType: 
-    noLogic: 1
-    noQuery: 1
-  - GUID: fb4a55c4-df3b-4381-8324-6570d286b5fb
-    parentGUID: 73b40e22-fbbf-4e03-8b67-785248a83074
-    title: Selector
-    childGUIDs:
-    - fcd4d430-6e21-4b09-8681-37dc42fcffda
-    - dab1bcd9-21d0-4b22-95c2-ee6890d0dd54
-    - 58508c02-72cb-464b-bb24-70cb776f8c8c
-    - 62d658cf-ff6f-43f1-86ad-6a84d552704d
-    - a0f32c3f-3c72-484e-9fcb-0274fc7ec490
-    nodeType: 5
-    position: {x: 2009, y: 2571}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Selector, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: dab1bcd9-21d0-4b22-95c2-ee6890d0dd54
-    parentGUID: fb4a55c4-df3b-4381-8324-6570d286b5fb
-    title: Sequence
-    childGUIDs:
-    - 0fa7e8ae-8ccb-43b9-a847-40ec8fa69a43
-    - 8376fd88-6949-4762-999e-d4cc41a61095
-    nodeType: 4
-    position: {x: 2866, y: 2580}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 0fa7e8ae-8ccb-43b9-a847-40ec8fa69a43
-    parentGUID: dab1bcd9-21d0-4b22-95c2-ee6890d0dd54
-    title: IfTrue
-    childGUIDs: []
-    nodeType: 2
-    position: {x: 3068, y: 2580}
+    nodeType: 1
+    position: {x: 2564, y: 2403}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
-    - name: CONDITION
-      GUID: 81b180ae-415f-48f0-b7c7-05f3fbc2d9d6
-      paramReference: 79350c65-c1be-44df-8afd-add18ae1cd10
+    - name: STATE NAME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: C_TRAPPED_Walking
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Animation.WaitUntilAnimationComplete, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: a9598bec-63e4-4795-ab0c-175c6599c1e6
+    parentGUID: 31090e56-9965-4dd1-a6d5-707f43b5ab7e
+    title: WaitUntilAnimationComplete
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 2564, y: 2503}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: STATE NAME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: S_TRAPPED_Walking
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Animation.WaitUntilAnimationComplete, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: b14c629d-e8e3-4289-87b5-9ed44f352516
+    parentGUID: 515b0fed-e26a-45c6-bbc9-3c4892d23354
+    title: SetBoolParameter
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 2429, y: 2293}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: PARAMETERNAME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: InBearTrap
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: VALUE
+      GUID: null
+      paramReference: null
       serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       svalue: 
@@ -819,41 +1306,115 @@ MonoBehaviour:
       v4value: {x: 0, y: 0, z: 0, w: 0}
       ovalue: {fileID: 0}
       output: 0
-    runtimeLogicType: NodeAI.IfTrue, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    runtimeLogicType: SetBoolParameter, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
     queryType: 
     noLogic: 0
     noQuery: 1
-  - GUID: 8376fd88-6949-4762-999e-d4cc41a61095
-    parentGUID: dab1bcd9-21d0-4b22-95c2-ee6890d0dd54
-    title: Selector
+  - GUID: 31090e56-9965-4dd1-a6d5-707f43b5ab7e
+    parentGUID: 515b0fed-e26a-45c6-bbc9-3c4892d23354
+    title: Parallel
     childGUIDs:
-    - fdbc0e00-c133-4c7e-855e-c3215be59ab1
-    - 6ae44061-23d0-450d-8b47-3f57021de25f
-    - 52963282-1b2e-479f-a01d-046ef0ab07c2
-    - db0f7d7c-082a-433d-9f77-f7b1a1059437
-    nodeType: 5
-    position: {x: 3045, y: 2720}
+    - ab410bc5-3f59-4f81-acb1-ee787e654fd1
+    - a9598bec-63e4-4795-ab0c-175c6599c1e6
+    nodeType: 6
+    position: {x: 2429, y: 2417}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
-    runtimeLogicType: NodeAI.Selector, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    runtimeLogicType: NodeAI.Parallel, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
     queryType: 
     noLogic: 0
     noQuery: 1
-  - GUID: 81b180ae-415f-48f0-b7c7-05f3fbc2d9d6
-    parentGUID: 79350c65-c1be-44df-8afd-add18ae1cd10
-    title: SecondPhase
-    childGUIDs: []
-    nodeType: 7
-    position: {x: 2911, y: 2482}
+  - GUID: fcd4d430-6e21-4b09-8681-37dc42fcffda
+    parentGUID: fb4a55c4-df3b-4381-8324-6570d286b5fb
+    title: Chance
+    childGUIDs:
+    - 73f0207c-c023-46fe-ab3b-54a669e52ca9
+    nodeType: 3
+    position: {x: 2155, y: 3220}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: 
+    properties:
+    - name: CHANCE
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 1
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Chance, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
     queryType: 
-    noLogic: 1
+    noLogic: 0
+    noQuery: 1
+  - GUID: 73f0207c-c023-46fe-ab3b-54a669e52ca9
+    parentGUID: fcd4d430-6e21-4b09-8681-37dc42fcffda
+    title: Attack
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 2391, y: 3220}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: ATTACK DATA
+      GUID: null
+      paramReference: null
+      serializedTypename: AttackData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 11400000, guid: 8b54e8c7d767fd2c1aec7bb58998294e, type: 2}
+      output: 0
+    - name: PROJECTILE SPAWN BONE
+      GUID: null
+      paramReference: null
+      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: INTERRUPTED
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
     noQuery: 1
   - GUID: 58508c02-72cb-464b-bb24-70cb776f8c8c
     parentGUID: fb4a55c4-df3b-4381-8324-6570d286b5fb
@@ -915,17 +1476,221 @@ MonoBehaviour:
     queryType: 
     noLogic: 0
     noQuery: 1
-  - GUID: 61dd29e2-07e5-4bb9-9ada-225736546c27
-    parentGUID: e8611c77-c04c-453b-bbff-bc4409e14f2e
+  - GUID: a0f32c3f-3c72-484e-9fcb-0274fc7ec490
+    parentGUID: fb4a55c4-df3b-4381-8324-6570d286b5fb
+    title: Chance
+    childGUIDs:
+    - f0206aad-0e8e-46c1-a6d1-d0168f5ceb91
+    nodeType: 3
+    position: {x: 2157, y: 3284}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: CHANCE
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0.5
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Chance, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 3b7f71a9-0c05-4282-9f3f-c6d17512cd6b
+    parentGUID: 62d658cf-ff6f-43f1-86ad-6a84d552704d
+    title: Attack
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 2391, y: 2781}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: ATTACK DATA
+      GUID: null
+      paramReference: null
+      serializedTypename: AttackData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 11400000, guid: 89cbc58e1ab33b30899a23f6538af604, type: 2}
+      output: 0
+    - name: PROJECTILE SPAWN BONE
+      GUID: null
+      paramReference: null
+      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: INTERRUPTED
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 1f246937-09ff-437d-b4de-df8b1138032a
+    parentGUID: 58508c02-72cb-464b-bb24-70cb776f8c8c
+    title: Attack
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 2391, y: 3032}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: ATTACK DATA
+      GUID: null
+      paramReference: null
+      serializedTypename: AttackData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 11400000, guid: 2f5423930542656b89fa8c0fc3b7b7ca, type: 2}
+      output: 0
+    - name: PROJECTILE SPAWN BONE
+      GUID: null
+      paramReference: null
+      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: INTERRUPTED
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: f0206aad-0e8e-46c1-a6d1-d0168f5ceb91
+    parentGUID: a0f32c3f-3c72-484e-9fcb-0274fc7ec490
+    title: Attack
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 2391, y: 3284}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: ATTACK DATA
+      GUID: null
+      paramReference: null
+      serializedTypename: AttackData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 11400000, guid: 8ece814a4e10dc87393bde802ba87aeb, type: 2}
+      output: 0
+    - name: PROJECTILE SPAWN BONE
+      GUID: null
+      paramReference: null
+      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: INTERRUPTED
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: dab1bcd9-21d0-4b22-95c2-ee6890d0dd54
+    parentGUID: fb4a55c4-df3b-4381-8324-6570d286b5fb
     title: Sequence
     childGUIDs:
-    - 9172273b-b134-442a-8be7-588b16d16245
-    - 28ef16bb-a476-4736-9a29-db712977fbc7
-    - 2c9f3ba8-bc12-4362-84de-e2a6cad72ca3
-    - e4558bd6-adf1-4ecf-a40b-cb9f6d5f3488
-    - 0e3f4fc1-a896-49c0-878b-d502cba04dfd
+    - 0fa7e8ae-8ccb-43b9-a847-40ec8fa69a43
+    - 8376fd88-6949-4762-999e-d4cc41a61095
     nodeType: 4
-    position: {x: 939, y: 1030}
+    position: {x: 2869, y: 2580}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -933,6 +1698,997 @@ MonoBehaviour:
       PublicKeyToken=null
     queryType: 
     noLogic: 0
+    noQuery: 1
+  - GUID: 0fa7e8ae-8ccb-43b9-a847-40ec8fa69a43
+    parentGUID: dab1bcd9-21d0-4b22-95c2-ee6890d0dd54
+    title: IfTrue
+    childGUIDs: []
+    nodeType: 2
+    position: {x: 3071, y: 2580}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: CONDITION
+      GUID: 81b180ae-415f-48f0-b7c7-05f3fbc2d9d6
+      paramReference: 79350c65-c1be-44df-8afd-add18ae1cd10
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.IfTrue, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 8376fd88-6949-4762-999e-d4cc41a61095
+    parentGUID: dab1bcd9-21d0-4b22-95c2-ee6890d0dd54
+    title: Selector
+    childGUIDs:
+    - fdbc0e00-c133-4c7e-855e-c3215be59ab1
+    - 6ae44061-23d0-450d-8b47-3f57021de25f
+    - 52963282-1b2e-479f-a01d-046ef0ab07c2
+    nodeType: 5
+    position: {x: 3048, y: 2720}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Selector, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 81b180ae-415f-48f0-b7c7-05f3fbc2d9d6
+    parentGUID: 79350c65-c1be-44df-8afd-add18ae1cd10
+    title: SecondPhase
+    childGUIDs: []
+    nodeType: 7
+    position: {x: 2914, y: 2482}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: 
+    queryType: 
+    noLogic: 1
+    noQuery: 1
+  - GUID: fdbc0e00-c133-4c7e-855e-c3215be59ab1
+    parentGUID: 8376fd88-6949-4762-999e-d4cc41a61095
+    title: Chance
+    childGUIDs:
+    - 85e882b9-3add-4102-b959-d165ad7cc56e
+    nodeType: 3
+    position: {x: 3237, y: 2746}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: CHANCE
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0.15
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Chance, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 85e882b9-3add-4102-b959-d165ad7cc56e
+    parentGUID: fdbc0e00-c133-4c7e-855e-c3215be59ab1
+    title: Attack
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 3459, y: 2746}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: ATTACK DATA
+      GUID: null
+      paramReference: null
+      serializedTypename: AttackData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 11400000, guid: 44174f6ef86fd2c7cbbc2cf5b36375d2, type: 2}
+      output: 0
+    - name: PROJECTILE SPAWN BONE
+      GUID: 74f3fcc4-026a-4a94-9d90-c42916da44f4
+      paramReference: 8a9dba71-0057-491f-8765-1af86356dd42
+      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: INTERRUPTED
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 70c07038-1fd6-4974-b3d0-342c9eb3110d
+    parentGUID: 6ae44061-23d0-450d-8b47-3f57021de25f
+    title: Attack
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 3459, y: 2920}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: ATTACK DATA
+      GUID: null
+      paramReference: null
+      serializedTypename: AttackData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 11400000, guid: 52e093c476259a0b1b250bd6b171c9df, type: 2}
+      output: 0
+    - name: PROJECTILE SPAWN BONE
+      GUID: null
+      paramReference: null
+      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: INTERRUPTED
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 6ae44061-23d0-450d-8b47-3f57021de25f
+    parentGUID: 8376fd88-6949-4762-999e-d4cc41a61095
+    title: Chance
+    childGUIDs:
+    - 70c07038-1fd6-4974-b3d0-342c9eb3110d
+    nodeType: 3
+    position: {x: 3237, y: 2920}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: CHANCE
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0.25
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Chance, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 52963282-1b2e-479f-a01d-046ef0ab07c2
+    parentGUID: 8376fd88-6949-4762-999e-d4cc41a61095
+    title: Chance
+    childGUIDs:
+    - 7fff19f7-f93b-45fa-a7f6-6ccc5e28f456
+    nodeType: 3
+    position: {x: 3237, y: 3118}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: CHANCE
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 1
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Chance, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 7fff19f7-f93b-45fa-a7f6-6ccc5e28f456
+    parentGUID: 52963282-1b2e-479f-a01d-046ef0ab07c2
+    title: Attack
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 3459, y: 3118}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: ATTACK DATA
+      GUID: null
+      paramReference: null
+      serializedTypename: AttackData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 11400000, guid: 1c99f3df52a2073538fc5596621da53d, type: 2}
+      output: 0
+    - name: PROJECTILE SPAWN BONE
+      GUID: null
+      paramReference: null
+      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: INTERRUPTED
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 74f3fcc4-026a-4a94-9d90-c42916da44f4
+    parentGUID: 8a9dba71-0057-491f-8765-1af86356dd42
+    title: BloodbreathSpawnTransform
+    childGUIDs: []
+    nodeType: 7
+    position: {x: 3237, y: 2670}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: 
+    queryType: 
+    noLogic: 1
+    noQuery: 1
+  - GUID: d3178502-d701-4028-b0c0-2b2b8c8a3554
+    parentGUID: 697764e2-499d-4dcc-9fd0-b3675d88f685
+    title: Sequence
+    childGUIDs:
+    - 98aef8f4-db45-4af6-9788-ed2eb151a651
+    - 02abd8c4-0783-4ade-b345-d5d1ee1c7b33
+    nodeType: 4
+    position: {x: 2764, y: 351}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 98aef8f4-db45-4af6-9788-ed2eb151a651
+    parentGUID: d3178502-d701-4028-b0c0-2b2b8c8a3554
+    title: CheckTagInRange
+    childGUIDs: []
+    nodeType: 2
+    position: {x: 2931, y: 442}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: TAG
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: Player
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: RANGE
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 20
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.CheckTagInRange, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 02abd8c4-0783-4ade-b345-d5d1ee1c7b33
+    parentGUID: d3178502-d701-4028-b0c0-2b2b8c8a3554
+    title: Selector
+    childGUIDs:
+    - 725a9ee8-b482-4cda-94ae-954d8257e841
+    - 52f7df38-74ff-4060-a0ad-84458e15c844
+    - 324e5c6f-ab74-4468-b1d0-1fe07746c47c
+    - 3570eecc-2b9b-4a63-a415-0e29b8149d02
+    nodeType: 5
+    position: {x: 2931, y: 586}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Selector, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 725a9ee8-b482-4cda-94ae-954d8257e841
+    parentGUID: 02abd8c4-0783-4ade-b345-d5d1ee1c7b33
+    title: Sequence
+    childGUIDs:
+    - 9a3d9b05-49ce-40f8-92f2-9e7f0d0f9e17
+    - 2885db5d-aa11-4e23-b2af-d126e58b44cd
+    nodeType: 4
+    position: {x: 3122, y: 586}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 9a3d9b05-49ce-40f8-92f2-9e7f0d0f9e17
+    parentGUID: 725a9ee8-b482-4cda-94ae-954d8257e841
+    title: IfTrue
+    childGUIDs: []
+    nodeType: 2
+    position: {x: 3295, y: 581}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: CONDITION
+      GUID: f7448166-2021-42b6-b50a-e3b90823efa4
+      paramReference: 79350c65-c1be-44df-8afd-add18ae1cd10
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.IfTrue, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 2885db5d-aa11-4e23-b2af-d126e58b44cd
+    parentGUID: 725a9ee8-b482-4cda-94ae-954d8257e841
+    title: Chance
+    childGUIDs:
+    - fde7b774-9b7e-4066-95ed-6ba7413a0643
+    nodeType: 3
+    position: {x: 3295, y: 699}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: CHANCE
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0.25
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Chance, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 42dbeb14-7bdd-4ad1-a7a8-245da0490df1
+    parentGUID: 52f7df38-74ff-4060-a0ad-84458e15c844
+    title: Chance
+    childGUIDs:
+    - a6421340-aecd-4ba5-a2d8-3ea2d0ef319d
+    nodeType: 3
+    position: {x: 3295, y: 943}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: CHANCE
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0.25
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Chance, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 8f764227-3610-4e7d-881a-1f7548364f02
+    parentGUID: a19c06ad-ad3d-47f6-ac7a-0a4d247d07b4
+    title: IfTrue
+    childGUIDs: []
+    nodeType: 2
+    position: {x: 3295, y: 831}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: CONDITION
+      GUID: a34823f2-5700-4c46-88ce-bb01bce290e6
+      paramReference: 79350c65-c1be-44df-8afd-add18ae1cd10
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.IfTrue, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: a34823f2-5700-4c46-88ce-bb01bce290e6
+    parentGUID: 79350c65-c1be-44df-8afd-add18ae1cd10
+    title: SecondPhase
+    childGUIDs: []
+    nodeType: 7
+    position: {x: 3145, y: 779}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: 
+    queryType: 
+    noLogic: 1
+    noQuery: 1
+  - GUID: a19c06ad-ad3d-47f6-ac7a-0a4d247d07b4
+    parentGUID: 52f7df38-74ff-4060-a0ad-84458e15c844
+    title: Inverter
+    childGUIDs:
+    - 8f764227-3610-4e7d-881a-1f7548364f02
+    nodeType: 3
+    position: {x: 3147, y: 855}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Inverter, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 52f7df38-74ff-4060-a0ad-84458e15c844
+    parentGUID: 02abd8c4-0783-4ade-b345-d5d1ee1c7b33
+    title: Sequence
+    childGUIDs:
+    - 42dbeb14-7bdd-4ad1-a7a8-245da0490df1
+    - a19c06ad-ad3d-47f6-ac7a-0a4d247d07b4
+    nodeType: 4
+    position: {x: 2990, y: 855}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: fde7b774-9b7e-4066-95ed-6ba7413a0643
+    parentGUID: 2885db5d-aa11-4e23-b2af-d126e58b44cd
+    title: Attack
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 3650, y: 699}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: ATTACK DATA
+      GUID: null
+      paramReference: null
+      serializedTypename: AttackData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 11400000, guid: 5592a42e062b7332aa865cac29e37b21, type: 2}
+      output: 0
+    - name: PROJECTILE SPAWN BONE
+      GUID: 46852d99-6df8-4a80-b4a4-bdd33069c2e5
+      paramReference: 75a0919d-8cd3-447c-84d5-cb5e18826362
+      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: INTERRUPTED
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: a6421340-aecd-4ba5-a2d8-3ea2d0ef319d
+    parentGUID: 42dbeb14-7bdd-4ad1-a7a8-245da0490df1
+    title: Attack
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 3635, y: 943}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: ATTACK DATA
+      GUID: null
+      paramReference: null
+      serializedTypename: AttackData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 11400000, guid: ee9abf09ac19939b4bd8e53c5cd81558, type: 2}
+      output: 0
+    - name: PROJECTILE SPAWN BONE
+      GUID: null
+      paramReference: null
+      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: INTERRUPTED
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 46852d99-6df8-4a80-b4a4-bdd33069c2e5
+    parentGUID: 75a0919d-8cd3-447c-84d5-cb5e18826362
+    title: SpikethrowSpawnTransform
+    childGUIDs: []
+    nodeType: 7
+    position: {x: 3428, y: 624}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: 
+    queryType: 
+    noLogic: 1
+    noQuery: 1
+  - GUID: f7448166-2021-42b6-b50a-e3b90823efa4
+    parentGUID: 79350c65-c1be-44df-8afd-add18ae1cd10
+    title: SecondPhase
+    childGUIDs: []
+    nodeType: 7
+    position: {x: 3145, y: 490}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: 
+    queryType: 
+    noLogic: 1
+    noQuery: 1
+  - GUID: 324e5c6f-ab74-4468-b1d0-1fe07746c47c
+    parentGUID: 02abd8c4-0783-4ade-b345-d5d1ee1c7b33
+    title: Sequence
+    childGUIDs:
+    - 3a6e8c21-017c-43cf-8ebd-d27e043b7e56
+    - 2b533153-5677-43ff-8613-18c7b0f83a21
+    nodeType: 4
+    position: {x: 3135, y: 1125}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: c24ade92-a45f-4c7f-826a-74589abef071
+    parentGUID: 3a6e8c21-017c-43cf-8ebd-d27e043b7e56
+    title: Selector
+    childGUIDs:
+    - 75437238-5229-45c1-8816-a3915c71c4a5
+    - 8d46a0fb-f0e1-49eb-9789-aa0d238b4027
+    nodeType: 5
+    position: {x: 3533, y: 1227}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Selector, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 63fa3917-901e-4561-a1d5-60f1b0b2500e
+    parentGUID: 75437238-5229-45c1-8816-a3915c71c4a5
+    title: Attack
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 3916, y: 1227}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: ATTACK DATA
+      GUID: null
+      paramReference: null
+      serializedTypename: AttackData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 11400000, guid: 89c2f0af2ce98656ea2a1de253f164ea, type: 2}
+      output: 0
+    - name: PROJECTILE SPAWN BONE
+      GUID: null
+      paramReference: null
+      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: INTERRUPTED
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 75437238-5229-45c1-8816-a3915c71c4a5
+    parentGUID: c24ade92-a45f-4c7f-826a-74589abef071
+    title: Chance
+    childGUIDs:
+    - 63fa3917-901e-4561-a1d5-60f1b0b2500e
+    nodeType: 3
+    position: {x: 3709, y: 1227}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: CHANCE
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0.5
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Chance, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 8d46a0fb-f0e1-49eb-9789-aa0d238b4027
+    parentGUID: c24ade92-a45f-4c7f-826a-74589abef071
+    title: Attack
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 3694, y: 1375}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: ATTACK DATA
+      GUID: null
+      paramReference: null
+      serializedTypename: AttackData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 11400000, guid: 44837687545d934e09d3baf8f9ee85b6, type: 2}
+      output: 0
+    - name: PROJECTILE SPAWN BONE
+      GUID: null
+      paramReference: null
+      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: INTERRUPTED
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 3a6e8c21-017c-43cf-8ebd-d27e043b7e56
+    parentGUID: 324e5c6f-ab74-4468-b1d0-1fe07746c47c
+    title: Chance
+    childGUIDs:
+    - c24ade92-a45f-4c7f-826a-74589abef071
+    nodeType: 3
+    position: {x: 3331, y: 1227}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: CHANCE
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0.3
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Chance, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 2b533153-5677-43ff-8613-18c7b0f83a21
+    parentGUID: 324e5c6f-ab74-4468-b1d0-1fe07746c47c
+    title: IfTrue
+    childGUIDs: []
+    nodeType: 2
+    position: {x: 3331, y: 1125}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: CONDITION
+      GUID: ce3dd556-650d-48dc-89b0-22c276b7b2aa
+      paramReference: 79350c65-c1be-44df-8afd-add18ae1cd10
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.IfTrue, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: ce3dd556-650d-48dc-89b0-22c276b7b2aa
+    parentGUID: 79350c65-c1be-44df-8afd-add18ae1cd10
+    title: SecondPhase
+    childGUIDs: []
+    nodeType: 7
+    position: {x: 3139, y: 1201}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: 
+    queryType: 
+    noLogic: 1
     noQuery: 1
   - GUID: cebd829d-b7dd-4e23-aded-7f06fadaf2dd
     parentGUID: 697764e2-499d-4dcc-9fd0-b3675d88f685
@@ -1157,978 +2913,6 @@ MonoBehaviour:
     queryType: 
     noLogic: 0
     noQuery: 1
-  - GUID: a0f32c3f-3c72-484e-9fcb-0274fc7ec490
-    parentGUID: fb4a55c4-df3b-4381-8324-6570d286b5fb
-    title: Chance
-    childGUIDs:
-    - f0206aad-0e8e-46c1-a6d1-d0168f5ceb91
-    nodeType: 3
-    position: {x: 2157, y: 3284}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: CHANCE
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0.5
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Chance, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 30e7e09d-1495-449d-a771-89479d156aa9
-    parentGUID: db0f7d7c-082a-433d-9f77-f7b1a1059437
-    title: Attack
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 3456, y: 2582}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: ATTACK DATA
-      GUID: null
-      paramReference: null
-      serializedTypename: AttackData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 11400000, guid: 96ece17a2d7e35d279a261535ef01907, type: 2}
-      output: 0
-    - name: PROJECTILE SPAWN BONE
-      GUID: 7511f4cc-7d19-47d8-a72b-0196b24ed265
-      paramReference: 8a9dba71-0057-491f-8765-1af86356dd42
-      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: INTERRUPTED
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 7511f4cc-7d19-47d8-a72b-0196b24ed265
-    parentGUID: 8a9dba71-0057-491f-8765-1af86356dd42
-    title: BloodbreathSpawnTransform
-    childGUIDs: []
-    nodeType: 7
-    position: {x: 3214, y: 2486}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: 
-    queryType: 
-    noLogic: 1
-    noQuery: 1
-  - GUID: 3b7f71a9-0c05-4282-9f3f-c6d17512cd6b
-    parentGUID: 62d658cf-ff6f-43f1-86ad-6a84d552704d
-    title: Attack
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 2391, y: 2781}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: ATTACK DATA
-      GUID: null
-      paramReference: null
-      serializedTypename: AttackData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 11400000, guid: 89cbc58e1ab33b30899a23f6538af604, type: 2}
-      output: 0
-    - name: PROJECTILE SPAWN BONE
-      GUID: null
-      paramReference: null
-      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: INTERRUPTED
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 1f246937-09ff-437d-b4de-df8b1138032a
-    parentGUID: 58508c02-72cb-464b-bb24-70cb776f8c8c
-    title: Attack
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 2391, y: 3032}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: ATTACK DATA
-      GUID: null
-      paramReference: null
-      serializedTypename: AttackData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 11400000, guid: 2f5423930542656b89fa8c0fc3b7b7ca, type: 2}
-      output: 0
-    - name: PROJECTILE SPAWN BONE
-      GUID: null
-      paramReference: null
-      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: INTERRUPTED
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: f0206aad-0e8e-46c1-a6d1-d0168f5ceb91
-    parentGUID: a0f32c3f-3c72-484e-9fcb-0274fc7ec490
-    title: Attack
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 2391, y: 3284}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: ATTACK DATA
-      GUID: null
-      paramReference: null
-      serializedTypename: AttackData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 11400000, guid: 8ece814a4e10dc87393bde802ba87aeb, type: 2}
-      output: 0
-    - name: PROJECTILE SPAWN BONE
-      GUID: null
-      paramReference: null
-      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: INTERRUPTED
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: fdbc0e00-c133-4c7e-855e-c3215be59ab1
-    parentGUID: 8376fd88-6949-4762-999e-d4cc41a61095
-    title: Chance
-    childGUIDs:
-    - 85e882b9-3add-4102-b959-d165ad7cc56e
-    nodeType: 3
-    position: {x: 3234, y: 2746}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: CHANCE
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0.15
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Chance, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 85e882b9-3add-4102-b959-d165ad7cc56e
-    parentGUID: fdbc0e00-c133-4c7e-855e-c3215be59ab1
-    title: Attack
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 3456, y: 2746}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: ATTACK DATA
-      GUID: null
-      paramReference: null
-      serializedTypename: AttackData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 11400000, guid: 44174f6ef86fd2c7cbbc2cf5b36375d2, type: 2}
-      output: 0
-    - name: PROJECTILE SPAWN BONE
-      GUID: 74f3fcc4-026a-4a94-9d90-c42916da44f4
-      paramReference: 8a9dba71-0057-491f-8765-1af86356dd42
-      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: INTERRUPTED
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 70c07038-1fd6-4974-b3d0-342c9eb3110d
-    parentGUID: 6ae44061-23d0-450d-8b47-3f57021de25f
-    title: Attack
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 3456, y: 2920}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: ATTACK DATA
-      GUID: null
-      paramReference: null
-      serializedTypename: AttackData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 11400000, guid: 52e093c476259a0b1b250bd6b171c9df, type: 2}
-      output: 0
-    - name: PROJECTILE SPAWN BONE
-      GUID: null
-      paramReference: null
-      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: INTERRUPTED
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 6ae44061-23d0-450d-8b47-3f57021de25f
-    parentGUID: 8376fd88-6949-4762-999e-d4cc41a61095
-    title: Chance
-    childGUIDs:
-    - 70c07038-1fd6-4974-b3d0-342c9eb3110d
-    nodeType: 3
-    position: {x: 3234, y: 2920}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: CHANCE
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0.25
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Chance, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 52963282-1b2e-479f-a01d-046ef0ab07c2
-    parentGUID: 8376fd88-6949-4762-999e-d4cc41a61095
-    title: Chance
-    childGUIDs:
-    - 7fff19f7-f93b-45fa-a7f6-6ccc5e28f456
-    nodeType: 3
-    position: {x: 3234, y: 3118}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: CHANCE
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 1
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Chance, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 7fff19f7-f93b-45fa-a7f6-6ccc5e28f456
-    parentGUID: 52963282-1b2e-479f-a01d-046ef0ab07c2
-    title: Attack
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 3456, y: 3118}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: ATTACK DATA
-      GUID: null
-      paramReference: null
-      serializedTypename: AttackData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 11400000, guid: 1c99f3df52a2073538fc5596621da53d, type: 2}
-      output: 0
-    - name: PROJECTILE SPAWN BONE
-      GUID: null
-      paramReference: null
-      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: INTERRUPTED
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 74f3fcc4-026a-4a94-9d90-c42916da44f4
-    parentGUID: 8a9dba71-0057-491f-8765-1af86356dd42
-    title: BloodbreathSpawnTransform
-    childGUIDs: []
-    nodeType: 7
-    position: {x: 3234, y: 2670}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: 
-    queryType: 
-    noLogic: 1
-    noQuery: 1
-  - GUID: db0f7d7c-082a-433d-9f77-f7b1a1059437
-    parentGUID: 8376fd88-6949-4762-999e-d4cc41a61095
-    title: Chance
-    childGUIDs:
-    - 30e7e09d-1495-449d-a771-89479d156aa9
-    nodeType: 3
-    position: {x: 3234, y: 2582}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: CHANCE
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0.15
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Chance, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 98aef8f4-db45-4af6-9788-ed2eb151a651
-    parentGUID: d3178502-d701-4028-b0c0-2b2b8c8a3554
-    title: CheckTagInRange
-    childGUIDs: []
-    nodeType: 2
-    position: {x: 2391, y: 764}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: TAG
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: Player
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: RANGE
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 20
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.CheckTagInRange, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 02abd8c4-0783-4ade-b345-d5d1ee1c7b33
-    parentGUID: d3178502-d701-4028-b0c0-2b2b8c8a3554
-    title: Selector
-    childGUIDs:
-    - 725a9ee8-b482-4cda-94ae-954d8257e841
-    - 52f7df38-74ff-4060-a0ad-84458e15c844
-    - 324e5c6f-ab74-4468-b1d0-1fe07746c47c
-    nodeType: 5
-    position: {x: 2391, y: 908}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Selector, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 725a9ee8-b482-4cda-94ae-954d8257e841
-    parentGUID: 02abd8c4-0783-4ade-b345-d5d1ee1c7b33
-    title: Sequence
-    childGUIDs:
-    - 9a3d9b05-49ce-40f8-92f2-9e7f0d0f9e17
-    - 2885db5d-aa11-4e23-b2af-d126e58b44cd
-    nodeType: 4
-    position: {x: 2582, y: 908}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 9a3d9b05-49ce-40f8-92f2-9e7f0d0f9e17
-    parentGUID: 725a9ee8-b482-4cda-94ae-954d8257e841
-    title: IfTrue
-    childGUIDs: []
-    nodeType: 2
-    position: {x: 2755, y: 903}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: CONDITION
-      GUID: f7448166-2021-42b6-b50a-e3b90823efa4
-      paramReference: 79350c65-c1be-44df-8afd-add18ae1cd10
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.IfTrue, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 2885db5d-aa11-4e23-b2af-d126e58b44cd
-    parentGUID: 725a9ee8-b482-4cda-94ae-954d8257e841
-    title: Chance
-    childGUIDs:
-    - fde7b774-9b7e-4066-95ed-6ba7413a0643
-    nodeType: 3
-    position: {x: 2755, y: 1021}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: CHANCE
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0.25
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Chance, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 42dbeb14-7bdd-4ad1-a7a8-245da0490df1
-    parentGUID: 52f7df38-74ff-4060-a0ad-84458e15c844
-    title: Chance
-    childGUIDs:
-    - a6421340-aecd-4ba5-a2d8-3ea2d0ef319d
-    nodeType: 3
-    position: {x: 2755, y: 1265}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: CHANCE
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0.25
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Chance, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 8f764227-3610-4e7d-881a-1f7548364f02
-    parentGUID: a19c06ad-ad3d-47f6-ac7a-0a4d247d07b4
-    title: IfTrue
-    childGUIDs: []
-    nodeType: 2
-    position: {x: 2755, y: 1153}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: CONDITION
-      GUID: a34823f2-5700-4c46-88ce-bb01bce290e6
-      paramReference: 79350c65-c1be-44df-8afd-add18ae1cd10
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.IfTrue, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: a34823f2-5700-4c46-88ce-bb01bce290e6
-    parentGUID: 79350c65-c1be-44df-8afd-add18ae1cd10
-    title: SecondPhase
-    childGUIDs: []
-    nodeType: 7
-    position: {x: 2605, y: 1101}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: 
-    queryType: 
-    noLogic: 1
-    noQuery: 1
-  - GUID: a19c06ad-ad3d-47f6-ac7a-0a4d247d07b4
-    parentGUID: 52f7df38-74ff-4060-a0ad-84458e15c844
-    title: Inverter
-    childGUIDs:
-    - 8f764227-3610-4e7d-881a-1f7548364f02
-    nodeType: 3
-    position: {x: 2607, y: 1177}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Inverter, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 52f7df38-74ff-4060-a0ad-84458e15c844
-    parentGUID: 02abd8c4-0783-4ade-b345-d5d1ee1c7b33
-    title: Sequence
-    childGUIDs:
-    - 42dbeb14-7bdd-4ad1-a7a8-245da0490df1
-    - a19c06ad-ad3d-47f6-ac7a-0a4d247d07b4
-    nodeType: 4
-    position: {x: 2450, y: 1177}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: fde7b774-9b7e-4066-95ed-6ba7413a0643
-    parentGUID: 2885db5d-aa11-4e23-b2af-d126e58b44cd
-    title: Attack
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 3110, y: 1021}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: ATTACK DATA
-      GUID: null
-      paramReference: null
-      serializedTypename: AttackData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 11400000, guid: 5592a42e062b7332aa865cac29e37b21, type: 2}
-      output: 0
-    - name: PROJECTILE SPAWN BONE
-      GUID: 46852d99-6df8-4a80-b4a4-bdd33069c2e5
-      paramReference: 75a0919d-8cd3-447c-84d5-cb5e18826362
-      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: INTERRUPTED
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: a6421340-aecd-4ba5-a2d8-3ea2d0ef319d
-    parentGUID: 42dbeb14-7bdd-4ad1-a7a8-245da0490df1
-    title: Attack
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 3095, y: 1265}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: ATTACK DATA
-      GUID: null
-      paramReference: null
-      serializedTypename: AttackData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 11400000, guid: ee9abf09ac19939b4bd8e53c5cd81558, type: 2}
-      output: 0
-    - name: PROJECTILE SPAWN BONE
-      GUID: null
-      paramReference: null
-      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: INTERRUPTED
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 46852d99-6df8-4a80-b4a4-bdd33069c2e5
-    parentGUID: 75a0919d-8cd3-447c-84d5-cb5e18826362
-    title: SpikethrowSpawnTransform
-    childGUIDs: []
-    nodeType: 7
-    position: {x: 2888, y: 946}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: 
-    queryType: 
-    noLogic: 1
-    noQuery: 1
-  - GUID: f7448166-2021-42b6-b50a-e3b90823efa4
-    parentGUID: 79350c65-c1be-44df-8afd-add18ae1cd10
-    title: SecondPhase
-    childGUIDs: []
-    nodeType: 7
-    position: {x: 2605, y: 812}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: 
-    queryType: 
-    noLogic: 1
-    noQuery: 1
   - GUID: 404ec0e7-e52f-41bd-9184-a3a1e9a49b8c
     parentGUID: cebd829d-b7dd-4e23-aded-7f06fadaf2dd
     title: WaitUntilAnimationComplete
@@ -2158,70 +2942,12 @@ MonoBehaviour:
     queryType: 
     noLogic: 0
     noQuery: 1
-  - GUID: ab410bc5-3f59-4f81-acb1-ee787e654fd1
-    parentGUID: 31090e56-9965-4dd1-a6d5-707f43b5ab7e
-    title: WaitUntilAnimationComplete
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 2564, y: 2403}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: STATE NAME
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: C_TRAPPED_Walking
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Animation.WaitUntilAnimationComplete, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: a9598bec-63e4-4795-ab0c-175c6599c1e6
-    parentGUID: 31090e56-9965-4dd1-a6d5-707f43b5ab7e
-    title: WaitUntilAnimationComplete
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 2564, y: 2503}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: STATE NAME
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: S_TRAPPED_Walking
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Animation.WaitUntilAnimationComplete, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 2adc7a75-f9d9-4fa5-8cdf-9fd97e035a6b
-    parentGUID: 518bfffd-1db0-4339-b131-78b5898defe4
-    title: InBearTrap
+  - GUID: 031fc4f8-03d8-4e5d-9852-3e0abaaeef74
+    parentGUID: 79350c65-c1be-44df-8afd-add18ae1cd10
+    title: SecondPhase
     childGUIDs: []
     nodeType: 7
-    position: {x: 1313, y: 636}
+    position: {x: 1509, y: 756}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -2229,297 +2955,13 @@ MonoBehaviour:
     queryType: 
     noLogic: 1
     noQuery: 1
-  - GUID: 04e23b7c-aa5c-49cd-986a-e027b91def00
-    parentGUID: cb059f8d-1623-4dd8-9fbd-236026cbd865
-    title: GoTo
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 2395, y: 1667}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: POSITION
-      GUID: ca0bee4a-e5b6-4004-98e9-dfed7507ba0f
-      paramReference: 4f85eccc-0ed1-4403-8206-58989cd6bdb2
-      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: STOPPING DISTANCE
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 5
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: SPEED
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 4
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: ACCELERATION
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 8
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: INTERRUPT
-      GUID: 078eb8f8-a9ff-4c53-87e4-063765133745
-      paramReference: 518bfffd-1db0-4339-b131-78b5898defe4
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.GoTo, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: b14c629d-e8e3-4289-87b5-9ed44f352516
-    parentGUID: 515b0fed-e26a-45c6-bbc9-3c4892d23354
-    title: SetBoolParameter
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 2429, y: 2293}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: PARAMETERNAME
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: InBearTrap
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: VALUE
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: SetBoolParameter, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 31090e56-9965-4dd1-a6d5-707f43b5ab7e
-    parentGUID: 515b0fed-e26a-45c6-bbc9-3c4892d23354
-    title: Parallel
-    childGUIDs:
-    - ab410bc5-3f59-4f81-acb1-ee787e654fd1
-    - a9598bec-63e4-4795-ab0c-175c6599c1e6
-    nodeType: 6
-    position: {x: 2429, y: 2417}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Parallel, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 28ef16bb-a476-4736-9a29-db712977fbc7
-    parentGUID: 61dd29e2-07e5-4bb9-9ada-225736546c27
-    title: Parallel
-    childGUIDs:
-    - bcbb50ec-8991-471f-b84e-c075946a9851
-    - 09db0be2-66c3-438f-a84f-12f29182445e
-    nodeType: 6
-    position: {x: 1126, y: 1236}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Parallel, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: bcbb50ec-8991-471f-b84e-c075946a9851
-    parentGUID: 28ef16bb-a476-4736-9a29-db712977fbc7
-    title: WaitUntilAnimationComplete
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 1291, y: 1151}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: STATE NAME
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: S_TRAPPED
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Animation.WaitUntilAnimationComplete, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 09db0be2-66c3-438f-a84f-12f29182445e
-    parentGUID: 28ef16bb-a476-4736-9a29-db712977fbc7
-    title: WaitUntilAnimationComplete
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 1296, y: 1261}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: STATE NAME
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: C_TRAPPED
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Animation.WaitUntilAnimationComplete, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 2c9f3ba8-bc12-4362-84de-e2a6cad72ca3
-    parentGUID: 61dd29e2-07e5-4bb9-9ada-225736546c27
-    title: SetBoolParameter
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 1099, y: 1382}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: PARAMETERNAME
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: InBearTrap
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: VALUE
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: SetBoolParameter, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 697764e2-499d-4dcc-9fd0-b3675d88f685
-    parentGUID: 8b230599-6486-4f55-9735-fa7521ca2e94
-    title: Selector
-    childGUIDs:
-    - d3178502-d701-4028-b0c0-2b2b8c8a3554
-    - 73b40e22-fbbf-4e03-8b67-785248a83074
-    - cebd829d-b7dd-4e23-aded-7f06fadaf2dd
-    nodeType: 5
-    position: {x: 1749, y: 1588}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Selector, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: aa17294c-ee09-4486-9bcf-8d690f12853e
-    parentGUID: e4558bd6-adf1-4ecf-a40b-cb9f6d5f3488
+  - GUID: eeecb009-4609-49f7-9cff-9d05f949a2b2
+    parentGUID: 
     title: Repeater
     childGUIDs:
-    - 8b230599-6486-4f55-9735-fa7521ca2e94
-    nodeType: 3
-    position: {x: 1394, y: 1588}
+    - 8d603b5f-3d1d-4567-af45-c81c027a5d45
+    nodeType: 0
+    position: {x: -206, y: 11}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -2529,7 +2971,7 @@ MonoBehaviour:
       serializedTypename: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       svalue: 
-      ivalue: 6
+      ivalue: 1
       fvalue: 0
       bvalue: 0
       cvalue: {r: 0, g: 0, b: 0, a: 0}
@@ -2546,7 +2988,7 @@ MonoBehaviour:
       svalue: 
       ivalue: 0
       fvalue: 0
-      bvalue: 0
+      bvalue: 1
       cvalue: {r: 0, g: 0, b: 0, a: 0}
       v2value: {x: 0, y: 0}
       v3value: {x: 0, y: 0, z: 0}
@@ -2558,293 +3000,14 @@ MonoBehaviour:
     queryType: 
     noLogic: 0
     noQuery: 1
-  - GUID: 8b230599-6486-4f55-9735-fa7521ca2e94
-    parentGUID: aa17294c-ee09-4486-9bcf-8d690f12853e
-    title: Sequence
-    childGUIDs:
-    - 697764e2-499d-4dcc-9fd0-b3675d88f685
-    nodeType: 4
-    position: {x: 1579, y: 1588}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: e4558bd6-adf1-4ecf-a40b-cb9f6d5f3488
-    parentGUID: 61dd29e2-07e5-4bb9-9ada-225736546c27
-    title: Parallel
-    childGUIDs:
-    - aa17294c-ee09-4486-9bcf-8d690f12853e
-    - 961e5817-ab05-4c8d-8d51-6676c9fd69a2
-    nodeType: 6
-    position: {x: 1105, y: 1588}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Parallel, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 0e3f4fc1-a896-49c0-878b-d502cba04dfd
-    parentGUID: 61dd29e2-07e5-4bb9-9ada-225736546c27
-    title: SetAnimatorTrigger
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 1105, y: 1712}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: NAME
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: AttackingFinished
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Animation.SetAnimatorTrigger, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 63ccfdce-56ae-4f58-977e-d2744f5bcf9c
-    parentGUID: 961e5817-ab05-4c8d-8d51-6676c9fd69a2
-    title: Sequence
-    childGUIDs:
-    - 898da118-4a22-430c-be45-161d59a9521d
-    - a3b791c1-744b-4dcf-8383-a15debef8e18
-    nodeType: 4
-    position: {x: 1413, y: 1998}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 898da118-4a22-430c-be45-161d59a9521d
-    parentGUID: 63ccfdce-56ae-4f58-977e-d2744f5bcf9c
-    title: IfTrue
-    childGUIDs: []
-    nodeType: 2
-    position: {x: 1597, y: 1998}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: CONDITION
-      GUID: 90866170-fd5e-4ea6-a998-bd0524b7b70e
-      paramReference: 751da48b-e23e-4b79-953d-ed720a113860
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.IfTrue, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 90866170-fd5e-4ea6-a998-bd0524b7b70e
-    parentGUID: 751da48b-e23e-4b79-953d-ed720a113860
-    title: PhaseChange
-    childGUIDs: []
-    nodeType: 7
-    position: {x: 1413, y: 2074}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: 
-    queryType: 
-    noLogic: 1
-    noQuery: 1
-  - GUID: 961e5817-ab05-4c8d-8d51-6676c9fd69a2
-    parentGUID: e4558bd6-adf1-4ecf-a40b-cb9f6d5f3488
-    title: RepeatUntilSuccess
-    childGUIDs:
-    - 63ccfdce-56ae-4f58-977e-d2744f5bcf9c
-    nodeType: 3
-    position: {x: 1198, y: 1998}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.RepeatUntilSuccess, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: a3b791c1-744b-4dcf-8383-a15debef8e18
-    parentGUID: 63ccfdce-56ae-4f58-977e-d2744f5bcf9c
-    title: SetBoolParameter
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 1598, y: 2108}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: PARAMETERNAME
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: PhaseChange
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: VALUE
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: SetBoolParameter, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: d87b0e0d-bbf6-43f9-89d5-96ae3186d5d5
-    parentGUID: fbfae120-f7dc-454c-95ca-6735e62ef84f
-    title: SetAnimatorTrigger
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 808, y: 8}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: NAME
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: Baited
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Animation.SetAnimatorTrigger, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 6258c192-1607-4287-9725-d704e2ca4482
-    parentGUID: fbfae120-f7dc-454c-95ca-6735e62ef84f
-    title: WaitFor
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 808, y: 111}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: TIME
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0.3
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.WaitFor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: b07191ba-24a7-4216-8d55-27e2fb0c0a5e
-    parentGUID: fbfae120-f7dc-454c-95ca-6735e62ef84f
-    title: Inverter
-    childGUIDs:
-    - 247a26d6-cb00-4660-9e4d-36ff5db9fc51
-    nodeType: 3
-    position: {x: 808, y: 211}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Inverter, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 247a26d6-cb00-4660-9e4d-36ff5db9fc51
-    parentGUID: b07191ba-24a7-4216-8d55-27e2fb0c0a5e
-    title: WaitUntilAnimationComplete
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 965, y: 211}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: STATE NAME
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: C_BAITED
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Animation.WaitUntilAnimationComplete, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 324e5c6f-ab74-4468-b1d0-1fe07746c47c
+  - GUID: 3570eecc-2b9b-4a63-a415-0e29b8149d02
     parentGUID: 02abd8c4-0783-4ade-b345-d5d1ee1c7b33
     title: Sequence
     childGUIDs:
-    - 3a6e8c21-017c-43cf-8ebd-d27e043b7e56
-    - 2b533153-5677-43ff-8613-18c7b0f83a21
+    - ca85eb85-cd81-4d26-acd8-740cb7232af3
+    - a1394b22-7ef7-4d63-92cf-84cb652036b4
     nodeType: 4
-    position: {x: 2595, y: 1447}
+    position: {x: 3099, y: 1474}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -2853,212 +3016,18 @@ MonoBehaviour:
     queryType: 
     noLogic: 0
     noQuery: 1
-  - GUID: c24ade92-a45f-4c7f-826a-74589abef071
-    parentGUID: 3a6e8c21-017c-43cf-8ebd-d27e043b7e56
-    title: Selector
-    childGUIDs:
-    - 75437238-5229-45c1-8816-a3915c71c4a5
-    - 8d46a0fb-f0e1-49eb-9789-aa0d238b4027
-    nodeType: 5
-    position: {x: 2993, y: 1549}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Selector, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 63fa3917-901e-4561-a1d5-60f1b0b2500e
-    parentGUID: 75437238-5229-45c1-8816-a3915c71c4a5
-    title: Attack
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 3376, y: 1549}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: ATTACK DATA
-      GUID: null
-      paramReference: null
-      serializedTypename: AttackData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 11400000, guid: 89c2f0af2ce98656ea2a1de253f164ea, type: 2}
-      output: 0
-    - name: PROJECTILE SPAWN BONE
-      GUID: null
-      paramReference: null
-      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: INTERRUPTED
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 75437238-5229-45c1-8816-a3915c71c4a5
-    parentGUID: c24ade92-a45f-4c7f-826a-74589abef071
-    title: Chance
-    childGUIDs:
-    - 63fa3917-901e-4561-a1d5-60f1b0b2500e
-    nodeType: 3
-    position: {x: 3169, y: 1549}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: CHANCE
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0.5
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Chance, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 8d46a0fb-f0e1-49eb-9789-aa0d238b4027
-    parentGUID: c24ade92-a45f-4c7f-826a-74589abef071
-    title: Attack
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 3154, y: 1697}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: ATTACK DATA
-      GUID: null
-      paramReference: null
-      serializedTypename: AttackData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 11400000, guid: 44837687545d934e09d3baf8f9ee85b6, type: 2}
-      output: 0
-    - name: PROJECTILE SPAWN BONE
-      GUID: null
-      paramReference: null
-      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: INTERRUPTED
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 3a6e8c21-017c-43cf-8ebd-d27e043b7e56
-    parentGUID: 324e5c6f-ab74-4468-b1d0-1fe07746c47c
-    title: Chance
-    childGUIDs:
-    - c24ade92-a45f-4c7f-826a-74589abef071
-    nodeType: 3
-    position: {x: 2791, y: 1549}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: CHANCE
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0.3
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Chance, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 2b533153-5677-43ff-8613-18c7b0f83a21
-    parentGUID: 324e5c6f-ab74-4468-b1d0-1fe07746c47c
+  - GUID: ca85eb85-cd81-4d26-acd8-740cb7232af3
+    parentGUID: 3570eecc-2b9b-4a63-a415-0e29b8149d02
     title: IfTrue
     childGUIDs: []
     nodeType: 2
-    position: {x: 2791, y: 1447}
+    position: {x: 3295, y: 1474}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
     - name: CONDITION
-      GUID: ce3dd556-650d-48dc-89b0-22c276b7b2aa
-      paramReference: 79350c65-c1be-44df-8afd-add18ae1cd10
+      GUID: null
+      paramReference: null
       serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       svalue: 
@@ -3076,12 +3045,101 @@ MonoBehaviour:
     queryType: 
     noLogic: 0
     noQuery: 1
-  - GUID: ce3dd556-650d-48dc-89b0-22c276b7b2aa
-    parentGUID: 79350c65-c1be-44df-8afd-add18ae1cd10
-    title: SecondPhase
+  - GUID: a1394b22-7ef7-4d63-92cf-84cb652036b4
+    parentGUID: 3570eecc-2b9b-4a63-a415-0e29b8149d02
+    title: Chance
+    childGUIDs:
+    - c65ca088-5a2a-418c-9e85-cec34aa71238
+    nodeType: 3
+    position: {x: 3302, y: 1574}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: CHANCE
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0.25
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Chance, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: c65ca088-5a2a-418c-9e85-cec34aa71238
+    parentGUID: a1394b22-7ef7-4d63-92cf-84cb652036b4
+    title: Attack
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 3659, y: 1574}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: ATTACK DATA
+      GUID: null
+      paramReference: null
+      serializedTypename: AttackData, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 11400000, guid: 96ece17a2d7e35d279a261535ef01907, type: 2}
+      output: 0
+    - name: PROJECTILE SPAWN BONE
+      GUID: 0b03ab89-7f22-4ad5-ae39-2b8f9ecf5f08
+      paramReference: 8a9dba71-0057-491f-8765-1af86356dd42
+      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: INTERRUPTED
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: Attack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 0b03ab89-7f22-4ad5-ae39-2b8f9ecf5f08
+    parentGUID: 8a9dba71-0057-491f-8765-1af86356dd42
+    title: BloodbreathSpawnTransform
     childGUIDs: []
     nodeType: 7
-    position: {x: 2599, y: 1523}
+    position: {x: 3377, y: 1684}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -3226,106 +3284,118 @@ MonoBehaviour:
     ovalue: {fileID: 0}
     output: 0
   nodeGroups:
-  - title: Wait for fight to Start
+  - title: Group
     childGUIDs:
     - 8d603b5f-3d1d-4567-af45-c81c027a5d45
+    - 04128507-afab-4885-b8e0-05992ce6af8e
+    - fbfae120-f7dc-454c-95ca-6735e62ef84f
+    - 06a6fe24-26ef-412e-9f77-bc3dbca4c9ce
     - 624b27f3-fa8a-4fab-bd81-c380f7238e48
     - a7051ff5-c4da-4c3c-8dec-33f708b2088f
-    - 04128507-afab-4885-b8e0-05992ce6af8e
-  - title: Eat bait if correct
-    childGUIDs:
-    - fbfae120-f7dc-454c-95ca-6735e62ef84f
     - d48d05e2-ba9d-4482-aa59-95718cc75a59
     - d87b0e0d-bbf6-43f9-89d5-96ae3186d5d5
-    - 06a6fe24-26ef-412e-9f77-bc3dbca4c9ce
     - 6258c192-1607-4287-9725-d704e2ca4482
     - b07191ba-24a7-4216-8d55-27e2fb0c0a5e
     - 247a26d6-cb00-4660-9e4d-36ff5db9fc51
-  - title: Charge
+  - title: Group
     childGUIDs:
     - f3baaaa6-d52d-4e4c-bc07-20fc41188859
-    - 2adc7a75-f9d9-4fa5-8cdf-9fd97e035a6b
-    - 1ddcbee3-d8e5-4265-b23f-2ebee1102bbf
     - 8263b227-3f47-42d2-abdb-fe053823ceff
     - 4380702f-d785-4a8b-bf06-473208d43848
-  - title: Chase Player
+    - 1ddcbee3-d8e5-4265-b23f-2ebee1102bbf
+    - 2adc7a75-f9d9-4fa5-8cdf-9fd97e035a6b
+  - title: Group
     childGUIDs:
+    - 63ccfdce-56ae-4f58-977e-d2744f5bcf9c
+    - 898da118-4a22-430c-be45-161d59a9521d
+    - 90866170-fd5e-4ea6-a998-bd0524b7b70e
+    - 961e5817-ab05-4c8d-8d51-6676c9fd69a2
+    - a3b791c1-744b-4dcf-8383-a15debef8e18
+  - title: Group
+    childGUIDs:
+    - 9172273b-b134-442a-8be7-588b16d16245
+    - 28ef16bb-a476-4736-9a29-db712977fbc7
+    - bcbb50ec-8991-471f-b84e-c075946a9851
+    - 09db0be2-66c3-438f-a84f-12f29182445e
+    - 2c9f3ba8-bc12-4362-84de-e2a6cad72ca3
     - aa17294c-ee09-4486-9bcf-8d690f12853e
     - 8b230599-6486-4f55-9735-fa7521ca2e94
-    - 697764e2-499d-4dcc-9fd0-b3675d88f685
-  - title: Long range Attack
+    - e4558bd6-adf1-4ecf-a40b-cb9f6d5f3488
+    - 0e3f4fc1-a896-49c0-878b-d502cba04dfd
+  - title: Group
     childGUIDs:
-    - d3178502-d701-4028-b0c0-2b2b8c8a3554
-    - 98aef8f4-db45-4af6-9788-ed2eb151a651
-    - 02abd8c4-0783-4ade-b345-d5d1ee1c7b33
-    - 42dbeb14-7bdd-4ad1-a7a8-245da0490df1
-    - 725a9ee8-b482-4cda-94ae-954d8257e841
-    - 9a3d9b05-49ce-40f8-92f2-9e7f0d0f9e17
-    - f7448166-2021-42b6-b50a-e3b90823efa4
-    - 2885db5d-aa11-4e23-b2af-d126e58b44cd
-    - 52f7df38-74ff-4060-a0ad-84458e15c844
-    - a19c06ad-ad3d-47f6-ac7a-0a4d247d07b4
-    - 8f764227-3610-4e7d-881a-1f7548364f02
-    - a34823f2-5700-4c46-88ce-bb01bce290e6
-    - fde7b774-9b7e-4066-95ed-6ba7413a0643
-    - a6421340-aecd-4ba5-a2d8-3ea2d0ef319d
-    - 46852d99-6df8-4a80-b4a4-bdd33069c2e5
-    - 324e5c6f-ab74-4468-b1d0-1fe07746c47c
-    - 63fa3917-901e-4561-a1d5-60f1b0b2500e
-    - 8d46a0fb-f0e1-49eb-9789-aa0d238b4027
-    - 2b533153-5677-43ff-8613-18c7b0f83a21
-    - 3a6e8c21-017c-43cf-8ebd-d27e043b7e56
-    - c24ade92-a45f-4c7f-826a-74589abef071
-    - 75437238-5229-45c1-8816-a3915c71c4a5
-    - ce3dd556-650d-48dc-89b0-22c276b7b2aa
-  - title: Trapped while Walking
+    - ca0bee4a-e5b6-4004-98e9-dfed7507ba0f
+    - 078eb8f8-a9ff-4c53-87e4-063765133745
+    - 04e23b7c-aa5c-49cd-986a-e027b91def00
+  - title: Group
     childGUIDs:
     - 3fb52624-6312-4895-b5e4-0b23bce0b6f6
     - b8633c70-ab39-49bf-a3db-27f6b2034dec
     - 515b0fed-e26a-45c6-bbc9-3c4892d23354
     - ab410bc5-3f59-4f81-acb1-ee787e654fd1
-    - 31090e56-9965-4dd1-a6d5-707f43b5ab7e
     - a9598bec-63e4-4795-ab0c-175c6599c1e6
     - b14c629d-e8e3-4289-87b5-9ed44f352516
-  - title: Seek the Player
+    - 31090e56-9965-4dd1-a6d5-707f43b5ab7e
+  - title: Group
     childGUIDs:
-    - cb059f8d-1623-4dd8-9fbd-236026cbd865
-    - ca0bee4a-e5b6-4004-98e9-dfed7507ba0f
-    - 078eb8f8-a9ff-4c53-87e4-063765133745
-    - 04e23b7c-aa5c-49cd-986a-e027b91def00
-  - title: Stage 2 Close range attacks
-    childGUIDs:
-    - fdbc0e00-c133-4c7e-855e-c3215be59ab1
-    - 6ae44061-23d0-450d-8b47-3f57021de25f
-    - db0f7d7c-082a-433d-9f77-f7b1a1059437
-    - dab1bcd9-21d0-4b22-95c2-ee6890d0dd54
-    - 0fa7e8ae-8ccb-43b9-a847-40ec8fa69a43
-    - 8376fd88-6949-4762-999e-d4cc41a61095
-    - 81b180ae-415f-48f0-b7c7-05f3fbc2d9d6
-    - 7511f4cc-7d19-47d8-a72b-0196b24ed265
-    - 30e7e09d-1495-449d-a771-89479d156aa9
-    - 85e882b9-3add-4102-b959-d165ad7cc56e
-    - 70c07038-1fd6-4974-b3d0-342c9eb3110d
-    - 52963282-1b2e-479f-a01d-046ef0ab07c2
-    - 7fff19f7-f93b-45fa-a7f6-6ccc5e28f456
-    - 74f3fcc4-026a-4a94-9d90-c42916da44f4
-  - title: Stage 1 Close range attacks
-    childGUIDs:
-    - 58508c02-72cb-464b-bb24-70cb776f8c8c
     - fcd4d430-6e21-4b09-8681-37dc42fcffda
+    - 73f0207c-c023-46fe-ab3b-54a669e52ca9
+    - 58508c02-72cb-464b-bb24-70cb776f8c8c
     - 62d658cf-ff6f-43f1-86ad-6a84d552704d
     - a0f32c3f-3c72-484e-9fcb-0274fc7ec490
     - 3b7f71a9-0c05-4282-9f3f-c6d17512cd6b
     - 1f246937-09ff-437d-b4de-df8b1138032a
     - f0206aad-0e8e-46c1-a6d1-d0168f5ceb91
-    - 73f0207c-c023-46fe-ab3b-54a669e52ca9
-  - title: Check phase change
+  - title: Group
+    childGUIDs:
+    - dab1bcd9-21d0-4b22-95c2-ee6890d0dd54
+    - 0fa7e8ae-8ccb-43b9-a847-40ec8fa69a43
+    - 8376fd88-6949-4762-999e-d4cc41a61095
+    - 81b180ae-415f-48f0-b7c7-05f3fbc2d9d6
+    - fdbc0e00-c133-4c7e-855e-c3215be59ab1
+    - 85e882b9-3add-4102-b959-d165ad7cc56e
+    - 70c07038-1fd6-4974-b3d0-342c9eb3110d
+    - 6ae44061-23d0-450d-8b47-3f57021de25f
+    - 52963282-1b2e-479f-a01d-046ef0ab07c2
+    - 7fff19f7-f93b-45fa-a7f6-6ccc5e28f456
+    - 74f3fcc4-026a-4a94-9d90-c42916da44f4
+  - title: Group
+    childGUIDs:
+    - d3178502-d701-4028-b0c0-2b2b8c8a3554
+    - 98aef8f4-db45-4af6-9788-ed2eb151a651
+    - 02abd8c4-0783-4ade-b345-d5d1ee1c7b33
+    - 725a9ee8-b482-4cda-94ae-954d8257e841
+    - 9a3d9b05-49ce-40f8-92f2-9e7f0d0f9e17
+    - 2885db5d-aa11-4e23-b2af-d126e58b44cd
+    - 42dbeb14-7bdd-4ad1-a7a8-245da0490df1
+    - 8f764227-3610-4e7d-881a-1f7548364f02
+    - a34823f2-5700-4c46-88ce-bb01bce290e6
+    - a19c06ad-ad3d-47f6-ac7a-0a4d247d07b4
+    - 52f7df38-74ff-4060-a0ad-84458e15c844
+    - fde7b774-9b7e-4066-95ed-6ba7413a0643
+    - a6421340-aecd-4ba5-a2d8-3ea2d0ef319d
+    - 46852d99-6df8-4a80-b4a4-bdd33069c2e5
+    - f7448166-2021-42b6-b50a-e3b90823efa4
+    - 324e5c6f-ab74-4468-b1d0-1fe07746c47c
+    - c24ade92-a45f-4c7f-826a-74589abef071
+    - 63fa3917-901e-4561-a1d5-60f1b0b2500e
+    - 75437238-5229-45c1-8816-a3915c71c4a5
+    - 8d46a0fb-f0e1-49eb-9789-aa0d238b4027
+    - 3a6e8c21-017c-43cf-8ebd-d27e043b7e56
+    - 2b533153-5677-43ff-8613-18c7b0f83a21
+    - ce3dd556-650d-48dc-89b0-22c276b7b2aa
+    - 3570eecc-2b9b-4a63-a415-0e29b8149d02
+    - ca85eb85-cd81-4d26-acd8-740cb7232af3
+    - a1394b22-7ef7-4d63-92cf-84cb652036b4
+    - c65ca088-5a2a-418c-9e85-cec34aa71238
+    - 0b03ab89-7f22-4ad5-ae39-2b8f9ecf5f08
+  - title: Group
     childGUIDs:
     - cebd829d-b7dd-4e23-aded-7f06fadaf2dd
-    - 242f1793-11d9-4bdb-95c4-dd484e6f890f
-    - 40c12997-3b34-44fa-9041-07144a2ee32d
     - 9217c40a-df04-4457-b331-970c57b4297c
     - 31de75a1-ef3c-4dd8-9ee5-d5ea6125a6e9
+    - 242f1793-11d9-4bdb-95c4-dd484e6f890f
+    - 40c12997-3b34-44fa-9041-07144a2ee32d
     - ad1cac6a-154d-47b4-99a2-f832fb5ab1fd
     - 404ec0e7-e52f-41bd-9184-a3a1e9a49b8c
   queries: []
