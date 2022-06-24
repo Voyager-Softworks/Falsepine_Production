@@ -107,7 +107,7 @@ public class UIScript : MonoBehaviour
                     equipmentIcon.GetComponent<Image>().sprite = equipment.m_icon;
 
                     //if equipment count > 0 make white
-                    if (equipment.currentStackSize > 0) {
+                    if (equipment.currentStackSize > 0 && pii.selectedEquipment == equipment){
                         equipmentIcon.GetComponent<Image>().color = Color.white;
                     } else {
                         equipmentIcon.GetComponent<Image>().color = Color.gray;

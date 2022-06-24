@@ -143,6 +143,17 @@ public class Inventory : MonoBehaviour
         if (_item == null) return null;
         int startAmount = _item.currentStackSize;
 
+        // loop through slots and try to add item to existing stack
+        for (int i = 0; i < slots.Count; i++)
+        {
+            Item inSlot = slots[i].item;
+            if (inSlot && inSlot.id == _item.id)
+            {
+                _item = slots[i].TryAddItemToSlot(_item);
+            }
+        }
+
+
         // loop through all slots and try to add item while not null
         for (int i = 0; i < m_slots.Count; i++)
         {

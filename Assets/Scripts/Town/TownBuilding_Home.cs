@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 using System;
 using UnityEngine.Events;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -36,6 +37,42 @@ public class TownBuilding_Home : TownBuilding
     public void UpdateUI(){
         UpdateHomeItems();
         UpdatePlayerItems();
+
+        if (!UI.activeSelf) return;
+        // update info box
+        InfoBox ib = FindObjectOfType<InfoBox>();
+        if (ib != null)
+        {
+            List<GameObject> items = new List<GameObject>(gridItems);
+            items.Add(playerPrimaryCell);
+            items.Add(playerSecondaryCell);
+            items.Add(playerEquipmentCell);
+
+            // if mouse is over a grid item, display info box
+            if (items.Count > 0)
+            {
+                foreach (GameObject gridItem in items)
+                {
+                    Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
+
+                    Vector3 gridItemWorldPos = gridItem.transform.position;
+                    Vector2 gridItemScreenPos = uiCamera.WorldToScreenPoint(gridItemWorldPos);
+                    float width = gridItem.GetComponent<RectTransform>().rect.width;
+                    float height = gridItem.GetComponent<RectTransform>().rect.height;
+
+                    // check if mouse is within the grid item's screen space
+                    if (mouseScreenPos.x > gridItemScreenPos.x &&
+                        mouseScreenPos.x < gridItemScreenPos.x + width &&
+                        mouseScreenPos.y < gridItemScreenPos.y &&
+                        mouseScreenPos.y > gridItemScreenPos.y - height)
+                    {
+                        // display info box
+                        ib.Display(gridItem.GetComponent<InventoryGridItem>().item, 0.1f, 0.1f);
+                        break;
+                    }
+                }
+            }
+        }
     }
 
     public void UpdateHomeItems(){
@@ -89,8 +126,10 @@ public class TownBuilding_Home : TownBuilding
                 Item item = items[i];
                 if (item != null)
                 {
+                    gridItems[i].GetComponent<InventoryGridItem>().item = item;
+
                     gridItems[i].GetComponent<InventoryGridItem>().icon.sprite = item.m_icon;
-                    gridItems[i].GetComponent<InventoryGridItem>().text.text = item.name;
+                    gridItems[i].GetComponent<InventoryGridItem>().text.text = item.m_displayName;
 
                     //get index of item in home inventory
                     int index = homeInventory.GetItemIndex(item);
@@ -116,8 +155,11 @@ public class TownBuilding_Home : TownBuilding
         if (primaryItem != null)
         {
             playerPrimaryCell.SetActive(true);
+            
+            playerPrimaryCell.GetComponent<InventoryGridItem>().item = primaryItem;
+
             playerPrimaryCell.GetComponent<InventoryGridItem>().icon.sprite = primaryItem.m_icon;
-            playerPrimaryCell.GetComponent<InventoryGridItem>().text.text = primaryItem.name;
+            playerPrimaryCell.GetComponent<InventoryGridItem>().text.text = primaryItem.m_displayName;
 
             playerPrimaryCell.GetComponent<InventoryGridItem>().button.onClick.RemoveAllListeners();
             playerPrimaryCell.GetComponent<InventoryGridItem>().button.onClick.AddListener(() => {
@@ -132,8 +174,11 @@ public class TownBuilding_Home : TownBuilding
         if (secondaryItem != null)
         {
             playerSecondaryCell.SetActive(true);
+
+            playerSecondaryCell.GetComponent<InventoryGridItem>().item = secondaryItem;
+
             playerSecondaryCell.GetComponent<InventoryGridItem>().icon.sprite = secondaryItem.m_icon;
-            playerSecondaryCell.GetComponent<InventoryGridItem>().text.text = secondaryItem.name;
+            playerSecondaryCell.GetComponent<InventoryGridItem>().text.text = secondaryItem.m_displayName;
 
             playerSecondaryCell.GetComponent<InventoryGridItem>().button.onClick.RemoveAllListeners();
             playerSecondaryCell.GetComponent<InventoryGridItem>().button.onClick.AddListener(() => {
@@ -148,8 +193,11 @@ public class TownBuilding_Home : TownBuilding
         if (equipmentItem != null)
         {
             playerEquipmentCell.SetActive(true);
+
+            playerEquipmentCell.GetComponent<InventoryGridItem>().item = equipmentItem;
+
             playerEquipmentCell.GetComponent<InventoryGridItem>().icon.sprite = equipmentItem.m_icon;
-            playerEquipmentCell.GetComponent<InventoryGridItem>().text.text = equipmentItem.name;
+            playerEquipmentCell.GetComponent<InventoryGridItem>().text.text = equipmentItem.m_displayName;
 
             playerEquipmentCell.GetComponent<InventoryGridItem>().button.onClick.RemoveAllListeners();
             playerEquipmentCell.GetComponent<InventoryGridItem>().button.onClick.AddListener(() => {
