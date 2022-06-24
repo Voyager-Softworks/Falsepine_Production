@@ -65,6 +65,8 @@ public class ClickableObject : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         if (Physics.Raycast(ray, out hit))
         {
+            Debug.Log("Hit: " + hit.transform.name);
+
             for (int i = 0; i < colliders.Length; i++)
             {
                 if (colliders[i] == hit.collider)

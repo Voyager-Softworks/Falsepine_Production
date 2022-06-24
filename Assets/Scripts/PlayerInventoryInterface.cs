@@ -116,6 +116,10 @@ public class PlayerInventoryInterface : MonoBehaviour
             UpdateAimLines();
         }
 
+        if (useEquipmentAction.triggered && selectedEquipment == null)
+        {
+            SelectEquipment();
+        }
         if (selectedEquipment){
             selectedEquipment.ManualUpdate(gameObject);
 

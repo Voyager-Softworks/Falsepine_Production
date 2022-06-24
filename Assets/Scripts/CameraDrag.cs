@@ -7,10 +7,23 @@ public class CameraDrag : MonoBehaviour
 {
     public float dragSpeed = 2;
     private Vector2 dragOrigin;
+
+    public Vector3 center = new Vector3(0, 0, 0);
+    public float maxDistance = 10;
+
+    private void Start() {
+        center = transform.position;
+    }
  
  
     void Update()
     {
+        if ((transform.position - center).magnitude > maxDistance)
+        {
+            // lerp to the max distance
+            transform.position = Vector3.Lerp(transform.position, center, Time.deltaTime);
+        }
+
         if (Mouse.current.rightButton.wasPressedThisFrame)
         {
             dragOrigin = Mouse.current.position.ReadValue();
