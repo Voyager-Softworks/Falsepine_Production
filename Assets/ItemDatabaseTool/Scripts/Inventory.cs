@@ -38,7 +38,6 @@ public class Inventory : MonoBehaviour
     {
         // type filter
         [SerializeField] public List<string> typeFilter = new List<string>();
-
         [SerializeField] private Item m_item = null;
         [SerializeField] public Item item
         {
@@ -71,6 +70,7 @@ public class Inventory : MonoBehaviour
                 }
             }
         }
+        [SerializeField] public Inventory ownerInventory;
 
         /// <summary>
         /// Attempt to add an item to this slot (matching filter), tries to stack if possible.
@@ -133,6 +133,14 @@ public class Inventory : MonoBehaviour
     {
         get { return m_slots; }
         set { m_slots = value; }
+    }
+
+    public void SetSlotsOwner()
+    {
+        foreach (InventorySlot slot in slots)
+        {
+            slot.ownerInventory = this;
+        }
     }
 
     /// <summary>
@@ -494,6 +502,8 @@ public class Inventory : MonoBehaviour
                 EditorUtility.SetDirty(this);
             }
         }
+
+        SetSlotsOwner();
     }
 
     // custom editor
@@ -575,11 +585,19 @@ public class Inventory : MonoBehaviour
                 
                 EditorGUILayout.EndHorizontal();
 
+                // if slot owner does not exist
+                if (!slot.ownerInventory)
+                {
+                    inventory.SetSlotsOwner();
+                    EditorUtility.SetDirty(inventory);
+                }
+
                 EditorGUILayout.EndVertical();  
             }
             if (GUILayout.Button("Add Slot"))
             {
                 inventory.m_slots.Add(new InventorySlot());
+                inventory.SetSlotsOwner();
                 EditorUtility.SetDirty(inventory);
             }
 

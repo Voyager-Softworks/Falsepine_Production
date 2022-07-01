@@ -27,11 +27,11 @@ public class CursorScript : MonoBehaviour
     void Update()
     {
         Cursor.visible = false;
-        if(Gamepad.current != null)
-        {
-            cursorImage.enabled = false;
-        }
-        else
+        // if(Gamepad.current != null)
+        // {
+        //     cursorImage.enabled = false;
+        // }
+        // else
         {
             cursorImage.enabled = true;
             
