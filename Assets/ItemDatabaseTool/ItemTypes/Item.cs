@@ -174,7 +174,7 @@ public class Item : ScriptableObject
 
         // check invalid type
         if (this.GetType() != _item.GetType() || this.id != _item.id){
-            Debug.LogWarning("Trying to add an item of a different type or id to a stack");
+            //Debug.LogWarning("Trying to add an item of a different type or id to a stack");
             return _item;
         }
 

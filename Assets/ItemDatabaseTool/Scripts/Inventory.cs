@@ -91,7 +91,7 @@ public class Inventory : MonoBehaviour
             // check if item type is in filter
             if (typeFilter.Count() > 0 && !typeFilter.Contains(_item.GetType().Name))
             {
-                Debug.LogWarning("Item type does not match inventory type filter.");
+                //Debug.LogWarning("Item type does not match inventory type filter.");
 
                 return _item;
             }
@@ -174,7 +174,7 @@ public class Inventory : MonoBehaviour
         {
             int endAmount = _item.currentStackSize;
 
-            Debug.Log("Could not add all: Added " + (endAmount - startAmount) + "/" + startAmount + " of " + _item.name + " to inventory.");
+            //Debug.Log("Could not add all: Added " + (endAmount - startAmount) + "/" + startAmount + " of " + _item.name + " to inventory.");
         }
 
         return _item;
