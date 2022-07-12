@@ -189,13 +189,13 @@ public class ItemDatabase
     }
 
 
-    public static string GetDatabaseFoldersPath()
+    public static string GetDatabaseFolderNames()
     {
         return "/ItemDatabase/database/";
     }
 
-    public static string GetSavePath(){
-        return Application.dataPath + GetDatabaseFoldersPath();
+    public static string GetDatabaseFoldersPath(){
+        return Application.dataPath + GetDatabaseFolderNames();
     }
 
     [RuntimeInitializeOnLoadMethod]
@@ -225,7 +225,7 @@ public class ItemDatabase
         // make databse folder in build folder
         string buildFolder = pathToBuiltProject.Substring(0, pathToBuiltProject.LastIndexOf("/")) ;
         string productName = Application.productName;
-        string buildDatabasePath = buildFolder + "/" + productName + "_Data" + GetDatabaseFoldersPath();
+        string buildDatabasePath = buildFolder + "/" + productName + "_Data" + GetDatabaseFolderNames();
         Debug.Log("Creating database at: " + buildDatabasePath);
         if (!Directory.Exists(buildDatabasePath))
         {
@@ -234,13 +234,13 @@ public class ItemDatabase
         }
 
         // get all files in the ItemDatabase folder
-        string[] files = Directory.GetFiles(GetSavePath(), "*.json");
+        string[] files = Directory.GetFiles(GetDatabaseFoldersPath(), "*.json");
         foreach (string file in files)
         {
             // get the file name
             string fileName = Path.GetFileName(file);
             // copy the file to the build folder
-            File.Copy(GetSavePath() + fileName, buildDatabasePath + fileName, true);
+            File.Copy(GetDatabaseFoldersPath() + fileName, buildDatabasePath + fileName, true);
 
             Debug.Log("Copied file: " + fileName);
         }
@@ -254,7 +254,7 @@ public class ItemDatabase
     /// </summary>
     static public void SaveListToFile()
     {
-        string path = GetSavePath();
+        string path = GetDatabaseFoldersPath();
         if (!Directory.Exists(path))
         {
             Directory.CreateDirectory(path);
@@ -263,7 +263,7 @@ public class ItemDatabase
         foreach (Item item in database)
         {
             string fileName = item.id + ".json";
-            Item.Save(GetSavePath(), fileName, item);
+            Item.Save(GetDatabaseFoldersPath(), fileName, item);
         }
     }
 
@@ -272,7 +272,7 @@ public class ItemDatabase
     /// </summary>
     static public void LoadListFromFile()
     {
-        string path = GetSavePath();
+        string path = GetDatabaseFoldersPath();
         if (!Directory.Exists(path))
         {
             Directory.CreateDirectory(path);
@@ -285,7 +285,7 @@ public class ItemDatabase
             // if file does not ends in .json, continue
             if (!fileName.EndsWith(".json")) continue;
             
-            Item item = Item.Load(GetSavePath(), fileName);
+            Item item = Item.Load(GetDatabaseFoldersPath(), fileName);
             database.Add(item);
         }
     }
@@ -297,7 +297,7 @@ public class ItemDatabase
     {
         Debug.Log("Deleting database");
 
-        string path = GetSavePath();
+        string path = GetDatabaseFoldersPath();
         if (!Directory.Exists(path))
         {
             Directory.CreateDirectory(path);
@@ -320,7 +320,7 @@ public class ItemDatabase
     {
         Debug.Log("Deleting database meta data");
 
-        string path = GetSavePath();
+        string path = GetDatabaseFoldersPath();
         if (!Directory.Exists(path))
         {
             Directory.CreateDirectory(path);

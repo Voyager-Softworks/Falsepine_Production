@@ -230,7 +230,7 @@ public class Inventory : MonoBehaviour
     /// <summary>
     /// Gets the save FOLDER path for this inventory.
     /// </summary>
-    public string GetSavePath(int saveSlot = 0)
+    public string GetSaveFolderPath(int saveSlot = 0)
     {
         return GetInventoryFolder(saveSlot) + this.GetType().Name + id.ToString() + "/";
     }
@@ -240,7 +240,7 @@ public class Inventory : MonoBehaviour
     /// </summary>
     public string GetSaveFilePath()
     {
-        return GetSavePath() + "/inventory.json";
+        return GetSaveFolderPath() + "/inventory.json";
     }
 
     /// <summary>
@@ -249,9 +249,9 @@ public class Inventory : MonoBehaviour
     public void SaveInventory()
     {
         // if save path doesn't exist, create it
-        if (!Directory.Exists(GetSavePath()))
+        if (!Directory.Exists(GetSaveFolderPath()))
         {
-            Directory.CreateDirectory(GetSavePath());
+            Directory.CreateDirectory(GetSaveFolderPath());
         }
 
         List<string> fileNames = new List<string>();
@@ -285,9 +285,9 @@ public class Inventory : MonoBehaviour
     public void LoadInventory()
     {
         // if save path doesn't exist, create it
-        if (!Directory.Exists(GetSavePath()))
+        if (!Directory.Exists(GetSaveFolderPath()))
         {
-            Directory.CreateDirectory(GetSavePath());
+            Directory.CreateDirectory(GetSaveFolderPath());
         }
         // if save file doesn't exist, return
         if (!File.Exists(GetSaveFilePath()))
