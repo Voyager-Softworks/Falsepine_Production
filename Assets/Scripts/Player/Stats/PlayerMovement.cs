@@ -30,7 +30,6 @@ public class PlayerMovement : MonoBehaviour
     public bool isRolling = false;
     public AudioClip rollSound;
     private PlayerHealth playerHealth;
-    private GunScript gunScript;
 
 
 
@@ -68,8 +67,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         playerHealth = GetComponent<PlayerHealth>();
-
-        gunScript = GetComponentInChildren<GunScript>();
 
         _animator = GetComponentInChildren<Animator>();
 

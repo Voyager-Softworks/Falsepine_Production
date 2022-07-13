@@ -110,8 +110,6 @@ public class PlayerHealth : MonoBehaviour
         //disable player movement, shooting, inventory, etc.
         PlayerMovement playerMovement = FindObjectOfType<PlayerMovement>();
         if (playerMovement) playerMovement.enabled = false;
-        GunScript gunScript = FindObjectOfType<GunScript>();
-        if (gunScript) gunScript.enabled = false;
         old_InventoryManager inventoryScript = FindObjectOfType<old_InventoryManager>();
         if (inventoryScript) inventoryScript.enabled = false;
 

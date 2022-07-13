@@ -202,6 +202,15 @@ public class RangedWeapon : Item
             GameObject sound = Instantiate(m_shootSound, _origin, Quaternion.identity);
         }
 
+        //Trigger auditory event on all sensors in range:
+        foreach (NodeAI.NodeAI_Senses sensor in FindObjectsOfType<NodeAI.NodeAI_Senses>())
+        {
+            if (Vector3.Distance(sensor.gameObject.transform.position, _origin) < sensor.maxHearingRange)
+            {
+                sensor.RegisterSensoryEvent(_owner, sensor.gameObject, 10.0f, NodeAI.SensoryEvent.SenseType.AURAL);
+            }
+        }
+
         // create shoot effect:
         if (m_shootEffect != null)
         {

@@ -20,8 +20,17 @@ public class StatsManager : MonoBehaviour
 {
     public static StatsManager instance;
 
+    public List<Stat> allStats = new List<Stat>();
+    public List<Modifier> allModifiers = new List<Modifier>();
+
+    // stat class with be used to build subclasses.
+    // subclasses will be used to keep track of specific things (up to dev), for example ( ShotgunStats: Damage, Accuracy, Rate of Fire, etc. )
+
+    // modifier class with be used to build subclasses.
+    // subclasses will be used to keep track of specific things (up to dev), for example ( ShotgunModifier: Damage, Accuracy, Rate of Fire, etc. )
+
     /// <summary>
-    /// Class for a single statistic. <br/>
+    /// Class for a single basic statistic. <br/>
     /// IMPORTANT: Stats are NOT meant to be instantiated at runtime. <br/>
     /// </summary>
     [Serializable]
@@ -30,24 +39,42 @@ public class StatsManager : MonoBehaviour
         public string name = "";
 
         public float baseValue = 0;
-        public float calculatedValue = 0;
-        public float calculatedFlatMod = 0;
-        public float calculatedPercentMod = 0;
+        // ? public float calculatedValue = 0;
 
         public float maxValue = Mathf.Infinity;
         public float minValue = Mathf.NegativeInfinity;
     }
 
-    // perhaps 2 classes here, base stats, and modifiable stats. (base: e.g. gold, simple values that need to be saved, with custom functions, modifiable: e.g. damage, which can be modified by items, etc.)
-    // then a class for modifiers that have flat and percent modifiers.
-    // keep track of all modifier objects in a list.
-    // keep track of modifiers that affect specific stats, within the stats?
+    /// <summary>
+    /// Class for a modifiable statistic. <br/>
+    /// IMPORTANT: Stats are NOT meant to be instantiated at runtime. <br/>
+    /// </summary>
+    [Serializable]
+    public class ModifiableStat : Stat
+    {
+        public List<Modifier> modifiers = new List<Modifier>();
+    }
 
+    /// <summary>
+    /// Class for a single modifier. <br/>
+    /// </summary>
+    [Serializable]
+    public class Modifier
+    {
+        public string name = "";
+        public float value = 0;
+        public float flatValue = 0;
+        public float percentValue = 0;
+    }
+
+
+
+    [Serializable]
     public class Gold : Stat
     {
         
     }
-    Gold gold = new Gold();
+    [SerializeField] Gold gold = new Gold();
     
     [Serializable]
     public class StatModifier
@@ -55,7 +82,7 @@ public class StatsManager : MonoBehaviour
 
     }
 
-    private void Awake() {
+    unsafe private void Awake() {
         if (instance == null) {
             instance = this;
             //do not destroy this object
