@@ -20,66 +20,80 @@ public class StatsManager : MonoBehaviour
 {
     public static StatsManager instance;
 
-    public List<Stat> allStats = new List<Stat>();
-    public List<Modifier> allModifiers = new List<Modifier>();
-
     // stat class with be used to build subclasses.
-    // subclasses will be used to keep track of specific things (up to dev), for example ( ShotgunStats: Damage, Accuracy, Rate of Fire, etc. )
+    // subclasses will be used to keep track of specific things (up to dev), for example ( Damage, Accuracy, Rate of Fire, etc. )
 
-    // modifier class with be used to build subclasses.
-    // subclasses will be used to keep track of specific things (up to dev), for example ( ShotgunModifier: Damage, Accuracy, Rate of Fire, etc. )
+    // stat groups will 
+
+    // need to make an interface for different types of common stats, such as damage, accuracy, rate of fire, etc.
+
+
+    // EXAMPLE:
+    // StatType: Damage
+    // StatType: Accuracy
+    // etc.
+
+    // StatGroup: WeaponStats
+    //  WeaponStats: Damage, etc
+    //  StatGroup: ShotgunStats
+    // ShotgunStats: Damage, Accuracy, etc.
 
     /// <summary>
     /// Class for a single basic statistic. <br/>
     /// IMPORTANT: Stats are NOT meant to be instantiated at runtime. <br/>
     /// </summary>
     [Serializable]
-    public class Stat
+    public class StatGroup
     {
-        public string name = "";
-
-        public float baseValue = 0;
-        // ? public float calculatedValue = 0;
-
-        public float maxValue = Mathf.Infinity;
-        public float minValue = Mathf.NegativeInfinity;
     }
 
+    public interface StatType
+    {
+    }
+
+    public interface Damage : StatType
+    {
+        float GetFlatDamage();
+        float GetMultiplierDamage();
+    }
     /// <summary>
-    /// Class for a modifiable statistic. <br/>
-    /// IMPORTANT: Stats are NOT meant to be instantiated at runtime. <br/>
+    /// Calculates the damage of a weapon from a list of stat groups.
     /// </summary>
-    [Serializable]
-    public class ModifiableStat : Stat
+    /// <param name="statGroups"></param>
+    /// <param name="baseDamage"></param>
+    /// <returns></returns>
+    static public float CalculateDamage(List<StatGroup> statGroups, float baseDamage = 0)
     {
-        public List<Modifier> modifiers = new List<Modifier>();
+        float damage = baseDamage;
+        float flatDamage = 0;
+        float multiplierDamage = 0;
+        foreach (StatGroup statGroup in statGroups)
+        {
+            if (statGroup is Damage)
+            {
+                Damage damageStat = (Damage)statGroup;
+                flatDamage += damageStat.GetFlatDamage();
+                multiplierDamage += damageStat.GetMultiplierDamage();
+            }
+        }
+        damage += flatDamage;
+        damage *= multiplierDamage;
+        return damage;
     }
 
-    /// <summary>
-    /// Class for a single modifier. <br/>
-    /// </summary>
-    [Serializable]
-    public class Modifier
+    public class RangedWeapon : StatGroup, Damage
     {
-        public string name = "";
-        public float value = 0;
-        public float flatValue = 0;
-        public float percentValue = 0;
-    }
+        public float flatDamage;
+        public float multiplierDamage;
 
-
-
-    [Serializable]
-    public class Gold : Stat
-    {
-        
-    }
-    [SerializeField] Gold gold = new Gold();
-    
-    [Serializable]
-    public class StatModifier
-    {
-
+        public float GetFlatDamage()
+        {
+            return flatDamage;
+        }
+        public float GetMultiplierDamage()
+        {
+            return multiplierDamage;
+        }
     }
 
     unsafe private void Awake() {
