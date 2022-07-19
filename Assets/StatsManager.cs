@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
 using System;
+using System.Reflection;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using System.IO;
@@ -66,14 +67,14 @@ public class StatsManager : MonoBehaviour
     {
         float damage = baseDamage;
         float flatDamage = 0;
-        float multiplierDamage = 0;
+        float multiplierDamage = 1;
         foreach (StatGroup statGroup in statGroups)
         {
             if (statGroup is Damage)
             {
                 Damage damageStat = (Damage)statGroup;
                 flatDamage += damageStat.GetFlatDamage();
-                multiplierDamage += damageStat.GetMultiplierDamage();
+                multiplierDamage *= damageStat.GetMultiplierDamage();
             }
         }
         damage += flatDamage;
@@ -81,10 +82,13 @@ public class StatsManager : MonoBehaviour
         return damage;
     }
 
-    public class RangedWeapon : StatGroup, Damage
+    [Serializable]
+    public class RangedWeaponStatGroup : StatGroup, Damage
     {
-        public float flatDamage;
-        public float multiplierDamage;
+        public string name = "Ranged Weapon";
+
+        public float flatDamage = 0;
+        public float multiplierDamage = 1;
 
         public float GetFlatDamage()
         {
@@ -95,8 +99,39 @@ public class StatsManager : MonoBehaviour
             return multiplierDamage;
         }
     }
+    static RangedWeaponStatGroup baseRangedStat = new RangedWeaponStatGroup();
 
-    unsafe private void Awake() {
+
+
+    // stat modifier needs to reference a StatGroup, and have a StatType to modify the group.
+    [Serializable]
+    public class StatModifier
+    {
+        public StatGroup modifiedStatGroup;
+
+        public StatModifier(StatGroup statGroup)
+        {
+            //make copy of stat group just in case
+            modifiedStatGroup = statGroup;
+        }
+
+        [Serializable]
+        public class StatModChange{
+            public string statDescription;
+            public float value;
+        }
+    }
+
+    // test of stat modifier
+    static StatModifier testStatModifier = new StatModifier(
+        new RangedWeaponStatGroup()
+        {
+            flatDamage = 2,
+            multiplierDamage = 1.1f
+        }
+    );
+
+    private void Awake() {
         if (instance == null) {
             instance = this;
             //do not destroy this object
