@@ -22,7 +22,6 @@ public class StatsManager : MonoBehaviour
 {
     public static StatsManager instance;
 
-    [Serializable]
     // public enum StatType{
     //     RangedDamage = 0,
     //     RangedInaccuracy = 1,
@@ -32,6 +31,7 @@ public class StatsManager : MonoBehaviour
     //     PistolDamage = 4,
     //     RifleDamage = 5,
     // }
+    [Serializable]
     public class StatType
     {
         private StatType(string _value){
