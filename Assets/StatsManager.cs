@@ -22,9 +22,30 @@ public class StatsManager : MonoBehaviour
     public static StatsManager instance;
 
     [Serializable]
-    public enum StatType{
-        RangedDamage,
-        ShotgunDamage
+    // public enum StatType{
+    //     RangedDamage = 0,
+    //     RangedInaccuracy = 1,
+    //     RangedRange = 2,
+    //     RangedAimSpeed = 6,
+    //     ShotgunDamage = 3,
+    //     PistolDamage = 4,
+    //     RifleDamage = 5,
+    // }
+    public class StatType
+    {
+        private StatType(string _value){
+            value = _value;
+        }
+
+        public string value;
+
+        public static StatType RangedDamage         = new StatType("RangedDamage");
+        public static StatType RangedInaccuracy     = new StatType("RangedInaccuracy");
+        public static StatType RangedRange         = new StatType("RangedRange");
+        public static StatType RangedAimSpeed      = new StatType("RangedAimSpeed");
+        public static StatType ShotgunDamage       = new StatType("ShotgunDamage");
+        public static StatType PistolDamage        = new StatType("PistolDamage");
+        public static StatType RifleDamage         = new StatType("RifleDamage");
     }
 
     [Serializable]

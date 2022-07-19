@@ -606,7 +606,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
             string usedStatTypes = "Used Stat Types: ";
             for (int i = 0; i < item.m_usedStatTypes.Count; i++)
             {
-                usedStatTypes += item.m_usedStatTypes[i].ToString() + ", ";
+                usedStatTypes += item.m_usedStatTypes[i].value + ", ";
             }
             if (item.m_usedStatTypes.Count > 0)
             {
@@ -622,9 +622,18 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
                 GenericMenu menu = new GenericMenu();
 
                 // add all stat types
-                foreach (StatsManager.StatType type in Enum.GetValues(typeof(StatsManager.StatType)))
+                FieldInfo[] pi = typeof(StatsManager.StatType).GetFields();
+                foreach (FieldInfo field in pi)
                 {
-                    menu.AddItem(new GUIContent(type.ToString()), item.m_usedStatTypes.Contains(type), () => { 
+                    StatsManager.StatType type = null;
+                    // if field is not static, return
+                    if (!field.IsStatic) continue;
+                    type = (StatsManager.StatType)field.GetValue(null);
+                    if (item.m_usedStatTypes.Count() > 0){
+                        StatsManager.StatType firstTpe = item.m_usedStatTypes[0];
+                    }
+
+                    menu.AddItem(new GUIContent(type.value), item.m_usedStatTypes.Contains(type), () => { 
                         if (!item.m_usedStatTypes.Contains(type))
                         {
                             item.m_usedStatTypes.Add(type);
