@@ -633,8 +633,11 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
                         StatsManager.StatType firstTpe = item.m_usedStatTypes[0];
                     }
 
-                    menu.AddItem(new GUIContent(type.value), item.m_usedStatTypes.Contains(type), () => { 
-                        if (!item.m_usedStatTypes.Contains(type))
+                    // check if it is used, by comparing the value of the field to the used stat types
+                    bool isUsed = item.m_usedStatTypes.Any(x => x.value == type.value);
+
+                    menu.AddItem(new GUIContent(type.value), isUsed, () => { 
+                        if (!isUsed)
                         {
                             item.m_usedStatTypes.Add(type);
 
@@ -663,12 +666,25 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
             }
             GUILayout.EndHorizontal();
 
+            // space
+            GUILayout.Space(10);
+
+            GUILayout.Label("Stat Mods", CustomEditorStuff.center_bold_label);
+
             // start recording stats
             EditorGUI.BeginChangeCheck();
 
             // stat mods (used property field)
             EditorGUI.indentLevel++;
-            EditorGUILayout.PropertyField(serializedObject.FindProperty("m_statMods"), true);
+            // use DrawStatMod
+            if (StatsManager.DrawStatModList(item.m_statMods)){
+                // save
+                // if not in play mode, save (set dirty)
+                if (!Application.isPlaying)
+                {
+                    EditorUtility.SetDirty(this);
+                }
+            }
             EditorGUI.indentLevel--;
 
             // end recording stats

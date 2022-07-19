@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
 using System;
+using System.Linq;
 using System.Reflection;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -41,11 +42,11 @@ public class StatsManager : MonoBehaviour
 
         public static StatType RangedDamage         = new StatType("RangedDamage");
         public static StatType RangedInaccuracy     = new StatType("RangedInaccuracy");
-        public static StatType RangedRange         = new StatType("RangedRange");
-        public static StatType RangedAimSpeed      = new StatType("RangedAimSpeed");
-        public static StatType ShotgunDamage       = new StatType("ShotgunDamage");
-        public static StatType PistolDamage        = new StatType("PistolDamage");
-        public static StatType RifleDamage         = new StatType("RifleDamage");
+        public static StatType RangedRange          = new StatType("RangedRange");
+        public static StatType RangedAimSpeed       = new StatType("RangedAimSpeed");
+        public static StatType ShotgunDamage        = new StatType("ShotgunDamage");
+        public static StatType PistolDamage         = new StatType("PistolDamage");
+        public static StatType RifleDamage          = new StatType("RifleDamage");
     }
 
     [Serializable]
@@ -56,10 +57,70 @@ public class StatsManager : MonoBehaviour
 
     [Serializable]
     public class StatMod{
-        [SerializeField] public StatType statType;
-        [SerializeField] public ModType modType;
-        [SerializeField] public float value;
+        [SerializeField] public StatType statType = null;
+        [SerializeField] public ModType modType = ModType.Additive;
+        [SerializeField] public float value = 0;
     }
+    #if UNITY_EDITOR
+    static public bool DrawStatMod(StatMod statMod, bool doHoriz = true){
+        if (statMod == null) {
+            return false;
+        }
+
+        if (doHoriz) EditorGUILayout.BeginHorizontal();
+
+        // get all static fields of the StatType class
+        FieldInfo[] fields = typeof(StatType).GetFields(BindingFlags.Public | BindingFlags.Static);
+        //remove any which arent of type StatType
+        fields = fields.Where(f => f.FieldType == typeof(StatType)).ToArray();
+
+        // create a list of strings to display in the dropdown
+        List<string> options = new List<string>();
+        foreach (FieldInfo field in fields) {
+            options.Add(field.Name);
+        }
+
+        // get the index of the selected option
+        int selectedIndex = 0;
+        if (statMod.statType != null) selectedIndex = options.IndexOf(statMod.statType.value);
+        //check if index is within bounds
+        if (selectedIndex < 0 || selectedIndex >= options.Count) {
+            // set the selected option
+            selectedIndex = 0;
+        }
+        // draw the dropdown
+        selectedIndex = EditorGUILayout.Popup(selectedIndex, options.ToArray());
+        string test = fields[selectedIndex].Name;
+        // get the selected option
+        statMod.statType = (StatType)fields[selectedIndex].GetValue(null);
+
+        statMod.modType = (ModType)EditorGUILayout.EnumPopup(statMod.modType);
+        statMod.value = EditorGUILayout.FloatField(statMod.value);
+        
+        if (doHoriz) EditorGUILayout.EndHorizontal();
+
+        return false;
+    }
+
+    static public bool DrawStatModList(List<StatMod> statMods){
+        foreach (StatMod statMod in statMods) {
+            EditorGUILayout.BeginHorizontal();
+            DrawStatMod(statMod, false);
+            if (GUILayout.Button("X")) {
+                statMods.Remove(statMod);
+                return true;
+            }
+            EditorGUILayout.EndHorizontal();
+        }
+        // add a new stat mod
+        if (GUILayout.Button("Add Stat Mod")) {
+            statMods.Add(new StatMod());
+            return true;
+        }
+
+        return false;
+    }
+    #endif
 
     public interface UsesStats{
         List<StatType> GetStatTypes();
@@ -112,10 +173,15 @@ public class StatsManager : MonoBehaviour
         float damageAdditive = 0.0f;
         float damageMultiplier = 1.0f;
 
+        float minDamage = 0.0f;
+        float maxDamage = float.MaxValue;
+
         // list of stats to use in this function
         List<StatType> usedStatTypes = new List<StatType>(){
             StatType.RangedDamage,
-            StatType.ShotgunDamage
+            StatType.ShotgunDamage,
+            StatType.PistolDamage,
+            StatType.RifleDamage,
         };
 
         // get all stat mods
@@ -125,7 +191,7 @@ public class StatsManager : MonoBehaviour
         foreach (StatMod statMod in statMods)
         {
             // if stat type is in list of stat types to pay attention to
-            if (usedStatTypes.Contains(statMod.statType))
+            if (usedStatTypes.Any(x => x.value == statMod.statType.value))
             {
                 // if stat mod is additive
                 if (statMod.modType == ModType.Additive)
@@ -144,6 +210,9 @@ public class StatsManager : MonoBehaviour
         damage += damageAdditive;
         // multiply damage
         damage *= damageMultiplier;
+
+        // clamp damage
+        damage = Mathf.Clamp(damage, minDamage, maxDamage);
 
         return damage;
     }
