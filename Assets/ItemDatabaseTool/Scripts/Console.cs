@@ -376,6 +376,12 @@ public class Console : MonoBehaviour
                     {
                         Log("- - " + field.Name + ": " + value);
                     }
+
+                    //if field is a list, get the count
+                    if (field.FieldType.IsGenericType && field.FieldType.GetGenericTypeDefinition() == typeof(List<>))
+                    {
+                        Log("- - " + field.Name + ": " + field.GetValue(item).GetType().GetProperty("Count").GetValue(field.GetValue(item)));
+                    }
                 }
 
                 return;

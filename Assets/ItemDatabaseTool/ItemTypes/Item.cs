@@ -14,7 +14,7 @@ using UnityEditor;
 #endif
 
 [Serializable]
-public class Item : ScriptableObject
+public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasStatMods
 {
     // List of all the item classes in the game
     [NonSerialized] public static readonly IEnumerable<System.Type> AllTypes;
@@ -126,6 +126,21 @@ public class Item : ScriptableObject
     [SerializeField] public List<TagManager.Tag> m_tags = new List<TagManager.Tag>();
 
 
+    // StatsManager.UsesStats interface implementation
+    [SerializeField] public List<StatsManager.StatType> m_usedStatTypes = new List<StatsManager.StatType>();
+    public List<StatsManager.StatType> GetStatTypes()
+    {
+        return m_usedStatTypes;
+    }
+
+    // StatsManager.HasStatMods interface implementation
+    [SerializeField] public List<StatsManager.StatMod> m_statMods = new List<StatsManager.StatMod>();
+    public List<StatsManager.StatMod> GetStatMods()
+    {
+        return m_statMods;
+    }
+
+
     [Serializable]
     public class FieldResourceLink{
         [SerializeField] public string fieldName = "";
@@ -133,8 +148,6 @@ public class Item : ScriptableObject
         [SerializeField] public Type resourceType = typeof(Item);
     }
     [SerializeField] public List<FieldResourceLink> m_resourceLinks = new List<FieldResourceLink>();
-
-    //[SerializeField] public List<String> m_resources = new List<String>();
 
     /// <summary>
     /// Update function for the item
@@ -249,6 +262,8 @@ public class Item : ScriptableObject
         item.m_icon = this.m_icon;
         // NOTE: Make sure to COPY lists like below, not pass by reference
         item.m_tags = new List<TagManager.Tag>(this.m_tags);
+        item.m_usedStatTypes = new List<StatsManager.StatType>(this.m_usedStatTypes);
+        item.m_statMods = new List<StatsManager.StatMod>(this.m_statMods);
 
         item.currentStackSize = this.m_currentStackSize;
         item.maxStackSize = this.m_maxStackSize;
@@ -527,6 +542,11 @@ public class Item : ScriptableObject
             // end stack info box
             GUILayout.EndVertical();
 
+            // tags box
+            GUILayout.BeginVertical("box");
+            // bold text
+            GUILayout.Label("Tags", CustomEditorStuff.center_bold_label);
+
             //tags list
             EditorGUI.indentLevel++;
             showTags = EditorGUILayout.Foldout(showTags, "Tags", true, new GUIStyle(EditorStyles.foldout) { fontStyle = FontStyle.Bold});
@@ -573,8 +593,94 @@ public class Item : ScriptableObject
                 GUILayout.EndVertical();
             }
 
+            //end tags box
+            GUILayout.EndVertical();
+
+            // stats info box
+            GUILayout.BeginVertical("box");
+            // bold text
+            GUILayout.Label("Stats", CustomEditorStuff.center_bold_label);
+
+            // used stat types, multi select dropdown (generic menu)
+            GUILayout.BeginHorizontal();
+            string usedStatTypes = "Used Stat Types: ";
+            for (int i = 0; i < item.m_usedStatTypes.Count; i++)
+            {
+                usedStatTypes += item.m_usedStatTypes[i].ToString() + ", ";
+            }
+            if (item.m_usedStatTypes.Count > 0)
+            {
+                usedStatTypes = usedStatTypes.Substring(0, usedStatTypes.Length - 2);
+            }
+            else
+            {
+                usedStatTypes += "None";
+            }
+            //GUILayout.Label(new GUIContent(usedStatTypes, "The stat types used by this item"));
+            if (GUILayout.Button(new GUIContent(usedStatTypes, "Stat Types this item should use")))
+            {
+                GenericMenu menu = new GenericMenu();
+
+                // add all stat types
+                foreach (StatsManager.StatType type in Enum.GetValues(typeof(StatsManager.StatType)))
+                {
+                    menu.AddItem(new GUIContent(type.ToString()), item.m_usedStatTypes.Contains(type), () => { 
+                        if (!item.m_usedStatTypes.Contains(type))
+                        {
+                            item.m_usedStatTypes.Add(type);
+
+                            //save
+                            // if not in play mode, save (set dirty)
+                            if (!Application.isPlaying)
+                            {
+                                EditorUtility.SetDirty(this);
+                            }
+                        }
+                        else {
+                            item.m_usedStatTypes.Remove(type);
+
+                            //save
+                            // if not in play mode, save (set dirty)
+                            if (!Application.isPlaying)
+                            {
+                                EditorUtility.SetDirty(this);
+                            }
+                        }
+                    });
+                }
+
+                // show menu
+                menu.ShowAsContext();
+            }
+            GUILayout.EndHorizontal();
+
+            // start recording stats
+            EditorGUI.BeginChangeCheck();
+
+            // stat mods (used property field)
+            EditorGUI.indentLevel++;
+            EditorGUILayout.PropertyField(serializedObject.FindProperty("m_statMods"), true);
+            EditorGUI.indentLevel--;
+
+            // end recording stats
+            if (EditorGUI.EndChangeCheck())
+            {
+                // save
+                // if not in play mode, save (set dirty)
+                if (!Application.isPlaying)
+                {
+                    EditorUtility.SetDirty(this);
+                }
+            }
+
+            // end stats info box
+            GUILayout.EndVertical();
+
+            // space
+            GUILayout.Space(20);
+
             // move prefabs to resources
-            if (GUILayout.Button("Move Prefabs to Resources"))
+            if (GUILayout.Button(new GUIContent("Move Prefabs to Resources", "Makes sure that all prefabs are within the resources folder, to ensure they are loaded in build")))
             {
                 item.MovePrefabsToResourceFolder();
             }

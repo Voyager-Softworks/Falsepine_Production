@@ -21,115 +21,111 @@ public class StatsManager : MonoBehaviour
 {
     public static StatsManager instance;
 
-    // stat class with be used to build subclasses.
-    // subclasses will be used to keep track of specific things (up to dev), for example ( Damage, Accuracy, Rate of Fire, etc. )
-
-    // stat groups will 
-
-    // need to make an interface for different types of common stats, such as damage, accuracy, rate of fire, etc.
-
-
-    // EXAMPLE:
-    // StatType: Damage
-    // StatType: Accuracy
-    // etc.
-
-    // StatGroup: WeaponStats
-    //  WeaponStats: Damage, etc
-    //  StatGroup: ShotgunStats
-    // ShotgunStats: Damage, Accuracy, etc.
-
-    /// <summary>
-    /// Class for a single basic statistic. <br/>
-    /// IMPORTANT: Stats are NOT meant to be instantiated at runtime. <br/>
-    /// </summary>
     [Serializable]
-    public class StatGroup
-    {
+    public enum StatType{
+        RangedDamage,
+        ShotgunDamage
     }
 
-    public interface StatType
-    {
+    [Serializable]
+    public enum ModType{
+        Additive,
+        Multiplier
     }
 
-    public interface Damage : StatType
-    {
-        float GetFlatDamage();
-        float GetMultiplierDamage();
+    [Serializable]
+    public class StatMod{
+        [SerializeField] public StatType statType;
+        [SerializeField] public ModType modType;
+        [SerializeField] public float value;
     }
-    /// <summary>
-    /// Calculates the damage of a weapon from a list of stat groups.
-    /// </summary>
-    /// <param name="statGroups"></param>
-    /// <param name="baseDamage"></param>
-    /// <returns></returns>
-    static public float CalculateDamage(List<StatGroup> statGroups, float baseDamage = 0)
+
+    public interface UsesStats{
+        List<StatType> GetStatTypes();
+    }
+
+    public interface HasStatMods{
+        List<StatMod> GetStatMods();
+    }
+
+    [SerializeField] static public List<StatMod> globalStatMods = new List<StatMod>()
     {
-        float damage = baseDamage;
-        float flatDamage = 0;
-        float multiplierDamage = 1;
-        foreach (StatGroup statGroup in statGroups)
+
+    };
+
+    //default list of invetory IDS must be given as pararam
+    public static List<StatMod> GetPlayerInvetoryStatMods(){
+        //empty list
+        List<StatMod> statMods = new List<StatMod>();
+
+        // get inv manager
+        InventoryManager invManager = InventoryManager.instance;
+        if (!invManager) return statMods;
+
+        // get player inventory
+        Inventory playerInventory = invManager.GetInventory("player");
+        if (!playerInventory) return statMods;
+
+        // get all items in inventory, check if they have stat mods, if so add them to list
+        List<Item> items = playerInventory.GetItems();
+        foreach (Item item in items)
         {
-            if (statGroup is Damage)
+            if (item is HasStatMods)
             {
-                Damage damageStat = (Damage)statGroup;
-                flatDamage += damageStat.GetFlatDamage();
-                multiplierDamage *= damageStat.GetMultiplierDamage();
+                statMods.AddRange((item as HasStatMods).GetStatMods());
             }
         }
-        damage += flatDamage;
-        damage *= multiplierDamage;
+
+        return statMods;
+    }
+
+    public static List<StatMod> GetAllStatMods(){
+        List<StatMod> allStatMods = new List<StatMod>();
+        allStatMods.AddRange(globalStatMods);
+        allStatMods.AddRange(GetPlayerInvetoryStatMods());
+        return allStatMods;
+    }
+
+    static public float CalculateDamage(UsesStats statUser, float baseDamage = 1.0f){
+        float damage = baseDamage;
+        float damageAdditive = 0.0f;
+        float damageMultiplier = 1.0f;
+
+        // list of stats to use in this function
+        List<StatType> usedStatTypes = new List<StatType>(){
+            StatType.RangedDamage,
+            StatType.ShotgunDamage
+        };
+
+        // get all stat mods
+        List<StatMod> statMods = GetAllStatMods();
+
+        // loop through all stat mods and add them to the damage
+        foreach (StatMod statMod in statMods)
+        {
+            // if stat type is in list of stat types to pay attention to
+            if (usedStatTypes.Contains(statMod.statType))
+            {
+                // if stat mod is additive
+                if (statMod.modType == ModType.Additive)
+                {
+                    damageAdditive += statMod.value;
+                }
+                // if stat mod is multiplier
+                else if (statMod.modType == ModType.Multiplier)
+                {
+                    damageMultiplier *= statMod.value;
+                }
+            }
+        }
+
+        // add additive damage
+        damage += damageAdditive;
+        // multiply damage
+        damage *= damageMultiplier;
+
         return damage;
     }
-
-    [Serializable]
-    public class RangedWeaponStatGroup : StatGroup, Damage
-    {
-        public string name = "Ranged Weapon";
-
-        public float flatDamage = 0;
-        public float multiplierDamage = 1;
-
-        public float GetFlatDamage()
-        {
-            return flatDamage;
-        }
-        public float GetMultiplierDamage()
-        {
-            return multiplierDamage;
-        }
-    }
-    static RangedWeaponStatGroup baseRangedStat = new RangedWeaponStatGroup();
-
-
-
-    // stat modifier needs to reference a StatGroup, and have a StatType to modify the group.
-    [Serializable]
-    public class StatModifier
-    {
-        public StatGroup modifiedStatGroup;
-
-        public StatModifier(StatGroup statGroup)
-        {
-            //make copy of stat group just in case
-            modifiedStatGroup = statGroup;
-        }
-
-        [Serializable]
-        public class StatModChange{
-            public string statDescription;
-            public float value;
-        }
-    }
-
-    // test of stat modifier
-    static StatModifier testStatModifier = new StatModifier(
-        new RangedWeaponStatGroup()
-        {
-            flatDamage = 2,
-            multiplierDamage = 1.1f
-        }
-    );
 
     private void Awake() {
         if (instance == null) {

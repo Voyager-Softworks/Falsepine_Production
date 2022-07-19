@@ -103,6 +103,21 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public List<Item> GetItems()
+    {
+        List<Item> items = new List<Item>();
+
+        foreach (InventorySlot slot in slots)
+        {
+            if (slot.item != null)
+            {
+                items.Add(slot.item);
+            }
+        }
+
+        return items;
+    }
+
     [SerializeField] private string m_id = "";
 
     public int GetItemIndex(Item item)

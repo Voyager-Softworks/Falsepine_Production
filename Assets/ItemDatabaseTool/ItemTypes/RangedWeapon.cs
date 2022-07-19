@@ -164,7 +164,7 @@ public class RangedWeapon : Item
                 if (!healthScript) healthScript = hit.collider.GetComponentInParent<HealthScript>();
                 if (healthScript != null)
                 {
-                    healthScript.TakeDamage(m_damage, _owner);
+                    healthScript.TakeDamage(StatsManager.CalculateDamage(this, m_damage), _owner);
                     if (m_hitEffect) Destroy(Instantiate(m_hitEffect, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal)), 2.0f);
                 }
                 hit.collider.GetComponentInChildren<NodeAI.NodeAI_Senses>()?.RegisterSensoryEvent(
