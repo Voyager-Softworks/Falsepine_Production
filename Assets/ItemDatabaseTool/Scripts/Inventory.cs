@@ -280,16 +280,29 @@ public class Inventory : MonoBehaviour
 
                 fileNames.Add(fileName);
             }
+            else if (slot.item == null)
+            {
+                fileNames.Add("");
+            }
         }
 
         FileStream file = File.Create(GetSaveFilePath());
 
         //write to file
         StreamWriter writer = new StreamWriter(file);
-        foreach (string fileName in fileNames)
+        for (int i = 0; i < fileNames.Count; i++)
         {
-            writer.WriteLine(fileName);
+            //if not last item, write new line
+            if (i < fileNames.Count - 1)
+            {
+                writer.WriteLine(fileNames[i]);
+            }
+            else
+            {
+                writer.Write(fileNames[i]);
+            }
         }
+
         writer.Close();
         file.Close();
     }
