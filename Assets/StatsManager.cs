@@ -47,6 +47,18 @@ public class StatsManager : MonoBehaviour
         public static StatType ShotgunDamage        = new StatType("ShotgunDamage");
         public static StatType PistolDamage         = new StatType("PistolDamage");
         public static StatType RifleDamage          = new StatType("RifleDamage");
+
+        public static String DisplayName(StatType type){
+            //add a space before each capital letter
+            string displayName = "";
+            foreach(char c in type.value){
+                if(char.IsUpper(c)){
+                    displayName += " ";
+                }
+                displayName += c;
+            }
+            return displayName;
+        }
     }
 
     [Serializable]

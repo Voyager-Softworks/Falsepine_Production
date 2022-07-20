@@ -11,6 +11,7 @@ using UnityEngine.Events;
 public class InventoryGridItem : MonoBehaviour
 {
     public Image icon;
+    public Image modIcon;
     public TextMeshProUGUI text;
     public Button button;
 
@@ -71,6 +72,12 @@ public class InventoryGridItem : MonoBehaviour
         // update visuals
         icon.sprite = itemInSlot?.m_icon;
         text.text = itemInSlot?.m_displayName;
+
+        if (itemInSlot?.GetStatMods().Count > 0) {
+            modIcon.gameObject.SetActive(true);
+        } else {
+            modIcon.gameObject.SetActive(false);
+        }
     }
 
     public void ClickItem(){
