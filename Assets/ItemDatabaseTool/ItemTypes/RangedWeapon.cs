@@ -37,6 +37,8 @@ public class RangedWeapon : Item
     // Ammunition:
     [SerializeField] public int m_clipAmmo = 0;
     [SerializeField] public int m_clipSize = 0;
+    [SerializeField] public int m_spareAmmo = 0;
+    [SerializeField] public bool m_unlimitedAmmo = false;
     
     // Reloading:
     [SerializeField] public float m_reloadTime = 0;
@@ -80,6 +82,8 @@ public class RangedWeapon : Item
         newItem.m_aimTime = m_aimTime;
         newItem.m_clipAmmo = m_clipAmmo;
         newItem.m_clipSize = m_clipSize;
+        newItem.m_spareAmmo = m_spareAmmo;
+        newItem.m_unlimitedAmmo = m_unlimitedAmmo;
         newItem.m_reloadTime = m_reloadTime;
         newItem.m_equipTime = m_equipTime;
         newItem.m_shootEffect = m_shootEffect;
@@ -228,7 +232,7 @@ public class RangedWeapon : Item
     {
         if (m_reloadTimer <= 0 && m_waitTimer <= 0)
         {
-            if (m_clipAmmo < m_clipSize)
+            if (m_clipAmmo < m_clipSize && (m_spareAmmo > 0 || m_unlimitedAmmo))
             {
                 Reload(_owner);
                 return true;
@@ -251,7 +255,14 @@ public class RangedWeapon : Item
             GameObject sound = Instantiate(m_reloadSound, _owner.transform.position, Quaternion.identity, _owner.transform);
         }
 
-        m_clipAmmo = m_clipSize;
+        if (m_unlimitedAmmo){
+            m_spareAmmo = int.MaxValue;
+        }
+
+        // reload clip:
+        int ammoToReload = Mathf.Min(m_clipSize - m_clipAmmo, m_spareAmmo);
+        m_spareAmmo = Mathf.Max(0, m_spareAmmo - ammoToReload);
+        m_clipAmmo += ammoToReload;
     }
 
     /// <summary>
@@ -359,6 +370,10 @@ public class RangedWeapon : Item
             rangedWeapon.m_clipAmmo = EditorGUILayout.IntField(new GUIContent("Clip Ammo", "The amount of ammo currently in the clip"), rangedWeapon.m_clipAmmo);
             // reserve ammo
             rangedWeapon.m_clipSize = EditorGUILayout.IntField(new GUIContent("Clip Size", "The amount of ammo the clip can carry"), rangedWeapon.m_clipSize);
+            // spare ammo
+            rangedWeapon.m_spareAmmo = EditorGUILayout.IntField(new GUIContent("Spare Ammo", "The amount of ammo currently in the reserve"), rangedWeapon.m_spareAmmo);
+            // unlimited ammo
+            rangedWeapon.m_unlimitedAmmo = EditorGUILayout.Toggle(new GUIContent("Unlimited Ammo", "If this weapon has unlimited ammo"), rangedWeapon.m_unlimitedAmmo);
 
             // reloading:
             GUILayout.Label("Reloading", CustomEditorStuff.center_bold_label);

@@ -59,7 +59,10 @@ public class UIScript : MonoBehaviour
 
             // update ammo text
             if (currentWeapon != null && (RangedWeapon)currentWeapon && ammoText != null) {
-                ammoText.text = ((RangedWeapon)currentWeapon).m_clipAmmo + "/" + ((RangedWeapon)currentWeapon).m_clipSize;
+                string spareAmmoText = "";
+                if (((RangedWeapon)currentWeapon).m_unlimitedAmmo) spareAmmoText = "∞";
+                else spareAmmoText = ((RangedWeapon)currentWeapon).m_spareAmmo.ToString();
+                ammoText.text = ((RangedWeapon)currentWeapon).m_clipAmmo + "/" + spareAmmoText;
             }
 
             // get player inventory
