@@ -1,3 +1,16 @@
+/*
+ * Bachelor of Software Engineering
+ * Media Design School
+ * Auckland
+ * New Zealand
+ * 
+ * (c) 2022 Media Design School
+ * 
+ * File Name: NodeAI_Agent.cs
+ * Description: 
+ * Author: Nerys Thamm
+ * Mail: nerysthamm@gmail.com
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,28 +18,32 @@ using System.Linq;
 
 namespace NodeAI
 {
+    /// <summary>
+    ///  The Component responsible for enabling NodeAI_Behaviour files to be used to control the behaviour of GameObjects.
+    /// </summary>
+    /// <para>
+    /// This component is attached to GameObjects.
+    /// </para>
     public class NodeAI_Agent : MonoBehaviour
     {
-        public NodeAI_Behaviour AI_Behaviour;
+        public NodeAI_Behaviour AI_Behaviour; ///< The NodeAI_Behaviour that this Agent is using.
         NodeAI_Behaviour _behaviour;
-        public string faction = "";
+        public string faction = ""; ///< The faction that this Agent belongs to.
 
         [SerializeField]
-        public List<NodeData.SerializableProperty> inspectorProperties;
+        public List<NodeData.SerializableProperty> inspectorProperties; ///< List of all exposed properties in the behaviour.
 
-        Dictionary<NodeData.SerializableProperty, List<NodeData.SerializableProperty>> _propertyMap;
+        Dictionary<NodeData.SerializableProperty, List<NodeData.SerializableProperty>> _propertyMap; ///< Dictionary of all exposed properties in the behaviour.
 
-        public NodeAI_Behaviour behaviour{
+        public NodeAI_Behaviour behaviour{ ///< The NodeAI_Behaviour that this Agent is using.
             get{
                 return _behaviour;
             }
         }
-        public NodeTree nodeTree = null;
+        public NodeTree nodeTree = null; ///< The NodeTree that this Agent is using.
 
-        const float tickRate = 0.01f;
-        float tickTimer = 0f;
-
-        bool initialized = false;
+        const float tickRate = 0.01f; ///< The rate at which the Agent will tick.
+        float tickTimer = 0f; ///< The timer for the Agent's tick.
 
         // Start is called before the first frame update
         void Start()
@@ -36,24 +53,13 @@ namespace NodeAI
                 Debug.LogError("No AI_Behaviour assigned to NodeAI_Agent " + gameObject.name);
                 return;
             }
-            
-            StartCoroutine(Initialize());
-
-        }
-
-        IEnumerator Initialize()
-        {
             _behaviour = Instantiate(AI_Behaviour);
-            yield return new WaitForEndOfFrame();
+            
             _behaviour.nodeData.Where(x => !x.noLogic).All(x => x.runtimeLogic = (RuntimeBase)ScriptableObject.Instantiate(x.runtimeLogic));
-            yield return new WaitForEndOfFrame();
             _behaviour.nodeData.Where(x => !x.noQuery).All(x => x.query = (Query)ScriptableObject.Instantiate(x.query));
             _behaviour.queries.Clear();
-            yield return new WaitForEndOfFrame();
             _behaviour.queries.AddRange(_behaviour.nodeData.Where(x => !x.noQuery).Select(x => x.query));
-            yield return new WaitForEndOfFrame();
             _behaviour.nodeData.Where(x => !x.noLogic).ToList().ForEach(x => x.runtimeLogic.state = NodeData.State.Idle);
-            yield return new WaitForEndOfFrame();
             foreach(NodeData.SerializableProperty p in inspectorProperties)
             {
                 NodeData.SerializableProperty  other = _behaviour.exposedProperties.Where(x => x.GUID == p.GUID).First();
@@ -66,14 +72,11 @@ namespace NodeAI
                 other.v3value = p.v3value;
                 other.v4value = p.v4value;
                 other.cvalue = p.cvalue;
-                yield return new WaitForEndOfFrame();
             }
             nodeTree = NodeTree.CreateFromNodeData(_behaviour.nodeData.Find(x => x.nodeType == NodeData.Type.EntryPoint), _behaviour.nodeData);;
-            yield return new WaitForEndOfFrame();
             nodeTree.rootLeaf.nodeData.runtimeLogic.Init(nodeTree.rootLeaf);
-            yield return new WaitForEndOfFrame();
             nodeTree.PropogateExposedProperties(_behaviour.exposedProperties);
-            yield return new WaitForEndOfFrame();
+
             _propertyMap = new Dictionary<NodeData.SerializableProperty, List<NodeData.SerializableProperty>>();
             foreach(NodeData.SerializableProperty p in _behaviour.exposedProperties)
             {
@@ -84,7 +87,7 @@ namespace NodeAI
                 }
                 _propertyMap[p].AddRange(nodeTree.nodes.Where(x => !x.noLogic).SelectMany(x => x.runtimeLogic.GetPropertiesWhereParamReference(p.GUID)));
                 _propertyMap[p].AddRange(nodeTree.nodes.Where(x => !x.noQuery).SelectMany(x => x.query.GetPropertiesWhereParamReference(p.GUID)));
-                yield return new WaitForEndOfFrame();
+                
                 
             }
             foreach(Query q in _behaviour.queries)
@@ -101,24 +104,41 @@ namespace NodeAI
                     _propertyMap[x].AddRange(_behaviour.queries.SelectMany(n => n.GetPropertiesWhereParamReference(x.GUID)));
                     
                 });
-                yield return new WaitForEndOfFrame();
             }
+            
 
-            initialized = true;
-            StartCoroutine(UpdateValues());
-            yield return null;
         }
+
+    
 
         // Update is called once per frame
         void Update()
         {
-            if(_behaviour == null || !initialized)
+            if(_behaviour == null)
             {
                 return;
             }
             tickTimer += Time.deltaTime;
             
-            
+            foreach (var query in _behaviour.queries)
+            {
+                query.GetNewValues(this);
+            }
+            _propertyMap?.Keys.ToList().ForEach(x =>
+            {
+                foreach(NodeData.SerializableProperty p in _propertyMap[x])
+                {
+                    p.ivalue = x.ivalue;
+                    p.fvalue = x.fvalue;
+                    p.svalue = x.svalue;
+                    p.bvalue = x.bvalue;
+                    p.ovalue = x.ovalue;
+                    p.v2value = x.v2value;
+                    p.v3value = x.v3value;
+                    p.v4value = x.v4value;
+                    p.cvalue = x.cvalue;
+                }
+            });
             if (tickTimer > tickRate)
             {
                 tickTimer = 0f;
@@ -126,38 +146,12 @@ namespace NodeAI
             }
         }
 
-        IEnumerator UpdateValues()
-        {
-            while(true)
-            {
-                yield return new WaitForSeconds(0.1f);
-                foreach (var query in _behaviour.queries)
-                {
-                    query.GetNewValues(this);
-                }
-                _propertyMap.Keys.ToList().ForEach(x =>
-                {
-                    foreach(NodeData.SerializableProperty p in _propertyMap[x])
-                    {
-                        p.ivalue = x.ivalue;
-                        p.fvalue = x.fvalue;
-                        p.svalue = x.svalue;
-                        p.bvalue = x.bvalue;
-                        p.ovalue = x.ovalue;
-                        p.v2value = x.v2value;
-                        p.v3value = x.v3value;
-                        p.v4value = x.v4value;
-                        p.cvalue = x.cvalue;
-                    }
-                });
-            }
-        }
-
-        void OnDisable()
-        {
-            StopAllCoroutines();
-        }
-
+        /// <summary>
+        ///  Sets the value of a parameter.
+        /// </summary>
+        /// <param name="name">The name of the parameter.</param>
+        /// <param name="value">The value the parameter should be set to.</param>
+        /// <typeparam name="T">The datatype of the parameter.</typeparam>
         public void SetParameter<T>(string name, T value)
         {
             if(_behaviour == null)
@@ -204,6 +198,15 @@ namespace NodeAI
             
         }
 
+        /// <summary>
+        ///  Gets the value of a parameter.
+        /// </summary>
+        /// <param name="name">The name of the parameter.</param>
+        /// <typeparam name="T">The datatype of the parameter.</typeparam>
+        /// <returns>The current value of the parameter with the given name and type</returns>
+        /// <remarks>
+        /// If the parameter does not exist, the default value of the parameter's type is returned.
+        /// </remarks>
         public T GetParameter<T>(string name)
         {
             if(_behaviour == null)
@@ -240,6 +243,9 @@ namespace NodeAI
             return default(T);
         }
 
+        /// <summary>
+        /// Draws node Gizmos
+        /// </summary>
         void OnDrawGizmos()
         {
             Gizmos.DrawIcon(transform.position, "Profiler.Memory", true, Color.magenta);

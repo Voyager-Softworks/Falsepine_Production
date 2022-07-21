@@ -98,10 +98,13 @@ Collaboration diagram for NodeAI.BlackboardSearchWindow:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:aca446f3940aaf877195412b181d7b6f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1BlackboardSearchWindow.html#aca446f3940aaf877195412b181d7b6f9">Init</a> (<a class="el" href="classNodeAI_1_1GraphView.html">GraphView</a> graphView)</td></tr>
+<tr class="memdesc:aca446f3940aaf877195412b181d7b6f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is called when the search window is opened.  <a href="classNodeAI_1_1BlackboardSearchWindow.html#aca446f3940aaf877195412b181d7b6f9">More...</a><br /></td></tr>
 <tr class="separator:aca446f3940aaf877195412b181d7b6f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4379d7d06a949ee6e6db96c7f18f2952"><td class="memItemLeft" align="right" valign="top">List&lt; SearchTreeEntry &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1BlackboardSearchWindow.html#a4379d7d06a949ee6e6db96c7f18f2952">CreateSearchTree</a> (SearchWindowContext context)</td></tr>
+<tr class="memdesc:a4379d7d06a949ee6e6db96c7f18f2952"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to create a search window.  <a href="classNodeAI_1_1BlackboardSearchWindow.html#a4379d7d06a949ee6e6db96c7f18f2952">More...</a><br /></td></tr>
 <tr class="separator:a4379d7d06a949ee6e6db96c7f18f2952"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a119afb1ff66ab9d06d887bc4031215c3"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1BlackboardSearchWindow.html#a119afb1ff66ab9d06d887bc4031215c3">OnSelectEntry</a> (SearchTreeEntry entry, SearchWindowContext context)</td></tr>
+<tr class="memdesc:a119afb1ff66ab9d06d887bc4031215c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is called when a selection is made in the search window.  <a href="classNodeAI_1_1BlackboardSearchWindow.html#a119afb1ff66ab9d06d887bc4031215c3">More...</a><br /></td></tr>
 <tr class="separator:a119afb1ff66ab9d06d887bc4031215c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
@@ -132,7 +135,9 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="BlackboardSearchWindow_8cs_source.html#l00044">44</a> of file <a class="el" href="BlackboardSearchWindow_8cs_source.html">BlackboardSearchWindow.cs</a>.</p>
+<p>This method is used to create a search window. </p>
+
+<p class="definition">Definition at line <a class="el" href="BlackboardSearchWindow_8cs_source.html#l00042">42</a> of file <a class="el" href="BlackboardSearchWindow_8cs_source.html">BlackboardSearchWindow.cs</a>.</p>
 
 </div>
 </div>
@@ -160,7 +165,15 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="BlackboardSearchWindow_8cs_source.html#l00030">30</a> of file <a class="el" href="BlackboardSearchWindow_8cs_source.html">BlackboardSearchWindow.cs</a>.</p>
+<p>This function is called when the search window is opened. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">graphView</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="BlackboardSearchWindow_8cs_source.html#l00033">33</a> of file <a class="el" href="BlackboardSearchWindow_8cs_source.html">BlackboardSearchWindow.cs</a>.</p>
 
 </div>
 </div>
@@ -198,7 +211,17 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="BlackboardSearchWindow_8cs_source.html#l00098">98</a> of file <a class="el" href="BlackboardSearchWindow_8cs_source.html">BlackboardSearchWindow.cs</a>.</p>
+<p>This method is called when a selection is made in the search window. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">entry</td><td>The entry which was selected.</td></tr>
+    <tr><td class="paramname">context</td><td>The SearchWindowContext object.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Whether or not the selection was successful.</dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="BlackboardSearchWindow_8cs_source.html#l00075">75</a> of file <a class="el" href="BlackboardSearchWindow_8cs_source.html">BlackboardSearchWindow.cs</a>.</p>
 
 </div>
 </div>

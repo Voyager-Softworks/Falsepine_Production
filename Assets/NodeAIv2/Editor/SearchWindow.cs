@@ -51,6 +51,8 @@ namespace NodeAI
         /// <summary>
         /// Gets all child classes of the given type.
         /// </summary>
+        /// <param name="MyType">The type to get the child classes of.</param>
+        /// <returns>A list of child classes.</returns>
         Type[] GetInheritedClasses(Type MyType) 
         {
             return Assembly.GetAssembly(MyType).GetTypes().Where(TheType => TheType.IsClass && !TheType.IsAbstract && TheType.IsSubclassOf(MyType)).ToArray();
@@ -59,6 +61,8 @@ namespace NodeAI
         /// <summary>
         /// Creates the search tree for the search window.
         /// </summary>
+        /// <param name="context">The search window context.</param>
+        /// <returns>The search tree.</returns>
         public List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context)
         {
             // Split inherited classes into lists based on their namespace
@@ -210,6 +214,8 @@ namespace NodeAI
         /// <summary>
         /// Creates a new node.
         /// </summary>
+        /// <param name="context">The search window context.</param>
+        /// <returns>Boolean indicating if the node was created.</returns>
         public bool OnSelectEntry(SearchTreeEntry entry, SearchWindowContext context)
         {
             

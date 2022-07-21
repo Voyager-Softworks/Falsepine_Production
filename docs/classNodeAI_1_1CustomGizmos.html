@@ -74,27 +74,34 @@ $(function() {
   <div class="headertitle"><div class="title">NodeAI.CustomGizmos Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>A class used to draw Custom Gizmos used by <a class="el" href="namespaceNodeAI.html">NodeAI</a>.  
+ <a href="classNodeAI_1_1CustomGizmos.html#details">More...</a></p>
 <div class="dynheader">
 Collaboration diagram for NodeAI.CustomGizmos:</div>
 <div class="dyncontent">
 <div class="center"><img src="classNodeAI_1_1CustomGizmos__coll__graph.png" border="0" usemap="#aNodeAI_8CustomGizmos_coll__map" alt="Collaboration graph"/></div>
 <map name="aNodeAI_8CustomGizmos_coll__map" id="aNodeAI_8CustomGizmos_coll__map">
-<area shape="rect" title=" " alt="" coords="5,5,177,112"/>
+<area shape="rect" title="A class used to draw Custom Gizmos used by NodeAI." alt="" coords="5,5,177,112"/>
 </map>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:ae0d39b88b51de7bf099f8aad5b2aad2e"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1CustomGizmos.html#ae0d39b88b51de7bf099f8aad5b2aad2e">DrawRay</a> (Vector3 start, Vector3 dir, float length=1f)</td></tr>
+<tr class="memdesc:ae0d39b88b51de7bf099f8aad5b2aad2e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a Ray Gizmo.  <a href="classNodeAI_1_1CustomGizmos.html#ae0d39b88b51de7bf099f8aad5b2aad2e">More...</a><br /></td></tr>
 <tr class="separator:ae0d39b88b51de7bf099f8aad5b2aad2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a709f3d56a36d833374c16d1c78286e0f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1CustomGizmos.html#a709f3d56a36d833374c16d1c78286e0f">DrawCone</a> (Vector3 start, Vector3 dir, float angle, float length=1f)</td></tr>
+<tr class="memdesc:a709f3d56a36d833374c16d1c78286e0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a Cone Gizmo.  <a href="classNodeAI_1_1CustomGizmos.html#a709f3d56a36d833374c16d1c78286e0f">More...</a><br /></td></tr>
 <tr class="separator:a709f3d56a36d833374c16d1c78286e0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a647dee52aedfbf3472113a1a1ab4618e"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1CustomGizmos.html#a647dee52aedfbf3472113a1a1ab4618e">DrawCone</a> (Transform startTransform, Vector3 dir, float angle, float length=1f)</td></tr>
+<tr class="memdesc:a647dee52aedfbf3472113a1a1ab4618e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw a Cone Gizmo.  <a href="classNodeAI_1_1CustomGizmos.html#a647dee52aedfbf3472113a1a1ab4618e">More...</a><br /></td></tr>
 <tr class="separator:a647dee52aedfbf3472113a1a1ab4618e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="Gizmos_8cs_source.html#l00007">7</a> of file <a class="el" href="Gizmos_8cs_source.html">Gizmos.cs</a>.</p>
+<div class="textblock"><p >A class used to draw Custom Gizmos used by <a class="el" href="namespaceNodeAI.html">NodeAI</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="Gizmos_8cs_source.html#l00023">23</a> of file <a class="el" href="Gizmos_8cs_source.html">Gizmos.cs</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a647dee52aedfbf3472113a1a1ab4618e" name="a647dee52aedfbf3472113a1a1ab4618e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a647dee52aedfbf3472113a1a1ab4618e">&#9670;&nbsp;</a></span>DrawCone() <span class="overload">[1/2]</span></h2>
@@ -142,7 +149,19 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Gizmos_8cs_source.html#l00041">41</a> of file <a class="el" href="Gizmos_8cs_source.html">Gizmos.cs</a>.</p>
+<p>Draw a Cone Gizmo. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">start</td><td>The start point of the cone.</td></tr>
+    <tr><td class="paramname">dir</td><td>A unit vector representing the direction of the cone.</td></tr>
+    <tr><td class="paramname">angle</td><td>The interior angle of the cone's point.</td></tr>
+    <tr><td class="paramname">length</td><td>The length of the cone.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p >This version of the method uses a Transform to determine its origin. </p>
+
+<p class="definition">Definition at line <a class="el" href="Gizmos_8cs_source.html#l00083">83</a> of file <a class="el" href="Gizmos_8cs_source.html">Gizmos.cs</a>.</p>
 
 </div>
 </div>
@@ -192,7 +211,19 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Gizmos_8cs_source.html#l00014">14</a> of file <a class="el" href="Gizmos_8cs_source.html">Gizmos.cs</a>.</p>
+<p>Draw a Cone Gizmo. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">start</td><td>The start point of the cone.</td></tr>
+    <tr><td class="paramname">dir</td><td>A unit vector representing the direction of the cone.</td></tr>
+    <tr><td class="paramname">angle</td><td>The interior angle of the cone's point.</td></tr>
+    <tr><td class="paramname">length</td><td>The length of the cone.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p >This version of the method uses a Vector3 to determine its origin. </p>
+
+<p class="definition">Definition at line <a class="el" href="Gizmos_8cs_source.html#l00046">46</a> of file <a class="el" href="Gizmos_8cs_source.html">Gizmos.cs</a>.</p>
 
 </div>
 </div>
@@ -236,7 +267,17 @@ Static Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Gizmos_8cs_source.html#l00009">9</a> of file <a class="el" href="Gizmos_8cs_source.html">Gizmos.cs</a>.</p>
+<p>Draw a Ray Gizmo. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">start</td><td>The startpoint of the ray.</td></tr>
+    <tr><td class="paramname">dir</td><td>A unit vector representing the direction of the ray.</td></tr>
+    <tr><td class="paramname">length</td><td>The length of the ray.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="Gizmos_8cs_source.html#l00031">31</a> of file <a class="el" href="Gizmos_8cs_source.html">Gizmos.cs</a>.</p>
 
 </div>
 </div>

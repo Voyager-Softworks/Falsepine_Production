@@ -1,9 +1,25 @@
+/*
+ * Bachelor of Software Engineering
+ * Media Design School
+ * Auckland
+ * New Zealand
+ * 
+ * (c) 2022 Media Design School
+ * 
+ * File Name: WaitFor.cs
+ * Description: 
+ * Author: Nerys Thamm
+ * Mail: nerysthamm@gmail.com
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace NodeAI
 {
+    /// <summary>
+    ///  A Node that waits for a certain amount of time.
+    /// </summary>
     public class WaitFor : ActionBase
     {
         float timer = 0f;

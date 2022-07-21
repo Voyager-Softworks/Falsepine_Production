@@ -24,40 +24,23 @@ namespace NodeAI
 {
     public class BlackboardSearchWindow : ScriptableObject, ISearchWindowProvider
     {
-        private GraphView graphView;
+        private GraphView graphView; ///< The GraphView that is currently being searched.
 
-
+        /// <summary>
+        ///  This function is called when the search window is opened.
+        /// </summary>
+        /// <param name="graphView"></param>
         public void Init(GraphView graphView)
         {
             this.graphView = graphView;
         }
 
-        
 
-
-
-        Type[] GetInheritedClasses(Type MyType) 
-        {
-            return Assembly.GetAssembly(MyType).GetTypes().Where(TheType => TheType.IsClass && !TheType.IsAbstract && TheType.IsSubclassOf(MyType)).ToArray();
-        }
-
+        /// <summary>
+        /// This method is used to create a search window.
+        /// </summary>
         public List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context)
         {
-            // string[] assemblies = {"UnityEngine.AudioModule", "UnityEngine.CoreModule", "UnityEngine.AnimationModule" };
-            // var classes = System.AppDomain.CurrentDomain.GetAssemblies().Where(assembly => assemblies.Contains(assembly.GetName().Name))
-            //             .SelectMany(assembly => assembly.GetTypes())
-            //             .Where(type => type.IsClass && type.IsSubclassOf(typeof(MonoBehaviour)));
-
-            // // Create a list of all namespaces
-            // var namespaces = new List<string>();
-            
-            // foreach (var c in classes)
-            // {
-            //     if (!namespaces.Contains(c.Namespace))
-            //     {
-            //         namespaces.Add(c.Namespace);
-            //     }
-            // }
 
             Type[] supportedTypes = {typeof(GameObject), typeof(AudioClip), typeof(Transform), typeof(Animator)};
 
@@ -75,18 +58,6 @@ namespace NodeAI
                 new SearchTreeEntry(new GUIContent("Color")){userData = typeof(Color), level = 1},
                 
             };
-            
-            // foreach (var n in namespaces)
-            // {
-            //     tree.Add(new SearchTreeGroupEntry(new GUIContent(n), 1));
-            //     foreach (var c in classes)
-            //     {
-            //         if (c.Namespace == n)
-            //         {
-            //             tree.Add(new SearchTreeEntry(new GUIContent(c.Name)){userData = c, level = 2});
-            //         }
-            //     }
-            // }
 
             foreach (var t in supportedTypes)
             {
@@ -95,6 +66,12 @@ namespace NodeAI
             return tree;
         }
 
+        /// <summary>
+        ///  This method is called when a selection is made in the search window.
+        /// </summary>
+        /// <param name="entry">The entry which was selected.</param>
+        /// <param name="context">The SearchWindowContext object.</param>
+        /// <returns>Whether or not the selection was successful.</returns>
         public bool OnSelectEntry(SearchTreeEntry entry, SearchWindowContext context)
         {
             switch(((Type)entry.userData).Name)

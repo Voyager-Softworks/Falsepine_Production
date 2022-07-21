@@ -76,15 +76,15 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>A query is a node that can take inputs and produce outputs based on the scene.  
+<p>Base class for all query nodes.  
  <a href="classNodeAI_1_1Query.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for NodeAI.Query:</div>
 <div class="dyncontent">
 <div class="center"><img src="classNodeAI_1_1Query__inherit__graph.png" border="0" usemap="#aNodeAI_8Query_inherit__map" alt="Inheritance graph"/></div>
 <map name="aNodeAI_8Query_inherit__map" id="aNodeAI_8Query_inherit__map">
-<area shape="rect" title="A query is a node that can take inputs and produce outputs based on the scene." alt="" coords="1541,131,1827,369"/>
-<area shape="rect" href="classNodeAI_1_1FindWithTag.html" title=" " alt="" coords="5,425,157,517"/>
+<area shape="rect" title="Base class for all query nodes." alt="" coords="1732,131,2017,369"/>
+<area shape="rect" href="classNodeAI_1_1FindWithTag.html" title="A query that returns an object with the specifies tag." alt="" coords="5,425,157,517"/>
 <area shape="rect" href="classNodeAI_1_1Logic_1_1And.html" title=" " alt="" coords="182,425,325,517"/>
 <area shape="rect" href="classNodeAI_1_1Logic_1_1Nand.html" title=" " alt="" coords="349,425,494,517"/>
 <area shape="rect" href="classNodeAI_1_1Logic_1_1Nor.html" title=" " alt="" coords="518,425,661,517"/>
@@ -101,10 +101,12 @@ Inheritance diagram for NodeAI.Query:</div>
 <area shape="rect" href="classNodeAI_1_1Math_1_1Multiply.html" title=" " alt="" coords="2520,425,2683,517"/>
 <area shape="rect" href="classNodeAI_1_1Math_1_1NotEqualTo.html" title=" " alt="" coords="2707,425,2890,517"/>
 <area shape="rect" href="classNodeAI_1_1Math_1_1Subtract.html" title=" " alt="" coords="2914,425,3078,517"/>
-<area shape="rect" href="classNodeAI_1_1Random_1_1RandomBool.html" title=" " alt="" coords="3102,425,3317,517"/>
-<area shape="rect" href="classNodeAI_1_1Random_1_1RandomFloat.html" title=" " alt="" coords="3341,425,3560,517"/>
-<area shape="rect" href="classNodeAI_1_1Utility_1_1GetObjectTransform.html" title=" " alt="" coords="3585,417,3765,524"/>
-<area shape="rect" title=" " alt="" coords="1619,5,1749,83"/>
+<area shape="rect" href="classNodeAI_1_1Random_1_1RandomBool.html" title="A query that returns a random boolean." alt="" coords="3102,425,3317,517"/>
+<area shape="rect" href="classNodeAI_1_1Random_1_1RandomFloat.html" title="A query that returns a random float." alt="" coords="3341,425,3560,517"/>
+<area shape="rect" href="classNodeAI_1_1Senses_1_1FindTagInKnownObjects.html" title="A Query that returns an object with the specified tag if the Agent is aware of it." alt="" coords="3585,417,3813,524"/>
+<area shape="rect" href="classNodeAI_1_1Utility_1_1DistanceFromAgent.html" title="A Query Node that returns the distance of an object from the agent." alt="" coords="3837,417,4043,524"/>
+<area shape="rect" href="classNodeAI_1_1Utility_1_1GetObjectTransform.html" title=" " alt="" coords="4067,417,4247,524"/>
+<area shape="rect" title=" " alt="" coords="1810,5,1939,83"/>
 </map>
 </div>
 <div class="dynheader">
@@ -112,7 +114,7 @@ Collaboration diagram for NodeAI.Query:</div>
 <div class="dyncontent">
 <div class="center"><img src="classNodeAI_1_1Query__coll__graph.png" border="0" usemap="#aNodeAI_8Query_coll__map" alt="Collaboration graph"/></div>
 <map name="aNodeAI_8Query_coll__map" id="aNodeAI_8Query_coll__map">
-<area shape="rect" title="A query is a node that can take inputs and produce outputs based on the scene." alt="" coords="5,131,291,369"/>
+<area shape="rect" title="Base class for all query nodes." alt="" coords="5,131,291,369"/>
 <area shape="rect" title=" " alt="" coords="83,5,213,83"/>
 </map>
 </div>
@@ -123,37 +125,70 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a8dc7a412b6a7199ebb1faa03fd5c6fbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes when object is enabled  <a href="classNodeAI_1_1Query.html#a8dc7a412b6a7199ebb1faa03fd5c6fbe">More...</a><br /></td></tr>
 <tr class="separator:a8dc7a412b6a7199ebb1faa03fd5c6fbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29213ec2680107ec72da307f4b6dd5fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1Query.html#a29213ec2680107ec72da307f4b6dd5fb">RepopulateProperties</a> (List&lt; <a class="el" href="classNodeAI_1_1NodeData_1_1SerializableProperty.html">NodeData.SerializableProperty</a> &gt; properties)</td></tr>
+<tr class="memdesc:a29213ec2680107ec72da307f4b6dd5fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Repopulates the properties list.  <a href="classNodeAI_1_1Query.html#a29213ec2680107ec72da307f4b6dd5fb">More...</a><br /></td></tr>
 <tr class="separator:a29213ec2680107ec72da307f4b6dd5fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adf19169481bb301d8c741a493b4cbf97"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1Query.html#adf19169481bb301d8c741a493b4cbf97">AddProperty&lt; T &gt;</a> (string name, T initialValue, bool isOutput)</td></tr>
+<tr class="memdesc:adf19169481bb301d8c741a493b4cbf97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a property to the <a class="el" href="classNodeAI_1_1Query.html" title="Base class for all query nodes.">Query</a>.  <a href="classNodeAI_1_1Query.html#adf19169481bb301d8c741a493b4cbf97">More...</a><br /></td></tr>
 <tr class="separator:adf19169481bb301d8c741a493b4cbf97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92bda15ad222837b4e027eed4af692b0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1Query.html#a92bda15ad222837b4e027eed4af692b0">SetProperty&lt; T &gt;</a> (string name, T value)</td></tr>
+<tr class="memdesc:a92bda15ad222837b4e027eed4af692b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the value of a property.  <a href="classNodeAI_1_1Query.html#a92bda15ad222837b4e027eed4af692b0">More...</a><br /></td></tr>
 <tr class="separator:a92bda15ad222837b4e027eed4af692b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7499b40765d52cbb9b49abae249d38dc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1Query.html#a7499b40765d52cbb9b49abae249d38dc">SetProperty</a> (string name, Object value, System.Type type)</td></tr>
+<tr class="memdesc:a7499b40765d52cbb9b49abae249d38dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the value of a property.  <a href="classNodeAI_1_1Query.html#a7499b40765d52cbb9b49abae249d38dc">More...</a><br /></td></tr>
 <tr class="separator:a7499b40765d52cbb9b49abae249d38dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acd169c1979982b9260960bd9498f24be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1Query.html#acd169c1979982b9260960bd9498f24be">SetPropertyGUID</a> (string name, string GUID)</td></tr>
+<tr class="memdesc:acd169c1979982b9260960bd9498f24be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the GUID of a property.  <a href="classNodeAI_1_1Query.html#acd169c1979982b9260960bd9498f24be">More...</a><br /></td></tr>
 <tr class="separator:acd169c1979982b9260960bd9498f24be"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a638a24d7ac723f74d117822905fcbda6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1Query.html#a638a24d7ac723f74d117822905fcbda6">SetPropertyParamReference</a> (string name, string paramReference)</td></tr>
+<tr class="memdesc:a638a24d7ac723f74d117822905fcbda6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the Parameter reference of a property.  <a href="classNodeAI_1_1Query.html#a638a24d7ac723f74d117822905fcbda6">More...</a><br /></td></tr>
 <tr class="separator:a638a24d7ac723f74d117822905fcbda6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a252874e6df65d819a2bb741c49feceac"><td class="memItemLeft" align="right" valign="top">T&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1Query.html#a252874e6df65d819a2bb741c49feceac">GetProperty&lt; T &gt;</a> (string name)</td></tr>
+<tr class="memdesc:a252874e6df65d819a2bb741c49feceac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the value of a property.  <a href="classNodeAI_1_1Query.html#a252874e6df65d819a2bb741c49feceac">More...</a><br /></td></tr>
 <tr class="separator:a252874e6df65d819a2bb741c49feceac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6e9e845d848297e7f89ec6e8a938cefb"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="classNodeAI_1_1NodeData_1_1Property.html">NodeData.Property</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1Query.html#a6e9e845d848297e7f89ec6e8a938cefb">GetProperties</a> ()</td></tr>
+<tr class="memdesc:a6e9e845d848297e7f89ec6e8a938cefb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets all the properties of a node.  <a href="classNodeAI_1_1Query.html#a6e9e845d848297e7f89ec6e8a938cefb">More...</a><br /></td></tr>
 <tr class="separator:a6e9e845d848297e7f89ec6e8a938cefb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaace1f4bb039a7e71d1b2c8525ac0064"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="classNodeAI_1_1NodeData_1_1SerializableProperty.html">NodeData.SerializableProperty</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1Query.html#aaace1f4bb039a7e71d1b2c8525ac0064">GetSerializableProperties</a> ()</td></tr>
+<tr class="memdesc:aaace1f4bb039a7e71d1b2c8525ac0064"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets all properties of a node as serializable properties.  <a href="classNodeAI_1_1Query.html#aaace1f4bb039a7e71d1b2c8525ac0064">More...</a><br /></td></tr>
 <tr class="separator:aaace1f4bb039a7e71d1b2c8525ac0064"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7bb3cf4692a9d7600080d755ab49019a"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="classNodeAI_1_1NodeData_1_1SerializableProperty.html">NodeData.SerializableProperty</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1Query.html#a7bb3cf4692a9d7600080d755ab49019a">GetPropertiesWhereParamReference</a> (string paramReference)</td></tr>
+<tr class="memdesc:a7bb3cf4692a9d7600080d755ab49019a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets all the properties of a node as serializable properties, where the parameter reference of the property is equal to the provided parameter reference.  <a href="classNodeAI_1_1Query.html#a7bb3cf4692a9d7600080d755ab49019a">More...</a><br /></td></tr>
 <tr class="separator:a7bb3cf4692a9d7600080d755ab49019a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac4f3935fbb188e6372d9073cda1fd1b2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1Query.html#ac4f3935fbb188e6372d9073cda1fd1b2">GetNewValues</a> (<a class="el" href="classNodeAI_1_1NodeAI__Agent.html">NodeAI_Agent</a> agent)</td></tr>
+<tr class="memdesc:ac4f3935fbb188e6372d9073cda1fd1b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is called when the <a class="el" href="classNodeAI_1_1Query.html" title="Base class for all query nodes.">Query</a> is updated, and should be overriden to define custom behaviour.  <a href="classNodeAI_1_1Query.html#ac4f3935fbb188e6372d9073cda1fd1b2">More...</a><br /></td></tr>
 <tr class="separator:ac4f3935fbb188e6372d9073cda1fd1b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a0f8e25a0b6a4a5bcb2796deb85bc5f4d"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1Query.html#a0f8e25a0b6a4a5bcb2796deb85bc5f4d">tooltip</a> = &quot;&quot;</td></tr>
+<tr class="memdesc:a0f8e25a0b6a4a5bcb2796deb85bc5f4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The tooltip that is displayed when the mouse is over the node.  <a href="classNodeAI_1_1Query.html#a0f8e25a0b6a4a5bcb2796deb85bc5f4d">More...</a><br /></td></tr>
 <tr class="separator:a0f8e25a0b6a4a5bcb2796deb85bc5f4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >A query is a node that can take inputs and produce outputs based on the scene. </p>
-
-<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00011">11</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
+<div class="textblock"><p >Base class for all query nodes. </p>
+<p >A query node is a node which executes some form of logic at runtime which is not directly part of the Agent's behaviour. <a class="el" href="classNodeAI_1_1Query.html" title="Base class for all query nodes.">Query</a> nodes can have any number of input and output properties, and can be used to either process said inputs in some way and return the result as an output, collect information from the scene, or both. </p>
+<p >The following snippet shows how to create a query node that takes a Color property and returns its intensity as an output: </p>
+<p ><br  />
+ </p>
+<div class="fragment"><div class="line"><span class="keyword">public</span> <span class="keyword">class </span>ColorIntensity : Query</div>
+<div class="line">{</div>
+<div class="line">   <span class="keyword">public</span> ColorIntensity()</div>
+<div class="line">   {</div>
+<div class="line">      AddProperty&lt;Color&gt;(<span class="stringliteral">&quot;Color&quot;</span>, Color.white, <span class="keyword">false</span>);</div>
+<div class="line">      AddProperty&lt;float&gt;(<span class="stringliteral">&quot;Intensity&quot;</span>, 0f, <span class="keyword">true</span>); </div>
+<div class="line">   }</div>
+<div class="line">   <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classNodeAI_1_1Query.html#ac4f3935fbb188e6372d9073cda1fd1b2">GetNewValues</a>(NodeAI_Agent agent)</div>
+<div class="line">   {</div>
+<div class="line">     <span class="keywordtype">float</span> r = GetProperty&lt;Color&gt;(<span class="stringliteral">&quot;Color&quot;</span>).r;</div>
+<div class="line">     <span class="keywordtype">float</span> g = GetProperty&lt;Color&gt;(<span class="stringliteral">&quot;Color&quot;</span>).g;</div>
+<div class="line">     <span class="keywordtype">float</span> b = GetProperty&lt;Color&gt;(<span class="stringliteral">&quot;Color&quot;</span>).b;</div>
+<div class="line">     <span class="keywordtype">float</span> intensity = (0.21f × r) + (0.72f × g) + (0.07f × b);</div>
+<div class="line">     SetProperty&lt;float&gt;(<span class="stringliteral">&quot;Intensity&quot;</span>, intensity);</div>
+<div class="line">   }</div>
+<div class="line">}</div>
+<div class="ttc" id="aclassNodeAI_1_1Query_html_ac4f3935fbb188e6372d9073cda1fd1b2"><div class="ttname"><a href="classNodeAI_1_1Query.html#ac4f3935fbb188e6372d9073cda1fd1b2">NodeAI.Query.GetNewValues</a></div><div class="ttdeci">virtual void GetNewValues(NodeAI_Agent agent)</div><div class="ttdoc">This method is called when the Query is updated, and should be overriden to define custom behaviour.</div><div class="ttdef"><b>Definition:</b> <a href="Query_8cs_source.html#l00398">Query.cs:398</a></div></div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00051">51</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="adf19169481bb301d8c741a493b4cbf97" name="adf19169481bb301d8c741a493b4cbf97"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#adf19169481bb301d8c741a493b4cbf97">&#9670;&nbsp;</a></span>AddProperty&lt; T &gt;()</h2>
@@ -195,7 +230,26 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00031">31</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
+<p>Adds a property to the <a class="el" href="classNodeAI_1_1Query.html" title="Base class for all query nodes.">Query</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The name of the property to add.</td></tr>
+    <tr><td class="paramname">initialValue</td><td>The initial value of the property.</td></tr>
+    <tr><td class="paramname">isOutput</td><td>Whether this property is an output or not.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The datatype of this property</td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line">AddProperty&lt;int&gt;(<span class="stringliteral">&quot;MyInt&quot;</span>, 0, <span class="keyword">false</span>); <span class="comment">// Adds a property called &quot;MyInt&quot; with a value of 0 which is an input</span></div>
+<div class="line">AddProperty&lt;bool&gt;(<span class="stringliteral">&quot;MyBool&quot;</span>, <span class="keyword">false</span>, <span class="keyword">true</span>); <span class="comment">// Adds a property called &quot;MyBool&quot; with a value of false which is an output</span></div>
+<div class="line"><span class="comment">//Whether a property is an input or an output determines whether it recieves an input port or an output port on the Node.</span></div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00092">92</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
 
 </div>
 </div>
@@ -223,7 +277,27 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00266">266</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
+<p>This method is called when the <a class="el" href="classNodeAI_1_1Query.html" title="Base class for all query nodes.">Query</a> is updated, and should be overriden to define custom behaviour. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">agent</td><td>The agent processing the <a class="el" href="classNodeAI_1_1Query.html" title="Base class for all query nodes.">Query</a>.</td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classNodeAI_1_1Query.html#ac4f3935fbb188e6372d9073cda1fd1b2">GetNewValues</a>(NodeAI_Agent agent)</div>
+<div class="line">{</div>
+<div class="line">   <span class="comment">// Get the value of the property called &quot;MyInt&quot;</span></div>
+<div class="line">    <span class="keywordtype">int</span> myInt = GetProperty&lt;int&gt;(<span class="stringliteral">&quot;MyInt&quot;</span>);</div>
+<div class="line">    <span class="comment">// Set the value of the property called &quot;MyInt&quot; to the value of the property called &quot;MyInt2&quot;</span></div>
+<div class="line">   <a class="code hl_function" href="classNodeAI_1_1Query.html#a7499b40765d52cbb9b49abae249d38dc">SetProperty</a>(<span class="stringliteral">&quot;MyInt&quot;</span>, GetProperty&lt;int&gt;(<span class="stringliteral">&quot;MyInt2&quot;</span>));</div>
+<div class="line">}</div>
+<div class="ttc" id="aclassNodeAI_1_1Query_html_a7499b40765d52cbb9b49abae249d38dc"><div class="ttname"><a href="classNodeAI_1_1Query.html#a7499b40765d52cbb9b49abae249d38dc">NodeAI.Query.SetProperty</a></div><div class="ttdeci">void SetProperty(string name, Object value, System.Type type)</div><div class="ttdoc">Sets the value of a property.</div><div class="ttdef"><b>Definition:</b> <a href="Query_8cs_source.html#l00210">Query.cs:210</a></div></div>
+</div><!-- fragment --> <p ><br  />
+ </p>
+
+<p>Reimplemented in <a class="el" href="classNodeAI_1_1Utility_1_1DistanceFromAgent.html#a8f943758a9f280ef58e4648d432e65dc">NodeAI.Utility.DistanceFromAgent</a>, <a class="el" href="classNodeAI_1_1Senses_1_1FindTagInKnownObjects.html#ac69884ff59d2faa314cb6a86c56a63e8">NodeAI.Senses.FindTagInKnownObjects</a>, <a class="el" href="classNodeAI_1_1FindWithTag.html#a29ae2bc4028c6109d8d57a04482a1410">NodeAI.FindWithTag</a>, <a class="el" href="classNodeAI_1_1Random_1_1RandomBool.html#a1bcf0aaeff10340a2edfeebbc74198c9">NodeAI.Random.RandomBool</a>, <a class="el" href="classNodeAI_1_1Random_1_1RandomFloat.html#a31c500bfb152400a4ff23f4fd9e10ee2">NodeAI.Random.RandomFloat</a>, <a class="el" href="classNodeAI_1_1Math_1_1Add.html#a124de3ef7550706e1fda59075a27f815">NodeAI.Math.Add</a>, <a class="el" href="classNodeAI_1_1Math_1_1Subtract.html#ab8341bf3388ca0fd44af3770f8c99551">NodeAI.Math.Subtract</a>, <a class="el" href="classNodeAI_1_1Math_1_1Multiply.html#a2bc5641eba67ab20411b2da441a990ff">NodeAI.Math.Multiply</a>, <a class="el" href="classNodeAI_1_1Math_1_1Divide.html#a50941a6b12d7a9d5f7f56ed948d128df">NodeAI.Math.Divide</a>, <a class="el" href="classNodeAI_1_1Math_1_1GreaterThan.html#a34abcb2420dbc210bbaa8fe769cfa719">NodeAI.Math.GreaterThan</a>, <a class="el" href="classNodeAI_1_1Math_1_1LessThan.html#adb133451839c1f1fa69d3af97d82a7df">NodeAI.Math.LessThan</a>, <a class="el" href="classNodeAI_1_1Math_1_1EqualTo.html#a2ec3861295b2ede8e061baf3996730dd">NodeAI.Math.EqualTo</a>, <a class="el" href="classNodeAI_1_1Math_1_1NotEqualTo.html#ab87c37b0d427dc19701e907304533f7f">NodeAI.Math.NotEqualTo</a>, <a class="el" href="classNodeAI_1_1Math_1_1GreaterThanOrEqualTo.html#adb63beb97e963a1aace27209175a81f2">NodeAI.Math.GreaterThanOrEqualTo</a>, <a class="el" href="classNodeAI_1_1Logic_1_1And.html#a1b7b29e4e96a3f0484a2b739366d83b1">NodeAI.Logic.And</a>, <a class="el" href="classNodeAI_1_1Logic_1_1Or.html#a84ca8286a6027a96121dcf0f006b521b">NodeAI.Logic.Or</a>, <a class="el" href="classNodeAI_1_1Logic_1_1Not.html#a85e18f5992fc8de41e721290e8ebf4dc">NodeAI.Logic.Not</a>, <a class="el" href="classNodeAI_1_1Logic_1_1Xor.html#a9a72336eccacbf054e5363ecf267bd4a">NodeAI.Logic.Xor</a>, <a class="el" href="classNodeAI_1_1Logic_1_1Nand.html#ab4d8e15352d75c15c0aa772614b4d16b">NodeAI.Logic.Nand</a>, <a class="el" href="classNodeAI_1_1Logic_1_1Nor.html#a247f37687a30738a50ed4be4e48b9115">NodeAI.Logic.Nor</a>, <a class="el" href="classNodeAI_1_1Logic_1_1Xnor.html#a14dc64aebd23fbda8f222f36a53fe946">NodeAI.Logic.Xnor</a>, and <a class="el" href="classNodeAI_1_1Utility_1_1GetObjectTransform.html#a472ac04b702023b807ca89b45991acd6">NodeAI.Utility.GetObjectTransform</a>.</p>
+
+<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00398">398</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
 
 </div>
 </div>
@@ -250,7 +324,10 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00248">248</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
+<p>Gets all the properties of a node. </p>
+<dl class="section return"><dt>Returns</dt><dd>A list of all properties.</dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00358">358</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
 
 </div>
 </div>
@@ -278,7 +355,16 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00260">260</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
+<p>Gets all the properties of a node as serializable properties, where the parameter reference of the property is equal to the provided parameter reference. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">paramReference</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00377">377</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
 
 </div>
 </div>
@@ -306,7 +392,24 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00195">195</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
+<p>Gets the value of a property. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The name of the property.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The datatype of the property.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The value of the property</dd></dl>
+<p >If the property does not exist, the method will return the default value of the property's datatype.</p>
+<div class="fragment"><div class="line"><span class="keywordtype">int</span> myInt = GetProperty&lt;int&gt;(<span class="stringliteral">&quot;MyInt&quot;</span>); <span class="comment">// Gets the value of the property called &quot;MyInt&quot;</span></div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00301">301</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
 
 </div>
 </div>
@@ -333,7 +436,10 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00254">254</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
+<p>Gets all properties of a node as serializable properties. </p>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00367">367</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
 
 </div>
 </div>
@@ -362,7 +468,7 @@ Public Attributes</h2></td></tr>
 
 <p>Executes when object is enabled </p>
 
-<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00016">16</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00056">56</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
 
 </div>
 </div>
@@ -390,7 +496,15 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00026">26</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
+<p>Repopulates the properties list. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">properties</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00073">73</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
 
 </div>
 </div>
@@ -434,7 +548,23 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00127">127</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
+<p>Sets the value of a property. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The name of the property to set.</td></tr>
+    <tr><td class="paramname">value</td><td>The value to set the property to.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The datatype of the property.</td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"><a class="code hl_function" href="classNodeAI_1_1Query.html#a7499b40765d52cbb9b49abae249d38dc">SetProperty</a>(<span class="stringliteral">&quot;MyInt&quot;</span>, (Object)5, typeof(<span class="keywordtype">int</span>)); <span class="comment">// Sets the value of the property called &quot;MyInt&quot; to 5</span></div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00210">210</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
 
 </div>
 </div>
@@ -448,7 +578,7 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void NodeAI.Query.SetProperty&lt; T &gt; </td>
+          <td class="memname">void <a class="el" href="classNodeAI_1_1Query.html#a7499b40765d52cbb9b49abae249d38dc">NodeAI.Query.SetProperty</a>&lt; T &gt; </td>
           <td>(</td>
           <td class="paramtype">string&#160;</td>
           <td class="paramname"><em>name</em>, </td>
@@ -472,7 +602,23 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00085">85</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
+<p>Sets the value of a property. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The name of the property to set.</td></tr>
+    <tr><td class="paramname">value</td><td>The value to set the property to.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">T</td><td>The datatype of the property.</td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line">SetProperty&lt;int&gt;(<span class="stringliteral">&quot;MyInt&quot;</span>, 5); <span class="comment">// Sets the value of the property called &quot;MyInt&quot; to 5</span></div>
+</div><!-- fragment --> 
+<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00157">157</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
 
 </div>
 </div>
@@ -510,7 +656,16 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00169">169</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
+<p>Sets the GUID of a property. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The name of the property.</td></tr>
+    <tr><td class="paramname">GUID</td><td>The GUID to set.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00256">256</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
 
 </div>
 </div>
@@ -548,7 +703,16 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00182">182</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
+<p>Sets the Parameter reference of a property. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>The name of the property.</td></tr>
+    <tr><td class="paramname">paramReference</td><td>The GUID of the parameter.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00274">274</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
 
 </div>
 </div>
@@ -565,7 +729,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00021">21</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
+<p>The tooltip that is displayed when the mouse is over the node. </p>
+
+<p class="definition">Definition at line <a class="el" href="Query_8cs_source.html#l00064">64</a> of file <a class="el" href="Query_8cs_source.html">Query.cs</a>.</p>
 
 </div>
 </div>

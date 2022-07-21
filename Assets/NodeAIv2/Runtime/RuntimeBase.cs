@@ -1,31 +1,60 @@
+/*
+ * Bachelor of Software Engineering
+ * Media Design School
+ * Auckland
+ * New Zealand
+ * 
+ * (c) 2022 Media Design School
+ * 
+ * File Name: RuntimeBase.cs
+ * Description: 
+ * Author: Nerys Thamm
+ * Mail: nerysthamm@gmail.com
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace NodeAI
 {
+    /// <summary>
+    /// Base class for all runtime nodes.
+    /// </summary>
     [System.Serializable]
     public class RuntimeBase : ScriptableObject
     {
-
-        public void OnEnable()
+        public void OnEnable() 
         {
             hideFlags = HideFlags.HideAndDontSave;
         }
         [SerializeField]
-        public NodeData.State state;
+        public NodeData.State state; ///< The state of the node.
 
-        public string tooltip = "";
+        public string tooltip = ""; ///< The tooltip of the node.
         [SerializeField]
-        List<NodeData.SerializableProperty> properties = new List<NodeData.SerializableProperty>();
+        List<NodeData.SerializableProperty> properties = new List<NodeData.SerializableProperty>(); ///< The exposed properties of the node.
 
+        /// <summary>
+        /// Repopulates properties that may have gotted destroyed in serialisation.
+        /// </summary>
+        /// <param name="properties">The properties to use to repopulate the node</param>
         public void RepopulateProperties(List<NodeData.SerializableProperty> properties)
         {
             this.properties = properties;
         }
 
         
-
+        /// <summary>
+        ///  Adds a property field to the node.
+        /// </summary>
+        /// <param name="name">The name of the property field.</param>
+        /// <param name="initialValue">The value the property field will have in a newly created node.</param>
+        /// <typeparam name="T">The datatype the property will store.</typeparam>
+        /// <example>
+        /// <code>
+        /// AddProperty<GameObject>("My GameObject", null);
+        /// </code>
+        /// </example>
         public void AddProperty<T>(string name, T initialValue)
         {
             if(properties == null)
@@ -79,6 +108,17 @@ namespace NodeAI
             properties.Add(newProp);
         }
 
+        /// <summary>
+        ///  Sets the value of a property field.
+        /// </summary>
+        /// <param name="name">The name of the property to set.</param>
+        /// <param name="value">The new value the property should be set to.</param>
+        /// <typeparam name="T">The datatype of the property</typeparam>
+        /// <example>
+        /// <code>
+        /// SetProperty<bool>("MyBool", true);
+        /// </code>
+        /// </example>
         public void SetProperty<T>(string name, T value)
         {
             foreach (NodeData.SerializableProperty property in properties)
@@ -121,6 +161,20 @@ namespace NodeAI
             Debug.LogError("Property with name " + name + " does not exist");
         }
 
+        /// <summary>
+        /// Sets the property of a value field as an Object type.
+        /// </summary>
+        /// <param name="name">The name of the property to set.</param>
+        /// <param name="value">The value the property should be set to, cast as an Object type.</param>
+        /// <param name="type">The actual datatype of the property.</param>
+        /// <remarks>
+        /// This is used to set the value of a property field as an Object type, it exists because Unity does not support serializing reference types, and thus a workaround must be used.
+        /// </remarks>
+        /// <example>
+        /// <code>
+        /// SetProperty("My Gameobject", (object)myGameObject, typeof(GameObject));
+        /// </code>
+        /// </example>
         public void SetProperty(string name, Object value, System.Type type)
         {
             foreach (NodeData.SerializableProperty property in properties)
@@ -163,6 +217,14 @@ namespace NodeAI
             Debug.LogError("Property with name " + name + " does not exist");
         }
 
+        /// <summary>
+        /// Sets the GUID of a property field.
+        /// </summary>
+        /// <param name="name">The name of the property to set.</param>
+        /// <param name="guid">The new GUID the property should be set to.</param>
+        /// <remarks>
+        /// This is a method used internally for serialisation and deserialisation, and should not be used by end users.
+        /// </remarks>
         public void SetPropertyGUID(string name, string GUID)
         {
             foreach (NodeData.SerializableProperty property in properties)
@@ -176,6 +238,14 @@ namespace NodeAI
             Debug.LogError("Property with name " + name + " does not exist");
         }
 
+        /// <summary>
+        /// Sets the Parameter reference of a Property
+        /// </summary>
+        /// <param name="name">The name of the property to set.</param>
+        /// <param name="parameter">The new Parameter reference the property should be set to.</param>
+        /// <remarks>
+        /// This is a method used internally for serialisation and deserialisation, and should not be used by end users.
+        /// </remarks>
         public void SetPropertyParamReference(string name, string paramReference)
         {
             foreach (NodeData.SerializableProperty property in properties)
@@ -189,6 +259,17 @@ namespace NodeAI
             Debug.LogError("Property with name " + name + " does not exist");
         }
 
+        /// <summary>
+        /// Gets the value of a property field.
+        /// </summary>
+        /// <param name="name">The name of the property to get.</param>
+        /// <typeparam name="T">The datatype of the property</typeparam>
+        /// <returns>The value of the property field.</returns>
+        /// <example>
+        /// <code>
+        /// bool myBool = GetProperty<bool>("MyBool");
+        /// </code>
+        /// </example>
         public T GetProperty<T>(string name)
         {
             if(properties == null)
@@ -242,32 +323,115 @@ namespace NodeAI
             return default(T);
         }
 
-
+        /// <summary>
+        /// Gets all the properties of a node.
+        /// </summary>
+        /// <returns>A list of all the properties of a node.</returns>
+        /// <remarks>
+        /// This is a method used internally for serialisation and deserialisation, and should not be used by end users.
+        /// </remarks>
+        /// <example>
+        /// <code>
+        /// List<NodeData.SerializableProperty> properties = GetProperties();
+        /// </code>
+        /// </example>
         public List<NodeData.Property> GetProperties()
         {
             if(properties == null) properties = new List<NodeData.SerializableProperty>();
             return properties.ConvertAll(x => (NodeData.Property)x);
         }
 
+        /// <summary>
+        /// Gets all properties of a node as SerializableProperties.
+        /// </summary>
+        /// <returns>A list of all the properties of a node.</returns>
+        /// <remarks>
+        /// This is a method used internally for serialisation and deserialisation, and should not be used by end users.
+        /// </remarks>
+        /// <example>
+        /// <code>
+        /// List<NodeData.SerializableProperty> properties = GetProperties();
+        /// </code>
+        /// </example>
         public List<NodeData.SerializableProperty> GetSerializableProperties()
         {
             if (properties == null) properties = new List<NodeData.SerializableProperty>();
             return properties;
         }
 
+        /// <summary>
+        /// Gets all properties with a specific parameter reference.
+        /// </summary>
+        /// <param name="paramReference">The parameter reference to get properties for.</param>
+        /// <returns>A list of all the properties with the specified parameter reference.</returns>
+        /// <remarks>
+        /// This is a method used internally for serialisation and deserialisation, and should not be used by end users.
+        /// </remarks>
         public List<NodeData.SerializableProperty> GetPropertiesWhereParamReference(string paramReference)
         {
             if (properties == null) properties = new List<NodeData.SerializableProperty>();
             return properties.FindAll(x => (x).paramReference == paramReference);
         }
 
-        
+        /// <summary>
+        ///  Eval is called when the node is evaluated, and contains all of the logic for the node.
+        /// </summary>
+        /// <param name="agent">The NodeAI_Agent that is currently running the node.</param>
+        /// <param name="current">The current node which is being run.</param>
+        /// <returns>The current or updated state of the node.</returns>
+        /// <list type="table">
+            /// <listheader>
+                /// <term>Possible return states</term>
+                /// <description>When a node is evaluated it may return one of four states based on whether it is currently running, or if it has succeeded.</description>
+            /// </listheader>
+            /// <item>
+            /// <term>Running</term>
+            /// <description>The node is currently running and is still evaluating.</description>
+            /// </item>
+            /// <item>
+            /// <term>Success</term>
+            /// <description>The node has succeeded and has finished evaluating.</description>
+            /// </item>
+            /// <item>
+            /// <term>Failure</term>
+            /// <description>The node has failed and has finished evaluating.</description>
+            /// </item>
+            /// <item>
+            /// <term>Idle</term>
+            /// <description>The node is not currently running and is not evaluating.</description>
+            /// </item>
+        /// </list>
         public virtual NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current) => NodeData.State.Failure;
 
+        /// <summary>
+        ///  Draw Gizmos is called when the Agent draws gizmos.
+        /// </summary>
+        /// <param name="agent">The Agent currently processing the node.</param>
+        /// <remarks>
+        /// This method is only called when the node is currently running.
+        /// </remarks>
+        /// <example>
+        /// <code>
+        /// override void DrawGizmos(NodeAI_Agent agent)
+        /// {
+        ///    Gizmos.color = Color.red;
+        ///    Gizmos.DrawSphere(agent.transform.position, 0.5f);
+        /// }
+        /// </code>
+        /// </example>
         public virtual void DrawGizmos(NodeAI_Agent agent){}  // Draw Gizmos for this node;
 
+        /// <summary>
+        /// OnInit is called whenever a node begins running.
+        /// </summary>
+        /// <remarks>
+        /// This method is called both when the node is first started, and when the node is restarted after succeeding or failing.
+        /// </remarks>
         public virtual void OnInit(){}
         
+        /// <summary>
+        /// Initialises the node and its children.
+        /// </summary>
         public void Init(NodeTree.Leaf current) 
         {
             state = NodeData.State.Running;
@@ -285,7 +449,45 @@ namespace NodeAI
         }
     }
 
-    
+    /// <summary>
+    ///  The base class for Action Nodes.
+    /// </summary>
+    /// <para>
+    /// Action Nodes are the base class for all nodes that perform actions.
+    /// Actions are performed by the agent and involve some sort of logic that determines the behaviour of the agent or interacts with the environment.
+    /// </para>
+    /// <example>
+    /// <code>
+    /// public class MyActionNode : ActionNode
+    /// {
+    ///     public MyActionNode()
+    ///     {
+    ///        tooltip = "An Example Action Node";
+    ///        AddProperty<float>("MyProperty", "My Property", 0.0f);
+    ///    }
+    /// 
+    ///   public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
+    ///  {
+    ///     
+    ///    if(...) // Check if the node has failed
+    ///    {
+    ///       state = NodeData.State.Failure;  
+    ///       return NodeData.State.Failure;    
+    ///    }
+    ///    else if(...) // Check if the node has succeeded
+    ///    {
+    ///      state = NodeData.State.Success;
+    ///      return NodeData.State.Success;
+    ///    }
+    ///    else // The node is still running
+    ///    {
+    ///      state = NodeData.State.Running;
+    ///      return NodeData.State.Running;
+    ///    }  
+    ///  }
+    /// }
+    /// </code>
+    /// </example>
     [System.Serializable]
     public class ActionBase : RuntimeBase
     {
@@ -294,6 +496,42 @@ namespace NodeAI
             return NodeData.State.Success;
         }
     }
+    /// <summary>
+    ///  The base class for Condition Nodes.
+    /// </summary>
+    /// <para>
+    /// Condition Nodes are the base class for all nodes that check conditions.
+    /// Nodes of this type determine if their condition is true or false.
+    /// If the condition is true, the node will succeed, otherwise it will fail.
+    /// Condition nodes are used as part of the control flow of the node tree.
+    /// </para>
+    /// <example>
+    /// <code>
+    /// public class MyConditionNode : ConditionBase
+    /// {
+    ///    public MyConditionNode()
+    ///   {
+    ///      tooltip = "This is an example condition node.";
+    ///      AddProperty<Vector3>("Position", Vector3.zero);
+    ///      AddProperty<float>("Distance", 0.0f);
+    ///  }
+    /// 
+    ///   public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
+    ///  {
+    ///     if (Vector3.Distanct(agent.transform.position, Position1) <= GetProperty<float>("Distance"))
+    ///     {
+    ///       state = NodeData.State.Success; 
+    ///       return NodeData.State.Success;
+    ///     }
+    ///     else
+    ///     {
+    ///      state = NodeData.State.Failure;
+    ///      return NodeData.State.Failure;
+    ///    }
+    /// }
+    /// }
+    /// </code>
+    /// </example>
     [System.Serializable]
     public class ConditionBase : RuntimeBase
     {
@@ -303,6 +541,13 @@ namespace NodeAI
         }
     }
 
+    /// <summary>
+    /// Checks if an inputted boolean parameter is true.
+    /// </summary>
+    /// <remarks>
+    /// This node checks if the boolean parameter is true, and succeeds if it is.
+    /// Otherwise it fails.
+    /// </remarks>
     [System.Serializable]
     public class IfTrue : ConditionBase
     {
@@ -324,12 +569,52 @@ namespace NodeAI
         }
     }
     
+    /// <summary>
+    ///  The base class for Decorator Nodes.
+    /// </summary>
+    /// <para>
+    /// Decorator Nodes may have one single child node, and they work by modifying the return of the child node, or otherwise changing how it runs.
+    /// An example of a decorator node is the Inverter node, which inverts the return of the child node. If the child of the inverter node returns success, the inverter node will fail, and vice versa.
+    /// Another example of a decorator node is the Repeater node, which repeats the child node multiple times.
+    /// </para>
+    /// <example>
+    /// <code>
+    /// public class MyDecoratorNode : DecoratorNode
+    /// {
+    ///    public MyDecoratorNode() // Constructor
+    ///    {   
+    ///      tooltip = "An Example Decorator Node";
+    ///      AddProperty<float>("MyProperty", "My Property", 0.0f);
+    ///    }
+    ///     
+    ///     public override NodeData.State ApplyDecorator(NodeAI_Agent agent, NodeTree.Leaf child) // Override the ApplyDecorator method
+    ///    {
+    ///       switch(child.nodeData.runtimeLogic.state) // Check the state of the child node
+    ///       {
+    ///         case NodeData.State.Success: // If the child node succeeded
+    ///             state = NodeData.State.Failure;
+    ///             return NodeData.State.Failure;
+    ///         case NodeData.State.Failure: // If the child node failed
+    ///             state = NodeData.State.Success;
+    ///             return NodeData.State.Success;
+    ///         default: // The child node is still running
+    ///             state = NodeData.State.Running;
+    ///             return NodeData.State.Running;
+    ///      }
+    ///   }
+    /// }
+    /// </code>
+    /// </example>    
     [System.Serializable]
     public class DecoratorBase : RuntimeBase
     {
         public virtual NodeData.State ApplyDecorator(NodeAI_Agent agent, NodeTree.Leaf child) => child.nodeData.Eval(agent, child);
         public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
         {
+            if(current.children.Count == 0)
+            {
+                return NodeData.State.Failure;
+            }
             if(current.children[0].nodeData.runtimeLogic.state != NodeData.State.Running)
             {
                 current.children[0].nodeData.Init(current.children[0]);
@@ -340,6 +625,9 @@ namespace NodeAI
 
         
     }
+    /// <summary>
+    /// Inverts the return of the child node.
+    /// </summary>
     [System.Serializable]
     public class Inverter : DecoratorBase
     {
@@ -362,6 +650,9 @@ namespace NodeAI
 
         
     }
+    /// <summary>
+    /// If the child node completes, then the Decorator will return success regardless of what the child node returns.
+    /// </summary>
     [System.Serializable]
     public class Succeeder : DecoratorBase
     {
@@ -376,6 +667,9 @@ namespace NodeAI
 
         
     }
+    /// <summary>
+    /// Runs the child node multiple times.
+    /// </summary>
     [System.Serializable]
     public class Repeater : DecoratorBase
     {
@@ -416,7 +710,9 @@ namespace NodeAI
 
         
     }
-
+    /// <summary>
+    /// Runs the child node multiple times until it fails.
+    /// </summary>
     public class RepeatUntilFail : DecoratorBase
     {
         public override NodeData.State ApplyDecorator(NodeAI_Agent agent, NodeTree.Leaf child)
@@ -439,7 +735,9 @@ namespace NodeAI
 
         
     }
-
+    /// <summary>
+    /// Runs the child node multiple times until it succeeds.
+    /// </summary>
     public class RepeatUntilSuccess : DecoratorBase
     {
         public override NodeData.State ApplyDecorator(NodeAI_Agent agent, NodeTree.Leaf child)
@@ -459,8 +757,18 @@ namespace NodeAI
                 return NodeData.State.Running;
             }
         }
-    }
 
+        
+    }
+    /// <summary>
+    /// Has a chance to run the child node.
+    /// </summary>
+    /// <remarks>
+    /// The chance is determined by the chance property.
+    /// When the node is initialised it will use RNG to determine whether or not it will run the child node.
+    /// If it runs the child node, it will return whatever the child node returns.
+    /// Otherwise, if it fails the chance test, it will return failure.
+    /// </remarks>
     public class Chance : DecoratorBase
     {
         float randValue = 0;
@@ -500,6 +808,13 @@ namespace NodeAI
         }
     }
 
+    /// <summary>
+    /// Runs all of the child nodes in sequence.
+    /// </summary>
+    /// <remarks>
+    /// If the child node fails, the sequence will stop and return failure.
+    /// If the child node succeeds, the sequence will continue.
+    /// </remarks>
     public class Sequence : RuntimeBase
     {
         public Sequence()
@@ -561,6 +876,13 @@ namespace NodeAI
         }
     }
 
+    /// <summary>
+    /// Runs all of the child nodes in parallel.
+    /// </summary>
+    /// <remarks>
+    /// If any child node succeeds, the parallel will return success.
+    /// Otherwise, if all child nodes fail, the parallel will return failure.
+    /// </remarks>
     public class Parallel : RuntimeBase
     {
         public Parallel()
@@ -608,6 +930,14 @@ namespace NodeAI
         }
     }
 
+    /// <summary>
+    /// Runs child nodes in sequence until one succeeds.
+    /// </summary>
+    /// <remarks>
+    /// If a child node succeeds, the sequence will stop and return success.
+    /// If a child node fails, the sequence will continue.
+    /// If all child nodes fail, the sequence will return failure.
+    /// </remarks>
     public class Selector : RuntimeBase
     {
         public Selector()

@@ -22,26 +22,39 @@ using System;
 
 namespace NodeAI
 {
+    /// <summary>
+    /// The search window for queries.
+    /// </summary>
     public class QuerySearchWindow : ScriptableObject, ISearchWindowProvider
     {
-        private GraphView graphView;
+        private GraphView graphView; ///< The GraphView that is currently being searched.
 
         
-
+        /// <summary>
+        ///  This function is called when the search window is opened.
+        /// </summary>
+        /// <param name="graphView"></param>
         public void Init(GraphView graphView)
         {
             this.graphView = graphView;
         }
 
-        
-
-
-
+        /// <summary>
+        ///  Used to get all child classes of a given type.
+        /// </summary>
+        /// <param name="MyType">The type to check.</param>
+        /// <returns>An array of all child types of the provided type.</returns>
         Type[] GetInheritedClasses(Type MyType) 
         {
             return Assembly.GetAssembly(MyType).GetTypes().Where(TheType => TheType.IsClass && !TheType.IsAbstract && TheType.IsSubclassOf(MyType)).ToArray();
         }
 
+        /// <summary>
+        ///  This method is used to recursively populate the search window.
+        /// </summary>
+        /// <param name="searchTree">The SearchTree to populate.</param>
+        /// <param name="entry">The Type to use as the Entry point.</param>
+        /// <param name="depth">The current recursion depth.</param>
         public void PopulateSearchTreeRecursively(List<SearchTreeEntry> searchTree, NamespaceParser.NamespaceEntry entry, int depth = 0)
         {
             if(entry.Namespace == "" || entry.Namespace == "NodeAI") depth = 0;
@@ -59,68 +72,33 @@ namespace NodeAI
                             });
             }
         }
-        
+        /// <summary>
+        ///  This method is used to create a search window.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public List<SearchTreeEntry> CreateSearchTree(SearchWindowContext context)
         {
             // Split inherited classes into lists based on their namespace
             Type[] queries = GetInheritedClasses(typeof(Query));
 
             var parsedTree = NamespaceParser.TreeFromTypes(queries);
-            
-            // Create a list of all namespaces
-            // var namespaces = new List<string>();
-            // foreach (var query in queries)
-            // {
-            //     if (!namespaces.Contains(query.Namespace))
-            //     {
-            //         namespaces.Add(query.Namespace);
-            //     }
-            // }
 
             var tree = new List<SearchTreeEntry>
             {
                 new SearchTreeGroupEntry(new GUIContent("New Query"), 0),
             };
             
-
             PopulateSearchTreeRecursively(tree, parsedTree, 0);
-
-
-
-            // foreach (var n in namespaces)
-            // {
-            //     if(n.Contains("NodeAI"))
-            //     {
-            //         foreach (var query in queries)
-            //         {
-            //             if (query.Namespace == "NodeAI")
-            //             {
-            //                 tree.Add(new SearchTreeEntry(new GUIContent(query.Name))
-            //                 {
-            //                     userData = query, level = 1
-            //                 });
-            //             }
-            //         }
-            //     }
-            //     else
-            //     {
-            //         tree.Add(new SearchTreeGroupEntry(new GUIContent(n ?? "Custom"), 1));
-            //         foreach (var query in queries)
-            //         {
-            //             if (query.Namespace == n)
-            //             {
-            //                 tree.Add(new SearchTreeEntry(new GUIContent(query.Name))
-            //                 {
-            //                     userData = query, level = 2
-            //                 });
-            //             }
-            //         }
-            //     }
-            // }
             
             return tree;
         }
-
+        /// <summary>
+        ///  This method is called when an entry is selected in the search window.
+        /// </summary>
+        /// <param name="entry"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public bool OnSelectEntry(SearchTreeEntry entry, SearchWindowContext context)
         {
             

@@ -1,3 +1,16 @@
+/*
+ * Bachelor of Software Engineering
+ * Media Design School
+ * Auckland
+ * New Zealand
+ * 
+ * (c) 2022 Media Design School
+ * 
+ * File Name: NodeData.cs
+ * Description: 
+ * Author: Nerys Thamm
+ * Mail: nerysthamm@gmail.com
+ */
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,47 +18,91 @@ using UnityEngine;
 
 namespace NodeAI
 {
+    /// <summary>
+    ///  This class is used to store the data of a node.
+    /// </summary>
+    /// <remarks>
+    /// It is used both as part of serialisation and at runtime in order to determine AI Agent behaviour.
+    /// </remarks>
     [System.Serializable]
     public class NodeData 
     {
-        
+        /// <summary>
+        ///  The Unique ID of the node.
+        /// </summary>
         public string GUID;
+        /// <summary>
+        ///  The GUID of the node's parent.
+        /// </summary>
         public string parentGUID;
+        /// <summary>
+        ///  The name of the node.
+        /// </summary>
         public string title;
+        /// <summary>
+        ///  The GUIDs of the node's children.
+        /// </summary>
         public List<string> childGUIDs;
+        /// <summary>
+        ///  The type of the node.
+        /// </summary>
         public Type nodeType;
+        /// <summary>
+        /// The position of the node in the node graph editor window.
+        /// </summary>
         public Vector2 position;
         
-
+        /// <summary>
+        ///  Contains all possible types of node.
+        /// </summary>
         public enum Type
             {
-                EntryPoint,
-                Action,
-                Condition,
-                Decorator,
-                Sequence,
-                Selector,
-                Parallel,
-                Parameter,
-                Query
+                EntryPoint, ///< The entry point of the node graph.
+                Action, ///< An action node.
+                Condition, ///< A condition node.
+                Decorator, ///< A decorator node.
+                Sequence, ///< A sequence node.
+                Selector, ///< A selector node.
+                Parallel, ///< A parallel node.
+                Parameter, ///< A parameter node.
+                Query ///< A query node.
             }
 
+        /// <summary>
+        /// Possible states of the node.
+        /// </summary>
         public enum State
         {
-            Running,
-            Success,
-            Failure,
-            Idle,
+            Running, ///< The node is running.
+            Success, ///< The node has succeeded.
+            Failure, ///< The node has failed.
+            Idle, ///< The node is not running.
         }
 
+        /// <summary>
+        /// Evaluates the node.
+        /// </summary>
         public State Eval(NodeAI_Agent agent, NodeTree.Leaf current) => runtimeLogic.Eval(agent, current);
 
+        /// <summary>
+        ///  Initialises the node.
+        /// </summary>
+        /// <param name="current"></param>
         public void Init(NodeTree.Leaf current) => runtimeLogic.Init(current);
+
+        /// <summary>
+        /// Contains the runtime logic for the node.
+        /// </summary>
         [SerializeField]
         RuntimeBase runtime;
+        /// <summary>
+        /// Contains the query logic for the node.
+        /// </summary>
         [SerializeField]
         Query runtimequery;
-        
+        /// <summary>
+        /// Contains all properties of the node.
+        /// </summary>
         [SerializeField]
         private List<SerializableProperty> properties;
         
@@ -58,7 +115,9 @@ namespace NodeAI
         public bool noLogic = false;
         [SerializeField]
         public bool noQuery = false;
-
+        /// <summary>
+        /// Resets the node.
+        /// </summary>
         public void Reset()
         {
             if(!noLogic)
@@ -73,21 +132,18 @@ namespace NodeAI
             }
 
         }
+        /// <summary>
+        /// Getter and setter for the runtime logic of the node.
+        /// </summary>
+        /// <value></value>
         public RuntimeBase runtimeLogic
         {
             get
             {
-                try
+                if (runtime == null && !noLogic)
                 {
-                    if (runtime == null && !noLogic)
-                    {
-                        runtime = (RuntimeBase)ScriptableObject.CreateInstance(System.Type.GetType(runtimeLogicType));
-                        runtime.RepopulateProperties(properties == null ? new List<SerializableProperty>() : properties);
-                    }
-                }
-                catch (Exception e)
-                {
-                    Debug.LogError(e.Message);
+                    runtime = (RuntimeBase)ScriptableObject.CreateInstance(System.Type.GetType(runtimeLogicType));
+                    runtime.RepopulateProperties(properties == null ? new List<SerializableProperty>() : properties);
                 }
                 return runtime;
             }
@@ -102,22 +158,18 @@ namespace NodeAI
                 }
             }
         }
-
+        /// <summary>
+        ///  Getter and setter for the query logic of the node.
+        /// </summary>
+        /// <value></value>
         public Query query
         {
             get
             {
                 if (runtimequery == null && !noQuery)
                 {
-                    try
-                    {
-                        runtimequery = (Query)ScriptableObject.CreateInstance(System.Type.GetType(queryType));
-                        runtimequery.RepopulateProperties(properties == null ? new List<SerializableProperty>() : properties);
-                    }
-                    catch (Exception e)
-                    {
-                        Debug.LogError(e.Message);
-                    }
+                    runtimequery = (Query)ScriptableObject.CreateInstance(System.Type.GetType(queryType));
+                    runtimequery.RepopulateProperties(properties == null ? new List<SerializableProperty>() : properties);
                 }
                 return runtimequery;
             }
@@ -133,16 +185,27 @@ namespace NodeAI
             }
         }
         
-
+        /// <summary>
+        /// The property class is used to store and access data in a node both in code and in the editor.
+        /// </summary>
         [System.Serializable]
         public class Property
         {
+            /// <summary>
+            /// Constructor for the property class.
+            /// </summary>
             public Property()
             {
                 name = "";
                 value = "";
                 GUID = System.Guid.NewGuid().ToString();
             }
+            /// <summary>
+            ///  Constructor for the property class.
+            /// </summary>
+            /// <param name="name">The name of the property.</param>
+            /// <param name="value">The initial value of the property.</param>
+            /// <param name="type">The datatype of the property.</param>
             public Property(string name, object value, System.Type type)
             {
                 this.name = name;
@@ -150,20 +213,25 @@ namespace NodeAI
                 this.type = type;
                 GUID = System.Guid.NewGuid().ToString();
             }
+            
             [SerializeField]
-            public string name;
-            [SerializeField]
-            public string GUID;
-            [SerializeField]
-            public string paramReference;
-            [SerializeField]
-            public System.Type type;
+            public string name; ///< The name of the property.
 
-            public object value;
+            [SerializeField]
+            public string GUID; ///< The GUID of the property.
+            [SerializeField]
+            public string paramReference; ///< The GUID of the parameter that the property is referencing. If this is not null, the property is a reference to a parameter exposed in the inspector.
+            [SerializeField]
+            public System.Type type; ///< The datatype of the property.
 
-            public bool output = false;
+            public object value; ///< The value of the property.
+
+            public bool output = false; ///< Whether the property is an output parameter or not. This is used to determine whether the property should be given an input port or an output port when shown in the graph editor.
         }
 
+        /// <summary>
+        /// A generic template version of the property class.
+        /// </summary>
         [System.Serializable]
         public class Property<T> : Property
         {
@@ -176,12 +244,18 @@ namespace NodeAI
             public T Value => (T)this.value;
             
         }
+        /// <summary>
+        ///  An adapted version of the Property class which is made to work with Unity Serialization.
+        /// </summary>
+        /// <para>
+        /// This class can be converted to and from the Property class, for the purpose of serialization.
+        /// </para>
         [System.Serializable]
         public class SerializableProperty
         {
-            public SerializableProperty(){ GUID = System.Guid.NewGuid().ToString(); }
+            public SerializableProperty(){ GUID = System.Guid.NewGuid().ToString(); } ///< Constructor for the SerializableProperty class.
             
-            public SerializableProperty(SerializableProperty copy)
+            public SerializableProperty(SerializableProperty copy) ///< Copy constructor for the SerializableProperty class.
             {
                 name = copy.name;
                 GUID = copy.GUID;
@@ -198,7 +272,7 @@ namespace NodeAI
                 ovalue = copy.ovalue;
                 output = copy.output;
             }
-            public void CopyValues(SerializableProperty from)
+            public void CopyValues(SerializableProperty from) ///< Copies the values of the SerializableProperty from the given SerializableProperty.
             {
                 ivalue = from.ivalue;
                 fvalue = from.fvalue;
@@ -210,7 +284,7 @@ namespace NodeAI
                 cvalue = from.cvalue;
                 ovalue = from.ovalue;
             }
-            public static implicit operator SerializableProperty(Property property)
+            public static implicit operator SerializableProperty(Property property) ///< Implicit conversion operator for the SerializableProperty class.
             {
                 var serializableProperty = new SerializableProperty();
                 serializableProperty.name = property.name;
@@ -251,7 +325,7 @@ namespace NodeAI
                 return serializableProperty;
             }
 
-            public static implicit operator Property(SerializableProperty serializableProperty)
+            public static implicit operator Property(SerializableProperty serializableProperty) ///< Implicit conversion operator for the SerializableProperty class.
             {
                 var property = new Property();
                 property.name = serializableProperty.name;
@@ -291,30 +365,33 @@ namespace NodeAI
                     }
                 return property;
             }
-            public string name;
-            public string GUID;
+            public string name; ///< The name of the property.
+            public string GUID; ///< The GUID of the property.
             [SerializeField]
-            public string paramReference;
-            public string serializedTypename;
-            public System.Type type => System.Type.GetType(serializedTypename);
-            public string svalue;
-            public int ivalue;
-            public float fvalue;
-            public bool bvalue;
-            public Color cvalue;
-            public Vector2 v2value;
-            public Vector3 v3value;
-            public Vector4 v4value;
-            [SerializeReference]public UnityEngine.Object ovalue;
-            public bool output = false;
+            public string paramReference; ///< The GUID of the parameter that the property is referencing. If this is not null, the property is a reference to a parameter exposed in the inspector.
+            public string serializedTypename; ///< The AssemblyQualifiedName of the datatype of the property.
+            public System.Type type => System.Type.GetType(serializedTypename); ///< The datatype of the property.
+            public string svalue; ///< The string value of the property.
+            public int ivalue; ///< The integer value of the property.
+            public float fvalue; ///< The float value of the property.
+            public bool bvalue; ///< The boolean value of the property.
+            public Color cvalue; ///< The color value of the property.
+            public Vector2 v2value; ///< The vector2 value of the property.
+            public Vector3 v3value; ///< The vector3 value of the property.
+            public Vector4 v4value; ///< The vector4 value of the property.
+            [SerializeReference]public UnityEngine.Object ovalue; ///< The object reference value of the property.
+            public bool output = false; ///< Whether the property is an output property.
         }
+        /// <summary>
+        /// A class which stores a collection of nodes as a group.
+        /// </summary>
         [System.Serializable]
         public struct NodeGroup
         {
             [SerializeField]
-            public string title;
+            public string title; ///< The title of the group.
             [SerializeField]
-            public List<string> childGUIDs;
+            public List<string> childGUIDs; ///< The GUIDs of the nodes in the group.
         }
         
     }

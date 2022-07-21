@@ -11,6 +11,8 @@ var searchData=
   ['cluescript_8',['ClueScript',['../classClueScript.html',1,'']]],
   ['conditionbase_9',['ConditionBase',['../classNodeAI_1_1ConditionBase.html',1,'NodeAI']]],
   ['console_10',['Console',['../classConsole.html',1,'']]],
-  ['cursorscript_11',['CursorScript',['../classCursorScript.html',1,'']]],
-  ['customgizmos_12',['CustomGizmos',['../classNodeAI_1_1CustomGizmos.html',1,'NodeAI']]]
+  ['cover_11',['Cover',['../classCover.html',1,'']]],
+  ['coverpoint_12',['CoverPoint',['../structCover_1_1CoverPoint.html',1,'Cover']]],
+  ['cursorscript_13',['CursorScript',['../classCursorScript.html',1,'']]],
+  ['customgizmos_14',['CustomGizmos',['../classNodeAI_1_1CustomGizmos.html',1,'NodeAI']]]
 ];

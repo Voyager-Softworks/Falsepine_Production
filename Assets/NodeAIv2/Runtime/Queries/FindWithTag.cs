@@ -4,9 +4,11 @@ using UnityEngine;
 
 namespace NodeAI
 {
+    /// <summary>
+    ///  A query that returns an object with the specifies tag.
+    /// </summary>
     public class FindWithTag : Query
     {
-        GameObject foundObject;
         public FindWithTag()
         {
             AddProperty<string>("Tag", "", false);
@@ -15,11 +17,7 @@ namespace NodeAI
 
         public override void GetNewValues(NodeAI_Agent agent)
         {
-            if (foundObject == null)
-            {
-                foundObject = GameObject.FindGameObjectWithTag(GetProperty<string>("Tag"));
-            }
-            SetProperty<GameObject>("Result", foundObject);
+            SetProperty<GameObject>("Result", GameObject.FindGameObjectWithTag(GetProperty<string>("Tag")));
         }
     }
 }

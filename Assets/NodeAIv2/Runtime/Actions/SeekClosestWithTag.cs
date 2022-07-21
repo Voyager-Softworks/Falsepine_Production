@@ -1,3 +1,16 @@
+/*
+ * Bachelor of Software Engineering
+ * Media Design School
+ * Auckland
+ * New Zealand
+ * 
+ * (c) 2022 Media Design School
+ * 
+ * File Name: SeekClosestWithTag.cs
+ * Description: 
+ * Author: Nerys Thamm
+ * Mail: nerysthamm@gmail.com
+ */
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +19,9 @@ using UnityEngine.AI;
 
 namespace NodeAI
 {
+    /// <summary>
+    /// A Node that seeks the closest object with a certain tag.
+    /// </summary>
     public class SeekClosestWithTag : ActionBase
     {
         NavMeshAgent navAgent;

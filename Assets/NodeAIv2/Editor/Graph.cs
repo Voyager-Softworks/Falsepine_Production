@@ -24,19 +24,31 @@ using UnityEditor.Callbacks;
 
 namespace NodeAI
 {
+    /// <summary>
+    /// The EditorWindow for the NodeAI Graph editor.
+    /// </summary>
+    /// <para>
+    /// This class is used to create a GraphView and handle all of the events that occur in the GraphView.
+    /// </para>
+    /// <para>
+    /// This class is also used to create a new NodeAI_Behaviour and save it to the project.
+    /// </para>
+    /// <para>
+    /// This class is also used to load a NodeAI_Behaviour from the project.
+    /// </para>
     public class Graph : EditorWindow
     {
-        private GraphView graphView;
-        private NodeAI_Behaviour behaviour;
-        private NodeAI_Behaviour runtimeBehaviour;
+        private GraphView graphView; ///< The GraphView that is currently being edited.
+        private NodeAI_Behaviour behaviour; ///< The NodeAI_Behaviour that is currently being edited.
+        private NodeAI_Behaviour runtimeBehaviour; ///< The NodeAI_Behaviour that has been selected at runtime, used for visual debugging.
         
-        private ObjectField behaviourField;
+        private ObjectField behaviourField; ///< The ObjectField that is used to select a NodeAI_Behaviour.
 
         private float timeSinceLastDraw = 0f;
-        
+        private int lastChildIndex = 0;
 
         /// <summary>
-        /// 
+        ///  This function is called when the Graph editor is opened.
         /// </summary>
         [MenuItem("Window/NodeAI/Graph")]
         public static void OpenGraphWindow()
@@ -47,8 +59,11 @@ namespace NodeAI
         }
 
         /// <summary>
-        /// 
+        ///  This function is called when a NodeAI_Behaviour asset is opened in the project view.
         /// </summary>
+        /// <para>
+        /// It is responsible for opening the NodeAI Graph Editor window and loading the selected NodeAI_Behaviour asset.
+        /// </para>
         /// <param name="instanceId"></param>
         /// <param name="line"></param>
         /// <returns></returns>
@@ -69,7 +84,7 @@ namespace NodeAI
         }
 
         /// <summary>
-        /// 
+        ///  This function is called when the Graph editor is opened.
         /// </summary>
         private void OnEnable()
         {
@@ -85,7 +100,7 @@ namespace NodeAI
         }
 
         /// <summary>
-        /// 
+        ///  This function is called every frame.
         /// </summary>
         void Update()
         {
@@ -196,7 +211,7 @@ namespace NodeAI
         }
 
         /// <summary>
-        /// 
+        ///  This function is used to create a new NodeAI_Behaviour asset.
         /// </summary>
         private void CreateNewBehaviour()
         {
@@ -216,7 +231,7 @@ namespace NodeAI
         }
 
         /// <summary>
-        /// 
+        ///  Called when the editor window is closed.
         /// </summary>
         private void OnDisable()
         {
@@ -225,7 +240,7 @@ namespace NodeAI
         }
 
         /// <summary>
-        /// 
+        ///  This function is used to generate the toolbar for the editor window.
         /// </summary>
         private void GenerateToolbar()
         {
@@ -269,7 +284,7 @@ namespace NodeAI
 
         
         /// <summary>
-        /// 
+        ///  This function is used to generate the Blackboard for the editor window.
         /// </summary>
         private void GenerateBlackboard()
         {

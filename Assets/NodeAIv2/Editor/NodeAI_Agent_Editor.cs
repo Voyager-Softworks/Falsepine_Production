@@ -20,13 +20,19 @@ using System.Linq;
 
 namespace NodeAI
 {
+    /// <summary>
+    ///  Custom Editor for the NodeAI_Agent.
+    /// </summary>
     [CustomEditor(typeof(NodeAI_Agent))]
     public class NodeAI_Agent_Editor : Editor
     {
-        NodeAI_Agent agent;
-        SerializedObject serializedAgent;
-        SerializedProperty behaviour;
-        bool paramFoldOut = true;
+        NodeAI_Agent agent; ///< Reference to the agent.
+        SerializedObject serializedAgent; ///< Reference to the serialized agent.
+        SerializedProperty behaviour; ///< Reference to the behaviour property.
+        bool paramFoldOut = true; ///< Whether the parameters foldout is open.
+        /// <summary>
+        ///  Called when the inspector is created.
+        /// </summary>
         public void OnEnable()
         {
             agent = (NodeAI_Agent)target;
@@ -51,6 +57,9 @@ namespace NodeAI
                 }
             }
         }
+        /// <summary>
+        ///  Called when the inspector is drawn.
+        /// </summary>
         public override void OnInspectorGUI()
         {
             

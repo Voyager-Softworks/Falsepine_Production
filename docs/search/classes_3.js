@@ -7,5 +7,6 @@ var searchData=
   ['debugnode_4',['DebugNode',['../classNodeAI_1_1DebugNode.html',1,'NodeAI']]],
   ['decoratorbase_5',['DecoratorBase',['../classNodeAI_1_1DecoratorBase.html',1,'NodeAI']]],
   ['destroyagent_6',['DestroyAgent',['../classDestroyAgent.html',1,'']]],
-  ['divide_7',['Divide',['../classNodeAI_1_1Math_1_1Divide.html',1,'NodeAI::Math']]]
+  ['distancefromagent_7',['DistanceFromAgent',['../classNodeAI_1_1Utility_1_1DistanceFromAgent.html',1,'NodeAI::Utility']]],
+  ['divide_8',['Divide',['../classNodeAI_1_1Math_1_1Divide.html',1,'NodeAI::Math']]]
 ];

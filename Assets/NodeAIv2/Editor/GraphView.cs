@@ -24,16 +24,22 @@ using System.Linq;
 
 namespace NodeAI
 {
+    /// <summary>
+    /// The GraphView is used to display the NodeAI Graph and handle user input.
+    /// </summary>
     public class GraphView : UnityEditor.Experimental.GraphView.GraphView
     {
-        private SearchWindow searchWindow;
-        private BlackboardSearchWindow blackboardSearchWindow;
-        private QuerySearchWindow querySearchWindow;
-        public List<NodeData.Property> exposedProperties = new List<NodeData.Property>();
-        public Blackboard blackboard;
+        private SearchWindow searchWindow; ///< The search window that is used to search for nodes.
+        private BlackboardSearchWindow blackboardSearchWindow; ///< The search window that is used to search for blackboard parameters.
+        private QuerySearchWindow querySearchWindow; ///< The search window that is used to search for queries.
+        public List<NodeData.Property> exposedProperties = new List<NodeData.Property>(); ///< List of all exposed properties in the behaviour.
+        public Blackboard blackboard; ///< The blackboard that is used to store parameters.
 
-        public Node currHoveredNode;
+        public Node currHoveredNode; ///< The node that is currently hovered.
 
+        /// <summary>
+        ///  This function is called when the GraphView is created.
+        /// </summary>
         public GraphView()
         {
             styleSheets.Add(Resources.Load<StyleSheet>("GraphStyle"));

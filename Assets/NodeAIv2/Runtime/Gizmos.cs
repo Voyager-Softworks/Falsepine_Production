@@ -1,16 +1,48 @@
+/*
+ * Bachelor of Software Engineering
+ * Media Design School
+ * Auckland
+ * New Zealand
+ * 
+ * (c) 2022 Media Design School
+ * 
+ * File Name: Gizmos.cs
+ * Description: 
+ * Author: Nerys Thamm
+ * Mail: nerysthamm@gmail.com
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace NodeAI
 {
+    /// <summary>
+    /// A class used to draw Custom Gizmos used by NodeAI.
+    /// </summary>
     public class CustomGizmos
     {
+        /// <summary>
+        ///  Draw a Ray Gizmo.
+        /// </summary>
+        /// <param name="start">The startpoint of the ray.</param>
+        /// <param name="dir">A unit vector representing the direction of the ray.</param>
+        /// <param name="length">The length of the ray.</param>
         public static void DrawRay(Vector3 start, Vector3 dir, float length = 1f)
         {
             Debug.DrawRay(start, dir * length, Color.yellow);
         }
 
+        /// <summary>
+        ///  Draw a Cone Gizmo.
+        /// </summary>
+        /// <param name="start">The start point of the cone.</param>
+        /// <param name="dir">A unit vector representing the direction of the cone.</param>
+        /// <param name="angle">The interior angle of the cone's point.</param>
+        /// <param name="length">The length of the cone.</param>
+        /// <remarks>
+        /// This version of the method uses a Vector3 to determine its origin.
+        /// </remarks>
         public static void DrawCone(Vector3 start, Vector3 dir, float angle, float length = 1f)
         {
             Gizmos.color = Color.yellow;
@@ -38,6 +70,16 @@ namespace NodeAI
             }
         }
 
+        /// <summary>
+        ///  Draw a Cone Gizmo.
+        /// </summary>
+        /// <param name="start">The start point of the cone.</param>
+        /// <param name="dir">A unit vector representing the direction of the cone.</param>
+        /// <param name="angle">The interior angle of the cone's point.</param>
+        /// <param name="length">The length of the cone.</param>
+        /// <remarks>
+        /// This version of the method uses a Transform to determine its origin.
+        /// </remarks>
         public static void DrawCone(Transform startTransform, Vector3 dir, float angle, float length = 1f)
         {
             Gizmos.color = Color.yellow;

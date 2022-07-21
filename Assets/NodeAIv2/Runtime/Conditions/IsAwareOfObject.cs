@@ -1,3 +1,16 @@
+/*
+ * Bachelor of Software Engineering
+ * Media Design School
+ * Auckland
+ * New Zealand
+ * 
+ * (c) 2022 Media Design School
+ * 
+ * File Name: IsAwareOfObject.cs
+ * Description: 
+ * Author: Nerys Thamm
+ * Mail: nerysthamm@gmail.com
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +18,9 @@ using UnityEngine;
 
 namespace NodeAI.Senses
 {
+    /// <summary>
+    ///  A Node that checks if the agent is aware of the target object.
+    /// </summary>
     public class IsAwareOfObject : ConditionBase
     {
         public NodeAI_Senses senses;

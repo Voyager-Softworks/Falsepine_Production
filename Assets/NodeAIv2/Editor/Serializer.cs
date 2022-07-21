@@ -22,6 +22,12 @@ using System.Linq;
 
 namespace NodeAI
 {
+    /// <summary>
+    /// Responsible for Serializing and Deserializing NodeAI Graphs
+    /// </summary>
+    /// <para>
+    /// This class is used to serialize and deserialize NodeAI Graphs.
+    /// </para>
     public class Serializer
     {
         private GraphView target; // The graph to serialize
@@ -228,9 +234,13 @@ namespace NodeAI
                     nodeData.nodeType != NodeData.Type.Query)
                 {
                     var parent = nodes.Find(x => x.GUID == nodeData.parentGUID);
-                    var edge = parent.outputPort.ConnectTo(node.inputPort);
-                    edges.Add(edge);
-                    target.AddElement(edge);
+                    if(parent != null)
+                    {
+                        var edge = parent.outputPort.ConnectTo(node.inputPort);
+                        edges.Add(edge);
+                        target.AddElement(edge);
+                    }
+                    
                 }
                 else if(nodeData.nodeType == NodeData.Type.Parameter) // If the node is a parameter then deserialize its parameter reference
                 {

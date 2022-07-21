@@ -7,6 +7,5 @@ var searchData=
   ['attack_4',['Attack',['../classAttack.html',1,'']]],
   ['attackdata_5',['AttackData',['../classAttackData.html',1,'']]],
   ['attackphase_6',['AttackPhase',['../classAttackData_1_1AttackPhase.html',1,'AttackData']]],
-  ['autosound_7',['AutoSound',['../classAutoSound.html',1,'']]],
-  ['awarenessevent_8',['AwarenessEvent',['../classNodeAI_1_1AwarenessEvent.html',1,'NodeAI']]]
+  ['autosound_7',['AutoSound',['../classAutoSound.html',1,'']]]
 ];

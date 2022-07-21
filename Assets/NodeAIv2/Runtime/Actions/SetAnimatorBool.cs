@@ -1,9 +1,25 @@
+/*
+ * Bachelor of Software Engineering
+ * Media Design School
+ * Auckland
+ * New Zealand
+ * 
+ * (c) 2022 Media Design School
+ * 
+ * File Name: SetAnimatorBool.cs
+ * Description: 
+ * Author: Nerys Thamm
+ * Mail: nerysthamm@gmail.com
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace NodeAI.Animation
 {
+    /// <summary>
+    ///  A Node that sets a bool on an Animator.
+    /// </summary>
     public class SetAnimatorBool : ActionBase
     {
         Animator animator;

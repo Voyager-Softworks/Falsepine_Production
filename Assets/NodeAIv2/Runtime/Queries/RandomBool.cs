@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace NodeAI.Random
 {
+    /// <summary>
+    ///  A query that returns a random boolean.
+    /// </summary>
     public class RandomBool : Query
     {
         public RandomBool()

@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['namespaceentry_0',['NamespaceEntry',['../classNamespaceParser_1_1NamespaceEntry.html',1,'NamespaceParser']]],
-  ['namespaceparser_1',['NamespaceParser',['../classNamespaceParser.html',1,'']]],
+  ['namespaceentry_0',['NamespaceEntry',['../classNodeAI_1_1NamespaceParser_1_1NamespaceEntry.html',1,'NodeAI::NamespaceParser']]],
+  ['namespaceparser_1',['NamespaceParser',['../classNodeAI_1_1NamespaceParser.html',1,'NodeAI']]],
   ['nand_2',['Nand',['../classNodeAI_1_1Logic_1_1Nand.html',1,'NodeAI::Logic']]],
   ['navagentblendtreecoupler_3',['NavagentBlendtreeCoupler',['../classNavagentBlendtreeCoupler.html',1,'']]],
   ['node_4',['Node',['../classNodeAI_1_1Node.html',1,'NodeAI']]],

@@ -1,9 +1,25 @@
+/*
+ * Bachelor of Software Engineering
+ * Media Design School
+ * Auckland
+ * New Zealand
+ * 
+ * (c) 2022 Media Design School
+ * 
+ * File Name: SetAnimatorTrigger.cs
+ * Description: 
+ * Author: Nerys Thamm
+ * Mail: nerysthamm@gmail.com
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace NodeAI.Animation
 {
+    /// <summary>
+    ///    A Node that sets an Animator's trigger.
+    /// </summary>
     public class SetAnimatorTrigger : ActionBase
     {
         Animator animator;
