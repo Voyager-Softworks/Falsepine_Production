@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Events;
 
 [Serializable]
-public class InventoryGridItem : MonoBehaviour
+public class InventoryGridItem : MonoBehaviour  /// @todo Comment
 {
     public Image icon;
     public Image modIcon;

@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['rangedattack_0',['RangedAttack',['../classRangedAttack.html',1,'']]],
-  ['reinstantiatemissions_1',['ReinstantiateMissions',['../classMissionManager.html#acf37741b830dc43afff097eb7d441178',1,'MissionManager']]],
-  ['requestattack_2',['RequestAttack',['../classRequestAttack.html',1,'']]],
-  ['rotatetowardsplayer_3',['RotateTowardsPlayer',['../classRotateTowardsPlayer.html',1,'']]]
+  ['query_0',['Query',['../classNodeAI_1_1Query.html',1,'NodeAI']]],
+  ['querysearchwindow_1',['QuerySearchWindow',['../classNodeAI_1_1QuerySearchWindow.html',1,'NodeAI']]]
 ];

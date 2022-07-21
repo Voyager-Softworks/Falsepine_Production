@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickupScript : Interactable
+public class PickupScript : Interactable  /// @todo Comment
 {
     [Header("Pickup Settings")]
     public string itemToAdd;

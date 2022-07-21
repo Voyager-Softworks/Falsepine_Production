@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.UI;
 
-public class BagUIList : MonoBehaviour
+public class BagUIList : MonoBehaviour  /// @todo Comment
 {
     public GameObject bagPanel;
     public List<GameObject> bagSlots;

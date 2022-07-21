@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.Events;
 
-public class old_InventoryManager : MonoBehaviour
+public class old_InventoryManager : MonoBehaviour  /// @deprecated The Old Inventorymanager
 {
 //     public InputAction openBagAction;
 //     public InputAction openJournalAction;

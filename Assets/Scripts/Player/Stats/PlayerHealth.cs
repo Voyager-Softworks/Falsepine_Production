@@ -14,7 +14,7 @@ using UnityEngine.Events;
 // Player must be able to take damage from enemies.
 // Player must be able to die.
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour /// @todo Comment
 {
     [Header("Stats")]
     public float maxHealth = 100f;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class RenderTextureManager : MonoBehaviour
+public class RenderTextureManager : MonoBehaviour  /// @todo Comment
 {
     public bool forceEanble = false;
     public GameObject rightFoot;

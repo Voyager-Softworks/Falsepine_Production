@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIInventoryTransfer : MonoBehaviour
+public class UIInventoryTransfer : MonoBehaviour /// @todo Comment
 {
     public InventoryPannel inventoryA;
     public InventoryPannel inventoryB;

@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.UI;
 
-public class VignetteScript : MonoBehaviour
+public class VignetteScript : MonoBehaviour /// @todo Comment
 {
     public float stayTime = 0.15f;
     private float stayTimer = 0f;

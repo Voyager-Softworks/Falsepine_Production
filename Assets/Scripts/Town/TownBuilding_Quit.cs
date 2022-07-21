@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TownBuilding_Quit : TownBuilding
+public class TownBuilding_Quit : TownBuilding  /// @todo Comment
 {
     public override void OnClick()
     {

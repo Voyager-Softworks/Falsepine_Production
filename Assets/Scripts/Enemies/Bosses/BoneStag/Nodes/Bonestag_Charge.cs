@@ -6,23 +6,26 @@ using UnityEngine.AI;
 
 namespace Boss.Bonestag
 {
+    /// <summary>
+    ///  Node that implements the charging phase of the Bonestag AI
+    /// </summary>
     public class Bonestag_Charge : NodeAI.ActionBase
     {
-        bool initialized = false;
-        Animator animator;
-        NavMeshAgent navAgent;
-        Vector3 target;
-        Transform agentTransform;
-        GameObject agentGameObject;
-        Transform targetTransform;
-        BossArenaController arenaController;
-        Vector3 arenaEdgeGoalPosition;
-        public float chargeSpeed = 50f;
-        public float chargeDamage = 10f;
-        public GameObject debrisPrefab;
-        bool hasDamagedPlayer = false;
+        bool initialized = false; ///< Whether or not the node has been initialized.
+        Animator animator; ///< The animator of the character.
+        NavMeshAgent navAgent; ///< The nav mesh agent of the character.
+        Vector3 target; ///< The target position of the character.
+        Transform agentTransform; ///< The transform of the character.
+        GameObject agentGameObject; ///< The game object of the character.
+        Transform targetTransform; ///< The transform of the target.
+        BossArenaController arenaController; ///< The arena controller of the character.
+        Vector3 arenaEdgeGoalPosition; ///< The position of the arena edge goal.
+        public float chargeSpeed = 50f; ///< The speed of the character when charging.
+        public float chargeDamage = 10f; ///< The damage of the character when charging.
+        public GameObject debrisPrefab; ///< The prefab of the debris to spawn.
+        bool hasDamagedPlayer = false; ///< Whether or not the character has damaged the player.
 
-        public AudioClip chargeSoundPhaseOne, chargeSoundPhaseTwo;
+        public AudioClip chargeSoundPhaseOne, chargeSoundPhaseTwo; ///< The sounds to play when charging.
         public Bonestag_Charge()
         {
             AddProperty<bool>("InBearTrap", false);

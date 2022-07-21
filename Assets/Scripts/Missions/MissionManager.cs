@@ -13,7 +13,7 @@ using System.IO;
 /// <summary>
 /// Singleton donotdestroy script that handles the mission system
 /// </summary>
-public class MissionManager : MonoBehaviour
+public class MissionManager : MonoBehaviour 
 {
     public static MissionManager instance;
 

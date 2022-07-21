@@ -5,7 +5,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-public class JournalPickupLimiter : MonoBehaviour
+public class JournalPickupLimiter : MonoBehaviour  /// @todo Comment
 {
     public int loreAmount = 1;
     public int clueAmount = 1;

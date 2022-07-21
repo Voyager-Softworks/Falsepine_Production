@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "NodeAI/Actions/Attack")]
-public class AttackData : ScriptableObject
+public class AttackData : ScriptableObject  /// @todo Comment
 {
     public enum AttackType
     {

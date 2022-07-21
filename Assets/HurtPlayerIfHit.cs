@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HurtPlayerIfHit : MonoBehaviour
+public class HurtPlayerIfHit : MonoBehaviour /// @todo Comment
 {
     public GameObject particle;
 

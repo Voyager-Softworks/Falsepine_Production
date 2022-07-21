@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class HealthScript : MonoBehaviour
+public class HealthScript : MonoBehaviour  /// @todo Comment
 {
     public bool isBoss = false;
     public float currentHealth = 100f;

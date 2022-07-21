@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CameraDrag : MonoBehaviour
+public class CameraDrag : MonoBehaviour  /// @todo Comment
 {
     public float dragSpeed = 2;
     private Vector2 dragOrigin;

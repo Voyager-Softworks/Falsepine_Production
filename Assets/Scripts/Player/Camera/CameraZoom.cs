@@ -4,7 +4,7 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.InputSystem;
 
-public class CameraZoom : MonoBehaviour
+public class CameraZoom : MonoBehaviour  /// @todo Comment
 {
     public InputAction zoomAction;
     CinemachineVirtualCamera cam;

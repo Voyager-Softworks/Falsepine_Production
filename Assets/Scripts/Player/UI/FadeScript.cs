@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.Events;
 
-public class FadeScript : MonoBehaviour
+public class FadeScript : MonoBehaviour  /// @todo Comment
 {
     private bool m_trueCompleteFalseOver = true;
 

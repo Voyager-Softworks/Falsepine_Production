@@ -9,7 +9,7 @@ using UnityEngine.Events;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-public class TownBuilding_MissionBoard : TownBuilding
+public class TownBuilding_MissionBoard : TownBuilding  /// @todo Comment
 {
     public List<MissionCardUI> lesserMissionCardUIList;
     public List<MissionCardUI> greaterMissionCardUIList;

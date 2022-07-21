@@ -7,7 +7,7 @@ using System.IO;
 using UnityEditor;
 #endif
 
-public class SaveManager : MonoBehaviour
+public class SaveManager : MonoBehaviour  /// @todo Comment
 {
     // Start is called before the first frame update
     void Start()

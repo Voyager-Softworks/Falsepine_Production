@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AutoSound : MonoBehaviour
+public class AutoSound : MonoBehaviour /// @todo Comment
 {
     public bool playOnStart = true;
     public bool destroyOnEnd = true;

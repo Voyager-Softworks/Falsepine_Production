@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 [Serializable]
-public class UI_MonsterClues : MonoBehaviour
+public class UI_MonsterClues : MonoBehaviour  /// @todo Comment
 {
     public string monsterName = "";
 

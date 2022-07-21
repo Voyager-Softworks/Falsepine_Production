@@ -6,7 +6,7 @@ using System.Linq;
 using UnityEngine.InputSystem;
 
 [Serializable]
-public class PlayerInventoryInterface : MonoBehaviour
+public class PlayerInventoryInterface : MonoBehaviour  /// @todo Comment
 {
     [Header("Input")]
     // Input actions:

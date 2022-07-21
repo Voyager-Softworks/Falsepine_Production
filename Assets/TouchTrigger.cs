@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class TouchTrigger : MonoBehaviour
+public class TouchTrigger : MonoBehaviour  /// @todo Comment
 {
     public string triggerName;
     public UnityEvent onTrigger;

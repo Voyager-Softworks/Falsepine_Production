@@ -4,7 +4,7 @@ using UnityEngine;
 using NodeAI;
 using UnityEngine.AI;
 using System.Linq;
-public class EncircleTarget : NodeAI.ActionBase
+public class EncircleTarget : NodeAI.ActionBase  /// @todo Comment
 {
     NavMeshAgent navAgent;
     

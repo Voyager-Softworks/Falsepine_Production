@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.Events;
 
-public class MessageScript : MonoBehaviour
+public class MessageScript : MonoBehaviour /// @todo Comment
 {
     public float startFadeDelay = 3.0f;
     private float startFadeDelayTimer = 0f;

@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+///  Script that manages enemies in the open world.
+/// </summary>
 public class EnemyManager : MonoBehaviour
 {
     public GameObject enemiesObject;

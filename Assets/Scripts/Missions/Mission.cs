@@ -5,7 +5,7 @@ using System;
 
 [CreateAssetMenu(fileName = "New Mission", menuName = "Missions/New Mission")]
 [Serializable]
-public class Mission : ScriptableObject
+public class Mission : ScriptableObject /// @todo Comment
 {
     [Serializable]
     public enum MissionSize {

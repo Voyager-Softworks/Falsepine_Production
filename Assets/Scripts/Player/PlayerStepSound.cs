@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStepSound : MonoBehaviour
+public class PlayerStepSound : MonoBehaviour  /// @todo Comment
 {
     public List<AudioClip> stepSounds;
 

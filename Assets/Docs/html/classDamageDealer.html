@@ -70,6 +70,9 @@ $(function() {
   <div class="headertitle"><div class="title">DamageDealer Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Script that handles dealing damage to the player through melee, ranged, and AOE attacks.  
+ <a href="classDamageDealer.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for DamageDealer:</div>
 <div class="dyncontent">
@@ -80,12 +83,16 @@ Inheritance diagram for DamageDealer:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abbc1fca072aef3b04ff18371524782f4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDamageDealer.html#abbc1fca072aef3b04ff18371524782f4">MeleeAttack</a> (float dmg, float delay, float duration, float stunDuration)</td></tr>
+<tr class="memdesc:abbc1fca072aef3b04ff18371524782f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do a melee attack on the player.  <a href="classDamageDealer.html#abbc1fca072aef3b04ff18371524782f4">More...</a><br /></td></tr>
 <tr class="separator:abbc1fca072aef3b04ff18371524782f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6bd9e944cdb5ae3c890b6d17004dd498"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDamageDealer.html#a6bd9e944cdb5ae3c890b6d17004dd498">AOEAttack</a> (float dmg, float delay, float radius, GameObject effect, float stunDuration)</td></tr>
+<tr class="memdesc:a6bd9e944cdb5ae3c890b6d17004dd498"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do an AOE attack on the player.  <a href="classDamageDealer.html#a6bd9e944cdb5ae3c890b6d17004dd498">More...</a><br /></td></tr>
 <tr class="separator:a6bd9e944cdb5ae3c890b6d17004dd498"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ac8b346282dd04e71acd2ecece12894"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDamageDealer.html#a0ac8b346282dd04e71acd2ecece12894">RangedAttack</a> (GameObject projectile, float delay, float speed, Transform spawnpoint, bool aimAtPlayer=false)</td></tr>
+<tr class="memdesc:a0ac8b346282dd04e71acd2ecece12894"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do a ranged attack on the player.  <a href="classDamageDealer.html#a0ac8b346282dd04e71acd2ecece12894">More...</a><br /></td></tr>
 <tr class="separator:a0ac8b346282dd04e71acd2ecece12894"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a56dec06e3e28bf1cf94ba19a95f4bb92"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDamageDealer.html#a56dec06e3e28bf1cf94ba19a95f4bb92">RangedAttack</a> (GameObject projectile, float delay, float speed, Transform spawnPoint, float duration, float waitBetweenSpawns)</td></tr>
+<tr class="memdesc:a56dec06e3e28bf1cf94ba19a95f4bb92"><td class="mdescLeft">&#160;</td><td class="mdescRight">Do a ranged attack on the player.  <a href="classDamageDealer.html#a56dec06e3e28bf1cf94ba19a95f4bb92">More...</a><br /></td></tr>
 <tr class="separator:a56dec06e3e28bf1cf94ba19a95f4bb92"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3d01a0c3dc2cec082b2e169bbb0070be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDamageDealer.html#a3d01a0c3dc2cec082b2e169bbb0070be">Update</a> ()</td></tr>
 <tr class="separator:a3d01a0c3dc2cec082b2e169bbb0070be"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -93,17 +100,22 @@ Public Member Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:abebe3505111580fbb6b06510cbfda6a5"><td class="memItemLeft" align="right" valign="top">List&lt; Collider &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDamageDealer.html#abebe3505111580fbb6b06510cbfda6a5">HurtBoxes</a> = new List&lt;Collider&gt;()</td></tr>
+<tr class="memdesc:abebe3505111580fbb6b06510cbfda6a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Colliders used to detect when the player is hit by an attack.  <a href="classDamageDealer.html#abebe3505111580fbb6b06510cbfda6a5">More...</a><br /></td></tr>
 <tr class="separator:abebe3505111580fbb6b06510cbfda6a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac295b6037239f2916421546dff30ccc9"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDamageDealer.html#ac295b6037239f2916421546dff30ccc9">hurtPlayerEffect</a></td></tr>
+<tr class="memdesc:ac295b6037239f2916421546dff30ccc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Particle effect spawned when the player is hurt.  <a href="classDamageDealer.html#ac295b6037239f2916421546dff30ccc9">More...</a><br /></td></tr>
 <tr class="separator:ac295b6037239f2916421546dff30ccc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac395cedc167af877a6ae314ba9b3536b"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDamageDealer.html#ac395cedc167af877a6ae314ba9b3536b">damage</a> = 10f</td></tr>
+<tr class="memdesc:ac395cedc167af877a6ae314ba9b3536b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Damage done by the attack.  <a href="classDamageDealer.html#ac395cedc167af877a6ae314ba9b3536b">More...</a><br /></td></tr>
 <tr class="separator:ac395cedc167af877a6ae314ba9b3536b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ade3b94e2d8aa2d8fbb01fc5213efc5d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDamageDealer.html#ade3b94e2d8aa2d8fbb01fc5213efc5d4">attkNum</a> = 1</td></tr>
+<tr class="memdesc:ade3b94e2d8aa2d8fbb01fc5213efc5d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of Attacks.  <a href="classDamageDealer.html#ade3b94e2d8aa2d8fbb01fc5213efc5d4">More...</a><br /></td></tr>
 <tr class="separator:ade3b94e2d8aa2d8fbb01fc5213efc5d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="DamageDealer_8cs_source.html#l00005">5</a> of file <a class="el" href="DamageDealer_8cs_source.html">DamageDealer.cs</a>.</p>
+<div class="textblock"><p >Script that handles dealing damage to the player through melee, ranged, and AOE attacks. </p>
+
+<p class="definition">Definition at line <a class="el" href="DamageDealer_8cs_source.html#l00008">8</a> of file <a class="el" href="DamageDealer_8cs_source.html">DamageDealer.cs</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a6bd9e944cdb5ae3c890b6d17004dd498" name="a6bd9e944cdb5ae3c890b6d17004dd498"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6bd9e944cdb5ae3c890b6d17004dd498">&#9670;&nbsp;</a></span>AOEAttack()</h2>
@@ -157,7 +169,19 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DamageDealer_8cs_source.html#l00102">102</a> of file <a class="el" href="DamageDealer_8cs_source.html">DamageDealer.cs</a>.</p>
+<p>Do an AOE attack on the player. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dmg</td><td>The Damage</td></tr>
+    <tr><td class="paramname">delay</td><td>The amount of time before the damage is dealt.</td></tr>
+    <tr><td class="paramname">radius</td><td>The radius of the AOE attack.</td></tr>
+    <tr><td class="paramname">effect</td><td>The effect to spawn when the player is hit.</td></tr>
+    <tr><td class="paramname">stunDuration</td><td>The length of time to stun the player for if they are hit.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="DamageDealer_8cs_source.html#l00156">156</a> of file <a class="el" href="DamageDealer_8cs_source.html">DamageDealer.cs</a>.</p>
 
 </div>
 </div>
@@ -207,7 +231,18 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DamageDealer_8cs_source.html#l00097">97</a> of file <a class="el" href="DamageDealer_8cs_source.html">DamageDealer.cs</a>.</p>
+<p>Do a melee attack on the player. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">dmg</td><td>The Damage</td></tr>
+    <tr><td class="paramname">delay</td><td>The amount of time before the damage is dealt.</td></tr>
+    <tr><td class="paramname">duration</td><td>The length of time during which the hurtboxes are checked for collision with the player.</td></tr>
+    <tr><td class="paramname">stunDuration</td><td>The length of time to stun the player for if they are hit.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="DamageDealer_8cs_source.html#l00143">143</a> of file <a class="el" href="DamageDealer_8cs_source.html">DamageDealer.cs</a>.</p>
 
 </div>
 </div>
@@ -263,7 +298,19 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DamageDealer_8cs_source.html#l00107">107</a> of file <a class="el" href="DamageDealer_8cs_source.html">DamageDealer.cs</a>.</p>
+<p>Do a ranged attack on the player. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">projectile</td><td>The projectile to spawn.</td></tr>
+    <tr><td class="paramname">delay</td><td>The amount of time before the damage is dealt.</td></tr>
+    <tr><td class="paramname">speed</td><td>The speed of the projectile.</td></tr>
+    <tr><td class="paramname">spawnpoint</td><td>The spawnpoint of the projectile.</td></tr>
+    <tr><td class="paramname">aimAtPlayer</td><td>Whether or not the projectile should aim at the player.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="DamageDealer_8cs_source.html#l00169">169</a> of file <a class="el" href="DamageDealer_8cs_source.html">DamageDealer.cs</a>.</p>
 
 </div>
 </div>
@@ -325,7 +372,20 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DamageDealer_8cs_source.html#l00112">112</a> of file <a class="el" href="DamageDealer_8cs_source.html">DamageDealer.cs</a>.</p>
+<p>Do a ranged attack on the player. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">projectile</td><td>The projectile to spawn.</td></tr>
+    <tr><td class="paramname">delay</td><td>The amount of time before the damage is dealt.</td></tr>
+    <tr><td class="paramname">speed</td><td>The speed of the projectile.</td></tr>
+    <tr><td class="paramname">spawnPoint</td><td>The spawnpoint of the projectile.</td></tr>
+    <tr><td class="paramname">duration</td><td>The duration for which projectiles should be spawned.</td></tr>
+    <tr><td class="paramname">waitBetweenSpawns</td><td>The amount of time between each projectile spawn.</td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="DamageDealer_8cs_source.html#l00183">183</a> of file <a class="el" href="DamageDealer_8cs_source.html">DamageDealer.cs</a>.</p>
 
 </div>
 </div>
@@ -352,7 +412,9 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DamageDealer_8cs_source.html#l00117">117</a> of file <a class="el" href="DamageDealer_8cs_source.html">DamageDealer.cs</a>.</p>
+<p></p>
+
+<p class="definition">Definition at line <a class="el" href="DamageDealer_8cs_source.html#l00191">191</a> of file <a class="el" href="DamageDealer_8cs_source.html">DamageDealer.cs</a>.</p>
 
 </div>
 </div>
@@ -369,7 +431,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DamageDealer_8cs_source.html#l00013">13</a> of file <a class="el" href="DamageDealer_8cs_source.html">DamageDealer.cs</a>.</p>
+<p>Number of Attacks. </p>
+
+<p class="definition">Definition at line <a class="el" href="DamageDealer_8cs_source.html#l00016">16</a> of file <a class="el" href="DamageDealer_8cs_source.html">DamageDealer.cs</a>.</p>
 
 </div>
 </div>
@@ -385,7 +449,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DamageDealer_8cs_source.html#l00012">12</a> of file <a class="el" href="DamageDealer_8cs_source.html">DamageDealer.cs</a>.</p>
+<p>Damage done by the attack. </p>
+
+<p class="definition">Definition at line <a class="el" href="DamageDealer_8cs_source.html#l00015">15</a> of file <a class="el" href="DamageDealer_8cs_source.html">DamageDealer.cs</a>.</p>
 
 </div>
 </div>
@@ -401,7 +467,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DamageDealer_8cs_source.html#l00008">8</a> of file <a class="el" href="DamageDealer_8cs_source.html">DamageDealer.cs</a>.</p>
+<p>Colliders used to detect when the player is hit by an attack. </p>
+
+<p class="definition">Definition at line <a class="el" href="DamageDealer_8cs_source.html#l00011">11</a> of file <a class="el" href="DamageDealer_8cs_source.html">DamageDealer.cs</a>.</p>
 
 </div>
 </div>
@@ -417,7 +485,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DamageDealer_8cs_source.html#l00010">10</a> of file <a class="el" href="DamageDealer_8cs_source.html">DamageDealer.cs</a>.</p>
+<p>Particle effect spawned when the player is hurt. </p>
+
+<p class="definition">Definition at line <a class="el" href="DamageDealer_8cs_source.html#l00013">13</a> of file <a class="el" href="DamageDealer_8cs_source.html">DamageDealer.cs</a>.</p>
 
 </div>
 </div>

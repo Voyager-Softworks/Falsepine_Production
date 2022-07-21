@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JournalPickupInteract : Interactable 
+public class JournalPickupInteract : Interactable   /// @todo Comment
 {
     public JournalManager.InfoType pickupType = JournalManager.InfoType.Lore;
 

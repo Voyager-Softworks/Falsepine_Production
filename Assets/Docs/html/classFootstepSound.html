@@ -70,6 +70,9 @@ $(function() {
   <div class="headertitle"><div class="title">FootstepSound Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Script to play footstep sounds when an agent is moving.  
+ <a href="classFootstepSound.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for FootstepSound:</div>
 <div class="dyncontent">
@@ -80,6 +83,7 @@ Inheritance diagram for FootstepSound:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a0a4bfdbb9bde6a1377be321ec4a9fb8c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFootstepSound.html#a0a4bfdbb9bde6a1377be321ec4a9fb8c">PlayFootstepSound</a> ()</td></tr>
+<tr class="memdesc:a0a4bfdbb9bde6a1377be321ec4a9fb8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Play a footstep sound.  <a href="classFootstepSound.html#a0a4bfdbb9bde6a1377be321ec4a9fb8c">More...</a><br /></td></tr>
 <tr class="separator:a0a4bfdbb9bde6a1377be321ec4a9fb8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
@@ -87,13 +91,16 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a632d27b81f41198b2600da471b280085"><td class="memItemLeft" align="right" valign="top">AudioClip[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFootstepSound.html#a632d27b81f41198b2600da471b280085">footstepSounds1</a></td></tr>
 <tr class="separator:a632d27b81f41198b2600da471b280085"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a21354f1367d0f724eafdb57e2a723f"><td class="memItemLeft" align="right" valign="top">AudioClip[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFootstepSound.html#a5a21354f1367d0f724eafdb57e2a723f">footstepSounds2</a></td></tr>
+<tr class="memdesc:a5a21354f1367d0f724eafdb57e2a723f"><td class="mdescLeft">&#160;</td><td class="mdescRight">The footstep sounds for the first and second phases of the boss fight.  <a href="classFootstepSound.html#a5a21354f1367d0f724eafdb57e2a723f">More...</a><br /></td></tr>
 <tr class="separator:a5a21354f1367d0f724eafdb57e2a723f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8be76856aeb9bb4dfcff42ebde0e34b"><td class="memItemLeft" align="right" valign="top">AudioSource&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFootstepSound.html#af8be76856aeb9bb4dfcff42ebde0e34b">audioSource</a></td></tr>
 <tr class="separator:af8be76856aeb9bb4dfcff42ebde0e34b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="FootstepSound_8cs_source.html#l00005">5</a> of file <a class="el" href="FootstepSound_8cs_source.html">FootstepSound.cs</a>.</p>
+<div class="textblock"><p >Script to play footstep sounds when an agent is moving. </p>
+<p >This script is attached to the agent's root. It is used by adding animator events into the agents animations to trigger the <a class="el" href="classFootstepSound.html#a0a4bfdbb9bde6a1377be321ec4a9fb8c" title="Play a footstep sound.">PlayFootstepSound()</a> method when their feet touch the ground in the animation. </p>
+
+<p class="definition">Definition at line <a class="el" href="FootstepSound_8cs_source.html#l00012">12</a> of file <a class="el" href="FootstepSound_8cs_source.html">FootstepSound.cs</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a0a4bfdbb9bde6a1377be321ec4a9fb8c" name="a0a4bfdbb9bde6a1377be321ec4a9fb8c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0a4bfdbb9bde6a1377be321ec4a9fb8c">&#9670;&nbsp;</a></span>PlayFootstepSound()</h2>
@@ -118,7 +125,9 @@ Public Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="FootstepSound_8cs_source.html#l00009">9</a> of file <a class="el" href="FootstepSound_8cs_source.html">FootstepSound.cs</a>.</p>
+<p>Play a footstep sound. </p>
+
+<p class="definition">Definition at line <a class="el" href="FootstepSound_8cs_source.html#l00019">19</a> of file <a class="el" href="FootstepSound_8cs_source.html">FootstepSound.cs</a>.</p>
 
 </div>
 </div>
@@ -134,8 +143,9 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p >The audio source for the footstep sounds. </p>
 
-<p class="definition">Definition at line <a class="el" href="FootstepSound_8cs_source.html#l00008">8</a> of file <a class="el" href="FootstepSound_8cs_source.html">FootstepSound.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootstepSound_8cs_source.html#l00015">15</a> of file <a class="el" href="FootstepSound_8cs_source.html">FootstepSound.cs</a>.</p>
 
 </div>
 </div>
@@ -151,7 +161,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="FootstepSound_8cs_source.html#l00007">7</a> of file <a class="el" href="FootstepSound_8cs_source.html">FootstepSound.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="FootstepSound_8cs_source.html#l00014">14</a> of file <a class="el" href="FootstepSound_8cs_source.html">FootstepSound.cs</a>.</p>
 
 </div>
 </div>
@@ -167,7 +177,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="FootstepSound_8cs_source.html#l00007">7</a> of file <a class="el" href="FootstepSound_8cs_source.html">FootstepSound.cs</a>.</p>
+<p>The footstep sounds for the first and second phases of the boss fight. </p>
+
+<p class="definition">Definition at line <a class="el" href="FootstepSound_8cs_source.html#l00014">14</a> of file <a class="el" href="FootstepSound_8cs_source.html">FootstepSound.cs</a>.</p>
 
 </div>
 </div>

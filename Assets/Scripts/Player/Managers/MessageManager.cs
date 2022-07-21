@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MessageManager : MonoBehaviour
+public class MessageManager : MonoBehaviour  /// @todo Comment
 {
     public GameObject messagePrefab;
 

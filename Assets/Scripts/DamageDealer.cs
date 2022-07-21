@@ -2,17 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+///  Script that handles dealing damage to the player through melee, ranged, and AOE attacks.
+/// </summary>
 public class DamageDealer : MonoBehaviour
 {
 
-    public List<Collider> HurtBoxes = new List<Collider>();
+    public List<Collider> HurtBoxes = new List<Collider>(); ///< Colliders used to detect when the player is hit by an attack
 
-    public GameObject hurtPlayerEffect;
+    public GameObject hurtPlayerEffect; ///< Particle effect spawned when the player is hurt
 
-    public float damage = 10f;
-    public int attkNum = 1;
+    public float damage = 10f; ///< Damage done by the attack
+    public int attkNum = 1; ///< Number of Attacks
     int currAttkNum = 0;
 
+    /// <summary>
+    ///  Coroutine to execute a melee attack on the player.
+    /// </summary>
+    /// <param name="dmg">The damage of the attack.</param>
+    /// <param name="delay">The amount of time before the damage is dealt.</param>
+    /// <param name="duration">The length of time during which the hurtboxes are checked for collision with the player.</param>
+    /// <param name="stunDuration">The length of time to stun the player for if they are hit.</param>
+    /// <returns></returns>
     IEnumerator MeleeAttackCoroutine(float dmg, float delay, float duration, float stunDuration)
     {
         yield return new WaitForSeconds(delay);
@@ -51,6 +62,15 @@ public class DamageDealer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    ///  Coroutine to execute an AOE attack on the player.
+    /// </summary>
+    /// <param name="dmg">The damage of the attack.</param>
+    /// <param name="delay">The amount of time before the damage is dealt.</param>
+    /// <param name="radius">The radius of the AOE attack.</param>
+    /// <param name="effect">The effect to spawn when the player is hit.</param>
+    /// <param name="stunDuration">The length of time to stun the player for if they are hit.</param>
+    /// <returns></returns>
     IEnumerator AOEAttackCoroutine(float dmg, float delay, float radius, GameObject effect, float stunDuration)
     {
         yield return new WaitForSeconds(delay);
@@ -68,6 +88,15 @@ public class DamageDealer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    ///  Coroutine to execute a ranged attack on the player.
+    /// </summary>
+    /// <param name="projectile">The projectile to spawn.</param>
+    /// <param name="delay">The amount of time before the damage is dealt.</param>
+    /// <param name="speed">The speed of the projectile.</param>
+    /// <param name="spawnpoint">The spawnpoint of the projectile.</param>
+    /// <param name="aimAtPlayer">Whether or not the projectile should aim at the player.</param>
+    /// <returns></returns>
     IEnumerator RangedAttackCoroutine(GameObject projectile, float delay, float speed, Transform spawnpoint, bool aimAtPlayer = false)
     {
         yield return new WaitForSeconds(delay);
@@ -82,6 +111,16 @@ public class DamageDealer : MonoBehaviour
         Destroy(proj, 20.0f);
     }
 
+    /// <summary>
+    ///  Coroutine to execute a ranged attack on the player.
+    /// </summary>
+    /// <param name="projectile">The projectile to spawn.</param>
+    /// <param name="delay">The amount of time before the damage is dealt.</param>
+    /// <param name="speed">The speed of the projectile.</param>
+    /// <param name="spawnPoint">The spawnpoint of the projectile.</param>
+    /// <param name="duration">The duration for which projectiles should be spawned.</param>
+    /// <param name="waitBetweenSpawns">The amount of time between each projectile spawn.</param>
+    /// <returns></returns>
     IEnumerator RangedAttackCoroutine(GameObject projectile, float delay, float speed, Transform spawnPoint, float duration, float waitBetweenSpawns)
     {
         yield return new WaitForSeconds(delay);
@@ -94,26 +133,61 @@ public class DamageDealer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    ///  Do a melee attack on the player.
+    /// </summary>
+    /// <param name="dmg">The Damage</param>
+    /// <param name="delay">The amount of time before the damage is dealt.</param>
+    /// <param name="duration">The length of time during which the hurtboxes are checked for collision with the player.</param>
+    /// <param name="stunDuration">The length of time to stun the player for if they are hit.</param>
     public void MeleeAttack(float dmg, float delay, float duration, float stunDuration)
     {
         StartCoroutine(MeleeAttackCoroutine(dmg, delay, duration, stunDuration));
     }
 
+    /// <summary>
+    ///  Do an AOE attack on the player.
+    /// </summary>
+    /// <param name="dmg">The Damage</param>
+    /// <param name="delay">The amount of time before the damage is dealt.</param>
+    /// <param name="radius">The radius of the AOE attack.</param>
+    /// <param name="effect">The effect to spawn when the player is hit.</param>
+    /// <param name="stunDuration">The length of time to stun the player for if they are hit.</param>
     public void AOEAttack(float dmg, float delay, float radius, GameObject effect, float stunDuration)
     {
         StartCoroutine(AOEAttackCoroutine(dmg, delay, radius, effect, stunDuration));
     }
 
+    /// <summary>
+    ///  Do a ranged attack on the player.
+    /// </summary>
+    /// <param name="projectile">The projectile to spawn.</param>
+    /// <param name="delay">The amount of time before the damage is dealt.</param>
+    /// <param name="speed">The speed of the projectile.</param>
+    /// <param name="spawnpoint">The spawnpoint of the projectile.</param>
+    /// <param name="aimAtPlayer">Whether or not the projectile should aim at the player.</param>
     public void RangedAttack(GameObject projectile, float delay, float speed, Transform spawnpoint, bool aimAtPlayer = false)
     {
         StartCoroutine(RangedAttackCoroutine(projectile, delay, speed, spawnpoint, aimAtPlayer));
     }
 
+    /// <summary>
+    ///  Do a ranged attack on the player.
+    /// </summary>
+    /// <param name="projectile">The projectile to spawn.</param>
+    /// <param name="delay">The amount of time before the damage is dealt.</param>
+    /// <param name="speed">The speed of the projectile.</param>
+    /// <param name="spawnPoint">The spawnpoint of the projectile.</param>
+    /// <param name="duration">The duration for which projectiles should be spawned.</param>
+    /// <param name="waitBetweenSpawns">The amount of time between each projectile spawn.</param>
     public void RangedAttack(GameObject projectile, float delay, float speed, Transform spawnPoint, float duration, float waitBetweenSpawns)
     {
         StartCoroutine(RangedAttackCoroutine(projectile, delay, speed, spawnPoint, duration, waitBetweenSpawns));
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
     public void Update()
     {
         if(currAttkNum > 0)

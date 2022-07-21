@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnableCursor : MonoBehaviour
+public class EnableCursor : MonoBehaviour  /// @todo Comment
 {
     // Start is called before the first frame update
     void Start()

@@ -73,17 +73,17 @@ $(function() {
 <div class="fragment"><div class="line"><a id="l00001" name="l00001"></a><span class="lineno">    1</span><span class="keyword">using</span> System.Collections;</div>
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="keyword">using</span> System.Collections.Generic;</div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">using</span> UnityEngine;</div>
-<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">using</span> NodeAI;</div>
+<div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">using</span> <a class="code hl_namespace" href="namespaceNodeAI.html">NodeAI</a>;</div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#if false </span><span class="comment">// Old code, not used anymore but kept for reference</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span>[CreateAssetMenu(fileName = <span class="stringliteral">&quot;New Custom State&quot;</span>, menuName = <span class="stringliteral">&quot;NodeAI/Custom State/BossFleeToEdgeState&quot;</span>)]</div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">public</span> <span class="keyword">class </span>BossFleeToEdgeState : NodeAI.CustomState</div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">public</span> <span class="keyword">class </span>BossFleeToEdgeState : <a class="code hl_namespace" href="namespaceNodeAI.html">NodeAI</a>.CustomState</div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>{</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    Transform agentTransform;</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    GameObject agentGameObject;</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <a class="code hl_class" href="classBossArenaController.html">BossArenaController</a> arenaController;</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    Vector3 arenaEdgeGoalPosition;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">void</span> DoCustomState(NodeAI_Agent agent)</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">void</span> DoCustomState(<a class="code hl_class" href="classNodeAI_1_1NodeAI__Agent.html">NodeAI_Agent</a> agent)</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    {</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        Debug.Log(<span class="stringliteral">&quot;DoCustomState&quot;</span>);</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        </div>
@@ -96,7 +96,7 @@ $(function() {
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        }</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>    }</div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">void</span> OnStateEnter(NodeAI_Agent agent)</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">void</span> OnStateEnter(<a class="code hl_class" href="classNodeAI_1_1NodeAI__Agent.html">NodeAI_Agent</a> agent)</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    {</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        Debug.Log(<span class="stringliteral">&quot;OnStateEnter&quot;</span>);</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>        agent.SetBool(<span class="stringliteral">&quot;Arrived&quot;</span>, <span class="keyword">false</span>);</div>
@@ -118,12 +118,12 @@ $(function() {
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        </div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    }</div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">void</span> OnStateExit(NodeAI_Agent agent)</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">void</span> OnStateExit(<a class="code hl_class" href="classNodeAI_1_1NodeAI__Agent.html">NodeAI_Agent</a> agent)</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    {</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        Debug.Log(<span class="stringliteral">&quot;OnStateExit&quot;</span>);</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    }</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">void</span> DrawStateGizmos(NodeAI_Agent agent)</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">void</span> DrawStateGizmos(<a class="code hl_class" href="classNodeAI_1_1NodeAI__Agent.html">NodeAI_Agent</a> agent)</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    {</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        Debug.Log(<span class="stringliteral">&quot;DrawStateGizmos&quot;</span>);</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        Gizmos.color = Color.red;</div>
@@ -142,7 +142,9 @@ $(function() {
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    }</div>
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>}</div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclassBossArenaController_html"><div class="ttname"><a href="classBossArenaController.html">BossArenaController</a></div><div class="ttdef"><b>Definition:</b> <a href="BossArenaController_8cs_source.html#l00008">BossArenaController.cs:9</a></div></div>
+<div class="ttc" id="aclassBossArenaController_html"><div class="ttname"><a href="classBossArenaController.html">BossArenaController</a></div><div class="ttdoc">Script to handle initiation and phases of Boss fights.</div><div class="ttdef"><b>Definition:</b> <a href="BossArenaController_8cs_source.html#l00011">BossArenaController.cs:12</a></div></div>
+<div class="ttc" id="aclassNodeAI_1_1NodeAI__Agent_html"><div class="ttname"><a href="classNodeAI_1_1NodeAI__Agent.html">NodeAI.NodeAI_Agent</a></div><div class="ttdef"><b>Definition:</b> <a href="NodeAI__Agent_8cs_source.html#l00008">NodeAI_Agent.cs:9</a></div></div>
+<div class="ttc" id="anamespaceNodeAI_html"><div class="ttname"><a href="namespaceNodeAI.html">NodeAI</a></div><div class="ttdef"><b>Definition:</b> <a href="BlackboardSearchWindow_8cs_source.html#l00023">BlackboardSearchWindow.cs:24</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine.UI;
 using System;
 
-public class JournalUIList : MonoBehaviour
+public class JournalUIList : MonoBehaviour /// @todo Comment
 {
     [Header("Self")]
     public GameObject journalPanel;

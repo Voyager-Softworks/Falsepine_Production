@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['unity_2dtexture_2dpacker_20_3ca_20href_3d_22http_3a_2f_2fmit_2dlicense_2eorg_22_20_3e_3cimg_20src_3d_22https_3a_2f_2fimg_2eshields_2eio_2fbadge_2flicense_2dmit_2dlightgrey_2esvg_3fstyle_3dflat_22_20alt_3d_22license_22_2f_3e_3c_2fa_3e_20_3ca_20href_3d_22https_3a_2f_2fwww_2epaypal_2eme_2fandyduboc_2f5usd_22_20_3e_3cimg_20src_3d_22https_3a_2f_2fimg_2eshields_2eio_2fbadge_2fdonate_2dpaypal_2dgreen_2esvg_22_20alt_3d_22donate_22_2f_3e_3c_2fa_3e_0',['unity-texture-packer &lt;a href=&quot;http://mit-license.org&quot; &gt;&lt;img src=&quot;https://img.shields.io/badge/License-MIT-lightgrey.svg?style=flat&quot; alt=&quot;License&quot;/&gt;&lt;/a&gt; &lt;a href=&quot;https://www.paypal.me/andyduboc/5usd&quot; &gt;&lt;img src=&quot;https://img.shields.io/badge/Donate-PayPal-green.svg&quot; alt=&quot;Donate&quot;/&gt;&lt;/a&gt;',['../md_Plugins_unity_texture_packer_master_README.html',1,'']]]
+];

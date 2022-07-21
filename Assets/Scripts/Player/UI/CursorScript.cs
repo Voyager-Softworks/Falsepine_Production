@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class CursorScript : MonoBehaviour
+public class CursorScript : MonoBehaviour  /// @todo Comment
 {
     public Image cursorImage;
     public Sprite aimCursor;

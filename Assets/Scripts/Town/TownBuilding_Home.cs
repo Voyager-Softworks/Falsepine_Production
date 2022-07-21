@@ -10,7 +10,7 @@ using UnityEngine.Events;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-public class TownBuilding_Home : TownBuilding
+public class TownBuilding_Home : TownBuilding  /// @todo Comment
 {
     //update
     protected override void Update()

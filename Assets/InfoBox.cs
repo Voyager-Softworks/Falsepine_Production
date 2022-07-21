@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-public class InfoBox : MonoBehaviour
+public class InfoBox : MonoBehaviour /// @todo Comment
 {
     //can be called from other scripts to display a message for a certain amount of time
 

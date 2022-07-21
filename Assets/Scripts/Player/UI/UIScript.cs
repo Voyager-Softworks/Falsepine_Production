@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class UIScript : MonoBehaviour
+public class UIScript : MonoBehaviour  /// @todo Comment
 {
     public CursorScript cursorScript;
 

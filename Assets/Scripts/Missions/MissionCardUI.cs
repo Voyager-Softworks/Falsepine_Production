@@ -8,7 +8,7 @@ using System;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class MissionCardUI : MonoBehaviour
+public class MissionCardUI : MonoBehaviour /// @todo Comment
 {
     [Header("Self")]
     public GameObject missionCard;

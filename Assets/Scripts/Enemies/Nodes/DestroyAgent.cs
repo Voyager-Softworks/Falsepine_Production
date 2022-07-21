@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NodeAI;
 
-public class DestroyAgent : NodeAI.ActionBase
+public class DestroyAgent : NodeAI.ActionBase  /// @todo Comment
 {
     public DestroyAgent()
     {

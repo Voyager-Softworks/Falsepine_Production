@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine.InputSystem;
 using System;
 
-public class TownBuilding : ClickableObject
+public class TownBuilding : ClickableObject  /// @todo Comment
 {
     public enum BuildingType {
         BANK,

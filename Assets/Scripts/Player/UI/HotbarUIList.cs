@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.UI;
 
-public class HotbarUIList : MonoBehaviour
+public class HotbarUIList : MonoBehaviour  /// @todo Comment
 {
     public GameObject hotbarPanel;
 

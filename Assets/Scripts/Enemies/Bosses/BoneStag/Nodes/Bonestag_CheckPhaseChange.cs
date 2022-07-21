@@ -5,6 +5,9 @@ using NodeAI;
 
 namespace Boss.Bonestag
 {
+    /// <summary>
+    ///  Node that checks if the Bonestag is changing phase.
+    /// </summary>
     public class Bonestag_CheckPhaseChange : NodeAI.ConditionBase
     {
         public Bonestag_CheckPhaseChange()

@@ -4,7 +4,7 @@ using UnityEngine;
 using NodeAI;
 using UnityEngine.AI;
 
-public class Attack : NodeAI.ActionBase
+public class Attack : NodeAI.ActionBase  /// @todo Comment
 {
     Animator animator;
     NavMeshAgent navAgent;

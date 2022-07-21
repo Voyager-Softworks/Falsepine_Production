@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletTrail : MonoBehaviour
+public class BulletTrail : MonoBehaviour  /// @todo Comment
 {
     public bool fadeOverTime = true;
     public float fadeRate = 1.0f;

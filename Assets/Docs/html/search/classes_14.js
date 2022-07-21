@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['weaponmodellink_0',['WeaponModelLink',['../classPlayerInventoryInterface_1_1WeaponModelLink.html',1,'PlayerInventoryInterface']]]
+  ['vignettescript_0',['VignetteScript',['../classVignetteScript.html',1,'']]]
 ];

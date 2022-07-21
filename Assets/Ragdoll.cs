@@ -2,8 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+///  Script to handle ragdolling models.
+/// </summary>
 public class Ragdoll : MonoBehaviour
 {
+    /// <summary>
+    ///  Enable the ragdoll.
+    /// </summary>
     public void EnableRagdoll()
     {
         var animator = GetComponent<Animator>();
@@ -18,6 +24,9 @@ public class Ragdoll : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Disable the ragdoll.
+    /// </summary>
     public void DisableRagdoll()
     {
         var animator = GetComponent<Animator>();

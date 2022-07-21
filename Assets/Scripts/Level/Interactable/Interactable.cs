@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.Events;
 
-public class Interactable : MonoBehaviour
+public class Interactable : MonoBehaviour  /// @todo Comment
 {
     public enum InteractEffect {
         NONE,

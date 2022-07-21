@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using NodeAI;
 using System.Linq;
-public class MobTarget : MonoBehaviour
+public class MobTarget : MonoBehaviour  /// @todo Comment
 {
     public int maxConcurrentAttackers = 3;
     public float influenceRadius = 10;

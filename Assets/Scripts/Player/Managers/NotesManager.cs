@@ -11,7 +11,7 @@ using UnityEngine.Events;
 using UnityEditor;
 #endif
 
-public class NotesManager : MonoBehaviour
+public class NotesManager : MonoBehaviour  /// @todo Comment
 {
     //list of clues to find
     public enum ClueType {

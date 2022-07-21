@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FaceCamera : MonoBehaviour
+public class FaceCamera : MonoBehaviour  /// @todo Comment
 {
     private Camera mainCamera;
 

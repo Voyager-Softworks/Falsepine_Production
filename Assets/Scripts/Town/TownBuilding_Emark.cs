@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TownBuilding_Emark : TownBuilding
+public class TownBuilding_Emark : TownBuilding  /// @todo Comment
 {
     // Start is called before the first frame update
     protected override void Start()

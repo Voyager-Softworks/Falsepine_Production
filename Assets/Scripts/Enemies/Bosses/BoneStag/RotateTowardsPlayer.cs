@@ -3,8 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+/// <summary>
+///  Script to handle rotation and translation towards the player as part of enemy attacks.
+/// </summary>
 public class RotateTowardsPlayer : MonoBehaviour
 {
+    /// <summary>
+    ///  Coroutine to rotate towards the player.
+    /// </summary>
+    /// <param name="duration">The length of time to rotate.</param>
+    /// <param name="speed">The speed of the rotation.</param>
+    /// <param name="delay">The delay before the rotation starts.</param>
+    /// <returns></returns>
     private IEnumerator RotateToPlayerCoroutine(float duration, float speed, float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -20,7 +30,13 @@ public class RotateTowardsPlayer : MonoBehaviour
             yield return null;
         }
     }
-
+    /// <summary>
+    ///  Coroutine to move towards the player.
+    /// </summary>
+    /// <param name="duration">The length of time to move.</param>
+    /// <param name="speed">The speed of the movement.</param>
+    /// <param name="delay">The delay before the movement starts.</param>
+    /// <returns></returns>
     private IEnumerator MoveToPlayerCoroutine(float duration, float speed, float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -37,12 +53,23 @@ public class RotateTowardsPlayer : MonoBehaviour
         }
         
     }
-
+    /// <summary>
+    ///  Method to move towards the player.
+    /// </summary>
+    /// <param name="duration">The length of time to move.</param>
+    /// <param name="speed">The speed of the movement.</param>
+    /// <param name="delay">The delay before the movement starts.</param>
     public void MoveToPlayer(float duration, float speed, float delay)
     {
         StartCoroutine(MoveToPlayerCoroutine(duration, speed, delay));
     }
 
+    /// <summary>
+    ///  Method to rotate towards the player.
+    /// </summary>
+    /// <param name="duration">The length of time to rotate.</param>
+    /// <param name="speed">The speed of the rotation.</param>
+    /// <param name="delay">The delay before the rotation starts.</param>
     public void RotateToPlayer(float duration, float speed, float delay)
     {
         StartCoroutine(RotateToPlayerCoroutine(duration, speed, delay));

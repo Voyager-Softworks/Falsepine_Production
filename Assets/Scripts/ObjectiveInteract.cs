@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectiveInteract : Interactable
+public class ObjectiveInteract : Interactable  /// @todo Comment
 {
     public Mission _mission;
     public GameObject completeSound;

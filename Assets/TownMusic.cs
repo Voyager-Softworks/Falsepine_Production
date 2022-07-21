@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class TownMusic : MonoBehaviour
+public class TownMusic : MonoBehaviour  /// @todo Comment
 {
     [Serializable]
     public class MusicBuildingLink
