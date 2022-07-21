@@ -4,7 +4,7 @@ var searchData=
   ['audio_1',['Audio',['../namespaceNodeAI_1_1Audio.html',1,'NodeAI']]],
   ['logic_2',['Logic',['../namespaceNodeAI_1_1Logic.html',1,'NodeAI']]],
   ['math_3',['Math',['../namespaceNodeAI_1_1Math.html',1,'NodeAI']]],
-  ['name_4',['name',['../classNodeAI_1_1NodeData_1_1SerializableProperty.html#aac8aa39b6005e4b1fa2f8f25b70db953',1,'NodeAI.NodeData.SerializableProperty.name()'],['../classNodeAI_1_1NodeData_1_1Property.html#a469da9f3b05a5c56bac54f29b2c3001c',1,'NodeAI.NodeData.Property.name()'],['../classTagManager_1_1Tag.html#a6f25ae9644fc80eac5df4a7dbc08680e',1,'TagManager.Tag.name()']]],
+  ['name_4',['name',['../structMissionSequencer_1_1MissionSequence.html#a9317af6b49501466d27736b1696af64e',1,'MissionSequencer.MissionSequence.name()'],['../classNodeAI_1_1NodeData_1_1SerializableProperty.html#aac8aa39b6005e4b1fa2f8f25b70db953',1,'NodeAI.NodeData.SerializableProperty.name()'],['../classNodeAI_1_1NodeData_1_1Property.html#a469da9f3b05a5c56bac54f29b2c3001c',1,'NodeAI.NodeData.Property.name()'],['../classTagManager_1_1Tag.html#a6f25ae9644fc80eac5df4a7dbc08680e',1,'TagManager.Tag.name()']]],
   ['namespaceentry_5',['NamespaceEntry',['../classNodeAI_1_1NamespaceParser_1_1NamespaceEntry.html',1,'NodeAI::NamespaceParser']]],
   ['namespaceparser_6',['NamespaceParser',['../classNodeAI_1_1NamespaceParser.html',1,'NodeAI']]],
   ['nand_7',['Nand',['../classNodeAI_1_1Logic_1_1Nand.html',1,'NodeAI::Logic']]],

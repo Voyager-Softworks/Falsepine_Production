@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5820970294476934577}
   - component: {fileID: 5820970294476934576}
+  - component: {fileID: 4652518046376801350}
   m_Layer: 0
   m_Name: MissionManager
   m_TagString: Untagged
@@ -50,3 +51,30 @@ MonoBehaviour:
   greaterMissionList:
   - {fileID: 11400000, guid: 6f6e8f9f891ab4a4dac28013a21d2e75, type: 2}
   currentMission: {fileID: 0}
+--- !u!114 &4652518046376801350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5820970294476934578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8344ad3592e680809817892a9f8a8d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  missionSequences:
+  - name: CheckClueDefeatEnemiesMission
+    minimumFillerScenes: 2
+    maximumFillerScenes: 5
+    fillerScenes:
+    - Snow1
+    - Snow2
+    - Snow3
+    - Snow4
+    - Snow5
+    objectiveScenes:
+    - SnowCheckClue1
+    - SnowClearEnemies3
+    missionStartScene: SnowEntrance1
+    missionEndScene: SnowCarriageExit

@@ -7,6 +7,7 @@ var searchData=
   ['coverradius_4',['coverRadius',['../classCover.html#a4365865cd8d7e5aa540dbf921abc3756',1,'Cover']]],
   ['coverrect_5',['coverRect',['../classCover.html#a19dd766e5cdacfbc214b6b96f15a3b6e',1,'Cover']]],
   ['covertype_6',['coverType',['../classCover.html#a4871826d964fd2a62b659ab525c19ef3',1,'Cover']]],
-  ['currhoverednode_7',['currHoveredNode',['../classNodeAI_1_1GraphView.html#ab24a1ea52918604a3f81e23e63d781f8',1,'NodeAI::GraphView']]],
-  ['cvalue_8',['cvalue',['../classNodeAI_1_1NodeData_1_1SerializableProperty.html#a45365486294c04cdce122f4dcd9a7219',1,'NodeAI::NodeData::SerializableProperty']]]
+  ['currentsequence_7',['currentSequence',['../classMissionSequencer.html#a879627f0edb199a114a14225db0fe1d6',1,'MissionSequencer']]],
+  ['currhoverednode_8',['currHoveredNode',['../classNodeAI_1_1GraphView.html#ab24a1ea52918604a3f81e23e63d781f8',1,'NodeAI::GraphView']]],
+  ['cvalue_9',['cvalue',['../classNodeAI_1_1NodeData_1_1SerializableProperty.html#a45365486294c04cdce122f4dcd9a7219',1,'NodeAI::NodeData::SerializableProperty']]]
 ];
