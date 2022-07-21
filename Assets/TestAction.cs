@@ -5,7 +5,7 @@ using NodeAI;
 
 public class TestAction : NodeAI.ActionBase  /// @todo Comment
 {
-    public TestAction()
+    public TestAction() /// @bug Test Bug
     {
         AddProperty<GameObject>("Target", null);
         AddProperty<Color>("Color", Color.white);
