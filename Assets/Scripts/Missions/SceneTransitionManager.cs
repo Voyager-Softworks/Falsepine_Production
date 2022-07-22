@@ -30,7 +30,7 @@ public class SceneTransitionManager : MonoBehaviour
     ///       Test this to make sure it works.
     ///     </item>
     ///   </list>
-    void Update()
+    public void Update()
     {
         if (canMoveToNextScene)
         {
