@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 /// <summary>
 ///  Script responsible for generating and managing mission scene sequencing.
@@ -12,18 +13,15 @@ using UnityEngine.SceneManagement;
 /// @todo
 ///     <list type="bullet">
 ///        <item>
-///           Add a method to generate a new sequence of scenes.
-///        </item>
-///        <item>
 ///          Make the object persistent.
 ///        </item>
-///        <item>
-///          Add a system to handle the transition between scenes, and keep track of the current scene.
-///       </item>
-///        <item>
-///          Register when a scene is complete and allow the player to move to the next scene.
-///       </item>
 ///    </list>
+/// @bug
+///    <list type="bullet">
+///       <item>
+///        The current implementation of the mission sequence is not robust.
+///      </item>
+///   </list>
 public class MissionSequencer : MonoBehaviour
 {
     public enum Area ///< Areas of the game world.
@@ -45,9 +43,7 @@ public class MissionSequencer : MonoBehaviour
     {
         public string name; ///< The name of the sequence.
         public Area area; ///< The area of the sequence.
-        public int minimumFillerScenes; ///< The minimum number of filler scenes to be included in the sequence.
-        public int maximumFillerScenes; ///< The maximum number of filler scenes to be included in the sequence.
-        public List<string> fillerScenes, objectiveScenes; ///< The list of scenes to be included in the sequence.
+        public List<string> scenes; ///< The list of scenes in the sequence.
         public string missionStartScene; ///< The scene to be loaded when the mission starts.
         public string missionEndScene; ///< The scene to be loaded when the mission ends.
     }
@@ -56,7 +52,22 @@ public class MissionSequencer : MonoBehaviour
 
     public Queue<string> currentSequence; ///< The current sequence of scenes.
 
-    //void GenerateNewSequence
+    /// <summary>
+    ///  Generates a new sequence of scenes for a mission.
+    /// </summary>
+    /// <param name="area">The area of the game world the mission should take place.</param>
+    void GenerateNewSequence(Area area)
+    {
+        currentSequence = new Queue<string>();
+        // Pick a random sequence from the list of sequences, where the area matches the parameter.
+        MissionSequence sequence = missionSequences.Where(x => x.area == area).OrderBy(x => Random.value).First();
+        // Add the start scene to the sequence.
+        currentSequence.Enqueue(sequence.missionStartScene);
+        // Add the scenes in random order to the sequence.
+        sequence.scenes.OrderBy(x => Random.value).ToList().ForEach(x => currentSequence.Enqueue(x));
+        // Add the end scene to the sequence.
+        currentSequence.Enqueue(sequence.missionEndScene);
+    }
 
     /// <summary>
     /// Start is called before the first frame update
@@ -72,6 +83,12 @@ public class MissionSequencer : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void Awake()
+    {
+        // Dont destroy this object when the scene changes.
+        DontDestroyOnLoad(gameObject);
     }
 
 
