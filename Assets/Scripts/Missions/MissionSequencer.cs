@@ -10,18 +10,6 @@ using System.Linq;
 /// <remarks>
 ///  Its responsibilities include: Generating sequences of scenes, keeping track of where the player is in the sequence, and handling transitions between these scenes.
 /// </remarks>
-/// @todo
-///     <list type="bullet">
-///        <item>
-///          Make the object persistent.
-///        </item>
-///    </list>
-/// @bug
-///    <list type="bullet">
-///       <item>
-///        The current implementation of the mission sequence is not robust.
-///      </item>
-///   </list>
 public class MissionSequencer : MonoBehaviour
 {
     public enum Area ///< Areas of the game world.
@@ -50,7 +38,7 @@ public class MissionSequencer : MonoBehaviour
 
     public List<MissionSequence> missionSequences; ///< The list of mission sequences.
 
-    public Queue<string> currentSequence; ///< The current sequence of scenes.
+    public Queue<string> currentSequence = new Queue<string>(); ///< The current sequence of scenes.
 
     /// <summary>
     ///  Generates a new sequence of scenes for a mission.
@@ -74,7 +62,7 @@ public class MissionSequencer : MonoBehaviour
     /// </summary>
     void Start()
     {
-        
+        Debug.Log("MissionSequencer.Start()");
     }
 
     /// <summary>
@@ -87,8 +75,18 @@ public class MissionSequencer : MonoBehaviour
 
     void Awake()
     {
-        // Dont destroy this object when the scene changes.
-        DontDestroyOnLoad(gameObject);
+        //If the object already exists, destroy the new one.
+        if (GameObject.Find("MissionManager") != gameObject)
+        {
+            Debug.Log("MissionSequencer.Awake(): Destroying duplicate object.");
+            Destroy(gameObject);
+        }
+        else
+        {
+            //Otherwise, make the object persistent.
+            DontDestroyOnLoad(gameObject);
+        }
+        
     }
 
 

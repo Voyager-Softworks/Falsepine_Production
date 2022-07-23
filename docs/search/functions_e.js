@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['validateid_0',['ValidateID',['../classItem.html#a38bb22f9b077e92544b58ed56fb96990',1,'Item.ValidateID()'],['../classInventory.html#ad425e645a5b2a17092ec44f658319d81',1,'Inventory.ValidateID()']]],
-  ['validateids_1',['ValidateIDs',['../classInventory.html#acc21f6298d5f73fccd13bb0a98cdf5a5',1,'Inventory.ValidateIDs()'],['../classItemDatabase.html#aa1df6ec2c0bb1316b6ad383bbf875cb7',1,'ItemDatabase.ValidateIDs()']]]
+  ['unlocknextscene_0',['UnlockNextScene',['../classSceneTransitionManager.html#abd1dafac9b3570cfcc21316ab5d5703b',1,'SceneTransitionManager']]],
+  ['update_1',['Update',['../classDamageDealer.html#a3d01a0c3dc2cec082b2e169bbb0070be',1,'DamageDealer.Update()'],['../classSceneTransitionManager.html#a5ca217978c47772f1e456761f56a6e25',1,'SceneTransitionManager.Update()']]],
+  ['usecorrectbait_2',['UseCorrectBait',['../classBossArenaController.html#a0185eaf9e891043798261ce9e8985836',1,'BossArenaController']]],
+  ['usewrongbait_3',['UseWrongBait',['../classBossArenaController.html#a550371922bc7dfd3d47520457cdd2015',1,'BossArenaController']]]
 ];

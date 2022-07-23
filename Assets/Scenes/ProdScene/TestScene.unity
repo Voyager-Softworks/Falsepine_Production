@@ -1371,6 +1371,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 543de79866d660d4c805616f86cf6c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &848292591
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 848292593}
+  - component: {fileID: 848292592}
+  m_Layer: 0
+  m_Name: SceneTransitionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &848292592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848292591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daa3ab80c6cc8b7fdaad633fd599fb40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  exitTransform: {fileID: 848292593}
+  exitBounds:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 5.61
+    height: 4.94
+--- !u!4 &848292593
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 848292591}
+  m_LocalRotation: {x: 0, y: 0.008726558, z: 0, w: 0.999962}
+  m_LocalPosition: {x: 11.2, y: 0.24, z: -2.62}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 22
+  m_LocalEulerAnglesHint: {x: 0, y: 1, z: 0}
 --- !u!4 &857600660 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1545178375750917921, guid: 6b9a11b79482c8d4ca71c526c6ea791b, type: 3}
@@ -4273,8 +4323,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c53285463759f1b2db1127fd03b2d6be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  boss: {fileID: 0}
   arenaCentreTransforms: []
-  arenaRadius: 27
+  arenaRadiuses: []
+  wrongBaitSpawn: {fileID: 0}
   baitedSound: {fileID: 0}
   bossMusic: {fileID: 0}
   bossMusicSecondPhase: {fileID: 0}
@@ -4300,6 +4352,10 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  phase: 0
+  phase1Threshold: 75
+  phase2Threshold: 50
+  phase3Threshold: 25
 --- !u!1 &2146660941
 GameObject:
   m_ObjectHideFlags: 0

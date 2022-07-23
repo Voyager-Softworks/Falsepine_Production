@@ -79,7 +79,7 @@ Inheritance diagram for SceneTransitionManager:</div>
 <div class="dyncontent">
 <div class="center"><img src="classSceneTransitionManager__inherit__graph.png" border="0" usemap="#aSceneTransitionManager_inherit__map" alt="Inheritance graph"/></div>
 <map name="aSceneTransitionManager_inherit__map" id="aSceneTransitionManager_inherit__map">
-<area shape="rect" title="Script responsible for handling player entry and exit from mission scenes." alt="" coords="5,131,187,237"/>
+<area shape="rect" title="Script responsible for handling player entry and exit from mission scenes." alt="" coords="5,131,187,252"/>
 <area shape="rect" title=" " alt="" coords="34,5,158,83"/>
 </map>
 </div>
@@ -88,7 +88,7 @@ Collaboration diagram for SceneTransitionManager:</div>
 <div class="dyncontent">
 <div class="center"><img src="classSceneTransitionManager__coll__graph.png" border="0" usemap="#aSceneTransitionManager_coll__map" alt="Collaboration graph"/></div>
 <map name="aSceneTransitionManager_coll__map" id="aSceneTransitionManager_coll__map">
-<area shape="rect" title="Script responsible for handling player entry and exit from mission scenes." alt="" coords="5,131,187,237"/>
+<area shape="rect" title="Script responsible for handling player entry and exit from mission scenes." alt="" coords="5,131,187,252"/>
 <area shape="rect" title=" " alt="" coords="34,5,158,83"/>
 </map>
 </div>
@@ -101,6 +101,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5ca217978c47772f1e456761f56a6e25"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSceneTransitionManager.html#a5ca217978c47772f1e456761f56a6e25">Update</a> ()</td></tr>
 <tr class="memdesc:a5ca217978c47772f1e456761f56a6e25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if the player can move to the next scene.  <a href="classSceneTransitionManager.html#a5ca217978c47772f1e456761f56a6e25">More...</a><br /></td></tr>
 <tr class="separator:a5ca217978c47772f1e456761f56a6e25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a43056216389b2f411fd60caf8a5a1e70"><td class="memItemLeft" align="right" valign="top">IEnumerator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSceneTransitionManager.html#a43056216389b2f411fd60caf8a5a1e70">FadeToBlack</a> (string scene)</td></tr>
+<tr class="memdesc:a43056216389b2f411fd60caf8a5a1e70"><td class="mdescLeft">&#160;</td><td class="mdescRight">Coroutine to fade the screen to black and load the next scene.  <a href="classSceneTransitionManager.html#a43056216389b2f411fd60caf8a5a1e70">More...</a><br /></td></tr>
+<tr class="separator:a43056216389b2f411fd60caf8a5a1e70"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -114,8 +117,45 @@ Public Attributes</h2></td></tr>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Script responsible for handling player entry and exit from mission scenes. </p>
 
-<p class="definition">Definition at line <a class="el" href="SceneTransitionManager_8cs_source.html#l00009">9</a> of file <a class="el" href="SceneTransitionManager_8cs_source.html">SceneTransitionManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneTransitionManager_8cs_source.html#l00010">10</a> of file <a class="el" href="SceneTransitionManager_8cs_source.html">SceneTransitionManager.cs</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a43056216389b2f411fd60caf8a5a1e70" name="a43056216389b2f411fd60caf8a5a1e70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43056216389b2f411fd60caf8a5a1e70">&#9670;&nbsp;</a></span>FadeToBlack()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">IEnumerator SceneTransitionManager.FadeToBlack </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>scene</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Coroutine to fade the screen to black and load the next scene. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">scene</td><td>The name of the Scene to load</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section attention"><dt>Attention</dt><dd>This uses the Fade object already present in the UI, but does not interact with the script which is meant to control this fade ui. This is a temporary solution, and a more robust solution should be discussed with Keane. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="SceneTransitionManager_8cs_source.html#l00085">85</a> of file <a class="el" href="SceneTransitionManager_8cs_source.html">SceneTransitionManager.cs</a>.</p>
+
+</div>
+</div>
 <a id="abd1dafac9b3570cfcc21316ab5d5703b" name="abd1dafac9b3570cfcc21316ab5d5703b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#abd1dafac9b3570cfcc21316ab5d5703b">&#9670;&nbsp;</a></span>UnlockNextScene()</h2>
 
@@ -141,7 +181,7 @@ Public Attributes</h2></td></tr>
 
 <p>Allows the player to move to the next scene. </p>
 
-<p class="definition">Definition at line <a class="el" href="SceneTransitionManager_8cs_source.html#l00019">19</a> of file <a class="el" href="SceneTransitionManager_8cs_source.html">SceneTransitionManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneTransitionManager_8cs_source.html#l00023">23</a> of file <a class="el" href="SceneTransitionManager_8cs_source.html">SceneTransitionManager.cs</a>.</p>
 
 </div>
 </div>
@@ -169,13 +209,18 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Checks if the player can move to the next scene. </p>
-<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000022">Todo:</a></b></dt><dd><ul>
+<dl class="todo"><dt><b><a class="el" href="todo.html#_todo000021">Todo:</a></b></dt><dd><ul>
 <li>
-Test this to make sure it works.  </li>
+Add in a transition sound effect.  </li>
+</ul>
+</dd></dl>
+<dl class="bug"><dt><b><a class="el" href="bug.html#_bug000001">Bug:</a></b></dt><dd><ul>
+<li>
+There may be some sort of issue with the bounds calculation not being correct, causing the trigger zone to not be where the gizmo shows. this needs further testing to confirm.  </li>
 </ul>
 </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="SceneTransitionManager_8cs_source.html#l00033">33</a> of file <a class="el" href="SceneTransitionManager_8cs_source.html">SceneTransitionManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneTransitionManager_8cs_source.html#l00044">44</a> of file <a class="el" href="SceneTransitionManager_8cs_source.html">SceneTransitionManager.cs</a>.</p>
 
 </div>
 </div>
@@ -194,7 +239,7 @@ Test this to make sure it works.  </li>
 
 <p>The bounds of the exit point. </p>
 
-<p class="definition">Definition at line <a class="el" href="SceneTransitionManager_8cs_source.html#l00012">12</a> of file <a class="el" href="SceneTransitionManager_8cs_source.html">SceneTransitionManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneTransitionManager_8cs_source.html#l00014">14</a> of file <a class="el" href="SceneTransitionManager_8cs_source.html">SceneTransitionManager.cs</a>.</p>
 
 </div>
 </div>
@@ -212,7 +257,7 @@ Test this to make sure it works.  </li>
 
 <p>The transform of the exit point. </p>
 
-<p class="definition">Definition at line <a class="el" href="SceneTransitionManager_8cs_source.html#l00011">11</a> of file <a class="el" href="SceneTransitionManager_8cs_source.html">SceneTransitionManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="SceneTransitionManager_8cs_source.html#l00013">13</a> of file <a class="el" href="SceneTransitionManager_8cs_source.html">SceneTransitionManager.cs</a>.</p>
 
 </div>
 </div>
