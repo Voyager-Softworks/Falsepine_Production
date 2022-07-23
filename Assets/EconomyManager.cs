@@ -12,7 +12,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     public static EconomyManager instance;
 
     // StatsManager.UsesStats implementation
-    public List<StatsManager.StatType> m_usedStatTypes = new List<StatsManager.StatType>()
+    private List<StatsManager.StatType> m_usedStatTypes = new List<StatsManager.StatType>()
     {
 
     };
@@ -24,7 +24,34 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     public interface Purchasable
     {
         int GetPrice();
-        bool AllowDiscount();
+        bool GetAllowedDiscount();
+    }
+
+    [Serializable]
+    public class PurchasableItem : Purchasable, StatsManager.UsesStats
+    {
+        public Item item = null;
+        public int price = 0;
+        public bool allowedDiscount = true;
+
+        public int GetPrice() {
+            if (allowedDiscount) {
+                return StatsManager.CalculatePrice(this, price);
+            } else {
+                return price;
+            }
+        }
+        public bool GetAllowedDiscount() { return allowedDiscount; }
+
+        // StatsManager.UsesStats implementation
+        private List<StatsManager.StatType> m_usedStatTypes = new List<StatsManager.StatType>()
+        {
+            StatsManager.StatType.ItemCost
+        };
+        public List<StatsManager.StatType> GetStatTypes()
+        {
+            return m_usedStatTypes;
+        }
     }
 
     public int m_playerSilver = 0;

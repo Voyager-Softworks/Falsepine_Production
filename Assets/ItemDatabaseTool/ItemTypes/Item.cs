@@ -14,7 +14,7 @@ using UnityEditor;
 #endif
 
 [Serializable]
-public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasStatMods, EconomyManager.Purchasable
+public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasStatMods
 {
     // List of all the item classes in the game
     [NonSerialized] public static readonly IEnumerable<System.Type> AllTypes;
@@ -138,18 +138,6 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
     public List<StatsManager.StatMod> GetStatMods()
     {
         return m_statMods;
-    }
-
-    // EconomyManager.Purchasable interface implementation
-    public int m_price = 0;
-    public bool m_allowDiscount = true;
-    public int GetPrice()
-    {
-        return m_price;
-    }
-    public bool AllowDiscount()
-    {
-        return m_allowDiscount;
     }
 
 
@@ -277,9 +265,6 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
 
         item.m_usedStatTypes = new List<StatsManager.StatType>(this.m_usedStatTypes);
         item.m_statMods = new List<StatsManager.StatMod>(this.m_statMods);
-
-        item.m_price = this.m_price;
-        item.m_allowDiscount = this.m_allowDiscount;
 
         item.currentStackSize = this.m_currentStackSize;
         item.maxStackSize = this.m_maxStackSize;
@@ -543,17 +528,6 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
             GUILayout.BeginVertical("box");
             // bold text
             GUILayout.Label("Economy", CustomEditorStuff.center_bold_label);
-
-            //horiz
-            GUILayout.BeginHorizontal();
-            // price
-            GUILayout.Label(new GUIContent("Price: ", "Price of the item"), GUILayout.Width(50));
-            item.m_price = EditorGUILayout.IntField(item.m_price);
-            // space
-            GUILayout.Space(10);
-            // discount
-            item.m_allowDiscount = EditorGUILayout.Toggle("Allow Discount: ", item.m_allowDiscount);
-            GUILayout.EndHorizontal();
             
             // End Economy box
             GUILayout.EndVertical();

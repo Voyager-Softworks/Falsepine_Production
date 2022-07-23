@@ -41,7 +41,8 @@ public class StatsManager : MonoBehaviour
         public static StatType RifleDamage          = new StatType("RifleDamage");
 
         // Economy
-        //public static StatType PlayerSilver         = new StatType("Silver");
+        public static StatType ShopCost             = new StatType("ShopCost");
+        public static StatType ItemCost             = new StatType("ItemCost");
 
         public static String DisplayName(StatType type){
             //add a space before each capital letter
@@ -174,14 +175,8 @@ public class StatsManager : MonoBehaviour
         return allStatMods;
     }
 
-    static public float CalculateDamage(UsesStats statUser, float baseDamage = 1.0f){
-        float damage = baseDamage;
-        float damageAdditive = 0.0f;
-        float damageMultiplier = 1.0f;
-
-        float minDamage = 0.0f;
-        float maxDamage = float.MaxValue;
-
+    static public float CalculateDamage(UsesStats _statUser, float _baseDamage = 1.0f)
+    {
         // list of stats to use in this function
         List<StatType> usedStatTypes = new List<StatType>(){
             StatType.RangedDamage,
@@ -189,38 +184,85 @@ public class StatsManager : MonoBehaviour
             StatType.PistolDamage,
             StatType.RifleDamage,
         };
+        
+        float additiveVal = 0.0f;
+        float multiplierVal = 1.0f;
 
+        float minVal = 0.0f;
+        float maxVal = float.MaxValue;
+
+        return GenericStatCalc(_statUser, _baseDamage, usedStatTypes, additiveVal, multiplierVal, minVal, maxVal);
+    }
+
+    static public int CalculatePrice(UsesStats _statUser, int _basePrice = 1)
+    {
+        // list of stats to use in this function
+        List<StatType> usedStatTypes = new List<StatType>(){
+            StatType.ShopCost,
+            StatType.ItemCost,
+        };
+        
+        float additiveVal = 0.0f;
+        float multiplierVal = 1.0f;
+
+        float minVal = 0.0f;
+        float maxVal = float.MaxValue;
+
+        return (int)GenericStatCalc(_statUser, _basePrice, usedStatTypes, additiveVal, multiplierVal, minVal, maxVal);
+    }
+
+    private static float GenericStatCalc(UsesStats _statUser, float _baseVal, List<StatType> _usedStatTypes, float _additiveVal = 0.0f, float _multiplierVal = 1.0f, float _minVal = 0.0f, float _maxVal = float.MaxValue)
+    {
+        float baseVal = _baseVal;
+        float additiveVal = _additiveVal;
+        float multiplierVal = _multiplierVal;
+
+        float minVal = _minVal;
+        float maxVal = _maxVal;
+
+        CalcMods(_statUser, ref additiveVal, ref multiplierVal, _usedStatTypes);
+
+        // add additive damage
+        baseVal += additiveVal;
+        // multiply damage
+        baseVal *= multiplierVal;
+
+        // clamp damage
+        baseVal = Mathf.Clamp(baseVal, minVal, maxVal);
+        return baseVal;
+    }
+
+    private static void CalcMods(UsesStats _statUser, ref float additiveVal, ref float dmultiplierVal, List<StatType> _usedStatTypes)
+    {
         // get all stat mods
         List<StatMod> statMods = GetAllStatMods();
 
-        // loop through all stat mods and add them to the damage
-        foreach (StatMod statMod in statMods)
+        // loop through all statUser's stat types
+        foreach (StatType statType in _statUser.GetStatTypes())
         {
-            // if stat type is in list of stat types to pay attention to
-            if (usedStatTypes.Any(x => x.value == statMod.statType.value))
+            // if stat type is in the list of used stat types
+            if (_usedStatTypes.Any(x => x.value == statType.value))
             {
-                // if stat mod is additive
-                if (statMod.modType == ModType.Additive)
+                // loop through all stat mods
+                foreach (StatMod statMod in statMods)
                 {
-                    damageAdditive += statMod.value;
-                }
-                // if stat mod is multiplier
-                else if (statMod.modType == ModType.Multiplier)
-                {
-                    damageMultiplier *= statMod.value;
+                    // if stat mod is for this stat type
+                    if (statMod.statType.value == statType.value)
+                    {
+                        // if mod is additive
+                        if (statMod.modType == ModType.Additive)
+                        {
+                            additiveVal += statMod.value;
+                        }
+                        // if mod is multiplier
+                        else if (statMod.modType == ModType.Multiplier)
+                        {
+                            dmultiplierVal *= statMod.value;
+                        }
+                    }
                 }
             }
         }
-
-        // add additive damage
-        damage += damageAdditive;
-        // multiply damage
-        damage *= damageMultiplier;
-
-        // clamp damage
-        damage = Mathf.Clamp(damage, minDamage, maxDamage);
-
-        return damage;
     }
 
     private void Awake() {
