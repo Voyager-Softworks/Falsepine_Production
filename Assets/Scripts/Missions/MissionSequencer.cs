@@ -29,8 +29,7 @@ public class MissionSequencer : MonoBehaviour
     [System.Serializable]
     public struct MissionSequence
     {
-        public string name; ///< The name of the sequence.
-        public Area area; ///< The area of the sequence.
+        public Mission mission; ///< The mission that this sequence is for.
         public List<string> scenes; ///< The list of scenes in the sequence.
         public string missionStartScene; ///< The scene to be loaded when the mission starts.
         public string missionEndScene; ///< The scene to be loaded when the mission ends.
@@ -43,12 +42,12 @@ public class MissionSequencer : MonoBehaviour
     /// <summary>
     ///  Generates a new sequence of scenes for a mission.
     /// </summary>
-    /// <param name="area">The area of the game world the mission should take place.</param>
-    void GenerateNewSequence(Area area)
+    /// <param name="mission">The area of the game world the mission should take place.</param>
+    void GenerateNewSequence(Mission mission)
     {
         currentSequence = new Queue<string>();
         // Pick a random sequence from the list of sequences, where the area matches the parameter.
-        MissionSequence sequence = missionSequences.Where(x => x.area == area).OrderBy(x => Random.value).First();
+        MissionSequence sequence = missionSequences.Where(x => x.mission == mission).OrderBy(x => Random.value).First();
         // Add the start scene to the sequence.
         currentSequence.Enqueue(sequence.missionStartScene);
         // Add the scenes in random order to the sequence.

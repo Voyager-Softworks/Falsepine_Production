@@ -22,15 +22,6 @@ public class StatsManager : MonoBehaviour
 {
     public static StatsManager instance;
 
-    // public enum StatType{
-    //     RangedDamage = 0,
-    //     RangedInaccuracy = 1,
-    //     RangedRange = 2,
-    //     RangedAimSpeed = 6,
-    //     ShotgunDamage = 3,
-    //     PistolDamage = 4,
-    //     RifleDamage = 5,
-    // }
     [Serializable]
     public class StatType
     {
@@ -40,6 +31,7 @@ public class StatsManager : MonoBehaviour
 
         public string value;
 
+        // Items
         public static StatType RangedDamage         = new StatType("RangedDamage");
         public static StatType RangedInaccuracy     = new StatType("RangedInaccuracy");
         public static StatType RangedRange          = new StatType("RangedRange");
@@ -47,6 +39,9 @@ public class StatsManager : MonoBehaviour
         public static StatType ShotgunDamage        = new StatType("ShotgunDamage");
         public static StatType PistolDamage         = new StatType("PistolDamage");
         public static StatType RifleDamage          = new StatType("RifleDamage");
+
+        // Economy
+        //public static StatType PlayerSilver         = new StatType("Silver");
 
         public static String DisplayName(StatType type){
             //add a space before each capital letter
@@ -59,6 +54,14 @@ public class StatsManager : MonoBehaviour
             }
             return displayName;
         }
+    }
+
+    public interface UsesStats{
+        List<StatType> GetStatTypes();
+    }
+
+    public interface HasStatMods{
+        List<StatMod> GetStatMods();
     }
 
     [Serializable]
@@ -113,7 +116,6 @@ public class StatsManager : MonoBehaviour
 
         return false;
     }
-
     static public bool DrawStatModList(List<StatMod> statMods){
         foreach (StatMod statMod in statMods) {
             EditorGUILayout.BeginHorizontal();
@@ -133,14 +135,6 @@ public class StatsManager : MonoBehaviour
         return false;
     }
     #endif
-
-    public interface UsesStats{
-        List<StatType> GetStatTypes();
-    }
-
-    public interface HasStatMods{
-        List<StatMod> GetStatMods();
-    }
 
     [SerializeField] static public List<StatMod> globalStatMods = new List<StatMod>()
     {

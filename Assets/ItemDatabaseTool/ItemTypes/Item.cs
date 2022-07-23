@@ -14,7 +14,7 @@ using UnityEditor;
 #endif
 
 [Serializable]
-public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasStatMods
+public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasStatMods, EconomyManager.Purchasable
 {
     // List of all the item classes in the game
     [NonSerialized] public static readonly IEnumerable<System.Type> AllTypes;
@@ -140,6 +140,18 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
         return m_statMods;
     }
 
+    // EconomyManager.Purchasable interface implementation
+    public int m_price = 0;
+    public bool m_allowDiscount = true;
+    public int GetPrice()
+    {
+        return m_price;
+    }
+    public bool AllowDiscount()
+    {
+        return m_allowDiscount;
+    }
+
 
     [Serializable]
     public class FieldResourceLink{
@@ -262,8 +274,12 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
         item.m_icon = this.m_icon;
         // NOTE: Make sure to COPY lists like below, not pass by reference
         item.m_tags = new List<TagManager.Tag>(this.m_tags);
+
         item.m_usedStatTypes = new List<StatsManager.StatType>(this.m_usedStatTypes);
         item.m_statMods = new List<StatsManager.StatMod>(this.m_statMods);
+
+        item.m_price = this.m_price;
+        item.m_allowDiscount = this.m_allowDiscount;
 
         item.currentStackSize = this.m_currentStackSize;
         item.maxStackSize = this.m_maxStackSize;
@@ -522,6 +538,26 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
             item.m_displayName = EditorGUILayout.TextField("Display Name: ", item.m_displayName);
             item.m_description = EditorGUILayout.TextField("Description: ", item.m_description);
             item.m_icon = EditorGUILayout.ObjectField("Icon: ", item.m_icon, typeof(Sprite), false) as Sprite;
+
+            // Economy box
+            GUILayout.BeginVertical("box");
+            // bold text
+            GUILayout.Label("Economy", CustomEditorStuff.center_bold_label);
+
+            //horiz
+            GUILayout.BeginHorizontal();
+            // price
+            GUILayout.Label(new GUIContent("Price: ", "Price of the item"), GUILayout.Width(50));
+            item.m_price = EditorGUILayout.IntField(item.m_price);
+            // space
+            GUILayout.Space(10);
+            // discount
+            item.m_allowDiscount = EditorGUILayout.Toggle("Allow Discount: ", item.m_allowDiscount);
+            GUILayout.EndHorizontal();
+            
+            // End Economy box
+            GUILayout.EndVertical();
+
 
             // stack info box
             GUILayout.BeginVertical("box");
