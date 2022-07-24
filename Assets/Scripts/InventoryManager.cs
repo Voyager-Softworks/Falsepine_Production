@@ -76,12 +76,17 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void MoveItem(Inventory source, Inventory target, int index) {
-        Item item = source.RemoveItemFromInventory(index);
-        if (!item) return;
-        item = target.AddItemToInventory(item);
-        if (!item) return;
-        source.AddItemToInventory(item);
+    public void TryMoveItem(Inventory source, Inventory target, int index) {
+        Item item = source.slots[index].item;
+        if (target.CanAddItemToInventory(item)) {
+            target.TryAddItemToInventory(item);
+            source.RemoveItemFromInventory(index);
+        }
+    }
+
+    public bool CanMoveItem(Inventory source, Inventory target, int index) {
+        Item item = source.slots[index].item;
+        return target.CanAddItemToInventory(item);
     }
 
     public void LoadInventories() {

@@ -204,7 +204,7 @@ public class Console : MonoBehaviour
             }
 
             // give the item to the player
-            if (inventory.AddItemToInventory(itemID, amount)){
+            if (inventory.TryAddItemToInventory(itemID, amount)){
                 Log("- " + inventoryID + " has received " + itemID);
             }
             else{

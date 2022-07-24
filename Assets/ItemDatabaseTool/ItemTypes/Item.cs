@@ -14,7 +14,7 @@ using UnityEditor;
 #endif
 
 [Serializable]
-public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasStatMods
+public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasStatMods, EconomyManager.Purchasable
 {
     // List of all the item classes in the game
     [NonSerialized] public static readonly IEnumerable<System.Type> AllTypes;
@@ -140,6 +140,21 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
         return m_statMods;
     }
 
+    // EconomyManager.Purchasable interface implementation
+    public int m_price = 0;
+    public bool m_allowedDiscount = true;
+    public int GetPrice(EconomyManager.PriceType _type = EconomyManager.PriceType.BUY_PRICE)
+    {
+        if (_type == PriceType.BUY_PRICE)
+        {
+            return m_price;
+        }
+        else
+        {
+            return m_price / 2;
+        }
+    }
+
 
     [Serializable]
     public class FieldResourceLink{
@@ -185,31 +200,9 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
     /// <returns>If fully stacked, returns null, otherwise returns back the item minus the amount that was stacked</returns>
     public Item TryAddToStack(Item _item){
 
-        // check invalid type
-        if (this.GetType() != _item.GetType() || this.id != _item.id){
-            //Debug.LogWarning("Trying to add an item of a different type or id to a stack");
+        if (!CanAddItemToStack(_item))
+        {
             return _item;
-        }
-
-        // compare strings
-        if (mustMatchToStack){
-            Item thisTemp = this.CreateInstance();
-            thisTemp.instanceID = "";
-            thisTemp.currentStackSize = 0;
-
-            Item otherTemp = _item.CreateInstance();
-            otherTemp.instanceID = "";
-            otherTemp.currentStackSize = 0;
-
-            // convert to json
-            string thisJson = JsonUtility.ToJson(thisTemp);
-            string otherJson = JsonUtility.ToJson(otherTemp);
-
-            // compare json
-            if (thisJson != otherJson){
-                Debug.LogWarning("Trying to add an item with different data to a stack");
-                return _item;
-            }
         }
 
         // add to stack as long as there is room
@@ -231,6 +224,52 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
 
         // otherwise return the item minus the amount that was stacked
         return _item;
+    }
+
+    public bool CanAddItemToStack(Item _item)
+    {
+        // check invalid type
+        if (this.GetType() != _item.GetType() || this.id != _item.id)
+        {
+            //Debug.LogWarning("Trying to add an item of a different type or id to a stack");
+            return false;
+        }
+
+        // compare strings
+        if (mustMatchToStack)
+        {
+            Item thisTemp = this.CreateInstance();
+            thisTemp.instanceID = "";
+            thisTemp.currentStackSize = 0;
+
+            Item otherTemp = _item.CreateInstance();
+            otherTemp.instanceID = "";
+            otherTemp.currentStackSize = 0;
+
+            // convert to json
+            string thisJson = JsonUtility.ToJson(thisTemp);
+            string otherJson = JsonUtility.ToJson(otherTemp);
+
+            // compare json
+            if (thisJson != otherJson)
+            {
+                //Debug.LogWarning("Trying to add an item with different data to a stack");
+                return false;
+            }
+        }
+
+        // add to stack as long as there is room
+        int amountToAdd = _item.currentStackSize;
+        int spareSpace = m_maxStackSize - m_currentStackSize;
+        int amountToAddToStack = Mathf.Min(amountToAdd, spareSpace);
+
+        if (amountToAddToStack > 0)
+        {
+            return true;
+        }
+
+        // if the item is now empty, return null
+        return false;
     }
 
     /// <summary>
@@ -265,6 +304,9 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
 
         item.m_usedStatTypes = new List<StatsManager.StatType>(this.m_usedStatTypes);
         item.m_statMods = new List<StatsManager.StatMod>(this.m_statMods);
+
+        item.m_price = this.m_price;
+        item.m_allowedDiscount = this.m_allowedDiscount;
 
         item.currentStackSize = this.m_currentStackSize;
         item.maxStackSize = this.m_maxStackSize;
@@ -528,6 +570,19 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
             GUILayout.BeginVertical("box");
             // bold text
             GUILayout.Label("Economy", CustomEditorStuff.center_bold_label);
+            // horiz
+            GUILayout.BeginHorizontal();
+            // price
+            GUILayout.Label("Price: ", GUILayout.Width(50));
+            item.m_price = EditorGUILayout.IntField(item.m_price);
+            //space
+            GUILayout.Space(10);
+            // discount
+            GUILayout.Label("Allowed Discount? ");
+            item.m_allowedDiscount = EditorGUILayout.Toggle(item.m_allowedDiscount);
+            // end horiz
+            GUILayout.EndHorizontal();
+
             
             // End Economy box
             GUILayout.EndVertical();
@@ -616,13 +671,20 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
             string usedStatTypes = "Used Stat Types: ";
             for (int i = 0; i < item.m_usedStatTypes.Count; i++)
             {
-                usedStatTypes += item.m_usedStatTypes[i].value + ", ";
+                usedStatTypes += item.m_usedStatTypes[i].value;
+                // if not last item, add comma and/or new line
+                if (i != item.m_usedStatTypes.Count - 1)
+                {
+                    usedStatTypes += ", ";
+
+                    // every third item, add a new line
+                    if (i % 3 == 2)
+                    {
+                        usedStatTypes += "\n";
+                    }
+                }
             }
-            if (item.m_usedStatTypes.Count > 0)
-            {
-                usedStatTypes = usedStatTypes.Substring(0, usedStatTypes.Length - 2);
-            }
-            else
+            if (item.m_usedStatTypes.Count <= 0)
             {
                 usedStatTypes += "None";
             }

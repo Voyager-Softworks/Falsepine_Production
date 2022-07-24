@@ -15,8 +15,14 @@ public class InventoryPannel : MonoBehaviour
     [ReadOnly]
     #endif
     [SerializeField] public Inventory linkedInventory;
-
     [SerializeField] public InventoryPannel otherPannel;
+
+    [Header("Transferring")]
+    [SerializeField] public bool sendingAllowed = true;
+    [SerializeField] public bool receivingAllowed = true;
+    [SerializeField] public bool transferCosts = false;
+    [SerializeField] public EconomyManager.PriceType sendingPriceType = EconomyManager.PriceType.BUY_PRICE;
+    [SerializeField] public EconomyManager.PriceType receivingPriceType = EconomyManager.PriceType.SELL_PRICE;
 
     [Header("UI")]
     public List<InventoryCell> cells = new List<InventoryCell>();
@@ -77,6 +83,39 @@ public class InventoryPannel : MonoBehaviour
                     slots.Remove(gridItem.linkedSlot);
                 }
             }
+        }
+    }
+
+    public void ItemClicked(InventoryGridItem gridItem)
+    {
+        if (gridItem == null) return;
+
+        Item item = gridItem.itemInSlot;
+        if (gridItem.itemInSlot == null) return;
+
+        if (!sendingAllowed) return;
+
+        Inventory sourceInventory = gridItem.linkedSlot.ownerInventory;
+        if (sourceInventory == null) return;
+
+        //get index of slot in source inventory
+        int sourceIndex = sourceInventory.GetItemIndex(gridItem.itemInSlot);
+        if (sourceIndex == -1) return;
+
+        Inventory targetInventory = otherPannel?.linkedInventory;
+        if (targetInventory == null) return;
+
+        if (!otherPannel.receivingAllowed) return;
+
+        EconomyManager economyManager = EconomyManager.instance;
+        if (economyManager == null) return;
+
+        if (!transferCosts){
+            //transfer
+            InventoryManager.instance.TryMoveItem(sourceInventory, targetInventory, sourceIndex);
+        }
+        else{
+            //int cost = item.getp
         }
     }
 }
