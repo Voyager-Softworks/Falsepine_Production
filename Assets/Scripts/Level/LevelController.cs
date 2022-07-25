@@ -19,18 +19,17 @@ public class LevelController : MonoBehaviour
         // save journal
         if (JournalManager.instance != null) JournalManager.instance.SaveJournal();
     }
-
     static public void LoadMenu()
     {
         SaveAll();
 
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("Menu");
     }
 
     static public void LoadTown(){
         SaveAll();
 
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("TownScene");
     }
 
     static public void LoadSnow()
