@@ -15,14 +15,17 @@ public class InventoryPannel : MonoBehaviour
     [ReadOnly]
     #endif
     [SerializeField] public Inventory linkedInventory;
-
     [SerializeField] public InventoryPannel otherPannel;
+
+    [Header("Transferring")]
+    [SerializeField] public bool sendingAllowed = true;
+    [SerializeField] public bool receivingAllowed = true;
 
     [Header("UI")]
     public List<InventoryCell> cells = new List<InventoryCell>();
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         // get inventory
         linkedInventory = InventoryManager.instance?.GetInventory(inventoryID);
@@ -37,7 +40,7 @@ public class InventoryPannel : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         // every 5 frames, update the UI
         if (Time.frameCount % 5 == 0)
@@ -46,7 +49,7 @@ public class InventoryPannel : MonoBehaviour
         }
     }
 
-    private void UpdateUI()
+    public virtual void UpdateUI()
     {
         // update each cell
         foreach (InventoryCell cell in cells)
@@ -55,7 +58,7 @@ public class InventoryPannel : MonoBehaviour
         }
     }
 
-    public void LinkGridItems(){
+    protected virtual void LinkGridItems(){
         // get inventory, and a list of slots in it
         Inventory inventory = InventoryManager.instance?.GetInventory(inventoryID);
         List<Inventory.InventorySlot> slots = new List<Inventory.InventorySlot>();
@@ -78,5 +81,30 @@ public class InventoryPannel : MonoBehaviour
                 }
             }
         }
+    }
+
+    public virtual void ItemClicked(InventoryGridItem gridItem)
+    {
+        if (gridItem == null) return;
+
+        if (!sendingAllowed) return;
+
+        Inventory sourceInventory = gridItem.linkedSlot.ownerInventory;
+        if (sourceInventory == null) return;
+
+        //get index of slot in source inventory
+        int sourceIndex = sourceInventory.GetItemIndex(gridItem.itemInSlot);
+        if (sourceIndex == -1) return;
+
+        Inventory targetInventory = otherPannel?.linkedInventory;
+        if (targetInventory == null) return;
+
+        if (!otherPannel.receivingAllowed) return;
+
+        PerformClickAction(gridItem, sourceInventory, targetInventory, sourceIndex);
+    }
+
+    protected virtual void PerformClickAction(InventoryGridItem gridItem, Inventory sourceInventory, Inventory targetInventory, int sourceIndex){
+        InventoryManager.instance.TryMoveItem(sourceInventory, targetInventory, sourceIndex);
     }
 }

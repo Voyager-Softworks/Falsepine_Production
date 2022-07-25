@@ -41,7 +41,7 @@ public class StatsManager : MonoBehaviour
         public static StatType RifleDamage          = new StatType("RifleDamage");
 
         // Economy
-        public static StatType ShopCost             = new StatType("ShopCost");
+        public static StatType StoreCost             = new StatType("StoreCost");
         public static StatType ItemCost             = new StatType("ItemCost");
 
         public static String DisplayName(StatType type){
@@ -198,7 +198,7 @@ public class StatsManager : MonoBehaviour
     {
         // list of stats to use in this function
         List<StatType> usedStatTypes = new List<StatType>(){
-            StatType.ShopCost,
+            StatType.StoreCost,
             StatType.ItemCost,
         };
         

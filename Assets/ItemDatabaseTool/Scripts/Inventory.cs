@@ -101,6 +101,28 @@ public class Inventory : MonoBehaviour
 
             return null;
         }
+
+        public bool CanAddItemToSlot(Item _item)
+        {
+            // if item is null, return
+            if (_item == null) return false;
+
+            // if slot is not empty, try to stack
+            if (this.item != null)
+            {
+                return this.item.CanAddItemToStack(_item);
+            }
+
+            // check if item type is in filter
+            if (typeFilter.Count() > 0 && !typeFilter.Contains(_item.GetType().Name))
+            {
+                //Debug.LogWarning("Item type does not match inventory type filter.");
+
+                return false;
+            }
+
+            return true;
+        }
     }
 
     public List<Item> GetItems()
@@ -122,6 +144,8 @@ public class Inventory : MonoBehaviour
 
     public int GetItemIndex(Item item)
     {
+        if (item == null) return -1;
+
         for (int i = 0; i < slots.Count; i++)
         {
             if (slots[i].item == item)
@@ -161,7 +185,7 @@ public class Inventory : MonoBehaviour
     /// <summary>
     /// Add an item to the inventory by reference.
     /// </summary>
-    public Item AddItemToInventory(Item _item){
+    public Item TryAddItemToInventory(Item _item){
         // if item is null, return
         if (_item == null) return null;
         int startAmount = _item.currentStackSize;
@@ -170,9 +194,13 @@ public class Inventory : MonoBehaviour
         for (int i = 0; i < slots.Count; i++)
         {
             Item inSlot = slots[i].item;
-            if (inSlot && inSlot.id == _item.id)
+            if (inSlot && _item && inSlot.id == _item.id)
             {
                 _item = slots[i].TryAddItemToSlot(_item);
+                if (_item == null)
+                {
+                    return null;
+                }
             }
         }
 
@@ -195,17 +223,48 @@ public class Inventory : MonoBehaviour
         return _item;
     }
 
+    public bool CanAddItemToInventory(Item _item)
+    {
+        // if item is null, return
+        if (_item == null) return false;
+
+        // loop through slots and try to add item to existing stack
+        for (int i = 0; i < slots.Count; i++)
+        {
+            Item inSlot = slots[i].item;
+            if (inSlot && _item && inSlot.id == _item.id)
+            {
+                if (inSlot.CanAddItemToStack(_item)){
+                    return true;
+                }
+            }
+        }
+
+        // loop through all slots and try to add item while not null
+        for (int i = 0; i < m_slots.Count; i++)
+        {
+            InventorySlot slot = m_slots[i];
+
+            if (slot.CanAddItemToSlot(_item))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     /// <summary>
     /// Tries to add an item to the inventory by ID.
     /// </summary>
-    public bool AddItemToInventory(string _id, int _amount = 1){
+    public bool TryAddItemToInventory(string _id, int _amount = 1){
         Item item = ItemDatabase.GetItem(_id);
         if (item == null) return false;
 
         item = item.CreateInstance();
         item.currentStackSize = _amount;
 
-        item = AddItemToInventory(item);
+        item = TryAddItemToInventory(item);
         if (item == null) return true;
 
         return false;

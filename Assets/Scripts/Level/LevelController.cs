@@ -65,12 +65,12 @@ public class LevelController : MonoBehaviour
             Destroy(MissionManager.instance.gameObject);
         }
 
-        // delete inventory save file for player, home, and shop
+        // delete inventory save file for player, home, and store
         if (InventoryManager.instance != null)
         {
             foreach (Inventory inv in InventoryManager.instance.inventories)
             {
-                if (inv.id == "player" || inv.id == "home" || inv.id == "shop")
+                if (inv.id == "player" || inv.id == "home" || inv.id == "store")
                 {
                     inv.ClearInventory();
                     inv.DeleteSaveFile();

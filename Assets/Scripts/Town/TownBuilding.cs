@@ -12,7 +12,7 @@ public class TownBuilding : ClickableObject  /// @todo Comment
         BANK,
         HOME,
         INN,
-        SHOP
+        STORE
     }
 
     public GameObject UI;

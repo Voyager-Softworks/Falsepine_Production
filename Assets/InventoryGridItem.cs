@@ -81,7 +81,11 @@ public class InventoryGridItem : MonoBehaviour  /// @todo Comment
     }
 
     public void ClickItem(){
-        TryTransferToOpenInventory();
+        //TryTransferToOpenInventory();
+
+        InventoryPannel parentPannel = GetComponentInParent<InventoryPannel>();
+        if (parentPannel == null) return;
+        parentPannel.ItemClicked(this);
 
         OnClick.Invoke();
     }
@@ -107,6 +111,6 @@ public class InventoryGridItem : MonoBehaviour  /// @todo Comment
         if (sourceIndex == -1) return;
 
         //transfer
-        InventoryManager.instance.MoveItem(sourceInventory, targetInventory, sourceIndex);
+        InventoryManager.instance.TryMoveItem(sourceInventory, targetInventory, sourceIndex);
     }
 }
