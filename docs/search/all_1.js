@@ -14,8 +14,10 @@ var searchData=
   ['boss_11',['boss',['../classBossArenaController.html#a951583a3cd5d7732bc1478ef5470b818',1,'BossArenaController']]],
   ['bossarenacontroller_12',['BossArenaController',['../classBossArenaController.html',1,'']]],
   ['bossmusicsecondphase_13',['bossMusicSecondPhase',['../classBossArenaController.html#acde687d0cc7f59346a270ff71ec3c5bb',1,'BossArenaController']]],
-  ['bug_20list_14',['Bug List',['../bug.html',1,'']]],
-  ['buildingpanellist_15',['BuildingPanelList',['../classBuildingPanelList.html',1,'']]],
-  ['bullettrail_16',['BulletTrail',['../classBulletTrail.html',1,'']]],
-  ['bvalue_17',['bvalue',['../classNodeAI_1_1NodeData_1_1SerializableProperty.html#a346ad2699c0b015447fce5584dd38dd2',1,'NodeAI::NodeData::SerializableProperty']]]
+  ['bossutilities_14',['BossUtilities',['../classBoss_1_1BossUtilities.html',1,'Boss']]],
+  ['brightmaw_15',['Brightmaw',['../namespaceBoss_1_1Brightmaw.html',1,'Boss']]],
+  ['bug_20list_16',['Bug List',['../bug.html',1,'']]],
+  ['buildingpanellist_17',['BuildingPanelList',['../classBuildingPanelList.html',1,'']]],
+  ['bullettrail_18',['BulletTrail',['../classBulletTrail.html',1,'']]],
+  ['bvalue_19',['bvalue',['../classNodeAI_1_1NodeData_1_1SerializableProperty.html#a346ad2699c0b015447fce5584dd38dd2',1,'NodeAI::NodeData::SerializableProperty']]]
 ];

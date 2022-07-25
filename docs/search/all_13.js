@@ -8,6 +8,7 @@ var searchData=
   ['update_5',['Update',['../classDamageDealer.html#a3d01a0c3dc2cec082b2e169bbb0070be',1,'DamageDealer.Update()'],['../classSceneTransitionManager.html#a5ca217978c47772f1e456761f56a6e25',1,'SceneTransitionManager.Update()']]],
   ['urgency_6',['urgency',['../classNodeAI_1_1SensoryEvent.html#a3ed5c37201466652bea74f6c184497e2',1,'NodeAI::SensoryEvent']]],
   ['usecorrectbait_7',['UseCorrectBait',['../classBossArenaController.html#a0185eaf9e891043798261ce9e8985836',1,'BossArenaController']]],
-  ['usesstats_8',['UsesStats',['../interfaceStatsManager_1_1UsesStats.html',1,'StatsManager']]],
-  ['usewrongbait_9',['UseWrongBait',['../classBossArenaController.html#a550371922bc7dfd3d47520457cdd2015',1,'BossArenaController']]]
+  ['userootmotion_8',['useRootMotion',['../classRootMotionAgent.html#a515239a604cef43bf3155ae0eef8b859',1,'RootMotionAgent']]],
+  ['usesstats_9',['UsesStats',['../interfaceStatsManager_1_1UsesStats.html',1,'StatsManager']]],
+  ['usewrongbait_10',['UseWrongBait',['../classBossArenaController.html#a550371922bc7dfd3d47520457cdd2015',1,'BossArenaController']]]
 ];

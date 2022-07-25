@@ -8,7 +8,7 @@ var searchData=
   ['namespaceentry_5',['NamespaceEntry',['../classNodeAI_1_1NamespaceParser_1_1NamespaceEntry.html',1,'NodeAI::NamespaceParser']]],
   ['namespaceparser_6',['NamespaceParser',['../classNodeAI_1_1NamespaceParser.html',1,'NodeAI']]],
   ['nand_7',['Nand',['../classNodeAI_1_1Logic_1_1Nand.html',1,'NodeAI::Logic']]],
-  ['navagent_8',['navAgent',['../classNavagentBlendtreeCoupler.html#ae18270aa49abd2265d6cbbf007934f38',1,'NavagentBlendtreeCoupler']]],
+  ['navagent_8',['navAgent',['../classNavagentBlendtreeCoupler.html#ae18270aa49abd2265d6cbbf007934f38',1,'NavagentBlendtreeCoupler.navAgent()'],['../classRootMotionAgent.html#a867259f8a4b96fc639cbffd887a48d65',1,'RootMotionAgent.navAgent()']]],
   ['navagentblendtreecoupler_9',['NavagentBlendtreeCoupler',['../classNavagentBlendtreeCoupler.html',1,'']]],
   ['node_10',['Node',['../classNodeAI_1_1Node.html',1,'NodeAI']]],
   ['nodeai_11',['NodeAI',['../namespaceNodeAI.html',1,'']]],

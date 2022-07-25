@@ -10,6 +10,8 @@ var searchData=
   ['repeatuntilfail_7',['RepeatUntilFail',['../classNodeAI_1_1RepeatUntilFail.html',1,'NodeAI']]],
   ['repeatuntilsuccess_8',['RepeatUntilSuccess',['../classNodeAI_1_1RepeatUntilSuccess.html',1,'NodeAI']]],
   ['requestattack_9',['RequestAttack',['../classRequestAttack.html',1,'']]],
-  ['rotatetowardsplayer_10',['RotateTowardsPlayer',['../classRotateTowardsPlayer.html',1,'']]],
-  ['runtimebase_11',['RuntimeBase',['../classNodeAI_1_1RuntimeBase.html',1,'NodeAI']]]
+  ['rootmotionagent_10',['RootMotionAgent',['../classRootMotionAgent.html',1,'']]],
+  ['rotatetowards_11',['RotateTowards',['../classRotateTowards.html',1,'']]],
+  ['rotatetowardsplayer_12',['RotateTowardsPlayer',['../classRotateTowardsPlayer.html',1,'']]],
+  ['runtimebase_13',['RuntimeBase',['../classNodeAI_1_1RuntimeBase.html',1,'NodeAI']]]
 ];
