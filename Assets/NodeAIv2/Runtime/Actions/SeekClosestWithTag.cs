@@ -44,7 +44,12 @@ namespace NodeAI
             var tag = GetProperty<string>("Tag");
             var range = GetProperty<float>("Range");
 
-            var targets = GameObject.FindGameObjectsWithTag(tag);
+            GameObject[] targets = GameObject.FindGameObjectsWithTag(tag);
+            if(targets.Length <= 0)
+            {
+
+                return NodeData.State.Failure;
+            }
             var closest = targets[0];
 
             foreach (var target in targets)

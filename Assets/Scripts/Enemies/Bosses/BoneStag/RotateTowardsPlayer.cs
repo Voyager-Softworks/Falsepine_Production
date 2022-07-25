@@ -6,6 +6,7 @@ using UnityEngine.AI;
 /// <summary>
 ///  Script to handle rotation and translation towards the player as part of enemy attacks.
 /// </summary>
+/// <seealso cref="RotateTowards"/>
 public class RotateTowardsPlayer : MonoBehaviour
 {
     /// <summary>
