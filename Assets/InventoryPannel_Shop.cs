@@ -11,6 +11,8 @@ using System;
 public class InventoryPannel_Shop : InventoryPannel
 {
 
+    public Item itemToBuy = null;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -42,16 +44,18 @@ public class InventoryPannel_Shop : InventoryPannel
         Item item = gridItem.itemInSlot;
         if (gridItem.itemInSlot == null) return;
 
-        EconomyManager economyManager = EconomyManager.instance;
-        if (economyManager == null) return;
+        itemToBuy = item;
 
-        int price = item.GetPrice();
-        if (economyManager.CanAfford(price)){
-            //transfer
-            if (InventoryManager.instance.CanMoveItem(sourceInventory, targetInventory, sourceIndex)){
-                economyManager.Spend(price);
-                InventoryManager.instance.TryMoveItem(sourceInventory, targetInventory, sourceIndex);
-            }
-        }
+        // EconomyManager economyManager = EconomyManager.instance;
+        // if (economyManager == null) return;
+
+        // int price = item.GetPrice();
+        // if (economyManager.CanAfford(price)){
+        //     //transfer
+        //     if (InventoryManager.instance.CanMoveItem(sourceInventory, targetInventory, sourceIndex)){
+        //         economyManager.Spend(price);
+        //         InventoryManager.instance.TryMoveItem(sourceInventory, targetInventory, sourceIndex);
+        //     }
+        // }
     }
 }
