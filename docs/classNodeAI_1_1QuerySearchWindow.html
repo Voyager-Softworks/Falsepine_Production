@@ -70,6 +70,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classNodeAI_1_1QuerySearchWindow-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">NodeAI.QuerySearchWindow Class Reference</div></div>
 </div><!--header-->
@@ -82,7 +84,7 @@ Inheritance diagram for NodeAI.QuerySearchWindow:</div>
 <div class="dyncontent">
 <div class="center"><img src="classNodeAI_1_1QuerySearchWindow__inherit__graph.png" border="0" usemap="#aNodeAI_8QuerySearchWindow_inherit__map" alt="Inheritance graph"/></div>
 <map name="aNodeAI_8QuerySearchWindow_inherit__map" id="aNodeAI_8QuerySearchWindow_inherit__map">
-<area shape="rect" title="The search window for queries." alt="" coords="33,131,283,252"/>
+<area shape="rect" title="The search window for queries." alt="" coords="33,131,283,267"/>
 <area shape="rect" title=" " alt="" coords="5,5,135,83"/>
 <area shape="rect" title=" " alt="" coords="159,5,335,83"/>
 </map>
@@ -92,15 +94,25 @@ Collaboration diagram for NodeAI.QuerySearchWindow:</div>
 <div class="dyncontent">
 <div class="center"><img src="classNodeAI_1_1QuerySearchWindow__coll__graph.png" border="0" usemap="#aNodeAI_8QuerySearchWindow_coll__map" alt="Collaboration graph"/></div>
 <map name="aNodeAI_8QuerySearchWindow_coll__map" id="aNodeAI_8QuerySearchWindow_coll__map">
-<area shape="rect" title="The search window for queries." alt="" coords="33,131,283,252"/>
-<area shape="rect" title=" " alt="" coords="5,5,135,83"/>
-<area shape="rect" title=" " alt="" coords="159,5,335,83"/>
+<area shape="rect" title="The search window for queries." alt="" coords="5,1712,256,1848"/>
+<area shape="rect" title=" " alt="" coords="511,5,641,83"/>
+<area shape="rect" href="classNodeAI_1_1SearchWindow.html" title="A search window provider for the NodeAI graph." alt="" coords="614,1065,786,1201"/>
+<area shape="rect" href="classNodeAI_1_1RuntimeBase.html" title="Base class for all runtime nodes." alt="" coords="540,132,825,429"/>
+<area shape="rect" href="classNodeAI_1_1Query.html" title="Base class for all query nodes." alt="" coords="849,154,1135,407"/>
+<area shape="rect" href="classNodeAI_1_1BlackboardSearchWindow.html" title=" " alt="" coords="824,1727,1067,1833"/>
+<area shape="rect" href="classNodeAI_1_1QuerySearchWindow.html" title="The search window for queries." alt="" coords="280,1712,531,1848"/>
+<area shape="rect" title=" " alt="" coords="264,881,440,959"/>
+<area shape="rect" href="classNodeAI_1_1GraphView.html" title="The GraphView is used to display the NodeAI Graph and handle user input." alt="" coords="470,1264,711,1649"/>
+<area shape="rect" title=" " alt="" coords="399,1087,590,1179"/>
+<area shape="rect" href="classNodeAI_1_1Node.html" title="The Node class is used to store data for a node in a NodeAI Graph." alt="" coords="798,837,943,1003"/>
+<area shape="rect" title=" " alt="" coords="515,587,706,679"/>
+<area shape="rect" href="classNodeAI_1_1NodeData.html" title="This class is used to store the data of a node." alt="" coords="880,492,1027,775"/>
 </map>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a23e1ec6499e2273ad1743c746b09c98d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1QuerySearchWindow.html#a23e1ec6499e2273ad1743c746b09c98d">Init</a> (<a class="el" href="classNodeAI_1_1GraphView.html">GraphView</a> graphView)</td></tr>
+<tr class="memitem:a23e1ec6499e2273ad1743c746b09c98d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1QuerySearchWindow.html#a23e1ec6499e2273ad1743c746b09c98d">Init</a> (<a class="el" href="classNodeAI_1_1GraphView.html">GraphView</a> <a class="el" href="classNodeAI_1_1QuerySearchWindow.html#abdb9531411ac0b4aaf8a5b27e40311da">graphView</a>)</td></tr>
 <tr class="memdesc:a23e1ec6499e2273ad1743c746b09c98d"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is called when the search window is opened.  <a href="classNodeAI_1_1QuerySearchWindow.html#a23e1ec6499e2273ad1743c746b09c98d">More...</a><br /></td></tr>
 <tr class="separator:a23e1ec6499e2273ad1743c746b09c98d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a587dbb415aaf13f8b314b639f161323e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1QuerySearchWindow.html#a587dbb415aaf13f8b314b639f161323e">PopulateSearchTreeRecursively</a> (List&lt; SearchTreeEntry &gt; searchTree, <a class="el" href="classNodeAI_1_1NamespaceParser_1_1NamespaceEntry.html">NamespaceParser.NamespaceEntry</a> entry, int depth=0)</td></tr>
@@ -112,6 +124,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a891a9ce09538a6013ae629f04cad0d66"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1QuerySearchWindow.html#a891a9ce09538a6013ae629f04cad0d66">OnSelectEntry</a> (SearchTreeEntry entry, SearchWindowContext context)</td></tr>
 <tr class="memdesc:a891a9ce09538a6013ae629f04cad0d66"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is called when an entry is selected in the search window.  <a href="classNodeAI_1_1QuerySearchWindow.html#a891a9ce09538a6013ae629f04cad0d66">More...</a><br /></td></tr>
 <tr class="separator:a891a9ce09538a6013ae629f04cad0d66"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a465cea7727c5b9554961db81bf015363"><td class="memItemLeft" align="right" valign="top">Type[]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1QuerySearchWindow.html#a465cea7727c5b9554961db81bf015363">GetInheritedClasses</a> (Type MyType)</td></tr>
+<tr class="memdesc:a465cea7727c5b9554961db81bf015363"><td class="mdescLeft">&#160;</td><td class="mdescRight">Used to get all child classes of a given type.  <a href="classNodeAI_1_1QuerySearchWindow.html#a465cea7727c5b9554961db81bf015363">More...</a><br /></td></tr>
+<tr class="separator:a465cea7727c5b9554961db81bf015363"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:abdb9531411ac0b4aaf8a5b27e40311da"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNodeAI_1_1GraphView.html">GraphView</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1QuerySearchWindow.html#abdb9531411ac0b4aaf8a5b27e40311da">graphView</a></td></tr>
+<tr class="memdesc:abdb9531411ac0b4aaf8a5b27e40311da"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classNodeAI_1_1GraphView.html" title="The GraphView is used to display the NodeAI Graph and handle user input.">GraphView</a> that is currently being searched.  <a href="classNodeAI_1_1QuerySearchWindow.html#abdb9531411ac0b4aaf8a5b27e40311da">More...</a><br /></td></tr>
+<tr class="separator:abdb9531411ac0b4aaf8a5b27e40311da"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >The search window for queries. </p>
@@ -153,6 +177,47 @@ Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="QuerySearchWindow_8cs_source.html#l00080">80</a> of file <a class="el" href="QuerySearchWindow_8cs_source.html">QuerySearchWindow.cs</a>.</p>
 
+<p class="reference">References <a class="el" href="QuerySearchWindow_8cs_source.html#l00047">NodeAI.QuerySearchWindow.GetInheritedClasses()</a>, <a class="el" href="QuerySearchWindow_8cs_source.html#l00058">NodeAI.QuerySearchWindow.PopulateSearchTreeRecursively()</a>, and <a class="el" href="NamespaceParser_8cs_source.html#l00038">NodeAI.NamespaceParser.TreeFromTypes()</a>.</p>
+
+</div>
+</div>
+<a id="a465cea7727c5b9554961db81bf015363" name="a465cea7727c5b9554961db81bf015363"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a465cea7727c5b9554961db81bf015363">&#9670;&nbsp;</a></span>GetInheritedClasses()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Type[] NodeAI.QuerySearchWindow.GetInheritedClasses </td>
+          <td>(</td>
+          <td class="paramtype">Type&#160;</td>
+          <td class="paramname"><em>MyType</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Used to get all child classes of a given type. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">MyType</td><td>The type to check.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>An array of all child types of the provided type.</dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="QuerySearchWindow_8cs_source.html#l00047">47</a> of file <a class="el" href="QuerySearchWindow_8cs_source.html">QuerySearchWindow.cs</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="QuerySearchWindow_8cs_source.html#l00080">NodeAI.QuerySearchWindow.CreateSearchTree()</a>.</p>
+
 </div>
 </div>
 <a id="a23e1ec6499e2273ad1743c746b09c98d" name="a23e1ec6499e2273ad1743c746b09c98d"></a>
@@ -188,6 +253,10 @@ Public Member Functions</h2></td></tr>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="QuerySearchWindow_8cs_source.html#l00037">37</a> of file <a class="el" href="QuerySearchWindow_8cs_source.html">QuerySearchWindow.cs</a>.</p>
+
+<p class="reference">References <a class="el" href="QuerySearchWindow_8cs_source.html#l00030">NodeAI.QuerySearchWindow.graphView</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="GraphView_8cs_source.html#l00043">NodeAI.GraphView.GraphView()</a>.</p>
 
 </div>
 </div>
@@ -236,6 +305,8 @@ Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="QuerySearchWindow_8cs_source.html#l00102">102</a> of file <a class="el" href="QuerySearchWindow_8cs_source.html">QuerySearchWindow.cs</a>.</p>
+
+<p class="reference">References <a class="el" href="GraphView_8cs_source.html#l00340">NodeAI.GraphView.GenerateQueryNode()</a>, and <a class="el" href="QuerySearchWindow_8cs_source.html#l00030">NodeAI.QuerySearchWindow.graphView</a>.</p>
 
 </div>
 </div>
@@ -290,6 +361,39 @@ Public Member Functions</h2></td></tr>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="QuerySearchWindow_8cs_source.html#l00058">58</a> of file <a class="el" href="QuerySearchWindow_8cs_source.html">QuerySearchWindow.cs</a>.</p>
+
+<p class="reference">References <a class="el" href="QuerySearchWindow_8cs_source.html#l00058">NodeAI.QuerySearchWindow.PopulateSearchTreeRecursively()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="QuerySearchWindow_8cs_source.html#l00080">NodeAI.QuerySearchWindow.CreateSearchTree()</a>, and <a class="el" href="QuerySearchWindow_8cs_source.html#l00058">NodeAI.QuerySearchWindow.PopulateSearchTreeRecursively()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="abdb9531411ac0b4aaf8a5b27e40311da" name="abdb9531411ac0b4aaf8a5b27e40311da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdb9531411ac0b4aaf8a5b27e40311da">&#9670;&nbsp;</a></span>graphView</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classNodeAI_1_1GraphView.html">GraphView</a> NodeAI.QuerySearchWindow.graphView</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The <a class="el" href="classNodeAI_1_1GraphView.html" title="The GraphView is used to display the NodeAI Graph and handle user input.">GraphView</a> that is currently being searched. </p>
+
+<p class="definition">Definition at line <a class="el" href="QuerySearchWindow_8cs_source.html#l00030">30</a> of file <a class="el" href="QuerySearchWindow_8cs_source.html">QuerySearchWindow.cs</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="QuerySearchWindow_8cs_source.html#l00037">NodeAI.QuerySearchWindow.Init()</a>, and <a class="el" href="QuerySearchWindow_8cs_source.html#l00102">NodeAI.QuerySearchWindow.OnSelectEntry()</a>.</p>
 
 </div>
 </div>

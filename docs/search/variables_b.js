@@ -1,8 +1,10 @@
 var searchData=
 [
-  ['onbattlestart_0',['onBattleStart',['../classBossArenaController.html#a4657e231030d594379a6ac532ce58d1d',1,'BossArenaController']]],
-  ['output_1',['output',['../classNodeAI_1_1NodeData_1_1Property.html#a05b16ef7003af4f01f3103d7e8493633',1,'NodeAI.NodeData.Property.output()'],['../classNodeAI_1_1NodeData_1_1SerializableProperty.html#aae5639febe15e4017ff229d44136590a',1,'NodeAI.NodeData.SerializableProperty.output()']]],
-  ['outputport_2',['outputPort',['../classNodeAI_1_1Node.html#a7cd06858111b3dbe86b1603f51c43e6e',1,'NodeAI::Node']]],
-  ['outputports_3',['outputPorts',['../classNodeAI_1_1Node.html#af82b54e5076cc1a629d41dec16fd80f7',1,'NodeAI::Node']]],
-  ['ovalue_4',['ovalue',['../classNodeAI_1_1NodeData_1_1SerializableProperty.html#a7af330dc127a1114c53ccd02e42dd729',1,'NodeAI::NodeData::SerializableProperty']]]
+  ['name_0',['name',['http://docs.unity3d.com/ScriptReference/classNodeAI_1_1NodeData_1_1Property.html#a469da9f3b05a5c56bac54f29b2c3001c',1,'NodeAI::NodeData.Property::name()'],['http://docs.unity3d.com/ScriptReference/classNodeAI_1_1NodeData_1_1SerializableProperty.html#aac8aa39b6005e4b1fa2f8f25b70db953',1,'NodeAI::NodeData::SerializableProperty::name()']]],
+  ['navagent_1',['navAgent',['http://docs.unity3d.com/ScriptReference/classBoss_1_1Bonestag_1_1Bonestag__Charge.html#a8066614e8d1b5da019d853dda44a6da6',1,'Boss.Bonestag::Bonestag_Charge::navAgent()'],['http://docs.unity3d.com/ScriptReference/classNavagentBlendtreeCoupler.html#ae18270aa49abd2265d6cbbf007934f38',1,'NavagentBlendtreeCoupler::navAgent()'],['http://docs.unity3d.com/ScriptReference/classRootMotionAgent.html#a867259f8a4b96fc639cbffd887a48d65',1,'RootMotionAgent::navAgent()'],['http://docs.unity3d.com/ScriptReference/classNodeAI_1_1SeekCoverFrom.html#ac450cb4c573ae03c188527765e9d5505',1,'NodeAI::SeekCoverFrom::navAgent()']]],
+  ['nodedata_2',['nodeData',['http://docs.unity3d.com/ScriptReference/classNodeAI_1_1NodeAI__Behaviour.html#a436fc36345229548b60b9cfbddc69b69',1,'NodeAI::NodeAI_Behaviour']]],
+  ['nodegroups_3',['nodeGroups',['http://docs.unity3d.com/ScriptReference/classNodeAI_1_1NodeAI__Behaviour.html#a5685fdc0afa6b46f4437cfb39a60dc64',1,'NodeAI::NodeAI_Behaviour']]],
+  ['nodetree_4',['nodeTree',['http://docs.unity3d.com/ScriptReference/classNodeAI_1_1NodeAI__Agent.html#a516f95c0fa07facf8550c36991d6b683',1,'NodeAI::NodeAI_Agent']]],
+  ['nodetype_5',['nodeType',['http://docs.unity3d.com/ScriptReference/classNodeAI_1_1Node.html#a519f3f6fcfeae21b6284d49415c4c69d',1,'NodeAI::Node::nodeType()'],['http://docs.unity3d.com/ScriptReference/classNodeAI_1_1NodeData.html#a4f333c35711706baeed85deca46621f2',1,'NodeAI::NodeData::nodeType()']]],
+  ['noticedobjects_6',['noticedObjects',['http://docs.unity3d.com/ScriptReference/classNodeAI_1_1NodeAI__Senses.html#a02825a0483f2fe621ce7f078060ef1ef',1,'NodeAI::NodeAI_Senses']]]
 ];

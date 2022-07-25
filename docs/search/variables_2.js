@@ -1,13 +1,12 @@
 var searchData=
 [
-  ['chargedamage_0',['chargeDamage',['../classBoss_1_1Bonestag_1_1Bonestag__Charge.html#a7703049efd28978e4efd36e00d72e476',1,'Boss::Bonestag::Bonestag_Charge']]],
-  ['chargesoundphasetwo_1',['chargeSoundPhaseTwo',['../classBoss_1_1Bonestag_1_1Bonestag__Charge.html#a7611cecfc82aaefca06456d0bdec8b0f',1,'Boss::Bonestag::Bonestag_Charge']]],
-  ['chargespeed_2',['chargeSpeed',['../classBoss_1_1Bonestag_1_1Bonestag__Charge.html#a6e061ec7255f5f35621ae0f4051943eb',1,'Boss::Bonestag::Bonestag_Charge']]],
-  ['childguids_3',['childGUIDs',['../classNodeAI_1_1NodeData.html#ab0ecd39bd3fd1186f1b612b086ee7529',1,'NodeAI.NodeData.childGUIDs()'],['../structNodeAI_1_1NodeData_1_1NodeGroup.html#a62b7eb1a80ff65365c077bafcbca51dd',1,'NodeAI.NodeData.NodeGroup.childGUIDs()']]],
-  ['coverradius_4',['coverRadius',['../classCover.html#a4365865cd8d7e5aa540dbf921abc3756',1,'Cover']]],
-  ['coverrect_5',['coverRect',['../classCover.html#a19dd766e5cdacfbc214b6b96f15a3b6e',1,'Cover']]],
-  ['covertype_6',['coverType',['../classCover.html#a4871826d964fd2a62b659ab525c19ef3',1,'Cover']]],
-  ['currentsequence_7',['currentSequence',['../classMissionSequencer.html#a879627f0edb199a114a14225db0fe1d6',1,'MissionSequencer']]],
-  ['currhoverednode_8',['currHoveredNode',['../classNodeAI_1_1GraphView.html#ab24a1ea52918604a3f81e23e63d781f8',1,'NodeAI::GraphView']]],
-  ['cvalue_9',['cvalue',['../classNodeAI_1_1NodeData_1_1SerializableProperty.html#a45365486294c04cdce122f4dcd9a7219',1,'NodeAI::NodeData::SerializableProperty']]]
+  ['baitedsound_0',['baitedSound',['http://docs.unity3d.com/ScriptReference/classBossArenaController.html#a64566c8061ab58c567ae2e5cbd68a5ba',1,'BossArenaController']]],
+  ['behaviour_1',['behaviour',['http://docs.unity3d.com/ScriptReference/classNodeAI_1_1Graph.html#a2e25c385ad325ff0baf4269ce4fe8f06',1,'NodeAI::Graph::behaviour()'],['http://docs.unity3d.com/ScriptReference/classNodeAI_1_1NodeAI__Agent__Editor.html#a0f6e2dde50bc91faabb7ee6b7440aac8',1,'NodeAI::NodeAI_Agent_Editor::behaviour()']]],
+  ['behaviourfield_2',['behaviourField',['http://docs.unity3d.com/ScriptReference/classNodeAI_1_1Graph.html#a91ffb86f0bc4d01144898006f67f6896',1,'NodeAI::Graph']]],
+  ['blackboard_3',['blackboard',['http://docs.unity3d.com/ScriptReference/classNodeAI_1_1GraphView.html#aca9ebe5d906093c0bfca82d9ec9b0ec0',1,'NodeAI::GraphView']]],
+  ['blackboardsearchwindow_4',['blackboardSearchWindow',['http://docs.unity3d.com/ScriptReference/classNodeAI_1_1GraphView.html#aac6e1e88fcdc2d107ea7f8e2ed668c4a',1,'NodeAI::GraphView']]],
+  ['boss_5',['boss',['http://docs.unity3d.com/ScriptReference/classBossArenaController.html#a951583a3cd5d7732bc1478ef5470b818',1,'BossArenaController']]],
+  ['bosshealth_6',['bossHealth',['http://docs.unity3d.com/ScriptReference/classBossArenaController.html#a0e6a4ce91bfd684a66d2b4547149a306',1,'BossArenaController']]],
+  ['bossmusicsecondphase_7',['bossMusicSecondPhase',['http://docs.unity3d.com/ScriptReference/classBossArenaController.html#acde687d0cc7f59346a270ff71ec3c5bb',1,'BossArenaController']]],
+  ['bvalue_8',['bvalue',['http://docs.unity3d.com/ScriptReference/classNodeAI_1_1NodeData_1_1SerializableProperty.html#a346ad2699c0b015447fce5584dd38dd2',1,'NodeAI::NodeData::SerializableProperty']]]
 ];

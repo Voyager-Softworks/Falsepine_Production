@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
     [Header("Movement")]
     private Animator _animator;
     CharacterController controller;
+    DynamicVaulting dynamicVaulting;
     public InputAction moveAction;
     public InputAction sprintAction;
     public float walkSpeed = 6f;
@@ -58,9 +59,12 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
         rollAction.Enable();
         sprintAction.Enable();
 
-        rollAction.performed += ctx => StartRoll();
+        
 
         controller = GetComponent<CharacterController>();
+        dynamicVaulting = GetComponent<DynamicVaulting>();
+
+        rollAction.performed += ctx => { if(dynamicVaulting.canVault) controller.Move(dynamicVaulting.vaultingHit.y * Vector3.up); StartRoll(); };
 
         if (cam == null){
             cam = Camera.main;
@@ -238,6 +242,13 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
 
             lastMoveDir = moveDir;
         }
+    }
+
+    public void StartVault()
+    {
+        _animator.SetTrigger("Vault");
+        _animator.SetLayerWeight(1, 0);
+        _animator.SetLayerWeight(2, 0);
     }
 
     public void StartRoll(){

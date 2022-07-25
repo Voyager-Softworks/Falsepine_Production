@@ -66,6 +66,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="classRotateTowardsPlayer-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">RotateTowardsPlayer Class Reference</div></div>
 </div><!--header-->
@@ -78,8 +79,8 @@ Inheritance diagram for RotateTowardsPlayer:</div>
 <div class="dyncontent">
 <div class="center"><img src="classRotateTowardsPlayer__inherit__graph.png" border="0" usemap="#aRotateTowardsPlayer_inherit__map" alt="Inheritance graph"/></div>
 <map name="aRotateTowardsPlayer_inherit__map" id="aRotateTowardsPlayer_inherit__map">
-<area shape="rect" title="Script to handle rotation and translation towards the player as part of enemy attacks." alt="" coords="5,131,164,223"/>
-<area shape="rect" title=" " alt="" coords="23,5,147,83"/>
+<area shape="rect" title="Script to handle rotation and translation towards the player as part of enemy attacks." alt="" coords="5,131,208,252"/>
+<area shape="rect" title=" " alt="" coords="45,5,169,83"/>
 </map>
 </div>
 <div class="dynheader">
@@ -87,8 +88,8 @@ Collaboration diagram for RotateTowardsPlayer:</div>
 <div class="dyncontent">
 <div class="center"><img src="classRotateTowardsPlayer__coll__graph.png" border="0" usemap="#aRotateTowardsPlayer_coll__map" alt="Collaboration graph"/></div>
 <map name="aRotateTowardsPlayer_coll__map" id="aRotateTowardsPlayer_coll__map">
-<area shape="rect" title="Script to handle rotation and translation towards the player as part of enemy attacks." alt="" coords="5,131,164,223"/>
-<area shape="rect" title=" " alt="" coords="23,5,147,83"/>
+<area shape="rect" title="Script to handle rotation and translation towards the player as part of enemy attacks." alt="" coords="5,131,208,252"/>
+<area shape="rect" title=" " alt="" coords="45,5,169,83"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -100,6 +101,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a24285b7e0df9a3c950423e7fd081c9f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRotateTowardsPlayer.html#a24285b7e0df9a3c950423e7fd081c9f1">RotateToPlayer</a> (float duration, float speed, float delay)</td></tr>
 <tr class="memdesc:a24285b7e0df9a3c950423e7fd081c9f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Method to rotate towards the player.  <a href="classRotateTowardsPlayer.html#a24285b7e0df9a3c950423e7fd081c9f1">More...</a><br /></td></tr>
 <tr class="separator:a24285b7e0df9a3c950423e7fd081c9f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a7d7a71c14f15a1927c01055366e85eaa"><td class="memItemLeft" align="right" valign="top">IEnumerator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRotateTowardsPlayer.html#a7d7a71c14f15a1927c01055366e85eaa">RotateToPlayerCoroutine</a> (float duration, float speed, float delay)</td></tr>
+<tr class="memdesc:a7d7a71c14f15a1927c01055366e85eaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Coroutine to rotate towards the player.  <a href="classRotateTowardsPlayer.html#a7d7a71c14f15a1927c01055366e85eaa">More...</a><br /></td></tr>
+<tr class="separator:a7d7a71c14f15a1927c01055366e85eaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5aad83e3ec173886dd2419bac394f66d"><td class="memItemLeft" align="right" valign="top">IEnumerator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRotateTowardsPlayer.html#a5aad83e3ec173886dd2419bac394f66d">MoveToPlayerCoroutine</a> (float duration, float speed, float delay)</td></tr>
+<tr class="memdesc:a5aad83e3ec173886dd2419bac394f66d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Coroutine to move towards the player.  <a href="classRotateTowardsPlayer.html#a5aad83e3ec173886dd2419bac394f66d">More...</a><br /></td></tr>
+<tr class="separator:a5aad83e3ec173886dd2419bac394f66d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Script to handle rotation and translation towards the player as part of enemy attacks. </p>
@@ -159,6 +169,67 @@ Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="RotateTowardsPlayer_8cs_source.html#l00063">63</a> of file <a class="el" href="RotateTowardsPlayer_8cs_source.html">RotateTowardsPlayer.cs</a>.</p>
 
+<p class="reference">References <a class="el" href="RotateTowardsPlayer_8cs_source.html#l00041">MoveToPlayerCoroutine()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Attack_8cs_source.html#l00030">Attack.Eval()</a>.</p>
+
+</div>
+</div>
+<a id="a5aad83e3ec173886dd2419bac394f66d" name="a5aad83e3ec173886dd2419bac394f66d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5aad83e3ec173886dd2419bac394f66d">&#9670;&nbsp;</a></span>MoveToPlayerCoroutine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">IEnumerator RotateTowardsPlayer.MoveToPlayerCoroutine </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>duration</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>speed</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>delay</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Coroutine to move towards the player. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">duration</td><td>The length of time to move.</td></tr>
+    <tr><td class="paramname">speed</td><td>The speed of the movement.</td></tr>
+    <tr><td class="paramname">delay</td><td>The delay before the movement starts.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="RotateTowardsPlayer_8cs_source.html#l00041">41</a> of file <a class="el" href="RotateTowardsPlayer_8cs_source.html">RotateTowardsPlayer.cs</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="RotateTowardsPlayer_8cs_source.html#l00063">MoveToPlayer()</a>.</p>
+
 </div>
 </div>
 <a id="a24285b7e0df9a3c950423e7fd081c9f1" name="a24285b7e0df9a3c950423e7fd081c9f1"></a>
@@ -212,6 +283,67 @@ Public Member Functions</h2></td></tr>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="RotateTowardsPlayer_8cs_source.html#l00074">74</a> of file <a class="el" href="RotateTowardsPlayer_8cs_source.html">RotateTowardsPlayer.cs</a>.</p>
+
+<p class="reference">References <a class="el" href="RotateTowardsPlayer_8cs_source.html#l00019">RotateToPlayerCoroutine()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Attack_8cs_source.html#l00030">Attack.Eval()</a>.</p>
+
+</div>
+</div>
+<a id="a7d7a71c14f15a1927c01055366e85eaa" name="a7d7a71c14f15a1927c01055366e85eaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d7a71c14f15a1927c01055366e85eaa">&#9670;&nbsp;</a></span>RotateToPlayerCoroutine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">IEnumerator RotateTowardsPlayer.RotateToPlayerCoroutine </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>duration</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>speed</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>delay</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Coroutine to rotate towards the player. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">duration</td><td>The length of time to rotate.</td></tr>
+    <tr><td class="paramname">speed</td><td>The speed of the rotation.</td></tr>
+    <tr><td class="paramname">delay</td><td>The delay before the rotation starts.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="RotateTowardsPlayer_8cs_source.html#l00019">19</a> of file <a class="el" href="RotateTowardsPlayer_8cs_source.html">RotateTowardsPlayer.cs</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="RotateTowardsPlayer_8cs_source.html#l00074">RotateToPlayer()</a>.</p>
 
 </div>
 </div>

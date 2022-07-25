@@ -70,6 +70,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classNodeAI_1_1Graph-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">NodeAI.Graph Class Reference</div></div>
 </div><!--header-->
@@ -82,8 +84,8 @@ Inheritance diagram for NodeAI.Graph:</div>
 <div class="dyncontent">
 <div class="center"><img src="classNodeAI_1_1Graph__inherit__graph.png" border="0" usemap="#aNodeAI_8Graph_inherit__map" alt="Inheritance graph"/></div>
 <map name="aNodeAI_8Graph_inherit__map" id="aNodeAI_8Graph_inherit__map">
-<area shape="rect" title="The EditorWindow for the NodeAI Graph editor." alt="" coords="5,131,177,223"/>
-<area shape="rect" title=" " alt="" coords="35,5,147,83"/>
+<area shape="rect" title="The EditorWindow for the NodeAI Graph editor." alt="" coords="5,131,184,384"/>
+<area shape="rect" title=" " alt="" coords="39,5,151,83"/>
 </map>
 </div>
 <div class="dynheader">
@@ -91,8 +93,21 @@ Collaboration diagram for NodeAI.Graph:</div>
 <div class="dyncontent">
 <div class="center"><img src="classNodeAI_1_1Graph__coll__graph.png" border="0" usemap="#aNodeAI_8Graph_coll__map" alt="Collaboration graph"/></div>
 <map name="aNodeAI_8Graph_coll__map" id="aNodeAI_8Graph_coll__map">
-<area shape="rect" title="The EditorWindow for the NodeAI Graph editor." alt="" coords="5,131,177,223"/>
-<area shape="rect" title=" " alt="" coords="35,5,147,83"/>
+<area shape="rect" title="The EditorWindow for the NodeAI Graph editor." alt="" coords="65,1620,244,1829"/>
+<area shape="rect" title=" " alt="" coords="5,1326,117,1403"/>
+<area shape="rect" href="classNodeAI_1_1GraphView.html" title="The GraphView is used to display the NodeAI Graph and handle user input." alt="" coords="683,1172,925,1557"/>
+<area shape="rect" href="classNodeAI_1_1SearchWindow.html" title="A search window provider for the NodeAI graph." alt="" coords="1283,1657,1455,1793"/>
+<area shape="rect" href="classNodeAI_1_1BlackboardSearchWindow.html" title=" " alt="" coords="855,1671,1097,1778"/>
+<area shape="rect" href="classNodeAI_1_1QuerySearchWindow.html" title="The search window for queries." alt="" coords="429,1657,680,1793"/>
+<area shape="rect" title=" " alt="" coords="709,981,899,1073"/>
+<area shape="rect" title=" " alt="" coords="1053,5,1182,83"/>
+<area shape="rect" href="classNodeAI_1_1RuntimeBase.html" title="Base class for all runtime nodes." alt="" coords="781,132,1067,429"/>
+<area shape="rect" href="classNodeAI_1_1Query.html" title="Base class for all query nodes." alt="" coords="1091,154,1376,407"/>
+<area shape="rect" href="classNodeAI_1_1NodeAI__Behaviour.html" title="This class is used to store Behaviour Data for Agents." alt="" coords="79,453,273,575"/>
+<area shape="rect" title=" " alt="" coords="1003,1326,1179,1403"/>
+<area shape="rect" href="classNodeAI_1_1Node.html" title="The Node class is used to store data for a node in a NodeAI Graph." alt="" coords="959,944,1105,1109"/>
+<area shape="rect" title=" " alt="" coords="661,694,851,786"/>
+<area shape="rect" href="classNodeAI_1_1NodeData.html" title="This class is used to store the data of a node." alt="" coords="1025,599,1172,881"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -104,6 +119,46 @@ Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a05b59656f8fbd256c2d6310b64e2ce46"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1Graph.html#a05b59656f8fbd256c2d6310b64e2ce46">OnOpenAsset</a> (int instanceId, int line)</td></tr>
 <tr class="memdesc:a05b59656f8fbd256c2d6310b64e2ce46"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is called when a <a class="el" href="classNodeAI_1_1NodeAI__Behaviour.html" title="This class is used to store Behaviour Data for Agents.">NodeAI_Behaviour</a> asset is opened in the project view.  <a href="classNodeAI_1_1Graph.html#a05b59656f8fbd256c2d6310b64e2ce46">More...</a><br /></td></tr>
 <tr class="separator:a05b59656f8fbd256c2d6310b64e2ce46"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a87e03b396024d4ecbdffe60051c75170"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1Graph.html#a87e03b396024d4ecbdffe60051c75170">OnEnable</a> ()</td></tr>
+<tr class="memdesc:a87e03b396024d4ecbdffe60051c75170"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is called when the <a class="el" href="classNodeAI_1_1Graph.html" title="The EditorWindow for the NodeAI Graph editor.">Graph</a> editor is opened.  <a href="classNodeAI_1_1Graph.html#a87e03b396024d4ecbdffe60051c75170">More...</a><br /></td></tr>
+<tr class="separator:a87e03b396024d4ecbdffe60051c75170"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4cf670440d4630b10f294b3be27e640"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1Graph.html#aa4cf670440d4630b10f294b3be27e640">Update</a> ()</td></tr>
+<tr class="memdesc:aa4cf670440d4630b10f294b3be27e640"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is called every frame.  <a href="classNodeAI_1_1Graph.html#aa4cf670440d4630b10f294b3be27e640">More...</a><br /></td></tr>
+<tr class="separator:aa4cf670440d4630b10f294b3be27e640"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4a7c7b0cc61f57b3bd80233b7422112"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1Graph.html#ad4a7c7b0cc61f57b3bd80233b7422112">CreateNewBehaviour</a> ()</td></tr>
+<tr class="memdesc:ad4a7c7b0cc61f57b3bd80233b7422112"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to create a new <a class="el" href="classNodeAI_1_1NodeAI__Behaviour.html" title="This class is used to store Behaviour Data for Agents.">NodeAI_Behaviour</a> asset.  <a href="classNodeAI_1_1Graph.html#ad4a7c7b0cc61f57b3bd80233b7422112">More...</a><br /></td></tr>
+<tr class="separator:ad4a7c7b0cc61f57b3bd80233b7422112"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d15eed90213da85379e6dd28f287c73"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1Graph.html#a7d15eed90213da85379e6dd28f287c73">OnDisable</a> ()</td></tr>
+<tr class="memdesc:a7d15eed90213da85379e6dd28f287c73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Called when the editor window is closed.  <a href="classNodeAI_1_1Graph.html#a7d15eed90213da85379e6dd28f287c73">More...</a><br /></td></tr>
+<tr class="separator:a7d15eed90213da85379e6dd28f287c73"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4ec81c9e44dfcd335d0463ef9eefd826"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1Graph.html#a4ec81c9e44dfcd335d0463ef9eefd826">GenerateToolbar</a> ()</td></tr>
+<tr class="memdesc:a4ec81c9e44dfcd335d0463ef9eefd826"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to generate the toolbar for the editor window.  <a href="classNodeAI_1_1Graph.html#a4ec81c9e44dfcd335d0463ef9eefd826">More...</a><br /></td></tr>
+<tr class="separator:a4ec81c9e44dfcd335d0463ef9eefd826"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae7189fbea7893fffcd60a1451192cdb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1Graph.html#aae7189fbea7893fffcd60a1451192cdb">GenerateBlackboard</a> ()</td></tr>
+<tr class="memdesc:aae7189fbea7893fffcd60a1451192cdb"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function is used to generate the Blackboard for the editor window.  <a href="classNodeAI_1_1Graph.html#aae7189fbea7893fffcd60a1451192cdb">More...</a><br /></td></tr>
+<tr class="separator:aae7189fbea7893fffcd60a1451192cdb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:af9f84ab9691a42e10c81ec208da41398"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNodeAI_1_1GraphView.html">GraphView</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1Graph.html#af9f84ab9691a42e10c81ec208da41398">graphView</a></td></tr>
+<tr class="memdesc:af9f84ab9691a42e10c81ec208da41398"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classNodeAI_1_1GraphView.html" title="The GraphView is used to display the NodeAI Graph and handle user input.">GraphView</a> that is currently being edited.  <a href="classNodeAI_1_1Graph.html#af9f84ab9691a42e10c81ec208da41398">More...</a><br /></td></tr>
+<tr class="separator:af9f84ab9691a42e10c81ec208da41398"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e25c385ad325ff0baf4269ce4fe8f06"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNodeAI_1_1NodeAI__Behaviour.html">NodeAI_Behaviour</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1Graph.html#a2e25c385ad325ff0baf4269ce4fe8f06">behaviour</a></td></tr>
+<tr class="memdesc:a2e25c385ad325ff0baf4269ce4fe8f06"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classNodeAI_1_1NodeAI__Behaviour.html" title="This class is used to store Behaviour Data for Agents.">NodeAI_Behaviour</a> that is currently being edited.  <a href="classNodeAI_1_1Graph.html#a2e25c385ad325ff0baf4269ce4fe8f06">More...</a><br /></td></tr>
+<tr class="separator:a2e25c385ad325ff0baf4269ce4fe8f06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae31e3d6bb8067569de2f5e884650edff"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classNodeAI_1_1NodeAI__Behaviour.html">NodeAI_Behaviour</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1Graph.html#ae31e3d6bb8067569de2f5e884650edff">runtimeBehaviour</a></td></tr>
+<tr class="memdesc:ae31e3d6bb8067569de2f5e884650edff"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="classNodeAI_1_1NodeAI__Behaviour.html" title="This class is used to store Behaviour Data for Agents.">NodeAI_Behaviour</a> that has been selected at runtime, used for visual debugging.  <a href="classNodeAI_1_1Graph.html#ae31e3d6bb8067569de2f5e884650edff">More...</a><br /></td></tr>
+<tr class="separator:ae31e3d6bb8067569de2f5e884650edff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91ffb86f0bc4d01144898006f67f6896"><td class="memItemLeft" align="right" valign="top">ObjectField&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1Graph.html#a91ffb86f0bc4d01144898006f67f6896">behaviourField</a></td></tr>
+<tr class="memdesc:a91ffb86f0bc4d01144898006f67f6896"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ObjectField that is used to select a <a class="el" href="classNodeAI_1_1NodeAI__Behaviour.html" title="This class is used to store Behaviour Data for Agents.">NodeAI_Behaviour</a>.  <a href="classNodeAI_1_1Graph.html#a91ffb86f0bc4d01144898006f67f6896">More...</a><br /></td></tr>
+<tr class="separator:a91ffb86f0bc4d01144898006f67f6896"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20bbb45c9385bfc4d13df81bfdfd7d85"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1Graph.html#a20bbb45c9385bfc4d13df81bfdfd7d85">timeSinceLastDraw</a> = 0f</td></tr>
+<tr class="separator:a20bbb45c9385bfc4d13df81bfdfd7d85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2670100d34ed69ff339ed4a5b39c0d29"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNodeAI_1_1Graph.html#a2670100d34ed69ff339ed4a5b39c0d29">lastChildIndex</a> = 0</td></tr>
+<tr class="separator:a2670100d34ed69ff339ed4a5b39c0d29"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >The EditorWindow for the <a class="el" href="namespaceNodeAI.html">NodeAI</a> <a class="el" href="classNodeAI_1_1Graph.html" title="The EditorWindow for the NodeAI Graph editor.">Graph</a> editor. </p>
@@ -113,6 +168,167 @@ Static Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="Graph_8cs_source.html#l00039">39</a> of file <a class="el" href="Graph_8cs_source.html">Graph.cs</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad4a7c7b0cc61f57b3bd80233b7422112" name="ad4a7c7b0cc61f57b3bd80233b7422112"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4a7c7b0cc61f57b3bd80233b7422112">&#9670;&nbsp;</a></span>CreateNewBehaviour()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NodeAI.Graph.CreateNewBehaviour </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This function is used to create a new <a class="el" href="classNodeAI_1_1NodeAI__Behaviour.html" title="This class is used to store Behaviour Data for Agents.">NodeAI_Behaviour</a> asset. </p>
+
+<p class="definition">Definition at line <a class="el" href="Graph_8cs_source.html#l00216">216</a> of file <a class="el" href="Graph_8cs_source.html">Graph.cs</a>.</p>
+
+<p class="reference">References <a class="el" href="GraphView_8cs_source.html#l00290">NodeAI.GraphView.AddEntryNode()</a>, <a class="el" href="Graph_8cs_source.html#l00042">NodeAI.Graph.behaviour</a>, <a class="el" href="Serializer_8cs_source.html#l00196">NodeAI.Serializer.Deserialize()</a>, <a class="el" href="Serializer_8cs_source.html#l00042">NodeAI.Serializer.GetInstance()</a>, and <a class="el" href="Graph_8cs_source.html#l00041">NodeAI.Graph.graphView</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Graph_8cs_source.html#l00245">NodeAI.Graph.GenerateToolbar()</a>.</p>
+
+</div>
+</div>
+<a id="aae7189fbea7893fffcd60a1451192cdb" name="aae7189fbea7893fffcd60a1451192cdb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae7189fbea7893fffcd60a1451192cdb">&#9670;&nbsp;</a></span>GenerateBlackboard()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NodeAI.Graph.GenerateBlackboard </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This function is used to generate the Blackboard for the editor window. </p>
+
+<p class="definition">Definition at line <a class="el" href="Graph_8cs_source.html#l00289">289</a> of file <a class="el" href="Graph_8cs_source.html">Graph.cs</a>.</p>
+
+<p class="reference">References <a class="el" href="GraphView_8cs_source.html#l00089">NodeAI.GraphView.AddBlackboardSearchWindow()</a>, <a class="el" href="GraphView_8cs_source.html#l00036">NodeAI.GraphView.blackboard</a>, <a class="el" href="GraphView_8cs_source.html#l00035">NodeAI.GraphView.exposedProperties</a>, and <a class="el" href="Graph_8cs_source.html#l00041">NodeAI.Graph.graphView</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Graph_8cs_source.html#l00089">NodeAI.Graph.OnEnable()</a>.</p>
+
+</div>
+</div>
+<a id="a4ec81c9e44dfcd335d0463ef9eefd826" name="a4ec81c9e44dfcd335d0463ef9eefd826"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4ec81c9e44dfcd335d0463ef9eefd826">&#9670;&nbsp;</a></span>GenerateToolbar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NodeAI.Graph.GenerateToolbar </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This function is used to generate the toolbar for the editor window. </p>
+
+<p class="definition">Definition at line <a class="el" href="Graph_8cs_source.html#l00245">245</a> of file <a class="el" href="Graph_8cs_source.html">Graph.cs</a>.</p>
+
+<p class="reference">References <a class="el" href="Graph_8cs_source.html#l00042">NodeAI.Graph.behaviour</a>, <a class="el" href="Graph_8cs_source.html#l00045">NodeAI.Graph.behaviourField</a>, <a class="el" href="Graph_8cs_source.html#l00216">NodeAI.Graph.CreateNewBehaviour()</a>, <a class="el" href="Serializer_8cs_source.html#l00196">NodeAI.Serializer.Deserialize()</a>, <a class="el" href="Serializer_8cs_source.html#l00042">NodeAI.Serializer.GetInstance()</a>, and <a class="el" href="Graph_8cs_source.html#l00041">NodeAI.Graph.graphView</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Graph_8cs_source.html#l00089">NodeAI.Graph.OnEnable()</a>.</p>
+
+</div>
+</div>
+<a id="a7d15eed90213da85379e6dd28f287c73" name="a7d15eed90213da85379e6dd28f287c73"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d15eed90213da85379e6dd28f287c73">&#9670;&nbsp;</a></span>OnDisable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NodeAI.Graph.OnDisable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Called when the editor window is closed. </p>
+
+<p class="definition">Definition at line <a class="el" href="Graph_8cs_source.html#l00236">236</a> of file <a class="el" href="Graph_8cs_source.html">Graph.cs</a>.</p>
+
+<p class="reference">References <a class="el" href="Graph_8cs_source.html#l00041">NodeAI.Graph.graphView</a>.</p>
+
+</div>
+</div>
+<a id="a87e03b396024d4ecbdffe60051c75170" name="a87e03b396024d4ecbdffe60051c75170"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87e03b396024d4ecbdffe60051c75170">&#9670;&nbsp;</a></span>OnEnable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NodeAI.Graph.OnEnable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This function is called when the <a class="el" href="classNodeAI_1_1Graph.html" title="The EditorWindow for the NodeAI Graph editor.">Graph</a> editor is opened. </p>
+
+<p class="definition">Definition at line <a class="el" href="Graph_8cs_source.html#l00089">89</a> of file <a class="el" href="Graph_8cs_source.html">Graph.cs</a>.</p>
+
+<p class="reference">References <a class="el" href="Graph_8cs_source.html#l00042">NodeAI.Graph.behaviour</a>, <a class="el" href="Serializer_8cs_source.html#l00196">NodeAI.Serializer.Deserialize()</a>, <a class="el" href="Graph_8cs_source.html#l00289">NodeAI.Graph.GenerateBlackboard()</a>, <a class="el" href="Graph_8cs_source.html#l00245">NodeAI.Graph.GenerateToolbar()</a>, <a class="el" href="Serializer_8cs_source.html#l00042">NodeAI.Serializer.GetInstance()</a>, and <a class="el" href="Graph_8cs_source.html#l00041">NodeAI.Graph.graphView</a>.</p>
+
+</div>
+</div>
 <a id="a05b59656f8fbd256c2d6310b64e2ce46" name="a05b59656f8fbd256c2d6310b64e2ce46"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a05b59656f8fbd256c2d6310b64e2ce46">&#9670;&nbsp;</a></span>OnOpenAsset()</h2>
 
@@ -160,6 +376,8 @@ Static Public Member Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="Graph_8cs_source.html#l00071">71</a> of file <a class="el" href="Graph_8cs_source.html">Graph.cs</a>.</p>
 
+<p class="reference">References <a class="el" href="Graph_8cs_source.html#l00042">NodeAI.Graph.behaviour</a>, <a class="el" href="Graph_8cs_source.html#l00045">NodeAI.Graph.behaviourField</a>, <a class="el" href="Serializer_8cs_source.html#l00196">NodeAI.Serializer.Deserialize()</a>, <a class="el" href="Serializer_8cs_source.html#l00042">NodeAI.Serializer.GetInstance()</a>, and <a class="el" href="Graph_8cs_source.html#l00041">NodeAI.Graph.graphView</a>.</p>
+
 </div>
 </div>
 <a id="a003da5213916ca3ff5ae219fa763f1d2" name="a003da5213916ca3ff5ae219fa763f1d2"></a>
@@ -188,6 +406,198 @@ Static Public Member Functions</h2></td></tr>
 <p>This function is called when the <a class="el" href="classNodeAI_1_1Graph.html" title="The EditorWindow for the NodeAI Graph editor.">Graph</a> editor is opened. </p>
 
 <p class="definition">Definition at line <a class="el" href="Graph_8cs_source.html#l00054">54</a> of file <a class="el" href="Graph_8cs_source.html">Graph.cs</a>.</p>
+
+</div>
+</div>
+<a id="aa4cf670440d4630b10f294b3be27e640" name="aa4cf670440d4630b10f294b3be27e640"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4cf670440d4630b10f294b3be27e640">&#9670;&nbsp;</a></span>Update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NodeAI.Graph.Update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>This function is called every frame. </p>
+
+<p class="definition">Definition at line <a class="el" href="Graph_8cs_source.html#l00105">105</a> of file <a class="el" href="Graph_8cs_source.html">Graph.cs</a>.</p>
+
+<p class="reference">References <a class="el" href="NodeAI__Agent_8cs_source.html#l00029">NodeAI.NodeAI_Agent.AI_Behaviour</a>, <a class="el" href="Graph_8cs_source.html#l00042">NodeAI.Graph.behaviour</a>, <a class="el" href="GraphView_8cs_source.html#l00038">NodeAI.GraphView.currHoveredNode</a>, <a class="el" href="Graph_8cs_source.html#l00041">NodeAI.Graph.graphView</a>, <a class="el" href="NodeData_8cs_source.html#l00033">NodeAI.NodeData.GUID</a>, <a class="el" href="NodeAI__Behaviour_8cs_source.html#l00030">NodeAI.NodeAI_Behaviour.nodeData</a>, <a class="el" href="Node_8cs_source.html#l00028">NodeAI.Node.nodeType</a>, <a class="el" href="Node_8cs_source.html#l00036">NodeAI.Node.outputPort</a>, <a class="el" href="Graph_8cs_source.html#l00043">NodeAI.Graph.runtimeBehaviour</a>, <a class="el" href="NodeData_8cs_source.html#l00140">NodeAI.NodeData.runtimeLogic</a>, and <a class="el" href="RuntimeBase_8cs_source.html#l00031">NodeAI.RuntimeBase.state</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a2e25c385ad325ff0baf4269ce4fe8f06" name="a2e25c385ad325ff0baf4269ce4fe8f06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e25c385ad325ff0baf4269ce4fe8f06">&#9670;&nbsp;</a></span>behaviour</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classNodeAI_1_1NodeAI__Behaviour.html">NodeAI_Behaviour</a> NodeAI.Graph.behaviour</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The <a class="el" href="classNodeAI_1_1NodeAI__Behaviour.html" title="This class is used to store Behaviour Data for Agents.">NodeAI_Behaviour</a> that is currently being edited. </p>
+
+<p class="definition">Definition at line <a class="el" href="Graph_8cs_source.html#l00042">42</a> of file <a class="el" href="Graph_8cs_source.html">Graph.cs</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Graph_8cs_source.html#l00216">NodeAI.Graph.CreateNewBehaviour()</a>, <a class="el" href="Graph_8cs_source.html#l00245">NodeAI.Graph.GenerateToolbar()</a>, <a class="el" href="Graph_8cs_source.html#l00089">NodeAI.Graph.OnEnable()</a>, <a class="el" href="Graph_8cs_source.html#l00071">NodeAI.Graph.OnOpenAsset()</a>, and <a class="el" href="Graph_8cs_source.html#l00105">NodeAI.Graph.Update()</a>.</p>
+
+</div>
+</div>
+<a id="a91ffb86f0bc4d01144898006f67f6896" name="a91ffb86f0bc4d01144898006f67f6896"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91ffb86f0bc4d01144898006f67f6896">&#9670;&nbsp;</a></span>behaviourField</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ObjectField NodeAI.Graph.behaviourField</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The ObjectField that is used to select a <a class="el" href="classNodeAI_1_1NodeAI__Behaviour.html" title="This class is used to store Behaviour Data for Agents.">NodeAI_Behaviour</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="Graph_8cs_source.html#l00045">45</a> of file <a class="el" href="Graph_8cs_source.html">Graph.cs</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Graph_8cs_source.html#l00245">NodeAI.Graph.GenerateToolbar()</a>, and <a class="el" href="Graph_8cs_source.html#l00071">NodeAI.Graph.OnOpenAsset()</a>.</p>
+
+</div>
+</div>
+<a id="af9f84ab9691a42e10c81ec208da41398" name="af9f84ab9691a42e10c81ec208da41398"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9f84ab9691a42e10c81ec208da41398">&#9670;&nbsp;</a></span>graphView</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classNodeAI_1_1GraphView.html">GraphView</a> NodeAI.Graph.graphView</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The <a class="el" href="classNodeAI_1_1GraphView.html" title="The GraphView is used to display the NodeAI Graph and handle user input.">GraphView</a> that is currently being edited. </p>
+
+<p class="definition">Definition at line <a class="el" href="Graph_8cs_source.html#l00041">41</a> of file <a class="el" href="Graph_8cs_source.html">Graph.cs</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Graph_8cs_source.html#l00216">NodeAI.Graph.CreateNewBehaviour()</a>, <a class="el" href="Graph_8cs_source.html#l00289">NodeAI.Graph.GenerateBlackboard()</a>, <a class="el" href="Graph_8cs_source.html#l00245">NodeAI.Graph.GenerateToolbar()</a>, <a class="el" href="Graph_8cs_source.html#l00236">NodeAI.Graph.OnDisable()</a>, <a class="el" href="Graph_8cs_source.html#l00089">NodeAI.Graph.OnEnable()</a>, <a class="el" href="Graph_8cs_source.html#l00071">NodeAI.Graph.OnOpenAsset()</a>, and <a class="el" href="Graph_8cs_source.html#l00105">NodeAI.Graph.Update()</a>.</p>
+
+</div>
+</div>
+<a id="a2670100d34ed69ff339ed4a5b39c0d29" name="a2670100d34ed69ff339ed4a5b39c0d29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2670100d34ed69ff339ed4a5b39c0d29">&#9670;&nbsp;</a></span>lastChildIndex</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int NodeAI.Graph.lastChildIndex = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Graph_8cs_source.html#l00048">48</a> of file <a class="el" href="Graph_8cs_source.html">Graph.cs</a>.</p>
+
+</div>
+</div>
+<a id="ae31e3d6bb8067569de2f5e884650edff" name="ae31e3d6bb8067569de2f5e884650edff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae31e3d6bb8067569de2f5e884650edff">&#9670;&nbsp;</a></span>runtimeBehaviour</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classNodeAI_1_1NodeAI__Behaviour.html">NodeAI_Behaviour</a> NodeAI.Graph.runtimeBehaviour</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The <a class="el" href="classNodeAI_1_1NodeAI__Behaviour.html" title="This class is used to store Behaviour Data for Agents.">NodeAI_Behaviour</a> that has been selected at runtime, used for visual debugging. </p>
+
+<p class="definition">Definition at line <a class="el" href="Graph_8cs_source.html#l00043">43</a> of file <a class="el" href="Graph_8cs_source.html">Graph.cs</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="Graph_8cs_source.html#l00105">NodeAI.Graph.Update()</a>.</p>
+
+</div>
+</div>
+<a id="a20bbb45c9385bfc4d13df81bfdfd7d85" name="a20bbb45c9385bfc4d13df81bfdfd7d85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20bbb45c9385bfc4d13df81bfdfd7d85">&#9670;&nbsp;</a></span>timeSinceLastDraw</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float NodeAI.Graph.timeSinceLastDraw = 0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Graph_8cs_source.html#l00047">47</a> of file <a class="el" href="Graph_8cs_source.html">Graph.cs</a>.</p>
 
 </div>
 </div>

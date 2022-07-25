@@ -89,10 +89,10 @@ $(function() {
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>[InitializeOnLoad]</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>[Serializable]</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classItemDatabase.html">   19</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_class" href="classItemDatabase.html">ItemDatabase</a></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html">ItemDatabase</a></div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>{</div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="comment">// constructor</span></div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keyword">static</span> <a class="code hl_class" href="classItemDatabase.html">ItemDatabase</a>(){</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keyword">static</span> <a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html">ItemDatabase</a>(){</div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">        #if UNITY_EDITOR</span></div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        Refresh();</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        Initialize();</div>
@@ -101,9 +101,9 @@ $(function() {
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    [SerializeField] <span class="keyword">public</span> <span class="keyword">static</span> List&lt;Item&gt; database = <span class="keyword">new</span> List&lt;Item&gt;();</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classItemDatabase.html#abe4d97ac324e14ed3b4bbeeae9093044">   36</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> <a class="code hl_class" href="classItem.html">Item</a> <a class="code hl_function" href="classItemDatabase.html#abe4d97ac324e14ed3b4bbeeae9093044">GetItem</a>(<span class="keywordtype">string</span> <span class="keywordtype">id</span>)</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keyword">public</span> <span class="keyword">static</span> <a class="code hl_namespaceRef" href="http://docs.unity3d.com/ScriptReference/classItem_1_1FieldResourceLink.html">Item</a> <a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#abe4d97ac324e14ed3b4bbeeae9093044">GetItem</a>(<span class="keywordtype">string</span> <span class="keywordtype">id</span>)</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    {</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <a class="code hl_class" href="classItem.html">Item</a> item = database.Find(x =&gt; x.id == <span class="keywordtype">id</span>);</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <a class="code hl_namespaceRef" href="http://docs.unity3d.com/ScriptReference/classItem_1_1FieldResourceLink.html">Item</a> item = database.Find(x =&gt; x.id == <span class="keywordtype">id</span>);</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keywordflow">if</span> (item == <span class="keyword">null</span>)</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        {</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>            Debug.LogWarning(<span class="stringliteral">&quot;Item with id &quot;</span> + <span class="keywordtype">id</span> + <span class="stringliteral">&quot; not found.&quot;</span>);</div>
@@ -111,32 +111,32 @@ $(function() {
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keywordflow">return</span> item;</div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    }</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="classItemDatabase.html#a18a1ce3f3147f7b4125f1e56a253d659">   49</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> List&lt;Item&gt; <a class="code hl_function" href="classItemDatabase.html#a18a1ce3f3147f7b4125f1e56a253d659">GetItemsById</a>(<span class="keywordtype">string</span> _id)</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keyword">public</span> <span class="keyword">static</span> List&lt;Item&gt; <a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a18a1ce3f3147f7b4125f1e56a253d659">GetItemsById</a>(<span class="keywordtype">string</span> _id)</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    {</div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        <span class="keywordflow">return</span> database.Where(x =&gt; x.id.ToLower().Contains(_id.ToLower())).ToList();</div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    }</div>
 <div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="classItemDatabase.html#a374d4bcc208b7cc42cabe3dcbefe389d">   57</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> List&lt;Item&gt; <a class="code hl_function" href="classItemDatabase.html#a374d4bcc208b7cc42cabe3dcbefe389d">GetItemsByName</a>(<span class="keywordtype">string</span> _name)</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keyword">public</span> <span class="keyword">static</span> List&lt;Item&gt; <a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a374d4bcc208b7cc42cabe3dcbefe389d">GetItemsByName</a>(<span class="keywordtype">string</span> _name)</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    {</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>        <span class="keywordflow">return</span> database.Where(x =&gt; x.m_displayName.ToLower().Contains(_name.ToLower())).ToList();</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    }</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno"><a class="line" href="classItemDatabase.html#a1e24487ecd65b018d3e528290d4bdd51">   65</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> List&lt;Item&gt; <a class="code hl_function" href="classItemDatabase.html#a1e24487ecd65b018d3e528290d4bdd51">GetItemsByDescription</a>(<span class="keywordtype">string</span> _description)</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    <span class="keyword">public</span> <span class="keyword">static</span> List&lt;Item&gt; <a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a1e24487ecd65b018d3e528290d4bdd51">GetItemsByDescription</a>(<span class="keywordtype">string</span> _description)</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    {</div>
 <div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        <span class="keywordflow">return</span> database.Where(x =&gt; x.m_description.ToLower().Contains(_description.ToLower())).ToList();</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    }</div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno"><a class="line" href="classItemDatabase.html#a9a1d9a09cf91954b6c3377e1a25faa21">   73</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> List&lt;Item&gt; <a class="code hl_function" href="classItemDatabase.html#a9a1d9a09cf91954b6c3377e1a25faa21">GetItemsByType</a>(System.Type _type)</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>    <span class="keyword">public</span> <span class="keyword">static</span> List&lt;Item&gt; <a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a9a1d9a09cf91954b6c3377e1a25faa21">GetItemsByType</a>(System.Type _type)</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    {</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordflow">return</span> database.Where(x =&gt; x.GetType() == _type).ToList();</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>    }</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno"><a class="line" href="classItemDatabase.html#a402d3463e5bc58f32c9f748ebae78a86">   82</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> List&lt;Item&gt; <a class="code hl_function" href="classItemDatabase.html#a402d3463e5bc58f32c9f748ebae78a86">GetItemsByType</a>(<span class="keywordtype">string</span> _type)</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>    <span class="keyword">public</span> <span class="keyword">static</span> List&lt;Item&gt; <a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a9a1d9a09cf91954b6c3377e1a25faa21">GetItemsByType</a>(<span class="keywordtype">string</span> _type)</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    {</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        <span class="keywordflow">return</span> database.Where(x =&gt; x.GetType().Name == _type).ToList();</div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    }</div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span> </div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno"><a class="line" href="classItemDatabase.html#af4a4711722aac586f07ce50926c16a77">   90</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> List&lt;Item&gt; <a class="code hl_function" href="classItemDatabase.html#af4a4711722aac586f07ce50926c16a77">GetItemsByORFilter</a>(<span class="keywordtype">string</span> _id = <span class="stringliteral">&quot;&quot;</span>, <span class="keywordtype">string</span> _name = <span class="stringliteral">&quot;&quot;</span>, <span class="keywordtype">string</span> _description = <span class="stringliteral">&quot;&quot;</span>, <span class="keywordtype">string</span> _type_s = <span class="stringliteral">&quot;&quot;</span>, System.Type _type_t = <span class="keyword">null</span>)</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>    <span class="keyword">public</span> <span class="keyword">static</span> List&lt;Item&gt; <a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#af4a4711722aac586f07ce50926c16a77">GetItemsByORFilter</a>(<span class="keywordtype">string</span> _id = <span class="stringliteral">&quot;&quot;</span>, <span class="keywordtype">string</span> _name = <span class="stringliteral">&quot;&quot;</span>, <span class="keywordtype">string</span> _description = <span class="stringliteral">&quot;&quot;</span>, <span class="keywordtype">string</span> _type_s = <span class="stringliteral">&quot;&quot;</span>, System.Type _type_t = <span class="keyword">null</span>)</div>
 <div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>    {</div>
 <div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>        List&lt;Item&gt; items = <span class="keyword">new</span> List&lt;Item&gt;();</div>
 <div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span> </div>
@@ -145,35 +145,35 @@ $(function() {
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        {</div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>            anyFilter = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span> </div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            items = items.Union(<a class="code hl_function" href="classItemDatabase.html#a18a1ce3f3147f7b4125f1e56a253d659">GetItemsById</a>(_id)).ToList();</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            items = items.Union(<a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a18a1ce3f3147f7b4125f1e56a253d659">GetItemsById</a>(_id)).ToList();</div>
 <div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>        }</div>
 <div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span> </div>
 <div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>        <span class="keywordflow">if</span> (_name != <span class="stringliteral">&quot;&quot;</span>)</div>
 <div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>        {</div>
 <div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>            anyFilter = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span> </div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>            items = items.Union(<a class="code hl_function" href="classItemDatabase.html#a374d4bcc208b7cc42cabe3dcbefe389d">GetItemsByName</a>(_name)).ToList();</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>            items = items.Union(<a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a374d4bcc208b7cc42cabe3dcbefe389d">GetItemsByName</a>(_name)).ToList();</div>
 <div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>        }</div>
 <div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span> </div>
 <div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>        <span class="keywordflow">if</span> (_description != <span class="stringliteral">&quot;&quot;</span>)</div>
 <div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>        {</div>
 <div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>            anyFilter = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span> </div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            items = items.Union(<a class="code hl_function" href="classItemDatabase.html#a1e24487ecd65b018d3e528290d4bdd51">GetItemsByDescription</a>(_description)).ToList();</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>            items = items.Union(<a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a1e24487ecd65b018d3e528290d4bdd51">GetItemsByDescription</a>(_description)).ToList();</div>
 <div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>        }</div>
 <div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span> </div>
 <div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>        <span class="keywordflow">if</span> (_type_s != <span class="stringliteral">&quot;&quot;</span>)</div>
 <div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>        {</div>
 <div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>            anyFilter = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span> </div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            items = items.Union(<a class="code hl_function" href="classItemDatabase.html#a9a1d9a09cf91954b6c3377e1a25faa21">GetItemsByType</a>(_type_s)).ToList();</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>            items = items.Union(<a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a9a1d9a09cf91954b6c3377e1a25faa21">GetItemsByType</a>(_type_s)).ToList();</div>
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        }</div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <span class="keywordflow">if</span> (_type_t != <span class="keyword">null</span>)</div>
 <div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        {</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            anyFilter = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span> </div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            items = items.Union(<a class="code hl_function" href="classItemDatabase.html#a9a1d9a09cf91954b6c3377e1a25faa21">GetItemsByType</a>(_type_t)).ToList();</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            items = items.Union(<a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a9a1d9a09cf91954b6c3377e1a25faa21">GetItemsByType</a>(_type_t)).ToList();</div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        }</div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
 <div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        <span class="comment">// if no filters were used, return all items</span></div>
@@ -185,7 +185,7 @@ $(function() {
 <div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        <span class="keywordflow">return</span> items;</div>
 <div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>    }</div>
 <div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span> </div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno"><a class="line" href="classItemDatabase.html#ab337a488b93f526fa15f96b39ff5908d">  142</a></span>    <span class="keyword">public</span> <span class="keyword">static</span> List&lt;Item&gt; <a class="code hl_function" href="classItemDatabase.html#ab337a488b93f526fa15f96b39ff5908d">GetItemsByANDFilter</a>(<span class="keywordtype">string</span> _id = <span class="stringliteral">&quot;&quot;</span>, <span class="keywordtype">string</span> _name = <span class="stringliteral">&quot;&quot;</span>, <span class="keywordtype">string</span> _description = <span class="stringliteral">&quot;&quot;</span> , <span class="keywordtype">string</span> _type_s = <span class="stringliteral">&quot;&quot;</span>, System.Type _type_t = <span class="keyword">null</span>)</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>    <span class="keyword">public</span> <span class="keyword">static</span> List&lt;Item&gt; <a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#ab337a488b93f526fa15f96b39ff5908d">GetItemsByANDFilter</a>(<span class="keywordtype">string</span> _id = <span class="stringliteral">&quot;&quot;</span>, <span class="keywordtype">string</span> _name = <span class="stringliteral">&quot;&quot;</span>, <span class="keywordtype">string</span> _description = <span class="stringliteral">&quot;&quot;</span> , <span class="keywordtype">string</span> _type_s = <span class="stringliteral">&quot;&quot;</span>, System.Type _type_t = <span class="keyword">null</span>)</div>
 <div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>    {</div>
 <div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        List&lt;Item&gt; items = <span class="keyword">new</span> List&lt;Item&gt;();</div>
 <div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span> </div>
@@ -194,35 +194,35 @@ $(function() {
 <div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>        {</div>
 <div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            anyFilter = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
-<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>            items = items.Intersect(<a class="code hl_function" href="classItemDatabase.html#a18a1ce3f3147f7b4125f1e56a253d659">GetItemsById</a>(_id)).ToList();</div>
+<div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span>            items = items.Intersect(<a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a18a1ce3f3147f7b4125f1e56a253d659">GetItemsById</a>(_id)).ToList();</div>
 <div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        }</div>
 <div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span> </div>
 <div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>        <span class="keywordflow">if</span> (_name != <span class="stringliteral">&quot;&quot;</span>)</div>
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>        {</div>
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span>            anyFilter = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00157" name="l00157"></a><span class="lineno">  157</span> </div>
-<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>            items = items.Intersect(<a class="code hl_function" href="classItemDatabase.html#a374d4bcc208b7cc42cabe3dcbefe389d">GetItemsByName</a>(_name)).ToList();</div>
+<div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>            items = items.Intersect(<a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a374d4bcc208b7cc42cabe3dcbefe389d">GetItemsByName</a>(_name)).ToList();</div>
 <div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>        }</div>
 <div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span> </div>
 <div class="line"><a id="l00161" name="l00161"></a><span class="lineno">  161</span>        <span class="keywordflow">if</span> (_description != <span class="stringliteral">&quot;&quot;</span>)</div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>        {</div>
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>            anyFilter = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
-<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>            items = items.Intersect(<a class="code hl_function" href="classItemDatabase.html#a1e24487ecd65b018d3e528290d4bdd51">GetItemsByDescription</a>(_description)).ToList();</div>
+<div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>            items = items.Intersect(<a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a1e24487ecd65b018d3e528290d4bdd51">GetItemsByDescription</a>(_description)).ToList();</div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>        }</div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>        <span class="keywordflow">if</span> (_type_s != <span class="stringliteral">&quot;&quot;</span>)</div>
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span>        {</div>
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span>            anyFilter = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00171" name="l00171"></a><span class="lineno">  171</span> </div>
-<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>            items = items.Intersect(<a class="code hl_function" href="classItemDatabase.html#a9a1d9a09cf91954b6c3377e1a25faa21">GetItemsByType</a>(_type_s)).ToList();</div>
+<div class="line"><a id="l00172" name="l00172"></a><span class="lineno">  172</span>            items = items.Intersect(<a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a9a1d9a09cf91954b6c3377e1a25faa21">GetItemsByType</a>(_type_s)).ToList();</div>
 <div class="line"><a id="l00173" name="l00173"></a><span class="lineno">  173</span>        }</div>
 <div class="line"><a id="l00174" name="l00174"></a><span class="lineno">  174</span> </div>
 <div class="line"><a id="l00175" name="l00175"></a><span class="lineno">  175</span>        <span class="keywordflow">if</span> (_type_t != <span class="keyword">null</span>)</div>
 <div class="line"><a id="l00176" name="l00176"></a><span class="lineno">  176</span>        {</div>
 <div class="line"><a id="l00177" name="l00177"></a><span class="lineno">  177</span>            anyFilter = <span class="keyword">true</span>;</div>
 <div class="line"><a id="l00178" name="l00178"></a><span class="lineno">  178</span> </div>
-<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>            items = items.Intersect(<a class="code hl_function" href="classItemDatabase.html#a9a1d9a09cf91954b6c3377e1a25faa21">GetItemsByType</a>(_type_t)).ToList();</div>
+<div class="line"><a id="l00179" name="l00179"></a><span class="lineno">  179</span>            items = items.Intersect(<a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a9a1d9a09cf91954b6c3377e1a25faa21">GetItemsByType</a>(_type_t)).ToList();</div>
 <div class="line"><a id="l00180" name="l00180"></a><span class="lineno">  180</span>        }</div>
 <div class="line"><a id="l00181" name="l00181"></a><span class="lineno">  181</span> </div>
 <div class="line"><a id="l00182" name="l00182"></a><span class="lineno">  182</span>        <span class="comment">// if no filters were used, return all items (redundant for this function, but included for consistency ¯\_(ツ)_/¯ )</span></div>
@@ -247,7 +247,7 @@ $(function() {
 <div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    [RuntimeInitializeOnLoadMethod]</div>
 <div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keywordtype">void</span> Initialize()</div>
 <div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    {</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        <a class="code hl_function" href="classItemDatabase.html#a57ef4c7dbdd13ea7ebcb3df79c5585b3">LoadListFromFile</a>();</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>        <a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a57ef4c7dbdd13ea7ebcb3df79c5585b3">LoadListFromFile</a>();</div>
 <div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
 <div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>        </div>
 <div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        CleanUpFiles();</div>
@@ -262,7 +262,7 @@ $(function() {
 <div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>        <span class="comment">// refresh db</span></div>
 <div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>        Refresh();</div>
 <div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>        <span class="comment">// save db to file</span></div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>        <a class="code hl_function" href="classItemDatabase.html#ade45cbd0b202c7953b544214704ab0fc">SaveListToFile</a>();</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>        <a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#ade45cbd0b202c7953b544214704ab0fc">SaveListToFile</a>();</div>
 <div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span> </div>
 <div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>        <span class="comment">// make databse folder in build folder</span></div>
 <div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>        <span class="keywordtype">string</span> buildFolder = pathToBuiltProject.Substring(0, pathToBuiltProject.LastIndexOf(<span class="stringliteral">&quot;/&quot;</span>)) ;</div>
@@ -291,7 +291,7 @@ $(function() {
 <div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>    }</div>
 <div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span><span class="preprocessor">    #endif</span></div>
 <div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span> </div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno"><a class="line" href="classItemDatabase.html#ade45cbd0b202c7953b544214704ab0fc">  255</a></span>    <span class="keyword">static</span> <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classItemDatabase.html#ade45cbd0b202c7953b544214704ab0fc">SaveListToFile</a>()</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>    <span class="keyword">static</span> <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#ade45cbd0b202c7953b544214704ab0fc">SaveListToFile</a>()</div>
 <div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>    {</div>
 <div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>        <span class="keywordtype">string</span> path = GetDatabaseFoldersPath();</div>
 <div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>        <span class="keywordflow">if</span> (!Directory.Exists(path))</div>
@@ -299,14 +299,14 @@ $(function() {
 <div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>            Directory.CreateDirectory(path);</div>
 <div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>        }</div>
 <div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span> </div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>        <span class="keywordflow">foreach</span> (<a class="code hl_class" href="classItem.html">Item</a> item <span class="keywordflow">in</span> database)</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>        <span class="keywordflow">foreach</span> (<a class="code hl_namespaceRef" href="http://docs.unity3d.com/ScriptReference/classItem_1_1FieldResourceLink.html">Item</a> item <span class="keywordflow">in</span> database)</div>
 <div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>        {</div>
 <div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>            <span class="keywordtype">string</span> fileName = item.id + <span class="stringliteral">&quot;.json&quot;</span>;</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>            <a class="code hl_class" href="classItem.html">Item</a>.<a class="code hl_function" href="classItem.html#a1b85af76085f21e154997b5b5b0ead2e">Save</a>(GetDatabaseFoldersPath(), fileName, item);</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>            <a class="code hl_namespaceRef" href="http://docs.unity3d.com/ScriptReference/classItem_1_1FieldResourceLink.html">Item</a>.Save(GetDatabaseFoldersPath(), fileName, item);</div>
 <div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>        }</div>
 <div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    }</div>
 <div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span> </div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno"><a class="line" href="classItemDatabase.html#a57ef4c7dbdd13ea7ebcb3df79c5585b3">  273</a></span>    <span class="keyword">static</span> <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classItemDatabase.html#a57ef4c7dbdd13ea7ebcb3df79c5585b3">LoadListFromFile</a>()</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>    <span class="keyword">static</span> <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a57ef4c7dbdd13ea7ebcb3df79c5585b3">LoadListFromFile</a>()</div>
 <div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    {</div>
 <div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        <span class="keywordtype">string</span> path = GetDatabaseFoldersPath();</div>
 <div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        <span class="keywordflow">if</span> (!Directory.Exists(path))</div>
@@ -321,12 +321,12 @@ $(function() {
 <div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>            <span class="comment">// if file does not ends in .json, continue</span></div>
 <div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>            <span class="keywordflow">if</span> (!fileName.EndsWith(<span class="stringliteral">&quot;.json&quot;</span>)) <span class="keywordflow">continue</span>;</div>
 <div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>            </div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>            <a class="code hl_class" href="classItem.html">Item</a> item = <a class="code hl_class" href="classItem.html">Item</a>.<a class="code hl_function" href="classItem.html#aacadd39b08d233a1e4e86330d9b3278c">Load</a>(GetDatabaseFoldersPath(), fileName);</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>            <a class="code hl_namespaceRef" href="http://docs.unity3d.com/ScriptReference/classItem_1_1FieldResourceLink.html">Item</a> item = <a class="code hl_namespaceRef" href="http://docs.unity3d.com/ScriptReference/classItem_1_1FieldResourceLink.html">Item</a>.Load(GetDatabaseFoldersPath(), fileName);</div>
 <div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>            database.Add(item);</div>
 <div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>        }</div>
 <div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    }</div>
 <div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span> </div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno"><a class="line" href="classItemDatabase.html#a9503fbcef9b0d7ac8d0e4b0da1a54b1c">  296</a></span>    <span class="keyword">static</span> <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classItemDatabase.html#a9503fbcef9b0d7ac8d0e4b0da1a54b1c">DeleteListFromFile</a>()</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    <span class="keyword">static</span> <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a9503fbcef9b0d7ac8d0e4b0da1a54b1c">DeleteListFromFile</a>()</div>
 <div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    {</div>
 <div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>        Debug.Log(<span class="stringliteral">&quot;Deleting database&quot;</span>);</div>
 <div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span> </div>
@@ -346,7 +346,7 @@ $(function() {
 <div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>        }</div>
 <div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>    }</div>
 <div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span> </div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno"><a class="line" href="classItemDatabase.html#a35bac811f6dc3a2d21e4adacc0063dcb">  319</a></span>    <span class="keyword">static</span> <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classItemDatabase.html#a35bac811f6dc3a2d21e4adacc0063dcb">DeleteListMetaDataFromFile</a>()</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    <span class="keyword">static</span> <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a35bac811f6dc3a2d21e4adacc0063dcb">DeleteListMetaDataFromFile</a>()</div>
 <div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>    {</div>
 <div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>        Debug.Log(<span class="stringliteral">&quot;Deleting database meta data&quot;</span>);</div>
 <div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span> </div>
@@ -371,42 +371,42 @@ $(function() {
 <div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>        Debug.Log(<span class="stringliteral">&quot;Cleaning up files&quot;</span>);</div>
 <div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span> </div>
 <div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>        <span class="comment">// if directory does not exist, create it (instance save folder)</span></div>
-<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>        <span class="keywordflow">if</span> (!Directory.Exists(<a class="code hl_class" href="classItem.html">Item</a>.<a class="code hl_function" href="classItem.html#ac36645a8dcde5d3ad9acccce2bef3017">GetInstanceSavePath</a>()))</div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>        <span class="keywordflow">if</span> (!Directory.Exists(<a class="code hl_namespaceRef" href="http://docs.unity3d.com/ScriptReference/classItem_1_1FieldResourceLink.html">Item</a>.GetInstanceSavePath()))</div>
 <div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>        {</div>
-<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>            Directory.CreateDirectory(<a class="code hl_class" href="classItem.html">Item</a>.<a class="code hl_function" href="classItem.html#ac36645a8dcde5d3ad9acccce2bef3017">GetInstanceSavePath</a>());</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>            Directory.CreateDirectory(<a class="code hl_namespaceRef" href="http://docs.unity3d.com/ScriptReference/classItem_1_1FieldResourceLink.html">Item</a>.GetInstanceSavePath());</div>
 <div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>        }</div>
 <div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>        <span class="comment">//if directory does not exist, create it (inventory save folder)</span></div>
-<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>        <span class="keywordflow">if</span> (!Directory.Exists(<a class="code hl_class" href="classInventory.html">Inventory</a>.GetInventoryFolder()))</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>        <span class="keywordflow">if</span> (!Directory.Exists(<a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classInventory.html">Inventory</a>.GetInventoryFolder()))</div>
 <div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>        {</div>
-<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>            Directory.CreateDirectory(<a class="code hl_class" href="classInventory.html">Inventory</a>.GetInventoryFolder());</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>            Directory.CreateDirectory(<a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classInventory.html">Inventory</a>.GetInventoryFolder());</div>
 <div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span>        }</div>
 <div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span> </div>
 <div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>        <span class="comment">// delete all instance files that are not in any inventories and not in any save files</span></div>
 <div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span> </div>
 <div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>        <span class="comment">// get all files in the instance folder</span></div>
-<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>        <span class="keywordtype">string</span>[] instanceSaveFiles = Directory.GetFiles(<a class="code hl_class" href="classItem.html">Item</a>.<a class="code hl_function" href="classItem.html#ac36645a8dcde5d3ad9acccce2bef3017">GetInstanceSavePath</a>(), <span class="stringliteral">&quot;*.json&quot;</span>);</div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>        <span class="keywordtype">string</span>[] instanceSaveFiles = Directory.GetFiles(<a class="code hl_namespaceRef" href="http://docs.unity3d.com/ScriptReference/classItem_1_1FieldResourceLink.html">Item</a>.GetInstanceSavePath(), <span class="stringliteral">&quot;*.json&quot;</span>);</div>
 <div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span>        <span class="comment">// convert to file names</span></div>
 <div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span> </div>
 <div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span> </div>
 <div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span>        <span class="comment">// get all inventories in the game</span></div>
-<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>        List&lt;Inventory&gt; inventories = <a class="code hl_class" href="classInventory.html">Inventory</a>.allInventories;</div>
+<div class="line"><a id="l00362" name="l00362"></a><span class="lineno">  362</span>        List&lt;Inventory&gt; inventories = <a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classInventory.html">Inventory</a>.allInventories;</div>
 <div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span> </div>
 <div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>        <span class="comment">// get all inventory save files by inventory name</span></div>
 <div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>        List&lt;string&gt; savedInstances = <span class="keyword">new</span> List&lt;string&gt;();</div>
-<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>        <span class="keywordflow">foreach</span> (<a class="code hl_class" href="classInventory.html">Inventory</a> inventory <span class="keywordflow">in</span> inventories)</div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>        <span class="keywordflow">foreach</span> (<a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classInventory.html">Inventory</a> inventory <span class="keywordflow">in</span> inventories)</div>
 <div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>        {</div>
 <div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>            <span class="comment">//if file does not exist, continue</span></div>
-<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>            <span class="keywordflow">if</span> (!File.Exists(inventory.<a class="code hl_function" href="classInventory.html#ace07482990e78b34e083cc81a719c8cb">GetSaveFilePath</a>())) <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span>            <span class="keywordflow">if</span> (!File.Exists(inventory.<a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classInventory.html#ace07482990e78b34e083cc81a719c8cb">GetSaveFilePath</a>())) <span class="keywordflow">continue</span>;</div>
 <div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span> </div>
 <div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>            <span class="comment">// get every line of the inventory save file</span></div>
-<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>            List&lt;string&gt; lines = File.ReadAllLines(inventory.<a class="code hl_function" href="classInventory.html#ace07482990e78b34e083cc81a719c8cb">GetSaveFilePath</a>()).ToList();</div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>            List&lt;string&gt; lines = File.ReadAllLines(inventory.<a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classInventory.html#ace07482990e78b34e083cc81a719c8cb">GetSaveFilePath</a>()).ToList();</div>
 <div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span> </div>
 <div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>            <span class="comment">// combine lines into savedInstances</span></div>
 <div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>            savedInstances = savedInstances.Union(lines).ToList();</div>
 <div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span>        }</div>
 <div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span> </div>
 <div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>        <span class="comment">// get all directories in the inventory folder</span></div>
-<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>        <span class="keywordtype">string</span>[] directories = Directory.GetDirectories(<a class="code hl_class" href="classInventory.html">Inventory</a>.GetInventoryFolder());</div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>        <span class="keywordtype">string</span>[] directories = Directory.GetDirectories(<a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classInventory.html">Inventory</a>.GetInventoryFolder());</div>
 <div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span> </div>
 <div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span>        <span class="keywordflow">foreach</span> (<span class="keywordtype">string</span> directory <span class="keywordflow">in</span> directories)</div>
 <div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>        {</div>
@@ -433,11 +433,11 @@ $(function() {
 <div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span> </div>
 <div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>            <span class="keywordtype">bool</span> inInventory = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>            <span class="comment">// if id and instance id exist in any inventory, continue</span></div>
-<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>            <span class="keywordflow">foreach</span> (<a class="code hl_class" href="classInventory.html">Inventory</a> inventory <span class="keywordflow">in</span> inventories)</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>            <span class="keywordflow">foreach</span> (<a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classInventory.html">Inventory</a> inventory <span class="keywordflow">in</span> inventories)</div>
 <div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>            {</div>
 <div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; inventory.slots.Count; i++)</div>
 <div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>                {</div>
-<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>                    <a class="code hl_class" href="classItem.html">Item</a> item = inventory.slots[i].item;</div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>                    <a class="code hl_namespaceRef" href="http://docs.unity3d.com/ScriptReference/classItem_1_1FieldResourceLink.html">Item</a> item = inventory.slots[i].item;</div>
 <div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>                    <span class="keywordflow">if</span> (item != <span class="keyword">null</span> &amp;&amp; fileName.Contains(item.id) &amp;&amp; fileName.Contains(item.instanceID))</div>
 <div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>                    {</div>
 <div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span>                        inInventory = <span class="keyword">true</span>;</div>
@@ -453,13 +453,13 @@ $(function() {
 <div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>        }</div>
 <div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>    }</div>
 <div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span> </div>
-<div class="line"><a id="l00429" name="l00429"></a><span class="lineno"><a class="line" href="classItemDatabase.html#aeda4256591cb1a4e0cfe758043960e36">  429</a></span>    <span class="keyword">static</span> <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classItemDatabase.html#aeda4256591cb1a4e0cfe758043960e36">ResetDatabaseFolder</a>()</div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>    <span class="keyword">static</span> <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#aeda4256591cb1a4e0cfe758043960e36">ResetDatabaseFolder</a>()</div>
 <div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>    {</div>
 <div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>        Debug.Log(<span class="stringliteral">&quot;Resetting database folder&quot;</span>);</div>
-<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>        <a class="code hl_function" href="classItemDatabase.html#a9503fbcef9b0d7ac8d0e4b0da1a54b1c">DeleteListFromFile</a>();</div>
-<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>        <a class="code hl_function" href="classItemDatabase.html#a35bac811f6dc3a2d21e4adacc0063dcb">DeleteListMetaDataFromFile</a>();</div>
+<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span>        <a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a9503fbcef9b0d7ac8d0e4b0da1a54b1c">DeleteListFromFile</a>();</div>
+<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span>        <a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a35bac811f6dc3a2d21e4adacc0063dcb">DeleteListMetaDataFromFile</a>();</div>
 <div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>        </div>
-<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>        <a class="code hl_function" href="classItemDatabase.html#ade45cbd0b202c7953b544214704ab0fc">SaveListToFile</a>();</div>
+<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>        <a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#ade45cbd0b202c7953b544214704ab0fc">SaveListToFile</a>();</div>
 <div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>    }</div>
 <div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span> </div>
 <div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>    <span class="keyword">static</span> <span class="keyword">public</span> <span class="keywordtype">void</span> Refresh() {</div>
@@ -474,14 +474,14 @@ $(function() {
 <div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>            }</div>
 <div class="line"><a id="l00448" name="l00448"></a><span class="lineno">  448</span>        }</div>
 <div class="line"><a id="l00449" name="l00449"></a><span class="lineno">  449</span> </div>
-<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span>        <a class="code hl_function" href="classItemDatabase.html#aa1df6ec2c0bb1316b6ad383bbf875cb7">ValidateIDs</a>();</div>
+<div class="line"><a id="l00450" name="l00450"></a><span class="lineno">  450</span>        <a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#aa1df6ec2c0bb1316b6ad383bbf875cb7">ValidateIDs</a>();</div>
 <div class="line"><a id="l00451" name="l00451"></a><span class="lineno">  451</span> </div>
 <div class="line"><a id="l00452" name="l00452"></a><span class="lineno">  452</span><span class="preprocessor">        #if UNITY_EDITOR</span></div>
 <div class="line"><a id="l00453" name="l00453"></a><span class="lineno">  453</span>        database.Clear();</div>
 <div class="line"><a id="l00454" name="l00454"></a><span class="lineno">  454</span>        var guids = AssetDatabase.FindAssets(<span class="stringliteral">&quot;t:Item&quot;</span>);</div>
 <div class="line"><a id="l00455" name="l00455"></a><span class="lineno">  455</span>        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i = 0; i &lt; guids.Length; i++) {</div>
 <div class="line"><a id="l00456" name="l00456"></a><span class="lineno">  456</span>            var path = AssetDatabase.GUIDToAssetPath(guids[i]);</div>
-<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>            var asset = AssetDatabase.LoadAssetAtPath&lt;<a class="code hl_class" href="classItem.html">Item</a>&gt;(path);</div>
+<div class="line"><a id="l00457" name="l00457"></a><span class="lineno">  457</span>            var asset = AssetDatabase.LoadAssetAtPath&lt;<a class="code hl_namespaceRef" href="http://docs.unity3d.com/ScriptReference/classItem_1_1FieldResourceLink.html">Item</a>&gt;(path);</div>
 <div class="line"><a id="l00458" name="l00458"></a><span class="lineno">  458</span>            database.Add(asset);</div>
 <div class="line"><a id="l00459" name="l00459"></a><span class="lineno">  459</span>        }</div>
 <div class="line"><a id="l00460" name="l00460"></a><span class="lineno">  460</span><span class="preprocessor">        #endif</span></div>
@@ -510,7 +510,7 @@ $(function() {
 <div class="line"><a id="l00483" name="l00483"></a><span class="lineno">  483</span>        });</div>
 <div class="line"><a id="l00484" name="l00484"></a><span class="lineno">  484</span>    }</div>
 <div class="line"><a id="l00485" name="l00485"></a><span class="lineno">  485</span> </div>
-<div class="line"><a id="l00489" name="l00489"></a><span class="lineno"><a class="line" href="classItemDatabase.html#aa1df6ec2c0bb1316b6ad383bbf875cb7">  489</a></span>    <span class="keyword">static</span> <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classItemDatabase.html#aa1df6ec2c0bb1316b6ad383bbf875cb7">ValidateIDs</a>() {</div>
+<div class="line"><a id="l00489" name="l00489"></a><span class="lineno">  489</span>    <span class="keyword">static</span> <span class="keyword">public</span> <span class="keywordtype">void</span> <a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#aa1df6ec2c0bb1316b6ad383bbf875cb7">ValidateIDs</a>() {</div>
 <div class="line"><a id="l00490" name="l00490"></a><span class="lineno">  490</span><span class="preprocessor">        #if UNITY_EDITOR</span></div>
 <div class="line"><a id="l00491" name="l00491"></a><span class="lineno">  491</span>        <span class="comment">// put selected id at the top (Reason: so that when we check for issues, it will be the first to change, in an attempt to not modify other items )</span></div>
 <div class="line"><a id="l00492" name="l00492"></a><span class="lineno">  492</span>        <span class="keywordflow">if</span> (DatabaseWindow.selected != <span class="keyword">null</span>)</div>
@@ -552,7 +552,7 @@ $(function() {
 <div class="line"><a id="l00528" name="l00528"></a><span class="lineno">  528</span>                        <span class="comment">//add new number</span></div>
 <div class="line"><a id="l00529" name="l00529"></a><span class="lineno">  529</span>                        database[i].id += number;</div>
 <div class="line"><a id="l00530" name="l00530"></a><span class="lineno">  530</span> </div>
-<div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span>                        <a class="code hl_function" href="classItemDatabase.html#aa1df6ec2c0bb1316b6ad383bbf875cb7">ValidateIDs</a>();</div>
+<div class="line"><a id="l00531" name="l00531"></a><span class="lineno">  531</span>                        <a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#aa1df6ec2c0bb1316b6ad383bbf875cb7">ValidateIDs</a>();</div>
 <div class="line"><a id="l00532" name="l00532"></a><span class="lineno">  532</span>                    }</div>
 <div class="line"><a id="l00533" name="l00533"></a><span class="lineno">  533</span>                    <span class="keywordflow">else</span> {</div>
 <div class="line"><a id="l00534" name="l00534"></a><span class="lineno">  534</span>                        <span class="comment">//add _1 to the number</span></div>
@@ -563,27 +563,23 @@ $(function() {
 <div class="line"><a id="l00539" name="l00539"></a><span class="lineno">  539</span>        }</div>
 <div class="line"><a id="l00540" name="l00540"></a><span class="lineno">  540</span>    }</div>
 <div class="line"><a id="l00541" name="l00541"></a><span class="lineno">  541</span>}</div>
-<div class="ttc" id="aclassInventory_html"><div class="ttname"><a href="classInventory.html">Inventory</a></div><div class="ttdef"><b>Definition:</b> <a href="Inventory_8cs_source.html#l00015">Inventory.cs:16</a></div></div>
-<div class="ttc" id="aclassInventory_html_ace07482990e78b34e083cc81a719c8cb"><div class="ttname"><a href="classInventory.html#ace07482990e78b34e083cc81a719c8cb">Inventory.GetSaveFilePath</a></div><div class="ttdeci">string GetSaveFilePath()</div><div class="ttdoc">Gets the save FILE path for this inventory.</div><div class="ttdef"><b>Definition:</b> <a href="Inventory_8cs_source.html#l00256">Inventory.cs:256</a></div></div>
-<div class="ttc" id="aclassItemDatabase_html"><div class="ttname"><a href="classItemDatabase.html">ItemDatabase</a></div><div class="ttdef"><b>Definition:</b> <a href="ItemDatabase_8cs_source.html#l00019">ItemDatabase.cs:20</a></div></div>
-<div class="ttc" id="aclassItemDatabase_html_a18a1ce3f3147f7b4125f1e56a253d659"><div class="ttname"><a href="classItemDatabase.html#a18a1ce3f3147f7b4125f1e56a253d659">ItemDatabase.GetItemsById</a></div><div class="ttdeci">static List&lt; Item &gt; GetItemsById(string _id)</div><div class="ttdoc">get list of items in the database by id</div><div class="ttdef"><b>Definition:</b> <a href="ItemDatabase_8cs_source.html#l00049">ItemDatabase.cs:49</a></div></div>
-<div class="ttc" id="aclassItemDatabase_html_a1e24487ecd65b018d3e528290d4bdd51"><div class="ttname"><a href="classItemDatabase.html#a1e24487ecd65b018d3e528290d4bdd51">ItemDatabase.GetItemsByDescription</a></div><div class="ttdeci">static List&lt; Item &gt; GetItemsByDescription(string _description)</div><div class="ttdoc">get list of items in the database by description</div><div class="ttdef"><b>Definition:</b> <a href="ItemDatabase_8cs_source.html#l00065">ItemDatabase.cs:65</a></div></div>
-<div class="ttc" id="aclassItemDatabase_html_a35bac811f6dc3a2d21e4adacc0063dcb"><div class="ttname"><a href="classItemDatabase.html#a35bac811f6dc3a2d21e4adacc0063dcb">ItemDatabase.DeleteListMetaDataFromFile</a></div><div class="ttdeci">static void DeleteListMetaDataFromFile()</div><div class="ttdoc">Deletes meta data files in the database folder</div><div class="ttdef"><b>Definition:</b> <a href="ItemDatabase_8cs_source.html#l00319">ItemDatabase.cs:319</a></div></div>
-<div class="ttc" id="aclassItemDatabase_html_a374d4bcc208b7cc42cabe3dcbefe389d"><div class="ttname"><a href="classItemDatabase.html#a374d4bcc208b7cc42cabe3dcbefe389d">ItemDatabase.GetItemsByName</a></div><div class="ttdeci">static List&lt; Item &gt; GetItemsByName(string _name)</div><div class="ttdoc">get list of items in the database by name</div><div class="ttdef"><b>Definition:</b> <a href="ItemDatabase_8cs_source.html#l00057">ItemDatabase.cs:57</a></div></div>
-<div class="ttc" id="aclassItemDatabase_html_a402d3463e5bc58f32c9f748ebae78a86"><div class="ttname"><a href="classItemDatabase.html#a402d3463e5bc58f32c9f748ebae78a86">ItemDatabase.GetItemsByType</a></div><div class="ttdeci">static List&lt; Item &gt; GetItemsByType(string _type)</div><div class="ttdoc">get list of items in the database by type (string)   NOTE: Case sensitive!</div><div class="ttdef"><b>Definition:</b> <a href="ItemDatabase_8cs_source.html#l00082">ItemDatabase.cs:82</a></div></div>
-<div class="ttc" id="aclassItemDatabase_html_a57ef4c7dbdd13ea7ebcb3df79c5585b3"><div class="ttname"><a href="classItemDatabase.html#a57ef4c7dbdd13ea7ebcb3df79c5585b3">ItemDatabase.LoadListFromFile</a></div><div class="ttdeci">static void LoadListFromFile()</div><div class="ttdoc">Loads the database from file into memory</div><div class="ttdef"><b>Definition:</b> <a href="ItemDatabase_8cs_source.html#l00273">ItemDatabase.cs:273</a></div></div>
-<div class="ttc" id="aclassItemDatabase_html_a9503fbcef9b0d7ac8d0e4b0da1a54b1c"><div class="ttname"><a href="classItemDatabase.html#a9503fbcef9b0d7ac8d0e4b0da1a54b1c">ItemDatabase.DeleteListFromFile</a></div><div class="ttdeci">static void DeleteListFromFile()</div><div class="ttdoc">Deletes all .json files in the database folder</div><div class="ttdef"><b>Definition:</b> <a href="ItemDatabase_8cs_source.html#l00296">ItemDatabase.cs:296</a></div></div>
-<div class="ttc" id="aclassItemDatabase_html_a9a1d9a09cf91954b6c3377e1a25faa21"><div class="ttname"><a href="classItemDatabase.html#a9a1d9a09cf91954b6c3377e1a25faa21">ItemDatabase.GetItemsByType</a></div><div class="ttdeci">static List&lt; Item &gt; GetItemsByType(System.Type _type)</div><div class="ttdoc">get list of items in the database by type (System.Type)</div><div class="ttdef"><b>Definition:</b> <a href="ItemDatabase_8cs_source.html#l00073">ItemDatabase.cs:73</a></div></div>
-<div class="ttc" id="aclassItemDatabase_html_aa1df6ec2c0bb1316b6ad383bbf875cb7"><div class="ttname"><a href="classItemDatabase.html#aa1df6ec2c0bb1316b6ad383bbf875cb7">ItemDatabase.ValidateIDs</a></div><div class="ttdeci">static void ValidateIDs()</div><div class="ttdoc">Validates all item ids.</div><div class="ttdef"><b>Definition:</b> <a href="ItemDatabase_8cs_source.html#l00489">ItemDatabase.cs:489</a></div></div>
-<div class="ttc" id="aclassItemDatabase_html_ab337a488b93f526fa15f96b39ff5908d"><div class="ttname"><a href="classItemDatabase.html#ab337a488b93f526fa15f96b39ff5908d">ItemDatabase.GetItemsByANDFilter</a></div><div class="ttdeci">static List&lt; Item &gt; GetItemsByANDFilter(string _id=&quot;&quot;, string _name=&quot;&quot;, string _description=&quot;&quot;, string _type_s=&quot;&quot;, System.Type _type_t=null)</div><div class="ttdoc">get list of items in the database using optional search parameters using AND logic</div><div class="ttdef"><b>Definition:</b> <a href="ItemDatabase_8cs_source.html#l00142">ItemDatabase.cs:142</a></div></div>
-<div class="ttc" id="aclassItemDatabase_html_abe4d97ac324e14ed3b4bbeeae9093044"><div class="ttname"><a href="classItemDatabase.html#abe4d97ac324e14ed3b4bbeeae9093044">ItemDatabase.GetItem</a></div><div class="ttdeci">static Item GetItem(string id)</div><div class="ttdoc">Gets an item by its id.</div><div class="ttdef"><b>Definition:</b> <a href="ItemDatabase_8cs_source.html#l00036">ItemDatabase.cs:36</a></div></div>
-<div class="ttc" id="aclassItemDatabase_html_ade45cbd0b202c7953b544214704ab0fc"><div class="ttname"><a href="classItemDatabase.html#ade45cbd0b202c7953b544214704ab0fc">ItemDatabase.SaveListToFile</a></div><div class="ttdeci">static void SaveListToFile()</div><div class="ttdoc">Saves the database to file from memory.</div><div class="ttdef"><b>Definition:</b> <a href="ItemDatabase_8cs_source.html#l00255">ItemDatabase.cs:255</a></div></div>
-<div class="ttc" id="aclassItemDatabase_html_aeda4256591cb1a4e0cfe758043960e36"><div class="ttname"><a href="classItemDatabase.html#aeda4256591cb1a4e0cfe758043960e36">ItemDatabase.ResetDatabaseFolder</a></div><div class="ttdeci">static void ResetDatabaseFolder()</div><div class="ttdoc">Resets the database folder</div><div class="ttdef"><b>Definition:</b> <a href="ItemDatabase_8cs_source.html#l00429">ItemDatabase.cs:429</a></div></div>
-<div class="ttc" id="aclassItemDatabase_html_af4a4711722aac586f07ce50926c16a77"><div class="ttname"><a href="classItemDatabase.html#af4a4711722aac586f07ce50926c16a77">ItemDatabase.GetItemsByORFilter</a></div><div class="ttdeci">static List&lt; Item &gt; GetItemsByORFilter(string _id=&quot;&quot;, string _name=&quot;&quot;, string _description=&quot;&quot;, string _type_s=&quot;&quot;, System.Type _type_t=null)</div><div class="ttdoc">get list of items in the database using optional search parameters using OR logic</div><div class="ttdef"><b>Definition:</b> <a href="ItemDatabase_8cs_source.html#l00090">ItemDatabase.cs:90</a></div></div>
-<div class="ttc" id="aclassItem_html"><div class="ttname"><a href="classItem.html">Item</a></div><div class="ttdef"><b>Definition:</b> <a href="Item_8cs_source.html#l00017">Item.cs:18</a></div></div>
-<div class="ttc" id="aclassItem_html_a1b85af76085f21e154997b5b5b0ead2e"><div class="ttname"><a href="classItem.html#a1b85af76085f21e154997b5b5b0ead2e">Item.Save</a></div><div class="ttdeci">static void Save(string _path, string _fileName, Item _item)</div><div class="ttdoc">Saves item to file</div><div class="ttdef"><b>Definition:</b> <a href="Item_8cs_source.html#l00384">Item.cs:384</a></div></div>
-<div class="ttc" id="aclassItem_html_aacadd39b08d233a1e4e86330d9b3278c"><div class="ttname"><a href="classItem.html#aacadd39b08d233a1e4e86330d9b3278c">Item.Load</a></div><div class="ttdeci">static Item Load(string _path, string _fileName)</div><div class="ttdoc">Loads item from file</div><div class="ttdef"><b>Definition:</b> <a href="Item_8cs_source.html#l00418">Item.cs:418</a></div></div>
-<div class="ttc" id="aclassItem_html_ac36645a8dcde5d3ad9acccce2bef3017"><div class="ttname"><a href="classItem.html#ac36645a8dcde5d3ad9acccce2bef3017">Item.GetInstanceSavePath</a></div><div class="ttdeci">static string GetInstanceSavePath(int saveSlot=0)</div><div class="ttdoc">Gets the folder to save item instances to.</div><div class="ttdef"><b>Definition:</b> <a href="Item_8cs_source.html#l00025">Item.cs:25</a></div></div>
+<div class="ttc" id="aclassInventory_html"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classInventory.html">Inventory</a></div></div>
+<div class="ttc" id="aclassInventory_html_ace07482990e78b34e083cc81a719c8cb"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classInventory.html#ace07482990e78b34e083cc81a719c8cb">Inventory::GetSaveFilePath</a></div><div class="ttdeci">string GetSaveFilePath()</div></div>
+<div class="ttc" id="aclassItemDatabase_html"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html">ItemDatabase</a></div></div>
+<div class="ttc" id="aclassItemDatabase_html_a18a1ce3f3147f7b4125f1e56a253d659"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a18a1ce3f3147f7b4125f1e56a253d659">ItemDatabase::GetItemsById</a></div><div class="ttdeci">static List&lt; Item &gt; GetItemsById(string _id)</div></div>
+<div class="ttc" id="aclassItemDatabase_html_a1e24487ecd65b018d3e528290d4bdd51"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a1e24487ecd65b018d3e528290d4bdd51">ItemDatabase::GetItemsByDescription</a></div><div class="ttdeci">static List&lt; Item &gt; GetItemsByDescription(string _description)</div></div>
+<div class="ttc" id="aclassItemDatabase_html_a35bac811f6dc3a2d21e4adacc0063dcb"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a35bac811f6dc3a2d21e4adacc0063dcb">ItemDatabase::DeleteListMetaDataFromFile</a></div><div class="ttdeci">static void DeleteListMetaDataFromFile()</div></div>
+<div class="ttc" id="aclassItemDatabase_html_a374d4bcc208b7cc42cabe3dcbefe389d"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a374d4bcc208b7cc42cabe3dcbefe389d">ItemDatabase::GetItemsByName</a></div><div class="ttdeci">static List&lt; Item &gt; GetItemsByName(string _name)</div></div>
+<div class="ttc" id="aclassItemDatabase_html_a57ef4c7dbdd13ea7ebcb3df79c5585b3"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a57ef4c7dbdd13ea7ebcb3df79c5585b3">ItemDatabase::LoadListFromFile</a></div><div class="ttdeci">static void LoadListFromFile()</div></div>
+<div class="ttc" id="aclassItemDatabase_html_a9503fbcef9b0d7ac8d0e4b0da1a54b1c"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a9503fbcef9b0d7ac8d0e4b0da1a54b1c">ItemDatabase::DeleteListFromFile</a></div><div class="ttdeci">static void DeleteListFromFile()</div></div>
+<div class="ttc" id="aclassItemDatabase_html_a9a1d9a09cf91954b6c3377e1a25faa21"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#a9a1d9a09cf91954b6c3377e1a25faa21">ItemDatabase::GetItemsByType</a></div><div class="ttdeci">static List&lt; Item &gt; GetItemsByType(System.Type _type)</div></div>
+<div class="ttc" id="aclassItemDatabase_html_aa1df6ec2c0bb1316b6ad383bbf875cb7"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#aa1df6ec2c0bb1316b6ad383bbf875cb7">ItemDatabase::ValidateIDs</a></div><div class="ttdeci">static void ValidateIDs()</div></div>
+<div class="ttc" id="aclassItemDatabase_html_ab337a488b93f526fa15f96b39ff5908d"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#ab337a488b93f526fa15f96b39ff5908d">ItemDatabase::GetItemsByANDFilter</a></div><div class="ttdeci">static List&lt; Item &gt; GetItemsByANDFilter(string _id=&quot;&quot;, string _name=&quot;&quot;, string _description=&quot;&quot;, string _type_s=&quot;&quot;, System.Type _type_t=null)</div></div>
+<div class="ttc" id="aclassItemDatabase_html_abe4d97ac324e14ed3b4bbeeae9093044"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#abe4d97ac324e14ed3b4bbeeae9093044">ItemDatabase::GetItem</a></div><div class="ttdeci">static Item GetItem(string id)</div></div>
+<div class="ttc" id="aclassItemDatabase_html_ade45cbd0b202c7953b544214704ab0fc"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#ade45cbd0b202c7953b544214704ab0fc">ItemDatabase::SaveListToFile</a></div><div class="ttdeci">static void SaveListToFile()</div></div>
+<div class="ttc" id="aclassItemDatabase_html_aeda4256591cb1a4e0cfe758043960e36"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#aeda4256591cb1a4e0cfe758043960e36">ItemDatabase::ResetDatabaseFolder</a></div><div class="ttdeci">static void ResetDatabaseFolder()</div></div>
+<div class="ttc" id="aclassItemDatabase_html_af4a4711722aac586f07ce50926c16a77"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classItemDatabase.html#af4a4711722aac586f07ce50926c16a77">ItemDatabase::GetItemsByORFilter</a></div><div class="ttdeci">static List&lt; Item &gt; GetItemsByORFilter(string _id=&quot;&quot;, string _name=&quot;&quot;, string _description=&quot;&quot;, string _type_s=&quot;&quot;, System.Type _type_t=null)</div></div>
+<div class="ttc" id="aclassItem_1_1FieldResourceLink_html"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classItem_1_1FieldResourceLink.html">Item</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

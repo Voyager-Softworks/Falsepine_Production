@@ -66,6 +66,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classDamagePlayerWhenCollide-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">DamagePlayerWhenCollide Class Reference</div></div>
 </div><!--header-->
@@ -78,7 +80,7 @@ Inheritance diagram for DamagePlayerWhenCollide:</div>
 <div class="dyncontent">
 <div class="center"><img src="classDamagePlayerWhenCollide__inherit__graph.png" border="0" usemap="#aDamagePlayerWhenCollide_inherit__map" alt="Inheritance graph"/></div>
 <map name="aDamagePlayerWhenCollide_inherit__map" id="aDamagePlayerWhenCollide_inherit__map">
-<area shape="rect" title="Script that damages the player when they intersect with a collider." alt="" coords="5,131,205,237"/>
+<area shape="rect" title="Script that damages the player when they intersect with a collider." alt="" coords="5,131,205,281"/>
 <area shape="rect" title=" " alt="" coords="43,5,167,83"/>
 </map>
 </div>
@@ -87,7 +89,7 @@ Collaboration diagram for DamagePlayerWhenCollide:</div>
 <div class="dyncontent">
 <div class="center"><img src="classDamagePlayerWhenCollide__coll__graph.png" border="0" usemap="#aDamagePlayerWhenCollide_coll__map" alt="Collaboration graph"/></div>
 <map name="aDamagePlayerWhenCollide_coll__map" id="aDamagePlayerWhenCollide_coll__map">
-<area shape="rect" title="Script that damages the player when they intersect with a collider." alt="" coords="5,131,205,237"/>
+<area shape="rect" title="Script that damages the player when they intersect with a collider." alt="" coords="5,131,205,281"/>
 <area shape="rect" title=" " alt="" coords="43,5,167,83"/>
 </map>
 </div>
@@ -103,12 +105,81 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a1198b33bbe9efa84be40859c9f9bcdcf"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDamagePlayerWhenCollide.html#a1198b33bbe9efa84be40859c9f9bcdcf">tickRate</a> = 0.5f</td></tr>
 <tr class="memdesc:a1198b33bbe9efa84be40859c9f9bcdcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">The amount of time between each damage tick.  <a href="classDamagePlayerWhenCollide.html#a1198b33bbe9efa84be40859c9f9bcdcf">More...</a><br /></td></tr>
 <tr class="separator:a1198b33bbe9efa84be40859c9f9bcdcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a5434b3291b54e4a6a50902496cf94d45"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDamagePlayerWhenCollide.html#a5434b3291b54e4a6a50902496cf94d45">Start</a> ()</td></tr>
+<tr class="separator:a5434b3291b54e4a6a50902496cf94d45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2eb782e09bd98817f907886d7e17dc45"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDamagePlayerWhenCollide.html#a2eb782e09bd98817f907886d7e17dc45">Update</a> ()</td></tr>
+<tr class="separator:a2eb782e09bd98817f907886d7e17dc45"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a8f2c648d801afe79f9d8a92770053c76"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDamagePlayerWhenCollide.html#a8f2c648d801afe79f9d8a92770053c76">tickTimer</a> = 0f</td></tr>
+<tr class="separator:a8f2c648d801afe79f9d8a92770053c76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:affff23b9591bb0ea14795331c318d9e7"><td class="memItemLeft" align="right" valign="top">SphereCollider&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDamagePlayerWhenCollide.html#affff23b9591bb0ea14795331c318d9e7">sphereCollider</a></td></tr>
+<tr class="separator:affff23b9591bb0ea14795331c318d9e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Script that damages the player when they intersect with a collider. </p>
 
 <p class="definition">Definition at line <a class="el" href="DamagePlayerWhenCollide_8cs_source.html#l00008">8</a> of file <a class="el" href="DamagePlayerWhenCollide_8cs_source.html">DamagePlayerWhenCollide.cs</a>.</p>
-</div><h2 class="groupheader">Member Data Documentation</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a5434b3291b54e4a6a50902496cf94d45" name="a5434b3291b54e4a6a50902496cf94d45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5434b3291b54e4a6a50902496cf94d45">&#9670;&nbsp;</a></span>Start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DamagePlayerWhenCollide.Start </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DamagePlayerWhenCollide_8cs_source.html#l00017">17</a> of file <a class="el" href="DamagePlayerWhenCollide_8cs_source.html">DamagePlayerWhenCollide.cs</a>.</p>
+
+</div>
+</div>
+<a id="a2eb782e09bd98817f907886d7e17dc45" name="a2eb782e09bd98817f907886d7e17dc45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2eb782e09bd98817f907886d7e17dc45">&#9670;&nbsp;</a></span>Update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void DamagePlayerWhenCollide.Update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DamagePlayerWhenCollide_8cs_source.html#l00023">23</a> of file <a class="el" href="DamagePlayerWhenCollide_8cs_source.html">DamagePlayerWhenCollide.cs</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
 <a id="a8e0b6f05be9d87ebdf10295954cd14cd" name="a8e0b6f05be9d87ebdf10295954cd14cd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8e0b6f05be9d87ebdf10295954cd14cd">&#9670;&nbsp;</a></span>damage</h2>
 
@@ -145,6 +216,30 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="affff23b9591bb0ea14795331c318d9e7" name="affff23b9591bb0ea14795331c318d9e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#affff23b9591bb0ea14795331c318d9e7">&#9670;&nbsp;</a></span>sphereCollider</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SphereCollider DamagePlayerWhenCollide.sphereCollider</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DamagePlayerWhenCollide_8cs_source.html#l00014">14</a> of file <a class="el" href="DamagePlayerWhenCollide_8cs_source.html">DamagePlayerWhenCollide.cs</a>.</p>
+
+</div>
+</div>
 <a id="a1198b33bbe9efa84be40859c9f9bcdcf" name="a1198b33bbe9efa84be40859c9f9bcdcf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1198b33bbe9efa84be40859c9f9bcdcf">&#9670;&nbsp;</a></span>tickRate</h2>
 
@@ -160,6 +255,30 @@ Public Attributes</h2></td></tr>
 <p>The amount of time between each damage tick. </p>
 
 <p class="definition">Definition at line <a class="el" href="DamagePlayerWhenCollide_8cs_source.html#l00012">12</a> of file <a class="el" href="DamagePlayerWhenCollide_8cs_source.html">DamagePlayerWhenCollide.cs</a>.</p>
+
+</div>
+</div>
+<a id="a8f2c648d801afe79f9d8a92770053c76" name="a8f2c648d801afe79f9d8a92770053c76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8f2c648d801afe79f9d8a92770053c76">&#9670;&nbsp;</a></span>tickTimer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float DamagePlayerWhenCollide.tickTimer = 0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DamagePlayerWhenCollide_8cs_source.html#l00013">13</a> of file <a class="el" href="DamagePlayerWhenCollide_8cs_source.html">DamagePlayerWhenCollide.cs</a>.</p>
 
 </div>
 </div>

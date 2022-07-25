@@ -68,6 +68,8 @@ $(function() {
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classNotesManager-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">NotesManager Class Reference</div></div>
 </div><!--header-->
@@ -77,7 +79,7 @@ Inheritance diagram for NotesManager:</div>
 <div class="dyncontent">
 <div class="center"><img src="classNotesManager__inherit__graph.png" border="0" usemap="#aNotesManager_inherit__map" alt="Inheritance graph"/></div>
 <map name="aNotesManager_inherit__map" id="aNotesManager_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,131,173,267"/>
+<area shape="rect" title=" " alt="" coords="5,131,173,340"/>
 <area shape="rect" title=" " alt="" coords="27,5,151,83"/>
 </map>
 </div>
@@ -86,8 +88,11 @@ Collaboration diagram for NotesManager:</div>
 <div class="dyncontent">
 <div class="center"><img src="classNotesManager__coll__graph.png" border="0" usemap="#aNotesManager_coll__map" alt="Collaboration graph"/></div>
 <map name="aNotesManager_coll__map" id="aNotesManager_coll__map">
-<area shape="rect" title=" " alt="" coords="5,131,173,267"/>
-<area shape="rect" title=" " alt="" coords="27,5,151,83"/>
+<area shape="rect" title=" " alt="" coords="60,827,228,1007"/>
+<area shape="rect" title=" " alt="" coords="70,5,194,83"/>
+<area shape="rect" href="classUIScript.html" title=" " alt="" coords="45,437,244,764"/>
+<area shape="rect" href="classCursorScript.html" title=" " alt="" coords="122,132,242,283"/>
+<area shape="rect" href="classMessageManager.html" title=" " alt="" coords="238,307,376,413"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -116,6 +121,22 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a97d60b54e2b6df4252831e7c35c17259"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9491aad41e605dcae6df5a44267bdd1"><td class="memItemLeft" align="right" valign="top">List&lt; ClueType &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNotesManager.html#af9491aad41e605dcae6df5a44267bdd1">cluesFound</a> = new List&lt;ClueType&gt;()</td></tr>
 <tr class="separator:af9491aad41e605dcae6df5a44267bdd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a16d8589b66cec91a0383d8d43c71aea9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNotesManager.html#a16d8589b66cec91a0383d8d43c71aea9">Start</a> ()</td></tr>
+<tr class="separator:a16d8589b66cec91a0383d8d43c71aea9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6866556c554cc100c15618af9df485c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNotesManager.html#ae6866556c554cc100c15618af9df485c">Update</a> ()</td></tr>
+<tr class="separator:ae6866556c554cc100c15618af9df485c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:aff56ebc6f5a7b5673c38695fbcfed0e6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classUIScript.html">UIScript</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNotesManager.html#aff56ebc6f5a7b5673c38695fbcfed0e6">_uiScript</a></td></tr>
+<tr class="separator:aff56ebc6f5a7b5673c38695fbcfed0e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a10e883f8aaffca393d197f66710fdeda"><td class="memItemLeft" align="right" valign="top">AudioSource&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNotesManager.html#a10e883f8aaffca393d197f66710fdeda">_audioSource</a></td></tr>
+<tr class="separator:a10e883f8aaffca393d197f66710fdeda"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a99069e8ae66cdc0c35b90444ff0b6072"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classMessageManager.html">MessageManager</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classNotesManager.html#a99069e8ae66cdc0c35b90444ff0b6072">_messageManager</a></td></tr>
+<tr class="separator:a99069e8ae66cdc0c35b90444ff0b6072"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000028">Todo:</a></b></dt><dd>Comment </dd></dl>
@@ -167,6 +188,60 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a16d8589b66cec91a0383d8d43c71aea9" name="a16d8589b66cec91a0383d8d43c71aea9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16d8589b66cec91a0383d8d43c71aea9">&#9670;&nbsp;</a></span>Start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NotesManager.Start </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="NotesManager_8cs_source.html#l00049">49</a> of file <a class="el" href="NotesManager_8cs_source.html">NotesManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="ae6866556c554cc100c15618af9df485c" name="ae6866556c554cc100c15618af9df485c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae6866556c554cc100c15618af9df485c">&#9670;&nbsp;</a></span>Update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void NotesManager.Update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="NotesManager_8cs_source.html#l00059">59</a> of file <a class="el" href="NotesManager_8cs_source.html">NotesManager.cs</a>.</p>
+
+</div>
+</div>
 <a id="aab43fd185cdd08615a038cba947cb9e8" name="aab43fd185cdd08615a038cba947cb9e8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aab43fd185cdd08615a038cba947cb9e8">&#9670;&nbsp;</a></span>UpdateNotesPaper()</h2>
 
@@ -195,6 +270,78 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a10e883f8aaffca393d197f66710fdeda" name="a10e883f8aaffca393d197f66710fdeda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10e883f8aaffca393d197f66710fdeda">&#9670;&nbsp;</a></span>_audioSource</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">AudioSource NotesManager._audioSource</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="NotesManager_8cs_source.html#l00040">40</a> of file <a class="el" href="NotesManager_8cs_source.html">NotesManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="a99069e8ae66cdc0c35b90444ff0b6072" name="a99069e8ae66cdc0c35b90444ff0b6072"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a99069e8ae66cdc0c35b90444ff0b6072">&#9670;&nbsp;</a></span>_messageManager</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classMessageManager.html">MessageManager</a> NotesManager._messageManager</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="NotesManager_8cs_source.html#l00046">46</a> of file <a class="el" href="NotesManager_8cs_source.html">NotesManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="aff56ebc6f5a7b5673c38695fbcfed0e6" name="aff56ebc6f5a7b5673c38695fbcfed0e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff56ebc6f5a7b5673c38695fbcfed0e6">&#9670;&nbsp;</a></span>_uiScript</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classUIScript.html">UIScript</a> NotesManager._uiScript</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="NotesManager_8cs_source.html#l00039">39</a> of file <a class="el" href="NotesManager_8cs_source.html">NotesManager.cs</a>.</p>
+
+</div>
+</div>
 <a id="a97d60b54e2b6df4252831e7c35c17259" name="a97d60b54e2b6df4252831e7c35c17259"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a97d60b54e2b6df4252831e7c35c17259">&#9670;&nbsp;</a></span>clueFoundSound</h2>
 
