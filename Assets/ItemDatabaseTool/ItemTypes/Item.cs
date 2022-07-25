@@ -143,16 +143,13 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
     // EconomyManager.Purchasable interface implementation
     public int m_price = 0;
     public bool m_allowedDiscount = true;
-    public int GetPrice(EconomyManager.PriceType _type = EconomyManager.PriceType.BUY_PRICE)
+    public int GetPrice()
     {
-        if (_type == PriceType.BUY_PRICE)
-        {
-            return m_price;
-        }
-        else
-        {
-            return m_price / 2;
-        }
+        return m_price;
+    }
+    public bool GetAllowedDiscount()
+    {
+        return m_allowedDiscount;
     }
 
 

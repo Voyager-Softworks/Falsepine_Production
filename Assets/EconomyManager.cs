@@ -21,24 +21,10 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
         return m_usedStatTypes;
     }
 
-    [Serializable]
-    public enum PriceType{
-        BUY_PRICE,
-        SELL_PRICE,
-    }
-
     public interface Purchasable
     {
-        int GetPrice(PriceType _type = PriceType.BUY_PRICE);
-        int GetBuyPrice();
-        int GetSellPrice();
+        int GetPrice();
         bool GetAllowedDiscount();
-    }
-
-    public int GenericSellPrice(Purchasable _purchasable, PriceType _type = PriceType.BUY_PRICE)
-    {
-        int price = _purchasable.GetBuyPrice();
-        int // bruh do we even want to be able to sell things, cuz with discounts this might be a large issue?
     }
 
     [Serializable]
@@ -78,5 +64,9 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
 
     public bool CanAfford(int _amount){
         return m_playerSilver >= _amount;
+    }
+
+    public void Spend(int _amount){
+        m_playerSilver -= _amount;
     }
 }

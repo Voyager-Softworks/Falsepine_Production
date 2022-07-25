@@ -20,15 +20,12 @@ public class InventoryPannel : MonoBehaviour
     [Header("Transferring")]
     [SerializeField] public bool sendingAllowed = true;
     [SerializeField] public bool receivingAllowed = true;
-    [SerializeField] public bool transferCosts = false;
-    [SerializeField] public EconomyManager.PriceType sendingPriceType = EconomyManager.PriceType.BUY_PRICE;
-    [SerializeField] public EconomyManager.PriceType receivingPriceType = EconomyManager.PriceType.SELL_PRICE;
 
     [Header("UI")]
     public List<InventoryCell> cells = new List<InventoryCell>();
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
         // get inventory
         linkedInventory = InventoryManager.instance?.GetInventory(inventoryID);
@@ -43,7 +40,7 @@ public class InventoryPannel : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         // every 5 frames, update the UI
         if (Time.frameCount % 5 == 0)
@@ -52,7 +49,7 @@ public class InventoryPannel : MonoBehaviour
         }
     }
 
-    private void UpdateUI()
+    public virtual void UpdateUI()
     {
         // update each cell
         foreach (InventoryCell cell in cells)
@@ -61,7 +58,7 @@ public class InventoryPannel : MonoBehaviour
         }
     }
 
-    public void LinkGridItems(){
+    protected virtual void LinkGridItems(){
         // get inventory, and a list of slots in it
         Inventory inventory = InventoryManager.instance?.GetInventory(inventoryID);
         List<Inventory.InventorySlot> slots = new List<Inventory.InventorySlot>();
@@ -86,12 +83,9 @@ public class InventoryPannel : MonoBehaviour
         }
     }
 
-    public void ItemClicked(InventoryGridItem gridItem)
+    public virtual void ItemClicked(InventoryGridItem gridItem)
     {
         if (gridItem == null) return;
-
-        Item item = gridItem.itemInSlot;
-        if (gridItem.itemInSlot == null) return;
 
         if (!sendingAllowed) return;
 
@@ -107,15 +101,10 @@ public class InventoryPannel : MonoBehaviour
 
         if (!otherPannel.receivingAllowed) return;
 
-        EconomyManager economyManager = EconomyManager.instance;
-        if (economyManager == null) return;
+        PerformClickAction(gridItem, sourceInventory, targetInventory, sourceIndex);
+    }
 
-        if (!transferCosts){
-            //transfer
-            InventoryManager.instance.TryMoveItem(sourceInventory, targetInventory, sourceIndex);
-        }
-        else{
-            //int cost = item.getp
-        }
+    protected virtual void PerformClickAction(InventoryGridItem gridItem, Inventory sourceInventory, Inventory targetInventory, int sourceIndex){
+        InventoryManager.instance.TryMoveItem(sourceInventory, targetInventory, sourceIndex);
     }
 }

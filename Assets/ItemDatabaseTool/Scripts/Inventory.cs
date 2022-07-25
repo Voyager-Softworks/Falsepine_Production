@@ -234,7 +234,9 @@ public class Inventory : MonoBehaviour
             Item inSlot = slots[i].item;
             if (inSlot && _item && inSlot.id == _item.id)
             {
-                return inSlot.CanAddItemToStack(_item);
+                if (inSlot.CanAddItemToStack(_item)){
+                    return true;
+                }
             }
         }
 
