@@ -67,6 +67,8 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classPlayerHealth-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">PlayerHealth Class Reference</div></div>
 </div><!--header-->
@@ -76,7 +78,7 @@ Inheritance diagram for PlayerHealth:</div>
 <div class="dyncontent">
 <div class="center"><img src="classPlayerHealth__inherit__graph.png" border="0" usemap="#aPlayerHealth_inherit__map" alt="Inheritance graph"/></div>
 <map name="aPlayerHealth_inherit__map" id="aPlayerHealth_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,131,188,399"/>
+<area shape="rect" title=" " alt="" coords="5,131,188,472"/>
 <area shape="rect" title=" " alt="" coords="35,5,159,83"/>
 </map>
 </div>
@@ -85,10 +87,10 @@ Collaboration diagram for PlayerHealth:</div>
 <div class="dyncontent">
 <div class="center"><img src="classPlayerHealth__coll__graph.png" border="0" usemap="#aPlayerHealth_coll__map" alt="Collaboration graph"/></div>
 <map name="aPlayerHealth_coll__map" id="aPlayerHealth_coll__map">
-<area shape="rect" title=" " alt="" coords="5,647,188,900"/>
+<area shape="rect" title=" " alt="" coords="5,735,188,1061"/>
 <area shape="rect" title=" " alt="" coords="64,5,188,83"/>
-<area shape="rect" href="classUIScript.html" title=" " alt="" coords="112,316,311,584"/>
-<area shape="rect" href="classCursorScript.html" title=" " alt="" coords="163,132,283,253"/>
+<area shape="rect" href="classUIScript.html" title=" " alt="" coords="112,345,311,672"/>
+<area shape="rect" href="classCursorScript.html" title=" " alt="" coords="163,132,283,283"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -127,6 +129,22 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a87a530da7459b783bd52f4589efbb5cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6a394a55f51ebf477ce51c953f38ef5"><td class="memItemLeft" align="right" valign="top">UnityEvent&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayerHealth.html#ab6a394a55f51ebf477ce51c953f38ef5">OnDeath</a></td></tr>
 <tr class="separator:ab6a394a55f51ebf477ce51c953f38ef5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a2dc105641d870f4a48bf90a5d0dec87c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayerHealth.html#a2dc105641d870f4a48bf90a5d0dec87c">Start</a> ()</td></tr>
+<tr class="separator:a2dc105641d870f4a48bf90a5d0dec87c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c49fdd702b2cf0fca654ef6e502f311"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayerHealth.html#a3c49fdd702b2cf0fca654ef6e502f311">Update</a> ()</td></tr>
+<tr class="separator:a3c49fdd702b2cf0fca654ef6e502f311"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ab1e3a043029f4ca46ad74ddbb0e90937"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayerHealth.html#ab1e3a043029f4ca46ad74ddbb0e90937">stunTimer</a> = 0f</td></tr>
+<tr class="separator:ab1e3a043029f4ca46ad74ddbb0e90937"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aff00b1bdcce687badea4ee63eb5a9159"><td class="memItemLeft" align="right" valign="top">AudioSource&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayerHealth.html#aff00b1bdcce687badea4ee63eb5a9159">_audioSource</a></td></tr>
+<tr class="separator:aff00b1bdcce687badea4ee63eb5a9159"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe50df33b26114fb81d49a0e28bf520b"><td class="memItemLeft" align="right" valign="top">Animator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayerHealth.html#afe50df33b26114fb81d49a0e28bf520b">_animator</a></td></tr>
+<tr class="separator:afe50df33b26114fb81d49a0e28bf520b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000031">Todo:</a></b></dt><dd>Comment </dd></dl>
@@ -185,6 +203,33 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="PlayerHealth_8cs_source.html#l00129">129</a> of file <a class="el" href="PlayerHealth_8cs_source.html">PlayerHealth.cs</a>.</p>
+
+</div>
+</div>
+<a id="a2dc105641d870f4a48bf90a5d0dec87c" name="a2dc105641d870f4a48bf90a5d0dec87c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2dc105641d870f4a48bf90a5d0dec87c">&#9670;&nbsp;</a></span>Start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PlayerHealth.Start </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="PlayerHealth_8cs_source.html#l00041">41</a> of file <a class="el" href="PlayerHealth_8cs_source.html">PlayerHealth.cs</a>.</p>
 
 </div>
 </div>
@@ -271,6 +316,33 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a3c49fdd702b2cf0fca654ef6e502f311" name="a3c49fdd702b2cf0fca654ef6e502f311"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c49fdd702b2cf0fca654ef6e502f311">&#9670;&nbsp;</a></span>Update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PlayerHealth.Update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="PlayerHealth_8cs_source.html#l00049">49</a> of file <a class="el" href="PlayerHealth_8cs_source.html">PlayerHealth.cs</a>.</p>
+
+</div>
+</div>
 <a id="a9de1c1b06cabc458fd1b4e1e1586922c" name="a9de1c1b06cabc458fd1b4e1e1586922c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a9de1c1b06cabc458fd1b4e1e1586922c">&#9670;&nbsp;</a></span>UpdateUI()</h2>
 
@@ -299,6 +371,54 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="afe50df33b26114fb81d49a0e28bf520b" name="afe50df33b26114fb81d49a0e28bf520b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe50df33b26114fb81d49a0e28bf520b">&#9670;&nbsp;</a></span>_animator</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Animator PlayerHealth._animator</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="PlayerHealth_8cs_source.html#l00038">38</a> of file <a class="el" href="PlayerHealth_8cs_source.html">PlayerHealth.cs</a>.</p>
+
+</div>
+</div>
+<a id="aff00b1bdcce687badea4ee63eb5a9159" name="aff00b1bdcce687badea4ee63eb5a9159"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff00b1bdcce687badea4ee63eb5a9159">&#9670;&nbsp;</a></span>_audioSource</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">AudioSource PlayerHealth._audioSource</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="PlayerHealth_8cs_source.html#l00030">30</a> of file <a class="el" href="PlayerHealth_8cs_source.html">PlayerHealth.cs</a>.</p>
+
+</div>
+</div>
 <a id="ac139fad06676c9deb190c892d93a3d0f" name="ac139fad06676c9deb190c892d93a3d0f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac139fad06676c9deb190c892d93a3d0f">&#9670;&nbsp;</a></span>currentHealth</h2>
 
@@ -424,6 +544,30 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="PlayerHealth_8cs_source.html#l00036">36</a> of file <a class="el" href="PlayerHealth_8cs_source.html">PlayerHealth.cs</a>.</p>
+
+</div>
+</div>
+<a id="ab1e3a043029f4ca46ad74ddbb0e90937" name="ab1e3a043029f4ca46ad74ddbb0e90937"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab1e3a043029f4ca46ad74ddbb0e90937">&#9670;&nbsp;</a></span>stunTimer</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float PlayerHealth.stunTimer = 0f</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="PlayerHealth_8cs_source.html#l00025">25</a> of file <a class="el" href="PlayerHealth_8cs_source.html">PlayerHealth.cs</a>.</p>
 
 </div>
 </div>

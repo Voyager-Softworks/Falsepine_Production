@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['exitbounds_0',['exitBounds',['../classSceneTransitionManager.html#aa595989291f12a1ea5c2312cb613b494',1,'SceneTransitionManager']]],
-  ['exittransform_1',['exitTransform',['../classSceneTransitionManager.html#a3ec9f087ce9e9ae9518dba92ef861a9b',1,'SceneTransitionManager']]],
-  ['exposedproperties_2',['exposedProperties',['../classNodeAI_1_1GraphView.html#aaccb0bd23daa60f2ab228449b8883325',1,'NodeAI.GraphView.exposedProperties()'],['../classNodeAI_1_1NodeAI__Behaviour.html#af4e892860f3c2abcef969b5b40e57daa',1,'NodeAI.NodeAI_Behaviour.exposedProperties()']]],
-  ['eyedirection_3',['eyeDirection',['../classNodeAI_1_1NodeAI__Senses.html#a59ee402f9b82d68483fef66d9af02c57',1,'NodeAI::NodeAI_Senses']]],
-  ['eyesbone_4',['eyesBone',['../classNodeAI_1_1NodeAI__Senses.html#ac66f50d26e96e74eead680e22a7dea16',1,'NodeAI::NodeAI_Senses']]]
+  ['damage_0',['damage',['http://docs.unity3d.com/ScriptReference/classDamageDealer.html#ac395cedc167af877a6ae314ba9b3536b',1,'DamageDealer::damage()'],['http://docs.unity3d.com/ScriptReference/classDamagePlayerWhenCollide.html#a8e0b6f05be9d87ebdf10295954cd14cd',1,'DamagePlayerWhenCollide::damage()']]],
+  ['debrisprefab_1',['debrisPrefab',['http://docs.unity3d.com/ScriptReference/classBoss_1_1Bonestag_1_1Bonestag__Charge.html#a1686e42a67843a6faff53a140c6a1f71',1,'Boss::Bonestag::Bonestag_Charge']]],
+  ['destroyoncollision_2',['destroyOnCollision',['http://docs.unity3d.com/ScriptReference/classDamagePlayerWhenCollide.html#a074c8dd7c8400e3ccbd4168dd4f148a7',1,'DamagePlayerWhenCollide']]],
+  ['direction_3',['direction',['http://docs.unity3d.com/ScriptReference/structCover_1_1CoverPoint.html#a5779bdeb839b4124bc295923ec3b5a4f',1,'Cover::CoverPoint']]]
 ];

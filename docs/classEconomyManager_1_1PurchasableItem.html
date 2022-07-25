@@ -71,6 +71,7 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classEconomyManager_1_1PurchasableItem-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">EconomyManager.PurchasableItem Class Reference</div></div>
 </div><!--header-->
@@ -80,7 +81,7 @@ Inheritance diagram for EconomyManager.PurchasableItem:</div>
 <div class="dyncontent">
 <div class="center"><img src="classEconomyManager_1_1PurchasableItem__inherit__graph.png" border="0" usemap="#aEconomyManager_8PurchasableItem_inherit__map" alt="Inheritance graph"/></div>
 <map name="aEconomyManager_8PurchasableItem_inherit__map" id="aEconomyManager_8PurchasableItem_inherit__map">
-<area shape="rect" title=" " alt="" coords="72,145,323,281"/>
+<area shape="rect" title=" " alt="" coords="72,145,323,296"/>
 <area shape="rect" href="interfaceEconomyManager_1_1Purchasable.html" title=" " alt="" coords="5,5,184,97"/>
 <area shape="rect" href="interfaceStatsManager_1_1UsesStats.html" title=" " alt="" coords="209,13,394,90"/>
 </map>
@@ -90,10 +91,10 @@ Collaboration diagram for EconomyManager.PurchasableItem:</div>
 <div class="dyncontent">
 <div class="center"><img src="classEconomyManager_1_1PurchasableItem__coll__graph.png" border="0" usemap="#aEconomyManager_8PurchasableItem_coll__map" alt="Collaboration graph"/></div>
 <map name="aEconomyManager_8PurchasableItem_coll__map" id="aEconomyManager_8PurchasableItem_coll__map">
-<area shape="rect" title=" " alt="" coords="96,653,347,775"/>
-<area shape="rect" href="interfaceEconomyManager_1_1Purchasable.html" title=" " alt="" coords="5,315,184,407"/>
+<area shape="rect" title=" " alt="" coords="96,741,347,877"/>
+<area shape="rect" href="interfaceEconomyManager_1_1Purchasable.html" title=" " alt="" coords="5,359,184,451"/>
 <area shape="rect" href="interfaceStatsManager_1_1UsesStats.html" title=" " alt="" coords="123,5,309,83"/>
-<area shape="rect" href="classItem.html" title=" " alt="" coords="263,132,510,591"/>
+<area shape="rect" href="classItem.html" title=" " alt="" coords="263,132,510,679"/>
 <area shape="rect" title=" " alt="" coords="333,5,462,83"/>
 <area shape="rect" href="interfaceStatsManager_1_1HasStatMods.html" title=" " alt="" coords="486,5,693,83"/>
 </map>
@@ -125,6 +126,11 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a76e248917a05039c0043ac2ff5fa5c65"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92f7df1cc16c9130b1d8ddc623ecaf2f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEconomyManager_1_1PurchasableItem.html#a92f7df1cc16c9130b1d8ddc623ecaf2f">allowedDiscount</a> = true</td></tr>
 <tr class="separator:a92f7df1cc16c9130b1d8ddc623ecaf2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:aa8a26bef2411a63276080de16032c588"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="classStatsManager_1_1StatType.html">StatsManager.StatType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEconomyManager_1_1PurchasableItem.html#aa8a26bef2411a63276080de16032c588">m_usedStatTypes</a></td></tr>
+<tr class="separator:aa8a26bef2411a63276080de16032c588"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
@@ -247,6 +253,36 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="EconomyManager_8cs_source.html#l00033">33</a> of file <a class="el" href="EconomyManager_8cs_source.html">EconomyManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="aa8a26bef2411a63276080de16032c588" name="aa8a26bef2411a63276080de16032c588"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8a26bef2411a63276080de16032c588">&#9670;&nbsp;</a></span>m_usedStatTypes</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt;<a class="el" href="classStatsManager_1_1StatType.html">StatsManager.StatType</a>&gt; EconomyManager.PurchasableItem.m_usedStatTypes</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">new</span> List&lt;<a class="code hl_class" href="classStatsManager.html">StatsManager</a>.<a class="code hl_class" href="classStatsManager_1_1StatType.html">StatType</a>&gt;()</div>
+<div class="line">        {</div>
+<div class="line">            <a class="code hl_class" href="classStatsManager.html">StatsManager</a>.<a class="code hl_class" href="classStatsManager_1_1StatType.html">StatType</a>.ItemCost</div>
+<div class="line">        }</div>
+<div class="ttc" id="aclassStatsManager_1_1StatType_html"><div class="ttname"><a href="classStatsManager_1_1StatType.html">StatsManager.StatType</a></div><div class="ttdef"><b>Definition:</b> <a href="StatsManager_8cs_source.html#l00026">StatsManager.cs:27</a></div></div>
+<div class="ttc" id="aclassStatsManager_html"><div class="ttname"><a href="classStatsManager.html">StatsManager</a></div><div class="ttdoc">Singleton donotdestroy script that handles the stats system</div><div class="ttdef"><b>Definition:</b> <a href="StatsManager_8cs_source.html#l00021">StatsManager.cs:22</a></div></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="EconomyManager_8cs_source.html#l00047">47</a> of file <a class="el" href="EconomyManager_8cs_source.html">EconomyManager.cs</a>.</p>
 
 </div>
 </div>

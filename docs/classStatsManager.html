@@ -70,6 +70,8 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-static-methods">Static Private Member Functions</a> &#124;
 <a href="classStatsManager-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">StatsManager Class Reference</div></div>
 </div><!--header-->
@@ -82,7 +84,7 @@ Inheritance diagram for StatsManager:</div>
 <div class="dyncontent">
 <div class="center"><img src="classStatsManager__inherit__graph.png" border="0" usemap="#aStatsManager_inherit__map" alt="Inheritance graph"/></div>
 <map name="aStatsManager_inherit__map" id="aStatsManager_inherit__map">
-<area shape="rect" title="Singleton donotdestroy script that handles the stats system" alt="" coords="5,131,232,325"/>
+<area shape="rect" title="Singleton donotdestroy script that handles the stats system" alt="" coords="5,131,232,384"/>
 <area shape="rect" title=" " alt="" coords="57,5,181,83"/>
 </map>
 </div>
@@ -91,7 +93,7 @@ Collaboration diagram for StatsManager:</div>
 <div class="dyncontent">
 <div class="center"><img src="classStatsManager__coll__graph.png" border="0" usemap="#aStatsManager_coll__map" alt="Collaboration graph"/></div>
 <map name="aStatsManager_coll__map" id="aStatsManager_coll__map">
-<area shape="rect" title="Singleton donotdestroy script that handles the stats system" alt="" coords="5,132,232,312"/>
+<area shape="rect" title="Singleton donotdestroy script that handles the stats system" alt="" coords="5,132,232,371"/>
 <area shape="rect" title=" " alt="" coords="57,5,181,83"/>
 </map>
 </div>
@@ -142,6 +144,20 @@ Static Public Attributes</h2></td></tr>
 <tr class="separator:ac69bf2506704bd133b2b5f592155d50c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3010a6bd16175f7379bc35162cc7cf9a"><td class="memItemLeft" align="right" valign="top">static List&lt; <a class="el" href="classStatsManager_1_1StatMod.html">StatMod</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStatsManager.html#a3010a6bd16175f7379bc35162cc7cf9a">globalStatMods</a></td></tr>
 <tr class="separator:a3010a6bd16175f7379bc35162cc7cf9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a5e6e9f77e8890216f150408c21fd6442"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStatsManager.html#a5e6e9f77e8890216f150408c21fd6442">Awake</a> ()</td></tr>
+<tr class="separator:a5e6e9f77e8890216f150408c21fd6442"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d215339ec147407f1b7fc04e895ae31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStatsManager.html#a9d215339ec147407f1b7fc04e895ae31">Update</a> ()</td></tr>
+<tr class="separator:a9d215339ec147407f1b7fc04e895ae31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-static-methods" name="pri-static-methods"></a>
+Static Private Member Functions</h2></td></tr>
+<tr class="memitem:aa6942a48853925a8680ae15a1510f7e6"><td class="memItemLeft" align="right" valign="top">static float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStatsManager.html#aa6942a48853925a8680ae15a1510f7e6">GenericStatCalc</a> (<a class="el" href="interfaceStatsManager_1_1UsesStats.html">UsesStats</a> _statUser, float _baseVal, List&lt; <a class="el" href="classStatsManager_1_1StatType.html">StatType</a> &gt; _usedStatTypes, float _additiveVal=0.0f, float _multiplierVal=1.0f, float _minVal=0.0f, float _maxVal=float.MaxValue)</td></tr>
+<tr class="separator:aa6942a48853925a8680ae15a1510f7e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3edd74785c42dac2050c9f3c0f272b9f"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classStatsManager.html#a3edd74785c42dac2050c9f3c0f272b9f">CalcMods</a> (<a class="el" href="interfaceStatsManager_1_1UsesStats.html">UsesStats</a> _statUser, ref float additiveVal, ref float dmultiplierVal, List&lt; <a class="el" href="classStatsManager_1_1StatType.html">StatType</a> &gt; _usedStatTypes)</td></tr>
+<tr class="separator:a3edd74785c42dac2050c9f3c0f272b9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Singleton donotdestroy script that handles the stats system </p>
@@ -165,6 +181,83 @@ Static Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a5e6e9f77e8890216f150408c21fd6442" name="a5e6e9f77e8890216f150408c21fd6442"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e6e9f77e8890216f150408c21fd6442">&#9670;&nbsp;</a></span>Awake()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StatsManager.Awake </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="StatsManager_8cs_source.html#l00268">268</a> of file <a class="el" href="StatsManager_8cs_source.html">StatsManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="a3edd74785c42dac2050c9f3c0f272b9f" name="a3edd74785c42dac2050c9f3c0f272b9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3edd74785c42dac2050c9f3c0f272b9f">&#9670;&nbsp;</a></span>CalcMods()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void StatsManager.CalcMods </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="interfaceStatsManager_1_1UsesStats.html">UsesStats</a>&#160;</td>
+          <td class="paramname"><em>_statUser</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ref float&#160;</td>
+          <td class="paramname"><em>additiveVal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ref float&#160;</td>
+          <td class="paramname"><em>dmultiplierVal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">List&lt; <a class="el" href="classStatsManager_1_1StatType.html">StatType</a> &gt;&#160;</td>
+          <td class="paramname"><em>_usedStatTypes</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="StatsManager_8cs_source.html#l00235">235</a> of file <a class="el" href="StatsManager_8cs_source.html">StatsManager.cs</a>.</p>
+
+</div>
+</div>
 <a id="a64f16cf7f2253bfb1cba2c0331919cb3" name="a64f16cf7f2253bfb1cba2c0331919cb3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a64f16cf7f2253bfb1cba2c0331919cb3">&#9670;&nbsp;</a></span>CalculateDamage()</h2>
 
@@ -238,6 +331,74 @@ Static Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="StatsManager_8cs_source.html#l00197">197</a> of file <a class="el" href="StatsManager_8cs_source.html">StatsManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="aa6942a48853925a8680ae15a1510f7e6" name="aa6942a48853925a8680ae15a1510f7e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6942a48853925a8680ae15a1510f7e6">&#9670;&nbsp;</a></span>GenericStatCalc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static float StatsManager.GenericStatCalc </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="interfaceStatsManager_1_1UsesStats.html">UsesStats</a>&#160;</td>
+          <td class="paramname"><em>_statUser</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>_baseVal</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">List&lt; <a class="el" href="classStatsManager_1_1StatType.html">StatType</a> &gt;&#160;</td>
+          <td class="paramname"><em>_usedStatTypes</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>_additiveVal</em> = <code>0.0f</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>_multiplierVal</em> = <code>1.0f</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>_minVal</em> = <code>0.0f</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>_maxVal</em> = <code>float.MaxValue</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="StatsManager_8cs_source.html#l00214">214</a> of file <a class="el" href="StatsManager_8cs_source.html">StatsManager.cs</a>.</p>
 
 </div>
 </div>
@@ -402,6 +563,33 @@ Static Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="StatsManager_8cs_source.html#l00291">291</a> of file <a class="el" href="StatsManager_8cs_source.html">StatsManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="a9d215339ec147407f1b7fc04e895ae31" name="a9d215339ec147407f1b7fc04e895ae31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d215339ec147407f1b7fc04e895ae31">&#9670;&nbsp;</a></span>Update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void StatsManager.Update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="StatsManager_8cs_source.html#l00337">337</a> of file <a class="el" href="StatsManager_8cs_source.html">StatsManager.cs</a>.</p>
 
 </div>
 </div>

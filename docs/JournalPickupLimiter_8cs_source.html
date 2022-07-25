@@ -78,7 +78,7 @@ $(function() {
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">using</span> System.Linq;</div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">using</span> System.Reflection;</div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="classJournalPickupLimiter.html">    8</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_class" href="classJournalPickupLimiter.html">JournalPickupLimiter</a> : MonoBehaviour  </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classJournalPickupLimiter.html">JournalPickupLimiter</a> : MonoBehaviour  </div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>{</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keyword">public</span> <span class="keywordtype">int</span> loreAmount = 1;</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keyword">public</span> <span class="keywordtype">int</span> clueAmount = 1;</div>
@@ -113,8 +113,8 @@ $(function() {
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="comment">// find all pickups in the scene</span></div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        all = FindObjectsOfType&lt;JournalPickupInteract&gt;(<span class="keyword">false</span>).ToList();</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span> </div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        enabledLore = all.Where(x =&gt; x.pickupType == <a class="code hl_class" href="classJournalManager.html">JournalManager</a>.InfoType.Lore).ToList();</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        enabledClues = all.Where(x =&gt; x.pickupType == <a class="code hl_class" href="classJournalManager.html">JournalManager</a>.InfoType.Clue).ToList();</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        enabledLore = all.Where(x =&gt; x.pickupType == <a class="code hl_namespaceRef" href="http://docs.unity3d.com/ScriptReference/classJournalManager_1_1MonsterClues_1_1Data.html">JournalManager</a>.InfoType.Lore).ToList();</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        enabledClues = all.Where(x =&gt; x.pickupType == <a class="code hl_namespaceRef" href="http://docs.unity3d.com/ScriptReference/classJournalManager_1_1MonsterClues_1_1Data.html">JournalManager</a>.InfoType.Clue).ToList();</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        </div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>        <span class="comment">// randomly disable some lore until we have the correct amount</span></div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>        <span class="keywordflow">if</span> (enabledLore.Count &gt; loreAmount)</div>
@@ -131,8 +131,8 @@ $(function() {
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>        }</div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    }</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>}</div>
-<div class="ttc" id="aclassJournalManager_html"><div class="ttname"><a href="classJournalManager.html">JournalManager</a></div><div class="ttdoc">Singleton donotdestroy script that handles the journal system</div><div class="ttdef"><b>Definition:</b> <a href="JournalManager_8cs_source.html#l00016">JournalManager.cs:17</a></div></div>
-<div class="ttc" id="aclassJournalPickupLimiter_html"><div class="ttname"><a href="classJournalPickupLimiter.html">JournalPickupLimiter</a></div><div class="ttdef"><b>Definition:</b> <a href="JournalPickupLimiter_8cs_source.html#l00008">JournalPickupLimiter.cs:9</a></div></div>
+<div class="ttc" id="aclassJournalManager_1_1MonsterClues_1_1Data_html"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classJournalManager_1_1MonsterClues_1_1Data.html">JournalManager</a></div></div>
+<div class="ttc" id="aclassJournalPickupLimiter_html"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classJournalPickupLimiter.html">JournalPickupLimiter</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

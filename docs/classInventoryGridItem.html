@@ -68,6 +68,8 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#properties">Properties</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classInventoryGridItem-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">InventoryGridItem Class Reference</div></div>
 </div><!--header-->
@@ -77,7 +79,7 @@ Inheritance diagram for InventoryGridItem:</div>
 <div class="dyncontent">
 <div class="center"><img src="classInventoryGridItem__inherit__graph.png" border="0" usemap="#aInventoryGridItem_inherit__map" alt="Inheritance graph"/></div>
 <map name="aInventoryGridItem_inherit__map" id="aInventoryGridItem_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,131,233,325"/>
+<area shape="rect" title=" " alt="" coords="5,131,233,384"/>
 <area shape="rect" title=" " alt="" coords="57,5,181,83"/>
 </map>
 </div>
@@ -86,9 +88,10 @@ Collaboration diagram for InventoryGridItem:</div>
 <div class="dyncontent">
 <div class="center"><img src="classInventoryGridItem__coll__graph.png" border="0" usemap="#aInventoryGridItem_coll__map" alt="Collaboration graph"/></div>
 <map name="aInventoryGridItem_coll__map" id="aInventoryGridItem_coll__map">
-<area shape="rect" title=" " alt="" coords="5,521,233,701"/>
-<area shape="rect" title=" " alt="" coords="52,5,176,83"/>
-<area shape="rect" href="classInventory.html" title=" " alt="" coords="135,132,362,459"/>
+<area shape="rect" title=" " alt="" coords="73,624,301,848"/>
+<area shape="rect" title=" " alt="" coords="125,5,249,83"/>
+<area shape="rect" href="classInventory.html" title=" " alt="" coords="74,132,300,561"/>
+<area shape="rect" href="classInfoBox.html" title=" " alt="" coords="325,169,476,525"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -120,6 +123,20 @@ Public Attributes</h2></td></tr>
 Properties</h2></td></tr>
 <tr class="memitem:a7b2b8528f01f3858f27bc7bcc83cb489"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classItem.html">Item</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInventoryGridItem.html#a7b2b8528f01f3858f27bc7bcc83cb489">itemInSlot</a><code> [get]</code></td></tr>
 <tr class="separator:a7b2b8528f01f3858f27bc7bcc83cb489"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a7df274d05996ee98198b8f6d250125fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInventoryGridItem.html#a7df274d05996ee98198b8f6d250125fb">Start</a> ()</td></tr>
+<tr class="separator:a7df274d05996ee98198b8f6d250125fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a455140ff90b2f16c59730d2687ed8af3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInventoryGridItem.html#a455140ff90b2f16c59730d2687ed8af3">Update</a> ()</td></tr>
+<tr class="separator:a455140ff90b2f16c59730d2687ed8af3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ac4f774d209287b0eea535a88d9b1bf3d"><td class="memItemLeft" align="right" valign="top">Camera&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInventoryGridItem.html#ac4f774d209287b0eea535a88d9b1bf3d">uiCamera</a> = null</td></tr>
+<tr class="separator:ac4f774d209287b0eea535a88d9b1bf3d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63e00fe81908f9e4460dff6da534e72b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classInfoBox.html">InfoBox</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInventoryGridItem.html#a63e00fe81908f9e4460dff6da534e72b">ib</a> = null</td></tr>
+<tr class="separator:a63e00fe81908f9e4460dff6da534e72b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000003">Todo:</a></b></dt><dd>Comment </dd></dl>
@@ -153,6 +170,33 @@ Properties</h2></td></tr>
 
 </div>
 </div>
+<a id="a7df274d05996ee98198b8f6d250125fb" name="a7df274d05996ee98198b8f6d250125fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7df274d05996ee98198b8f6d250125fb">&#9670;&nbsp;</a></span>Start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void InventoryGridItem.Start </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="InventoryGridItem_8cs_source.html#l00030">30</a> of file <a class="el" href="InventoryGridItem_8cs_source.html">InventoryGridItem.cs</a>.</p>
+
+</div>
+</div>
 <a id="a4abf1dbf38194bafed73551bb2b5baa9" name="a4abf1dbf38194bafed73551bb2b5baa9"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4abf1dbf38194bafed73551bb2b5baa9">&#9670;&nbsp;</a></span>TryTransferToOpenInventory()</h2>
 
@@ -177,6 +221,33 @@ Properties</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="InventoryGridItem_8cs_source.html#l00089">89</a> of file <a class="el" href="InventoryGridItem_8cs_source.html">InventoryGridItem.cs</a>.</p>
+
+</div>
+</div>
+<a id="a455140ff90b2f16c59730d2687ed8af3" name="a455140ff90b2f16c59730d2687ed8af3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a455140ff90b2f16c59730d2687ed8af3">&#9670;&nbsp;</a></span>Update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void InventoryGridItem.Update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="InventoryGridItem_8cs_source.html#l00047">47</a> of file <a class="el" href="InventoryGridItem_8cs_source.html">InventoryGridItem.cs</a>.</p>
 
 </div>
 </div>
@@ -221,6 +292,30 @@ Properties</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="InventoryGridItem_8cs_source.html#l00016">16</a> of file <a class="el" href="InventoryGridItem_8cs_source.html">InventoryGridItem.cs</a>.</p>
+
+</div>
+</div>
+<a id="a63e00fe81908f9e4460dff6da534e72b" name="a63e00fe81908f9e4460dff6da534e72b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63e00fe81908f9e4460dff6da534e72b">&#9670;&nbsp;</a></span>ib</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classInfoBox.html">InfoBox</a> InventoryGridItem.ib = null</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="InventoryGridItem_8cs_source.html#l00028">28</a> of file <a class="el" href="InventoryGridItem_8cs_source.html">InventoryGridItem.cs</a>.</p>
 
 </div>
 </div>
@@ -301,6 +396,30 @@ Properties</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="InventoryGridItem_8cs_source.html#l00015">15</a> of file <a class="el" href="InventoryGridItem_8cs_source.html">InventoryGridItem.cs</a>.</p>
+
+</div>
+</div>
+<a id="ac4f774d209287b0eea535a88d9b1bf3d" name="ac4f774d209287b0eea535a88d9b1bf3d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4f774d209287b0eea535a88d9b1bf3d">&#9670;&nbsp;</a></span>uiCamera</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Camera InventoryGridItem.uiCamera = null</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="InventoryGridItem_8cs_source.html#l00027">27</a> of file <a class="el" href="InventoryGridItem_8cs_source.html">InventoryGridItem.cs</a>.</p>
 
 </div>
 </div>

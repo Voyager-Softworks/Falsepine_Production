@@ -66,6 +66,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="classRootMotionAgent-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">RootMotionAgent Class Reference</div></div>
 </div><!--header-->
@@ -78,7 +79,7 @@ Inheritance diagram for RootMotionAgent:</div>
 <div class="dyncontent">
 <div class="center"><img src="classRootMotionAgent__inherit__graph.png" border="0" usemap="#aRootMotionAgent_inherit__map" alt="Inheritance graph"/></div>
 <map name="aRootMotionAgent_inherit__map" id="aRootMotionAgent_inherit__map">
-<area shape="rect" title="Script integrating root motion movement animation with navmesh agent AI navigation." alt="" coords="5,131,172,267"/>
+<area shape="rect" title="Script integrating root motion movement animation with navmesh agent AI navigation." alt="" coords="5,131,172,311"/>
 <area shape="rect" title=" " alt="" coords="27,5,151,83"/>
 </map>
 </div>
@@ -87,7 +88,7 @@ Collaboration diagram for RootMotionAgent:</div>
 <div class="dyncontent">
 <div class="center"><img src="classRootMotionAgent__coll__graph.png" border="0" usemap="#aRootMotionAgent_coll__map" alt="Collaboration graph"/></div>
 <map name="aRootMotionAgent_coll__map" id="aRootMotionAgent_coll__map">
-<area shape="rect" title="Script integrating root motion movement animation with navmesh agent AI navigation." alt="" coords="5,131,172,267"/>
+<area shape="rect" title="Script integrating root motion movement animation with navmesh agent AI navigation." alt="" coords="5,131,172,311"/>
 <area shape="rect" title=" " alt="" coords="27,5,151,83"/>
 </map>
 </div>
@@ -109,6 +110,17 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a515239a604cef43bf3155ae0eef8b859"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRootMotionAgent.html#a515239a604cef43bf3155ae0eef8b859">useRootMotion</a> = true</td></tr>
 <tr class="memdesc:a515239a604cef43bf3155ae0eef8b859"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether to use root motion.  <a href="classRootMotionAgent.html#a515239a604cef43bf3155ae0eef8b859">More...</a><br /></td></tr>
 <tr class="separator:a515239a604cef43bf3155ae0eef8b859"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:ad562e4dda6bbc4528a14e63197fe3a31"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRootMotionAgent.html#ad562e4dda6bbc4528a14e63197fe3a31">Start</a> ()</td></tr>
+<tr class="separator:ad562e4dda6bbc4528a14e63197fe3a31"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51e461550a2c196cea8b14b07756538a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRootMotionAgent.html#a51e461550a2c196cea8b14b07756538a">Update</a> ()</td></tr>
+<tr class="separator:a51e461550a2c196cea8b14b07756538a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6eada52c28e64bc6ed1f1ce65894de52"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRootMotionAgent.html#a6eada52c28e64bc6ed1f1ce65894de52">GetTurnDirection</a> (Vector3 currentVelocty, Vector3 targetVelocity)</td></tr>
+<tr class="separator:a6eada52c28e64bc6ed1f1ce65894de52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2883433d44588b29c04ba86535e5beca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRootMotionAgent.html#a2883433d44588b29c04ba86535e5beca">OnAnimatorMove</a> ()</td></tr>
+<tr class="separator:a2883433d44588b29c04ba86535e5beca"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Script integrating root motion movement animation with navmesh agent AI navigation. </p>
@@ -123,7 +135,127 @@ Make this script into a wrapper for the NavMeshAgent for use with root motioned 
 </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="RootMotionAgent_8cs_source.html#l00024">24</a> of file <a class="el" href="RootMotionAgent_8cs_source.html">RootMotionAgent.cs</a>.</p>
-</div><h2 class="groupheader">Member Data Documentation</h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a6eada52c28e64bc6ed1f1ce65894de52" name="a6eada52c28e64bc6ed1f1ce65894de52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6eada52c28e64bc6ed1f1ce65894de52">&#9670;&nbsp;</a></span>GetTurnDirection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float RootMotionAgent.GetTurnDirection </td>
+          <td>(</td>
+          <td class="paramtype">Vector3&#160;</td>
+          <td class="paramname"><em>currentVelocty</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Vector3&#160;</td>
+          <td class="paramname"><em>targetVelocity</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="RootMotionAgent_8cs_source.html#l00050">50</a> of file <a class="el" href="RootMotionAgent_8cs_source.html">RootMotionAgent.cs</a>.</p>
+
+</div>
+</div>
+<a id="a2883433d44588b29c04ba86535e5beca" name="a2883433d44588b29c04ba86535e5beca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2883433d44588b29c04ba86535e5beca">&#9670;&nbsp;</a></span>OnAnimatorMove()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RootMotionAgent.OnAnimatorMove </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="RootMotionAgent_8cs_source.html#l00058">58</a> of file <a class="el" href="RootMotionAgent_8cs_source.html">RootMotionAgent.cs</a>.</p>
+
+</div>
+</div>
+<a id="ad562e4dda6bbc4528a14e63197fe3a31" name="ad562e4dda6bbc4528a14e63197fe3a31"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad562e4dda6bbc4528a14e63197fe3a31">&#9670;&nbsp;</a></span>Start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RootMotionAgent.Start </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="RootMotionAgent_8cs_source.html#l00033">33</a> of file <a class="el" href="RootMotionAgent_8cs_source.html">RootMotionAgent.cs</a>.</p>
+
+</div>
+</div>
+<a id="a51e461550a2c196cea8b14b07756538a" name="a51e461550a2c196cea8b14b07756538a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51e461550a2c196cea8b14b07756538a">&#9670;&nbsp;</a></span>Update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RootMotionAgent.Update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="RootMotionAgent_8cs_source.html#l00039">39</a> of file <a class="el" href="RootMotionAgent_8cs_source.html">RootMotionAgent.cs</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
 <a id="aa75762423fc4a812f6b0124dcf4e35cf" name="aa75762423fc4a812f6b0124dcf4e35cf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa75762423fc4a812f6b0124dcf4e35cf">&#9670;&nbsp;</a></span>angularSpeedParam</h2>
 

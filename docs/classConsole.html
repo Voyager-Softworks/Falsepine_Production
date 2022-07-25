@@ -67,6 +67,8 @@ $(function() {
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="classConsole-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Console Class Reference</div></div>
 </div><!--header-->
@@ -76,7 +78,7 @@ Inheritance diagram for Console:</div>
 <div class="dyncontent">
 <div class="center"><img src="classConsole__inherit__graph.png" border="0" usemap="#aConsole_inherit__map" alt="Inheritance graph"/></div>
 <map name="aConsole_inherit__map" id="aConsole_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,131,171,281"/>
+<area shape="rect" title=" " alt="" coords="5,131,171,355"/>
 <area shape="rect" title=" " alt="" coords="26,5,150,83"/>
 </map>
 </div>
@@ -85,7 +87,7 @@ Collaboration diagram for Console:</div>
 <div class="dyncontent">
 <div class="center"><img src="classConsole__coll__graph.png" border="0" usemap="#aConsole_coll__map" alt="Collaboration graph"/></div>
 <map name="aConsole_coll__map" id="aConsole_coll__map">
-<area shape="rect" title=" " alt="" coords="5,131,171,281"/>
+<area shape="rect" title=" " alt="" coords="5,131,171,355"/>
 <area shape="rect" title=" " alt="" coords="26,5,150,83"/>
 </map>
 </div>
@@ -112,6 +114,22 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a8cf42f4703baffa47573b200d5f53958"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2593c789069b083a97e4c767dc9a001"><td class="memItemLeft" align="right" valign="top">TextMeshProUGUI&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConsole.html#aa2593c789069b083a97e4c767dc9a001">consoleLog</a></td></tr>
 <tr class="separator:aa2593c789069b083a97e4c767dc9a001"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a0f140fe7409c463db5c745a1d6907c1f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConsole.html#a0f140fe7409c463db5c745a1d6907c1f">Update</a> ()</td></tr>
+<tr class="separator:a0f140fe7409c463db5c745a1d6907c1f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a3dbec47d39eef08c0e47339d048dd7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConsole.html#a0a3dbec47d39eef08c0e47339d048dd7">ToggleConsole</a> ()</td></tr>
+<tr class="separator:a0a3dbec47d39eef08c0e47339d048dd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:ae9747594d233e2e8382901722fcf552e"><td class="memItemLeft" align="right" valign="top">List&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConsole.html#ae9747594d233e2e8382901722fcf552e">commandHistory</a> = new List&lt;string&gt;()</td></tr>
+<tr class="separator:ae9747594d233e2e8382901722fcf552e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed2b6f164c223fefbfbb68ea54c70af8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConsole.html#aed2b6f164c223fefbfbb68ea54c70af8">upIndex</a> = 0</td></tr>
+<tr class="separator:aed2b6f164c223fefbfbb68ea54c70af8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe2cde4cb205efd9cbef96fe5fac1e88"><td class="memItemLeft" align="right" valign="top">List&lt; string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classConsole.html#abe2cde4cb205efd9cbef96fe5fac1e88">commandList</a></td></tr>
+<tr class="separator:abe2cde4cb205efd9cbef96fe5fac1e88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock">
@@ -155,6 +173,8 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="Console_8cs_source.html#l00415">415</a> of file <a class="el" href="Console_8cs_source.html">Console.cs</a>.</p>
 
+<p class="reference">Referenced by <a class="el" href="Console_8cs_source.html#l00115">TrySendCommand()</a>.</p>
+
 </div>
 </div>
 <a id="a4c7f57ccd8394a51b787c3a1c2da5e94" name="a4c7f57ccd8394a51b787c3a1c2da5e94"></a>
@@ -186,6 +206,33 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a0a3dbec47d39eef08c0e47339d048dd7" name="a0a3dbec47d39eef08c0e47339d048dd7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a3dbec47d39eef08c0e47339d048dd7">&#9670;&nbsp;</a></span>ToggleConsole()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Console.ToggleConsole </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Console_8cs_source.html#l00081">81</a> of file <a class="el" href="Console_8cs_source.html">Console.cs</a>.</p>
+
+</div>
+</div>
 <a id="ae2bbe9af0110ebf5a1492b2852522e28" name="ae2bbe9af0110ebf5a1492b2852522e28"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae2bbe9af0110ebf5a1492b2852522e28">&#9670;&nbsp;</a></span>TrySendCommand()</h2>
 
@@ -214,9 +261,102 @@ Public Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="Console_8cs_source.html#l00115">115</a> of file <a class="el" href="Console_8cs_source.html">Console.cs</a>.</p>
 
+<p class="reference">References <a class="el" href="Inventory_8cs_source.html#l00164">Inventory.AddItemToInventory()</a>, <a class="el" href="Inventory_8cs_source.html#l00381">Inventory.ClearInventory()</a>, <a class="el" href="Inventory_8cs_source.html#l00313">Inventory.LoadInventory()</a>, <a class="el" href="Console_8cs_source.html#l00415">Log()</a>, and <a class="el" href="Inventory_8cs_source.html#l00264">Inventory.SaveInventory()</a>.</p>
+
+</div>
+</div>
+<a id="a0f140fe7409c463db5c745a1d6907c1f" name="a0f140fe7409c463db5c745a1d6907c1f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f140fe7409c463db5c745a1d6907c1f">&#9670;&nbsp;</a></span>Update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Console.Update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Console_8cs_source.html#l00028">28</a> of file <a class="el" href="Console_8cs_source.html">Console.cs</a>.</p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="ae9747594d233e2e8382901722fcf552e" name="ae9747594d233e2e8382901722fcf552e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9747594d233e2e8382901722fcf552e">&#9670;&nbsp;</a></span>commandHistory</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt;string&gt; Console.commandHistory = new List&lt;string&gt;()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Console_8cs_source.html#l00024">24</a> of file <a class="el" href="Console_8cs_source.html">Console.cs</a>.</p>
+
+</div>
+</div>
+<a id="abe2cde4cb205efd9cbef96fe5fac1e88" name="abe2cde4cb205efd9cbef96fe5fac1e88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe2cde4cb205efd9cbef96fe5fac1e88">&#9670;&nbsp;</a></span>commandList</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt;string&gt; Console.commandList</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">= <span class="keyword">new</span> List&lt;string&gt;(){</div>
+<div class="line">        <span class="stringliteral">&quot;help&quot;</span>,</div>
+<div class="line">        <span class="stringliteral">&quot;list_inventories&quot;</span>,</div>
+<div class="line">        <span class="stringliteral">&quot;list_inventory inventoryID&quot;</span>,</div>
+<div class="line">        <span class="stringliteral">&quot;give inventoryID itemID amount?&quot;</span>,</div>
+<div class="line">        <span class="stringliteral">&quot;clear inventoryID&quot;</span>,</div>
+<div class="line">        <span class="stringliteral">&quot;save inventoryID&quot;</span>,</div>
+<div class="line">        <span class="stringliteral">&quot;load inventoryID&quot;</span>,</div>
+<div class="line">        <span class="stringliteral">&quot;list_database&quot;</span>,</div>
+<div class="line">        <span class="stringliteral">&quot;quit&quot;</span>,</div>
+<div class="line">        <span class="stringliteral">&quot;restart&quot;</span>,</div>
+<div class="line">        <span class="stringliteral">&quot;scene sceneNumber&quot;</span>,</div>
+<div class="line">        <span class="stringliteral">&quot;delete_mission_save&quot;</span>,</div>
+<div class="line">        <span class="stringliteral">&quot;complete_mission&quot;</span>,</div>
+<div class="line">        <span class="stringliteral">&quot;inspect inventoryID slotNumber&quot;</span></div>
+<div class="line">    }</div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="Console_8cs_source.html#l00395">395</a> of file <a class="el" href="Console_8cs_source.html">Console.cs</a>.</p>
+
+</div>
+</div>
 <a id="a8cf42f4703baffa47573b200d5f53958" name="a8cf42f4703baffa47573b200d5f53958"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8cf42f4703baffa47573b200d5f53958">&#9670;&nbsp;</a></span>consoleInput</h2>
 
@@ -262,6 +402,30 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="Console_8cs_source.html#l00019">19</a> of file <a class="el" href="Console_8cs_source.html">Console.cs</a>.</p>
+
+</div>
+</div>
+<a id="aed2b6f164c223fefbfbb68ea54c70af8" name="aed2b6f164c223fefbfbb68ea54c70af8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed2b6f164c223fefbfbb68ea54c70af8">&#9670;&nbsp;</a></span>upIndex</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Console.upIndex = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Console_8cs_source.html#l00025">25</a> of file <a class="el" href="Console_8cs_source.html">Console.cs</a>.</p>
 
 </div>
 </div>

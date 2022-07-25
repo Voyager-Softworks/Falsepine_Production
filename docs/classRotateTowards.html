@@ -66,6 +66,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
 <a href="classRotateTowards-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">RotateTowards Class Reference</div></div>
 </div><!--header-->
@@ -78,8 +79,8 @@ Inheritance diagram for RotateTowards:</div>
 <div class="dyncontent">
 <div class="center"><img src="classRotateTowards__inherit__graph.png" border="0" usemap="#aRotateTowards_inherit__map" alt="Inheritance graph"/></div>
 <map name="aRotateTowards_inherit__map" id="aRotateTowards_inherit__map">
-<area shape="rect" title="A class that handles coroutine rotation towards generic objects." alt="" coords="5,131,152,208"/>
-<area shape="rect" title=" " alt="" coords="17,5,141,83"/>
+<area shape="rect" title="A class that handles coroutine rotation towards generic objects." alt="" coords="5,131,208,252"/>
+<area shape="rect" title=" " alt="" coords="45,5,169,83"/>
 </map>
 </div>
 <div class="dynheader">
@@ -87,8 +88,8 @@ Collaboration diagram for RotateTowards:</div>
 <div class="dyncontent">
 <div class="center"><img src="classRotateTowards__coll__graph.png" border="0" usemap="#aRotateTowards_coll__map" alt="Collaboration graph"/></div>
 <map name="aRotateTowards_coll__map" id="aRotateTowards_coll__map">
-<area shape="rect" title="A class that handles coroutine rotation towards generic objects." alt="" coords="5,131,152,208"/>
-<area shape="rect" title=" " alt="" coords="17,5,141,83"/>
+<area shape="rect" title="A class that handles coroutine rotation towards generic objects." alt="" coords="5,131,208,252"/>
+<area shape="rect" title=" " alt="" coords="45,5,169,83"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -97,6 +98,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab90150ab4ceac0d4f7cd101592f90f67"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRotateTowards.html#ab90150ab4ceac0d4f7cd101592f90f67">RotateToObject</a> (GameObject obj, float duration, float speed, float delay)</td></tr>
 <tr class="memdesc:ab90150ab4ceac0d4f7cd101592f90f67"><td class="mdescLeft">&#160;</td><td class="mdescRight">Rotate the object towards another object.  <a href="classRotateTowards.html#ab90150ab4ceac0d4f7cd101592f90f67">More...</a><br /></td></tr>
 <tr class="separator:ab90150ab4ceac0d4f7cd101592f90f67"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:ac4af0946dca730194ecb4cd2e5fc0863"><td class="memItemLeft" align="right" valign="top">IEnumerator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRotateTowards.html#ac4af0946dca730194ecb4cd2e5fc0863">RotateToObjectCoroutine</a> (GameObject obj, float duration, float speed, float delay)</td></tr>
+<tr class="separator:ac4af0946dca730194ecb4cd2e5fc0863"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1af3572abcea2aea651a01907040831e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRotateTowards.html#a1af3572abcea2aea651a01907040831e">Start</a> ()</td></tr>
+<tr class="separator:a1af3572abcea2aea651a01907040831e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22cff85253438fac48080478eb724444"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classRotateTowards.html#a22cff85253438fac48080478eb724444">Update</a> ()</td></tr>
+<tr class="separator:a22cff85253438fac48080478eb724444"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >A class that handles coroutine rotation towards generic objects. </p>
@@ -162,6 +172,129 @@ Public Member Functions</h2></td></tr>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="RotateTowards_8cs_source.html#l00042">42</a> of file <a class="el" href="RotateTowards_8cs_source.html">RotateTowards.cs</a>.</p>
+
+<p class="reference">References <a class="el" href="RotateTowards_8cs_source.html#l00019">RotateToObjectCoroutine()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="ThrowBoulder_8cs_source.html#l00029">Boss.Brightmaw.ThrowBoulder.Eval()</a>.</p>
+
+</div>
+</div>
+<a id="ac4af0946dca730194ecb4cd2e5fc0863" name="ac4af0946dca730194ecb4cd2e5fc0863"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4af0946dca730194ecb4cd2e5fc0863">&#9670;&nbsp;</a></span>RotateToObjectCoroutine()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">IEnumerator RotateTowards.RotateToObjectCoroutine </td>
+          <td>(</td>
+          <td class="paramtype">GameObject&#160;</td>
+          <td class="paramname"><em>obj</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>duration</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>speed</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>delay</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p></p>
+<p >Coroutine to rotate towards an object. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">obj</td><td>The object to rotate towards.</td></tr>
+    <tr><td class="paramname">duration</td><td>The length of time to rotate.</td></tr>
+    <tr><td class="paramname">speed</td><td>The speed of the rotation.</td></tr>
+    <tr><td class="paramname">delay</td><td>The delay before the rotation starts.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="RotateTowards_8cs_source.html#l00019">19</a> of file <a class="el" href="RotateTowards_8cs_source.html">RotateTowards.cs</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="RotateTowards_8cs_source.html#l00042">RotateToObject()</a>.</p>
+
+</div>
+</div>
+<a id="a1af3572abcea2aea651a01907040831e" name="a1af3572abcea2aea651a01907040831e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1af3572abcea2aea651a01907040831e">&#9670;&nbsp;</a></span>Start()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RotateTowards.Start </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="RotateTowards_8cs_source.html#l00049">49</a> of file <a class="el" href="RotateTowards_8cs_source.html">RotateTowards.cs</a>.</p>
+
+</div>
+</div>
+<a id="a22cff85253438fac48080478eb724444" name="a22cff85253438fac48080478eb724444"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22cff85253438fac48080478eb724444">&#9670;&nbsp;</a></span>Update()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void RotateTowards.Update </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="RotateTowards_8cs_source.html#l00055">55</a> of file <a class="el" href="RotateTowards_8cs_source.html">RotateTowards.cs</a>.</p>
 
 </div>
 </div>
