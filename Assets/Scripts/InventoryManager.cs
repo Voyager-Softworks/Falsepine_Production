@@ -79,8 +79,11 @@ public class InventoryManager : MonoBehaviour
     public void TryMoveItem(Inventory source, Inventory target, int index) {
         Item item = source.slots[index].item;
         if (target.CanAddItemToInventory(item)) {
-            target.TryAddItemToInventory(item);
             source.RemoveItemFromInventory(index);
+            Item leftover = target.TryAddItemToInventory(item);
+            if (leftover != null) {
+                source.TryAddItemToInventory(leftover);
+            }
         }
     }
 

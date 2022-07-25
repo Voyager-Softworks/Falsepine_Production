@@ -20,6 +20,7 @@ public class InventoryPannel : MonoBehaviour
     [Header("Transferring")]
     [SerializeField] public bool sendingAllowed = true;
     [SerializeField] public bool receivingAllowed = true;
+    [SerializeField] public bool removeSpaces = false;
 
     [Header("UI")]
     public List<InventoryCell> cells = new List<InventoryCell>();
@@ -46,6 +47,14 @@ public class InventoryPannel : MonoBehaviour
         if (Time.frameCount % 5 == 0)
         {
             UpdateUI();
+        }
+
+        // every 20 frames, try remove empty spaces
+        if (Time.frameCount % 20 == 0)
+        {
+            if (removeSpaces){
+                TryRemoveSpaces(linkedInventory);
+            }
         }
     }
 
@@ -102,9 +111,38 @@ public class InventoryPannel : MonoBehaviour
         if (!otherPannel.receivingAllowed) return;
 
         PerformClickAction(gridItem, sourceInventory, targetInventory, sourceIndex);
+
+        if (removeSpaces){
+            TryRemoveSpaces(sourceInventory);
+        }
     }
 
     protected virtual void PerformClickAction(InventoryGridItem gridItem, Inventory sourceInventory, Inventory targetInventory, int sourceIndex){
         InventoryManager.instance.TryMoveItem(sourceInventory, targetInventory, sourceIndex);
+    }
+
+    protected virtual void TryRemoveSpaces(Inventory sourceInventory){
+        // get inventory, and a list of slots in it
+        Inventory inventory = InventoryManager.instance?.GetInventory(inventoryID);
+        List<Inventory.InventorySlot> slots = new List<Inventory.InventorySlot>();
+        if (inventory != null)
+        {
+            slots = new List<Inventory.InventorySlot>(inventory.slots);
+        }
+
+        // loop through each slot in the inventory, try move the item to an earlier slot
+        foreach (Inventory.InventorySlot slot in slots)
+        {
+            Item item = slot.item;
+            if (item == null) continue;
+
+            //get index of slot in source inventory
+            int sourceIndex = sourceInventory.GetItemIndex(item);
+            if (sourceIndex == -1) return;
+
+            sourceInventory.RemoveItemFromInventory(sourceIndex);
+
+            Item leftover = sourceInventory.TryAddItemToInventory(item);
+        }
     }
 }
