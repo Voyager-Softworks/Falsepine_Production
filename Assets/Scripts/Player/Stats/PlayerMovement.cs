@@ -357,7 +357,7 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
         Vector3 cpToExact = exactMouseAimPoint - cp;
         float cpToExactMag = cpToExact.magnitude;
 
-        float angle = 20.0f;
+        float angle = 10.0f;
         float adjacent = (cp - firePoint).magnitude;
         // calc opposite using angle and adjacent
         float opposite = Mathf.Tan(angle * Mathf.Deg2Rad) * adjacent;
