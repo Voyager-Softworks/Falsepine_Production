@@ -305,19 +305,28 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
     public Vector3 GetMouseAimPoint(){
         //mouse raycast to get direction
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
-        PlayerInventoryInterface pii = GetComponent<PlayerInventoryInterface>();
-        if (!pii) return mouseAimPoint;
-        GameObject weaponFirepoint = pii.GetWeaponFirepoint(pii.selectedWeapon);
-        if (!weaponFirepoint) return mouseAimPoint;
-        //find where ray intersects on the plane of the player
-        Plane playerPlane = new Plane(Vector3.up, weaponFirepoint.transform.position);
-        float rayDistance;
-        if (playerPlane.Raycast(ray, out rayDistance)){
-            //get mouse hit pos
-            Vector3 hitPoint = ray.GetPoint(rayDistance);
-            mouseAimPoint = hitPoint;
+
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 1000f)){
+            return hit.point;
         }
-        return mouseAimPoint;
+        else{
+            return transform.position;
+        }
+
+        // PlayerInventoryInterface pii = GetComponent<PlayerInventoryInterface>();
+        // if (!pii) return mouseAimPoint;
+        // GameObject weaponFirepoint = pii.GetWeaponFirepoint(pii.selectedWeapon);
+        // if (!weaponFirepoint) return mouseAimPoint;
+        // //find where ray intersects on the plane of the player
+        // Plane playerPlane = new Plane(Vector3.up, weaponFirepoint.transform.position);
+        // float rayDistance;
+        // if (playerPlane.Raycast(ray, out rayDistance)){
+        //     //get mouse hit pos
+        //     Vector3 hitPoint = ray.GetPoint(rayDistance);
+        //     mouseAimPoint = hitPoint;
+        // }
+        // return mouseAimPoint;
     }
 
     public Vector3 GetGamepadAimPoint(){

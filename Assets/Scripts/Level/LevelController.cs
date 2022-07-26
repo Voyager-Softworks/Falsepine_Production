@@ -36,14 +36,14 @@ public class LevelController : MonoBehaviour
     {
         SaveAll();
 
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("SnowLevel");
     }
 
     static public void LoadSnowBoss()
     {
         SaveAll();
 
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene("BoneStag");
     }
 
     static public void LoadComplete()
