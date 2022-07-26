@@ -336,10 +336,10 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
         }
 
         // if dist between fire point and mousePlaneAimPoint is less than 1, return it
-        if (Vector3.Distance(firePoint, mousePlanePoint) < 1)
-        {
-            return mousePlanePoint;
-        }
+        // if (Vector3.Distance(firePoint, mousePlanePoint) < 1)
+        // {
+        //     return mousePlanePoint;
+        // }
 
         //return mousePlaneAimPoint;
 
@@ -357,7 +357,7 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
         Vector3 cpToExact = exactMouseAimPoint - cp;
         float cpToExactMag = cpToExact.magnitude;
 
-        float angle = 10.0f;
+        float angle = 20.0f;
         float adjacent = (cp - firePoint).magnitude;
         // calc opposite using angle and adjacent
         float opposite = Mathf.Tan(angle * Mathf.Deg2Rad) * adjacent;

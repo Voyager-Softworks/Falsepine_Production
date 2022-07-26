@@ -42,6 +42,8 @@ public class PlayerInventoryInterface : MonoBehaviour  /// @todo Comment
     public List<WeaponModelLink> weaponFirepointLinks = new List<WeaponModelLink>();
 
     public LineRenderer aimLines;
+    public Color aimLineStartColor = Color.white;
+    public Color aimLineEndColor = Color.white;
 
     public Animator playerAnimator;
 
@@ -57,6 +59,9 @@ public class PlayerInventoryInterface : MonoBehaviour  /// @todo Comment
 
         // select equipment
         SelectEquipment();
+
+        aimLines.startColor = aimLineStartColor;
+        aimLines.endColor = aimLineEndColor;
     }
 
     // Update is called once per frame
@@ -153,25 +158,44 @@ public class PlayerInventoryInterface : MonoBehaviour  /// @todo Comment
 
             if (!rangedWeapon.m_isAiming || rangedWeapon.m_reloadTimer > 0 || playerMovement.isRolling){
                 // fade to transparent over time
-                Color currentColor = aimLines.startColor;
+                float startAlpha = aimLines.startColor.a;
+                float endAlpha = aimLines.endColor.a;
                 // subtract alpha from current color using time
-                currentColor.a -= Time.deltaTime * 10.0f;
-                // clamp aplpha between 0 and 1
-                currentColor.a = Mathf.Clamp01(currentColor.a);
+                startAlpha -= Time.deltaTime * 10.0f;
+                endAlpha -= Time.deltaTime * 10.0f;
+                // clamp alpha between 0 and 1
+                startAlpha = Mathf.Clamp01(startAlpha);
+                endAlpha = Mathf.Clamp01(endAlpha);
                 // set color
-                aimLines.startColor = currentColor;
-                aimLines.endColor = currentColor;
+                Gradient gradient = new Gradient();
+                gradient.SetKeys(
+                    new GradientColorKey[] { new GradientColorKey(aimLineEndColor, 0.0f), new GradientColorKey(aimLineStartColor, 0.5f), new GradientColorKey(aimLineEndColor, 1.0f) },
+                    new GradientAlphaKey[] { new GradientAlphaKey(endAlpha, 0.0f), new GradientAlphaKey(startAlpha, 0.5f), new GradientAlphaKey(endAlpha, 1.0f) }
+                );
+                aimLines.colorGradient = gradient;
             }
             else{
                 // fade to opaque over time
-                Color currentColor = aimLines.startColor;
+                float startAlpha = aimLines.startColor.a;
+                float endAlpha = aimLines.endColor.a;
                 // add alpha to current color using time
-                currentColor.a += Time.deltaTime * 2.0f;
-                // clamp aplpha between 0 and 1
-                currentColor.a = Mathf.Clamp01(currentColor.a);
+                startAlpha += Time.deltaTime * 2.0f;
+                endAlpha += Time.deltaTime * 2.0f;
+                // clamp alpha between 0 and 1
+                startAlpha = Mathf.Clamp01(startAlpha);
+                endAlpha = Mathf.Clamp01(endAlpha);
+
+                //clamp alpha between current and target color
+                startAlpha = Mathf.Clamp(startAlpha, aimLines.startColor.a, aimLineStartColor.a) * 255;
+                endAlpha = Mathf.Clamp(endAlpha, aimLines.endColor.a, aimLineEndColor.a) * 255;
+
                 // set color
-                aimLines.startColor = currentColor;
-                aimLines.endColor = currentColor;
+                Gradient gradient = new Gradient();
+                gradient.SetKeys(
+                    new GradientColorKey[] { new GradientColorKey(aimLineEndColor, 0.0f), new GradientColorKey(aimLineStartColor, 0.5f), new GradientColorKey(aimLineEndColor, 1.0f) },
+                    new GradientAlphaKey[] { new GradientAlphaKey(endAlpha, 0.0f), new GradientAlphaKey(startAlpha, 0.5f), new GradientAlphaKey(endAlpha, 1.0f) }
+                );
+                aimLines.colorGradient = gradient;
             }
 
             Vector3 aimPoint = playerMovement.GetMouseAimPoint();
