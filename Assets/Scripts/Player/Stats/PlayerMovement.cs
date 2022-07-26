@@ -45,6 +45,18 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
     Vector3 camForward;
     Vector3 camRight;
 
+
+    Vector3 planeIntersect;
+    private void OnDrawGizmos() {
+        // draw mouse plane aim point
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(mouseAimPoint, 0.1f);
+
+        //draw plane intersect point
+        Gizmos.color = Color.blue;
+        Gizmos.DrawSphere(planeIntersect, 0.2f);
+    }
+
     public void DoFootstep()
     {
         int random = Random.Range(0, footstepSounds.Length);
@@ -306,28 +318,77 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
         //mouse raycast to get direction
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 1000f)){
-            return hit.point;
-        }
-        else{
-            return transform.position;
+        PlayerInventoryInterface pii = GetComponent<PlayerInventoryInterface>();
+        if (!pii) return mouseAimPoint;
+        GameObject weaponFirepoint = pii.GetWeaponFirepoint(pii.selectedWeapon);
+        if (!weaponFirepoint) return mouseAimPoint;
+
+        Vector3 mousePlanePoint = new Vector3();
+
+        Vector3 firePoint = weaponFirepoint.transform.position;
+        //find where ray intersects on the plane of the player
+        Plane playerPlane = new Plane(Vector3.up, firePoint);
+        float rayDistance;
+        if (playerPlane.Raycast(ray, out rayDistance)){
+            //get mouse hit pos
+            Vector3 hitPoint = ray.GetPoint(rayDistance);
+            mousePlanePoint = hitPoint;
         }
 
-        // PlayerInventoryInterface pii = GetComponent<PlayerInventoryInterface>();
-        // if (!pii) return mouseAimPoint;
-        // GameObject weaponFirepoint = pii.GetWeaponFirepoint(pii.selectedWeapon);
-        // if (!weaponFirepoint) return mouseAimPoint;
-        // //find where ray intersects on the plane of the player
-        // Plane playerPlane = new Plane(Vector3.up, weaponFirepoint.transform.position);
-        // float rayDistance;
-        // if (playerPlane.Raycast(ray, out rayDistance)){
-        //     //get mouse hit pos
-        //     Vector3 hitPoint = ray.GetPoint(rayDistance);
-        //     mouseAimPoint = hitPoint;
-        // }
-        // return mouseAimPoint;
+        // if dist between fire point and mousePlaneAimPoint is less than 1, return it
+        if (Vector3.Distance(firePoint, mousePlanePoint) < 1)
+        {
+            return mousePlanePoint;
+        }
+
+        //return mousePlaneAimPoint;
+
+
+        Vector3 exactMouseAimPoint = new Vector3();
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, 1000f)){
+            exactMouseAimPoint = hit.point;
+        }
+
+        //Vector3 cp = ClosestPointOnLine(firePoint, mousePlanePoint, exactMouseAimPoint);
+        Vector3 cp = LineIntersectsPlane(exactMouseAimPoint - Vector3.up * 100, exactMouseAimPoint + Vector3.up * 100, firePoint, Vector3.up);
+        planeIntersect = cp;
+
+        Vector3 cpToExact = exactMouseAimPoint - cp;
+        float cpToExactMag = cpToExact.magnitude;
+
+        float angle = 20.0f;
+        float adjacent = (cp - firePoint).magnitude;
+        // calc opposite using angle and adjacent
+        float opposite = Mathf.Tan(angle * Mathf.Deg2Rad) * adjacent;
+
+        //clamp cpToExactMag to opposite
+        float newDist = Mathf.Clamp(cpToExactMag, 0, opposite);
+
+        mouseAimPoint = cp + cpToExact.normalized * newDist;
+
+        return mouseAimPoint;
     }
+
+    public Vector3 ClosestPointOnLine(Vector3 lineStart, Vector3 lineEnd, Vector3 point){
+        Vector3 lineDir = lineEnd - lineStart;
+        lineDir.Normalize();
+        float dot = Vector3.Dot(lineDir, point - lineStart);
+        return lineStart + lineDir * dot;
+    }
+
+    public Vector3 LineIntersectsPlane(Vector3 lineStart, Vector3 lineEnd, Vector3 planePoint, Vector3 planeNormal){
+        Vector3 lineDir = lineEnd - lineStart;
+        lineDir.Normalize();
+        float dot = Vector3.Dot(planeNormal, lineDir);
+        if (Mathf.Abs(dot) < 0.00001f){
+            return Vector3.zero;
+        }
+        float dot2 = Vector3.Dot(planeNormal, lineStart - planePoint);
+        float t = -dot2 / dot;
+        return lineStart + lineDir * t;
+    }
+
 
     public Vector3 GetGamepadAimPoint(){
         //Get the right stick value
