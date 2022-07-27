@@ -314,7 +314,7 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
         audioSource.PlayOneShot(rollSound);
     }
 
-    public Vector3 GetMouseAimPoint(){
+public Vector3 GetMouseAimPoint(){
         //mouse raycast to get direction
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
 
@@ -326,7 +326,8 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
         Vector3 mousePlanePoint = new Vector3();
 
         Vector3 firePoint = weaponFirepoint.transform.position;
-        //find where ray intersects on the plane of the player
+
+        //find where ray intersects on the plane at gun height
         Plane playerPlane = new Plane(Vector3.up, firePoint);
         float rayDistance;
         if (playerPlane.Raycast(ray, out rayDistance)){
@@ -334,6 +335,7 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
             Vector3 hitPoint = ray.GetPoint(rayDistance);
             mousePlanePoint = hitPoint;
         }
+        return mousePlanePoint;
 
         // if dist between fire point and mousePlaneAimPoint is less than 1, return it
         // if (Vector3.Distance(firePoint, mousePlanePoint) < 1)
@@ -344,30 +346,32 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
         //return mousePlaneAimPoint;
 
 
-        Vector3 exactMouseAimPoint = new Vector3();
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 1000f)){
-            exactMouseAimPoint = hit.point;
-        }
+        /// Following code treats the aiming like a cone, allowing some vertical/horiz movement.
 
-        //Vector3 cp = ClosestPointOnLine(firePoint, mousePlanePoint, exactMouseAimPoint);
-        Vector3 cp = LineIntersectsPlane(exactMouseAimPoint - Vector3.up * 100, exactMouseAimPoint + Vector3.up * 100, firePoint, Vector3.up);
-        planeIntersect = cp;
+        // Vector3 exactMouseAimPoint = new Vector3();
+        // RaycastHit hit;
+        // if (Physics.Raycast(ray, out hit, 1000f)){
+        //     exactMouseAimPoint = hit.point;
+        // }
 
-        Vector3 cpToExact = exactMouseAimPoint - cp;
-        float cpToExactMag = cpToExact.magnitude;
+        // //Vector3 cp = ClosestPointOnLine(firePoint, mousePlanePoint, exactMouseAimPoint);
+        // Vector3 cp = LineIntersectsPlane(exactMouseAimPoint - Vector3.up * 100, exactMouseAimPoint + Vector3.up * 100, firePoint, Vector3.up);
+        // planeIntersect = cp;
 
-        float angle = 20.0f;
-        float adjacent = (cp - firePoint).magnitude;
-        // calc opposite using angle and adjacent
-        float opposite = Mathf.Tan(angle * Mathf.Deg2Rad) * adjacent;
+        // Vector3 cpToExact = exactMouseAimPoint - cp;
+        // float cpToExactMag = cpToExact.magnitude;
 
-        //clamp cpToExactMag to opposite
-        float newDist = Mathf.Clamp(cpToExactMag, 0, opposite);
+        // float angle = 20.0f;
+        // float adjacent = (cp - firePoint).magnitude;
+        // // calc opposite using angle and adjacent
+        // float opposite = Mathf.Tan(angle * Mathf.Deg2Rad) * adjacent;
 
-        mouseAimPoint = cp + cpToExact.normalized * newDist;
+        // //clamp cpToExactMag to opposite
+        // float newDist = Mathf.Clamp(cpToExactMag, 0, opposite);
 
-        return mouseAimPoint;
+        // mouseAimPoint = cp + cpToExact.normalized * newDist;
+
+        // return mouseAimPoint;
     }
 
     public Vector3 ClosestPointOnLine(Vector3 lineStart, Vector3 lineEnd, Vector3 point){
