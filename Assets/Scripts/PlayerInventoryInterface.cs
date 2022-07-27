@@ -45,6 +45,8 @@ public class PlayerInventoryInterface : MonoBehaviour  /// @todo Comment
     public Color aimLineStartColor = Color.white;
     public Color aimLineEndColor = Color.white;
 
+    public GameObject aimQuad;
+
     public Animator playerAnimator;
 
 
@@ -173,6 +175,7 @@ public class PlayerInventoryInterface : MonoBehaviour  /// @todo Comment
                     new GradientAlphaKey[] { new GradientAlphaKey(endAlpha, 0.0f), new GradientAlphaKey(startAlpha, 0.5f), new GradientAlphaKey(endAlpha, 1.0f) }
                 );
                 aimLines.colorGradient = gradient;
+                aimQuad.SetActive(false);
             }
             else{
                 // fade to opaque over time
@@ -196,6 +199,7 @@ public class PlayerInventoryInterface : MonoBehaviour  /// @todo Comment
                     new GradientAlphaKey[] { new GradientAlphaKey(endAlpha, 0.0f), new GradientAlphaKey(startAlpha, 0.5f), new GradientAlphaKey(endAlpha, 1.0f) }
                 );
                 aimLines.colorGradient = gradient;
+                aimQuad.SetActive(true);
             }
 
             Vector3 aimPoint = playerMovement.GetMouseAimPoint();
@@ -213,6 +217,30 @@ public class PlayerInventoryInterface : MonoBehaviour  /// @todo Comment
             aimLines.SetPosition(0, aimpointL);
             aimLines.SetPosition(1, firepointObj.transform.position);
             aimLines.SetPosition(2, aimpointR);
+
+            // modify the vertices of the aimQuad to match the aimLines (convert coordinates to local space of aimQuad)
+            Vector3 vert1 = aimQuad.transform.InverseTransformPoint(aimpointL);
+            Vector3 vert2 = aimQuad.transform.InverseTransformPoint(aimpointR);
+            Vector3 vert3 = Vector3.right * 0.1f;
+            Vector3 vert4 = Vector3.left * 0.1f;
+            //set y to 0
+            vert1.y = 0;
+            vert2.y = 0;
+            vert3.y = 0;
+            vert4.y = 0;
+
+            // set the vertices of the aimQuad
+            Mesh mesh = aimQuad.GetComponent<MeshFilter>().mesh;
+            mesh.SetVertices(new List<Vector3>() { vert1, vert2, vert3, vert4 });
+
+            //set tris to match the aimLines
+            mesh.SetTriangles(new List<int>() { 0, 1, 2, 0, 2, 3 }, 0);
+
+            mesh.RecalculateBounds();
+            mesh.RecalculateNormals();
+
+
+
         }
     }
 
