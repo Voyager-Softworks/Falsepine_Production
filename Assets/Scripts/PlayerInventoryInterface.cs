@@ -49,6 +49,53 @@ public class PlayerInventoryInterface : MonoBehaviour  /// @todo Comment
 
     public Animator playerAnimator;
 
+    public struct AimZone
+    {
+        public Vector3 forwardLeft;
+        public Vector3 forwardRight;
+        public Vector3 backwardRight;
+        public Vector3 backwardLeft;
+
+        public Vector3 fl { get{ return forwardLeft; } }
+        public Vector3 fr { get{ return forwardRight; } }
+        public Vector3 br { get{ return backwardRight; } }
+        public Vector3 bl { get{ return backwardLeft; } }
+
+
+        // constructor
+        public AimZone(Vector3 forwardLeft, Vector3 forwardRight, Vector3 backwardRight, Vector3 backwardLeft)
+        {
+            this.forwardLeft = forwardLeft;
+            this.forwardRight = forwardRight;
+            this.backwardRight = backwardRight;
+            this.backwardLeft = backwardLeft;
+        }
+
+        // zero constructor
+        static public AimZone Zero = new AimZone(Vector3.zero, Vector3.zero, Vector3.zero, Vector3.zero);
+
+        // get list
+        public List<Vector3> GetPoints()
+        {
+            List<Vector3> points = new List<Vector3>();
+            points.Add(forwardLeft);
+            points.Add(forwardRight);
+            points.Add(backwardRight);
+            points.Add(backwardLeft);
+            return points;
+        }
+
+        //equality operator
+        public static bool operator ==(AimZone a, AimZone b)
+        {
+            return a.forwardLeft == b.forwardLeft && a.forwardRight == b.forwardRight && a.backwardRight == b.backwardRight && a.backwardLeft == b.backwardLeft;
+        }
+        public static bool operator !=(AimZone a, AimZone b)
+        {
+            return !(a == b);
+        }
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -80,7 +127,7 @@ public class PlayerInventoryInterface : MonoBehaviour  /// @todo Comment
 
             GameObject weaponFirepoint = GetWeaponFirepoint(selectedWeapon);
             Vector3 weaponFirepointPosition = weaponFirepoint.transform.position;
-            Vector3 fireDirection = GetComponent<PlayerMovement>().GetMouseAimPoint() - weaponFirepointPosition;
+            Vector3 fireDirection = GetComponent<PlayerMovement>().GetMouseAimPlanePoint() - weaponFirepointPosition;
 
             RangedWeapon rangedWeapon = selectedWeapon as RangedWeapon;
             if (rangedWeapon)
@@ -120,7 +167,7 @@ public class PlayerInventoryInterface : MonoBehaviour  /// @todo Comment
 
             }
 
-            UpdateAimLines();
+            UpdateAimZone();
         }
 
         if (useEquipmentAction.triggered && selectedEquipment == null)
@@ -135,7 +182,7 @@ public class PlayerInventoryInterface : MonoBehaviour  /// @todo Comment
                 Equipment equipment = selectedEquipment as Equipment;
                 if (equipment)
                 {
-                    Vector3 spawnDirection = (GetComponent<PlayerMovement>().GetMouseAimPoint() - transform.position).normalized;
+                    Vector3 spawnDirection = (GetComponent<PlayerMovement>().GetMouseAimPlanePoint() - transform.position).normalized;
                     Vector3 spawnPostion = transform.position + spawnDirection * 1.5f;
 
                     equipment.TossPrefab(spawnPostion, spawnDirection * 0.5f, gameObject);
@@ -146,7 +193,7 @@ public class PlayerInventoryInterface : MonoBehaviour  /// @todo Comment
         }
     }
 
-    private void UpdateAimLines()
+    private void UpdateAimZone()
     {
         if (aimLines)
         {
@@ -159,89 +206,70 @@ public class PlayerInventoryInterface : MonoBehaviour  /// @todo Comment
             if (!playerMovement) return;
 
             if (!rangedWeapon.m_isAiming || rangedWeapon.m_reloadTimer > 0 || playerMovement.isRolling){
-                // fade to transparent over time
-                float startAlpha = aimLines.startColor.a;
-                float endAlpha = aimLines.endColor.a;
-                // subtract alpha from current color using time
-                startAlpha -= Time.deltaTime * 10.0f;
-                endAlpha -= Time.deltaTime * 10.0f;
-                // clamp alpha between 0 and 1
-                startAlpha = Mathf.Clamp01(startAlpha);
-                endAlpha = Mathf.Clamp01(endAlpha);
-                // set color
-                Gradient gradient = new Gradient();
-                gradient.SetKeys(
-                    new GradientColorKey[] { new GradientColorKey(aimLineEndColor, 0.0f), new GradientColorKey(aimLineStartColor, 0.5f), new GradientColorKey(aimLineEndColor, 1.0f) },
-                    new GradientAlphaKey[] { new GradientAlphaKey(endAlpha, 0.0f), new GradientAlphaKey(startAlpha, 0.5f), new GradientAlphaKey(endAlpha, 1.0f) }
-                );
-                aimLines.colorGradient = gradient;
                 aimQuad.SetActive(false);
             }
             else{
-                // fade to opaque over time
-                float startAlpha = aimLines.startColor.a;
-                float endAlpha = aimLines.endColor.a;
-                // add alpha to current color using time
-                startAlpha += Time.deltaTime * 2.0f;
-                endAlpha += Time.deltaTime * 2.0f;
-                // clamp alpha between 0 and 1
-                startAlpha = Mathf.Clamp01(startAlpha);
-                endAlpha = Mathf.Clamp01(endAlpha);
-
-                //clamp alpha between current and target color
-                startAlpha = Mathf.Clamp(startAlpha, aimLines.startColor.a, aimLineStartColor.a) * 255;
-                endAlpha = Mathf.Clamp(endAlpha, aimLines.endColor.a, aimLineEndColor.a) * 255;
-
-                // set color
-                Gradient gradient = new Gradient();
-                gradient.SetKeys(
-                    new GradientColorKey[] { new GradientColorKey(aimLineEndColor, 0.0f), new GradientColorKey(aimLineStartColor, 0.5f), new GradientColorKey(aimLineEndColor, 1.0f) },
-                    new GradientAlphaKey[] { new GradientAlphaKey(endAlpha, 0.0f), new GradientAlphaKey(startAlpha, 0.5f), new GradientAlphaKey(endAlpha, 1.0f) }
-                );
-                aimLines.colorGradient = gradient;
                 aimQuad.SetActive(true);
             }
 
-            Vector3 aimPoint = playerMovement.GetMouseAimPoint();
+            // update actual aim zone mesh
+            AimZone aimZone = GetAimZone(aimQuad.transform);
+            if (aimZone != AimZone.Zero){
+                // set the vertices of the aimQuad
+                Mesh mesh = aimQuad.GetComponent<MeshFilter>().mesh;
+                mesh.SetVertices(aimZone.GetPoints());
 
-            GameObject firepointObj = GetWeaponFirepoint(selectedWeapon);
-            if (!firepointObj) return;
+                //set tris to match the aimLines
+                mesh.SetTriangles(new List<int>() { 0, 1, 2, 0, 2, 3 }, 0);
 
-            float currentAimAngle = rangedWeapon.CalcCurrentAimAngle();
-            // if nan or inf, set to 0
-            if (float.IsNaN(currentAimAngle) || float.IsInfinity(currentAimAngle)) currentAimAngle = 0; ;
-
-            Vector3 aimpointL = Quaternion.Euler(0, -currentAimAngle, 0) * (aimPoint - firepointObj.transform.position) + firepointObj.transform.position;
-            Vector3 aimpointR = Quaternion.Euler(0, currentAimAngle, 0) * (aimPoint - firepointObj.transform.position) + firepointObj.transform.position;
-
-            aimLines.SetPosition(0, aimpointL);
-            aimLines.SetPosition(1, firepointObj.transform.position);
-            aimLines.SetPosition(2, aimpointR);
-
-            // modify the vertices of the aimQuad to match the aimLines (convert coordinates to local space of aimQuad)
-            Vector3 vert1 = aimQuad.transform.InverseTransformPoint(aimpointL);
-            Vector3 vert2 = aimQuad.transform.InverseTransformPoint(aimpointR);
-            Vector3 vert3 = Vector3.right * 0.1f;
-            Vector3 vert4 = Vector3.left * 0.1f;
-            //set y to 0
-            vert1.y = 0;
-            vert2.y = 0;
-            vert3.y = 0;
-            vert4.y = 0;
-
-            // set the vertices of the aimQuad
-            Mesh mesh = aimQuad.GetComponent<MeshFilter>().mesh;
-            mesh.SetVertices(new List<Vector3>() { vert1, vert2, vert3, vert4 });
-
-            //set tris to match the aimLines
-            mesh.SetTriangles(new List<int>() { 0, 1, 2, 0, 2, 3 }, 0);
-
-            mesh.RecalculateBounds();
-            mesh.RecalculateNormals();
-
-
-
+                mesh.RecalculateBounds();
+                mesh.RecalculateNormals();
+            }
         }
+    }
+
+    public AimZone GetAimZone(Transform _t = null)
+    {
+        AimZone aimZone = AimZone.Zero;
+
+        if (aimQuad == null) return aimZone;
+
+        RangedWeapon rangedWeapon = selectedWeapon as RangedWeapon;
+        if (!rangedWeapon) return aimZone;
+
+        PlayerMovement playerMovement = GetComponent<PlayerMovement>();
+        if (!playerMovement) return aimZone;
+
+        GameObject firepointObj = GetWeaponFirepoint(selectedWeapon);
+        if (!firepointObj) return aimZone;
+        
+        Vector3 aimPoint = playerMovement.GetMouseAimPlanePoint();
+
+        float currentAimAngle = rangedWeapon.CalcCurrentAimAngle();
+        // if nan or inf, set to 0
+        if (float.IsNaN(currentAimAngle) || float.IsInfinity(currentAimAngle)) currentAimAngle = 0;
+
+        aimZone.backwardLeft = aimQuad.transform.position + aimQuad.transform.right * -0.1f + aimQuad.transform.forward * 0.1f;
+        aimZone.backwardRight = aimQuad.transform.position + aimQuad.transform.right * 0.1f + aimQuad.transform.forward * 0.1f;
+
+        float distFromBackLeftToAimPoint = Vector3.Distance(aimZone.backwardLeft, new Vector3(aimPoint.x, aimZone.backwardLeft.y, aimPoint.z));
+        float distFromBackRightToAimPoint = Vector3.Distance(aimZone.backwardRight, new Vector3(aimPoint.x, aimZone.backwardRight.y, aimPoint.z));
+
+        aimZone.forwardLeft = Quaternion.Euler(0, -currentAimAngle, 0) * (aimZone.backwardLeft + (aimQuad.transform.forward * distFromBackLeftToAimPoint) - aimZone.backwardLeft) + aimZone.backwardLeft;
+        aimZone.forwardRight = Quaternion.Euler(0, currentAimAngle, 0) * (aimZone.backwardRight + (aimQuad.transform.forward * distFromBackRightToAimPoint) - aimZone.backwardRight) + aimZone.backwardRight;
+        aimZone.forwardLeft.y = aimQuad.transform.position.y;
+        aimZone.forwardRight.y = aimQuad.transform.position.y;
+
+        if (_t != null)
+        {
+            //convert coordinates to local space of _t
+            aimZone.backwardLeft = _t.InverseTransformPoint(aimZone.backwardLeft);
+            aimZone.backwardRight = _t.InverseTransformPoint(aimZone.backwardRight);
+            aimZone.forwardLeft = _t.InverseTransformPoint(aimZone.forwardLeft);
+            aimZone.forwardRight = _t.InverseTransformPoint(aimZone.forwardRight);
+        }
+
+        return aimZone;
     }
 
     public GameObject GetWeaponFirepoint(Item weapon)

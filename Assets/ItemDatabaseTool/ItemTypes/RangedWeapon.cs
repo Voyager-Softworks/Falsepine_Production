@@ -124,7 +124,8 @@ public class RangedWeapon : Item
         {
             if (m_clipAmmo > 0)
             {
-                Shoot(_origin, _direction, _owner);
+                //RaycastShoot(_origin, _direction, _owner);
+                AimZoneShoot(_origin, _direction, _owner);
                 return true;
             }
             else {
@@ -141,7 +142,7 @@ public class RangedWeapon : Item
     /// <summary>
     /// Shoots the weapon using raycasts. Uses wait timer.
     /// </summary>
-    private void Shoot(Vector3 _origin, Vector3 _direction, GameObject _owner)
+    private void RaycastShoot(Vector3 _origin, Vector3 _direction, GameObject _owner)
     {
         m_shootTimer = m_shootTime;
         UpdateWaitTimer(m_shootTime);
@@ -226,6 +227,122 @@ public class RangedWeapon : Item
 
         m_clipAmmo--;
     }
+
+    public void AimZoneShoot(Vector3 _origin, Vector3 _direction, GameObject _owner){
+
+        m_shootTimer = m_shootTime;
+        UpdateWaitTimer(m_shootTime);
+
+        // get aim zone
+        PlayerInventoryInterface pii = _owner.GetComponent<PlayerInventoryInterface>();
+        if (pii == null) return;
+        PlayerInventoryInterface.AimZone aimZone = pii.GetAimZone();
+        if (aimZone == PlayerInventoryInterface.AimZone.Zero) return;
+
+        // get all objects with healthScript in the scene
+        HealthScript[] healthScripts = FindObjectsOfType<HealthScript>();
+        List<HealthScript> healthScriptsInAimZone = new List<HealthScript>();
+        foreach (HealthScript healthScript in healthScripts)
+        {
+            // get bounds of healthScript object
+            Bounds? tempBounds = healthScript.GetComponent<Collider>()?.bounds;
+            if (tempBounds == null) continue;
+            Bounds bounds = (Bounds)tempBounds;
+
+            // split aimzone into two triangles (bl, fl, fr) and (bl, fr, br)
+            if (
+                PointInTriangle(healthScript.transform.position, aimZone.bl, aimZone.fl, aimZone.fr) || 
+                PointInTriangle(healthScript.transform.position, aimZone.bl, aimZone.fr, aimZone.br))
+            {
+                healthScriptsInAimZone.Add(healthScript);
+            }
+        }
+        // sort by distance from the aimQuad
+        Vector3 aimQuadPos = pii.aimQuad.transform.position;
+        healthScriptsInAimZone.Sort((x, y) => Vector3.Distance(x.transform.position, aimQuadPos).CompareTo(Vector3.Distance(y.transform.position, aimQuadPos)));
+
+        // deal damage to the closest object
+        if (healthScriptsInAimZone.Count > 0)
+        {
+            //dmg
+            healthScriptsInAimZone[0].TakeDamage(m_damage, _owner);
+            if (m_hitEffect) Destroy(Instantiate(
+                m_hitEffect, healthScriptsInAimZone[0].transform.position, 
+                Quaternion.FromToRotation(Vector3.up, healthScriptsInAimZone[0].transform.position - _owner.transform.position)), 
+                2.0f
+                );
+
+            //somatic event
+            healthScriptsInAimZone[0].GetComponentInChildren<NodeAI.NodeAI_Senses>()?.RegisterSensoryEvent(
+                                                                                                _owner,
+                                                                                                healthScriptsInAimZone[0].gameObject,
+                                                                                                20.0f,
+                                                                                                NodeAI.SensoryEvent.SenseType.SOMATIC
+                                                                                                );
+        }
+
+        // play shoot sound:
+        if (m_shootSound != null)
+        {
+            GameObject sound = Instantiate(m_shootSound, _origin, Quaternion.identity);
+        }
+
+        //Trigger auditory event on all sensors in range:
+        foreach (NodeAI.NodeAI_Senses sensor in FindObjectsOfType<NodeAI.NodeAI_Senses>())
+        {
+            if (Vector3.Distance(sensor.gameObject.transform.position, _origin) < sensor.maxHearingRange)
+            {
+                sensor.RegisterSensoryEvent(_owner, sensor.gameObject, 10.0f, NodeAI.SensoryEvent.SenseType.AURAL);
+            }
+        }
+
+        // create shoot effect:
+        if (m_shootEffect != null)
+        {
+            GameObject effect = Instantiate(m_shootEffect, _origin, Quaternion.identity);
+            effect.transform.LookAt(_origin + _direction);
+        }
+
+        m_clipAmmo--;
+    }
+
+    public static bool PointInTriangle(Vector3 _point, Vector3 _triangleA, Vector3 _triangleB, Vector3 _triangleC)
+    {
+        // set y to 0
+        _point.y = 0;
+        _triangleA.y = 0;
+        _triangleB.y = 0;
+        _triangleC.y = 0;
+
+        // get vectors
+        Vector3 v0 = _triangleC - _triangleA;
+        Vector3 v1 = _triangleB - _triangleA;
+        Vector3 v2 = _point - _triangleA;
+
+        // get dot products
+        float dot00 = Vector3.Dot(v0, v0);
+        float dot01 = Vector3.Dot(v0, v1);
+        float dot02 = Vector3.Dot(v0, v2);
+        float dot11 = Vector3.Dot(v1, v1);
+        float dot12 = Vector3.Dot(v1, v2);
+
+        // get barycentric coordinates
+        float b = (dot00 * dot11 - dot01 * dot01);
+        float inv = 1 / b;
+        float u = (dot11 * dot02 - dot01 * dot12) * inv;
+        float v = (dot00 * dot12 - dot01 * dot02) * inv;
+
+        // check if point is in triangle
+        return (u >= 0) && (v >= 0) && (u + v < 1);
+    }
+
+    // public static bool BoundsInTriangle(Bounds _bounds, Vector3 _triangleA, Vector3 _triangleB, Vector3 _triangleC)
+    // {
+    //     //check center of bounds
+    //     if (PointInTriangle(_bounds.center, _triangleA, _triangleB, _triangleC)) return true;
+    //     //check corners of bounds
+    //     if (PointInTriangle(_bounds.center + new Vector3(_bounds.extents.x, _bounds.extents.y, _bounds.extents.z), _triangleA, _triangleB, _triangleC)) return true;
+    // }
 
     /// <summary>
     /// Tries to reload the weapon
