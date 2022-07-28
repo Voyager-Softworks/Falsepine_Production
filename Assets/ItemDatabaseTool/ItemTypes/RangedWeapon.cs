@@ -60,6 +60,15 @@ public class RangedWeapon : Item
     [SerializeField] public GameObject m_startAimSound = null;
     [SerializeField] public GameObject m_stopAimSound = null;
 
+    // save variables from last shoot attempt:
+    public struct RHit
+    {
+        public Vector3 origin;
+        public Vector3 destination;
+    }
+    public List<RHit> m_rHits = new List<RHit>();
+
+
 
     private float m_waitTimer = 0;
 
@@ -240,10 +249,15 @@ public class RangedWeapon : Item
         if (aimZone == PlayerInventoryInterface.AimZone.Zero) return;
 
         // get all objects with healthScript in the scene
-        HealthScript[] healthScripts = FindObjectsOfType<HealthScript>();
+        List<HealthScript> healthScripts = FindObjectsOfType<HealthScript>().ToList();
+        // sort by distance from the aimQuad
+        Vector3 aimQuadPos = pii.aimQuad.transform.position;
+        healthScripts.Sort((x, y) => Vector3.Distance(x.transform.position, aimQuadPos).CompareTo(Vector3.Distance(y.transform.position, aimQuadPos)));
+
         List<HealthScript> healthScriptsInAimZone = new List<HealthScript>();
         foreach (HealthScript healthScript in healthScripts)
         {
+            if (healthScript.isDead) continue;
             // get bounds of healthScript object
             Bounds? tempBounds = healthScript.GetComponent<Collider>()?.bounds;
             if (tempBounds == null) continue;
@@ -251,21 +265,46 @@ public class RangedWeapon : Item
 
             // split aimzone into two triangles (bl, fl, fr) and (bl, fr, br)
             if (
-                PointInTriangle(healthScript.transform.position, aimZone.bl, aimZone.fl, aimZone.fr) || 
-                PointInTriangle(healthScript.transform.position, aimZone.bl, aimZone.fr, aimZone.br))
+                BoundsInTriangle(bounds, aimZone.bl, aimZone.fl, aimZone.fr) || 
+                BoundsInTriangle(bounds, aimZone.bl, aimZone.fr, aimZone.br))
             {
-                healthScriptsInAimZone.Add(healthScript);
+                // raycast all 8 corners of the bounds, and the center of the bounds
+                bool hit = false;
+                List<Vector3> corners = new List<Vector3>();
+                corners.Add(bounds.center);
+                corners.AddRange(GetCorners(bounds));
+                foreach (Vector3 corner in corners)
+                {
+                    RaycastHit hitInfo;
+                    if (Physics.Raycast(_origin, corner - _origin, out hitInfo, m_range))
+                    {
+                        RHit hitInfoR = new RHit();
+                        hitInfoR.origin = _origin;
+                        hitInfoR.destination = hitInfo.point;
+                        
+                        if (hitInfo.collider.GetComponentInParent<HealthScript>() == healthScript)
+                        {
+                            m_rHits.Clear();
+                            m_rHits.Add(hitInfoR);
+                            hit = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (hit){
+                    healthScriptsInAimZone.Add(healthScript);
+                    break;
+                }
             }
         }
-        // sort by distance from the aimQuad
-        Vector3 aimQuadPos = pii.aimQuad.transform.position;
-        healthScriptsInAimZone.Sort((x, y) => Vector3.Distance(x.transform.position, aimQuadPos).CompareTo(Vector3.Distance(y.transform.position, aimQuadPos)));
 
         // deal damage to the closest object
         if (healthScriptsInAimZone.Count > 0)
         {
             //dmg
-            healthScriptsInAimZone[0].TakeDamage(m_damage, _owner);
+            float calcdDamage = StatsManager.CalculateDamage(this, m_damage);
+            healthScriptsInAimZone[0].TakeDamage(calcdDamage, _owner);
             if (m_hitEffect) Destroy(Instantiate(
                 m_hitEffect, healthScriptsInAimZone[0].transform.position, 
                 Quaternion.FromToRotation(Vector3.up, healthScriptsInAimZone[0].transform.position - _owner.transform.position)), 
@@ -336,13 +375,30 @@ public class RangedWeapon : Item
         return (u >= 0) && (v >= 0) && (u + v < 1);
     }
 
-    // public static bool BoundsInTriangle(Bounds _bounds, Vector3 _triangleA, Vector3 _triangleB, Vector3 _triangleC)
-    // {
-    //     //check center of bounds
-    //     if (PointInTriangle(_bounds.center, _triangleA, _triangleB, _triangleC)) return true;
-    //     //check corners of bounds
-    //     if (PointInTriangle(_bounds.center + new Vector3(_bounds.extents.x, _bounds.extents.y, _bounds.extents.z), _triangleA, _triangleB, _triangleC)) return true;
-    // }
+    public static bool BoundsInTriangle(Bounds _bounds, Vector3 _triangleA, Vector3 _triangleB, Vector3 _triangleC)
+    {
+        //check center of bounds
+        if (PointInTriangle(_bounds.center, _triangleA, _triangleB, _triangleC)) return true;
+        //check corners of bounds
+        if (PointInTriangle(_bounds.center + new Vector3(_bounds.extents.x, 0, _bounds.extents.z), _triangleA, _triangleB, _triangleC)) return true;
+        if (PointInTriangle(_bounds.center + new Vector3(_bounds.extents.x, 0, -_bounds.extents.z), _triangleA, _triangleB, _triangleC)) return true;
+        if (PointInTriangle(_bounds.center + new Vector3(-_bounds.extents.x, 0, _bounds.extents.z), _triangleA, _triangleB, _triangleC)) return true;
+        if (PointInTriangle(_bounds.center + new Vector3(-_bounds.extents.x, 0, -_bounds.extents.z), _triangleA, _triangleB, _triangleC)) return true;
+        return false;
+    }
+
+    public List<Vector3> GetCorners(Bounds _bounds){
+        List<Vector3> corners = new List<Vector3>();
+        corners.Add(_bounds.center + new Vector3(_bounds.extents.x, -_bounds.extents.y, _bounds.extents.z));
+        corners.Add(_bounds.center + new Vector3(_bounds.extents.x, -_bounds.extents.y, -_bounds.extents.z));
+        corners.Add(_bounds.center + new Vector3(-_bounds.extents.x, -_bounds.extents.y, _bounds.extents.z));
+        corners.Add(_bounds.center + new Vector3(-_bounds.extents.x, -_bounds.extents.y, -_bounds.extents.z));
+        corners.Add(_bounds.center + new Vector3(_bounds.extents.x, _bounds.extents.y, _bounds.extents.z));
+        corners.Add(_bounds.center + new Vector3(_bounds.extents.x, _bounds.extents.y, -_bounds.extents.z));
+        corners.Add(_bounds.center + new Vector3(-_bounds.extents.x, _bounds.extents.y, _bounds.extents.z));
+        corners.Add(_bounds.center + new Vector3(-_bounds.extents.x, _bounds.extents.y, -_bounds.extents.z));
+        return corners;
+    }
 
     /// <summary>
     /// Tries to reload the weapon

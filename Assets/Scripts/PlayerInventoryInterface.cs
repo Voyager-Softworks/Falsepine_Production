@@ -96,6 +96,18 @@ public class PlayerInventoryInterface : MonoBehaviour  /// @todo Comment
         }
     }
 
+    private void OnDrawGizmos() {
+        // get equipped weapon
+        RangedWeapon rangedWeapon = selectedWeapon as RangedWeapon;
+        if (rangedWeapon) {
+            //draw m_rHits
+            Gizmos.color = Color.red;
+            foreach (RangedWeapon.RHit hit in rangedWeapon.m_rHits) {
+                Gizmos.DrawLine(hit.origin, hit.destination);
+            }
+        }
+    }
+
 
     // Start is called before the first frame update
     void Start()
