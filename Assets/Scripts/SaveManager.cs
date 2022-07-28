@@ -31,6 +31,8 @@ public class SaveManager : MonoBehaviour  /// @todo Comment
         return GetRootSaveFolder() + "/save" + saveSlot;
     }
 
+    #if UNITY_EDITOR
+
     // custom Editor button to delete all save files
     [CustomEditor(typeof(SaveManager))]
     public class SaveManagerEditor : Editor
@@ -52,4 +54,6 @@ public class SaveManager : MonoBehaviour  /// @todo Comment
             Directory.CreateDirectory(saveFolderPath);
         }
     }
+
+    #endif
 }
