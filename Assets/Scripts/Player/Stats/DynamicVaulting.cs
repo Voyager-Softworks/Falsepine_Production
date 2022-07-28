@@ -25,7 +25,16 @@ public class DynamicVaulting : MonoBehaviour
 
     public bool canVault = false;
 
-    
+    public float GetVaultingHeight()
+    {
+        return vaultingHit.y;
+    }
+    public Vector3 GetVaultingDirection()
+    {
+        Vector3 dir = horizontalHit - transform.position;
+        dir.y = 0;
+        return dir;
+    }
 
     // Start is called before the first frame update
     void Start()
