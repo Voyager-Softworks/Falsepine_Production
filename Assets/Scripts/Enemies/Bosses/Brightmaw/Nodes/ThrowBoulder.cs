@@ -20,6 +20,9 @@ namespace Boss.Brightmaw
         bool reachedBoulder = false;
         RotateTowards rotateTowards;
         NavMeshAgent navAgent;
+        Animator animator;
+        float throwTimer = 1.05f;
+        float lastTime = 0;
         public ThrowBoulder()
         {
             AddProperty<Transform>("Target", null);
@@ -32,6 +35,7 @@ namespace Boss.Brightmaw
             {
                 rotateTowards = agent.GetComponent<RotateTowards>();
                 navAgent = agent.GetComponent<NavMeshAgent>();
+                animator = agent.GetComponent<Animator>();
                 if(navAgent == null)
                 {
                     Debug.LogError("ThrowBoulder: NavMeshAgent not found on agent");
@@ -41,6 +45,12 @@ namespace Boss.Brightmaw
                 if (rotateTowards == null)
                 {
                     Debug.LogError("ThrowBoulder: RotateTowards not found on agent");
+                    state = NodeData.State.Failure;
+                    return NodeData.State.Failure;
+                }
+                if (animator == null)
+                {
+                    Debug.LogError("ThrowBoulder: Animator not found on agent");
                     state = NodeData.State.Failure;
                     return NodeData.State.Failure;
                 }
@@ -65,7 +75,10 @@ namespace Boss.Brightmaw
                     }
                 }
             }
-            if (Vector3.Distance(agent.transform.position, closest.transform.position) > GetProperty<float>("Range"))
+            if (Vector3.Distance(agent.transform.position, closest.transform.position + 
+                    ((closest.transform.position - GetProperty<Transform>("Target").position).normalized 
+                    * GetProperty<float>("Range") 
+                    * 0.9f)) > 2.0f && !reachedBoulder)
             {
                 navAgent.SetDestination(
                     closest.transform.position + 
@@ -73,6 +86,11 @@ namespace Boss.Brightmaw
                     * GetProperty<float>("Range") 
                     * 0.9f)
                     );  
+                navAgent.speed = 1.0f;
+                navAgent.acceleration = 15.0f;
+                navAgent.stoppingDistance = 0.0f;
+                animator.SetBool("Running", true);
+                navAgent.isStopped = false;
                 state = NodeData.State.Running;
                 return NodeData.State.Running;
             }
@@ -80,18 +98,49 @@ namespace Boss.Brightmaw
             {
                 if(!reachedBoulder)
                 {
-                    rotateTowards.RotateToObject(closest, 0.3f, 5.0f, 0.0f);
+                    rotateTowards.RotateToObject(closest, 1.0f, 10.0f, 0.0f);
                     reachedBoulder = true;
+                    animator.SetBool("Running", false);
+                    animator.SetTrigger("BoulderToss");
+                    navAgent.isStopped = true;
+                    lastTime = Time.time;
+                    navAgent.Warp(closest.transform.position + 
+                        ((closest.transform.position - GetProperty<Transform>("Target").position).normalized 
+                        * GetProperty<float>("Range") 
+                        * 0.9f));
                 }
-                state = NodeData.State.Success;
-                return NodeData.State.Success;
+                
+                
+                
             }
+            if(reachedBoulder)
+            {
+                throwTimer -= Time.time - lastTime;
+                lastTime = Time.time;
+                if(throwTimer <= 0.0f)
+                {
+                    closest.GetComponent<Rigidbody>().AddForce(
+                        ( GetProperty<Transform>("Target").position - closest.transform.position).normalized * 
+                        20.0f, 
+                        ForceMode.Impulse
+                        );
+                    state = NodeData.State.Success;
+                    return NodeData.State.Success;
+                }
+                else
+                {
+                    state = NodeData.State.Running;
+                    return NodeData.State.Running;
+                }
+            }
+            return NodeData.State.Running;
         }
 
         public override void OnInit()
         {
             initialised = false;
             reachedBoulder = false;
+            throwTimer = 1.05f;
         }
     }
 }
