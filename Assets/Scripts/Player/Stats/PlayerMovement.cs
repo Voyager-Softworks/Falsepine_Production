@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
 {
 
     [Header("Movement")]
-    private Animator _animator;
+    public Animator _animator;
     CharacterController controller;
     DynamicVaulting dynamicVaulting;
     public InputAction moveAction;
@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
         controller = GetComponent<CharacterController>();
         dynamicVaulting = GetComponent<DynamicVaulting>();
 
-        rollAction.performed += ctx => { if(dynamicVaulting.canVault) controller.Move(dynamicVaulting.vaultingHit.y * Vector3.up); StartRoll(); };
+        rollAction.performed += ctx => { if(dynamicVaulting.canVault) StartVault(); else StartRoll(); };
 
         if (cam == null){
             cam = Camera.main;
@@ -84,7 +84,7 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
 
         playerHealth = GetComponent<PlayerHealth>();
 
-        _animator = GetComponentInChildren<Animator>();
+        //_animator = GetComponentInChildren<Animator>();
 
         audioSource = GetComponent<AudioSource>();
 
@@ -258,9 +258,17 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
 
     public void StartVault()
     {
+        if(!dynamicVaulting.canVault) return;
+        rollDir = dynamicVaulting.GetVaultingDirection();
+        _animator.SetFloat("VaultHeight", dynamicVaulting.GetVaultingHeight());
         _animator.SetTrigger("Vault");
+        
         _animator.SetLayerWeight(1, 0);
         _animator.SetLayerWeight(2, 0);
+
+        
+        StartCoroutine(VaultCoroutine());
+
     }
 
     public void StartRoll(){
@@ -313,6 +321,23 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
         _animator.SetLayerWeight(2, 0);
         audioSource.PlayOneShot(rollSound);
     }
+
+IEnumerator VaultCoroutine()
+{
+    GetComponent<CapsuleCollider>().enabled = false;
+    GetComponent<CharacterController>().enabled = false;
+    Vector3 startPos = transform.position;
+    Vector3 endPos = transform.position + (rollDir * 2.2f);
+    float t = 0;
+    while (t < 1)
+    {
+        t += Time.deltaTime / 0.7f;
+        transform.position = Vector3.Lerp(startPos, endPos, t);
+        yield return null;
+    }
+    GetComponent<CapsuleCollider>().enabled = true;
+    GetComponent<CharacterController>().enabled = true;
+}
 
 public Vector3 GetMouseAimPoint(){
         //mouse raycast to get direction
