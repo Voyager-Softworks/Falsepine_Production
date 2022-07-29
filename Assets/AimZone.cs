@@ -60,6 +60,70 @@ public class AimZone : MonoBehaviour
     public Vector3 br { get { return m_corners.backRight; } }
     public Vector3 bl { get { return m_corners.backLeft; } }
 
+    //equality operator (check for null)
+    public static bool operator ==(AimZone a, AimZone b)
+    {
+        if (System.Object.ReferenceEquals(a, b))
+        {
+            return true;
+        }
+
+        if (((object)a == null) || ((object)b == null))
+        {
+            return false;
+        }
+
+        return a.m_corners == b.m_corners;
+    }
+    //inequality operator
+    public static bool operator !=(AimZone a, AimZone b)
+    {
+        return !(a == b);
+    }
+
+    // Start is called before the first frame update
+    private void Awake()
+    {
+        //get mesh
+        m_mesh = GetComponent<MeshFilter>().mesh;
+        //get mesh renderer
+        m_meshRenderer = GetComponent<MeshRenderer>();
+
+        //hide aim zone
+        Hide();
+        //MatchSnowHeight();
+    }
+
+    private void MatchSnowHeight()
+    {
+        DynamicSnow snow = FindObjectOfType<DynamicSnow>();
+        if (snow != null)
+        {
+            // get average height of snow using mesh
+            float averageHeight = 0;
+            Mesh mesh = snow.GetComponentInChildren<MeshFilter>().mesh;
+            int count = 0;
+            for (int i = 0; i < mesh.vertices.Length; i += 1000)
+            {
+                averageHeight += mesh.vertices[i].y;
+                count++;
+            }
+            averageHeight /= (mesh.vertices.Length / count);
+            // set aim zone height to average height of snow
+            transform.position = new Vector3(transform.position.x, averageHeight, transform.position.z);
+        }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        // // if any of the local points are not the same as the mesh points, update the mesh
+        // if (m_mesh.vertices[0] != fl || m_mesh.vertices[1] != fr || m_mesh.vertices[2] != br || m_mesh.vertices[3] != bl)
+        // {
+        //     UpdateMesh();
+        // }
+    }
+
     /// <summary>
     /// Get corners of the aim zone in world space
     /// </summary>
@@ -86,48 +150,6 @@ public class AimZone : MonoBehaviour
         corners.backRight = transform.InverseTransformPoint(m_br);
         corners.backLeft = transform.InverseTransformPoint(m_bl);
         return corners;
-    }
-
-    //equality operator (check for null)
-    public static bool operator ==(AimZone a, AimZone b)
-    {
-        if (System.Object.ReferenceEquals(a, b))
-        {
-            return true;
-        }
-
-        if (((object)a == null) || ((object)b == null))
-        {
-            return false;
-        }
-
-        return a.m_corners == b.m_corners;
-    }
-    //inequality operator
-    public static bool operator !=(AimZone a, AimZone b)
-    {
-        return !(a == b);
-    }
-
-    // Start is called before the first frame update
-    private void Awake() {
-        //get mesh
-        m_mesh = GetComponent<MeshFilter>().mesh;
-        //get mesh renderer
-        m_meshRenderer = GetComponent<MeshRenderer>();
-
-        //hide aim zone
-        Hide();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // // if any of the local points are not the same as the mesh points, update the mesh
-        // if (m_mesh.vertices[0] != fl || m_mesh.vertices[1] != fr || m_mesh.vertices[2] != br || m_mesh.vertices[3] != bl)
-        // {
-        //     UpdateMesh();
-        // }
     }
 
     /// <summary>
