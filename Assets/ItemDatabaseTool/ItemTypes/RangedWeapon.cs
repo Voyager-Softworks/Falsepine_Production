@@ -127,14 +127,14 @@ public class RangedWeapon : Item
     /// <summary>
     /// Tries to shoot the weapon.
     /// </summary>
-    public bool TryShoot(Vector3 _origin, Vector3 _direction, GameObject _owner)
+    public bool TryShoot(Vector3 _origin, Vector3 _direction, GameObject _owner, AimZone _aimZone)
     {
         if (m_isAiming && m_shootTimer <= 0 && m_waitTimer <= 0)
         {
             if (m_clipAmmo > 0)
             {
                 //RaycastShoot(_origin, _direction, _owner);
-                AimZoneShoot(_origin, _direction, _owner);
+                AimZoneShoot(_origin, _direction, _owner, _aimZone);
                 return true;
             }
             else {
@@ -237,21 +237,15 @@ public class RangedWeapon : Item
         m_clipAmmo--;
     }
 
-    public void AimZoneShoot(Vector3 _origin, Vector3 _direction, GameObject _owner){
+    public void AimZoneShoot(Vector3 _origin, Vector3 _direction, GameObject _owner, AimZone _aimZone){
 
         m_shootTimer = m_shootTime;
         UpdateWaitTimer(m_shootTime);
 
-        // get aim zone
-        PlayerInventoryInterface pii = _owner.GetComponent<PlayerInventoryInterface>();
-        if (pii == null) return;
-        PlayerInventoryInterface.AimZone aimZone = pii.GetAimZone();
-        if (aimZone == PlayerInventoryInterface.AimZone.Zero) return;
-
         // get all objects with healthScript in the scene
         List<HealthScript> healthScripts = FindObjectsOfType<HealthScript>().ToList();
         // sort by distance from the aimQuad
-        Vector3 aimQuadPos = pii.aimQuad.transform.position;
+        Vector3 aimQuadPos = _aimZone.transform.position;
         healthScripts.Sort((x, y) => Vector3.Distance(x.transform.position, aimQuadPos).CompareTo(Vector3.Distance(y.transform.position, aimQuadPos)));
 
         List<HealthScript> healthScriptsInAimZone = new List<HealthScript>();
@@ -265,8 +259,8 @@ public class RangedWeapon : Item
 
             // split aimzone into two triangles (bl, fl, fr) and (bl, fr, br)
             if (
-                BoundsInTriangle(bounds, aimZone.bl, aimZone.fl, aimZone.fr) || 
-                BoundsInTriangle(bounds, aimZone.bl, aimZone.fr, aimZone.br))
+                BoundsInTriangle(bounds, _aimZone.bl, _aimZone.fl, _aimZone.fr) || 
+                BoundsInTriangle(bounds, _aimZone.bl, _aimZone.fr, _aimZone.br))
             {
                 // raycast all 8 corners of the bounds, and the center of the bounds
                 bool hit = false;

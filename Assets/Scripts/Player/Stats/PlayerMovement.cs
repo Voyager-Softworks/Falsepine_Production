@@ -395,13 +395,13 @@ IEnumerator VaultCoroutine()
 
         PlayerInventoryInterface pii = GetComponent<PlayerInventoryInterface>();
         if (!pii) return mousePlanePoint;
-        GameObject aimQuad = pii.aimQuad;
-        if (!aimQuad) return mousePlanePoint;
+        GameObject _aimZone = pii.m_aimZone?.gameObject;
+        if (!_aimZone) return mousePlanePoint;
 
-        Vector3 aimPoint = aimQuad.transform.position;
+        Vector3 aimZonePosition = _aimZone.transform.position;
 
         //find where ray intersects on the plane at gun height
-        Plane playerPlane = new Plane(Vector3.up, aimPoint);
+        Plane playerPlane = new Plane(Vector3.up, aimZonePosition);
         float rayDistance;
         if (playerPlane.Raycast(ray, out rayDistance)){
             //get mouse hit pos

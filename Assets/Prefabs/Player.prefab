@@ -497,6 +497,7 @@ GameObject:
   - component: {fileID: 859079206}
   - component: {fileID: 859079208}
   - component: {fileID: 859079207}
+  - component: {fileID: 541290802}
   m_Layer: 3
   m_Name: AimZone
   m_TagString: Untagged
@@ -567,6 +568,18 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &541290802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 859079205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83d8c6e0dcee165409ac44a9110a8f83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1504336537
 GameObject:
   m_ObjectHideFlags: 0
@@ -3585,10 +3598,7 @@ MonoBehaviour:
   - weapon: {fileID: 11400000, guid: 9271ef825691c4f4091e6f98d57ad914, type: 2}
     weaponFirepoint: {fileID: 7327169557105037240}
     animatorBoolName: Shotgun
-  aimLines: {fileID: 0}
-  aimLineStartColor: {r: 1, g: 1, b: 1, a: 1}
-  aimLineEndColor: {r: 1, g: 1, b: 1, a: 0}
-  aimQuad: {fileID: 859079205}
+  m_aimZone: {fileID: 541290802}
   playerAnimator: {fileID: 3860339509754754993}
 --- !u!114 &1244257067
 MonoBehaviour:
@@ -17165,7 +17175,7 @@ CharacterJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: -1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.0016040845, y: 0.0007611334, z: 0.00020988088}
+  m_ConnectedAnchor: {x: -0.0016040811, y: 0.00076113356, z: 0.00020988415}
   serializedVersion: 2
   m_SwingAxis: {x: 1, y: 0, z: 0}
   m_TwistLimitSpring:
