@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
 {
 
     [Header("Movement")]
-    private Animator _animator;
+    public Animator _animator;
     CharacterController controller;
     DynamicVaulting dynamicVaulting;
     public InputAction moveAction;
@@ -34,7 +34,7 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
 
 
 
-    public Vector3 mouseAimPoint = Vector3.zero;
+    //public Vector3 mousePlanePoint = Vector3.zero;
     public Transform shootPoint;
     private Camera cam;
     private AudioSource audioSource;
@@ -44,18 +44,6 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
 
     Vector3 camForward;
     Vector3 camRight;
-
-
-    Vector3 planeIntersect;
-    private void OnDrawGizmos() {
-        // draw mouse plane aim point
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(mouseAimPoint, 0.1f);
-
-        //draw plane intersect point
-        Gizmos.color = Color.blue;
-        Gizmos.DrawSphere(planeIntersect, 0.2f);
-    }
 
     public void DoFootstep()
     {
@@ -76,7 +64,7 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
         controller = GetComponent<CharacterController>();
         dynamicVaulting = GetComponent<DynamicVaulting>();
 
-        rollAction.performed += ctx => { if(dynamicVaulting.canVault) controller.Move(dynamicVaulting.vaultingHit.y * Vector3.up); StartRoll(); };
+        rollAction.performed += ctx => { if(dynamicVaulting.canVault) StartVault(); else StartRoll(); };
 
         if (cam == null){
             cam = Camera.main;
@@ -84,7 +72,7 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
 
         playerHealth = GetComponent<PlayerHealth>();
 
-        _animator = GetComponentInChildren<Animator>();
+        //_animator = GetComponentInChildren<Animator>();
 
         audioSource = GetComponent<AudioSource>();
 
@@ -228,7 +216,7 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
                 }
                 else
                 {
-                    lookDir = GetMouseAimPoint() - transform.position;
+                    lookDir = GetMouseAimPlanePoint() - transform.position;
                 }
                 
 
@@ -258,9 +246,17 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
 
     public void StartVault()
     {
+        if(!dynamicVaulting.canVault) return;
+        rollDir = dynamicVaulting.GetVaultingDirection();
+        _animator.SetFloat("VaultHeight", dynamicVaulting.GetVaultingHeight());
         _animator.SetTrigger("Vault");
+        
         _animator.SetLayerWeight(1, 0);
         _animator.SetLayerWeight(2, 0);
+
+        
+        StartCoroutine(VaultCoroutine());
+
     }
 
     public void StartRoll(){
@@ -299,7 +295,7 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
             rollDir = moveDir;
         }
         else{
-            rollDir = mouseAimPoint - transform.position;
+            rollDir = GetMouseAimPlanePoint() - transform.position;
             rollDir.y = 0;
             rollDir.Normalize();
         }
@@ -314,16 +310,33 @@ public class PlayerMovement : MonoBehaviour  /// @todo Comment
         audioSource.PlayOneShot(rollSound);
     }
 
-public Vector3 GetMouseAimPoint(){
+IEnumerator VaultCoroutine()
+{
+    GetComponent<CapsuleCollider>().enabled = false;
+    GetComponent<CharacterController>().enabled = false;
+    Vector3 startPos = transform.position;
+    Vector3 endPos = transform.position + (rollDir * 2.2f);
+    float t = 0;
+    while (t < 1)
+    {
+        t += Time.deltaTime / 0.7f;
+        transform.position = Vector3.Lerp(startPos, endPos, t);
+        yield return null;
+    }
+    GetComponent<CapsuleCollider>().enabled = true;
+    GetComponent<CharacterController>().enabled = true;
+}
+
+    public Vector3 GetMouseWeaponPlanePoint(){
         //mouse raycast to get direction
         Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
 
-        PlayerInventoryInterface pii = GetComponent<PlayerInventoryInterface>();
-        if (!pii) return mouseAimPoint;
-        GameObject weaponFirepoint = pii.GetWeaponFirepoint(pii.selectedWeapon);
-        if (!weaponFirepoint) return mouseAimPoint;
-
         Vector3 mousePlanePoint = new Vector3();
+
+        PlayerInventoryInterface pii = GetComponent<PlayerInventoryInterface>();
+        if (!pii) return mousePlanePoint;
+        GameObject weaponFirepoint = pii.GetWeaponFirepoint(pii.selectedWeapon);
+        if (!weaponFirepoint) return mousePlanePoint;
 
         Vector3 firePoint = weaponFirepoint.transform.position;
 
@@ -372,6 +385,30 @@ public Vector3 GetMouseAimPoint(){
         // mouseAimPoint = cp + cpToExact.normalized * newDist;
 
         // return mouseAimPoint;
+    }
+
+    public Vector3 GetMouseAimPlanePoint(){
+        //mouse raycast to get direction
+        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+
+        Vector3 mousePlanePoint = new Vector3();
+
+        PlayerInventoryInterface pii = GetComponent<PlayerInventoryInterface>();
+        if (!pii) return mousePlanePoint;
+        GameObject _aimZone = pii.m_aimZone?.gameObject;
+        if (!_aimZone) return mousePlanePoint;
+
+        Vector3 aimZonePosition = _aimZone.transform.position;
+
+        //find where ray intersects on the plane at gun height
+        Plane playerPlane = new Plane(Vector3.up, aimZonePosition);
+        float rayDistance;
+        if (playerPlane.Raycast(ray, out rayDistance)){
+            //get mouse hit pos
+            Vector3 hitPoint = ray.GetPoint(rayDistance);
+            mousePlanePoint = hitPoint;
+        }
+        return mousePlanePoint;
     }
 
     public Vector3 ClosestPointOnLine(Vector3 lineStart, Vector3 lineEnd, Vector3 point){

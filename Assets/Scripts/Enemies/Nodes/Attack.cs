@@ -115,7 +115,7 @@ public class Attack : NodeAI.ActionBase  /// @todo Comment
         {
             animator.ResetTrigger(attackData.animationTrigger);
             state = NodeData.State.Success;
-            navAgent.isStopped = false;
+            //navAgent.isStopped = false;
             return NodeData.State.Success;
         }
         else
