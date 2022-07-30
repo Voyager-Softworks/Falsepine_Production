@@ -248,6 +248,8 @@ public class RangedWeapon : Item
         Vector3 aimQuadPos = _aimZone.transform.position;
         healthScripts.Sort((x, y) => Vector3.Distance(x.transform.position, aimQuadPos).CompareTo(Vector3.Distance(y.transform.position, aimQuadPos)));
 
+        RHit hitInfoR = new RHit();
+
         List<HealthScript> healthScriptsInAimZone = new List<HealthScript>();
         foreach (HealthScript healthScript in healthScripts)
         {
@@ -270,9 +272,12 @@ public class RangedWeapon : Item
                 foreach (Vector3 corner in corners)
                 {
                     RaycastHit hitInfo;
-                    if (Physics.Raycast(_origin, corner - _origin, out hitInfo, m_range))
+                    // layer mask for all layers
+                    int layerMask = -1;
+                    // to hit position
+                    Vector3 toPosition = Vector3.Lerp(corner, bounds.center, 0.5f);
+                    if (Physics.Raycast(_origin, toPosition - _origin, out hitInfo, m_range, layerMask, QueryTriggerInteraction.Ignore))
                     {
-                        RHit hitInfoR = new RHit();
                         hitInfoR.origin = _origin;
                         hitInfoR.destination = hitInfo.point;
                         
@@ -299,11 +304,13 @@ public class RangedWeapon : Item
             //dmg
             float calcdDamage = StatsManager.CalculateDamage(this, m_damage);
             healthScriptsInAimZone[0].TakeDamage(calcdDamage, _owner);
-            if (m_hitEffect) Destroy(Instantiate(
-                m_hitEffect, healthScriptsInAimZone[0].transform.position, 
-                Quaternion.FromToRotation(Vector3.up, healthScriptsInAimZone[0].transform.position - _owner.transform.position)), 
-                2.0f
-                );
+            if (m_hitEffect != null)
+            {
+                Destroy(Instantiate(
+                m_hitEffect, hitInfoR.destination,
+                Quaternion.FromToRotation(Vector3.up, hitInfoR.destination - hitInfoR.origin)),
+                2.0f);
+            }
 
             //somatic event
             healthScriptsInAimZone[0].GetComponentInChildren<NodeAI.NodeAI_Senses>()?.RegisterSensoryEvent(
