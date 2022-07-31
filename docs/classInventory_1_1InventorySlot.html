@@ -82,13 +82,14 @@ Collaboration diagram for Inventory.InventorySlot:</div>
 <div class="dyncontent">
 <div class="center"><img src="classInventory_1_1InventorySlot__coll__graph.png" border="0" usemap="#aInventory_8InventorySlot_coll__map" alt="Collaboration graph"/></div>
 <map name="aInventory_8InventorySlot_coll__map" id="aInventory_8InventorySlot_coll__map">
-<area shape="rect" title=" " alt="" coords="333,741,506,833"/>
-<area shape="rect" href="classItem.html" title=" " alt="" coords="165,132,412,679"/>
-<area shape="rect" title=" " alt="" coords="5,5,135,83"/>
-<area shape="rect" href="interfaceStatsManager_1_1UsesStats.html" title=" " alt="" coords="159,5,344,83"/>
-<area shape="rect" href="interfaceStatsManager_1_1HasStatMods.html" title=" " alt="" coords="368,5,575,83"/>
-<area shape="rect" href="classInventory.html" title=" " alt="" coords="510,191,737,620"/>
-<area shape="rect" title=" " alt="" coords="599,5,723,83"/>
+<area shape="rect" title=" " alt="" coords="605,829,778,936"/>
+<area shape="rect" href="classItem.html" title=" " alt="" coords="348,147,595,767"/>
+<area shape="rect" title=" " alt="" coords="5,13,135,90"/>
+<area shape="rect" href="interfaceStatsManager_1_1UsesStats.html" title=" " alt="" coords="159,13,344,90"/>
+<area shape="rect" href="interfaceStatsManager_1_1HasStatMods.html" title=" " alt="" coords="368,13,575,90"/>
+<area shape="rect" href="interfaceEconomyManager_1_1Purchasable.html" title=" " alt="" coords="599,5,826,97"/>
+<area shape="rect" href="classInventory.html" title=" " alt="" coords="755,235,982,679"/>
+<area shape="rect" title=" " alt="" coords="851,13,975,90"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -97,6 +98,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab6593aaaa7258e799ccbfe4b0aafdce8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classItem.html">Item</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInventory_1_1InventorySlot.html#ab6593aaaa7258e799ccbfe4b0aafdce8">TryAddItemToSlot</a> (<a class="el" href="classItem.html">Item</a> _item)</td></tr>
 <tr class="memdesc:ab6593aaaa7258e799ccbfe4b0aafdce8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Attempt to add an item to this slot (matching filter), tries to stack if possible.  <a href="classInventory_1_1InventorySlot.html#ab6593aaaa7258e799ccbfe4b0aafdce8">More...</a><br /></td></tr>
 <tr class="separator:ab6593aaaa7258e799ccbfe4b0aafdce8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8ac0d781c3f2943fe1934af00034327"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInventory_1_1InventorySlot.html#af8ac0d781c3f2943fe1934af00034327">CanAddItemToSlot</a> (<a class="el" href="classItem.html">Item</a> _item)</td></tr>
+<tr class="separator:af8ac0d781c3f2943fe1934af00034327"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -119,6 +122,34 @@ Private Attributes</h2></td></tr>
 <div class="textblock">
 <p class="definition">Definition at line <a class="el" href="Inventory_8cs_source.html#l00037">37</a> of file <a class="el" href="Inventory_8cs_source.html">Inventory.cs</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="af8ac0d781c3f2943fe1934af00034327" name="af8ac0d781c3f2943fe1934af00034327"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8ac0d781c3f2943fe1934af00034327">&#9670;&nbsp;</a></span>CanAddItemToSlot()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Inventory.InventorySlot.CanAddItemToSlot </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classItem.html">Item</a>&#160;</td>
+          <td class="paramname"><em>_item</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="Inventory_8cs_source.html#l00105">105</a> of file <a class="el" href="Inventory_8cs_source.html">Inventory.cs</a>.</p>
+
+</div>
+</div>
 <a id="ab6593aaaa7258e799ccbfe4b0aafdce8" name="ab6593aaaa7258e799ccbfe4b0aafdce8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab6593aaaa7258e799ccbfe4b0aafdce8">&#9670;&nbsp;</a></span>TryAddItemToSlot()</h2>
 
@@ -147,9 +178,9 @@ Private Attributes</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="Inventory_8cs_source.html#l00078">78</a> of file <a class="el" href="Inventory_8cs_source.html">Inventory.cs</a>.</p>
 
-<p class="reference">References <a class="el" href="Item_8cs_source.html#l00186">Item.TryAddToStack()</a>.</p>
+<p class="reference">References <a class="el" href="Item_8cs_source.html#l00198">Item.TryAddToStack()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="Inventory_8cs_source.html#l00164">Inventory.AddItemToInventory()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="Inventory_8cs_source.html#l00188">Inventory.TryAddItemToInventory()</a>.</p>
 
 </div>
 </div>

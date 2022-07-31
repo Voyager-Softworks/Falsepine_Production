@@ -76,14 +76,14 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Manages the in game economy, things like player and shop money, unlocked items, item prices, etc.  
+<p>Manages the in game economy, things like player and store money, unlocked items, item prices, etc.  
  <a href="classEconomyManager.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for EconomyManager:</div>
 <div class="dyncontent">
 <div class="center"><img src="classEconomyManager__inherit__graph.png" border="0" usemap="#aEconomyManager_inherit__map" alt="Inheritance graph"/></div>
 <map name="aEconomyManager_inherit__map" id="aEconomyManager_inherit__map">
-<area shape="rect" title="Manages the in game economy, things like player and shop money, unlocked items, item prices,..." alt="" coords="84,131,229,252"/>
+<area shape="rect" title="Manages the in game economy, things like player and store money, unlocked items, item prices,..." alt="" coords="67,131,246,355"/>
 <area shape="rect" title=" " alt="" coords="5,5,129,83"/>
 <area shape="rect" href="interfaceStatsManager_1_1UsesStats.html" title=" " alt="" coords="153,5,339,83"/>
 </map>
@@ -93,7 +93,7 @@ Collaboration diagram for EconomyManager:</div>
 <div class="dyncontent">
 <div class="center"><img src="classEconomyManager__coll__graph.png" border="0" usemap="#aEconomyManager_coll__map" alt="Collaboration graph"/></div>
 <map name="aEconomyManager_coll__map" id="aEconomyManager_coll__map">
-<area shape="rect" title="Manages the in game economy, things like player and shop money, unlocked items, item prices,..." alt="" coords="84,132,229,239"/>
+<area shape="rect" title="Manages the in game economy, things like player and store money, unlocked items, item prices,..." alt="" coords="67,132,246,341"/>
 <area shape="rect" title=" " alt="" coords="5,5,129,83"/>
 <area shape="rect" href="interfaceStatsManager_1_1UsesStats.html" title=" " alt="" coords="153,5,339,83"/>
 </map>
@@ -110,12 +110,26 @@ Classes</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:abfb31dcfde4b2205a789e934226d68b0"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="classStatsManager_1_1StatType.html">StatsManager.StatType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEconomyManager.html#abfb31dcfde4b2205a789e934226d68b0">GetStatTypes</a> ()</td></tr>
 <tr class="separator:abfb31dcfde4b2205a789e934226d68b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8026472e2467b9554ca9f95fc45e0b17"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEconomyManager.html#a8026472e2467b9554ca9f95fc45e0b17">RefillStoreInventory</a> ()</td></tr>
+<tr class="separator:a8026472e2467b9554ca9f95fc45e0b17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a20f432dff9d75b50a821a6169ad54fc5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEconomyManager.html#a20f432dff9d75b50a821a6169ad54fc5">CanAfford</a> (int _amount)</td></tr>
+<tr class="separator:a20f432dff9d75b50a821a6169ad54fc5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae38ac8a45893b2321158d42d97411f23"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEconomyManager.html#ae38ac8a45893b2321158d42d97411f23">Spend</a> (int _amount)</td></tr>
+<tr class="separator:ae38ac8a45893b2321158d42d97411f23"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0394023a82c38e505d08d9410ec4e28b"><td class="memItemLeft" align="right" valign="top"><a id="a0394023a82c38e505d08d9410ec4e28b" name="a0394023a82c38e505d08d9410ec4e28b"></a>
 List&lt; <a class="el" href="classStatsManager_1_1StatType.html">StatType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>GetStatTypes</b> ()</td></tr>
 <tr class="separator:a0394023a82c38e505d08d9410ec4e28b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:acc1ec2792ec0af3df311356fadbdd716"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEconomyManager.html#acc1ec2792ec0af3df311356fadbdd716">storeInventoryName</a> = &quot;store&quot;</td></tr>
+<tr class="separator:acc1ec2792ec0af3df311356fadbdd716"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0e28508747ba59eaa6f1e3ef98eca08"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEconomyManager.html#af0e28508747ba59eaa6f1e3ef98eca08">playerInventoryName</a> = &quot;player&quot;</td></tr>
+<tr class="separator:af0e28508747ba59eaa6f1e3ef98eca08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab98e2fee12e210b589773415e8100d75"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEconomyManager.html#ab98e2fee12e210b589773415e8100d75">homeInventoryName</a> = &quot;home&quot;</td></tr>
+<tr class="separator:ab98e2fee12e210b589773415e8100d75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b5a7a6e1e70d30a94e1675ed0f0f9d3"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="classEconomyManager_1_1PurchasableItem.html">PurchasableItem</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEconomyManager.html#a4b5a7a6e1e70d30a94e1675ed0f0f9d3">purchasableItems</a> = new List&lt;<a class="el" href="classEconomyManager_1_1PurchasableItem.html">PurchasableItem</a>&gt;()</td></tr>
+<tr class="separator:a4b5a7a6e1e70d30a94e1675ed0f0f9d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2d765371aeeabbfe761ae178a35ae28b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classEconomyManager.html#a2d765371aeeabbfe761ae178a35ae28b">m_playerSilver</a> = 0</td></tr>
 <tr class="separator:a2d765371aeeabbfe761ae178a35ae28b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -135,7 +149,7 @@ Private Attributes</h2></td></tr>
 <tr class="separator:ab47a26d8f6dc9b385011bdc366777af2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Manages the in game economy, things like player and shop money, unlocked items, item prices, etc. </p>
+<div class="textblock"><p >Manages the in game economy, things like player and store money, unlocked items, item prices, etc. </p>
 
 <p class="definition">Definition at line <a class="el" href="EconomyManager_8cs_source.html#l00010">10</a> of file <a class="el" href="EconomyManager_8cs_source.html">EconomyManager.cs</a>.</p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
@@ -162,7 +176,35 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="EconomyManager_8cs_source.html#l00059">59</a> of file <a class="el" href="EconomyManager_8cs_source.html">EconomyManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="EconomyManager_8cs_source.html#l00047">47</a> of file <a class="el" href="EconomyManager_8cs_source.html">EconomyManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="a20f432dff9d75b50a821a6169ad54fc5" name="a20f432dff9d75b50a821a6169ad54fc5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20f432dff9d75b50a821a6169ad54fc5">&#9670;&nbsp;</a></span>CanAfford()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool EconomyManager.CanAfford </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>_amount</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="EconomyManager_8cs_source.html#l00065">65</a> of file <a class="el" href="EconomyManager_8cs_source.html">EconomyManager.cs</a>.</p>
 
 </div>
 </div>
@@ -195,7 +237,78 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a8026472e2467b9554ca9f95fc45e0b17" name="a8026472e2467b9554ca9f95fc45e0b17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8026472e2467b9554ca9f95fc45e0b17">&#9670;&nbsp;</a></span>RefillStoreInventory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EconomyManager.RefillStoreInventory </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="EconomyManager_8cs_source.html#l00060">60</a> of file <a class="el" href="EconomyManager_8cs_source.html">EconomyManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="ae38ac8a45893b2321158d42d97411f23" name="ae38ac8a45893b2321158d42d97411f23"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae38ac8a45893b2321158d42d97411f23">&#9670;&nbsp;</a></span>Spend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void EconomyManager.Spend </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>_amount</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="EconomyManager_8cs_source.html#l00069">69</a> of file <a class="el" href="EconomyManager_8cs_source.html">EconomyManager.cs</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="ab98e2fee12e210b589773415e8100d75" name="ab98e2fee12e210b589773415e8100d75"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab98e2fee12e210b589773415e8100d75">&#9670;&nbsp;</a></span>homeInventoryName</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string EconomyManager.homeInventoryName = &quot;home&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="EconomyManager_8cs_source.html#l00041">41</a> of file <a class="el" href="EconomyManager_8cs_source.html">EconomyManager.cs</a>.</p>
+
+</div>
+</div>
 <a id="a0d7e811a45571cf32841843828fbe32c" name="a0d7e811a45571cf32841843828fbe32c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0d7e811a45571cf32841843828fbe32c">&#9670;&nbsp;</a></span>instance</h2>
 
@@ -232,7 +345,7 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="EconomyManager_8cs_source.html#l00057">57</a> of file <a class="el" href="EconomyManager_8cs_source.html">EconomyManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="EconomyManager_8cs_source.html#l00045">45</a> of file <a class="el" href="EconomyManager_8cs_source.html">EconomyManager.cs</a>.</p>
 
 </div>
 </div>
@@ -266,8 +379,56 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="af0e28508747ba59eaa6f1e3ef98eca08" name="af0e28508747ba59eaa6f1e3ef98eca08"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0e28508747ba59eaa6f1e3ef98eca08">&#9670;&nbsp;</a></span>playerInventoryName</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string EconomyManager.playerInventoryName = &quot;player&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="EconomyManager_8cs_source.html#l00040">40</a> of file <a class="el" href="EconomyManager_8cs_source.html">EconomyManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="a4b5a7a6e1e70d30a94e1675ed0f0f9d3" name="a4b5a7a6e1e70d30a94e1675ed0f0f9d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b5a7a6e1e70d30a94e1675ed0f0f9d3">&#9670;&nbsp;</a></span>purchasableItems</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt;<a class="el" href="classEconomyManager_1_1PurchasableItem.html">PurchasableItem</a>&gt; EconomyManager.purchasableItems = new List&lt;<a class="el" href="classEconomyManager_1_1PurchasableItem.html">PurchasableItem</a>&gt;()</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="EconomyManager_8cs_source.html#l00043">43</a> of file <a class="el" href="EconomyManager_8cs_source.html">EconomyManager.cs</a>.</p>
+
+</div>
+</div>
+<a id="acc1ec2792ec0af3df311356fadbdd716" name="acc1ec2792ec0af3df311356fadbdd716"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc1ec2792ec0af3df311356fadbdd716">&#9670;&nbsp;</a></span>storeInventoryName</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string EconomyManager.storeInventoryName = &quot;store&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="EconomyManager_8cs_source.html#l00039">39</a> of file <a class="el" href="EconomyManager_8cs_source.html">EconomyManager.cs</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Assets/<a class="el" href="EconomyManager_8cs_source.html">EconomyManager.cs</a></li>
+<li>Assets/Scripts/Managers/<a class="el" href="EconomyManager_8cs_source.html">EconomyManager.cs</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

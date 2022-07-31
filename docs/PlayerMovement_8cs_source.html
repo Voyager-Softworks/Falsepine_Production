@@ -77,13 +77,13 @@ $(function() {
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="comment">//inputsystem</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">using</span> UnityEngine.InputSystem;</div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classPlayerMovement.html">PlayerMovement</a> : MonoBehaviour  </div>
+<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="classPlayerMovement.html">    7</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_class" href="classPlayerMovement.html">PlayerMovement</a> : MonoBehaviour  </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>{</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    [Header(<span class="stringliteral">&quot;Movement&quot;</span>)]</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keyword">private</span> Animator _animator;</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keyword">public</span> Animator _animator;</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    CharacterController controller;</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <a class="code hl_class" href="classDynamicVaulting.html">DynamicVaulting</a> dynamicVaulting;</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classDynamicVaulting.html">DynamicVaulting</a> dynamicVaulting;</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keyword">public</span> InputAction moveAction;</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <span class="keyword">public</span> InputAction sprintAction;</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="keyword">public</span> <span class="keywordtype">float</span> walkSpeed = 6f;</div>
@@ -103,11 +103,11 @@ $(function() {
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keyword">private</span> <span class="keywordtype">float</span> rollDelayTimer = 0f;</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keyword">public</span> <span class="keywordtype">bool</span> isRolling = <span class="keyword">false</span>;</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keyword">public</span> AudioClip rollSound;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keyword">private</span> <a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classPlayerHealth.html">PlayerHealth</a> playerHealth;</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    <span class="keyword">private</span> <a class="code hl_class" href="classPlayerHealth.html">PlayerHealth</a> playerHealth;</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span> </div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span> </div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keyword">public</span> Vector3 mouseAimPoint = Vector3.zero;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="comment">//public Vector3 mousePlanePoint = Vector3.zero;</span></div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keyword">public</span> Transform shootPoint;</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">private</span> Camera cam;</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keyword">private</span> AudioSource audioSource;</div>
@@ -137,7 +137,7 @@ $(function() {
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        controller = GetComponent&lt;CharacterController&gt;();</div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        dynamicVaulting = GetComponent&lt;DynamicVaulting&gt;();</div>
 <div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span> </div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        rollAction.performed += ctx =&gt; { <span class="keywordflow">if</span>(dynamicVaulting.canVault) controller.Move(dynamicVaulting.vaultingHit.y * Vector3.up); StartRoll(); };</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        rollAction.performed += ctx =&gt; { <span class="keywordflow">if</span>(dynamicVaulting.canVault) StartVault(); <span class="keywordflow">else</span> StartRoll(); };</div>
 <div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span> </div>
 <div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>        <span class="keywordflow">if</span> (cam == <span class="keyword">null</span>){</div>
 <div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            cam = Camera.main;</div>
@@ -145,7 +145,7 @@ $(function() {
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span> </div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>        playerHealth = GetComponent&lt;PlayerHealth&gt;();</div>
 <div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span> </div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        _animator = GetComponentInChildren&lt;Animator&gt;();</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="comment">//_animator = GetComponentInChildren&lt;Animator&gt;();</span></div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span> </div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        audioSource = GetComponent&lt;AudioSource&gt;();</div>
 <div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span> </div>
@@ -194,9 +194,9 @@ $(function() {
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>        moveDir.Normalize();</div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>        <span class="keywordtype">bool</span> isAiming = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classPlayerInventoryInterface.html">PlayerInventoryInterface</a> pii = GetComponent&lt;PlayerInventoryInterface&gt;();</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <a class="code hl_class" href="classPlayerInventoryInterface.html">PlayerInventoryInterface</a> pii = GetComponent&lt;PlayerInventoryInterface&gt;();</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        <span class="keywordflow">if</span> (pii){</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>            <a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classRangedWeapon.html">RangedWeapon</a> rangedWeapon = pii.selectedWeapon as <a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classRangedWeapon.html">RangedWeapon</a>;</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>            <a class="code hl_class" href="classRangedWeapon.html">RangedWeapon</a> rangedWeapon = pii.selectedWeapon as <a class="code hl_class" href="classRangedWeapon.html">RangedWeapon</a>;</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            <span class="keywordflow">if</span> (rangedWeapon){</div>
 <div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>                isAiming = rangedWeapon.m_isAiming;</div>
 <div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>            }</div>
@@ -289,7 +289,7 @@ $(function() {
 <div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>                }</div>
 <div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>                <span class="keywordflow">else</span></div>
 <div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>                {</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>                    lookDir = GetMouseAimPoint() - transform.position;</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>                    lookDir = GetMouseAimPlanePoint() - transform.position;</div>
 <div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>                }</div>
 <div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>                </div>
 <div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span> </div>
@@ -319,99 +319,210 @@ $(function() {
 <div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span> </div>
 <div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    <span class="keyword">public</span> <span class="keywordtype">void</span> StartVault()</div>
 <div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    {</div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>        _animator.SetTrigger(<span class="stringliteral">&quot;Vault&quot;</span>);</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>        _animator.SetLayerWeight(1, 0);</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>        _animator.SetLayerWeight(2, 0);</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>    }</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span> </div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>    <span class="keyword">public</span> <span class="keywordtype">void</span> StartRoll(){</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        <span class="keywordflow">if</span> (rollDelayTimer &gt; 0){</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>            <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>        }</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>        <span class="keywordflow">if</span> (isRolling){</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>            <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        }</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>        <span class="comment">//check if placing bear trap anim is playing</span></div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>        <span class="keywordflow">if</span> (_animator.GetCurrentAnimatorStateInfo(3).IsName(<span class="stringliteral">&quot;Player|PLACE TRAP (ALL)&quot;</span>) ||</div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>            _animator.GetCurrentAnimatorStateInfo(3).IsName(<span class="stringliteral">&quot;Player|PAIN (ALL)&quot;</span>))</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>        {</div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>            <span class="keywordflow">return</span>;</div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>        }</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>        </div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span> </div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        isRolling = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        rollDelayTimer = rollDelay;</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span> </div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>        <span class="comment">//get cam direction</span></div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>        Vector3 camForward = cam.transform.forward;</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>        camForward.y = 0;</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        camForward.Normalize();</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>        Vector3 camRight = cam.transform.right;</div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>        camRight.y = 0;</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        camRight.Normalize();</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>        <span class="keywordflow">if</span>(!dynamicVaulting.canVault) <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>        rollDir = dynamicVaulting.GetVaultingDirection();</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>        _animator.SetFloat(<span class="stringliteral">&quot;VaultHeight&quot;</span>, dynamicVaulting.GetVaultingHeight());</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>        _animator.SetTrigger(<span class="stringliteral">&quot;Vault&quot;</span>);</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        </div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>        _animator.SetLayerWeight(1, 0);</div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        _animator.SetLayerWeight(2, 0);</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span> </div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>        </div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>        StartCoroutine(VaultCoroutine());</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span> </div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    }</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    <span class="keyword">public</span> <span class="keywordtype">void</span> StartRoll(){</div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>        <span class="keywordflow">if</span> (rollDelayTimer &gt; 0){</div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>        }</div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>        <span class="keywordflow">if</span> (isRolling){</div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>        }</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        <span class="comment">//check if placing bear trap anim is playing</span></div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        <span class="keywordflow">if</span> (_animator.GetCurrentAnimatorStateInfo(3).IsName(<span class="stringliteral">&quot;Player|PLACE TRAP (ALL)&quot;</span>) ||</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>            _animator.GetCurrentAnimatorStateInfo(3).IsName(<span class="stringliteral">&quot;Player|PAIN (ALL)&quot;</span>))</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>        {</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>            <span class="keywordflow">return</span>;</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>        }</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>        </div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span> </div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>        isRolling = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>        rollDelayTimer = rollDelay;</div>
 <div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span> </div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>        <span class="comment">//get movement direction using input and cam direction</span></div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>        Vector2 move = moveAction.ReadValue&lt;Vector2&gt;();</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>        Vector3 moveDir = move.x * camRight + move.y * camForward;</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>        moveDir.y = 0;</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>        moveDir.Normalize();</div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span> </div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>        <span class="keywordflow">if</span> (move != Vector2.zero){</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>            rollDir = moveDir;</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        }</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        <span class="keywordflow">else</span>{</div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>            rollDir = mouseAimPoint - transform.position;</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>            rollDir.y = 0;</div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>            rollDir.Normalize();</div>
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span>        }</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span> </div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>        <span class="comment">//transform.rotation = Quaternion.LookRotation(rollDir);</span></div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span> </div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>        rollTimer = rollTime;</div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span> </div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>        _animator.SetTrigger(<span class="stringliteral">&quot;Dodge&quot;</span>);</div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>        _animator.SetLayerWeight(1, 0);</div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>        _animator.SetLayerWeight(2, 0);</div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>        audioSource.PlayOneShot(rollSound);</div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>    }</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>        <span class="comment">//get cam direction</span></div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>        Vector3 camForward = cam.transform.forward;</div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>        camForward.y = 0;</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>        camForward.Normalize();</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>        Vector3 camRight = cam.transform.right;</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>        camRight.y = 0;</div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>        camRight.Normalize();</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span> </div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        <span class="comment">//get movement direction using input and cam direction</span></div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>        Vector2 move = moveAction.ReadValue&lt;Vector2&gt;();</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>        Vector3 moveDir = move.x * camRight + move.y * camForward;</div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>        moveDir.y = 0;</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>        moveDir.Normalize();</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span> </div>
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>        <span class="keywordflow">if</span> (move != Vector2.zero){</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>            rollDir = moveDir;</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>        }</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>        <span class="keywordflow">else</span>{</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>            rollDir = GetMouseAimPlanePoint() - transform.position;</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>            rollDir.y = 0;</div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>            rollDir.Normalize();</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>        }</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span> </div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>        <span class="comment">//transform.rotation = Quaternion.LookRotation(rollDir);</span></div>
 <div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span> </div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>    <span class="keyword">public</span> Vector3 GetMouseAimPoint(){</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>        <span class="comment">//mouse raycast to get direction</span></div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());</div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>        <a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classPlayerInventoryInterface.html">PlayerInventoryInterface</a> pii = GetComponent&lt;PlayerInventoryInterface&gt;();</div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>        <span class="keywordflow">if</span> (!pii) <span class="keywordflow">return</span> mouseAimPoint;</div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>        GameObject weaponFirepoint = pii.GetWeaponFirepoint(pii.selectedWeapon);</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>        <span class="keywordflow">if</span> (!weaponFirepoint) <span class="keywordflow">return</span> mouseAimPoint;</div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>        <span class="comment">//find where ray intersects on the plane of the player</span></div>
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>        Plane playerPlane = <span class="keyword">new</span> Plane(Vector3.up, weaponFirepoint.transform.position);</div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>        <span class="keywordtype">float</span> rayDistance;</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>        <span class="keywordflow">if</span> (playerPlane.Raycast(ray, out rayDistance)){</div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>            <span class="comment">//get mouse hit pos</span></div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>            Vector3 hitPoint = ray.GetPoint(rayDistance);</div>
-<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>            mouseAimPoint = hitPoint;</div>
-<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>        }</div>
-<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>        <span class="keywordflow">return</span> mouseAimPoint;</div>
-<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    }</div>
-<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span> </div>
-<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>    <span class="keyword">public</span> Vector3 GetGamepadAimPoint(){</div>
-<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>        <span class="comment">//Get the right stick value</span></div>
-<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>        Vector2 rightStick = Gamepad.current.rightStick.ReadValue();</div>
-<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>        <span class="comment">//Get the direction of the right stick</span></div>
-<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>        Vector3 rightStickDir = rightStick.x * camRight + rightStick.y * camForward;</div>
-<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>        </div>
-<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span>        Vector3 aimPoint = rightStickDir * 10f + transform.position;</div>
-<div class="line"><a id="l00330" name="l00330"></a><span class="lineno">  330</span>        aimPoint.y = shootPoint.position.y;</div>
-<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>        <span class="keywordflow">return</span> aimPoint;</div>
-<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>        </div>
-<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span>    }</div>
-<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span> </div>
-<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span>    </div>
-<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>}</div>
-<div class="ttc" id="aclassDynamicVaulting_html"><div class="ttname"><a href="classDynamicVaulting.html">DynamicVaulting</a></div><div class="ttdoc">Script to allow characters to dynamically vault over obstacles in the scene.</div><div class="ttdef"><b>Definition:</b> <a href="DynamicVaulting_8cs_source.html#l00008">DynamicVaulting.cs:9</a></div></div>
-<div class="ttc" id="aclassPlayerHealth_html"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classPlayerHealth.html">PlayerHealth</a></div></div>
-<div class="ttc" id="aclassPlayerInventoryInterface_html"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classPlayerInventoryInterface.html">PlayerInventoryInterface</a></div></div>
-<div class="ttc" id="aclassPlayerMovement_html"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classPlayerMovement.html">PlayerMovement</a></div></div>
-<div class="ttc" id="aclassRangedWeapon_html"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classRangedWeapon.html">RangedWeapon</a></div></div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>        rollTimer = rollTime;</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span> </div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>        _animator.SetTrigger(<span class="stringliteral">&quot;Dodge&quot;</span>);</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>        _animator.SetLayerWeight(1, 0);</div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>        _animator.SetLayerWeight(2, 0);</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>        audioSource.PlayOneShot(rollSound);</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>    }</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span> </div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span>IEnumerator VaultCoroutine()</div>
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>{</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>    GetComponent&lt;CapsuleCollider&gt;().enabled = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>    GetComponent&lt;CharacterController&gt;().enabled = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>    Vector3 startPos = transform.position;</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>    Vector3 endPos = transform.position + (rollDir * 2.2f);</div>
+<div class="line"><a id="l00319" name="l00319"></a><span class="lineno">  319</span>    <span class="keywordtype">float</span> t = 0;</div>
+<div class="line"><a id="l00320" name="l00320"></a><span class="lineno">  320</span>    <span class="keywordflow">while</span> (t &lt; 1)</div>
+<div class="line"><a id="l00321" name="l00321"></a><span class="lineno">  321</span>    {</div>
+<div class="line"><a id="l00322" name="l00322"></a><span class="lineno">  322</span>        t += Time.deltaTime / 0.7f;</div>
+<div class="line"><a id="l00323" name="l00323"></a><span class="lineno">  323</span>        transform.position = Vector3.Lerp(startPos, endPos, t);</div>
+<div class="line"><a id="l00324" name="l00324"></a><span class="lineno">  324</span>        yield <span class="keywordflow">return</span> <span class="keyword">null</span>;</div>
+<div class="line"><a id="l00325" name="l00325"></a><span class="lineno">  325</span>    }</div>
+<div class="line"><a id="l00326" name="l00326"></a><span class="lineno">  326</span>    GetComponent&lt;CapsuleCollider&gt;().enabled = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00327" name="l00327"></a><span class="lineno">  327</span>    GetComponent&lt;CharacterController&gt;().enabled = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00328" name="l00328"></a><span class="lineno">  328</span>}</div>
+<div class="line"><a id="l00329" name="l00329"></a><span class="lineno">  329</span> </div>
+<div class="line"><a id="l00330" name="l00330"></a><span class="lineno"><a class="line" href="classPlayerMovement.html#a266eb48fd091ec325435220e3288c669">  330</a></span>    <span class="keyword">public</span> Vector3 <a class="code hl_function" href="classPlayerMovement.html#a266eb48fd091ec325435220e3288c669">GetMouseWeaponPlanePoint</a>(){</div>
+<div class="line"><a id="l00331" name="l00331"></a><span class="lineno">  331</span>        <span class="comment">//mouse raycast to get direction</span></div>
+<div class="line"><a id="l00332" name="l00332"></a><span class="lineno">  332</span>        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());</div>
+<div class="line"><a id="l00333" name="l00333"></a><span class="lineno">  333</span> </div>
+<div class="line"><a id="l00334" name="l00334"></a><span class="lineno">  334</span>        Vector3 mousePlanePoint = <span class="keyword">new</span> Vector3();</div>
+<div class="line"><a id="l00335" name="l00335"></a><span class="lineno">  335</span> </div>
+<div class="line"><a id="l00336" name="l00336"></a><span class="lineno">  336</span>        <a class="code hl_class" href="classPlayerInventoryInterface.html">PlayerInventoryInterface</a> pii = GetComponent&lt;PlayerInventoryInterface&gt;();</div>
+<div class="line"><a id="l00337" name="l00337"></a><span class="lineno">  337</span>        <span class="keywordflow">if</span> (!pii) <span class="keywordflow">return</span> mousePlanePoint;</div>
+<div class="line"><a id="l00338" name="l00338"></a><span class="lineno">  338</span>        GameObject weaponFirepoint = pii.GetWeaponFirepoint(pii.selectedWeapon);</div>
+<div class="line"><a id="l00339" name="l00339"></a><span class="lineno">  339</span>        <span class="keywordflow">if</span> (!weaponFirepoint) <span class="keywordflow">return</span> mousePlanePoint;</div>
+<div class="line"><a id="l00340" name="l00340"></a><span class="lineno">  340</span> </div>
+<div class="line"><a id="l00341" name="l00341"></a><span class="lineno">  341</span>        Vector3 firePoint = weaponFirepoint.transform.position;</div>
+<div class="line"><a id="l00342" name="l00342"></a><span class="lineno">  342</span> </div>
+<div class="line"><a id="l00343" name="l00343"></a><span class="lineno">  343</span>        <span class="comment">//find where ray intersects on the plane at gun height</span></div>
+<div class="line"><a id="l00344" name="l00344"></a><span class="lineno">  344</span>        Plane playerPlane = <span class="keyword">new</span> Plane(Vector3.up, firePoint);</div>
+<div class="line"><a id="l00345" name="l00345"></a><span class="lineno">  345</span>        <span class="keywordtype">float</span> rayDistance;</div>
+<div class="line"><a id="l00346" name="l00346"></a><span class="lineno">  346</span>        <span class="keywordflow">if</span> (playerPlane.Raycast(ray, out rayDistance)){</div>
+<div class="line"><a id="l00347" name="l00347"></a><span class="lineno">  347</span>            <span class="comment">//get mouse hit pos</span></div>
+<div class="line"><a id="l00348" name="l00348"></a><span class="lineno">  348</span>            Vector3 hitPoint = ray.GetPoint(rayDistance);</div>
+<div class="line"><a id="l00349" name="l00349"></a><span class="lineno">  349</span>            mousePlanePoint = hitPoint;</div>
+<div class="line"><a id="l00350" name="l00350"></a><span class="lineno">  350</span>        }</div>
+<div class="line"><a id="l00351" name="l00351"></a><span class="lineno">  351</span>        <span class="keywordflow">return</span> mousePlanePoint;</div>
+<div class="line"><a id="l00352" name="l00352"></a><span class="lineno">  352</span> </div>
+<div class="line"><a id="l00353" name="l00353"></a><span class="lineno">  353</span>        <span class="comment">// if dist between fire point and mousePlaneAimPoint is less than 1, return it</span></div>
+<div class="line"><a id="l00354" name="l00354"></a><span class="lineno">  354</span>        <span class="comment">// if (Vector3.Distance(firePoint, mousePlanePoint) &lt; 1)</span></div>
+<div class="line"><a id="l00355" name="l00355"></a><span class="lineno">  355</span>        <span class="comment">// {</span></div>
+<div class="line"><a id="l00356" name="l00356"></a><span class="lineno">  356</span>        <span class="comment">//     return mousePlanePoint;</span></div>
+<div class="line"><a id="l00357" name="l00357"></a><span class="lineno">  357</span>        <span class="comment">// }</span></div>
+<div class="line"><a id="l00358" name="l00358"></a><span class="lineno">  358</span> </div>
+<div class="line"><a id="l00359" name="l00359"></a><span class="lineno">  359</span>        <span class="comment">//return mousePlaneAimPoint;</span></div>
+<div class="line"><a id="l00360" name="l00360"></a><span class="lineno">  360</span> </div>
+<div class="line"><a id="l00361" name="l00361"></a><span class="lineno">  361</span> </div>
+<div class="line"><a id="l00363" name="l00363"></a><span class="lineno">  363</span> </div>
+<div class="line"><a id="l00364" name="l00364"></a><span class="lineno">  364</span>        <span class="comment">// Vector3 exactMouseAimPoint = new Vector3();</span></div>
+<div class="line"><a id="l00365" name="l00365"></a><span class="lineno">  365</span>        <span class="comment">// RaycastHit hit;</span></div>
+<div class="line"><a id="l00366" name="l00366"></a><span class="lineno">  366</span>        <span class="comment">// if (Physics.Raycast(ray, out hit, 1000f)){</span></div>
+<div class="line"><a id="l00367" name="l00367"></a><span class="lineno">  367</span>        <span class="comment">//     exactMouseAimPoint = hit.point;</span></div>
+<div class="line"><a id="l00368" name="l00368"></a><span class="lineno">  368</span>        <span class="comment">// }</span></div>
+<div class="line"><a id="l00369" name="l00369"></a><span class="lineno">  369</span> </div>
+<div class="line"><a id="l00370" name="l00370"></a><span class="lineno">  370</span>        <span class="comment">// //Vector3 cp = ClosestPointOnLine(firePoint, mousePlanePoint, exactMouseAimPoint);</span></div>
+<div class="line"><a id="l00371" name="l00371"></a><span class="lineno">  371</span>        <span class="comment">// Vector3 cp = LineIntersectsPlane(exactMouseAimPoint - Vector3.up * 100, exactMouseAimPoint + Vector3.up * 100, firePoint, Vector3.up);</span></div>
+<div class="line"><a id="l00372" name="l00372"></a><span class="lineno">  372</span>        <span class="comment">// planeIntersect = cp;</span></div>
+<div class="line"><a id="l00373" name="l00373"></a><span class="lineno">  373</span> </div>
+<div class="line"><a id="l00374" name="l00374"></a><span class="lineno">  374</span>        <span class="comment">// Vector3 cpToExact = exactMouseAimPoint - cp;</span></div>
+<div class="line"><a id="l00375" name="l00375"></a><span class="lineno">  375</span>        <span class="comment">// float cpToExactMag = cpToExact.magnitude;</span></div>
+<div class="line"><a id="l00376" name="l00376"></a><span class="lineno">  376</span> </div>
+<div class="line"><a id="l00377" name="l00377"></a><span class="lineno">  377</span>        <span class="comment">// float angle = 20.0f;</span></div>
+<div class="line"><a id="l00378" name="l00378"></a><span class="lineno">  378</span>        <span class="comment">// float adjacent = (cp - firePoint).magnitude;</span></div>
+<div class="line"><a id="l00379" name="l00379"></a><span class="lineno">  379</span>        <span class="comment">// // calc opposite using angle and adjacent</span></div>
+<div class="line"><a id="l00380" name="l00380"></a><span class="lineno">  380</span>        <span class="comment">// float opposite = Mathf.Tan(angle * Mathf.Deg2Rad) * adjacent;</span></div>
+<div class="line"><a id="l00381" name="l00381"></a><span class="lineno">  381</span> </div>
+<div class="line"><a id="l00382" name="l00382"></a><span class="lineno">  382</span>        <span class="comment">// //clamp cpToExactMag to opposite</span></div>
+<div class="line"><a id="l00383" name="l00383"></a><span class="lineno">  383</span>        <span class="comment">// float newDist = Mathf.Clamp(cpToExactMag, 0, opposite);</span></div>
+<div class="line"><a id="l00384" name="l00384"></a><span class="lineno">  384</span> </div>
+<div class="line"><a id="l00385" name="l00385"></a><span class="lineno">  385</span>        <span class="comment">// mouseAimPoint = cp + cpToExact.normalized * newDist;</span></div>
+<div class="line"><a id="l00386" name="l00386"></a><span class="lineno">  386</span> </div>
+<div class="line"><a id="l00387" name="l00387"></a><span class="lineno">  387</span>        <span class="comment">// return mouseAimPoint;</span></div>
+<div class="line"><a id="l00388" name="l00388"></a><span class="lineno">  388</span>    }</div>
+<div class="line"><a id="l00389" name="l00389"></a><span class="lineno">  389</span> </div>
+<div class="line"><a id="l00390" name="l00390"></a><span class="lineno">  390</span>    <span class="keyword">public</span> Vector3 GetMouseAimPlanePoint(){</div>
+<div class="line"><a id="l00391" name="l00391"></a><span class="lineno">  391</span>        <span class="comment">//mouse raycast to get direction</span></div>
+<div class="line"><a id="l00392" name="l00392"></a><span class="lineno">  392</span>        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());</div>
+<div class="line"><a id="l00393" name="l00393"></a><span class="lineno">  393</span> </div>
+<div class="line"><a id="l00394" name="l00394"></a><span class="lineno">  394</span>        Vector3 mousePlanePoint = <span class="keyword">new</span> Vector3();</div>
+<div class="line"><a id="l00395" name="l00395"></a><span class="lineno">  395</span> </div>
+<div class="line"><a id="l00396" name="l00396"></a><span class="lineno">  396</span>        <a class="code hl_class" href="classPlayerInventoryInterface.html">PlayerInventoryInterface</a> pii = GetComponent&lt;PlayerInventoryInterface&gt;();</div>
+<div class="line"><a id="l00397" name="l00397"></a><span class="lineno">  397</span>        <span class="keywordflow">if</span> (!pii) <span class="keywordflow">return</span> mousePlanePoint;</div>
+<div class="line"><a id="l00398" name="l00398"></a><span class="lineno">  398</span>        GameObject _aimZone = pii.m_aimZone?.gameObject;</div>
+<div class="line"><a id="l00399" name="l00399"></a><span class="lineno">  399</span>        <span class="keywordflow">if</span> (!_aimZone) <span class="keywordflow">return</span> mousePlanePoint;</div>
+<div class="line"><a id="l00400" name="l00400"></a><span class="lineno">  400</span> </div>
+<div class="line"><a id="l00401" name="l00401"></a><span class="lineno">  401</span>        Vector3 aimZonePosition = _aimZone.transform.position;</div>
+<div class="line"><a id="l00402" name="l00402"></a><span class="lineno">  402</span> </div>
+<div class="line"><a id="l00403" name="l00403"></a><span class="lineno">  403</span>        <span class="comment">//find where ray intersects on the plane at gun height</span></div>
+<div class="line"><a id="l00404" name="l00404"></a><span class="lineno">  404</span>        Plane playerPlane = <span class="keyword">new</span> Plane(Vector3.up, aimZonePosition);</div>
+<div class="line"><a id="l00405" name="l00405"></a><span class="lineno">  405</span>        <span class="keywordtype">float</span> rayDistance;</div>
+<div class="line"><a id="l00406" name="l00406"></a><span class="lineno">  406</span>        <span class="keywordflow">if</span> (playerPlane.Raycast(ray, out rayDistance)){</div>
+<div class="line"><a id="l00407" name="l00407"></a><span class="lineno">  407</span>            <span class="comment">//get mouse hit pos</span></div>
+<div class="line"><a id="l00408" name="l00408"></a><span class="lineno">  408</span>            Vector3 hitPoint = ray.GetPoint(rayDistance);</div>
+<div class="line"><a id="l00409" name="l00409"></a><span class="lineno">  409</span>            mousePlanePoint = hitPoint;</div>
+<div class="line"><a id="l00410" name="l00410"></a><span class="lineno">  410</span>        }</div>
+<div class="line"><a id="l00411" name="l00411"></a><span class="lineno">  411</span>        <span class="keywordflow">return</span> mousePlanePoint;</div>
+<div class="line"><a id="l00412" name="l00412"></a><span class="lineno">  412</span>    }</div>
+<div class="line"><a id="l00413" name="l00413"></a><span class="lineno">  413</span> </div>
+<div class="line"><a id="l00414" name="l00414"></a><span class="lineno">  414</span>    <span class="keyword">public</span> Vector3 ClosestPointOnLine(Vector3 lineStart, Vector3 lineEnd, Vector3 point){</div>
+<div class="line"><a id="l00415" name="l00415"></a><span class="lineno">  415</span>        Vector3 lineDir = lineEnd - lineStart;</div>
+<div class="line"><a id="l00416" name="l00416"></a><span class="lineno">  416</span>        lineDir.Normalize();</div>
+<div class="line"><a id="l00417" name="l00417"></a><span class="lineno">  417</span>        <span class="keywordtype">float</span> dot = Vector3.Dot(lineDir, point - lineStart);</div>
+<div class="line"><a id="l00418" name="l00418"></a><span class="lineno">  418</span>        <span class="keywordflow">return</span> lineStart + lineDir * dot;</div>
+<div class="line"><a id="l00419" name="l00419"></a><span class="lineno">  419</span>    }</div>
+<div class="line"><a id="l00420" name="l00420"></a><span class="lineno">  420</span> </div>
+<div class="line"><a id="l00421" name="l00421"></a><span class="lineno">  421</span>    <span class="keyword">public</span> Vector3 LineIntersectsPlane(Vector3 lineStart, Vector3 lineEnd, Vector3 planePoint, Vector3 planeNormal){</div>
+<div class="line"><a id="l00422" name="l00422"></a><span class="lineno">  422</span>        Vector3 lineDir = lineEnd - lineStart;</div>
+<div class="line"><a id="l00423" name="l00423"></a><span class="lineno">  423</span>        lineDir.Normalize();</div>
+<div class="line"><a id="l00424" name="l00424"></a><span class="lineno">  424</span>        <span class="keywordtype">float</span> dot = Vector3.Dot(planeNormal, lineDir);</div>
+<div class="line"><a id="l00425" name="l00425"></a><span class="lineno">  425</span>        <span class="keywordflow">if</span> (Mathf.Abs(dot) &lt; 0.00001f){</div>
+<div class="line"><a id="l00426" name="l00426"></a><span class="lineno">  426</span>            <span class="keywordflow">return</span> Vector3.zero;</div>
+<div class="line"><a id="l00427" name="l00427"></a><span class="lineno">  427</span>        }</div>
+<div class="line"><a id="l00428" name="l00428"></a><span class="lineno">  428</span>        <span class="keywordtype">float</span> dot2 = Vector3.Dot(planeNormal, lineStart - planePoint);</div>
+<div class="line"><a id="l00429" name="l00429"></a><span class="lineno">  429</span>        <span class="keywordtype">float</span> t = -dot2 / dot;</div>
+<div class="line"><a id="l00430" name="l00430"></a><span class="lineno">  430</span>        <span class="keywordflow">return</span> lineStart + lineDir * t;</div>
+<div class="line"><a id="l00431" name="l00431"></a><span class="lineno">  431</span>    }</div>
+<div class="line"><a id="l00432" name="l00432"></a><span class="lineno">  432</span> </div>
+<div class="line"><a id="l00433" name="l00433"></a><span class="lineno">  433</span> </div>
+<div class="line"><a id="l00434" name="l00434"></a><span class="lineno">  434</span>    <span class="keyword">public</span> Vector3 GetGamepadAimPoint(){</div>
+<div class="line"><a id="l00435" name="l00435"></a><span class="lineno">  435</span>        <span class="comment">//Get the right stick value</span></div>
+<div class="line"><a id="l00436" name="l00436"></a><span class="lineno">  436</span>        Vector2 rightStick = Gamepad.current.rightStick.ReadValue();</div>
+<div class="line"><a id="l00437" name="l00437"></a><span class="lineno">  437</span>        <span class="comment">//Get the direction of the right stick</span></div>
+<div class="line"><a id="l00438" name="l00438"></a><span class="lineno">  438</span>        Vector3 rightStickDir = rightStick.x * camRight + rightStick.y * camForward;</div>
+<div class="line"><a id="l00439" name="l00439"></a><span class="lineno">  439</span>        </div>
+<div class="line"><a id="l00440" name="l00440"></a><span class="lineno">  440</span>        Vector3 aimPoint = rightStickDir * 10f + transform.position;</div>
+<div class="line"><a id="l00441" name="l00441"></a><span class="lineno">  441</span>        aimPoint.y = shootPoint.position.y;</div>
+<div class="line"><a id="l00442" name="l00442"></a><span class="lineno">  442</span>        <span class="keywordflow">return</span> aimPoint;</div>
+<div class="line"><a id="l00443" name="l00443"></a><span class="lineno">  443</span>        </div>
+<div class="line"><a id="l00444" name="l00444"></a><span class="lineno">  444</span>    }</div>
+<div class="line"><a id="l00445" name="l00445"></a><span class="lineno">  445</span> </div>
+<div class="line"><a id="l00446" name="l00446"></a><span class="lineno">  446</span>    </div>
+<div class="line"><a id="l00447" name="l00447"></a><span class="lineno">  447</span>}</div>
+<div class="ttc" id="aclassDynamicVaulting_html"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classDynamicVaulting.html">DynamicVaulting</a></div></div>
+<div class="ttc" id="aclassPlayerHealth_html"><div class="ttname"><a href="classPlayerHealth.html">PlayerHealth</a></div><div class="ttdef"><b>Definition:</b> <a href="PlayerHealth_8cs_source.html#l00017">PlayerHealth.cs:18</a></div></div>
+<div class="ttc" id="aclassPlayerInventoryInterface_html"><div class="ttname"><a href="classPlayerInventoryInterface.html">PlayerInventoryInterface</a></div><div class="ttdef"><b>Definition:</b> <a href="PlayerInventoryInterface_8cs_source.html#l00009">PlayerInventoryInterface.cs:10</a></div></div>
+<div class="ttc" id="aclassPlayerMovement_html"><div class="ttname"><a href="classPlayerMovement.html">PlayerMovement</a></div><div class="ttdef"><b>Definition:</b> <a href="PlayerMovement_8cs_source.html#l00007">PlayerMovement.cs:8</a></div></div>
+<div class="ttc" id="aclassPlayerMovement_html_a266eb48fd091ec325435220e3288c669"><div class="ttname"><a href="classPlayerMovement.html#a266eb48fd091ec325435220e3288c669">PlayerMovement.GetMouseWeaponPlanePoint</a></div><div class="ttdeci">Vector3 GetMouseWeaponPlanePoint()</div><div class="ttdef"><b>Definition:</b> <a href="PlayerMovement_8cs_source.html#l00330">PlayerMovement.cs:330</a></div></div>
+<div class="ttc" id="aclassRangedWeapon_html"><div class="ttname"><a href="classRangedWeapon.html">RangedWeapon</a></div><div class="ttdoc">An example of a custom item type that can be used in the item database.</div><div class="ttdef"><b>Definition:</b> <a href="RangedWeapon_8cs_source.html#l00018">RangedWeapon.cs:19</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

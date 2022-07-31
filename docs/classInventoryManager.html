@@ -81,7 +81,7 @@ Inheritance diagram for InventoryManager:</div>
 <div class="dyncontent">
 <div class="center"><img src="classInventoryManager__inherit__graph.png" border="0" usemap="#aInventoryManager_inherit__map" alt="Inheritance graph"/></div>
 <map name="aInventoryManager_inherit__map" id="aInventoryManager_inherit__map">
-<area shape="rect" title="Singleton donotdestroy script that handles the mission system" alt="" coords="5,131,168,325"/>
+<area shape="rect" title="Singleton donotdestroy script that handles the mission system" alt="" coords="5,131,168,340"/>
 <area shape="rect" title=" " alt="" coords="25,5,149,83"/>
 </map>
 </div>
@@ -90,7 +90,7 @@ Collaboration diagram for InventoryManager:</div>
 <div class="dyncontent">
 <div class="center"><img src="classInventoryManager__coll__graph.png" border="0" usemap="#aInventoryManager_coll__map" alt="Collaboration graph"/></div>
 <map name="aInventoryManager_coll__map" id="aInventoryManager_coll__map">
-<area shape="rect" title="Singleton donotdestroy script that handles the mission system" alt="" coords="5,132,168,312"/>
+<area shape="rect" title="Singleton donotdestroy script that handles the mission system" alt="" coords="5,132,168,327"/>
 <area shape="rect" title=" " alt="" coords="25,5,149,83"/>
 </map>
 </div>
@@ -105,8 +105,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a1999113d484fae5e0d9bfc2e0138e6eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad58d096b923588cd42c21e78a8ce85da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInventoryManager.html#ad58d096b923588cd42c21e78a8ce85da">SaveInventories</a> ()</td></tr>
 <tr class="separator:ad58d096b923588cd42c21e78a8ce85da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8fce545f716e083e183ada73a6c5686"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInventoryManager.html#ab8fce545f716e083e183ada73a6c5686">MoveItem</a> (<a class="el" href="classInventory.html">Inventory</a> source, <a class="el" href="classInventory.html">Inventory</a> target, int index)</td></tr>
-<tr class="separator:ab8fce545f716e083e183ada73a6c5686"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54f5d57d5a89db3e21805d8759d52263"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInventoryManager.html#a54f5d57d5a89db3e21805d8759d52263">TryMoveItem</a> (<a class="el" href="classInventory.html">Inventory</a> source, <a class="el" href="classInventory.html">Inventory</a> target, int index)</td></tr>
+<tr class="separator:a54f5d57d5a89db3e21805d8759d52263"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad71ff9551b5a57ef9370523ec2a4746b"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInventoryManager.html#ad71ff9551b5a57ef9370523ec2a4746b">CanMoveItem</a> (<a class="el" href="classInventory.html">Inventory</a> source, <a class="el" href="classInventory.html">Inventory</a> target, int index)</td></tr>
+<tr class="separator:ad71ff9551b5a57ef9370523ec2a4746b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a979c0c2a1a0febda47465b82693fe574"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classInventoryManager.html#a979c0c2a1a0febda47465b82693fe574">LoadInventories</a> ()</td></tr>
 <tr class="separator:a979c0c2a1a0febda47465b82693fe574"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -187,6 +189,50 @@ Private Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="ad71ff9551b5a57ef9370523ec2a4746b" name="ad71ff9551b5a57ef9370523ec2a4746b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad71ff9551b5a57ef9370523ec2a4746b">&#9670;&nbsp;</a></span>CanMoveItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool InventoryManager.CanMoveItem </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classInventory.html">Inventory</a>&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classInventory.html">Inventory</a>&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="InventoryManager_8cs_source.html#l00090">90</a> of file <a class="el" href="InventoryManager_8cs_source.html">InventoryManager.cs</a>.</p>
+
+</div>
+</div>
 <a id="a1999113d484fae5e0d9bfc2e0138e6eb" name="a1999113d484fae5e0d9bfc2e0138e6eb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1999113d484fae5e0d9bfc2e0138e6eb">&#9670;&nbsp;</a></span>GetInventory()</h2>
 
@@ -238,51 +284,7 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="InventoryManager_8cs_source.html#l00087">87</a> of file <a class="el" href="InventoryManager_8cs_source.html">InventoryManager.cs</a>.</p>
-
-</div>
-</div>
-<a id="ab8fce545f716e083e183ada73a6c5686" name="ab8fce545f716e083e183ada73a6c5686"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8fce545f716e083e183ada73a6c5686">&#9670;&nbsp;</a></span>MoveItem()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void InventoryManager.MoveItem </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="classInventory.html">Inventory</a>&#160;</td>
-          <td class="paramname"><em>source</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="classInventory.html">Inventory</a>&#160;</td>
-          <td class="paramname"><em>target</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>index</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="InventoryManager_8cs_source.html#l00079">79</a> of file <a class="el" href="InventoryManager_8cs_source.html">InventoryManager.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="InventoryManager_8cs_source.html#l00095">95</a> of file <a class="el" href="InventoryManager_8cs_source.html">InventoryManager.cs</a>.</p>
 
 </div>
 </div>
@@ -368,6 +370,50 @@ Private Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a54f5d57d5a89db3e21805d8759d52263" name="a54f5d57d5a89db3e21805d8759d52263"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54f5d57d5a89db3e21805d8759d52263">&#9670;&nbsp;</a></span>TryMoveItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void InventoryManager.TryMoveItem </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classInventory.html">Inventory</a>&#160;</td>
+          <td class="paramname"><em>source</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classInventory.html">Inventory</a>&#160;</td>
+          <td class="paramname"><em>target</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="InventoryManager_8cs_source.html#l00079">79</a> of file <a class="el" href="InventoryManager_8cs_source.html">InventoryManager.cs</a>.</p>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="ace602d33ec272f5ff5248e0a28db890c" name="ace602d33ec272f5ff5248e0a28db890c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ace602d33ec272f5ff5248e0a28db890c">&#9670;&nbsp;</a></span>instance</h2>
@@ -410,7 +456,7 @@ Private Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Assets/Scripts/<a class="el" href="InventoryManager_8cs_source.html">InventoryManager.cs</a></li>
+<li>Assets/Scripts/Managers/<a class="el" href="InventoryManager_8cs_source.html">InventoryManager.cs</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

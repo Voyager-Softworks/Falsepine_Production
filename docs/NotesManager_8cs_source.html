@@ -84,7 +84,7 @@ $(function() {
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">using</span> UnityEditor;</div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="preprocessor">#endif</span></div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classNotesManager.html">NotesManager</a> : MonoBehaviour  </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classNotesManager.html">   14</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_class" href="classNotesManager.html">NotesManager</a> : MonoBehaviour  </div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>{</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    <span class="comment">//list of clues to find</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keyword">public</span> <span class="keyword">enum</span> ClueType {</div>
@@ -109,14 +109,14 @@ $(function() {
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    };</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span> </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">private</span> <a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classUIScript.html">UIScript</a> _uiScript;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">private</span> <a class="code hl_class" href="classUIScript.html">UIScript</a> _uiScript;</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keyword">private</span> AudioSource _audioSource;</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keyword">public</span> AudioClip clueFoundSound;</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
 <div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keyword">public</span> List&lt;ClueType&gt; cluesFound = <span class="keyword">new</span> List&lt;ClueType&gt;();</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">private</span> <a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classMessageManager.html">MessageManager</a> _messageManager;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keyword">private</span> <a class="code hl_class" href="classMessageManager.html">MessageManager</a> _messageManager;</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
 <div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="comment">// Start is called before the first frame update</span></div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordtype">void</span> Start()</div>
@@ -144,7 +144,7 @@ $(function() {
 <div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>        <span class="comment">// _uiScript.journalUIList.notesText.text = text;</span></div>
 <div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>    }</div>
 <div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span> </div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keyword">public</span> <span class="keywordtype">void</span> ClueInspected(<a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classClueScript.html">ClueScript</a> _clue)</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>    <span class="keyword">public</span> <span class="keywordtype">void</span> ClueInspected(<a class="code hl_class" href="classClueScript.html">ClueScript</a> _clue)</div>
 <div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>    {</div>
 <div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keywordflow">if</span> (cluesFound.Contains(_clue.clueType)) <span class="keywordflow">return</span>;</div>
 <div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span> </div>
@@ -155,10 +155,10 @@ $(function() {
 <div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>        <span class="keywordflow">if</span> (_audioSource != <span class="keyword">null</span> &amp;&amp; clueFoundSound != <span class="keyword">null</span>) _audioSource.PlayOneShot(clueFoundSound);</div>
 <div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>    }</div>
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>}</div>
-<div class="ttc" id="aclassClueScript_html"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classClueScript.html">ClueScript</a></div></div>
-<div class="ttc" id="aclassMessageManager_html"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classMessageManager.html">MessageManager</a></div></div>
-<div class="ttc" id="aclassNotesManager_html"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classNotesManager.html">NotesManager</a></div></div>
-<div class="ttc" id="aclassUIScript_html"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classUIScript.html">UIScript</a></div></div>
+<div class="ttc" id="aclassClueScript_html"><div class="ttname"><a href="classClueScript.html">ClueScript</a></div><div class="ttdef"><b>Definition:</b> <a href="ClueScript_8cs_source.html#l00010">ClueScript.cs:11</a></div></div>
+<div class="ttc" id="aclassMessageManager_html"><div class="ttname"><a href="classMessageManager.html">MessageManager</a></div><div class="ttdef"><b>Definition:</b> <a href="MessageManager_8cs_source.html#l00005">MessageManager.cs:6</a></div></div>
+<div class="ttc" id="aclassNotesManager_html"><div class="ttname"><a href="classNotesManager.html">NotesManager</a></div><div class="ttdef"><b>Definition:</b> <a href="NotesManager_8cs_source.html#l00014">NotesManager.cs:15</a></div></div>
+<div class="ttc" id="aclassUIScript_html"><div class="ttname"><a href="classUIScript.html">UIScript</a></div><div class="ttdef"><b>Definition:</b> <a href="UIScript_8cs_source.html#l00009">UIScript.cs:10</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

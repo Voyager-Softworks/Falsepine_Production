@@ -1,14 +1,4087 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
 <tagfile doxygen_version="1.9.3">
   <compound kind="class">
-    <name>DynamicVaulting</name>
-    <filename>classDynamicVaulting.html</filename>
+    <name>NodeAI::ActionBase</name>
+    <filename>classNodeAI_1_1ActionBase.html</filename>
+    <base>NodeAI::RuntimeBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classNodeAI_1_1ActionBase.html</anchorfile>
+      <anchor>ac78aa7d57d8b86c33f18a0fec2ee77de</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Math::Add</name>
+    <filename>classNodeAI_1_1Math_1_1Add.html</filename>
+    <base>NodeAI::Query</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>GetNewValues</name>
+      <anchorfile>classNodeAI_1_1Math_1_1Add.html</anchorfile>
+      <anchor>a124de3ef7550706e1fda59075a27f815</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>AimZone</name>
+    <filename>classAimZone.html</filename>
+    <class kind="struct">AimZone::Corners</class>
+    <member kind="function">
+      <type>Corners</type>
+      <name>GetWorldCorners</name>
+      <anchorfile>classAimZone.html</anchorfile>
+      <anchor>a57326aa8fc3ab105a99f0cb808642399</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>Corners</type>
+      <name>GetLocalCorners</name>
+      <anchorfile>classAimZone.html</anchorfile>
+      <anchor>a790c241878c30f1b87994baccf37a577</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>SetCorners</name>
+      <anchorfile>classAimZone.html</anchorfile>
+      <anchor>a39b31be3770b49131d482b9947d402c7</anchor>
+      <arglist>(Corners _corners)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>SetCorners</name>
+      <anchorfile>classAimZone.html</anchorfile>
+      <anchor>adc3790647d49040c8c88dba105da8f40</anchor>
+      <arglist>(Vector3 _frontLeft, Vector3 _frontRight, Vector3 _backRight, Vector3 _backLeft)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>UpdateMesh</name>
+      <anchorfile>classAimZone.html</anchorfile>
+      <anchor>a962e4477001fd0b0385c9d904d297a0a</anchor>
+      <arglist>()</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Logic::And</name>
+    <filename>classNodeAI_1_1Logic_1_1And.html</filename>
+    <base>NodeAI::Query</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>GetNewValues</name>
+      <anchorfile>classNodeAI_1_1Logic_1_1And.html</anchorfile>
+      <anchor>a1b7b29e4e96a3f0484a2b739366d83b1</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>AOEAttack</name>
+    <filename>classAOEAttack.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>Attack</name>
+    <filename>classAttack.html</filename>
+    <base>NodeAI::ActionBase</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>OnInit</name>
+      <anchorfile>classAttack.html</anchorfile>
+      <anchor>a94db94ff2af42918302fc4a97c25212f</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classAttack.html</anchorfile>
+      <anchor>a791701e5072e37b3ad1b4e99389cbc6d</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>AttackData</name>
+    <filename>classAttackData.html</filename>
+    <class kind="class">AttackData::AttackPhase</class>
+  </compound>
+  <compound kind="class">
+    <name>AttackData::AttackPhase</name>
+    <filename>classAttackData_1_1AttackPhase.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>AutoSound</name>
+    <filename>classAutoSound.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>BagUIList</name>
+    <filename>classBagUIList.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>BaitLocationScript</name>
+    <filename>classBaitLocationScript.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::BlackboardSearchWindow</name>
+    <filename>classNodeAI_1_1BlackboardSearchWindow.html</filename>
+    <member kind="function">
+      <type>void</type>
+      <name>Init</name>
+      <anchorfile>classNodeAI_1_1BlackboardSearchWindow.html</anchorfile>
+      <anchor>aca446f3940aaf877195412b181d7b6f9</anchor>
+      <arglist>(GraphView graphView)</arglist>
+    </member>
+    <member kind="function">
+      <type>List&lt; SearchTreeEntry &gt;</type>
+      <name>CreateSearchTree</name>
+      <anchorfile>classNodeAI_1_1BlackboardSearchWindow.html</anchorfile>
+      <anchor>a4379d7d06a949ee6e6db96c7f18f2952</anchor>
+      <arglist>(SearchWindowContext context)</arglist>
+    </member>
     <member kind="function">
       <type>bool</type>
-      <name>CalculateVaultData</name>
-      <anchorfile>classDynamicVaulting.html</anchorfile>
-      <anchor>a77918edc172c2320d3d91731c55c2274</anchor>
+      <name>OnSelectEntry</name>
+      <anchorfile>classNodeAI_1_1BlackboardSearchWindow.html</anchorfile>
+      <anchor>a119afb1ff66ab9d06d887bc4031215c3</anchor>
+      <arglist>(SearchTreeEntry entry, SearchWindowContext context)</arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>GraphView</type>
+      <name>graphView</name>
+      <anchorfile>classNodeAI_1_1BlackboardSearchWindow.html</anchorfile>
+      <anchor>a1351b88aef1fa9a18a2bd22b6853428a</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>Boss::Bonestag::Bonestag_Charge</name>
+    <filename>classBoss_1_1Bonestag_1_1Bonestag__Charge.html</filename>
+    <base>NodeAI::ActionBase</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>OnInit</name>
+      <anchorfile>classBoss_1_1Bonestag_1_1Bonestag__Charge.html</anchorfile>
+      <anchor>aaee3ff94e3be4b32322ca67e30e19834</anchor>
       <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classBoss_1_1Bonestag_1_1Bonestag__Charge.html</anchorfile>
+      <anchor>a11c4ceecb786fcccb5d0639be31b5882</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+    <member kind="function">
+      <type>override void</type>
+      <name>DrawGizmos</name>
+      <anchorfile>classBoss_1_1Bonestag_1_1Bonestag__Charge.html</anchorfile>
+      <anchor>a1eee3889c1c6ea0af0dd46c132ba0f99</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+    <member kind="variable">
+      <type>float</type>
+      <name>chargeSpeed</name>
+      <anchorfile>classBoss_1_1Bonestag_1_1Bonestag__Charge.html</anchorfile>
+      <anchor>a6e061ec7255f5f35621ae0f4051943eb</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>float</type>
+      <name>chargeDamage</name>
+      <anchorfile>classBoss_1_1Bonestag_1_1Bonestag__Charge.html</anchorfile>
+      <anchor>a7703049efd28978e4efd36e00d72e476</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>GameObject</type>
+      <name>debrisPrefab</name>
+      <anchorfile>classBoss_1_1Bonestag_1_1Bonestag__Charge.html</anchorfile>
+      <anchor>a1686e42a67843a6faff53a140c6a1f71</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>AudioClip</type>
+      <name>chargeSoundPhaseTwo</name>
+      <anchorfile>classBoss_1_1Bonestag_1_1Bonestag__Charge.html</anchorfile>
+      <anchor>a7611cecfc82aaefca06456d0bdec8b0f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>bool</type>
+      <name>initialized</name>
+      <anchorfile>classBoss_1_1Bonestag_1_1Bonestag__Charge.html</anchorfile>
+      <anchor>a807a9b6ae007ee6cd019cecf0d82d9f3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>Animator</type>
+      <name>animator</name>
+      <anchorfile>classBoss_1_1Bonestag_1_1Bonestag__Charge.html</anchorfile>
+      <anchor>a2931cb461f8640d74270bb5034d6eb2f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>NavMeshAgent</type>
+      <name>navAgent</name>
+      <anchorfile>classBoss_1_1Bonestag_1_1Bonestag__Charge.html</anchorfile>
+      <anchor>a8066614e8d1b5da019d853dda44a6da6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>Vector3</type>
+      <name>target</name>
+      <anchorfile>classBoss_1_1Bonestag_1_1Bonestag__Charge.html</anchorfile>
+      <anchor>a729818c5dcdd1b7dc7bc3674f2adc4a8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>Transform</type>
+      <name>agentTransform</name>
+      <anchorfile>classBoss_1_1Bonestag_1_1Bonestag__Charge.html</anchorfile>
+      <anchor>a2941368fe4beb62bf2e03829976dd544</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>GameObject</type>
+      <name>agentGameObject</name>
+      <anchorfile>classBoss_1_1Bonestag_1_1Bonestag__Charge.html</anchorfile>
+      <anchor>a710511b7a9000067f3326ba1aa880e82</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>Transform</type>
+      <name>targetTransform</name>
+      <anchorfile>classBoss_1_1Bonestag_1_1Bonestag__Charge.html</anchorfile>
+      <anchor>a2d9aa7aa42f7d3d54df7c8b72acd07a5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>BossArenaController</type>
+      <name>arenaController</name>
+      <anchorfile>classBoss_1_1Bonestag_1_1Bonestag__Charge.html</anchorfile>
+      <anchor>a9b47e521e2832fd10733505d97bdb87a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>Vector3</type>
+      <name>arenaEdgeGoalPosition</name>
+      <anchorfile>classBoss_1_1Bonestag_1_1Bonestag__Charge.html</anchorfile>
+      <anchor>a30ccf83adc7c3d1b567dd2ae75f5b97f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>bool</type>
+      <name>hasDamagedPlayer</name>
+      <anchorfile>classBoss_1_1Bonestag_1_1Bonestag__Charge.html</anchorfile>
+      <anchor>acfdc04e2028d037f20ddacc81a3d4ee6</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>Boss::Bonestag::Bonestag_CheckPhaseChange</name>
+    <filename>classBoss_1_1Bonestag_1_1Bonestag__CheckPhaseChange.html</filename>
+    <base>NodeAI::ConditionBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classBoss_1_1Bonestag_1_1Bonestag__CheckPhaseChange.html</anchorfile>
+      <anchor>a7f69d799e7110ed57c01bbfd023271d2</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>BossArenaController</name>
+    <filename>classBossArenaController.html</filename>
+    <member kind="function">
+      <type>void</type>
+      <name>EnableBossUI</name>
+      <anchorfile>classBossArenaController.html</anchorfile>
+      <anchor>a6134eb647c36907f0fa20e1831604d3b</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>UseCorrectBait</name>
+      <anchorfile>classBossArenaController.html</anchorfile>
+      <anchor>a0185eaf9e891043798261ce9e8985836</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>StartSecondPhase</name>
+      <anchorfile>classBossArenaController.html</anchorfile>
+      <anchor>aca0f016b70bb2fb638436eb693d4bb6b</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>UseWrongBait</name>
+      <anchorfile>classBossArenaController.html</anchorfile>
+      <anchor>a550371922bc7dfd3d47520457cdd2015</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="variable">
+      <type>NodeAI.NodeAI_Agent</type>
+      <name>boss</name>
+      <anchorfile>classBossArenaController.html</anchorfile>
+      <anchor>a951583a3cd5d7732bc1478ef5470b818</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>List&lt; Transform &gt;</type>
+      <name>arenaCentreTransforms</name>
+      <anchorfile>classBossArenaController.html</anchorfile>
+      <anchor>a99f8dd5d2257bb08bc3dff8b652348db</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>List&lt; float &gt;</type>
+      <name>arenaRadiuses</name>
+      <anchorfile>classBossArenaController.html</anchorfile>
+      <anchor>ad946d70a786d098846ee54a9f98470a0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>Transform</type>
+      <name>wrongBaitSpawn</name>
+      <anchorfile>classBossArenaController.html</anchorfile>
+      <anchor>aec27ec47b1d231176bc1211463ae1190</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>AudioClip</type>
+      <name>baitedSound</name>
+      <anchorfile>classBossArenaController.html</anchorfile>
+      <anchor>a64566c8061ab58c567ae2e5cbd68a5ba</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>AudioClip</type>
+      <name>bossMusicSecondPhase</name>
+      <anchorfile>classBossArenaController.html</anchorfile>
+      <anchor>acde687d0cc7f59346a270ff71ec3c5bb</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>float</type>
+      <name>fadeOutTime</name>
+      <anchorfile>classBossArenaController.html</anchorfile>
+      <anchor>ab7bc82b22c03b1caf98a1d0efb6dfc4f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>UnityEvent</type>
+      <name>onBattleStart</name>
+      <anchorfile>classBossArenaController.html</anchorfile>
+      <anchor>a4657e231030d594379a6ac532ce58d1d</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>InputAction</type>
+      <name>incorrectBait</name>
+      <anchorfile>classBossArenaController.html</anchorfile>
+      <anchor>a0b905916355e8cfacc3763440f6bda54</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>IEnumerator</type>
+      <name>FadeToSecondPhaseCoroutine</name>
+      <anchorfile>classBossArenaController.html</anchorfile>
+      <anchor>abcbf1f96e1ead018e60e275a9e0310da</anchor>
+      <arglist>(float fadeOutTime)</arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>HealthScript</type>
+      <name>bossHealth</name>
+      <anchorfile>classBossArenaController.html</anchorfile>
+      <anchor>a0e6a4ce91bfd684a66d2b4547149a306</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>UIScript</type>
+      <name>_uiScript</name>
+      <anchorfile>classBossArenaController.html</anchorfile>
+      <anchor>acc6366ff422f4b0f2cb035305f2b49e8</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>Boss::BossUtilities</name>
+    <filename>classBoss_1_1BossUtilities.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>BuildingPanelList</name>
+    <filename>classBuildingPanelList.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>BulletTrail</name>
+    <filename>classBulletTrail.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>CameraDrag</name>
+    <filename>classCameraDrag.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>CameraFollow</name>
+    <filename>classCameraFollow.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>CameraZoom</name>
+    <filename>classCameraZoom.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Senses::CanSee</name>
+    <filename>classNodeAI_1_1Senses_1_1CanSee.html</filename>
+    <base>NodeAI::ConditionBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classNodeAI_1_1Senses_1_1CanSee.html</anchorfile>
+      <anchor>a2c8246313726cc9a6158c5ed00ad23c8</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Senses::CanSeeTag</name>
+    <filename>classNodeAI_1_1Senses_1_1CanSeeTag.html</filename>
+    <base>NodeAI::ConditionBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classNodeAI_1_1Senses_1_1CanSeeTag.html</anchorfile>
+      <anchor>a2515fc2c9526af70018194c7275d73d8</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Chance</name>
+    <filename>classNodeAI_1_1Chance.html</filename>
+    <base>NodeAI::DecoratorBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classNodeAI_1_1Chance.html</anchorfile>
+      <anchor>a2aaf3cce46e9a52515be727f4e9ffcd4</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+    <member kind="function">
+      <type>override void</type>
+      <name>OnInit</name>
+      <anchorfile>classNodeAI_1_1Chance.html</anchorfile>
+      <anchor>adcbc9d67778e1d6e4662d02aca939a40</anchor>
+      <arglist>()</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::CheckTagInRange</name>
+    <filename>classNodeAI_1_1CheckTagInRange.html</filename>
+    <base>NodeAI::ConditionBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classNodeAI_1_1CheckTagInRange.html</anchorfile>
+      <anchor>a7a58eb82429eae13d1ac9bf008c48475</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+    <member kind="function">
+      <type>override void</type>
+      <name>DrawGizmos</name>
+      <anchorfile>classNodeAI_1_1CheckTagInRange.html</anchorfile>
+      <anchor>a640c0101a01b3dd62bfd5472c280ce8f</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>ClickableObject</name>
+    <filename>classClickableObject.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>ClueScript</name>
+    <filename>classClueScript.html</filename>
+    <base>Interactable</base>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::ConditionBase</name>
+    <filename>classNodeAI_1_1ConditionBase.html</filename>
+    <base>NodeAI::RuntimeBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classNodeAI_1_1ConditionBase.html</anchorfile>
+      <anchor>a1ebfe00bc83a6ab8176cf1d31b5cbc31</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>Console</name>
+    <filename>classConsole.html</filename>
+    <member kind="function">
+      <type>void</type>
+      <name>StartTyping</name>
+      <anchorfile>classConsole.html</anchorfile>
+      <anchor>a4c7f57ccd8394a51b787c3a1c2da5e94</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>TrySendCommand</name>
+      <anchorfile>classConsole.html</anchorfile>
+      <anchor>ae2bbe9af0110ebf5a1492b2852522e28</anchor>
+      <arglist>(string _command)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>Log</name>
+      <anchorfile>classConsole.html</anchorfile>
+      <anchor>a12e0e83f215860236aba01486f777edc</anchor>
+      <arglist>(string _text=&quot;&quot;, bool _newLine=true)</arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>AimZone::Corners</name>
+    <filename>structAimZone_1_1Corners.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>Cover</name>
+    <filename>classCover.html</filename>
+    <class kind="struct">Cover::CoverPoint</class>
+    <member kind="function">
+      <type>List&lt; Vector3 &gt;</type>
+      <name>GetAvailableCoverPoints</name>
+      <anchorfile>classCover.html</anchorfile>
+      <anchor>a2fef3ea2c7dfcaf7e8a67b9a234a73c2</anchor>
+      <arglist>(Vector3 direction)</arglist>
+    </member>
+    <member kind="variable">
+      <type>CoverType</type>
+      <name>coverType</name>
+      <anchorfile>classCover.html</anchorfile>
+      <anchor>a4871826d964fd2a62b659ab525c19ef3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>Rect</type>
+      <name>coverRect</name>
+      <anchorfile>classCover.html</anchorfile>
+      <anchor>a19dd766e5cdacfbc214b6b96f15a3b6e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>float</type>
+      <name>coverRadius</name>
+      <anchorfile>classCover.html</anchorfile>
+      <anchor>a4365865cd8d7e5aa540dbf921abc3756</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="property" protection="private">
+      <type>int</type>
+      <name>NumPointsPerSide</name>
+      <anchorfile>classCover.html</anchorfile>
+      <anchor>a77d5b25fa5ae15bbc447d6429a74b7fe</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>List&lt; CoverPoint &gt;</type>
+      <name>coverPoints</name>
+      <anchorfile>classCover.html</anchorfile>
+      <anchor>ac6de663514a9227e350a8a036d5fbd1f</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>Cover::CoverPoint</name>
+    <filename>structCover_1_1CoverPoint.html</filename>
+    <member kind="variable">
+      <type>Vector3</type>
+      <name>position</name>
+      <anchorfile>structCover_1_1CoverPoint.html</anchorfile>
+      <anchor>a2ebb214c37359b359972b5b57ad723a1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>bool</type>
+      <name>taken</name>
+      <anchorfile>structCover_1_1CoverPoint.html</anchorfile>
+      <anchor>ad33f0ba510940de802599f643e47ba4c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>Vector3</type>
+      <name>direction</name>
+      <anchorfile>structCover_1_1CoverPoint.html</anchorfile>
+      <anchor>a5779bdeb839b4124bc295923ec3b5a4f</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>CursorScript</name>
+    <filename>classCursorScript.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::CustomGizmos</name>
+    <filename>classNodeAI_1_1CustomGizmos.html</filename>
+    <member kind="function" static="yes">
+      <type>static void</type>
+      <name>DrawRay</name>
+      <anchorfile>classNodeAI_1_1CustomGizmos.html</anchorfile>
+      <anchor>ae0d39b88b51de7bf099f8aad5b2aad2e</anchor>
+      <arglist>(Vector3 start, Vector3 dir, float length=1f)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static void</type>
+      <name>DrawCone</name>
+      <anchorfile>classNodeAI_1_1CustomGizmos.html</anchorfile>
+      <anchor>a709f3d56a36d833374c16d1c78286e0f</anchor>
+      <arglist>(Vector3 start, Vector3 dir, float angle, float length=1f)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static void</type>
+      <name>DrawCone</name>
+      <anchorfile>classNodeAI_1_1CustomGizmos.html</anchorfile>
+      <anchor>a647dee52aedfbf3472113a1a1ab4618e</anchor>
+      <arglist>(Transform startTransform, Vector3 dir, float angle, float length=1f)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>DamageDealer</name>
+    <filename>classDamageDealer.html</filename>
+    <member kind="function">
+      <type>void</type>
+      <name>MeleeAttack</name>
+      <anchorfile>classDamageDealer.html</anchorfile>
+      <anchor>abbc1fca072aef3b04ff18371524782f4</anchor>
+      <arglist>(float dmg, float delay, float duration, float stunDuration)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>AOEAttack</name>
+      <anchorfile>classDamageDealer.html</anchorfile>
+      <anchor>a6bd9e944cdb5ae3c890b6d17004dd498</anchor>
+      <arglist>(float dmg, float delay, float radius, GameObject effect, float stunDuration)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>RangedAttack</name>
+      <anchorfile>classDamageDealer.html</anchorfile>
+      <anchor>a0ac8b346282dd04e71acd2ecece12894</anchor>
+      <arglist>(GameObject projectile, float delay, float speed, Transform spawnpoint, bool aimAtPlayer=false)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>RangedAttack</name>
+      <anchorfile>classDamageDealer.html</anchorfile>
+      <anchor>a56dec06e3e28bf1cf94ba19a95f4bb92</anchor>
+      <arglist>(GameObject projectile, float delay, float speed, Transform spawnPoint, float duration, float waitBetweenSpawns)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>Update</name>
+      <anchorfile>classDamageDealer.html</anchorfile>
+      <anchor>a3d01a0c3dc2cec082b2e169bbb0070be</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="variable">
+      <type>List&lt; Collider &gt;</type>
+      <name>HurtBoxes</name>
+      <anchorfile>classDamageDealer.html</anchorfile>
+      <anchor>abebe3505111580fbb6b06510cbfda6a5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>GameObject</type>
+      <name>hurtPlayerEffect</name>
+      <anchorfile>classDamageDealer.html</anchorfile>
+      <anchor>ac295b6037239f2916421546dff30ccc9</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>float</type>
+      <name>damage</name>
+      <anchorfile>classDamageDealer.html</anchorfile>
+      <anchor>ac395cedc167af877a6ae314ba9b3536b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>attkNum</name>
+      <anchorfile>classDamageDealer.html</anchorfile>
+      <anchor>ade3b94e2d8aa2d8fbb01fc5213efc5d4</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>IEnumerator</type>
+      <name>MeleeAttackCoroutine</name>
+      <anchorfile>classDamageDealer.html</anchorfile>
+      <anchor>a76ed3a7b064afc40157f736f6fab8230</anchor>
+      <arglist>(float dmg, float delay, float duration, float stunDuration)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>IEnumerator</type>
+      <name>AOEAttackCoroutine</name>
+      <anchorfile>classDamageDealer.html</anchorfile>
+      <anchor>a4950b317373721cf357977bbc69b26ad</anchor>
+      <arglist>(float dmg, float delay, float radius, GameObject effect, float stunDuration)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>IEnumerator</type>
+      <name>RangedAttackCoroutine</name>
+      <anchorfile>classDamageDealer.html</anchorfile>
+      <anchor>ac5c046d84e698a9c0c44ee97f49f5738</anchor>
+      <arglist>(GameObject projectile, float delay, float speed, Transform spawnpoint, bool aimAtPlayer=false)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>IEnumerator</type>
+      <name>RangedAttackCoroutine</name>
+      <anchorfile>classDamageDealer.html</anchorfile>
+      <anchor>a83a5042b8cb14c511b8dd69aa23b2c23</anchor>
+      <arglist>(GameObject projectile, float delay, float speed, Transform spawnPoint, float duration, float waitBetweenSpawns)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>DamagePlayerWhenCollide</name>
+    <filename>classDamagePlayerWhenCollide.html</filename>
+    <member kind="variable">
+      <type>float</type>
+      <name>damage</name>
+      <anchorfile>classDamagePlayerWhenCollide.html</anchorfile>
+      <anchor>a8e0b6f05be9d87ebdf10295954cd14cd</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>bool</type>
+      <name>destroyOnCollision</name>
+      <anchorfile>classDamagePlayerWhenCollide.html</anchorfile>
+      <anchor>a074c8dd7c8400e3ccbd4168dd4f148a7</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>float</type>
+      <name>tickRate</name>
+      <anchorfile>classDamagePlayerWhenCollide.html</anchorfile>
+      <anchor>a1198b33bbe9efa84be40859c9f9bcdcf</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>JournalManager::MonsterClues::Data</name>
+    <filename>classJournalManager_1_1MonsterClues_1_1Data.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>DebugMissionCompleter</name>
+    <filename>classDebugMissionCompleter.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::DebugNode</name>
+    <filename>classNodeAI_1_1DebugNode.html</filename>
+    <base>NodeAI::ActionBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classNodeAI_1_1DebugNode.html</anchorfile>
+      <anchor>a9c81f1efdf34c090bea3b0536b93d8df</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::DecoratorBase</name>
+    <filename>classNodeAI_1_1DecoratorBase.html</filename>
+    <base>NodeAI::RuntimeBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classNodeAI_1_1DecoratorBase.html</anchorfile>
+      <anchor>a8b43a9211547409460192402002c086d</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>DestroyAgent</name>
+    <filename>classDestroyAgent.html</filename>
+    <base>NodeAI::ActionBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classDestroyAgent.html</anchorfile>
+      <anchor>abff265485a26e4d67c78a3c00648ae38</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Utility::DistanceFromAgent</name>
+    <filename>classNodeAI_1_1Utility_1_1DistanceFromAgent.html</filename>
+    <base>NodeAI::Query</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>GetNewValues</name>
+      <anchorfile>classNodeAI_1_1Utility_1_1DistanceFromAgent.html</anchorfile>
+      <anchor>a8f943758a9f280ef58e4648d432e65dc</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Math::Divide</name>
+    <filename>classNodeAI_1_1Math_1_1Divide.html</filename>
+    <base>NodeAI::Query</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>GetNewValues</name>
+      <anchorfile>classNodeAI_1_1Math_1_1Divide.html</anchorfile>
+      <anchor>a50941a6b12d7a9d5f7f56ed948d128df</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>DynamicSnow</name>
+    <filename>classDynamicSnow.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>DynamicSnowPainter</name>
+    <filename>classDynamicSnowPainter.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>EconomyManager</name>
+    <filename>classEconomyManager.html</filename>
+    <base>StatsManager::UsesStats</base>
+    <class kind="interface">EconomyManager::Purchasable</class>
+    <class kind="class">EconomyManager::PurchasableItem</class>
+  </compound>
+  <compound kind="class">
+    <name>EnableCursor</name>
+    <filename>classEnableCursor.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>EncircleTarget</name>
+    <filename>classEncircleTarget.html</filename>
+    <base>NodeAI::ActionBase</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>OnInit</name>
+      <anchorfile>classEncircleTarget.html</anchorfile>
+      <anchor>a7462125cb95aedf67359048e0fbd4652</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classEncircleTarget.html</anchorfile>
+      <anchor>a60466d8a36e0d5a837fef915dc9a9f2a</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+    <member kind="function">
+      <type>override void</type>
+      <name>DrawGizmos</name>
+      <anchorfile>classEncircleTarget.html</anchorfile>
+      <anchor>a9a956b32d65249f69bb33269b05c9886</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>EnemyManager</name>
+    <filename>classEnemyManager.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Math::EqualTo</name>
+    <filename>classNodeAI_1_1Math_1_1EqualTo.html</filename>
+    <base>NodeAI::Query</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>GetNewValues</name>
+      <anchorfile>classNodeAI_1_1Math_1_1EqualTo.html</anchorfile>
+      <anchor>a2ec3861295b2ede8e061baf3996730dd</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>Equipment</name>
+    <filename>classEquipment.html</filename>
+    <base>Item</base>
+    <member kind="function">
+      <type>override Item</type>
+      <name>CreateInstance</name>
+      <anchorfile>classEquipment.html</anchorfile>
+      <anchor>a76843c0b1783b492561c7e2e1deaee52</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>override void</type>
+      <name>ManualUpdate</name>
+      <anchorfile>classEquipment.html</anchorfile>
+      <anchor>a4e6f6151d590c6ecc2e4147fe6c9264a</anchor>
+      <arglist>(GameObject _owner)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>FaceCamera</name>
+    <filename>classFaceCamera.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>FadeScript</name>
+    <filename>classFadeScript.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>Item::FieldResourceLink</name>
+    <filename>classItem_1_1FieldResourceLink.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Senses::FindTagInKnownObjects</name>
+    <filename>classNodeAI_1_1Senses_1_1FindTagInKnownObjects.html</filename>
+    <base>NodeAI::Query</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>GetNewValues</name>
+      <anchorfile>classNodeAI_1_1Senses_1_1FindTagInKnownObjects.html</anchorfile>
+      <anchor>ac69884ff59d2faa314cb6a86c56a63e8</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::FindWithTag</name>
+    <filename>classNodeAI_1_1FindWithTag.html</filename>
+    <base>NodeAI::Query</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>GetNewValues</name>
+      <anchorfile>classNodeAI_1_1FindWithTag.html</anchorfile>
+      <anchor>a29ae2bc4028c6109d8d57a04482a1410</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>Flee</name>
+    <filename>classFlee.html</filename>
+    <base>NodeAI::ActionBase</base>
+  </compound>
+  <compound kind="class">
+    <name>FootstepSound</name>
+    <filename>classFootstepSound.html</filename>
+    <member kind="function">
+      <type>void</type>
+      <name>PlayFootstepSound</name>
+      <anchorfile>classFootstepSound.html</anchorfile>
+      <anchor>a0a4bfdbb9bde6a1377be321ec4a9fb8c</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="variable">
+      <type>AudioClip[]</type>
+      <name>footstepSounds2</name>
+      <anchorfile>classFootstepSound.html</anchorfile>
+      <anchor>a5a21354f1367d0f724eafdb57e2a723f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>AudioSource</type>
+      <name>audioSource</name>
+      <anchorfile>classFootstepSound.html</anchorfile>
+      <anchor>af8be76856aeb9bb4dfcff42ebde0e34b</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Utility::GetObjectTransform</name>
+    <filename>classNodeAI_1_1Utility_1_1GetObjectTransform.html</filename>
+    <base>NodeAI::Query</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>GetNewValues</name>
+      <anchorfile>classNodeAI_1_1Utility_1_1GetObjectTransform.html</anchorfile>
+      <anchor>a472ac04b702023b807ca89b45991acd6</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::GoTo</name>
+    <filename>classNodeAI_1_1GoTo.html</filename>
+    <base>NodeAI::ActionBase</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>OnInit</name>
+      <anchorfile>classNodeAI_1_1GoTo.html</anchorfile>
+      <anchor>a4ae36ea1c259c3943a3009158ed26faa</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classNodeAI_1_1GoTo.html</anchorfile>
+      <anchor>aaec7e204d7e0cbdb805bd6fd67888430</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Graph</name>
+    <filename>classNodeAI_1_1Graph.html</filename>
+    <member kind="function" static="yes">
+      <type>static void</type>
+      <name>OpenGraphWindow</name>
+      <anchorfile>classNodeAI_1_1Graph.html</anchorfile>
+      <anchor>a003da5213916ca3ff5ae219fa763f1d2</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static bool</type>
+      <name>OnOpenAsset</name>
+      <anchorfile>classNodeAI_1_1Graph.html</anchorfile>
+      <anchor>a05b59656f8fbd256c2d6310b64e2ce46</anchor>
+      <arglist>(int instanceId, int line)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>OnEnable</name>
+      <anchorfile>classNodeAI_1_1Graph.html</anchorfile>
+      <anchor>a87e03b396024d4ecbdffe60051c75170</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>Update</name>
+      <anchorfile>classNodeAI_1_1Graph.html</anchorfile>
+      <anchor>aa4cf670440d4630b10f294b3be27e640</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>CreateNewBehaviour</name>
+      <anchorfile>classNodeAI_1_1Graph.html</anchorfile>
+      <anchor>ad4a7c7b0cc61f57b3bd80233b7422112</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>OnDisable</name>
+      <anchorfile>classNodeAI_1_1Graph.html</anchorfile>
+      <anchor>a7d15eed90213da85379e6dd28f287c73</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>GenerateToolbar</name>
+      <anchorfile>classNodeAI_1_1Graph.html</anchorfile>
+      <anchor>a4ec81c9e44dfcd335d0463ef9eefd826</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>GenerateBlackboard</name>
+      <anchorfile>classNodeAI_1_1Graph.html</anchorfile>
+      <anchor>aae7189fbea7893fffcd60a1451192cdb</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>GraphView</type>
+      <name>graphView</name>
+      <anchorfile>classNodeAI_1_1Graph.html</anchorfile>
+      <anchor>af9f84ab9691a42e10c81ec208da41398</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>NodeAI_Behaviour</type>
+      <name>behaviour</name>
+      <anchorfile>classNodeAI_1_1Graph.html</anchorfile>
+      <anchor>a2e25c385ad325ff0baf4269ce4fe8f06</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>NodeAI_Behaviour</type>
+      <name>runtimeBehaviour</name>
+      <anchorfile>classNodeAI_1_1Graph.html</anchorfile>
+      <anchor>ae31e3d6bb8067569de2f5e884650edff</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>ObjectField</type>
+      <name>behaviourField</name>
+      <anchorfile>classNodeAI_1_1Graph.html</anchorfile>
+      <anchor>a91ffb86f0bc4d01144898006f67f6896</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::GraphView</name>
+    <filename>classNodeAI_1_1GraphView.html</filename>
+    <member kind="function">
+      <type></type>
+      <name>GraphView</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>ab2b9ce99fa2ffbc90ee493537d6aa526</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>AddBlackboardSearchWindow</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>a35474412a2b9db3050f220e670eb9804</anchor>
+      <arglist>(Vector2 position)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>CreateGroup</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>a3cd609fe44b207d48ee0e93ac67061d7</anchor>
+      <arglist>(string name, List&lt; Node &gt; nodes)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>AddEntryNode</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>a96746139458a2bd762970bb3d1e902a0</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>Node</type>
+      <name>GenerateQueryNode</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>adebccc6121bf97d591e29f39af5422ee</anchor>
+      <arglist>(string name, Query query, Vector2 position)</arglist>
+    </member>
+    <member kind="function">
+      <type>Node</type>
+      <name>ContextCreateNode</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>ad8070cf62764c70c6ce6336212631c90</anchor>
+      <arglist>(Node parent, NodeData.Type type, string name, RuntimeBase logic)</arglist>
+    </member>
+    <member kind="function">
+      <type>Node</type>
+      <name>GenerateNode</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>a29260ff1e7f9704c14ee057d6a6e484d</anchor>
+      <arglist>(NodeData data)</arglist>
+    </member>
+    <member kind="function">
+      <type>Node</type>
+      <name>GenerateNode</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>a47f4b858333d27b6182a4824b4171e2f</anchor>
+      <arglist>(NodeData.Type nodeType, string name, RuntimeBase logic)</arglist>
+    </member>
+    <member kind="function">
+      <type>override List&lt; Port &gt;</type>
+      <name>GetCompatiblePorts</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>a082110ebc813e216f40a9b4ac95ce8fc</anchor>
+      <arglist>(Port startPort, NodeAdapter nodeAdapter)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>AddPropertyToBlackboard</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>ab505c56804c62632df07bc6bfa2796c9</anchor>
+      <arglist>(NodeData.Property exposedProperty)</arglist>
+    </member>
+    <member kind="variable">
+      <type>List&lt; NodeData.Property &gt;</type>
+      <name>exposedProperties</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>aaccb0bd23daa60f2ab228449b8883325</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>Blackboard</type>
+      <name>blackboard</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>aca9ebe5d906093c0bfca82d9ec9b0ec0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>Node</type>
+      <name>currHoveredNode</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>ab24a1ea52918604a3f81e23e63d781f8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>AddSearchWindow</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>a870c915285c782d7bf47080e04fa60e4</anchor>
+      <arglist>(Vector2 position)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>GroupNodes</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>a92f9b0976d35b2b6d292b08d5722b8d5</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>UngroupNodes</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>a832e8fc47b87c0dbf92c962007a89f34</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>UnlinkAndRemove</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>aac38c658c2ff1df89c522e56e82f5f05</anchor>
+      <arglist>(Node n)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>UnlinkAndRemove</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>a6843d1d5bee135466d427e9b0a45b0e6</anchor>
+      <arglist>(Edge e)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>RemoveSelectedNodes</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>a21894c4f7dbb958cfe4d5f19b616e4bb</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>RemoveSelectedEdges</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>a1d4ff19872f97ebddd2cfdeedc2c2476</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>HandleDragEndEvent</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>ab76fdc611073c205d9e1a7229b54b744</anchor>
+      <arglist>(DragPerformEvent e)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>HandleMouseDownEvents</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>adf8369fd112421a3c266252b52f659f9</anchor>
+      <arglist>(MouseDownEvent e)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>HandleMouseOverEvent</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>ae0fa0e99074c6c69516014dbbfaceeb5</anchor>
+      <arglist>(MouseOverEvent e)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>HandleMouseLeaveEvent</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>a9e7275e2ccb3a4b6db742bd7b20bcd73</anchor>
+      <arglist>(MouseLeaveEvent e)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>Port</type>
+      <name>GeneratePort</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>a60cecefe1f141c7537dee1727bb05ae9</anchor>
+      <arglist>(Node node, Direction dir, Port.Capacity capacity=Port.Capacity.Single)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>Node</type>
+      <name>GenerateParameterNode</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>a1dd055d1015b94f928f0c2c0f9f723dc</anchor>
+      <arglist>(string paramReference, System.Type paramType, Vector2 position)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>Node</type>
+      <name>GenerateEntryPointNode</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>ae5bd82a9189b3e11c3ecd2261b4e3f4e</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>AddPropertyField</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>a08eb1596aa93e0ac0a7995b887a4d0d6</anchor>
+      <arglist>(Node node, NodeData.SerializableProperty property, RuntimeBase logic)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>AddPropertyField</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>a11ed4547012c40ab0529e5cf2858009a</anchor>
+      <arglist>(Node node, NodeData.SerializableProperty property, Query query)</arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>SearchWindow</type>
+      <name>searchWindow</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>a03ad0a53c5ffc88555165717b437ddd2</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>BlackboardSearchWindow</type>
+      <name>blackboardSearchWindow</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>aac6e1e88fcdc2d107ea7f8e2ed668c4a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>QuerySearchWindow</type>
+      <name>querySearchWindow</name>
+      <anchorfile>classNodeAI_1_1GraphView.html</anchorfile>
+      <anchor>a58edf7f8f726fc92fc5071acf17092b3</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Math::GreaterThan</name>
+    <filename>classNodeAI_1_1Math_1_1GreaterThan.html</filename>
+    <base>NodeAI::Query</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>GetNewValues</name>
+      <anchorfile>classNodeAI_1_1Math_1_1GreaterThan.html</anchorfile>
+      <anchor>a34abcb2420dbc210bbaa8fe769cfa719</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Math::GreaterThanOrEqualTo</name>
+    <filename>classNodeAI_1_1Math_1_1GreaterThanOrEqualTo.html</filename>
+    <base>NodeAI::Query</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>GetNewValues</name>
+      <anchorfile>classNodeAI_1_1Math_1_1GreaterThanOrEqualTo.html</anchorfile>
+      <anchor>adb63beb97e963a1aace27209175a81f2</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+  </compound>
+  <compound kind="interface">
+    <name>StatsManager::HasStatMods</name>
+    <filename>interfaceStatsManager_1_1HasStatMods.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>HealthScript</name>
+    <filename>classHealthScript.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>HotbarUIList</name>
+    <filename>classHotbarUIList.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>HurtPlayerIfHit</name>
+    <filename>classHurtPlayerIfHit.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::IfTrue</name>
+    <filename>classNodeAI_1_1IfTrue.html</filename>
+    <base>NodeAI::ConditionBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classNodeAI_1_1IfTrue.html</anchorfile>
+      <anchor>a651a3a81c96a88d4d764289c9c029f27</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>InfoBox</name>
+    <filename>classInfoBox.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>Interactable</name>
+    <filename>classInteractable.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>Inventory</name>
+    <filename>classInventory.html</filename>
+    <class kind="class">Inventory::InventorySlot</class>
+    <member kind="function">
+      <type>Item</type>
+      <name>TryAddItemToInventory</name>
+      <anchorfile>classInventory.html</anchorfile>
+      <anchor>a6eb0486d4d0ed9d3ad1c1c2ccbda8055</anchor>
+      <arglist>(Item _item)</arglist>
+    </member>
+    <member kind="function">
+      <type>bool</type>
+      <name>TryAddItemToInventory</name>
+      <anchorfile>classInventory.html</anchorfile>
+      <anchor>a30a0a20a38e5125c844718bc79883313</anchor>
+      <arglist>(string _id, int _amount=1)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>ConvertItemsToInstances</name>
+      <anchorfile>classInventory.html</anchorfile>
+      <anchor>ade833425946490e2ac8d1837811ab51d</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>string</type>
+      <name>GetSaveFolderPath</name>
+      <anchorfile>classInventory.html</anchorfile>
+      <anchor>a9c5cd9b2d04e69f884659848566996bb</anchor>
+      <arglist>(int saveSlot=0)</arglist>
+    </member>
+    <member kind="function">
+      <type>string</type>
+      <name>GetSaveFilePath</name>
+      <anchorfile>classInventory.html</anchorfile>
+      <anchor>ace07482990e78b34e083cc81a719c8cb</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>SaveInventory</name>
+      <anchorfile>classInventory.html</anchorfile>
+      <anchor>a174930d408ba83c46735010137414b42</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>LoadInventory</name>
+      <anchorfile>classInventory.html</anchorfile>
+      <anchor>abe7b914882a47034e14bfdba72e239ff</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>DeleteSaveFile</name>
+      <anchorfile>classInventory.html</anchorfile>
+      <anchor>a371821126205ac565e795000a8b35c1c</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>ClearInventory</name>
+      <anchorfile>classInventory.html</anchorfile>
+      <anchor>aa26b4ffe70ad4830d7f2434959442391</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>ValidateID</name>
+      <anchorfile>classInventory.html</anchorfile>
+      <anchor>ad425e645a5b2a17092ec44f658319d81</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static void</type>
+      <name>ValidateIDs</name>
+      <anchorfile>classInventory.html</anchorfile>
+      <anchor>acc21f6298d5f73fccd13bb0a98cdf5a5</anchor>
+      <arglist>(Inventory _selectedInventory=null)</arglist>
+    </member>
+    <member kind="function" protection="private" static="yes">
+      <type>static void</type>
+      <name>AddInventory</name>
+      <anchorfile>classInventory.html</anchorfile>
+      <anchor>aeea280b3d61d38522e1f3ec80fae5566</anchor>
+      <arglist>(Inventory inventory)</arglist>
+    </member>
+    <member kind="function" protection="private" static="yes">
+      <type>static void</type>
+      <name>RemoveInventory</name>
+      <anchorfile>classInventory.html</anchorfile>
+      <anchor>a0238204c041364d0e36c1506cdec88ba</anchor>
+      <arglist>(Inventory inventory)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>InventoryCell</name>
+    <filename>classInventoryCell.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>InventoryGridItem</name>
+    <filename>classInventoryGridItem.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>InventoryManager</name>
+    <filename>classInventoryManager.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>InventoryPannel</name>
+    <filename>classInventoryPannel.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>InventoryPannel_Shop</name>
+    <filename>classInventoryPannel__Shop.html</filename>
+    <base>InventoryPannel</base>
+  </compound>
+  <compound kind="class">
+    <name>Inventory::InventorySlot</name>
+    <filename>classInventory_1_1InventorySlot.html</filename>
+    <member kind="function">
+      <type>Item</type>
+      <name>TryAddItemToSlot</name>
+      <anchorfile>classInventory_1_1InventorySlot.html</anchorfile>
+      <anchor>ab6593aaaa7258e799ccbfe4b0aafdce8</anchor>
+      <arglist>(Item _item)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Inverter</name>
+    <filename>classNodeAI_1_1Inverter.html</filename>
+    <base>NodeAI::DecoratorBase</base>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Animation::IsAnimationFinished</name>
+    <filename>classNodeAI_1_1Animation_1_1IsAnimationFinished.html</filename>
+    <base>NodeAI::ConditionBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classNodeAI_1_1Animation_1_1IsAnimationFinished.html</anchorfile>
+      <anchor>a06b3a6395e3fd739be16a5c7e5f57bf5</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Senses::IsAwareOfObject</name>
+    <filename>classNodeAI_1_1Senses_1_1IsAwareOfObject.html</filename>
+    <base>NodeAI::ConditionBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classNodeAI_1_1Senses_1_1IsAwareOfObject.html</anchorfile>
+      <anchor>aa55b5e1474d9adbef1739a28a6bd6f7d</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>Item</name>
+    <filename>classItem.html</filename>
+    <base>StatsManager::UsesStats</base>
+    <base>StatsManager::HasStatMods</base>
+    <base>EconomyManager::Purchasable</base>
+    <class kind="class">Item::FieldResourceLink</class>
+    <member kind="function">
+      <type>string</type>
+      <name>GetInstanceFileName</name>
+      <anchorfile>classItem.html</anchorfile>
+      <anchor>a81d0ab871dfe3055f4a4a198a2075c62</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>ManualUpdate</name>
+      <anchorfile>classItem.html</anchorfile>
+      <anchor>acb63975288ac9585a683339e9515632b</anchor>
+      <arglist>(GameObject _owner)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>DestroyInstance</name>
+      <anchorfile>classItem.html</anchorfile>
+      <anchor>aeb8899c7a266acca4f5cfdd184c2cf89</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>Item</type>
+      <name>TryAddToStack</name>
+      <anchorfile>classItem.html</anchorfile>
+      <anchor>ac0a2963959946f599ded8d3adb847deb</anchor>
+      <arglist>(Item _item)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>ValidateID</name>
+      <anchorfile>classItem.html</anchorfile>
+      <anchor>a38bb22f9b077e92544b58ed56fb96990</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual Item</type>
+      <name>CreateInstance</name>
+      <anchorfile>classItem.html</anchorfile>
+      <anchor>a9b7ae1c945174bbe1a62303b917b5411</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static string</type>
+      <name>GetInstanceSavePath</name>
+      <anchorfile>classItem.html</anchorfile>
+      <anchor>ac36645a8dcde5d3ad9acccce2bef3017</anchor>
+      <arglist>(int saveSlot=0)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static void</type>
+      <name>Save</name>
+      <anchorfile>classItem.html</anchorfile>
+      <anchor>a1b85af76085f21e154997b5b5b0ead2e</anchor>
+      <arglist>(string _path, string _fileName, Item _item)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static Item</type>
+      <name>Load</name>
+      <anchorfile>classItem.html</anchorfile>
+      <anchor>aacadd39b08d233a1e4e86330d9b3278c</anchor>
+      <arglist>(string _path, string _fileName)</arglist>
+    </member>
+    <member kind="function" protection="private" static="yes">
+      <type>static</type>
+      <name>Item</name>
+      <anchorfile>classItem.html</anchorfile>
+      <anchor>adbd8979b54d36449459fc5a0a62d69d4</anchor>
+      <arglist>()</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>ItemDatabase</name>
+    <filename>classItemDatabase.html</filename>
+    <member kind="function" static="yes">
+      <type>static Item</type>
+      <name>GetItem</name>
+      <anchorfile>classItemDatabase.html</anchorfile>
+      <anchor>abe4d97ac324e14ed3b4bbeeae9093044</anchor>
+      <arglist>(string id)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static List&lt; Item &gt;</type>
+      <name>GetItemsById</name>
+      <anchorfile>classItemDatabase.html</anchorfile>
+      <anchor>a18a1ce3f3147f7b4125f1e56a253d659</anchor>
+      <arglist>(string _id)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static List&lt; Item &gt;</type>
+      <name>GetItemsByName</name>
+      <anchorfile>classItemDatabase.html</anchorfile>
+      <anchor>a374d4bcc208b7cc42cabe3dcbefe389d</anchor>
+      <arglist>(string _name)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static List&lt; Item &gt;</type>
+      <name>GetItemsByDescription</name>
+      <anchorfile>classItemDatabase.html</anchorfile>
+      <anchor>a1e24487ecd65b018d3e528290d4bdd51</anchor>
+      <arglist>(string _description)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static List&lt; Item &gt;</type>
+      <name>GetItemsByType</name>
+      <anchorfile>classItemDatabase.html</anchorfile>
+      <anchor>a9a1d9a09cf91954b6c3377e1a25faa21</anchor>
+      <arglist>(System.Type _type)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static List&lt; Item &gt;</type>
+      <name>GetItemsByType</name>
+      <anchorfile>classItemDatabase.html</anchorfile>
+      <anchor>a402d3463e5bc58f32c9f748ebae78a86</anchor>
+      <arglist>(string _type)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static List&lt; Item &gt;</type>
+      <name>GetItemsByORFilter</name>
+      <anchorfile>classItemDatabase.html</anchorfile>
+      <anchor>af4a4711722aac586f07ce50926c16a77</anchor>
+      <arglist>(string _id=&quot;&quot;, string _name=&quot;&quot;, string _description=&quot;&quot;, string _type_s=&quot;&quot;, System.Type _type_t=null)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static List&lt; Item &gt;</type>
+      <name>GetItemsByANDFilter</name>
+      <anchorfile>classItemDatabase.html</anchorfile>
+      <anchor>ab337a488b93f526fa15f96b39ff5908d</anchor>
+      <arglist>(string _id=&quot;&quot;, string _name=&quot;&quot;, string _description=&quot;&quot;, string _type_s=&quot;&quot;, System.Type _type_t=null)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static void</type>
+      <name>SaveListToFile</name>
+      <anchorfile>classItemDatabase.html</anchorfile>
+      <anchor>ade45cbd0b202c7953b544214704ab0fc</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static void</type>
+      <name>LoadListFromFile</name>
+      <anchorfile>classItemDatabase.html</anchorfile>
+      <anchor>a57ef4c7dbdd13ea7ebcb3df79c5585b3</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static void</type>
+      <name>DeleteListFromFile</name>
+      <anchorfile>classItemDatabase.html</anchorfile>
+      <anchor>a9503fbcef9b0d7ac8d0e4b0da1a54b1c</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static void</type>
+      <name>DeleteListMetaDataFromFile</name>
+      <anchorfile>classItemDatabase.html</anchorfile>
+      <anchor>a35bac811f6dc3a2d21e4adacc0063dcb</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static void</type>
+      <name>ResetDatabaseFolder</name>
+      <anchorfile>classItemDatabase.html</anchorfile>
+      <anchor>aeda4256591cb1a4e0cfe758043960e36</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static void</type>
+      <name>ValidateIDs</name>
+      <anchorfile>classItemDatabase.html</anchorfile>
+      <anchor>aa1df6ec2c0bb1316b6ad383bbf875cb7</anchor>
+      <arglist>()</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>JournalManager</name>
+    <filename>classJournalManager.html</filename>
+    <class kind="class">JournalManager::MonsterClues</class>
+    <member kind="function">
+      <type>void</type>
+      <name>SaveJournal</name>
+      <anchorfile>classJournalManager.html</anchorfile>
+      <anchor>aeeb478ab11e3e8d575c8fefe9b18034e</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>LoadJournal</name>
+      <anchorfile>classJournalManager.html</anchorfile>
+      <anchor>a6fadeae88a64de3dc5cfb966d9f0f527</anchor>
+      <arglist>()</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>JournalPickupInteract</name>
+    <filename>classJournalPickupInteract.html</filename>
+    <base>Interactable</base>
+  </compound>
+  <compound kind="class">
+    <name>JournalPickupLimiter</name>
+    <filename>classJournalPickupLimiter.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>JournalUIList</name>
+    <filename>classJournalUIList.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::NodeTree::Leaf</name>
+    <filename>classNodeAI_1_1NodeTree_1_1Leaf.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Math::LessThan</name>
+    <filename>classNodeAI_1_1Math_1_1LessThan.html</filename>
+    <base>NodeAI::Query</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>GetNewValues</name>
+      <anchorfile>classNodeAI_1_1Math_1_1LessThan.html</anchorfile>
+      <anchor>adb133451839c1f1fa69d3af97d82a7df</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>LevelController</name>
+    <filename>classLevelController.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>LevelGenerator</name>
+    <filename>classLevelGenerator.html</filename>
+    <class kind="struct">LevelGenerator::Tile</class>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::LinkData</name>
+    <filename>classNodeAI_1_1LinkData.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>MeleeAttack</name>
+    <filename>classMeleeAttack.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>MessageManager</name>
+    <filename>classMessageManager.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>MessageScript</name>
+    <filename>classMessageScript.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>Mission</name>
+    <filename>classMission.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>TownBuilding_MissionBoard::MissionBoardData</name>
+    <filename>classTownBuilding__MissionBoard_1_1MissionBoardData.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>MissionCardUI</name>
+    <filename>classMissionCardUI.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>MissionManager::MissionData</name>
+    <filename>classMissionManager_1_1MissionData.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>MissionManager</name>
+    <filename>classMissionManager.html</filename>
+    <class kind="class">MissionManager::MissionData</class>
+    <class kind="class">MissionManager::SerializableMission</class>
+    <member kind="function">
+      <type>void</type>
+      <name>SaveMissions</name>
+      <anchorfile>classMissionManager.html</anchorfile>
+      <anchor>a7c9d068cc1ae666d50923fe115a29167</anchor>
+      <arglist>(bool serialize=false)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>LoadMissions</name>
+      <anchorfile>classMissionManager.html</anchorfile>
+      <anchor>a270cf4be615a0e44f4d06a48d956fca5</anchor>
+      <arglist>(bool isSerialize=false)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>ReinstantiateMissions</name>
+      <anchorfile>classMissionManager.html</anchorfile>
+      <anchor>acf37741b830dc43afff097eb7d441178</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>TryStartMission</name>
+      <anchorfile>classMissionManager.html</anchorfile>
+      <anchor>a3bd647b4d40ae2ecbf91f83cae980af3</anchor>
+      <arglist>(Mission mission)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>TryReturnMission</name>
+      <anchorfile>classMissionManager.html</anchorfile>
+      <anchor>acede91c876ef0731cad8053646c6b273</anchor>
+      <arglist>()</arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>MissionSequencer::MissionSequence</name>
+    <filename>structMissionSequencer_1_1MissionSequence.html</filename>
+    <member kind="variable">
+      <type>Mission</type>
+      <name>mission</name>
+      <anchorfile>structMissionSequencer_1_1MissionSequence.html</anchorfile>
+      <anchor>ac097f0f61867261685645e10e3ce97d8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>List&lt; string &gt;</type>
+      <name>scenes</name>
+      <anchorfile>structMissionSequencer_1_1MissionSequence.html</anchorfile>
+      <anchor>a6b846e07c68ad0cc20c9aa0fa9812d18</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>string</type>
+      <name>missionStartScene</name>
+      <anchorfile>structMissionSequencer_1_1MissionSequence.html</anchorfile>
+      <anchor>abdc6da3d3f8f3902ea075f0b3ef2d158</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>string</type>
+      <name>missionEndScene</name>
+      <anchorfile>structMissionSequencer_1_1MissionSequence.html</anchorfile>
+      <anchor>a0b71f34c5078ebc84834e701a9126b48</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>MissionSequencer</name>
+    <filename>classMissionSequencer.html</filename>
+    <class kind="struct">MissionSequencer::MissionSequence</class>
+    <member kind="enumeration">
+      <type></type>
+      <name>Area</name>
+      <anchorfile>classMissionSequencer.html</anchorfile>
+      <anchor>a60de1ab6f8c01a88ca90318c50df9bda</anchor>
+      <arglist></arglist>
+      <enumvalue file="classMissionSequencer.html" anchor="a60de1ab6f8c01a88ca90318c50df9bdaac63e2bf2eb1c92832e0a76fb3734abe8">Tundra</enumvalue>
+      <enumvalue file="classMissionSequencer.html" anchor="a60de1ab6f8c01a88ca90318c50df9bdaa000c016d34ff41e245b69c67f22c83ff">Desert</enumvalue>
+      <enumvalue file="classMissionSequencer.html" anchor="a60de1ab6f8c01a88ca90318c50df9bdaacae72b79c62b393d63f69616ef18d39b">RedwoodForest</enumvalue>
+      <enumvalue file="classMissionSequencer.html" anchor="a60de1ab6f8c01a88ca90318c50df9bdaa597b3debbfb8df412edb615548980621">AutumnForest</enumvalue>
+      <enumvalue file="classMissionSequencer.html" anchor="a60de1ab6f8c01a88ca90318c50df9bdaa2b6f48ac3e1c531576cb06c03d0cb81b">Swamp</enumvalue>
+      <enumvalue file="classMissionSequencer.html" anchor="a60de1ab6f8c01a88ca90318c50df9bdaac16dac173aa8377a1c07aed8e0472f7c">Town</enumvalue>
+    </member>
+    <member kind="variable">
+      <type>List&lt; MissionSequence &gt;</type>
+      <name>missionSequences</name>
+      <anchorfile>classMissionSequencer.html</anchorfile>
+      <anchor>ad8b53f60034d3245e28c79207b0bfc1e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>Queue&lt; string &gt;</type>
+      <name>currentSequence</name>
+      <anchorfile>classMissionSequencer.html</anchorfile>
+      <anchor>a879627f0edb199a114a14225db0fe1d6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>GenerateNewSequence</name>
+      <anchorfile>classMissionSequencer.html</anchorfile>
+      <anchor>a80acab370a8505639ae627852e570b5f</anchor>
+      <arglist>(Mission mission)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>Start</name>
+      <anchorfile>classMissionSequencer.html</anchorfile>
+      <anchor>a0c1d4a83f0dd97ee9be1e336d040147d</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>Update</name>
+      <anchorfile>classMissionSequencer.html</anchorfile>
+      <anchor>a29ae956d200a4a493f9b89e54340bb1f</anchor>
+      <arglist>()</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>MobTarget</name>
+    <filename>classMobTarget.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>JournalManager::MonsterClues</name>
+    <filename>classJournalManager_1_1MonsterClues.html</filename>
+    <class kind="class">JournalManager::MonsterClues::Data</class>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Math::Multiply</name>
+    <filename>classNodeAI_1_1Math_1_1Multiply.html</filename>
+    <base>NodeAI::Query</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>GetNewValues</name>
+      <anchorfile>classNodeAI_1_1Math_1_1Multiply.html</anchorfile>
+      <anchor>a2bc5641eba67ab20411b2da441a990ff</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>TownMusic::MusicBuildingLink</name>
+    <filename>classTownMusic_1_1MusicBuildingLink.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::NamespaceParser::NamespaceEntry</name>
+    <filename>classNodeAI_1_1NamespaceParser_1_1NamespaceEntry.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::NamespaceParser</name>
+    <filename>classNodeAI_1_1NamespaceParser.html</filename>
+    <class kind="class">NodeAI::NamespaceParser::NamespaceEntry</class>
+    <member kind="function" static="yes">
+      <type>static NamespaceEntry</type>
+      <name>TreeFromTypes</name>
+      <anchorfile>classNodeAI_1_1NamespaceParser.html</anchorfile>
+      <anchor>af54617622d0f9d1bd9f8cd62b711dc6e</anchor>
+      <arglist>(System.Type[] types)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Logic::Nand</name>
+    <filename>classNodeAI_1_1Logic_1_1Nand.html</filename>
+    <base>NodeAI::Query</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>GetNewValues</name>
+      <anchorfile>classNodeAI_1_1Logic_1_1Nand.html</anchorfile>
+      <anchor>ab4d8e15352d75c15c0aa772614b4d16b</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NavagentBlendtreeCoupler</name>
+    <filename>classNavagentBlendtreeCoupler.html</filename>
+    <member kind="variable">
+      <type>Animator</type>
+      <name>animator</name>
+      <anchorfile>classNavagentBlendtreeCoupler.html</anchorfile>
+      <anchor>a335db33d0489c7f95b7b5b2ec4f6cf5a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>NavMeshAgent</type>
+      <name>navAgent</name>
+      <anchorfile>classNavagentBlendtreeCoupler.html</anchorfile>
+      <anchor>ae18270aa49abd2265d6cbbf007934f38</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>bool</type>
+      <name>hasForwardSpeed</name>
+      <anchorfile>classNavagentBlendtreeCoupler.html</anchorfile>
+      <anchor>a2111b40942f963699a4da166ac7866e0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>string</type>
+      <name>forwardVelocityParameter</name>
+      <anchorfile>classNavagentBlendtreeCoupler.html</anchorfile>
+      <anchor>abd77b67f2dafbeb23538751cac3feb1c</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Node</name>
+    <filename>classNodeAI_1_1Node.html</filename>
+    <member kind="variable">
+      <type>string</type>
+      <name>GUID</name>
+      <anchorfile>classNodeAI_1_1Node.html</anchorfile>
+      <anchor>a53d7d2f23d8e87e2d3d8681530567518</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>NodeData.Type</type>
+      <name>nodeType</name>
+      <anchorfile>classNodeAI_1_1Node.html</anchorfile>
+      <anchor>a519f3f6fcfeae21b6284d49415c4c69d</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>RuntimeBase</type>
+      <name>runtimeLogic</name>
+      <anchorfile>classNodeAI_1_1Node.html</anchorfile>
+      <anchor>ab3d4bfd447da30f6f8a9c369247e1393</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>Query</type>
+      <name>query</name>
+      <anchorfile>classNodeAI_1_1Node.html</anchorfile>
+      <anchor>a7e16ec8ef3727965c82816d2123241fe</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>string</type>
+      <name>paramReference</name>
+      <anchorfile>classNodeAI_1_1Node.html</anchorfile>
+      <anchor>a9266c7df32ffec2a07d12ebcdfed5bdc</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>Port</type>
+      <name>inputPort</name>
+      <anchorfile>classNodeAI_1_1Node.html</anchorfile>
+      <anchor>a69a646e05381f61fa891f9e87e6386de</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>List&lt; Port &gt;</type>
+      <name>inputPorts</name>
+      <anchorfile>classNodeAI_1_1Node.html</anchorfile>
+      <anchor>a76bcd44bdbd705859f9c928b64eb3de6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>Port</type>
+      <name>outputPort</name>
+      <anchorfile>classNodeAI_1_1Node.html</anchorfile>
+      <anchor>a7cd06858111b3dbe86b1603f51c43e6e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>List&lt; Port &gt;</type>
+      <name>outputPorts</name>
+      <anchorfile>classNodeAI_1_1Node.html</anchorfile>
+      <anchor>af82b54e5076cc1a629d41dec16fd80f7</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>List&lt; NodeData.Property &gt;</type>
+      <name>properties</name>
+      <anchorfile>classNodeAI_1_1Node.html</anchorfile>
+      <anchor>a069da94c8c98b8db1d3b45d47b105a1a</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::NodeAI_Agent</name>
+    <filename>classNodeAI_1_1NodeAI__Agent.html</filename>
+    <member kind="function">
+      <type>void</type>
+      <name>SetParameter&lt; T &gt;</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Agent.html</anchorfile>
+      <anchor>af0847c9a9e7dcd7339a10aceafeb1858</anchor>
+      <arglist>(string name, T value)</arglist>
+    </member>
+    <member kind="function">
+      <type>T</type>
+      <name>GetParameter&lt; T &gt;</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Agent.html</anchorfile>
+      <anchor>ae219f1f809467d8a53dc7157a031a349</anchor>
+      <arglist>(string name)</arglist>
+    </member>
+    <member kind="variable">
+      <type>NodeAI_Behaviour</type>
+      <name>AI_Behaviour</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Agent.html</anchorfile>
+      <anchor>ad10c3008d285317a30e1b1413bf0b4d8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>string</type>
+      <name>faction</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Agent.html</anchorfile>
+      <anchor>a79a1b00ab7fbc1f77b328b0cd124f1c7</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>List&lt; NodeData.SerializableProperty &gt;</type>
+      <name>inspectorProperties</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Agent.html</anchorfile>
+      <anchor>a94b45daf0083dcbfe497337faaffd295</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>NodeTree</type>
+      <name>nodeTree</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Agent.html</anchorfile>
+      <anchor>a516f95c0fa07facf8550c36991d6b683</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>OnDrawGizmos</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Agent.html</anchorfile>
+      <anchor>a13f326f0346ce1a075126bfccce938a5</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>Dictionary&lt; NodeData.SerializableProperty, List&lt; NodeData.SerializableProperty &gt; &gt;</type>
+      <name>_propertyMap</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Agent.html</anchorfile>
+      <anchor>aa9510d2676dd408e9fba67035ee699be</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>float</type>
+      <name>tickTimer</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Agent.html</anchorfile>
+      <anchor>a5e83650f64c0018f6f969ac86823daeb</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private" static="yes">
+      <type>const float</type>
+      <name>tickRate</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Agent.html</anchorfile>
+      <anchor>a7fb311aa9174d749afba756fa750eab2</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::NodeAI_Agent_Editor</name>
+    <filename>classNodeAI_1_1NodeAI__Agent__Editor.html</filename>
+    <member kind="function">
+      <type>void</type>
+      <name>OnEnable</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Agent__Editor.html</anchorfile>
+      <anchor>ab8165e2ee2322880e356b3c9a827b29e</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>override void</type>
+      <name>OnInspectorGUI</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Agent__Editor.html</anchorfile>
+      <anchor>ae08794b4292eb02c6cd313e0a783538d</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>NodeAI_Agent</type>
+      <name>agent</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Agent__Editor.html</anchorfile>
+      <anchor>a9af2aa5610b95051ef88e526d54d38e2</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>SerializedObject</type>
+      <name>serializedAgent</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Agent__Editor.html</anchorfile>
+      <anchor>a49c548b21a9072bda1c5223cf6de2c84</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>SerializedProperty</type>
+      <name>behaviour</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Agent__Editor.html</anchorfile>
+      <anchor>a0f6e2dde50bc91faabb7ee6b7440aac8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>bool</type>
+      <name>paramFoldOut</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Agent__Editor.html</anchorfile>
+      <anchor>a512c466de182dc807ddc1cc4fd00d35c</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::NodeAI_Behaviour</name>
+    <filename>classNodeAI_1_1NodeAI__Behaviour.html</filename>
+    <member kind="variable">
+      <type>List&lt; NodeData &gt;</type>
+      <name>nodeData</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Behaviour.html</anchorfile>
+      <anchor>a436fc36345229548b60b9cfbddc69b69</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>List&lt; NodeData.SerializableProperty &gt;</type>
+      <name>exposedProperties</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Behaviour.html</anchorfile>
+      <anchor>af4e892860f3c2abcef969b5b40e57daa</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>List&lt; NodeData.NodeGroup &gt;</type>
+      <name>nodeGroups</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Behaviour.html</anchorfile>
+      <anchor>a5685fdc0afa6b46f4437cfb39a60dc64</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>List&lt; Query &gt;</type>
+      <name>queries</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Behaviour.html</anchorfile>
+      <anchor>ac96256b62c716acede4a5a32e83a1b5a</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::NodeAI_Senses</name>
+    <filename>classNodeAI_1_1NodeAI__Senses.html</filename>
+    <member kind="enumeration">
+      <type></type>
+      <name>BoneDirection</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Senses.html</anchorfile>
+      <anchor>a3c8278666654440a96487395e4b6598e</anchor>
+      <arglist></arglist>
+      <enumvalue file="classNodeAI_1_1NodeAI__Senses.html" anchor="a3c8278666654440a96487395e4b6598ea67d2f6740a8eaebf4d5c6f79be8da481">Forward</enumvalue>
+      <enumvalue file="classNodeAI_1_1NodeAI__Senses.html" anchor="a3c8278666654440a96487395e4b6598ea92b09c7c48c520c3c55e497875da437c">Right</enumvalue>
+      <enumvalue file="classNodeAI_1_1NodeAI__Senses.html" anchor="a3c8278666654440a96487395e4b6598ea945d5e233cf7d6240f6b783b36a374ff">Left</enumvalue>
+      <enumvalue file="classNodeAI_1_1NodeAI__Senses.html" anchor="a3c8278666654440a96487395e4b6598ea258f49887ef8d14ac268c92b02503aaa">Up</enumvalue>
+      <enumvalue file="classNodeAI_1_1NodeAI__Senses.html" anchor="a3c8278666654440a96487395e4b6598ea0557fa923dcee4d0f86b1409f5c2167f">Back</enumvalue>
+      <enumvalue file="classNodeAI_1_1NodeAI__Senses.html" anchor="a3c8278666654440a96487395e4b6598ea08a38277b0309070706f6652eeae9a53">Down</enumvalue>
+    </member>
+    <member kind="function">
+      <type>delegate void</type>
+      <name>SensoryEventHandler</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Senses.html</anchorfile>
+      <anchor>aae0f38c83abe7be339c3f6266ad1e50e</anchor>
+      <arglist>(SensoryEvent e)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>RegisterSensoryEvent</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Senses.html</anchorfile>
+      <anchor>aacb22f39684670e8b8f1355567293af1</anchor>
+      <arglist>(GameObject source, GameObject target, float urgency, SensoryEvent.SenseType type)</arglist>
+    </member>
+    <member kind="function">
+      <type>bool</type>
+      <name>CanSee</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Senses.html</anchorfile>
+      <anchor>a48c5eb4cd673110353512c21b17e35ee</anchor>
+      <arglist>(GameObject target)</arglist>
+    </member>
+    <member kind="function">
+      <type>bool</type>
+      <name>CanSeeTag</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Senses.html</anchorfile>
+      <anchor>a12df03b77484d8682f05c087dc53b3ce</anchor>
+      <arglist>(string tag)</arglist>
+    </member>
+    <member kind="function">
+      <type>bool</type>
+      <name>IsAwareOf</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Senses.html</anchorfile>
+      <anchor>acff5b65d5d52e545afba1d0fb1a7e5e9</anchor>
+      <arglist>(GameObject target)</arglist>
+    </member>
+    <member kind="function">
+      <type>bool</type>
+      <name>IsAwareOfTag</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Senses.html</anchorfile>
+      <anchor>aadf24f29fe62bb87bbbf722938490636</anchor>
+      <arglist>(string tag)</arglist>
+    </member>
+    <member kind="function">
+      <type>GameObject</type>
+      <name>GetAwareObjectWithTag</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Senses.html</anchorfile>
+      <anchor>ae29330df8db0c23203277bd2368d1ee0</anchor>
+      <arglist>(string tag)</arglist>
+    </member>
+    <member kind="function">
+      <type>GameObject[]</type>
+      <name>GetVisibleObjects</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Senses.html</anchorfile>
+      <anchor>a65406f0854c2495e781a3367c6e55b80</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>OnDrawGizmosSelected</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Senses.html</anchorfile>
+      <anchor>ac6666390c82e5e520bc665d36648b5a4</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="variable">
+      <type>Transform</type>
+      <name>eyesBone</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Senses.html</anchorfile>
+      <anchor>ac66f50d26e96e74eead680e22a7dea16</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>float</type>
+      <name>maxHearingRange</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Senses.html</anchorfile>
+      <anchor>a7edefff88e1234deb049d5acfc4376f3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>BoneDirection</type>
+      <name>eyeDirection</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Senses.html</anchorfile>
+      <anchor>a59ee402f9b82d68483fef66d9af02c57</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>float</type>
+      <name>sightDistance</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Senses.html</anchorfile>
+      <anchor>a41053888d75c929d18a1c9d83d788a55</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>float</type>
+      <name>sightAngle</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Senses.html</anchorfile>
+      <anchor>a0da7b89e9da2c22e8605bf35702b3756</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>LayerMask</type>
+      <name>sightMask</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Senses.html</anchorfile>
+      <anchor>a1a9198283b794b4e61549612f16e9bbe</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="event">
+      <type>SensoryEventHandler</type>
+      <name>OnSensoryEvent</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Senses.html</anchorfile>
+      <anchor>afd71ad301cd1b322c61bef134f92e620</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>DebugSense</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Senses.html</anchorfile>
+      <anchor>a7a474d2033725275741f5535fec0b119</anchor>
+      <arglist>(SensoryEvent e)</arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>List&lt; SensoryEvent &gt;</type>
+      <name>sensoryEvents</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Senses.html</anchorfile>
+      <anchor>a4f5cc17e8622c9ac9d9c00d979d796f6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>List&lt; GameObject &gt;</type>
+      <name>noticedObjects</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Senses.html</anchorfile>
+      <anchor>a02825a0483f2fe621ce7f078060ef1ef</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>Vector3</type>
+      <name>eyesForward</name>
+      <anchorfile>classNodeAI_1_1NodeAI__Senses.html</anchorfile>
+      <anchor>ad0757cca48f260acf56600f97b1db614</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::NodeData</name>
+    <filename>classNodeAI_1_1NodeData.html</filename>
+    <class kind="struct">NodeAI::NodeData::NodeGroup</class>
+    <class kind="class">NodeAI::NodeData::Property</class>
+    <class kind="class">NodeAI::NodeData::SerializableProperty</class>
+    <member kind="enumeration">
+      <type></type>
+      <name>Type</name>
+      <anchorfile>classNodeAI_1_1NodeData.html</anchorfile>
+      <anchor>ace91a41897f6c2535253414697231623</anchor>
+      <arglist></arglist>
+      <enumvalue file="classNodeAI_1_1NodeData.html" anchor="ace91a41897f6c2535253414697231623ac7621448fc59f74a63427914cba0a4fe">EntryPoint</enumvalue>
+      <enumvalue file="classNodeAI_1_1NodeData.html" anchor="ace91a41897f6c2535253414697231623a004bf6c9a40003140292e97330236c53">Action</enumvalue>
+      <enumvalue file="classNodeAI_1_1NodeData.html" anchor="ace91a41897f6c2535253414697231623a9e2941b3c81256fac10392aaca4ccfde">Condition</enumvalue>
+      <enumvalue file="classNodeAI_1_1NodeData.html" anchor="ace91a41897f6c2535253414697231623a5041ffe849fcde6f23f9d99c2e949265">Decorator</enumvalue>
+      <enumvalue file="classNodeAI_1_1NodeData.html" anchor="ace91a41897f6c2535253414697231623a3ff39d3acb327553070a64ef0cb321d5">Sequence</enumvalue>
+      <enumvalue file="classNodeAI_1_1NodeData.html" anchor="ace91a41897f6c2535253414697231623a0c3cd33e7bf626da4897316a7158a7a4">Selector</enumvalue>
+      <enumvalue file="classNodeAI_1_1NodeData.html" anchor="ace91a41897f6c2535253414697231623a98402eecfbcefc336954458a01752131">Parallel</enumvalue>
+      <enumvalue file="classNodeAI_1_1NodeData.html" anchor="ace91a41897f6c2535253414697231623a83f499a540b1323009c200d6f8cc9396">Parameter</enumvalue>
+      <enumvalue file="classNodeAI_1_1NodeData.html" anchor="ace91a41897f6c2535253414697231623a66c1b4c7f3dc385b68a9fa903ccd016d">Query</enumvalue>
+    </member>
+    <member kind="enumeration">
+      <type></type>
+      <name>State</name>
+      <anchorfile>classNodeAI_1_1NodeData.html</anchorfile>
+      <anchor>ac6922af1bb0a7d7caf6dd2aa284506bb</anchor>
+      <arglist></arglist>
+      <enumvalue file="classNodeAI_1_1NodeData.html" anchor="ac6922af1bb0a7d7caf6dd2aa284506bba5bda814c4aedb126839228f1a3d92f09">Running</enumvalue>
+      <enumvalue file="classNodeAI_1_1NodeData.html" anchor="ac6922af1bb0a7d7caf6dd2aa284506bba505a83f220c02df2f85c3810cd9ceb38">Success</enumvalue>
+      <enumvalue file="classNodeAI_1_1NodeData.html" anchor="ac6922af1bb0a7d7caf6dd2aa284506bbae139a585510a502bbf1841cf589f5086">Failure</enumvalue>
+      <enumvalue file="classNodeAI_1_1NodeData.html" anchor="ac6922af1bb0a7d7caf6dd2aa284506bbae599161956d626eda4cb0a5ffb85271c">Idle</enumvalue>
+    </member>
+    <member kind="function">
+      <type>State</type>
+      <name>Eval</name>
+      <anchorfile>classNodeAI_1_1NodeData.html</anchorfile>
+      <anchor>a182b8023239d0202c2cd294fe6207b8c</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>Init</name>
+      <anchorfile>classNodeAI_1_1NodeData.html</anchorfile>
+      <anchor>a968f1ec3382c79a10358f45f12d33432</anchor>
+      <arglist>(NodeTree.Leaf current)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>Reset</name>
+      <anchorfile>classNodeAI_1_1NodeData.html</anchorfile>
+      <anchor>abc729bf66617ac58c4b22a97454f3bab</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="variable">
+      <type>string</type>
+      <name>GUID</name>
+      <anchorfile>classNodeAI_1_1NodeData.html</anchorfile>
+      <anchor>a6b717532c6d10340733aa5e2a5776245</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>string</type>
+      <name>parentGUID</name>
+      <anchorfile>classNodeAI_1_1NodeData.html</anchorfile>
+      <anchor>a97fe34a215a495457b298a463a8dd021</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>string</type>
+      <name>title</name>
+      <anchorfile>classNodeAI_1_1NodeData.html</anchorfile>
+      <anchor>a7130c2177cd301adf7fcd92b7f6be9fa</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>List&lt; string &gt;</type>
+      <name>childGUIDs</name>
+      <anchorfile>classNodeAI_1_1NodeData.html</anchorfile>
+      <anchor>ab0ecd39bd3fd1186f1b612b086ee7529</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>Type</type>
+      <name>nodeType</name>
+      <anchorfile>classNodeAI_1_1NodeData.html</anchorfile>
+      <anchor>a4f333c35711706baeed85deca46621f2</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>Vector2</type>
+      <name>position</name>
+      <anchorfile>classNodeAI_1_1NodeData.html</anchorfile>
+      <anchor>ac8612116e6163ca04ade7e6c04ebb5f8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="property">
+      <type>RuntimeBase</type>
+      <name>runtimeLogic</name>
+      <anchorfile>classNodeAI_1_1NodeData.html</anchorfile>
+      <anchor>a819d89698d72b8fb7e4877667d59b25f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="property">
+      <type>Query</type>
+      <name>query</name>
+      <anchorfile>classNodeAI_1_1NodeData.html</anchorfile>
+      <anchor>a83ebc429fee4a9cf7d2ad509b560602e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>RuntimeBase</type>
+      <name>runtime</name>
+      <anchorfile>classNodeAI_1_1NodeData.html</anchorfile>
+      <anchor>a36f518b099f7f49863b946ce6389c0cd</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>Query</type>
+      <name>runtimequery</name>
+      <anchorfile>classNodeAI_1_1NodeData.html</anchorfile>
+      <anchor>a8608bfff932397425db69730da56a515</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>List&lt; SerializableProperty &gt;</type>
+      <name>properties</name>
+      <anchorfile>classNodeAI_1_1NodeData.html</anchorfile>
+      <anchor>a269b7f528e3da943dd1de3ee96608498</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>NodeAI::NodeData::NodeGroup</name>
+    <filename>structNodeAI_1_1NodeData_1_1NodeGroup.html</filename>
+    <member kind="variable">
+      <type>string</type>
+      <name>title</name>
+      <anchorfile>structNodeAI_1_1NodeData_1_1NodeGroup.html</anchorfile>
+      <anchor>aa7bc6280980d9cd3baf5db07099c3f29</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>List&lt; string &gt;</type>
+      <name>childGUIDs</name>
+      <anchorfile>structNodeAI_1_1NodeData_1_1NodeGroup.html</anchorfile>
+      <anchor>a62b7eb1a80ff65365c077bafcbca51dd</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::NodeTree</name>
+    <filename>classNodeAI_1_1NodeTree.html</filename>
+    <class kind="class">NodeAI::NodeTree::Leaf</class>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Logic::Nor</name>
+    <filename>classNodeAI_1_1Logic_1_1Nor.html</filename>
+    <base>NodeAI::Query</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>GetNewValues</name>
+      <anchorfile>classNodeAI_1_1Logic_1_1Nor.html</anchorfile>
+      <anchor>a247f37687a30738a50ed4be4e48b9115</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Logic::Not</name>
+    <filename>classNodeAI_1_1Logic_1_1Not.html</filename>
+    <base>NodeAI::Query</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>GetNewValues</name>
+      <anchorfile>classNodeAI_1_1Logic_1_1Not.html</anchorfile>
+      <anchor>a85e18f5992fc8de41e721290e8ebf4dc</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Math::NotEqualTo</name>
+    <filename>classNodeAI_1_1Math_1_1NotEqualTo.html</filename>
+    <base>NodeAI::Query</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>GetNewValues</name>
+      <anchorfile>classNodeAI_1_1Math_1_1NotEqualTo.html</anchorfile>
+      <anchor>ab87c37b0d427dc19701e907304533f7f</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NotesManager</name>
+    <filename>classNotesManager.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>ObjectiveInteract</name>
+    <filename>classObjectiveInteract.html</filename>
+    <base>Interactable</base>
+  </compound>
+  <compound kind="class">
+    <name>old_InventoryManager</name>
+    <filename>classold__InventoryManager.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Logic::Or</name>
+    <filename>classNodeAI_1_1Logic_1_1Or.html</filename>
+    <base>NodeAI::Query</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>GetNewValues</name>
+      <anchorfile>classNodeAI_1_1Logic_1_1Or.html</anchorfile>
+      <anchor>a84ca8286a6027a96121dcf0f006b521b</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>Outline</name>
+    <filename>classOutline.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Parallel</name>
+    <filename>classNodeAI_1_1Parallel.html</filename>
+    <base>NodeAI::RuntimeBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classNodeAI_1_1Parallel.html</anchorfile>
+      <anchor>a317b1609fc0c5a5e4bdbb708395157f9</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>PickupScript</name>
+    <filename>classPickupScript.html</filename>
+    <base>Interactable</base>
+  </compound>
+  <compound kind="class">
+    <name>PlayerHealth</name>
+    <filename>classPlayerHealth.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>PlayerInventoryInterface</name>
+    <filename>classPlayerInventoryInterface.html</filename>
+    <class kind="class">PlayerInventoryInterface::WeaponModelLink</class>
+  </compound>
+  <compound kind="class">
+    <name>PlayerMovement</name>
+    <filename>classPlayerMovement.html</filename>
+    <member kind="function">
+      <type>Vector3</type>
+      <name>GetMouseWeaponPlanePoint</name>
+      <anchorfile>classPlayerMovement.html</anchorfile>
+      <anchor>a266eb48fd091ec325435220e3288c669</anchor>
+      <arglist>()</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>PlayerStepSound</name>
+    <filename>classPlayerStepSound.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Audio::PlaySound</name>
+    <filename>classNodeAI_1_1Audio_1_1PlaySound.html</filename>
+    <base>NodeAI::ActionBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classNodeAI_1_1Audio_1_1PlaySound.html</anchorfile>
+      <anchor>ac04e433882723e4cad13bf239e0fe011</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>PrimaryRangedWeapon</name>
+    <filename>classPrimaryRangedWeapon.html</filename>
+    <base>RangedWeapon</base>
+    <member kind="function">
+      <type>override Item</type>
+      <name>CreateInstance</name>
+      <anchorfile>classPrimaryRangedWeapon.html</anchorfile>
+      <anchor>ad539fbc2c09d0b110da7b8956a49a8ce</anchor>
+      <arglist>()</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::NodeData::Property</name>
+    <filename>classNodeAI_1_1NodeData_1_1Property.html</filename>
+    <templarg>T</templarg>
+    <member kind="function">
+      <type></type>
+      <name>Property</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1Property.html</anchorfile>
+      <anchor>aa32e297561297ece96b0e41e8bf34289</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>Property</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1Property.html</anchorfile>
+      <anchor>aa50f033071b60f6fc7db941d7aaa729e</anchor>
+      <arglist>(string name, object value, System.Type type)</arglist>
+    </member>
+    <member kind="variable">
+      <type>string</type>
+      <name>name</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1Property.html</anchorfile>
+      <anchor>a469da9f3b05a5c56bac54f29b2c3001c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>string</type>
+      <name>GUID</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1Property.html</anchorfile>
+      <anchor>a5f8376005374c80a381101b221bf4cb8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>string</type>
+      <name>paramReference</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1Property.html</anchorfile>
+      <anchor>a2ef829343258b8d56b69d746f779874f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>System.Type</type>
+      <name>type</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1Property.html</anchorfile>
+      <anchor>aa0e59f695591ffb445781a7123d9f2bd</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>object</type>
+      <name>value</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1Property.html</anchorfile>
+      <anchor>aceb627cf38bc52f2465826223d3f451f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>bool</type>
+      <name>output</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1Property.html</anchorfile>
+      <anchor>a05b16ef7003af4f01f3103d7e8493633</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="interface">
+    <name>EconomyManager::Purchasable</name>
+    <filename>interfaceEconomyManager_1_1Purchasable.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>EconomyManager::PurchasableItem</name>
+    <filename>classEconomyManager_1_1PurchasableItem.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Query</name>
+    <filename>classNodeAI_1_1Query.html</filename>
+    <member kind="function">
+      <type>void</type>
+      <name>OnEnable</name>
+      <anchorfile>classNodeAI_1_1Query.html</anchorfile>
+      <anchor>a8dc7a412b6a7199ebb1faa03fd5c6fbe</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>RepopulateProperties</name>
+      <anchorfile>classNodeAI_1_1Query.html</anchorfile>
+      <anchor>a29213ec2680107ec72da307f4b6dd5fb</anchor>
+      <arglist>(List&lt; NodeData.SerializableProperty &gt; properties)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>AddProperty&lt; T &gt;</name>
+      <anchorfile>classNodeAI_1_1Query.html</anchorfile>
+      <anchor>adf19169481bb301d8c741a493b4cbf97</anchor>
+      <arglist>(string name, T initialValue, bool isOutput)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>SetProperty&lt; T &gt;</name>
+      <anchorfile>classNodeAI_1_1Query.html</anchorfile>
+      <anchor>a92bda15ad222837b4e027eed4af692b0</anchor>
+      <arglist>(string name, T value)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>SetProperty</name>
+      <anchorfile>classNodeAI_1_1Query.html</anchorfile>
+      <anchor>a7499b40765d52cbb9b49abae249d38dc</anchor>
+      <arglist>(string name, Object value, System.Type type)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>SetPropertyGUID</name>
+      <anchorfile>classNodeAI_1_1Query.html</anchorfile>
+      <anchor>acd169c1979982b9260960bd9498f24be</anchor>
+      <arglist>(string name, string GUID)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>SetPropertyParamReference</name>
+      <anchorfile>classNodeAI_1_1Query.html</anchorfile>
+      <anchor>a638a24d7ac723f74d117822905fcbda6</anchor>
+      <arglist>(string name, string paramReference)</arglist>
+    </member>
+    <member kind="function">
+      <type>T</type>
+      <name>GetProperty&lt; T &gt;</name>
+      <anchorfile>classNodeAI_1_1Query.html</anchorfile>
+      <anchor>a252874e6df65d819a2bb741c49feceac</anchor>
+      <arglist>(string name)</arglist>
+    </member>
+    <member kind="function">
+      <type>List&lt; NodeData.Property &gt;</type>
+      <name>GetProperties</name>
+      <anchorfile>classNodeAI_1_1Query.html</anchorfile>
+      <anchor>a6e9e845d848297e7f89ec6e8a938cefb</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>List&lt; NodeData.SerializableProperty &gt;</type>
+      <name>GetSerializableProperties</name>
+      <anchorfile>classNodeAI_1_1Query.html</anchorfile>
+      <anchor>aaace1f4bb039a7e71d1b2c8525ac0064</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>List&lt; NodeData.SerializableProperty &gt;</type>
+      <name>GetPropertiesWhereParamReference</name>
+      <anchorfile>classNodeAI_1_1Query.html</anchorfile>
+      <anchor>a7bb3cf4692a9d7600080d755ab49019a</anchor>
+      <arglist>(string paramReference)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>GetNewValues</name>
+      <anchorfile>classNodeAI_1_1Query.html</anchorfile>
+      <anchor>ac4f3935fbb188e6372d9073cda1fd1b2</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+    <member kind="variable">
+      <type>string</type>
+      <name>tooltip</name>
+      <anchorfile>classNodeAI_1_1Query.html</anchorfile>
+      <anchor>a0f8e25a0b6a4a5bcb2796deb85bc5f4d</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::QuerySearchWindow</name>
+    <filename>classNodeAI_1_1QuerySearchWindow.html</filename>
+    <member kind="function">
+      <type>void</type>
+      <name>Init</name>
+      <anchorfile>classNodeAI_1_1QuerySearchWindow.html</anchorfile>
+      <anchor>a23e1ec6499e2273ad1743c746b09c98d</anchor>
+      <arglist>(GraphView graphView)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>PopulateSearchTreeRecursively</name>
+      <anchorfile>classNodeAI_1_1QuerySearchWindow.html</anchorfile>
+      <anchor>a587dbb415aaf13f8b314b639f161323e</anchor>
+      <arglist>(List&lt; SearchTreeEntry &gt; searchTree, NamespaceParser.NamespaceEntry entry, int depth=0)</arglist>
+    </member>
+    <member kind="function">
+      <type>List&lt; SearchTreeEntry &gt;</type>
+      <name>CreateSearchTree</name>
+      <anchorfile>classNodeAI_1_1QuerySearchWindow.html</anchorfile>
+      <anchor>ae7c431da83b1abfda40f95cb35b5d4b7</anchor>
+      <arglist>(SearchWindowContext context)</arglist>
+    </member>
+    <member kind="function">
+      <type>bool</type>
+      <name>OnSelectEntry</name>
+      <anchorfile>classNodeAI_1_1QuerySearchWindow.html</anchorfile>
+      <anchor>a891a9ce09538a6013ae629f04cad0d66</anchor>
+      <arglist>(SearchTreeEntry entry, SearchWindowContext context)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>Type[]</type>
+      <name>GetInheritedClasses</name>
+      <anchorfile>classNodeAI_1_1QuerySearchWindow.html</anchorfile>
+      <anchor>a465cea7727c5b9554961db81bf015363</anchor>
+      <arglist>(Type MyType)</arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>GraphView</type>
+      <name>graphView</name>
+      <anchorfile>classNodeAI_1_1QuerySearchWindow.html</anchorfile>
+      <anchor>abdb9531411ac0b4aaf8a5b27e40311da</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>Ragdoll</name>
+    <filename>classRagdoll.html</filename>
+    <member kind="function">
+      <type>void</type>
+      <name>EnableRagdoll</name>
+      <anchorfile>classRagdoll.html</anchorfile>
+      <anchor>aa9e2247f9b7c8772d6e22527f5395695</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>DisableRagdoll</name>
+      <anchorfile>classRagdoll.html</anchorfile>
+      <anchor>a284539ea1fe4a6088106bd23284f62c3</anchor>
+      <arglist>()</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Random::RandomBool</name>
+    <filename>classNodeAI_1_1Random_1_1RandomBool.html</filename>
+    <base>NodeAI::Query</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>GetNewValues</name>
+      <anchorfile>classNodeAI_1_1Random_1_1RandomBool.html</anchorfile>
+      <anchor>a1bcf0aaeff10340a2edfeebbc74198c9</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Random::RandomFloat</name>
+    <filename>classNodeAI_1_1Random_1_1RandomFloat.html</filename>
+    <base>NodeAI::Query</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>GetNewValues</name>
+      <anchorfile>classNodeAI_1_1Random_1_1RandomFloat.html</anchorfile>
+      <anchor>a31c500bfb152400a4ff23f4fd9e10ee2</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>RangedAttack</name>
+    <filename>classRangedAttack.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>RangedWeapon</name>
+    <filename>classRangedWeapon.html</filename>
+    <base>Item</base>
+    <class kind="struct">RangedWeapon::RHit</class>
+    <member kind="function">
+      <type>override Item</type>
+      <name>CreateInstance</name>
+      <anchorfile>classRangedWeapon.html</anchorfile>
+      <anchor>af1f233058e0920debce8b4ca535fad9e</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>override void</type>
+      <name>ManualUpdate</name>
+      <anchorfile>classRangedWeapon.html</anchorfile>
+      <anchor>abb6eda57c47c24111b94d2f107fb320a</anchor>
+      <arglist>(GameObject _owner)</arglist>
+    </member>
+    <member kind="function">
+      <type>bool</type>
+      <name>TryShoot</name>
+      <anchorfile>classRangedWeapon.html</anchorfile>
+      <anchor>aa6a492da3b09cd6829facae708a88211</anchor>
+      <arglist>(Vector3 _origin, Vector3 _direction, GameObject _owner, AimZone _aimZone)</arglist>
+    </member>
+    <member kind="function">
+      <type>bool</type>
+      <name>TryReload</name>
+      <anchorfile>classRangedWeapon.html</anchorfile>
+      <anchor>a1b5e1d8b7e070c5e4d40bd0516c47081</anchor>
+      <arglist>(GameObject _owner)</arglist>
+    </member>
+    <member kind="function">
+      <type>bool</type>
+      <name>TrySetAim</name>
+      <anchorfile>classRangedWeapon.html</anchorfile>
+      <anchor>a9e1ef50bf284bf8def6a82e2fc239393</anchor>
+      <arglist>(bool _aim, GameObject _owner)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>RaycastShoot</name>
+      <anchorfile>classRangedWeapon.html</anchorfile>
+      <anchor>aba53ce79d0ae92880c7bc679ee1f7f59</anchor>
+      <arglist>(Vector3 _origin, Vector3 _direction, GameObject _owner)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>Reload</name>
+      <anchorfile>classRangedWeapon.html</anchorfile>
+      <anchor>a5a29dca194f7d832200cc3d163698024</anchor>
+      <arglist>(GameObject _owner)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Repeater</name>
+    <filename>classNodeAI_1_1Repeater.html</filename>
+    <base>NodeAI::DecoratorBase</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>OnInit</name>
+      <anchorfile>classNodeAI_1_1Repeater.html</anchorfile>
+      <anchor>ac4e552143a0ce2a1cf135f4da79de3b2</anchor>
+      <arglist>()</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::RepeatUntilFail</name>
+    <filename>classNodeAI_1_1RepeatUntilFail.html</filename>
+    <base>NodeAI::DecoratorBase</base>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::RepeatUntilSuccess</name>
+    <filename>classNodeAI_1_1RepeatUntilSuccess.html</filename>
+    <base>NodeAI::DecoratorBase</base>
+  </compound>
+  <compound kind="class">
+    <name>RequestAttack</name>
+    <filename>classRequestAttack.html</filename>
+    <base>NodeAI::ActionBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classRequestAttack.html</anchorfile>
+      <anchor>ad484e4cdf955b2b4f0ca01b98cb52987</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>RangedWeapon::RHit</name>
+    <filename>structRangedWeapon_1_1RHit.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>RootMotionAgent</name>
+    <filename>classRootMotionAgent.html</filename>
+    <member kind="variable">
+      <type>NavMeshAgent</type>
+      <name>navAgent</name>
+      <anchorfile>classRootMotionAgent.html</anchorfile>
+      <anchor>a867259f8a4b96fc639cbffd887a48d65</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>Animator</type>
+      <name>animator</name>
+      <anchorfile>classRootMotionAgent.html</anchorfile>
+      <anchor>aa1e84f3aaea222b57c1e8f7504ab8b0f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>string</type>
+      <name>speedParam</name>
+      <anchorfile>classRootMotionAgent.html</anchorfile>
+      <anchor>a620fbd17b8ed6bce686d967acaa49628</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>string</type>
+      <name>angularSpeedParam</name>
+      <anchorfile>classRootMotionAgent.html</anchorfile>
+      <anchor>aa75762423fc4a812f6b0124dcf4e35cf</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>bool</type>
+      <name>useRootMotion</name>
+      <anchorfile>classRootMotionAgent.html</anchorfile>
+      <anchor>a515239a604cef43bf3155ae0eef8b859</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>RotateTowards</name>
+    <filename>classRotateTowards.html</filename>
+    <member kind="function">
+      <type>void</type>
+      <name>RotateToObject</name>
+      <anchorfile>classRotateTowards.html</anchorfile>
+      <anchor>ab90150ab4ceac0d4f7cd101592f90f67</anchor>
+      <arglist>(GameObject obj, float duration, float speed, float delay)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>IEnumerator</type>
+      <name>RotateToObjectCoroutine</name>
+      <anchorfile>classRotateTowards.html</anchorfile>
+      <anchor>ac4af0946dca730194ecb4cd2e5fc0863</anchor>
+      <arglist>(GameObject obj, float duration, float speed, float delay)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>RotateTowardsPlayer</name>
+    <filename>classRotateTowardsPlayer.html</filename>
+    <member kind="function">
+      <type>void</type>
+      <name>MoveToPlayer</name>
+      <anchorfile>classRotateTowardsPlayer.html</anchorfile>
+      <anchor>ae90aae11b948fc8001ddef53f8066c1b</anchor>
+      <arglist>(float duration, float speed, float delay)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>RotateToPlayer</name>
+      <anchorfile>classRotateTowardsPlayer.html</anchorfile>
+      <anchor>a24285b7e0df9a3c950423e7fd081c9f1</anchor>
+      <arglist>(float duration, float speed, float delay)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>IEnumerator</type>
+      <name>RotateToPlayerCoroutine</name>
+      <anchorfile>classRotateTowardsPlayer.html</anchorfile>
+      <anchor>a7d7a71c14f15a1927c01055366e85eaa</anchor>
+      <arglist>(float duration, float speed, float delay)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>IEnumerator</type>
+      <name>MoveToPlayerCoroutine</name>
+      <anchorfile>classRotateTowardsPlayer.html</anchorfile>
+      <anchor>a5aad83e3ec173886dd2419bac394f66d</anchor>
+      <arglist>(float duration, float speed, float delay)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::RuntimeBase</name>
+    <filename>classNodeAI_1_1RuntimeBase.html</filename>
+    <member kind="function">
+      <type>void</type>
+      <name>RepopulateProperties</name>
+      <anchorfile>classNodeAI_1_1RuntimeBase.html</anchorfile>
+      <anchor>aeb73885dd1d2edb7415ea156ee5cec8d</anchor>
+      <arglist>(List&lt; NodeData.SerializableProperty &gt; properties)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>AddProperty&lt; T &gt;</name>
+      <anchorfile>classNodeAI_1_1RuntimeBase.html</anchorfile>
+      <anchor>a344a981cf42750921db2f656839c8be6</anchor>
+      <arglist>(string name, T initialValue)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>SetProperty&lt; T &gt;</name>
+      <anchorfile>classNodeAI_1_1RuntimeBase.html</anchorfile>
+      <anchor>adea76aa37da921563e7c656a98bd4212</anchor>
+      <arglist>(string name, T value)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>SetProperty</name>
+      <anchorfile>classNodeAI_1_1RuntimeBase.html</anchorfile>
+      <anchor>a552189dbf6e5c1a3dd6802ef2d59a37d</anchor>
+      <arglist>(string name, Object value, System.Type type)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>SetPropertyGUID</name>
+      <anchorfile>classNodeAI_1_1RuntimeBase.html</anchorfile>
+      <anchor>a75b64607a1f14c9636fb72aea60aed01</anchor>
+      <arglist>(string name, string GUID)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>SetPropertyParamReference</name>
+      <anchorfile>classNodeAI_1_1RuntimeBase.html</anchorfile>
+      <anchor>ab965200a0159bb4d8d332258878cd75f</anchor>
+      <arglist>(string name, string paramReference)</arglist>
+    </member>
+    <member kind="function">
+      <type>T</type>
+      <name>GetProperty&lt; T &gt;</name>
+      <anchorfile>classNodeAI_1_1RuntimeBase.html</anchorfile>
+      <anchor>a5cb2e12b2c99cddabe00a1bf75739814</anchor>
+      <arglist>(string name)</arglist>
+    </member>
+    <member kind="function">
+      <type>List&lt; NodeData.Property &gt;</type>
+      <name>GetProperties</name>
+      <anchorfile>classNodeAI_1_1RuntimeBase.html</anchorfile>
+      <anchor>ae43ffa603926e3715229381a3e1ff6a2</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>List&lt; NodeData.SerializableProperty &gt;</type>
+      <name>GetSerializableProperties</name>
+      <anchorfile>classNodeAI_1_1RuntimeBase.html</anchorfile>
+      <anchor>a5a13801a0975552601de1a76255615c9</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>List&lt; NodeData.SerializableProperty &gt;</type>
+      <name>GetPropertiesWhereParamReference</name>
+      <anchorfile>classNodeAI_1_1RuntimeBase.html</anchorfile>
+      <anchor>af510d5d2c38aa588c9e16c2dc74635d6</anchor>
+      <arglist>(string paramReference)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classNodeAI_1_1RuntimeBase.html</anchorfile>
+      <anchor>ae2ac77fe8ece6f4d127c64be3253c46d</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>DrawGizmos</name>
+      <anchorfile>classNodeAI_1_1RuntimeBase.html</anchorfile>
+      <anchor>a9d9a5bc31cc601ed9a41465da6f3c0ee</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+    <member kind="function" virtualness="virtual">
+      <type>virtual void</type>
+      <name>OnInit</name>
+      <anchorfile>classNodeAI_1_1RuntimeBase.html</anchorfile>
+      <anchor>aa86daf827e29874396c3c1bc3cc9eda2</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>Init</name>
+      <anchorfile>classNodeAI_1_1RuntimeBase.html</anchorfile>
+      <anchor>a1258212cf7aaec1f3cfb98aae0cf4f2c</anchor>
+      <arglist>(NodeTree.Leaf current)</arglist>
+    </member>
+    <member kind="variable">
+      <type>NodeData.State</type>
+      <name>state</name>
+      <anchorfile>classNodeAI_1_1RuntimeBase.html</anchorfile>
+      <anchor>a7c14c35b8b17324d8c7b8ae7511662eb</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>string</type>
+      <name>tooltip</name>
+      <anchorfile>classNodeAI_1_1RuntimeBase.html</anchorfile>
+      <anchor>a5fb268786ab921708445622258467afc</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>List&lt; NodeData.SerializableProperty &gt;</type>
+      <name>properties</name>
+      <anchorfile>classNodeAI_1_1RuntimeBase.html</anchorfile>
+      <anchor>a2b912dda705bb73d4d341a06605ca0be</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>SaveManager</name>
+    <filename>classSaveManager.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>Utilities::SceneField</name>
+    <filename>classUtilities_1_1SceneField.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>SceneTransitionManager</name>
+    <filename>classSceneTransitionManager.html</filename>
+    <member kind="function">
+      <type>void</type>
+      <name>UnlockNextScene</name>
+      <anchorfile>classSceneTransitionManager.html</anchorfile>
+      <anchor>abd1dafac9b3570cfcc21316ab5d5703b</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>Update</name>
+      <anchorfile>classSceneTransitionManager.html</anchorfile>
+      <anchor>a5ca217978c47772f1e456761f56a6e25</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>IEnumerator</type>
+      <name>FadeToBlack</name>
+      <anchorfile>classSceneTransitionManager.html</anchorfile>
+      <anchor>a43056216389b2f411fd60caf8a5a1e70</anchor>
+      <arglist>(string scene)</arglist>
+    </member>
+    <member kind="variable">
+      <type>Transform</type>
+      <name>exitTransform</name>
+      <anchorfile>classSceneTransitionManager.html</anchorfile>
+      <anchor>a3ec9f087ce9e9ae9518dba92ef861a9b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>Rect</type>
+      <name>exitBounds</name>
+      <anchorfile>classSceneTransitionManager.html</anchorfile>
+      <anchor>aa595989291f12a1ea5c2312cb613b494</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>Rect</type>
+      <name>ScaleRect</name>
+      <anchorfile>classSceneTransitionManager.html</anchorfile>
+      <anchor>a7f791aa0d2850ba671c4f5966d9bffee</anchor>
+      <arglist>(Rect rect, Vector3 scale)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>Rect</type>
+      <name>RotateRect</name>
+      <anchorfile>classSceneTransitionManager.html</anchorfile>
+      <anchor>a6f528b2b419cdf4266b60505ae37c83c</anchor>
+      <arglist>(Rect rect, float angle)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>Vector2</type>
+      <name>RotatePoint</name>
+      <anchorfile>classSceneTransitionManager.html</anchorfile>
+      <anchor>a387a8829919d590c5d9c30cb9db752ec</anchor>
+      <arglist>(Vector2 point, float angle)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>void</type>
+      <name>OnDrawGizmos</name>
+      <anchorfile>classSceneTransitionManager.html</anchorfile>
+      <anchor>a049843847bb41819daaf74102d45419f</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>bool</type>
+      <name>canMoveToNextScene</name>
+      <anchorfile>classSceneTransitionManager.html</anchorfile>
+      <anchor>a40aa020a94f63be47b9b9e24dfa69dc5</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::SearchWindow</name>
+    <filename>classNodeAI_1_1SearchWindow.html</filename>
+    <member kind="function">
+      <type>void</type>
+      <name>Init</name>
+      <anchorfile>classNodeAI_1_1SearchWindow.html</anchorfile>
+      <anchor>a993fe5405339b0ee5ffae9fcf6d7431a</anchor>
+      <arglist>(GraphView graphView)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>SetSelectedNode</name>
+      <anchorfile>classNodeAI_1_1SearchWindow.html</anchorfile>
+      <anchor>a06b46133f185f3518a7a52346f0edafe</anchor>
+      <arglist>(Node node)</arglist>
+    </member>
+    <member kind="function">
+      <type>List&lt; SearchTreeEntry &gt;</type>
+      <name>CreateSearchTree</name>
+      <anchorfile>classNodeAI_1_1SearchWindow.html</anchorfile>
+      <anchor>a63b1c305db3bffc12d496d394897e7b9</anchor>
+      <arglist>(SearchWindowContext context)</arglist>
+    </member>
+    <member kind="function">
+      <type>bool</type>
+      <name>OnSelectEntry</name>
+      <anchorfile>classNodeAI_1_1SearchWindow.html</anchorfile>
+      <anchor>a1ad2f38dda59161042f952b84f829259</anchor>
+      <arglist>(SearchTreeEntry entry, SearchWindowContext context)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>Type[]</type>
+      <name>GetInheritedClasses</name>
+      <anchorfile>classNodeAI_1_1SearchWindow.html</anchorfile>
+      <anchor>ae87fb55239b45482e3020dff6f9c4ec0</anchor>
+      <arglist>(Type MyType)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>SecondaryRangedWeapon</name>
+    <filename>classSecondaryRangedWeapon.html</filename>
+    <base>RangedWeapon</base>
+    <member kind="function">
+      <type>override Item</type>
+      <name>CreateInstance</name>
+      <anchorfile>classSecondaryRangedWeapon.html</anchorfile>
+      <anchor>a90f61bca326b12c1d12bdc5d7cca3177</anchor>
+      <arglist>()</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::SeekClosestWithTag</name>
+    <filename>classNodeAI_1_1SeekClosestWithTag.html</filename>
+    <base>NodeAI::ActionBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classNodeAI_1_1SeekClosestWithTag.html</anchorfile>
+      <anchor>a0113e673cb526c4031a8b50b02f9475b</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+    <member kind="function">
+      <type>override void</type>
+      <name>DrawGizmos</name>
+      <anchorfile>classNodeAI_1_1SeekClosestWithTag.html</anchorfile>
+      <anchor>ae4a2fab351a6f21c3693b707445937e7</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::SeekCoverFrom</name>
+    <filename>classNodeAI_1_1SeekCoverFrom.html</filename>
+    <base>NodeAI::ActionBase</base>
+    <member kind="function">
+      <type></type>
+      <name>SeekCoverFrom</name>
+      <anchorfile>classNodeAI_1_1SeekCoverFrom.html</anchorfile>
+      <anchor>a43c691427c074a15da4a771674c99ca1</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>override void</type>
+      <name>OnInit</name>
+      <anchorfile>classNodeAI_1_1SeekCoverFrom.html</anchorfile>
+      <anchor>a9e688d4f778d06e9f661e8b3e9adf6ec</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classNodeAI_1_1SeekCoverFrom.html</anchorfile>
+      <anchor>ad0f715df760bb95ceebb04d003b98395</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+    <member kind="function" protection="private">
+      <type>Vector3</type>
+      <name>GetClosestCoverPoint</name>
+      <anchorfile>classNodeAI_1_1SeekCoverFrom.html</anchorfile>
+      <anchor>a7e93b173b83c0a46af615834c16eab80</anchor>
+      <arglist>(NodeAI_Agent agent, GameObject coverFrom)</arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>NavMeshAgent</type>
+      <name>navAgent</name>
+      <anchorfile>classNodeAI_1_1SeekCoverFrom.html</anchorfile>
+      <anchor>ac450cb4c573ae03c188527765e9d5505</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>GameObject</type>
+      <name>coverFrom</name>
+      <anchorfile>classNodeAI_1_1SeekCoverFrom.html</anchorfile>
+      <anchor>ac432cb3d6ce67505bdff140231ade7b4</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>Vector3</type>
+      <name>currCoverPoint</name>
+      <anchorfile>classNodeAI_1_1SeekCoverFrom.html</anchorfile>
+      <anchor>a2fa9dc6eeb4222cc077bc2e19e1fef38</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable" protection="private">
+      <type>bool</type>
+      <name>initialized</name>
+      <anchorfile>classNodeAI_1_1SeekCoverFrom.html</anchorfile>
+      <anchor>a45ef7858269e013a6e7b8ffa568b6980</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Selector</name>
+    <filename>classNodeAI_1_1Selector.html</filename>
+    <base>NodeAI::RuntimeBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classNodeAI_1_1Selector.html</anchorfile>
+      <anchor>aab6f2b46f0bf3ec874332e24b30ed699</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::SensoryEvent</name>
+    <filename>classNodeAI_1_1SensoryEvent.html</filename>
+    <member kind="enumeration">
+      <type></type>
+      <name>SenseType</name>
+      <anchorfile>classNodeAI_1_1SensoryEvent.html</anchorfile>
+      <anchor>a16ec25579d9a435a163d045ef2edadaf</anchor>
+      <arglist></arglist>
+      <enumvalue file="classNodeAI_1_1SensoryEvent.html" anchor="a16ec25579d9a435a163d045ef2edadafa8daf3496602a64f00b16ce266e7084dc">VISUAL</enumvalue>
+      <enumvalue file="classNodeAI_1_1SensoryEvent.html" anchor="a16ec25579d9a435a163d045ef2edadafad772f9917aee8b2555bce5828a1697f5">AURAL</enumvalue>
+      <enumvalue file="classNodeAI_1_1SensoryEvent.html" anchor="a16ec25579d9a435a163d045ef2edadafa7f3501211ea094337741cf2259a3e333">SOMATIC</enumvalue>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>SensoryEvent</name>
+      <anchorfile>classNodeAI_1_1SensoryEvent.html</anchorfile>
+      <anchor>a9d92a4a68df84a3e4f05e69ea1a3cf14</anchor>
+      <arglist>(GameObject _source, GameObject _target, float _urgency, SenseType _senseType)</arglist>
+    </member>
+    <member kind="property">
+      <type>GameObject</type>
+      <name>source</name>
+      <anchorfile>classNodeAI_1_1SensoryEvent.html</anchorfile>
+      <anchor>a6142f3fac2c125b9badc0fb1c720531f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="property">
+      <type>GameObject</type>
+      <name>target</name>
+      <anchorfile>classNodeAI_1_1SensoryEvent.html</anchorfile>
+      <anchor>aad37a569b970c742984875ec7735c9ca</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="property">
+      <type>float</type>
+      <name>distance</name>
+      <anchorfile>classNodeAI_1_1SensoryEvent.html</anchorfile>
+      <anchor>a51bd9e232bedd4846b4bd2efc21f0fe9</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="property">
+      <type>Vector3</type>
+      <name>direction</name>
+      <anchorfile>classNodeAI_1_1SensoryEvent.html</anchorfile>
+      <anchor>a688f3b2a1fe22bacb8df09474b3a95dd</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="property">
+      <type>float</type>
+      <name>time</name>
+      <anchorfile>classNodeAI_1_1SensoryEvent.html</anchorfile>
+      <anchor>a5c5f6e148e92a022cb4d2e75f5acf11f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="property">
+      <type>float</type>
+      <name>age</name>
+      <anchorfile>classNodeAI_1_1SensoryEvent.html</anchorfile>
+      <anchor>a239d0d9b19b78f690a3bcb3708213474</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="property">
+      <type>float</type>
+      <name>urgency</name>
+      <anchorfile>classNodeAI_1_1SensoryEvent.html</anchorfile>
+      <anchor>a3ed5c37201466652bea74f6c184497e2</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="property">
+      <type>float</type>
+      <name>salience</name>
+      <anchorfile>classNodeAI_1_1SensoryEvent.html</anchorfile>
+      <anchor>a573dcb802ef0210da94c114741dfce13</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="property">
+      <type>SenseType</type>
+      <name>type</name>
+      <anchorfile>classNodeAI_1_1SensoryEvent.html</anchorfile>
+      <anchor>a065bd24cea434d17fefafd759e0b55c8</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::SensoryEventComparer</name>
+    <filename>classNodeAI_1_1SensoryEventComparer.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Sequence</name>
+    <filename>classNodeAI_1_1Sequence.html</filename>
+    <base>NodeAI::RuntimeBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classNodeAI_1_1Sequence.html</anchorfile>
+      <anchor>a7c5da3b9bc91478128872d492c64418f</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>MissionManager::SerializableMission</name>
+    <filename>classMissionManager_1_1SerializableMission.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::NodeData::SerializableProperty</name>
+    <filename>classNodeAI_1_1NodeData_1_1SerializableProperty.html</filename>
+    <member kind="function">
+      <type></type>
+      <name>SerializableProperty</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1SerializableProperty.html</anchorfile>
+      <anchor>a4893cfa012e7ebb7fe442d3fddf9893b</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type></type>
+      <name>SerializableProperty</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1SerializableProperty.html</anchorfile>
+      <anchor>a5fc24f874b3513d26561f58976db450e</anchor>
+      <arglist>(SerializableProperty copy)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>CopyValues</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1SerializableProperty.html</anchorfile>
+      <anchor>aa28d346399a9b3c84d85a489a53c03a8</anchor>
+      <arglist>(SerializableProperty from)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static implicit</type>
+      <name>operator SerializableProperty</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1SerializableProperty.html</anchorfile>
+      <anchor>ad4ffc2cc8819640dd2d51a4df6cffd27</anchor>
+      <arglist>(Property property)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static implicit</type>
+      <name>operator Property</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1SerializableProperty.html</anchorfile>
+      <anchor>aba2a2bd5df6a2325155ca9a5cd419e55</anchor>
+      <arglist>(SerializableProperty serializableProperty)</arglist>
+    </member>
+    <member kind="variable">
+      <type>string</type>
+      <name>name</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1SerializableProperty.html</anchorfile>
+      <anchor>aac8aa39b6005e4b1fa2f8f25b70db953</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>string</type>
+      <name>GUID</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1SerializableProperty.html</anchorfile>
+      <anchor>a941edeafd10edf57d4a2ecd4df4241c4</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>string</type>
+      <name>paramReference</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1SerializableProperty.html</anchorfile>
+      <anchor>a55f1903729b670c77028574490bbef5e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>string</type>
+      <name>serializedTypename</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1SerializableProperty.html</anchorfile>
+      <anchor>a262a824f72c2e93b66ecdc33490d231a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>string</type>
+      <name>svalue</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1SerializableProperty.html</anchorfile>
+      <anchor>a01e98a2466706e58ec5b8aeb172b684e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>int</type>
+      <name>ivalue</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1SerializableProperty.html</anchorfile>
+      <anchor>ad5ae049c07722cda304d6ff5b855918b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>float</type>
+      <name>fvalue</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1SerializableProperty.html</anchorfile>
+      <anchor>aa7fb0a877f43da342384e2881691e727</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>bool</type>
+      <name>bvalue</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1SerializableProperty.html</anchorfile>
+      <anchor>a346ad2699c0b015447fce5584dd38dd2</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>Color</type>
+      <name>cvalue</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1SerializableProperty.html</anchorfile>
+      <anchor>a45365486294c04cdce122f4dcd9a7219</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>Vector2</type>
+      <name>v2value</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1SerializableProperty.html</anchorfile>
+      <anchor>a30b48b7529e78262205901dd0fbc31ce</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>Vector3</type>
+      <name>v3value</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1SerializableProperty.html</anchorfile>
+      <anchor>af04bdce4f747db61ee4c8741ffc4c626</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>Vector4</type>
+      <name>v4value</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1SerializableProperty.html</anchorfile>
+      <anchor>aaf7056edf32dedc8331d2c2e4f118b3a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>UnityEngine.Object</type>
+      <name>ovalue</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1SerializableProperty.html</anchorfile>
+      <anchor>a7af330dc127a1114c53ccd02e42dd729</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>bool</type>
+      <name>output</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1SerializableProperty.html</anchorfile>
+      <anchor>aae5639febe15e4017ff229d44136590a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="property">
+      <type>System.Type</type>
+      <name>type</name>
+      <anchorfile>classNodeAI_1_1NodeData_1_1SerializableProperty.html</anchorfile>
+      <anchor>aeb7d2b0d7912c04db2fe578bb66ad3ec</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Serializer</name>
+    <filename>classNodeAI_1_1Serializer.html</filename>
+    <member kind="function">
+      <type>void</type>
+      <name>Serialize</name>
+      <anchorfile>classNodeAI_1_1Serializer.html</anchorfile>
+      <anchor>a14a662ddfa521b924f65ed09db07ac27</anchor>
+      <arglist>(NodeAI_Behaviour nodeAI_Behaviour)</arglist>
+    </member>
+    <member kind="function">
+      <type>void</type>
+      <name>Deserialize</name>
+      <anchorfile>classNodeAI_1_1Serializer.html</anchorfile>
+      <anchor>aeae285605e10c3c40c3cf88a1a7158c4</anchor>
+      <arglist>(NodeAI_Behaviour nodeAI_Behaviour)</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static Serializer</type>
+      <name>GetInstance</name>
+      <anchorfile>classNodeAI_1_1Serializer.html</anchorfile>
+      <anchor>a36b14235f048dc54327558415c1ad44c</anchor>
+      <arglist>(GraphView target)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Animation::SetAnimatorBool</name>
+    <filename>classNodeAI_1_1Animation_1_1SetAnimatorBool.html</filename>
+    <base>NodeAI::ActionBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classNodeAI_1_1Animation_1_1SetAnimatorBool.html</anchorfile>
+      <anchor>ae883087fb0a0ee9fb642f690a350fe83</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Animation::SetAnimatorFloat</name>
+    <filename>classNodeAI_1_1Animation_1_1SetAnimatorFloat.html</filename>
+    <base>NodeAI::ActionBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classNodeAI_1_1Animation_1_1SetAnimatorFloat.html</anchorfile>
+      <anchor>a5955dbf3a99d4830f33457c517b8f087</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Animation::SetAnimatorInt</name>
+    <filename>classNodeAI_1_1Animation_1_1SetAnimatorInt.html</filename>
+    <base>NodeAI::ActionBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classNodeAI_1_1Animation_1_1SetAnimatorInt.html</anchorfile>
+      <anchor>aa51f772366046765aab861c1d0e590a0</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Animation::SetAnimatorTrigger</name>
+    <filename>classNodeAI_1_1Animation_1_1SetAnimatorTrigger.html</filename>
+    <base>NodeAI::ActionBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classNodeAI_1_1Animation_1_1SetAnimatorTrigger.html</anchorfile>
+      <anchor>aa55d74384cb886cffc6377f1ec4b129e</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>SetBoolParameter</name>
+    <filename>classSetBoolParameter.html</filename>
+    <base>NodeAI::ActionBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classSetBoolParameter.html</anchorfile>
+      <anchor>a4867e24b869040be2ad38317976ef01e</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>SpawnBaitScript</name>
+    <filename>classSpawnBaitScript.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>StatsManager::StatMod</name>
+    <filename>classStatsManager_1_1StatMod.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>StatsManager</name>
+    <filename>classStatsManager.html</filename>
+    <class kind="interface">StatsManager::HasStatMods</class>
+    <class kind="class">StatsManager::StatMod</class>
+    <class kind="class">StatsManager::StatType</class>
+    <class kind="interface">StatsManager::UsesStats</class>
+  </compound>
+  <compound kind="class">
+    <name>StatsManager::StatType</name>
+    <filename>classStatsManager_1_1StatType.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Math::Subtract</name>
+    <filename>classNodeAI_1_1Math_1_1Subtract.html</filename>
+    <base>NodeAI::Query</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>GetNewValues</name>
+      <anchorfile>classNodeAI_1_1Math_1_1Subtract.html</anchorfile>
+      <anchor>ab8341bf3388ca0fd44af3770f8c99551</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Succeeder</name>
+    <filename>classNodeAI_1_1Succeeder.html</filename>
+    <base>NodeAI::DecoratorBase</base>
+  </compound>
+  <compound kind="class">
+    <name>TagManager::Tag</name>
+    <filename>classTagManager_1_1Tag.html</filename>
+    <member kind="function">
+      <type>int</type>
+      <name>PayloadToInt</name>
+      <anchorfile>classTagManager_1_1Tag.html</anchorfile>
+      <anchor>a5f2d73565c2ab0173375003c9c9eaa5e</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>float</type>
+      <name>PayloadToFloat</name>
+      <anchorfile>classTagManager_1_1Tag.html</anchorfile>
+      <anchor>ac2610747096502c79d849f6d54af2555</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>bool</type>
+      <name>PayloadToBool</name>
+      <anchorfile>classTagManager_1_1Tag.html</anchorfile>
+      <anchor>a7dcaa3602178da600483f07f17d19541</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>string</type>
+      <name>PayloadToString</name>
+      <anchorfile>classTagManager_1_1Tag.html</anchorfile>
+      <anchor>adfff2bed1dbdde5c38cc888e1450efeb</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>List&lt; string &gt;</type>
+      <name>PayloadToList</name>
+      <anchorfile>classTagManager_1_1Tag.html</anchorfile>
+      <anchor>a77b4932f082d2575861d5a1e69bb8fcd</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static implicit</type>
+      <name>operator Tag</name>
+      <anchorfile>classTagManager_1_1Tag.html</anchorfile>
+      <anchor>a3f402e843b3695de2c8c67b418511fcd</anchor>
+      <arglist>(string _payload)</arglist>
+    </member>
+    <member kind="property">
+      <type>string</type>
+      <name>name</name>
+      <anchorfile>classTagManager_1_1Tag.html</anchorfile>
+      <anchor>a6f25ae9644fc80eac5df4a7dbc08680e</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>TagManager</name>
+    <filename>classTagManager.html</filename>
+    <class kind="class">TagManager::Tag</class>
+  </compound>
+  <compound kind="class">
+    <name>TestAction</name>
+    <filename>classTestAction.html</filename>
+    <base>NodeAI::ActionBase</base>
+    <member kind="function">
+      <type></type>
+      <name>TestAction</name>
+      <anchorfile>classTestAction.html</anchorfile>
+      <anchor>afb15ffa7693183f1ebdde5845c76d2c9</anchor>
+      <arglist>()</arglist>
+    </member>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classTestAction.html</anchorfile>
+      <anchor>a9796f927193933bdefb276063c77aced</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>Boss::Brightmaw::ThrowBoulder</name>
+    <filename>classBoss_1_1Brightmaw_1_1ThrowBoulder.html</filename>
+    <base>NodeAI::ActionBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classBoss_1_1Brightmaw_1_1ThrowBoulder.html</anchorfile>
+      <anchor>a589538ca1bb64bfd50d17defe3701f25</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+    <member kind="function">
+      <type>override void</type>
+      <name>OnInit</name>
+      <anchorfile>classBoss_1_1Brightmaw_1_1ThrowBoulder.html</anchorfile>
+      <anchor>aba777cd5078626dc5018149b802be6a4</anchor>
+      <arglist>()</arglist>
+    </member>
+  </compound>
+  <compound kind="struct">
+    <name>LevelGenerator::Tile</name>
+    <filename>structLevelGenerator_1_1Tile.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>TileMission</name>
+    <filename>classTileMission.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>TouchTrigger</name>
+    <filename>classTouchTrigger.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>TownBuilding</name>
+    <filename>classTownBuilding.html</filename>
+    <base>ClickableObject</base>
+  </compound>
+  <compound kind="class">
+    <name>TownBuilding_Bank</name>
+    <filename>classTownBuilding__Bank.html</filename>
+    <base>TownBuilding</base>
+  </compound>
+  <compound kind="class">
+    <name>TownBuilding_Emark</name>
+    <filename>classTownBuilding__Emark.html</filename>
+    <base>TownBuilding</base>
+  </compound>
+  <compound kind="class">
+    <name>TownBuilding_Home</name>
+    <filename>classTownBuilding__Home.html</filename>
+    <base>TownBuilding</base>
+  </compound>
+  <compound kind="class">
+    <name>TownBuilding_MissionBoard</name>
+    <filename>classTownBuilding__MissionBoard.html</filename>
+    <base>TownBuilding</base>
+    <class kind="class">TownBuilding_MissionBoard::MissionBoardData</class>
+  </compound>
+  <compound kind="class">
+    <name>TownBuilding_Quit</name>
+    <filename>classTownBuilding__Quit.html</filename>
+    <base>TownBuilding</base>
+  </compound>
+  <compound kind="class">
+    <name>TownBuilding_Saloon</name>
+    <filename>classTownBuilding__Saloon.html</filename>
+    <base>TownBuilding</base>
+  </compound>
+  <compound kind="class">
+    <name>TownBuilding_Store</name>
+    <filename>classTownBuilding__Store.html</filename>
+    <base>TownBuilding</base>
+  </compound>
+  <compound kind="class">
+    <name>TownMusic</name>
+    <filename>classTownMusic.html</filename>
+    <class kind="class">TownMusic::MusicBuildingLink</class>
+  </compound>
+  <compound kind="class">
+    <name>TownSceneManager</name>
+    <filename>classTownSceneManager.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>TownUIManager</name>
+    <filename>classTownUIManager.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>UI_MonsterClues</name>
+    <filename>classUI__MonsterClues.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>UIInventoryTransfer</name>
+    <filename>classUIInventoryTransfer.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>UIScript</name>
+    <filename>classUIScript.html</filename>
+  </compound>
+  <compound kind="interface">
+    <name>StatsManager::UsesStats</name>
+    <filename>interfaceStatsManager_1_1UsesStats.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>VignetteScript</name>
+    <filename>classVignetteScript.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::WaitFor</name>
+    <filename>classNodeAI_1_1WaitFor.html</filename>
+    <base>NodeAI::ActionBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classNodeAI_1_1WaitFor.html</anchorfile>
+      <anchor>aa5098cfe680a91de9dbe0164791557c0</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+    <member kind="function">
+      <type>override void</type>
+      <name>OnInit</name>
+      <anchorfile>classNodeAI_1_1WaitFor.html</anchorfile>
+      <anchor>a91fb851fbbfe6d0b42254dd21300c3a7</anchor>
+      <arglist>()</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Animation::WaitUntilAnimationComplete</name>
+    <filename>classNodeAI_1_1Animation_1_1WaitUntilAnimationComplete.html</filename>
+    <base>NodeAI::ActionBase</base>
+    <member kind="function">
+      <type>override NodeData.State</type>
+      <name>Eval</name>
+      <anchorfile>classNodeAI_1_1Animation_1_1WaitUntilAnimationComplete.html</anchorfile>
+      <anchor>aa71e391930a471fed70b4c3fa5a6cf5d</anchor>
+      <arglist>(NodeAI_Agent agent, NodeTree.Leaf current)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>PlayerInventoryInterface::WeaponModelLink</name>
+    <filename>classPlayerInventoryInterface_1_1WeaponModelLink.html</filename>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Logic::Xnor</name>
+    <filename>classNodeAI_1_1Logic_1_1Xnor.html</filename>
+    <base>NodeAI::Query</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>GetNewValues</name>
+      <anchorfile>classNodeAI_1_1Logic_1_1Xnor.html</anchorfile>
+      <anchor>a14dc64aebd23fbda8f222f36a53fe946</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>NodeAI::Logic::Xor</name>
+    <filename>classNodeAI_1_1Logic_1_1Xor.html</filename>
+    <base>NodeAI::Query</base>
+    <member kind="function">
+      <type>override void</type>
+      <name>GetNewValues</name>
+      <anchorfile>classNodeAI_1_1Logic_1_1Xor.html</anchorfile>
+      <anchor>a9a72336eccacbf054e5363ecf267bd4a</anchor>
+      <arglist>(NodeAI_Agent agent)</arglist>
     </member>
   </compound>
   <compound kind="namespace">
@@ -16,14 +4089,18 @@
     <filename>namespaceBoss.html</filename>
     <namespace>Boss::Bonestag</namespace>
     <namespace>Boss::Brightmaw</namespace>
+    <class kind="class">Boss::BossUtilities</class>
   </compound>
   <compound kind="namespace">
     <name>Boss::Bonestag</name>
     <filename>namespaceBoss_1_1Bonestag.html</filename>
+    <class kind="class">Boss::Bonestag::Bonestag_Charge</class>
+    <class kind="class">Boss::Bonestag::Bonestag_CheckPhaseChange</class>
   </compound>
   <compound kind="namespace">
     <name>Boss::Brightmaw</name>
     <filename>namespaceBoss_1_1Brightmaw.html</filename>
+    <class kind="class">Boss::Brightmaw::ThrowBoulder</class>
   </compound>
   <compound kind="namespace">
     <name>NodeAI</name>
@@ -35,34 +4112,115 @@
     <namespace>NodeAI::Random</namespace>
     <namespace>NodeAI::Senses</namespace>
     <namespace>NodeAI::Utility</namespace>
+    <class kind="class">NodeAI::ActionBase</class>
+    <class kind="class">NodeAI::BlackboardSearchWindow</class>
+    <class kind="class">NodeAI::Chance</class>
+    <class kind="class">NodeAI::CheckTagInRange</class>
+    <class kind="class">NodeAI::ConditionBase</class>
+    <class kind="class">NodeAI::CustomGizmos</class>
+    <class kind="class">NodeAI::DebugNode</class>
+    <class kind="class">NodeAI::DecoratorBase</class>
+    <class kind="class">NodeAI::FindWithTag</class>
+    <class kind="class">NodeAI::GoTo</class>
+    <class kind="class">NodeAI::Graph</class>
+    <class kind="class">NodeAI::GraphView</class>
+    <class kind="class">NodeAI::IfTrue</class>
+    <class kind="class">NodeAI::Inverter</class>
+    <class kind="class">NodeAI::LinkData</class>
+    <class kind="class">NodeAI::NamespaceParser</class>
+    <class kind="class">NodeAI::Node</class>
+    <class kind="class">NodeAI::NodeAI_Agent</class>
+    <class kind="class">NodeAI::NodeAI_Agent_Editor</class>
+    <class kind="class">NodeAI::NodeAI_Behaviour</class>
+    <class kind="class">NodeAI::NodeAI_Senses</class>
+    <class kind="class">NodeAI::NodeData</class>
+    <class kind="class">NodeAI::NodeTree</class>
+    <class kind="class">NodeAI::Parallel</class>
+    <class kind="class">NodeAI::Query</class>
+    <class kind="class">NodeAI::QuerySearchWindow</class>
+    <class kind="class">NodeAI::Repeater</class>
+    <class kind="class">NodeAI::RepeatUntilFail</class>
+    <class kind="class">NodeAI::RepeatUntilSuccess</class>
+    <class kind="class">NodeAI::RuntimeBase</class>
+    <class kind="class">NodeAI::SearchWindow</class>
+    <class kind="class">NodeAI::SeekClosestWithTag</class>
+    <class kind="class">NodeAI::SeekCoverFrom</class>
+    <class kind="class">NodeAI::Selector</class>
+    <class kind="class">NodeAI::SensoryEvent</class>
+    <class kind="class">NodeAI::SensoryEventComparer</class>
+    <class kind="class">NodeAI::Sequence</class>
+    <class kind="class">NodeAI::Serializer</class>
+    <class kind="class">NodeAI::Succeeder</class>
+    <class kind="class">NodeAI::WaitFor</class>
   </compound>
   <compound kind="namespace">
     <name>NodeAI::Animation</name>
     <filename>namespaceNodeAI_1_1Animation.html</filename>
+    <class kind="class">NodeAI::Animation::IsAnimationFinished</class>
+    <class kind="class">NodeAI::Animation::SetAnimatorBool</class>
+    <class kind="class">NodeAI::Animation::SetAnimatorFloat</class>
+    <class kind="class">NodeAI::Animation::SetAnimatorInt</class>
+    <class kind="class">NodeAI::Animation::SetAnimatorTrigger</class>
+    <class kind="class">NodeAI::Animation::WaitUntilAnimationComplete</class>
   </compound>
   <compound kind="namespace">
     <name>NodeAI::Audio</name>
     <filename>namespaceNodeAI_1_1Audio.html</filename>
+    <class kind="class">NodeAI::Audio::PlaySound</class>
   </compound>
   <compound kind="namespace">
     <name>NodeAI::Logic</name>
     <filename>namespaceNodeAI_1_1Logic.html</filename>
+    <class kind="class">NodeAI::Logic::And</class>
+    <class kind="class">NodeAI::Logic::Nand</class>
+    <class kind="class">NodeAI::Logic::Nor</class>
+    <class kind="class">NodeAI::Logic::Not</class>
+    <class kind="class">NodeAI::Logic::Or</class>
+    <class kind="class">NodeAI::Logic::Xnor</class>
+    <class kind="class">NodeAI::Logic::Xor</class>
   </compound>
   <compound kind="namespace">
     <name>NodeAI::Math</name>
     <filename>namespaceNodeAI_1_1Math.html</filename>
+    <class kind="class">NodeAI::Math::Add</class>
+    <class kind="class">NodeAI::Math::Divide</class>
+    <class kind="class">NodeAI::Math::EqualTo</class>
+    <class kind="class">NodeAI::Math::GreaterThan</class>
+    <class kind="class">NodeAI::Math::GreaterThanOrEqualTo</class>
+    <class kind="class">NodeAI::Math::LessThan</class>
+    <class kind="class">NodeAI::Math::Multiply</class>
+    <class kind="class">NodeAI::Math::NotEqualTo</class>
+    <class kind="class">NodeAI::Math::Subtract</class>
   </compound>
   <compound kind="namespace">
     <name>NodeAI::Random</name>
     <filename>namespaceNodeAI_1_1Random.html</filename>
+    <class kind="class">NodeAI::Random::RandomBool</class>
+    <class kind="class">NodeAI::Random::RandomFloat</class>
   </compound>
   <compound kind="namespace">
     <name>NodeAI::Senses</name>
     <filename>namespaceNodeAI_1_1Senses.html</filename>
+    <class kind="class">NodeAI::Senses::CanSee</class>
+    <class kind="class">NodeAI::Senses::CanSeeTag</class>
+    <class kind="class">NodeAI::Senses::FindTagInKnownObjects</class>
+    <class kind="class">NodeAI::Senses::IsAwareOfObject</class>
   </compound>
   <compound kind="namespace">
     <name>NodeAI::Utility</name>
     <filename>namespaceNodeAI_1_1Utility.html</filename>
+    <class kind="class">NodeAI::Utility::DistanceFromAgent</class>
+    <class kind="class">NodeAI::Utility::GetObjectTransform</class>
+  </compound>
+  <compound kind="namespace">
+    <name>Utilities</name>
+    <filename>namespaceUtilities.html</filename>
+    <class kind="class">Utilities::SceneField</class>
+  </compound>
+  <compound kind="page">
+    <name>md_Assets_NodeAIv2_README_NodeAI</name>
+    <title>README_NodeAI</title>
+    <filename>md_Assets_NodeAIv2_README_NodeAI.html</filename>
   </compound>
   <compound kind="page">
     <name>index</name>

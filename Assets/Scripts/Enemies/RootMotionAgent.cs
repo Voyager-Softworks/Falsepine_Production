@@ -38,7 +38,7 @@ public class RootMotionAgent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        navAgent.updatePosition = false;
+        navAgent.updatePosition = true;
         navAgent.updateRotation = true;
         var localVelocity = transform.InverseTransformDirection(navAgent.velocity);
         animator.SetFloat(speedParam, localVelocity.z);

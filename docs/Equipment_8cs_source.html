@@ -85,15 +85,15 @@ $(function() {
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span><span class="comment">//Make sure to set the [Serializable] attribute on this class, so that it can be saved!</span></div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>[Serializable]</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classEquipment.html">Equipment</a> : <a class="code hl_namespaceRef" href="http://docs.unity3d.com/ScriptReference/classItem_1_1FieldResourceLink.html">Item</a></div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno"><a class="line" href="classEquipment.html">   18</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_class" href="classEquipment.html">Equipment</a> : <a class="code hl_class" href="classItem.html">Item</a></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>{</div>
 <div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <span class="comment">// make sure to set variables as serialized fields in the inspector, so that they can be saved!</span></div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    [SerializeField] <span class="keyword">public</span> GameObject m_equipmentPrefab;</div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keyword">public</span> <span class="keyword">override</span> <a class="code hl_namespaceRef" href="http://docs.unity3d.com/ScriptReference/classItem_1_1FieldResourceLink.html">Item</a> <a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classEquipment.html#a76843c0b1783b492561c7e2e1deaee52">CreateInstance</a>()</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classEquipment.html#a76843c0b1783b492561c7e2e1deaee52">   26</a></span>    <span class="keyword">public</span> <span class="keyword">override</span> <a class="code hl_class" href="classItem.html">Item</a> <a class="code hl_function" href="classEquipment.html#a76843c0b1783b492561c7e2e1deaee52">CreateInstance</a>()</div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    {</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>        <span class="comment">// [REQUIRED] Create base item</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classEquipment.html">Equipment</a> newItem = (<a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classEquipment.html">Equipment</a>)base.<a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classEquipment.html#a76843c0b1783b492561c7e2e1deaee52">CreateInstance</a>();</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>        <a class="code hl_class" href="classEquipment.html">Equipment</a> newItem = (<a class="code hl_class" href="classEquipment.html">Equipment</a>)base.<a class="code hl_function" href="classEquipment.html#a76843c0b1783b492561c7e2e1deaee52">CreateInstance</a>();</div>
 <div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span> </div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>        <span class="comment">// Setting unique values here:</span></div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>        <span class="comment">// example valye</span></div>
@@ -103,7 +103,7 @@ $(function() {
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    }</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="comment">// update</span></div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">void</span> <a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classEquipment.html#a4e6f6151d590c6ecc2e4147fe6c9264a">ManualUpdate</a>(GameObject _owner)</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno"><a class="line" href="classEquipment.html#a4e6f6151d590c6ecc2e4147fe6c9264a">   39</a></span>    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classEquipment.html#a4e6f6151d590c6ecc2e4147fe6c9264a">ManualUpdate</a>(GameObject _owner)</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    {</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        base.ManualUpdate(_owner);</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    }</div>
@@ -117,7 +117,7 @@ $(function() {
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    </div>
 <div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="comment">//Custom editor for this class</span></div>
 <div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span><span class="preprocessor">    #if UNITY_EDITOR</span></div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    [CustomEditor(typeof(<a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classEquipment.html">Equipment</a>))]</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    [CustomEditor(typeof(<a class="code hl_class" href="classEquipment.html">Equipment</a>))]</div>
 <div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    <span class="keyword">public</span> <span class="keyword">class </span>EquipmentEditor : ItemEditor</div>
 <div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    {</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">void</span> OnInspectorGUI()</div>
@@ -125,7 +125,7 @@ $(function() {
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <span class="comment">// [REQUIRED] draw base editor (Item in this case)</span></div>
 <div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            base.OnInspectorGUI();</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            <span class="comment">// [REQUIRED] get the editor target</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            <a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classEquipment.html">Equipment</a> item = (<a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classEquipment.html">Equipment</a>)target;</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>            <a class="code hl_class" href="classEquipment.html">Equipment</a> item = (<a class="code hl_class" href="classEquipment.html">Equipment</a>)target;</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
 <div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            <span class="comment">// red box for weapon stats</span></div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            GUI.backgroundColor = Color.red;</div>
@@ -151,10 +151,10 @@ $(function() {
 <div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>    </div>
 <div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>    </div>
 <div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>}</div>
-<div class="ttc" id="aclassEquipment_html"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classEquipment.html">Equipment</a></div></div>
-<div class="ttc" id="aclassEquipment_html_a4e6f6151d590c6ecc2e4147fe6c9264a"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classEquipment.html#a4e6f6151d590c6ecc2e4147fe6c9264a">Equipment::ManualUpdate</a></div><div class="ttdeci">override void ManualUpdate(GameObject _owner)</div></div>
-<div class="ttc" id="aclassEquipment_html_a76843c0b1783b492561c7e2e1deaee52"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classEquipment.html#a76843c0b1783b492561c7e2e1deaee52">Equipment::CreateInstance</a></div><div class="ttdeci">override Item CreateInstance()</div></div>
-<div class="ttc" id="aclassItem_1_1FieldResourceLink_html"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classItem_1_1FieldResourceLink.html">Item</a></div></div>
+<div class="ttc" id="aclassEquipment_html"><div class="ttname"><a href="classEquipment.html">Equipment</a></div><div class="ttdoc">An example of a custom item type that can be used in the item database.</div><div class="ttdef"><b>Definition:</b> <a href="Equipment_8cs_source.html#l00018">Equipment.cs:19</a></div></div>
+<div class="ttc" id="aclassEquipment_html_a4e6f6151d590c6ecc2e4147fe6c9264a"><div class="ttname"><a href="classEquipment.html#a4e6f6151d590c6ecc2e4147fe6c9264a">Equipment.ManualUpdate</a></div><div class="ttdeci">override void ManualUpdate(GameObject _owner)</div><div class="ttdoc">Update function for the item</div><div class="ttdef"><b>Definition:</b> <a href="Equipment_8cs_source.html#l00039">Equipment.cs:39</a></div></div>
+<div class="ttc" id="aclassEquipment_html_a76843c0b1783b492561c7e2e1deaee52"><div class="ttname"><a href="classEquipment.html#a76843c0b1783b492561c7e2e1deaee52">Equipment.CreateInstance</a></div><div class="ttdeci">override Item CreateInstance()</div><div class="ttdoc">[REQUIRED] Used to create a copy of the item. Make sure to set any unique values here!</div><div class="ttdef"><b>Definition:</b> <a href="Equipment_8cs_source.html#l00026">Equipment.cs:26</a></div></div>
+<div class="ttc" id="aclassItem_html"><div class="ttname"><a href="classItem.html">Item</a></div><div class="ttdef"><b>Definition:</b> <a href="Item_8cs_source.html#l00017">Item.cs:18</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

@@ -28,6 +28,7 @@ namespace Boss.Brightmaw
             AddProperty<Transform>("Target", null);
             AddProperty<string>("Boulder Tag", "");
             AddProperty<float>("Range", 100f);
+            AddProperty<AudioClip>("Sound", null);
         }
         public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
         {
@@ -75,16 +76,21 @@ namespace Boss.Brightmaw
                     }
                 }
             }
-            if (Vector3.Distance(agent.transform.position, closest.transform.position + 
-                    ((closest.transform.position - GetProperty<Transform>("Target").position).normalized 
-                    * GetProperty<float>("Range") 
-                    * 0.9f)) > 2.0f && !reachedBoulder)
+            Vector3 moveToVector =(closest.transform.position - GetProperty<Transform>("Target").position);
+            moveToVector.y = closest.transform.position.y;
+            moveToVector.Normalize();
+            moveToVector *= GetProperty<float>("Range") * 0.9f;
+            moveToVector += closest.transform.position;
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(moveToVector, out hit, GetProperty<float>("Range"), NavMesh.AllAreas))
+            {
+                moveToVector = hit.position;
+            }
+            if (Vector3.Distance(agent.transform.position, (moveToVector 
+                    )) > 2.0f && !reachedBoulder)
             {
                 navAgent.SetDestination(
-                    closest.transform.position + 
-                    ((closest.transform.position - GetProperty<Transform>("Target").position).normalized 
-                    * GetProperty<float>("Range") 
-                    * 0.9f)
+                    (moveToVector )
                     );  
                 navAgent.speed = 1.0f;
                 navAgent.acceleration = 15.0f;
@@ -98,16 +104,14 @@ namespace Boss.Brightmaw
             {
                 if(!reachedBoulder)
                 {
-                    rotateTowards.RotateToObject(closest, 1.0f, 10.0f, 0.0f);
+                    rotateTowards.RotateToObject(closest, 1.5f, 6.0f, 0.0f);
                     reachedBoulder = true;
                     animator.SetBool("Running", false);
                     animator.SetTrigger("BoulderToss");
+                    agent.GetComponent<AudioSource>().PlayOneShot(GetProperty<AudioClip>("Sound"));
                     navAgent.isStopped = true;
                     lastTime = Time.time;
-                    navAgent.Warp(closest.transform.position + 
-                        ((closest.transform.position - GetProperty<Transform>("Target").position).normalized 
-                        * GetProperty<float>("Range") 
-                        * 0.9f));
+                    navAgent.Warp(moveToVector);
                 }
                 
                 

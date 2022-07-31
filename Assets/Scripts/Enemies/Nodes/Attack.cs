@@ -4,6 +4,29 @@ using UnityEngine;
 using NodeAI;
 using UnityEngine.AI;
 
+/// <summary>
+///  A Node for implementing enemy Attacks.
+/// </summary>
+/// <remarks>
+/// This node includes functionality for:
+///     - Melee Attacks
+///         - Hurtboxes
+///         - Variable Hurtbox Collision Check Duration
+///     - Ranged Attacks
+///         - Projectiles
+///         - Single Shot Projectiles
+///         - Continuous Fire Projectiles
+///         - Specifiable Projectile Spawn Bone
+///     - AOE Attacks
+///         - Damage dealt within a radius
+///         - Spawns an AOE particle effect provided
+///     - Rotation and Translation
+///         - Rotation to target\n
+///           Specify a speed, delay, and duration that is used to rotate towards the target as part of the attack.
+///         - Translation to target\n
+///           Specify a speed, delay, and duration that is used to move towards the target as part of the attack.
+/// </remarks>
+/// @bugs
 public class Attack : NodeAI.ActionBase  /// @todo Comment
 {
     Animator animator;

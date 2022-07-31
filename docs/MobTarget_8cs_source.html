@@ -76,13 +76,13 @@ $(function() {
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">using</span> UnityEngine;</div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">using</span> <a class="code hl_namespace" href="namespaceNodeAI.html">NodeAI</a>;</div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">using</span> System.Linq;</div>
-<div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classMobTarget.html">MobTarget</a> : MonoBehaviour  </div>
+<div class="line"><a id="l00006" name="l00006"></a><span class="lineno"><a class="line" href="classMobTarget.html">    6</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_class" href="classMobTarget.html">MobTarget</a> : MonoBehaviour  </div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span>{</div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>    <span class="keyword">public</span> <span class="keywordtype">int</span> maxConcurrentAttackers = 3;</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>    <span class="keyword">public</span> <span class="keywordtype">float</span> influenceRadius = 10;</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keyword">public</span> List&lt;NodeAI_Agent&gt; attackers = <span class="keyword">new</span> List&lt;NodeAI_Agent&gt;();</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keyword">public</span> <span class="keywordtype">bool</span> RegisterAttacker(<a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classNodeAI_1_1NodeAI__Agent.html">NodeAI_Agent</a> attacker)</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keyword">public</span> <span class="keywordtype">bool</span> RegisterAttacker(<a class="code hl_class" href="classNodeAI_1_1NodeAI__Agent.html">NodeAI_Agent</a> attacker)</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    {</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>        <span class="keywordflow">if</span>(attackers.Contains(attacker))</div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        {</div>
@@ -105,13 +105,13 @@ $(function() {
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    <span class="keywordtype">void</span> Update()</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    {</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>        attackers.Where(</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            a =&gt; a == <span class="keyword">null</span> || a.GetComponent&lt;<a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classHealthScript.html">HealthScript</a>&gt;().isDead || Vector3.Distance(a.transform.position, transform.position) &gt; influenceRadius).ToList().ForEach(</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>            a =&gt; a == <span class="keyword">null</span> || a.GetComponent&lt;<a class="code hl_class" href="classHealthScript.html">HealthScript</a>&gt;().isDead || Vector3.Distance(a.transform.position, transform.position) &gt; influenceRadius).ToList().ForEach(</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>                a =&gt; attackers.Remove(a));</div>
 <div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    }</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>}</div>
-<div class="ttc" id="aclassHealthScript_html"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classHealthScript.html">HealthScript</a></div></div>
-<div class="ttc" id="aclassMobTarget_html"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classMobTarget.html">MobTarget</a></div></div>
-<div class="ttc" id="aclassNodeAI_1_1NodeAI__Agent_html"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classNodeAI_1_1NodeAI__Agent.html">NodeAI::NodeAI_Agent</a></div></div>
+<div class="ttc" id="aclassHealthScript_html"><div class="ttname"><a href="classHealthScript.html">HealthScript</a></div><div class="ttdef"><b>Definition:</b> <a href="HealthScript_8cs_source.html#l00007">HealthScript.cs:8</a></div></div>
+<div class="ttc" id="aclassMobTarget_html"><div class="ttname"><a href="classMobTarget.html">MobTarget</a></div><div class="ttdef"><b>Definition:</b> <a href="MobTarget_8cs_source.html#l00006">MobTarget.cs:7</a></div></div>
+<div class="ttc" id="aclassNodeAI_1_1NodeAI__Agent_html"><div class="ttname"><a href="classNodeAI_1_1NodeAI__Agent.html">NodeAI.NodeAI_Agent</a></div><div class="ttdoc">The Component responsible for enabling NodeAI_Behaviour files to be used to control the behaviour of ...</div><div class="ttdef"><b>Definition:</b> <a href="NodeAI__Agent_8cs_source.html#l00027">NodeAI_Agent.cs:28</a></div></div>
 <div class="ttc" id="anamespaceNodeAI_html"><div class="ttname"><a href="namespaceNodeAI.html">NodeAI</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

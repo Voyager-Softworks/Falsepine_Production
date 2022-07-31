@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['journalmanager_0',['JournalManager',['http://docs.unity3d.com/ScriptReference/classJournalManager.html',1,'JournalManager'],['http://docs.unity3d.com/ScriptReference/classJournalManager_1_1MonsterClues_1_1Data.html',1,'JournalManager']]],
-  ['journalpickupinteract_1',['JournalPickupInteract',['http://docs.unity3d.com/ScriptReference/classJournalPickupInteract.html',1,'']]],
-  ['journalpickuplimiter_2',['JournalPickupLimiter',['http://docs.unity3d.com/ScriptReference/classJournalPickupLimiter.html',1,'']]],
-  ['journaluilist_3',['JournalUIList',['http://docs.unity3d.com/ScriptReference/classJournalUIList.html',1,'']]],
-  ['monsterclues_4',['MonsterClues',['http://docs.unity3d.com/ScriptReference/classJournalManager_1_1MonsterClues_1_1Data.html',1,'JournalManager']]]
+  ['journalmanager_0',['JournalManager',['../classJournalManager.html',1,'']]],
+  ['journalpickupinteract_1',['JournalPickupInteract',['../classJournalPickupInteract.html',1,'']]],
+  ['journalpickuplimiter_2',['JournalPickupLimiter',['../classJournalPickupLimiter.html',1,'']]],
+  ['journaluilist_3',['JournalUIList',['../classJournalUIList.html',1,'']]]
 ];

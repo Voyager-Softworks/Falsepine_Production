@@ -79,7 +79,7 @@ Inheritance diagram for PlayerInventoryInterface:</div>
 <div class="dyncontent">
 <div class="center"><img src="classPlayerInventoryInterface__inherit__graph.png" border="0" usemap="#aPlayerInventoryInterface_inherit__map" alt="Inheritance graph"/></div>
 <map name="aPlayerInventoryInterface_inherit__map" id="aPlayerInventoryInterface_inherit__map">
-<area shape="rect" title=" " alt="" coords="5,131,256,560"/>
+<area shape="rect" title=" " alt="" coords="5,131,256,589"/>
 <area shape="rect" title=" " alt="" coords="69,5,193,83"/>
 </map>
 </div>
@@ -88,13 +88,16 @@ Collaboration diagram for PlayerInventoryInterface:</div>
 <div class="dyncontent">
 <div class="center"><img src="classPlayerInventoryInterface__coll__graph.png" border="0" usemap="#aPlayerInventoryInterface_coll__map" alt="Collaboration graph"/></div>
 <map name="aPlayerInventoryInterface_coll__map" id="aPlayerInventoryInterface_coll__map">
-<area shape="rect" title=" " alt="" coords="53,756,303,1141"/>
-<area shape="rect" title=" " alt="" coords="5,5,129,83"/>
-<area shape="rect" href="classInventory.html" title=" " alt="" coords="65,191,291,620"/>
-<area shape="rect" href="classItem.html" title=" " alt="" coords="316,132,563,679"/>
-<area shape="rect" title=" " alt="" coords="193,5,323,83"/>
-<area shape="rect" href="interfaceStatsManager_1_1UsesStats.html" title=" " alt="" coords="347,5,532,83"/>
-<area shape="rect" href="interfaceStatsManager_1_1HasStatMods.html" title=" " alt="" coords="556,5,763,83"/>
+<area shape="rect" title=" " alt="" coords="185,931,436,1331"/>
+<area shape="rect" title=" " alt="" coords="140,49,264,127"/>
+<area shape="rect" href="classInventory.html" title=" " alt="" coords="89,321,316,765"/>
+<area shape="rect" href="classAimZone.html" title=" " alt="" coords="340,358,499,729"/>
+<area shape="rect" href="classItem.html" title=" " alt="" coords="671,233,918,853"/>
+<area shape="rect" title=" " alt="" coords="548,49,678,127"/>
+<area shape="rect" href="interfaceStatsManager_1_1UsesStats.html" title=" " alt="" coords="702,49,887,127"/>
+<area shape="rect" href="interfaceStatsManager_1_1HasStatMods.html" title=" " alt="" coords="911,49,1118,127"/>
+<area shape="rect" href="interfaceEconomyManager_1_1Purchasable.html" title=" " alt="" coords="1142,42,1369,134"/>
+<area shape="rect" href="structAimZone_1_1Corners.html" title=" " alt="" coords="320,5,455,171"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -113,6 +116,8 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:ad7915e91ef2f8608682945fd627b3ae8"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structAimZone_1_1Corners.html">AimZone.Corners</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayerInventoryInterface.html#ad7915e91ef2f8608682945fd627b3ae8">CalculateAimZoneCorners</a> ()</td></tr>
+<tr class="separator:ad7915e91ef2f8608682945fd627b3ae8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7cc6e5ef35fa3df99b0dc1642c7984c4"><td class="memItemLeft" align="right" valign="top">GameObject&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayerInventoryInterface.html#a7cc6e5ef35fa3df99b0dc1642c7984c4">GetWeaponFirepoint</a> (<a class="el" href="classItem.html">Item</a> weapon)</td></tr>
 <tr class="separator:a7cc6e5ef35fa3df99b0dc1642c7984c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7203594e2f0ec8c0b6b287d0c40c2a9c"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayerInventoryInterface.html#a7203594e2f0ec8c0b6b287d0c40c2a9c">GetWeaponAnimatorBoolName</a> (<a class="el" href="classItem.html">Item</a> weapon)</td></tr>
@@ -154,26 +159,28 @@ Public Attributes</h2></td></tr>
 <tr class="separator:abffb454fb7f889419bc454ee8b71b408"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4b3e22f8e80c872aa5e4b8109294e15"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="classPlayerInventoryInterface_1_1WeaponModelLink.html">WeaponModelLink</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayerInventoryInterface.html#ab4b3e22f8e80c872aa5e4b8109294e15">weaponFirepointLinks</a> = new List&lt;<a class="el" href="classPlayerInventoryInterface_1_1WeaponModelLink.html">WeaponModelLink</a>&gt;()</td></tr>
 <tr class="separator:ab4b3e22f8e80c872aa5e4b8109294e15"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a64eaab76a3f147a4fc4b7ce3bfb9af65"><td class="memItemLeft" align="right" valign="top">LineRenderer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayerInventoryInterface.html#a64eaab76a3f147a4fc4b7ce3bfb9af65">aimLines</a></td></tr>
-<tr class="separator:a64eaab76a3f147a4fc4b7ce3bfb9af65"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a522dca6a42012874e4f8b20285a8ff93"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classAimZone.html">AimZone</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayerInventoryInterface.html#a522dca6a42012874e4f8b20285a8ff93">m_aimZone</a></td></tr>
+<tr class="separator:a522dca6a42012874e4f8b20285a8ff93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5f35b0ef581a6917e0a3a9cc33447986"><td class="memItemLeft" align="right" valign="top">Animator&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayerInventoryInterface.html#a5f35b0ef581a6917e0a3a9cc33447986">playerAnimator</a></td></tr>
 <tr class="separator:a5f35b0ef581a6917e0a3a9cc33447986"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
+<tr class="memitem:a50facf6c870e152ec941fa5567f1c2fd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayerInventoryInterface.html#a50facf6c870e152ec941fa5567f1c2fd">OnDrawGizmos</a> ()</td></tr>
+<tr class="separator:a50facf6c870e152ec941fa5567f1c2fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a1f31e539a42cb07c27e4f86c3ffcb9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayerInventoryInterface.html#a1a1f31e539a42cb07c27e4f86c3ffcb9">Start</a> ()</td></tr>
 <tr class="separator:a1a1f31e539a42cb07c27e4f86c3ffcb9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee0632b74fc1e5e87b2041cba017c7c7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayerInventoryInterface.html#aee0632b74fc1e5e87b2041cba017c7c7">Update</a> ()</td></tr>
 <tr class="separator:aee0632b74fc1e5e87b2041cba017c7c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa05ca50c0effece9ab4084069889e8ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayerInventoryInterface.html#aa05ca50c0effece9ab4084069889e8ac">UpdateAimLines</a> ()</td></tr>
-<tr class="separator:aa05ca50c0effece9ab4084069889e8ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb77bee4ae84e47550a69dbbbacabfbf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayerInventoryInterface.html#afb77bee4ae84e47550a69dbbbacabfbf">UpdateAimZone</a> ()</td></tr>
+<tr class="separator:afb77bee4ae84e47550a69dbbbacabfbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae10f1cb647c441f4199d26508240f97d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayerInventoryInterface.html#ae10f1cb647c441f4199d26508240f97d">OnEnable</a> ()</td></tr>
 <tr class="separator:ae10f1cb647c441f4199d26508240f97d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a64187e122c2a0ca05a1f17b2b2f0ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPlayerInventoryInterface.html#a5a64187e122c2a0ca05a1f17b2b2f0ae">OnDisable</a> ()</td></tr>
 <tr class="separator:a5a64187e122c2a0ca05a1f17b2b2f0ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000042">Todo:</a></b></dt><dd>Comment </dd></dl>
+<div class="textblock"><dl class="todo"><dt><b><a class="el" href="todo.html#_todo000026">Todo:</a></b></dt><dd>Comment </dd></dl>
 
 <p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00009">9</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
 </div><h2 class="groupheader">Member Enumeration Documentation</h2>
@@ -194,6 +201,33 @@ Private Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="ad7915e91ef2f8608682945fd627b3ae8" name="ad7915e91ef2f8608682945fd627b3ae8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad7915e91ef2f8608682945fd627b3ae8">&#9670;&nbsp;</a></span>CalculateAimZoneCorners()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structAimZone_1_1Corners.html">AimZone.Corners</a> PlayerInventoryInterface.CalculateAimZoneCorners </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00179">179</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
+
+</div>
+</div>
 <a id="a12ea2ba1aa7164a59659d0b74a3e46ea" name="a12ea2ba1aa7164a59659d0b74a3e46ea"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a12ea2ba1aa7164a59659d0b74a3e46ea">&#9670;&nbsp;</a></span>DisableAllAnimatorWeapons()</h2>
 
@@ -217,7 +251,7 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00278">278</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00297">297</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
 
 </div>
 </div>
@@ -244,7 +278,7 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00308">308</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00327">327</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
 
 </div>
 </div>
@@ -271,7 +305,7 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00299">299</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00318">318</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
 
 </div>
 </div>
@@ -299,7 +333,7 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00208">208</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00227">227</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
 
 </div>
 </div>
@@ -327,7 +361,7 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00195">195</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00214">214</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
 
 </div>
 </div>
@@ -354,7 +388,34 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00295">295</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00314">314</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
+
+</div>
+</div>
+<a id="a50facf6c870e152ec941fa5567f1c2fd" name="a50facf6c870e152ec941fa5567f1c2fd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50facf6c870e152ec941fa5567f1c2fd">&#9670;&nbsp;</a></span>OnDrawGizmos()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void PlayerInventoryInterface.OnDrawGizmos </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00048">48</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
 
 </div>
 </div>
@@ -381,7 +442,7 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00291">291</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00310">310</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
 
 </div>
 </div>
@@ -408,7 +469,7 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00267">267</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00286">286</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
 
 </div>
 </div>
@@ -436,7 +497,7 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00246">246</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00265">265</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
 
 </div>
 </div>
@@ -463,7 +524,7 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00050">50</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00062">62</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
 
 </div>
 </div>
@@ -490,7 +551,7 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00220">220</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00239">239</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
 
 </div>
 </div>
@@ -517,12 +578,12 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00063">63</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00078">78</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
 
 </div>
 </div>
-<a id="aa05ca50c0effece9ab4084069889e8ac" name="aa05ca50c0effece9ab4084069889e8ac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa05ca50c0effece9ab4084069889e8ac">&#9670;&nbsp;</a></span>UpdateAimLines()</h2>
+<a id="afb77bee4ae84e47550a69dbbbacabfbf" name="afb77bee4ae84e47550a69dbbbacabfbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afb77bee4ae84e47550a69dbbbacabfbf">&#9670;&nbsp;</a></span>UpdateAimZone()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -531,7 +592,7 @@ Private Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void PlayerInventoryInterface.UpdateAimLines </td>
+          <td class="memname">void PlayerInventoryInterface.UpdateAimZone </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -544,27 +605,11 @@ Private Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00142">142</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00156">156</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="a64eaab76a3f147a4fc4b7ce3bfb9af65" name="a64eaab76a3f147a4fc4b7ce3bfb9af65"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a64eaab76a3f147a4fc4b7ce3bfb9af65">&#9670;&nbsp;</a></span>aimLines</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">LineRenderer PlayerInventoryInterface.aimLines</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00044">44</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
-
-</div>
-</div>
 <a id="a813a602df5f16793e8b1a615f411f085" name="a813a602df5f16793e8b1a615f411f085"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a813a602df5f16793e8b1a615f411f085">&#9670;&nbsp;</a></span>aimWeaponAction</h2>
 
@@ -594,6 +639,22 @@ Private Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00018">18</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
+
+</div>
+</div>
+<a id="a522dca6a42012874e4f8b20285a8ff93" name="a522dca6a42012874e4f8b20285a8ff93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a522dca6a42012874e4f8b20285a8ff93">&#9670;&nbsp;</a></span>m_aimZone</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classAimZone.html">AimZone</a> PlayerInventoryInterface.m_aimZone</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="PlayerInventoryInterface_8cs_source.html#l00044">44</a> of file <a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a>.</p>
 
 </div>
 </div>
@@ -758,7 +819,7 @@ Private Member Functions</h2></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>Assets/Scripts/<a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a></li>
+<li>Assets/Scripts/Player/<a class="el" href="PlayerInventoryInterface_8cs_source.html">PlayerInventoryInterface.cs</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
