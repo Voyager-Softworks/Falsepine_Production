@@ -40,38 +40,18 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: GitHub Pages
-        # You may pin to the exact commit or the version.
-        # uses: crazy-max/ghaction-github-pages@eb08c35b9fab86751edfff4e55cd5cde35ff0e52
-        uses: crazy-max/ghaction-github-pages@v3.0.0
-        with:
-          # Git domain (default github.com)
-          #domain: # optional, default is github.com
-          # GitHub repository where assets will be deployed (default $GITHUB_REPOSITORY)
-          #repo: # optional
-          # Git branch where assets will be deployed
-          #target_branch: # optional, default is gh-pages
-          # Create incremental commit instead of doing push force
-          #keep_history: # optional, default is false
-          # Allow an empty commit to be created
-          #allow_empty_commit: # optional, default is true
-          # Build directory to deploy
-          build_dir: /docs
-          # Whether to treat build_dir as an absolute path
-          #absolute_build_dir: # optional, default is false
-          # If enabled, the content of symbolic links will be copied
-          #follow_symlinks: # optional, default is false
-          # The committer name and email address
-          #committer: # optional
-          # The author name and email address
-          #author: # optional
-          # Commit message
-          #commit_message: # optional
-          # Write the given domain name to the CNAME file
-          #fqdn: # optional
-          # Allow Jekyll to build your site
-          #jekyll: # optional, default is true
-          # If enabled, nothing will be pushed
-          #dry_run: # optional, default is false
-          # Enable verbose output
-          #verbose: # optional, default
+      - name: Publish to GitHub Pages
+  # You may pin to the exact commit or the version.
+  # uses: tsunematsu21/actions-publish-gh-pages@c04b531c52b8f9d25c596bc6e6a7ddc116b2f3f8
+  uses: tsunematsu21/actions-publish-gh-pages@v1.0.2
+  with:
+    # The name of the directory that containing the content to be published
+    dir: ./docs
+    # The name of the remote branch that publishing source for GitHub Pages site
+    branch: main
+    # The remote repository that publishing source for GitHub Pages site, defaults to current repo and is formatted like 'user/repo-name'
+    repo: Voyager-Softworks/Falsepine_Production
+    # The personal access token that authorize repo access
+    token: ${{ secrets.GITHUB_TOKEN }}
+      
+      
