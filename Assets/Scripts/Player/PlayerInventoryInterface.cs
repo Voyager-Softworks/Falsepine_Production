@@ -73,6 +73,7 @@ public class PlayerInventoryInterface : MonoBehaviour  /// @todo Comment
         // aimLines.startColor = aimLineStartColor;
         // aimLines.endColor = aimLineEndColor;
     }
+    
 
     // Update is called once per frame
     void Update()
@@ -166,7 +167,7 @@ public class PlayerInventoryInterface : MonoBehaviour  /// @todo Comment
             if (!playerMovement) return;
 
             if (!rangedWeapon.m_isAiming || rangedWeapon.m_reloadTimer > 0 || playerMovement.isRolling){
-                //m_aimZone.Hide();
+                m_aimZone.Hide();
             }
             else{
                 m_aimZone.Show();
@@ -197,14 +198,14 @@ public class PlayerInventoryInterface : MonoBehaviour  /// @todo Comment
         // if nan or inf, set to 0
         if (float.IsNaN(currentAimAngle) || float.IsInfinity(currentAimAngle)) currentAimAngle = 0;
 
-        corners.backLeft = m_aimZone.transform.position + m_aimZone.transform.right * -0.6f + m_aimZone.transform.forward * 0.1f;
-        corners.backRight = m_aimZone.transform.position + m_aimZone.transform.right * 0.6f + m_aimZone.transform.forward * 0.1f;
+        corners.backLeft = m_aimZone.transform.position + m_aimZone.transform.right * -0.0f + m_aimZone.transform.forward * 0.1f;
+        corners.backRight = m_aimZone.transform.position + m_aimZone.transform.right * 0.0f + m_aimZone.transform.forward * 0.1f;
 
         float distFromBackLeftToAimPoint = Vector3.Distance(corners.backLeft, new Vector3(aimPoint.x, corners.backLeft.y, aimPoint.z));
         float distFromBackRightToAimPoint = Vector3.Distance(corners.backRight, new Vector3(aimPoint.x, corners.backRight.y, aimPoint.z));
 
-        corners.frontLeft = Quaternion.Euler(0, -currentAimAngle, 0) * (corners.backLeft + (m_aimZone.transform.forward * distFromBackLeftToAimPoint) - corners.backLeft) + corners.backLeft;
-        corners.frontRight = Quaternion.Euler(0, currentAimAngle, 0) * (corners.backRight + (m_aimZone.transform.forward * distFromBackRightToAimPoint) - corners.backRight) + corners.backRight;
+        corners.frontLeft = Quaternion.Euler(0, -currentAimAngle, 0) * (corners.backLeft + (m_aimZone.transform.forward * rangedWeapon.m_range) - corners.backLeft) + corners.backLeft;
+        corners.frontRight = Quaternion.Euler(0, currentAimAngle, 0) * (corners.backRight + (m_aimZone.transform.forward * rangedWeapon.m_range) - corners.backRight) + corners.backRight;
         corners.frontLeft.y = m_aimZone.transform.position.y;
         corners.frontRight.y = m_aimZone.transform.position.y;
 
