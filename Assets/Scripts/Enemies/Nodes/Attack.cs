@@ -27,7 +27,8 @@ using UnityEngine.AI;
 ///           Specify a speed, delay, and duration that is used to move towards the target as part of the attack.
 /// </remarks>
 /// @bug
-///     - Issue where an attack animation MUST fully play or the attack will not register as complete. It cannot transition before it is at least 90% complete.
+///     Issue where an attack animation MUST fully play or the attack will not register as complete. 
+///     - It cannot transition before it is at least 90% complete.
 public class Attack : NodeAI.ActionBase  /// @todo Comment
 {
     Animator animator;
