@@ -71,6 +71,11 @@ public class RotateTowardsPlayer : MonoBehaviour
     /// <param name="duration">The length of time to rotate.</param>
     /// <param name="speed">The speed of the rotation.</param>
     /// <param name="delay">The delay before the rotation starts.</param>
+    /// <example>
+    /// <code>
+    /// RotateToPlayer(1.0f, 6.0f, 0.2f); // Rotate towards the player for 1 second at a speed of 6, after a delay of 0.2 seconds.
+    /// </code>
+    /// </example>
     public void RotateToPlayer(float duration, float speed, float delay)
     {
         StartCoroutine(RotateToPlayerCoroutine(duration, speed, delay));
