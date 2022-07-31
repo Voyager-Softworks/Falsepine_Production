@@ -75,7 +75,7 @@ $(function() {
 <div class="line"><a id="l00002" name="l00002"></a><span class="lineno">    2</span><span class="keyword">using</span> System.Collections.Generic;</div>
 <div class="line"><a id="l00003" name="l00003"></a><span class="lineno">    3</span><span class="keyword">using</span> UnityEngine;</div>
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span> </div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_classRef" href="http://docs.unity3d.com/ScriptReference/classDynamicVaulting.html">DynamicVaulting</a> : MonoBehaviour</div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno"><a class="line" href="classDynamicVaulting.html">    8</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_class" href="classDynamicVaulting.html">DynamicVaulting</a> : MonoBehaviour</div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span>{</div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <span class="keyword">public</span> <span class="keywordtype">int</span> sphereCastCount = 10;</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keyword">public</span> <span class="keywordtype">float</span> sphereCastRadius = 0.5f;</div>
@@ -115,10 +115,10 @@ $(function() {
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="comment">// Update is called once per frame</span></div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordtype">void</span> Update()</div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    {</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        canVault = <a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classDynamicVaulting.html#a77918edc172c2320d3d91731c55c2274">CalculateVaultData</a>();</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        canVault = <a class="code hl_function" href="classDynamicVaulting.html#a77918edc172c2320d3d91731c55c2274">CalculateVaultData</a>();</div>
 <div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    }</div>
 <div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classDynamicVaulting.html#a77918edc172c2320d3d91731c55c2274">CalculateVaultData</a>()</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classDynamicVaulting.html#a77918edc172c2320d3d91731c55c2274">   59</a></span>    <span class="keyword">public</span> <span class="keywordtype">bool</span> <a class="code hl_function" href="classDynamicVaulting.html#a77918edc172c2320d3d91731c55c2274">CalculateVaultData</a>()</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    {</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>        sphereCastPositions = <span class="keyword">new</span> Vector3[sphereCastCount];</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>        sphereCastHits = <span class="keyword">new</span> RaycastHit[sphereCastCount];</div>
@@ -183,7 +183,7 @@ $(function() {
 <div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>    }</div>
 <div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span> </div>
 <div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>    <span class="keyword">private</span> <span class="keywordtype">void</span> OnDrawGizmos() {</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <span class="keywordflow">if</span>(!Application.isPlaying) canVault = <a class="code hl_functionRef" href="http://docs.unity3d.com/ScriptReference/classDynamicVaulting.html#a77918edc172c2320d3d91731c55c2274">CalculateVaultData</a>();</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>        <span class="keywordflow">if</span>(!Application.isPlaying) canVault = <a class="code hl_function" href="classDynamicVaulting.html#a77918edc172c2320d3d91731c55c2274">CalculateVaultData</a>();</div>
 <div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>        <span class="keywordflow">for</span>(<span class="keywordtype">int</span> i = 0; i &lt; sphereCastCount; i++)</div>
 <div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>        {</div>
 <div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            Gizmos.color = canVault ? Color.blue : Color.red;</div>
@@ -225,8 +225,8 @@ $(function() {
 <div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>        Gizmos.color = Color.white;</div>
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span>    }</div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>}</div>
-<div class="ttc" id="aclassDynamicVaulting_html"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classDynamicVaulting.html">DynamicVaulting</a></div></div>
-<div class="ttc" id="aclassDynamicVaulting_html_a77918edc172c2320d3d91731c55c2274"><div class="ttname"><a href="http://docs.unity3d.com/ScriptReference/classDynamicVaulting.html#a77918edc172c2320d3d91731c55c2274">DynamicVaulting::CalculateVaultData</a></div><div class="ttdeci">bool CalculateVaultData()</div></div>
+<div class="ttc" id="aclassDynamicVaulting_html"><div class="ttname"><a href="classDynamicVaulting.html">DynamicVaulting</a></div><div class="ttdoc">Script to allow characters to dynamically vault over obstacles in the scene.</div><div class="ttdef"><b>Definition:</b> <a href="DynamicVaulting_8cs_source.html#l00008">DynamicVaulting.cs:9</a></div></div>
+<div class="ttc" id="aclassDynamicVaulting_html_a77918edc172c2320d3d91731c55c2274"><div class="ttname"><a href="classDynamicVaulting.html#a77918edc172c2320d3d91731c55c2274">DynamicVaulting.CalculateVaultData</a></div><div class="ttdeci">bool CalculateVaultData()</div><div class="ttdoc">Calculates data related to vaulting.</div><div class="ttdef"><b>Definition:</b> <a href="DynamicVaulting_8cs_source.html#l00059">DynamicVaulting.cs:59</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

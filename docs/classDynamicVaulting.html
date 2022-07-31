@@ -81,8 +81,8 @@ Inheritance diagram for DynamicVaulting:</div>
 <div class="dyncontent">
 <div class="center"><img src="classDynamicVaulting__inherit__graph.png" border="0" usemap="#aDynamicVaulting_inherit__map" alt="Inheritance graph"/></div>
 <map name="aDynamicVaulting_inherit__map" id="aDynamicVaulting_inherit__map">
-<area shape="rect" title="Script to allow characters to dynamically vault over obstacles in the scene." alt="" coords="5,131,181,457"/>
-<area shape="rect" title=" " alt="" coords="31,5,155,83"/>
+<area shape="rect" title="Script to allow characters to dynamically vault over obstacles in the scene." alt="" coords="5,131,188,487"/>
+<area shape="rect" title=" " alt="" coords="35,5,159,83"/>
 </map>
 </div>
 <div class="dynheader">
@@ -90,13 +90,17 @@ Collaboration diagram for DynamicVaulting:</div>
 <div class="dyncontent">
 <div class="center"><img src="classDynamicVaulting__coll__graph.png" border="0" usemap="#aDynamicVaulting_coll__map" alt="Collaboration graph"/></div>
 <map name="aDynamicVaulting_coll__map" id="aDynamicVaulting_coll__map">
-<area shape="rect" title="Script to allow characters to dynamically vault over obstacles in the scene." alt="" coords="5,131,181,457"/>
-<area shape="rect" title=" " alt="" coords="31,5,155,83"/>
+<area shape="rect" title="Script to allow characters to dynamically vault over obstacles in the scene." alt="" coords="5,131,188,487"/>
+<area shape="rect" title=" " alt="" coords="35,5,159,83"/>
 </map>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:adbf8d289077a5fb0a36d346fb560a32c"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicVaulting.html#adbf8d289077a5fb0a36d346fb560a32c">GetVaultingHeight</a> ()</td></tr>
+<tr class="separator:adbf8d289077a5fb0a36d346fb560a32c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afda08462a8904575ed31ed500c204812"><td class="memItemLeft" align="right" valign="top">Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicVaulting.html#afda08462a8904575ed31ed500c204812">GetVaultingDirection</a> ()</td></tr>
+<tr class="separator:afda08462a8904575ed31ed500c204812"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a77918edc172c2320d3d91731c55c2274"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classDynamicVaulting.html#a77918edc172c2320d3d91731c55c2274">CalculateVaultData</a> ()</td></tr>
 <tr class="memdesc:a77918edc172c2320d3d91731c55c2274"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates data related to vaulting.  <a href="classDynamicVaulting.html#a77918edc172c2320d3d91731c55c2274">More...</a><br /></td></tr>
 <tr class="separator:a77918edc172c2320d3d91731c55c2274"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -178,7 +182,61 @@ Private Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>True if the character can vault, false otherwise.</dd></dl>
 <p >This method detects whether there is an object in front of the player which can be vaulted over, and finds the point on the object which can be grabbed by the character. </p>
 
-<p class="definition">Definition at line <a class="el" href="DynamicVaulting_8cs_source.html#l00050">50</a> of file <a class="el" href="DynamicVaulting_8cs_source.html">DynamicVaulting.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DynamicVaulting_8cs_source.html#l00059">59</a> of file <a class="el" href="DynamicVaulting_8cs_source.html">DynamicVaulting.cs</a>.</p>
+
+</div>
+</div>
+<a id="afda08462a8904575ed31ed500c204812" name="afda08462a8904575ed31ed500c204812"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afda08462a8904575ed31ed500c204812">&#9670;&nbsp;</a></span>GetVaultingDirection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Vector3 DynamicVaulting.GetVaultingDirection </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DynamicVaulting_8cs_source.html#l00032">32</a> of file <a class="el" href="DynamicVaulting_8cs_source.html">DynamicVaulting.cs</a>.</p>
+
+</div>
+</div>
+<a id="adbf8d289077a5fb0a36d346fb560a32c" name="adbf8d289077a5fb0a36d346fb560a32c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbf8d289077a5fb0a36d346fb560a32c">&#9670;&nbsp;</a></span>GetVaultingHeight()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">float DynamicVaulting.GetVaultingHeight </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="DynamicVaulting_8cs_source.html#l00028">28</a> of file <a class="el" href="DynamicVaulting_8cs_source.html">DynamicVaulting.cs</a>.</p>
 
 </div>
 </div>
@@ -205,7 +263,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DynamicVaulting_8cs_source.html#l00114">114</a> of file <a class="el" href="DynamicVaulting_8cs_source.html">DynamicVaulting.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DynamicVaulting_8cs_source.html#l00123">123</a> of file <a class="el" href="DynamicVaulting_8cs_source.html">DynamicVaulting.cs</a>.</p>
 
 </div>
 </div>
@@ -232,7 +290,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DynamicVaulting_8cs_source.html#l00031">31</a> of file <a class="el" href="DynamicVaulting_8cs_source.html">DynamicVaulting.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DynamicVaulting_8cs_source.html#l00040">40</a> of file <a class="el" href="DynamicVaulting_8cs_source.html">DynamicVaulting.cs</a>.</p>
 
 </div>
 </div>
@@ -259,7 +317,7 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="DynamicVaulting_8cs_source.html#l00037">37</a> of file <a class="el" href="DynamicVaulting_8cs_source.html">DynamicVaulting.cs</a>.</p>
+<p class="definition">Definition at line <a class="el" href="DynamicVaulting_8cs_source.html#l00046">46</a> of file <a class="el" href="DynamicVaulting_8cs_source.html">DynamicVaulting.cs</a>.</p>
 
 </div>
 </div>

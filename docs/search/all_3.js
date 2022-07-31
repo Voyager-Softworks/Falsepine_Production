@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['calculatevaultdata_0',['CalculateVaultData',['http://docs.unity3d.com/ScriptReference/classDynamicVaulting.html#a77918edc172c2320d3d91731c55c2274',1,'DynamicVaulting']]],
+  ['calculatevaultdata_0',['CalculateVaultData',['../classDynamicVaulting.html#a77918edc172c2320d3d91731c55c2274',1,'DynamicVaulting']]],
   ['cameradrag_1',['CameraDrag',['../classCameraDrag.html',1,'']]],
   ['camerafollow_2',['CameraFollow',['../classCameraFollow.html',1,'']]],
   ['camerazoom_3',['CameraZoom',['../classCameraZoom.html',1,'']]],

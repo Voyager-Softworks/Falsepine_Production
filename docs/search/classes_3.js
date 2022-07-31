@@ -11,5 +11,5 @@ var searchData=
   ['divide_8',['Divide',['../classNodeAI_1_1Math_1_1Divide.html',1,'NodeAI::Math']]],
   ['dynamicsnow_9',['DynamicSnow',['../classDynamicSnow.html',1,'']]],
   ['dynamicsnowpainter_10',['DynamicSnowPainter',['../classDynamicSnowPainter.html',1,'']]],
-  ['dynamicvaulting_11',['DynamicVaulting',['http://docs.unity3d.com/ScriptReference/classDynamicVaulting.html',1,'']]]
+  ['dynamicvaulting_11',['DynamicVaulting',['../classDynamicVaulting.html',1,'']]]
 ];

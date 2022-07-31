@@ -30,5 +30,5 @@ var searchData=
   ['drawray_27',['DrawRay',['../classNodeAI_1_1CustomGizmos.html#ae0d39b88b51de7bf099f8aad5b2aad2e',1,'NodeAI::CustomGizmos']]],
   ['dynamicsnow_28',['DynamicSnow',['../classDynamicSnow.html',1,'']]],
   ['dynamicsnowpainter_29',['DynamicSnowPainter',['../classDynamicSnowPainter.html',1,'']]],
-  ['dynamicvaulting_30',['DynamicVaulting',['http://docs.unity3d.com/ScriptReference/classDynamicVaulting.html',1,'']]]
+  ['dynamicvaulting_30',['DynamicVaulting',['../classDynamicVaulting.html',1,'']]]
 ];
