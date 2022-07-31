@@ -42,3 +42,9 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@main
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: 'Documentation for {{ EVENT_PAYLOAD.repository.full_name }} has been updated and deployed successfully! https://voyager-softworks.github.io/Falsepine_Production/index.html'
