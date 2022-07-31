@@ -77,137 +77,137 @@ $(function() {
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="keyword">using</span> <a class="code hl_namespace" href="namespaceNodeAI.html">NodeAI</a>;</div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="keyword">using</span> UnityEngine.AI;</div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classAttack.html">   30</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_class" href="classAttack.html">Attack</a> : <a class="code hl_namespace" href="namespaceNodeAI.html">NodeAI</a>.<a class="code hl_class" href="classNodeAI_1_1ActionBase.html">ActionBase</a>  </div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>{</div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    Animator animator;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    NavMeshAgent navAgent;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <a class="code hl_class" href="classRotateTowardsPlayer.html">RotateTowardsPlayer</a> rotateTowardsPlayer;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    AudioSource audioSource;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <a class="code hl_class" href="classAttackData.html">AttackData</a> attackData;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordtype">bool</span> initialized = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">float</span> timeSinceInitialized = 0;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    <span class="keyword">public</span> <a class="code hl_class" href="classAttack.html">Attack</a>()</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    {</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        AddProperty&lt;AttackData&gt;(<span class="stringliteral">&quot;Attack Data&quot;</span>, <span class="keyword">null</span>);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        AddProperty&lt;Transform&gt;(<span class="stringliteral">&quot;Projectile spawn bone&quot;</span>, <span class="keyword">null</span>);</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        AddProperty&lt;bool&gt;(<span class="stringliteral">&quot;Interrupted&quot;</span>, <span class="keyword">false</span>);</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    }</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classAttack.html#a94db94ff2af42918302fc4a97c25212f">   46</a></span>    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classAttack.html#a94db94ff2af42918302fc4a97c25212f">OnInit</a>()</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>    {</div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>        initialized = <span class="keyword">false</span>;</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        SetProperty&lt;bool&gt;(<span class="stringliteral">&quot;Interrupted&quot;</span>, <span class="keyword">false</span>);</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        timeSinceInitialized = 0;</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        attackData = GetProperty&lt;AttackData&gt;(<span class="stringliteral">&quot;Attack Data&quot;</span>);</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    }</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno"><a class="line" href="classAttack.html#a791701e5072e37b3ad1b4e99389cbc6d">   53</a></span>    <span class="keyword">public</span> <span class="keyword">override</span> <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a> <a class="code hl_function" href="classAttack.html#a791701e5072e37b3ad1b4e99389cbc6d">Eval</a>(<a class="code hl_class" href="classNodeAI_1_1NodeAI__Agent.html">NodeAI_Agent</a> agent, <a class="code hl_class" href="classNodeAI_1_1NodeTree.html">NodeTree</a>.<a class="code hl_class" href="classNodeAI_1_1NodeTree_1_1Leaf.html">Leaf</a> current)</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    {</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>        <span class="keywordflow">if</span>(animator == <span class="keyword">null</span>)</div>
-<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        {</div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>            animator = agent.GetComponentInChildren&lt;Animator&gt;();</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            <span class="keywordflow">if</span>(animator == <span class="keyword">null</span>)</div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            {</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>                Debug.LogError(<span class="stringliteral">&quot;No Animator found on &quot;</span> + agent.gameObject.name);</div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                <a class="code hl_variable" href="classNodeAI_1_1RuntimeBase.html#a7c14c35b8b17324d8c7b8ae7511662eb">state</a> = <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Failure;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                <span class="keywordflow">return</span> <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Failure;</div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>            }</div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>        }</div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        <span class="keywordflow">if</span>(navAgent == <span class="keyword">null</span>)</div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        {</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>            navAgent = agent.GetComponentInChildren&lt;NavMeshAgent&gt;();</div>
-<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            <span class="keywordflow">if</span>(navAgent == <span class="keyword">null</span>)</div>
-<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            {</div>
-<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>                Debug.LogError(<span class="stringliteral">&quot;No NavMeshAgent found on &quot;</span> + agent.gameObject.name);</div>
-<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                <a class="code hl_variable" href="classNodeAI_1_1RuntimeBase.html#a7c14c35b8b17324d8c7b8ae7511662eb">state</a> = <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Failure;</div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                <span class="keywordflow">return</span> <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Failure;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>            }</div>
-<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>        }</div>
-<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        <span class="keywordflow">if</span>(rotateTowardsPlayer == <span class="keyword">null</span>)</div>
-<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        {</div>
-<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>            rotateTowardsPlayer = agent.GetComponentInChildren&lt;<a class="code hl_class" href="classRotateTowardsPlayer.html">RotateTowardsPlayer</a>&gt;();</div>
-<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            <span class="keywordflow">if</span>(rotateTowardsPlayer == <span class="keyword">null</span>)</div>
-<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            {</div>
-<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>                Debug.LogError(<span class="stringliteral">&quot;No RotateTowardsPlayer found on &quot;</span> + agent.gameObject.name);</div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                <a class="code hl_variable" href="classNodeAI_1_1RuntimeBase.html#a7c14c35b8b17324d8c7b8ae7511662eb">state</a> = <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Failure;</div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                <span class="keywordflow">return</span> <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Failure;</div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>            }</div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>        }</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        <span class="keywordflow">if</span>(audioSource == <span class="keyword">null</span>)</div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        {</div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>            audioSource = agent.GetComponentInChildren&lt;AudioSource&gt;();</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            <span class="keywordflow">if</span>(audioSource == <span class="keyword">null</span>)</div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            {</div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>                Debug.LogError(<span class="stringliteral">&quot;No AudioSource found on &quot;</span> + agent.gameObject.name);</div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                <a class="code hl_variable" href="classNodeAI_1_1RuntimeBase.html#a7c14c35b8b17324d8c7b8ae7511662eb">state</a> = <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Failure;</div>
-<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                <span class="keywordflow">return</span> <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Failure;</div>
-<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>            }</div>
-<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>        }</div>
-<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span> </div>
-<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>        <span class="keywordflow">if</span>(!initialized)</div>
-<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        {</div>
-<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>            initialized = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            animator.SetTrigger(attackData.animationTrigger);</div>
-<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            audioSource.PlayOneShot(attackData.attackSound);</div>
-<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            <span class="keywordflow">foreach</span>(<a class="code hl_class" href="classAttackData.html">AttackData</a>.<a class="code hl_class" href="classAttackData_1_1AttackPhase.html">AttackPhase</a> phase in attackData.attackPhases)</div>
-<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            {</div>
-<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>                <span class="keywordflow">if</span>(phase.attackType == <a class="code hl_class" href="classAttackData.html">AttackData</a>.AttackType.Melee)</div>
-<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                {</div>
-<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                    agent.GetComponent&lt;<a class="code hl_class" href="classDamageDealer.html">DamageDealer</a>&gt;().<a class="code hl_class" href="classMeleeAttack.html">MeleeAttack</a>(phase.attackDamage, phase.attackDelay, phase.attackDuration, phase.attackStunDuration);</div>
-<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                }</div>
-<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                <span class="keywordflow">else</span> <span class="keywordflow">if</span>(phase.attackType == <a class="code hl_class" href="classAttackData.html">AttackData</a>.AttackType.Ranged)</div>
-<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                {</div>
-<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                    <span class="keywordflow">if</span>(!phase.projectileContinuousFire)</div>
-<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                    {</div>
-<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                        agent.GetComponent&lt;<a class="code hl_class" href="classDamageDealer.html">DamageDealer</a>&gt;().<a class="code hl_class" href="classRangedAttack.html">RangedAttack</a>(phase.projectile, phase.attackDelay, phase.projectileSpeed, GetProperty&lt;Transform&gt;(<span class="stringliteral">&quot;Projectile spawn bone&quot;</span>), <span class="keyword">true</span>);</div>
-<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                    }</div>
-<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                    <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                    {</div>
-<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                        agent.GetComponent&lt;<a class="code hl_class" href="classDamageDealer.html">DamageDealer</a>&gt;().<a class="code hl_class" href="classRangedAttack.html">RangedAttack</a>(phase.projectile, phase.attackDelay, phase.projectileSpeed, GetProperty&lt;Transform&gt;(<span class="stringliteral">&quot;Projectile spawn bone&quot;</span>), phase.attackDuration, phase.projectileFireDelay);</div>
-<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                    }</div>
-<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                }</div>
-<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                <span class="keywordflow">else</span> <span class="keywordflow">if</span>(phase.attackType == <a class="code hl_class" href="classAttackData.html">AttackData</a>.AttackType.AOE)</div>
-<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                {</div>
-<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                    agent.GetComponent&lt;<a class="code hl_class" href="classDamageDealer.html">DamageDealer</a>&gt;().<a class="code hl_class" href="classAOEAttack.html">AOEAttack</a>(phase.attackDamage, phase.attackDelay, phase.attackRange, phase.AOEeffect, phase.attackStunDuration);</div>
-<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                }</div>
-<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                rotateTowardsPlayer.<a class="code hl_function" href="classRotateTowardsPlayer.html#a24285b7e0df9a3c950423e7fd081c9f1">RotateToPlayer</a>(phase.turnDuration, phase.turnSpeed, phase.turnDelay);</div>
-<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                rotateTowardsPlayer.<a class="code hl_function" href="classRotateTowardsPlayer.html#ae90aae11b948fc8001ddef53f8066c1b">MoveToPlayer</a>(phase.translationDuration, phase.translationSpeed, phase.translationDelay);</div>
-<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>            }</div>
-<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            navAgent.isStopped = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>            navAgent.SetDestination(agent.transform.position);</div>
-<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            </div>
-<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>        }</div>
-<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span> </div>
-<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span>        <span class="keywordflow">if</span>(GetProperty&lt;bool&gt;(<span class="stringliteral">&quot;Interrupted&quot;</span>))</div>
-<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        {</div>
-<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>            <a class="code hl_variable" href="classNodeAI_1_1RuntimeBase.html#a7c14c35b8b17324d8c7b8ae7511662eb">state</a> = <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Failure;</div>
-<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>            <span class="keywordflow">return</span> <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Failure;</div>
-<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>        }</div>
-<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        timeSinceInitialized += Time.deltaTime;</div>
-<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        </div>
-<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        <span class="keywordflow">if</span>(animator.GetCurrentAnimatorStateInfo(0).normalizedTime &gt;= 0.9 &amp;&amp; timeSinceInitialized &gt;= 0.3f)</div>
-<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        {</div>
-<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>            animator.ResetTrigger(attackData.animationTrigger);</div>
-<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>            <a class="code hl_variable" href="classNodeAI_1_1RuntimeBase.html#a7c14c35b8b17324d8c7b8ae7511662eb">state</a> = <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Success;</div>
-<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>            <span class="comment">//navAgent.isStopped = false;</span></div>
-<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>            <span class="keywordflow">return</span> <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Success;</div>
-<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>        }</div>
-<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        <span class="keywordflow">else</span></div>
-<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        {</div>
-<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>            <a class="code hl_variable" href="classNodeAI_1_1RuntimeBase.html#a7c14c35b8b17324d8c7b8ae7511662eb">state</a> = <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Running;</div>
-<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            navAgent.isStopped = <span class="keyword">true</span>;</div>
-<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            <span class="keywordflow">return</span> <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Running;</div>
-<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>        }</div>
-<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno"><a class="line" href="classAttack.html">   31</a></span><span class="keyword">public</span> <span class="keyword">class </span><a class="code hl_class" href="classAttack.html">Attack</a> : <a class="code hl_namespace" href="namespaceNodeAI.html">NodeAI</a>.<a class="code hl_class" href="classNodeAI_1_1ActionBase.html">ActionBase</a>  </div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>{</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    Animator animator;</div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    NavMeshAgent navAgent;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <a class="code hl_class" href="classRotateTowardsPlayer.html">RotateTowardsPlayer</a> rotateTowardsPlayer;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    AudioSource audioSource;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <a class="code hl_class" href="classAttackData.html">AttackData</a> attackData;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordtype">bool</span> initialized = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    <span class="keywordtype">float</span> timeSinceInitialized = 0;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keyword">public</span> <a class="code hl_class" href="classAttack.html">Attack</a>()</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    {</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        AddProperty&lt;AttackData&gt;(<span class="stringliteral">&quot;Attack Data&quot;</span>, <span class="keyword">null</span>);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        AddProperty&lt;Transform&gt;(<span class="stringliteral">&quot;Projectile spawn bone&quot;</span>, <span class="keyword">null</span>);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>        AddProperty&lt;bool&gt;(<span class="stringliteral">&quot;Interrupted&quot;</span>, <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    }</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="classAttack.html#a94db94ff2af42918302fc4a97c25212f">   47</a></span>    <span class="keyword">public</span> <span class="keyword">override</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classAttack.html#a94db94ff2af42918302fc4a97c25212f">OnInit</a>()</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    {</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>        initialized = <span class="keyword">false</span>;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>        SetProperty&lt;bool&gt;(<span class="stringliteral">&quot;Interrupted&quot;</span>, <span class="keyword">false</span>);</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>        timeSinceInitialized = 0;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>        attackData = GetProperty&lt;AttackData&gt;(<span class="stringliteral">&quot;Attack Data&quot;</span>);</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    }</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno"><a class="line" href="classAttack.html#a791701e5072e37b3ad1b4e99389cbc6d">   54</a></span>    <span class="keyword">public</span> <span class="keyword">override</span> <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a> <a class="code hl_function" href="classAttack.html#a791701e5072e37b3ad1b4e99389cbc6d">Eval</a>(<a class="code hl_class" href="classNodeAI_1_1NodeAI__Agent.html">NodeAI_Agent</a> agent, <a class="code hl_class" href="classNodeAI_1_1NodeTree.html">NodeTree</a>.<a class="code hl_class" href="classNodeAI_1_1NodeTree_1_1Leaf.html">Leaf</a> current)</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    {</div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>        <span class="keywordflow">if</span>(animator == <span class="keyword">null</span>)</div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>        {</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>            animator = agent.GetComponentInChildren&lt;Animator&gt;();</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>            <span class="keywordflow">if</span>(animator == <span class="keyword">null</span>)</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>            {</div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>                Debug.LogError(<span class="stringliteral">&quot;No Animator found on &quot;</span> + agent.gameObject.name);</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>                <a class="code hl_variable" href="classNodeAI_1_1RuntimeBase.html#a7c14c35b8b17324d8c7b8ae7511662eb">state</a> = <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Failure;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>                <span class="keywordflow">return</span> <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Failure;</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>            }</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>        }</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>        <span class="keywordflow">if</span>(navAgent == <span class="keyword">null</span>)</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>        {</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>            navAgent = agent.GetComponentInChildren&lt;NavMeshAgent&gt;();</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span>            <span class="keywordflow">if</span>(navAgent == <span class="keyword">null</span>)</div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>            {</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>                Debug.LogError(<span class="stringliteral">&quot;No NavMeshAgent found on &quot;</span> + agent.gameObject.name);</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span>                <a class="code hl_variable" href="classNodeAI_1_1RuntimeBase.html#a7c14c35b8b17324d8c7b8ae7511662eb">state</a> = <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Failure;</div>
+<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span>                <span class="keywordflow">return</span> <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Failure;</div>
+<div class="line"><a id="l00074" name="l00074"></a><span class="lineno">   74</span>            }</div>
+<div class="line"><a id="l00075" name="l00075"></a><span class="lineno">   75</span>        }</div>
+<div class="line"><a id="l00076" name="l00076"></a><span class="lineno">   76</span>        <span class="keywordflow">if</span>(rotateTowardsPlayer == <span class="keyword">null</span>)</div>
+<div class="line"><a id="l00077" name="l00077"></a><span class="lineno">   77</span>        {</div>
+<div class="line"><a id="l00078" name="l00078"></a><span class="lineno">   78</span>            rotateTowardsPlayer = agent.GetComponentInChildren&lt;<a class="code hl_class" href="classRotateTowardsPlayer.html">RotateTowardsPlayer</a>&gt;();</div>
+<div class="line"><a id="l00079" name="l00079"></a><span class="lineno">   79</span>            <span class="keywordflow">if</span>(rotateTowardsPlayer == <span class="keyword">null</span>)</div>
+<div class="line"><a id="l00080" name="l00080"></a><span class="lineno">   80</span>            {</div>
+<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>                Debug.LogError(<span class="stringliteral">&quot;No RotateTowardsPlayer found on &quot;</span> + agent.gameObject.name);</div>
+<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>                <a class="code hl_variable" href="classNodeAI_1_1RuntimeBase.html#a7c14c35b8b17324d8c7b8ae7511662eb">state</a> = <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Failure;</div>
+<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span>                <span class="keywordflow">return</span> <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Failure;</div>
+<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span>            }</div>
+<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>        }</div>
+<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>        <span class="keywordflow">if</span>(audioSource == <span class="keyword">null</span>)</div>
+<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>        {</div>
+<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span>            audioSource = agent.GetComponentInChildren&lt;AudioSource&gt;();</div>
+<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>            <span class="keywordflow">if</span>(audioSource == <span class="keyword">null</span>)</div>
+<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span>            {</div>
+<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span>                Debug.LogError(<span class="stringliteral">&quot;No AudioSource found on &quot;</span> + agent.gameObject.name);</div>
+<div class="line"><a id="l00092" name="l00092"></a><span class="lineno">   92</span>                <a class="code hl_variable" href="classNodeAI_1_1RuntimeBase.html#a7c14c35b8b17324d8c7b8ae7511662eb">state</a> = <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Failure;</div>
+<div class="line"><a id="l00093" name="l00093"></a><span class="lineno">   93</span>                <span class="keywordflow">return</span> <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Failure;</div>
+<div class="line"><a id="l00094" name="l00094"></a><span class="lineno">   94</span>            }</div>
+<div class="line"><a id="l00095" name="l00095"></a><span class="lineno">   95</span>        }</div>
+<div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span> </div>
+<div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>        <span class="keywordflow">if</span>(!initialized)</div>
+<div class="line"><a id="l00098" name="l00098"></a><span class="lineno">   98</span>        {</div>
+<div class="line"><a id="l00099" name="l00099"></a><span class="lineno">   99</span>            initialized = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00100" name="l00100"></a><span class="lineno">  100</span>            animator.SetTrigger(attackData.animationTrigger);</div>
+<div class="line"><a id="l00101" name="l00101"></a><span class="lineno">  101</span>            audioSource.PlayOneShot(attackData.attackSound);</div>
+<div class="line"><a id="l00102" name="l00102"></a><span class="lineno">  102</span>            <span class="keywordflow">foreach</span>(<a class="code hl_class" href="classAttackData.html">AttackData</a>.<a class="code hl_class" href="classAttackData_1_1AttackPhase.html">AttackPhase</a> phase in attackData.attackPhases)</div>
+<div class="line"><a id="l00103" name="l00103"></a><span class="lineno">  103</span>            {</div>
+<div class="line"><a id="l00104" name="l00104"></a><span class="lineno">  104</span>                <span class="keywordflow">if</span>(phase.attackType == <a class="code hl_class" href="classAttackData.html">AttackData</a>.AttackType.Melee)</div>
+<div class="line"><a id="l00105" name="l00105"></a><span class="lineno">  105</span>                {</div>
+<div class="line"><a id="l00106" name="l00106"></a><span class="lineno">  106</span>                    agent.GetComponent&lt;<a class="code hl_class" href="classDamageDealer.html">DamageDealer</a>&gt;().<a class="code hl_class" href="classMeleeAttack.html">MeleeAttack</a>(phase.attackDamage, phase.attackDelay, phase.attackDuration, phase.attackStunDuration);</div>
+<div class="line"><a id="l00107" name="l00107"></a><span class="lineno">  107</span>                }</div>
+<div class="line"><a id="l00108" name="l00108"></a><span class="lineno">  108</span>                <span class="keywordflow">else</span> <span class="keywordflow">if</span>(phase.attackType == <a class="code hl_class" href="classAttackData.html">AttackData</a>.AttackType.Ranged)</div>
+<div class="line"><a id="l00109" name="l00109"></a><span class="lineno">  109</span>                {</div>
+<div class="line"><a id="l00110" name="l00110"></a><span class="lineno">  110</span>                    <span class="keywordflow">if</span>(!phase.projectileContinuousFire)</div>
+<div class="line"><a id="l00111" name="l00111"></a><span class="lineno">  111</span>                    {</div>
+<div class="line"><a id="l00112" name="l00112"></a><span class="lineno">  112</span>                        agent.GetComponent&lt;<a class="code hl_class" href="classDamageDealer.html">DamageDealer</a>&gt;().<a class="code hl_class" href="classRangedAttack.html">RangedAttack</a>(phase.projectile, phase.attackDelay, phase.projectileSpeed, GetProperty&lt;Transform&gt;(<span class="stringliteral">&quot;Projectile spawn bone&quot;</span>), <span class="keyword">true</span>);</div>
+<div class="line"><a id="l00113" name="l00113"></a><span class="lineno">  113</span>                    }</div>
+<div class="line"><a id="l00114" name="l00114"></a><span class="lineno">  114</span>                    <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00115" name="l00115"></a><span class="lineno">  115</span>                    {</div>
+<div class="line"><a id="l00116" name="l00116"></a><span class="lineno">  116</span>                        agent.GetComponent&lt;<a class="code hl_class" href="classDamageDealer.html">DamageDealer</a>&gt;().<a class="code hl_class" href="classRangedAttack.html">RangedAttack</a>(phase.projectile, phase.attackDelay, phase.projectileSpeed, GetProperty&lt;Transform&gt;(<span class="stringliteral">&quot;Projectile spawn bone&quot;</span>), phase.attackDuration, phase.projectileFireDelay);</div>
+<div class="line"><a id="l00117" name="l00117"></a><span class="lineno">  117</span>                    }</div>
+<div class="line"><a id="l00118" name="l00118"></a><span class="lineno">  118</span>                }</div>
+<div class="line"><a id="l00119" name="l00119"></a><span class="lineno">  119</span>                <span class="keywordflow">else</span> <span class="keywordflow">if</span>(phase.attackType == <a class="code hl_class" href="classAttackData.html">AttackData</a>.AttackType.AOE)</div>
+<div class="line"><a id="l00120" name="l00120"></a><span class="lineno">  120</span>                {</div>
+<div class="line"><a id="l00121" name="l00121"></a><span class="lineno">  121</span>                    agent.GetComponent&lt;<a class="code hl_class" href="classDamageDealer.html">DamageDealer</a>&gt;().<a class="code hl_class" href="classAOEAttack.html">AOEAttack</a>(phase.attackDamage, phase.attackDelay, phase.attackRange, phase.AOEeffect, phase.attackStunDuration);</div>
+<div class="line"><a id="l00122" name="l00122"></a><span class="lineno">  122</span>                }</div>
+<div class="line"><a id="l00123" name="l00123"></a><span class="lineno">  123</span>                rotateTowardsPlayer.<a class="code hl_function" href="classRotateTowardsPlayer.html#a24285b7e0df9a3c950423e7fd081c9f1">RotateToPlayer</a>(phase.turnDuration, phase.turnSpeed, phase.turnDelay);</div>
+<div class="line"><a id="l00124" name="l00124"></a><span class="lineno">  124</span>                rotateTowardsPlayer.<a class="code hl_function" href="classRotateTowardsPlayer.html#ae90aae11b948fc8001ddef53f8066c1b">MoveToPlayer</a>(phase.translationDuration, phase.translationSpeed, phase.translationDelay);</div>
+<div class="line"><a id="l00125" name="l00125"></a><span class="lineno">  125</span>            }</div>
+<div class="line"><a id="l00126" name="l00126"></a><span class="lineno">  126</span>            navAgent.isStopped = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00127" name="l00127"></a><span class="lineno">  127</span>            navAgent.SetDestination(agent.transform.position);</div>
+<div class="line"><a id="l00128" name="l00128"></a><span class="lineno">  128</span>            </div>
+<div class="line"><a id="l00129" name="l00129"></a><span class="lineno">  129</span>        }</div>
+<div class="line"><a id="l00130" name="l00130"></a><span class="lineno">  130</span> </div>
+<div class="line"><a id="l00131" name="l00131"></a><span class="lineno">  131</span>        <span class="keywordflow">if</span>(GetProperty&lt;bool&gt;(<span class="stringliteral">&quot;Interrupted&quot;</span>))</div>
+<div class="line"><a id="l00132" name="l00132"></a><span class="lineno">  132</span>        {</div>
+<div class="line"><a id="l00133" name="l00133"></a><span class="lineno">  133</span>            <a class="code hl_variable" href="classNodeAI_1_1RuntimeBase.html#a7c14c35b8b17324d8c7b8ae7511662eb">state</a> = <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Failure;</div>
+<div class="line"><a id="l00134" name="l00134"></a><span class="lineno">  134</span>            <span class="keywordflow">return</span> <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Failure;</div>
+<div class="line"><a id="l00135" name="l00135"></a><span class="lineno">  135</span>        }</div>
+<div class="line"><a id="l00136" name="l00136"></a><span class="lineno">  136</span>        timeSinceInitialized += Time.deltaTime;</div>
+<div class="line"><a id="l00137" name="l00137"></a><span class="lineno">  137</span>        </div>
+<div class="line"><a id="l00138" name="l00138"></a><span class="lineno">  138</span>        <span class="keywordflow">if</span>(animator.GetCurrentAnimatorStateInfo(0).normalizedTime &gt;= 0.9 &amp;&amp; timeSinceInitialized &gt;= 0.3f)</div>
+<div class="line"><a id="l00139" name="l00139"></a><span class="lineno">  139</span>        {</div>
+<div class="line"><a id="l00140" name="l00140"></a><span class="lineno">  140</span>            animator.ResetTrigger(attackData.animationTrigger);</div>
+<div class="line"><a id="l00141" name="l00141"></a><span class="lineno">  141</span>            <a class="code hl_variable" href="classNodeAI_1_1RuntimeBase.html#a7c14c35b8b17324d8c7b8ae7511662eb">state</a> = <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Success;</div>
+<div class="line"><a id="l00142" name="l00142"></a><span class="lineno">  142</span>            <span class="comment">//navAgent.isStopped = false;</span></div>
+<div class="line"><a id="l00143" name="l00143"></a><span class="lineno">  143</span>            <span class="keywordflow">return</span> <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Success;</div>
+<div class="line"><a id="l00144" name="l00144"></a><span class="lineno">  144</span>        }</div>
+<div class="line"><a id="l00145" name="l00145"></a><span class="lineno">  145</span>        <span class="keywordflow">else</span></div>
+<div class="line"><a id="l00146" name="l00146"></a><span class="lineno">  146</span>        {</div>
+<div class="line"><a id="l00147" name="l00147"></a><span class="lineno">  147</span>            <a class="code hl_variable" href="classNodeAI_1_1RuntimeBase.html#a7c14c35b8b17324d8c7b8ae7511662eb">state</a> = <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Running;</div>
+<div class="line"><a id="l00148" name="l00148"></a><span class="lineno">  148</span>            navAgent.isStopped = <span class="keyword">true</span>;</div>
+<div class="line"><a id="l00149" name="l00149"></a><span class="lineno">  149</span>            <span class="keywordflow">return</span> <a class="code hl_class" href="classNodeAI_1_1NodeData.html">NodeData</a>.<a class="code hl_enumeration" href="classNodeAI_1_1NodeData.html#ac6922af1bb0a7d7caf6dd2aa284506bb">State</a>.Running;</div>
+<div class="line"><a id="l00150" name="l00150"></a><span class="lineno">  150</span>        }</div>
 <div class="line"><a id="l00151" name="l00151"></a><span class="lineno">  151</span> </div>
-<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span>        </div>
-<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>    }</div>
-<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>}</div>
+<div class="line"><a id="l00152" name="l00152"></a><span class="lineno">  152</span> </div>
+<div class="line"><a id="l00153" name="l00153"></a><span class="lineno">  153</span>        </div>
+<div class="line"><a id="l00154" name="l00154"></a><span class="lineno">  154</span>    }</div>
+<div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span>}</div>
 <div class="ttc" id="aclassAOEAttack_html"><div class="ttname"><a href="classAOEAttack.html">AOEAttack</a></div><div class="ttdef"><b>Definition:</b> <a href="AOEAttack_8cs_source.html#l00005">AOEAttack.cs:6</a></div></div>
 <div class="ttc" id="aclassAttackData_1_1AttackPhase_html"><div class="ttname"><a href="classAttackData_1_1AttackPhase.html">AttackData.AttackPhase</a></div><div class="ttdef"><b>Definition:</b> <a href="AttackData_8cs_source.html#l00019">AttackData.cs:20</a></div></div>
 <div class="ttc" id="aclassAttackData_html"><div class="ttname"><a href="classAttackData.html">AttackData</a></div><div class="ttdef"><b>Definition:</b> <a href="AttackData_8cs_source.html#l00006">AttackData.cs:7</a></div></div>
-<div class="ttc" id="aclassAttack_html"><div class="ttname"><a href="classAttack.html">Attack</a></div><div class="ttdoc">A Node for implementing enemy Attacks.</div><div class="ttdef"><b>Definition:</b> <a href="Attack_8cs_source.html#l00030">Attack.cs:31</a></div></div>
-<div class="ttc" id="aclassAttack_html_a791701e5072e37b3ad1b4e99389cbc6d"><div class="ttname"><a href="classAttack.html#a791701e5072e37b3ad1b4e99389cbc6d">Attack.Eval</a></div><div class="ttdeci">override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)</div><div class="ttdoc">Eval is called when the node is evaluated, and contains all of the logic for the node.</div><div class="ttdef"><b>Definition:</b> <a href="Attack_8cs_source.html#l00053">Attack.cs:53</a></div></div>
-<div class="ttc" id="aclassAttack_html_a94db94ff2af42918302fc4a97c25212f"><div class="ttname"><a href="classAttack.html#a94db94ff2af42918302fc4a97c25212f">Attack.OnInit</a></div><div class="ttdeci">override void OnInit()</div><div class="ttdoc">OnInit is called whenever a node begins running.</div><div class="ttdef"><b>Definition:</b> <a href="Attack_8cs_source.html#l00046">Attack.cs:46</a></div></div>
+<div class="ttc" id="aclassAttack_html"><div class="ttname"><a href="classAttack.html">Attack</a></div><div class="ttdoc">A Node for implementing enemy Attacks.</div><div class="ttdef"><b>Definition:</b> <a href="Attack_8cs_source.html#l00031">Attack.cs:32</a></div></div>
+<div class="ttc" id="aclassAttack_html_a791701e5072e37b3ad1b4e99389cbc6d"><div class="ttname"><a href="classAttack.html#a791701e5072e37b3ad1b4e99389cbc6d">Attack.Eval</a></div><div class="ttdeci">override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)</div><div class="ttdoc">Eval is called when the node is evaluated, and contains all of the logic for the node.</div><div class="ttdef"><b>Definition:</b> <a href="Attack_8cs_source.html#l00054">Attack.cs:54</a></div></div>
+<div class="ttc" id="aclassAttack_html_a94db94ff2af42918302fc4a97c25212f"><div class="ttname"><a href="classAttack.html#a94db94ff2af42918302fc4a97c25212f">Attack.OnInit</a></div><div class="ttdeci">override void OnInit()</div><div class="ttdoc">OnInit is called whenever a node begins running.</div><div class="ttdef"><b>Definition:</b> <a href="Attack_8cs_source.html#l00047">Attack.cs:47</a></div></div>
 <div class="ttc" id="aclassDamageDealer_html"><div class="ttname"><a href="classDamageDealer.html">DamageDealer</a></div><div class="ttdoc">Script that handles dealing damage to the player through melee, ranged, and AOE attacks.</div><div class="ttdef"><b>Definition:</b> <a href="DamageDealer_8cs_source.html#l00008">DamageDealer.cs:9</a></div></div>
 <div class="ttc" id="aclassMeleeAttack_html"><div class="ttname"><a href="classMeleeAttack.html">MeleeAttack</a></div><div class="ttdef"><b>Definition:</b> <a href="MeleeAttack_8cs_source.html#l00005">MeleeAttack.cs:6</a></div></div>
 <div class="ttc" id="aclassNodeAI_1_1ActionBase_html"><div class="ttname"><a href="classNodeAI_1_1ActionBase.html">NodeAI.ActionBase</a></div><div class="ttdoc">The base class for Action Nodes.</div><div class="ttdef"><b>Definition:</b> <a href="RuntimeBase_8cs_source.html#l00492">RuntimeBase.cs:493</a></div></div>

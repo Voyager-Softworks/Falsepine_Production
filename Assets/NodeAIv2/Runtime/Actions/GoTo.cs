@@ -21,6 +21,13 @@ namespace NodeAI
     /// <summary>
     /// A node which moves the agent to a given position.
     /// </summary>
+    /// @bug
+    ///     - The agent will stop, but the action will not register as successful.\n
+    ///       Steps to reproduce:
+    ///         - Create an Agent with the Goto node
+    ///         - Make the agent move to a position, with a stopping distance larger than 0
+    ///         - Set the speed of the agent to a low value
+    ///       Doing this will cause the agent to stop without the node registering as successful.
     public class GoTo : ActionBase
     {
         NavMeshAgent navAgent;
