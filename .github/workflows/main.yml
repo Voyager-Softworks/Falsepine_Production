@@ -24,12 +24,9 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      - name: Doxygen Action
+      - name: Update Doxygen Documentation
         uses: mattnotmitt/doxygen-action@1.9.4
         
-  build:
-    runs-on: ubuntu-latest
-    steps:
       - name: Publish to GitHub Pages
         # You may pin to the exact commit or the version.
         # uses: tsunematsu21/actions-publish-gh-pages@c04b531c52b8f9d25c596bc6e6a7ddc116b2f3f8
