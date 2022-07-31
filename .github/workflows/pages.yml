@@ -1,5 +1,5 @@
 # Simple workflow for deploying static content to GitHub Pages
-name: Deploy static content to Pages
+name: Documentation Updater Process
 
 on:
   # Runs on pushes targeting the default branch
@@ -28,13 +28,13 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Branch
         uses: actions/checkout@v3
       - name: Update Doxygen Documentation
         uses: mattnotmitt/doxygen-action@1.9.4
       - name: Setup Pages
         uses: actions/configure-pages@v1
-      - name: Upload artifact
+      - name: Upload Artifact
         uses: actions/upload-pages-artifact@v1
         with:
           # Upload entire repository
