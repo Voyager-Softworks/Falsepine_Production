@@ -14,10 +14,20 @@ public class AimZone : MonoBehaviour
     // uvs[2] = new Vector2(0.1f, 0.1f);
     // uvs[3] = new Vector2(-0.1f, 0.1f);
 
-    public Vector2 uv_fl = new Vector2(-1, 1);
-    public Vector2 uv_fr = new Vector2(1, 1);
-    public Vector2 uv_br = new Vector2(0.1f, 0.1f);
-    public Vector2 uv_bl = new Vector2(-0.1f, 0.1f);
+    public Color m_ZoneColor = Color.white;
+
+    public Color m_leftStartColor = new Color(1.0f, 0.0f, 0.0f, 0.0f);
+    public Color m_leftEndColor = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+
+    public Color m_midStartColor = new Color(1.0f, 0.0f, 0.0f, 0.0f);
+    public Color m_midEndColor = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+
+    public Color m_rightStartColor = new Color(0.5f, 0.5f, 0.5f, 0.0f);
+    public Color m_rightEndColor = new Color(0.0f, 0.0f, 1.0f, 1.0f);
+
+    public LineRenderer m_leftLine = null;
+    public LineRenderer m_midLine = null;
+    public LineRenderer m_rightLine = null;
 
     public struct Corners
     {
@@ -116,7 +126,7 @@ public class AimZone : MonoBehaviour
         //get mesh
         m_mesh = m_meshFilter.mesh;
 
-        SetColors(Color.red, Color.red, Color.red, Color.red);
+        SetZoneColors(m_ZoneColor);
 
         //hide aim zone
         Hide();
@@ -125,25 +135,16 @@ public class AimZone : MonoBehaviour
         
     }
 
-    // private void MatchSnowHeight()
-    // {
-    //     DynamicSnow snow = FindObjectOfType<DynamicSnow>();
-    //     if (snow != null)
-    //     {
-    //         // get average height of snow using mesh
-    //         float averageHeight = 0;
-    //         Mesh mesh = snow.GetComponentInChildren<MeshFilter>().mesh;
-    //         int count = 0;
-    //         for (int i = 0; i < mesh.vertices.Length; i += 1000)
-    //         {
-    //             averageHeight += mesh.vertices[i].y;
-    //             count++;
-    //         }
-    //         averageHeight /= (mesh.vertices.Length / count);
-    //         // set aim zone height to average height of snow
-    //         transform.position = new Vector3(transform.position.x, averageHeight, transform.position.z);
-    //     }
-    // }
+    private void OnEnable()
+    {
+        Application.onBeforeRender += UpdateLine;
+    }
+    
+    private void OnDisable()
+    {
+        Application.onBeforeRender -= UpdateLine;
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -155,10 +156,10 @@ public class AimZone : MonoBehaviour
         // }
 
         // every 10 frames, update the mesh
-        if (Time.frameCount % 20 == 0)
-        {
-            UpdateMesh();
-        }
+        // if (Time.frameCount % 20 == 0)
+        // {
+        //     UpdateMesh();
+        // }
     }
 
     /// <summary>
@@ -200,7 +201,7 @@ public class AimZone : MonoBehaviour
         this.m_br = _corners.backRight;
         this.m_bl = _corners.backLeft;
 
-        UpdateMesh();
+        UpdateVisuals();
     }
 
     /// <summary>
@@ -215,7 +216,7 @@ public class AimZone : MonoBehaviour
         SetCorners(new Corners(_frontLeft, _frontRight, _backRight, _backLeft));
     }
 
-    public void SetColors(Color _flColor, Color _frColor, Color _brColor, Color _blColor)
+    public void SetZoneColors(Color _flColor, Color _frColor, Color _brColor, Color _blColor)
     {
         Color[] colors = new Color[4];
         colors[0] = _flColor;
@@ -225,29 +226,59 @@ public class AimZone : MonoBehaviour
         m_mesh.colors = colors;
     }
 
+    public void SetZoneColors(Color _color)
+    {
+        SetZoneColors(_color, _color, _color, _color);
+    }
+
+    public void SetLineColors(Color _leftStart, Color _leftEnd, Color _midStart, Color _midEnd, Color _rightStart, Color _rightEnd)
+    {
+        m_midLine.startColor = _midStart;
+        m_midLine.endColor = _midEnd;
+
+        m_leftLine.startColor = _leftStart;
+        m_leftLine.endColor = _leftEnd;
+
+        m_rightLine.startColor = _rightStart;
+        m_rightLine.endColor = _rightEnd;
+    }
+
     /// <summary>
     /// Update the actual mesh of the aim zone (the quad)
     /// </summary>
-    public void UpdateMesh(){
+    public void UpdateVisuals()
+    {
         // set the vertices of the aimQuad
         m_mesh.SetVertices(GetLocalCorners().ToList());
 
         //set tris to match the aimLines
-        m_mesh.SetTriangles(new List<int>() { 0,1,2,  0,2,3, }, 0);
+        m_mesh.SetTriangles(new List<int>() { 0, 1, 2, 0, 2, 3, }, 0);
 
         //custom UVs
         Vector3[] vertices = m_mesh.vertices;
         Vector2[] uvs = new Vector2[4];
-        uvs[0] = uv_fl;
-        uvs[1] = uv_fr;
-        uvs[2] = uv_br;
-        uvs[3] = uv_bl;
+        uvs[0] = new Vector2(0, 1);
+        uvs[1] = new Vector2(1, 1);
+        float ratio = Mathf.Abs(vertices[2].x - vertices[3].x) / Mathf.Abs(vertices[0].x - vertices[1].x) / 2.0f;
+        uvs[2] = new Vector2(0.5f + ratio, 0);
+        uvs[3] = new Vector2(0.5f - ratio, 0);
         m_mesh.uv = uvs;
 
         m_mesh.RecalculateBounds();
         m_mesh.RecalculateNormals();
         m_mesh.RecalculateTangents();
         m_mesh.RecalculateUVDistributionMetrics();
+        UpdateLine();
+    }
+
+    private void UpdateLine()
+    {
+        m_leftLine.SetPositions(new Vector3[] { m_bl, m_fl });
+        m_midLine.SetPositions(new Vector3[] { (m_bl + m_br) / 2.0f, (m_fl + m_fr) / 2.0f });
+        m_rightLine.SetPositions(new Vector3[] { m_br, m_fr });
+
+        SetZoneColors(m_ZoneColor);
+        SetLineColors(m_leftStartColor, m_leftEndColor, m_midStartColor, m_midEndColor, m_rightStartColor, m_rightEndColor);
     }
 
     public float CalcDmgFalloff(Vector2 _uv){
@@ -260,10 +291,20 @@ public class AimZone : MonoBehaviour
     {
         // hide the mesh renderer
         m_meshRenderer.enabled = false;
+
+        // hide lines
+        m_leftLine.enabled = false;
+        m_midLine.enabled = false;
+        m_rightLine.enabled = false;
     }
     public void Show()
     {
         // show the mesh renderer
         m_meshRenderer.enabled = true;
+
+        // show the lines
+        m_leftLine.enabled = true;
+        m_midLine.enabled = true;
+        m_rightLine.enabled = true;
     }
 }
