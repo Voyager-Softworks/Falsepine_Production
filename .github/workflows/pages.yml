@@ -28,9 +28,8 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - uses: snow-actions/sparse-checkout@v1.1.0
-        with:
-          patterns: 'docs/* Doxyfile doxygen-awesome.css Assets/Scripts/*'
+      - name: checkout
+        uses: Checkout@v3
           
       - name: Update Doxygen Documentation
         uses: mattnotmitt/doxygen-action@1.9.4
