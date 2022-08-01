@@ -237,10 +237,6 @@ public class AimZone : MonoBehaviour
 
         UpdateMesh();
         UpdateLine();
-
-        // test dmg calc
-        float dmg = CalcDmgMult_float(Vector3.zero, 0.5f);
-        Debug.Log("Dmg: " + dmg);
     }
 
     private void UpdateMesh()
@@ -353,7 +349,7 @@ public class AimZone : MonoBehaviour
         }
 
         // use falloff to calculate horiz dmg
-        widthVal = Mathf.Lerp(1 - _falloffMult, 1, widthVal);
+        widthVal = Mathf.Lerp(1.0f - _falloffMult, 1.0f, widthVal);
         widthVal = Mathf.Clamp(widthVal, 0.0f, 1.0f);
 
         
@@ -366,7 +362,7 @@ public class AimZone : MonoBehaviour
     /// <param name="_worldPoint"></param>
     /// <param name="_falloffMult"></param>
     /// <returns></returns>
-    float CalcDmgMult_float(Vector3 _worldPoint, float _falloffMult){
+    public float CalcDmgMult_float(Vector3 _worldPoint, float _falloffMult){
         Vector2 uv = CalculateUVFromWorld(_worldPoint);
         return CalcDmgMult_float(uv, _falloffMult);
     }

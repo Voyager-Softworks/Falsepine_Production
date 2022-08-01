@@ -39,7 +39,7 @@ void CalcDmgMult_float(float2 uv, float falloffMult, out float alpha){
     }
 
     // use falloff to calculate horiz dmg
-    widthVal = lerp(1 - falloffMult, 1, widthVal);
+    widthVal = lerp(1.0 - falloffMult, 1.0, widthVal);
     widthVal = clamp(widthVal, 0.0f, 1.0f);
 
     // return

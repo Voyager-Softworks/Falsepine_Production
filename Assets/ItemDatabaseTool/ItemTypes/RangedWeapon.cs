@@ -324,6 +324,8 @@ public class RangedWeapon : Item
         {
             //dmg
             float calcdDamage = StatsManager.CalculateDamage(this, m_damage);
+            calcdDamage *= _aimZone.CalcDmgMult_float(hitInfoR.destination, m_horizFalloffMult);
+            Debug.Log("Original damage: " + m_damage + " | Calcd damage: " + calcdDamage);
             healthScriptsInAimZone[0].TakeDamage(calcdDamage, _owner);
             if (m_hitEffect != null)
             {
