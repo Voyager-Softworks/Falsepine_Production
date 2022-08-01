@@ -1445,6 +1445,10 @@ MonoBehaviour:
     title: Sequence
     childGUIDs:
     - 58814bf1-d6e7-4fd2-9878-f2247cf5b3da
+    - f78ddb58-f475-4c06-81c6-2793beec22dc
+    - 168fd189-1ddb-476e-9ee0-9dcb0e054579
+    - cd9cfdc4-ed36-43fc-a4d2-87f020a432b9
+    - 0f858e69-aee3-42fd-8d4a-326cd87d6228
     nodeType: 4
     position: {x: 1166, y: 1610}
     runtime: {fileID: 0}
@@ -1497,6 +1501,126 @@ MonoBehaviour:
     queryType: 
     noLogic: 1
     noQuery: 1
+  - GUID: 23d47f9f-1ac1-4cea-a1e9-5dd4e516959c
+    parentGUID: 10eb79b5-1da9-472b-9e33-e25d0e97acc4
+    title: Sequence
+    childGUIDs:
+    - 00f442e6-17f4-4d72-b7d6-7e475c91d6af
+    - c9b14b78-c0f7-436a-b91a-95d4bd91cd9c
+    - efe591c2-ac16-4b34-8cf9-dbbc49bdad07
+    - d5eafb18-03ae-4732-906e-0f0b14b7720c
+    nodeType: 4
+    position: {x: 784, y: 1019}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: f78ddb58-f475-4c06-81c6-2793beec22dc
+    parentGUID: 51efe30a-bcb4-4725-9822-6fa42412f552
+    title: Flee
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 1362, y: 1710}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: TARGET
+      GUID: 5b36bc0a-c295-46b9-b102-c2924344a3bd
+      paramReference: 794cf222-fb16-4cdc-96a7-a5bc26b049ca
+      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: SPEED
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 6
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: DISTANCE
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 13
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: ACCELERATION
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 15
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: Flee, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 168fd189-1ddb-476e-9ee0-9dcb0e054579
+    parentGUID: 51efe30a-bcb4-4725-9822-6fa42412f552
+    title: SetAnimatorTrigger
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 1362, y: 1882}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: NAME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: Unburrow
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Animation.SetAnimatorTrigger, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
   - GUID: b632b312-e13f-44af-97ad-3ced2413a010
     parentGUID: d5eafb18-03ae-4732-906e-0f0b14b7720c
     title: Sequence
@@ -1504,7 +1628,7 @@ MonoBehaviour:
     - 381411c0-b919-4b73-b713-dda5a3831578
     - f1385628-73d8-479b-90ee-cc2518d572c5
     nodeType: 4
-    position: {x: 1166, y: 1814}
+    position: {x: 1168, y: 2642}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -1518,7 +1642,7 @@ MonoBehaviour:
     title: GetObjectTransform
     childGUIDs: []
     nodeType: 8
-    position: {x: 822, y: 1890}
+    position: {x: 824, y: 2718}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -1557,74 +1681,12 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
     noLogic: 1
     noQuery: 0
-  - GUID: e13d937f-c73f-4daf-9289-cab2f958034f
-    parentGUID: 
-    title: FindWithTag
-    childGUIDs: []
-    nodeType: 8
-    position: {x: 629, y: 1890}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: TAG
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: Player
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: RESULT
-      GUID: b4a0a432-0c2a-46b8-bdd9-802167a89b92
-      paramReference: 
-      serializedTypename: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 1
-    runtimeLogicType: 
-    queryType: NodeAI.FindWithTag, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    noLogic: 1
-    noQuery: 0
-  - GUID: 23d47f9f-1ac1-4cea-a1e9-5dd4e516959c
-    parentGUID: 10eb79b5-1da9-472b-9e33-e25d0e97acc4
-    title: Sequence
-    childGUIDs:
-    - 00f442e6-17f4-4d72-b7d6-7e475c91d6af
-    - c9b14b78-c0f7-436a-b91a-95d4bd91cd9c
-    - efe591c2-ac16-4b34-8cf9-dbbc49bdad07
-    - d5eafb18-03ae-4732-906e-0f0b14b7720c
-    nodeType: 4
-    position: {x: 784, y: 1019}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
   - GUID: 381411c0-b919-4b73-b713-dda5a3831578
     parentGUID: b632b312-e13f-44af-97ad-3ced2413a010
     title: Attack
     childGUIDs: []
     nodeType: 1
-    position: {x: 1354, y: 2010}
+    position: {x: 1356, y: 2838}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -1683,7 +1745,7 @@ MonoBehaviour:
     title: MeleeRange
     childGUIDs: []
     nodeType: 7
-    position: {x: 1205, y: 1934}
+    position: {x: 1207, y: 2762}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -1696,7 +1758,7 @@ MonoBehaviour:
     title: GoTo
     childGUIDs: []
     nodeType: 1
-    position: {x: 1355, y: 1814}
+    position: {x: 1357, y: 2642}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -1777,6 +1839,153 @@ MonoBehaviour:
       output: 0
     runtimeLogicType: NodeAI.GoTo, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: e13d937f-c73f-4daf-9289-cab2f958034f
+    parentGUID: 
+    title: FindWithTag
+    childGUIDs: []
+    nodeType: 8
+    position: {x: 603, y: 2718}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: TAG
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: Player
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: RESULT
+      GUID: b4a0a432-0c2a-46b8-bdd9-802167a89b92
+      paramReference: 
+      serializedTypename: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 1
+    runtimeLogicType: 
+    queryType: NodeAI.FindWithTag, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    noLogic: 1
+    noQuery: 0
+  - GUID: cd9cfdc4-ed36-43fc-a4d2-87f020a432b9
+    parentGUID: 51efe30a-bcb4-4725-9822-6fa42412f552
+    title: PlaySound
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 1366, y: 1982}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: SOUND
+      GUID: null
+      paramReference: null
+      serializedTypename: UnityEngine.AudioClip, UnityEngine.AudioModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: VOLUME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 1
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: PITCH
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 1
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: DELAY
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Audio.PlaySound, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 0f858e69-aee3-42fd-8d4a-326cd87d6228
+    parentGUID: 51efe30a-bcb4-4725-9822-6fa42412f552
+    title: WaitUntilAnimationComplete
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 1366, y: 2154}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: STATE NAME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: Unburrow_R
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Animation.WaitUntilAnimationComplete, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     queryType: 
     noLogic: 0
     noQuery: 1
@@ -1886,6 +2095,10 @@ MonoBehaviour:
     - e13d937f-c73f-4daf-9289-cab2f958034f
     - 381411c0-b919-4b73-b713-dda5a3831578
     - f29a5f2d-a17f-4bea-95f6-d6081142c863
+    - f78ddb58-f475-4c06-81c6-2793beec22dc
+    - 168fd189-1ddb-476e-9ee0-9dcb0e054579
+    - cd9cfdc4-ed36-43fc-a4d2-87f020a432b9
+    - 0f858e69-aee3-42fd-8d4a-326cd87d6228
   queries:
   - {fileID: 0}
   - {fileID: 0}
