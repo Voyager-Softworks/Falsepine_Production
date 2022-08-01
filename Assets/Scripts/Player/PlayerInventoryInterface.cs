@@ -180,6 +180,10 @@ public class PlayerInventoryInterface : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Calculates the corners of the aim zone using the weapon's range and accuracy.
+    /// </summary>
+    /// <returns></returns>
     public AimZone.Corners CalculateAimZoneCorners()
     {
         AimZone.Corners corners = AimZone.Corners.Zero;

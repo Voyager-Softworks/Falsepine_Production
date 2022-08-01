@@ -426,6 +426,7 @@ public class Console : MonoBehaviour
         "list_inventories",
         "list_inventory inventoryID",
         "give inventoryID itemID amount?",
+        "remove inventoryID slotNumber",
         "clear inventoryID",
         "save inventoryID",
         "load inventoryID",
@@ -435,7 +436,7 @@ public class Console : MonoBehaviour
         "scene sceneNumber",
         "delete_mission_save",
         "complete_mission",
-        "inspect inventoryID slotNumber"
+        "inspect inventoryID slotNumber",
     };
 
     /// <summary>
