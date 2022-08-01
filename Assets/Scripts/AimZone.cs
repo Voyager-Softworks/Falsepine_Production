@@ -146,17 +146,6 @@ public class AimZone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // // if any of the local points are not the same as the mesh points, update the mesh
-        // if (m_mesh.vertices[0] != fl || m_mesh.vertices[1] != fr || m_mesh.vertices[2] != br || m_mesh.vertices[3] != bl)
-        // {
-        //     UpdateMesh();
-        // }
-
-        // every 10 frames, update the mesh
-        // if (Time.frameCount % 20 == 0)
-        // {
-        //     UpdateMesh();
-        // }
     }
 
     /// <summary>
@@ -197,8 +186,6 @@ public class AimZone : MonoBehaviour
         this.m_fr = _corners.frontRight;
         this.m_br = _corners.backRight;
         this.m_bl = _corners.backLeft;
-
-        UpdateVisuals();
     }
 
     /// <summary>
@@ -243,7 +230,20 @@ public class AimZone : MonoBehaviour
     /// <summary>
     /// Update the actual mesh of the aim zone (the quad)
     /// </summary>
-    public void UpdateVisuals()
+    public void UpdateVisuals(float _falloffMult)
+    {
+        // update the shader
+        m_meshRenderer.material.SetFloat("_falloffMult", _falloffMult);
+
+        UpdateMesh();
+        UpdateLine();
+
+        // test dmg calc
+        float dmg = CalcDmgMult_float(Vector3.zero, 0.5f);
+        Debug.Log("Dmg: " + dmg);
+    }
+
+    private void UpdateMesh()
     {
         // set the vertices of the aimQuad
         m_mesh.SetVertices(GetLocalCorners().ToList());
@@ -257,11 +257,6 @@ public class AimZone : MonoBehaviour
         m_mesh.RecalculateNormals();
         m_mesh.RecalculateTangents();
         m_mesh.RecalculateUVDistributionMetrics();
-        UpdateLine();
-
-        // test dmg calc
-        float dmg = CalcDmgMult_float(Vector3.zero, 0.5f);
-        Debug.Log("Dmg: " + dmg);
     }
 
     /// <summary>
@@ -358,7 +353,8 @@ public class AimZone : MonoBehaviour
         }
 
         // use falloff to calculate horiz dmg
-        widthVal =  Mathf.Lerp(1 - _falloffMult, 1, widthVal);
+        widthVal = Mathf.Lerp(1 - _falloffMult, 1, widthVal);
+        widthVal = Mathf.Clamp(widthVal, 0.0f, 1.0f);
 
         
         return (lengthVal * widthVal);

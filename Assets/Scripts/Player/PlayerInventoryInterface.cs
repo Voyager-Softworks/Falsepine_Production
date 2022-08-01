@@ -176,6 +176,8 @@ public class PlayerInventoryInterface : MonoBehaviour
                 m_aimZone.Show();
 
                 m_aimZone.SetCorners(CalculateAimZoneCorners());
+
+                m_aimZone.UpdateVisuals(rangedWeapon.m_horizFalloffMult);
             }
         }
     }
