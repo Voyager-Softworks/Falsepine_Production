@@ -32,6 +32,7 @@ public class RangedWeapon : Item
     [SerializeField] public float m_unaimedInaccuracy = 0;
     [SerializeField] public float m_aimTime = 0;
     [SerializeField] private float m_aimTimer = 0;
+    [SerializeField] public float m_horizFalloffMult = 0;
     public bool m_isAiming = false;
 
     // Ammunition:
@@ -43,7 +44,7 @@ public class RangedWeapon : Item
     // Reloading:
     [SerializeField] public float m_reloadTime = 0;
     [SerializeField] public float m_reloadTimer = 0;
-    [SerializeField] private float m_reloadAmount = 0;
+    //[SerializeField] private float m_reloadAmount = 0;
 
     // Other:
     [SerializeField] public float m_equipTime = 0;
@@ -81,23 +82,35 @@ public class RangedWeapon : Item
         RangedWeapon newItem = (RangedWeapon)base.CreateInstance();
 
         // Setting unique values here:
+        // Shooting Performance:
         newItem.m_damage = m_damage;
         newItem.m_range = m_range;
         newItem.m_shootTime = m_shootTime;
         newItem.m_projectileCount = m_projectileCount;
         newItem.m_isAutomnatic = m_isAutomnatic;
+
+        // Aiming:
         newItem.m_aimedInaccuracy = m_aimedInaccuracy;
         newItem.m_unaimedInaccuracy = m_unaimedInaccuracy;
         newItem.m_aimTime = m_aimTime;
+        newItem.m_horizFalloffMult = m_horizFalloffMult;
+
+        // Ammunition:
         newItem.m_clipAmmo = m_clipAmmo;
         newItem.m_clipSize = m_clipSize;
         newItem.m_spareAmmo = m_spareAmmo;
         newItem.m_unlimitedAmmo = m_unlimitedAmmo;
+
+        // Reloading:
         newItem.m_reloadTime = m_reloadTime;
+
+        // Other:
         newItem.m_equipTime = m_equipTime;
         newItem.m_shootEffect = m_shootEffect;
         newItem.m_hitEffect = m_hitEffect;
         newItem.m_trailEffect = m_trailEffect;
+
+        // Sounds:
         newItem.m_shootSound = m_shootSound;
         newItem.m_emptySound = m_emptySound;
         newItem.m_reloadSound = m_reloadSound;
@@ -542,6 +555,8 @@ public class RangedWeapon : Item
             rangedWeapon.m_unaimedInaccuracy = EditorGUILayout.FloatField(new GUIContent("Unaimed Inaccuracy", "The amount of degrees +/- of inaccuracy when UNAIMED"), rangedWeapon.m_unaimedInaccuracy);
             // aim time
             rangedWeapon.m_aimTime = EditorGUILayout.FloatField(new GUIContent("Aim Time", "The time it takes to aim"), rangedWeapon.m_aimTime);
+            // horizontal falloff multiplier
+            rangedWeapon.m_horizFalloffMult = EditorGUILayout.FloatField(new GUIContent("Horizontal Falloff Multiplier", "1 means 0 damage at side, 0 means no falloff"), rangedWeapon.m_horizFalloffMult);
             // end vertical
             GUILayout.EndVertical();
 
@@ -564,7 +579,7 @@ public class RangedWeapon : Item
             // reload time
             rangedWeapon.m_reloadTime = EditorGUILayout.FloatField(new GUIContent("Reload Time", "The time it takes to reload"), rangedWeapon.m_reloadTime);
             // reload amount
-            rangedWeapon.m_reloadAmount = EditorGUILayout.FloatField(new GUIContent("Reload Amount", "The amount of ammo to reload"), rangedWeapon.m_reloadAmount);
+            //rangedWeapon.m_reloadAmount = EditorGUILayout.FloatField(new GUIContent("Reload Amount", "The amount of ammo to reload"), rangedWeapon.m_reloadAmount);
 
             // other:
             GUILayout.Label("Other", CustomEditorStuff.center_bold_label);

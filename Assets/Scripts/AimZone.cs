@@ -146,17 +146,6 @@ public class AimZone : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // // if any of the local points are not the same as the mesh points, update the mesh
-        // if (m_mesh.vertices[0] != fl || m_mesh.vertices[1] != fr || m_mesh.vertices[2] != br || m_mesh.vertices[3] != bl)
-        // {
-        //     UpdateMesh();
-        // }
-
-        // every 10 frames, update the mesh
-        // if (Time.frameCount % 20 == 0)
-        // {
-        //     UpdateMesh();
-        // }
     }
 
     /// <summary>
@@ -197,8 +186,6 @@ public class AimZone : MonoBehaviour
         this.m_fr = _corners.frontRight;
         this.m_br = _corners.backRight;
         this.m_bl = _corners.backLeft;
-
-        UpdateVisuals();
     }
 
     /// <summary>
@@ -243,7 +230,20 @@ public class AimZone : MonoBehaviour
     /// <summary>
     /// Update the actual mesh of the aim zone (the quad)
     /// </summary>
-    public void UpdateVisuals()
+    public void UpdateVisuals(float _falloffMult)
+    {
+        // update the shader
+        m_meshRenderer.material.SetFloat("_falloffMult", _falloffMult);
+
+        UpdateMesh();
+        UpdateLine();
+
+        // test dmg calc
+        float dmg = CalcDmgMult_float(Vector3.zero, 0.5f);
+        Debug.Log("Dmg: " + dmg);
+    }
+
+    private void UpdateMesh()
     {
         // set the vertices of the aimQuad
         m_mesh.SetVertices(GetLocalCorners().ToList());
@@ -257,11 +257,6 @@ public class AimZone : MonoBehaviour
         m_mesh.RecalculateNormals();
         m_mesh.RecalculateTangents();
         m_mesh.RecalculateUVDistributionMetrics();
-        UpdateLine();
-
-        // test dmg calc
-        float dmg = CalcDmgMult_float(Vector3.zero);
-        Debug.Log("Dmg: " + dmg);
     }
 
     /// <summary>
@@ -320,8 +315,9 @@ public class AimZone : MonoBehaviour
     /// Performs the same action as the shader, where damage falls off along length as well as width.
     /// </summary>
     /// <param name="uv"></param>
+    /// <param name="_falloffMult"></param>
     /// <returns></returns>
-    private float CalcDmgMult_float(Vector2 uv){
+    private float CalcDmgMult_float(Vector2 uv, float _falloffMult){
         float lengthVal = 1.0f;
         
         // calc far dmg falloff
@@ -336,7 +332,7 @@ public class AimZone : MonoBehaviour
 
         // if behind or too far, no dmg
         if (uv.y > 1.0 || uv.y < 0.0){
-            lengthVal = 0.0f;
+            return 0.0f;
         }
         
         // make width var be 1 in the middle, and reach 0 at sides
@@ -353,8 +349,13 @@ public class AimZone : MonoBehaviour
 
         // if too wide, no dmg
         if (currentWidth <= 0.5f){
-            widthVal = 0.0f;
+            return 0.0f;
         }
+
+        // use falloff to calculate horiz dmg
+        widthVal = Mathf.Lerp(1 - _falloffMult, 1, widthVal);
+        widthVal = Mathf.Clamp(widthVal, 0.0f, 1.0f);
+
         
         return (lengthVal * widthVal);
     }
@@ -363,10 +364,11 @@ public class AimZone : MonoBehaviour
     /// Calculates the damage multiplier based on position within the aim zone.
     /// </summary>
     /// <param name="_worldPoint"></param>
+    /// <param name="_falloffMult"></param>
     /// <returns></returns>
-    float CalcDmgMult_float(Vector3 _worldPoint){
+    float CalcDmgMult_float(Vector3 _worldPoint, float _falloffMult){
         Vector2 uv = CalculateUVFromWorld(_worldPoint);
-        return CalcDmgMult_float(uv);
+        return CalcDmgMult_float(uv, _falloffMult);
     }
 
     public void Hide()

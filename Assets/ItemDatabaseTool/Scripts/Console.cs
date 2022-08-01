@@ -47,7 +47,21 @@ public class Console : MonoBehaviour
             string text = consoleInput.text;
             if (text == "") return;
 
-            TrySendCommand(text);
+            Log("Input: " + text);
+            Log();
+
+            //split by "&" to get multiple commands
+            string[] commands = text.Split('&');
+
+            // for each command, try to run it
+            for (int i = 0; i < commands.Length; i++)
+            {
+                string command = commands[i];
+                if (command == "") continue;
+                TrySendCommand(command);
+            }
+
+            //TrySendCommand(text);
 
             consoleInput.text = "";
 
@@ -118,11 +132,22 @@ public class Console : MonoBehaviour
     public void TrySendCommand(string _command){
         // to lower
         _command = _command.ToLower();
-        Log(_command);
         commandHistory.Add(_command);
         upIndex = commandHistory.Count;
 
+        //remove any multiple spaces
+        while (_command.Contains("  "))
+        {
+            _command = _command.Replace("  ", " ");
+        }
+
+        //remove any leading or trailing spaces
+        _command = _command.Trim();
+
+        Log(_command);
+
         string[] split = _command.Split(' ');
+        
 
         // "help"
         if (split[0] == "help")
@@ -222,7 +247,9 @@ public class Console : MonoBehaviour
         if (split.Length == 3 && split[0] == "remove")
         {
             string inventoryID = split[1];
-            int slotNumber = int.Parse(split[2]);
+            int slotNumber = 0;
+            try { slotNumber = int.Parse(split[2]); }
+            catch { Log("- Invalid slot number"); return; }
 
             Inventory inventory = Inventory.allInventories.Find(x => x.id == inventoryID);
             if (!inventory){
