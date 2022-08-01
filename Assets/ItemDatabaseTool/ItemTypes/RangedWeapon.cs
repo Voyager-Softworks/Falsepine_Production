@@ -282,8 +282,8 @@ public class RangedWeapon : Item
 
             // split aimzone into two triangles (bl, fl, fr) and (bl, fr, br)
             if (
-                BoundsInTriangle(bounds, _aimZone.bl, _aimZone.fl, _aimZone.fr) || 
-                BoundsInTriangle(bounds, _aimZone.bl, _aimZone.fr, _aimZone.br))
+                BoundsIntersectTriangle(bounds, _aimZone.bl, _aimZone.fl, _aimZone.fr) || 
+                BoundsIntersectTriangle(bounds, _aimZone.bl, _aimZone.fr, _aimZone.br))
             {
                 // raycast all 8 corners of the bounds, and the center of the bounds
                 bool hit = false;
@@ -399,15 +399,62 @@ public class RangedWeapon : Item
         return (u >= 0) && (v >= 0) && (u + v < 1);
     }
 
-    public static bool BoundsInTriangle(Bounds _bounds, Vector3 _triangleA, Vector3 _triangleB, Vector3 _triangleC)
+    public static bool LinesIntersect(Vector3 a1, Vector3 a2, Vector3 b1, Vector3 b2) {
+        // set y to 0
+        a1.y = 0;
+        a2.y = 0;
+        b1.y = 0;
+        b2.y = 0;
+
+        float denominator = (b2.z - b1.z) * (a2.x - a1.x) - (b2.x - b1.x) * (a2.z - a1.z);
+        if (denominator == 0) {
+            return false;
+        }
+        float ua = ((b2.x - b1.x) * (a1.z - b1.z) - (b2.z - b1.z) * (a1.x - b1.x)) / denominator;
+        float ub = ((a2.x - a1.x) * (a1.z - b1.z) - (a2.z - a1.z) * (a1.x - b1.x)) / denominator;
+        return ua >= 0 && ua <= 1 && ub >= 0 && ub <= 1;
+    }
+
+    /// <summary>
+    /// Checks if bounds are intersecting the given triangle.
+    /// </summary>
+    /// <param name="_bounds"></param>
+    /// <param name="_triangleA"></param>
+    /// <param name="_triangleB"></param>
+    /// <param name="_triangleC"></param>
+    /// <returns></returns>
+    public static bool BoundsIntersectTriangle(Bounds _bounds, Vector3 _triangleA, Vector3 _triangleB, Vector3 _triangleC)
     {
+        Vector3 b1 = _bounds.center + new Vector3(_bounds.extents.x, 0, _bounds.extents.z);
+        Vector3 b2 = _bounds.center + new Vector3(_bounds.extents.x, 0, -_bounds.extents.z);
+        Vector3 b3 = _bounds.center + new Vector3(-_bounds.extents.x, 0, _bounds.extents.z);
+        Vector3 b4 = _bounds.center + new Vector3(-_bounds.extents.x, 0, -_bounds.extents.z);
+
         //check center of bounds
         if (PointInTriangle(_bounds.center, _triangleA, _triangleB, _triangleC)) return true;
+
         //check corners of bounds
-        if (PointInTriangle(_bounds.center + new Vector3(_bounds.extents.x, 0, _bounds.extents.z), _triangleA, _triangleB, _triangleC)) return true;
-        if (PointInTriangle(_bounds.center + new Vector3(_bounds.extents.x, 0, -_bounds.extents.z), _triangleA, _triangleB, _triangleC)) return true;
-        if (PointInTriangle(_bounds.center + new Vector3(-_bounds.extents.x, 0, _bounds.extents.z), _triangleA, _triangleB, _triangleC)) return true;
-        if (PointInTriangle(_bounds.center + new Vector3(-_bounds.extents.x, 0, -_bounds.extents.z), _triangleA, _triangleB, _triangleC)) return true;
+        if (PointInTriangle(b1, _triangleA, _triangleB, _triangleC)) return true;
+        if (PointInTriangle(b2, _triangleA, _triangleB, _triangleC)) return true;
+        if (PointInTriangle(b3, _triangleA, _triangleB, _triangleC)) return true;
+        if (PointInTriangle(b4, _triangleA, _triangleB, _triangleC)) return true;
+
+        //check edges of bounds
+        if (LinesIntersect(b1, b2, _triangleA, _triangleB)) return true;
+        if (LinesIntersect(b2, b3, _triangleA, _triangleB)) return true;
+        if (LinesIntersect(b3, b4, _triangleA, _triangleB)) return true;
+        if (LinesIntersect(b4, b1, _triangleA, _triangleB)) return true;
+
+        if (LinesIntersect(b1, b2, _triangleA, _triangleC)) return true;
+        if (LinesIntersect(b2, b3, _triangleA, _triangleC)) return true;
+        if (LinesIntersect(b3, b4, _triangleA, _triangleC)) return true;
+        if (LinesIntersect(b4, b1, _triangleA, _triangleC)) return true;
+
+        if (LinesIntersect(b1, b2, _triangleB, _triangleC)) return true;
+        if (LinesIntersect(b2, b3, _triangleB, _triangleC)) return true;
+        if (LinesIntersect(b3, b4, _triangleB, _triangleC)) return true;
+        if (LinesIntersect(b4, b1, _triangleB, _triangleC)) return true;
+
         return false;
     }
 
