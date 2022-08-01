@@ -237,6 +237,14 @@ public class RangedWeapon : Item
         m_clipAmmo--;
     }
 
+    /// <summary>
+    /// Uses the aim zone to detect what to shoot and how much damage to deal<br/>
+    /// @Todo: Make the aim zone check for collisions using polygons, rather than points
+    /// </summary>
+    /// <param name="_origin"></param>
+    /// <param name="_direction"></param>
+    /// <param name="_owner"></param>
+    /// <param name="_aimZone"></param>
     public void AimZoneShoot(Vector3 _origin, Vector3 _direction, GameObject _owner, AimZone _aimZone){
 
         m_shootTimer = m_shootTime;
