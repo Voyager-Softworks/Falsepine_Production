@@ -13,6 +13,9 @@ using UnityEngine.SceneManagement;
 using UnityEditor;
 #endif
 
+/// <summary>
+/// The base class for all items. Lets dynamic items be created, and automatically generates adds and manages the item's data.
+/// </summary>
 [Serializable]
 public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasStatMods, EconomyManager.Purchasable
 {

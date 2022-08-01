@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DebugMissionCompleter : MonoBehaviour  /// @todo Comment
+/// <summary>
+/// Test class to complete a mission
+/// </summary>
+public class DebugMissionCompleter : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()

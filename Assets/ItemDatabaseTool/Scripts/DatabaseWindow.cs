@@ -9,6 +9,9 @@ using System.Text.RegularExpressions;
 #if UNITY_EDITOR
 using UnityEditor;
 
+/// <summary>
+/// The main window for the Item Database Tool.
+/// </summary>
 public class DatabaseWindow : EditorWindow {
 
     static string itemPath = "Assets/ItemDatabaseTool/Resources/Items/";

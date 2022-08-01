@@ -5,8 +5,11 @@ using System;
 using System.Linq;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Interacts with the player's inventory, item database, and functionality of items.
+/// </summary>
 [Serializable]
-public class PlayerInventoryInterface : MonoBehaviour  /// @todo Comment
+public class PlayerInventoryInterface : MonoBehaviour
 {
     [Header("Input")]
     // Input actions:

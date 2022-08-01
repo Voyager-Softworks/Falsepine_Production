@@ -7,7 +7,11 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.Events;
 
-public class MessageScript : MonoBehaviour /// @todo Comment
+/// <summary>
+/// @Deprecated not used anymore. <br/>
+/// Class to manage old UI for the message popup.
+/// </summary>
+public class MessageScript : MonoBehaviour
 {
     public float startFadeDelay = 3.0f;
     private float startFadeDelayTimer = 0f;

@@ -5,7 +5,10 @@ using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.UI;
 
-public class VignetteScript : MonoBehaviour /// @todo Comment
+/// <summary>
+/// Applies a vignette to the screen.
+/// </summary>
+public class VignetteScript : MonoBehaviour
 {
     public float stayTime = 0.15f;
     private float stayTimer = 0f;

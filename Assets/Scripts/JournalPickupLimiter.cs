@@ -5,6 +5,10 @@ using System;
 using System.Linq;
 using System.Reflection;
 
+/// <summary>
+/// @Deprecated not used anymore. <br/>
+/// Limits the amount of clues that spawn in a level.
+/// </summary>
 public class JournalPickupLimiter : MonoBehaviour  /// @todo Comment
 {
     public int loreAmount = 1;

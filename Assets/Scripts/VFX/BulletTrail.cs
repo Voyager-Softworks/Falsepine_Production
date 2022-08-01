@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletTrail : MonoBehaviour  /// @todo Comment
+/// <summary>
+/// Creates a trail behind a bullet.
+/// </summary>
+public class BulletTrail : MonoBehaviour
 {
     public bool fadeOverTime = true;
     public float fadeRate = 1.0f;

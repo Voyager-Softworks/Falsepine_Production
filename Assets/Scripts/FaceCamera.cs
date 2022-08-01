@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FaceCamera : MonoBehaviour  /// @todo Comment
+/// <summary>
+/// Makes an object look at the camera (TextMeshPro usually)
+/// </summary>
+public class FaceCamera : MonoBehaviour
 {
     private Camera mainCamera;
 

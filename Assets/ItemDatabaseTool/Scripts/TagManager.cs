@@ -5,7 +5,9 @@ using System;
 using System.Text.RegularExpressions;
 using System.Linq;
 
-// tag manager class for items
+/// <summary>
+/// Tag manager for the ItemDatabase.
+/// </summary>
 [Serializable]
 public class TagManager
 {

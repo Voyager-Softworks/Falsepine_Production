@@ -5,10 +5,11 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-public class InfoBox : MonoBehaviour /// @todo Comment
+/// <summary>
+/// Called by other scripts to display information at the cursor
+/// </summary>
+public class InfoBox : MonoBehaviour
 {
-    //can be called from other scripts to display a message for a certain amount of time
-
     public float fullBrightTime = 1.0f;
     private float fullBrightTimer = 0.0f;
 

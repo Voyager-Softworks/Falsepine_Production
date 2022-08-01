@@ -6,7 +6,10 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class UIScript : MonoBehaviour  /// @todo Comment
+/// <summary>
+/// Manages the player UI.
+/// </summary>
+public class UIScript : MonoBehaviour
 {
     public CursorScript cursorScript;
 

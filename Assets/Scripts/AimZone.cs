@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Aim zones are used to calculate damage, area, and range, of weapons.
+/// </summary>
 public class AimZone : MonoBehaviour
 {
     private Mesh m_mesh;
     private MeshRenderer m_meshRenderer;
     private MeshFilter m_meshFilter;
-
-
-    // uvs[0] = new Vector2(-1, 1);
-    // uvs[1] = new Vector2(1, 1);
-    // uvs[2] = new Vector2(0.1f, 0.1f);
-    // uvs[3] = new Vector2(-0.1f, 0.1f);
 
     public Color m_ZoneColor = Color.white;
 

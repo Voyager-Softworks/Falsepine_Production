@@ -11,7 +11,7 @@ using UnityEditor;
 #endif
 
 /// <summary>
-/// An example of a custom item type that can be used in the item database.
+/// Secondary variant of a ranged weapon.
 /// </summary>
 //Make sure to set the [Serializable] attribute on this class, so that it can be saved!
 [Serializable]
