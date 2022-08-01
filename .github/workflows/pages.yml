@@ -34,7 +34,7 @@ jobs:
         uses: gogaille/sparse-checkout@v0.1
         with:
           # Git sparse checkout patterns.
-          patterns: docs Doxyfile Assets/Scripts/*.cs
+          patterns: docs Doxyfile Assets/Scripts
           token: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Update Doxygen Documentation
