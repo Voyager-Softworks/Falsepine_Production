@@ -28,14 +28,9 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Sparse Checkout
-        # You may pin to the exact commit or the version.
-        # uses: gogaille/sparse-checkout@3114de9b3cf84c0829fe84222d8ae8d806fbc794
-        uses: gogaille/sparse-checkout@v0.1
+      - uses: snow-actions/sparse-checkout@v1.1.0
         with:
-          # Git sparse checkout patterns.
-          patterns: 'docs Doxyfile Assets/Scripts doxygen-awesome.css'
-          token: ${{ secrets.GITHUB_TOKEN }}
+          patterns: 'docs/* Doxyfile doxygen-awesome.css Assets/Scripts/*'
           
       - name: Update Doxygen Documentation
         uses: mattnotmitt/doxygen-action@1.9.4
