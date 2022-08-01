@@ -260,7 +260,7 @@ public class AimZone : MonoBehaviour
         UpdateLine();
 
         // test dmg calc
-        float dmg = CalcDmgMult_float(Vector3.zero);
+        float dmg = CalcDmgMult_float(Vector3.zero, 0.5f);
         Debug.Log("Dmg: " + dmg);
     }
 
@@ -320,8 +320,9 @@ public class AimZone : MonoBehaviour
     /// Performs the same action as the shader, where damage falls off along length as well as width.
     /// </summary>
     /// <param name="uv"></param>
+    /// <param name="_falloffMult"></param>
     /// <returns></returns>
-    private float CalcDmgMult_float(Vector2 uv){
+    private float CalcDmgMult_float(Vector2 uv, float _falloffMult){
         float lengthVal = 1.0f;
         
         // calc far dmg falloff
@@ -336,7 +337,7 @@ public class AimZone : MonoBehaviour
 
         // if behind or too far, no dmg
         if (uv.y > 1.0 || uv.y < 0.0){
-            lengthVal = 0.0f;
+            return 0.0f;
         }
         
         // make width var be 1 in the middle, and reach 0 at sides
@@ -353,8 +354,12 @@ public class AimZone : MonoBehaviour
 
         // if too wide, no dmg
         if (currentWidth <= 0.5f){
-            widthVal = 0.0f;
+            return 0.0f;
         }
+
+        // use falloff to calculate horiz dmg
+        widthVal =  Mathf.Lerp(1 - _falloffMult, 1, widthVal);
+
         
         return (lengthVal * widthVal);
     }
@@ -363,10 +368,11 @@ public class AimZone : MonoBehaviour
     /// Calculates the damage multiplier based on position within the aim zone.
     /// </summary>
     /// <param name="_worldPoint"></param>
+    /// <param name="_falloffMult"></param>
     /// <returns></returns>
-    float CalcDmgMult_float(Vector3 _worldPoint){
+    float CalcDmgMult_float(Vector3 _worldPoint, float _falloffMult){
         Vector2 uv = CalculateUVFromWorld(_worldPoint);
-        return CalcDmgMult_float(uv);
+        return CalcDmgMult_float(uv, _falloffMult);
     }
 
     public void Hide()
