@@ -3,7 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AutoSound : MonoBehaviour /// @todo Comment
+/// <summary>
+/// Used on sound prefabs to automatically destroy after the sound plays
+/// </summary>
+public class AutoSound : MonoBehaviour
 {
     public bool playOnStart = true;
     public bool destroyOnEnd = true;

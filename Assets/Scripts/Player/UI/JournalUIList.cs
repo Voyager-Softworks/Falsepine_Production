@@ -6,7 +6,11 @@ using TMPro;
 using UnityEngine.UI;
 using System;
 
-public class JournalUIList : MonoBehaviour /// @todo Comment
+/// <summary>
+/// @Deprecated not used anymore. <br/>
+/// Class to manage old UI for the journal.
+/// </summary>
+public class JournalUIList : MonoBehaviour
 {
     [Header("Self")]
     public GameObject journalPanel;

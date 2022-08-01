@@ -11,6 +11,9 @@ using System.Linq;
 using UnityEditor;
 #endif
 
+/// <summary>
+/// Manages storing and loading of items.
+/// </summary>
 [Serializable]
 public class Inventory : MonoBehaviour
 {

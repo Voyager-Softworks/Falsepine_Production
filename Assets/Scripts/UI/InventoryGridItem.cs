@@ -7,8 +7,11 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
 
+/// <summary>
+/// Grid item for displaying an item in the inventory.
+/// </summary>
 [Serializable]
-public class InventoryGridItem : MonoBehaviour  /// @todo Comment
+public class InventoryGridItem : MonoBehaviour
 {
     public Image icon;
     public Image modIcon;

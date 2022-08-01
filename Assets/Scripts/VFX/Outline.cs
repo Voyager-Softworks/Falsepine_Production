@@ -2,6 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// @Deprecated not used anymore. <br/>
+/// Class to manage the outline shader on objects.
+/// </summary>
 public class Outline : MonoBehaviour  /// @todo Comment
 {
     public Material outlineMaterial;

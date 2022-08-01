@@ -5,7 +5,11 @@ using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.UI;
 
-public class HotbarUIList : MonoBehaviour  /// @todo Comment
+/// <summary>
+/// @Deprecated not used anymore. <br/>
+/// Class to manage old UI for the hotbar.
+/// </summary>
+public class HotbarUIList : MonoBehaviour
 {
     public GameObject hotbarPanel;
 

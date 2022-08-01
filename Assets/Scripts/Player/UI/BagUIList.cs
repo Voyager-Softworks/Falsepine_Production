@@ -5,7 +5,11 @@ using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.UI;
 
-public class BagUIList : MonoBehaviour  /// @todo Comment
+/// <summary>
+/// @Deprecated not used anymore. <br/>
+/// Class to manage old UI for the bag.
+/// </summary>
+public class BagUIList : MonoBehaviour
 {
     public GameObject bagPanel;
     public List<GameObject> bagSlots;

@@ -12,6 +12,9 @@ using UnityEditor;
 using UnityEditor.Callbacks;
 #endif
 
+/// <summary>
+/// The main class for the ItemDatabaseTool.
+/// </summary>
 #if UNITY_EDITOR
 [InitializeOnLoad]
 #endif

@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerStepSound : MonoBehaviour  /// @todo Comment
+/// <summary>
+/// Auto step sounds on animation events
+/// </summary>
+public class PlayerStepSound : MonoBehaviour
 {
     public List<AudioClip> stepSounds;
 

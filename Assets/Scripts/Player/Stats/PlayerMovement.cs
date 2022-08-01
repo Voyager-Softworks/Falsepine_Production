@@ -4,7 +4,10 @@ using UnityEngine;
 //inputsystem
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour  /// @todo Comment
+/// <summary>
+/// Controls the player movement and some mouse control
+/// </summary>
+public class PlayerMovement : MonoBehaviour
 {
 
     [Header("Movement")]

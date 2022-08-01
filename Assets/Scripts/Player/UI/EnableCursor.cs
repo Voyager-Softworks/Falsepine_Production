@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnableCursor : MonoBehaviour  /// @todo Comment
+/// <summary>
+/// Enables the cursor on the scene.
+/// </summary>
+public class EnableCursor : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()

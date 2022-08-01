@@ -12,6 +12,9 @@ using UnityEngine.InputSystem;
 using UnityEditor;
 #endif
 
+/// <summary>
+/// Console class lets the user interact with the game's code in a more direct way.
+/// </summary>
 [Serializable]
 public class Console : MonoBehaviour
 {
@@ -209,6 +212,32 @@ public class Console : MonoBehaviour
             }
             else{
                 Log("- Could not give " + inventoryID + " " + itemID);
+            }
+
+            Log();
+            return;
+        }
+
+        // "remove inventoryID slotNumber"
+        if (split.Length == 3 && split[0] == "remove")
+        {
+            string inventoryID = split[1];
+            int slotNumber = int.Parse(split[2]);
+
+            Inventory inventory = Inventory.allInventories.Find(x => x.id == inventoryID);
+            if (!inventory){
+                Log("- Inventory not found");
+                return;
+            }
+
+
+            Item removed = inventory.RemoveItemFromInventory(slotNumber);
+            // remove the item from the inventory
+            if (removed != null){
+                Log("- " + inventoryID + " has removed " + removed.m_displayName + " from slot " + slotNumber);
+            }
+            else{
+                Log("- Could not remove item from " + inventoryID + " slot " + slotNumber);
             }
 
             Log();

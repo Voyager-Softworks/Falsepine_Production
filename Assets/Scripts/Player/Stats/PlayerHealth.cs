@@ -7,14 +7,12 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.Events;
 
-//NOTES:
-// Player has health from 0-100, Starting at 100.
-// Player must be able to become invulnerable (toggle).
-// Player must be able to be healed.
-// Player must be able to take damage from enemies.
-// Player must be able to die.
 
-public class PlayerHealth : MonoBehaviour /// @todo Comment
+/// <summary>
+/// The health script for the player
+/// @todo Make this script more generic and not specific to the player. (i.e. make it a generic health script, then inherit it for the player)
+/// </summary>
+public class PlayerHealth : MonoBehaviour
 {
     [Header("Stats")]
     public float maxHealth = 100f;

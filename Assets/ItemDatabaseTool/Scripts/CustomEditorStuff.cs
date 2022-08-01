@@ -50,8 +50,8 @@ public class ReadOnlyDrawer : PropertyDrawer
 }
 
 /// <summary>
-/// Custom Input Dialog for Unity Editor
-/// Retrieved From: https://forum.unity.com/threads/is-there-a-way-to-input-text-using-a-unity-editor-utility.473743/#post-7191802
+/// Custom Input Dialog for Unity Editor <br/>
+/// Retrieved From: https://forum.unity.com/threads/is-there-a-way-to-input-text-using-a-unity-editor-utility.473743/#post-7191802 <br/>
 /// By User: https://forum.unity.com/members/vedran_m.4124355/
 /// </summary>
 public class EditorInputDialog : EditorWindow

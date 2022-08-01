@@ -8,6 +8,9 @@ using System;
  using UnityEditor;
  #endif
  
+ /// <summary>
+ /// Some useful utilities for the game.
+ /// </summary>
  namespace Utilities
  {
      [System.Serializable]

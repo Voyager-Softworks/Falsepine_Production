@@ -7,7 +7,10 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.Events;
 
-public class FadeScript : MonoBehaviour  /// @todo Comment
+/// <summary>
+/// Fades the screen out, then transitions to another scene.
+/// </summary>
+public class FadeScript : MonoBehaviour
 {
     private bool m_trueCompleteFalseOver = true;
 

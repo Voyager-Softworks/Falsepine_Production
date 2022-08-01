@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class HealthScript : MonoBehaviour  /// @todo Comment
+/// <summary>
+/// Manages the health of objects and enemies.
+/// </summary>
+public class HealthScript : MonoBehaviour
 {
     public bool isBoss = false;
     public float currentHealth = 100f;

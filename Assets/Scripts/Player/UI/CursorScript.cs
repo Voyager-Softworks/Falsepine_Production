@@ -4,7 +4,10 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class CursorScript : MonoBehaviour  /// @todo Comment
+/// <summary>
+/// Manages the display of the custom cursor.
+/// </summary>
+public class CursorScript : MonoBehaviour
 {
     public Image cursorImage;
     public Sprite aimCursor;
