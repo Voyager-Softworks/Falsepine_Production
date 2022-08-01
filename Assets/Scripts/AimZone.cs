@@ -352,7 +352,7 @@ public class AimZone : MonoBehaviour
         }
 
         // if too wide, no dmg
-        if (widthVal > 1.0f){
+        if (currentWidth <= 0.5f){
             widthVal = 0.0f;
         }
         
