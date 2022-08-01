@@ -46,6 +46,7 @@ public class Flee : NodeAI.ActionBase
             }
             navAgent.speed = GetProperty<float>("Speed");
             navAgent.acceleration = GetProperty<float>("Acceleration");
+            navAgent.isStopped = false;
 
             // Set destination to be opposite direction to the target, by the distance.
             Vector3 targetPos = GetProperty<Transform>("Target").position;
@@ -54,6 +55,7 @@ public class Flee : NodeAI.ActionBase
         }
         if (navAgent.remainingDistance <= navAgent.stoppingDistance)
         {
+            navAgent.isStopped = true;
             state = NodeData.State.Success;
             return NodeData.State.Success;
         }
