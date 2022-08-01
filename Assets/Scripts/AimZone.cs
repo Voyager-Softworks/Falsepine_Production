@@ -250,15 +250,7 @@ public class AimZone : MonoBehaviour
 
         //set tris to match the aimLines
         m_mesh.SetTriangles(new List<int>() { 0, 1, 2, 0, 2, 3, }, 0);
-
-        //custom UVs
-        Vector3[] vertices = m_mesh.vertices;
-        Vector2[] uvs = new Vector2[4];
-        uvs[0] = new Vector2(0, 1);
-        uvs[1] = new Vector2(1, 1);
-        float ratio = Mathf.Abs(vertices[2].x - vertices[3].x) / Mathf.Abs(vertices[0].x - vertices[1].x) / 2.0f;
-        uvs[2] = new Vector2(0.5f + ratio, 0);
-        uvs[3] = new Vector2(0.5f - ratio, 0);
+        Vector2[] uvs = CalculateUVs();
         m_mesh.uv = uvs;
 
         m_mesh.RecalculateBounds();
@@ -266,6 +258,51 @@ public class AimZone : MonoBehaviour
         m_mesh.RecalculateTangents();
         m_mesh.RecalculateUVDistributionMetrics();
         UpdateLine();
+
+        // test dmg calc
+        float dmg = CalcDmgMult_float(Vector3.zero);
+        Debug.Log("Dmg: " + dmg);
+    }
+
+    /// <summary>
+    /// Calculate the UVs of the aim quad corners
+    /// </summary>
+    /// <returns></returns>
+    private Vector2[] CalculateUVs()
+    {
+        //custom UVs
+        Vector3[] vertices = m_mesh.vertices;
+        Vector2[] uvs = new Vector2[4];
+        uvs[0] = new Vector2(0, 1);
+        uvs[1] = new Vector2(1, 1);
+        uvs[2] = CalculateUVFromWorld(m_br);
+        uvs[3] = CalculateUVFromWorld(m_bl);
+        return uvs;
+    }
+
+    /// <summary>
+    /// Takes a world point and calulates the effective UV coordinates of the point in the aim zone <br/>
+    /// Widest points have UV.x between 0 and 1. 0 is left.<br/>
+    /// Tallest points have UV.y between 0 and 1. 0 is closer to player.<br/>
+    /// </summary>
+    /// <param name="_worldPoint"></param>
+    /// <returns></returns>
+    public Vector2 CalculateUVFromWorld(Vector3 _worldPoint)
+    {
+        // convert to local space
+        Vector3 localPoint = transform.InverseTransformPoint(_worldPoint);
+
+        // get local corners
+        Corners localCorners = GetLocalCorners();
+
+        // get x value from 0 to 1 between front left and front right
+        float x = Mathf.InverseLerp(localCorners.frontLeft.x, localCorners.frontRight.x, localPoint.x);
+
+        // get z value from 0 to 1 between back left and front left
+        float z = Mathf.InverseLerp(localCorners.backLeft.z, localCorners.frontLeft.z, localPoint.z);
+
+        // return the UV
+        return new Vector2(x, z);
     }
 
     private void UpdateLine()
@@ -278,10 +315,58 @@ public class AimZone : MonoBehaviour
         SetLineColors(m_leftStartColor, m_leftEndColor, m_midStartColor, m_midEndColor, m_rightStartColor, m_rightEndColor);
     }
 
-    public float CalcDmgFalloff(Vector2 _uv){
-        float dmgMult = 1.0f;
+    /// <summary>
+    /// Calculates the damage multiplier based on position within the aim zone. <br/>
+    /// Performs the same action as the shader, where damage falls off along length as well as width.
+    /// </summary>
+    /// <param name="uv"></param>
+    /// <returns></returns>
+    private float CalcDmgMult_float(Vector2 uv){
+        float lengthVal = 1.0f;
+        
+        // calc far dmg falloff
+        if (uv.y >= 0.75f){
+            lengthVal *= (1.0f - ((uv.y - 0.75f)/0.25f));
+        }
 
-        return dmgMult;
+        // calc close dmg falloff
+        if (uv.y <= 0.1){
+            lengthVal *= (1.0f - ((0.1f - uv.y)/0.1f));
+        }
+
+        // if behind or too far, no dmg
+        if (uv.y > 1.0 || uv.y < 0.0){
+            lengthVal = 0.0f;
+        }
+        
+        // make width var be 1 in the middle, and reach 0 at sides
+        float widthVal = 1.0f;
+        float currentWidth = uv.x + 0.5f;
+        if (currentWidth > 1.0f){
+            currentWidth = 1.0f - (currentWidth - 1.0f);
+        }
+
+        // calc width dmg falloff
+        if (currentWidth > 0.5){
+            widthVal = currentWidth * 2.0f - 1.0f;
+        }
+
+        // if too wide, no dmg
+        if (widthVal > 1.0f){
+            widthVal = 0.0f;
+        }
+        
+        return (lengthVal * widthVal);
+    }
+
+    /// <summary>
+    /// Calculates the damage multiplier based on position within the aim zone.
+    /// </summary>
+    /// <param name="_worldPoint"></param>
+    /// <returns></returns>
+    float CalcDmgMult_float(Vector3 _worldPoint){
+        Vector2 uv = CalculateUVFromWorld(_worldPoint);
+        return CalcDmgMult_float(uv);
     }
 
     public void Hide()
