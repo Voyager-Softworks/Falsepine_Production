@@ -271,6 +271,8 @@ public class RangedWeapon : Item
 
         RHit hitInfoR = new RHit();
 
+        Vector3 intersection = Vector3.zero;
+
         List<HealthScript> healthScriptsInAimZone = new List<HealthScript>();
         foreach (HealthScript healthScript in healthScripts)
         {
@@ -280,10 +282,12 @@ public class RangedWeapon : Item
             if (tempBounds == null) continue;
             Bounds bounds = (Bounds)tempBounds;
 
+            Vector3 tempIntersection = Vector3.zero;
+
             // split aimzone into two triangles (bl, fl, fr) and (bl, fr, br)
             if (
-                BoundsIntersectTriangle(bounds, _aimZone.bl, _aimZone.fl, _aimZone.fr) || 
-                BoundsIntersectTriangle(bounds, _aimZone.bl, _aimZone.fr, _aimZone.br))
+                BoundsIntersectTriangle(bounds, _aimZone.bl, _aimZone.fl, _aimZone.fr, out tempIntersection) || 
+                BoundsIntersectTriangle(bounds, _aimZone.bl, _aimZone.fr, _aimZone.br, out tempIntersection))
             {
                 // raycast all 8 corners of the bounds, and the center of the bounds
                 bool hit = false;
@@ -306,6 +310,7 @@ public class RangedWeapon : Item
                         {
                             m_rHits.Clear();
                             m_rHits.Add(hitInfoR);
+                            intersection = tempIntersection;
                             hit = true;
                             break;
                         }
@@ -324,7 +329,7 @@ public class RangedWeapon : Item
         {
             //dmg
             float calcdDamage = StatsManager.CalculateDamage(this, m_damage);
-            calcdDamage *= _aimZone.CalcDmgMult_float(hitInfoR.destination, m_horizFalloffMult);
+            calcdDamage *= _aimZone.CalcDmgMult_float(intersection, m_horizFalloffMult);
             Debug.Log("Original damage: " + m_damage + " | Calcd damage: " + calcdDamage);
             healthScriptsInAimZone[0].TakeDamage(calcdDamage, _owner);
             if (m_hitEffect != null)
@@ -369,7 +374,7 @@ public class RangedWeapon : Item
         m_clipAmmo--;
     }
 
-    public static bool PointInTriangle(Vector3 _point, Vector3 _triangleA, Vector3 _triangleB, Vector3 _triangleC)
+    public static bool PointInTriangle(Vector3 _point, Vector3 _triangleA, Vector3 _triangleB, Vector3 _triangleC, out Vector3 intersection)
     {
         // set y to 0
         _point.y = 0;
@@ -395,16 +400,29 @@ public class RangedWeapon : Item
         float u = (dot11 * dot02 - dot01 * dot12) * inv;
         float v = (dot00 * dot12 - dot01 * dot02) * inv;
 
+        if (u >= 0 && v >= 0 && u + v < 1)
+        {
+            intersection = _triangleA + u * v0 + v * v1;
+            return true;
+        }
+        else
+        {
+            intersection = Vector3.zero;
+            return false;
+        }
+
         // check if point is in triangle
         return (u >= 0) && (v >= 0) && (u + v < 1);
     }
 
-    public static bool LinesIntersect(Vector3 a1, Vector3 a2, Vector3 b1, Vector3 b2) {
+    public static bool LinesIntersect(Vector3 a1, Vector3 a2, Vector3 b1, Vector3 b2, out Vector3 intersection) {
         // set y to 0
         a1.y = 0;
         a2.y = 0;
         b1.y = 0;
         b2.y = 0;
+
+        intersection = Vector3.zero;
 
         float denominator = (b2.z - b1.z) * (a2.x - a1.x) - (b2.x - b1.x) * (a2.z - a1.z);
         if (denominator == 0) {
@@ -412,7 +430,12 @@ public class RangedWeapon : Item
         }
         float ua = ((b2.x - b1.x) * (a1.z - b1.z) - (b2.z - b1.z) * (a1.x - b1.x)) / denominator;
         float ub = ((a2.x - a1.x) * (a1.z - b1.z) - (a2.z - a1.z) * (a1.x - b1.x)) / denominator;
-        return ua >= 0 && ua <= 1 && ub >= 0 && ub <= 1;
+
+        if (ua >= 0 && ua <= 1 && ub >= 0 && ub <= 1) {
+            intersection = new Vector3(a1.x + ua * (a2.x - a1.x), 0, a1.z + ua * (a2.z - a1.z));
+            return true;
+        }
+        return false;
     }
 
     /// <summary>
@@ -423,37 +446,39 @@ public class RangedWeapon : Item
     /// <param name="_triangleB"></param>
     /// <param name="_triangleC"></param>
     /// <returns></returns>
-    public static bool BoundsIntersectTriangle(Bounds _bounds, Vector3 _triangleA, Vector3 _triangleB, Vector3 _triangleC)
+    public static bool BoundsIntersectTriangle(Bounds _bounds, Vector3 _triangleA, Vector3 _triangleB, Vector3 _triangleC, out Vector3 intersection)
     {
         Vector3 b1 = _bounds.center + new Vector3(_bounds.extents.x, 0, _bounds.extents.z);
         Vector3 b2 = _bounds.center + new Vector3(_bounds.extents.x, 0, -_bounds.extents.z);
         Vector3 b3 = _bounds.center + new Vector3(-_bounds.extents.x, 0, _bounds.extents.z);
         Vector3 b4 = _bounds.center + new Vector3(-_bounds.extents.x, 0, -_bounds.extents.z);
 
+        intersection = Vector3.zero;
+
         //check center of bounds
-        if (PointInTriangle(_bounds.center, _triangleA, _triangleB, _triangleC)) return true;
+        if (PointInTriangle(_bounds.center, _triangleA, _triangleB, _triangleC, out intersection)) return true;
 
         //check corners of bounds
-        if (PointInTriangle(b1, _triangleA, _triangleB, _triangleC)) return true;
-        if (PointInTriangle(b2, _triangleA, _triangleB, _triangleC)) return true;
-        if (PointInTriangle(b3, _triangleA, _triangleB, _triangleC)) return true;
-        if (PointInTriangle(b4, _triangleA, _triangleB, _triangleC)) return true;
+        if (PointInTriangle(b1, _triangleA, _triangleB, _triangleC, out intersection)) return true;
+        if (PointInTriangle(b2, _triangleA, _triangleB, _triangleC, out intersection)) return true;
+        if (PointInTriangle(b3, _triangleA, _triangleB, _triangleC, out intersection)) return true;
+        if (PointInTriangle(b4, _triangleA, _triangleB, _triangleC, out intersection)) return true;
 
         //check edges of bounds
-        if (LinesIntersect(b1, b2, _triangleA, _triangleB)) return true;
-        if (LinesIntersect(b2, b3, _triangleA, _triangleB)) return true;
-        if (LinesIntersect(b3, b4, _triangleA, _triangleB)) return true;
-        if (LinesIntersect(b4, b1, _triangleA, _triangleB)) return true;
+        if (LinesIntersect(b1, b2, _triangleA, _triangleB, out intersection)) return true;
+        if (LinesIntersect(b2, b3, _triangleA, _triangleB, out intersection)) return true;
+        if (LinesIntersect(b3, b4, _triangleA, _triangleB, out intersection)) return true;
+        if (LinesIntersect(b4, b1, _triangleA, _triangleB, out intersection)) return true;
 
-        if (LinesIntersect(b1, b2, _triangleA, _triangleC)) return true;
-        if (LinesIntersect(b2, b3, _triangleA, _triangleC)) return true;
-        if (LinesIntersect(b3, b4, _triangleA, _triangleC)) return true;
-        if (LinesIntersect(b4, b1, _triangleA, _triangleC)) return true;
+        if (LinesIntersect(b1, b2, _triangleA, _triangleC, out intersection)) return true;
+        if (LinesIntersect(b2, b3, _triangleA, _triangleC, out intersection)) return true;
+        if (LinesIntersect(b3, b4, _triangleA, _triangleC, out intersection)) return true;
+        if (LinesIntersect(b4, b1, _triangleA, _triangleC, out intersection)) return true;
 
-        if (LinesIntersect(b1, b2, _triangleB, _triangleC)) return true;
-        if (LinesIntersect(b2, b3, _triangleB, _triangleC)) return true;
-        if (LinesIntersect(b3, b4, _triangleB, _triangleC)) return true;
-        if (LinesIntersect(b4, b1, _triangleB, _triangleC)) return true;
+        if (LinesIntersect(b1, b2, _triangleB, _triangleC, out intersection)) return true;
+        if (LinesIntersect(b2, b3, _triangleB, _triangleC, out intersection)) return true;
+        if (LinesIntersect(b3, b4, _triangleB, _triangleC, out intersection)) return true;
+        if (LinesIntersect(b4, b1, _triangleB, _triangleC, out intersection)) return true;
 
         return false;
     }
