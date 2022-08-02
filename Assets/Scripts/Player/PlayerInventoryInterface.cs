@@ -5,6 +5,10 @@ using System;
 using System.Linq;
 using UnityEngine.InputSystem;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 /// <summary>
 /// Interacts with the player's inventory, item database, and functionality of items.
 /// </summary>
@@ -54,8 +58,13 @@ public class PlayerInventoryInterface : MonoBehaviour
         if (rangedWeapon) {
             //draw m_rHits
             Gizmos.color = Color.red;
-            foreach (RangedWeapon.RHit hit in rangedWeapon.m_rHits) {
-                Gizmos.DrawLine(hit.origin, hit.destination);
+            foreach (RangedWeapon.ShotInfo hit in rangedWeapon.m_allShots) {
+                Gizmos.DrawLine(hit.originPoint, hit.hitPoint);
+
+                //draw damage dealt in text
+                #if UNITY_EDITOR
+                Handles.Label(hit.hitPoint, hit.damage.ToString());
+                #endif
             }
         }
     }
