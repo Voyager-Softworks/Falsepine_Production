@@ -24,7 +24,7 @@ public class RangedWeapon : Item
     [SerializeField] public float m_range = 0;
     [SerializeField] public float m_shootTime = 0;
     [SerializeField] private float m_shootTimer = 0;
-    [SerializeField] public int m_projectileCount = 0;
+    [SerializeField] public int m_maxHitsPerShot = 0;
     [SerializeField] public bool m_isAutomnatic = false;
 
     // Aiming:
@@ -62,12 +62,19 @@ public class RangedWeapon : Item
     [SerializeField] public GameObject m_stopAimSound = null;
 
     // save variables from last shoot attempt:
-    public struct RHit
+    public struct ShotInfo
     {
-        public Vector3 origin;
-        public Vector3 destination;
+        public Vector3 originPoint;
+        public Vector3 hitPoint;
+
+        public Vector3 zoneIntersection;
+        public Vector2 zoneUVPoint;
+
+        public HealthScript healthScriptHit;
+
+        public float damage;
     }
-    public List<RHit> m_rHits = new List<RHit>();
+    public List<ShotInfo> m_allShots = new List<ShotInfo>();
 
 
 
@@ -86,7 +93,7 @@ public class RangedWeapon : Item
         newItem.m_damage = m_damage;
         newItem.m_range = m_range;
         newItem.m_shootTime = m_shootTime;
-        newItem.m_projectileCount = m_projectileCount;
+        newItem.m_maxHitsPerShot = m_maxHitsPerShot;
         newItem.m_isAutomnatic = m_isAutomnatic;
 
         // Aiming:
@@ -170,7 +177,7 @@ public class RangedWeapon : Item
         UpdateWaitTimer(m_shootTime);
 
         // shoot raycasts
-        for (int i = 0; i < m_projectileCount; i++)
+        for (int i = 0; i < m_maxHitsPerShot; i++)
         {
             float currentAimInaccuracy = CalcCurrentAimAngle();
             float aimAngle = UnityEngine.Random.Range(-currentAimInaccuracy, currentAimInaccuracy);
@@ -269,11 +276,13 @@ public class RangedWeapon : Item
         Vector3 aimQuadPos = _aimZone.transform.position;
         healthScripts.Sort((x, y) => Vector3.Distance(x.transform.position, aimQuadPos).CompareTo(Vector3.Distance(y.transform.position, aimQuadPos)));
 
-        RHit hitInfoR = new RHit();
+        // store hitlist
+        List<ShotInfo> hitList = new List<ShotInfo>();
 
-        Vector3 intersection = Vector3.zero;
+        //clear allShots
+        m_allShots.Clear();
 
-        List<HealthScript> healthScriptsInAimZone = new List<HealthScript>();
+        //List<HealthScript> healthScriptsInAimZone = new List<HealthScript>();
         foreach (HealthScript healthScript in healthScripts)
         {
             if (healthScript.isDead) continue;
@@ -282,12 +291,11 @@ public class RangedWeapon : Item
             if (tempBounds == null) continue;
             Bounds bounds = (Bounds)tempBounds;
 
-            Vector3 tempIntersection = Vector3.zero;
+            ShotInfo shotInfo = new ShotInfo();
 
             // split aimzone into two triangles (bl, fl, fr) and (bl, fr, br)
-            if (
-                BoundsIntersectTriangle(bounds, _aimZone.bl, _aimZone.fl, _aimZone.fr, out tempIntersection) || 
-                BoundsIntersectTriangle(bounds, _aimZone.bl, _aimZone.fr, _aimZone.br, out tempIntersection))
+            if (BoundsIntersectTriangle(bounds, _aimZone.bl, _aimZone.fl, _aimZone.fr, out shotInfo.zoneIntersection) || 
+                BoundsIntersectTriangle(bounds, _aimZone.bl, _aimZone.fr, _aimZone.br, out shotInfo.zoneIntersection))
             {
                 // raycast all 8 corners of the bounds, and the center of the bounds
                 bool hit = false;
@@ -303,14 +311,14 @@ public class RangedWeapon : Item
                     Vector3 toPosition = Vector3.Lerp(corner, bounds.center, 0.5f);
                     if (Physics.Raycast(_origin, toPosition - _origin, out hitInfo, m_range, layerMask, QueryTriggerInteraction.Ignore))
                     {
-                        hitInfoR.origin = _origin;
-                        hitInfoR.destination = hitInfo.point;
+                        shotInfo.originPoint = _origin;
+                        shotInfo.hitPoint = hitInfo.point;
                         
                         if (hitInfo.collider.GetComponentInParent<HealthScript>() == healthScript)
                         {
-                            m_rHits.Clear();
-                            m_rHits.Add(hitInfoR);
-                            intersection = tempIntersection;
+                            //m_shots.Clear();
+                            shotInfo.healthScriptHit = healthScript;
+                            hitList.Add(shotInfo);
                             hit = true;
                             break;
                         }
@@ -318,35 +326,66 @@ public class RangedWeapon : Item
                 }
 
                 if (hit){
-                    healthScriptsInAimZone.Add(healthScript);
-                    break;
+                    //healthScriptsInAimZone.Add(healthScript);
+                    continue;
                 }
             }
         }
 
-        // deal damage to the closest object
-        if (healthScriptsInAimZone.Count > 0)
+        for (int i = 0; i < hitList.Count; i++)
         {
-            //dmg
+            //get shotInfo from list
+            ShotInfo shotInfo = hitList[i];
+
+            //update damage
             float calcdDamage = StatsManager.CalculateDamage(this, m_damage);
-            calcdDamage *= _aimZone.CalcDmgMult_float(intersection, m_horizFalloffMult);
-            Debug.Log("Original damage: " + m_damage + " | Calcd damage: " + calcdDamage);
-            healthScriptsInAimZone[0].TakeDamage(calcdDamage, _owner);
+            calcdDamage *= _aimZone.CalcDmgMult_float(shotInfo.zoneIntersection, m_horizFalloffMult);
+            shotInfo.damage = calcdDamage;
+
+            //update UV
+            shotInfo.zoneUVPoint = _aimZone.CalculateUVFromWorld(shotInfo.zoneIntersection);
+
+            //update list
+            hitList[i] = shotInfo;
+        }
+
+        //sort hitList by damage (most first) (if damage is within 0.1f of eachother, sort by distance)
+        hitList.Sort((x, y) =>
+        {
+            if (Mathf.Abs(x.damage - y.damage) < 0.5f)
+            {
+                return Vector3.Distance(x.hitPoint, _origin).CompareTo(Vector3.Distance(y.hitPoint, _origin));
+            }
+            return y.damage.CompareTo(x.damage);
+        });
+
+        // deal damage to healthScripts in aimZone (using m_maxHitsPerShot)
+        for (int i = 0; i < hitList.Count && i < m_maxHitsPerShot; i++)
+        {
+            //get shotInfo
+            ShotInfo shotInfo = hitList[i];
+
+            //add to allShots
+            m_allShots.Add(shotInfo);
+
+            //Deal damage
+            Debug.Log("Original damage: " + m_damage + " | Calcd damage: " + shotInfo.damage);
+            shotInfo.healthScriptHit.TakeDamage(shotInfo.damage, _owner);
             if (m_hitEffect != null)
             {
                 Destroy(Instantiate(
-                m_hitEffect, hitInfoR.destination,
-                Quaternion.FromToRotation(Vector3.up, hitInfoR.destination - hitInfoR.origin)),
+                m_hitEffect, shotInfo.hitPoint,
+                Quaternion.FromToRotation(Vector3.up, shotInfo.hitPoint - shotInfo.originPoint)),
                 2.0f);
             }
 
             //somatic event
-            healthScriptsInAimZone[0].GetComponentInChildren<NodeAI.NodeAI_Senses>()?.RegisterSensoryEvent(
-                                                                                                _owner,
-                                                                                                healthScriptsInAimZone[0].gameObject,
-                                                                                                20.0f,
-                                                                                                NodeAI.SensoryEvent.SenseType.SOMATIC
-                                                                                                );
+            shotInfo.healthScriptHit.GetComponentInChildren<NodeAI.NodeAI_Senses>()?.RegisterSensoryEvent(
+                _owner,
+                shotInfo.healthScriptHit.gameObject,
+                20.0f,
+                NodeAI.SensoryEvent.SenseType.SOMATIC
+            );
         }
 
         // play shoot sound:
@@ -610,7 +649,7 @@ public class RangedWeapon : Item
             // shoot time
             rangedWeapon.m_shootTime = EditorGUILayout.FloatField(new GUIContent("Shoot Time", "The time it takes to shoot\nThe delay after one shot"), rangedWeapon.m_shootTime);
             // projectile count
-            rangedWeapon.m_projectileCount = EditorGUILayout.IntField(new GUIContent("Projectile Count", "The amount of projectiles this weapon shoots"), rangedWeapon.m_projectileCount);
+            rangedWeapon.m_maxHitsPerShot = EditorGUILayout.IntField(new GUIContent("Max Hits", "Max amount of targets that can be hit per shot"), rangedWeapon.m_maxHitsPerShot);
             // is automatic
             rangedWeapon.m_isAutomnatic = EditorGUILayout.Toggle(new GUIContent("Is Automatic", "If this weapon is automatic"), rangedWeapon.m_isAutomnatic);
             // end vertical
