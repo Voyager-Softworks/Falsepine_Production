@@ -102,7 +102,7 @@ public class TownBuilding_MissionBoard : TownBuilding  /// @todo Comment
             case Mission.MissionSize.LESSER:
                 for (int i = 0; i < MissionManager.instance.lesserMissionList.Count; i++)
                 {
-                    if (MissionManager.instance.lesserMissionList[i].isCompleted && MissionManager.instance.lesserMissionList[i] != MissionManager.instance.currentMission)
+                    if (MissionManager.instance.lesserMissionList[i].m_isCompleted && MissionManager.instance.lesserMissionList[i] != MissionManager.instance.currentMission)
                     {
                         totalTurnedIn++;
                     }
@@ -111,7 +111,7 @@ public class TownBuilding_MissionBoard : TownBuilding  /// @todo Comment
             case Mission.MissionSize.GREATER:
                 for (int i = 0; i < MissionManager.instance.greaterMissionList.Count; i++)
                 {
-                    if (MissionManager.instance.greaterMissionList[i].isCompleted && MissionManager.instance.greaterMissionList[i] != MissionManager.instance.currentMission)
+                    if (MissionManager.instance.greaterMissionList[i].m_isCompleted && MissionManager.instance.greaterMissionList[i] != MissionManager.instance.currentMission)
                     {
                         totalTurnedIn++;
                     }

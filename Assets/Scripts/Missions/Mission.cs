@@ -14,15 +14,6 @@ public class Mission : ScriptableObject /// @todo Comment
     };
 
     [Serializable]
-    public enum MissionZone {
-        SNOW,
-        DESERT,
-        REDWOOD,
-        SWAMP,
-        FOREST
-    }
-
-    [Serializable]
     public enum MissionType {
         COLLECTION,
         EXTERMINATION,
@@ -30,28 +21,28 @@ public class Mission : ScriptableObject /// @todo Comment
         BOSS
     }
 
-    [SerializeField] public MissionSize size;
+    [SerializeField] public MissionSize m_size;
 
-    [SerializeField] public MissionZone zone;
+    [SerializeField] public MissionZone m_parentZone;
 
-    [SerializeField] public MissionType type;
+    [SerializeField] public MissionType m_type;
 
-    [SerializeField] public string title;
+    [SerializeField] public string m_title;
 
     [TextArea(4, 10)]
-    [SerializeField] public string description;
+    [SerializeField] public string m_description;
 
-    [SerializeField] public bool isCompleted;
+    [SerializeField] public bool m_isCompleted;
 
     public void SetCompleted(bool _val){
-        isCompleted = _val;
+        m_isCompleted = _val;
     }
 
     // equality check
     public bool Equals(Mission other)
     {
         if (other == null) return false;
-        return this.size == other.size && this.zone == other.zone && this.type == other.type && this.title == other.title && this.description == other.description;
+        return this.m_size == other.m_size && this.m_parentZone == other.m_parentZone && this.m_type == other.m_type && this.m_title == other.m_title && this.m_description == other.m_description;
     }
 
 }

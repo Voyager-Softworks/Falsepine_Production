@@ -38,7 +38,7 @@ public class MissionManager : MonoBehaviour
     public class SerializableMission{
         [SerializeField] public Mission.MissionSize size;
 
-        [SerializeField] public Mission.MissionZone zone;
+        //[SerializeField] public Mission.MissionZone zone;
 
         [SerializeField] public Mission.MissionType type;
 
@@ -50,23 +50,23 @@ public class MissionManager : MonoBehaviour
 
         //constructor that converts the mission to a serializable mission
         public SerializableMission(Mission mission){
-            size = mission.size;
-            zone = mission.zone;
-            type = mission.type;
-            title = mission.title;
-            description = mission.description;
-            isCompleted = mission.isCompleted;
+            size = mission.m_size;
+            //zone = mission.m_parentZone;
+            type = mission.m_type;
+            title = mission.m_title;
+            description = mission.m_description;
+            isCompleted = mission.m_isCompleted;
         }
 
         //converts the serializable mission to a mission
         public Mission ToMission(){
             Mission mission = ScriptableObject.CreateInstance<Mission>();
-            mission.size = size;
-            mission.zone = zone;
-            mission.type = type;
-            mission.title = title;
-            mission.description = description;
-            mission.isCompleted = isCompleted;
+            mission.m_size = size;
+            //mission.m_parentZone = zone;
+            mission.m_type = type;
+            mission.m_title = title;
+            mission.m_description = description;
+            mission.m_isCompleted = isCompleted;
             return mission;
         }
     }
@@ -142,7 +142,7 @@ public class MissionManager : MonoBehaviour
         }
 
         if (currentMission){
-            data.currentMissionSize = currentMission.size;
+            data.currentMissionSize = currentMission.m_size;
             data.currentMissionIndex = GetMissionIndex(currentMission);
         }
 
@@ -225,7 +225,7 @@ public class MissionManager : MonoBehaviour
         Mission.MissionSize currentSize = Mission.MissionSize.LESSER;
         int currentIndex = -1;
         if (currentMission){
-            currentSize = currentMission.size;
+            currentSize = currentMission.m_size;
             currentIndex = GetMissionIndex(currentMission);
         }
 
@@ -249,13 +249,13 @@ public class MissionManager : MonoBehaviour
         //loop through lesser missions and set them to not completed
         foreach (Mission m in lesserMissionList)
         {
-            m.isCompleted = false;
+            m.m_isCompleted = false;
         }
 
         //loop through greater missions and set them to not completed
         foreach (Mission m in greaterMissionList)
         {
-            m.isCompleted = false;
+            m.m_isCompleted = false;
         }
 
         //set current mission to null
@@ -320,7 +320,7 @@ public class MissionManager : MonoBehaviour
     }
 
     public int GetMissionIndex(Mission _mission){
-        switch (_mission.size)
+        switch (_mission.m_size)
         {
             case Mission.MissionSize.LESSER:
                 return lesserMissionList.IndexOf(_mission);

@@ -27,6 +27,6 @@ public class DebugMissionCompleter : MonoBehaviour
             return;
         }
 
-        if (MissionManager.instance.currentMission) MissionManager.instance.currentMission.isCompleted = true;
+        if (MissionManager.instance.currentMission) MissionManager.instance.currentMission.m_isCompleted = true;
     }
 }

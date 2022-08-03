@@ -20,7 +20,7 @@ public class TownBuilding_Emark : TownBuilding  /// @todo Comment
             worldText.text = "Contract Required!";
         }
         //if contract already completed, say so
-        else if (MissionManager.instance.currentMission.isCompleted){
+        else if (MissionManager.instance.currentMission.m_isCompleted){
             worldText.text = "Turn in Contract!";
         }
         else{
@@ -35,11 +35,11 @@ public class TownBuilding_Emark : TownBuilding  /// @todo Comment
         base.OnClick();
 
         //load level 1 if valid
-        if (MissionManager.instance.currentMission != null && !MissionManager.instance.currentMission.isCompleted){
-            if (MissionManager.instance.currentMission.size == Mission.MissionSize.LESSER){
+        if (MissionManager.instance.currentMission != null && !MissionManager.instance.currentMission.m_isCompleted){
+            if (MissionManager.instance.currentMission.m_size == Mission.MissionSize.LESSER){
                 LevelController.LoadSnow();
             }
-            else if (MissionManager.instance.currentMission.size == Mission.MissionSize.GREATER){
+            else if (MissionManager.instance.currentMission.m_size == Mission.MissionSize.GREATER){
                 LevelController.LoadSnowBoss();
             }
         }

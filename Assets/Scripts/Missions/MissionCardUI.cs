@@ -101,7 +101,7 @@ public class MissionCardUI : MonoBehaviour /// @todo Comment
             ShowCard();
 
             missionTitle.text = "Mission Taken";
-            if (associatedMission.isCompleted){
+            if (associatedMission.m_isCompleted){
                 missionDescription.text = "The mission is completed, turn it in.";
             }
             else{
@@ -122,7 +122,7 @@ public class MissionCardUI : MonoBehaviour /// @todo Comment
             //button
             button.SetActive(true);
             //if complete
-            if (associatedMission.isCompleted)
+            if (associatedMission.m_isCompleted)
             {
                 buttonText.text = "Turn In";
             }
@@ -137,11 +137,11 @@ public class MissionCardUI : MonoBehaviour /// @todo Comment
             ShowCard();
 
             //update text
-            missionTitle.text = associatedMission.title;
-            missionDescription.text = associatedMission.description;
+            missionTitle.text = associatedMission.m_title;
+            missionDescription.text = associatedMission.m_description;
 
             //update stamp
-            missionStamp.enabled = associatedMission.isCompleted;
+            missionStamp.enabled = associatedMission.m_isCompleted;
 
             //update background image
             //backgroundImage.enabled = true;
@@ -150,7 +150,7 @@ public class MissionCardUI : MonoBehaviour /// @todo Comment
             //update button
 
             //if tracking current or completed, hide button
-            if ((trackCurrentMission) || associatedMission.isCompleted)
+            if ((trackCurrentMission) || associatedMission.m_isCompleted)
             {
                 button.SetActive(false);
             }
