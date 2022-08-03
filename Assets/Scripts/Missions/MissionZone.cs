@@ -33,6 +33,7 @@ public class MissionZone : ScriptableObject
     public string m_description;
     public ZoneArea m_area;
 
+
     [Header("Missions")]
     public List<Mission> m_possibleLesserMissions;
     public List<Mission> m_possibleGreaterMissions;
@@ -41,12 +42,17 @@ public class MissionZone : ScriptableObject
     private List<Mission> m_lesserMissions = new List<Mission>();
     private Mission m_greaterMission;
 
+    public Mission currentMission;
+
+
     [Header("Scenes")]
     public Utilities.SceneField m_startScene;
     public Utilities.SceneField m_endScene;
     public int m_middleSceneCount = 6;
     public List<Utilities.SceneField> m_possibleMiddleScenes;
     private List<Utilities.SceneField> m_middleScenes = new List<Utilities.SceneField>();
+
+    public int m_currentSceneIndex = 0;
 
     public void RandomiseLesserMissions()
     {
