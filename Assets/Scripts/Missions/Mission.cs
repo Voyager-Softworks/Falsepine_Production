@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// Mission class stores data about a specific mission. <br/>
+/// E.g. Snow Zone, size, type, title, description, and completion status.
+/// </summary>
 [CreateAssetMenu(fileName = "New Mission", menuName = "Missions/New Mission")]
 [Serializable]
 public class Mission : ScriptableObject /// @todo Comment
@@ -44,5 +48,4 @@ public class Mission : ScriptableObject /// @todo Comment
         if (other == null) return false;
         return this.m_size == other.m_size && this.m_parentZone == other.m_parentZone && this.m_type == other.m_type && this.m_title == other.m_title && this.m_description == other.m_description;
     }
-
 }
