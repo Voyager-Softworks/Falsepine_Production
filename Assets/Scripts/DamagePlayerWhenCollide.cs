@@ -12,6 +12,8 @@ public class DamagePlayerWhenCollide : MonoBehaviour
     public float tickRate = 0.5f; ///< The amount of time between each damage tick.
     float tickTimer = 0f;
     SphereCollider sphereCollider;
+    public bool setInactiveOnCollision = false; ///< Whether or not the object should be set inactive after it collides with the player.
+    public bool isActive = true;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +28,7 @@ public class DamagePlayerWhenCollide : MonoBehaviour
         if (tickTimer >= tickRate)
         {
             tickTimer = 0f;
+            if(!isActive) return;
             RaycastHit[] hits = Physics.SphereCastAll(transform.position, sphereCollider.radius, Vector3.down, 0.1f);
             foreach (RaycastHit hit in hits)
             {
@@ -35,6 +38,10 @@ public class DamagePlayerWhenCollide : MonoBehaviour
                     if (destroyOnCollision)
                     {
                         Destroy(gameObject);
+                    }
+                    else if(setInactiveOnCollision)
+                    {
+                        isActive = false;
                     }
                 }
             }
