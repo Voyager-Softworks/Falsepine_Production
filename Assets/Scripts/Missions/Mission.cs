@@ -38,6 +38,7 @@ public class Mission : ScriptableObject /// @todo Comment
 
     [SerializeField] public string title;
 
+    [TextArea(4, 10)]
     [SerializeField] public string description;
 
     [SerializeField] public bool isCompleted;
