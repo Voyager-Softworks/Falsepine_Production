@@ -27,8 +27,6 @@ public class Mission : ScriptableObject /// @todo Comment
 
     [SerializeField] public MissionSize m_size;
 
-    [SerializeField] public MissionZone m_parentZone;
-
     [SerializeField] public MissionType m_type;
 
     [SerializeField] public string m_title;
@@ -46,6 +44,39 @@ public class Mission : ScriptableObject /// @todo Comment
     public bool Equals(Mission other)
     {
         if (other == null) return false;
-        return this.m_size == other.m_size && this.m_parentZone == other.m_parentZone && this.m_type == other.m_type && this.m_title == other.m_title && this.m_description == other.m_description;
+        return this.m_size == other.m_size && this.m_type == other.m_type && this.m_title == other.m_title && this.m_description == other.m_description;
+    }
+
+    /// <summary>
+    /// Serializable class equivalent for the Mission ScriptableObject
+    /// </summary>
+    [Serializable]
+    public class Serializable_Mission
+    {
+        [SerializeField] public Mission.MissionSize m_size;
+        [SerializeField] public Mission.MissionType m_type;
+        [SerializeField] public string m_title;
+        [SerializeField] public string m_description;
+        [SerializeField] public bool m_isCompleted;
+
+        public Serializable_Mission(Mission _mission)
+        {
+            m_size = _mission.m_size;
+            m_type = _mission.m_type;
+            m_title = _mission.m_title;
+            m_description = _mission.m_description;
+            m_isCompleted = _mission.m_isCompleted;
+        }
+
+        public Mission ToMission()
+        {
+            Mission m = new Mission();
+            m.m_size = m_size;
+            m.m_type = m_type;
+            m.m_title = m_title;
+            m.m_description = m_description;
+            m.m_isCompleted = m_isCompleted;
+            return m;
+        }
     }
 }
