@@ -25,7 +25,10 @@ public class MissionCardUI : MonoBehaviour /// @todo Comment
     public GameObject button;
     public TextMeshProUGUI buttonText;
 
-    [HideInInspector] public Mission associatedMission;
+    #if UNITY_EDITOR
+    [ReadOnly]
+    #endif 
+    public Mission associatedMission;
 
     [Header("Tracking")]
     public bool trackCurrentMission = false;
@@ -58,8 +61,10 @@ public class MissionCardUI : MonoBehaviour /// @todo Comment
             return;
         }
 
+        Mission cm = MissionManager.instance.GetCurrentMission();
+
         //if the current mission is this mission, return the mission
-        if (associatedMission == MissionManager.instance.GetCurrentMission())
+        if (associatedMission == cm)
         {
             MissionManager.instance.TryReturnMission();
         }

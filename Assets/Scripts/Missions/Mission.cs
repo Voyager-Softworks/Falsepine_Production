@@ -44,12 +44,41 @@ public class Mission : ScriptableObject /// @todo Comment
         SetCompleted(false);
     }
 
-    // equality check
-    public bool Equals(Mission other)
+    // equality operator
+    public static bool operator ==(Mission a, Mission b)
     {
-        if (other == null) return false;
-        return this.m_size == other.m_size && this.m_type == other.m_type && this.m_title == other.m_title && this.m_description == other.m_description;
+        if (System.Object.ReferenceEquals(a, b))
+        {
+            return true;
+        }
+
+        if (((object)a == null) || ((object)b == null))
+        {
+            return false;
+        }
+
+        return a.m_size == b.m_size && a.m_type == b.m_type && a.m_title == b.m_title && a.m_description == b.m_description;
     }
+    //inequality operator
+    public static bool operator !=(Mission a, Mission b)
+    {
+        return !(a == b);
+    }
+    //override equals method
+    public override bool Equals(object obj)
+    {
+        if (obj == null)
+        {
+            return false;
+        }
+        Mission other = obj as Mission;
+        if (other == null)
+        {
+            return false;
+        }
+        return this == other;
+    }
+    
 
     /// <summary>
     /// Serializable class equivalent for the Mission ScriptableObject

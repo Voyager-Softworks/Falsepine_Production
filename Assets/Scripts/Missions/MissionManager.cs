@@ -144,7 +144,7 @@ public class MissionManager : MonoBehaviour
             //find the zone in the list
             foreach (MissionZone zone in m_missionZones)
             {
-                if (zone.Equals(tempZone))
+                if (zone == tempZone)
                 {
                     m_currentZone = zone;
                     break;
@@ -165,6 +165,12 @@ public class MissionManager : MonoBehaviour
     /// Replace missions in list with new copies of the missions
     /// </summary>
     public void ReinstantiateZones(){
+        // reinstatedate zones
+        for (int i = 0; i < m_missionZones.Count; i++)
+        {
+            m_missionZones[i] = Instantiate(m_missionZones[i]);
+        }
+
         // reinstantiate all missions in each zone first
         foreach (MissionZone zone in m_missionZones)
         {

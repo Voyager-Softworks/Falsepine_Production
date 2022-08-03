@@ -40,8 +40,8 @@ public class MissionZone : ScriptableObject
 
     private int m_lesserMissionCount = 3;
     private int m_greaterMissionCount = 1;
-    [HideInInspector] public List<Mission> m_lesserMissions = new List<Mission>();
-    [HideInInspector] public List<Mission> m_greaterMissions = new List<Mission>();
+    public List<Mission> m_lesserMissions = new List<Mission>();
+    public List<Mission> m_greaterMissions = new List<Mission>();
 
     public Mission currentMission;
 
@@ -51,7 +51,7 @@ public class MissionZone : ScriptableObject
     public Utilities.SceneField m_endScene;
     public int m_middleSceneCount = 6;
     public List<Utilities.SceneField> m_possibleMiddleScenes;
-    [HideInInspector] public List<Utilities.SceneField> m_middleScenes = new List<Utilities.SceneField>();
+    public List<Utilities.SceneField> m_middleScenes = new List<Utilities.SceneField>();
 
     public int m_currentSceneIndex = 0;
 
@@ -147,7 +147,10 @@ public class MissionZone : ScriptableObject
         }
         for (int i = 0; i < m_lesserMissions.Count; i++)
         {
-            m_lesserMissions[i] = Instantiate(m_lesserMissions[i]);
+            if (m_lesserMissions[i])
+            {
+                m_lesserMissions[i] = Instantiate(m_lesserMissions[i]);
+            }
         }
 
         //greater
@@ -157,7 +160,10 @@ public class MissionZone : ScriptableObject
         }
         for (int i = 0; i < m_greaterMissions.Count; i++)
         {
-            m_greaterMissions[i] = Instantiate(m_greaterMissions[i]);
+            if (m_greaterMissions[i])
+            {
+                m_greaterMissions[i] = Instantiate(m_greaterMissions[i]);
+            }
         }
 
         //set current mission
@@ -208,19 +214,38 @@ public class MissionZone : ScriptableObject
         }
     }
 
-    /// <summary>
-    /// Simple Equality check. <br/>
-    /// @Todo: Check more thoroughly.
-    /// </summary>
-    /// <param name="other"></param>
-    /// <returns></returns>
-    public bool Equals(MissionZone other)
+    // equality operator
+    public static bool operator ==(MissionZone a, MissionZone b)
     {
-        if (other == null)
+        if (System.Object.ReferenceEquals(a, b))
+        {
+            return true;
+        }
+
+        if (((object)a == null) || ((object)b == null))
         {
             return false;
         }
-        return this.m_title == other.m_title;
+
+        return a.m_title == b.m_title;
+    }
+    //inequality operator
+    public static bool operator !=(MissionZone a, MissionZone b)
+    {
+        return !(a == b);
+    }
+    //override equals
+    public override bool Equals(object obj)
+    {
+        if (obj == null)
+        {
+            return false;
+        }
+        if (obj.GetType() != typeof(MissionZone))
+        {
+            return false;
+        }
+        return this == (MissionZone)obj;
     }
 
     /// <summary>
@@ -353,7 +378,7 @@ public class MissionZone : ScriptableObject
             // find temp in lesser missions
             foreach (Mission m in mz.m_lesserMissions)
             {
-                if (m.Equals(tempCurrentMission))
+                if (m == tempCurrentMission)
                 {
                     mz.currentMission = m;
                     break;

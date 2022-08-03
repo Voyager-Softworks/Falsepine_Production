@@ -26,7 +26,7 @@ public class ObjectiveInteract : Interactable  /// @todo Comment
         {
             if (MissionManager.instance != null)
             {
-                if (_mission.Equals(MissionManager.instance.GetCurrentMission()))
+                if (_mission == MissionManager.instance.GetCurrentMission())
                 {
                     MissionManager.instance.GetCurrentMission().SetCompleted(true);
 
