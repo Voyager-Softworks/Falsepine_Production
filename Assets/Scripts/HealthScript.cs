@@ -14,6 +14,7 @@ public class HealthScript : MonoBehaviour
     public float maxHealth = 100f;
     public bool isDead = false;
     public bool isInvincible = false;
+    public bool updateAI = false;
 
     public bool endScreenOnDeath = true;
 
@@ -59,6 +60,8 @@ public class HealthScript : MonoBehaviour
     {
         if (isInvincible) return;
         if (isDead) return;
+
+        if (updateAI) GetComponent<NodeAI.NodeAI_Agent>().SetParameter("Health", currentHealth);
 
         currentHealth -= damage;
         _senses?.RegisterSensoryEvent(source, this.gameObject, damage, NodeAI.SensoryEvent.SenseType.SOMATIC);
