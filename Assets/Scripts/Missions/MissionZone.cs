@@ -39,8 +39,9 @@ public class MissionZone : ScriptableObject
     public List<Mission> m_possibleGreaterMissions;
 
     private int m_lesserMissionCount = 3;
-    private List<Mission> m_lesserMissions = new List<Mission>();
-    private Mission m_greaterMission;
+    private int m_greaterMissionCount = 1;
+    [HideInInspector] public List<Mission> m_lesserMissions = new List<Mission>();
+    [HideInInspector] public List<Mission> m_greaterMissions = new List<Mission>();
 
     public Mission currentMission;
 
@@ -50,11 +51,11 @@ public class MissionZone : ScriptableObject
     public Utilities.SceneField m_endScene;
     public int m_middleSceneCount = 6;
     public List<Utilities.SceneField> m_possibleMiddleScenes;
-    private List<Utilities.SceneField> m_middleScenes = new List<Utilities.SceneField>();
+    [HideInInspector] public List<Utilities.SceneField> m_middleScenes = new List<Utilities.SceneField>();
 
     public int m_currentSceneIndex = 0;
 
-    public void RandomiseLesserMissions()
+    private void RandomiseLesserMissions()
     {
         // make new list of possible lesser missions
         List<Mission> tempPLM = new List<Mission>();
@@ -69,7 +70,7 @@ public class MissionZone : ScriptableObject
         }
     }
 
-    public void RandomiseGreaterMission()
+    private void RandomiseGreaterMission()
     {
         // make new list of possible lesser missions
         List<Mission> tempPGM = new List<Mission>();
@@ -77,11 +78,14 @@ public class MissionZone : ScriptableObject
         // randomise tempPLM
         tempPGM = m_possibleGreaterMissions.OrderBy(x => UnityEngine.Random.value).ToList();
 
-        // add to lesser missions
-        m_greaterMission = tempPGM[0];
+        // add to greater missions
+        for (int i = 0; i < m_greaterMissionCount; i++)
+        {
+            m_greaterMissions.Add(tempPGM[i]);
+        }
     }
 
-    public void RandomiseMiddleScenes()
+    private void RandomiseMiddleScenes()
     {
         // make new list of possible lesser missions
         List<Utilities.SceneField> tempPMS = new List<Utilities.SceneField>();
@@ -94,6 +98,129 @@ public class MissionZone : ScriptableObject
         {
             m_middleScenes.Add(tempPMS[i]);
         }
+    }
+
+    public void Reset(){
+        // clear lesser missions
+        m_lesserMissions.Clear();
+
+        // reset possible lesser missions
+        foreach (Mission m in m_possibleLesserMissions)
+        {
+            m.Reset();
+        }
+
+        // clear greater mission
+        m_greaterMissions.Clear();
+
+        // reset possible greater mission
+        foreach (Mission m in m_possibleGreaterMissions)
+        {
+            m.Reset();
+        }
+
+        // clear middle scenes
+        m_middleScenes.Clear();
+
+        // clear current scene index
+        m_currentSceneIndex = 0;
+
+        // Randomise all
+        RandomiseLesserMissions();
+        RandomiseGreaterMission();
+        RandomiseMiddleScenes();
+    }
+
+    public void ReinstantiateMissions(){
+        //store current mission info
+        Mission.MissionSize currentSize = Mission.MissionSize.LESSER;
+        int currentIndex = -1;
+        if (currentMission){
+            currentSize = currentMission.m_size;
+            currentIndex = GetMissionIndex(currentMission);
+        }
+
+        //lesser
+        for (int i = 0; i < m_possibleLesserMissions.Count; i++)
+        {
+            m_possibleLesserMissions[i] = Instantiate(m_possibleLesserMissions[i]);
+        }
+        for (int i = 0; i < m_lesserMissions.Count; i++)
+        {
+            m_lesserMissions[i] = Instantiate(m_lesserMissions[i]);
+        }
+
+        //greater
+        for (int i = 0; i < m_possibleGreaterMissions.Count; i++)
+        {
+            m_possibleGreaterMissions[i] = Instantiate(m_possibleGreaterMissions[i]);
+        }
+        for (int i = 0; i < m_greaterMissions.Count; i++)
+        {
+            m_greaterMissions[i] = Instantiate(m_greaterMissions[i]);
+        }
+
+        //set current mission
+        currentMission = GetMission(currentSize, currentIndex);
+    }
+
+    public bool TryStartMission(Mission _misison){
+        //check if mission is in list
+        int lesserIndex = GetMissionIndex(_misison);
+        if (lesserIndex == -1) return false;
+
+        currentMission = _misison;
+        m_currentSceneIndex = 0;
+        return true;
+    }
+
+    public bool TryReturnMission(){
+        currentMission = null;
+        return true;
+    }
+
+    public int GetMissionIndex(Mission _mission)
+    {
+        switch (_mission.m_size)
+        {
+            case Mission.MissionSize.LESSER:
+                return m_lesserMissions.IndexOf(_mission);
+            case Mission.MissionSize.GREATER:
+                return m_greaterMissions.IndexOf(_mission);
+            default:
+                return -1;
+        }
+    }
+
+    public Mission GetMission(Mission.MissionSize _size, int _index){
+        switch (_size)
+        {
+            case Mission.MissionSize.LESSER:
+                //check if index is valid
+                if (_index < 0 || _index >= m_lesserMissions.Count) return null;
+                return m_lesserMissions[_index];
+            case Mission.MissionSize.GREATER:
+                //check if index is valid
+                if (_index < 0 || _index >= m_greaterMissions.Count) return null;
+                return m_greaterMissions[_index];
+            default:
+                return null;
+        }
+    }
+
+    /// <summary>
+    /// Simple Equality check. <br/>
+    /// @Todo: Check more thoroughly.
+    /// </summary>
+    /// <param name="other"></param>
+    /// <returns></returns>
+    public bool Equals(MissionZone other)
+    {
+        if (other == null)
+        {
+            return false;
+        }
+        return this.m_title == other.m_title;
     }
 
     /// <summary>
@@ -110,8 +237,10 @@ public class MissionZone : ScriptableObject
         [SerializeField] public List<Mission.Serializable_Mission> m_possibleLesserMissions;
         [SerializeField] public List<Mission.Serializable_Mission> m_possibleGreaterMissions;
         [SerializeField] public int m_lesserMissionCount;
+        [SerializeField] public int m_greaterMissionCount;
         [SerializeField] public List<Mission.Serializable_Mission> m_lesserMissions;
-        [SerializeField] public Mission.Serializable_Mission m_greaterMission;
+        [SerializeField] public List<Mission.Serializable_Mission> m_greaterMissions;
+        [SerializeField] public Mission.Serializable_Mission currentMission;
 
         // scenes
         [SerializeField] public Utilities.SceneField m_startScene;
@@ -133,6 +262,7 @@ public class MissionZone : ScriptableObject
             m_possibleLesserMissions = new List<Mission.Serializable_Mission>();
             m_possibleGreaterMissions = new List<Mission.Serializable_Mission>();
             m_lesserMissions = new List<Mission.Serializable_Mission>();
+            m_greaterMissions = new List<Mission.Serializable_Mission>();
 
             // fill with data
             foreach (Mission m in mz.m_possibleLesserMissions)
@@ -143,13 +273,21 @@ public class MissionZone : ScriptableObject
             {
                 m_possibleGreaterMissions.Add(new Mission.Serializable_Mission(m));
             }
+            //lesser
             m_lesserMissionCount = mz.m_lesserMissionCount;
             foreach (Mission m in mz.m_lesserMissions)
             {
                 m_lesserMissions.Add(new Mission.Serializable_Mission(m));
             }
-            m_greaterMission = new Mission.Serializable_Mission(mz.m_greaterMission);
+            //greater
+            m_greaterMissionCount = mz.m_greaterMissionCount;
+            foreach (Mission m in mz.m_greaterMissions)
+            {
+                m_greaterMissions.Add(new Mission.Serializable_Mission(m));
+            }
 
+            // current mission
+            currentMission = new Mission.Serializable_Mission(mz.currentMission);
 
 
             // Scenes:
@@ -181,10 +319,11 @@ public class MissionZone : ScriptableObject
             mz.m_area = m_area;
 
             // Missions:
-            // make empty lists
+            // set empty lists
             mz.m_possibleLesserMissions = new List<Mission>();
             mz.m_possibleGreaterMissions = new List<Mission>();
             mz.m_lesserMissions = new List<Mission>();
+            mz.m_greaterMissions = new List<Mission>();
 
             // fill with data
             foreach (Mission.Serializable_Mission sm in m_possibleLesserMissions)
@@ -195,12 +334,43 @@ public class MissionZone : ScriptableObject
             {
                 mz.m_possibleGreaterMissions.Add(sm.ToMission());
             }
+            //lesser
             mz.m_lesserMissionCount = m_lesserMissionCount;
             foreach (Mission.Serializable_Mission sm in m_lesserMissions)
             {
                 mz.m_lesserMissions.Add(sm.ToMission());
             }
-            mz.m_greaterMission = m_greaterMission.ToMission();
+            //greater
+            mz.m_greaterMissionCount = m_greaterMissionCount;
+            foreach (Mission.Serializable_Mission sm in m_greaterMissions)
+            {
+                mz.m_greaterMissions.Add(sm.ToMission());
+            }
+
+            // make temp current mission
+            Mission tempCurrentMission = currentMission.ToMission();
+
+            // find temp in lesser missions
+            foreach (Mission m in mz.m_lesserMissions)
+            {
+                if (m.Equals(tempCurrentMission))
+                {
+                    mz.currentMission = m;
+                    break;
+                }
+            }
+            // if not found, find temp in greater missions
+            if (mz.currentMission == null)
+            {
+                foreach (Mission m in mz.m_greaterMissions)
+                {
+                    if (m.Equals(tempCurrentMission))
+                    {
+                        mz.currentMission = m;
+                        break;
+                    }
+                }
+            }
 
             // Scenes:
             mz.m_startScene = m_startScene;

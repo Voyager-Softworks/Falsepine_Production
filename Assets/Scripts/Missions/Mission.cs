@@ -40,6 +40,10 @@ public class Mission : ScriptableObject /// @todo Comment
         m_isCompleted = _val;
     }
 
+    public void Reset(){
+        SetCompleted(false);
+    }
+
     // equality check
     public bool Equals(Mission other)
     {

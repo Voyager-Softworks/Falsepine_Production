@@ -100,18 +100,18 @@ public class TownBuilding_MissionBoard : TownBuilding  /// @todo Comment
         int totalTurnedIn = 0;
         switch (_size){
             case Mission.MissionSize.LESSER:
-                for (int i = 0; i < MissionManager.instance.lesserMissionList.Count; i++)
+                for (int i = 0; i < MissionManager.instance.GetLesserMissions().Count; i++)
                 {
-                    if (MissionManager.instance.lesserMissionList[i].m_isCompleted && MissionManager.instance.lesserMissionList[i] != MissionManager.instance.currentMission)
+                    if (MissionManager.instance.GetLesserMissions()[i].m_isCompleted && MissionManager.instance.GetLesserMissions()[i] != MissionManager.instance.GetCurrentMission())
                     {
                         totalTurnedIn++;
                     }
                 }
                 break;
             case Mission.MissionSize.GREATER:
-                for (int i = 0; i < MissionManager.instance.greaterMissionList.Count; i++)
+                for (int i = 0; i < MissionManager.instance.GetGreaterMissions().Count; i++)
                 {
-                    if (MissionManager.instance.greaterMissionList[i].m_isCompleted && MissionManager.instance.greaterMissionList[i] != MissionManager.instance.currentMission)
+                    if (MissionManager.instance.GetGreaterMissions()[i].m_isCompleted && MissionManager.instance.GetGreaterMissions()[i] != MissionManager.instance.GetCurrentMission())
                     {
                         totalTurnedIn++;
                     }
@@ -133,7 +133,7 @@ public class TownBuilding_MissionBoard : TownBuilding  /// @todo Comment
                 SetPage(Mission.MissionSize.GREATER);
                 break;
             case Mission.MissionSize.GREATER:
-                if (MissionManager.instance) MissionManager.instance.RestartMissions();
+                if (MissionManager.instance) MissionManager.instance.RestartAllZones();
                 SetPage(Mission.MissionSize.LESSER);
                 break;
             default:

@@ -17,13 +17,12 @@ public class MissionManager : MonoBehaviour
 {
     public static MissionManager instance;
 
-    [SerializeField] public List<Mission> lesserMissionList;
-    [SerializeField] public List<Mission> greaterMissionList;
-    [SerializeField] public Mission currentMission;
+    [SerializeField] public List<MissionZone> m_missionZones;
+    [SerializeField] public MissionZone m_currentZone;
 
     public static string GetSaveFolderPath(int saveSlot = 0)
     {
-        return Application.dataPath + "/saves/save" + saveSlot + "/missions/";
+        return SaveManager.GetSaveFolderPath() + "/missions/";
     }
 
     public static string GetSaveFilePath(int saveSlot = 0)
@@ -32,56 +31,12 @@ public class MissionManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Serializable version of the mission class from Mission.cs
-    /// </summary>
-    [Serializable]
-    public class SerializableMission{
-        [SerializeField] public Mission.MissionSize size;
-
-        //[SerializeField] public Mission.MissionZone zone;
-
-        [SerializeField] public Mission.MissionType type;
-
-        [SerializeField] public string title;
-
-        [SerializeField] public string description;
-
-        [SerializeField] public bool isCompleted;
-
-        //constructor that converts the mission to a serializable mission
-        public SerializableMission(Mission mission){
-            size = mission.m_size;
-            //zone = mission.m_parentZone;
-            type = mission.m_type;
-            title = mission.m_title;
-            description = mission.m_description;
-            isCompleted = mission.m_isCompleted;
-        }
-
-        //converts the serializable mission to a mission
-        public Mission ToMission(){
-            Mission mission = ScriptableObject.CreateInstance<Mission>();
-            mission.m_size = size;
-            //mission.m_parentZone = zone;
-            mission.m_type = type;
-            mission.m_title = title;
-            mission.m_description = description;
-            mission.m_isCompleted = isCompleted;
-            return mission;
-        }
-    }
-
-    /// <summary>
     /// Serializable class that holds the mission data to be saved
     /// </summary>
     [Serializable]
     public class MissionData{
-        [SerializeField] public List<SerializableMission> lesserMissionList;
-        [SerializeField] public List<SerializableMission> greaterMissionList;
-
-        //current
-        [SerializeField] public Mission.MissionSize currentMissionSize = Mission.MissionSize.LESSER;
-        [SerializeField] public int currentMissionIndex = -1;
+        [SerializeField] public List<MissionZone.Serializable_MissionZone> missionZones;
+        [SerializeField] public MissionZone.Serializable_MissionZone currentZone;
     }
 
     void Awake() {
@@ -100,7 +55,21 @@ public class MissionManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ReinstantiateMissions();
+        ReinstantiateZones();
+
+        //if there is no current zone, set it to the first one and reset it
+        if (m_currentZone == null)
+        {
+            m_currentZone = m_missionZones[0];
+            m_currentZone.Reset();
+        }
+        else {
+            // if there are no lesser or greater missions in the current zone, reset it
+            if (m_currentZone.m_lesserMissions.Count == 0 && m_currentZone.m_greaterMissions.Count == 0)
+            {
+                m_currentZone.Reset();
+            }
+        }
 
         UpdateAllMissionCards();
     }
@@ -112,9 +81,9 @@ public class MissionManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Serialize the missions and save them to file
+    /// Saves the mission data to json file
     /// </summary>
-    public void SaveMissions(bool serialize = false){
+    public void SaveMissions(){
         // if the save folder doesn't exist, create it
         if (!Directory.Exists(GetSaveFolderPath()))
         {
@@ -125,42 +94,20 @@ public class MissionManager : MonoBehaviour
 
         MissionData data = new MissionData();
 
-        //copy lesser mission list to serializable mission list
-        data.lesserMissionList = new List<SerializableMission>();
-        foreach (Mission m in lesserMissionList)
+        // Populate Data:
+        data.missionZones = new List<MissionZone.Serializable_MissionZone>();
+        foreach (MissionZone zone in m_missionZones)
         {
-            SerializableMission sm = new SerializableMission(m);
-            data.lesserMissionList.Add(sm);
+            data.missionZones.Add(new MissionZone.Serializable_MissionZone(zone));
         }
+        data.currentZone = new MissionZone.Serializable_MissionZone(m_currentZone);
 
-        //copy greater mission list to serializable mission list
-        data.greaterMissionList = new List<SerializableMission>();
-        foreach (Mission m in greaterMissionList)
-        {
-            SerializableMission sm = new SerializableMission(m);
-            data.greaterMissionList.Add(sm);
-        }
+        //json serialize the data
+        string json = JsonUtility.ToJson(data, true);
 
-        if (currentMission){
-            data.currentMissionSize = currentMission.m_size;
-            data.currentMissionIndex = GetMissionIndex(currentMission);
-        }
-
-        if (serialize){
-            BinaryFormatter bf = new BinaryFormatter();
-            bf.Serialize(file, data);
-        }
-
-        else{
-            //json serialize the data
-            string json = JsonUtility.ToJson(data, true);
-
-            StreamWriter writer = new StreamWriter(file);
-            writer.Write(json);
-            writer.Close();
-        }
-
-
+        StreamWriter writer = new StreamWriter(file);
+        writer.Write(json);
+        writer.Close();
 
         file.Close();
     }
@@ -168,44 +115,41 @@ public class MissionManager : MonoBehaviour
     /// <summary>
     /// Deserialize the missions from file and load them
     /// </summary>
-    public void LoadMissions(bool isSerialize = false){
+    public void LoadMissions(){
         if (File.Exists(GetSaveFilePath())){
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(GetSaveFilePath(), FileMode.Open);
 
             MissionData data = new MissionData();
 
-            if (isSerialize){
-                data = (MissionData)bf.Deserialize(file);
+            // unpack data
+            string json = "";
+            using (StreamReader reader = new StreamReader(file))
+            {
+                json = reader.ReadToEnd();
             }
-            else{
-                string json = "";
-                using (StreamReader reader = new StreamReader(file))
-                {
-                    json = reader.ReadToEnd();
-                }
-                data = JsonUtility.FromJson<MissionData>(json);
-            }
+            data = JsonUtility.FromJson<MissionData>(json);
 
             file.Close();
 
-            //copy lesser serializable mission list to mission list
-            lesserMissionList = new List<Mission>();
-            foreach (SerializableMission sm in data.lesserMissionList)
+            // load data
+            m_missionZones = new List<MissionZone>();
+            foreach (MissionZone.Serializable_MissionZone zone in data.missionZones)
             {
-                Mission m = sm.ToMission();
-                lesserMissionList.Add(m);
+                m_missionZones.Add(zone.ToMissionZone());
             }
+            //make temp zone
+            MissionZone tempZone = data.currentZone.ToMissionZone();
 
-            //copy greater serializable mission list to mission list
-            greaterMissionList = new List<Mission>();
-            foreach (SerializableMission sm in data.greaterMissionList)
+            //find the zone in the list
+            foreach (MissionZone zone in m_missionZones)
             {
-                Mission m = sm.ToMission();
-                greaterMissionList.Add(m);
+                if (zone.Equals(tempZone))
+                {
+                    m_currentZone = zone;
+                    break;
+                }
             }
-
-            currentMission = GetMission(data.currentMissionSize, data.currentMissionIndex);
         }
 
         UpdateAllMissionCards();
@@ -220,46 +164,33 @@ public class MissionManager : MonoBehaviour
     /// <summary>
     /// Replace missions in list with new copies of the missions
     /// </summary>
-    public void ReinstantiateMissions(){
-        //store current mission info
-        Mission.MissionSize currentSize = Mission.MissionSize.LESSER;
-        int currentIndex = -1;
-        if (currentMission){
-            currentSize = currentMission.m_size;
-            currentIndex = GetMissionIndex(currentMission);
-        }
-
-        //lesser
-        for (int i = 0; i < lesserMissionList.Count; i++)
+    public void ReinstantiateZones(){
+        // reinstantiate all missions in each zone first
+        foreach (MissionZone zone in m_missionZones)
         {
-            lesserMissionList[i] = Instantiate(lesserMissionList[i]);
+            zone.ReinstantiateMissions();
         }
 
-        //greater
-        for (int i = 0; i < greaterMissionList.Count; i++)
-        {
-            greaterMissionList[i] = Instantiate(greaterMissionList[i]);
-        }
+        // store current zone info
+        int currentZoneIndex = GetZoneIndex(m_currentZone);
 
-        //set current mission
-        currentMission = GetMission(currentSize, currentIndex);
+        m_missionZones = new List<MissionZone>(m_missionZones);
+
+        m_currentZone = GetZone(currentZoneIndex);
     }
 
-    public void RestartMissions(){
-        //loop through lesser missions and set them to not completed
-        foreach (Mission m in lesserMissionList)
+    /// <summary>
+    /// Restarts and randomizes all zones.
+    /// </summary>
+    public void RestartAllZones(){
+        // reset all zones
+        foreach (MissionZone zone in m_missionZones)
         {
-            m.m_isCompleted = false;
+            zone.Reset();
         }
 
-        //loop through greater missions and set them to not completed
-        foreach (Mission m in greaterMissionList)
-        {
-            m.m_isCompleted = false;
-        }
-
-        //set current mission to null
-        currentMission = null;
+        // clear current zone
+        m_currentZone = null;
 
         UpdateAllMissionCards();
     }
@@ -269,26 +200,27 @@ public class MissionManager : MonoBehaviour
     /// </summary>
     public void TryStartMission(Mission mission){
         if (mission == null) return;
+        if (m_currentZone == null) return;
 
-        //check if mission is in list
-        int lesserIndex = lesserMissionList.IndexOf(mission);
-        int greaterIndex = greaterMissionList.IndexOf(mission);
-        if (lesserIndex == -1 && greaterIndex == -1) return;
-
-        currentMission = mission;
-
-        UpdateAllMissionCards();
+        if (m_currentZone.TryStartMission(mission)){
+            UpdateAllMissionCards();
+        }
     }
 
     /// <summary>
     /// Try to return the mission
     /// </summary>
     public void TryReturnMission(){
-        currentMission = null;
+        if (m_currentZone == null) return;
 
-        UpdateAllMissionCards();
+        if (m_currentZone.TryReturnMission()){
+            UpdateAllMissionCards();
+        }
     }
 
+    /// <summary>
+    /// Updates all mission cards.
+    /// </summary>
     public void UpdateAllMissionCards(){
         MissionCardUI[] missionCardUIList = FindObjectsOfType<MissionCardUI>(true);
 
@@ -303,35 +235,58 @@ public class MissionManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Gets the index of a zone in the list
+    /// </summary>
+    /// <param name="_zone"></param>
+    /// <returns></returns>
+    public int GetZoneIndex(MissionZone _zone){
+        return m_missionZones.IndexOf(_zone);
+    }
+
+    /// <summary>
+    /// Gets the zone of index
+    /// </summary>
+    /// <param name="_index"></param>
+    /// <returns></returns>
+    public MissionZone GetZone(int _index){
+        if (_index < 0 || _index >= m_missionZones.Count) return null;
+        return m_missionZones[_index];
+    }
+
+    /// <summary>
+    /// Gets the lesser missions of the current zone
+    /// </summary>
+    /// <returns></returns>
+    public List<Mission> GetLesserMissions(){
+        if (m_currentZone == null) return null;
+
+        return m_currentZone.m_lesserMissions;
+    }
+
+    /// <summary>
+    /// Gets the greater missions of the current zone
+    /// </summary>
+    /// <returns></returns>
+    public List<Mission> GetGreaterMissions(){
+        if (m_currentZone == null) return null;
+
+        return m_currentZone.m_greaterMissions;
+    }
+
+    /// <summary>
+    /// Gets the current mission of the current zone
+    /// </summary>
+    /// <returns></returns>
+    public Mission GetCurrentMission(){
+        if (m_currentZone == null) return null;
+
+        return m_currentZone.currentMission;
+    }
+
     public Mission GetMission(Mission.MissionSize _size, int _index){
-        switch (_size)
-        {
-            case Mission.MissionSize.LESSER:
-                //check if index is valid
-                if (_index < 0 || _index >= lesserMissionList.Count) return null;
-                return lesserMissionList[_index];
-            case Mission.MissionSize.GREATER:
-                //check if index is valid
-                if (_index < 0 || _index >= greaterMissionList.Count) return null;
-                return greaterMissionList[_index];
-            default:
-                return null;
-        }
-    }
+        if (m_currentZone == null) return null;
 
-    public int GetMissionIndex(Mission _mission){
-        switch (_mission.m_size)
-        {
-            case Mission.MissionSize.LESSER:
-                return lesserMissionList.IndexOf(_mission);
-            case Mission.MissionSize.GREATER:
-                return greaterMissionList.IndexOf(_mission);
-            default:
-                return -1;
-        }
-    }
-
-    public bool WithinRange(int index){
-        return index >= 0 && index < lesserMissionList.Count;
+        return m_currentZone.GetMission(_size, _index);
     }
 }

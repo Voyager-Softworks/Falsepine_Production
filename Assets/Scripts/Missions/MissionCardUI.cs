@@ -59,7 +59,7 @@ public class MissionCardUI : MonoBehaviour /// @todo Comment
         }
 
         //if the current mission is this mission, return the mission
-        if (associatedMission == MissionManager.instance.currentMission)
+        if (associatedMission == MissionManager.instance.GetCurrentMission())
         {
             MissionManager.instance.TryReturnMission();
         }
@@ -85,7 +85,7 @@ public class MissionCardUI : MonoBehaviour /// @todo Comment
 
         if (trackCurrentMission){
             //get current mission from manager
-            associatedMission = MissionManager.instance.currentMission;
+            associatedMission = MissionManager.instance.GetCurrentMission();
         }
 
         //if no mission associated, disable the mission card
@@ -96,7 +96,7 @@ public class MissionCardUI : MonoBehaviour /// @todo Comment
         }
 
         //if not tracking current mission, and the mission is the current mission, say so
-        if (!(trackCurrentMission) && MissionManager.instance.currentMission != null && associatedMission == MissionManager.instance.currentMission)
+        if (!(trackCurrentMission) && MissionManager.instance.GetCurrentMission() != null && associatedMission == MissionManager.instance.GetCurrentMission())
         {
             ShowCard();
 
@@ -156,7 +156,7 @@ public class MissionCardUI : MonoBehaviour /// @todo Comment
             }
             else{
                 //else, show button and update text
-                if (MissionManager.instance.currentMission != null)
+                if (MissionManager.instance.GetCurrentMission() != null)
                 {
                     buttonText.text = "Switch";
                 }

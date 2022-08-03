@@ -26,6 +26,11 @@ public class SaveManager : MonoBehaviour  /// @todo Comment
         return Application.dataPath + "/saves";
     }
 
+    /// <summary>
+    /// Gets the folder for the current save. ".../saves[saveSlot]"
+    /// </summary>
+    /// <param name="saveSlot">the index of the save slot you want</param>
+    /// <returns></returns>
     public static string GetSaveFolderPath(int saveSlot = 0)
     {
         return GetRootSaveFolder() + "/save" + saveSlot;

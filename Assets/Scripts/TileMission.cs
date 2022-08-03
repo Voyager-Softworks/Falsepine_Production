@@ -13,7 +13,7 @@ public class TileMission : MonoBehaviour  /// @todo Comment
     void Start()
     {
         if (MissionManager.instance){
-            if (MissionManager.instance.currentMission.Equals(linkedMission)){
+            if (MissionManager.instance.GetCurrentMission().Equals(linkedMission)){
                 EnableMisison();
             }
             else {
