@@ -188,15 +188,15 @@ public class MissionManager : MonoBehaviour
     /// <summary>
     /// Restarts and randomizes all zones.
     /// </summary>
-    public void RestartAllZones(){
+    public void ResetAllZones(){
         // reset all zones
         foreach (MissionZone zone in m_missionZones)
         {
             zone.Reset();
         }
 
-        // clear current zone
-        m_currentZone = null;
+        // set current zone to first zone
+        m_currentZone = GetZone(0);
 
         UpdateAllMissionCards();
     }

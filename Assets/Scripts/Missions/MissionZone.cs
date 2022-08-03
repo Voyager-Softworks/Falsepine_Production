@@ -172,8 +172,10 @@ public class MissionZone : ScriptableObject
 
     public bool TryStartMission(Mission _misison){
         //check if mission is in list
-        int lesserIndex = GetMissionIndex(_misison);
-        if (lesserIndex == -1) return false;
+        int index = GetMissionIndex(_misison);
+        if (index == -1){
+            return false;
+        }
 
         currentMission = _misison;
         m_currentSceneIndex = 0;

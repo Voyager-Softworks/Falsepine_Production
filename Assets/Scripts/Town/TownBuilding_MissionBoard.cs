@@ -133,7 +133,7 @@ public class TownBuilding_MissionBoard : TownBuilding  /// @todo Comment
                 SetPage(Mission.MissionSize.GREATER);
                 break;
             case Mission.MissionSize.GREATER:
-                //if (MissionManager.instance) MissionManager.instance.RestartAllZones();
+                if (MissionManager.instance) MissionManager.instance.ResetAllZones();
                 SetPage(Mission.MissionSize.LESSER);
                 break;
             default:

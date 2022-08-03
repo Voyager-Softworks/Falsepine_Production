@@ -379,6 +379,17 @@ public class Console : MonoBehaviour
             return;
         }
 
+        // "scene sceneName"
+        if (split.Length == 2 && split[0] == "scene")
+        {
+            string sceneName = split[1];
+            SceneManager.LoadScene(sceneName);
+
+            Log("- Scene " + sceneName + " loaded");
+
+            return;
+        }
+
         // "delete_mission_save"
         if (split.Length == 1 && split[0] == "delete_mission_save")
         {
@@ -461,6 +472,7 @@ public class Console : MonoBehaviour
         "quit",
         "restart",
         "scene sceneNumber",
+        "scene sceneName",
         "delete_mission_save",
         "complete_mission",
         "inspect inventoryID slotNumber",
