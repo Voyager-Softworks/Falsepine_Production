@@ -125,9 +125,10 @@ namespace Boss.Brightmaw
                 {
                     closest.GetComponent<Rigidbody>().AddForce(
                         ( GetProperty<Transform>("Target").position - closest.transform.position).normalized * 
-                        20.0f, 
+                        40.0f, 
                         ForceMode.Impulse
                         );
+                    closest.GetComponent<DamagePlayerWhenCollide>().isActive = true;
                     state = NodeData.State.Success;
                     return NodeData.State.Success;
                 }

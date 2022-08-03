@@ -4,8 +4,11 @@ using UnityEngine;
 using UnityEngine.Events;
 
 /// <summary>
-/// 
+/// Manages the spawning of groups of enemies.
 /// </summary>
+/// <remarks>
+///  This script was made primarily for use in boss fights when the boss summons groups of enemies.
+/// </remarks>
 public class EnemyGroup : MonoBehaviour
 {
     [System.Serializable]
