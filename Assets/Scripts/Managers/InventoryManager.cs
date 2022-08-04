@@ -33,7 +33,7 @@ public class InventoryManager : MonoBehaviour
                 AddInventory(inv);
             }
 
-            LoadInventories();
+            LoadInventories(SaveManager.currentSaveSlot);
         } else {
             Destroy(this);
             Destroy(gameObject);
@@ -70,9 +70,9 @@ public class InventoryManager : MonoBehaviour
         return null;
     }
 
-    public void SaveInventories() {
+    public void SaveInventories(int saveSlot) {
         foreach (Inventory inv in inventories) {
-            inv.SaveInventory();
+            inv.SaveInventory(saveSlot);
         }
     }
 
@@ -92,9 +92,13 @@ public class InventoryManager : MonoBehaviour
         return target.CanAddItemToInventory(item);
     }
 
-    public void LoadInventories() {
+    /// <summary>
+    /// Loads inventories from file
+    /// </summary>
+    /// <param name="saveSlot"></param>
+    public void LoadInventories(int saveSlot) {
         foreach (Inventory inv in inventories) {
-            inv.LoadInventory();
+            inv.LoadInventory(saveSlot);
         }
     }
 

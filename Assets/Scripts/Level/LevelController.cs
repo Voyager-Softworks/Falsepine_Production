@@ -9,79 +9,52 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class LevelController : MonoBehaviour
 {
-    static public void SaveAll(){
-        // save all inventories
-        if (InventoryManager.instance != null) InventoryManager.instance.SaveInventories();
-
-        // save missions
-        if (MissionManager.instance != null) MissionManager.instance.SaveMissions();
-
-        // save journal
-        if (JournalManager.instance != null) JournalManager.instance.SaveJournal();
-    }
     static public void LoadMenu()
     {
-        SaveAll();
+        SaveManager.SaveAll(SaveManager.currentSaveSlot);
 
         SceneManager.LoadScene("Menu");
     }
 
     static public void LoadTown(){
-        SaveAll();
+        SaveManager.SaveAll(SaveManager.currentSaveSlot);
 
         SceneManager.LoadScene("TownScene");
     }
 
     static public void LoadSnow()
     {
-        SaveAll();
+        SaveManager.SaveAll(SaveManager.currentSaveSlot);
 
         SceneManager.LoadScene("SnowLevel");
     }
 
     static public void LoadSnowBoss()
     {
-        SaveAll();
+        SaveManager.SaveAll(SaveManager.currentSaveSlot);
 
         SceneManager.LoadScene("BoneStag");
     }
 
     static public void LoadComplete()
     {
-        SaveAll();
+        SaveManager.SaveAll(SaveManager.currentSaveSlot);
 
         SceneManager.LoadScene("Scene_Complete");
     }
 
     static public void LoadGameOver()
     {
-        // delete misison save file
-        if (MissionManager.instance != null)
-        {
-            MissionManager.instance.DeleteMissionSave();
+        SaveManager.SoftDeleteAll(SaveManager.currentSaveSlot);
 
-            // destroy mission manager
-            Destroy(MissionManager.instance.gameObject);
-        }
+        // destroy mission manager
+        if (MissionManager.instance) Destroy(MissionManager.instance.gameObject);
 
-        // delete inventory save file for player, home, and store
-        if (InventoryManager.instance != null)
-        {
-            foreach (Inventory inv in InventoryManager.instance.inventories)
-            {
-                if (inv.id == "player" || inv.id == "home" || inv.id == "store")
-                {
-                    inv.ClearInventory();
-                    inv.DeleteSaveFile();
-                }
-            }
-
-            // destroy inventory manager
-            Destroy(InventoryManager.instance.gameObject);
-        }
+        // destroy inventory manager
+        if (InventoryManager.instance) Destroy(InventoryManager.instance.gameObject);
 
         // destroy journal
-        Destroy(JournalManager.instance.gameObject);
+        if (JournalManager.instance) Destroy(JournalManager.instance.gameObject);
 
         SceneManager.LoadScene("Scene_GameOver");
     }

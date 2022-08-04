@@ -25,14 +25,14 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
     /// <summary>
     /// Gets the folder to save item instances to.
     /// </summary>
-    public static string GetInstanceSavePath(int saveSlot = 0){
-        return Application.dataPath + "/saves/save" + saveSlot + "/instances/";
+    public static string GetInstanceSavePath(int saveSlot){
+        return SaveManager.GetSaveFolderPath(saveSlot) + "/instances/";
     }
 
     /// <summary>
     /// Gets the potential file name for this item instance.
     /// </summary>
-    public string GetInstanceFileName(){
+    public string GetInstanceFileName(int saveSlot){
         return this.id + this.instanceID + ".json";
     }
 
@@ -175,7 +175,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
     /// <summary>
     /// Destroys the item instance, and deletes it from file.
     /// </summary>
-    public void DestroyInstance()
+    public void DestroyInstance(int saveSlot)
     {
         Debug.Log("Destroying instance of item: " + this.id);
 
@@ -184,7 +184,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
             return;
         }
 
-        string path = GetInstanceSavePath() + GetInstanceFileName();
+        string path = GetInstanceSavePath(saveSlot) + GetInstanceFileName(saveSlot);
         if (File.Exists(path))
         {
             File.Delete(path);

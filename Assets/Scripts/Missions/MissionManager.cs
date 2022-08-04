@@ -20,12 +20,12 @@ public class MissionManager : MonoBehaviour
     [SerializeField] public List<MissionZone> m_missionZones;
     [SerializeField] public MissionZone m_currentZone;
 
-    public static string GetSaveFolderPath(int saveSlot = 0)
+    public static string GetSaveFolderPath(int saveSlot)
     {
-        return SaveManager.GetSaveFolderPath() + "/missions/";
+        return SaveManager.GetSaveFolderPath(saveSlot) + "/missions/";
     }
 
-    public static string GetSaveFilePath(int saveSlot = 0)
+    public static string GetSaveFilePath(int saveSlot)
     {
         return GetSaveFolderPath(saveSlot) + "missions.json";
     }
@@ -45,7 +45,7 @@ public class MissionManager : MonoBehaviour
             //do not destroy this object
             DontDestroyOnLoad(this);
 
-            LoadMissions();
+            LoadMissions(SaveManager.currentSaveSlot);
         } else {
             Destroy(this);
             Destroy(gameObject);
@@ -83,14 +83,14 @@ public class MissionManager : MonoBehaviour
     /// <summary>
     /// Saves the mission data to json file
     /// </summary>
-    public void SaveMissions(){
+    public void SaveMissions(int saveSlot){
         // if the save folder doesn't exist, create it
-        if (!Directory.Exists(GetSaveFolderPath()))
+        if (!Directory.Exists(GetSaveFolderPath(saveSlot)))
         {
-            Directory.CreateDirectory(GetSaveFolderPath());
+            Directory.CreateDirectory(GetSaveFolderPath(saveSlot));
         }
 
-        FileStream file = File.Create(GetSaveFilePath());
+        FileStream file = File.Create(GetSaveFilePath(saveSlot));
 
         MissionData data = new MissionData();
 
@@ -115,10 +115,10 @@ public class MissionManager : MonoBehaviour
     /// <summary>
     /// Deserialize the missions from file and load them
     /// </summary>
-    public void LoadMissions(){
-        if (File.Exists(GetSaveFilePath())){
+    public void LoadMissions(int saveSlot){
+        if (File.Exists(GetSaveFilePath(saveSlot))){
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(GetSaveFilePath(), FileMode.Open);
+            FileStream file = File.Open(GetSaveFilePath(saveSlot), FileMode.Open);
 
             MissionData data = new MissionData();
 
@@ -155,9 +155,9 @@ public class MissionManager : MonoBehaviour
         UpdateAllMissionCards();
     }
 
-    public void DeleteMissionSave(){
-        if (File.Exists(GetSaveFilePath())){
-            File.Delete(GetSaveFilePath());
+    public void DeleteMissionSave(int saveSlot){
+        if (File.Exists(GetSaveFilePath(saveSlot))){
+            File.Delete(GetSaveFilePath(saveSlot));
         }
     }
 
@@ -290,9 +290,33 @@ public class MissionManager : MonoBehaviour
         return m_currentZone.currentMission;
     }
 
+    /// <summary>
+    /// Gets the mission from the current zone with the specified size and index)
+    /// </summary>
+    /// <param name="_size"></param>
+    /// <param name="_index"></param>
+    /// <returns></returns>
     public Mission GetMission(Mission.MissionSize _size, int _index){
         if (m_currentZone == null) return null;
 
         return m_currentZone.GetMission(_size, _index);
+    }
+
+    /// <summary>
+    /// Gets the path of the current scene
+    /// </summary>
+    /// <returns></returns>
+    public string GetCurrentScenePath(){
+        if (m_currentZone == null) return "";
+        return m_currentZone.GetCurrentScenePath();
+    }
+
+    /// <summary>
+    /// Gets the path of the next scene
+    /// </summary>
+    /// <returns></returns>
+    public string GetNextScenePath(){
+        if (m_currentZone == null) return "";
+        return m_currentZone.GetNextScenePath();
     }
 }

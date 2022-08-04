@@ -271,32 +271,32 @@ public class StatsManager : MonoBehaviour
             //do not destroy this object
             DontDestroyOnLoad(this);
 
-            LoadStats();
+            LoadStats(SaveManager.currentSaveSlot);
         } else {
             Destroy(this);
             Destroy(gameObject);
         }
     }
 
-    public static string GetSaveFolderPath(int saveSlot = 0)
+    public static string GetSaveFolderPath(int saveSlot)
     {
-        return Application.dataPath + "/saves/save" + saveSlot + "/stats/";
+        return SaveManager.GetSaveFolderPath(saveSlot) + "/stats/";
     }
 
-    public static string GetSaveFilePath(int saveSlot = 0)
+    public static string GetSaveFilePath(int saveSlot)
     {
         return GetSaveFolderPath(saveSlot) + "stats.json";
     }
 
-    public void SaveStats()
+    public void SaveStats(int saveSlot)
     {
         // if the save folder doesn't exist, create it
-        if (!Directory.Exists(GetSaveFolderPath()))
+        if (!Directory.Exists(GetSaveFolderPath(saveSlot)))
         {
-            Directory.CreateDirectory(GetSaveFolderPath());
+            Directory.CreateDirectory(GetSaveFolderPath(saveSlot));
         }
 
-        FileStream file = File.Create(GetSaveFilePath());
+        FileStream file = File.Create(GetSaveFilePath(saveSlot));
 
         // write the json to the file
         StreamWriter writer = new StreamWriter(file);
@@ -306,23 +306,23 @@ public class StatsManager : MonoBehaviour
     }
 
 
-    public void LoadStats()
+    public void LoadStats(int saveSlot)
     {
         // if the save folder doesn't exist, create it
-        if (!Directory.Exists(GetSaveFolderPath()))
+        if (!Directory.Exists(GetSaveFolderPath(saveSlot)))
         {
-            Directory.CreateDirectory(GetSaveFolderPath());
+            Directory.CreateDirectory(GetSaveFolderPath(saveSlot));
         }
 
         // if the file doesn't exist, create it
-        if (!File.Exists(GetSaveFilePath()))
+        if (!File.Exists(GetSaveFilePath(saveSlot)))
         {
-            File.Create(GetSaveFilePath());
+            File.Create(GetSaveFilePath(saveSlot));
             return;
         }
 
         // read the file
-        FileStream file = File.Open(GetSaveFilePath(), FileMode.Open);
+        FileStream file = File.Open(GetSaveFilePath(saveSlot), FileMode.Open);
 
         StreamReader reader = new StreamReader(file);
         string json = reader.ReadToEnd();

@@ -55,12 +55,12 @@ public class JournalManager : MonoBehaviour
     }
     [SerializeField] public List<MonsterClues> monsterCluesList = new List<MonsterClues>();
 
-    public static string GetSaveFolderPath(int saveSlot = 0)
+    public static string GetSaveFolderPath(int saveSlot)
     {
-        return Application.dataPath + "/saves/save" + saveSlot + "/journal/";
+        return SaveManager.GetSaveFolderPath(saveSlot) + "/journal/";
     }
 
-    public static string GetSaveFilePath(int saveSlot = 0)
+    public static string GetSaveFilePath(int saveSlot)
     {
         return GetSaveFolderPath(saveSlot) + "clues.json";
     }
@@ -72,7 +72,7 @@ public class JournalManager : MonoBehaviour
             //do not destroy this object
             DontDestroyOnLoad(this);
 
-            LoadJournal();
+            LoadJournal(SaveManager.currentSaveSlot);
         } else {
             Destroy(this);
             Destroy(gameObject);
@@ -151,15 +151,15 @@ public class JournalManager : MonoBehaviour
     /// <summary>
     /// Save the journal
     /// </summary>
-    public void SaveJournal()
+    public void SaveJournal(int saveSlot)
     {
         // if the save folder doesn't exist, create it
-        if (!Directory.Exists(GetSaveFolderPath()))
+        if (!Directory.Exists(GetSaveFolderPath(saveSlot)))
         {
-            Directory.CreateDirectory(GetSaveFolderPath());
+            Directory.CreateDirectory(GetSaveFolderPath(saveSlot));
         }
 
-        FileStream file = File.Create(GetSaveFilePath());
+        FileStream file = File.Create(GetSaveFilePath(saveSlot));
 
         // create list of data
         List<MonsterClues.Data> data = new List<MonsterClues.Data>();
@@ -186,23 +186,23 @@ public class JournalManager : MonoBehaviour
     /// <summary>
     /// Load the journal
     /// </summary>
-    public void LoadJournal()
+    public void LoadJournal(int saveSlot)
     {
         // if the save folder doesn't exist, create it
-        if (!Directory.Exists(GetSaveFolderPath()))
+        if (!Directory.Exists(GetSaveFolderPath(saveSlot)))
         {
-            Directory.CreateDirectory(GetSaveFolderPath());
+            Directory.CreateDirectory(GetSaveFolderPath(saveSlot));
         }
 
         // if the file doesn't exist, create it
-        if (!File.Exists(GetSaveFilePath()))
+        if (!File.Exists(GetSaveFilePath(saveSlot)))
         {
-            File.Create(GetSaveFilePath());
+            File.Create(GetSaveFilePath(saveSlot));
             return;
         }
 
         // read the file
-        FileStream file = File.Open(GetSaveFilePath(), FileMode.Open);
+        FileStream file = File.Open(GetSaveFilePath(saveSlot), FileMode.Open);
 
         StreamReader reader = new StreamReader(file);
         string json = reader.ReadToEnd();
@@ -232,6 +232,13 @@ public class JournalManager : MonoBehaviour
 
         reader.Close();
         file.Close();
+    }
+
+    public void DeleteJournalSave(int saveSlot)
+    {
+        if (File.Exists(GetSaveFilePath(saveSlot))){
+            File.Delete(GetSaveFilePath(saveSlot));
+        }
     }
 
     public void UpdateJournalUI(){
