@@ -300,14 +300,14 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public static string GetInventoryFolder(int saveSlot = 0){
-        return Application.dataPath + "/saves/save" + saveSlot + "/inventories/";
+    public static string GetInventoryFolder(int saveSlot){
+        return SaveManager.GetSaveFolderPath(saveSlot) + "/inventories/";
     }
 
     /// <summary>
     /// Gets the save FOLDER path for this inventory.
     /// </summary>
-    public string GetSaveFolderPath(int saveSlot = 0)
+    public string GetSaveFolderPath(int saveSlot)
     {
         return GetInventoryFolder(saveSlot) + this.GetType().Name + id.ToString() + "/";
     }
@@ -315,20 +315,20 @@ public class Inventory : MonoBehaviour
     /// <summary>
     /// Gets the save FILE path for this inventory.
     /// </summary>
-    public string GetSaveFilePath()
+    public string GetSaveFilePath(int saveSlot)
     {
-        return GetSaveFolderPath() + "/inventory.json";
+        return GetSaveFolderPath(saveSlot) + "/inventory.json";
     }
 
     /// <summary>
     /// Saves this inventory to file.
     /// </summary>
-    public void SaveInventory()
+    public void SaveInventory(int saveSlot)
     {
         // if save path doesn't exist, create it
-        if (!Directory.Exists(GetSaveFolderPath()))
+        if (!Directory.Exists(GetSaveFolderPath(saveSlot)))
         {
-            Directory.CreateDirectory(GetSaveFolderPath());
+            Directory.CreateDirectory(GetSaveFolderPath(saveSlot));
         }
 
         List<string> fileNames = new List<string>();
@@ -337,8 +337,8 @@ public class Inventory : MonoBehaviour
         {
             if (slot.item != null)
             {
-                string fileName = slot.item.GetInstanceFileName();
-                Item.Save(Item.GetInstanceSavePath(), fileName, slot.item);
+                string fileName = slot.item.GetInstanceFileName(saveSlot);
+                Item.Save(Item.GetInstanceSavePath(saveSlot), fileName, slot.item);
 
                 fileNames.Add(fileName);
             }
@@ -348,7 +348,7 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        FileStream file = File.Create(GetSaveFilePath());
+        FileStream file = File.Create(GetSaveFilePath(saveSlot));
 
         //write to file
         StreamWriter writer = new StreamWriter(file);
@@ -372,22 +372,22 @@ public class Inventory : MonoBehaviour
     /// <summary>
     /// Loads this inventory from file.
     /// </summary>
-    public void LoadInventory()
+    public void LoadInventory(int saveSlot)
     {
         // if save path doesn't exist, create it
-        if (!Directory.Exists(GetSaveFolderPath()))
+        if (!Directory.Exists(GetSaveFolderPath(saveSlot)))
         {
-            Directory.CreateDirectory(GetSaveFolderPath());
+            Directory.CreateDirectory(GetSaveFolderPath(saveSlot));
         }
         // if save file doesn't exist, return
-        if (!File.Exists(GetSaveFilePath()))
+        if (!File.Exists(GetSaveFilePath(saveSlot)))
         {
             Debug.Log("Save file does not exist.");
             return;
         }
 
         // get file name
-        string file = System.IO.File.ReadAllText(GetSaveFilePath());
+        string file = System.IO.File.ReadAllText(GetSaveFilePath(saveSlot));
 
         string[] fileNames = file.Split('\n');
 
@@ -406,7 +406,7 @@ public class Inventory : MonoBehaviour
 
             if (fileName == "") continue;
 
-            Item item = Item.Load(Item.GetInstanceSavePath(), fileName);
+            Item item = Item.Load(Item.GetInstanceSavePath(saveSlot), fileName);
 
             if (item == null)
             {
@@ -429,11 +429,11 @@ public class Inventory : MonoBehaviour
     /// <summary>
     /// Delete save file
     /// </summary>
-    public void DeleteSaveFile()
+    public void DeleteSaveFile(int saveSlot)
     {
-        if (File.Exists(GetSaveFilePath()))
+        if (File.Exists(GetSaveFilePath(saveSlot)))
         {
-            File.Delete(GetSaveFilePath());
+            File.Delete(GetSaveFilePath(saveSlot));
         }
     }
 

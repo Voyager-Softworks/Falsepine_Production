@@ -207,7 +207,7 @@ public class ItemDatabase
         LoadListFromFile();
 
         
-        CleanUpFiles();
+        CleanUpFiles(SaveManager.currentSaveSlot);
     }
 
 
@@ -339,25 +339,25 @@ public class ItemDatabase
         }
     }
 
-    static public void CleanUpFiles()
+    static public void CleanUpFiles(int saveSlot)
     {
         Debug.Log("Cleaning up files");
 
         // if directory does not exist, create it (instance save folder)
-        if (!Directory.Exists(Item.GetInstanceSavePath()))
+        if (!Directory.Exists(Item.GetInstanceSavePath(saveSlot)))
         {
-            Directory.CreateDirectory(Item.GetInstanceSavePath());
+            Directory.CreateDirectory(Item.GetInstanceSavePath(saveSlot));
         }
         //if directory does not exist, create it (inventory save folder)
-        if (!Directory.Exists(Inventory.GetInventoryFolder()))
+        if (!Directory.Exists(Inventory.GetInventoryFolder(saveSlot)))
         {
-            Directory.CreateDirectory(Inventory.GetInventoryFolder());
+            Directory.CreateDirectory(Inventory.GetInventoryFolder(saveSlot));
         }
 
         // delete all instance files that are not in any inventories and not in any save files
 
         // get all files in the instance folder
-        string[] instanceSaveFiles = Directory.GetFiles(Item.GetInstanceSavePath(), "*.json");
+        string[] instanceSaveFiles = Directory.GetFiles(Item.GetInstanceSavePath(saveSlot), "*.json");
         // convert to file names
 
 
@@ -369,17 +369,17 @@ public class ItemDatabase
         foreach (Inventory inventory in inventories)
         {
             //if file does not exist, continue
-            if (!File.Exists(inventory.GetSaveFilePath())) continue;
+            if (!File.Exists(inventory.GetSaveFilePath(saveSlot))) continue;
 
             // get every line of the inventory save file
-            List<string> lines = File.ReadAllLines(inventory.GetSaveFilePath()).ToList();
+            List<string> lines = File.ReadAllLines(inventory.GetSaveFilePath(saveSlot)).ToList();
 
             // combine lines into savedInstances
             savedInstances = savedInstances.Union(lines).ToList();
         }
 
         // get all directories in the inventory folder
-        string[] directories = Directory.GetDirectories(Inventory.GetInventoryFolder());
+        string[] directories = Directory.GetDirectories(Inventory.GetInventoryFolder(saveSlot));
 
         foreach (string directory in directories)
         {

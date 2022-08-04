@@ -53,8 +53,11 @@ public class MissionZone : ScriptableObject
     public List<Utilities.SceneField> m_possibleMiddleScenes;
     public List<Utilities.SceneField> m_middleScenes = new List<Utilities.SceneField>();
 
-    public int m_currentSceneIndex = 0;
+    public int m_currentSceneIndex = -1;
 
+    /// <summary>
+    /// Randomises the current lesser missions from the possible lesser missions
+    /// </summary>
     private void RandomiseLesserMissions()
     {
         // make new list of possible lesser missions
@@ -70,6 +73,9 @@ public class MissionZone : ScriptableObject
         }
     }
 
+    /// <summary>
+    /// Randomises the current greater missions from the possible greater missions
+    /// </summary>
     private void RandomiseGreaterMission()
     {
         // make new list of possible lesser missions
@@ -85,6 +91,9 @@ public class MissionZone : ScriptableObject
         }
     }
 
+    /// <summary>
+    /// Randomises the current selection of scenes from the possible scenes.
+    /// </summary>
     private void RandomiseMiddleScenes()
     {
         // make new list of possible lesser missions
@@ -100,6 +109,9 @@ public class MissionZone : ScriptableObject
         }
     }
 
+    /// <summary>
+    /// Resets the current zone and all missions within it to be not completed.
+    /// </summary>
     public void Reset(){
         // clear lesser missions
         m_lesserMissions.Clear();
@@ -131,6 +143,10 @@ public class MissionZone : ScriptableObject
         RandomiseMiddleScenes();
     }
 
+    /// <summary>
+    /// Reinstantiate all missions to ensure that we have modifiable copies of the missions. <br/>
+    /// - Dont want to modify the original mission assets.
+    /// </summary>
     public void ReinstantiateMissions(){
         //store current mission info
         Mission.MissionSize currentSize = Mission.MissionSize.LESSER;
@@ -170,6 +186,12 @@ public class MissionZone : ScriptableObject
         currentMission = GetMission(currentSize, currentIndex);
     }
 
+    /// <summary>
+    /// Tries to set current mission to the given mission. <br/>
+    /// Also sets current scene to -1. (This is to indicate that the current scene is not set yet)
+    /// </summary>
+    /// <param name="_misison"></param>
+    /// <returns></returns>
     public bool TryStartMission(Mission _misison){
         //check if mission is in list
         int index = GetMissionIndex(_misison);
@@ -182,11 +204,21 @@ public class MissionZone : ScriptableObject
         return true;
     }
 
+    /// <summary>
+    /// Sets current mission to null
+    /// </summary>
+    /// <returns></returns>
     public bool TryReturnMission(){
         currentMission = null;
         return true;
     }
 
+
+    /// <summary>
+    /// Returns the index of the mission in the specific mission list. (Lesser or Greater)
+    /// </summary>
+    /// <param name="_mission"></param>
+    /// <returns></returns>
     public int GetMissionIndex(Mission _mission)
     {
         switch (_mission.m_size)
@@ -200,6 +232,12 @@ public class MissionZone : ScriptableObject
         }
     }
 
+    /// <summary>
+    /// Returns the mission of specified size and index.
+    /// </summary>
+    /// <param name="_size"></param>
+    /// <param name="_index"></param>
+    /// <returns></returns>
     public Mission GetMission(Mission.MissionSize _size, int _index){
         switch (_size)
         {
@@ -214,6 +252,24 @@ public class MissionZone : ScriptableObject
             default:
                 return null;
         }
+    }
+
+    /// <summary>
+    /// Gets the path of the current scene
+    /// </summary>
+    /// <returns></returns>
+    public String GetCurrentScenePath(){
+        if (m_currentSceneIndex < 0 || m_currentSceneIndex >= m_middleScenes.Count) return "";
+        return m_middleScenes[m_currentSceneIndex].scenePath;
+    }
+
+    /// <summary>
+    /// Gets the path of the next scene
+    /// </summary>
+    /// <returns></returns>
+    public String GetNextScenePath(){
+        if (m_currentSceneIndex + 1 >= m_middleScenes.Count) return "";
+        return m_middleScenes[m_currentSceneIndex + 1].scenePath;
     }
 
     // equality operator

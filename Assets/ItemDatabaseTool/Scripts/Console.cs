@@ -305,7 +305,7 @@ public class Console : MonoBehaviour
             }
 
             // save the inventory
-            inventory.SaveInventory();
+            inventory.SaveInventory(SaveManager.currentSaveSlot);
             Log("- Inventory saved");
 
             Log();
@@ -327,8 +327,24 @@ public class Console : MonoBehaviour
             }
 
             // load the inventory
-            inventory.LoadInventory();
+            inventory.LoadInventory(SaveManager.currentSaveSlot);
             Log("- Inventory loaded");
+
+            Log();
+            return;
+        }
+
+        // "set_saveslot slotNumber"
+        if (split.Length == 2 && split[0] == "set_saveslot")
+        {
+            string set = split[0];
+            string slotNumber = split[1];
+            int slot = 0;
+            try { slot = int.Parse(slotNumber); }
+            catch { Log("- Invalid slot number"); return; }
+
+            SaveManager.SetSaveSlot(slot);
+            Log("- Save slot set to " + slot);
 
             Log();
             return;
@@ -393,7 +409,7 @@ public class Console : MonoBehaviour
         // "delete_mission_save"
         if (split.Length == 1 && split[0] == "delete_mission_save")
         {
-            MissionManager.instance?.DeleteMissionSave();
+            MissionManager.instance?.DeleteMissionSave(SaveManager.currentSaveSlot);
 
             Log("- Mission save deleted");
 
@@ -468,6 +484,7 @@ public class Console : MonoBehaviour
         "clear inventoryID",
         "save inventoryID",
         "load inventoryID",
+        "set_saveslot slotNumber",
         "list_database",
         "quit",
         "restart",
