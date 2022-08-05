@@ -11,6 +11,9 @@ public class DynamicSnowPainter : MonoBehaviour
         if (ds != null) {
             EnableVFX(true);
         }
+        else{
+            EnableVFX(false);
+        }
     }
 
     public void EnableVFX(bool enable)
