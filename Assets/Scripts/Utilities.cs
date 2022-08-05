@@ -57,20 +57,29 @@ using System;
             position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
             if (sceneAsset != null)
             {
-                EditorGUI.BeginChangeCheck();
-                var value = EditorGUI.ObjectField(position, sceneAsset.objectReferenceValue, typeof(SceneAsset), false);
-                if (EditorGUI.EndChangeCheck())
+                //if game is running
+                if (Application.isPlaying)
                 {
-                    sceneAsset.objectReferenceValue = value;
-                    if (sceneAsset.objectReferenceValue != null)
+                    // display the path
+                    EditorGUI.LabelField(position, scenePath.stringValue);
+                }
+                else{
+                    EditorGUI.BeginChangeCheck();
+                    var value = EditorGUI.ObjectField(position, sceneAsset.objectReferenceValue, typeof(SceneAsset), false);
+                    if (EditorGUI.EndChangeCheck())
                     {
-                        var fullScenePath = AssetDatabase.GetAssetPath(sceneAsset.objectReferenceValue);
-                        var assetsIndex = fullScenePath.IndexOf("Assets", StringComparison.Ordinal) + 7;
-                        var extensionIndex = fullScenePath.LastIndexOf(".unity", StringComparison.Ordinal);
-                        fullScenePath = fullScenePath.Substring(assetsIndex, extensionIndex - assetsIndex);
-                        scenePath.stringValue = fullScenePath;
+                        sceneAsset.objectReferenceValue = value;
+                        if (sceneAsset.objectReferenceValue != null)
+                        {
+                            var fullScenePath = AssetDatabase.GetAssetPath(sceneAsset.objectReferenceValue);
+                            var assetsIndex = fullScenePath.IndexOf("Assets", StringComparison.Ordinal) + 7;
+                            var extensionIndex = fullScenePath.LastIndexOf(".unity", StringComparison.Ordinal);
+                            fullScenePath = fullScenePath.Substring(assetsIndex, extensionIndex - assetsIndex);
+                            scenePath.stringValue = fullScenePath;
+                        }
                     }
                 }
+                
             }
             EditorGUI.EndProperty();
         }

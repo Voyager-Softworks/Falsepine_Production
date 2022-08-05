@@ -213,6 +213,41 @@ public class MissionManager : MonoBehaviour
         }
     }
 
+    public void TryEmbark(){
+        //load level 1 if valid
+        if (GetCurrentMission() != null && !GetCurrentMission().m_isCompleted){
+            if (GetCurrentMission().m_size == Mission.MissionSize.LESSER){
+                LoadFirstLesserScene();
+            }
+            else if (GetCurrentMission().m_size == Mission.MissionSize.GREATER){
+                LoadFirstGreaterScene();
+            }
+        }
+    }
+
+    public void LoadFirstLesserScene(){
+        if (m_currentZone == null) return;
+        if (m_currentZone.m_startScene == null) return;
+
+        LevelController.LoadScene(m_currentZone.m_startScene.scenePath);
+    }
+
+    public void LoadNextLesserScene(){
+        if (m_currentZone == null) return;
+
+        string nextPath = m_currentZone.GetNextLesserScenePath();
+        if (nextPath == "") return;
+
+        LevelController.LoadScene(nextPath);
+    }
+
+    public void LoadFirstGreaterScene(){
+        if (m_currentZone == null) return;
+        if (m_currentZone.m_startScene == null) return;
+
+        LevelController.LoadScene(m_currentZone.m_bossScene.scenePath);
+    }
+
     /// <summary>
     /// Try to return the mission
     /// </summary>
@@ -302,21 +337,27 @@ public class MissionManager : MonoBehaviour
         return m_currentZone.GetMission(_size, _index);
     }
 
-    /// <summary>
-    /// Gets the path of the current scene
-    /// </summary>
-    /// <returns></returns>
-    public string GetCurrentScenePath(){
-        if (m_currentZone == null) return "";
-        return m_currentZone.GetCurrentScenePath();
+    public int GetCurrentLesserSceneIndex(){
+        if (m_currentZone == null) return -1;
+
+        return m_currentZone.GetCurrentLesserSceneIndex();
     }
 
-    /// <summary>
-    /// Gets the path of the next scene
-    /// </summary>
-    /// <returns></returns>
-    public string GetNextScenePath(){
-        if (m_currentZone == null) return "";
-        return m_currentZone.GetNextScenePath();
-    }
+    // /// <summary>
+    // /// Gets the path of the current scene
+    // /// </summary>
+    // /// <returns></returns>
+    // public string GetCurrentScenePath(){
+    //     if (m_currentZone == null) return "";
+    //     return m_currentZone.GetCurrentScenePath();
+    // }
+
+    // /// <summary>
+    // /// Gets the path of the next scene
+    // /// </summary>
+    // /// <returns></returns>
+    // public string GetNextScenePath(){
+    //     if (m_currentZone == null) return "";
+    //     return m_currentZone.GetNextScenePath();
+    // }
 }

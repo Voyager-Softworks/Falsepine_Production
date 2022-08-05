@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -52,8 +53,9 @@ public class MissionZone : ScriptableObject
     public int m_middleSceneCount = 6;
     public List<Utilities.SceneField> m_possibleMiddleScenes;
     public List<Utilities.SceneField> m_middleScenes = new List<Utilities.SceneField>();
+    public Utilities.SceneField m_bossScene;
 
-    public int m_currentSceneIndex = -1;
+    //public string m_currentScenePath = "";
 
     /// <summary>
     /// Randomises the current lesser missions from the possible lesser missions
@@ -134,8 +136,8 @@ public class MissionZone : ScriptableObject
         // clear middle scenes
         m_middleScenes.Clear();
 
-        // clear current scene index
-        m_currentSceneIndex = 0;
+        // clear current scene indexs
+        //m_currentScenePath = "";
 
         // Randomise all
         RandomiseLesserMissions();
@@ -200,7 +202,8 @@ public class MissionZone : ScriptableObject
         }
 
         currentMission = _misison;
-        m_currentSceneIndex = 0;
+
+        //m_currentScenePath = "";
         return true;
     }
 
@@ -255,21 +258,84 @@ public class MissionZone : ScriptableObject
     }
 
     /// <summary>
-    /// Gets the path of the current scene
-    /// </summary>
-    /// <returns></returns>
-    public String GetCurrentScenePath(){
-        if (m_currentSceneIndex < 0 || m_currentSceneIndex >= m_middleScenes.Count) return "";
-        return m_middleScenes[m_currentSceneIndex].scenePath;
-    }
-
-    /// <summary>
     /// Gets the path of the next scene
     /// </summary>
     /// <returns></returns>
-    public String GetNextScenePath(){
-        if (m_currentSceneIndex + 1 >= m_middleScenes.Count) return "";
-        return m_middleScenes[m_currentSceneIndex + 1].scenePath;
+    // public String GetNextScenePath(){
+    //     //  check if current scene is set
+    //     if (m_currentScenePath == ""){
+    //         return "";
+    //     }
+        
+    //     // check if it is the boss scene
+    //     if (m_currentScenePath == m_bossScene.scenePath){
+    //         return "";
+    //     }
+
+    //     // add start middle and end scenes to new list
+    //     List<Utilities.SceneField> temp = new List<Utilities.SceneField>();
+    //     temp.Add(m_startScene);
+    //     temp.AddRange(m_middleScenes);
+    //     temp.Add(m_endScene);
+    //     // check if current scene is in list
+    //     if (temp.Any(x => x.scenePath == m_currentScenePath)){
+    //         // get index of current scene
+    //         int index = temp.FindIndex(x => x.scenePath == m_currentScenePath);
+    //         if (index == -1){
+    //             return "";
+    //         }
+    //         // check if last scene
+    //         if (index == temp.Count - 1){
+    //             return "";
+    //         }
+    //         // return next scene
+    //         return temp[index + 1].scenePath;
+    //     }
+
+    //     // if current scene is not in list, return ""
+    //     return "";
+    // }
+
+    public int GetCurrentLesserSceneIndex(){
+        string currentScenePath = SceneManager.GetActiveScene().path;
+
+        // add start middle and end scenes to new list
+        List<Utilities.SceneField> temp = new List<Utilities.SceneField>();
+        temp.Add(m_startScene);
+        temp.AddRange(m_middleScenes);
+        temp.Add(m_endScene);
+
+        // find Console
+        Console console = GameObject.FindObjectOfType<Console>();
+        if (console != null){
+            console.Log("Current scene: " + currentScenePath);
+        }
+
+        // check if current scene is in list
+        if (temp.Any(x => currentScenePath.Contains(x.scenePath))){
+            // get index of current scene
+            return temp.FindIndex(x => currentScenePath.Contains(x.scenePath));
+        }
+        
+        return -1;
+    }
+
+    public string GetNextLesserScenePath(){
+        // add start middle and end scenes to new list
+        List<Utilities.SceneField> temp = new List<Utilities.SceneField>();
+        temp.Add(m_startScene);
+        temp.AddRange(m_middleScenes);
+        temp.Add(m_endScene);
+
+        int currentSceneIndex = GetCurrentLesserSceneIndex();
+        if (currentSceneIndex == -1){
+            return "";
+        }
+        // if last, return ""
+        if (currentSceneIndex == temp.Count - 1){
+            return "";
+        }
+        return temp[currentSceneIndex + 1].scenePath;
     }
 
     // equality operator
@@ -328,6 +394,7 @@ public class MissionZone : ScriptableObject
         // scenes
         [SerializeField] public Utilities.SceneField m_startScene;
         [SerializeField] public Utilities.SceneField m_endScene;
+        [SerializeField] public Utilities.SceneField m_bossScene;
         [SerializeField] public int m_middleSceneCount;
         [SerializeField] public List<Utilities.SceneField> m_possibleMiddleScenes;
         [SerializeField] public List<Utilities.SceneField> m_middleScenes;
@@ -376,6 +443,7 @@ public class MissionZone : ScriptableObject
             // Scenes:
             m_startScene = mz.m_startScene;
             m_endScene = mz.m_endScene;
+            m_bossScene = mz.m_bossScene;
             m_middleSceneCount = mz.m_middleSceneCount;
 
             // make empty lists
@@ -458,6 +526,7 @@ public class MissionZone : ScriptableObject
             // Scenes:
             mz.m_startScene = m_startScene;
             mz.m_endScene = m_endScene;
+            mz.m_bossScene = m_bossScene;
             mz.m_middleSceneCount = m_middleSceneCount;
 
             // make empty lists

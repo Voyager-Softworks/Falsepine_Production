@@ -36,6 +36,15 @@ public class LevelController : MonoBehaviour
         SceneManager.LoadScene("BoneStag");
     }
 
+    static public void LoadScene(string sceneName, bool doSave = true)
+    {
+        if (doSave)
+        {
+            SaveManager.SaveAll(SaveManager.currentSaveSlot);
+        }
+        SceneManager.LoadScene(sceneName);
+    }
+
     static public void LoadComplete()
     {
         SaveManager.SaveAll(SaveManager.currentSaveSlot);

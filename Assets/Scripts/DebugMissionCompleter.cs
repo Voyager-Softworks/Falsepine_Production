@@ -7,10 +7,11 @@ using UnityEngine;
 /// </summary>
 public class DebugMissionCompleter : MonoBehaviour
 {
+    public bool CompleteOnTrigger = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -27,6 +28,16 @@ public class DebugMissionCompleter : MonoBehaviour
             return;
         }
 
-        //if (MissionManager.instance.currentMission) MissionManager.instance.currentMission.m_isCompleted = true;
+        if (MissionManager.instance != null && MissionManager.instance.GetCurrentMission() != null)
+        {
+            MissionManager.instance.GetCurrentMission().SetCompleted(true);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (CompleteOnTrigger)
+        {
+            TryCompleteMission();
+        }
     }
 }
