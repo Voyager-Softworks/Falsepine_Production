@@ -106,6 +106,7 @@ public class DamageDealer : MonoBehaviour
         else
         {
             Vector3 dir = (GameObject.FindGameObjectWithTag("Player").transform.position - proj.transform.position).normalized;
+            proj.transform.rotation = Quaternion.LookRotation(dir);
             proj.GetComponent<Rigidbody>().velocity = dir * speed;
         }
         Destroy(proj, 20.0f);
@@ -194,6 +195,11 @@ public class DamageDealer : MonoBehaviour
         {
             
         }
+    }
+
+    public void CancelAttack()
+    {
+        StopAllCoroutines();
     }
     
     

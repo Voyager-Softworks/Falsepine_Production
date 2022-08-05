@@ -79,6 +79,8 @@ public class HealthScript : MonoBehaviour
         OnDeath.Invoke();
         //GetComponent<NodeAI.NodeAI_Agent>().SetState("Dead"); Legacy code
 
+        GetComponent<DamageDealer>()?.CancelAttack();
+
         GetComponentInChildren<Animator>().SetBool("Dead", true);
 
         if (_audioSource && deathSound) _audioSource.PlayOneShot(deathSound);
