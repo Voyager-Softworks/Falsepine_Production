@@ -1,0 +1,46 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using NodeAI;
+
+public class BrightmawBurrow : MonoBehaviour
+{
+    public NodeAI_Agent agent;
+    public AudioSource audioSource;
+    public AudioClip burrowSound;
+    public ParticleSystem burrowParticles, unburrowParticles;
+    
+
+    bool burrowing = false;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        bool newBurrowVal = agent.GetParameter<bool>("Burrowing");
+
+        if (newBurrowVal != burrowing)
+        {
+            if (newBurrowVal)
+            {
+                audioSource.loop = true;
+                audioSource.clip = burrowSound;
+                audioSource.Play();
+                burrowParticles.Play();
+            }
+            else
+            {
+                burrowParticles.Stop();
+                audioSource.loop = false;
+                audioSource.Stop();
+                unburrowParticles.Play();
+            }
+            burrowing = newBurrowVal;
+        }
+    }
+}
