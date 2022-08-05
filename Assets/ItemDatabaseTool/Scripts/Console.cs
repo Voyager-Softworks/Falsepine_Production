@@ -162,7 +162,7 @@ public class Console : MonoBehaviour
             return;
         }
 
-                // "list_inventories"
+        // "list_inventories"
         if (split.Length >= 1 && split[0] == "list_inventories")
         {
             Log("- Available inventories:");
@@ -334,6 +334,36 @@ public class Console : MonoBehaviour
             return;
         }
 
+        // "fill_ammo inventoryID"
+        if (split.Length >= 2 && split[0] == "fill_ammo")
+        {
+            string fillAmmo = split[0];
+            string inventoryID = split[1];
+
+            Inventory inventory = Inventory.allInventories.Find(x => x.id == inventoryID);
+            if (!inventory){
+                Log("- Inventory not found");
+
+                Log();
+                return;
+            }
+            // fill the ammo
+            foreach (Inventory.InventorySlot slot in inventory.slots)
+            {
+                Item item = slot.item;
+                // if item is ranged weapon
+                if (item != null && item as RangedWeapon != null)
+                {
+                    RangedWeapon weapon = item as RangedWeapon;
+                    weapon.m_clipAmmo = weapon.m_clipSize;
+                    weapon.m_spareAmmo = weapon.m_maxSpareAmmo;
+                }
+            }
+            Log("- Ammo filled");
+            Log();
+            return;
+        }
+
         // "set_saveslot slotNumber"
         if (split.Length == 2 && split[0] == "set_saveslot")
         {
@@ -484,6 +514,7 @@ public class Console : MonoBehaviour
         "clear inventoryID",
         "save inventoryID",
         "load inventoryID",
+        "fill_ammo inventoryID",
         "set_saveslot slotNumber",
         "list_database",
         "quit",

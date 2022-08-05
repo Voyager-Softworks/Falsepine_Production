@@ -133,6 +133,10 @@ public class MissionManager : MonoBehaviour
             file.Close();
 
             // load data
+            if (data == null)
+            {
+                return;
+            }
             m_missionZones = new List<MissionZone>();
             foreach (MissionZone.Serializable_MissionZone zone in data.missionZones)
             {

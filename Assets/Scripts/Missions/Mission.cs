@@ -94,6 +94,10 @@ public class Mission : ScriptableObject /// @todo Comment
 
         public Serializable_Mission(Mission _mission)
         {
+            if (_mission == null)
+            {
+                return;
+            }
             m_size = _mission.m_size;
             m_type = _mission.m_type;
             m_title = _mission.m_title;
