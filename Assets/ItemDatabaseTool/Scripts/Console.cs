@@ -429,10 +429,10 @@ public class Console : MonoBehaviour
             return;
         }
 
-        // "restart"
-        if (split.Length == 1 && split[0] == "restart")
+        // "restart_scene"
+        if (split.Length == 1 && split[0] == "restart_scene")
         {
-            Log("- Restarting");
+            Log("- Restarting Scene");
 
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             return;
@@ -543,7 +543,7 @@ public class Console : MonoBehaviour
         "list_database",
         "kill_all",
         "quit",
-        "restart",
+        "restart_scene",
         "scene sceneNumber",
         "scene sceneName",
         "delete_mission_save",

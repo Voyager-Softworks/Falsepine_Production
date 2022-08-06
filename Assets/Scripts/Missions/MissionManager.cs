@@ -9,6 +9,7 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Singleton donotdestroy script that handles the mission system
@@ -46,9 +47,42 @@ public class MissionManager : MonoBehaviour
             DontDestroyOnLoad(this);
 
             LoadMissions(SaveManager.currentSaveSlot);
+
+            SceneManager.sceneLoaded += OnSceneLoaded;
         } else {
             Destroy(this);
             Destroy(gameObject);
+        }
+    }
+
+    private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        // if instance is not this, return
+        if (instance != this)
+        {
+            return;
+        }
+
+        SetUpMissionGroups();
+    }
+
+    private void SetUpMissionGroups()
+    {
+        // find all MissionGroup objects in the scene
+        MissionGroup[] missionGroups = FindObjectsOfType<MissionGroup>(true);
+
+        Mission currentM = GetCurrentMission();
+        if (currentM == null) return;
+
+        // enable/disable corrent ones
+        foreach (MissionGroup missionGroup in missionGroups)
+        {
+            missionGroup.gameObject.SetActive(false);
+
+            if (missionGroup.m_linkedMission == currentM)
+            {
+                missionGroup.gameObject.SetActive(true);
+            }
         }
     }
 
@@ -73,6 +107,7 @@ public class MissionManager : MonoBehaviour
 
         UpdateAllMissionCards();
     }
+    
 
     // Update is called once per frame
     void Update()
