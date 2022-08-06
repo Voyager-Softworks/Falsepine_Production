@@ -13,7 +13,7 @@ public class KillAll_Condition : LevelCondition
     {
         m_isComplete = true;
         // get all "enemies" that have a healthscript
-        List<HealthScript> enemies = GameObject.FindObjectsOfType<HealthScript>(true).ToList();
+        List<HealthScript> enemies = GameObject.FindObjectsOfType<HealthScript>(/* true */).ToList();
         // reverse backwards removing any enemies that dont have AI script
         for (int i = enemies.Count() - 1; i >= 0; i--){
             GameObject enemy = enemies[i].gameObject;
