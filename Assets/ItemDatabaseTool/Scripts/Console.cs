@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 using System.IO;
 using System.Reflection;
 using TMPro;
@@ -396,6 +397,29 @@ public class Console : MonoBehaviour
             return;
         }
 
+        // "kill_all"
+        if (split.Length == 1 && split[0] == "kill_all")
+        {
+            // get all "enemies" that have a healthscript
+            List<HealthScript> enemies = GameObject.FindObjectsOfType<HealthScript>(/* true */).ToList();
+            // reverse backwards removing any enemies that dont have AI script
+            for (int i = enemies.Count() - 1; i >= 0; i--){
+                GameObject enemy = enemies[i].gameObject;
+                if (!enemy.GetComponent<NodeAI.NodeAI_Agent>()){
+                    enemies.RemoveAt(i);
+                    continue;
+                }
+            }
+
+            // kill all of them
+            foreach (HealthScript enemy in enemies){
+                enemy.TakeDamage(enemy.maxHealth, gameObject);
+            }
+            Log("- All enemies killed");
+            Log();
+            return;
+        }
+
         // "quit"
         if (split.Length == 1 && split[0] == "quit")
         {
@@ -517,6 +541,7 @@ public class Console : MonoBehaviour
         "fill_ammo inventoryID",
         "set_saveslot slotNumber",
         "list_database",
+        "kill_all",
         "quit",
         "restart",
         "scene sceneNumber",
