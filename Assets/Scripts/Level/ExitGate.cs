@@ -24,6 +24,8 @@ public class ExitGate : MonoBehaviour
     private float m_checkTimer = 0.0f;
     private bool m_unlocked = false;
 
+    private bool m_isLoading = false;
+
     [Header("Refs")]
     public GameObject lockedObject;
     public GameObject unlockedObject;
@@ -98,6 +100,11 @@ public class ExitGate : MonoBehaviour
         if (!CheckConditions()){
             return;
         }
+
+        if (m_isLoading){
+            return;
+        }
+        m_isLoading = true;
 
         switch (m_destination)
         {
