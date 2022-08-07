@@ -38,8 +38,8 @@ public class Health : MonoBehaviour
     public List<DamageStat> m_damageHistory = new List<DamageStat>();
 
     [Header("Sounds")]
-    public List<GameObject> m_deathSounds = new List<GameObject>();
-    public List<GameObject> m_hurtSounds = new List<GameObject>();
+    public GameObject m_deathSound = null;
+    public GameObject m_hurtSound = null;
 
     public virtual void Start(){
         CheckMaxHealth();
@@ -114,24 +114,18 @@ public class Health : MonoBehaviour
     /// Plays a random hurt sound.
     /// </summary>
     public void PlayHurtSound() {
-        if (m_hurtSounds.Count > 0) {
-            GameObject sound = m_hurtSounds[Random.Range(0, m_hurtSounds.Count)];
-            if (sound != null) {
-                Instantiate(sound, transform.position, Quaternion.identity, transform);
-            }
-        }
+        if (m_hurtSound == null) return;
+
+        GameObject sound = Instantiate(m_hurtSound, transform.position, Quaternion.identity, transform);
     }
 
     /// <summary>
     /// Plays a random death sound.
     /// </summary>
     public void PlayDeathSound() {
-        if (m_deathSounds.Count > 0) {
-            GameObject sound = m_deathSounds[Random.Range(0, m_deathSounds.Count)];
-            if (sound != null) {
-                Instantiate(sound, transform.position, Quaternion.identity);
-            }
-        }
+        if (m_deathSound == null) return;
+
+        GameObject sound = Instantiate(m_deathSound, transform.position, Quaternion.identity);
     }
 
 }

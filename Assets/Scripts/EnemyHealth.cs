@@ -10,9 +10,6 @@ using UnityEngine.AI;
 /// </summary>
 public class EnemyHealth : Health
 {
-    public UnityEvent OnDeath;
-
-    //private UIScript _uiScript;
     protected NodeAI.NodeAI_Senses m_senses;
 
     // Start is called before the first frame update
@@ -38,8 +35,7 @@ public class EnemyHealth : Health
 
     public override void Die(){
         base.Die();
-
-        OnDeath.Invoke();
+        
         //GetComponent<NodeAI.NodeAI_Agent>().SetState("Dead"); Legacy code
 
         GetComponent<DamageDealer>()?.CancelAttack();

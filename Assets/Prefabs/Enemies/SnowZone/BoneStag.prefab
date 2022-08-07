@@ -8883,56 +8883,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 4073824831346734678}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7c4fb7dd56b2264eb382f4bef0c2030, type: 3}
+  m_Script: {fileID: 11500000, guid: 49fb0d73ccc574241a7db52785eff5b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isBoss: 1
-  currentHealth: 400
-  maxHealth: 400
-  isDead: 0
-  isInvincible: 0
-  endScreenOnDeath: 1
-  deathSound: {fileID: 8300000, guid: 0d0c21a1982bf3c4cb3b6a49b05de72f, type: 3}
-  hurtSound: {fileID: 8300000, guid: 3241d151dcd8d3946b43c821458d34f5, type: 3}
+  m_currentHealth: 400
+  m_maxHealth: 400
+  m_deathSound: {fileID: 0}
+  m_hurtSound: {fileID: 0}
   OnDeath:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4073824831346734679}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 4073824831651167523}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6997043509876742857}
-        m_TargetAssemblyTypeName: DebugMissionCompleter, Assembly-CSharp
-        m_MethodName: TryCompleteMission
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+  m_uiScript: {fileID: 0}
+  m_endScreenOnDeath: 1
 --- !u!114 &7500680383744065261
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9112,6 +9074,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ee1b237e44a7754da5a6ec4362b097a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CompleteOnTrigger: 0
 --- !u!1 &4073824831651167523
 GameObject:
   m_ObjectHideFlags: 0
