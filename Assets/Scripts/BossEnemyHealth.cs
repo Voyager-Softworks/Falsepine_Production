@@ -10,8 +10,11 @@ using UnityEngine.AI;
 /// </summary>
 public class BossEnemyHealth : EnemyHealth
 {
-    public UIScript m_uiScript;
     public bool m_endScreenOnDeath = true;
+    public GameObject m_indicator = null;
+    public Mission m_linkedMission = null;
+
+    private UIScript m_uiScript;
 
     // Start is called before the first frame update
     public override void Start()
@@ -45,6 +48,12 @@ public class BossEnemyHealth : EnemyHealth
 
     public override void Die(){
         base.Die();
+
+        m_indicator.SetActive(false);
+
+        if (m_linkedMission != null){
+            m_linkedMission.SetCompleted(true);
+        }
 
         if (m_endScreenOnDeath)
         {
