@@ -59,7 +59,7 @@ public class EnemyGroup : MonoBehaviour
     public bool AreEnemiesAlive()
     {
         //Remove all dead enemies from the list
-        spawnedEnemies.RemoveAll(enemy => enemy.GetComponent<HealthScript>().isDead);
+        spawnedEnemies.RemoveAll(enemy => enemy.GetComponent<EnemyHealth>().hasDied);
         return spawnedEnemies.Count > 0;
     }
 

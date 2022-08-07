@@ -11,7 +11,7 @@ using UnityEngine.AI;
 public class BossArenaController : MonoBehaviour
 {
     public NodeAI.NodeAI_Agent boss; ///< The boss AI agent.
-    HealthScript bossHealth; ///< The boss's health script.
+    EnemyHealth bossHealth; ///< The boss's health script.
     public Transform arenaCentre { 
         get {
             return arenaCentreTransforms[phase];
@@ -55,7 +55,7 @@ public class BossArenaController : MonoBehaviour
 
         _uiScript = FindObjectOfType<UIScript>();
 
-        bossHealth = boss.GetComponent<HealthScript>();
+        bossHealth = boss.GetComponent<EnemyHealth>();
         
 
         if (_uiScript != null){
@@ -70,17 +70,17 @@ public class BossArenaController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(bossHealth.currentHealth < phase1Threshold && phase == 0)
+        if(bossHealth.m_currentHealth < phase1Threshold && phase == 0)
         {
             phase = 1;
             boss.SetParameter<bool>("PhaseChange", true);
         }
-        if(bossHealth.currentHealth < phase2Threshold && phase == 1)
+        if(bossHealth.m_currentHealth < phase2Threshold && phase == 1)
         {
             phase = 2;
             boss.SetParameter<bool>("PhaseChange", true);
         }
-        if(bossHealth.currentHealth < phase3Threshold && phase == 2)
+        if(bossHealth.m_currentHealth < phase3Threshold && phase == 2)
         {
             phase = 3;
             boss.SetParameter<bool>("PhaseChange", true);

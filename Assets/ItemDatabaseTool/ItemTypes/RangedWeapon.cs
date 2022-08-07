@@ -71,7 +71,7 @@ public class RangedWeapon : Item
         public Vector3 zoneIntersection;
         public Vector2 zoneUVPoint;
 
-        public HealthScript healthScriptHit;
+        public EnemyHealth healthScriptHit;
 
         public float damage;
     }
@@ -196,13 +196,13 @@ public class RangedWeapon : Item
                 GameObject hitObject = hit.collider.gameObject;
 
                 //if hit something, apply damage
-                HealthScript healthScript = hit.collider.GetComponentInChildren<HealthScript>();
-                if (!healthScript) healthScript = hit.collider.GetComponentInParent<HealthScript>();
+                EnemyHealth healthScript = hit.collider.GetComponentInChildren<EnemyHealth>();
+                if (!healthScript) healthScript = hit.collider.GetComponentInParent<EnemyHealth>();
                 if (healthScript != null)
                 {
                     float calcdDamage = StatsManager.CalculateDamage(this, m_damage);
                     Debug.Log("Original damage: " + m_damage + " | Calcd damage: " + calcdDamage);
-                    healthScript.TakeDamage(calcdDamage, _owner);
+                    healthScript.TakeDamage(new Health.DamageStat(calcdDamage, _owner, _origin, hit.point));
                     if (m_hitEffect) Destroy(Instantiate(m_hitEffect, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal)), 2.0f);
                 }
                 hit.collider.GetComponentInChildren<NodeAI.NodeAI_Senses>()?.RegisterSensoryEvent(
@@ -261,7 +261,7 @@ public class RangedWeapon : Item
 
     /// <summary>
     /// Uses the aim zone to detect what to shoot and how much damage to deal<br/>
-    /// @Todo: Make the aim zone check for collisions using polygons, rather than points
+    /// @Todo: Check for other health scripts and deal damage to them as well, not just enemies.
     /// </summary>
     /// <param name="_origin"></param>
     /// <param name="_direction"></param>
@@ -273,7 +273,7 @@ public class RangedWeapon : Item
         UpdateWaitTimer(m_shootTime);
 
         // get all objects with healthScript in the scene
-        List<HealthScript> healthScripts = FindObjectsOfType<HealthScript>().ToList();
+        List<EnemyHealth> healthScripts = FindObjectsOfType<EnemyHealth>().ToList();
         // sort by distance from the aimQuad
         Vector3 aimQuadPos = _aimZone.transform.position;
         healthScripts.Sort((x, y) => Vector3.Distance(x.transform.position, aimQuadPos).CompareTo(Vector3.Distance(y.transform.position, aimQuadPos)));
@@ -285,9 +285,9 @@ public class RangedWeapon : Item
         m_allShots.Clear();
 
         //List<HealthScript> healthScriptsInAimZone = new List<HealthScript>();
-        foreach (HealthScript healthScript in healthScripts)
+        foreach (EnemyHealth healthScript in healthScripts)
         {
-            if (healthScript.isDead) continue;
+            if (healthScript.hasDied) continue;
             // get bounds of healthScript object
             Bounds? tempBounds = healthScript.GetComponent<Collider>()?.bounds;
             if (tempBounds == null) continue;
@@ -316,7 +316,7 @@ public class RangedWeapon : Item
                         shotInfo.originPoint = _origin;
                         shotInfo.hitPoint = hitInfo.point;
                         
-                        if (hitInfo.collider.GetComponentInParent<HealthScript>() == healthScript)
+                        if (hitInfo.collider.GetComponentInParent<EnemyHealth>() == healthScript)
                         {
                             //m_shots.Clear();
                             shotInfo.healthScriptHit = healthScript;
@@ -372,7 +372,7 @@ public class RangedWeapon : Item
 
             //Deal damage
             Debug.Log("Original damage: " + m_damage + " | Calcd damage: " + shotInfo.damage);
-            shotInfo.healthScriptHit.TakeDamage(shotInfo.damage, _owner);
+            shotInfo.healthScriptHit.TakeDamage(new Health.DamageStat(shotInfo.damage, _owner, _origin, shotInfo.hitPoint));
             if (m_hitEffect != null)
             {
                 Destroy(Instantiate(

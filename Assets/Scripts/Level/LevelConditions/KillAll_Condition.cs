@@ -13,19 +13,11 @@ public class KillAll_Condition : LevelCondition
     {
         m_isComplete = true;
         // get all "enemies" that have a healthscript
-        List<HealthScript> enemies = GameObject.FindObjectsOfType<HealthScript>(/* true */).ToList();
-        // reverse backwards removing any enemies that dont have AI script
-        for (int i = enemies.Count() - 1; i >= 0; i--){
-            GameObject enemy = enemies[i].gameObject;
-            if (!enemy.GetComponent<NodeAI.NodeAI_Agent>()){
-                enemies.RemoveAt(i);
-                continue;
-            }
-        }
+        List<EnemyHealth> enemies = GameObject.FindObjectsOfType<EnemyHealth>(/* true */).ToList();
 
         // check that all of them are dead, if not, set false, break
-        foreach (HealthScript enemy in enemies){
-            if (!enemy.isDead){
+        foreach (EnemyHealth enemy in enemies){
+            if (!enemy.hasDied){
                 m_isComplete = false;
                 break;
             }
