@@ -41,13 +41,14 @@ public class PlayerInventoryInterface : MonoBehaviour
     public class WeaponModelLink
     {
         public Item weapon;
-        public GameObject weaponFirepoint;
+        public GameObject model;
+        public Transform weaponFirepoint;
         public string animatorBoolName = "";
     }
 
 
     [Header("References")]  
-    public List<WeaponModelLink> weaponFirepointLinks = new List<WeaponModelLink>();
+    public List<WeaponModelLink> weaponModelLinks = new List<WeaponModelLink>();
 
     public AimZone m_aimZone;
 
@@ -100,8 +101,8 @@ public class PlayerInventoryInterface : MonoBehaviour
         if (selectedWeapon){
             selectedWeapon.ManualUpdate(gameObject);
 
-            GameObject weaponFirepoint = GetWeaponFirepoint(selectedWeapon);
-            Vector3 weaponFirepointPosition = weaponFirepoint.transform.position;
+            Transform weaponFirepoint = GetWeaponFirepoint(selectedWeapon);
+            Vector3 weaponFirepointPosition = weaponFirepoint.position;
             Vector3 fireDirection = GetComponent<PlayerMovement>().GetMouseAimPlanePoint() - weaponFirepointPosition;
 
             RangedWeapon rangedWeapon = selectedWeapon as RangedWeapon;
@@ -207,9 +208,6 @@ public class PlayerInventoryInterface : MonoBehaviour
 
         PlayerMovement playerMovement = GetComponent<PlayerMovement>();
         if (!playerMovement) return corners;
-
-        GameObject firepointObj = GetWeaponFirepoint(selectedWeapon);
-        if (!firepointObj) return corners;
         
         Vector3 aimPoint = playerMovement.GetMouseAimPlanePoint();
 
@@ -231,10 +229,22 @@ public class PlayerInventoryInterface : MonoBehaviour
         return corners;
     }
 
-    public GameObject GetWeaponFirepoint(Item weapon)
+    public GameObject GetWeaponModel(Item weapon){
+        if (!weapon) return null;
+        foreach (WeaponModelLink link in weaponModelLinks)
+        {
+            if (link.weapon.id == weapon.id)
+            {
+                return link.model;
+            }
+        }
+        return null;
+    }
+
+    public Transform GetWeaponFirepoint(Item weapon)
     {
         if (!weapon) return null;
-        foreach (WeaponModelLink link in weaponFirepointLinks)
+        foreach (WeaponModelLink link in weaponModelLinks)
         {
             if (link.weapon.id == weapon.id)
             {
@@ -246,7 +256,7 @@ public class PlayerInventoryInterface : MonoBehaviour
 
     public string GetWeaponAnimatorBoolName(Item weapon)
     {
-        foreach (WeaponModelLink link in weaponFirepointLinks)
+        foreach (WeaponModelLink link in weaponModelLinks)
         {
             if (link.weapon.id == weapon.id)
             {
@@ -301,6 +311,14 @@ public class PlayerInventoryInterface : MonoBehaviour
             DisableAllAnimatorWeapons();
             playerAnimator.SetBool(animatorBoolName, true);
         }
+
+        // enable weapon model
+        DisableAllWeaponModels();
+        GameObject weaponModel = GetWeaponModel(selectedWeapon);
+        if (weaponModel)
+        {
+            weaponModel.SetActive(true);
+        }
     }
 
     public void SelectEquipment(){
@@ -314,10 +332,20 @@ public class PlayerInventoryInterface : MonoBehaviour
         if (selectedEquipment == null) return;
     }
 
+    public void DisableAllWeaponModels(){
+        foreach (WeaponModelLink link in weaponModelLinks)
+        {
+            if (link.model)
+            {
+                link.model.SetActive(false);
+            }
+        }
+    }
+
     public void DisableAllAnimatorWeapons(){
         if (playerAnimator == null) return;
 
-        foreach (WeaponModelLink link in weaponFirepointLinks)
+        foreach (WeaponModelLink link in weaponModelLinks)
         {
             string animatorBoolName = link.animatorBoolName;
             if (animatorBoolName != "")

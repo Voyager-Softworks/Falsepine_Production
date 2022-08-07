@@ -338,10 +338,10 @@ IEnumerator VaultCoroutine()
 
         PlayerInventoryInterface pii = GetComponent<PlayerInventoryInterface>();
         if (!pii) return mousePlanePoint;
-        GameObject weaponFirepoint = pii.GetWeaponFirepoint(pii.selectedWeapon);
+        Transform weaponFirepoint = pii.GetWeaponFirepoint(pii.selectedWeapon);
         if (!weaponFirepoint) return mousePlanePoint;
 
-        Vector3 firePoint = weaponFirepoint.transform.position;
+        Vector3 firePoint = weaponFirepoint.position;
 
         //find where ray intersects on the plane at gun height
         Plane playerPlane = new Plane(Vector3.up, firePoint);
