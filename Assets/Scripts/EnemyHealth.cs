@@ -8,7 +8,7 @@ using UnityEngine.AI;
 /// <summary>
 /// Manages the health of enemies.
 /// </summary>
-public class EnemyHealth : Health
+public class EnemyHealth : Health_Base
 {
     protected NodeAI.NodeAI_Senses m_senses;
 
@@ -25,12 +25,12 @@ public class EnemyHealth : Health
         base.Update();
     }
 
-    public override void TakeDamage(Health.DamageStat _damage)
+    public override void TakeDamage(Health_Base.DamageStat _damage)
     {
         base.TakeDamage(_damage);
         GetComponent<NodeAI.NodeAI_Agent>().SetParameter("Health", m_currentHealth);
 
-        m_senses?.RegisterSensoryEvent(_damage.m_sourceObject, this.gameObject, _damage.m_damage, NodeAI.SensoryEvent.SenseType.SOMATIC);
+        m_senses?.RegisterSensoryEvent(_damage.m_sourceObject, this.gameObject, 20.0f, NodeAI.SensoryEvent.SenseType.SOMATIC);
     }
 
     public override void Die(){

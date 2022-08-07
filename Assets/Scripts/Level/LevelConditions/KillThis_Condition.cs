@@ -14,7 +14,7 @@ public class KillThis_Condition : LevelCondition
         m_isComplete = false;
 
         // get health script
-        Health health = GetComponent<Health>();
+        Health_Base health = GetComponent<Health_Base>();
         if (health == null) return;
 
         if (health.hasDied){

@@ -6,7 +6,7 @@ using UnityEngine;
 /// A base health class for all objects that can take damage.
 /// @Todo: Impliment this into players, enemies, destructable objects.
 /// </summary>
-public class Health : MonoBehaviour
+public class Health_Base : MonoBehaviour
 {
     public class DamageStat
     {
@@ -47,7 +47,7 @@ public class Health : MonoBehaviour
     }
 
     public virtual void Update() {
-        UpdateDeath();
+        //UpdateDeath();
     }
 
     protected void UpdateDeath() {
@@ -67,15 +67,15 @@ public class Health : MonoBehaviour
 
         if (_damageStat == null) return;
 
+        // add to damage history
+        m_damageHistory.Add(_damageStat);
+
         // deal dmg
         m_currentHealth -= _damageStat.m_damage;
 
         UpdateDeath();
 
         PlayHurtSound();
-
-        // add to damage history
-        m_damageHistory.Add(_damageStat);
     }
 
     /// <summary>

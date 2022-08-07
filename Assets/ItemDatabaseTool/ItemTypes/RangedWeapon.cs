@@ -71,7 +71,7 @@ public class RangedWeapon : Item
         public Vector3 zoneIntersection;
         public Vector2 zoneUVPoint;
 
-        public EnemyHealth healthScriptHit;
+        public Health_Base healthScriptHit;
 
         public float damage;
     }
@@ -173,91 +173,91 @@ public class RangedWeapon : Item
     /// <summary>
     /// Shoots the weapon using raycasts. Uses wait timer.
     /// </summary>
-    private void RaycastShoot(Vector3 _origin, Vector3 _direction, GameObject _owner)
-    {
-        m_shootTimer = m_shootTime;
-        UpdateWaitTimer(m_shootTime);
+    // private void RaycastShoot(Vector3 _origin, Vector3 _direction, GameObject _owner)
+    // {
+    //     m_shootTimer = m_shootTime;
+    //     UpdateWaitTimer(m_shootTime);
 
-        // shoot raycasts
-        for (int i = 0; i < m_maxHitsPerShot; i++)
-        {
-            float currentAimInaccuracy = CalcCurrentAimAngle();
-            float aimAngle = UnityEngine.Random.Range(-currentAimInaccuracy, currentAimInaccuracy);
-            Vector3 currentDirection = Quaternion.AngleAxis(aimAngle, Vector3.up) * _direction;
+    //     // shoot raycasts
+    //     for (int i = 0; i < m_maxHitsPerShot; i++)
+    //     {
+    //         float currentAimInaccuracy = CalcCurrentAimAngle();
+    //         float aimAngle = UnityEngine.Random.Range(-currentAimInaccuracy, currentAimInaccuracy);
+    //         Vector3 currentDirection = Quaternion.AngleAxis(aimAngle, Vector3.up) * _direction;
 
-            // create raycast
-            RaycastHit hit;
-            Ray ray = new Ray(_origin, currentDirection);
+    //         // create raycast
+    //         RaycastHit hit;
+    //         Ray ray = new Ray(_origin, currentDirection);
 
-            // shoot raycast
-            if (Physics.Raycast(ray, out hit, m_range))
-            {
-                // get hit object
-                GameObject hitObject = hit.collider.gameObject;
+    //         // shoot raycast
+    //         if (Physics.Raycast(ray, out hit, m_range))
+    //         {
+    //             // get hit object
+    //             GameObject hitObject = hit.collider.gameObject;
 
-                //if hit something, apply damage
-                EnemyHealth healthScript = hit.collider.GetComponentInChildren<EnemyHealth>();
-                if (!healthScript) healthScript = hit.collider.GetComponentInParent<EnemyHealth>();
-                if (healthScript != null)
-                {
-                    float calcdDamage = StatsManager.CalculateDamage(this, m_damage);
-                    Debug.Log("Original damage: " + m_damage + " | Calcd damage: " + calcdDamage);
-                    healthScript.TakeDamage(new Health.DamageStat(calcdDamage, _owner, _origin, hit.point));
-                    if (m_hitEffect) Destroy(Instantiate(m_hitEffect, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal)), 2.0f);
-                }
-                hit.collider.GetComponentInChildren<NodeAI.NodeAI_Senses>()?.RegisterSensoryEvent(
-                                                                                                _owner,
-                                                                                                hit.collider.gameObject,
-                                                                                                20.0f,
-                                                                                                NodeAI.SensoryEvent.SenseType.SOMATIC
-                                                                                                );
-            }
+    //             //if hit something, apply damage
+    //             Health_Base healthScript = hit.collider.GetComponentInChildren<Health_Base>();
+    //             if (!healthScript) healthScript = hit.collider.GetComponentInParent<Health_Base>();
+    //             if (healthScript != null)
+    //             {
+    //                 float calcdDamage = StatsManager.CalculateDamage(this, m_damage);
+    //                 Debug.Log("Original damage: " + m_damage + " | Calcd damage: " + calcdDamage);
+    //                 healthScript.TakeDamage(new Health_Base.DamageStat(calcdDamage, _owner, _origin, hit.point));
+    //                 if (m_hitEffect) Destroy(Instantiate(m_hitEffect, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal)), 2.0f);
+    //             }
+    //             hit.collider.GetComponentInChildren<NodeAI.NodeAI_Senses>()?.RegisterSensoryEvent(
+    //                                                                                             _owner,
+    //                                                                                             hit.collider.gameObject,
+    //                                                                                             20.0f,
+    //                                                                                             NodeAI.SensoryEvent.SenseType.SOMATIC
+    //                                                                                             );
+    //         }
 
-            // create trail effect
-            if (m_trailEffect != null)
-            {
-                GameObject trail = Instantiate(m_trailEffect, _origin, Quaternion.identity);
-                // LineRenderer lineRenderer = trail.GetComponent<LineRenderer>();
-                // if (lineRenderer != null)
-                // {
-                //     lineRenderer.SetPosition(0, _origin);
-                //     lineRenderer.SetPosition(1, (hit.distance > 0 ? hit.point : _origin + currentDirection * m_range));
-                // }
-                BulletTrail bulletTrail = trail.GetComponent<BulletTrail>();
-                if (bulletTrail != null)
-                {
-                    bulletTrail.SetPositions(
-                        _origin,
-                        (hit.distance > 0 ? hit.point : _origin + currentDirection * m_range)
-                    );
-                }
-            }
-        }
+    //         // create trail effect
+    //         if (m_trailEffect != null)
+    //         {
+    //             GameObject trail = Instantiate(m_trailEffect, _origin, Quaternion.identity);
+    //             // LineRenderer lineRenderer = trail.GetComponent<LineRenderer>();
+    //             // if (lineRenderer != null)
+    //             // {
+    //             //     lineRenderer.SetPosition(0, _origin);
+    //             //     lineRenderer.SetPosition(1, (hit.distance > 0 ? hit.point : _origin + currentDirection * m_range));
+    //             // }
+    //             BulletTrail bulletTrail = trail.GetComponent<BulletTrail>();
+    //             if (bulletTrail != null)
+    //             {
+    //                 bulletTrail.SetPositions(
+    //                     _origin,
+    //                     (hit.distance > 0 ? hit.point : _origin + currentDirection * m_range)
+    //                 );
+    //             }
+    //         }
+    //     }
 
-        // play shoot sound:
-        if (m_shootSound != null)
-        {
-            GameObject sound = Instantiate(m_shootSound, _origin, Quaternion.identity);
-        }
+    //     // play shoot sound:
+    //     if (m_shootSound != null)
+    //     {
+    //         GameObject sound = Instantiate(m_shootSound, _origin, Quaternion.identity);
+    //     }
 
-        //Trigger auditory event on all sensors in range:
-        foreach (NodeAI.NodeAI_Senses sensor in FindObjectsOfType<NodeAI.NodeAI_Senses>())
-        {
-            if (Vector3.Distance(sensor.gameObject.transform.position, _origin) < sensor.maxHearingRange)
-            {
-                sensor.RegisterSensoryEvent(_owner, sensor.gameObject, 10.0f, NodeAI.SensoryEvent.SenseType.AURAL);
-            }
-        }
+    //     //Trigger auditory event on all sensors in range:
+    //     foreach (NodeAI.NodeAI_Senses sensor in FindObjectsOfType<NodeAI.NodeAI_Senses>())
+    //     {
+    //         if (Vector3.Distance(sensor.gameObject.transform.position, _origin) < sensor.maxHearingRange)
+    //         {
+    //             sensor.RegisterSensoryEvent(_owner, sensor.gameObject, 10.0f, NodeAI.SensoryEvent.SenseType.AURAL);
+    //         }
+    //     }
 
-        // create shoot effect:
-        if (m_shootEffect != null)
-        {
-            GameObject effect = Instantiate(m_shootEffect, _origin, Quaternion.identity);
-            effect.transform.LookAt(_origin + _direction);
-        }
+    //     // create shoot effect:
+    //     if (m_shootEffect != null)
+    //     {
+    //         GameObject effect = Instantiate(m_shootEffect, _origin, Quaternion.identity);
+    //         effect.transform.LookAt(_origin + _direction);
+    //     }
 
-        m_clipAmmo--;
-    }
+    //     m_clipAmmo--;
+    // }
 
     /// <summary>
     /// Uses the aim zone to detect what to shoot and how much damage to deal<br/>
@@ -273,7 +273,7 @@ public class RangedWeapon : Item
         UpdateWaitTimer(m_shootTime);
 
         // get all objects with healthScript in the scene
-        List<EnemyHealth> healthScripts = FindObjectsOfType<EnemyHealth>().ToList();
+        List<Health_Base> healthScripts = FindObjectsOfType<Health_Base>().ToList();
         // sort by distance from the aimQuad
         Vector3 aimQuadPos = _aimZone.transform.position;
         healthScripts.Sort((x, y) => Vector3.Distance(x.transform.position, aimQuadPos).CompareTo(Vector3.Distance(y.transform.position, aimQuadPos)));
@@ -285,7 +285,7 @@ public class RangedWeapon : Item
         m_allShots.Clear();
 
         //List<HealthScript> healthScriptsInAimZone = new List<HealthScript>();
-        foreach (EnemyHealth healthScript in healthScripts)
+        foreach (Health_Base healthScript in healthScripts)
         {
             if (healthScript.hasDied) continue;
             // get bounds of healthScript object
@@ -300,7 +300,6 @@ public class RangedWeapon : Item
                 BoundsIntersectTriangle(bounds, _aimZone.bl, _aimZone.fr, _aimZone.br, out shotInfo.zoneIntersection))
             {
                 // raycast all 8 corners of the bounds, and the center of the bounds
-                bool hit = false;
                 List<Vector3> corners = new List<Vector3>();
                 corners.Add(bounds.center);
                 corners.AddRange(GetCorners(bounds));
@@ -316,20 +315,14 @@ public class RangedWeapon : Item
                         shotInfo.originPoint = _origin;
                         shotInfo.hitPoint = hitInfo.point;
                         
-                        if (hitInfo.collider.GetComponentInParent<EnemyHealth>() == healthScript)
+                        if (hitInfo.collider.GetComponentInParent<Health_Base>() == healthScript)
                         {
                             //m_shots.Clear();
                             shotInfo.healthScriptHit = healthScript;
                             hitList.Add(shotInfo);
-                            hit = true;
                             break;
                         }
                     }
-                }
-
-                if (hit){
-                    //healthScriptsInAimZone.Add(healthScript);
-                    continue;
                 }
             }
         }
@@ -361,6 +354,32 @@ public class RangedWeapon : Item
             return y.damage.CompareTo(x.damage);
         });
 
+        // split hitList by EnemyHealth and PropHealth
+        List<ShotInfo> enemyHitList = new List<ShotInfo>();
+        List<ShotInfo> propHitList = new List<ShotInfo>();
+        List<ShotInfo> remainingHitList = new List<ShotInfo>();
+        foreach (ShotInfo shotInfo in hitList)
+        {
+            if (shotInfo.healthScriptHit.GetComponent<EnemyHealth>() != null)
+            {
+                enemyHitList.Add(shotInfo);
+            }
+            else if (shotInfo.healthScriptHit.GetComponent<PropHealth>() != null)
+            {
+                propHitList.Add(shotInfo);
+            }
+            else
+            {
+                remainingHitList.Add(shotInfo);
+            }
+        }
+
+        // try shoot enemies, then props, then anything else
+        hitList.Clear();
+        hitList.AddRange(enemyHitList);
+        hitList.AddRange(propHitList);
+        hitList.AddRange(remainingHitList);
+
         // deal damage to healthScripts in aimZone (using m_maxHitsPerShot)
         for (int i = 0; i < hitList.Count && i < m_maxHitsPerShot; i++)
         {
@@ -372,7 +391,7 @@ public class RangedWeapon : Item
 
             //Deal damage
             Debug.Log("Original damage: " + m_damage + " | Calcd damage: " + shotInfo.damage);
-            shotInfo.healthScriptHit.TakeDamage(new Health.DamageStat(shotInfo.damage, _owner, _origin, shotInfo.hitPoint));
+            shotInfo.healthScriptHit.TakeDamage(new Health_Base.DamageStat(shotInfo.damage, _owner, _origin, shotInfo.hitPoint));
             if (m_hitEffect != null)
             {
                 Destroy(Instantiate(
@@ -380,14 +399,6 @@ public class RangedWeapon : Item
                 Quaternion.FromToRotation(Vector3.up, shotInfo.hitPoint - shotInfo.originPoint)),
                 2.0f);
             }
-
-            //somatic event
-            shotInfo.healthScriptHit.GetComponentInChildren<NodeAI.NodeAI_Senses>()?.RegisterSensoryEvent(
-                _owner,
-                shotInfo.healthScriptHit.gameObject,
-                20.0f,
-                NodeAI.SensoryEvent.SenseType.SOMATIC
-            );
         }
 
         // play shoot sound:

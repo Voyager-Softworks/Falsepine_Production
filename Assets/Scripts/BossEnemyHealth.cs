@@ -41,7 +41,7 @@ public class BossEnemyHealth : EnemyHealth
         m_uiScript.bossHealthBar.rectTransform.sizeDelta = new Vector2(m_uiScript.bossHealthBarMaxWidth * (m_currentHealth / m_maxHealth), m_uiScript.bossHealthBar.rectTransform.sizeDelta.y);
     }
 
-    public override void TakeDamage(Health.DamageStat _damage)
+    public override void TakeDamage(Health_Base.DamageStat _damage)
     {
         base.TakeDamage(_damage);
     }
