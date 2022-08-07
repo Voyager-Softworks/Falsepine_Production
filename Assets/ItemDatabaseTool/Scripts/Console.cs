@@ -401,19 +401,11 @@ public class Console : MonoBehaviour
         if (split.Length == 1 && split[0] == "kill_all")
         {
             // get all "enemies" that have a healthscript
-            List<HealthScript> enemies = GameObject.FindObjectsOfType<HealthScript>(/* true */).ToList();
-            // reverse backwards removing any enemies that dont have AI script
-            for (int i = enemies.Count() - 1; i >= 0; i--){
-                GameObject enemy = enemies[i].gameObject;
-                if (!enemy.GetComponent<NodeAI.NodeAI_Agent>()){
-                    enemies.RemoveAt(i);
-                    continue;
-                }
-            }
+            List<EnemyHealth> enemies = GameObject.FindObjectsOfType<EnemyHealth>(/* true */).ToList();
 
             // kill all of them
-            foreach (HealthScript enemy in enemies){
-                enemy.TakeDamage(enemy.maxHealth, gameObject);
+            foreach (EnemyHealth enemy in enemies){
+                enemy.TakeDamage(new Health.DamageStat(enemy.m_currentHealth, this.gameObject, transform.position, enemy.transform.position));
             }
             Log("- All enemies killed");
             Log();
