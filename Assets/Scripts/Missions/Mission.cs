@@ -41,6 +41,13 @@ public class Mission : ScriptableObject /// @todo Comment
     }
 
     public void Reset(){
+        // @Todo: Remove the following DEBUG code
+        // if is lesser, and not extermination, set completed to true
+        if (m_size == MissionSize.LESSER && m_type != MissionType.EXTERMINATION) {
+            SetCompleted(true);
+            return;
+        }
+
         SetCompleted(false);
     }
 
