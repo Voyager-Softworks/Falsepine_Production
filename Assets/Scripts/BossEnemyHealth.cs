@@ -51,8 +51,10 @@ public class BossEnemyHealth : EnemyHealth
 
         m_indicator.SetActive(false);
 
-        if (m_linkedMission != null){
-            m_linkedMission.SetCompleted(true);
+        MissionManager mm = MissionManager.instance;
+        if (mm != null && m_linkedMission != null && mm.GetCurrentMission() == m_linkedMission)
+        {
+            mm.GetCurrentMission().SetCompleted(true);
         }
 
         if (m_endScreenOnDeath)
