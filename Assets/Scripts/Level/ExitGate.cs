@@ -31,6 +31,9 @@ public class ExitGate : MonoBehaviour
     public GameObject unlockedObject;
     public GameObject unlockSound;
 
+    [Tooltip("Only needed if this gate completes a mission when unlocked")]
+    public bool tryCompleteMission = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,9 +50,7 @@ public class ExitGate : MonoBehaviour
         if (m_checkTimer >= m_checkInterval)
         {
             m_checkTimer = 0.0f;
-            if (CheckConditions()){
-                Unlock();
-            }
+            CheckConditions();
         }
     }
 
@@ -85,6 +86,11 @@ public class ExitGate : MonoBehaviour
 
         if (unlockSound != null){
             Instantiate(unlockSound, transform.position, Quaternion.identity);
+        }
+
+        // complete mission
+        if (tryCompleteMission && MissionManager.instance?.GetCurrentMission() != null){
+            MissionManager.instance.GetCurrentMission().SetCompleted(true);
         }
     }
 

@@ -109,7 +109,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2756040438195152620}
-  - component: {fileID: 8064306617849270038}
+  - component: {fileID: 1670498332}
+  - component: {fileID: 6094103905252670490}
   m_Layer: 0
   m_Name: exterminationObjective
   m_TagString: Untagged
@@ -124,9 +125,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3275450094254275670}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0038115238, y: 0.0038115238, z: 0.0038115238}
+  m_LocalScale: {x: 0.0036721972, y: 0.0036721975, z: 0.0036721972}
   m_Children:
   - {fileID: 6412676910399850591}
   - {fileID: 6485589477699724894}
@@ -135,7 +136,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8064306617849270038
+--- !u!114 &1670498332
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,19 +145,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 3275450094254275670}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a083fc2e50fd4c4089b7628f48ea3d7, type: 3}
+  m_Script: {fileID: 11500000, guid: e686fa258b112764e8e05e226a447b10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   interactAction:
     m_Name: Interact
     m_Type: 0
     m_ExpectedControlType: 
-    m_Id: 62fa54cf-2aac-4f7b-bba3-3d2e14751f57
+    m_Id: cd0f338e-e556-4106-9eec-48939980e175
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings:
     - m_Name: 
-      m_Id: 5779a568-9392-4a90-833a-2c3158464396
+      m_Id: a4adeeea-59eb-41da-909f-7038abdcf582
       m_Path: <Keyboard>/e
       m_Interactions: 
       m_Processors: 
@@ -164,17 +165,28 @@ MonoBehaviour:
       m_Action: Interact
       m_Flags: 0
     m_Flags: 0
-  interactText: '[E] Exterminate'
+  interactText: '[E] Detonate'
   _transToCheck: {fileID: 0}
   interactDistance: 5
   fadeDistance: 10
-  onInteractEffect: 3
+  onInteractEffect: 1
   _text: {fileID: 9102429273251784919}
   OnInteract:
     m_PersistentCalls:
       m_Calls: []
-  _mission: {fileID: 11400000, guid: 261fbb4c007a87e4b9c5e04e6e049bf0, type: 2}
-  completeSound: {fileID: 3107313251738698642, guid: dc098346c5c57dd4f9ad4e0bbb44d945, type: 3}
+  explosion: {fileID: 0}
+--- !u!114 &6094103905252670490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3275450094254275670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68095f8be9a29964dbbebb7a3aff09f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4848896385157349423
 GameObject:
   m_ObjectHideFlags: 0
