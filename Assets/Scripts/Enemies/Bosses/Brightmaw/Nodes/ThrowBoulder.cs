@@ -118,8 +118,9 @@ namespace Boss.Brightmaw
             {
                 if(!reachedBoulder)
                 {
-                    rotateTowards.RotateToObject(closest, 1.5f, 6.0f, 0.0f);
+                    rotateTowards.RotateToObject(closest, 1.00f, 6.0f, 0.0f);
                     agent.StartCoroutine(PullBoulderToHand(1.05f, 0.2f));
+                    rotateTowards.RotateToObject(GetProperty<Transform>("Target").gameObject, 0.5f, 12.0f, 1.0f);
                     reachedBoulder = true;
                     animator.SetBool("Running", false);
                     animator.SetTrigger("BoulderToss");
@@ -139,10 +140,10 @@ namespace Boss.Brightmaw
                 if(throwTimer <= 0.0f)
                 {
                     Vector3 throwVector = (GetProperty<Transform>("Target").position - closest.transform.position);
-                    throwVector.y += 1.5f;
+                    throwVector.y += 0.5f;
                     closest.GetComponent<Rigidbody>().AddForce(
                         (throwVector).normalized * 
-                        600.0f, 
+                        900.0f, 
                         ForceMode.Impulse
                         );
                     closest.GetComponent<DamagePlayerWhenCollide>().isActive = true;

@@ -31351,10 +31351,10 @@ GameObject:
   - component: {fileID: 6529405913941819599}
   - component: {fileID: 6529405913941819598}
   - component: {fileID: 6529405913941819597}
-  - component: {fileID: 1073679383143891}
   - component: {fileID: -1431192097814048358}
   - component: {fileID: 1309886058678701852}
   - component: {fileID: 5744351900138450829}
+  - component: {fileID: 6902923877470590226}
   m_Layer: 0
   m_Name: JuvenileBrightmawRanged
   m_TagString: Untagged
@@ -31666,66 +31666,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e7db3457c7f67eed92cf8adf3ae262c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1073679383143891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6529405913941819586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7c4fb7dd56b2264eb382f4bef0c2030, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isBoss: 0
-  currentHealth: 10
-  maxHealth: 10
-  isDead: 0
-  isInvincible: 0
-  updateAI: 0
-  endScreenOnDeath: 0
-  deathSound: {fileID: 8300000, guid: 5031e98759e1b2d4591707dc15d6a1a3, type: 3}
-  hurtSound: {fileID: 0}
-  OnDeath:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6529405913941819599}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: SetTrigger
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Death
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 6529405913941819585}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1309886058678701852}
-        m_TargetAssemblyTypeName: DamageDealer, Assembly-CSharp
-        m_MethodName: CancelAttack
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!135 &-1431192097814048358
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -31772,6 +31712,22 @@ MonoBehaviour:
   burrowSound: {fileID: 8300000, guid: b9bdd22e3942caf4d8e66cf594f076be, type: 3}
   burrowParticles: {fileID: 5075997436189800631}
   unburrowParticles: {fileID: 59623831581204439}
+--- !u!114 &6902923877470590226
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6529405913941819586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382e18cd65ba3ee40981aca66eb43b48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_currentHealth: 7
+  m_maxHealth: 7
+  m_deathSound: {fileID: 0}
+  m_hurtSound: {fileID: 0}
 --- !u!1 &6616845151341851582
 GameObject:
   m_ObjectHideFlags: 0
