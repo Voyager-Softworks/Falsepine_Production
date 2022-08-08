@@ -8,7 +8,7 @@ using System;
 using UnityEngine.Events;
 
 /// <summary>
-/// @Deprecated not used anymore. <br/>
+/// @deprecated not used anymore. <br/>
 /// Class to manage old UI for the message popup.
 /// </summary>
 public class MessageScript : MonoBehaviour

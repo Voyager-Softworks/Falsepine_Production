@@ -11,7 +11,7 @@ using UnityEditor;
 /// <summary>
 /// Manages the saving and loading of multiple systems. <br/>
 /// It also manages the current save slot. <br/>
-/// @Todo: Add a way to save and load the current save slot, as well as a way to get a list of current save slots.
+/// @todo Add a way to save and load the current save slot, as well as a way to get a list of current save slots.
 /// </summary>
 public class SaveManager : MonoBehaviour  /// @todo Comment
 {

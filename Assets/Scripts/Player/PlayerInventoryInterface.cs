@@ -11,7 +11,7 @@ using UnityEditor;
 
 /// <summary>
 /// Interacts with the player's inventory, item database, and functionality of items.
-/// @Todo: Make sure that ammo is replenished when the player returns to the town.
+/// @todo Make sure that ammo is replenished when the player returns to the town.
 /// </summary>
 [Serializable]
 public class PlayerInventoryInterface : MonoBehaviour

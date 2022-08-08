@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine.UI;
 
 /// <summary>
-/// @Deprecated not used anymore. <br/>
+/// @deprecated not used anymore. <br/>
 /// Class to manage old UI for the hotbar.
 /// </summary>
 public class HotbarUIList : MonoBehaviour

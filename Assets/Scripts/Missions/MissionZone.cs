@@ -12,7 +12,7 @@ using UnityEditor;
 /// <summary>
 /// Mission Zone class is responsible for storing data about a specific misison zone <br/>
 /// E.g. Snow Zone, its missions, and its scenes.
-/// @Todo: Decide if we should allow saving and quitting during mission. <br/>
+/// @todo Decide if we should allow saving and quitting during mission. <br/>
 /// - If we do, we need to make sure that we save clues and current scene correctly, to now allow abusing of the save system.
 /// </summary>
 [CreateAssetMenu(fileName = "New Mission", menuName = "Missions/New Mission Zone")]

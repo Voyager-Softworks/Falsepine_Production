@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using System;
 
 /// <summary>
-/// @Deprecated not used anymore. <br/>
+/// @deprecated not used anymore. <br/>
 /// Class to manage old UI for the journal.
 /// </summary>
 public class JournalUIList : MonoBehaviour
