@@ -21,14 +21,28 @@ namespace Boss.Brightmaw
         RotateTowards rotateTowards;
         NavMeshAgent navAgent;
         Animator animator;
-        float throwTimer = 1.05f;
+        float throwTimer = 1.25f;
         float lastTime = 0;
         public ThrowBoulder()
         {
             AddProperty<Transform>("Target", null);
+            AddProperty<Transform>("Boulder Holder Bone", null);
             AddProperty<string>("Boulder Tag", "");
             AddProperty<float>("Range", 100f);
             AddProperty<AudioClip>("Sound", null);
+        }
+
+        IEnumerator PullBoulderToHand(float duration, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            //Lerp the boulder towards the hand
+            float t = 0;
+            while (t < duration)
+            {
+                t += Time.deltaTime;
+                closest.transform.position = Vector3.Lerp(closest.transform.position, GetProperty<Transform>("Boulder Holder Bone").position, t / duration);
+                yield return null;
+            }
         }
         public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
         {
@@ -105,6 +119,7 @@ namespace Boss.Brightmaw
                 if(!reachedBoulder)
                 {
                     rotateTowards.RotateToObject(closest, 1.5f, 6.0f, 0.0f);
+                    agent.StartCoroutine(PullBoulderToHand(1.05f, 0.2f));
                     reachedBoulder = true;
                     animator.SetBool("Running", false);
                     animator.SetTrigger("BoulderToss");
@@ -123,9 +138,11 @@ namespace Boss.Brightmaw
                 lastTime = Time.time;
                 if(throwTimer <= 0.0f)
                 {
+                    Vector3 throwVector = (GetProperty<Transform>("Target").position - closest.transform.position);
+                    throwVector.y += 1.5f;
                     closest.GetComponent<Rigidbody>().AddForce(
-                        ( GetProperty<Transform>("Target").position - closest.transform.position).normalized * 
-                        40.0f, 
+                        (throwVector).normalized * 
+                        600.0f, 
                         ForceMode.Impulse
                         );
                     closest.GetComponent<DamagePlayerWhenCollide>().isActive = true;
@@ -145,7 +162,7 @@ namespace Boss.Brightmaw
         {
             initialised = false;
             reachedBoulder = false;
-            throwTimer = 1.05f;
+            throwTimer = 1.25f;
         }
     }
 }
