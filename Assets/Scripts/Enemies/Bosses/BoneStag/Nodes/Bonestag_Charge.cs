@@ -136,6 +136,7 @@ namespace Boss.Bonestag
                     {
                         animator.ResetTrigger("AttackingFinished");
                         SetProperty<bool>("InBearTrap", true);
+                        agent.SetParameter<bool>("InBearTrap", true);
                         navAgent.enabled = false;
                         agent.transform.position = hit.collider.gameObject.transform.position;
                         navAgent.enabled = true;
