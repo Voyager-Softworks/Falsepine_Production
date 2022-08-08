@@ -23,6 +23,9 @@ namespace Boss.Brightmaw
         Animator animator;
         float throwTimer = 1.25f;
         float lastTime = 0;
+        /// <summary>
+        /// Constructor for the node.
+        /// </summary>
         public ThrowBoulder()
         {
             AddProperty<Transform>("Target", null);
@@ -32,6 +35,12 @@ namespace Boss.Brightmaw
             AddProperty<AudioClip>("Sound", null);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="duration"></param>
+        /// <param name="delay"></param>
+        /// <returns></returns>
         IEnumerator PullBoulderToHand(float duration, float delay)
         {
             yield return new WaitForSeconds(delay);
@@ -44,6 +53,7 @@ namespace Boss.Brightmaw
                 yield return null;
             }
         }
+        
         public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
         {
             if (!initialised)
