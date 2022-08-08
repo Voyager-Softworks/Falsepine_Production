@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using NodeAI;
 
+/// <summary>
+///  Script that enables and disables particles and audio when the boss/enemy burrows and unburrows.
+/// </summary>
 public class BrightmawBurrow : MonoBehaviour
 {
     public NodeAI_Agent agent;

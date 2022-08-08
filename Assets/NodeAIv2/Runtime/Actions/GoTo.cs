@@ -31,6 +31,7 @@ namespace NodeAI
     public class GoTo : ActionBase
     {
         NavMeshAgent navAgent;
+        float originalSpeed;
         public GoTo()
         {
             AddProperty<Transform>("Position", null);
@@ -42,6 +43,8 @@ namespace NodeAI
         public override void OnInit()
         {
             SetProperty<bool>("Interrupt", false);
+            originalSpeed = navAgent?.speed ?? 0;
+            
         }
         public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
         {
@@ -54,6 +57,7 @@ namespace NodeAI
                     state = NodeData.State.Failure;
                     return NodeData.State.Failure;
                 }
+                originalSpeed = navAgent.speed;
             }
             if(GetProperty<bool>("Interrupt"))
             {
@@ -71,6 +75,7 @@ namespace NodeAI
                 if(Vector3.Distance(agent.transform.position, GetProperty<Transform>("Position").position) <= navAgent.stoppingDistance + 0.1f)
                 {
                     navAgent.isStopped = true;
+                    navAgent.speed = originalSpeed;
                     state = NodeData.State.Success;
                     return NodeData.State.Success;
                 }

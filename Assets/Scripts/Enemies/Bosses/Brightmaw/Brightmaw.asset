@@ -1656,8 +1656,8 @@ MonoBehaviour:
       ovalue: {fileID: 0}
       output: 0
     - name: STOPPING DISTANCE
-      GUID: null
-      paramReference: null
+      GUID: 207c6f8d-8884-49fb-b383-d626c839b49b
+      paramReference: 2be69cda-4bac-4528-827e-095eb30cda12
       serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       svalue: 
@@ -1677,7 +1677,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       svalue: 
       ivalue: 0
-      fvalue: 1
+      fvalue: 1.5
       bvalue: 0
       cvalue: {r: 0, g: 0, b: 0, a: 0}
       v2value: {x: 0, y: 0}
@@ -1869,7 +1869,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       svalue: 
       ivalue: 0
-      fvalue: 0.4
+      fvalue: 1
       bvalue: 0
       cvalue: {r: 0, g: 0, b: 0, a: 0}
       v2value: {x: 0, y: 0}
@@ -1995,7 +1995,7 @@ MonoBehaviour:
     title: Sequence
     childGUIDs:
     - 5ebf9cd8-64e5-49ae-a2d2-7f7de535fa38
-    - 6d34157d-065b-438e-adaa-9c1534e6d3c4
+    - 5fb6a9da-ec43-4992-80f9-eaea5a9115b6
     nodeType: 4
     position: {x: 1658, y: 3056}
     runtime: {fileID: 0}
@@ -2106,80 +2106,6 @@ MonoBehaviour:
       output: 0
     runtimeLogicType: NodeAI.WaitFor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 6d34157d-065b-438e-adaa-9c1534e6d3c4
-    parentGUID: 8e6ed662-3300-4801-ae15-1ddfe5a8b570
-    title: ThrowBoulder
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 1843, y: 3172}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: TARGET
-      GUID: ee1c81b0-6145-47b7-b3ca-9970838bdb04
-      paramReference: bf4defcb-7fc2-4179-9468-782505392dc9
-      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: BOULDER TAG
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: ThrowableRock
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: RANGE
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 10
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: SOUND
-      GUID: null
-      paramReference: null
-      serializedTypename: UnityEngine.AudioClip, UnityEngine.AudioModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 8300000, guid: 344fd5927b06c1e47b1ee0ef406a9337, type: 3}
-      output: 0
-    runtimeLogicType: Boss.Brightmaw.ThrowBoulder, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
     queryType: 
     noLogic: 0
     noQuery: 1
@@ -2824,6 +2750,121 @@ MonoBehaviour:
       PublicKeyToken=null
     noLogic: 1
     noQuery: 0
+  - GUID: 207c6f8d-8884-49fb-b383-d626c839b49b
+    parentGUID: 2be69cda-4bac-4528-827e-095eb30cda12
+    title: Jumpslam Range
+    childGUIDs: []
+    nodeType: 7
+    position: {x: 1605, y: 3748}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: 
+    queryType: 
+    noLogic: 1
+    noQuery: 1
+  - GUID: 5fb6a9da-ec43-4992-80f9-eaea5a9115b6
+    parentGUID: 8e6ed662-3300-4801-ae15-1ddfe5a8b570
+    title: ThrowBoulder
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 1843, y: 3170}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: TARGET
+      GUID: ee1c81b0-6145-47b7-b3ca-9970838bdb04
+      paramReference: bf4defcb-7fc2-4179-9468-782505392dc9
+      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: BOULDER HOLDER BONE
+      GUID: 9aa40859-64e5-40ad-ac80-c23b761b677d
+      paramReference: 19205a28-3c99-49dd-9d7f-508285a8d8a0
+      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: BOULDER TAG
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: ThrowableRock
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: RANGE
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 4
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: SOUND
+      GUID: null
+      paramReference: null
+      serializedTypename: UnityEngine.AudioClip, UnityEngine.AudioModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 8300000, guid: 344fd5927b06c1e47b1ee0ef406a9337, type: 3}
+      output: 0
+    runtimeLogicType: Boss.Brightmaw.ThrowBoulder, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 9aa40859-64e5-40ad-ac80-c23b761b677d
+    parentGUID: 19205a28-3c99-49dd-9d7f-508285a8d8a0
+    title: Boulder Holding Bone
+    childGUIDs: []
+    nodeType: 7
+    position: {x: 1611, y: 3205}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: 
+    queryType: 
+    noLogic: 1
+    noQuery: 1
   exposedProperties:
   - name: Started
     GUID: 3d2cfc35-fcac-43ad-9987-c9d1d67c0153
@@ -2930,6 +2971,36 @@ MonoBehaviour:
     v4value: {x: 0, y: 0, z: 0, w: 0}
     ovalue: {fileID: 0}
     output: 0
+  - name: Jumpslam Range
+    GUID: 2be69cda-4bac-4528-827e-095eb30cda12
+    paramReference: 
+    serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+      PublicKeyToken=b77a5c561934e089
+    svalue: 
+    ivalue: 0
+    fvalue: 9
+    bvalue: 0
+    cvalue: {r: 0, g: 0, b: 0, a: 0}
+    v2value: {x: 0, y: 0}
+    v3value: {x: 0, y: 0, z: 0}
+    v4value: {x: 0, y: 0, z: 0, w: 0}
+    ovalue: {fileID: 0}
+    output: 0
+  - name: Boulder Holding Bone
+    GUID: 19205a28-3c99-49dd-9d7f-508285a8d8a0
+    paramReference: 
+    serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    svalue: 
+    ivalue: 0
+    fvalue: 0
+    bvalue: 0
+    cvalue: {r: 0, g: 0, b: 0, a: 0}
+    v2value: {x: 0, y: 0}
+    v3value: {x: 0, y: 0, z: 0}
+    v4value: {x: 0, y: 0, z: 0, w: 0}
+    ovalue: {fileID: 0}
+    output: 0
   nodeGroups:
   - title: Wait for fight start
     childGUIDs:
@@ -2994,7 +3065,8 @@ MonoBehaviour:
     - 9fb31142-48d7-4e64-8b8d-01ef593ad6eb
     - 8e6ed662-3300-4801-ae15-1ddfe5a8b570
     - 5ebf9cd8-64e5-49ae-a2d2-7f7de535fa38
-    - 6d34157d-065b-438e-adaa-9c1534e6d3c4
+    - 5fb6a9da-ec43-4992-80f9-eaea5a9115b6
+    - 9aa40859-64e5-40ad-ac80-c23b761b677d
   - title: Air slam attack
     childGUIDs:
     - 5a711f84-9568-492b-a990-666a862794f4
@@ -3007,6 +3079,7 @@ MonoBehaviour:
     - 30e8c84a-1c63-4465-a4d5-9cb61e20b04d
     - 05d7d05f-85fc-4335-8b76-2f0dc6a3ce17
     - 48f01718-272b-4017-bb43-65f946ee7eca
+    - 207c6f8d-8884-49fb-b383-d626c839b49b
   queries:
   - {fileID: 0}
   - {fileID: 0}
