@@ -5,6 +5,9 @@ using NodeAI;
 
 namespace Boss.Brightmaw
 {
+    /// <summary>
+    ///  A node responsible for summoning boulders around the Brightmaw boss.
+    /// </summary>
     public class SummonBoulders : NodeAI.ActionBase
     {
         public List<GameObject> m_boulders = new List<GameObject>();
