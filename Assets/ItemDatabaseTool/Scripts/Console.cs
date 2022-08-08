@@ -104,6 +104,8 @@ public class Console : MonoBehaviour
             input.SetActive(false);
 
             consoleInput.text = "";
+
+            Time.timeScale = 1;
         }
         else
         {
@@ -111,6 +113,8 @@ public class Console : MonoBehaviour
             input.SetActive(true);
 
             consoleInput.text = "";
+
+            Time.timeScale = 0;
 
             StartTyping();
         }
