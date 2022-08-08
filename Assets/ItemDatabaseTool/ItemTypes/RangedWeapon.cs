@@ -261,7 +261,7 @@ public class RangedWeapon : Item
 
     /// <summary>
     /// Uses the aim zone to detect what to shoot and how much damage to deal<br/>
-    /// @Todo: Check for other health scripts and deal damage to them as well, not just enemies.
+    /// @Todo: Replace trigger collider checking with layers?
     /// </summary>
     /// <param name="_origin"></param>
     /// <param name="_direction"></param>
@@ -289,7 +289,12 @@ public class RangedWeapon : Item
         {
             if (healthScript.hasDied) continue;
             // get bounds of healthScript object
-            Bounds? tempBounds = healthScript.GetComponent<Collider>()?.bounds;
+            Collider col = healthScript.GetComponent<Collider>();
+            // make collider not trigger
+            bool isTrigger = col.isTrigger;
+            col.isTrigger = false;
+            if (col == null) continue;
+            Bounds? tempBounds = col.bounds;
             if (tempBounds == null) continue;
             Bounds bounds = (Bounds)tempBounds;
 
@@ -325,6 +330,9 @@ public class RangedWeapon : Item
                     }
                 }
             }
+
+            // reset collider
+            col.isTrigger = isTrigger;
         }
 
         for (int i = 0; i < hitList.Count; i++)
