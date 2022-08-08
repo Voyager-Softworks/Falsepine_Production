@@ -27,6 +27,8 @@ public class PlayerInventoryInterface : MonoBehaviour
     // aim weapon
     public InputAction aimWeaponAction;
     public InputAction useEquipmentAction;
+    // melee attack
+    public InputAction meleeAttackAction;
 
     [Header("Inventory")]
     public string playerInventoryName = "player";
@@ -36,6 +38,13 @@ public class PlayerInventoryInterface : MonoBehaviour
     [SerializeField] public SelectedWeaponType selectedWeaponType = SelectedWeaponType.None;
     public Item selectedWeapon;
     public Item selectedEquipment;
+
+    [Header("Melee")]
+    public float meleeAttackDamage = 20.0f;
+    public float meleeAttackRange = 2.0f;
+    public float meleeAttackSize = 2.0f;
+    public float meleeAttackCooldown = 0.5f;
+    private float meleeAttackTimer = 0.0f;
 
     [Serializable]
     public class WeaponModelLink
@@ -129,6 +138,11 @@ public class PlayerInventoryInterface : MonoBehaviour
                 if (aimWeaponAction.ReadValue<float>() > 0)
                 {
                     rangedWeapon.TrySetAim(true, gameObject);
+
+                    if (meleeAttackAction.triggered)
+                    {
+                        TryMeleeAttack();
+                    }
                 }
                 else
                 {
@@ -164,6 +178,36 @@ public class PlayerInventoryInterface : MonoBehaviour
 
                     playerAnimator.SetTrigger("PlaceBeartrap");
                 }
+            }
+        }
+
+        //update melee attack timer
+        if (meleeAttackTimer > 0.0f)
+        {
+            meleeAttackTimer -= Time.deltaTime;
+        }
+    }
+
+    private void TryMeleeAttack()
+    {
+        if (meleeAttackTimer > 0.0f)
+        {
+            return;
+        }
+        meleeAttackTimer = meleeAttackCooldown;
+
+        // play melee attack clip
+        playerAnimator.SetTrigger("Melee");
+
+        // do sphere cast to find enemies in range
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position + transform.forward * 0.5f, 2.0f);
+        foreach (Collider hitCollider in hitColliders)
+        {
+            // if hit collider is an enemy, deal damage
+            Health_Base enemy = hitCollider.GetComponent<Health_Base>();
+            if (enemy)
+            {
+                enemy.TakeDamage(new Health_Base.DamageStat(20, gameObject, transform.position, transform.position + transform.forward * 0.5f));
             }
         }
     }
@@ -370,6 +414,7 @@ public class PlayerInventoryInterface : MonoBehaviour
         fireWeaponAction.Enable();
         aimWeaponAction.Enable();
         useEquipmentAction.Enable();
+        meleeAttackAction.Enable();
     }
 
     public void DisableInput()
@@ -379,5 +424,6 @@ public class PlayerInventoryInterface : MonoBehaviour
         fireWeaponAction.Disable();
         aimWeaponAction.Disable();
         useEquipmentAction.Disable();
+        meleeAttackAction.Disable();
     }
 }
