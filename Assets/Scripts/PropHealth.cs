@@ -45,6 +45,15 @@ public class PropHealth : Health_Base
                 DamageStat lastDamage = m_damageHistory[m_damageHistory.Count - 1];
                 rigidbody.AddForce(lastDamage.direction * 0.1f, ForceMode.Impulse);
             }
+
+            if (m_disablePlayerCollision)
+            {
+                Collider[] colliders = broken.GetComponentsInChildren<Collider>();
+                foreach (Collider collider in colliders)
+                {
+                    collider.gameObject.layer = LayerMask.NameToLayer("NOPlayerCollide");
+                }
+            }
         }
     }
 }
