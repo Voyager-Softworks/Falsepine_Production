@@ -17,6 +17,7 @@ public class Health_Base : MonoBehaviour
         public Vector3 direction { get { return m_hitPoint - m_originPoint; } }
         public float m_time;
 
+
         public DamageStat(float damage, GameObject sourceObject, Vector3 origin, Vector3 hitPoint)
         {
             m_damage = damage;
@@ -34,6 +35,8 @@ public class Health_Base : MonoBehaviour
     public bool isInvulnerable { get { return m_isInvulnerable; } set { m_isInvulnerable = value; } }
     protected bool m_hasDied = false;
     public bool hasDied { get { UpdateDeath(); return m_hasDied; } }
+
+    public bool m_disablePlayerCollision = true;
 
     public List<DamageStat> m_damageHistory = new List<DamageStat>();
 
@@ -87,6 +90,15 @@ public class Health_Base : MonoBehaviour
         m_hasDied = true;
 
         PlayDeathSound();
+
+        if (m_disablePlayerCollision)
+        {
+            Collider[] colliders = GetComponentsInChildren<Collider>();
+            foreach (Collider collider in colliders)
+            {
+                collider.gameObject.layer = LayerMask.NameToLayer("NOPlayerCollide");
+            }
+        }
     }
 
     /// <summary>
