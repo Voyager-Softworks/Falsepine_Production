@@ -67,7 +67,8 @@ public class Inventory : MonoBehaviour
                 if (m_item.instanceID == "")
                 {
                     // if game is not running, return
-                    if (!Application.isPlaying) return;
+                    //@todo add this check back in, remove to try create instances in editor
+                    //if (!Application.isPlaying) return;
 
                     m_item = m_item.CreateInstance();
                 }
@@ -535,6 +536,15 @@ public class Inventory : MonoBehaviour
             }
         }
         #endif
+
+        //remove null inventories
+        for (int i = allInventories.Count - 1; i >= 0; i--)
+        {
+            if (allInventories[i] == null)
+            {
+                allInventories.RemoveAt(i);
+            }
+        }
 
         //correct ID values
         for (int i = 0; i < allInventories.Count; i++) {

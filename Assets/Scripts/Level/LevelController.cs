@@ -9,45 +9,43 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class LevelController : MonoBehaviour
 {
-    static public void LoadMenu()
+    static public void LoadMenu(bool _doSave = true)
     {
-        SaveManager.SaveAll(SaveManager.currentSaveSlot);
+        if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
 
         SceneManager.LoadScene("Menu");
     }
 
-    static public void LoadTown(){
-        SaveManager.SaveAll(SaveManager.currentSaveSlot);
+    static public void LoadTown(bool _doSave = true){
+        if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
 
         SceneManager.LoadScene("TownScene");
     }
 
-    static public void LoadSnow()
+    static public void LoadSnow(bool _doSave = true)
     {
-        SaveManager.SaveAll(SaveManager.currentSaveSlot);
+        if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
 
         SceneManager.LoadScene("SnowLevel");
     }
 
-    static public void LoadSnowBoss()
+    static public void LoadSnowBoss(bool _doSave = true)
     {
-        SaveManager.SaveAll(SaveManager.currentSaveSlot);
+        if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
 
         SceneManager.LoadScene("BoneStag");
     }
 
-    static public void LoadScene(string sceneName, bool doSave = true)
+    static public void LoadScene(string sceneName, bool _doSave = true)
     {
-        if (doSave)
-        {
-            SaveManager.SaveAll(SaveManager.currentSaveSlot);
-        }
+        if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
+
         SceneManager.LoadScene(sceneName);
     }
 
-    static public void LoadComplete()
+    static public void LoadComplete(bool _doSave = true)
     {
-        SaveManager.SaveAll(SaveManager.currentSaveSlot);
+        if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
 
         SceneManager.LoadScene("Scene_Complete");
     }
@@ -68,7 +66,12 @@ public class LevelController : MonoBehaviour
         SceneManager.LoadScene("Scene_GameOver");
     }
 
-    static public void Quit(){
+    static public void Quit(/* bool _doSave = true */){
+        // if (_doSave)
+        // {
+        //     SaveManager.SaveAll(SaveManager.currentSaveSlot);
+        // }
+
         Application.Quit();
     }
 
