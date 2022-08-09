@@ -284,6 +284,20 @@ public class Inventory : MonoBehaviour
         return item;
     }
 
+    public void FillAmmo(){
+        foreach (Inventory.InventorySlot slot in slots)
+        {
+            Item item = slot.item;
+            // if item is ranged weapon
+            if (item != null && item as RangedWeapon != null)
+            {
+                RangedWeapon weapon = item as RangedWeapon;
+                weapon.m_clipAmmo = weapon.m_clipSize;
+                weapon.m_spareAmmo = weapon.m_maxSpareAmmo;
+            }
+        }
+    }
+
     /// <summary>
     /// Convert all items to instances.
     /// </summary>

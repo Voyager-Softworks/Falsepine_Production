@@ -353,17 +353,7 @@ public class Console : MonoBehaviour
                 return;
             }
             // fill the ammo
-            foreach (Inventory.InventorySlot slot in inventory.slots)
-            {
-                Item item = slot.item;
-                // if item is ranged weapon
-                if (item != null && item as RangedWeapon != null)
-                {
-                    RangedWeapon weapon = item as RangedWeapon;
-                    weapon.m_clipAmmo = weapon.m_clipSize;
-                    weapon.m_spareAmmo = weapon.m_maxSpareAmmo;
-                }
-            }
+            inventory.FillAmmo();
             Log("- Ammo filled");
             Log();
             return;
