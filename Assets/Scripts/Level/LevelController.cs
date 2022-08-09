@@ -66,6 +66,10 @@ public class LevelController : MonoBehaviour
         SceneManager.LoadScene("Scene_GameOver");
     }
 
+    static public void ReloadScene(){
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
     static public void Quit(/* bool _doSave = true */){
         // if (_doSave)
         // {
