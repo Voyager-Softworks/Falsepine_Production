@@ -78,6 +78,10 @@ public class PlayerInventoryInterface : MonoBehaviour
                 #endif
             }
         }
+
+        // draw melee attack zone
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position + (transform.forward * meleeAttackRange), meleeAttackSize);
     }
 
 
@@ -200,14 +204,14 @@ public class PlayerInventoryInterface : MonoBehaviour
         playerAnimator.SetTrigger("Melee");
 
         // do sphere cast to find enemies in range
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position + transform.forward * 0.5f, 2.0f);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position + transform.forward * meleeAttackRange, meleeAttackSize);
         foreach (Collider hitCollider in hitColliders)
         {
             // if hit collider is an enemy, deal damage
             Health_Base enemy = hitCollider.GetComponent<Health_Base>();
             if (enemy)
             {
-                enemy.TakeDamage(new Health_Base.DamageStat(20, gameObject, transform.position, transform.position + transform.forward * 0.5f));
+                enemy.TakeDamage(new Health_Base.DamageStat(meleeAttackDamage, gameObject, transform.position, transform.position + transform.forward * meleeAttackRange));
             }
         }
     }
