@@ -13,7 +13,12 @@ namespace Boss.WailingTree
     /// </summary>
     public class SummonRootwall : NodeAI.ActionBase
     {
-
+        public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
+        {
+            GameObject.FindObjectOfType<RootwallManager>().SpawnRootwall();
+            state = NodeData.State.Success;
+            return NodeData.State.Success;
+        }
     }
 }
 

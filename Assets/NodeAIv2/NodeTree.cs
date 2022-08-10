@@ -70,7 +70,7 @@ namespace NodeAI
 
             public void DrawGizmos(NodeAI_Agent agent)
             {
-                if(nodeData.runtimeLogic)
+                if(!nodeData.noLogic)
                 {
                     nodeData.runtimeLogic.DrawGizmos(agent);
                 }
