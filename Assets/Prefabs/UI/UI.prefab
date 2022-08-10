@@ -27,7 +27,7 @@ RectTransform:
   m_GameObject: {fileID: 83471338}
   m_LocalRotation: {x: -0, y: -0, z: 0.0007353751, w: 0.99999976}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.406173, y: 1.6398642, z: 1.6398642}
+  m_LocalScale: {x: 2, y: 2, z: 2.5}
   m_Children:
   - {fileID: 92573540}
   - {fileID: 1887563407}
@@ -718,16 +718,16 @@ RectTransform:
   m_GameObject: {fileID: 1070458490}
   m_LocalRotation: {x: -0, y: -0, z: 0.003578215, w: -0.9999936}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4156045, y: 0.60979193, z: 0.6098066}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 83471339}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 84.674}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -26.5, y: -17.2}
-  m_SizeDelta: {x: -148, y: -306}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 10}
+  m_SizeDelta: {x: -20, y: 240}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &1070458493
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -760,21 +760,25 @@ MonoBehaviour:
 
     dodge - space bar
 
+    run - shift
+
     aim - right mouse
 
-    shoot -
-    left mouse
+    shoot
+    - left mouse
+
+    melee - middle mouse
 
     swap weapon - tab
 
-    use equipment - f
+    use equipment
+    - f
 
-    open journal -
-    J
+    open journal - J
 
     pickup / interact- E
 
-    console - `'
+    console - tilde (~`)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 80b87317267cfcf45a8a11f99c028dc1, type: 2}
   m_sharedMaterial: {fileID: -4030745231317914076, guid: 80b87317267cfcf45a8a11f99c028dc1, type: 2}
@@ -801,14 +805,14 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45
-  m_fontSizeBase: 45
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 17
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 32
   m_VerticalAlignment: 4096
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -837,7 +841,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -75.8613, y: 63.655193, z: -212.75076, w: 80.67855}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1155,16 +1159,16 @@ RectTransform:
   m_GameObject: {fileID: 1887563406}
   m_LocalRotation: {x: -0, y: -0, z: 0.004762824, w: -0.9999887}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.41560978, y: 0.6097809, z: 0.6098066}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 83471339}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 84.539}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.699997, y: 116.3}
-  m_SizeDelta: {x: -148, y: -306}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -10}
+  m_SizeDelta: {x: -20, y: 45}
+  m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &1887563409
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1220,8 +1224,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 90
-  m_fontSizeBase: 90
+  m_fontSize: 50
+  m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1256,7 +1260,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -75.8613, y: 85.00615, z: -75.41292, w: 80.67855}
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

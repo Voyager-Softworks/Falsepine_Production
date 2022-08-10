@@ -78,6 +78,10 @@ public class PlayerInventoryInterface : MonoBehaviour
                 #endif
             }
         }
+
+        // draw melee attack zone
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position + (transform.forward * meleeAttackRange), meleeAttackSize);
     }
 
 
@@ -200,14 +204,35 @@ public class PlayerInventoryInterface : MonoBehaviour
         playerAnimator.SetTrigger("Melee");
 
         // do sphere cast to find enemies in range
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position + transform.forward * 0.5f, 2.0f);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position + transform.forward * meleeAttackRange, meleeAttackSize);
+        List<Health_Base> hitEnemies = new List<Health_Base>();
         foreach (Collider hitCollider in hitColliders)
         {
             // if hit collider is an enemy, deal damage
-            Health_Base enemy = hitCollider.GetComponent<Health_Base>();
+            Health_Base enemy = hitCollider.GetComponentInParent<Health_Base>();
             if (enemy)
             {
-                enemy.TakeDamage(new Health_Base.DamageStat(20, gameObject, transform.position, transform.position + transform.forward * 0.5f));
+                // check if already hit this enemy
+                if (hitEnemies.Contains(enemy))
+                {
+                    continue;
+                }
+                hitEnemies.Add(enemy);
+
+                Health_Base.DamageStat ds = new Health_Base.DamageStat(meleeAttackDamage, gameObject, transform.position, transform.position + transform.forward * meleeAttackRange);
+                enemy.TakeDamage(ds);
+
+                RangedWeapon rangedWeapon = selectedWeapon as RangedWeapon;
+                if (rangedWeapon == null) continue;
+
+                // hit effect
+                if (rangedWeapon.m_hitEffect != null)
+                {
+                    Destroy(Instantiate(
+                    rangedWeapon.m_hitEffect, ds.m_hitPoint,
+                    Quaternion.FromToRotation(Vector3.up, ds.m_hitPoint - ds.m_originPoint)),
+                    2.0f);
+                }
             }
         }
     }

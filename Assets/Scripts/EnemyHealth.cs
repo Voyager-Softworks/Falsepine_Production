@@ -42,15 +42,22 @@ public class EnemyHealth : Health_Base
 
         GetComponentInChildren<Animator>().SetBool("Dead", true);
 
+        // Disable agent
         NodeAI.NodeAI_Agent agent = GetComponent<NodeAI.NodeAI_Agent>();
         if (agent != null) agent.enabled = false;;
 
         if (m_senses != null) m_senses.enabled = false;
 
+        // disable nav mesh agent
         NavMeshAgent navMeshAgent = GetComponent<NavMeshAgent>();
         if (navMeshAgent != null) navMeshAgent.enabled = false;
 
+        // do ragdoll
         Ragdoll ragdoll = GetComponent<Ragdoll>();
         if (ragdoll != null) ragdoll.EnableRagdoll();
+
+        //stop audiosource
+        AudioSource audioSource = GetComponent<AudioSource>();
+        if (audioSource != null) audioSource.Stop();
     }
 }

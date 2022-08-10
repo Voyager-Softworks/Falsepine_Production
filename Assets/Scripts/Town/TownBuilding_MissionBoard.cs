@@ -32,7 +32,7 @@ public class TownBuilding_MissionBoard : TownBuilding  /// @todo Comment
     {
         base.Start();
 
-        LoadMissionBoard();
+        LoadMissionBoard(SaveManager.currentSaveSlot);
     }
 
     // Update is called once per frame
@@ -47,21 +47,21 @@ public class TownBuilding_MissionBoard : TownBuilding  /// @todo Comment
         }
     }
 
-    public void SaveMissionBoard(){
+    public void SaveMissionBoard(int _saveSlot){
         //save the missionboard current page
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/missionboard.dat");
+        FileStream file = File.Create(SaveManager.GetSaveFolderPath(_saveSlot) + "/missionboard.dat");
         MissionBoardData data = new MissionBoardData();
         data.currentPage = currentPage;
         bf.Serialize(file, data);
         file.Close();
     }
 
-    public void LoadMissionBoard(){
-        if (File.Exists(Application.persistentDataPath + "/missionboard.dat"))
+    public void LoadMissionBoard(int _saveSlot){
+        if (File.Exists(SaveManager.GetSaveFolderPath(_saveSlot) + "/missionboard.dat"))
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/missionboard.dat", FileMode.Open);
+            FileStream file = File.Open(SaveManager.GetSaveFolderPath(_saveSlot) + "/missionboard.dat", FileMode.Open);
             MissionBoardData data = (MissionBoardData)bf.Deserialize(file);
             file.Close();
 
@@ -145,7 +145,7 @@ public class TownBuilding_MissionBoard : TownBuilding  /// @todo Comment
     public void SetPage(Mission.MissionSize _page){
         currentPage = _page;
 
-        SaveMissionBoard();
+        SaveMissionBoard(SaveManager.currentSaveSlot);
     }
 
     public void DrawGreaterPage(){

@@ -400,6 +400,8 @@ public class RangedWeapon : Item
             //Deal damage
             Debug.Log("Original damage: " + m_damage + " | Calcd damage: " + shotInfo.damage);
             shotInfo.healthScriptHit.TakeDamage(new Health_Base.DamageStat(shotInfo.damage, _owner, _origin, shotInfo.hitPoint));
+
+            // hit effect
             if (m_hitEffect != null)
             {
                 Destroy(Instantiate(

@@ -68,6 +68,23 @@ public class SaveManager : MonoBehaviour  /// @todo Comment
         if (JournalManager.instance != null) JournalManager.instance.SaveJournal(saveSlot);
     }
 
+    public static void LoadAll(int saveSlot)
+    {
+        // set current save slot
+        SetSaveSlot(saveSlot);
+
+        // destroy mission manager
+        if (MissionManager.instance) Destroy(MissionManager.instance.gameObject);
+
+        // destroy inventory manager
+        if (InventoryManager.instance) Destroy(InventoryManager.instance.gameObject);
+
+        // destroy journal
+        if (JournalManager.instance) Destroy(JournalManager.instance.gameObject);
+
+        LevelController.LoadTown(false);
+    }
+
     /// <summary>
     /// Deletes all inventories and missions, but keeps the journal.
     /// </summary>

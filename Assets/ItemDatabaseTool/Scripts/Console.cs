@@ -295,50 +295,6 @@ public class Console : MonoBehaviour
             return;
         }
 
-        // "save inventoryID"
-        if (split.Length >= 2 && split[0] == "save")
-        {
-            string save = split[0];
-            string inventoryID = split[1];
-
-            Inventory inventory = Inventory.allInventories.Find(x => x.id == inventoryID);
-            if (!inventory){
-                Log("- Inventory not found");
-
-                Log();
-                return;
-            }
-
-            // save the inventory
-            inventory.SaveInventory(SaveManager.currentSaveSlot);
-            Log("- Inventory saved");
-
-            Log();
-            return;
-        }
-
-        // "load inventoryID"
-        if (split.Length >= 2 && split[0] == "load")
-        {
-            string load = split[0];
-            string inventoryID = split[1];
-
-            Inventory inventory = Inventory.allInventories.Find(x => x.id == inventoryID);
-            if (!inventory){
-                Log("- Inventory not found");
-
-                Log();
-                return;
-            }
-
-            // load the inventory
-            inventory.LoadInventory(SaveManager.currentSaveSlot);
-            Log("- Inventory loaded");
-
-            Log();
-            return;
-        }
-
         // "fill_ammo inventoryID"
         if (split.Length >= 2 && split[0] == "fill_ammo")
         {
@@ -353,17 +309,7 @@ public class Console : MonoBehaviour
                 return;
             }
             // fill the ammo
-            foreach (Inventory.InventorySlot slot in inventory.slots)
-            {
-                Item item = slot.item;
-                // if item is ranged weapon
-                if (item != null && item as RangedWeapon != null)
-                {
-                    RangedWeapon weapon = item as RangedWeapon;
-                    weapon.m_clipAmmo = weapon.m_clipSize;
-                    weapon.m_spareAmmo = weapon.m_maxSpareAmmo;
-                }
-            }
+            inventory.FillAmmo();
             Log("- Ammo filled");
             Log();
             return;
@@ -381,6 +327,42 @@ public class Console : MonoBehaviour
             SaveManager.SetSaveSlot(slot);
             Log("- Save slot set to " + slot);
 
+            Log();
+            return;
+        }
+
+        // "get_saveslot"
+        if (split.Length == 1 && split[0] == "get_saveslot")
+        {
+            Log("- Save slot is " + SaveManager.currentSaveSlot);
+            Log();
+            return;
+        }
+
+        // "save slotNumber"
+        if (split.Length == 2 && split[0] == "save")
+        {
+            string save = split[0];
+            string slotNumber = split[1];
+            int slot = 0;
+            try { slot = int.Parse(slotNumber); }
+            catch { Log("- Invalid slot number"); return; }
+            SaveManager.SaveAll(slot);
+            Log("- Saved to slot " + slot);
+            Log();
+            return;
+        }
+
+        // "load slotNumber"
+        if (split.Length == 2 && split[0] == "load")
+        {
+            string load = split[0];
+            string slotNumber = split[1];
+            int slot = 0;
+            try { slot = int.Parse(slotNumber); }
+            catch { Log("- Invalid slot number"); return; }
+            SaveManager.LoadAll(slot);
+            Log("- Loaded");
             Log();
             return;
         }
@@ -521,6 +503,70 @@ public class Console : MonoBehaviour
             }
         }
 
+        // "controls"
+        if (split.Length == 1 && split[0] == "controls")
+        {
+            // Walk - WASD
+            // dodge - space bar
+            // run - shift
+            // aim - right mouse
+            // shoot - left mouse
+            // melee - middle mouse
+            // swap weapon - tab
+            // use equipment - f
+            // open journal - J
+            // pickup / interact- E
+            // console - tilde (~`)
+            Log("- Controls:");
+            Log("- - Walk: WASD");
+            Log("- - Dodge: space bar");
+            Log("- - Run: shift");
+            Log("- - Aim: right mouse");
+            Log("- - Shoot: left mouse");
+            Log("- - Melee: middle mouse");
+            Log("- - Swap Weapon: tab");
+            Log("- - Use Equipment: f");
+            Log("- - Open Journal: J");
+            Log("- - Pickup / Interact: E");
+            Log("- - Console: tilde (~`)");
+
+            Log();
+
+            return;
+        }
+
+        // "game_help"
+        if (split.Length == 1 && split[0] == "game_help")
+        {
+            Log("- Game Help:");
+            Log("- - This console has a few useful features if you need them.");
+            Log("- - - Namely, 'scene 1' will take you back to the town if you are stuck");
+            Log();
+            Log("- - In the town, use right click drag to pan the camera");
+            Log("- - In the town, use left click on lit buildings to interact open their UI");
+            Log();
+            Log("- - In the town, top left is the home, where you can equip/store weapons and items.");
+            Log("- - - Take a primary, pistol, and some equipment before embarking!");
+            Log();
+            Log("- - In the town, just right of the center is the mission board, where you can view, accept, and hand in missions.");
+            Log("- - - Accept a mission in order allow embarking.");
+            Log("- - - Red X means the mission is complete and can be handed in.");
+            Log("- - - Check your journal [J] for the current mission.");
+            Log();
+            Log("- - In the town, bottom right is there embark wagon/sign, where you can embark.");
+            Log("- - - You can only embark if you have a non-complete mission selected. Check your journal to see.");
+            Log();
+            Log("- - In the town, bottom left is the exit wagon/sign, where you can return to the menu.");
+            Log("- - - Quitting or embarking will save the game.");
+            Log();
+            Log("- - In the wilderness, ammo is sparse, use your melee [Aim + Middle Mouse] attack to kill enemies.");
+            Log("- - - You need to be aiming with a weapon in order to melee.");
+
+            Log();
+
+            return;
+        }
+
         // command not found
         Log("- Command not found");
     }
@@ -532,10 +578,11 @@ public class Console : MonoBehaviour
         "give inventoryID itemID amount?",
         "remove inventoryID slotNumber",
         "clear inventoryID",
-        "save inventoryID",
-        "load inventoryID",
         "fill_ammo inventoryID",
         "set_saveslot slotNumber",
+        "get_saveslot",
+        "save slotNumber",
+        "load slotNumber",
         "list_database",
         "kill_all",
         "quit",
@@ -545,6 +592,8 @@ public class Console : MonoBehaviour
         "delete_mission_save",
         "complete_mission",
         "inspect inventoryID slotNumber",
+        "controls",
+        "game_help"
     };
 
     /// <summary>
