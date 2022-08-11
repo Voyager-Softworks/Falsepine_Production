@@ -49,8 +49,15 @@ using System;
     [CustomPropertyDrawer(typeof(SceneField))]
     public class SceneFieldPropertyDrawer : PropertyDrawer
     {
+        private int fieldAmount = 2;
+        private float fieldSize = 20;
+        private float padding = 2;
+
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
+            //divide all field heights by the field amount..then minus the padding
+            position.height /= fieldAmount; position.height -= padding;
+
             EditorGUI.BeginProperty(position, GUIContent.none, property);
             SerializedProperty sceneAsset = property.FindPropertyRelative("m_sceneAsset");
             SerializedProperty scenePath = property.FindPropertyRelative("m_scenePath");
@@ -60,12 +67,28 @@ using System;
                 //if game is running
                 if (Application.isPlaying)
                 {
+                    fieldAmount = 1;
+
                     // display the path
                     EditorGUI.LabelField(position, scenePath.stringValue);
                 }
                 else{
+                    fieldAmount = 2;
+
                     EditorGUI.BeginChangeCheck();
+                    
                     UnityEngine.Object value = EditorGUI.ObjectField(position, sceneAsset.objectReferenceValue, typeof(SceneAsset), false);
+
+                    // if any changes, update the asset and the scene path
+                    if (EditorGUI.EndChangeCheck())
+                    {
+                        sceneAsset.objectReferenceValue = value;
+                        if (sceneAsset.objectReferenceValue != null)
+                        {
+                            string fullScenePath = GetScenePath(sceneAsset);
+                            scenePath.stringValue = fullScenePath;
+                        }
+                    }
 
                     // get scene path currently stored in the property
                     string scenePathCurrently = scenePath.stringValue;
@@ -74,11 +97,7 @@ using System;
                     string scenePathFromAsset = "";
                     if (value != null)
                     {
-                        scenePathFromAsset = AssetDatabase.GetAssetPath(value);
-
-                        int assetsIndex = scenePathFromAsset.IndexOf("Assets", StringComparison.Ordinal) + 7;
-                        int extensionIndex = scenePathFromAsset.LastIndexOf(".unity", StringComparison.Ordinal);
-                        scenePathFromAsset = scenePathFromAsset.Substring(assetsIndex, extensionIndex - assetsIndex);
+                        scenePathFromAsset = GetScenePath(sceneAsset);
                     }
                     // if the scene path from the asset is different from the one stored in the property, update the property
                     if (scenePathFromAsset != scenePathCurrently)
@@ -86,24 +105,43 @@ using System;
                         scenePath.stringValue = scenePathFromAsset;
                     }
 
-                    // if any changes, update the asset and the scene path
-                    if (EditorGUI.EndChangeCheck())
-                    {
-                        sceneAsset.objectReferenceValue = value;
-                        if (sceneAsset.objectReferenceValue != null)
-                        {
-                            string fullScenePath = AssetDatabase.GetAssetPath(sceneAsset.objectReferenceValue);
-                            int assetsIndex = fullScenePath.IndexOf("Assets", StringComparison.Ordinal) + 7;
-                            int extensionIndex = fullScenePath.LastIndexOf(".unity", StringComparison.Ordinal);
-                            fullScenePath = fullScenePath.Substring(assetsIndex, extensionIndex - assetsIndex);
-                            scenePath.stringValue = fullScenePath;
-                        }
-                    }
+                    // display path below the object field
+                    position.y += fieldSize + padding; //offset position.y by field size
+                    EditorGUI.LabelField(position, scenePath.stringValue);
                 }
-                
             }
             EditorGUI.EndProperty();
         }
+
+        private static string GetScenePath(SerializedProperty sceneAsset)
+        {
+            string fullScenePath = AssetDatabase.GetAssetPath(sceneAsset.objectReferenceValue);
+            int assetsIndex = fullScenePath.IndexOf("Assets", StringComparison.Ordinal) + 7;
+            int extensionIndex = fullScenePath.LastIndexOf(".unity", StringComparison.Ordinal);
+            fullScenePath = fullScenePath.Substring(assetsIndex, extensionIndex - assetsIndex);
+            return fullScenePath;
+        }
+
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+        {
+            //set the height of the drawer by the field size and padding
+            return (fieldSize * fieldAmount)+(padding * fieldAmount);
+        }
+
+        // public override float GetPropertyHeight (SerializedProperty property, GUIContent label) {
+ 
+        //     SerializedObject childObj = new UnityEditor.SerializedObject(property.objectReferenceValue as Command);
+        //     SerializedProperty ite = childObj.GetIterator();
+    
+        //     float totalHeight = EditorGUI.GetPropertyHeight (property, label, true) + EditorGUIUtility.standardVerticalSpacing;
+    
+        //     while (ite.NextVisible(true))
+        //     {
+        //         totalHeight += EditorGUI.GetPropertyHeight(ite, label, true) + EditorGUIUtility.standardVerticalSpacing;
+        //     }
+    
+        //     return totalHeight;
+        // }
     }
     #endif
 }
