@@ -119,7 +119,8 @@ public class Attack : NodeAI.ActionBase  /// @todo Comment
                 }
                 else if(phase.attackType == AttackData.AttackType.AOE)
                 {
-                    agent.GetComponent<DamageDealer>().AOEAttack(phase.attackDamage, phase.attackDelay, phase.attackRange, phase.AOEeffect, phase.attackStunDuration);
+                    agent.GetComponent<DamageDealer>().AOEAttack(phase.attackDamage, phase.attackDelay, phase.attackRange, phase.AOEeffect, phase.AOEspawnOffset, phase.attackStunDuration);
+                    agent.GetComponent<DamageDealer>().DisplayIndicator(phase.attackDelay, phase.attackRange, phase.AOEspawnOffset, rotateTowardsPlayer.GetPlayerDir, phase.translationSpeed, phase.translationDuration, phase.AOEindicatorColor, phase.AOEindicatorDuration);
                 }
                 rotateTowardsPlayer.RotateToPlayer(phase.turnDuration, phase.turnSpeed, phase.turnDelay);
                 rotateTowardsPlayer.MoveToPlayer(phase.translationDuration, phase.translationSpeed, phase.translationDelay);

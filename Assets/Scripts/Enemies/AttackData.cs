@@ -34,6 +34,10 @@ public class AttackData : ScriptableObject  /// @todo Comment
         [Header("AOE")]
         [SerializeReference]
         public GameObject AOEeffect;
+        public Vector2 AOEspawnOffset;
+        public Color AOEindicatorColor;
+        public float AOEindicatorDuration;
+
         [Header("Rotation")]
         public float turnDuration;
         public float turnSpeed;

@@ -12,11 +12,43 @@ public class EnemyHealth : Health_Base
 {
     protected NodeAI.NodeAI_Senses m_senses;
 
+    private SkinnedMeshRenderer m_renderer;
+    private List<Material> m_materials = new List<Material>();
+
     // Start is called before the first frame update
     public override void Start()
     {
         base.Start();
         m_senses = GetComponent<NodeAI.NodeAI_Senses>();
+
+        m_renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        m_materials.AddRange(m_renderer.materials);
+    }
+
+    IEnumerator DamageFlashCoroutine(float duration)
+    {
+        Vector3 startScale = transform.localScale;
+        Vector3 endScale = startScale * 1.03f;
+
+        Color flashCol = new Color(1f, 0.6f, 0.6f, 1f);
+        // Make the material flash red
+        for (int i = 0; i < m_materials.Count; i++)
+        {
+            m_materials[i].SetColor("_BaseColor", flashCol);
+        }
+
+        // fade the material back to normal over the duration
+        float elapsedTime = 0;
+        while (elapsedTime < duration)
+        {
+            for (int i = 0; i < m_materials.Count; i++)
+            {
+                m_materials[i].SetColor("_BaseColor", Color.Lerp(flashCol, Color.white, elapsedTime / duration));
+            }
+            transform.localScale = Vector3.Lerp(endScale, startScale, elapsedTime / duration);  
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
     }
 
     // Update is called once per frame
@@ -29,6 +61,8 @@ public class EnemyHealth : Health_Base
     {
         base.TakeDamage(_damage);
         GetComponent<NodeAI.NodeAI_Agent>().SetParameter("Health", m_currentHealth);
+        StopCoroutine("DamageFlashCoroutine");
+        StartCoroutine(DamageFlashCoroutine(0.25f));
 
         m_senses?.RegisterSensoryEvent(_damage.m_sourceObject, this.gameObject, 20.0f, NodeAI.SensoryEvent.SenseType.SOMATIC);
     }
