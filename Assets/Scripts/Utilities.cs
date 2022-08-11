@@ -55,10 +55,11 @@ using System;
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
+            EditorGUI.BeginProperty(position, label, property);
+
             //divide all field heights by the field amount..then minus the padding
             position.height /= fieldAmount; position.height -= padding;
 
-            EditorGUI.BeginProperty(position, GUIContent.none, property);
             SerializedProperty sceneAsset = property.FindPropertyRelative("m_sceneAsset");
             SerializedProperty scenePath = property.FindPropertyRelative("m_scenePath");
             position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
@@ -106,10 +107,12 @@ using System;
                     }
 
                     // display path below the object field
+
                     position.y += fieldSize + padding; //offset position.y by field size
                     EditorGUI.LabelField(position, scenePath.stringValue);
                 }
             }
+
             EditorGUI.EndProperty();
         }
 
