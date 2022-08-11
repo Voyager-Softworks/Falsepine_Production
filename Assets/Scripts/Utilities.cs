@@ -52,8 +52,8 @@ using System;
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             EditorGUI.BeginProperty(position, GUIContent.none, property);
-            var sceneAsset = property.FindPropertyRelative("m_sceneAsset");
-            var scenePath = property.FindPropertyRelative("m_scenePath");
+            SerializedProperty sceneAsset = property.FindPropertyRelative("m_sceneAsset");
+            SerializedProperty scenePath = property.FindPropertyRelative("m_scenePath");
             position = EditorGUI.PrefixLabel(position, GUIUtility.GetControlID(FocusType.Passive), label);
             if (sceneAsset != null)
             {
@@ -65,15 +65,36 @@ using System;
                 }
                 else{
                     EditorGUI.BeginChangeCheck();
-                    var value = EditorGUI.ObjectField(position, sceneAsset.objectReferenceValue, typeof(SceneAsset), false);
+                    UnityEngine.Object value = EditorGUI.ObjectField(position, sceneAsset.objectReferenceValue, typeof(SceneAsset), false);
+
+                    // get scene path currently stored in the property
+                    string scenePathCurrently = scenePath.stringValue;
+
+                    // get the actual scene path from the sceneAsset
+                    string scenePathFromAsset = "";
+                    if (value != null)
+                    {
+                        scenePathFromAsset = AssetDatabase.GetAssetPath(value);
+
+                        int assetsIndex = scenePathFromAsset.IndexOf("Assets", StringComparison.Ordinal) + 7;
+                        int extensionIndex = scenePathFromAsset.LastIndexOf(".unity", StringComparison.Ordinal);
+                        scenePathFromAsset = scenePathFromAsset.Substring(assetsIndex, extensionIndex - assetsIndex);
+                    }
+                    // if the scene path from the asset is different from the one stored in the property, update the property
+                    if (scenePathFromAsset != scenePathCurrently)
+                    {
+                        scenePath.stringValue = scenePathFromAsset;
+                    }
+
+                    // if any changes, update the asset and the scene path
                     if (EditorGUI.EndChangeCheck())
                     {
                         sceneAsset.objectReferenceValue = value;
                         if (sceneAsset.objectReferenceValue != null)
                         {
-                            var fullScenePath = AssetDatabase.GetAssetPath(sceneAsset.objectReferenceValue);
-                            var assetsIndex = fullScenePath.IndexOf("Assets", StringComparison.Ordinal) + 7;
-                            var extensionIndex = fullScenePath.LastIndexOf(".unity", StringComparison.Ordinal);
+                            string fullScenePath = AssetDatabase.GetAssetPath(sceneAsset.objectReferenceValue);
+                            int assetsIndex = fullScenePath.IndexOf("Assets", StringComparison.Ordinal) + 7;
+                            int extensionIndex = fullScenePath.LastIndexOf(".unity", StringComparison.Ordinal);
                             fullScenePath = fullScenePath.Substring(assetsIndex, extensionIndex - assetsIndex);
                             scenePath.stringValue = fullScenePath;
                         }
