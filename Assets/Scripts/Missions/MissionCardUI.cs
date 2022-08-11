@@ -133,7 +133,8 @@ public class MissionCardUI : MonoBehaviour /// @todo Comment
             }
             else
             {
-                buttonText.text = "Return";
+                // disable button
+                button.SetActive(false);
             }
             return;
         }
