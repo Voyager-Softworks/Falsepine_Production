@@ -15,6 +15,8 @@ public class EnemyHealth : Health_Base
     private SkinnedMeshRenderer m_renderer;
     private List<Material> m_materials = new List<Material>();
 
+    public GameObject m_bloodEffect;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -61,10 +63,13 @@ public class EnemyHealth : Health_Base
     {
         base.TakeDamage(_damage);
         GetComponent<NodeAI.NodeAI_Agent>().SetParameter("Health", m_currentHealth);
+        GetComponentInChildren<Animator>()?.SetTrigger("Hit");
+        GetComponentInChildren<Animator>()?.SetFloat("PainNum", UnityEngine.Random.value);
         StopCoroutine("DamageFlashCoroutine");
         StartCoroutine(DamageFlashCoroutine(0.25f));
 
         m_senses?.RegisterSensoryEvent(_damage.m_sourceObject, this.gameObject, 20.0f, NodeAI.SensoryEvent.SenseType.SOMATIC);
+        Instantiate(m_bloodEffect, _damage.m_hitPoint + (_damage.direction.normalized * 0.5f) , Quaternion.LookRotation(_damage.direction));
     }
 
     public override void Die(){
@@ -88,7 +93,10 @@ public class EnemyHealth : Health_Base
 
         // do ragdoll
         Ragdoll ragdoll = GetComponent<Ragdoll>();
-        if (ragdoll != null) ragdoll.EnableRagdoll();
+        if (ragdoll != null) 
+        {
+            ragdoll.EnableRagdoll();
+        }
 
         //stop audiosource
         AudioSource audioSource = GetComponent<AudioSource>();
