@@ -48,7 +48,7 @@ public class RotateTowardsPlayer : MonoBehaviour
         Vector3 direction = targetPos - startPos;
         while (elapsedTime < duration)
         {
-            agent.Move((targetPos - startPos) * Time.deltaTime * speed);
+            agent.Move((targetPos - startPos).normalized * Time.deltaTime * speed);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -63,6 +63,11 @@ public class RotateTowardsPlayer : MonoBehaviour
     public void MoveToPlayer(float duration, float speed, float delay)
     {
         StartCoroutine(MoveToPlayerCoroutine(duration, speed, delay));
+    }
+
+    public Vector3 GetPlayerDir()
+    {
+        return (GameObject.FindGameObjectWithTag("Player").transform.position - transform.position).normalized;
     }
 
     /// <summary>

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
+using System;
 
 /// <summary>
 ///  Script that handles dealing damage to the player through melee, ranged, and AOE attacks.
@@ -11,9 +13,14 @@ public class DamageDealer : MonoBehaviour
     public List<Collider> HurtBoxes = new List<Collider>(); ///< Colliders used to detect when the player is hit by an attack
 
     public GameObject hurtPlayerEffect; ///< Particle effect spawned when the player is hurt
+    
+    public GameObject indicatorPrefab; ///< Indicator that shows where the attack will hit
 
     public float damage = 10f; ///< Damage done by the attack
     public int attkNum = 1; ///< Number of Attacks
+    
+    
+    
     int currAttkNum = 0;
 
     /// <summary>
@@ -71,11 +78,12 @@ public class DamageDealer : MonoBehaviour
     /// <param name="effect">The effect to spawn when the player is hit.</param>
     /// <param name="stunDuration">The length of time to stun the player for if they are hit.</param>
     /// <returns></returns>
-    IEnumerator AOEAttackCoroutine(float dmg, float delay, float radius, GameObject effect, float stunDuration)
+    IEnumerator AOEAttackCoroutine(float dmg, float delay, float radius, GameObject effect, Vector2 offset, float stunDuration)
     {
         yield return new WaitForSeconds(delay);
-        Destroy(Instantiate(effect, transform.position, Quaternion.identity), 20.0f);
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, radius, transform.forward, 0.5f);
+        Vector3 offsetVector = transform.forward * offset.y + transform.right * offset.x;
+        Destroy(Instantiate(effect, transform.position + offsetVector, Quaternion.identity), 20.0f);
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position + offsetVector, radius, transform.forward, 0.5f);
         foreach (RaycastHit hit in hits)
         {
             if (hit.collider.CompareTag("Player"))
@@ -87,6 +95,43 @@ public class DamageDealer : MonoBehaviour
             }
         }
     }
+    /// <summary>
+    ///  Coroutine to display an attack indicator for AOE attacks.
+    /// </summary>
+    /// <param name="delay"></param>
+    /// <param name="radius"></param>
+    /// <param name="translationSpeed"></param>
+    /// <param name="translationDuration"></param>
+    /// <param name="translationDirection"></param>
+    /// <returns></returns>
+    IEnumerator IndicatorCoroutine(float delay, float radius, Vector2 offset, Func<Vector3> playerDirectionFunction,float translationSpeed, float translationDuration, Color attackColor, float indicatorDuration)
+    {
+        yield return new WaitForSeconds(delay-indicatorDuration);
+        Vector3 offsetVector = transform.forward * offset.y + transform.right * offset.x;
+        GameObject indicator = Instantiate(indicatorPrefab, transform.position + offsetVector + (playerDirectionFunction() * (translationSpeed * translationDuration)) - Vector3.up, Quaternion.Euler(90, 0, 0));
+        float t = 0.0f;
+        DecalProjector decalProjector = indicator.GetComponent<DecalProjector>();
+        decalProjector.material.SetColor("_BaseColor", attackColor);
+        
+        decalProjector.material.SetColor("_EmissiveColor", attackColor);
+        decalProjector.size = Vector3.zero;
+        Vector3 startSize = new Vector3(0.0f, 0.0f, 2.0f);
+        Vector3 endSize = new Vector3(radius*4.0f, radius*4.0f, 2.0f);
+        while (t < indicatorDuration)
+        {
+            Vector3 groundPos = transform.position;
+            groundPos.y = 0.0f;
+            offsetVector = transform.forward * offset.y + transform.right * offset.x;
+            indicator.transform.position = (groundPos+offsetVector) + (transform.forward * translationSpeed * translationDuration * (1-((t+(delay-indicatorDuration))/delay))) + (Vector3.up);
+            
+            t += Time.deltaTime;
+            decalProjector.size = Vector3.Lerp(startSize, endSize, t / indicatorDuration);
+            yield return null;
+        }
+        Destroy(indicator);
+        
+    }
+
 
     /// <summary>
     ///  Coroutine to execute a ranged attack on the player.
@@ -154,10 +199,16 @@ public class DamageDealer : MonoBehaviour
     /// <param name="radius">The radius of the AOE attack.</param>
     /// <param name="effect">The effect to spawn when the player is hit.</param>
     /// <param name="stunDuration">The length of time to stun the player for if they are hit.</param>
-    public void AOEAttack(float dmg, float delay, float radius, GameObject effect, float stunDuration)
+    public void AOEAttack(float dmg, float delay, float radius, GameObject effect, Vector2 offset, float stunDuration)
     {
-        StartCoroutine(AOEAttackCoroutine(dmg, delay, radius, effect, stunDuration));
+        StartCoroutine(AOEAttackCoroutine(dmg, delay, radius, effect, offset, stunDuration));
     }
+
+    public void DisplayIndicator(float delay, float radius, Vector2 offset, Func<Vector3> playerDirectionFunction, float translationSpeed, float translationDuration, Color color, float indicatorDuration)
+    {
+        StartCoroutine(IndicatorCoroutine(delay, radius, offset, playerDirectionFunction, translationSpeed, translationDuration, color, indicatorDuration));
+    }
+    
 
     /// <summary>
     ///  Do a ranged attack on the player.
