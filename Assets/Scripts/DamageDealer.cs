@@ -19,6 +19,15 @@ public class DamageDealer : MonoBehaviour
     public float damage = 10f; ///< Damage done by the attack
     public int attkNum = 1; ///< Number of Attacks
     
+    void Start()
+    {
+        GetComponent<EnemyHealth>().Death += (Health_Base.DeathContext context) => {
+            foreach (var hurtBox in HurtBoxes)
+            {
+                hurtBox.enabled = false;
+            }
+        };
+    }
     
     
     int currAttkNum = 0;

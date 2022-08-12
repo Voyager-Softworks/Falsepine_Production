@@ -17,10 +17,26 @@ public class Ragdoll : MonoBehaviour
         {
             animator.enabled = false;
         }
+        var colliders = GetComponents<Collider>();
+        foreach(var collider in colliders)
+        {
+            collider.enabled = false;
+        }
         var rigidbodies = GetComponentsInChildren<Rigidbody>();
         foreach(var rb in rigidbodies)
         {
             rb.isKinematic = false;
+        }
+    }
+
+    public void RagdollOnDeath(Health_Base.DeathContext context)
+    {
+        EnableRagdoll();
+        // Add force to rigidbody in the direction of the hit point.
+        var rigidbodies = GetComponentsInChildren<Rigidbody>();
+        foreach(var rb in rigidbodies)
+        {
+            rb.velocity = context.Direction.normalized * 4.0f;
         }
     }
 
@@ -44,5 +60,7 @@ public class Ragdoll : MonoBehaviour
     void Start()
     {
         DisableRagdoll();
+        GetComponent<EnemyHealth>().Death += RagdollOnDeath;
+
     }
 }

@@ -91,11 +91,11 @@ public class EnemyHealth : Health_Base
         NavMeshAgent navMeshAgent = GetComponent<NavMeshAgent>();
         if (navMeshAgent != null) navMeshAgent.enabled = false;
 
-        // do ragdoll
+        
         Ragdoll ragdoll = GetComponent<Ragdoll>();
         if (ragdoll != null) 
         {
-            ragdoll.EnableRagdoll();
+            GetComponentInChildren<Animator>().enabled = false;
         }
 
         //stop audiosource
