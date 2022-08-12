@@ -14,10 +14,11 @@ public class Health_Base : MonoBehaviour
         // draw the bounding box
         Collider collider = GetComponent<Collider>();
         if (collider != null) {
-            Gizmos.color = Color.red;
+            Gizmos.color = new Color(1, 0, 0, 0.3f);
             Gizmos.DrawWireCube(collider.bounds.center, collider.bounds.size);
         }
     }
+
     public class DamageStat
     {
         public float m_damage;
