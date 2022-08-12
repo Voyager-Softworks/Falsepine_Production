@@ -37355,7 +37355,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.41
+  m_Radius: 0.3
   m_Height: 1.78
   m_Direction: 1
   m_Center: {x: 0, y: 0.93, z: 0}
@@ -37371,10 +37371,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382e18cd65ba3ee40981aca66eb43b48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_currentHealth: 12
-  m_maxHealth: 12
+  m_currentHealth: 6
+  m_maxHealth: 6
+  m_disablePlayerCollision: 1
   m_deathSound: {fileID: 3107313251738698642, guid: 10cb214655d87364e89074a5ad7b68e2, type: 3}
   m_hurtSound: {fileID: 3107313251738698642, guid: c2b4557bd46830a459455463fecead8d, type: 3}
+  m_bloodEffect: {fileID: 7806886839550920633, guid: 5685b526b95f40145b6b7c9e297a5cf2, type: 3}
 --- !u!114 &2082676413730661257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37390,6 +37392,7 @@ MonoBehaviour:
   HurtBoxes:
   - {fileID: 7270673991510209974}
   hurtPlayerEffect: {fileID: 906613630111261276, guid: 035c7f8b389e1f340903030517c35684, type: 3}
+  indicatorPrefab: {fileID: 0}
   damage: 15
   attkNum: 1
 --- !u!114 &5310953167412475306

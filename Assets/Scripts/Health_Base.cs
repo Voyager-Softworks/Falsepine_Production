@@ -1,13 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// A base health class for all objects that can take damage.
-/// @Todo: Impliment this into players, enemies, destructable objects.
+/// @todo Impliment this into players, enemies, destructable objects.
 /// </summary>
 public class Health_Base : MonoBehaviour
 {
+
+    private void OnDrawGizmos() {
+        // draw the bounding box
+        Collider collider = GetComponent<Collider>();
+        if (collider != null) {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(collider.bounds.center, collider.bounds.size);
+        }
+    }
     public class DamageStat
     {
         public float m_damage;
@@ -16,7 +26,6 @@ public class Health_Base : MonoBehaviour
         public Vector3 m_hitPoint;
         public Vector3 direction { get { return m_hitPoint - m_originPoint; } }
         public float m_time;
-
 
         public DamageStat(float damage, GameObject sourceObject, Vector3 origin, Vector3 hitPoint)
         {
@@ -27,6 +36,18 @@ public class Health_Base : MonoBehaviour
             m_time = Time.time;
         }
     }
+
+    public struct DeathContext
+    {
+        public GameObject m_sourceObject;
+        public Vector3 m_originPoint;
+        public Vector3 m_hitPoint;
+        public Vector3 Direction { get { return m_hitPoint - m_originPoint; } }
+        public float m_time;
+    }
+
+    public System.Action<DeathContext> Death;
+    public System.Action<DamageStat> Damage;
 
     [Header("Stats")]
     public float m_currentHealth = 100f;
@@ -76,6 +97,8 @@ public class Health_Base : MonoBehaviour
         // deal dmg
         m_currentHealth -= _damageStat.m_damage;
 
+        Damage?.Invoke(_damageStat);
+
         UpdateDeath();
 
         PlayHurtSound();
@@ -90,6 +113,13 @@ public class Health_Base : MonoBehaviour
         m_hasDied = true;
 
         PlayDeathSound();
+
+        Death?.Invoke(new DeathContext() {
+            m_sourceObject = m_damageHistory[m_damageHistory.Count-1].m_sourceObject,
+            m_originPoint = m_damageHistory[m_damageHistory.Count-1].m_originPoint,
+            m_hitPoint = m_damageHistory[m_damageHistory.Count-1].m_hitPoint,
+            m_time = m_damageHistory[m_damageHistory.Count-1].m_time
+        });
 
         if (m_disablePlayerCollision)
         {

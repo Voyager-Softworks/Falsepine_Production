@@ -61,7 +61,6 @@ public class PlayerMovement : MonoBehaviour
         moveAction.Enable();
         rollAction.Enable();
         sprintAction.Enable();
-
         
 
         controller = GetComponent<CharacterController>();
