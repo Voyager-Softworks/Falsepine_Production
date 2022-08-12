@@ -300,9 +300,34 @@ public class RangedWeapon : Item
 
             ShotInfo shotInfo = new ShotInfo();
 
+            List<Vector3> intersections1 = new List<Vector3>();
+            List<Vector3> intersections2 = new List<Vector3>();
+
+            bool inTri1 = BoundsIntersectTriangle(bounds, _aimZone.bl, _aimZone.fl, _aimZone.fr, out intersections1);
+            bool inTry2 = BoundsIntersectTriangle(bounds, _aimZone.bl, _aimZone.fr, _aimZone.br, out intersections2);
+
+            // combine the two lists of intersections
+            List<Vector3> intersections = new List<Vector3>();
+            intersections.AddRange(intersections1);
+            intersections.AddRange(intersections2);
+
+            // set shotInfo.damage to the highest damage value
+            shotInfo.damage = 0;
+            foreach (Vector3 intersection in intersections)
+            {
+                //update damage
+                float calcdDamage = StatsManager.CalculateDamage(this, m_damage);
+                calcdDamage *= _aimZone.CalcDmgMult_float(intersection, m_horizFalloffMult);
+
+                if (calcdDamage > shotInfo.damage)
+                {
+                    shotInfo.damage = calcdDamage;
+                    shotInfo.zoneIntersection = intersection;
+                }
+            }
+
             // split aimzone into two triangles (bl, fl, fr) and (bl, fr, br)
-            if (BoundsIntersectTriangle(bounds, _aimZone.bl, _aimZone.fl, _aimZone.fr, out shotInfo.zoneIntersection) || 
-                BoundsIntersectTriangle(bounds, _aimZone.bl, _aimZone.fr, _aimZone.br, out shotInfo.zoneIntersection))
+            if (inTri1 || inTry2)
             {
                 // raycast all 8 corners of the bounds, and the center of the bounds
                 List<Vector3> corners = new List<Vector3>();
@@ -317,13 +342,14 @@ public class RangedWeapon : Item
                     Vector3 toPosition = Vector3.Lerp(corner, bounds.center, 0.5f);
                     if (Physics.Raycast(_origin, toPosition - _origin, out hitInfo, m_range, layerMask, QueryTriggerInteraction.Ignore))
                     {
-                        shotInfo.originPoint = _origin;
-                        shotInfo.hitPoint = hitInfo.point;
                         
                         if (hitInfo.collider.GetComponentInParent<Health_Base>() == healthScript)
                         {
-                            //m_shots.Clear();
+                            // update shotInfo
+                            shotInfo.originPoint = _origin;
+                            shotInfo.hitPoint = hitInfo.point;
                             shotInfo.healthScriptHit = healthScript;
+
                             hitList.Add(shotInfo);
                             break;
                         }
@@ -340,11 +366,6 @@ public class RangedWeapon : Item
             //get shotInfo from list
             ShotInfo shotInfo = hitList[i];
 
-            //update damage
-            float calcdDamage = StatsManager.CalculateDamage(this, m_damage);
-            calcdDamage *= _aimZone.CalcDmgMult_float(shotInfo.zoneIntersection, m_horizFalloffMult);
-            shotInfo.damage = calcdDamage;
-
             //update UV
             shotInfo.zoneUVPoint = _aimZone.CalculateUVFromWorld(shotInfo.zoneIntersection);
 
@@ -355,7 +376,7 @@ public class RangedWeapon : Item
         //sort hitList by damage (most first) (if damage is within 0.1f of eachother, sort by distance)
         hitList.Sort((x, y) =>
         {
-            if (Mathf.Abs(x.damage - y.damage) < 0.5f)
+            if (Mathf.Abs(x.damage - y.damage) < 0.1f)
             {
                 return Vector3.Distance(x.hitPoint, _origin).CompareTo(Vector3.Distance(y.hitPoint, _origin));
             }
@@ -508,39 +529,47 @@ public class RangedWeapon : Item
     /// <param name="_triangleB"></param>
     /// <param name="_triangleC"></param>
     /// <returns></returns>
-    public static bool BoundsIntersectTriangle(Bounds _bounds, Vector3 _triangleA, Vector3 _triangleB, Vector3 _triangleC, out Vector3 intersection)
+    public static bool BoundsIntersectTriangle(Bounds _bounds, Vector3 _triangleA, Vector3 _triangleB, Vector3 _triangleC, out List<Vector3> intersections)
     {
         Vector3 b1 = _bounds.center + new Vector3(_bounds.extents.x, 0, _bounds.extents.z);
         Vector3 b2 = _bounds.center + new Vector3(_bounds.extents.x, 0, -_bounds.extents.z);
         Vector3 b3 = _bounds.center + new Vector3(-_bounds.extents.x, 0, _bounds.extents.z);
         Vector3 b4 = _bounds.center + new Vector3(-_bounds.extents.x, 0, -_bounds.extents.z);
 
-        intersection = Vector3.zero;
+        // list of all intersection points
+        intersections = new List<Vector3>();
+
+        // temp vec to use
+        Vector3 intersection = Vector3.zero;
 
         //check center of bounds
-        if (PointInTriangle(_bounds.center, _triangleA, _triangleB, _triangleC, out intersection)) return true;
+        if (PointInTriangle(_bounds.center, _triangleA, _triangleB, _triangleC, out intersection)) { intersections.Add(intersection);}
 
         //check corners of bounds
-        if (PointInTriangle(b1, _triangleA, _triangleB, _triangleC, out intersection)) return true;
-        if (PointInTriangle(b2, _triangleA, _triangleB, _triangleC, out intersection)) return true;
-        if (PointInTriangle(b3, _triangleA, _triangleB, _triangleC, out intersection)) return true;
-        if (PointInTriangle(b4, _triangleA, _triangleB, _triangleC, out intersection)) return true;
+        if (PointInTriangle(b1, _triangleA, _triangleB, _triangleC, out intersection)) { intersections.Add(intersection); }
+        if (PointInTriangle(b2, _triangleA, _triangleB, _triangleC, out intersection)) { intersections.Add(intersection); }
+        if (PointInTriangle(b3, _triangleA, _triangleB, _triangleC, out intersection)) { intersections.Add(intersection); }
+        if (PointInTriangle(b4, _triangleA, _triangleB, _triangleC, out intersection)) { intersections.Add(intersection); }
 
         //check edges of bounds
-        if (LinesIntersect(b1, b2, _triangleA, _triangleB, out intersection)) return true;
-        if (LinesIntersect(b2, b3, _triangleA, _triangleB, out intersection)) return true;
-        if (LinesIntersect(b3, b4, _triangleA, _triangleB, out intersection)) return true;
-        if (LinesIntersect(b4, b1, _triangleA, _triangleB, out intersection)) return true;
+        if (LinesIntersect(b1, b2, _triangleA, _triangleB, out intersection)) { intersections.Add(intersection); }
+        if (LinesIntersect(b2, b3, _triangleA, _triangleB, out intersection)) { intersections.Add(intersection); }
+        if (LinesIntersect(b3, b4, _triangleA, _triangleB, out intersection)) { intersections.Add(intersection); }
+        if (LinesIntersect(b4, b1, _triangleA, _triangleB, out intersection)) { intersections.Add(intersection); }
 
-        if (LinesIntersect(b1, b2, _triangleA, _triangleC, out intersection)) return true;
-        if (LinesIntersect(b2, b3, _triangleA, _triangleC, out intersection)) return true;
-        if (LinesIntersect(b3, b4, _triangleA, _triangleC, out intersection)) return true;
-        if (LinesIntersect(b4, b1, _triangleA, _triangleC, out intersection)) return true;
+        if (LinesIntersect(b1, b2, _triangleA, _triangleC, out intersection)) { intersections.Add(intersection); }
+        if (LinesIntersect(b2, b3, _triangleA, _triangleC, out intersection)) { intersections.Add(intersection); }
+        if (LinesIntersect(b3, b4, _triangleA, _triangleC, out intersection)) { intersections.Add(intersection); }
+        if (LinesIntersect(b4, b1, _triangleA, _triangleC, out intersection)) { intersections.Add(intersection); }
 
-        if (LinesIntersect(b1, b2, _triangleB, _triangleC, out intersection)) return true;
-        if (LinesIntersect(b2, b3, _triangleB, _triangleC, out intersection)) return true;
-        if (LinesIntersect(b3, b4, _triangleB, _triangleC, out intersection)) return true;
-        if (LinesIntersect(b4, b1, _triangleB, _triangleC, out intersection)) return true;
+        if (LinesIntersect(b1, b2, _triangleB, _triangleC, out intersection)) { intersections.Add(intersection); }
+        if (LinesIntersect(b2, b3, _triangleB, _triangleC, out intersection)) { intersections.Add(intersection); }
+        if (LinesIntersect(b3, b4, _triangleB, _triangleC, out intersection)) { intersections.Add(intersection); }
+        if (LinesIntersect(b4, b1, _triangleB, _triangleC, out intersection)) { intersections.Add(intersection); }
+
+        if (intersections.Count > 0) {
+            return true;
+        }
 
         return false;
     }

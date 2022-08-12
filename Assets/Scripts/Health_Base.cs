@@ -9,6 +9,15 @@ using UnityEngine.Events;
 /// </summary>
 public class Health_Base : MonoBehaviour
 {
+
+    private void OnDrawGizmos() {
+        // draw the bounding box
+        Collider collider = GetComponent<Collider>();
+        if (collider != null) {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(collider.bounds.center, collider.bounds.size);
+        }
+    }
     public class DamageStat
     {
         public float m_damage;
