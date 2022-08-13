@@ -100,6 +100,12 @@ public class JournalManager : MonoBehaviour
 
         //enable the contents
         contents.SetActive(true);
+
+        //get the scroll rect
+        ScrollRect scrollRect = contents.GetComponent<ScrollRect>();
+        if (scrollRect == null) return;
+        //scroll to the top
+        scrollRect.verticalNormalizedPosition = 1;
     }
 
     private void DisableAllContents()

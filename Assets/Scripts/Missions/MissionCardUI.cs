@@ -91,10 +91,14 @@ public class MissionCardUI : MonoBehaviour /// @todo Comment
         if (trackCurrentMission){
             //get current mission from manager
             associatedMission = MissionManager.instance.GetCurrentMission();
-        }
 
-        //if no mission associated, disable the mission card
-        if (associatedMission == null)
+            if (associatedMission == null){
+                DisplayNoMission();
+                return;
+            }
+        }
+        //if not tracking mission, and no mission associated, disable the mission card
+        else if (associatedMission == null)
         {
             HideCard();
             return;
@@ -174,6 +178,21 @@ public class MissionCardUI : MonoBehaviour /// @todo Comment
         }
     }
 
+    private void DisplayNoMission()
+    {
+        ShowCard();
+
+        missionTitle.text = "No Bounty Selected";
+        missionDescription.text = "Accept a Bounty from the bounty board in town.";
+
+        backgroundImage.color = new Color(backgroundImage.color.r, backgroundImage.color.g, backgroundImage.color.b, 0.5f);
+
+        missionStamp.enabled = false;
+        dropShadow.enabled = false;
+        takenGroup.SetActive(false);
+        button.SetActive(false);
+    }
+
     private void ShowCard()
     {
         missionTitle.enabled = true;
@@ -181,6 +200,8 @@ public class MissionCardUI : MonoBehaviour /// @todo Comment
         //set title and descript to be black
         missionTitle.color = Color.black;
         missionDescription.color = Color.black;
+
+        backgroundImage.color = new Color(backgroundImage.color.r, backgroundImage.color.g, backgroundImage.color.b, 1.0f);
 
         missionStamp.enabled = true;
         backgroundImage.enabled = true;
