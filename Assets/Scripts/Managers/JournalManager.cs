@@ -84,8 +84,9 @@ public class JournalManager : MonoBehaviour
 
             //add listeners to the buttons
             foreach (ContentsLink link in contentsLinks) {
-                link.button.onClick.AddListener(() => {
+                link.button?.onClick.AddListener(() => {
                     OpenContents(link.contents);
+                    link.button.interactable = false;
                 });
             }
         } else {
@@ -114,6 +115,12 @@ public class JournalManager : MonoBehaviour
         foreach (ContentsLink link in contentsLinks)
         {
             link.contents.SetActive(false);
+        }
+
+        // enable all buttons
+        foreach (ContentsLink link in contentsLinks)
+        {
+            if (link.button) link.button.interactable = true;
         }
     }
 
