@@ -15,6 +15,12 @@ using System.IO;
 [Serializable]
 public class JournalManager : MonoBehaviour
 {
+    [Serializable]
+    public class ContentsLink {
+        public Button button;
+        public GameObject contents;
+    }
+
     public enum InfoType
     {
         Lore,
@@ -34,6 +40,8 @@ public class JournalManager : MonoBehaviour
 
     [Header("References")]
     public GameObject journalPanel;
+
+    public List<ContentsLink> contentsLinks;
     
     private AudioSource _audioSource;
 
@@ -73,9 +81,33 @@ public class JournalManager : MonoBehaviour
             DontDestroyOnLoad(this);
 
             LoadJournal(SaveManager.currentSaveSlot);
+
+            //add listeners to the buttons
+            foreach (ContentsLink link in contentsLinks) {
+                link.button.onClick.AddListener(() => {
+                    OpenContents(link.contents);
+                });
+            }
         } else {
             Destroy(this);
             Destroy(gameObject);
+        }
+    }
+
+    private void OpenContents(GameObject contents)
+    {
+        DisableAllContents();
+
+        //enable the contents
+        contents.SetActive(true);
+    }
+
+    private void DisableAllContents()
+    {
+        //disable all other contents
+        foreach (ContentsLink link in contentsLinks)
+        {
+            link.contents.SetActive(false);
         }
     }
 
