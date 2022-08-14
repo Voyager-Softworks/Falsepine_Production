@@ -107,21 +107,30 @@ public class DamageDealer : MonoBehaviour
     /// <summary>
     ///  Coroutine to display an attack indicator for AOE attacks.
     /// </summary>
-    /// <param name="delay"></param>
-    /// <param name="radius"></param>
-    /// <param name="translationSpeed"></param>
-    /// <param name="translationDuration"></param>
-    /// <param name="translationDirection"></param>
+    /// <param name="delay">The amount of time before the attack hits. (Seconds)</param>
+    /// <param name="radius">The damage radius of the attack.</param>
+    /// <param name="offset">The amount to offset the position of the attack indicator by in respect to the origin of the enemy.</param>
+    /// <param name="playerDirectionFunction">A delegate used to find the direction of the player relative to the enemy</param>
+    /// <param name="translationSpeed">The speed at which the enemy is moving towards the player.</param>
+    /// <param name="translationDuration">The duration for which the enemy will move towards the player during this attack phase.</param>
+    /// <param name="attackColor">The color to make the attack indicator circle.</param>
+    /// <param name="indicatorDuration">The duration to display the indicator for prior to the attack hitting</param>
     /// <returns></returns>
-    IEnumerator IndicatorCoroutine(float delay, float radius, Vector2 offset, Func<Vector3> playerDirectionFunction,float translationSpeed, float translationDuration, Color attackColor, float indicatorDuration)
+    public IEnumerator IndicatorCoroutine(float delay, float radius, Vector2 offset, Func<Vector3> playerDirectionFunction,float translationSpeed, float translationDuration, Color attackColor, float indicatorDuration)
     {
-        yield return new WaitForSeconds(delay-indicatorDuration);
-        Vector3 offsetVector = transform.forward * offset.y + transform.right * offset.x;
-        GameObject indicator = Instantiate(indicatorPrefab, transform.position + offsetVector + (playerDirectionFunction() * (translationSpeed * translationDuration)) - Vector3.up, Quaternion.Euler(90, 0, 0));
-        float t = 0.0f;
+        yield return new WaitForSeconds(delay-indicatorDuration); //Wait until it is time to begin displaying the indicator
+
+        Vector3 offsetVector = transform.forward * offset.y + transform.right * offset.x; //Get the offset position
+
+        GameObject indicator = Instantiate(indicatorPrefab, transform.position + offsetVector + (playerDirectionFunction() * (translationSpeed * translationDuration)) - Vector3.up, Quaternion.Euler(90, 0, 0)); //Instantiate the indicator
+        float t = 0.0f; //Create the timer
+
+        //Set the properties of the decal projector
         DecalProjector decalProjector = indicator.GetComponent<DecalProjector>();
-        decalProjector.material = new Material(decalProjector.material);
+        decalProjector.material = new Material(decalProjector.material); //Make a new instance of the material
         decalProjector.material.SetColor("_BaseColor", attackColor);
+
+        //Maths to get around Unity's strange storing of HDR colors
         Color emissiveColor = decalProjector.material.GetColor("_EmissiveColor");
         var maxColComponent = emissiveColor.maxColorComponent;
         byte maxOverExposedColor = 191;
@@ -129,7 +138,11 @@ public class DamageDealer : MonoBehaviour
         float intensity = Mathf.Log(255f/factor) / Mathf.Log(2f);
         Color newEmissiveColor = new Color(attackColor.r * intensity, attackColor.g * intensity, attackColor.b * intensity, attackColor.a);
         decalProjector.material.SetColor("_EmissiveColor", newEmissiveColor);
+
+        
         decalProjector.size = Vector3.zero;
+
+        //Animate the size of the indicator
         Vector3 startSize = new Vector3(0.0f, 0.0f, 2.0f);
         Vector3 endSize = new Vector3(radius*2f, radius*2f, 2.0f);
         while (t < indicatorDuration)
