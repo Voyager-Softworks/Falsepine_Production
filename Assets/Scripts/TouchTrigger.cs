@@ -25,8 +25,7 @@ public class TouchTrigger : MonoBehaviour  /// @todo Comment
 
     void OnTriggerEnter(Collider other)
     {
-
-        if (ignorePlayer && (other.GetComponentInChildren<PlayerMovement>() != null || other.GetComponentsInParent<PlayerMovement>() != null))
+        if (ignorePlayer && (other.GetComponentInChildren<PlayerMovement>() != null || other.GetComponentInParent<PlayerMovement>() != null))
         {
             return;
         }
@@ -35,11 +34,9 @@ public class TouchTrigger : MonoBehaviour  /// @todo Comment
         {
             return;
         }
-        if(other.gameObject.GetComponent<NodeAI.NodeAI_Agent>() != null)
+        if(other.transform.root.GetComponentInChildren<NodeAI.NodeAI_Agent>() != null)
         {
-            other.gameObject.GetComponent<NodeAI.NodeAI_Agent>().SetParameter<bool>(triggerName, true);
-            
-            
+            other.transform.root.GetComponentInChildren<NodeAI.NodeAI_Agent>().SetParameter<bool>(triggerName, true);
         }
         triggered = true;
         onTrigger.Invoke();
