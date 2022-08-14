@@ -6,10 +6,11 @@ using System;
 [Serializable]
 public class JournalContent
 {
-    public string stringContent = "";
-    public Sprite spriteContent = null;
+    [TextArea(3, 10)]
+    public string text = "";
+    public Sprite image = null;
 
     // padding around the content
-    public float verticalPadding = 5;
-    public float horizontalPadding = 5;
+    //public float verticalPadding = 5;
+    //public float horizontalPadding = 5;
 }

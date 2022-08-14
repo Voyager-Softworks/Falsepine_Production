@@ -63,6 +63,9 @@ public class JournalManager : MonoBehaviour
     }
     [SerializeField] public List<MonsterClues> monsterCluesList = new List<MonsterClues>();
 
+    public List<JounralEntry> undiscoveredEntries = new List<JounralEntry>();
+    public List<JounralEntry> discoveredEntries = new List<JounralEntry>();
+
     public static string GetSaveFolderPath(int saveSlot)
     {
         return SaveManager.GetSaveFolderPath(saveSlot) + "/journal/";
