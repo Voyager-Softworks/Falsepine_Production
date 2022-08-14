@@ -91,11 +91,11 @@ namespace Boss.Bonestag
                 
                 if(GetProperty<bool>("SecondPhase")) {
                     agent.GetComponent<AudioSource>().PlayOneShot(chargeSoundPhaseTwo);
-                    navAgent.speed = 50;
+                    navAgent.speed = 70;
                 }
                 else {
                     agent.GetComponent<AudioSource>().PlayOneShot(chargeSoundPhaseOne);
-                    navAgent.speed = 30;
+                    navAgent.speed = 50;
                 }
 
                 navAgent.velocity =  (arenaEdgeGoalPosition - agent.transform.position).normalized * navAgent.speed;
