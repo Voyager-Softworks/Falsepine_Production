@@ -19,6 +19,7 @@ public class BossArenaController : MonoBehaviour
     }
 
     public List<Transform> arenaCentreTransforms = new List<Transform>(); ///< The arena centre transforms.
+    public List<ParticleSystem> arenaParticles = new List<ParticleSystem>(); ///< The arena particles.
     public List<float> arenaRadiuses = new List<float>(); ///< The arena radiis.
 
     public Transform wrongBaitSpawn; ///< The spawn point for the wrong bait.
@@ -34,7 +35,9 @@ public class BossArenaController : MonoBehaviour
     public AudioClip bossMusic, bossMusicSecondPhase; ///< The music to play when the boss is in the arena.
     public float fadeOutTime; ///< The time it takes to fade out the music.
 
-
+    public TouchTrigger startTrigger; ///< The trigger to start the boss fight.
+    
+    public TouchTrigger room2, room3;
     public UnityEvent onBattleStart; ///< The event to call when the boss starts a battle.
 
     private UIScript _uiScript; ///< The UI script.
@@ -52,6 +55,20 @@ public class BossArenaController : MonoBehaviour
         incorrectBait.performed += ctx => UseWrongBait();
         correctBait.Enable();
         incorrectBait.Enable();
+
+        startTrigger.Triggered += UseCorrectBait;
+
+        room2.Triggered += () => { 
+                EnableBossUI();
+                arenaParticles[1].Play();
+                boss.SetParameter<bool>("BossStarted", true);
+            };
+
+        room3.Triggered += () => { 
+                EnableBossUI();
+                arenaParticles[2].Play();
+                boss.SetParameter<bool>("BossStarted", true);
+            };
 
         _uiScript = FindObjectOfType<UIScript>();
 
@@ -74,11 +91,21 @@ public class BossArenaController : MonoBehaviour
         {
             phase = 1;
             boss.SetParameter<bool>("PhaseChange", true);
+            foreach (ParticleSystem particle in arenaParticles)
+            {
+                particle.Stop();
+            }
+            _uiScript.bossUI.SetActive(false);
         }
         if(bossHealth.m_currentHealth < phase2Threshold && phase == 1)
         {
             phase = 2;
             boss.SetParameter<bool>("PhaseChange", true);
+            foreach (ParticleSystem particle in arenaParticles)
+            {
+                particle.Stop();
+            }
+            _uiScript.bossUI.SetActive(false);
         }
         if(bossHealth.m_currentHealth < phase3Threshold && phase == 2)
         {
@@ -110,6 +137,7 @@ public class BossArenaController : MonoBehaviour
         GetComponent<AudioSource>().clip = bossMusic;
         GetComponent<AudioSource>().Play();
         onBattleStart.Invoke();
+        arenaParticles[0].Play();
 
     }
 

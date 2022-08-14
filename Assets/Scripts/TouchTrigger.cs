@@ -6,10 +6,9 @@ using UnityEngine.Events;
 public class TouchTrigger : MonoBehaviour  /// @todo Comment
 {
     public string triggerName;
-    public UnityEvent onTrigger;
     bool triggered = false;
-
     public bool ignorePlayer = false;
+    public System.Action Triggered;
 
     // Start is called before the first frame update
     void Start()
@@ -39,7 +38,7 @@ public class TouchTrigger : MonoBehaviour  /// @todo Comment
             other.transform.root.GetComponentInChildren<NodeAI.NodeAI_Agent>().SetParameter<bool>(triggerName, true);
         }
         triggered = true;
-        onTrigger.Invoke();
+        Triggered.Invoke();
         
     }
 }
