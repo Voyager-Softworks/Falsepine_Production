@@ -112,7 +112,7 @@ namespace Boss.Bonestag
                 navAgent.SetDestination(agent.transform.position);
                 navAgent.isStopped = true;
                 navAgent.velocity =  Vector3.zero;
-                animator.SetTrigger("Trapped");
+                //animator.SetTrigger("Trapped");
                 animator.SetBool("Charging", false);
                 state = NodeData.State.Failure;
                 return state;

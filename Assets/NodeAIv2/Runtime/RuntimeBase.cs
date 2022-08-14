@@ -662,7 +662,15 @@ namespace NodeAI
         }
         public override NodeData.State ApplyDecorator(NodeAI_Agent agent, NodeTree.Leaf child)
         {
-            return NodeData.State.Success;
+            if (child.nodeData.runtimeLogic.Eval(agent, child) == NodeData.State.Running)
+            {
+                return NodeData.State.Running;
+            }
+            else
+            {
+                return NodeData.State.Success;
+            }
+            
         }
 
         
