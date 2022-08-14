@@ -120,12 +120,18 @@ public class DamageDealer : MonoBehaviour
         GameObject indicator = Instantiate(indicatorPrefab, transform.position + offsetVector + (playerDirectionFunction() * (translationSpeed * translationDuration)) - Vector3.up, Quaternion.Euler(90, 0, 0));
         float t = 0.0f;
         DecalProjector decalProjector = indicator.GetComponent<DecalProjector>();
+        decalProjector.material = new Material(decalProjector.material);
         decalProjector.material.SetColor("_BaseColor", attackColor);
-        
-        decalProjector.material.SetColor("_EmissiveColor", attackColor);
+        Color emissiveColor = decalProjector.material.GetColor("_EmissiveColor");
+        var maxColComponent = emissiveColor.maxColorComponent;
+        byte maxOverExposedColor = 191;
+        var factor = maxOverExposedColor / maxColComponent;
+        float intensity = Mathf.Log(255f/factor) / Mathf.Log(2f);
+        Color newEmissiveColor = new Color(attackColor.r * intensity, attackColor.g * intensity, attackColor.b * intensity, attackColor.a);
+        decalProjector.material.SetColor("_EmissiveColor", newEmissiveColor);
         decalProjector.size = Vector3.zero;
         Vector3 startSize = new Vector3(0.0f, 0.0f, 2.0f);
-        Vector3 endSize = new Vector3(radius*4.0f, radius*4.0f, 2.0f);
+        Vector3 endSize = new Vector3(radius*2f, radius*2f, 2.0f);
         while (t < indicatorDuration)
         {
             Vector3 groundPos = transform.position;
