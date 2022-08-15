@@ -8,6 +8,7 @@ public class TouchTrigger : MonoBehaviour  /// @todo Comment
     public string triggerName;
     bool triggered = false;
     public bool ignorePlayer = false;
+    public bool ignoreNonHealth = true;
     public System.Action Triggered;
 
     // Start is called before the first frame update
@@ -24,6 +25,13 @@ public class TouchTrigger : MonoBehaviour  /// @todo Comment
 
     void OnTriggerEnter(Collider other)
     {
+        // if hot collider does not have health script in parent or child, return
+        if (ignoreNonHealth && other.gameObject.GetComponentInParent<Health_Base>() == null && other.gameObject.GetComponentInChildren<Health_Base>() == null)
+        {
+            return;
+        }
+
+
         if (ignorePlayer && (other.GetComponentInChildren<PlayerMovement>() != null || other.GetComponentInParent<PlayerMovement>() != null))
         {
             return;
