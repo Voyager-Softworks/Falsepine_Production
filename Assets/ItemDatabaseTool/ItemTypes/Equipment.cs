@@ -41,10 +41,10 @@ public class Equipment : Item
         base.ManualUpdate(_owner);
     }
 
-    public void TossPrefab(Transform _throwTransform, Vector3 _velocity, GameObject _owner)
+    public void TossPrefab(Transform _throwTransform, Vector3 _direction, GameObject _owner)
     {
         GameObject newEquipment = Instantiate(m_equipmentPrefab, _throwTransform.position, Quaternion.identity);
-        newEquipment.GetComponent<ItemThrow>()?.TossPrefab(_throwTransform, _velocity, _owner);
+        newEquipment.GetComponent<ItemThrow>()?.TossPrefab(_throwTransform, _direction, _owner);
     }
 
     

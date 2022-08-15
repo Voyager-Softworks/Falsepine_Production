@@ -1,0 +1,63 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Dynamite : MonoBehaviour
+{
+
+    public float m_fuseTime = 3.0f;
+    private float m_fuseTimer = 0.0f;
+
+    public float m_damage = 50.0f;
+    public float m_explosionRadius = 5.0f;
+
+    public GameObject explosionPrefab;
+
+    
+
+    // Start is called before the first frame update
+    void Awake()
+    {
+        // set fuse timer
+        m_fuseTimer = m_fuseTime;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        // while the timer is greater than 0, lerp to transform position
+        if (m_fuseTimer > 0.0f)
+        {
+            m_fuseTimer -= Time.deltaTime;
+        }
+        else
+        {
+            // explode
+            Explode();
+        }
+    }
+
+    private void Explode()
+    {
+        // do damage check
+        Collider[] colliders = Physics.OverlapSphere(transform.position, m_explosionRadius);
+        List<Health_Base> hitObjects = new List<Health_Base>();
+        foreach (Collider collider in colliders)
+        {
+            // get health from parent and children
+            Health_Base health = collider.transform.GetComponentInParent<Health_Base>();
+            if (health == null) health = collider.transform.GetComponentInChildren<Health_Base>();
+            if (health != null && !hitObjects.Contains(health))
+            {
+                hitObjects.Add(health);
+                health.TakeDamage(new Health_Base.DamageStat(m_damage, gameObject, transform.position, collider.transform.position));
+            }
+        }
+        
+        // instantiate explosion
+        GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+        Destroy(explosion, 2.0f);
+        Destroy(gameObject);
+    }
+}

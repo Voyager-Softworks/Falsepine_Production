@@ -6,12 +6,16 @@ public class ItemThrow : MonoBehaviour
 {   
     public float m_throwDelay = 0.5f;
     private float m_throwTimer = 0.0f;
+    public float m_throwForce = 10.0f;
     private Vector3 m_throwVelocity = Vector3.zero;
     private Transform m_throwTransform;
+    public Quaternion m_throwRotation;
     private bool m_isThrown = false;
 
     public float m_startScale = 0.0f;
     private Vector3 m_realScale = Vector3.zero;
+
+    GameObject m_owner;
 
     // Start is called before the first frame update
     void Awake()
@@ -22,19 +26,20 @@ public class ItemThrow : MonoBehaviour
 
         // set scale
         m_realScale = transform.localScale;
-        transform.localScale = Vector3.one * m_startScale;
+        transform.localScale = m_realScale * m_startScale;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.localScale = Vector3.Lerp(transform.localScale, m_realScale, Time.deltaTime * 2.0f);
+        transform.localScale = Vector3.Lerp(transform.localScale, m_realScale, Time.deltaTime * 1.0f);
 
         // while the timer is greater than 0, lerp to transform position
         if (m_throwTimer > 0.0f)
         {
             m_throwTimer -= Time.deltaTime;
-            transform.position = Vector3.Lerp(transform.position, m_throwTransform.position, Time.deltaTime * 10.0f);
+            transform.position = Vector3.Lerp(transform.position, m_throwTransform.position, Time.deltaTime * 20.0f);
+            transform.rotation = Quaternion.Lerp(transform.rotation, m_throwTransform.rotation * m_throwRotation, Time.deltaTime * 20.0f);
 
             // lerp scale
             //transform.localScale = Vector3.Lerp(transform.localScale, m_realScale, 1 - (m_throwTimer / m_throwDelay));
@@ -50,14 +55,18 @@ public class ItemThrow : MonoBehaviour
             //transform.localScale = m_realScale;
 
             // throw the item
+            m_throwVelocity = m_owner.transform.forward.normalized * m_throwForce;
             GetComponent<Rigidbody>().velocity = m_throwVelocity;
+            //random rotation
+            GetComponent<Rigidbody>().angularVelocity = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)) * 20.0f;
         }
     }
 
-    public void TossPrefab(Transform _throwTransform, Vector3 _velocity, GameObject _owner)
+    public void TossPrefab(Transform _throwTransform, Vector3 _direction, GameObject _owner)
     {
         m_throwTimer = m_throwDelay;
         m_throwTransform = _throwTransform;
-        m_throwVelocity = _velocity;
+        m_throwVelocity = _direction.normalized * m_throwForce;
+        m_owner = _owner;
     }
 }
