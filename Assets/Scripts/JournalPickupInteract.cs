@@ -8,6 +8,8 @@ using UnityEditor;
 
 /// <summary>
 /// An interactable object that contributes lore ore clues to the journal.
+/// @todo make an option to get current zone's boss automatically as the monster type
+/// - Possibly even allow selecting a specific zone? (and get it automatically?)
 /// </summary>
 public class JournalPickupInteract : Interactable   /// @todo Comment
 {
