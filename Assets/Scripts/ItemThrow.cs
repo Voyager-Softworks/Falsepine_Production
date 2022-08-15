@@ -11,6 +11,7 @@ public class ItemThrow : MonoBehaviour
     private Vector3 m_throwVelocity = Vector3.zero;
     private Transform m_throwTransform;
     public Quaternion m_throwRotation;
+    public bool m_forceUpright = false;
     private bool m_isThrown = false;
 
     public float m_startScale = 0.0f;
@@ -33,7 +34,6 @@ public class ItemThrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.localScale = Vector3.Lerp(transform.localScale, m_realScale, Time.deltaTime * 1.0f);
 
         // while the timer is greater than 0, lerp to transform position
         if (m_throwTimer > 0.0f)
@@ -43,7 +43,7 @@ public class ItemThrow : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, m_throwTransform.rotation * m_throwRotation, Time.deltaTime * 20.0f);
 
             // lerp scale
-            //transform.localScale = Vector3.Lerp(transform.localScale, m_realScale, 1 - (m_throwTimer / m_throwDelay));
+            transform.localScale = Vector3.Lerp(transform.localScale, m_realScale, Time.deltaTime * 1.0f);
         }
         else if (!m_isThrown) {
             m_isThrown = true;
@@ -60,6 +60,15 @@ public class ItemThrow : MonoBehaviour
             GetComponent<Rigidbody>().velocity = m_throwVelocity;
             //random rotation
             if (m_randomTorque) GetComponent<Rigidbody>().angularVelocity = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)) * 20.0f;
+        }
+
+        if (m_isThrown) {
+            // lerp quickly to real scale
+            transform.localScale = Vector3.Lerp(transform.localScale, m_realScale, Time.deltaTime * 10.0f);
+
+            if (m_forceUpright){
+                transform.rotation = Quaternion.identity;
+            }
         }
     }
 

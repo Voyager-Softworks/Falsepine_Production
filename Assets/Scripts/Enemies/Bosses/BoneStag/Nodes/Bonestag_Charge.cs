@@ -150,7 +150,7 @@ namespace Boss.Bonestag
                         //disable interaction
                         Interactable interactable = trapRoot.GetComponent<Interactable>();
                         if (interactable){
-                            interactable._text.enabled = false;
+                            //interactable._text.enabled = false;
                             interactable.enabled = false;
                         }
                         //disable all colliders

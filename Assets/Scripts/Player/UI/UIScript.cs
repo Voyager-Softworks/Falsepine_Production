@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using System;
 
 /// <summary>
 /// Manages the player UI.
@@ -23,6 +24,17 @@ public class UIScript : MonoBehaviour
     public GameObject equipmentIcon;
 
     [HideInInspector] public float healthBarMaxWidth;
+
+    private float m_persistTime = 0.25f;
+    private float m_persistTimer = 0.0f;
+    public float m_defaultPersistTime = 0.25f;
+
+    private float m_fadeInSpeed = 10.0f;
+    public float m_defaultFadeInSpeed = 10.0f;
+
+    private float m_fadeOutSpeed = 10.0f;
+    public float m_defaultFadeOutSpeed = 10.0f;
+
 
     [Header("Boss UI")]
     public GameObject bossUI;
@@ -50,18 +62,27 @@ public class UIScript : MonoBehaviour
         ClosePauseMenu();
     }
 
-    private void Update() {
+    private void Update()
+    {
         // if escape is pressed, toggle pause
-        if (Keyboard.current.escapeKey.wasPressedThisFrame) {
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
             TogglePauseMenu();
         }
 
-        if (InventoryManager.instance){
+        UpdateHud();
+    }
+
+    private void UpdateHud()
+    {
+        if (InventoryManager.instance)
+        {
             PlayerInventoryInterface pii = FindObjectOfType<PlayerInventoryInterface>();
             Item currentWeapon = pii.selectedWeapon;
 
             // update ammo text
-            if (currentWeapon != null && (RangedWeapon)currentWeapon && ammoText != null) {
+            if (currentWeapon != null && (RangedWeapon)currentWeapon && ammoText != null)
+            {
                 string spareAmmoText = "";
                 if (((RangedWeapon)currentWeapon).m_unlimitedAmmo) spareAmmoText = "∞";
                 else spareAmmoText = ((RangedWeapon)currentWeapon).m_spareAmmo.ToString();
@@ -70,55 +91,74 @@ public class UIScript : MonoBehaviour
 
             // get player inventory
             Inventory inventory = InventoryManager.instance.GetInventory("player");
-            if (inventory != null) {
+            if (inventory != null)
+            {
                 //set icon
                 RangedWeapon primaryWeapon = inventory.slots[0].item as RangedWeapon;
-                if (primaryWeapon != null) {
+                if (primaryWeapon != null)
+                {
                     primaryWeaponIcon.SetActive(true);
                     primaryWeaponIcon.GetComponent<Image>().sprite = primaryWeapon.m_icon;
 
                     // set col of icon
-                    if (currentWeapon && primaryWeapon.id == currentWeapon.id){
+                    if (currentWeapon && primaryWeapon.id == currentWeapon.id)
+                    {
                         primaryWeaponIcon.GetComponent<Image>().color = Color.white;
-                    } else {
+                    }
+                    else
+                    {
                         primaryWeaponIcon.GetComponent<Image>().color = Color.gray;
                     }
 
-                } else {
+                }
+                else
+                {
                     primaryWeaponIcon.SetActive(false);
                 }
 
                 //set icon
                 RangedWeapon secondaryWeapon = inventory.slots[1].item as RangedWeapon;
-                if (secondaryWeapon != null) {
+                if (secondaryWeapon != null)
+                {
                     secondaryWeaponIcon.SetActive(true);
                     secondaryWeaponIcon.GetComponent<Image>().sprite = secondaryWeapon.m_icon;
 
                     //set col of icon
-                    if (currentWeapon && secondaryWeapon.id == currentWeapon.id){
+                    if (currentWeapon && secondaryWeapon.id == currentWeapon.id)
+                    {
                         secondaryWeaponIcon.GetComponent<Image>().color = Color.white;
-                    } else {
+                    }
+                    else
+                    {
                         secondaryWeaponIcon.GetComponent<Image>().color = Color.gray;
                     }
 
-                } else {
+                }
+                else
+                {
                     secondaryWeaponIcon.SetActive(false);
                 }
 
-                
+
 
                 Equipment equipment = inventory.slots[2].item as Equipment;
-                if (equipment != null) {
+                if (equipment != null)
+                {
                     equipmentIcon.SetActive(true);
                     equipmentIcon.GetComponent<Image>().sprite = equipment.m_icon;
 
                     //if equipment count > 0 make white
-                    if (equipment.currentStackSize > 0 && pii.selectedEquipment == equipment){
+                    if (equipment.currentStackSize > 0 && pii.selectedEquipment == equipment)
+                    {
                         equipmentIcon.GetComponent<Image>().color = Color.white;
-                    } else {
+                    }
+                    else
+                    {
                         equipmentIcon.GetComponent<Image>().color = Color.gray;
                     }
-                } else {
+                }
+                else
+                {
                     equipmentIcon.SetActive(false);
                 }
 

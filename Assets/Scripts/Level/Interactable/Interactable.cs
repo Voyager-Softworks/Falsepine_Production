@@ -22,11 +22,7 @@ public class Interactable : MonoBehaviour  /// @todo Comment
 
     public Transform _transToCheck = null;
     public float interactDistance = 1f;
-    public float fadeDistance = 2f;
     public InteractEffect onInteractEffect = InteractEffect.NONE;
-
-    [Header("UI")]
-    public TextMeshProUGUI _text;
 
     [Header("Events")]
     public UnityEvent OnInteract;
@@ -45,9 +41,6 @@ public class Interactable : MonoBehaviour  /// @todo Comment
     {
 
         if (_transToCheck == null && FindObjectOfType<PlayerMovement>()) _transToCheck = FindObjectOfType<PlayerMovement>().transform;
-
-        if (_text == null) _text = GetComponentInChildren<TextMeshProUGUI>();
-        if (_text != null) _text.text = /* "[" + interactAction.ToString() + "] " + */ interactText;
     }
 
     // Update is called once per frame
@@ -87,26 +80,26 @@ public class Interactable : MonoBehaviour  /// @todo Comment
 
     virtual public void DisableInteract()
     {
-        if (_text) _text.enabled = false;
         this.enabled = false;
+
+        // get UI script
+        BottomText bt = FindObjectOfType<BottomText>();
+        if (bt == null) return;
+
+        // remove request
+        bt.RemoveRequest(new BottomText.TextRequest(interactText, gameObject, interactDistance));
     }
 
     virtual public void UpdateUI()
     {
-        if (_text)
+        if (Vector3.Distance(transform.position, _transToCheck.position) <= interactDistance)
         {
-            //make text look at camera
-            _text.transform.LookAt(Camera.main.transform);
+            // get UI script
+            BottomText bt = FindObjectOfType<BottomText>();
+            if (bt == null) return;
 
-            //set opacity
-            _text.color = new Color(1f, 1f, 1f, 0f);
-            if (Vector3.Distance(transform.position, _transToCheck.position) <= interactDistance) {
-                //make text full opacity and gold
-                _text.color = new Color(1f, 0.85f, 0f, 1f);
-            }
-            else if (Vector3.Distance(transform.position, _transToCheck.position) <= fadeDistance) {
-                _text.color = new Color(1f, 1f, 1f, (1f - (Vector3.Distance(transform.position, _transToCheck.position) - interactDistance) / (fadeDistance - interactDistance)) * 0.1f);
-            }
+            // send request
+            bt.RequestBottomText(new BottomText.TextRequest(interactText, gameObject, interactDistance));
         }
     }
 }
