@@ -752,6 +752,36 @@ MonoBehaviour:
   m_leftLine: {fileID: 1761884913}
   m_midLine: {fileID: 326548375}
   m_rightLine: {fileID: 931676416}
+--- !u!1 &861255042
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 861255043}
+  m_Layer: 3
+  m_Name: DynamiteThrow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &861255043
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861255042}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.0334, y: 0.1038, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4759883443018922625}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &931676414
 GameObject:
   m_ObjectHideFlags: 0
@@ -4059,6 +4089,10 @@ MonoBehaviour:
     model: {fileID: 0}
     weaponFirepoint: {fileID: 712825273}
     animatorBoolName: PlaceBeartrap
+  - weapon: {fileID: 11400000, guid: 3541ada567cf1e14db489713c7fc2c37, type: 2}
+    model: {fileID: 0}
+    weaponFirepoint: {fileID: 861255043}
+    animatorBoolName: ThrowDynamite
   m_aimZone: {fileID: 541290802}
   playerAnimator: {fileID: 8319605992207801018}
 --- !u!114 &1244257067
@@ -10118,6 +10152,7 @@ Transform:
   - {fileID: 7893691567871156545}
   - {fileID: 5686226026860174169}
   - {fileID: 712825273}
+  - {fileID: 861255043}
   m_Father: {fileID: 2575071169318914127}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: -19.158936, y: 131.38945, z: 13.511295}

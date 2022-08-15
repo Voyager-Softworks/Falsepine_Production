@@ -193,26 +193,27 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("Running", sprintAction.ReadValue<float>() > 0.1f);
 
             controller.Move(moveDir * Time.deltaTime);
-            if (isAiming){
+            if (isAiming)
+            {
                 //apply movement
                 //transform.position += (moveDir * speed * Time.deltaTime);
                 _animator.SetLayerWeight(1, Mathf.Lerp(_animator.GetLayerWeight(1), 1, Time.deltaTime * 10f));
                 _animator.SetLayerWeight(2, Mathf.Lerp(_animator.GetLayerWeight(2), 1, Time.deltaTime * 10f));
-                
 
-                
+
+
 
                 //calc signed magnitude of movement for right and forward
                 float rightMag = Vector3.Dot(transform.right, animVelocity.normalized);
                 float forwardMag = Vector3.Dot(transform.forward, animVelocity.normalized);
 
-                
+
 
                 _animator.SetFloat("MoveSide", rightMag);
                 _animator.SetFloat("MoveForward", forwardMag);
                 //calc the direction to look
                 Vector3 lookDir;
-                if(Gamepad.current != null)
+                if (Gamepad.current != null)
                 {
                     lookDir = GetGamepadAimPoint() - transform.position;
                 }
@@ -220,16 +221,17 @@ public class PlayerMovement : MonoBehaviour
                 {
                     lookDir = GetMouseAimPlanePoint() - transform.position;
                 }
-                
+
 
                 //remove vertical
                 lookDir.y = 0;
                 lookDir.Normalize();
                 //apply rotation
                 //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDir), Time.deltaTime * 20f);
-                transform.rotation = Quaternion.LookRotation(lookDir);
+                SetLookDirection(lookDir);
             }
-            else{
+            else
+            {
                 _animator.SetFloat("MoveSide", 0);
                 _animator.SetFloat("MoveForward", 0);
                 _animator.SetLayerWeight(1, Mathf.Lerp(_animator.GetLayerWeight(1), 0, Time.deltaTime * 10f));
@@ -244,6 +246,11 @@ public class PlayerMovement : MonoBehaviour
 
             lastMoveDir = moveDir;
         }
+    }
+
+    public void SetLookDirection(Vector3 lookDir)
+    {
+        transform.rotation = Quaternion.LookRotation(lookDir);
     }
 
     public void StartVault()

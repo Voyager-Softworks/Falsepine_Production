@@ -163,7 +163,7 @@ public class PlayerInventoryInterface : MonoBehaviour
             UpdateAimZone();
         }
 
-        if (useEquipmentAction.triggered && selectedEquipment == null)
+        if (useEquipmentAction.triggered)
         {
             SelectEquipment();
         }
@@ -179,10 +179,14 @@ public class PlayerInventoryInterface : MonoBehaviour
 
                     Transform throwPoint = GetWeaponFirepoint(selectedEquipment);
 
-                    equipment.TossPrefab(throwPoint, spawnDirection * 2.5f, gameObject);
+                    equipment.TossPrefab(throwPoint, spawnDirection, gameObject);
 
                     string animatorName = GetWeaponAnimatorBoolName(selectedEquipment);
                     playerAnimator.SetTrigger(animatorName);
+
+                    // make player look at cursor
+                    PlayerMovement playerMovement = GetComponent<PlayerMovement>();
+                    playerMovement.SetLookDirection(playerMovement.GetMouseAimPlanePoint() - transform.position);
                 }
             }
         }

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// A simple touch trigger that can be used to trigger events.
+/// </summary>
 public class TouchTrigger : MonoBehaviour  /// @todo Comment
 {
     public string triggerName;
@@ -26,10 +29,10 @@ public class TouchTrigger : MonoBehaviour  /// @todo Comment
     void OnTriggerEnter(Collider other)
     {
         // if hot collider does not have health script in parent or child, return
-        if (ignoreNonHealth && other.gameObject.GetComponentInParent<Health_Base>() == null && other.gameObject.GetComponentInChildren<Health_Base>() == null)
-        {
-            return;
-        }
+        // if (ignoreNonHealth && other.gameObject.GetComponentInParent<Health_Base>() == null && other.gameObject.GetComponentInChildren<Health_Base>() == null)
+        // {
+        //     return;
+        // }
 
 
         if (ignorePlayer && (other.GetComponentInChildren<PlayerMovement>() != null || other.GetComponentInParent<PlayerMovement>() != null))
