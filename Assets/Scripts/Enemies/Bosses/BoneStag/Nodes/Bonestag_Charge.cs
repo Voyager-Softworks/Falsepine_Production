@@ -20,8 +20,8 @@ namespace Boss.Bonestag
         Transform targetTransform; ///< The transform of the target.
         BossArenaController arenaController; ///< The arena controller of the character.
         Vector3 arenaEdgeGoalPosition; ///< The position of the arena edge goal.
-        public float chargeSpeed = 50f; ///< The speed of the character when charging.
-        public float chargeDamage = 10f; ///< The damage of the character when charging.
+        public float chargeSpeed = 40f; ///< The speed of the character when charging.
+        public float chargeDamage = 15f; ///< The damage of the character when charging.
         public GameObject debrisPrefab; ///< The prefab of the debris to spawn.
         bool hasDamagedPlayer = false; ///< Whether or not the character has damaged the player.
 
@@ -95,7 +95,7 @@ namespace Boss.Bonestag
                 }
                 else {
                     agent.GetComponent<AudioSource>().PlayOneShot(chargeSoundPhaseOne);
-                    navAgent.speed = 50;
+                    navAgent.speed = 40;
                 }
 
                 navAgent.velocity =  (arenaEdgeGoalPosition - agent.transform.position).normalized * navAgent.speed;
