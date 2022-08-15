@@ -5,18 +5,23 @@ using TMPro;
 using UnityEngine.UI;
 using System;
 
-public class BottomText : MonoBehaviour
+/// <summary>
+/// This class manages the interaction between the player and the interactable objects.
+/// </summary>
+public class InteractManager : MonoBehaviour
 {
+    static InteractManager instance = null;
+
     [Serializable]
     public class TextRequest{
         public string m_text;
-        public GameObject m_requester;
+        public Interactable m_requester;
         public float m_interactDistance = 1f;
         public float? m_persistTime = null;
         public float? m_fadeInSpeed = null;
         public float? m_fadeOutSpeed = null;
 
-        public TextRequest(string _text, GameObject _requester, float _interactDistance, float? _persistTime = null, float? _fadeInSpeed = null, float? _fadeOutSpeed = null){
+        public TextRequest(string _text, Interactable _requester, float _interactDistance, float? _persistTime = null, float? _fadeInSpeed = null, float? _fadeOutSpeed = null){
             this.m_text = _text;
             this.m_requester = _requester;
             this.m_interactDistance = _interactDistance;
@@ -33,6 +38,7 @@ public class BottomText : MonoBehaviour
         }
     }
 
+    [Header("On Screen Text")]
     private float m_persistTime = 0.25f;
     private float m_persistTimer = 0.0f;
     public float m_defaultPersistTime = 0.25f;
@@ -47,13 +53,31 @@ public class BottomText : MonoBehaviour
 
     private List<TextRequest> m_textRequests = new List<TextRequest>();
 
+
+    private bool m_interactedThisFrame = false;
+
+
     [Header("Refs")]
     Transform m_playerTransform = null;
+
+    void Awake() {
+        if (instance == null) {
+            instance = this;
+            //do not destroy this object
+            DontDestroyOnLoad(this);
+        } else {
+            Destroy(this);
+            Destroy(gameObject);
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        m_text = GetComponent<TextMeshProUGUI>();
+        UIScript ui = FindObjectOfType<UIScript>();
+        if (ui != null) {
+            m_text = ui.interactText;
+        }
 
         m_playerTransform = GameObject.FindObjectOfType<PlayerMovement>()?.transform;
     }
@@ -61,8 +85,6 @@ public class BottomText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (m_text == null) return;
-
         // remove any text requests that are too far away or invalid
         for (int i = 0; i < m_textRequests.Count; i++){
             if (m_textRequests[i].m_requester == null || Vector3.Distance(m_playerTransform.position, m_textRequests[i].m_requester.transform.position) > m_textRequests[i].m_interactDistance){
@@ -77,6 +99,17 @@ public class BottomText : MonoBehaviour
             float yDist = Vector3.Distance(m_playerTransform.position, y.m_requester.transform.position);
             return xDist.CompareTo(yDist);
         });
+
+
+        // check if any actions are pressed
+        m_interactedThisFrame = false;
+        for (int i = 0; i < m_textRequests.Count; i++){
+            if (m_interactedThisFrame) break;
+            
+            Interactable requester = m_textRequests[i].m_requester;
+            if (requester == null) continue;
+            m_interactedThisFrame = requester.CheckActionPressed();
+        }
 
         // set text
         if (m_textRequests.Count > 0)

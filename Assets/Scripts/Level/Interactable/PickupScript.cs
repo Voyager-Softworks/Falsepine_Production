@@ -12,14 +12,19 @@ public class PickupScript : Interactable  /// @todo Comment
     override public void Start()
     {
         base.Start();
-
-        OnInteract.AddListener(() => AddToInventory(itemToAdd, amountToAdd));
     }
 
     // Update is called once per frame
     override public void Update()
     {
         base.Update();
+    }
+
+    override public void DoInteract()
+    {
+        base.DoInteract();
+
+        AddToInventory(itemToAdd, amountToAdd);
     }
 
     public void AddToInventory(string _itemName, int _amount)

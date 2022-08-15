@@ -9,6 +9,8 @@ using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour  /// @todo Comment
 {
+    static bool m_interactedThisFrame = false;
+
     public enum InteractEffect {
         NONE,
         DISABLE_INTERACT,
@@ -23,9 +25,6 @@ public class Interactable : MonoBehaviour  /// @todo Comment
     public Transform _transToCheck = null;
     public float interactDistance = 1f;
     public InteractEffect onInteractEffect = InteractEffect.NONE;
-
-    [Header("Events")]
-    public UnityEvent OnInteract;
 
     private void OnEnable() {
         
@@ -49,17 +48,27 @@ public class Interactable : MonoBehaviour  /// @todo Comment
         if (_transToCheck == null) return;
 
         UpdateUI();
+    }
 
-        if (Vector3.Distance(transform.position, _transToCheck.position) <= interactDistance)
+    public bool CheckActionPressed()
+    {
+        if (interactAction.triggered)
         {
-            if (interactAction.triggered)
+            if (Vector3.Distance(transform.position, _transToCheck.position) <= interactDistance)
             {
-                DoInteract();   
+                DoInteract();
+                return true;
             }
         }
+        return false;
+    }
+
+    private void LateUpdate() {
+        m_interactedThisFrame = false;
     }
 
     virtual public void DoInteract(){
+
         switch (onInteractEffect)
         {
             case InteractEffect.NONE:
@@ -74,8 +83,6 @@ public class Interactable : MonoBehaviour  /// @todo Comment
                 Destroy(gameObject);
                 break;
         }
-
-        OnInteract.Invoke();
     }
 
     virtual public void DisableInteract()
@@ -83,11 +90,11 @@ public class Interactable : MonoBehaviour  /// @todo Comment
         this.enabled = false;
 
         // get UI script
-        BottomText bt = FindObjectOfType<BottomText>();
+        InteractManager bt = FindObjectOfType<InteractManager>();
         if (bt == null) return;
 
         // remove request
-        bt.RemoveRequest(new BottomText.TextRequest(interactText, gameObject, interactDistance));
+        bt.RemoveRequest(new InteractManager.TextRequest(interactText, this, interactDistance));
     }
 
     virtual public void UpdateUI()
@@ -95,11 +102,11 @@ public class Interactable : MonoBehaviour  /// @todo Comment
         if (Vector3.Distance(transform.position, _transToCheck.position) <= interactDistance)
         {
             // get UI script
-            BottomText bt = FindObjectOfType<BottomText>();
+            InteractManager bt = FindObjectOfType<InteractManager>();
             if (bt == null) return;
 
             // send request
-            bt.RequestBottomText(new BottomText.TextRequest(interactText, gameObject, interactDistance));
+            bt.RequestBottomText(new InteractManager.TextRequest(interactText, this, interactDistance));
         }
     }
 }

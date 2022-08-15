@@ -25,15 +25,8 @@ public class UIScript : MonoBehaviour
 
     [HideInInspector] public float healthBarMaxWidth;
 
-    private float m_persistTime = 0.25f;
-    private float m_persistTimer = 0.0f;
-    public float m_defaultPersistTime = 0.25f;
-
-    private float m_fadeInSpeed = 10.0f;
-    public float m_defaultFadeInSpeed = 10.0f;
-
-    private float m_fadeOutSpeed = 10.0f;
-    public float m_defaultFadeOutSpeed = 10.0f;
+    [Header("Interact Text")]
+    public TextMeshProUGUI interactText;
 
 
     [Header("Boss UI")]

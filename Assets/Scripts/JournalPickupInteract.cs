@@ -25,10 +25,10 @@ public class JournalPickupInteract : Interactable   /// @todo Comment
 
     override public void DoInteract()
     {
+        base.DoInteract();
+        
         if (JournalManager.instance){
             JournalManager.instance.AddInfo(pickupType, monsterName, infoName);
         }
-
-        base.DoInteract();
     }
 }
