@@ -2923,6 +2923,7 @@ MonoBehaviour:
     - 1830f15e-6bd5-4ceb-ac9c-0da7f0888a68
     - 28ef16bb-a476-4736-9a29-db712977fbc7
     - 2c9f3ba8-bc12-4362-84de-e2a6cad72ca3
+    - 51c63945-0589-4590-8381-e6654dcb344d
     nodeType: 4
     position: {x: 1230, y: 1037}
     runtime: {fileID: 0}
@@ -3091,66 +3092,6 @@ MonoBehaviour:
       output: 0
     runtimeLogicType: NodeAI.Animation.SetAnimatorTrigger, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 28ef16bb-a476-4736-9a29-db712977fbc7
-    parentGUID: 5c268056-4269-49f3-a57e-7d9a6b3d36ae
-    title: Parallel
-    childGUIDs:
-    - bcbb50ec-8991-471f-b84e-c075946a9851
-    - 09db0be2-66c3-438f-a84f-12f29182445e
-    nodeType: 6
-    position: {x: 1391, y: 1258}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Parallel, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 2c9f3ba8-bc12-4362-84de-e2a6cad72ca3
-    parentGUID: 5c268056-4269-49f3-a57e-7d9a6b3d36ae
-    title: SetBoolParameter
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 1386, y: 1358}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: PARAMETERNAME
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: InBearTrap
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: VALUE
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: SetBoolParameter, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
     queryType: 
     noLogic: 0
     noQuery: 1
@@ -3642,8 +3583,8 @@ MonoBehaviour:
     parentGUID: cb059f8d-1623-4dd8-9fbd-236026cbd865
     title: Sequence
     childGUIDs:
-    - b7c46139-b6d1-451b-9fe1-832aaefb1a9a
     - 04e23b7c-aa5c-49cd-986a-e027b91def00
+    - b7c46139-b6d1-451b-9fe1-832aaefb1a9a
     nodeType: 4
     position: {x: 2235, y: 1694}
     runtime: {fileID: 0}
@@ -3673,6 +3614,95 @@ MonoBehaviour:
     childGUIDs: []
     nodeType: 1
     position: {x: 2442, y: 1644}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: NAME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: BeginWalking
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Animation.SetAnimatorTrigger, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 2c9f3ba8-bc12-4362-84de-e2a6cad72ca3
+    parentGUID: 5c268056-4269-49f3-a57e-7d9a6b3d36ae
+    title: SetBoolParameter
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 1391, y: 1434}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: PARAMETERNAME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: InBearTrap
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: VALUE
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: SetBoolParameter, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 28ef16bb-a476-4736-9a29-db712977fbc7
+    parentGUID: 5c268056-4269-49f3-a57e-7d9a6b3d36ae
+    title: Parallel
+    childGUIDs:
+    - bcbb50ec-8991-471f-b84e-c075946a9851
+    - 09db0be2-66c3-438f-a84f-12f29182445e
+    nodeType: 6
+    position: {x: 1391, y: 1346}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Parallel, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 51c63945-0589-4590-8381-e6654dcb344d
+    parentGUID: 5c268056-4269-49f3-a57e-7d9a6b3d36ae
+    title: SetAnimatorTrigger
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 1397, y: 1238}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -3877,6 +3907,7 @@ MonoBehaviour:
     - 00a8a469-5b8a-43b9-9ca5-36ab4f52511f
     - 240306e4-ee42-41d5-88a3-45fd89c5211a
     - 343ae28b-bc78-4dd7-8b96-844338c3489a
+    - 51c63945-0589-4590-8381-e6654dcb344d
   - title: Group
     childGUIDs:
     - ca0bee4a-e5b6-4004-98e9-dfed7507ba0f
