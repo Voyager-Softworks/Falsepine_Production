@@ -7,6 +7,7 @@ public class ItemThrow : MonoBehaviour
     public float m_throwDelay = 0.5f;
     private float m_throwTimer = 0.0f;
     public float m_throwForce = 10.0f;
+    public bool m_randomTorque = true;
     private Vector3 m_throwVelocity = Vector3.zero;
     private Transform m_throwTransform;
     public Quaternion m_throwRotation;
@@ -38,7 +39,7 @@ public class ItemThrow : MonoBehaviour
         if (m_throwTimer > 0.0f)
         {
             m_throwTimer -= Time.deltaTime;
-            transform.position = Vector3.Lerp(transform.position, m_throwTransform.position, Time.deltaTime * 20.0f);
+            transform.position = m_throwTransform.position; //Vector3.Lerp(transform.position, m_throwTransform.position, Time.deltaTime * 20.0f);
             transform.rotation = Quaternion.Lerp(transform.rotation, m_throwTransform.rotation * m_throwRotation, Time.deltaTime * 20.0f);
 
             // lerp scale
@@ -58,7 +59,7 @@ public class ItemThrow : MonoBehaviour
             m_throwVelocity = m_owner.transform.forward.normalized * m_throwForce;
             GetComponent<Rigidbody>().velocity = m_throwVelocity;
             //random rotation
-            GetComponent<Rigidbody>().angularVelocity = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)) * 20.0f;
+            if (m_randomTorque) GetComponent<Rigidbody>().angularVelocity = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)) * 20.0f;
         }
     }
 
