@@ -61,6 +61,8 @@ public class EnemyHealth : Health_Base
 
     public override void TakeDamage(Health_Base.DamageStat _damage)
     {
+        if (m_hasDied) return;
+
         base.TakeDamage(_damage);
         GetComponent<NodeAI.NodeAI_Agent>().SetParameter("Health", m_currentHealth);
         GetComponentInChildren<Animator>()?.SetTrigger("Hit");

@@ -21,6 +21,7 @@ public class ObjectiveInteract : Interactable  /// @todo Comment
 
     override public void DoInteract()
     {
+        base.DoInteract();
 
         if (_mission != null)
         {

@@ -9,6 +9,8 @@ using UnityEngine.Events;
 
 public class Interactable : MonoBehaviour  /// @todo Comment
 {
+    static bool m_interactedThisFrame = false;
+
     public enum InteractEffect {
         NONE,
         DISABLE_INTERACT,
@@ -22,14 +24,7 @@ public class Interactable : MonoBehaviour  /// @todo Comment
 
     public Transform _transToCheck = null;
     public float interactDistance = 1f;
-    public float fadeDistance = 2f;
     public InteractEffect onInteractEffect = InteractEffect.NONE;
-
-    [Header("UI")]
-    public TextMeshProUGUI _text;
-
-    [Header("Events")]
-    public UnityEvent OnInteract;
 
     private void OnEnable() {
         
@@ -45,9 +40,6 @@ public class Interactable : MonoBehaviour  /// @todo Comment
     {
 
         if (_transToCheck == null && FindObjectOfType<PlayerMovement>()) _transToCheck = FindObjectOfType<PlayerMovement>().transform;
-
-        if (_text == null) _text = GetComponentInChildren<TextMeshProUGUI>();
-        if (_text != null) _text.text = /* "[" + interactAction.ToString() + "] " + */ interactText;
     }
 
     // Update is called once per frame
@@ -56,17 +48,27 @@ public class Interactable : MonoBehaviour  /// @todo Comment
         if (_transToCheck == null) return;
 
         UpdateUI();
+    }
 
-        if (Vector3.Distance(transform.position, _transToCheck.position) <= interactDistance)
+    public bool CheckActionPressed()
+    {
+        if (interactAction.triggered)
         {
-            if (interactAction.triggered)
+            if (Vector3.Distance(transform.position, _transToCheck.position) <= interactDistance)
             {
-                DoInteract();   
+                DoInteract();
+                return true;
             }
         }
+        return false;
+    }
+
+    private void LateUpdate() {
+        m_interactedThisFrame = false;
     }
 
     virtual public void DoInteract(){
+
         switch (onInteractEffect)
         {
             case InteractEffect.NONE:
@@ -81,32 +83,30 @@ public class Interactable : MonoBehaviour  /// @todo Comment
                 Destroy(gameObject);
                 break;
         }
-
-        OnInteract.Invoke();
     }
 
     virtual public void DisableInteract()
     {
-        if (_text) _text.enabled = false;
         this.enabled = false;
+
+        // get UI script
+        InteractManager bt = FindObjectOfType<InteractManager>();
+        if (bt == null) return;
+
+        // remove request
+        bt.RemoveRequest(new InteractManager.TextRequest(interactText, this, interactDistance));
     }
 
     virtual public void UpdateUI()
     {
-        if (_text)
+        if (Vector3.Distance(transform.position, _transToCheck.position) <= interactDistance)
         {
-            //make text look at camera
-            _text.transform.LookAt(Camera.main.transform);
+            // get UI script
+            InteractManager bt = FindObjectOfType<InteractManager>();
+            if (bt == null) return;
 
-            //set opacity
-            _text.color = new Color(1f, 1f, 1f, 0f);
-            if (Vector3.Distance(transform.position, _transToCheck.position) <= interactDistance) {
-                //make text full opacity and gold
-                _text.color = new Color(1f, 0.85f, 0f, 1f);
-            }
-            else if (Vector3.Distance(transform.position, _transToCheck.position) <= fadeDistance) {
-                _text.color = new Color(1f, 1f, 1f, (1f - (Vector3.Distance(transform.position, _transToCheck.position) - interactDistance) / (fadeDistance - interactDistance)) * 0.1f);
-            }
+            // send request
+            bt.RequestBottomText(new InteractManager.TextRequest(interactText, this, interactDistance));
         }
     }
 }
