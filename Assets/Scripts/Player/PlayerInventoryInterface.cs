@@ -175,12 +175,14 @@ public class PlayerInventoryInterface : MonoBehaviour
                 Equipment equipment = selectedEquipment as Equipment;
                 if (equipment)
                 {
-                    Vector3 spawnDirection = (GetComponent<PlayerMovement>().GetMouseAimPlanePoint() - transform.position).normalized;
-                    Vector3 spawnPostion = transform.position + spawnDirection * 1.5f;
+                    Vector3 spawnDirection = (transform.forward).normalized;
 
-                    equipment.TossPrefab(spawnPostion, spawnDirection * 0.5f, gameObject);
+                    Transform throwPoint = GetWeaponFirepoint(selectedEquipment);
 
-                    playerAnimator.SetTrigger("PlaceBeartrap");
+                    equipment.TossPrefab(throwPoint, spawnDirection * 2.5f, gameObject);
+
+                    string animatorName = GetWeaponAnimatorBoolName(selectedEquipment);
+                    playerAnimator.SetTrigger(animatorName);
                 }
             }
         }
