@@ -12,20 +12,20 @@ public class JounralEntry : ScriptableObject
     [Serializable]
     public enum EntryType
     {
-        Entry,
+        Lore,
         Clue
     }
 
     [Serializable]
-    public enum BossType
+    public enum MonsterType
     {
         Bonestag,
         Brightmaw
     }
 
-    public EntryType entryType = EntryType.Entry;
+    public EntryType m_entryType = EntryType.Lore;
 
-    public BossType bossType = BossType.Bonestag;
+    public MonsterType m_monsterType = MonsterType.Bonestag;
 
     public JournalContent entryContent;
 

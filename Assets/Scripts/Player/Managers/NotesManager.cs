@@ -11,6 +11,9 @@ using UnityEngine.Events;
 using UnityEditor;
 #endif
 
+/// <summary>
+/// deprecated?
+/// </summary>
 public class NotesManager : MonoBehaviour  /// @todo Comment
 {
     //list of clues to find
@@ -71,14 +74,14 @@ public class NotesManager : MonoBehaviour  /// @todo Comment
         // _uiScript.journalUIList.notesText.text = text;
     }
 
-    public void ClueInspected(ClueScript _clue)
-    {
-        if (cluesFound.Contains(_clue.clueType)) return;
+    // public void ClueInspected(ClueScript _clue)
+    // {
+    //     if (cluesFound.Contains(_clue.clueType)) return;
 
-        cluesFound.Add(_clue.clueType);
+    //     cluesFound.Add(_clue.clueType);
 
-        if (_messageManager != null) _messageManager.AddMessage("Clue Found!\n" + clueLongDesc[_clue.clueType]);
+    //     if (_messageManager != null) _messageManager.AddMessage("Clue Found!\n" + clueLongDesc[_clue.clueType]);
 
-        if (_audioSource != null && clueFoundSound != null) _audioSource.PlayOneShot(clueFoundSound);
-    }
+    //     if (_audioSource != null && clueFoundSound != null) _audioSource.PlayOneShot(clueFoundSound);
+    // }
 }

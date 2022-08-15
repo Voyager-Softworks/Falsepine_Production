@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JournalUpdater_Bonestag : JournalContentUpdater
+public class JournalUpdater_Monster : JournalContentUpdater
 {
-    private JounralEntry.BossType bossType = JounralEntry.BossType.Bonestag;
+    public JounralEntry.MonsterType bossType = JounralEntry.MonsterType.Bonestag;
 
     public override void UpdateContent()
     {
@@ -27,7 +27,7 @@ public class JournalUpdater_Bonestag : JournalContentUpdater
         // add new content that has the same boss type
         foreach (JounralEntry entry in discoveredEntries)
         {
-            if (entry.bossType == bossType)
+            if (entry.m_monsterType == bossType)
             {
                 contentList.Add(entry.entryContent);
             }

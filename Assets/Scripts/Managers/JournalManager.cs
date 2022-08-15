@@ -21,12 +21,6 @@ public class JournalManager : MonoBehaviour
         public GameObject contents;
     }
 
-    public enum InfoType
-    {
-        Lore,
-        Clue
-    }
-
     public static JournalManager instance;
 
     [Header("Keys")]
@@ -177,24 +171,40 @@ public class JournalManager : MonoBehaviour
         }
     }
 
-    public void AddInfo(JournalManager.InfoType infoType, string monsterName, string infoName)
+    /// <summary>
+    /// Adds specific entry to the journal, and removes it from the undiscovered list (if it is there)
+    /// </summary>
+    /// <param name="entry"></param>
+    public void DiscoverEntry(JounralEntry entry)
     {
-        // find the monster clues
-        MonsterClues clues = monsterCluesList.Find(x => x.monsterName == monsterName);
+        if (entry == null) return;
 
-        if (clues != null) {
-            // add the info to the monster clues
-            if (infoType == InfoType.Lore) {
-                clues.loreFound++;
-            } else if (infoType == InfoType.Clue) {
-                clues.cluesFound++;
-            }
-
-            // play the add info sound
-            if (addInfoSound && _audioSource) _audioSource.PlayOneShot(addInfoSound);
+        if (undiscoveredEntries.Contains(entry)) {
+            undiscoveredEntries.Remove(entry);
         }
+        
+        discoveredEntries.Add(entry);
     }
 
+    /// <summary>
+    /// Discovers a random entry that matches the MonsterType? and EntryType? if given
+    /// </summary>
+    public void DiscoverRandomEntry(JounralEntry.MonsterType? monsterType = null, JounralEntry.EntryType? entryType = null)
+    {
+        // get valid entries
+        List<JounralEntry> undisLore = new List<JounralEntry>();
+        foreach (JounralEntry entry in undiscoveredEntries) {
+            if (monsterType != null && entry.m_monsterType != monsterType) continue;
+            if (entryType != null && entry.m_entryType != entryType) continue;
+            undisLore.Add(entry);
+        }
+
+        // if there is any, pick one at random and discover it
+        if (undisLore.Count > 0) {
+            int index = UnityEngine.Random.Range(0, undisLore.Count);
+            DiscoverEntry(undisLore[index]);
+        }
+    }
 
     /// <summary>
     /// Save the journal
