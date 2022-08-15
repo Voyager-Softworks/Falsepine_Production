@@ -8,10 +8,13 @@ public class ExplodeOnDeath : MonoBehaviour
     public float m_damage = 10f;
     public float m_radius = 5f;
 
+    public float m_fuseTime = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
-        GetComponent<EnemyHealth>().Death += Explode;
+        if(GetComponent<Health_Base>())GetComponent<Health_Base>().Death += (ctx) => {Explode(ctx);};
+        
     }
 
     void Explode(Health_Base.DeathContext context)
@@ -21,12 +24,18 @@ public class ExplodeOnDeath : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, m_radius);
         foreach (Collider collider in colliders)
         {
-            if (collider.gameObject.GetComponent<EnemyHealth>() != null)
+            if (collider.gameObject.GetComponent<Health_Base>() != null)
             {
-                collider.gameObject.GetComponent<EnemyHealth>().TakeDamage(new Health_Base.DamageStat(damage: m_damage, sourceObject: gameObject, origin: transform.position, hitPoint: collider.transform.position));
+                collider.gameObject.GetComponent<Health_Base>().TakeDamage(new Health_Base.DamageStat(damage: m_damage, sourceObject: gameObject, origin: transform.position, hitPoint: collider.transform.position));
             }
         }
 
+    }
+
+    IEnumerator Fuse(Health_Base.DeathContext context)
+    {
+        yield return new WaitForSeconds(m_fuseTime);
+        Explode(context);
     }
 
     // Update is called once per frame
