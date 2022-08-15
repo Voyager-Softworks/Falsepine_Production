@@ -11,8 +11,13 @@ public class TouchTrigger : MonoBehaviour  /// @todo Comment
     public string triggerName;
     bool triggered = false;
     public bool ignorePlayer = false;
-    public bool ignoreNonHealth = true;
+    public bool mustHaveHealth = false;
     public System.Action Triggered;
+
+    #if UNITY_EDITOR
+    [ReadOnly]
+    #endif
+    public Collider hitCollider;
 
     // Start is called before the first frame update
     void Start()
@@ -28,14 +33,22 @@ public class TouchTrigger : MonoBehaviour  /// @todo Comment
 
     void OnTriggerEnter(Collider other)
     {
-        // if hot collider does not have health script in parent or child, return
-        // if (ignoreNonHealth && other.gameObject.GetComponentInParent<Health_Base>() == null && other.gameObject.GetComponentInChildren<Health_Base>() == null)
-        // {
-        //     return;
-        // }
+        if (triggered) return;
 
+        bool hasHealth = false;
+        if (other.gameObject.GetComponentInParent<Health_Base>() != null || other.gameObject.GetComponentInChildren<Health_Base>() != null)
+        {
+            hasHealth = true;
+        }
 
-        if (ignorePlayer && (other.GetComponentInChildren<PlayerMovement>() != null || other.GetComponentInParent<PlayerMovement>() != null))
+        bool isPlayer = false;
+        if (other.GetComponentInChildren<PlayerMovement>() != null || other.GetComponentInParent<PlayerMovement>() != null)
+        {
+            isPlayer = true;
+        }
+
+        if ((mustHaveHealth && !hasHealth && !isPlayer) ||
+            (ignorePlayer && isPlayer))
         {
             return;
         }
@@ -49,7 +62,7 @@ public class TouchTrigger : MonoBehaviour  /// @todo Comment
             other.transform.root.GetComponentInChildren<NodeAI.NodeAI_Agent>().SetParameter<bool>(triggerName, true);
         }
         triggered = true;
+        hitCollider = other;
         Triggered.Invoke();
-        
     }
 }

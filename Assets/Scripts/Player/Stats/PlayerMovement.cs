@@ -223,11 +223,7 @@ public class PlayerMovement : MonoBehaviour
                 }
 
 
-                //remove vertical
-                lookDir.y = 0;
-                lookDir.Normalize();
-                //apply rotation
-                //transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(lookDir), Time.deltaTime * 20f);
+                // Look at the look direction
                 SetLookDirection(lookDir);
             }
             else
@@ -250,7 +246,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void SetLookDirection(Vector3 lookDir)
     {
-        transform.rotation = Quaternion.LookRotation(lookDir);
+        lookDir.y = 0;
+        transform.rotation = Quaternion.LookRotation(lookDir.normalized);
     }
 
     public void StartVault()
