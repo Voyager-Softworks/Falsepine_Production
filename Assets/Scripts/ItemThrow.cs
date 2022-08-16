@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+///  Script to handle throwing of items by the player.
+///</summary>
 public class ItemThrow : MonoBehaviour
-{   
+{
     public float m_throwDelay = 0.5f;
     private float m_throwTimer = 0.0f;
     public float m_throwForce = 10.0f;
@@ -45,7 +48,8 @@ public class ItemThrow : MonoBehaviour
             // lerp scale
             transform.localScale = Vector3.Lerp(transform.localScale, m_realScale, Time.deltaTime * 1.0f);
         }
-        else if (!m_isThrown) {
+        else if (!m_isThrown)
+        {
             m_isThrown = true;
 
             // enable rigidbody and collider
@@ -62,11 +66,13 @@ public class ItemThrow : MonoBehaviour
             if (m_randomTorque) GetComponent<Rigidbody>().angularVelocity = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)) * 20.0f;
         }
 
-        if (m_isThrown) {
+        if (m_isThrown)
+        {
             // lerp quickly to real scale
             transform.localScale = Vector3.Lerp(transform.localScale, m_realScale, Time.deltaTime * 10.0f);
 
-            if (m_forceUpright){
+            if (m_forceUpright)
+            {
                 transform.rotation = Quaternion.identity;
             }
         }

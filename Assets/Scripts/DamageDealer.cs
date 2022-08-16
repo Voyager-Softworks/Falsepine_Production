@@ -13,22 +13,23 @@ public class DamageDealer : MonoBehaviour
     public List<Collider> m_hurtBoxes = new List<Collider>(); ///< Colliders used to detect when the player is hit by an attack
 
     public GameObject m_hurtPlayerEffect; ///< Particle _effect spawned when the player is hurt
-    
+
     public GameObject m_indicatorPrefab; ///< Indicator that shows where the attack will hit
 
     public float m_damage = 10f; ///< Damage done by the attack
     public int m_attkNum = 1; ///< Number of Attacks
-    
+
     void Start()
     {
-        GetComponent<EnemyHealth>().Death += (Health_Base.DeathContext context) => {
+        GetComponent<EnemyHealth>().Death += (Health_Base.DeathContext context) =>
+        {
             foreach (var hurtBox in m_hurtBoxes)
             {
                 hurtBox.enabled = false;
             }
         };
     }
-    
+
 
     /// <summary>
     ///  Coroutine to execute a melee attack on the player.
@@ -47,7 +48,7 @@ public class DamageDealer : MonoBehaviour
         }
         float timer = 0f;
         bool playerHit = false;
-        while(timer < _duration && !playerHit)
+        while (timer < _duration && !playerHit)
         {
             timer += Time.deltaTime;
             foreach (Collider hurtBox in m_hurtBoxes)
@@ -114,9 +115,9 @@ public class DamageDealer : MonoBehaviour
     /// <param name="_attackColor">The color to make the attack indicator circle.</param>
     /// <param name="_indicatorDuration">The _duration to display the indicator for prior to the attack hitting</param>
     /// <returns></returns>
-    public IEnumerator IndicatorCoroutine(float _delay, float _radius, Vector2 _offset, Func<Vector3> _playerDirectionFunction,float _translationSpeed, float _translationDuration, Color _attackColor, float _indicatorDuration)
+    public IEnumerator IndicatorCoroutine(float _delay, float _radius, Vector2 _offset, Func<Vector3> _playerDirectionFunction, float _translationSpeed, float _translationDuration, Color _attackColor, float _indicatorDuration)
     {
-        yield return new WaitForSeconds(_delay-_indicatorDuration); //Wait until it is time to begin displaying the indicator
+        yield return new WaitForSeconds(_delay - _indicatorDuration); //Wait until it is time to begin displaying the indicator
 
         Vector3 offsetVector = transform.forward * _offset.y + transform.right * _offset.x; //Get the _offset position
 
@@ -133,29 +134,29 @@ public class DamageDealer : MonoBehaviour
         var maxColComponent = emissiveColor.maxColorComponent;
         byte maxOverExposedColor = 191;
         var factor = maxOverExposedColor / maxColComponent;
-        float intensity = Mathf.Log(255f/factor) / Mathf.Log(2f);
+        float intensity = Mathf.Log(255f / factor) / Mathf.Log(2f);
         Color newEmissiveColor = new Color(_attackColor.r * intensity, _attackColor.g * intensity, _attackColor.b * intensity, _attackColor.a);
         decalProjector.material.SetColor("_EmissiveColor", newEmissiveColor);
 
-        
+
         decalProjector.size = Vector3.zero;
 
         //Animate the size of the indicator
         Vector3 startSize = new Vector3(0.0f, 0.0f, 2.0f);
-        Vector3 endSize = new Vector3(_radius*2f, _radius*2f, 2.0f);
+        Vector3 endSize = new Vector3(_radius * 2f, _radius * 2f, 2.0f);
         while (t < _indicatorDuration)
         {
             Vector3 groundPos = transform.position;
             groundPos.y = 0.0f;
             offsetVector = transform.forward * _offset.y + transform.right * _offset.x;
-            indicator.transform.position = (groundPos+offsetVector) + (transform.forward * _translationSpeed * _translationDuration * (1-((t+(_delay-_indicatorDuration))/_delay))) + (Vector3.up);
-            
+            indicator.transform.position = (groundPos + offsetVector) + (transform.forward * _translationSpeed * _translationDuration * (1 - ((t + (_delay - _indicatorDuration)) / _delay))) + (Vector3.up);
+
             t += Time.deltaTime;
             decalProjector.size = Vector3.Lerp(startSize, endSize, t / _indicatorDuration);
             yield return null;
         }
         Destroy(indicator);
-        
+
     }
 
 
@@ -172,7 +173,7 @@ public class DamageDealer : MonoBehaviour
     {
         yield return new WaitForSeconds(_delay);
         GameObject proj = Instantiate(_projectile, _spawnpoint.position, _spawnpoint.rotation);
-        if(!_aimAtPlayer)
+        if (!_aimAtPlayer)
             proj.GetComponent<Rigidbody>().velocity = proj.transform.forward * _speed;
         else
         {
@@ -245,7 +246,7 @@ public class DamageDealer : MonoBehaviour
     {
         StartCoroutine(IndicatorCoroutine(_delay, _radius, _offset, _playerDirectionFunction, _translationSpeed, _translationDuration, _color, _indicatorDuration));
     }
-    
+
 
     /// <summary>
     ///  Do a ranged attack on the player.
@@ -283,10 +284,10 @@ public class DamageDealer : MonoBehaviour
     {
         StopAllCoroutines();
     }
-    
-    
 
-    
+
+
+
 
 
 }

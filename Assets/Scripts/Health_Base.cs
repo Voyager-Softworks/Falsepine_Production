@@ -6,27 +6,31 @@ using UnityEngine.Events;
 /// <summary>
 /// A base health class for all objects that can take damage.
 /// </summary>
-/// @todo Impliment this into players, enemies, destructable objects.
-public class Health_Base : MonoBehaviour
+public class Health_Base : MonoBehaviour /// @todo Impliment this into players, enemies, destructable objects.
 {
 
-    private void OnDrawGizmos() {
+    private void OnDrawGizmos()
+    {
         // draw the bounding box
         Collider collider = GetComponent<Collider>();
-        if (collider != null) {
+        if (collider != null)
+        {
             Gizmos.color = new Color(1, 0, 0, 0.3f);
             Gizmos.DrawWireCube(collider.bounds.center, collider.bounds.size);
         }
     }
 
+    /// <summary>
+    ///  A data object containing info about a damage dealt.
+    /// </summary>
     public class DamageStat
     {
-        public float m_damage;
-        public GameObject m_sourceObject;
-        public Vector3 m_originPoint;
-        public Vector3 m_hitPoint;
-        public Vector3 direction { get { return m_hitPoint - m_originPoint; } }
-        public float m_time;
+        public float m_damage; //< The amount of damage dealt.
+        public GameObject m_sourceObject; //< The object that dealt the damage.
+        public Vector3 m_originPoint; //< The point of origin of the damage.
+        public Vector3 m_hitPoint; //< The point of impact of the damage.
+        public Vector3 direction { get { return m_hitPoint - m_originPoint; } } //< The direction the attack was moving in.
+        public float m_time; //< The time the damage was dealt.
 
         public DamageStat(float damage, GameObject sourceObject, Vector3 origin, Vector3 hitPoint)
         {
@@ -38,45 +42,55 @@ public class Health_Base : MonoBehaviour
         }
     }
 
+    /// <summary>
+    ///  Context object containing relavent information about the death of the object.
+    /// </summary>
     public struct DeathContext
     {
-        public GameObject m_sourceObject;
-        public Vector3 m_originPoint;
-        public Vector3 m_hitPoint;
-        public Vector3 Direction { get { return m_hitPoint - m_originPoint; } }
-        public float m_time;
+        public GameObject m_sourceObject; //< The object that dealt the killing blow.
+        public Vector3 m_originPoint;  //< The point of origin of the damage.
+        public Vector3 m_hitPoint; //< The point of impact of the damage.
+        public Vector3 Direction { get { return m_hitPoint - m_originPoint; } } //< The direction the attack was moving in.
+        public float m_time; //< The time the damage was dealt.
     }
 
-    public System.Action<DeathContext> Death;
-    public System.Action<DamageStat> Damage;
+    public System.Action<DeathContext> Death; //< Delegate for when the object dies.
+    public System.Action<DamageStat> Damage; //< Delegate for when the object takes damage.
 
     [Header("Stats")]
-    public float m_currentHealth = 100f;
-    public float m_maxHealth = 100f;
-    protected bool m_isInvulnerable = false;
-    public bool isInvulnerable { get { return m_isInvulnerable; } set { m_isInvulnerable = value; } }
-    protected bool m_hasDied = false;
-    public bool hasDied { get { UpdateDeath(); return m_hasDied; } }
+    public float m_currentHealth = 100f; //< The current health of the object.
+    public float m_maxHealth = 100f; //< The maximum health of the object.
+    protected bool m_isInvulnerable = false; //< Whether the object is invulnerable.
+    public bool isInvulnerable { get { return m_isInvulnerable; } set { m_isInvulnerable = value; } } //< Whether the object is invulnerable.
+    protected bool m_hasDied = false; //< Whether the object has died.
+    public bool hasDied { get { UpdateDeath(); return m_hasDied; } } //< Whether the object has died.
 
-    public bool m_disablePlayerCollision = true;
+    public bool m_disablePlayerCollision = true; //< Whether or not the player should be able to collide with the object.
 
-    public List<DamageStat> m_damageHistory = new List<DamageStat>();
+    public List<DamageStat> m_damageHistory = new List<DamageStat>(); //< The damage history of the object.
 
     [Header("Sounds")]
-    public GameObject m_deathSound = null;
-    public GameObject m_hurtSound = null;
+    public GameObject m_deathSound = null; //< The sound to play when the object dies.
+    public GameObject m_hurtSound = null; //< The sound to play when the object takes damage.
 
-    public virtual void Start(){
+    public virtual void Start()
+    {
         CheckMaxHealth();
         UpdateDeath();
     }
 
-    public virtual void Update() {
+    public virtual void Update()
+    {
         //UpdateDeath();
     }
 
-    protected void UpdateDeath() {
-        if (!m_hasDied && m_currentHealth <= 0) {
+    /// <summary>
+    ///  Calls the Die method if the object is not already dead and has a health value of 0 or less.
+    /// </summary>
+    protected void UpdateDeath()
+    {
+        if (!m_hasDied && m_currentHealth <= 0)
+        {
             Die();
         }
     }
@@ -84,9 +98,9 @@ public class Health_Base : MonoBehaviour
     /// <summary>
     /// Deals damage to this object.
     /// </summary>
-    /// <param name="damage"></param>
-    /// <param name="source"></param>
-    public virtual void TakeDamage(DamageStat _damageStat) {
+    /// <param name="_damageStat">Data object containing info about the damage to be dealt.</param>
+    public virtual void TakeDamage(DamageStat _damageStat)
+    {
         // if dead or invulnerable, do nothing
         if (m_isInvulnerable || m_hasDied) return;
 
@@ -108,18 +122,20 @@ public class Health_Base : MonoBehaviour
     /// <summary>
     /// Kills this object.
     /// </summary>
-    public virtual void Die() {
+    public virtual void Die()
+    {
         if (m_hasDied) return;
 
         m_hasDied = true;
 
         PlayDeathSound();
 
-        Death?.Invoke(new DeathContext() {
-            m_sourceObject = m_damageHistory[m_damageHistory.Count-1].m_sourceObject,
-            m_originPoint = m_damageHistory[m_damageHistory.Count-1].m_originPoint,
-            m_hitPoint = m_damageHistory[m_damageHistory.Count-1].m_hitPoint,
-            m_time = m_damageHistory[m_damageHistory.Count-1].m_time
+        Death?.Invoke(new DeathContext()
+        {
+            m_sourceObject = m_damageHistory[m_damageHistory.Count - 1].m_sourceObject,
+            m_originPoint = m_damageHistory[m_damageHistory.Count - 1].m_originPoint,
+            m_hitPoint = m_damageHistory[m_damageHistory.Count - 1].m_hitPoint,
+            m_time = m_damageHistory[m_damageHistory.Count - 1].m_time
         });
 
         if (m_disablePlayerCollision)
@@ -135,7 +151,7 @@ public class Health_Base : MonoBehaviour
     /// <summary>
     /// Heals this object.
     /// </summary>
-    /// <param name="_amount"></param>
+    /// <param name="_amount">The amount of health to heal.</param>
     public virtual void Heal(float _amount)
     {
         m_currentHealth += _amount;
@@ -156,7 +172,8 @@ public class Health_Base : MonoBehaviour
     /// <summary>
     /// Plays a random hurt sound.
     /// </summary>
-    public void PlayHurtSound() {
+    public void PlayHurtSound()
+    {
         if (m_hurtSound == null) return;
 
         GameObject sound = Instantiate(m_hurtSound, transform.position, Quaternion.identity, transform);
@@ -165,7 +182,8 @@ public class Health_Base : MonoBehaviour
     /// <summary>
     /// Plays a random death sound.
     /// </summary>
-    public void PlayDeathSound() {
+    public void PlayDeathSound()
+    {
         if (m_deathSound == null) return;
 
         GameObject sound = Instantiate(m_deathSound, transform.position, Quaternion.identity);
