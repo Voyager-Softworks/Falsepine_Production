@@ -7,21 +7,12 @@ using System.Linq;
 using UnityEditor;
 #endif
 
-public class MissionGroup : MonoBehaviour  /// @todo comment
+/// <summary>
+/// Manages a group of objects in scene, enable/disable based on current mission
+/// </summary>
+public class MissionGroup : MonoBehaviour
 {
     public Mission m_linkedMission;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     // editor
 #if UNITY_EDITOR

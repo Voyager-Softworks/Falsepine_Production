@@ -5,9 +5,8 @@ using System.Linq;
 
 /// <summary>
 /// A condition which requires all enemies to be killed.
-/// @Todo: Make it more reliable when checking for enemies.
 /// </summary>
-public class KillAll_Condition : LevelCondition  /// @todo comment
+public class KillAll_Condition : LevelCondition
 {
     protected override void UpdateCondition()
     {

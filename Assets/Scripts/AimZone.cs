@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Aim zones are used to calculate damage, area, and range, of weapons.
 /// </summary>
-public class AimZone : MonoBehaviour  /// @todo comment
+public class AimZone : MonoBehaviour
 {
     private Mesh m_mesh;
     private MeshRenderer m_meshRenderer;
@@ -26,6 +26,9 @@ public class AimZone : MonoBehaviour  /// @todo comment
     public LineRenderer m_midLine = null;
     public LineRenderer m_rightLine = null;
 
+    /// <summary>
+    /// Corners are used by the aim zone to keep track of the corners of the aim zone.
+    /// </summary>
     public struct Corners
     {
         public Vector3 frontLeft;
@@ -200,6 +203,13 @@ public class AimZone : MonoBehaviour  /// @todo comment
         SetCorners(new Corners(_frontLeft, _frontRight, _backRight, _backLeft));
     }
 
+    /// <summary>
+    /// Sets the colour of the aim zone for each corner
+    /// </summary>
+    /// <param name="_flColor"></param>
+    /// <param name="_frColor"></param>
+    /// <param name="_brColor"></param>
+    /// <param name="_blColor"></param>
     public void SetZoneColors(Color _flColor, Color _frColor, Color _brColor, Color _blColor)
     {
         Color[] colors = new Color[4];
@@ -210,11 +220,24 @@ public class AimZone : MonoBehaviour  /// @todo comment
         m_mesh.colors = colors;
     }
 
+    /// <summary>
+    /// Sets the colour of the aim zone overall
+    /// </summary>
+    /// <param name="_color"></param>
     public void SetZoneColors(Color _color)
     {
         SetZoneColors(_color, _color, _color, _color);
     }
 
+    /// <summary>
+    /// Sets the colour of the aim lines
+    /// </summary>
+    /// <param name="_leftStart"></param>
+    /// <param name="_leftEnd"></param>
+    /// <param name="_midStart"></param>
+    /// <param name="_midEnd"></param>
+    /// <param name="_rightStart"></param>
+    /// <param name="_rightEnd"></param>
     public void SetLineColors(Color _leftStart, Color _leftEnd, Color _midStart, Color _midEnd, Color _rightStart, Color _rightEnd)
     {
         m_midLine.startColor = _midStart;
@@ -239,6 +262,9 @@ public class AimZone : MonoBehaviour  /// @todo comment
         UpdateLine();
     }
 
+    /// <summary>
+    /// Updates the mesh to represent the aim zone
+    /// </summary>
     private void UpdateMesh()
     {
         // set the vertices of the aimQuad
@@ -296,6 +322,9 @@ public class AimZone : MonoBehaviour  /// @todo comment
         return new Vector2(x, z);
     }
 
+    /// <summary>
+    /// Updates the lines to represent the aim zone
+    /// </summary>
     private void UpdateLine()
     {
         m_leftLine.SetPositions(new Vector3[] { m_bl, m_fl });
@@ -375,6 +404,9 @@ public class AimZone : MonoBehaviour  /// @todo comment
         return CalcDmgMult_float(uv, _falloffMult);
     }
 
+    /// <summary>
+    /// Hide the zone
+    /// </summary>
     public void Hide()
     {
         // hide the mesh renderer
@@ -385,6 +417,9 @@ public class AimZone : MonoBehaviour  /// @todo comment
         m_midLine.enabled = false;
         m_rightLine.enabled = false;
     }
+    /// <summary>
+    /// Show the zone
+    /// </summary>
     public void Show()
     {
         // show the mesh renderer

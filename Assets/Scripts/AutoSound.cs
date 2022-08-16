@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// Used on sound prefabs to automatically destroy after the sound plays
 /// </summary>
-public class AutoSound : MonoBehaviour  /// @todo comment
+public class AutoSound : MonoBehaviour
 {
     public bool playOnStart = true;
     public bool destroyOnEnd = true;
@@ -34,6 +34,9 @@ public class AutoSound : MonoBehaviour  /// @todo comment
         }
     }
 
+    /// <summary>
+    /// Plays one of the clips randomly
+    /// </summary>
     private void PlayRandomClip()
     {
         hasPlayed = true;

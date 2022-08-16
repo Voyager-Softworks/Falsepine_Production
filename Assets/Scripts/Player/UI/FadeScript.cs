@@ -10,7 +10,7 @@ using UnityEngine.Events;
 /// <summary>
 /// Fades the screen out, then transitions to another scene.
 /// </summary>
-public class FadeScript : MonoBehaviour  /// @todo comment
+public class FadeScript : MonoBehaviour
 {
     private bool m_trueCompleteFalseOver = true;
 
@@ -79,6 +79,9 @@ public class FadeScript : MonoBehaviour  /// @todo comment
         }
     }
 
+    /// <summary>
+    /// Tries to load the destination scene
+    /// </summary>
     public void GotoDestination()
     {
         if (m_trueCompleteFalseOver)
@@ -91,6 +94,13 @@ public class FadeScript : MonoBehaviour  /// @todo comment
         }
     }
 
+    /// <summary>
+    /// Fades between two colours over time
+    /// </summary>
+    /// <param name="_a"></param>
+    /// <param name="_b"></param>
+    /// <param name="_time"></param>
+    /// <param name="_delay"></param>
     public void FadeFromAToB(Color _a, Color _b, float _time = 1.0f, float _delay = 0.0f)
     {
         startColor = _a;
@@ -102,22 +112,39 @@ public class FadeScript : MonoBehaviour  /// @todo comment
         fadeDelayTimer = 0f;
     }
 
+    /// <summary>
+    /// Fades from black to clear
+    /// </summary>
+    /// <param name="_fadeTime"></param>
+    /// <param name="_fadeDelay"></param>
     public void FadeFromBlackToClear(float _fadeTime = 1.0f, float _fadeDelay = 0.0f)
     {
         FadeFromAToB(Color.black, Color.clear, _fadeTime, _fadeDelay);
     }
 
+    /// <summary>
+    /// Fades from clear to black
+    /// </summary>
+    /// <param name="_fadeTime"></param>
+    /// <param name="_fadeDelay"></param>
     public void FadeFromClearToBlack(float _fadeTime = 1.0f, float _fadeDelay = 0.0f)
     {
         FadeFromAToB(Color.clear, Color.black, _fadeTime, _fadeDelay);
     }
 
+    /// <summary>
+    /// Fades from black to clear (used when starting the scene)
+    /// </summary>
     public void StartScreen()
     {
         isStartFade = true;
         FadeFromBlackToClear(3.0f, 2.0f);
     }
 
+    /// <summary>
+    /// Fades from clear to black (used when ending the scene)
+    /// </summary>
+    /// <param name="_trueCompleteFalseOver"></param>
     public void EndScreen(bool _trueCompleteFalseOver = true)
     {
         isEndFade = true;

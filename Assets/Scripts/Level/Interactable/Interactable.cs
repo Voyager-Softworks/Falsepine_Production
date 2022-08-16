@@ -10,10 +10,13 @@ using UnityEngine.Events;
 /// <summary>
 /// Base class for interactable objects, such as clues, pikcups, objectives, etc.
 /// </summary>
-public class Interactable : MonoBehaviour  /// @todo Comment
+public class Interactable : MonoBehaviour
 {
     static bool m_interactedThisFrame = false;
 
+    /// <summary>
+    /// How an interactable object should react after being interacted with.
+    /// </summary>
     public enum InteractEffect {
         NONE,
         DISABLE_INTERACT,

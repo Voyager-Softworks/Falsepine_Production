@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickupScript : Interactable  /// @todo Comment
+/// <summary>
+/// Script that lets the player pikcup up an item.
+/// @todo rework this to use the new inventory system.
+/// </summary>
+public class PickupScript : Interactable
 {
     [Header("Pickup Settings")]
     public string itemToAdd;
@@ -27,6 +31,11 @@ public class PickupScript : Interactable  /// @todo Comment
         AddToInventory(itemToAdd, amountToAdd);
     }
 
+    /// <summary>
+    /// Tries to add an item to the inventory.
+    /// </summary>
+    /// <param name="_itemName"></param>
+    /// <param name="_amount"></param>
     public void AddToInventory(string _itemName, int _amount)
     {
         old_InventoryManager inventoryManager = FindObjectOfType<old_InventoryManager>();

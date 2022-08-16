@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Manual_Condition : LevelCondition  /// @todo comment
+/// <summary>
+/// A condition that must be manually completed in code.
+/// </summary>
+public class Manual_Condition : LevelCondition
 {
     public void Complete()
     {

@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectiveInteract : Interactable  /// @todo Comment
+/// <summary>
+/// @deprecated
+/// Completes a mission when interacted with, and ends scene.
+/// </summary>
+public class ObjectiveInteract : Interactable
 {
     public Mission _mission;
     public GameObject completeSound;

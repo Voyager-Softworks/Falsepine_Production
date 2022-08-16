@@ -8,7 +8,10 @@ using System;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class MissionCardUI : MonoBehaviour /// @todo Comment
+/// <summary>
+/// Mission card represents a mission that the player can interact with.
+/// </summary>
+public class MissionCardUI : MonoBehaviour
 {
     [Header("Self")]
     public GameObject missionCard;
@@ -54,6 +57,9 @@ public class MissionCardUI : MonoBehaviour /// @todo Comment
         UpdateCard();
     }
 
+    /// <summary>
+    /// Called when the button on the card is clicked.
+    /// </summary>
     public void ButtonClicked(){
         if (MissionManager.instance == null)
         {
@@ -78,6 +84,9 @@ public class MissionCardUI : MonoBehaviour /// @todo Comment
         EventSystem.current.SetSelectedGameObject(null);
     }
 
+    /// <summary>
+    /// Updates the cards UI
+    /// </summary>
     public void UpdateCard(){
         if (MissionManager.instance == null)
         {
@@ -178,6 +187,9 @@ public class MissionCardUI : MonoBehaviour /// @todo Comment
         }
     }
 
+    /// <summary>
+    /// Displays filler text to show that there is no mission to display.
+    /// </summary>
     private void DisplayNoMission()
     {
         ShowCard();
@@ -193,6 +205,9 @@ public class MissionCardUI : MonoBehaviour /// @todo Comment
         button.SetActive(false);
     }
 
+    /// <summary>
+    /// Shows the card completely.
+    /// </summary>
     private void ShowCard()
     {
         missionTitle.enabled = true;
@@ -209,6 +224,9 @@ public class MissionCardUI : MonoBehaviour /// @todo Comment
         button.SetActive(true);
     }
 
+    /// <summary>
+    /// Hides the card completely.
+    /// </summary>
     private void HideCard()
     {
         missionTitle.enabled = false;

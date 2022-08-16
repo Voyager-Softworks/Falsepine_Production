@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class DynamicSnowPainter : MonoBehaviour  /// @todo comment
+/// <summary>
+/// Automatically enables/disables this dynamic snow painer if there is/isnt snow in the scene.
+/// </summary>
+public class DynamicSnowPainter : MonoBehaviour
 {
     // Start is called before the first frame update
     private void Awake()

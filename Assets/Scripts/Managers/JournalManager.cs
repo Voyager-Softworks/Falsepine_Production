@@ -18,10 +18,13 @@ using UnityEditor;
 /// Singleton donotdestroy script that handles the journal system
 /// </summary>
 [Serializable]
-public class JournalManager : MonoBehaviour  /// @todo comment
+public class JournalManager : MonoBehaviour
 {
+    /// <summary>
+    /// Used to link a button to a specific page of content
+    /// </summary>
     [Serializable]
-    public class ContentsLink  /// @todo comment
+    public class ContentsLink
     {
         public Button button;
         public GameObject contents;
@@ -48,6 +51,9 @@ public class JournalManager : MonoBehaviour  /// @todo comment
     public List<JounralEntry> undiscoveredEntries = new List<JounralEntry>();
     public List<JounralEntry> discoveredEntries = new List<JounralEntry>();
 
+    /// <summary>
+    /// Class used to save the journal entries
+    /// </summary> 
     private class SaveData{
         public List<JounralEntry.SerializableJournalEntry> undiscoveredEntries = new List<JounralEntry.SerializableJournalEntry>();
         public List<JounralEntry.SerializableJournalEntry> discoveredEntries = new List<JounralEntry.SerializableJournalEntry>();
@@ -313,7 +319,7 @@ public class JournalManager : MonoBehaviour  /// @todo comment
             OpenJournal();
         }
     }
-
+    
     public void OpenJournal()
     {
         if (journalPanel.activeSelf) return;

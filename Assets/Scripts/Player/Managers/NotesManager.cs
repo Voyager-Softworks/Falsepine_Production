@@ -12,9 +12,9 @@ using UnityEditor;
 #endif
 
 /// <summary>
-/// deprecated?
+/// @deprecated Use JournalManager instead
 /// </summary>
-public class NotesManager : MonoBehaviour  /// @todo Comment
+public class NotesManager : MonoBehaviour
 {
     //list of clues to find
     public enum ClueType {

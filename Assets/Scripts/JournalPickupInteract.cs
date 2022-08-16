@@ -11,7 +11,7 @@ using UnityEditor;
 /// @todo make an option to get current zone's boss automatically as the monster type
 /// - Possibly even allow selecting a specific zone? (and get it automatically?)
 /// </summary>
-public class JournalPickupInteract : Interactable   /// @todo Comment
+public class JournalPickupInteract : Interactable
 {
     public enum PickupType {
         SpecificEntry,
@@ -20,12 +20,17 @@ public class JournalPickupInteract : Interactable   /// @todo Comment
         RandomEntry
     }
 
+    [Tooltip("What kind of entry should be given when picked up")]
     [HideInInspector] public PickupType m_pickupType = PickupType.SpecificEntry;
+    [Tooltip("The specific entry to give when picked up")]
     [HideInInspector] public JounralEntry m_linkedEntry;
 
+    [Tooltip("Whether or not to give an entry from a specific monster or not")]
     [HideInInspector] public bool m_specificMonster = false;
+    [Tooltip("The specific monster to give an entry from")]
     [HideInInspector] public MonsterInfo m_monster = null;
 
+    [Tooltip("If this should give a random entry from the current zones boss")]
     [HideInInspector] public bool m_currentZoneBoss = false;
 
     // Start is called before the first frame update

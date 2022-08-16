@@ -14,7 +14,7 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Singleton donotdestroy script that handles the mission system
 /// </summary>
-public class MissionManager : MonoBehaviour  /// @todo comment
+public class MissionManager : MonoBehaviour
 {
     public static MissionManager instance;
 
@@ -71,6 +71,9 @@ public class MissionManager : MonoBehaviour  /// @todo comment
         SetUpMissionGroups();
     }
 
+    /// <summary>
+    /// Enables/Disables the mission groups based on the current mission
+    /// </summary>
     private void SetUpMissionGroups()
     {
         // find all MissionGroup objects in the scene
@@ -203,6 +206,10 @@ public class MissionManager : MonoBehaviour  /// @todo comment
         UpdateAllMissionCards();
     }
 
+    /// <summary>
+    /// Deletes the save file
+    /// </summary>
+    /// <param name="saveSlot"></param>
     public void DeleteMissionSave(int saveSlot)
     {
         if (File.Exists(GetSaveFilePath(saveSlot)))
@@ -267,6 +274,9 @@ public class MissionManager : MonoBehaviour  /// @todo comment
         }
     }
 
+    /// <summary>
+    /// Tries to embark to new scene with current mission
+    /// </summary>
     public void TryEmbark()
     {
         //load level 1 if valid
@@ -283,6 +293,9 @@ public class MissionManager : MonoBehaviour  /// @todo comment
         }
     }
 
+    /// <summary>
+    /// Loads the starting scene
+    /// </summary>
     public void LoadFirstLesserScene()
     {
         if (m_currentZone == null) return;
@@ -291,6 +304,9 @@ public class MissionManager : MonoBehaviour  /// @todo comment
         LevelController.LoadScene(m_currentZone.m_startScene.scenePath);
     }
 
+    /// <summary>
+    /// Loads the next scene in the list
+    /// </summary>
     public void LoadNextLesserScene()
     {
         if (m_currentZone == null) return;
@@ -301,6 +317,9 @@ public class MissionManager : MonoBehaviour  /// @todo comment
         LevelController.LoadScene(nextPath);
     }
 
+    /// <summary>
+    /// Loads the boss scene
+    /// </summary>
     public void LoadFirstGreaterScene()
     {
         if (m_currentZone == null) return;
@@ -421,22 +440,4 @@ public class MissionManager : MonoBehaviour  /// @todo comment
 
         return m_currentZone.GetCurrentLesserSceneIndex();
     }
-
-    // /// <summary>
-    // /// Gets the path of the current scene
-    // /// </summary>
-    // /// <returns></returns>
-    // public string GetCurrentScenePath(){
-    //     if (m_currentZone == null) return "";
-    //     return m_currentZone.GetCurrentScenePath();
-    // }
-
-    // /// <summary>
-    // /// Gets the path of the next scene
-    // /// </summary>
-    // /// <returns></returns>
-    // public string GetNextScenePath(){
-    //     if (m_currentZone == null) return "";
-    //     return m_currentZone.GetNextScenePath();
-    // }
 }
