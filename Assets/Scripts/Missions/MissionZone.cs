@@ -33,6 +33,7 @@ public class MissionZone : ScriptableObject
     [TextArea(4, 10)]
     public string m_description;
     public ZoneArea m_area;
+    public List<MonsterInfo> m_zoneMonsters = new List<MonsterInfo>();
 
 
     [Header("Missions")]
@@ -336,6 +337,44 @@ public class MissionZone : ScriptableObject
             return "";
         }
         return temp[currentSceneIndex + 1].scenePath;
+    }
+
+    /// <summary>
+    /// Gets a random boss type from this zone.
+    /// </summary>
+    /// <returns></returns>
+    public MonsterInfo GetRandomZoneBoss(){
+        // get all bosses from list
+        List<MonsterInfo> bosses = new List<MonsterInfo>();
+        foreach (MonsterInfo info in m_zoneMonsters){
+            if (info.m_type == MonsterInfo.MonsterType.Boss){
+                bosses.Add(info);
+            }
+        }
+        // get random boss
+        if (bosses.Count == 0){
+            return null;
+        }
+        return bosses[UnityEngine.Random.Range(0, bosses.Count)];
+    }
+
+    /// <summary>
+    /// Gets a random monster type from this zone.
+    /// </summary>
+    /// <returns></returns>
+    public MonsterInfo GetRandomZoneMinion(){
+        // get all minions from list
+        List<MonsterInfo> minions = new List<MonsterInfo>();
+        foreach (MonsterInfo info in m_zoneMonsters){
+            if (info.m_type == MonsterInfo.MonsterType.Minion){
+                minions.Add(info);
+            }
+        }
+        // get random minion
+        if (minions.Count == 0){
+            return null;
+        }
+        return minions[UnityEngine.Random.Range(0, minions.Count)];
     }
 
     // equality operator

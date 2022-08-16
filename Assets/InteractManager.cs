@@ -132,6 +132,10 @@ public class InteractManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets the text on screen based on the given request.
+    /// </summary>
+    /// <param name="_trq"></param>
     private void SetBottomText(TextRequest _trq)
     {
         if (m_text == null) return;
@@ -144,6 +148,10 @@ public class InteractManager : MonoBehaviour
         m_fadeOutSpeed = _trq.m_fadeOutSpeed == null ? m_defaultFadeOutSpeed : (float)_trq.m_fadeOutSpeed;
     }
 
+    /// <summary>
+    /// Request some text to be shown on screen (requests are stored and sorted by distance from player).
+    /// </summary>
+    /// <param name="_trq"></param>
     public void RequestBottomText(TextRequest _trq)
     {
         // if list already contains the same text request, don't add it again
@@ -154,6 +162,10 @@ public class InteractManager : MonoBehaviour
         m_textRequests.Add(_trq);
     }
 
+    /// <summary>
+    /// Remove a request from the list.
+    /// </summary>
+    /// <param name="_trq"></param>
     public void RemoveRequest(TextRequest _trq)
     {
         foreach (TextRequest tr in m_textRequests)

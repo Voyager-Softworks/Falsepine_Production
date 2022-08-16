@@ -7,6 +7,9 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.Events;
 
+/// <summary>
+/// Base class for interactable objects, such as clues, pikcups, objectives, etc.
+/// </summary>
 public class Interactable : MonoBehaviour  /// @todo Comment
 {
     static bool m_interactedThisFrame = false;
@@ -50,6 +53,10 @@ public class Interactable : MonoBehaviour  /// @todo Comment
         UpdateUI();
     }
 
+    /// <summary>
+    /// Checks if the interaction button was pressed this frame, and does the interaction if it was.
+    /// </summary>
+    /// <returns></returns>
     public bool CheckActionPressed()
     {
         if (interactAction.triggered)
@@ -67,6 +74,9 @@ public class Interactable : MonoBehaviour  /// @todo Comment
         m_interactedThisFrame = false;
     }
 
+    /// <summary>
+    /// Virtual function to be overridden by child classes. Used to perform the action of the interactable.
+    /// </summary>
     virtual public void DoInteract(){
 
         switch (onInteractEffect)
@@ -85,6 +95,9 @@ public class Interactable : MonoBehaviour  /// @todo Comment
         }
     }
 
+    /// <summary>
+    /// Stops this interactable from being interacted with.
+    /// </summary>
     virtual public void DisableInteract()
     {
         this.enabled = false;
@@ -97,6 +110,9 @@ public class Interactable : MonoBehaviour  /// @todo Comment
         bt.RemoveRequest(new InteractManager.TextRequest(interactText, this, interactDistance));
     }
 
+    /// <summary>
+    /// Updates the UI to show the interact text.
+    /// </summary>
     virtual public void UpdateUI()
     {
         if (Vector3.Distance(transform.position, _transToCheck.position) <= interactDistance)
