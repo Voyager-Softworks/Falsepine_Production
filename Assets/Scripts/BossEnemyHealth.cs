@@ -10,11 +10,11 @@ using UnityEngine.AI;
 /// </summary>
 public class BossEnemyHealth : EnemyHealth
 {
-    public bool m_endScreenOnDeath = true;
-    public GameObject m_indicator = null;
-    public Mission m_linkedMission = null;
+    public bool m_endScreenOnDeath = true; ///< Whether or not to end the game when the boss dies.
+    public GameObject m_indicator = null; ///< The indicator to show when the boss is alive.
+    public Mission m_linkedMission = null; ///< The mission to complete when the boss is alive.
 
-    private UIScript m_uiScript;
+    private UIScript m_uiScript; ///< The UI script to use.
 
     // Start is called before the first frame update
     public override void Start()
@@ -46,7 +46,8 @@ public class BossEnemyHealth : EnemyHealth
         base.TakeDamage(_damage);
     }
 
-    public override void Die(){
+    public override void Die()
+    {
         base.Die();
 
         m_indicator.SetActive(false);

@@ -15,25 +15,25 @@ using UnityEngine.Events;
 public class PlayerHealth : MonoBehaviour
 {
     [Header("Stats")]
-    public float maxHealth = 100f; //< The maximum health of the player.
-    public float currentHealth = 100f; //< The current health of the player.
-    public bool isInvulnerable = false; //< Whether or not the player is invulnerable.
-    public bool isDead = false; //< Whether or not the player is dead.
-    public bool isStunned = false; //< Whether or not the player is stunned.
-    float stunTimer = 0f; //< The timer for the stun.
+    public float maxHealth = 100f; ///< The maximum health of the player.
+    public float currentHealth = 100f; ///< The current health of the player.
+    public bool isInvulnerable = false; ///< Whether or not the player is invulnerable.
+    public bool isDead = false; ///< Whether or not the player is dead.
+    public bool isStunned = false; ///< Whether or not the player is stunned.
+    float stunTimer = 0f; ///< The timer for the stun.
 
     [Header("Sounds")]
-    public AudioClip deathSound; //< The sound to play when the player dies.
-    public AudioClip hurtSound; //< The sound to play when the player is hurt.
-    private AudioSource _audioSource; //< The audio source for the player.
+    public AudioClip deathSound; ///< The sound to play when the player dies.
+    public AudioClip hurtSound; ///< The sound to play when the player is hurt.
+    private AudioSource _audioSource; ///< The audio source for the player.
 
     [Header("UI")]
-    [HideInInspector] public UIScript uiScript; //< The UI script for the player.
+    [HideInInspector] public UIScript uiScript; ///< The UI script for the player.
 
     [Header("Events")]
-    public UnityEvent OnDeath; //< The event to call when the player dies.
+    public UnityEvent OnDeath; ///< The event to call when the player dies.
 
-    private Animator _animator; //< The animator for the player.
+    private Animator _animator; ///< The animator for the player.
 
     // Start is called before the first frame update
     void Start()

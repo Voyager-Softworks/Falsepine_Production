@@ -11,42 +11,42 @@ public class PlayerMovement : MonoBehaviour
 {
 
     [Header("Movement")]
-    public Animator _animator; //< The animator for the player.
-    CharacterController controller; //< The character controller for the player.
-    DynamicVaulting dynamicVaulting; //< The dynamic vaulting script for the player.
-    public InputAction moveAction; //< The action for moving the player.
-    public InputAction sprintAction; //< The action for sprinting.
-    public float walkSpeed = 6f; //< The speed of the player when walking.
-    public float jogSpeed = 10f; //< The speed of the player when jogging.
-    public float sprintSpeed = 14f; //< The speed of the player when sprinting.
-    private Vector3 lastMoveDir = Vector3.zero; //< The last direction the player moved.
+    public Animator _animator; ///< The animator for the player.
+    CharacterController controller; ///< The character controller for the player.
+    DynamicVaulting dynamicVaulting; ///< The dynamic vaulting script for the player.
+    public InputAction moveAction; ///< The action for moving the player.
+    public InputAction sprintAction; ///< The action for sprinting.
+    public float walkSpeed = 6f; ///< The speed of the player when walking.
+    public float jogSpeed = 10f; ///< The speed of the player when jogging.
+    public float sprintSpeed = 14f; ///< The speed of the player when sprinting.
+    private Vector3 lastMoveDir = Vector3.zero; ///< The last direction the player moved.
 
-    private Vector3 animVelocity = Vector3.zero; //< The velocity of the player for the animator.
+    private Vector3 animVelocity = Vector3.zero; ///< The velocity of the player for the animator.
 
     [Header("Roll")]
-    public InputAction rollAction; //< The action for rolling.
-    private Vector3 rollDir = Vector3.zero; //< The direction of the roll.
-    public float rollSpeed = 10f; //< The speed of the roll.
-    public float rollTime = 1f; //< The time the roll takes.
-    private float rollTimer = 0f; //< The timer for the roll.
-    public float rollDelay = 1.5f; //< The delay before the roll can be used again.
-    private float rollDelayTimer = 0f; //< The timer for the roll delay.
-    public bool isRolling = false; //< Whether or not the player is rolling.
-    public AudioClip rollSound; //< The sound to play when the player rolls.
-    private PlayerHealth playerHealth; //< The player health script for the player.
+    public InputAction rollAction; ///< The action for rolling.
+    private Vector3 rollDir = Vector3.zero; ///< The direction of the roll.
+    public float rollSpeed = 10f; ///< The speed of the roll.
+    public float rollTime = 1f; ///< The time the roll takes.
+    private float rollTimer = 0f; ///< The timer for the roll.
+    public float rollDelay = 1.5f; ///< The delay before the roll can be used again.
+    private float rollDelayTimer = 0f; ///< The timer for the roll delay.
+    public bool isRolling = false; ///< Whether or not the player is rolling.
+    public AudioClip rollSound; ///< The sound to play when the player rolls.
+    private PlayerHealth playerHealth; ///< The player health script for the player.
 
 
 
     //public Vector3 mousePlanePoint = Vector3.zero;
-    public Transform shootPoint; //< The point the player shoots from.
-    private Camera cam; //< The camera for the player.
-    private AudioSource audioSource; //< The audio source for the player.
+    public Transform shootPoint; ///< The point the player shoots from.
+    private Camera cam; ///< The camera for the player.
+    private AudioSource audioSource; ///< The audio source for the player.
 
-    public AudioClip dodgeSound; //< The sound to play when the player dodges.
-    public AudioClip[] footstepSounds; //< The footstep sounds for the player.
+    public AudioClip dodgeSound; ///< The sound to play when the player dodges.
+    public AudioClip[] footstepSounds; ///< The footstep sounds for the player.
 
-    Vector3 camForward; //< The forward direction of the camera.
-    Vector3 camRight; //< The right direction of the camera.
+    Vector3 camForward; ///< The forward direction of the camera.
+    Vector3 camRight; ///< The right direction of the camera.
 
     /// <summary>
     ///  Plays a footstep sound.

@@ -3,15 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using NodeAI;
 using System.Linq;
-public class MobTarget : MonoBehaviour  /// @todo Comment
+/// <summary>
+///  Script which handles directed attacking. 
+/// </summary>
+/// <remarks>
+/// This script is attached to the player.
+/// It is responsible for making sure that only a certain number of enemies attempt to attack the player at once, even when many enemies are pursuing them.
+/// </remarks>
+public class MobTarget : MonoBehaviour
 {
-    public int maxConcurrentAttackers = 3;
-    public float influenceRadius = 10;
-    public List<NodeAI_Agent> attackers = new List<NodeAI_Agent>();
+    public int maxConcurrentAttackers = 3; ///< The maximum number of enemies that can attack the player at once.
+    public float influenceRadius = 10; ///< The radius of the influence sphere.
+    public List<NodeAI_Agent> attackers = new List<NodeAI_Agent>(); ///< The list of attackers.
 
+
+    /// <summary>
+    /// If the attacker is already registered, return true. If the attacker is not already registered
+    /// and the number of attackers is less than the maximum allowed, add the attacker to the list and
+    /// return true. Otherwise, return false
+    /// </summary>
+    /// <param name="NodeAI_Agent">The attacker that is trying to register.</param>
+    /// <returns>
+    /// A boolean value.
+    /// </returns>
     public bool RegisterAttacker(NodeAI_Agent attacker)
     {
-        if(attackers.Contains(attacker))
+        if (attackers.Contains(attacker))
         {
             return true;
         }
@@ -25,7 +42,7 @@ public class MobTarget : MonoBehaviour  /// @todo Comment
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame

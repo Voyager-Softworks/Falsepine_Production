@@ -32,44 +32,44 @@ public class DamagePlayerWhenCollide : MonoBehaviour
         if (tickTimer >= tickRate)
         {
             tickTimer = 0f;
-            if(!isActive) return;
+            if (!isActive) return;
             timeBeforeDetectionTimer += Time.deltaTime;
             if (timeBeforeDetectionTimer < timeBeforeDetection) return;
             RaycastHit[] hits = Physics.SphereCastAll(transform.position, sphereCollider.radius, Vector3.down, 0.1f);
             foreach (RaycastHit hit in hits)
             {
-                if (hit.collider.gameObject.tag == "Player" )
+                if (hit.collider.gameObject.tag == "Player")
                 {
                     hit.collider.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
                     if (destroyOnCollision)
                     {
                         Destroy(gameObject);
-                        if(destroyParticle != null)
+                        if (destroyParticle != null)
                         {
                             Instantiate(destroyParticle, transform.position, Quaternion.identity);
                         }
                     }
-                    else if(setInactiveOnCollision)
+                    else if (setInactiveOnCollision)
                     {
                         isActive = false;
                         timeBeforeDetectionTimer = 0f;
                     }
                 }
-                else if(destroyOnGround)
+                else if (destroyOnGround)
                 {
                     Destroy(gameObject);
-                    if(destroyParticle != null)
+                    if (destroyParticle != null)
                     {
                         Instantiate(destroyParticle, transform.position, Quaternion.identity);
                     }
                 }
             }
         }
-        
+
 
     }
 
-    
+
 
 
 }

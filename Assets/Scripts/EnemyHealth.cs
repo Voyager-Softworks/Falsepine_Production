@@ -10,12 +10,12 @@ using UnityEngine.AI;
 /// </summary>
 public class EnemyHealth : Health_Base
 {
-    protected NodeAI.NodeAI_Senses m_senses;
+    protected NodeAI.NodeAI_Senses m_senses; ///< The senses of the enemy.
 
-    private SkinnedMeshRenderer m_renderer;
-    private List<Material> m_materials = new List<Material>();
+    private SkinnedMeshRenderer m_renderer; ///< The renderer of the enemy.
+    private List<Material> m_materials = new List<Material>(); ///< The materials of the enemy.
 
-    public GameObject m_bloodEffect;
+    public GameObject m_bloodEffect; ///< The blood effect to show when the enemy is damaged.
 
     // Start is called before the first frame update
     public override void Start()
@@ -27,6 +27,11 @@ public class EnemyHealth : Health_Base
         m_materials.AddRange(m_renderer.materials);
     }
 
+
+    /// <summary>
+    /// It makes the object flash red, then fade back to white over the duration of the function
+    /// </summary>
+    /// <param name="duration">The amount of time the flash should last for.</param>
     IEnumerator DamageFlashCoroutine(float duration)
     {
         Vector3 startScale = transform.localScale;
@@ -47,7 +52,7 @@ public class EnemyHealth : Health_Base
             {
                 m_materials[i].SetColor("_BaseColor", Color.Lerp(flashCol, Color.white, elapsedTime / duration));
             }
-            transform.localScale = Vector3.Lerp(endScale, startScale, elapsedTime / duration);  
+            transform.localScale = Vector3.Lerp(endScale, startScale, elapsedTime / duration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -59,6 +64,16 @@ public class EnemyHealth : Health_Base
         base.Update();
     }
 
+    /// <summary>
+    /// > This function takes damage, and then tells the AI to update its health parameter, and then
+    /// tells the animator to play a hit animation, and then tells the animator to play a random pain
+    /// animation, and then stops the damage flash coroutine and starts it again, and then tells the
+    /// senses to register a sensory event, and then instantiates a blood effect
+    /// </summary>
+    /// <param name="_damage">The damage object that contains the damage information.</param>
+    /// <returns>
+    /// The return type is void, so nothing is being returned.
+    /// </returns>
     public override void TakeDamage(Health_Base.DamageStat _damage)
     {
         if (m_hasDied) return;
@@ -71,12 +86,17 @@ public class EnemyHealth : Health_Base
         StartCoroutine(DamageFlashCoroutine(0.25f));
 
         m_senses?.RegisterSensoryEvent(_damage.m_sourceObject, this.gameObject, 20.0f, NodeAI.SensoryEvent.SenseType.SOMATIC);
-        Instantiate(m_bloodEffect, _damage.m_hitPoint + (_damage.direction.normalized * 0.5f) , Quaternion.LookRotation(_damage.direction));
+        Instantiate(m_bloodEffect, _damage.m_hitPoint + (_damage.direction.normalized * 0.5f), Quaternion.LookRotation(_damage.direction));
     }
 
-    public override void Die(){
+    /// <summary>
+    ///  This function is called when the enemy dies. It tells the animator to play a death animation, and disables AI and colliders.
+    ///  If the enemy has a ragdoll, it activates it.
+    /// </summary>
+    public override void Die()
+    {
         base.Die();
-        
+
         //GetComponent<NodeAI.NodeAI_Agent>().SetState("Dead"); Legacy code
 
         GetComponent<DamageDealer>()?.CancelAttack();
@@ -85,7 +105,7 @@ public class EnemyHealth : Health_Base
 
         // Disable agent
         NodeAI.NodeAI_Agent agent = GetComponent<NodeAI.NodeAI_Agent>();
-        if (agent != null) agent.enabled = false;;
+        if (agent != null) agent.enabled = false; ;
 
         if (m_senses != null) m_senses.enabled = false;
 
@@ -93,9 +113,9 @@ public class EnemyHealth : Health_Base
         NavMeshAgent navMeshAgent = GetComponent<NavMeshAgent>();
         if (navMeshAgent != null) navMeshAgent.enabled = false;
 
-        
+
         Ragdoll ragdoll = GetComponent<Ragdoll>();
-        if (ragdoll != null) 
+        if (ragdoll != null)
         {
             GetComponentInChildren<Animator>().enabled = false;
         }

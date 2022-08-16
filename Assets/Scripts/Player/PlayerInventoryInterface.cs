@@ -19,63 +19,80 @@ public class PlayerInventoryInterface : MonoBehaviour
     [Header("Input")]
     // Input actions:
     // swap weapon
-    public InputAction swapWeaponAction;
+    public InputAction swapWeaponAction; ///< The action to swap weapons.
     // reload
-    public InputAction reloadAction;
+    public InputAction reloadAction; ///< The action to reload.
     // fire weapon
-    public InputAction fireWeaponAction;
+    public InputAction fireWeaponAction; ///< The action to fire the weapon.
     // aim weapon
-    public InputAction aimWeaponAction;
-    public InputAction useEquipmentAction;
+    public InputAction aimWeaponAction; ///< The action to aim the weapon.
+    public InputAction useEquipmentAction; ///< The action to use an equipment.
     // melee attack
-    public InputAction meleeAttackAction;
+    public InputAction meleeAttackAction; ///< The action to melee attack.
 
     [Header("Inventory")]
-    public string playerInventoryName = "player";
-    public Inventory playerInventory;
+    public string playerInventoryName = "player"; ///< The name of the player's inventory.
+    public Inventory playerInventory; ///< The player's inventory.
 
-    public enum SelectedWeaponType{ Primary, Secondary, None }
-    [SerializeField] public SelectedWeaponType selectedWeaponType = SelectedWeaponType.None;
-    public Item selectedWeapon;
-    public Item selectedEquipment;
+    /// <summary>
+    ///  Enum describing different weapon types in respect to what inventory slot they may be in.
+    /// </summary>
+    public enum SelectedWeaponType
+    {
+        Primary, ///< Primary weapons which may be equipped in the primary slot.
+        Secondary, ///< Secondary weapons which may be equipped in the secondary slot.
+        None ///< No weapon is selected.
+    }
+    [SerializeField] public SelectedWeaponType selectedWeaponType = SelectedWeaponType.None; ///< The currently selected weapon type.
+    public Item selectedWeapon; ///< The currently selected weapon.
+    public Item selectedEquipment; ///< The currently selected equipment.
 
     [Header("Melee")]
-    public float meleeAttackDamage = 20.0f;
-    public float meleeAttackRange = 2.0f;
-    public float meleeAttackSize = 2.0f;
-    public float meleeAttackCooldown = 0.5f;
-    private float meleeAttackTimer = 0.0f;
+    public float meleeAttackDamage = 20.0f; ///< The damage of the melee attack.
+    public float meleeAttackRange = 2.0f; ///< The range of the melee attack.
+    public float meleeAttackSize = 2.0f; ///< The size of the melee attack.
+    public float meleeAttackCooldown = 0.5f; ///< The cooldown of the melee attack.
+    private float meleeAttackTimer = 0.0f; ///< The timer of the melee attack.
 
     [Serializable]
+    /// <summary>
+    ///  Wrapper class grouping abstract weapon data with the weapons model.
+    /// </summary>
     public class WeaponModelLink
     {
-        public Item weapon;
-        public GameObject model;
-        public Transform weaponFirepoint;
-        public string animatorBoolName = "";
+        public Item weapon; ///< The weapon.
+        public GameObject model; ///< The model of the weapon.
+        public Transform weaponFirepoint; ///< The weapon's firepoint: the point where the weapon is fired from.
+        public string animatorBoolName = ""; ///< The name of the animator bool to set when the weapon is fired.
     }
 
 
-    [Header("References")]  
-    public List<WeaponModelLink> weaponModelLinks = new List<WeaponModelLink>();
+    [Header("References")]
+    public List<WeaponModelLink> weaponModelLinks = new List<WeaponModelLink>(); ///< The list of weapon model links.
 
-    public AimZone m_aimZone;
+    public AimZone m_aimZone; ///< The aim zone.
 
-    public Animator playerAnimator;
+    public Animator playerAnimator; ///< The player's animator.
 
-    private void OnDrawGizmos() {
+    /// <summary>
+    ///  Draw Gizmos.
+    /// </summary>
+    private void OnDrawGizmos()
+    {
         // get equipped weapon
         RangedWeapon rangedWeapon = selectedWeapon as RangedWeapon;
-        if (rangedWeapon) {
+        if (rangedWeapon)
+        {
             //draw m_rHits
             Gizmos.color = Color.red;
-            foreach (RangedWeapon.ShotInfo hit in rangedWeapon.m_allShots) {
+            foreach (RangedWeapon.ShotInfo hit in rangedWeapon.m_allShots)
+            {
                 Gizmos.DrawLine(hit.originPoint, hit.hitPoint);
 
                 //draw damage dealt in text
-                #if UNITY_EDITOR
+#if UNITY_EDITOR
                 Handles.Label(hit.hitPoint, hit.damage.ToString());
-                #endif
+#endif
             }
         }
 
@@ -100,7 +117,7 @@ public class PlayerInventoryInterface : MonoBehaviour
         // aimLines.startColor = aimLineStartColor;
         // aimLines.endColor = aimLineEndColor;
     }
-    
+
 
     // Update is called once per frame
     void Update()
@@ -111,7 +128,8 @@ public class PlayerInventoryInterface : MonoBehaviour
             SwapWeapon();
         }
 
-        if (selectedWeapon){
+        if (selectedWeapon)
+        {
             selectedWeapon.ManualUpdate(gameObject);
 
             Transform weaponFirepoint = GetWeaponFirepoint(selectedWeapon);
@@ -124,7 +142,8 @@ public class PlayerInventoryInterface : MonoBehaviour
                 // if fire weapon action is pressed and is not auto and is not shooting, shoot weapon || if fire weapon action is current down and is auto, shoot weapon
                 if ((fireWeaponAction.triggered && !rangedWeapon.m_isAutomnatic) || (fireWeaponAction.ReadValue<float>() > 0 && rangedWeapon.m_isAutomnatic))
                 {
-                    if (rangedWeapon.TryShoot(weaponFirepointPosition, fireDirection, gameObject, m_aimZone)){
+                    if (rangedWeapon.TryShoot(weaponFirepointPosition, fireDirection, gameObject, m_aimZone))
+                    {
                         // play shoot animation
                         playerAnimator.SetTrigger("Shoot");
                     }
@@ -133,7 +152,8 @@ public class PlayerInventoryInterface : MonoBehaviour
                 // if reload action is pressed, reload weapon
                 if (reloadAction.triggered)
                 {
-                    if (rangedWeapon.TryReload(gameObject)){
+                    if (rangedWeapon.TryReload(gameObject))
+                    {
                         playerAnimator.SetTrigger("Reload");
                     }
                 }
@@ -167,7 +187,8 @@ public class PlayerInventoryInterface : MonoBehaviour
         {
             SelectEquipment();
         }
-        if (selectedEquipment){
+        if (selectedEquipment)
+        {
             selectedEquipment.ManualUpdate(gameObject);
 
             if (useEquipmentAction.triggered)
@@ -198,6 +219,9 @@ public class PlayerInventoryInterface : MonoBehaviour
         }
     }
 
+    /// <summary>
+    ///  Attempts to melee attack.
+    /// </summary>
     private void TryMeleeAttack()
     {
         if (meleeAttackTimer > 0.0f)
@@ -243,6 +267,10 @@ public class PlayerInventoryInterface : MonoBehaviour
         }
     }
 
+    /// <summary>
+    ///  Updates the position and shape of the Aim Zone.
+    /// </summary>
+    /// @todo Fix interaction with snow material.
     private void UpdateAimZone()
     {
         if (m_aimZone)
@@ -255,10 +283,12 @@ public class PlayerInventoryInterface : MonoBehaviour
             PlayerMovement playerMovement = GetComponent<PlayerMovement>();
             if (!playerMovement) return;
 
-            if (!rangedWeapon.m_isAiming || rangedWeapon.m_reloadTimer > 0 || playerMovement.isRolling){
+            if (!rangedWeapon.m_isAiming || rangedWeapon.m_reloadTimer > 0 || playerMovement.isRolling)
+            {
                 m_aimZone.Hide();
             }
-            else{
+            else
+            {
                 m_aimZone.Show();
 
                 m_aimZone.SetCorners(CalculateAimZoneCorners());
@@ -283,7 +313,7 @@ public class PlayerInventoryInterface : MonoBehaviour
 
         PlayerMovement playerMovement = GetComponent<PlayerMovement>();
         if (!playerMovement) return corners;
-        
+
         Vector3 aimPoint = playerMovement.GetMouseAimPlanePoint();
 
         float currentAimAngle = rangedWeapon.CalcCurrentAimAngle();
@@ -304,7 +334,16 @@ public class PlayerInventoryInterface : MonoBehaviour
         return corners;
     }
 
-    public GameObject GetWeaponModel(Item weapon){
+
+    /// <summary>
+    /// If the weapon exists, return the weapon model.
+    /// </summary>
+    /// <param name="Item">The weapon item that you want to get the model for.</param>
+    /// <returns>
+    /// The weapon model.
+    /// </returns>
+    public GameObject GetWeaponModel(Item weapon)
+    {
         if (!weapon) return null;
         foreach (WeaponModelLink link in weaponModelLinks)
         {
@@ -316,6 +355,13 @@ public class PlayerInventoryInterface : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// If the weapon exists, return the weapon's firepoint.
+    /// </summary>
+    /// <param name="Item">The weapon item that you want to get the firepoint for.</param>
+    /// <returns>
+    /// The weapon firepoint of the weapon that is being passed in.
+    /// </returns>
     public Transform GetWeaponFirepoint(Item weapon)
     {
         if (!weapon) return null;
@@ -329,6 +375,14 @@ public class PlayerInventoryInterface : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    /// It returns the animator bool name of the weapon model link that has the same id as the weapon
+    /// passed in
+    /// </summary>
+    /// <param name="Item">The weapon item that you want to get the animator bool name for.</param>
+    /// <returns>
+    /// The animator bool name of the weapon.
+    /// </returns>
     public string GetWeaponAnimatorBoolName(Item weapon)
     {
         foreach (WeaponModelLink link in weaponModelLinks)
@@ -341,7 +395,15 @@ public class PlayerInventoryInterface : MonoBehaviour
         return "";
     }
 
-    public void SwapWeapon(){
+    /// <summary>
+    /// If the player has a primary weapon, select the secondary weapon. If the player has a secondary
+    /// weapon, select the primary weapon. If the player has no weapons, select no weapon
+    /// </summary>
+    /// <returns>
+    /// The method is returning the selected weapon type.
+    /// </returns>
+    public void SwapWeapon()
+    {
         // if inventory is null, return
         if (playerInventory == null) return;
 
@@ -349,25 +411,36 @@ public class PlayerInventoryInterface : MonoBehaviour
         if (selectedWeaponType == SelectedWeaponType.Primary)
         {
             SelectWeapon(SelectedWeaponType.Secondary);
-        } 
+        }
         else if (selectedWeaponType == SelectedWeaponType.Secondary)
         {
             SelectWeapon(SelectedWeaponType.Primary);
         }
 
         // if selected weapon is null, try to select primary, secondary, then none
-        if (selectedWeapon == null){
+        if (selectedWeapon == null)
+        {
             SelectWeapon(SelectedWeaponType.Primary);
-            if (selectedWeapon == null){
+            if (selectedWeapon == null)
+            {
                 SelectWeapon(SelectedWeaponType.Secondary);
-                if (selectedWeapon == null){
+                if (selectedWeapon == null)
+                {
                     SelectWeapon(SelectedWeaponType.None);
                 }
             }
         }
     }
 
-    public void SelectWeapon(SelectedWeaponType _type){
+    /// <summary>
+    /// It selects a weapon from the inventory and enables the weapon model
+    /// </summary>
+    /// <param name="_type">The weapon type that you want to select.</param>
+    /// <returns>
+    /// The weapon that is selected.
+    /// </returns>
+    public void SelectWeapon(SelectedWeaponType _type)
+    {
         selectedWeaponType = _type;
 
         // if inventory is null, return
@@ -396,7 +469,16 @@ public class PlayerInventoryInterface : MonoBehaviour
         }
     }
 
-    public void SelectEquipment(){
+
+    /// <summary>
+    /// If the player's inventory is not null, and the third slot in the inventory is not null, then set
+    /// the selected equipment to the item in the third slot
+    /// </summary>
+    /// <returns>
+    /// The selected equipment is being returned.
+    /// </returns>
+    public void SelectEquipment()
+    {
         // if inventory is null, return
         if (playerInventory == null) return;
 
@@ -407,7 +489,12 @@ public class PlayerInventoryInterface : MonoBehaviour
         if (selectedEquipment == null) return;
     }
 
-    public void DisableAllWeaponModels(){
+
+    /// <summary>
+    /// Disable all weapon models
+    /// </summary>
+    public void DisableAllWeaponModels()
+    {
         foreach (WeaponModelLink link in weaponModelLinks)
         {
             if (link.model)
@@ -417,7 +504,11 @@ public class PlayerInventoryInterface : MonoBehaviour
         }
     }
 
-    public void DisableAllAnimatorWeapons(){
+    /// <summary>
+    /// Disable all the weapons in the animator
+    /// </summary>
+    public void DisableAllAnimatorWeapons()
+    {
         if (playerAnimator == null) return;
 
         foreach (WeaponModelLink link in weaponModelLinks)
@@ -429,15 +520,24 @@ public class PlayerInventoryInterface : MonoBehaviour
             }
         }
     }
-
-    private void OnEnable() {
+    /// <summary>
+    ///  Enables input when this object is enabled
+    /// </summary>
+    private void OnEnable()
+    {
         EnableInput();
     }
-
-    private void OnDisable() {
+    /// <summary>
+    /// Disables input when this object is disabled.
+    /// </summary>
+    private void OnDisable()
+    {
         DisableInput();
     }
 
+    /// <summary>
+    ///  Enables input actions.
+    /// </summary>
     public void EnableInput()
     {
         swapWeaponAction.Enable();
@@ -448,6 +548,9 @@ public class PlayerInventoryInterface : MonoBehaviour
         meleeAttackAction.Enable();
     }
 
+    /// <summary>
+    /// Disables input actions.
+    /// </summary>
     public void DisableInput()
     {
         swapWeaponAction.Disable();
