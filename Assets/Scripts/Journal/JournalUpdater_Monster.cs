@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JournalUpdater_Monster : JournalContentUpdater
+public class JournalUpdater_Monster : JournalContentUpdater  /// @todo comment
 {
     public JounralEntry.MonsterType bossType = JounralEntry.MonsterType.Bonestag;
 

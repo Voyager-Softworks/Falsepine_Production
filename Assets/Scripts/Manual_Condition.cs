@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Manual_Condition : LevelCondition
+public class Manual_Condition : LevelCondition  /// @todo comment
 {
-    public void Complete(){
+    public void Complete()
+    {
         m_isComplete = true;
     }
 

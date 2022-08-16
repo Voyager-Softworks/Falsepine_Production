@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TNTInteract : Interactable
+public class TNTInteract : Interactable  /// @todo comment
 {
     public GameObject explosion = null;
     public GameObject enemies = null;
@@ -37,7 +37,8 @@ public class TNTInteract : Interactable
             // get player gameobject
             GameObject player = FindObjectOfType<PlayerHealth>()?.transform.root.gameObject;
 
-            if (player != null){
+            if (player != null)
+            {
                 // send somatic event to all enemies
                 NodeAI.NodeAI_Senses[] senses = enemies.GetComponentsInChildren<NodeAI.NodeAI_Senses>();
                 foreach (NodeAI.NodeAI_Senses sense in senses)

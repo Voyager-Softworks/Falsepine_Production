@@ -8,7 +8,7 @@ using UnityEngine.UI;
 /// <summary>
 /// Applies a vignette to the screen.
 /// </summary>
-public class VignetteScript : MonoBehaviour
+public class VignetteScript : MonoBehaviour  /// @todo comment
 {
     public float stayTime = 0.15f;
     private float stayTimer = 0f;
@@ -18,7 +18,7 @@ public class VignetteScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame

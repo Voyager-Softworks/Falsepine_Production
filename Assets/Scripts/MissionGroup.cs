@@ -7,24 +7,24 @@ using System.Linq;
 using UnityEditor;
 #endif
 
-public class MissionGroup : MonoBehaviour
+public class MissionGroup : MonoBehaviour  /// @todo comment
 {
     public Mission m_linkedMission;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     // editor
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
     [CustomEditor(typeof(MissionGroup))]
     public class MissionGroupEditor : Editor
     {
@@ -94,5 +94,5 @@ public class MissionGroup : MonoBehaviour
             Debug.Log("Changed " + changed + " objectives.");
         }
     }
-    #endif
+#endif
 }

@@ -7,7 +7,7 @@ using System;
 /// Manages the in game economy, things like player and store money, unlocked items, item prices, etc.
 /// </summary>
 [Serializable]
-public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
+public class EconomyManager : MonoBehaviour, StatsManager.UsesStats  /// @todo comment
 {
     public static EconomyManager instance;
 
@@ -44,14 +44,18 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
 
     public int m_playerSilver = 0;
 
-    void Awake() {
-        if (instance == null) {
+    void Awake()
+    {
+        if (instance == null)
+        {
             instance = this;
             //do not destroy this object
             DontDestroyOnLoad(this);
 
             //LoadMissions();
-        } else {
+        }
+        else
+        {
             Destroy(this);
             Destroy(gameObject);
         }
@@ -59,14 +63,16 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
 
     public void RefillStoreInventory()
     {
-        
+
     }
 
-    public bool CanAfford(int _amount){
+    public bool CanAfford(int _amount)
+    {
         return m_playerSilver >= _amount;
     }
 
-    public void Spend(int _amount){
+    public void Spend(int _amount)
+    {
         m_playerSilver -= _amount;
     }
 }

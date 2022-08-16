@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnBaitScript : MonoBehaviour
+public class SpawnBaitScript : MonoBehaviour  /// @todo comment
 {
     public bool isCorrectBait = false;
 
@@ -23,6 +23,6 @@ public class SpawnBaitScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

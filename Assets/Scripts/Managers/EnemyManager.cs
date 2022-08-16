@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 ///  Script that manages enemies in the open world.
 /// </summary>
-public class EnemyManager : MonoBehaviour
+public class EnemyManager : MonoBehaviour  /// @todo comment
 {
     public GameObject enemiesObject;
     public Rect extents;

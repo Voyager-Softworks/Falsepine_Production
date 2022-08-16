@@ -7,13 +7,13 @@ using UnityEngine.UI;
 /// <summary>
 /// Manages the display of the custom cursor.
 /// </summary>
-public class CursorScript : MonoBehaviour
+public class CursorScript : MonoBehaviour  /// @todo comment
 {
     public Image cursorImage;
     public Sprite aimCursor;
     public Sprite reloadCursor;
 
-    public bool setOnStart = true; 
+    public bool setOnStart = true;
 
     // Start is called before the first frame update
     void Start()
@@ -37,13 +37,14 @@ public class CursorScript : MonoBehaviour
         // else
         {
             cursorImage.enabled = true;
-            
-            if (cursorImage == null || aimCursor == null || reloadCursor == null) {
+
+            if (cursorImage == null || aimCursor == null || reloadCursor == null)
+            {
                 Debug.LogError("CursorScript: Missing cursor image or cursor sprites");
                 return;
             }
 
-            
+
             //get mouse pos
             Vector2 mousePos = Mouse.current.position.ReadValue();
             //set cursor pos

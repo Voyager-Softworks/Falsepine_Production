@@ -13,28 +13,33 @@ public class Ragdoll : MonoBehaviour
     public void EnableRagdoll()
     {
         var animator = GetComponent<Animator>();
-        if(animator)
+        if (animator)
         {
             animator.enabled = false;
         }
         var colliders = GetComponents<Collider>();
-        foreach(var collider in colliders)
+        foreach (var collider in colliders)
         {
             collider.enabled = false;
         }
         var rigidbodies = GetComponentsInChildren<Rigidbody>();
-        foreach(var rb in rigidbodies)
+        foreach (var rb in rigidbodies)
         {
             rb.isKinematic = false;
         }
     }
 
+    /// <summary>
+    /// "When the player dies, enable the ragdoll and add a force to the rigidbodies in the direction of
+    /// the hit point."
+    /// </summary>
+    /// <param name="context">The context of the death.</param>
     public void RagdollOnDeath(Health_Base.DeathContext context)
     {
         EnableRagdoll();
         // Add force to rigidbody in the direction of the hit point.
         var rigidbodies = GetComponentsInChildren<Rigidbody>();
-        foreach(var rb in rigidbodies)
+        foreach (var rb in rigidbodies)
         {
             rb.velocity = context.Direction.normalized * 4.0f;
         }
@@ -46,12 +51,12 @@ public class Ragdoll : MonoBehaviour
     public void DisableRagdoll()
     {
         var animator = GetComponent<Animator>();
-        if(animator)
+        if (animator)
         {
             animator.enabled = true;
         }
         var rigidbodies = GetComponentsInChildren<Rigidbody>();
-        foreach(var rb in rigidbodies)
+        foreach (var rb in rigidbodies)
         {
             rb.isKinematic = true;
         }

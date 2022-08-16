@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 /// Used on sound prefabs to automatically destroy after the sound plays
 /// </summary>
-public class AutoSound : MonoBehaviour
+public class AutoSound : MonoBehaviour  /// @todo comment
 {
     public bool playOnStart = true;
     public bool destroyOnEnd = true;

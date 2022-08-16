@@ -11,7 +11,7 @@ using UnityEngine.EventSystems;
 /// <summary>
 /// A base script for 3D objects that can be clicked on.
 /// </summary>
-public class ClickableObject : MonoBehaviour
+public class ClickableObject : MonoBehaviour  /// @todo comment
 {
     //collider to check for click
     public Collider[] colliders;
@@ -38,10 +38,12 @@ public class ClickableObject : MonoBehaviour
     {
         if (worldText != null)
         {
-            if (CheckMouseOver()){
+            if (CheckMouseOver())
+            {
                 worldText.gameObject.SetActive(true);
             }
-            else{
+            else
+            {
                 worldText.gameObject.SetActive(false);
             }
         }
@@ -55,7 +57,8 @@ public class ClickableObject : MonoBehaviour
         }
     }
 
-    public bool CheckMouseOver(){
+    public bool CheckMouseOver()
+    {
         if (EventSystem.current.IsPointerOverGameObject())
         {
             return false;

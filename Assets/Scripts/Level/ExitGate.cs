@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-public class ExitGate : MonoBehaviour
+public class ExitGate : MonoBehaviour  /// @todo comment
 {
     public enum GateDestination
     {
@@ -60,7 +60,8 @@ public class ExitGate : MonoBehaviour
         foreach (LevelCondition condition in m_conditions)
         {
             // skip entries that are not enabled
-            if (!condition.enabled || condition.gameObject.activeSelf == false){
+            if (!condition.enabled || condition.gameObject.activeSelf == false)
+            {
                 continue;
             }
 
@@ -70,7 +71,8 @@ public class ExitGate : MonoBehaviour
                 break;
             }
         }
-        if (!m_unlocked && allConditionsMet){
+        if (!m_unlocked && allConditionsMet)
+        {
             Unlock();
         }
 
@@ -84,12 +86,14 @@ public class ExitGate : MonoBehaviour
         lockedObject.SetActive(false);
         unlockedObject.SetActive(true);
 
-        if (unlockSound != null){
+        if (unlockSound != null)
+        {
             Instantiate(unlockSound, transform.position, Quaternion.identity);
         }
 
         // complete mission
-        if (tryCompleteMission && MissionManager.instance?.GetCurrentMission() != null){
+        if (tryCompleteMission && MissionManager.instance?.GetCurrentMission() != null)
+        {
             MissionManager.instance.GetCurrentMission().SetCompleted(true);
         }
     }
@@ -103,11 +107,13 @@ public class ExitGate : MonoBehaviour
 
     public void TryGoToDestination()
     {
-        if (!CheckConditions()){
+        if (!CheckConditions())
+        {
             return;
         }
 
-        if (m_isLoading){
+        if (m_isLoading)
+        {
             return;
         }
         m_isLoading = true;
@@ -123,14 +129,16 @@ public class ExitGate : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if (other.transform.root.tag == "Player") {
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.root.tag == "Player")
+        {
             TryGoToDestination();
         }
     }
 
     // Editor
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
     [CustomEditor(typeof(ExitGate))]
     public class ExitGateEditor : Editor
     {
@@ -143,12 +151,14 @@ public class ExitGate : MonoBehaviour
             //space
             EditorGUILayout.Space();
 
-            if (GUILayout.Button("Set Up")) {
+            if (GUILayout.Button("Set Up"))
+            {
                 SetUp();
             }
         }
 
-        public void SetUp(){
+        public void SetUp()
+        {
             // add all conditions in the scene to the list
             ExitGate exitGate = target as ExitGate;
             if (exitGate == null) return;
@@ -197,5 +207,5 @@ public class ExitGate : MonoBehaviour
             EditorUtility.SetDirty(exitGate);
         }
     }
-    #endif
+#endif
 }

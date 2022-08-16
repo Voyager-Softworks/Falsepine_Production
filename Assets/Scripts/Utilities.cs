@@ -4,23 +4,25 @@ using UnityEngine;
 using System;
 
 
- #if UNITY_EDITOR
- using UnityEditor;
- #endif
- 
- /// <summary>
- /// Some useful utilities for the game.
- /// </summary>
- namespace Utilities
- {
-     [System.Serializable]
-     public class SceneField
-     {
-         [SerializeField] private UnityEngine.Object m_sceneAsset;
-         public UnityEngine.Object SceneAsset { 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+/// <summary>
+/// Some useful utilities for the game.
+/// </summary>
+namespace Utilities
+{
+    [System.Serializable]
+    public class SceneField  /// @todo comment
+    {
+        [SerializeField] private UnityEngine.Object m_sceneAsset;
+        public UnityEngine.Object SceneAsset
+        {
             get { return m_sceneAsset; }
-            #if UNITY_EDITOR
-            set { 
+#if UNITY_EDITOR
+            set
+            {
                 m_sceneAsset = value;
                 var fullScenePath = AssetDatabase.GetAssetPath(m_sceneAsset);
                 var assetsIndex = fullScenePath.IndexOf("Assets", StringComparison.Ordinal) + 7;
@@ -28,26 +30,26 @@ using System;
                 fullScenePath = fullScenePath.Substring(assetsIndex, extensionIndex - assetsIndex);
                 m_scenePath = fullScenePath;
             }
-            #endif
+#endif
         }
-    
 
-         [SerializeField] private string m_scenePath = "";
-         public string scenePath
-         {
-             get { return m_scenePath; }
-         }
- 
-         // makes it work with the existing Unity methods (LoadLevel/LoadScene)
-         public static implicit operator string(SceneField sceneField)
-         {
-             return sceneField.scenePath;
-         }
-     }
 
-    #if UNITY_EDITOR
+        [SerializeField] private string m_scenePath = "";
+        public string scenePath
+        {
+            get { return m_scenePath; }
+        }
+
+        // makes it work with the existing Unity methods (LoadLevel/LoadScene)
+        public static implicit operator string(SceneField sceneField)
+        {
+            return sceneField.scenePath;
+        }
+    }
+
+#if UNITY_EDITOR
     [CustomPropertyDrawer(typeof(SceneField))]
-    public class SceneFieldPropertyDrawer : PropertyDrawer
+    public class SceneFieldPropertyDrawer : PropertyDrawer  /// @todo comment
     {
         private int fieldAmount = 2;
         private float fieldSize = 20;
@@ -73,11 +75,12 @@ using System;
                     // display the path
                     EditorGUI.LabelField(position, scenePath.stringValue);
                 }
-                else{
+                else
+                {
                     fieldAmount = 2;
 
                     EditorGUI.BeginChangeCheck();
-                    
+
                     UnityEngine.Object value = EditorGUI.ObjectField(position, sceneAsset.objectReferenceValue, typeof(SceneAsset), false);
 
                     // if any changes, update the asset and the scene path
@@ -128,23 +131,23 @@ using System;
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             //set the height of the drawer by the field size and padding
-            return (fieldSize * fieldAmount)+(padding * fieldAmount);
+            return (fieldSize * fieldAmount) + (padding * fieldAmount);
         }
 
         // public override float GetPropertyHeight (SerializedProperty property, GUIContent label) {
- 
+
         //     SerializedObject childObj = new UnityEditor.SerializedObject(property.objectReferenceValue as Command);
         //     SerializedProperty ite = childObj.GetIterator();
-    
+
         //     float totalHeight = EditorGUI.GetPropertyHeight (property, label, true) + EditorGUIUtility.standardVerticalSpacing;
-    
+
         //     while (ite.NextVisible(true))
         //     {
         //         totalHeight += EditorGUI.GetPropertyHeight(ite, label, true) + EditorGUIUtility.standardVerticalSpacing;
         //     }
-    
+
         //     return totalHeight;
         // }
     }
-    #endif
+#endif
 }

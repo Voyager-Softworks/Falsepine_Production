@@ -10,7 +10,7 @@ using UnityEngine.Events;
 /// <summary>
 /// Fades the screen out, then transitions to another scene.
 /// </summary>
-public class FadeScript : MonoBehaviour
+public class FadeScript : MonoBehaviour  /// @todo comment
 {
     private bool m_trueCompleteFalseOver = true;
 
@@ -81,10 +81,12 @@ public class FadeScript : MonoBehaviour
 
     public void GotoDestination()
     {
-        if (m_trueCompleteFalseOver){
+        if (m_trueCompleteFalseOver)
+        {
             LevelController.LoadComplete();
         }
-        else{
+        else
+        {
             LevelController.LoadGameOver();
         }
     }
@@ -110,12 +112,14 @@ public class FadeScript : MonoBehaviour
         FadeFromAToB(Color.clear, Color.black, _fadeTime, _fadeDelay);
     }
 
-    public void StartScreen(){
+    public void StartScreen()
+    {
         isStartFade = true;
         FadeFromBlackToClear(3.0f, 2.0f);
     }
 
-    public void EndScreen(bool _trueCompleteFalseOver = true){
+    public void EndScreen(bool _trueCompleteFalseOver = true)
+    {
         isEndFade = true;
         FadeFromClearToBlack(3.0f, 2.0f);
         m_trueCompleteFalseOver = _trueCompleteFalseOver;

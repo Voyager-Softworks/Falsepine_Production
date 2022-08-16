@@ -9,7 +9,7 @@ using UnityEngine.UI;
 /// @deprecated not used anymore. <br/>
 /// Class to manage old UI for the bag.
 /// </summary>
-public class BagUIList : MonoBehaviour
+public class BagUIList : MonoBehaviour  /// @todo comment
 {
     public GameObject bagPanel;
     public List<GameObject> bagSlots;
@@ -51,7 +51,8 @@ public class BagUIList : MonoBehaviour
         return GetBagslot(index).GetComponentInChildren<TextMeshProUGUI>();
     }
 
-    public void ClearSlots(){
+    public void ClearSlots()
+    {
         for (int i = 0; i < bagSlots.Count; i++)
         {
             if (bagSlots[i] == null || GetBagSlotIcon(i) == null || GetBagSlotText(i) == null) continue;

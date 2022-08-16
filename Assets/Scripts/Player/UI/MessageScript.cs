@@ -11,7 +11,7 @@ using UnityEngine.Events;
 /// @deprecated not used anymore. <br/>
 /// Class to manage old UI for the message popup.
 /// </summary>
-public class MessageScript : MonoBehaviour
+public class MessageScript : MonoBehaviour  /// @todo comment
 {
     public float startFadeDelay = 3.0f;
     private float startFadeDelayTimer = 0f;
@@ -56,7 +56,7 @@ public class MessageScript : MonoBehaviour
     {
         if (text == null) text = GetComponentInChildren<TextMeshProUGUI>();
         if (text == null) return;
-        
+
         text.text = _message;
     }
 }

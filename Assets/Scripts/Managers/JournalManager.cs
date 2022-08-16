@@ -13,10 +13,11 @@ using System.IO;
 /// Singleton donotdestroy script that handles the journal system
 /// </summary>
 [Serializable]
-public class JournalManager : MonoBehaviour
+public class JournalManager : MonoBehaviour  /// @todo comment
 {
     [Serializable]
-    public class ContentsLink {
+    public class ContentsLink  /// @todo comment
+    {
         public Button button;
         public GameObject contents;
     }
@@ -36,11 +37,11 @@ public class JournalManager : MonoBehaviour
     public GameObject journalPanel;
 
     public List<ContentsLink> contentsLinks;
-    
+
     private AudioSource _audioSource;
 
     [Serializable]
-    public class MonsterClues
+    public class MonsterClues  /// @todo comment
     {
         public string monsterName = "";
         public UI_MonsterClues monsterCluesUI;
@@ -48,7 +49,7 @@ public class JournalManager : MonoBehaviour
         public int cluesFound;
 
         [Serializable]
-        public class Data
+        public class Data  /// @todo comment
         {
             [SerializeField] public string monsterName = "";
             [SerializeField] public int loreFound;
@@ -72,7 +73,8 @@ public class JournalManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null) {
+        if (instance == null)
+        {
             instance = this;
             //do not destroy this object
             DontDestroyOnLoad(this);
@@ -80,13 +82,17 @@ public class JournalManager : MonoBehaviour
             LoadJournal(SaveManager.currentSaveSlot);
 
             //add listeners to the buttons
-            foreach (ContentsLink link in contentsLinks) {
-                link.button?.onClick.AddListener(() => {
+            foreach (ContentsLink link in contentsLinks)
+            {
+                link.button?.onClick.AddListener(() =>
+                {
                     OpenContents(link.contents);
                     link.button.interactable = false;
                 });
             }
-        } else {
+        }
+        else
+        {
             Destroy(this);
             Destroy(gameObject);
         }
@@ -146,23 +152,33 @@ public class JournalManager : MonoBehaviour
     void Update()
     {
         // update the monster clues
-        foreach (MonsterClues clue in monsterCluesList) {
-            if (clue.monsterCluesUI != null) {
-                for (int i = 0; i < clue.monsterCluesUI.lore.Count; i++) {
-                    if (i < clue.loreFound) {
+        foreach (MonsterClues clue in monsterCluesList)
+        {
+            if (clue.monsterCluesUI != null)
+            {
+                for (int i = 0; i < clue.monsterCluesUI.lore.Count; i++)
+                {
+                    if (i < clue.loreFound)
+                    {
                         clue.monsterCluesUI.lore[i].transform.GetChild(0).gameObject.SetActive(true);
                         clue.monsterCluesUI.lore[i].transform.GetChild(1).gameObject.SetActive(false);
-                    } else {
+                    }
+                    else
+                    {
                         clue.monsterCluesUI.lore[i].transform.GetChild(0).gameObject.SetActive(false);
                         clue.monsterCluesUI.lore[i].transform.GetChild(1).gameObject.SetActive(true);
                     }
                 }
 
-                for (int i = 0; i < clue.monsterCluesUI.clue.Count; i++) {
-                    if (i < clue.cluesFound) {
+                for (int i = 0; i < clue.monsterCluesUI.clue.Count; i++)
+                {
+                    if (i < clue.cluesFound)
+                    {
                         clue.monsterCluesUI.clue[i].transform.GetChild(0).gameObject.SetActive(true);
                         clue.monsterCluesUI.clue[i].transform.GetChild(1).gameObject.SetActive(false);
-                    } else {
+                    }
+                    else
+                    {
                         clue.monsterCluesUI.clue[i].transform.GetChild(0).gameObject.SetActive(false);
                         clue.monsterCluesUI.clue[i].transform.GetChild(1).gameObject.SetActive(true);
                     }
@@ -179,10 +195,11 @@ public class JournalManager : MonoBehaviour
     {
         if (entry == null) return;
 
-        if (undiscoveredEntries.Contains(entry)) {
+        if (undiscoveredEntries.Contains(entry))
+        {
             undiscoveredEntries.Remove(entry);
         }
-        
+
         discoveredEntries.Add(entry);
     }
 
@@ -193,14 +210,16 @@ public class JournalManager : MonoBehaviour
     {
         // get valid entries
         List<JounralEntry> undisLore = new List<JounralEntry>();
-        foreach (JounralEntry entry in undiscoveredEntries) {
+        foreach (JounralEntry entry in undiscoveredEntries)
+        {
             if (monsterType != null && entry.m_monsterType != monsterType) continue;
             if (entryType != null && entry.m_entryType != entryType) continue;
             undisLore.Add(entry);
         }
 
         // if there is any, pick one at random and discover it
-        if (undisLore.Count > 0) {
+        if (undisLore.Count > 0)
+        {
             int index = UnityEngine.Random.Range(0, undisLore.Count);
             DiscoverEntry(undisLore[index]);
         }
@@ -264,7 +283,7 @@ public class JournalManager : MonoBehaviour
 
         StreamReader reader = new StreamReader(file);
         string json = reader.ReadToEnd();
-        
+
         // parse the json
         List<MonsterClues.Data> data = new List<MonsterClues.Data>();
         foreach (string line in json.Split('\n'))
@@ -294,12 +313,14 @@ public class JournalManager : MonoBehaviour
 
     public void DeleteJournalSave(int saveSlot)
     {
-        if (File.Exists(GetSaveFilePath(saveSlot))){
+        if (File.Exists(GetSaveFilePath(saveSlot)))
+        {
             File.Delete(GetSaveFilePath(saveSlot));
         }
     }
 
-    public void UpdateJournalUI(){
+    public void UpdateJournalUI()
+    {
         //update mission cards
         MissionManager missionManager = FindObjectOfType<MissionManager>();
 
@@ -308,7 +329,8 @@ public class JournalManager : MonoBehaviour
             Debug.Log("No MissionManager found in the scene");
             return;
         }
-        else{
+        else
+        {
             missionManager.UpdateAllMissionCards();
         }
     }
@@ -327,7 +349,7 @@ public class JournalManager : MonoBehaviour
 
     public void OpenJournal()
     {
-        if (journalPanel.activeSelf )return;
+        if (journalPanel.activeSelf) return;
 
         journalPanel.SetActive(true);
         if (_audioSource && openJournalSound) _audioSource.PlayOneShot(openJournalSound);

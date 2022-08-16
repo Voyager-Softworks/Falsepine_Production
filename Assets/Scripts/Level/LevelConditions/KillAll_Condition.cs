@@ -7,7 +7,7 @@ using System.Linq;
 /// A condition which requires all enemies to be killed.
 /// @Todo: Make it more reliable when checking for enemies.
 /// </summary>
-public class KillAll_Condition : LevelCondition
+public class KillAll_Condition : LevelCondition  /// @todo comment
 {
     protected override void UpdateCondition()
     {
@@ -16,8 +16,10 @@ public class KillAll_Condition : LevelCondition
         List<EnemyHealth> enemies = GameObject.FindObjectsOfType<EnemyHealth>(/* true */).ToList();
 
         // check that all of them are dead, if not, set false, break
-        foreach (EnemyHealth enemy in enemies){
-            if (!enemy.hasDied){
+        foreach (EnemyHealth enemy in enemies)
+        {
+            if (!enemy.hasDied)
+            {
                 m_isComplete = false;
                 break;
             }

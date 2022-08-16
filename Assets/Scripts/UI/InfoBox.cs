@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 /// <summary>
 /// Called by other scripts to display information at the cursor
 /// </summary>
-public class InfoBox : MonoBehaviour
+public class InfoBox : MonoBehaviour  /// @todo comment
 {
     public float fullBrightTime = 1.0f;
     private float fullBrightTimer = 0.0f;
@@ -125,32 +125,37 @@ public class InfoBox : MonoBehaviour
         }
     }
 
-    public void Display(Item item, float onTime = 1, float offTime = 1){
+    public void Display(Item item, float onTime = 1, float offTime = 1)
+    {
         if (!item) return;
         DisplayInfo(item.m_displayName, item.m_icon, item.m_description, onTime, offTime);
         UpdateMods(item.GetStatMods());
     }
 
-    private void DisableBox(){
+    private void DisableBox()
+    {
         background.enabled = false;
         title.enabled = false;
         icon.enabled = false;
         description.enabled = false;
     }
-    private void EnableBox(){
+    private void EnableBox()
+    {
         background.enabled = true;
         title.enabled = true;
         icon.enabled = true;
         description.enabled = true;
     }
 
-    private void DisableModsBox(){
+    private void DisableModsBox()
+    {
         modBackground.enabled = false;
         modTitle.enabled = false;
         modList.enabled = false;
         modIcon.enabled = false;
     }
-    private void EnableModsBox(){
+    private void EnableModsBox()
+    {
         modBackground.enabled = true;
         modTitle.enabled = true;
         modList.enabled = true;

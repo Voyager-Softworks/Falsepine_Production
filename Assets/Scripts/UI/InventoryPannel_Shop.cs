@@ -8,7 +8,7 @@ using System;
 /// This class is used to manage the inventory UI.<br/>
 /// Used on inventory pannels to display items, and allow the player to interact with them.
 /// </summary>
-public class InventoryPannel_Shop : InventoryPannel
+public class InventoryPannel_Shop : InventoryPannel  /// @todo comment
 {
 
     public Item itemToBuy = null;
@@ -30,7 +30,8 @@ public class InventoryPannel_Shop : InventoryPannel
         base.UpdateUI();
     }
 
-    protected override void LinkGridItems(){
+    protected override void LinkGridItems()
+    {
         base.LinkGridItems();
     }
 

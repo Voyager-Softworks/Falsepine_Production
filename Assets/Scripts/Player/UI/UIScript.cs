@@ -10,7 +10,7 @@ using System;
 /// <summary>
 /// Manages the player UI.
 /// </summary>
-public class UIScript : MonoBehaviour
+public class UIScript : MonoBehaviour  /// @todo comment
 {
     public CursorScript cursorScript;
 
@@ -42,7 +42,8 @@ public class UIScript : MonoBehaviour
 
     public UnityEvent OnStart;
 
-    private void Start() {
+    private void Start()
+    {
         if (cursorScript == null) cursorScript = GetComponent<CursorScript>();
         if (cursorScript == null) cursorScript = FindObjectOfType<CursorScript>();
 
@@ -174,13 +175,15 @@ public class UIScript : MonoBehaviour
         }
     }
 
-    private void OpenPauseMenu(){
+    private void OpenPauseMenu()
+    {
         if (pauseUI == null) return;
 
         pauseUI.SetActive(true);
     }
 
-    private void ClosePauseMenu(){
+    private void ClosePauseMenu()
+    {
         if (pauseUI == null) return;
 
         pauseUI.SetActive(false);

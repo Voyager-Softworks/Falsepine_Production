@@ -7,7 +7,7 @@ using System.Linq;
 /// A condition which requires all enemies to be killed.
 /// @Todo: Make it more reliable when checking for enemies.
 /// </summary>
-public class KillThis_Condition : LevelCondition
+public class KillThis_Condition : LevelCondition  /// @todo comment
 {
     protected override void UpdateCondition()
     {
@@ -17,7 +17,8 @@ public class KillThis_Condition : LevelCondition
         Health_Base health = GetComponent<Health_Base>();
         if (health == null) return;
 
-        if (health.hasDied){
+        if (health.hasDied)
+        {
             m_isComplete = true;
         }
     }

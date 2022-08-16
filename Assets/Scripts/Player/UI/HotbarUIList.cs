@@ -9,7 +9,7 @@ using UnityEngine.UI;
 /// @deprecated not used anymore. <br/>
 /// Class to manage old UI for the hotbar.
 /// </summary>
-public class HotbarUIList : MonoBehaviour
+public class HotbarUIList : MonoBehaviour  /// @todo comment
 {
     public GameObject hotbarPanel;
 
@@ -52,7 +52,8 @@ public class HotbarUIList : MonoBehaviour
         return texts[1];
     }
 
-    public void ClearSlots(){
+    public void ClearSlots()
+    {
         for (int i = 0; i < hotbarSlots.Count; i++)
         {
             if (hotbarSlots[i] == null || GetHotbarSlotIcon(i) == null || GetHotbarSlotHotkeyText(i) == null || GetHotbarSlotCountText(i) == null) continue;

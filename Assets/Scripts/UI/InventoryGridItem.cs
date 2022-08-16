@@ -11,7 +11,7 @@ using UnityEngine.Events;
 /// Grid item for displaying an item in the inventory.
 /// </summary>
 [Serializable]
-public class InventoryGridItem : MonoBehaviour
+public class InventoryGridItem : MonoBehaviour  /// @todo comment
 {
     public Image icon;
     public Image modIcon;
@@ -19,8 +19,10 @@ public class InventoryGridItem : MonoBehaviour
     public Button button;
 
     public Inventory.InventorySlot linkedSlot;
-    public Item itemInSlot {
-        get {
+    public Item itemInSlot
+    {
+        get
+        {
             return linkedSlot?.item;
         }
     }
@@ -30,13 +32,16 @@ public class InventoryGridItem : MonoBehaviour
     private Camera uiCamera = null;
     private InfoBox ib = null;
 
-    private void Start() {
+    private void Start()
+    {
         // find UI camera.
         // itterate through parents and check if they have a child with camera component.
         // if so, set it as the ui camera.
         Transform parent = transform.parent;
-        while (parent != null) {
-            if (parent.GetComponentInChildren<Camera>() != null) {
+        while (parent != null)
+        {
+            if (parent.GetComponentInChildren<Camera>() != null)
+            {
                 uiCamera = parent.GetComponentInChildren<Camera>();
                 break;
             }
@@ -47,7 +52,8 @@ public class InventoryGridItem : MonoBehaviour
         ib = FindObjectOfType<InfoBox>();
     }
 
-    private void Update() {
+    private void Update()
+    {
         // check if mouse is over this grid item
         Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
 
@@ -68,7 +74,8 @@ public class InventoryGridItem : MonoBehaviour
         }
     }
 
-    public void UpdateUI(){
+    public void UpdateUI()
+    {
         //check
         //if (itemInSlot == null) return;
 
@@ -76,14 +83,18 @@ public class InventoryGridItem : MonoBehaviour
         icon.sprite = itemInSlot?.m_icon;
         text.text = itemInSlot?.m_displayName;
 
-        if (itemInSlot?.GetStatMods().Count > 0) {
+        if (itemInSlot?.GetStatMods().Count > 0)
+        {
             modIcon.gameObject.SetActive(true);
-        } else {
+        }
+        else
+        {
             modIcon.gameObject.SetActive(false);
         }
     }
 
-    public void ClickItem(){
+    public void ClickItem()
+    {
         //TryTransferToOpenInventory();
 
         InventoryPannel parentPannel = GetComponentInParent<InventoryPannel>();
@@ -93,7 +104,8 @@ public class InventoryGridItem : MonoBehaviour
         OnClick.Invoke();
     }
 
-    public void TryTransferToOpenInventory(){
+    public void TryTransferToOpenInventory()
+    {
         if (linkedSlot == null) return;
         if (itemInSlot == null) return;
 

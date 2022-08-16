@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 ///  Script to handle throwing of items by the player.
 ///</summary>
-public class ItemThrow : MonoBehaviour
+public class ItemThrow : MonoBehaviour  /// @todo comment
 {
     public float m_throwDelay = 0.5f;
     private float m_throwTimer = 0.0f;

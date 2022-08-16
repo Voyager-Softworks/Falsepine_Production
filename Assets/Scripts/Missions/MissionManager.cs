@@ -14,7 +14,7 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Singleton donotdestroy script that handles the mission system
 /// </summary>
-public class MissionManager : MonoBehaviour 
+public class MissionManager : MonoBehaviour  /// @todo comment
 {
     public static MissionManager instance;
 
@@ -35,13 +35,16 @@ public class MissionManager : MonoBehaviour
     /// Serializable class that holds the mission data to be saved
     /// </summary>
     [Serializable]
-    public class MissionData{
+    public class MissionData  /// @todo comment
+    {
         [SerializeField] public List<MissionZone.Serializable_MissionZone> missionZones;
         [SerializeField] public MissionZone.Serializable_MissionZone currentZone;
     }
 
-    void Awake() {
-        if (instance == null) {
+    void Awake()
+    {
+        if (instance == null)
+        {
             instance = this;
             //do not destroy this object
             DontDestroyOnLoad(this);
@@ -49,7 +52,9 @@ public class MissionManager : MonoBehaviour
             LoadMissions(SaveManager.currentSaveSlot);
 
             SceneManager.sceneLoaded += OnSceneLoaded;
-        } else {
+        }
+        else
+        {
             Destroy(this);
             Destroy(gameObject);
         }
@@ -97,7 +102,8 @@ public class MissionManager : MonoBehaviour
             m_currentZone = m_missionZones[0];
             m_currentZone.Reset();
         }
-        else {
+        else
+        {
             // if there are no lesser or greater missions in the current zone, reset it
             if (m_currentZone.m_lesserMissions.Count == 0 && m_currentZone.m_greaterMissions.Count == 0)
             {
@@ -107,18 +113,19 @@ public class MissionManager : MonoBehaviour
 
         UpdateAllMissionCards();
     }
-    
+
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     /// <summary>
     /// Saves the mission data to json file
     /// </summary>
-    public void SaveMissions(int saveSlot){
+    public void SaveMissions(int saveSlot)
+    {
         // if the save folder doesn't exist, create it
         if (!Directory.Exists(GetSaveFolderPath(saveSlot)))
         {
@@ -150,8 +157,10 @@ public class MissionManager : MonoBehaviour
     /// <summary>
     /// Deserialize the missions from file and load them
     /// </summary>
-    public void LoadMissions(int saveSlot){
-        if (File.Exists(GetSaveFilePath(saveSlot))){
+    public void LoadMissions(int saveSlot)
+    {
+        if (File.Exists(GetSaveFilePath(saveSlot)))
+        {
             BinaryFormatter bf = new BinaryFormatter();
             FileStream file = File.Open(GetSaveFilePath(saveSlot), FileMode.Open);
 
@@ -194,8 +203,10 @@ public class MissionManager : MonoBehaviour
         UpdateAllMissionCards();
     }
 
-    public void DeleteMissionSave(int saveSlot){
-        if (File.Exists(GetSaveFilePath(saveSlot))){
+    public void DeleteMissionSave(int saveSlot)
+    {
+        if (File.Exists(GetSaveFilePath(saveSlot)))
+        {
             File.Delete(GetSaveFilePath(saveSlot));
         }
     }
@@ -203,7 +214,8 @@ public class MissionManager : MonoBehaviour
     /// <summary>
     /// Replace missions in list with new copies of the missions
     /// </summary>
-    public void ReinstantiateZones(){
+    public void ReinstantiateZones()
+    {
         // reinstatedate zones
         for (int i = 0; i < m_missionZones.Count; i++)
         {
@@ -227,7 +239,8 @@ public class MissionManager : MonoBehaviour
     /// <summary>
     /// Restarts and randomizes all zones.
     /// </summary>
-    public void ResetAllZones(){
+    public void ResetAllZones()
+    {
         // reset all zones
         foreach (MissionZone zone in m_missionZones)
         {
@@ -243,35 +256,43 @@ public class MissionManager : MonoBehaviour
     /// <summary>
     /// Try to accept and start the given mission
     /// </summary>
-    public void TryStartMission(Mission mission){
+    public void TryStartMission(Mission mission)
+    {
         if (mission == null) return;
         if (m_currentZone == null) return;
 
-        if (m_currentZone.TryStartMission(mission)){
+        if (m_currentZone.TryStartMission(mission))
+        {
             UpdateAllMissionCards();
         }
     }
 
-    public void TryEmbark(){
+    public void TryEmbark()
+    {
         //load level 1 if valid
-        if (GetCurrentMission() != null && !GetCurrentMission().m_isCompleted){
-            if (GetCurrentMission().m_size == Mission.MissionSize.LESSER){
+        if (GetCurrentMission() != null && !GetCurrentMission().m_isCompleted)
+        {
+            if (GetCurrentMission().m_size == Mission.MissionSize.LESSER)
+            {
                 LoadFirstLesserScene();
             }
-            else if (GetCurrentMission().m_size == Mission.MissionSize.GREATER){
+            else if (GetCurrentMission().m_size == Mission.MissionSize.GREATER)
+            {
                 LoadFirstGreaterScene();
             }
         }
     }
 
-    public void LoadFirstLesserScene(){
+    public void LoadFirstLesserScene()
+    {
         if (m_currentZone == null) return;
         if (m_currentZone.m_startScene == null) return;
 
         LevelController.LoadScene(m_currentZone.m_startScene.scenePath);
     }
 
-    public void LoadNextLesserScene(){
+    public void LoadNextLesserScene()
+    {
         if (m_currentZone == null) return;
 
         string nextPath = m_currentZone.GetNextLesserScenePath();
@@ -280,7 +301,8 @@ public class MissionManager : MonoBehaviour
         LevelController.LoadScene(nextPath);
     }
 
-    public void LoadFirstGreaterScene(){
+    public void LoadFirstGreaterScene()
+    {
         if (m_currentZone == null) return;
         if (m_currentZone.m_startScene == null) return;
 
@@ -290,10 +312,12 @@ public class MissionManager : MonoBehaviour
     /// <summary>
     /// Try to return the mission
     /// </summary>
-    public void TryReturnMission(){
+    public void TryReturnMission()
+    {
         if (m_currentZone == null) return;
 
-        if (m_currentZone.TryReturnMission()){
+        if (m_currentZone.TryReturnMission())
+        {
             UpdateAllMissionCards();
         }
     }
@@ -301,7 +325,8 @@ public class MissionManager : MonoBehaviour
     /// <summary>
     /// Updates all mission cards.
     /// </summary>
-    public void UpdateAllMissionCards(){
+    public void UpdateAllMissionCards()
+    {
         MissionCardUI[] missionCardUIList = FindObjectsOfType<MissionCardUI>(true);
 
         if (missionCardUIList == null) return;
@@ -320,7 +345,8 @@ public class MissionManager : MonoBehaviour
     /// </summary>
     /// <param name="_zone"></param>
     /// <returns></returns>
-    public int GetZoneIndex(MissionZone _zone){
+    public int GetZoneIndex(MissionZone _zone)
+    {
         return m_missionZones.IndexOf(_zone);
     }
 
@@ -329,7 +355,8 @@ public class MissionManager : MonoBehaviour
     /// </summary>
     /// <param name="_index"></param>
     /// <returns></returns>
-    public MissionZone GetZone(int _index){
+    public MissionZone GetZone(int _index)
+    {
         if (_index < 0 || _index >= m_missionZones.Count) return null;
         return m_missionZones[_index];
     }
@@ -338,7 +365,8 @@ public class MissionManager : MonoBehaviour
     /// Gets the lesser missions of the current zone
     /// </summary>
     /// <returns></returns>
-    public List<Mission> GetLesserMissions(){
+    public List<Mission> GetLesserMissions()
+    {
         if (m_currentZone == null) return null;
 
         return m_currentZone.m_lesserMissions;
@@ -348,7 +376,8 @@ public class MissionManager : MonoBehaviour
     /// Gets the greater missions of the current zone
     /// </summary>
     /// <returns></returns>
-    public List<Mission> GetGreaterMissions(){
+    public List<Mission> GetGreaterMissions()
+    {
         if (m_currentZone == null) return null;
 
         return m_currentZone.m_greaterMissions;
@@ -358,7 +387,8 @@ public class MissionManager : MonoBehaviour
     /// Gets the current mission of the current zone
     /// </summary>
     /// <returns></returns>
-    public Mission GetCurrentMission(){
+    public Mission GetCurrentMission()
+    {
         if (m_currentZone == null) return null;
 
         return m_currentZone.currentMission;
@@ -370,13 +400,15 @@ public class MissionManager : MonoBehaviour
     /// <param name="_size"></param>
     /// <param name="_index"></param>
     /// <returns></returns>
-    public Mission GetMission(Mission.MissionSize _size, int _index){
+    public Mission GetMission(Mission.MissionSize _size, int _index)
+    {
         if (m_currentZone == null) return null;
 
         return m_currentZone.GetMission(_size, _index);
     }
 
-    public int GetCurrentLesserSceneIndex(){
+    public int GetCurrentLesserSceneIndex()
+    {
         if (m_currentZone == null) return -1;
 
         return m_currentZone.GetCurrentLesserSceneIndex();

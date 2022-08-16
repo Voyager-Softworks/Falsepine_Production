@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Creates a trail behind a bullet.
 /// </summary>
-public class BulletTrail : MonoBehaviour
+public class BulletTrail : MonoBehaviour  /// @todo comment
 {
     public bool fadeOverTime = true;
     public float fadeRate = 1.0f;

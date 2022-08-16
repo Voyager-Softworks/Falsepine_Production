@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class DynamicSnowPainter : MonoBehaviour
+public class DynamicSnowPainter : MonoBehaviour  /// @todo comment
 {
     // Start is called before the first frame update
-    private void Awake() {
+    private void Awake()
+    {
         DynamicSnow ds = FindObjectOfType<DynamicSnow>();
-        if (ds != null) {
+        if (ds != null)
+        {
             EnableVFX(true);
         }
-        else{
+        else
+        {
             EnableVFX(false);
         }
     }

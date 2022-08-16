@@ -8,7 +8,7 @@ using UnityEngine.AI;
 /// <summary>
 /// Manages the health of enemies.
 /// </summary>
-public class PropHealth : Health_Base
+public class PropHealth : Health_Base  /// @todo comment
 {
     public GameObject m_brokenPrefab = null;
 
@@ -29,10 +29,12 @@ public class PropHealth : Health_Base
         base.TakeDamage(_damage);
     }
 
-    public override void Die(){
+    public override void Die()
+    {
         base.Die();
 
-        if (m_brokenPrefab != null) {
+        if (m_brokenPrefab != null)
+        {
             Destroy(gameObject);
 
             GameObject broken = Instantiate(m_brokenPrefab, transform.position, transform.rotation);
@@ -41,7 +43,8 @@ public class PropHealth : Health_Base
             broken.transform.localScale = transform.localScale;
 
             Rigidbody[] rigidbodies = broken.GetComponentsInChildren<Rigidbody>();
-            foreach (Rigidbody rigidbody in rigidbodies) {
+            foreach (Rigidbody rigidbody in rigidbodies)
+            {
                 DamageStat lastDamage = m_damageHistory[m_damageHistory.Count - 1];
                 rigidbody.AddForce(lastDamage.direction * 0.1f, ForceMode.Impulse);
             }

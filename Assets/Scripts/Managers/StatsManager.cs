@@ -18,37 +18,41 @@ using UnityEditor;
 /// <summary>
 /// Singleton donotdestroy script that handles the stats system
 /// </summary>
-public class StatsManager : MonoBehaviour
+public class StatsManager : MonoBehaviour  /// @todo comment
 {
     public static StatsManager instance;
 
     [Serializable]
     public class StatType
     {
-        private StatType(string _value){
+        private StatType(string _value)
+        {
             value = _value;
         }
 
         public string value;
 
         // Items
-        public static StatType RangedDamage         = new StatType("RangedDamage");
-        public static StatType RangedInaccuracy     = new StatType("RangedInaccuracy");
-        public static StatType RangedRange          = new StatType("RangedRange");
-        public static StatType RangedAimSpeed       = new StatType("RangedAimSpeed");
-        public static StatType ShotgunDamage        = new StatType("ShotgunDamage");
-        public static StatType PistolDamage         = new StatType("PistolDamage");
-        public static StatType RifleDamage          = new StatType("RifleDamage");
+        public static StatType RangedDamage = new StatType("RangedDamage");
+        public static StatType RangedInaccuracy = new StatType("RangedInaccuracy");
+        public static StatType RangedRange = new StatType("RangedRange");
+        public static StatType RangedAimSpeed = new StatType("RangedAimSpeed");
+        public static StatType ShotgunDamage = new StatType("ShotgunDamage");
+        public static StatType PistolDamage = new StatType("PistolDamage");
+        public static StatType RifleDamage = new StatType("RifleDamage");
 
         // Economy
-        public static StatType StoreCost             = new StatType("StoreCost");
-        public static StatType ItemCost             = new StatType("ItemCost");
+        public static StatType StoreCost = new StatType("StoreCost");
+        public static StatType ItemCost = new StatType("ItemCost");
 
-        public static String DisplayName(StatType type){
+        public static String DisplayName(StatType type)
+        {
             //add a space before each capital letter
             string displayName = "";
-            foreach(char c in type.value){
-                if(char.IsUpper(c)){
+            foreach (char c in type.value)
+            {
+                if (char.IsUpper(c))
+                {
                     displayName += " ";
                 }
                 displayName += c;
@@ -57,29 +61,35 @@ public class StatsManager : MonoBehaviour
         }
     }
 
-    public interface UsesStats{
+    public interface UsesStats
+    {
         List<StatType> GetStatTypes();
     }
 
-    public interface HasStatMods{
+    public interface HasStatMods
+    {
         List<StatMod> GetStatMods();
     }
 
     [Serializable]
-    public enum ModType{
+    public enum ModType
+    {
         Additive,
         Multiplier
     }
 
     [Serializable]
-    public class StatMod{
+    public class StatMod
+    {
         [SerializeField] public StatType statType = null;
         [SerializeField] public ModType modType = ModType.Additive;
         [SerializeField] public float value = 0;
     }
-    #if UNITY_EDITOR
-    static public bool DrawStatMod(StatMod statMod, bool doHoriz = true){
-        if (statMod == null) {
+#if UNITY_EDITOR
+    static public bool DrawStatMod(StatMod statMod, bool doHoriz = true)
+    {
+        if (statMod == null)
+        {
             return false;
         }
 
@@ -92,7 +102,8 @@ public class StatsManager : MonoBehaviour
 
         // create a list of strings to display in the dropdown
         List<string> options = new List<string>();
-        foreach (FieldInfo field in fields) {
+        foreach (FieldInfo field in fields)
+        {
             options.Add(field.Name);
         }
 
@@ -100,7 +111,8 @@ public class StatsManager : MonoBehaviour
         int selectedIndex = 0;
         if (statMod.statType != null) selectedIndex = options.IndexOf(statMod.statType.value);
         //check if index is within bounds
-        if (selectedIndex < 0 || selectedIndex >= options.Count) {
+        if (selectedIndex < 0 || selectedIndex >= options.Count)
+        {
             // set the selected option
             selectedIndex = 0;
         }
@@ -112,38 +124,44 @@ public class StatsManager : MonoBehaviour
 
         statMod.modType = (ModType)EditorGUILayout.EnumPopup(statMod.modType);
         statMod.value = EditorGUILayout.FloatField(statMod.value);
-        
+
         if (doHoriz) EditorGUILayout.EndHorizontal();
 
         return false;
     }
-    static public bool DrawStatModList(List<StatMod> statMods){
-        foreach (StatMod statMod in statMods) {
+    static public bool DrawStatModList(List<StatMod> statMods)
+    {
+        foreach (StatMod statMod in statMods)
+        {
             EditorGUILayout.BeginHorizontal();
             DrawStatMod(statMod, false);
-            if (GUILayout.Button("X")) {
+            if (GUILayout.Button("X"))
+            {
                 statMods.Remove(statMod);
                 return true;
             }
             EditorGUILayout.EndHorizontal();
         }
         // add a new stat mod
-        if (GUILayout.Button("Add Stat Mod")) {
+        if (GUILayout.Button("Add Stat Mod"))
+        {
             statMods.Add(new StatMod());
             return true;
         }
 
         return false;
     }
-    #endif
+#endif
 
-    [SerializeField] static public List<StatMod> globalStatMods = new List<StatMod>()
+    [SerializeField]
+    static public List<StatMod> globalStatMods = new List<StatMod>()
     {
 
     };
 
     //default list of invetory IDS must be given as pararam
-    public static List<StatMod> GetPlayerInvetoryStatMods(){
+    public static List<StatMod> GetPlayerInvetoryStatMods()
+    {
         //empty list
         List<StatMod> statMods = new List<StatMod>();
 
@@ -168,7 +186,8 @@ public class StatsManager : MonoBehaviour
         return statMods;
     }
 
-    public static List<StatMod> GetAllStatMods(){
+    public static List<StatMod> GetAllStatMods()
+    {
         List<StatMod> allStatMods = new List<StatMod>();
         allStatMods.AddRange(globalStatMods);
         allStatMods.AddRange(GetPlayerInvetoryStatMods());
@@ -184,7 +203,7 @@ public class StatsManager : MonoBehaviour
             StatType.PistolDamage,
             StatType.RifleDamage,
         };
-        
+
         float additiveVal = 0.0f;
         float multiplierVal = 1.0f;
 
@@ -201,7 +220,7 @@ public class StatsManager : MonoBehaviour
             StatType.StoreCost,
             StatType.ItemCost,
         };
-        
+
         float additiveVal = 0.0f;
         float multiplierVal = 1.0f;
 
@@ -265,14 +284,18 @@ public class StatsManager : MonoBehaviour
         }
     }
 
-    private void Awake() {
-        if (instance == null) {
+    private void Awake()
+    {
+        if (instance == null)
+        {
             instance = this;
             //do not destroy this object
             DontDestroyOnLoad(this);
 
             LoadStats(SaveManager.currentSaveSlot);
-        } else {
+        }
+        else
+        {
             Destroy(this);
             Destroy(gameObject);
         }
@@ -336,6 +359,6 @@ public class StatsManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
-public class JournalContentUpdater : MonoBehaviour
+public class JournalContentUpdater : MonoBehaviour  /// @todo comment
 {
     public GameObject contentParent;
 
@@ -19,16 +19,17 @@ public class JournalContentUpdater : MonoBehaviour
     // Start is called before the first frame update
     protected void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     protected void Update()
     {
-        
+
     }
 
-    protected virtual void OnEnable() {
+    protected virtual void OnEnable()
+    {
         UpdateContent();
     }
 
@@ -48,7 +49,8 @@ public class JournalContentUpdater : MonoBehaviour
         currentContentObjects.Add(imageContent);
     }
 
-    public virtual void UpdateContent(){
+    public virtual void UpdateContent()
+    {
         // remove current content
         RemoveContentObjects();
 

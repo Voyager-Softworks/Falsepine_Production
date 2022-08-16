@@ -8,12 +8,12 @@ using System;
 /// This class is used to manage the inventory UI.<br/>
 /// Used on inventory pannels to display items, and allow the player to interact with them.
 /// </summary>
-public class InventoryPannel : MonoBehaviour
+public class InventoryPannel : MonoBehaviour  /// @todo comment
 {
     public string inventoryID;
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
     [ReadOnly]
-    #endif
+#endif
     [SerializeField] public Inventory linkedInventory;
     [SerializeField] public InventoryPannel otherPannel;
 
@@ -52,7 +52,8 @@ public class InventoryPannel : MonoBehaviour
         // every 20 frames, try remove empty spaces
         if (Time.frameCount % 20 == 0)
         {
-            if (removeSpaces){
+            if (removeSpaces)
+            {
                 TryRemoveSpaces(linkedInventory);
             }
         }
@@ -67,7 +68,8 @@ public class InventoryPannel : MonoBehaviour
         }
     }
 
-    protected virtual void LinkGridItems(){
+    protected virtual void LinkGridItems()
+    {
         // get inventory, and a list of slots in it
         Inventory inventory = InventoryManager.instance?.GetInventory(inventoryID);
         List<Inventory.InventorySlot> slots = new List<Inventory.InventorySlot>();
@@ -112,16 +114,19 @@ public class InventoryPannel : MonoBehaviour
 
         PerformClickAction(gridItem, sourceInventory, targetInventory, sourceIndex);
 
-        if (removeSpaces){
+        if (removeSpaces)
+        {
             TryRemoveSpaces(sourceInventory);
         }
     }
 
-    protected virtual void PerformClickAction(InventoryGridItem gridItem, Inventory sourceInventory, Inventory targetInventory, int sourceIndex){
+    protected virtual void PerformClickAction(InventoryGridItem gridItem, Inventory sourceInventory, Inventory targetInventory, int sourceIndex)
+    {
         InventoryManager.instance.TryMoveItem(sourceInventory, targetInventory, sourceIndex);
     }
 
-    protected virtual void TryRemoveSpaces(Inventory sourceInventory){
+    protected virtual void TryRemoveSpaces(Inventory sourceInventory)
+    {
         // get inventory, and a list of slots in it
         Inventory inventory = InventoryManager.instance?.GetInventory(inventoryID);
         List<Inventory.InventorySlot> slots = new List<Inventory.InventorySlot>();

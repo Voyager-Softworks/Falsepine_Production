@@ -33,7 +33,7 @@ public class BossEnemyHealth : EnemyHealth
         UpdateUI();
     }
 
-    private void UpdateUI()
+    private void UpdateUI()  /// @todo comment
     {
         //boss health bar
         if (m_uiScript == null) return;
@@ -41,12 +41,12 @@ public class BossEnemyHealth : EnemyHealth
         m_uiScript.bossHealthBar.rectTransform.sizeDelta = new Vector2(m_uiScript.bossHealthBarMaxWidth * (m_currentHealth / m_maxHealth), m_uiScript.bossHealthBar.rectTransform.sizeDelta.y);
     }
 
-    public override void TakeDamage(Health_Base.DamageStat _damage)
+    public override void TakeDamage(Health_Base.DamageStat _damage)  /// @todo comment
     {
         base.TakeDamage(_damage);
     }
 
-    public override void Die()
+    public override void Die()  /// @todo comment
     {
         base.Die();
 

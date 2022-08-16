@@ -6,7 +6,7 @@ using System;
 /// <summary>
 /// Manages the music of the town.
 /// </summary>
-public class TownMusic : MonoBehaviour
+public class TownMusic : MonoBehaviour  /// @todo comment
 {
     [Serializable]
     public class MusicBuildingLink
@@ -49,7 +49,8 @@ public class TownMusic : MonoBehaviour
                 fadeTimer = 0.0f;
             }
         }
-        else{
+        else
+        {
             audioSource.volume = Mathf.Lerp(audioSource.volume, maxVolume, Time.deltaTime);
         }
 
@@ -60,7 +61,8 @@ public class TownMusic : MonoBehaviour
             if (link.building.UI.activeSelf)
             {
                 anyBuildingUIActive = true;
-                if (audioSource.clip != link.music && nextMusic != link.music){
+                if (audioSource.clip != link.music && nextMusic != link.music)
+                {
                     audioSource.PlayOneShot(link.startClip);
                     FadeTo(link.music);
                 }
@@ -72,7 +74,7 @@ public class TownMusic : MonoBehaviour
         {
             FadeTo(defaultMusic);
         }
-        
+
     }
 
     public void FadeTo(AudioClip clip)

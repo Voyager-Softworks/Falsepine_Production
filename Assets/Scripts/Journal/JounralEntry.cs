@@ -7,7 +7,7 @@ using System;
 /// Scriptable object that holds the content of a journal entry.
 /// </summary>
 [CreateAssetMenu(fileName = "JournalEntry", menuName = "Journal/Entry")]
-public class JounralEntry : ScriptableObject
+public class JounralEntry : ScriptableObject  /// @todo comment
 {
     [Serializable]
     public enum EntryType
@@ -32,12 +32,12 @@ public class JounralEntry : ScriptableObject
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

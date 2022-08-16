@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// The primary way to travel and load levels.
 /// </summary>
-public class LevelController : MonoBehaviour
+public class LevelController : MonoBehaviour  /// @todo comment
 {
     static public void LoadMenu(bool _doSave = true)
     {
@@ -16,7 +16,8 @@ public class LevelController : MonoBehaviour
         SceneManager.LoadScene("Menu");
     }
 
-    static public void LoadTown(bool _doSave = true){
+    static public void LoadTown(bool _doSave = true)
+    {
         if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
 
         SceneManager.LoadScene("TownScene");
@@ -66,11 +67,13 @@ public class LevelController : MonoBehaviour
         SceneManager.LoadScene("Scene_GameOver");
     }
 
-    static public void ReloadScene(){
+    static public void ReloadScene()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    static public void Quit(/* bool _doSave = true */){
+    static public void Quit(/* bool _doSave = true */)
+    {
         // if (_doSave)
         // {
         //     SaveManager.SaveAll(SaveManager.currentSaveSlot);

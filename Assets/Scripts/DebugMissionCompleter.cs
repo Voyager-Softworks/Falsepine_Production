@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Test class to complete a mission
 /// </summary>
-public class DebugMissionCompleter : MonoBehaviour
+public class DebugMissionCompleter : MonoBehaviour /// @todo comment
 {
     public bool CompleteOnTrigger = false;
 
@@ -17,7 +17,7 @@ public class DebugMissionCompleter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void TryCompleteMission()
@@ -34,7 +34,8 @@ public class DebugMissionCompleter : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerEnter(Collider other)
+    {
         if (CompleteOnTrigger)
         {
             TryCompleteMission();

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaitLocationScript : MonoBehaviour
+public class BaitLocationScript : MonoBehaviour  /// @todo comment
 {
     public float placeDistance = 3.0f;
     public bool hasPlacedBait = false;

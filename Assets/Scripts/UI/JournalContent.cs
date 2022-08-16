@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 [Serializable]
-public class JournalContent
+public class JournalContent  /// @todo comment
 {
     [TextArea(3, 10)]
     public string text = "";

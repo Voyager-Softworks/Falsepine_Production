@@ -10,7 +10,7 @@ using System;
 /// @deprecated not used anymore. <br/>
 /// Class to manage old UI for the journal.
 /// </summary>
-public class JournalUIList : MonoBehaviour
+public class JournalUIList : MonoBehaviour  /// @todo comment
 {
     [Header("Self")]
     public GameObject journalPanel;

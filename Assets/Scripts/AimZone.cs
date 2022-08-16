@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Aim zones are used to calculate damage, area, and range, of weapons.
 /// </summary>
-public class AimZone : MonoBehaviour
+public class AimZone : MonoBehaviour  /// @todo comment
 {
     private Mesh m_mesh;
     private MeshRenderer m_meshRenderer;
@@ -70,12 +70,12 @@ public class AimZone : MonoBehaviour
     private Corners m_corners;
     private Corners m_fallOffCorners;
 
-    private Vector3 m_fl { get{ return m_corners.frontLeft; } set { m_corners.frontLeft = value; } }
+    private Vector3 m_fl { get { return m_corners.frontLeft; } set { m_corners.frontLeft = value; } }
     private Vector3 m_fr { get { return m_corners.frontRight; } set { m_corners.frontRight = value; } }
     private Vector3 m_br { get { return m_corners.backRight; } set { m_corners.backRight = value; } }
     private Vector3 m_bl { get { return m_corners.backLeft; } set { m_corners.backLeft = value; } }
 
-    public Vector3 fl { get{ return m_corners.frontLeft; } }
+    public Vector3 fl { get { return m_corners.frontLeft; } }
     public Vector3 fr { get { return m_corners.frontRight; } }
     public Vector3 br { get { return m_corners.backRight; } }
     public Vector3 bl { get { return m_corners.backLeft; } }
@@ -129,14 +129,14 @@ public class AimZone : MonoBehaviour
         Hide();
         //MatchSnowHeight();
 
-        
+
     }
 
     private void OnEnable()
     {
         Application.onBeforeRender += UpdateLine;
     }
-    
+
     private void OnDisable()
     {
         Application.onBeforeRender -= UpdateLine;
@@ -313,38 +313,45 @@ public class AimZone : MonoBehaviour
     /// <param name="uv"></param>
     /// <param name="_falloffMult"></param>
     /// <returns></returns>
-    private float CalcDmgMult_float(Vector2 uv, float _falloffMult){
+    private float CalcDmgMult_float(Vector2 uv, float _falloffMult)
+    {
         float lengthVal = 1.0f;
-        
+
         // calc far dmg falloff
-        if (uv.y >= 0.75f){
-            lengthVal *= (1.0f - ((uv.y - 0.75f)/0.25f));
+        if (uv.y >= 0.75f)
+        {
+            lengthVal *= (1.0f - ((uv.y - 0.75f) / 0.25f));
         }
 
         // calc close dmg falloff
-        if (uv.y <= 0.1){
-            lengthVal *= (1.0f - ((0.1f - uv.y)/0.1f));
+        if (uv.y <= 0.1)
+        {
+            lengthVal *= (1.0f - ((0.1f - uv.y) / 0.1f));
         }
 
         // if behind or too far, no dmg
-        if (uv.y > 1.0 || uv.y < 0.0){
+        if (uv.y > 1.0 || uv.y < 0.0)
+        {
             return 0.0f;
         }
-        
+
         // make width var be 1 in the middle, and reach 0 at sides
         float widthVal = 1.0f;
         float currentWidth = uv.x + 0.5f;
-        if (currentWidth > 1.0f){
+        if (currentWidth > 1.0f)
+        {
             currentWidth = 1.0f - (currentWidth - 1.0f);
         }
 
         // calc width dmg falloff
-        if (currentWidth > 0.5){
+        if (currentWidth > 0.5)
+        {
             widthVal = currentWidth * 2.0f - 1.0f;
         }
 
         // if too wide, no dmg
-        if (currentWidth <= 0.5f){
+        if (currentWidth <= 0.5f)
+        {
             return 0.0f;
         }
 
@@ -352,7 +359,7 @@ public class AimZone : MonoBehaviour
         widthVal = Mathf.Lerp(1.0f - _falloffMult, 1.0f, widthVal);
         widthVal = Mathf.Clamp(widthVal, 0.0f, 1.0f);
 
-        
+
         return (lengthVal * widthVal);
     }
 
@@ -362,7 +369,8 @@ public class AimZone : MonoBehaviour
     /// <param name="_worldPoint"></param>
     /// <param name="_falloffMult"></param>
     /// <returns></returns>
-    public float CalcDmgMult_float(Vector3 _worldPoint, float _falloffMult){
+    public float CalcDmgMult_float(Vector3 _worldPoint, float _falloffMult)
+    {
         Vector2 uv = CalculateUVFromWorld(_worldPoint);
         return CalcDmgMult_float(uv, _falloffMult);
     }
