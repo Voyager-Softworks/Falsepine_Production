@@ -9,7 +9,7 @@ using System;
 /// </summary>
 [CreateAssetMenu(fileName = "New Mission", menuName = "Missions/New Mission")]
 [Serializable]
-public class Mission : ScriptableObject /// @todo Comment
+public class Mission : ScriptableObject
 {
     [Serializable]
     public enum MissionSize {
@@ -40,6 +40,9 @@ public class Mission : ScriptableObject /// @todo Comment
         m_isCompleted = _val;
     }
 
+    /// <summary>
+    /// Resets the mission to not completed.
+    /// </summary>
     public void Reset(){
         // @Todo: Remove the following DEBUG code
         // if is lesser, and not extermination, set completed to true

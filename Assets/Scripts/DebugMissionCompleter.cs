@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Test class to complete a mission
 /// </summary>
-public class DebugMissionCompleter : MonoBehaviour /// @todo comment
+public class DebugMissionCompleter : MonoBehaviour
 {
     public bool CompleteOnTrigger = false;
 
@@ -20,6 +20,9 @@ public class DebugMissionCompleter : MonoBehaviour /// @todo comment
 
     }
 
+    /// <summary>
+    /// Completes current mission
+    /// </summary>
     public void TryCompleteMission()
     {
         if (MissionManager.instance == null)

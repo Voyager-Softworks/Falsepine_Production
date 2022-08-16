@@ -4,7 +4,10 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.InputSystem;
 
-public class CameraZoom : MonoBehaviour  /// @todo Comment
+/// <summary>
+/// Manages the zooming of the camera.
+/// </summary>
+public class CameraZoom : MonoBehaviour
 {
     public InputAction zoomAction;
     CinemachineVirtualCamera cam;
@@ -28,6 +31,9 @@ public class CameraZoom : MonoBehaviour  /// @todo Comment
         Zoom();
     }
 
+    /// <summary>
+    /// Updates the zoom of the camera using input and current values.
+    /// </summary>
     void Zoom()
     {
         if (cam == null) return;

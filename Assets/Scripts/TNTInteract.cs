@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TNTInteract : Interactable  /// @todo comment
+/// <summary>
+/// Tnt interactable for the extermination mission.
+/// </summary>
+public class TNTInteract : Interactable
 {
     public GameObject explosion = null;
     public GameObject enemies = null;
@@ -48,6 +51,7 @@ public class TNTInteract : Interactable  /// @todo comment
             }
         }
 
+        // set condition to be complete
         Manual_Condition mc = GetComponent<Manual_Condition>();
         if (mc != null)
         {

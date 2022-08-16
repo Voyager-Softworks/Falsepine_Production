@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AmmoInteract : Interactable  /// @todo comment
+/// <summary>
+/// Fills the player's ammo completely.
+/// </summary>
+public class AmmoInteract : Interactable
 {
     // Start is called before the first frame update
     override public void Start()

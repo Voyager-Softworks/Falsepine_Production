@@ -18,10 +18,13 @@ using UnityEditor;
 /// <summary>
 /// Singleton donotdestroy script that handles the stats system
 /// </summary>
-public class StatsManager : MonoBehaviour  /// @todo comment
+public class StatsManager : MonoBehaviour
 {
     public static StatsManager instance;
 
+    /// <summary>
+    /// An ENUM replacement for the types
+    /// </summary>
     [Serializable]
     public class StatType
     {
@@ -61,11 +64,17 @@ public class StatsManager : MonoBehaviour  /// @todo comment
         }
     }
 
+    /// <summary>
+    /// Interface for a class that makes use of stats
+    /// </summary>
     public interface UsesStats
     {
         List<StatType> GetStatTypes();
     }
 
+    /// <summary>
+    /// Interface for a class that modifies stats
+    /// </summary>
     public interface HasStatMods
     {
         List<StatMod> GetStatMods();
@@ -159,7 +168,10 @@ public class StatsManager : MonoBehaviour  /// @todo comment
 
     };
 
-    //default list of invetory IDS must be given as pararam
+    /// <summary>
+    /// Gets the stat mods from the player inventory
+    /// </summary>
+    /// <returns></returns>
     public static List<StatMod> GetPlayerInvetoryStatMods()
     {
         //empty list
@@ -186,6 +198,10 @@ public class StatsManager : MonoBehaviour  /// @todo comment
         return statMods;
     }
 
+    /// <summary>
+    /// Gets all active stat mods
+    /// </summary>
+    /// <returns></returns>
     public static List<StatMod> GetAllStatMods()
     {
         List<StatMod> allStatMods = new List<StatMod>();
@@ -194,6 +210,12 @@ public class StatsManager : MonoBehaviour  /// @todo comment
         return allStatMods;
     }
 
+    /// <summary>
+    /// Uses damage stats to calculate damage
+    /// </summary>
+    /// <param name="_statUser"></param>
+    /// <param name="_baseDamage"></param>
+    /// <returns></returns>
     static public float CalculateDamage(UsesStats _statUser, float _baseDamage = 1.0f)
     {
         // list of stats to use in this function
@@ -213,6 +235,12 @@ public class StatsManager : MonoBehaviour  /// @todo comment
         return GenericStatCalc(_statUser, _baseDamage, usedStatTypes, additiveVal, multiplierVal, minVal, maxVal);
     }
 
+    /// <summary>
+    /// Uses economy stats to calculate cost
+    /// </summary>
+    /// <param name="_statUser"></param>
+    /// <param name="_basePrice"></param>
+    /// <returns></returns>
     static public int CalculatePrice(UsesStats _statUser, int _basePrice = 1)
     {
         // list of stats to use in this function
@@ -230,6 +258,17 @@ public class StatsManager : MonoBehaviour  /// @todo comment
         return (int)GenericStatCalc(_statUser, _basePrice, usedStatTypes, additiveVal, multiplierVal, minVal, maxVal);
     }
 
+    /// <summary>
+    /// The foundational stat calculation function
+    /// </summary>
+    /// <param name="_statUser"></param>
+    /// <param name="_baseVal"></param>
+    /// <param name="_usedStatTypes"></param>
+    /// <param name="_additiveVal"></param>
+    /// <param name="_multiplierVal"></param>
+    /// <param name="_minVal"></param>
+    /// <param name="_maxVal"></param>
+    /// <returns></returns>
     private static float GenericStatCalc(UsesStats _statUser, float _baseVal, List<StatType> _usedStatTypes, float _additiveVal = 0.0f, float _multiplierVal = 1.0f, float _minVal = 0.0f, float _maxVal = float.MaxValue)
     {
         float baseVal = _baseVal;
@@ -251,6 +290,13 @@ public class StatsManager : MonoBehaviour  /// @todo comment
         return baseVal;
     }
 
+    /// <summary>
+    /// Calculates the effect of all stat mods on a stat
+    /// </summary>
+    /// <param name="_statUser"></param>
+    /// <param name="additiveVal"></param>
+    /// <param name="dmultiplierVal"></param>
+    /// <param name="_usedStatTypes"></param>
     private static void CalcMods(UsesStats _statUser, ref float additiveVal, ref float dmultiplierVal, List<StatType> _usedStatTypes)
     {
         // get all stat mods

@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaitLocationScript : MonoBehaviour  /// @todo comment
+/// <summary>
+/// @deprecated
+/// Manages the placement of bait in the level.
+/// </summary>
+public class BaitLocationScript : MonoBehaviour
 {
     public float placeDistance = 3.0f;
     public bool hasPlacedBait = false;

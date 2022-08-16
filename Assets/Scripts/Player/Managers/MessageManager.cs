@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MessageManager : MonoBehaviour  /// @todo Comment
+/// <summary>
+/// @deprecated
+/// </summary>
+public class MessageManager : MonoBehaviour
 {
     public GameObject messagePrefab;
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
+/// @deprecated
 ///  Script that manages enemies in the open world.
 /// </summary>
 public class EnemyManager : MonoBehaviour  /// @todo comment

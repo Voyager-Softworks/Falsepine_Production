@@ -6,7 +6,10 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-public class ExitGate : MonoBehaviour  /// @todo comment
+/// <summary>
+/// Used to manage how and when the player can move to the next scene. (Exiting the level)
+/// </summary>
+public class ExitGate : MonoBehaviour
 {
     public enum GateDestination
     {
@@ -54,6 +57,10 @@ public class ExitGate : MonoBehaviour  /// @todo comment
         }
     }
 
+    /// <summary>
+    /// Check if all conditions are met or disabled.
+    /// </summary>
+    /// <returns></returns>
     public bool CheckConditions()
     {
         bool allConditionsMet = true;
@@ -79,6 +86,9 @@ public class ExitGate : MonoBehaviour  /// @todo comment
         return allConditionsMet;
     }
 
+    /// <summary>
+    /// Unlocks the gate, allowing player to leave.
+    /// </summary>
     public void Unlock()
     {
         m_unlocked = true;
@@ -98,6 +108,9 @@ public class ExitGate : MonoBehaviour  /// @todo comment
         }
     }
 
+    /// <summary>
+    /// Locks the gate, preventing player from leaving.
+    /// </summary>
     public void Lock()
     {
         m_unlocked = false;
@@ -105,6 +118,9 @@ public class ExitGate : MonoBehaviour  /// @todo comment
         unlockedObject.SetActive(false);
     }
 
+    /// <summary>
+    /// Tries to load the next scene.
+    /// </summary>
     public void TryGoToDestination()
     {
         if (!CheckConditions())
@@ -157,6 +173,9 @@ public class ExitGate : MonoBehaviour  /// @todo comment
             }
         }
 
+        /// <summary>
+        /// Sets up the gate with the correct conditions. Adding all in scene, and ensuring there is a killAll condition.
+        /// </summary>
         public void SetUp()
         {
             // add all conditions in the scene to the list

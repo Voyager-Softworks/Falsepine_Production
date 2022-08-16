@@ -13,8 +13,11 @@ using UnityEditor;
 /// </summary>
 namespace Utilities
 {
+    /// <summary>
+    /// A field for scene assets that can be used in the inspector.
+    /// </summary>
     [System.Serializable]
-    public class SceneField  /// @todo comment
+    public class SceneField
     {
         [SerializeField] private UnityEngine.Object m_sceneAsset;
         public UnityEngine.Object SceneAsset

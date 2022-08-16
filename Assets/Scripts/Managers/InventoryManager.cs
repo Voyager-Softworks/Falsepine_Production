@@ -15,7 +15,7 @@ using UnityEditor;
 /// <summary>
 /// Singleton donotdestroy script that handles the mission system
 /// </summary>
-public class InventoryManager : MonoBehaviour  /// @todo comment
+public class InventoryManager : MonoBehaviour
 {
     public static InventoryManager instance;
 
@@ -51,6 +51,10 @@ public class InventoryManager : MonoBehaviour  /// @todo comment
 
     }
 
+    /// <summary>
+    /// Adds inventory to the list of inventories
+    /// </summary>
+    /// <param name="inv"></param>
     public void AddInventory(Inventory inv)
     {
         // if inventory is already on this object, remove it first
@@ -62,6 +66,10 @@ public class InventoryManager : MonoBehaviour  /// @todo comment
         inventories.Add(inv);
     }
 
+    /// <summary>
+    /// Removes inventory from the list of inventories
+    /// </summary>
+    /// <param name="inv"></param>
     public void RemoveInventory(Inventory inv)
     {
         if (inventories.Contains(inv))
@@ -70,6 +78,11 @@ public class InventoryManager : MonoBehaviour  /// @todo comment
         }
     }
 
+    /// <summary>
+    /// Gets an inventory by ID
+    /// </summary>
+    /// <param name="_id"></param>
+    /// <returns></returns>
     public Inventory GetInventory(string _id)
     {
         foreach (Inventory inv in inventories)
@@ -90,6 +103,12 @@ public class InventoryManager : MonoBehaviour  /// @todo comment
         }
     }
 
+    /// <summary>
+    /// Tries to move an item from one inventory to another
+    /// </summary>
+    /// <param name="source"></param>
+    /// <param name="target"></param>
+    /// <param name="index"></param>
     public void TryMoveItem(Inventory source, Inventory target, int index)
     {
         Item item = source.slots[index].item;
@@ -104,6 +123,13 @@ public class InventoryManager : MonoBehaviour  /// @todo comment
         }
     }
 
+    /// <summary>
+    /// Checks if it is possible to move an item from one inventory to another
+    /// </summary>
+    /// <param name="source"></param>
+    /// <param name="target"></param>
+    /// <param name="index"></param>
+    /// <returns></returns>
     public bool CanMoveItem(Inventory source, Inventory target, int index)
     {
         Item item = source.slots[index].item;
@@ -121,43 +147,4 @@ public class InventoryManager : MonoBehaviour  /// @todo comment
             inv.LoadInventory(saveSlot);
         }
     }
-
-    // custom unity editor
-    // #if UNITY_EDITOR
-    // [CustomEditor(typeof(InventoryManager))]
-    // public class InventoryManagerEditor : Editor
-    // {
-    //     public override void OnInspectorGUI()
-    //     {
-    //         DrawDefaultInspector();
-
-    //         InventoryManager myScript = (InventoryManager)target;
-
-    //         // list of prefabs
-    //         UnityEditor.EditorGUILayout.LabelField("Prefabs", EditorStyles.boldLabel);
-    //         foreach (GameObject obj in prefabInstances)
-    //         {
-    //             UnityEditor.EditorGUILayout.LabelField(obj.name);
-    //         }
-
-    //         // add prefabs to list
-    //         if (GUILayout.Button("Add Prefabs to List"))
-    //         {
-    //             myScript.AddPrefabsToListList();
-    //         }
-
-    //         // clear prefab list
-    //         if (GUILayout.Button("Clear Prefab List"))
-    //         {
-    //             InventoryManager.prefabInstances.Clear();
-    //         }
-
-    //         // on change, set dirty
-    //         if (GUI.changed)
-    //         {
-    //             EditorUtility.SetDirty(target);
-    //         }
-    //     }
-    // }
-    // #endif
 }

@@ -7,7 +7,7 @@ using System;
 /// Scriptable object that holds the content of a journal entry.
 /// </summary>
 [CreateAssetMenu(fileName = "JournalEntry", menuName = "Journal/Entry")]
-public class JounralEntry : ScriptableObject  /// @todo comment
+public class JounralEntry : ScriptableObject
 {
     [Serializable]
     public enum EntryType

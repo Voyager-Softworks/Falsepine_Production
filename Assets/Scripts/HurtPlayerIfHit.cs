@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HurtPlayerIfHit : MonoBehaviour /// @todo Comment
+/// <summary>
+/// Hurts the player if they interact with this collider.
+/// </summary>
+public class HurtPlayerIfHit : MonoBehaviour
 {
     public GameObject particle;
 

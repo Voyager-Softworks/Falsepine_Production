@@ -10,8 +10,9 @@ using UnityEngine.EventSystems;
 
 /// <summary>
 /// A base script for 3D objects that can be clicked on.
+/// @todo make this work with the new UI bottomText?
 /// </summary>
-public class ClickableObject : MonoBehaviour  /// @todo comment
+public class ClickableObject : MonoBehaviour
 {
     //collider to check for click
     public Collider[] colliders;
@@ -57,6 +58,10 @@ public class ClickableObject : MonoBehaviour  /// @todo comment
         }
     }
 
+    /// <summary>
+    /// Checks if the mouse is pointing at the object.
+    /// </summary>
+    /// <returns></returns>
     public bool CheckMouseOver()
     {
         if (EventSystem.current.IsPointerOverGameObject())
@@ -81,6 +86,9 @@ public class ClickableObject : MonoBehaviour  /// @todo comment
         return false;
     }
 
+    /// <summary>
+    /// When the object is clicked on.
+    /// </summary>
     public virtual void OnClick()
     {
         OnClickEvent.Invoke();

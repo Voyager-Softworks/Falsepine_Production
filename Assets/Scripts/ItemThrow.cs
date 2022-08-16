@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-///  Script to handle throwing of items by the player.
+/// Script to handle throwing of items by the player.
 ///</summary>
-public class ItemThrow : MonoBehaviour  /// @todo comment
+public class ItemThrow : MonoBehaviour
 {
     public float m_throwDelay = 0.5f;
     private float m_throwTimer = 0.0f;
@@ -78,6 +78,12 @@ public class ItemThrow : MonoBehaviour  /// @todo comment
         }
     }
 
+    /// <summary>
+    /// Tells the item to start the throw sequence.
+    /// </summary>
+    /// <param name="_throwTransform"></param>
+    /// <param name="_direction"></param>
+    /// <param name="_owner"></param>
     public void TossPrefab(Transform _throwTransform, Vector3 _direction, GameObject _owner)
     {
         m_throwTimer = m_throwDelay;

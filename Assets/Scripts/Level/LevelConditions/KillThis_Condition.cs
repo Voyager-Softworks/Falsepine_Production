@@ -4,10 +4,9 @@ using UnityEngine;
 using System.Linq;
 
 /// <summary>
-/// A condition which requires all enemies to be killed.
-/// @Todo: Make it more reliable when checking for enemies.
+/// A condition which requires this specific thing to be killed.
 /// </summary>
-public class KillThis_Condition : LevelCondition  /// @todo comment
+public class KillThis_Condition : LevelCondition
 {
     protected override void UpdateCondition()
     {

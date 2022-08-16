@@ -6,7 +6,7 @@ using System;
 /// <summary>
 /// Manages the music of the town.
 /// </summary>
-public class TownMusic : MonoBehaviour  /// @todo comment
+public class TownMusic : MonoBehaviour
 {
     [Serializable]
     public class MusicBuildingLink
@@ -37,6 +37,7 @@ public class TownMusic : MonoBehaviour  /// @todo comment
     // Update is called once per frame
     void Update()
     {
+        // fades out music then switches to the next music
         if (fadeTimer > 0.0f)
         {
             fadeTimer -= Time.deltaTime;
@@ -77,6 +78,10 @@ public class TownMusic : MonoBehaviour  /// @todo comment
 
     }
 
+    /// <summary>
+    /// Queues a clip to be faded to.
+    /// </summary>
+    /// <param name="clip"></param>
     public void FadeTo(AudioClip clip)
     {
         nextMusic = clip;

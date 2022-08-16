@@ -9,7 +9,7 @@ using UnityEngine.UI;
 /// @deprecated not used anymore. <br/>
 /// Class to manage old UI for the bag.
 /// </summary>
-public class BagUIList : MonoBehaviour  /// @todo comment
+public class BagUIList : MonoBehaviour
 {
     public GameObject bagPanel;
     public List<GameObject> bagSlots;

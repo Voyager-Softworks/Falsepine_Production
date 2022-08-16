@@ -5,9 +5,9 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// The primary way to travel and load levels.
+/// The primary way to travel and load levels. Communicates with the SaveManager to save and load the state of the game.
 /// </summary>
-public class LevelController : MonoBehaviour  /// @todo comment
+public class LevelController : MonoBehaviour
 {
     static public void LoadMenu(bool _doSave = true)
     {
@@ -51,6 +51,9 @@ public class LevelController : MonoBehaviour  /// @todo comment
         SceneManager.LoadScene("Scene_Complete");
     }
 
+    /// <summary>
+    /// Soft deletes progress and loads the game over scene.
+    /// </summary>
     static public void LoadGameOver()
     {
         SaveManager.SoftDeleteAll(SaveManager.currentSaveSlot);

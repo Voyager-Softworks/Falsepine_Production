@@ -5,7 +5,10 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 
-public class JournalContentUpdater : MonoBehaviour  /// @todo comment
+/// <summary>
+/// Base class for content pages in the journal to make sure that they are updated when the journal is opened.
+/// </summary>
+public class JournalContentUpdater : MonoBehaviour
 {
     public GameObject contentParent;
 
@@ -33,6 +36,10 @@ public class JournalContentUpdater : MonoBehaviour  /// @todo comment
         UpdateContent();
     }
 
+    /// <summary>
+    /// Adds thext into this content page.
+    /// </summary>
+    /// <param name="text"></param>
     protected virtual void AddTextContentObject(string text)
     {
         GameObject textContent = Instantiate(textContentPrefab, contentParent.transform);
@@ -41,6 +48,10 @@ public class JournalContentUpdater : MonoBehaviour  /// @todo comment
         currentContentObjects.Add(textContent);
     }
 
+    /// <summary>
+    /// Adds an image into this content page.
+    /// </summary>
+    /// <param name="sprite"></param>
     protected virtual void AddImageContentObject(Sprite sprite)
     {
         GameObject imageContent = Instantiate(imageContentPrefab, contentParent.transform);
@@ -49,6 +60,9 @@ public class JournalContentUpdater : MonoBehaviour  /// @todo comment
         currentContentObjects.Add(imageContent);
     }
 
+    /// <summary>
+    /// Updates the content with the current content list.
+    /// </summary>
     public virtual void UpdateContent()
     {
         // remove current content
@@ -68,6 +82,9 @@ public class JournalContentUpdater : MonoBehaviour  /// @todo comment
         }
     }
 
+    /// <summary>
+    /// Removes old content
+    /// </summary>
     protected void RemoveContentObjects()
     {
         foreach (GameObject content in currentContentObjects)

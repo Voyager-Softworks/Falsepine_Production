@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnBaitScript : MonoBehaviour  /// @todo comment
+/// <summary>
+/// @deprecated
+/// Spawns the bait when player is close enough.
+/// </summary>
+public class SpawnBaitScript : MonoBehaviour
 {
     public bool isCorrectBait = false;
 
