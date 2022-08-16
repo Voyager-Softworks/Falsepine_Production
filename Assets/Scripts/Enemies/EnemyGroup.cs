@@ -12,41 +12,54 @@ using UnityEngine.Events;
 public class EnemyGroup : MonoBehaviour
 {
     [System.Serializable]
+    /// <summary>
+    ///  A class representing one group of enemies.
+    /// </summary>
     public struct GroupMember
     {
-        public GameObject enemyPrefab;
-        public int count;
+        public GameObject enemyPrefab; //< The enemy prefab to spawn.
+        public int count; //< The number of enemies to spawn.
     }
-    public List<GroupMember> groupMembers = new List<GroupMember>();
+    public List<GroupMember> groupMembers = new List<GroupMember>(); //< The group members.
 
-    public float spawnDelay = 1.0f;
+    public float spawnDelay = 1.0f; //< The delay between each group member being spawned.
 
-    public float spawnDelayJitter = 0.5f;
+    public float spawnDelayJitter = 0.5f; //< The amount of jitter to add to the spawn delay.
 
-    public float radius = 10.0f;
-    
-    List<GameObject> spawnedEnemies = new List<GameObject>();
+    public float radius = 10.0f; //< The radius of the area in which to spawn the group.
 
+    List<GameObject> spawnedEnemies = new List<GameObject>(); //< The spawned enemies.
+
+    /// <summary>
+    ///  Spawns the group of enemies.
+    /// </summary>
+    /// <returns> The coroutine that is running the spawning of the group. </returns>
     IEnumerator SpawnEnemiesCoroutine()
     {
-            foreach (GroupMember groupMember in groupMembers)
+        foreach (GroupMember groupMember in groupMembers)
+        {
+            for (int i = 0; i < groupMember.count; i++)
             {
-                for (int i = 0; i < groupMember.count; i++)
-                {
-                    yield return new WaitForSeconds(spawnDelay + Random.Range(-spawnDelayJitter, spawnDelayJitter));
-                    Vector3 spawnPosition = transform.position + Random.insideUnitSphere * radius;
-                    spawnPosition.y = transform.position.y;
-                    GameObject enemy = Instantiate(groupMember.enemyPrefab, spawnPosition, Quaternion.identity);
-                    spawnedEnemies.Add(enemy);
-                }
+                yield return new WaitForSeconds(spawnDelay + Random.Range(-spawnDelayJitter, spawnDelayJitter));
+                Vector3 spawnPosition = transform.position + Random.insideUnitSphere * radius;
+                spawnPosition.y = transform.position.y;
+                GameObject enemy = Instantiate(groupMember.enemyPrefab, spawnPosition, Quaternion.identity);
+                spawnedEnemies.Add(enemy);
             }
+        }
     }
 
+    /// <summary>
+    ///  Starts the spawning of the group.
+    /// </summary>
     public void SpawnEnemies()
     {
         StartCoroutine(SpawnEnemiesCoroutine());
     }
 
+    /// <summary>
+    ///  Destroys the group of enemies.
+    /// </summary>
     public void DestroyEnemies()
     {
         foreach (GameObject enemy in spawnedEnemies)
@@ -56,6 +69,10 @@ public class EnemyGroup : MonoBehaviour
         spawnedEnemies.Clear();
     }
 
+    /// <summary>
+    ///  Checks if the group of enemies is all dead.
+    /// </summary>
+    /// <returns> True if the group of enemies is all dead, false otherwise. </returns>
     public bool AreEnemiesAlive()
     {
         //Remove all dead enemies from the list
@@ -63,18 +80,9 @@ public class EnemyGroup : MonoBehaviour
         return spawnedEnemies.Count > 0;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    /// <summary>
+    ///  Draws Gizmos for the group of enemies.
+    /// </summary>
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;

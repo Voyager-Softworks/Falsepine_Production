@@ -53,7 +53,16 @@ namespace Boss.Brightmaw
                 yield return null;
             }
         }
-        
+
+        /// <summary>
+        /// The agent moves to the closest boulder, then pulls it to their hand, then throws it at the
+        /// player
+        /// </summary>
+        /// <param name="NodeAI_Agent">The agent that is running the tree.</param>
+        /// <param name="current">The current leaf in the tree</param>
+        /// <returns>
+        /// The state of the node.
+        /// </returns>
         public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
         {
             if (!initialised)
@@ -61,7 +70,7 @@ namespace Boss.Brightmaw
                 rotateTowards = agent.GetComponent<RotateTowards>();
                 navAgent = agent.GetComponent<NavMeshAgent>();
                 animator = agent.GetComponent<Animator>();
-                if(navAgent == null)
+                if (navAgent == null)
                 {
                     Debug.LogError("ThrowBoulder: NavMeshAgent not found on agent");
                     state = NodeData.State.Failure;
@@ -81,7 +90,7 @@ namespace Boss.Brightmaw
                 }
                 boulders = GameObject.FindGameObjectsWithTag(GetProperty<string>("Boulder Tag"));
                 initialised = true;
-            
+
                 if (boulders.Length <= 0)
                 {
                     state = NodeData.State.Failure;
@@ -100,7 +109,7 @@ namespace Boss.Brightmaw
                     }
                 }
             }
-            Vector3 moveToVector =(closest.transform.position - GetProperty<Transform>("Target").position);
+            Vector3 moveToVector = (closest.transform.position - GetProperty<Transform>("Target").position);
             moveToVector.y = closest.transform.position.y;
             moveToVector.Normalize();
             moveToVector *= GetProperty<float>("Range") * 0.9f;
@@ -110,12 +119,12 @@ namespace Boss.Brightmaw
             {
                 moveToVector = hit.position;
             }
-            if (Vector3.Distance(agent.transform.position, (moveToVector 
+            if (Vector3.Distance(agent.transform.position, (moveToVector
                     )) > 2.0f && !reachedBoulder)
             {
                 navAgent.SetDestination(
-                    (moveToVector )
-                    );  
+                    (moveToVector)
+                    );
                 navAgent.speed = 1.0f;
                 navAgent.acceleration = 15.0f;
                 navAgent.stoppingDistance = 0.0f;
@@ -126,7 +135,7 @@ namespace Boss.Brightmaw
             }
             else
             {
-                if(!reachedBoulder)
+                if (!reachedBoulder)
                 {
                     rotateTowards.RotateToObject(closest, 1.00f, 6.0f, 0.0f);
                     agent.StartCoroutine(PullBoulderToHand(1.05f, 0.2f));
@@ -139,21 +148,21 @@ namespace Boss.Brightmaw
                     lastTime = Time.time;
                     navAgent.Warp(moveToVector);
                 }
-                
-                
-                
+
+
+
             }
-            if(reachedBoulder)
+            if (reachedBoulder)
             {
                 throwTimer -= Time.time - lastTime;
                 lastTime = Time.time;
-                if(throwTimer <= 0.0f)
+                if (throwTimer <= 0.0f)
                 {
                     Vector3 throwVector = (GetProperty<Transform>("Target").position - closest.transform.position);
                     throwVector.y += 0.5f;
                     closest.GetComponent<Rigidbody>().AddForce(
-                        (throwVector).normalized * 
-                        900.0f, 
+                        (throwVector).normalized *
+                        900.0f,
                         ForceMode.Impulse
                         );
                     closest.GetComponent<DamagePlayerWhenCollide>().isActive = true;

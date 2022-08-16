@@ -10,33 +10,37 @@ using UnityEngine.AI;
 /// </summary>
 public class BossArenaController : MonoBehaviour
 {
-    public NodeAI.NodeAI_Agent boss; ///< The boss AI agent.
-    EnemyHealth bossHealth; ///< The boss's health script.
-    public Transform arenaCentre { 
-        get {
-            return arenaCentreTransforms[phase];
+    public NodeAI.NodeAI_Agent m_boss; ///< The boss AI agent.
+    EnemyHealth m_bossHealth; ///< The boss's health script.
+    public Transform ArenaCentre
+    {
+        get
+        {
+            return m_arenaCentreTransforms[phase];
         }
     }
 
-    public List<Transform> arenaCentreTransforms = new List<Transform>(); ///< The arena centre transforms.
-    public List<ParticleSystem> arenaParticles = new List<ParticleSystem>(); ///< The arena particles.
-    public List<float> arenaRadiuses = new List<float>(); ///< The arena radiis.
+    public List<Transform> m_arenaCentreTransforms = new List<Transform>(); ///< The arena centre transforms.
+    public List<ParticleSystem> m_arenaParticles = new List<ParticleSystem>(); ///< The arena particles.
+    public List<float> m_arenaRadiuses = new List<float>(); ///< The arena radiis.
 
-    public Transform wrongBaitSpawn; ///< The spawn point for the wrong bait.
-    public float arenaRadius{ 
-        get {
-            return arenaRadiuses[phase];
-            
+    public Transform m_wrongBaitSpawn; ///< The spawn point for the wrong bait.
+    public float ArenaRadius
+    {
+        get
+        {
+            return m_arenaRadiuses[phase];
+
         }
     }
 
-    public AudioClip baitedSound; ///< The sound to play when the boss is baited.
+    public AudioClip m_baitedSound; ///< The sound to play when the boss is baited.
 
     public AudioClip bossMusic, bossMusicSecondPhase; ///< The music to play when the boss is in the arena.
     public float fadeOutTime; ///< The time it takes to fade out the music.
 
     public TouchTrigger startTrigger; ///< The trigger to start the boss fight.
-    
+
     public TouchTrigger room2, room3;
     public UnityEvent onBattleStart; ///< The event to call when the boss starts a battle.
 
@@ -48,7 +52,11 @@ public class BossArenaController : MonoBehaviour
     public float phase1Threshold = 75f;
     public float phase2Threshold = 50f;
     public float phase3Threshold = 25f;
-    // Start is called before the first frame update
+
+
+    /// <summary>
+    /// We're setting up the input actions, and adding listeners to the triggers
+    /// </summary>
     void Start()
     {
         correctBait.performed += ctx => UseCorrectBait();
@@ -58,59 +66,67 @@ public class BossArenaController : MonoBehaviour
 
         startTrigger.Triggered += UseCorrectBait;
 
-        room2.Triggered += () => { 
-                EnableBossUI();
-                arenaParticles[1].Play();
-                boss.SetParameter<bool>("BossStarted", true);
-            };
+        room2.Triggered += () =>
+        {
+            EnableBossUI();
+            m_arenaParticles[1].Play();
+            m_boss.SetParameter<bool>("BossStarted", true);
+        };
 
-        room3.Triggered += () => { 
-                EnableBossUI();
-                arenaParticles[2].Play();
-                boss.SetParameter<bool>("BossStarted", true);
-            };
+        room3.Triggered += () =>
+        {
+            EnableBossUI();
+            m_arenaParticles[2].Play();
+            m_boss.SetParameter<bool>("BossStarted", true);
+        };
 
         _uiScript = FindObjectOfType<UIScript>();
 
-        bossHealth = boss.GetComponent<EnemyHealth>();
-        
+        m_bossHealth = m_boss.GetComponent<EnemyHealth>();
 
-        if (_uiScript != null){
+
+        if (_uiScript != null)
+        {
             onBattleStart.AddListener(EnableBossUI);
         }
     }
 
-    private void OnDestroy() {
+    private void OnDestroy()
+    {
         onBattleStart.RemoveListener(EnableBossUI);
     }
 
-    // Update is called once per frame
+
+    /// <summary>
+    /// If the boss's health is less than the threshold for the next phase, then change the phase and
+    /// stop the arena particles
+    /// </summary>
     void Update()
     {
-        if(bossHealth.m_currentHealth < phase1Threshold && phase == 0)
+        if (m_bossHealth.m_currentHealth < phase1Threshold && phase == 0)
         {
             phase = 1;
-            boss.SetParameter<bool>("PhaseChange", true);
-            foreach (ParticleSystem particle in arenaParticles)
+            m_boss.SetParameter<bool>("PhaseChange", true);
+            foreach (ParticleSystem particle in m_arenaParticles)
             {
                 particle.Stop();
             }
             _uiScript.bossUI.SetActive(false);
         }
-        if(bossHealth.m_currentHealth < phase2Threshold && phase == 1)
+        if (m_bossHealth.m_currentHealth < phase2Threshold && phase == 1)
         {
             phase = 2;
-            boss.SetParameter<bool>("PhaseChange", true);
-            foreach (ParticleSystem particle in arenaParticles)
+            m_boss.SetParameter<bool>("PhaseChange", true);
+            foreach (ParticleSystem particle in m_arenaParticles)
             {
                 particle.Stop();
             }
             _uiScript.bossUI.SetActive(false);
         }
-        if(bossHealth.m_currentHealth < phase3Threshold && phase == 2)
+        if (m_bossHealth.m_currentHealth < phase3Threshold && phase == 2)
         {
             phase = 3;
-            boss.SetParameter<bool>("PhaseChange", true);
+            m_boss.SetParameter<bool>("PhaseChange", true);
         }
 
     }
@@ -118,8 +134,10 @@ public class BossArenaController : MonoBehaviour
     /// <summary>
     ///  Enables UI related to the boss.
     /// </summary>
-    public void EnableBossUI(){
-        if (_uiScript != null){
+    public void EnableBossUI()
+    {
+        if (_uiScript != null)
+        {
             _uiScript.bossUI.SetActive(true);
         }
     }
@@ -129,15 +147,15 @@ public class BossArenaController : MonoBehaviour
     /// </summary>
     public void UseCorrectBait()
     {
-        
-        boss.GetComponent<NavMeshAgent>()?.Warp(arenaCentre.position + Vector3.back);
-        boss.SetParameter<bool>("CorrectBait", true);
-        boss.SetParameter<bool>("BossStarted", true);
-        boss.GetComponent<AudioSource>().PlayOneShot(baitedSound);
+
+        m_boss.GetComponent<NavMeshAgent>()?.Warp(ArenaCentre.position + Vector3.back);
+        m_boss.SetParameter<bool>("CorrectBait", true);
+        m_boss.SetParameter<bool>("BossStarted", true);
+        m_boss.GetComponent<AudioSource>().PlayOneShot(m_baitedSound);
         GetComponent<AudioSource>().clip = bossMusic;
         GetComponent<AudioSource>().Play();
         onBattleStart.Invoke();
-        arenaParticles[0].Play();
+        m_arenaParticles[0].Play();
 
     }
 
@@ -154,10 +172,10 @@ public class BossArenaController : MonoBehaviour
     /// </summary>
     public void UseWrongBait()
     {
-        boss.GetComponent<NavMeshAgent>()?.Warp(wrongBaitSpawn.position);
+        m_boss.GetComponent<NavMeshAgent>()?.Warp(m_wrongBaitSpawn.position);
         //boss.transform.position = wrongBaitSpawn.position;
-        boss.SetParameter<bool>("CorrectBait", false);
-        boss.SetParameter<bool>("BossStarted", true);
+        m_boss.SetParameter<bool>("CorrectBait", false);
+        m_boss.SetParameter<bool>("BossStarted", true);
         GetComponent<AudioSource>().clip = bossMusic;
         GetComponent<AudioSource>().Play();
         Debug.Log("Please recompile");
@@ -167,11 +185,11 @@ public class BossArenaController : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        for(int i = 0; i < arenaCentreTransforms.Count; i++)
+        for (int i = 0; i < m_arenaCentreTransforms.Count; i++)
         {
-            Gizmos.DrawWireSphere(arenaCentreTransforms[i].position, arenaRadiuses[i]);
+            Gizmos.DrawWireSphere(m_arenaCentreTransforms[i].position, m_arenaRadiuses[i]);
         }
-        
+
     }
 
     /// <summary>
@@ -195,5 +213,5 @@ public class BossArenaController : MonoBehaviour
         GetComponent<AudioSource>().volume = startVolume;
         yield break;
     }
-    
+
 }

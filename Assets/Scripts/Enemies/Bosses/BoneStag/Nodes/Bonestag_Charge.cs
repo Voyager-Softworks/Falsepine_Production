@@ -74,9 +74,9 @@ namespace Boss.Bonestag
                 
                 if(arenaController == null)
                     arenaController = FindObjectOfType<BossArenaController>();
-                targetTransform = arenaController.arenaCentre;
+                targetTransform = arenaController.ArenaCentre;
                 Vector3 playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
-                arenaEdgeGoalPosition = ComputeB(targetTransform.position, Vector3.up, arenaController.arenaRadius, agent.transform.position, (playerPos - agentTransform.position).normalized);
+                arenaEdgeGoalPosition = ComputeB(targetTransform.position, Vector3.up, arenaController.ArenaRadius, agent.transform.position, (playerPos - agentTransform.position).normalized);
                 NavMeshHit goalPosHit;
                 if(!NavMesh.FindClosestEdge(arenaEdgeGoalPosition, out goalPosHit, NavMesh.AllAreas))
                 {
@@ -163,7 +163,7 @@ namespace Boss.Bonestag
                 }
                 if(Vector3.Distance(agent.transform.position, arenaEdgeGoalPosition) < 3.0f)
                 {
-                    agent.transform.position = RandomPointOnCircle(targetTransform.position, Vector3.up, arenaController.arenaRadius);
+                    agent.transform.position = RandomPointOnCircle(targetTransform.position, Vector3.up, arenaController.ArenaRadius);
                     agent.gameObject.GetComponent<RotateTowardsPlayer>().RotateToPlayer(0.5f, 10.0f, 0.0f);
                     navAgent.SetDestination(agent.transform.position);
                     navAgent.isStopped = true;
@@ -185,7 +185,7 @@ namespace Boss.Bonestag
         public override void DrawGizmos(NodeAI_Agent agent)
         {
             Gizmos.color = Color.red;
-            if(arenaController != null) Gizmos.DrawWireSphere(arenaController.arenaCentre.position, arenaController.arenaRadius);
+            if(arenaController != null) Gizmos.DrawWireSphere(arenaController.ArenaCentre.position, arenaController.ArenaRadius);
         }
 
         private Vector3 ComputeB( Vector3 circleCenter, Vector3 circleNormal, float circleRadius, Vector3 point, Vector3 direction )
