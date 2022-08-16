@@ -45,26 +45,13 @@ public class JournalManager : MonoBehaviour  /// @todo comment
 
     private AudioSource _audioSource;
 
-    [Serializable]
-    public class MonsterClues  /// @todo comment
-    {
-        public string monsterName = "";
-        public UI_MonsterClues monsterCluesUI;
-        public int loreFound;
-        public int cluesFound;
-
-        [Serializable]
-        public class Data  /// @todo comment
-        {
-            [SerializeField] public string monsterName = "";
-            [SerializeField] public int loreFound;
-            [SerializeField] public int cluesFound;
-        }
-    }
-    [SerializeField] public List<MonsterClues> monsterCluesList = new List<MonsterClues>();
-
     public List<JounralEntry> undiscoveredEntries = new List<JounralEntry>();
     public List<JounralEntry> discoveredEntries = new List<JounralEntry>();
+
+    private class SaveData{
+        public List<JounralEntry.SerializableJournalEntry> undiscoveredEntries = new List<JounralEntry.SerializableJournalEntry>();
+        public List<JounralEntry.SerializableJournalEntry> discoveredEntries = new List<JounralEntry.SerializableJournalEntry>();
+    }
 
     public static string GetSaveFolderPath(int saveSlot)
     {
@@ -163,40 +150,6 @@ public class JournalManager : MonoBehaviour  /// @todo comment
     // Update is called once per frame
     void Update()
     {
-        // update the monster clues
-        foreach (MonsterClues clue in monsterCluesList)
-        {
-            if (clue.monsterCluesUI != null)
-            {
-                for (int i = 0; i < clue.monsterCluesUI.lore.Count; i++)
-                {
-                    if (i < clue.loreFound)
-                    {
-                        clue.monsterCluesUI.lore[i].transform.GetChild(0).gameObject.SetActive(true);
-                        clue.monsterCluesUI.lore[i].transform.GetChild(1).gameObject.SetActive(false);
-                    }
-                    else
-                    {
-                        clue.monsterCluesUI.lore[i].transform.GetChild(0).gameObject.SetActive(false);
-                        clue.monsterCluesUI.lore[i].transform.GetChild(1).gameObject.SetActive(true);
-                    }
-                }
-
-                for (int i = 0; i < clue.monsterCluesUI.clue.Count; i++)
-                {
-                    if (i < clue.cluesFound)
-                    {
-                        clue.monsterCluesUI.clue[i].transform.GetChild(0).gameObject.SetActive(true);
-                        clue.monsterCluesUI.clue[i].transform.GetChild(1).gameObject.SetActive(false);
-                    }
-                    else
-                    {
-                        clue.monsterCluesUI.clue[i].transform.GetChild(0).gameObject.SetActive(false);
-                        clue.monsterCluesUI.clue[i].transform.GetChild(1).gameObject.SetActive(true);
-                    }
-                }
-            }
-        }
     }
 
     /// <summary>
@@ -249,23 +202,23 @@ public class JournalManager : MonoBehaviour  /// @todo comment
 
         FileStream file = File.Create(GetSaveFilePath(saveSlot));
 
-        // create list of data
-        List<MonsterClues.Data> data = new List<MonsterClues.Data>();
-        foreach (MonsterClues clues in monsterCluesList)
+        // make data
+        SaveData data = new SaveData();
+        foreach (JounralEntry entry in undiscoveredEntries)
         {
-            MonsterClues.Data newData = new MonsterClues.Data();
-            newData.monsterName = clues.monsterName;
-            newData.loreFound = clues.loreFound;
-            newData.cluesFound = clues.cluesFound;
-            data.Add(newData);
+            data.undiscoveredEntries.Add(new JounralEntry.SerializableJournalEntry(entry));
         }
+        foreach (JounralEntry entry in discoveredEntries)
+        {
+            data.discoveredEntries.Add(new JounralEntry.SerializableJournalEntry(entry));
+        }
+        
 
         StreamWriter writer = new StreamWriter(file);
-        // for each data, write it to the file new line
-        foreach (MonsterClues.Data d in data)
-        {
-            writer.WriteLine(JsonUtility.ToJson(d));
-        }
+        
+        // save the data
+        writer.Write(JsonUtility.ToJson(data, true));
+        
         writer.Close();
 
         file.Close();
@@ -293,30 +246,25 @@ public class JournalManager : MonoBehaviour  /// @todo comment
         FileStream file = File.Open(GetSaveFilePath(saveSlot), FileMode.Open);
 
         StreamReader reader = new StreamReader(file);
-        string json = reader.ReadToEnd();
 
-        // parse the json
-        List<MonsterClues.Data> data = new List<MonsterClues.Data>();
-        foreach (string line in json.Split('\n'))
+        // load the data
+        SaveData data = JsonUtility.FromJson<SaveData>(reader.ReadToEnd());
+        // if data is null, return
+        if (data == null) return;
+
+        // clear the lists
+        undiscoveredEntries.Clear();
+        discoveredEntries.Clear();
+
+        // add the data to the lists
+        foreach (JounralEntry.SerializableJournalEntry entry in data.undiscoveredEntries)
         {
-            if (line.Length > 0)
-            {
-                data.Add(JsonUtility.FromJson<MonsterClues.Data>(line));
-            }
+            undiscoveredEntries.Add(entry.ToEntry());
         }
-
-        // update the monsterClues with cluesData
-        foreach (MonsterClues mc in monsterCluesList)
+        foreach (JounralEntry.SerializableJournalEntry entry in data.discoveredEntries)
         {
-            //find the data for this monster
-            MonsterClues.Data d = data.Find(x => x.monsterName == mc.monsterName);
-            if (d != null)
-            {
-                mc.loreFound = d.loreFound;
-                mc.cluesFound = d.cluesFound;
-            }
+            discoveredEntries.Add(entry.ToEntry());
         }
-
 
         reader.Close();
         file.Close();
