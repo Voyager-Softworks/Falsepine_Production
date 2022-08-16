@@ -5,9 +5,14 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
 using System;
+using System.Linq;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using System.IO;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 /// <summary>
 /// Singleton donotdestroy script that handles the journal system
@@ -98,6 +103,10 @@ public class JournalManager : MonoBehaviour  /// @todo comment
         }
     }
 
+    /// <summary>
+    /// Opens a specific contents panel
+    /// </summary>
+    /// <param name="contents"></param>
     private void OpenContents(GameObject contents)
     {
         DisableAllContents();
@@ -112,6 +121,9 @@ public class JournalManager : MonoBehaviour  /// @todo comment
         scrollRect.verticalNormalizedPosition = 1;
     }
 
+    /// <summary>
+    /// Closes all contents panels
+    /// </summary>
     private void DisableAllContents()
     {
         //disable all other contents
@@ -206,14 +218,13 @@ public class JournalManager : MonoBehaviour  /// @todo comment
     /// <summary>
     /// Discovers a random entry that matches the MonsterType? and EntryType? if given
     /// </summary>
-    public void DiscoverRandomEntry(JounralEntry.MonsterType? monsterType = null, JounralEntry.EntryType? entryType = null)
+    public void DiscoverRandomEntry(MonsterInfo _monster = null, JounralEntry.EntryType? _entryType = null)
     {
         // get valid entries
         List<JounralEntry> undisLore = new List<JounralEntry>();
-        foreach (JounralEntry entry in undiscoveredEntries)
-        {
-            if (monsterType != null && entry.m_monsterType != monsterType) continue;
-            if (entryType != null && entry.m_entryType != entryType) continue;
+        foreach (JounralEntry entry in undiscoveredEntries) {
+            if (_monster != null && entry.m_linkedMonster != _monster) continue;
+            if (_entryType != null && entry.m_entryType != _entryType) continue;
             undisLore.Add(entry);
         }
 
@@ -311,6 +322,9 @@ public class JournalManager : MonoBehaviour  /// @todo comment
         file.Close();
     }
 
+    /// <summary>
+    /// Deletes the save file
+    /// </summary>
     public void DeleteJournalSave(int saveSlot)
     {
         if (File.Exists(GetSaveFilePath(saveSlot)))
@@ -319,8 +333,10 @@ public class JournalManager : MonoBehaviour  /// @todo comment
         }
     }
 
-    public void UpdateJournalUI()
-    {
+    /// <summary>
+    /// Updates the journal UI
+    /// </summary>
+    public void UpdateJournalUI(){
         //update mission cards
         MissionManager missionManager = FindObjectOfType<MissionManager>();
 
@@ -335,6 +351,9 @@ public class JournalManager : MonoBehaviour  /// @todo comment
         }
     }
 
+    /// <summary>
+    /// Toggles on and off the journal UI
+    /// </summary>
     public void ToggleJournal()
     {
         if (journalPanel.activeSelf)
@@ -364,4 +383,50 @@ public class JournalManager : MonoBehaviour  /// @todo comment
         journalPanel.SetActive(false);
         if (_audioSource && closeJournalSound) _audioSource.PlayOneShot(closeJournalSound);
     }
+
+    // custom editor
+    #if UNITY_EDITOR
+    [CustomEditor(typeof(JournalManager))]
+    public class JournalManagerEditor : Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            DrawDefaultInspector();
+            JournalManager myScript = (JournalManager)target;
+            
+            // add all un-added entries
+            if (GUILayout.Button("Add Missing Entries"))
+            {
+                AddAllEntries();
+            }
+        }
+
+        /// <summary>
+        /// Adds all entries from assets that are not in the journal list
+        /// </summary>
+        private void AddAllEntries()
+        {
+            JournalManager myScript = (JournalManager)target;
+
+            // get all entries from the asset database
+            List<JounralEntry> entries = new List<JounralEntry>();
+            foreach (JounralEntry entry in AssetDatabase.FindAssets("t:JounralEntry").Select(guid => AssetDatabase.LoadAssetAtPath<JounralEntry>(AssetDatabase.GUIDToAssetPath(guid))))
+            {
+                entries.Add(entry);
+            }
+
+            // if an entry is not in discovered or undiscovered, add it to undiscovered
+            foreach (JounralEntry entry in entries)
+            {
+                if (!myScript.discoveredEntries.Contains(entry) && !myScript.undiscoveredEntries.Contains(entry))
+                {
+                    myScript.undiscoveredEntries.Add(entry);
+                }
+            }
+
+            // set dirty
+            EditorUtility.SetDirty(myScript);
+        }
+    }
+    #endif
 }

@@ -341,6 +341,14 @@ public class MissionManager : MonoBehaviour  /// @todo comment
     }
 
     /// <summary>
+    /// Returns the current zone
+    /// </summary>
+    /// <returns></returns>
+    public MissionZone GetCurrentZone(){
+        return m_currentZone;
+    }
+
+    /// <summary>
     /// Gets the index of a zone in the list
     /// </summary>
     /// <param name="_zone"></param>

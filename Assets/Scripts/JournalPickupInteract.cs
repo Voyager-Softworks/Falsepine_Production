@@ -21,11 +21,12 @@ public class JournalPickupInteract : Interactable   /// @todo Comment
     }
 
     [HideInInspector] public PickupType m_pickupType = PickupType.SpecificEntry;
-
     [HideInInspector] public JounralEntry m_linkedEntry;
 
-    [HideInInspector] public bool m_specificMonster = true;
-    [HideInInspector] public JounralEntry.MonsterType m_monsterType = JounralEntry.MonsterType.Bonestag;
+    [HideInInspector] public bool m_specificMonster = false;
+    [HideInInspector] public MonsterInfo m_monster = null;
+
+    [HideInInspector] public bool m_currentZoneBoss = false;
 
     // Start is called before the first frame update
     override public void Start()
@@ -47,11 +48,15 @@ public class JournalPickupInteract : Interactable   /// @todo Comment
             if (m_pickupType == PickupType.SpecificEntry){
                 JournalManager.instance.DiscoverEntry(m_linkedEntry);
             } else {
-                JournalManager.instance.DiscoverRandomEntry(GetMonsterType(), GetEntryType());
+                JournalManager.instance.DiscoverRandomEntry(GetMonsterInfo(), GetEntryType());
             }
         }
     }
 
+    /// <summary>
+    /// Gets the entry type based on user selection in inspector.
+    /// </summary>
+    /// <returns></returns>
     private JounralEntry.EntryType? GetEntryType(){
         switch (m_pickupType){
             case PickupType.SpecificEntry:
@@ -67,11 +72,19 @@ public class JournalPickupInteract : Interactable   /// @todo Comment
         }
     }
 
-    private JounralEntry.MonsterType? GetMonsterType(){
+    /// <summary>
+    /// Gets the monster type based on user selection in inspector.
+    /// </summary>
+    /// <returns></returns>
+    private MonsterInfo GetMonsterInfo(){
         if (m_specificMonster){
-            return m_monsterType;
+            return m_monster;
         } else {
-            return null;
+            if (m_currentZoneBoss){
+                return MissionManager.instance?.GetCurrentZone()?.GetRandomZoneBoss();
+            } else {
+                return null;
+            }
         }
     }
 
@@ -94,12 +107,14 @@ public class JournalPickupInteract : Interactable   /// @todo Comment
 
             myScript.m_pickupType = (PickupType)EditorGUILayout.EnumPopup("Pickup Type", myScript.m_pickupType);
             
-            if (myScript.m_pickupType == PickupType.SpecificEntry) {
-                myScript.m_linkedEntry = (JounralEntry)EditorGUILayout.ObjectField("Linked Entry", myScript.m_linkedEntry, typeof(JounralEntry), false);
+            if (myScript.m_pickupType == PickupType.SpecificEntry){
+                myScript.m_linkedEntry = (JounralEntry)EditorGUILayout.ObjectField("Entry", myScript.m_linkedEntry, typeof(JounralEntry), false);
             } else {
                 myScript.m_specificMonster = EditorGUILayout.Toggle("Specific Monster", myScript.m_specificMonster);
-                if (myScript.m_specificMonster) {
-                    myScript.m_monsterType = (JounralEntry.MonsterType)EditorGUILayout.EnumPopup("Monster Type", myScript.m_monsterType);
+                if (myScript.m_specificMonster){
+                    myScript.m_monster = (MonsterInfo)EditorGUILayout.ObjectField("Monster", myScript.m_monster, typeof(MonsterInfo), false);
+                } else {
+                    myScript.m_currentZoneBoss = EditorGUILayout.Toggle("Current Zone Boss", myScript.m_currentZoneBoss);
                 }
             }
 

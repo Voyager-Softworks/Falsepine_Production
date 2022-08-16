@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JournalUpdater_Monster : JournalContentUpdater  /// @todo comment
+/// <summary>
+/// Responsible for updating a journal page with the latest information.
+/// </summary>
+public class JournalUpdater_Monster : JournalContentUpdater
 {
-    public JounralEntry.MonsterType bossType = JounralEntry.MonsterType.Bonestag;
+    public MonsterInfo m_monster = null;
 
     public override void UpdateContent()
     {
@@ -27,7 +30,7 @@ public class JournalUpdater_Monster : JournalContentUpdater  /// @todo comment
         // add new content that has the same boss type
         foreach (JounralEntry entry in discoveredEntries)
         {
-            if (entry.m_monsterType == bossType)
+            if (entry.m_linkedMonster == m_monster)
             {
                 contentList.Add(entry.entryContent);
             }

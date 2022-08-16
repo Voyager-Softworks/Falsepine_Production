@@ -16,16 +16,9 @@ public class JounralEntry : ScriptableObject  /// @todo comment
         Clue
     }
 
-    [Serializable]
-    public enum MonsterType
-    {
-        Bonestag,
-        Brightmaw
-    }
-
     public EntryType m_entryType = EntryType.Lore;
 
-    public MonsterType m_monsterType = MonsterType.Bonestag;
+    public MonsterInfo m_linkedMonster;
 
     public JournalContent entryContent;
 
