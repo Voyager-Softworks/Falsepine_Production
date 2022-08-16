@@ -12,9 +12,9 @@ using System.Linq;
 /// </remarks>
 public class MobTarget : MonoBehaviour
 {
-    public int maxConcurrentAttackers = 3; //< The maximum number of enemies that can attack the player at once.
-    public float influenceRadius = 10; //< The radius of the influence sphere.
-    public List<NodeAI_Agent> attackers = new List<NodeAI_Agent>(); //< The list of attackers.
+    public int maxConcurrentAttackers = 3; ///< The maximum number of enemies that can attack the player at once.
+    public float influenceRadius = 10; ///< The radius of the influence sphere.
+    public List<NodeAI_Agent> attackers = new List<NodeAI_Agent>(); ///< The list of attackers.
 
 
     /// <summary>
