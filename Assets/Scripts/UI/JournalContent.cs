@@ -3,8 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+/// <summary>
+/// Class to store data about journal content, such as text and images.
+/// Used as variables in other classes primarily for the purpose of serialization.
+/// </summary>
 [Serializable]
-public class JournalContent  /// @todo comment
+public class JournalContent
 {
     [TextArea(3, 10)]
     public string text = "";

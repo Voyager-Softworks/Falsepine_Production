@@ -5,10 +5,9 @@ using System.Linq;
 using System;
 
 /// <summary>
-/// This class is used to manage the inventory UI.<br/>
-/// Used on inventory pannels to display items, and allow the player to interact with them.
+/// Inventory pannel for the shop specifically.
 /// </summary>
-public class InventoryPannel_Shop : InventoryPannel  /// @todo comment
+public class InventoryPannel_Shop : InventoryPannel
 {
 
     public Item itemToBuy = null;
@@ -40,6 +39,14 @@ public class InventoryPannel_Shop : InventoryPannel  /// @todo comment
         base.ItemClicked(gridItem);
     }
 
+    /// <summary>
+    /// Tries to buy the item.
+    /// @todo Make this work again with new UI.
+    /// </summary>
+    /// <param name="gridItem"></param>
+    /// <param name="sourceInventory"></param>
+    /// <param name="targetInventory"></param>
+    /// <param name="sourceIndex"></param>
     protected override void PerformClickAction(InventoryGridItem gridItem, Inventory sourceInventory, Inventory targetInventory, int sourceIndex)
     {
         Item item = gridItem.itemInSlot;

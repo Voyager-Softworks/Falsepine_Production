@@ -6,7 +6,10 @@ using TMPro;
 using UnityEngine.InputSystem;
 using System;
 
-public class TownBuilding : ClickableObject  /// @todo Comment
+/// <summary>
+/// A clickable building in the town. Used as a base class for specific buildings.
+/// </summary>
+public class TownBuilding : ClickableObject
 {
     public enum BuildingType {
         BANK,
@@ -39,13 +42,23 @@ public class TownBuilding : ClickableObject  /// @todo Comment
         }
     }
 
+    /// <summary>
+    /// When this building is clicked.
+    /// </summary>
     public override void OnClick()
     {
         base.OnClick();
 
-        OpenUI();
+        ToggleableTownWindow ttw = GetComponent<ToggleableTownWindow>();
+        if (ttw != null)
+        {
+            ttw.OpenWindow();
+        }
     }
 
+    /// <summary>
+    /// Opens the attached UI.
+    /// </summary>
     public virtual void OpenUI()
     {
         if (!UI) return;
@@ -53,6 +66,9 @@ public class TownBuilding : ClickableObject  /// @todo Comment
         uiCamera.enabled = true;
     }
 
+    /// <summary>
+    /// Close the attached UI.
+    /// </summary>
     public virtual void CloseUI()
     {
         if (!UI) return;
@@ -60,6 +76,9 @@ public class TownBuilding : ClickableObject  /// @todo Comment
         uiCamera.enabled = false;
     }
 
+    /// <summary>
+    /// Toggle the attached UI.
+    /// </summary>
     public virtual void ToggleUI()
     {
         if (!UI) return;

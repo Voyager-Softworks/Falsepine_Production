@@ -10,7 +10,7 @@ using System;
 /// <summary>
 /// Manages the player UI.
 /// </summary>
-public class UIScript : MonoBehaviour  /// @todo comment
+public class UIScript : MonoBehaviour
 {
     public CursorScript cursorScript;
 
@@ -36,9 +36,6 @@ public class UIScript : MonoBehaviour  /// @todo comment
     [HideInInspector] public float bossHealthBarMaxWidth;
     public TextMeshProUGUI bossNameText;
 
-    [Header("Pause UI")]
-    public GameObject pauseUI;
-
 
     public UnityEvent OnStart;
 
@@ -51,22 +48,16 @@ public class UIScript : MonoBehaviour  /// @todo comment
         if (bossHealthBar != null) bossHealthBarMaxWidth = bossHealthBar.rectTransform.sizeDelta.x;
 
         OnStart.Invoke();
-
-        // close pause
-        ClosePauseMenu();
     }
 
     private void Update()
     {
-        // if escape is pressed, toggle pause
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
-        {
-            TogglePauseMenu();
-        }
-
         UpdateHud();
     }
 
+    /// <summary>
+    /// Updates the ing ame hud with weapos and equipment.
+    /// </summary>
     private void UpdateHud()
     {
         if (InventoryManager.instance)
@@ -160,34 +151,4 @@ public class UIScript : MonoBehaviour  /// @todo comment
             }
         }
     }
-
-    private void TogglePauseMenu()
-    {
-        if (pauseUI == null) return;
-
-        if (pauseUI.activeSelf)
-        {
-            ClosePauseMenu();
-        }
-        else
-        {
-            OpenPauseMenu();
-        }
-    }
-
-    private void OpenPauseMenu()
-    {
-        if (pauseUI == null) return;
-
-        pauseUI.SetActive(true);
-    }
-
-    private void ClosePauseMenu()
-    {
-        if (pauseUI == null) return;
-
-        pauseUI.SetActive(false);
-    }
-
-
 }

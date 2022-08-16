@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Creates a trail behind a bullet.
 /// </summary>
-public class BulletTrail : MonoBehaviour  /// @todo comment
+public class BulletTrail : MonoBehaviour
 {
     public bool fadeOverTime = true;
     public float fadeRate = 1.0f;
@@ -45,6 +45,11 @@ public class BulletTrail : MonoBehaviour  /// @todo comment
         }
     }
 
+    /// <summary>
+    /// Sets positions of the line renderer.
+    /// </summary>
+    /// <param name="start"></param>
+    /// <param name="end"></param>
     public void SetPositions(Vector3 start, Vector3 end)
     {
         lineRenderer.SetPosition(0, start);

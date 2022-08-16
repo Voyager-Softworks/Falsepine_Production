@@ -5,10 +5,9 @@ using System.Linq;
 using System;
 
 /// <summary>
-/// This class is used to manage the inventory UI.<br/>
-/// Used on inventory pannels to display items, and allow the player to interact with them.
+/// Class used to display a specific inventory UI, as well as manage the rules around its interaction.
 /// </summary>
-public class InventoryPannel : MonoBehaviour  /// @todo comment
+public class InventoryPannel : MonoBehaviour
 {
     public string inventoryID;
 #if UNITY_EDITOR
@@ -59,6 +58,9 @@ public class InventoryPannel : MonoBehaviour  /// @todo comment
         }
     }
 
+    /// <summary>
+    /// Updates all the cells in the UI
+    /// </summary>
     public virtual void UpdateUI()
     {
         // update each cell
@@ -68,6 +70,9 @@ public class InventoryPannel : MonoBehaviour  /// @todo comment
         }
     }
 
+    /// <summary>
+    /// Links the items in the grid to actual items in the inventory.
+    /// </summary>
     protected virtual void LinkGridItems()
     {
         // get inventory, and a list of slots in it
@@ -94,6 +99,10 @@ public class InventoryPannel : MonoBehaviour  /// @todo comment
         }
     }
 
+    /// <summary>
+    /// Called when an item is clicked in the inventory.
+    /// </summary>
+    /// <param name="gridItem"></param>
     public virtual void ItemClicked(InventoryGridItem gridItem)
     {
         if (gridItem == null) return;
@@ -120,11 +129,22 @@ public class InventoryPannel : MonoBehaviour  /// @todo comment
         }
     }
 
+    /// <summary>
+    /// What should happen when an item is clicked
+    /// </summary>
+    /// <param name="gridItem"></param>
+    /// <param name="sourceInventory"></param>
+    /// <param name="targetInventory"></param>
+    /// <param name="sourceIndex"></param>
     protected virtual void PerformClickAction(InventoryGridItem gridItem, Inventory sourceInventory, Inventory targetInventory, int sourceIndex)
     {
         InventoryManager.instance.TryMoveItem(sourceInventory, targetInventory, sourceIndex);
     }
 
+    /// <summary>
+    /// Tries to remove empty spaces in the inventory.
+    /// </summary>
+    /// <param name="sourceInventory"></param>
     protected virtual void TryRemoveSpaces(Inventory sourceInventory)
     {
         // get inventory, and a list of slots in it

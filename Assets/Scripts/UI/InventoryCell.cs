@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// This class is used to keep track of each cell in the inventory grid. It is not funcitonal.
+/// Keeps track of this cell and the item it contains.
 /// </summary>
 [Serializable]
-public class InventoryCell : MonoBehaviour  /// @todo comment
+public class InventoryCell : MonoBehaviour
 {
     [SerializeField] public InventoryGridItem gridItem;
 
@@ -30,7 +30,7 @@ public class InventoryCell : MonoBehaviour  /// @todo comment
         }
     }
 
-    internal void UpdateUI()
+    private void UpdateUI()
     {
         if (gridItem && gridItem)
         {

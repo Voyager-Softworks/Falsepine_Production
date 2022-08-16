@@ -11,7 +11,7 @@ using UnityEngine.Events;
 /// Grid item for displaying an item in the inventory.
 /// </summary>
 [Serializable]
-public class InventoryGridItem : MonoBehaviour  /// @todo comment
+public class InventoryGridItem : MonoBehaviour
 {
     public Image icon;
     public Image modIcon;
@@ -74,6 +74,9 @@ public class InventoryGridItem : MonoBehaviour  /// @todo comment
         }
     }
 
+    /// <summary>
+    /// Updates this grid item with the given item info.
+    /// </summary>
     public void UpdateUI()
     {
         //check
@@ -93,6 +96,9 @@ public class InventoryGridItem : MonoBehaviour  /// @todo comment
         }
     }
 
+    /// <summary>
+    /// Called when this item is clicked
+    /// </summary>
     public void ClickItem()
     {
         //TryTransferToOpenInventory();
@@ -104,6 +110,9 @@ public class InventoryGridItem : MonoBehaviour  /// @todo comment
         OnClick.Invoke();
     }
 
+    /// <summary>
+    /// Tries to transfer the item in this grid item to the other open inventory.
+    /// </summary>
     public void TryTransferToOpenInventory()
     {
         if (linkedSlot == null) return;

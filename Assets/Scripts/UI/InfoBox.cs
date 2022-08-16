@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 /// <summary>
 /// Called by other scripts to display information at the cursor
 /// </summary>
-public class InfoBox : MonoBehaviour  /// @todo comment
+public class InfoBox : MonoBehaviour
 {
     public float fullBrightTime = 1.0f;
     private float fullBrightTimer = 0.0f;
@@ -92,6 +92,14 @@ public class InfoBox : MonoBehaviour  /// @todo comment
         }
     }
 
+    /// <summary>
+    /// Display some info in the info box at cursor.
+    /// </summary>
+    /// <param name="title"></param>
+    /// <param name="icon"></param>
+    /// <param name="description"></param>
+    /// <param name="onTime"></param>
+    /// <param name="offTime"></param>
     public void DisplayInfo(string title, Sprite icon, string description, float onTime = 1, float offTime = 1)
     {
         EnableBox();
@@ -107,6 +115,10 @@ public class InfoBox : MonoBehaviour  /// @todo comment
         fadeTimer = fadeTime;
     }
 
+    /// <summary>
+    /// Updates the modifier section of the info box with current info
+    /// </summary>
+    /// <param name="mods"></param>
     public void UpdateMods(List<StatsManager.StatMod> mods)
     {
         if (mods.Count > 0)
@@ -125,6 +137,12 @@ public class InfoBox : MonoBehaviour  /// @todo comment
         }
     }
 
+    /// <summary>
+    /// Display an Item in the info box at cursor.
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="onTime"></param>
+    /// <param name="offTime"></param>
     public void Display(Item item, float onTime = 1, float offTime = 1)
     {
         if (!item) return;
@@ -132,6 +150,9 @@ public class InfoBox : MonoBehaviour  /// @todo comment
         UpdateMods(item.GetStatMods());
     }
 
+    /// <summary>
+    /// Hides the info box
+    /// </summary>
     private void DisableBox()
     {
         background.enabled = false;
@@ -139,6 +160,9 @@ public class InfoBox : MonoBehaviour  /// @todo comment
         icon.enabled = false;
         description.enabled = false;
     }
+    /// <summary>
+    /// Shows the info box
+    /// </summary>
     private void EnableBox()
     {
         background.enabled = true;
@@ -147,6 +171,9 @@ public class InfoBox : MonoBehaviour  /// @todo comment
         description.enabled = true;
     }
 
+    /// <summary>
+    /// Hides the modifier section of the info box
+    /// </summary>
     private void DisableModsBox()
     {
         modBackground.enabled = false;
@@ -154,6 +181,9 @@ public class InfoBox : MonoBehaviour  /// @todo comment
         modList.enabled = false;
         modIcon.enabled = false;
     }
+    /// <summary>
+    /// Shows the modifier section of the info box
+    /// </summary>
     private void EnableModsBox()
     {
         modBackground.enabled = true;

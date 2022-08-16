@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TownUIManager : MonoBehaviour  /// @todo Comment
+/// <summary>
+/// @deprecated
+/// </summary>
+public class TownUIManager : MonoBehaviour
 {
     public BuildingPanelList buildingPanelList;
 

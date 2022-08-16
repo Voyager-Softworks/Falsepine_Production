@@ -18,7 +18,7 @@ using UnityEditor;
 /// Singleton donotdestroy script that handles the journal system
 /// </summary>
 [Serializable]
-public class JournalManager : MonoBehaviour
+public class JournalManager : ToggleableWindow
 {
     /// <summary>
     /// Used to link a button to a specific page of content
@@ -38,7 +38,6 @@ public class JournalManager : MonoBehaviour
 
     [Header("Sounds")]
     public AudioClip openJournalSound;
-    public AudioClip closeJournalSound;
     public AudioClip addInfoSound;
 
     [Header("References")]
@@ -136,26 +135,27 @@ public class JournalManager : MonoBehaviour
     void Start()
     {
         _audioSource = GetComponent<AudioSource>();
-
-        openJournalAction.performed += ctx => ToggleJournal();
-        closeAction.performed += ctx => CloseJournal();
     }
 
     void OnEnable()
     {
         openJournalAction.Enable();
-        closeAction.Enable();
     }
 
     void OnDisable()
     {
         openJournalAction.Disable();
-        closeAction.Disable();
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    public override void Update()
+    {   
+        base.Update();
+
+        if (openJournalAction.WasPressedThisFrame())
+        {
+            ToggleWindow();
+        }
     }
 
     /// <summary>
@@ -305,37 +305,20 @@ public class JournalManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Toggles on and off the journal UI
-    /// </summary>
-    public void ToggleJournal()
+    // Toggleable Window overrides
+    public override bool IsOpen()
     {
-        if (journalPanel.activeSelf)
-        {
-            CloseJournal();
-        }
-        else
-        {
-            OpenJournal();
-        }
+        return journalPanel.activeSelf;
     }
-    
-    public void OpenJournal()
+    public override void OpenWindow()
     {
-        if (journalPanel.activeSelf) return;
-
+        base.OpenWindow();
         journalPanel.SetActive(true);
-        if (_audioSource && openJournalSound) _audioSource.PlayOneShot(openJournalSound);
-
-        UpdateJournalUI();
     }
-
-    public void CloseJournal()
+    public override void CloseWindow()
     {
-        if (!journalPanel.activeSelf) return;
-
+        base.CloseWindow();
         journalPanel.SetActive(false);
-        if (_audioSource && closeJournalSound) _audioSource.PlayOneShot(closeJournalSound);
     }
 
     // custom editor

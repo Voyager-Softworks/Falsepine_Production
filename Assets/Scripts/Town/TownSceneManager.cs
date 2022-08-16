@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TownSceneManager : MonoBehaviour  /// @todo Comment
+/// <summary>
+/// @deprecated maybe
+/// </summary>
+public class TownSceneManager : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
