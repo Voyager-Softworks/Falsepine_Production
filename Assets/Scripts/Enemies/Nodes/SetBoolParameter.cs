@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using NodeAI;
 
+/// <summary>
+/// Sets a boolean parameter on the Agent.
+/// </summary>
 public class SetBoolParameter : NodeAI.ActionBase
 {
     public SetBoolParameter()
@@ -19,4 +22,3 @@ public class SetBoolParameter : NodeAI.ActionBase
         return NodeData.State.Success;
     }
 }
-    
