@@ -25,12 +25,12 @@ public class Health_Base : MonoBehaviour /// @todo Impliment this into players, 
     /// </summary>
     public class DamageStat
     {
-        public float m_damage; //< The amount of damage dealt.
-        public GameObject m_sourceObject; //< The object that dealt the damage.
-        public Vector3 m_originPoint; //< The point of origin of the damage.
-        public Vector3 m_hitPoint; //< The point of impact of the damage.
-        public Vector3 direction { get { return m_hitPoint - m_originPoint; } } //< The direction the attack was moving in.
-        public float m_time; //< The time the damage was dealt.
+        public float m_damage; ///< The amount of damage dealt.
+        public GameObject m_sourceObject; ///< The object that dealt the damage.
+        public Vector3 m_originPoint; ///< The point of origin of the damage.
+        public Vector3 m_hitPoint; ///< The point of impact of the damage.
+        public Vector3 direction { get { return m_hitPoint - m_originPoint; } } ///< The direction the attack was moving in.
+        public float m_time; ///< The time the damage was dealt.
 
         public DamageStat(float damage, GameObject sourceObject, Vector3 origin, Vector3 hitPoint)
         {
@@ -47,31 +47,31 @@ public class Health_Base : MonoBehaviour /// @todo Impliment this into players, 
     /// </summary>
     public struct DeathContext
     {
-        public GameObject m_sourceObject; //< The object that dealt the killing blow.
-        public Vector3 m_originPoint;  //< The point of origin of the damage.
-        public Vector3 m_hitPoint; //< The point of impact of the damage.
-        public Vector3 Direction { get { return m_hitPoint - m_originPoint; } } //< The direction the attack was moving in.
-        public float m_time; //< The time the damage was dealt.
+        public GameObject m_sourceObject; ///< The object that dealt the killing blow.
+        public Vector3 m_originPoint;  ///< The point of origin of the damage.
+        public Vector3 m_hitPoint; ///< The point of impact of the damage.
+        public Vector3 Direction { get { return m_hitPoint - m_originPoint; } } ///< The direction the attack was moving in.
+        public float m_time; ///< The time the damage was dealt.
     }
 
-    public System.Action<DeathContext> Death; //< Delegate for when the object dies.
-    public System.Action<DamageStat> Damage; //< Delegate for when the object takes damage.
+    public System.Action<DeathContext> Death; ///< Delegate for when the object dies.
+    public System.Action<DamageStat> Damage; ///< Delegate for when the object takes damage.
 
     [Header("Stats")]
-    public float m_currentHealth = 100f; //< The current health of the object.
-    public float m_maxHealth = 100f; //< The maximum health of the object.
-    protected bool m_isInvulnerable = false; //< Whether the object is invulnerable.
-    public bool isInvulnerable { get { return m_isInvulnerable; } set { m_isInvulnerable = value; } } //< Whether the object is invulnerable.
-    protected bool m_hasDied = false; //< Whether the object has died.
-    public bool hasDied { get { UpdateDeath(); return m_hasDied; } } //< Whether the object has died.
+    public float m_currentHealth = 100f; ///< The current health of the object.
+    public float m_maxHealth = 100f; ///< The maximum health of the object.
+    protected bool m_isInvulnerable = false; ///< Whether the object is invulnerable.
+    public bool isInvulnerable { get { return m_isInvulnerable; } set { m_isInvulnerable = value; } } ///< Whether the object is invulnerable.
+    protected bool m_hasDied = false; ///< Whether the object has died.
+    public bool hasDied { get { UpdateDeath(); return m_hasDied; } } ///< Whether the object has died.
 
-    public bool m_disablePlayerCollision = true; //< Whether or not the player should be able to collide with the object.
+    public bool m_disablePlayerCollision = true; ///< Whether or not the player should be able to collide with the object.
 
-    public List<DamageStat> m_damageHistory = new List<DamageStat>(); //< The damage history of the object.
+    public List<DamageStat> m_damageHistory = new List<DamageStat>(); ///< The damage history of the object.
 
     [Header("Sounds")]
-    public GameObject m_deathSound = null; //< The sound to play when the object dies.
-    public GameObject m_hurtSound = null; //< The sound to play when the object takes damage.
+    public GameObject m_deathSound = null; ///< The sound to play when the object dies.
+    public GameObject m_hurtSound = null; ///< The sound to play when the object takes damage.
 
     public virtual void Start()
     {

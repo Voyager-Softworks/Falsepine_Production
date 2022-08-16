@@ -10,12 +10,12 @@ using UnityEngine.AI;
 /// </summary>
 public class EnemyHealth : Health_Base
 {
-    protected NodeAI.NodeAI_Senses m_senses; //< The senses of the enemy.
+    protected NodeAI.NodeAI_Senses m_senses; ///< The senses of the enemy.
 
-    private SkinnedMeshRenderer m_renderer; //< The renderer of the enemy.
-    private List<Material> m_materials = new List<Material>(); //< The materials of the enemy.
+    private SkinnedMeshRenderer m_renderer; ///< The renderer of the enemy.
+    private List<Material> m_materials = new List<Material>(); ///< The materials of the enemy.
 
-    public GameObject m_bloodEffect; //< The blood effect to show when the enemy is damaged.
+    public GameObject m_bloodEffect; ///< The blood effect to show when the enemy is damaged.
 
     // Start is called before the first frame update
     public override void Start()

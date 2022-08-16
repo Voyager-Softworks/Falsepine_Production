@@ -17,18 +17,18 @@ public class EnemyGroup : MonoBehaviour
     /// </summary>
     public struct GroupMember
     {
-        public GameObject enemyPrefab; //< The enemy prefab to spawn.
-        public int count; //< The number of enemies to spawn.
+        public GameObject enemyPrefab; ///< The enemy prefab to spawn.
+        public int count; ///< The number of enemies to spawn.
     }
-    public List<GroupMember> groupMembers = new List<GroupMember>(); //< The group members.
+    public List<GroupMember> groupMembers = new List<GroupMember>(); ///< The group members.
 
-    public float spawnDelay = 1.0f; //< The delay between each group member being spawned.
+    public float spawnDelay = 1.0f; ///< The delay between each group member being spawned.
 
-    public float spawnDelayJitter = 0.5f; //< The amount of jitter to add to the spawn delay.
+    public float spawnDelayJitter = 0.5f; ///< The amount of jitter to add to the spawn delay.
 
-    public float radius = 10.0f; //< The radius of the area in which to spawn the group.
+    public float radius = 10.0f; ///< The radius of the area in which to spawn the group.
 
-    List<GameObject> spawnedEnemies = new List<GameObject>(); //< The spawned enemies.
+    List<GameObject> spawnedEnemies = new List<GameObject>(); ///< The spawned enemies.
 
     /// <summary>
     ///  Spawns the group of enemies.

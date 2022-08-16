@@ -19,40 +19,40 @@ public class PlayerInventoryInterface : MonoBehaviour
     [Header("Input")]
     // Input actions:
     // swap weapon
-    public InputAction swapWeaponAction; //< The action to swap weapons.
+    public InputAction swapWeaponAction; ///< The action to swap weapons.
     // reload
-    public InputAction reloadAction; //< The action to reload.
+    public InputAction reloadAction; ///< The action to reload.
     // fire weapon
-    public InputAction fireWeaponAction; //< The action to fire the weapon.
+    public InputAction fireWeaponAction; ///< The action to fire the weapon.
     // aim weapon
-    public InputAction aimWeaponAction; //< The action to aim the weapon.
-    public InputAction useEquipmentAction; //< The action to use an equipment.
+    public InputAction aimWeaponAction; ///< The action to aim the weapon.
+    public InputAction useEquipmentAction; ///< The action to use an equipment.
     // melee attack
-    public InputAction meleeAttackAction; //< The action to melee attack.
+    public InputAction meleeAttackAction; ///< The action to melee attack.
 
     [Header("Inventory")]
-    public string playerInventoryName = "player"; //< The name of the player's inventory.
-    public Inventory playerInventory; //< The player's inventory.
+    public string playerInventoryName = "player"; ///< The name of the player's inventory.
+    public Inventory playerInventory; ///< The player's inventory.
 
     /// <summary>
     ///  Enum describing different weapon types in respect to what inventory slot they may be in.
     /// </summary>
     public enum SelectedWeaponType
     {
-        Primary, //< Primary weapons which may be equipped in the primary slot.
-        Secondary, //< Secondary weapons which may be equipped in the secondary slot.
-        None //< No weapon is selected.
+        Primary, ///< Primary weapons which may be equipped in the primary slot.
+        Secondary, ///< Secondary weapons which may be equipped in the secondary slot.
+        None ///< No weapon is selected.
     }
-    [SerializeField] public SelectedWeaponType selectedWeaponType = SelectedWeaponType.None; //< The currently selected weapon type.
-    public Item selectedWeapon; //< The currently selected weapon.
-    public Item selectedEquipment; //< The currently selected equipment.
+    [SerializeField] public SelectedWeaponType selectedWeaponType = SelectedWeaponType.None; ///< The currently selected weapon type.
+    public Item selectedWeapon; ///< The currently selected weapon.
+    public Item selectedEquipment; ///< The currently selected equipment.
 
     [Header("Melee")]
-    public float meleeAttackDamage = 20.0f; //< The damage of the melee attack.
-    public float meleeAttackRange = 2.0f; //< The range of the melee attack.
-    public float meleeAttackSize = 2.0f; //< The size of the melee attack.
-    public float meleeAttackCooldown = 0.5f; //< The cooldown of the melee attack.
-    private float meleeAttackTimer = 0.0f; //< The timer of the melee attack.
+    public float meleeAttackDamage = 20.0f; ///< The damage of the melee attack.
+    public float meleeAttackRange = 2.0f; ///< The range of the melee attack.
+    public float meleeAttackSize = 2.0f; ///< The size of the melee attack.
+    public float meleeAttackCooldown = 0.5f; ///< The cooldown of the melee attack.
+    private float meleeAttackTimer = 0.0f; ///< The timer of the melee attack.
 
     [Serializable]
     /// <summary>
@@ -60,19 +60,19 @@ public class PlayerInventoryInterface : MonoBehaviour
     /// </summary>
     public class WeaponModelLink
     {
-        public Item weapon; //< The weapon.
-        public GameObject model; //< The model of the weapon.
-        public Transform weaponFirepoint; //< The weapon's firepoint: the point where the weapon is fired from.
-        public string animatorBoolName = ""; //< The name of the animator bool to set when the weapon is fired.
+        public Item weapon; ///< The weapon.
+        public GameObject model; ///< The model of the weapon.
+        public Transform weaponFirepoint; ///< The weapon's firepoint: the point where the weapon is fired from.
+        public string animatorBoolName = ""; ///< The name of the animator bool to set when the weapon is fired.
     }
 
 
     [Header("References")]
-    public List<WeaponModelLink> weaponModelLinks = new List<WeaponModelLink>(); //< The list of weapon model links.
+    public List<WeaponModelLink> weaponModelLinks = new List<WeaponModelLink>(); ///< The list of weapon model links.
 
-    public AimZone m_aimZone; //< The aim zone.
+    public AimZone m_aimZone; ///< The aim zone.
 
-    public Animator playerAnimator; //< The player's animator.
+    public Animator playerAnimator; ///< The player's animator.
 
     /// <summary>
     ///  Draw Gizmos.
