@@ -30,7 +30,10 @@ public class InventoryCell : MonoBehaviour
         }
     }
 
-    private void UpdateUI()
+    /// <summary>
+    /// Updates this cell's grid item UI.
+    /// </summary>
+    public void UpdateUI()
     {
         if (gridItem && gridItem)
         {

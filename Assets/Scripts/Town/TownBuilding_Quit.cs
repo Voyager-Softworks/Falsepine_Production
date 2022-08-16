@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TownBuilding_Quit : TownBuilding  /// @todo Comment
+/// <summary>
+/// Town building for the quit sign.
+/// @todo remove this? replaced by pause menu
+/// </summary>
+public class TownBuilding_Quit : TownBuilding
 {
     public override void OnClick()
     {

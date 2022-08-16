@@ -51,8 +51,11 @@ namespace Utilities
     }
 
 #if UNITY_EDITOR
+    /// <summary>
+    /// The property drawer for the SceneField class.
+    /// </summary>
     [CustomPropertyDrawer(typeof(SceneField))]
-    public class SceneFieldPropertyDrawer : PropertyDrawer  /// @todo comment
+    public class SceneFieldPropertyDrawer : PropertyDrawer
     {
         private int fieldAmount = 2;
         private float fieldSize = 20;
@@ -122,6 +125,11 @@ namespace Utilities
             EditorGUI.EndProperty();
         }
 
+        /// <summary>
+        /// Gets the path of a scene asset.
+        /// </summary>
+        /// <param name="sceneAsset"></param>
+        /// <returns></returns>
         private static string GetScenePath(SerializedProperty sceneAsset)
         {
             string fullScenePath = AssetDatabase.GetAssetPath(sceneAsset.objectReferenceValue);
@@ -131,26 +139,17 @@ namespace Utilities
             return fullScenePath;
         }
 
+        /// <summary>
+        /// Calculates the height of the property.
+        /// </summary>
+        /// <param name="property"></param>
+        /// <param name="label"></param>
+        /// <returns></returns>
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             //set the height of the drawer by the field size and padding
             return (fieldSize * fieldAmount) + (padding * fieldAmount);
         }
-
-        // public override float GetPropertyHeight (SerializedProperty property, GUIContent label) {
-
-        //     SerializedObject childObj = new UnityEditor.SerializedObject(property.objectReferenceValue as Command);
-        //     SerializedProperty ite = childObj.GetIterator();
-
-        //     float totalHeight = EditorGUI.GetPropertyHeight (property, label, true) + EditorGUIUtility.standardVerticalSpacing;
-
-        //     while (ite.NextVisible(true))
-        //     {
-        //         totalHeight += EditorGUI.GetPropertyHeight(ite, label, true) + EditorGUIUtility.standardVerticalSpacing;
-        //     }
-
-        //     return totalHeight;
-        // }
     }
 #endif
 }

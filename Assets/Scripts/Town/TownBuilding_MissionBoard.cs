@@ -9,7 +9,10 @@ using UnityEngine.Events;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-public class TownBuilding_MissionBoard : TownBuilding  /// @todo Comment
+/// <summary>
+/// Town building for the mission board.
+/// </summary>
+public class TownBuilding_MissionBoard : TownBuilding
 {
     public List<MissionCardUI> lesserMissionCardUIList;
     public List<MissionCardUI> greaterMissionCardUIList;
@@ -47,6 +50,10 @@ public class TownBuilding_MissionBoard : TownBuilding  /// @todo Comment
         }
     }
 
+    /// <summary>
+    /// Saves the state of the mission board.
+    /// </summary>
+    /// <param name="_saveSlot"></param>
     public void SaveMissionBoard(int _saveSlot){
         //save the missionboard current page
         BinaryFormatter bf = new BinaryFormatter();
@@ -57,6 +64,9 @@ public class TownBuilding_MissionBoard : TownBuilding  /// @todo Comment
         file.Close();
     }
 
+    /// <summary>
+    /// Loads the state of the mission board.
+    /// </summary>
     public void LoadMissionBoard(int _saveSlot){
         if (File.Exists(SaveManager.GetSaveFolderPath(_saveSlot) + "/missionboard.dat"))
         {
@@ -69,6 +79,9 @@ public class TownBuilding_MissionBoard : TownBuilding  /// @todo Comment
         }
     }
 
+    /// <summary>
+    /// Updates the UI of the mission board, including the mission cards within.
+    /// </summary>
     private void UpdateUI()
     {
         if (MissionManager.instance == null) return;
@@ -95,6 +108,11 @@ public class TownBuilding_MissionBoard : TownBuilding  /// @todo Comment
         }
     }
 
+    /// <summary>
+    /// Counts how many of the current missions are turned in, based on total that can be turned in.
+    /// </summary>
+    /// <param name="_size"></param>
+    /// <returns></returns>
     private static int CountTurnedIn(Mission.MissionSize _size)
     {
         int totalTurnedIn = 0;
@@ -119,14 +137,17 @@ public class TownBuilding_MissionBoard : TownBuilding  /// @todo Comment
                 break;
         }
         
-
         return totalTurnedIn;
     }
 
+    /// <summary>
+    /// Called when the big unlock button is pressed.
+    /// </summary>
     public void UnlockButtonPressed(){
         if (MissionManager.instance == null) return;
         if (bossUnlockButton == null) return;
 
+        // Tries to go to the next page/zone.
         switch (currentPage)
         {
             case Mission.MissionSize.LESSER:
@@ -142,15 +163,23 @@ public class TownBuilding_MissionBoard : TownBuilding  /// @todo Comment
         }
     }
 
+    /// <summary>
+    /// Sets the page of the mission board, and saves the state.
+    /// </summary>
+    /// <param name="_page"></param>
     public void SetPage(Mission.MissionSize _page){
         currentPage = _page;
 
         SaveMissionBoard(SaveManager.currentSaveSlot);
     }
 
+    /// <summary>
+    /// Draws the mission cards for the greater missions.
+    /// </summary>
     public void DrawGreaterPage(){
         int greatersTurnedIn = CountTurnedIn(Mission.MissionSize.GREATER);
 
+        // update unlock button
         if (greatersTurnedIn >= greatersNeeded)
         {
             bossUnlockButton.SetActive(true);
@@ -163,6 +192,7 @@ public class TownBuilding_MissionBoard : TownBuilding  /// @todo Comment
             bossUnlockButton.SetActive(false);
         }
 
+        // update mission cards
         for (int i = 0; i < lesserMissionCardUIList.Count; i++)
         {
             lesserMissionCardUIList[i].gameObject.SetActive(false);
@@ -174,8 +204,12 @@ public class TownBuilding_MissionBoard : TownBuilding  /// @todo Comment
         }
     }
 
+    /// <summary>
+    /// Draws the mission cards for the lesser missions.
+    /// </summary>
     public void DrawLesserPage(){
 
+        // update unlock button
         bossUnlockButton.GetComponentInChildren<TextMeshProUGUI>().text = "Unlock Greater Missions (" + CountTurnedIn(Mission.MissionSize.LESSER) + "/" + lessersNeeded + ")";
         if (CountTurnedIn(Mission.MissionSize.LESSER) < lessersNeeded) {
             bossUnlockButton.GetComponentInChildren<Button>().interactable = false;
@@ -190,6 +224,7 @@ public class TownBuilding_MissionBoard : TownBuilding  /// @todo Comment
             bossUnlockButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
         }
 
+        // update mission cards
         for (int i = 0; i < lesserMissionCardUIList.Count; i++)
         {
             lesserMissionCardUIList[i].gameObject.SetActive(true);

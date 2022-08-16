@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Base class for conditions in the level that need to be completed in order to progress.
 /// </summary>
-public class LevelCondition : MonoBehaviour  /// @todo comment
+public class LevelCondition : MonoBehaviour
 {
     protected string m_title = "";
     protected string m_description = "";

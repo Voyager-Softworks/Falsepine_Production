@@ -6,7 +6,7 @@ using UnityEngine;
 /// @deprecated not used anymore. <br/>
 /// Class to manage the outline shader on objects.
 /// </summary>
-public class Outline : MonoBehaviour  /// @todo Comment
+public class Outline : MonoBehaviour
 {
     public Material outlineMaterial;
 

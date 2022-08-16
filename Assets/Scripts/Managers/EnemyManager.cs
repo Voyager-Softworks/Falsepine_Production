@@ -6,7 +6,7 @@ using UnityEngine;
 /// @deprecated
 ///  Script that manages enemies in the open world.
 /// </summary>
-public class EnemyManager : MonoBehaviour  /// @todo comment
+public class EnemyManager : MonoBehaviour
 {
     public GameObject enemiesObject;
     public Rect extents;

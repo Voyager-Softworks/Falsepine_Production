@@ -42,23 +42,28 @@ public class BossEnemyHealth : EnemyHealth
         m_uiScript.bossHealthBar.rectTransform.sizeDelta = new Vector2(m_uiScript.bossHealthBarMaxWidth * (m_currentHealth / m_maxHealth), m_uiScript.bossHealthBar.rectTransform.sizeDelta.y);
     }
 
-    public override void TakeDamage(Health_Base.DamageStat _damage)  /// @todo comment
+    public override void TakeDamage(Health_Base.DamageStat _damage)
     {
         base.TakeDamage(_damage);
     }
 
-    public override void Die()  /// @todo comment
+    /// <summary>
+    /// When the boss is killed, end the game.
+    /// </summary>
+    public override void Die()
     {
         base.Die();
 
         m_indicator.SetActive(false);
 
+        // try complete the linked mission, if it is the current mission
         MissionManager mm = MissionManager.instance;
         if (mm != null && m_linkedMission != null && mm.GetCurrentMission() == m_linkedMission)
         {
             mm.GetCurrentMission().SetCompleted(true);
         }
 
+        // fade to black and show complete scene
         if (m_endScreenOnDeath)
         {
             FadeScript fadeScript = FindObjectOfType<FadeScript>();

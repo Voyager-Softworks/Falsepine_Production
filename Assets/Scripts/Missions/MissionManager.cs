@@ -35,7 +35,7 @@ public class MissionManager : MonoBehaviour
     /// Serializable class that holds the mission data to be saved
     /// </summary>
     [Serializable]
-    public class MissionData  /// @todo comment
+    public class MissionData
     {
         [SerializeField] public List<MissionZone.Serializable_MissionZone> missionZones;
         [SerializeField] public MissionZone.Serializable_MissionZone currentZone;

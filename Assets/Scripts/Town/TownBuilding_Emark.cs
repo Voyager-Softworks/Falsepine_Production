@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class TownBuilding_Emark : TownBuilding  /// @todo Comment
+/// <summary>
+/// Town building for the embark sign.
+/// </summary>
+public class TownBuilding_Emark : TownBuilding
 {
     // Start is called before the first frame update
     protected override void Start()
@@ -30,6 +33,9 @@ public class TownBuilding_Emark : TownBuilding  /// @todo Comment
         base.Update();
     }
 
+    /// <summary>
+    /// Try to emabrk
+    /// </summary>
     public override void OnClick()
     {
         base.OnClick();

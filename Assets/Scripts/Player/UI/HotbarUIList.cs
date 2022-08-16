@@ -9,7 +9,7 @@ using UnityEngine.UI;
 /// @deprecated not used anymore. <br/>
 /// Class to manage old UI for the hotbar.
 /// </summary>
-public class HotbarUIList : MonoBehaviour  /// @todo comment
+public class HotbarUIList : MonoBehaviour
 {
     public GameObject hotbarPanel;
 

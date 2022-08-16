@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildingPanelList : MonoBehaviour  /// @todo Comment
+/// <summary>
+/// @deprecated not used anymore.
+/// </summary>
+public class BuildingPanelList : MonoBehaviour
 {
     public List<GameObject> buildingPanels;
 }

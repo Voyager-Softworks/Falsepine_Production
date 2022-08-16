@@ -8,7 +8,7 @@ using UnityEngine.UI;
 /// <summary>
 /// Applies a vignette to the screen.
 /// </summary>
-public class VignetteScript : MonoBehaviour  /// @todo comment
+public class VignetteScript : MonoBehaviour
 {
     public float stayTime = 0.15f;
     private float stayTimer = 0f;
@@ -36,6 +36,9 @@ public class VignetteScript : MonoBehaviour  /// @todo comment
         }
     }
 
+    /// <summary>
+    /// Shows the vignette for a certain amount of time, then fades it out.
+    /// </summary>
     public void StartVignette()
     {
         stayTimer = stayTime;

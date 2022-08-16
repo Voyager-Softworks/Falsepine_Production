@@ -9,7 +9,10 @@ using UnityEngine.Events;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-public class TownBuilding_Saloon : TownBuilding  /// @todo Comment
+/// <summary>
+/// Town building for the saloon.
+/// </summary>
+public class TownBuilding_Saloon : TownBuilding
 {
     // Start is called before the first frame update
     protected override void Start()

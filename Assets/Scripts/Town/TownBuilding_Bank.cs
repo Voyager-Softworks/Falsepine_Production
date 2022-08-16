@@ -9,7 +9,10 @@ using UnityEngine.Events;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-public class TownBuilding_Bank : TownBuilding  /// @todo Comment
+/// <summary>
+/// Town building for the bank.
+/// </summary>
+public class TownBuilding_Bank : TownBuilding
 {
     
 }

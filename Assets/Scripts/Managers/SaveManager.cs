@@ -13,7 +13,7 @@ using UnityEditor;
 /// It also manages the current save slot. <br/>
 /// @todo Add a way to save and load the current save slot, as well as a way to get a list of current save slots.
 /// </summary>
-public class SaveManager : MonoBehaviour  /// @todo Comment
+public class SaveManager : MonoBehaviour
 {
     public static int currentSaveSlot = 0;
 
