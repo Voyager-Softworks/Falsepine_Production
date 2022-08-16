@@ -11,7 +11,7 @@ using UnityEngine.AI;
 public class BossArenaController : MonoBehaviour
 {
     public NodeAI.NodeAI_Agent m_boss; ///< The boss AI agent.
-    EnemyHealth m_bossHealth; ///< The boss's health script.
+    Health_Base m_bossHealth; ///< The boss's health script.
     public Transform ArenaCentre
     {
         get
@@ -82,7 +82,7 @@ public class BossArenaController : MonoBehaviour
 
         _uiScript = FindObjectOfType<UIScript>();
 
-        m_bossHealth = m_boss.GetComponent<EnemyHealth>();
+        m_bossHealth = m_boss.GetComponent<Health_Base>();
 
 
         if (_uiScript != null)
@@ -148,7 +148,7 @@ public class BossArenaController : MonoBehaviour
     public void UseCorrectBait()
     {
 
-        m_boss.GetComponent<NavMeshAgent>()?.Warp(ArenaCentre.position + Vector3.back);
+        //m_boss.GetComponent<NavMeshAgent>()?.Warp(ArenaCentre.position + Vector3.back);
         m_boss.SetParameter<bool>("CorrectBait", true);
         m_boss.SetParameter<bool>("BossStarted", true);
         m_boss.GetComponent<AudioSource>().PlayOneShot(m_baitedSound);
