@@ -4,10 +4,14 @@ using UnityEngine;
 using NodeAI;
 using UnityEngine.AI;
 using System.Linq;
-public class EncircleTarget : NodeAI.ActionBase  /// @todo Comment
+
+/// <summary>
+///  Used to make an agent encircle a target, taking other agents into account.
+/// </summary>
+public class EncircleTarget : NodeAI.ActionBase
 {
     NavMeshAgent navAgent;
-    
+
     public EncircleTarget()
     {
         AddProperty<GameObject>("Target", null);
@@ -18,9 +22,15 @@ public class EncircleTarget : NodeAI.ActionBase  /// @todo Comment
 
     public override void OnInit()
     {
-        
+
     }
 
+    /// <summary>
+    ///  @todo Comment this
+    /// </summary>
+    /// <param name="agent"></param>
+    /// <param name="current"></param>
+    /// <returns></returns>
     public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
     {
         if (GetProperty<GameObject>("Target") == null)
@@ -40,19 +50,19 @@ public class EncircleTarget : NodeAI.ActionBase  /// @todo Comment
         }
         // Encircle the target while avoiding allies
         Vector3 targetPosition = GetProperty<GameObject>("Target").transform.position;
-        
-        
+
+
         Collider[] colliders = Physics.OverlapSphere(agent.transform.position, GetProperty<float>("Ally avoidance radius"));
         List<Collider> allies = colliders.Where(c => c.gameObject.GetComponent<NodeAI_Agent>() != null && c.gameObject.GetComponent<NodeAI_Agent>().faction == agent.faction).ToList();
         Vector3 steeringVector = CalculateSteeringVector(
-                                                        targetPosition, 
-                                                        allies.ToArray(), GetProperty<float>("Ally avoidance radius"), 
-                                                        GetProperty<float>("Encircle radius"), 
-                                                        targetPosition, 
+                                                        targetPosition,
+                                                        allies.ToArray(), GetProperty<float>("Ally avoidance radius"),
+                                                        GetProperty<float>("Encircle radius"),
+                                                        targetPosition,
                                                         agent.transform.position
                                                         );
-        
-        if(steeringVector.magnitude > 0.01f)
+
+        if (steeringVector.magnitude > 0.01f)
         {
             NavMeshHit nhit;
             NavMesh.SamplePosition(agent.transform.position + (steeringVector.normalized * GetProperty<float>("Encircle speed")), out nhit, 3.0f, NavMesh.AllAreas);
@@ -68,15 +78,15 @@ public class EncircleTarget : NodeAI.ActionBase  /// @todo Comment
             return NodeData.State.Success;
         }
 
-        
 
-        if(Vector3.Distance(agent.transform.position, targetPosition) <= GetProperty<float>("Encircle radius") &&
+
+        if (Vector3.Distance(agent.transform.position, targetPosition) <= GetProperty<float>("Encircle radius") &&
             Vector3.Distance(agent.transform.position, targetPosition) > GetProperty<float>("Encircle radius") - 2.0f)
         {
             agent.GetComponent<RotateTowardsPlayer>().RotateToPlayer(1.0f, 2.0f, 0.1f);
             navAgent.SetDestination(agent.transform.position);
             navAgent.isStopped = true;
-            
+
             state = NodeData.State.Success;
             return NodeData.State.Success;
         }
@@ -87,11 +97,26 @@ public class EncircleTarget : NodeAI.ActionBase  /// @todo Comment
             state = NodeData.State.Running;
             return NodeData.State.Running;
         }
-        
-        
+
+
     }
 
-    //Calculate Steering Vector to navigate to target position while avoiding allies and the player
+
+    /// <summary>
+    /// "Calculate a steering vector that avoids allies and the player, and moves towards the
+    /// destination."
+    /// </summary>
+    /// <param name="Vector3">destination - The destination to move to</param>
+    /// <param name="allies">An array of all the allies in the scene.</param>
+    /// <param name="allyAvoidanceRadius">The radius around the agent that it will try to avoid allies
+    /// in.</param>
+    /// <param name="playerAvoidanceRadius">The radius around the player that the agent will try to
+    /// avoid.</param>
+    /// <param name="Vector3">destination - The position the agent is trying to reach.</param>
+    /// <param name="Vector3">destination - The destination to move to</param>
+    /// <returns>
+    /// A Vector3 that is the sum of the avoidance vectors and the vector to the destination.
+    /// </returns>
     Vector3 CalculateSteeringVector(Vector3 destination, Collider[] allies, float allyAvoidanceRadius, float playerAvoidanceRadius, Vector3 playerPosition, Vector3 agentPosition)
     {
         Vector3 steeringVector = Vector3.zero;
@@ -119,6 +144,12 @@ public class EncircleTarget : NodeAI.ActionBase  /// @todo Comment
         return steeringVector;
     }
 
+    /// <summary>
+    ///  Gets the position near the target that is least likely to be obstructed by an ally.
+    /// </summary>
+    /// <param name="targetPosition">The target position.</param>
+    /// <param name="agent">The agent.</param>
+    /// <returns></returns>
     Vector3 GetLeastAllyDensePosition(Vector3 targetPosition, NodeAI_Agent agent)
     {
         Collider[] colliders = Physics.OverlapSphere(agent.transform.position, GetProperty<float>("Ally avoidance radius"));
@@ -147,9 +178,9 @@ public class EncircleTarget : NodeAI.ActionBase  /// @todo Comment
         {
             return;
         }
-        
-    }
-            
 
-    
+    }
+
+
+
 }

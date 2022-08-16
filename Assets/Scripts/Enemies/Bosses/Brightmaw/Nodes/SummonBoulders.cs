@@ -22,15 +22,28 @@ namespace Boss.Brightmaw
             AddProperty<GameObject>("Boulder Prefab", null);
         }
 
+        /// <summary>
+        /// > This function is called when the game starts
+        /// </summary>
         public override void OnInit()
         {
             spawned = false;
             m_boulders.Clear();
         }
 
+
+        /// <summary>
+        /// For each boulder, spawn a boulder at a random position within a radius of the agent, and
+        /// give it a random velocity
+        /// </summary>
+        /// <param name="NodeAI_Agent">The agent that is running the tree.</param>
+        /// <param name="current">The current leaf that is being evaluated.</param>
+        /// <returns>
+        /// The state of the node.
+        /// </returns>
         public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
         {
-            if(!spawned)
+            if (!spawned)
             {
                 for (int i = 0; i < GetProperty<int>("Number of boulders"); i++)
                 {

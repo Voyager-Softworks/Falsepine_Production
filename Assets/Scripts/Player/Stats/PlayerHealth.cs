@@ -15,25 +15,25 @@ using UnityEngine.Events;
 public class PlayerHealth : MonoBehaviour
 {
     [Header("Stats")]
-    public float maxHealth = 100f;
-    public float currentHealth = 100f;
-    public bool isInvulnerable = false;
-    public bool isDead = false;
-    public bool isStunned = false;
-    float stunTimer = 0f;
+    public float maxHealth = 100f; //< The maximum health of the player.
+    public float currentHealth = 100f; //< The current health of the player.
+    public bool isInvulnerable = false; //< Whether or not the player is invulnerable.
+    public bool isDead = false; //< Whether or not the player is dead.
+    public bool isStunned = false; //< Whether or not the player is stunned.
+    float stunTimer = 0f; //< The timer for the stun.
 
     [Header("Sounds")]
-    public AudioClip deathSound;
-    public AudioClip hurtSound;
-    private AudioSource _audioSource;
+    public AudioClip deathSound; //< The sound to play when the player dies.
+    public AudioClip hurtSound; //< The sound to play when the player is hurt.
+    private AudioSource _audioSource; //< The audio source for the player.
 
     [Header("UI")]
-    [HideInInspector] public UIScript uiScript;
+    [HideInInspector] public UIScript uiScript; //< The UI script for the player.
 
     [Header("Events")]
-    public UnityEvent OnDeath;
+    public UnityEvent OnDeath; //< The event to call when the player dies.
 
-    private Animator _animator;
+    private Animator _animator; //< The animator for the player.
 
     // Start is called before the first frame update
     void Start()
@@ -53,11 +53,12 @@ public class PlayerHealth : MonoBehaviour
             if (stunTimer <= 0f)
             {
                 isStunned = false;
-                
+
             }
         }
         //check for health and dead
-        if (!isDead && currentHealth <= 0){
+        if (!isDead && currentHealth <= 0)
+        {
             Die();
         }
     }
@@ -69,6 +70,15 @@ public class PlayerHealth : MonoBehaviour
         uiScript.healthBar.rectTransform.sizeDelta = new Vector2(uiScript.healthBarMaxWidth * (currentHealth / maxHealth), uiScript.healthBar.rectTransform.sizeDelta.y);
     }
 
+    /// <summary>
+    /// If the player is not invulnerable, play the hurt sound, trigger the injured animation, start the
+    /// vignette, and subtract the damage from the current health. If the current health is less than or
+    /// equal to zero, call the Die() function
+    /// </summary>
+    /// <param name="damage">The amount of damage to take.</param>
+    /// <returns>
+    /// The method is returning void, so nothing is being returned.
+    /// </returns>
     public void TakeDamage(float damage)
     {
         if (isInvulnerable || isDead) return;
@@ -86,13 +96,25 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// "If the stunTimer is less than the duration, set the stunTimer to the duration and set isStunned
+    /// to true."
+    /// </summary>
+    /// <param name="duration">The duration of the stun in seconds.</param>
     public void Stun(float duration)
     {
         stunTimer = Mathf.Max(stunTimer, duration);
         isStunned = true;
     }
 
-    public void Die(){
+    /// <summary>
+    /// The player dies, the game ends, and the player's movement, shooting, and inventory are disabled
+    /// </summary>
+    /// <returns>
+    /// The method is returning void, so nothing is being returned.
+    /// </returns>
+    public void Die()
+    {
         if (isDead) return;
 
         isDead = true;
@@ -101,7 +123,8 @@ public class PlayerHealth : MonoBehaviour
         if (_audioSource && deathSound) _audioSource.PlayOneShot(deathSound);
 
         FadeScript fadeScript = FindObjectOfType<FadeScript>();
-        if (fadeScript){
+        if (fadeScript)
+        {
             fadeScript.EndScreen();
         }
 
@@ -127,6 +150,11 @@ public class PlayerHealth : MonoBehaviour
         OnDeath.Invoke();
     }
 
+    /// <summary>
+    /// This function takes in a float value and adds it to the current health. If the current health is
+    /// greater than the max health, then the current health is set to the max health
+    /// </summary>
+    /// <param name="heal">The amount of health to heal the player by.</param>
     public void Heal(float heal)
     {
         currentHealth += heal;
@@ -136,6 +164,9 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    /// <summary>
+    ///  Toggle the invulnerability of the player.
+    /// </summary>
     public void ToggleInvulnerability()
     {
         isInvulnerable = !isInvulnerable;

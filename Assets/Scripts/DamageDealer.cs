@@ -10,49 +10,47 @@ using System;
 public class DamageDealer : MonoBehaviour
 {
 
-    public List<Collider> HurtBoxes = new List<Collider>(); ///< Colliders used to detect when the player is hit by an attack
+    public List<Collider> m_hurtBoxes = new List<Collider>(); ///< Colliders used to detect when the player is hit by an attack
 
-    public GameObject hurtPlayerEffect; ///< Particle effect spawned when the player is hurt
+    public GameObject m_hurtPlayerEffect; ///< Particle _effect spawned when the player is hurt
     
-    public GameObject indicatorPrefab; ///< Indicator that shows where the attack will hit
+    public GameObject m_indicatorPrefab; ///< Indicator that shows where the attack will hit
 
-    public float damage = 10f; ///< Damage done by the attack
-    public int attkNum = 1; ///< Number of Attacks
+    public float m_damage = 10f; ///< Damage done by the attack
+    public int m_attkNum = 1; ///< Number of Attacks
     
     void Start()
     {
         GetComponent<EnemyHealth>().Death += (Health_Base.DeathContext context) => {
-            foreach (var hurtBox in HurtBoxes)
+            foreach (var hurtBox in m_hurtBoxes)
             {
                 hurtBox.enabled = false;
             }
         };
     }
     
-    
-    int currAttkNum = 0;
 
     /// <summary>
     ///  Coroutine to execute a melee attack on the player.
     /// </summary>
-    /// <param name="dmg">The damage of the attack.</param>
-    /// <param name="delay">The amount of time before the damage is dealt.</param>
-    /// <param name="duration">The length of time during which the hurtboxes are checked for collision with the player.</param>
-    /// <param name="stunDuration">The length of time to stun the player for if they are hit.</param>
+    /// <param name="_dmg">The damage of the attack.</param>
+    /// <param name="_delay">The amount of time before the damage is dealt.</param>
+    /// <param name="_duration">The length of time during which the hurtboxes are checked for collision with the player.</param>
+    /// <param name="_stunDuration">The length of time to stun the player for if they are hit.</param>
     /// <returns></returns>
-    IEnumerator MeleeAttackCoroutine(float dmg, float delay, float duration, float stunDuration)
+    IEnumerator MeleeAttackCoroutine(float _dmg, float _delay, float _duration, float _stunDuration)
     {
-        yield return new WaitForSeconds(delay);
-        foreach (Collider hurtBox in HurtBoxes)
+        yield return new WaitForSeconds(_delay);
+        foreach (Collider hurtBox in m_hurtBoxes)
         {
             hurtBox.enabled = true;
         }
         float timer = 0f;
         bool playerHit = false;
-        while(timer < duration && !playerHit)
+        while(timer < _duration && !playerHit)
         {
             timer += Time.deltaTime;
-            foreach (Collider hurtBox in HurtBoxes)
+            foreach (Collider hurtBox in m_hurtBoxes)
             {
                 if (hurtBox.enabled)
                 {
@@ -61,9 +59,9 @@ public class DamageDealer : MonoBehaviour
                     {
                         if (hit.collider.CompareTag("Player"))
                         {
-                            hit.collider.GetComponent<PlayerHealth>().TakeDamage(dmg);
-                            hit.collider.GetComponent<PlayerHealth>().Stun(stunDuration);
-                            Instantiate(hurtPlayerEffect, hit.point, Quaternion.identity);
+                            hit.collider.GetComponent<PlayerHealth>().TakeDamage(_dmg);
+                            hit.collider.GetComponent<PlayerHealth>().Stun(_stunDuration);
+                            Instantiate(m_hurtPlayerEffect, hit.point, Quaternion.identity);
                             playerHit = true;
                             break;
                         }
@@ -72,7 +70,7 @@ public class DamageDealer : MonoBehaviour
             }
             yield return null;
         }
-        foreach (Collider hurtBox in HurtBoxes)
+        foreach (Collider hurtBox in m_hurtBoxes)
         {
             hurtBox.enabled = false;
         }
@@ -81,25 +79,25 @@ public class DamageDealer : MonoBehaviour
     /// <summary>
     ///  Coroutine to execute an AOE attack on the player.
     /// </summary>
-    /// <param name="dmg">The damage of the attack.</param>
-    /// <param name="delay">The amount of time before the damage is dealt.</param>
-    /// <param name="radius">The radius of the AOE attack.</param>
-    /// <param name="effect">The effect to spawn when the player is hit.</param>
-    /// <param name="stunDuration">The length of time to stun the player for if they are hit.</param>
+    /// <param name="_dmg">The damage of the attack.</param>
+    /// <param name="_delay">The amount of time before the damage is dealt.</param>
+    /// <param name="_radius">The _radius of the AOE attack.</param>
+    /// <param name="_effect">The _effect to spawn when the player is hit.</param>
+    /// <param name="_stunDuration">The length of time to stun the player for if they are hit.</param>
     /// <returns></returns>
-    IEnumerator AOEAttackCoroutine(float dmg, float delay, float radius, GameObject effect, Vector2 offset, float stunDuration)
+    IEnumerator AOEAttackCoroutine(float _dmg, float _delay, float _radius, GameObject _effect, Vector2 _offset, float _stunDuration)
     {
-        yield return new WaitForSeconds(delay);
-        Vector3 offsetVector = transform.forward * offset.y + transform.right * offset.x;
-        Destroy(Instantiate(effect, transform.position + offsetVector, Quaternion.identity), 20.0f);
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position + offsetVector, radius, transform.forward, 0.5f);
+        yield return new WaitForSeconds(_delay);
+        Vector3 offsetVector = transform.forward * _offset.y + transform.right * _offset.x;
+        Destroy(Instantiate(_effect, transform.position + offsetVector, Quaternion.identity), 20.0f);
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position + offsetVector, _radius, transform.forward, 0.5f);
         foreach (RaycastHit hit in hits)
         {
             if (hit.collider.CompareTag("Player"))
             {
-                hit.collider.GetComponent<PlayerHealth>().TakeDamage(dmg);
-                hit.collider.GetComponent<PlayerHealth>().Stun(stunDuration);
-                Instantiate(hurtPlayerEffect, hit.point, Quaternion.identity);
+                hit.collider.GetComponent<PlayerHealth>().TakeDamage(_dmg);
+                hit.collider.GetComponent<PlayerHealth>().Stun(_stunDuration);
+                Instantiate(m_hurtPlayerEffect, hit.point, Quaternion.identity);
                 break;
             }
         }
@@ -107,28 +105,28 @@ public class DamageDealer : MonoBehaviour
     /// <summary>
     ///  Coroutine to display an attack indicator for AOE attacks.
     /// </summary>
-    /// <param name="delay">The amount of time before the attack hits. (Seconds)</param>
-    /// <param name="radius">The damage radius of the attack.</param>
-    /// <param name="offset">The amount to offset the position of the attack indicator by in respect to the origin of the enemy.</param>
-    /// <param name="playerDirectionFunction">A delegate used to find the direction of the player relative to the enemy</param>
-    /// <param name="translationSpeed">The speed at which the enemy is moving towards the player.</param>
-    /// <param name="translationDuration">The duration for which the enemy will move towards the player during this attack phase.</param>
-    /// <param name="attackColor">The color to make the attack indicator circle.</param>
-    /// <param name="indicatorDuration">The duration to display the indicator for prior to the attack hitting</param>
+    /// <param name="_delay">The amount of time before the attack hits. (Seconds)</param>
+    /// <param name="_radius">The damage _radius of the attack.</param>
+    /// <param name="_offset">The amount to _offset the position of the attack indicator by in respect to the origin of the enemy.</param>
+    /// <param name="_playerDirectionFunction">A delegate used to find the direction of the player relative to the enemy</param>
+    /// <param name="_translationSpeed">The _speed at which the enemy is moving towards the player.</param>
+    /// <param name="_translationDuration">The _duration for which the enemy will move towards the player during this attack phase.</param>
+    /// <param name="_attackColor">The color to make the attack indicator circle.</param>
+    /// <param name="_indicatorDuration">The _duration to display the indicator for prior to the attack hitting</param>
     /// <returns></returns>
-    public IEnumerator IndicatorCoroutine(float delay, float radius, Vector2 offset, Func<Vector3> playerDirectionFunction,float translationSpeed, float translationDuration, Color attackColor, float indicatorDuration)
+    public IEnumerator IndicatorCoroutine(float _delay, float _radius, Vector2 _offset, Func<Vector3> _playerDirectionFunction,float _translationSpeed, float _translationDuration, Color _attackColor, float _indicatorDuration)
     {
-        yield return new WaitForSeconds(delay-indicatorDuration); //Wait until it is time to begin displaying the indicator
+        yield return new WaitForSeconds(_delay-_indicatorDuration); //Wait until it is time to begin displaying the indicator
 
-        Vector3 offsetVector = transform.forward * offset.y + transform.right * offset.x; //Get the offset position
+        Vector3 offsetVector = transform.forward * _offset.y + transform.right * _offset.x; //Get the _offset position
 
-        GameObject indicator = Instantiate(indicatorPrefab, transform.position + offsetVector + (playerDirectionFunction() * (translationSpeed * translationDuration)) - Vector3.up, Quaternion.Euler(90, 0, 0)); //Instantiate the indicator
+        GameObject indicator = Instantiate(m_indicatorPrefab, transform.position + offsetVector + (_playerDirectionFunction() * (_translationSpeed * _translationDuration)) - Vector3.up, Quaternion.Euler(90, 0, 0)); //Instantiate the indicator
         float t = 0.0f; //Create the timer
 
         //Set the properties of the decal projector
         DecalProjector decalProjector = indicator.GetComponent<DecalProjector>();
         decalProjector.material = new Material(decalProjector.material); //Make a new instance of the material
-        decalProjector.material.SetColor("_BaseColor", attackColor);
+        decalProjector.material.SetColor("_BaseColor", _attackColor);
 
         //Maths to get around Unity's strange storing of HDR colors
         Color emissiveColor = decalProjector.material.GetColor("_EmissiveColor");
@@ -136,7 +134,7 @@ public class DamageDealer : MonoBehaviour
         byte maxOverExposedColor = 191;
         var factor = maxOverExposedColor / maxColComponent;
         float intensity = Mathf.Log(255f/factor) / Mathf.Log(2f);
-        Color newEmissiveColor = new Color(attackColor.r * intensity, attackColor.g * intensity, attackColor.b * intensity, attackColor.a);
+        Color newEmissiveColor = new Color(_attackColor.r * intensity, _attackColor.g * intensity, _attackColor.b * intensity, _attackColor.a);
         decalProjector.material.SetColor("_EmissiveColor", newEmissiveColor);
 
         
@@ -144,16 +142,16 @@ public class DamageDealer : MonoBehaviour
 
         //Animate the size of the indicator
         Vector3 startSize = new Vector3(0.0f, 0.0f, 2.0f);
-        Vector3 endSize = new Vector3(radius*2f, radius*2f, 2.0f);
-        while (t < indicatorDuration)
+        Vector3 endSize = new Vector3(_radius*2f, _radius*2f, 2.0f);
+        while (t < _indicatorDuration)
         {
             Vector3 groundPos = transform.position;
             groundPos.y = 0.0f;
-            offsetVector = transform.forward * offset.y + transform.right * offset.x;
-            indicator.transform.position = (groundPos+offsetVector) + (transform.forward * translationSpeed * translationDuration * (1-((t+(delay-indicatorDuration))/delay))) + (Vector3.up);
+            offsetVector = transform.forward * _offset.y + transform.right * _offset.x;
+            indicator.transform.position = (groundPos+offsetVector) + (transform.forward * _translationSpeed * _translationDuration * (1-((t+(_delay-_indicatorDuration))/_delay))) + (Vector3.up);
             
             t += Time.deltaTime;
-            decalProjector.size = Vector3.Lerp(startSize, endSize, t / indicatorDuration);
+            decalProjector.size = Vector3.Lerp(startSize, endSize, t / _indicatorDuration);
             yield return null;
         }
         Destroy(indicator);
@@ -164,23 +162,23 @@ public class DamageDealer : MonoBehaviour
     /// <summary>
     ///  Coroutine to execute a ranged attack on the player.
     /// </summary>
-    /// <param name="projectile">The projectile to spawn.</param>
-    /// <param name="delay">The amount of time before the damage is dealt.</param>
-    /// <param name="speed">The speed of the projectile.</param>
-    /// <param name="spawnpoint">The spawnpoint of the projectile.</param>
-    /// <param name="aimAtPlayer">Whether or not the projectile should aim at the player.</param>
+    /// <param name="_projectile">The _projectile to spawn.</param>
+    /// <param name="_delay">The amount of time before the damage is dealt.</param>
+    /// <param name="_speed">The _speed of the _projectile.</param>
+    /// <param name="_spawnPoint">The _spawnPoint of the _projectile.</param>
+    /// <param name="_aimAtPlayer">Whether or not the _projectile should aim at the player.</param>
     /// <returns></returns>
-    IEnumerator RangedAttackCoroutine(GameObject projectile, float delay, float speed, Transform spawnpoint, bool aimAtPlayer = false)
+    IEnumerator RangedAttackCoroutine(GameObject _projectile, float _delay, float _speed, Transform _spawnpoint, bool _aimAtPlayer = false)
     {
-        yield return new WaitForSeconds(delay);
-        GameObject proj = Instantiate(projectile, spawnpoint.position, spawnpoint.rotation);
-        if(!aimAtPlayer)
-            proj.GetComponent<Rigidbody>().velocity = proj.transform.forward * speed;
+        yield return new WaitForSeconds(_delay);
+        GameObject proj = Instantiate(_projectile, _spawnpoint.position, _spawnpoint.rotation);
+        if(!_aimAtPlayer)
+            proj.GetComponent<Rigidbody>().velocity = proj.transform.forward * _speed;
         else
         {
             Vector3 dir = (GameObject.FindGameObjectWithTag("Player").transform.position - proj.transform.position).normalized;
             proj.transform.rotation = Quaternion.LookRotation(dir);
-            proj.GetComponent<Rigidbody>().velocity = dir * speed;
+            proj.GetComponent<Rigidbody>().velocity = dir * _speed;
         }
         Destroy(proj, 20.0f);
     }
@@ -188,94 +186,99 @@ public class DamageDealer : MonoBehaviour
     /// <summary>
     ///  Coroutine to execute a ranged attack on the player.
     /// </summary>
-    /// <param name="projectile">The projectile to spawn.</param>
-    /// <param name="delay">The amount of time before the damage is dealt.</param>
-    /// <param name="speed">The speed of the projectile.</param>
-    /// <param name="spawnPoint">The spawnpoint of the projectile.</param>
-    /// <param name="duration">The duration for which projectiles should be spawned.</param>
-    /// <param name="waitBetweenSpawns">The amount of time between each projectile spawn.</param>
+    /// <param name="_projectile">The _projectile to spawn.</param>
+    /// <param name="_delay">The amount of time before the damage is dealt.</param>
+    /// <param name="_speed">The _speed of the _projectile.</param>
+    /// <param name="_spawnPoint">The _spawnPoint of the _projectile.</param>
+    /// <param name="_duration">The _duration for which projectiles should be spawned.</param>
+    /// <param name="_waitBetweenSpawns">The amount of time between each _projectile spawn.</param>
     /// <returns></returns>
-    IEnumerator RangedAttackCoroutine(GameObject projectile, float delay, float speed, Transform spawnPoint, float duration, float waitBetweenSpawns)
+    IEnumerator RangedAttackCoroutine(GameObject _projectile, float _delay, float _speed, Transform _spawnPoint, float _duration, float _waitBetweenSpawns)
     {
-        yield return new WaitForSeconds(delay);
-        for (int i = 0; i < duration / waitBetweenSpawns; i++)
+        yield return new WaitForSeconds(_delay);
+        for (int i = 0; i < _duration / _waitBetweenSpawns; i++)
         {
-            GameObject proj = Instantiate(projectile, spawnPoint.position, spawnPoint.rotation);
-            proj.GetComponent<Rigidbody>().velocity = proj.transform.forward * -speed;
+            GameObject proj = Instantiate(_projectile, _spawnPoint.position, _spawnPoint.rotation);
+            proj.GetComponent<Rigidbody>().velocity = proj.transform.forward * -_speed;
             Destroy(proj, 20.0f);
-            yield return new WaitForSeconds(waitBetweenSpawns);
+            yield return new WaitForSeconds(_waitBetweenSpawns);
         }
     }
 
     /// <summary>
     ///  Do a melee attack on the player.
     /// </summary>
-    /// <param name="dmg">The Damage</param>
-    /// <param name="delay">The amount of time before the damage is dealt.</param>
-    /// <param name="duration">The length of time during which the hurtboxes are checked for collision with the player.</param>
-    /// <param name="stunDuration">The length of time to stun the player for if they are hit.</param>
-    public void MeleeAttack(float dmg, float delay, float duration, float stunDuration)
+    /// <param name="_dmg">The Damage</param>
+    /// <param name="_delay">The amount of time before the damage is dealt.</param>
+    /// <param name="_duration">The length of time during which the hurtboxes are checked for collision with the player.</param>
+    /// <param name="_stunDuration">The length of time to stun the player for if they are hit.</param>
+    public void MeleeAttack(float _dmg, float _delay, float _duration, float _stunDuration)
     {
-        StartCoroutine(MeleeAttackCoroutine(dmg, delay, duration, stunDuration));
+        StartCoroutine(MeleeAttackCoroutine(_dmg, _delay, _duration, _stunDuration));
     }
 
     /// <summary>
     ///  Do an AOE attack on the player.
     /// </summary>
-    /// <param name="dmg">The Damage</param>
-    /// <param name="delay">The amount of time before the damage is dealt.</param>
-    /// <param name="radius">The radius of the AOE attack.</param>
-    /// <param name="effect">The effect to spawn when the player is hit.</param>
-    /// <param name="stunDuration">The length of time to stun the player for if they are hit.</param>
-    public void AOEAttack(float dmg, float delay, float radius, GameObject effect, Vector2 offset, float stunDuration)
+    /// <param name="_dmg">The Damage</param>
+    /// <param name="_delay">The amount of time before the damage is dealt.</param>
+    /// <param name="_radius">The _radius of the AOE attack.</param>
+    /// <param name="_effect">The _effect to spawn when the player is hit.</param>
+    /// <param name="_stunDuration">The length of time to stun the player for if they are hit.</param>
+    public void AOEAttack(float _dmg, float _delay, float _radius, GameObject _effect, Vector2 _offset, float _stunDuration)
     {
-        StartCoroutine(AOEAttackCoroutine(dmg, delay, radius, effect, offset, stunDuration));
+        StartCoroutine(AOEAttackCoroutine(_dmg, _delay, _radius, _effect, _offset, _stunDuration));
     }
 
-    public void DisplayIndicator(float delay, float radius, Vector2 offset, Func<Vector3> playerDirectionFunction, float translationSpeed, float translationDuration, Color color, float indicatorDuration)
+    /// <summary>
+    ///  Display the AOE indicator using the coroutine.
+    /// </summary>
+    /// <param name="_delay">The amount of time before the attack hits. (Seconds)</param>
+    /// <param name="_radius">The damage _radius of the attack.</param>
+    /// <param name="_offset">The amount to _offset the position of the attack indicator by in respect to the origin of the enemy.</param>
+    /// <param name="_playerDirectionFunction">A delegate used to find the direction of the player relative to the enemy</param>
+    /// <param name="_translationSpeed">The _speed at which the enemy is moving towards the player.</param>
+    /// <param name="_translationDuration">The _duration for which the enemy will move towards the player during this attack phase.</param>
+    /// <param name="_attackColor">The color to make the attack indicator circle.</param>
+    /// <param name="_indicatorDuration">The _duration to display the indicator for prior to the attack hitting</param>
+    public void DisplayIndicator(float _delay, float _radius, Vector2 _offset, Func<Vector3> _playerDirectionFunction, float _translationSpeed, float _translationDuration, Color _color, float _indicatorDuration)
     {
-        StartCoroutine(IndicatorCoroutine(delay, radius, offset, playerDirectionFunction, translationSpeed, translationDuration, color, indicatorDuration));
+        StartCoroutine(IndicatorCoroutine(_delay, _radius, _offset, _playerDirectionFunction, _translationSpeed, _translationDuration, _color, _indicatorDuration));
     }
     
 
     /// <summary>
     ///  Do a ranged attack on the player.
     /// </summary>
-    /// <param name="projectile">The projectile to spawn.</param>
-    /// <param name="delay">The amount of time before the damage is dealt.</param>
-    /// <param name="speed">The speed of the projectile.</param>
-    /// <param name="spawnpoint">The spawnpoint of the projectile.</param>
-    /// <param name="aimAtPlayer">Whether or not the projectile should aim at the player.</param>
-    public void RangedAttack(GameObject projectile, float delay, float speed, Transform spawnpoint, bool aimAtPlayer = false)
+    /// <param name="_projectile">The _projectile to spawn.</param>
+    /// <param name="_delay">The amount of time before the damage is dealt.</param>
+    /// <param name="_speed">The _speed of the _projectile.</param>
+    /// <param name="_spawnPoint">The _spawnPoint of the _projectile.</param>
+    /// <param name="_aimAtPlayer">Whether or not the _projectile should aim at the player.</param>
+    public void RangedAttack(GameObject _projectile, float _delay, float _speed, Transform _spawnPoint, bool _aimAtPlayer = false)
     {
-        StartCoroutine(RangedAttackCoroutine(projectile, delay, speed, spawnpoint, aimAtPlayer));
+        StartCoroutine(RangedAttackCoroutine(_projectile, _delay, _speed, _spawnPoint, _aimAtPlayer));
     }
 
     /// <summary>
     ///  Do a ranged attack on the player.
     /// </summary>
-    /// <param name="projectile">The projectile to spawn.</param>
-    /// <param name="delay">The amount of time before the damage is dealt.</param>
-    /// <param name="speed">The speed of the projectile.</param>
-    /// <param name="spawnPoint">The spawnpoint of the projectile.</param>
-    /// <param name="duration">The duration for which projectiles should be spawned.</param>
-    /// <param name="waitBetweenSpawns">The amount of time between each projectile spawn.</param>
-    public void RangedAttack(GameObject projectile, float delay, float speed, Transform spawnPoint, float duration, float waitBetweenSpawns)
+    /// <param name="_projectile">The _projectile to spawn.</param>
+    /// <param name="_delay">The amount of time before the damage is dealt.</param>
+    /// <param name="_speed">The _speed of the _projectile.</param>
+    /// <param name="_spawnPoint">The _spawnPoint of the _projectile.</param>
+    /// <param name="_duration">The _duration for which projectiles should be spawned.</param>
+    /// <param name="_waitBetweenSpawns">The amount of time between each _projectile spawn.</param>
+    public void RangedAttack(GameObject _projectile, float _delay, float _speed, Transform _spawnPoint, float _duration, float _waitBetweenSpawns)
     {
-        StartCoroutine(RangedAttackCoroutine(projectile, delay, speed, spawnPoint, duration, waitBetweenSpawns));
+        StartCoroutine(RangedAttackCoroutine(_projectile, _delay, _speed, _spawnPoint, _duration, _waitBetweenSpawns));
     }
 
     /// <summary>
-    /// 
+    /// Cancels all currently running attack coroutines.
     /// </summary>
-    public void Update()
-    {
-        if(currAttkNum > 0)
-        {
-            
-        }
-    }
-
+    /// <remarks>
+    /// This is used to stop attacks from continuing to execute after the enemy has been defeated, or otherwise should not be executing attacks it has queued.</remarks>
     public void CancelAttack()
     {
         StopAllCoroutines();

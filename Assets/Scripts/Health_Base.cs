@@ -5,8 +5,8 @@ using UnityEngine.Events;
 
 /// <summary>
 /// A base health class for all objects that can take damage.
-/// @todo Impliment this into players, enemies, destructable objects.
 /// </summary>
+/// @todo Impliment this into players, enemies, destructable objects.
 public class Health_Base : MonoBehaviour
 {
 
