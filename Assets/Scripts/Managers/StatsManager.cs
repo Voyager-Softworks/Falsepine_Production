@@ -22,6 +22,9 @@ public class StatsManager : MonoBehaviour
 {
     public static StatsManager instance;
 
+
+    ////////// STATS //////////
+
     /// <summary>
     /// An ENUM replacement for the types
     /// </summary>
@@ -70,6 +73,28 @@ public class StatsManager : MonoBehaviour
     public interface UsesStats
     {
         List<StatType> GetStatTypes();
+        void AddStatType(StatType type);
+        void RemoveStatType(StatType type);
+    }
+
+    ////////// MODS //////////
+
+    [Serializable]
+    public enum ModType
+    {
+        Additive,
+        Multiplier
+    }
+
+    /// <summary>
+    /// Used to modify a stat
+    /// </summary>
+    [Serializable]
+    public class StatMod
+    {
+        [SerializeField] public StatType statType = null;
+        [SerializeField] public ModType modType = ModType.Additive;
+        [SerializeField] public float value = 0;
     }
 
     /// <summary>
@@ -80,20 +105,24 @@ public class StatsManager : MonoBehaviour
         List<StatMod> GetStatMods();
     }
 
+    /// <summary>
+    /// A talisman modifies stats, and is kept for the whole run.
+    /// </summary>
     [Serializable]
-    public enum ModType
+    public class Talisman : UnityEngine.Object, StatsManager.HasStatMods
     {
-        Additive,
-        Multiplier
+        // HasStatMods interface implementation
+        public List<StatsManager.StatMod> StatMods = new List<StatsManager.StatMod>();
+        public List<StatsManager.StatMod> GetStatMods()
+        {
+            return StatMods;
+        }
     }
 
-    [Serializable]
-    public class StatMod
-    {
-        [SerializeField] public StatType statType = null;
-        [SerializeField] public ModType modType = ModType.Additive;
-        [SerializeField] public float value = 0;
-    }
+    //@todo remwork this to have random ranges for each possible stat mod
+    public List<StatMod> m_possibleTalismanMods = new List<StatMod>();
+    public List<Talisman> m_activeTalismans = new List<Talisman>();
+
 #if UNITY_EDITOR
     static public bool DrawStatMod(StatMod statMod, bool doHoriz = true)
     {
@@ -159,6 +188,95 @@ public class StatsManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    /// <summary>
+    /// A custom function that draws a list of stat mods given a target object
+    /// </summary>
+    /// <param name="_target"></param>
+    public static void StatTypeDropdown(StatsManager.UsesStats _target, out bool needToSave)
+    {
+        // target
+        StatsManager.UsesStats target = _target;
+
+        needToSave = false;
+
+        // used stat types, multi select dropdown (generic menu)
+        GUILayout.BeginHorizontal();
+        string usedStatTypes = "Used Stat Types: ";
+        for (int i = 0; i < _target.GetStatTypes().Count; i++)
+        {
+            usedStatTypes += _target.GetStatTypes()[i].value;
+            // if not last item, add comma and/or new line
+            if (i != _target.GetStatTypes().Count - 1)
+            {
+                usedStatTypes += ", ";
+
+                // every third item, add a new line
+                if (i % 3 == 2)
+                {
+                    usedStatTypes += "\n";
+                }
+            }
+        }
+        if (_target.GetStatTypes().Count <= 0)
+        {
+            usedStatTypes += "None";
+        }
+        //GUILayout.Label(new GUIContent(usedStatTypes, "The stat types used by this item"));
+        if (GUILayout.Button(new GUIContent(usedStatTypes, "Stat Types this item should use")))
+        {
+            GenericMenu menu = new GenericMenu();
+
+            needToSave = true;
+
+            // add all stat types
+            FieldInfo[] pi = typeof(StatsManager.StatType).GetFields();
+            foreach (FieldInfo field in pi)
+            {
+                StatsManager.StatType type = null;
+                // if field is not static, return
+                if (!field.IsStatic) continue;
+                type = (StatsManager.StatType)field.GetValue(null);
+                if (_target.GetStatTypes().Count() > 0)
+                {
+                    StatsManager.StatType firstTpe = _target.GetStatTypes()[0];
+                }
+
+                // check if it is used, by comparing the value of the field to the used stat types
+                bool isUsed = _target.GetStatTypes().Any(x => x.value == type.value);
+
+                menu.AddItem(new GUIContent(type.value), isUsed, () =>
+                {
+                    if (!isUsed)
+                    {
+                        _target.AddStatType(type);
+
+                        //save
+                        // if not in play mode, save (set dirty)
+                        if (!Application.isPlaying)
+                        {
+                            // save param is set earlier, this is only here if code needs to be changed back
+                        }
+                    }
+                    else
+                    {
+                        _target.RemoveStatType(type);
+
+                        //save
+                        // if not in play mode, save (set dirty)
+                        if (!Application.isPlaying)
+                        {
+                            // save param is set earlier, this is only here if code needs to be changed back
+                        }
+                    }
+                });
+            }
+
+            // show menu
+            menu.ShowAsContext();
+        }
+        GUILayout.EndHorizontal();
     }
 #endif
 
