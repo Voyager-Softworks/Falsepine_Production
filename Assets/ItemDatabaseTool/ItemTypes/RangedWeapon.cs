@@ -261,7 +261,8 @@ public class RangedWeapon : Item
 
     /// <summary>
     /// Uses the aim zone to detect what to shoot and how much damage to deal<br/>
-    /// @Todo: Replace trigger collider checking with layers?
+    /// @todo Replace trigger collider checking with layers?
+    /// @todo split this function up.
     /// </summary>
     /// <param name="_origin"></param>
     /// <param name="_direction"></param>

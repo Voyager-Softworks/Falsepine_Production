@@ -135,6 +135,20 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
     {
         return m_usedStatTypes;
     }
+    public void AddStatType(StatsManager.StatType statType)
+    {
+        if (!m_usedStatTypes.Contains(statType))
+        {
+            m_usedStatTypes.Add(statType);
+        }
+    }
+    public void RemoveStatType(StatsManager.StatType statType)
+    {
+        if (m_usedStatTypes.Contains(statType))
+        {
+            m_usedStatTypes.Remove(statType);
+        }
+    }
 
     // StatsManager.HasStatMods interface implementation
     [SerializeField] public List<StatsManager.StatMod> m_statMods = new List<StatsManager.StatMod>();
@@ -523,7 +537,8 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
             item.drawDefaultInspector = GUILayout.Toggle(item.drawDefaultInspector, "Default Inspector");
             GUILayout.FlexibleSpace();
             EditorGUILayout.EndHorizontal();
-            if (item.drawDefaultInspector){
+            if (item.drawDefaultInspector)
+            {
                 DrawDefaultInspector();
             }
 
@@ -561,7 +576,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
             EditorGUI.BeginDisabledGroup(true);
             item.instanceID = EditorGUILayout.TextField("Instance ID: ", item.instanceID);
             EditorGUI.EndDisabledGroup();
-            
+
             item.m_displayName = EditorGUILayout.TextField("Display Name: ", item.m_displayName);
             item.m_description = EditorGUILayout.TextField("Description: ", item.m_description);
             item.m_icon = EditorGUILayout.ObjectField("Icon: ", item.m_icon, typeof(Sprite), false) as Sprite;
@@ -583,7 +598,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
             // end horiz
             GUILayout.EndHorizontal();
 
-            
+
             // End Economy box
             GUILayout.EndVertical();
 
@@ -595,13 +610,13 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
 
             // horiz
             GUILayout.BeginHorizontal();
-            GUILayout.Label(new GUIContent("Current Stack: ","The current amount of items in this stack"));
+            GUILayout.Label(new GUIContent("Current Stack: ", "The current amount of items in this stack"));
             item.currentStackSize = EditorGUILayout.IntField(item.currentStackSize);
 
-            GUILayout.Label(new GUIContent("Max Stack: ","The maximum amount of items in this stack"));
+            GUILayout.Label(new GUIContent("Max Stack: ", "The maximum amount of items in this stack"));
             item.maxStackSize = EditorGUILayout.IntField(item.maxStackSize);
             GUILayout.EndHorizontal();
-            
+
             item.mustMatchToStack = EditorGUILayout.Toggle(new GUIContent("Must Match To Stack: ", "Items of the same type must match in all other spects to stack"), item.mustMatchToStack);
 
             // end stack info box
@@ -614,9 +629,10 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
 
             //tags list
             EditorGUI.indentLevel++;
-            showTags = EditorGUILayout.Foldout(showTags, "Tags", true, new GUIStyle(EditorStyles.foldout) { fontStyle = FontStyle.Bold});
+            showTags = EditorGUILayout.Foldout(showTags, "Tags", true, new GUIStyle(EditorStyles.foldout) { fontStyle = FontStyle.Bold });
             EditorGUI.indentLevel--;
-            if (showTags){
+            if (showTags)
+            {
                 GUI.backgroundColor = Color.white;
                 GUILayout.BeginVertical("box");
                 //draw tags
@@ -646,7 +662,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
                 {
                     item.m_tags.Add(new TagManager.Tag("New Tag"));
 
-                    int c =ItemDatabase.database.Count();
+                    int c = ItemDatabase.database.Count();
 
                     // save
                     // if not in play mode, save (set dirty)
@@ -665,78 +681,12 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
             GUILayout.BeginVertical("box");
             // bold text
             GUILayout.Label("Stats", CustomEditorStuff.center_bold_label);
-
-            // used stat types, multi select dropdown (generic menu)
-            GUILayout.BeginHorizontal();
-            string usedStatTypes = "Used Stat Types: ";
-            for (int i = 0; i < item.m_usedStatTypes.Count; i++)
+            bool needToSave = false;
+            StatsManager.StatTypeDropdown(item, out needToSave);
+            if (needToSave)
             {
-                usedStatTypes += item.m_usedStatTypes[i].value;
-                // if not last item, add comma and/or new line
-                if (i != item.m_usedStatTypes.Count - 1)
-                {
-                    usedStatTypes += ", ";
-
-                    // every third item, add a new line
-                    if (i % 3 == 2)
-                    {
-                        usedStatTypes += "\n";
-                    }
-                }
+                EditorUtility.SetDirty(this);
             }
-            if (item.m_usedStatTypes.Count <= 0)
-            {
-                usedStatTypes += "None";
-            }
-            //GUILayout.Label(new GUIContent(usedStatTypes, "The stat types used by this item"));
-            if (GUILayout.Button(new GUIContent(usedStatTypes, "Stat Types this item should use")))
-            {
-                GenericMenu menu = new GenericMenu();
-
-                // add all stat types
-                FieldInfo[] pi = typeof(StatsManager.StatType).GetFields();
-                foreach (FieldInfo field in pi)
-                {
-                    StatsManager.StatType type = null;
-                    // if field is not static, return
-                    if (!field.IsStatic) continue;
-                    type = (StatsManager.StatType)field.GetValue(null);
-                    if (item.m_usedStatTypes.Count() > 0){
-                        StatsManager.StatType firstTpe = item.m_usedStatTypes[0];
-                    }
-
-                    // check if it is used, by comparing the value of the field to the used stat types
-                    bool isUsed = item.m_usedStatTypes.Any(x => x.value == type.value);
-
-                    menu.AddItem(new GUIContent(type.value), isUsed, () => { 
-                        if (!isUsed)
-                        {
-                            item.m_usedStatTypes.Add(type);
-
-                            //save
-                            // if not in play mode, save (set dirty)
-                            if (!Application.isPlaying)
-                            {
-                                EditorUtility.SetDirty(this);
-                            }
-                        }
-                        else {
-                            item.m_usedStatTypes.Remove(type);
-
-                            //save
-                            // if not in play mode, save (set dirty)
-                            if (!Application.isPlaying)
-                            {
-                                EditorUtility.SetDirty(this);
-                            }
-                        }
-                    });
-                }
-
-                // show menu
-                menu.ShowAsContext();
-            }
-            GUILayout.EndHorizontal();
 
             // space
             GUILayout.Space(10);
@@ -749,7 +699,8 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
             // stat mods (used property field)
             EditorGUI.indentLevel++;
             // use DrawStatMod
-            if (StatsManager.DrawStatModList(item.m_statMods)){
+            if (StatsManager.DrawStatModList(item.m_statMods))
+            {
                 // save
                 // if not in play mode, save (set dirty)
                 if (!Application.isPlaying)
