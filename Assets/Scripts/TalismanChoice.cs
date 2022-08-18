@@ -43,22 +43,38 @@ public class TalismanChoice : ToggleableWindow
         interactable.onInteract += OpenWindow;
     }
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         m_closeButton.onClick.AddListener(CloseWindow);
+
+        RemoveAllListeners();
+        AddListeners();
+    }
+
+    private void OnDisable()
+    {
+        m_closeButton.onClick.RemoveListener(CloseWindow);
         
+        RemoveAllListeners();
+    }
+
+    private void AddListeners()
+    {
         foreach (ChoiceLink link in m_choices)
         {
-            link.m_button.onClick.AddListener(() => {
+            link.m_button.onClick.AddListener(() =>
+            {
                 ChooseTalisman(link.m_talisman);
             });
         }
     }
-    private void OnDisable() {
-        m_closeButton.onClick.RemoveListener(CloseWindow);
 
+    private void RemoveAllListeners()
+    {
         foreach (ChoiceLink link in m_choices)
         {
-            link.m_button.onClick.RemoveListener(() => {
+            link.m_button.onClick.RemoveListener(() =>
+            {
                 ChooseTalisman(link.m_talisman);
             });
         }
