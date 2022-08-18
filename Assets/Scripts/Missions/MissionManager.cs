@@ -162,44 +162,53 @@ public class MissionManager : MonoBehaviour
     /// </summary>
     public void LoadMissions(int saveSlot)
     {
-        if (File.Exists(GetSaveFilePath(saveSlot)))
+        // if save path doesn't exist, create it
+        if (!Directory.Exists(GetSaveFolderPath(saveSlot)))
         {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(GetSaveFilePath(saveSlot), FileMode.Open);
+            Directory.CreateDirectory(GetSaveFolderPath(saveSlot));
+        }
+        // if save file doesn't exist, return
+        if (!File.Exists(GetSaveFilePath(saveSlot)))
+        {
+            Debug.Log("Save file does not exist.");
+            return;
+        }
 
-            MissionData data = new MissionData();
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Open(GetSaveFilePath(saveSlot), FileMode.Open);
 
-            // unpack data
-            string json = "";
-            using (StreamReader reader = new StreamReader(file))
+        MissionData data = new MissionData();
+
+        // unpack data
+        string json = "";
+        using (StreamReader reader = new StreamReader(file))
+        {
+            json = reader.ReadToEnd();
+        }
+        data = JsonUtility.FromJson<MissionData>(json);
+
+        file.Close();
+
+        // load data
+        if (data == null)
+        {
+            return;
+        }
+        m_missionZones = new List<MissionZone>();
+        foreach (MissionZone.Serializable_MissionZone zone in data.missionZones)
+        {
+            m_missionZones.Add(zone.ToMissionZone());
+        }
+        //make temp zone
+        MissionZone tempZone = data.currentZone.ToMissionZone();
+
+        //find the zone in the list
+        foreach (MissionZone zone in m_missionZones)
+        {
+            if (zone == tempZone)
             {
-                json = reader.ReadToEnd();
-            }
-            data = JsonUtility.FromJson<MissionData>(json);
-
-            file.Close();
-
-            // load data
-            if (data == null)
-            {
-                return;
-            }
-            m_missionZones = new List<MissionZone>();
-            foreach (MissionZone.Serializable_MissionZone zone in data.missionZones)
-            {
-                m_missionZones.Add(zone.ToMissionZone());
-            }
-            //make temp zone
-            MissionZone tempZone = data.currentZone.ToMissionZone();
-
-            //find the zone in the list
-            foreach (MissionZone zone in m_missionZones)
-            {
-                if (zone == tempZone)
-                {
-                    m_currentZone = zone;
-                    break;
-                }
+                m_currentZone = zone;
+                break;
             }
         }
 

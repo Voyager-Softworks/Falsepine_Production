@@ -378,16 +378,15 @@ public class StatsManager : MonoBehaviour
 
     public void LoadStats(int saveSlot)
     {
-        // if the save folder doesn't exist, create it
+        // if save path doesn't exist, create it
         if (!Directory.Exists(GetSaveFolderPath(saveSlot)))
         {
             Directory.CreateDirectory(GetSaveFolderPath(saveSlot));
         }
-
-        // if the file doesn't exist, create it
+        // if save file doesn't exist, return
         if (!File.Exists(GetSaveFilePath(saveSlot)))
         {
-            File.Create(GetSaveFilePath(saveSlot));
+            Debug.Log("Save file does not exist.");
             return;
         }
 
