@@ -76,6 +76,9 @@ public class TalismanChoice : ToggleableWindow
 
         StatsManager.instance.m_activeTalismans.Add(talisman);
 
+        // disable interactable
+        GetComponent<Interactable>().DisableInteract();
+
         CloseWindow();
     }
 

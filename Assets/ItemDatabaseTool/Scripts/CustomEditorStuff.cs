@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEditor.SceneManagement;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -23,7 +24,34 @@ public class CustomEditorStuff
     public static GUIStyle bold_label = new GUIStyle(EditorStyles.label) {
         fontStyle = FontStyle.Bold
     };
+
+    [MenuItem("Dev/Add Required")]
+    public static void AddRequired()
+    {
+        // get all prefabs in Assets/Prefabs/Managers/Required
+        string[] prefabs = AssetDatabase.FindAssets("t:Prefab", new string[] { "Assets/Prefabs/Managers/Required" });
+        // add them to scene if they dont already exist
+        foreach (string prefab in prefabs)
+        {
+            string path = AssetDatabase.GUIDToAssetPath(prefab);
+            GameObject go = AssetDatabase.LoadAssetAtPath<GameObject>(path);
+            if (go == null){
+                Debug.LogError("Could not load prefab at path: " + path);
+                continue;
+            }
+            if (GameObject.Find(go.name) == null){
+                Debug.Log("Adding prefab: " + go.name);
+                PrefabUtility.InstantiatePrefab(go);
+
+                // make scene to be saved
+                EditorSceneManager.MarkSceneDirty(UnityEditor.SceneManagement.EditorSceneManager.GetActiveScene());
+            }
+        }
+    }
+
 }
+
+
 
 /// <summary>
 /// ReadOnly attribute for serialized fields.
