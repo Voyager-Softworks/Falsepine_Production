@@ -217,7 +217,9 @@ public class PlayerInventoryInterface : MonoBehaviour
         {
             meleeAttackTimer -= Time.deltaTime;
         }
-        else{
+        
+        if (meleeAttackTimer < 0.5f && GetMeleeLink().model.activeSelf)
+        {
             // disable melee model
             GetMeleeLink().model.SetActive(false);
             // enable equiped wepaon model
