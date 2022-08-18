@@ -18,59 +18,59 @@ using System.Linq;
 
 namespace NodeAI
 {
-        /// <summary>
-        /// An Event object containing sensory data.
-        /// </summary>
-        [System.Serializable]
-        public class SensoryEvent
+    /// <summary>
+    /// An Event object containing sensory data.
+    /// </summary>
+    [System.Serializable]
+    public class SensoryEvent
+    {
+        public SensoryEvent(GameObject _source, GameObject _target, float _urgency, SenseType _senseType) ///< Constructor.
         {
-            public SensoryEvent(GameObject _source, GameObject _target, float _urgency, SenseType _senseType) ///< Constructor.
-            {
-                source = _source;
-                target = _target;
-                urgency = _urgency;
-                type = _senseType;
-            }
-            public GameObject source{get;} ///< The source of the event.
-            public GameObject target{get;} ///< The target of the event.
-            public float distance{get => Vector3.Distance(source.transform.position, target.transform.position);} ///< The distance between the source and target.
-            public Vector3 direction { get { return source.transform.position - target.transform.position; } } ///< The direction between the source and target.
-            public float time{get;} ///< The time the event was created.
-            public float age{get{return Time.time - time;}} ///< The time since the event was created.
-            public float urgency{get;} ///< The urgency of the event.
-            public float salience ///< The salience of the event.
-            {
-                get
-                {
-                    return urgency / (distance + age);
-                }
-            }
-            public enum SenseType ///< The type of the event.
-            {
-                VISUAL, ///< Events caused by the Agent percieving visual (seeing) information.
-                AURAL, ///< Events caused by the Agent percieving auditory (hearing) information.
-                SOMATIC ///< Events caused by the Agent percieving somatic (feeling) information.
-            }
-            public SenseType type{get;} ///< The type of the event.
+            source = _source;
+            target = _target;
+            urgency = _urgency;
+            type = _senseType;
         }
-        /// <summary>
-        /// A comparer for SensoryEvents.
-        /// </summary>
-        public class SensoryEventComparer : IComparer<SensoryEvent>
+        public GameObject source { get; } ///< The source of the event.
+        public GameObject target { get; } ///< The target of the event.
+        public float distance { get => Vector3.Distance(source.transform.position, target.transform.position); } ///< The distance between the source and target.
+        public Vector3 direction { get { return source.transform.position - target.transform.position; } } ///< The direction between the source and target.
+        public float time { get; } ///< The time the event was created.
+        public float age { get { return Time.time - time; } } ///< The time since the event was created.
+        public float urgency { get; } ///< The urgency of the event.
+        public float salience ///< The salience of the event.
         {
-            public int Compare(SensoryEvent x, SensoryEvent y)
+            get
             {
-                if (x.salience > y.salience)
-                    return -1;
-                else if (x.salience < y.salience)
-                    return 1;
-                else
-                    return 0;
+                return urgency / (distance + age);
             }
         }
+        public enum SenseType ///< The type of the event.
+        {
+            VISUAL, ///< Events caused by the Agent percieving visual (seeing) information.
+            AURAL, ///< Events caused by the Agent percieving auditory (hearing) information.
+            SOMATIC ///< Events caused by the Agent percieving somatic (feeling) information.
+        }
+        public SenseType type { get; } ///< The type of the event.
+    }
+    /// <summary>
+    /// A comparer for SensoryEvents.
+    /// </summary>
+    public class SensoryEventComparer : IComparer<SensoryEvent>
+    {
+        public int Compare(SensoryEvent x, SensoryEvent y)
+        {
+            if (x.salience > y.salience)
+                return -1;
+            else if (x.salience < y.salience)
+                return 1;
+            else
+                return 0;
+        }
+    }
 
 
-    
+
     /// <summary>
     ///  A class which gives a NodeAI_Agent sensory awareness.
     /// </summary>
@@ -151,7 +151,7 @@ namespace NodeAI
         ///  A debug function to investigate the sensory events.
         /// </summary>
         /// <param name="e">The SensoryEvent</param>
-        void DebugSense(SensoryEvent e) 
+        void DebugSense(SensoryEvent e)
         {
             Debug.DrawLine(eyesBone.position, e.source.transform.position, Color.magenta);
         }
@@ -175,22 +175,22 @@ namespace NodeAI
                     break;
             }
             sensoryEvents.Sort((a, b) => a.salience.CompareTo(b.salience));
-            if(sensoryEvents.Count > 20)
+            if (sensoryEvents.Count > 20)
             {
                 sensoryEvents.RemoveAt(sensoryEvents.Count - 1);
             }
-            while(noticedObjects.Count > 20)
+            while (noticedObjects.Count > 20)
             {
                 noticedObjects.RemoveAt(noticedObjects.Count - 1);
             }
             //noticedObjects.Clear();
 
-            
+
 
             GameObject[] visible = GetVisibleObjects();
-            foreach(GameObject o in visible)
+            foreach (GameObject o in visible)
             {
-                if(!noticedObjects.Contains(o))
+                if (!noticedObjects.Contains(o))
                 {
                     sensoryEvents.Add(new SensoryEvent(o, gameObject, 1f, SensoryEvent.SenseType.VISUAL));
                     OnSensoryEvent?.Invoke(sensoryEvents.Last());
@@ -199,19 +199,19 @@ namespace NodeAI
                 {
                     //Move to front of list
                     int index = noticedObjects.IndexOf(o);
-                    if(index != 0)
+                    if (index != 0)
                     {
                         noticedObjects.RemoveAt(index);
                         noticedObjects.Insert(0, o);
                     }
                 }
             }
-            if(noticedObjects.Count >= visible.Length) noticedObjects.RemoveRange(visible.Length, noticedObjects.Count - visible.Length);
+            if (noticedObjects.Count >= visible.Length) noticedObjects.RemoveRange(visible.Length, noticedObjects.Count - visible.Length);
             sensoryEvents.ForEach(e =>
             {
                 if (e.salience > 0 && e.age > 0.2f)
                 {
-                    if(!noticedObjects.Contains(e.source))
+                    if (!noticedObjects.Contains(e.source))
                     {
                         noticedObjects.Insert(0, e.source);
                     }
@@ -225,7 +225,7 @@ namespace NodeAI
         /// </summary>
         /// <param name="target">The target to check.</param>
         /// <returns>True if the Agent can see the target.</returns>
-        public bool CanSee(GameObject target) 
+        public bool CanSee(GameObject target)
         {
             return GetVisibleObjects().Contains(target);
         }
@@ -247,7 +247,7 @@ namespace NodeAI
         /// <returns>True if the Agent is currently aware of the target.</returns>
         public bool IsAwareOf(GameObject target) ///< Returns true if the Agent is aware of the target.
         {
-            if(target == null)
+            if (target == null)
             {
                 return false;
             }
@@ -280,37 +280,37 @@ namespace NodeAI
         /// <returns>The list of objects which the Agent can see.</returns>
         public GameObject[] GetVisibleObjects() ///< Returns all objects which the Agent can see.
         {
-            RaycastHit[] hits = Physics.SphereCastAll(eyesBone.position, sightDistance/2, eyesForward, sightDistance/2, sightMask);
+            RaycastHit[] hits = Physics.SphereCastAll(eyesBone.position, sightDistance / 2, eyesForward, sightDistance / 2, sightMask);
             List<GameObject> visibleObjects = new List<GameObject>();
-            foreach(RaycastHit hit in hits)
+            foreach (RaycastHit hit in hits)
             {
-                if(hit.collider.gameObject == this.gameObject)
+                if (hit.collider.gameObject == this.gameObject)
                 {
                     continue;
                 }
-                if(hit.distance > sightDistance)
+                if (hit.distance > sightDistance)
                 {
                     continue;
                 }
                 Vector3 dir = hit.transform.position - transform.position;
-                if(Vector3.Angle(eyesForward, dir) < sightAngle / 2)
+                if (Vector3.Angle(eyesForward, dir) < sightAngle / 2)
                 {
                     //check line of sight
                     RaycastHit[] hits2 = Physics.RaycastAll(eyesBone.position, dir, dir.magnitude);
                     bool lineOfSight = true;
-                    foreach(RaycastHit hit2 in hits2)
+                    foreach (RaycastHit hit2 in hits2)
                     {
-                        if(hit.collider.gameObject == this.gameObject)
+                        if (hit.collider.gameObject == this.gameObject)
                         {
                             continue;
                         }
-                        if(hit2.collider.gameObject != hit.collider.gameObject)
+                        if (hit2.collider.gameObject != hit.collider.gameObject)
                         {
                             lineOfSight = false;
                             break;
                         }
                     }
-                    if(lineOfSight)
+                    if (lineOfSight)
                     {
                         visibleObjects.Add(hit.collider.gameObject);
                     }
@@ -324,20 +324,20 @@ namespace NodeAI
         /// </summary>
         public void OnDrawGizmosSelected() ///< Draws the vision cone gizmo
         {
-            
+
             Gizmos.color = Color.yellow;
-            if(eyesBone)CustomGizmos.DrawCone(eyesBone, eyesForward, sightAngle, sightDistance);
-            
-            foreach(GameObject o in noticedObjects)
+            if (eyesBone) CustomGizmos.DrawCone(eyesBone, eyesForward, sightAngle, sightDistance);
+
+            foreach (GameObject o in noticedObjects)
             {
                 Gizmos.color = Color.white;
-                Gizmos.DrawIcon(o.transform.position + (Vector3.up*2.0f), "d_animationvisibilitytoggleon", true, Color.magenta);
+                Gizmos.DrawIcon(o.transform.position + (Vector3.up * 2.0f), "d_animationvisibilitytoggleon", true, Color.magenta);
             }
-            if(sensoryEvents.Count > 0)
+            if (sensoryEvents.Count > 0)
             {
-                for(int i = 0; i < sensoryEvents.Count; i++)
+                for (int i = 0; i < sensoryEvents.Count; i++)
                 {
-                    Gizmos.color = Color.magenta * (1.0f -(i/ (float)sensoryEvents.Count));
+                    Gizmos.color = Color.magenta * (1.0f - (i / (float)sensoryEvents.Count));
                     Gizmos.DrawLine(eyesBone.position, sensoryEvents[i].source.transform.position);
                 }
             }
