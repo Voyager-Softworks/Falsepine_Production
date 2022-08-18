@@ -370,7 +370,7 @@ public class StatsManager : MonoBehaviour
 
         // write the json to the file
         StreamWriter writer = new StreamWriter(file);
-        writer.Write(JsonUtility.ToJson(this));
+        writer.Write(JsonUtility.ToJson(this, true));
         writer.Close();
         file.Close();
     }
@@ -401,6 +401,18 @@ public class StatsManager : MonoBehaviour
 
         // parse the json
         JsonUtility.FromJsonOverwrite(json, this);
+    }
+
+    /// <summary>
+    /// Deletes the save at index
+    /// </summary>
+    /// <param name="saveSlot"></param>
+    public void DeleteStatsSave(int saveSlot)
+    {
+        if (File.Exists(GetSaveFilePath(saveSlot)))
+        {
+            File.Delete(GetSaveFilePath(saveSlot));
+        }
     }
 
     // Update is called once per frame

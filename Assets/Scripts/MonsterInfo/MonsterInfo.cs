@@ -6,9 +6,11 @@ using System;
 /// <summary>
 /// Monster info scriptable object.
 /// </summary>
+[Serializable]
 [CreateAssetMenu(fileName = "MonsterInfo", menuName = "MonsterInfo/MonsterInfo")]
 public class MonsterInfo : ScriptableObject
 {
+    [Serializable]
     public enum MonsterType
     {
         Boss,

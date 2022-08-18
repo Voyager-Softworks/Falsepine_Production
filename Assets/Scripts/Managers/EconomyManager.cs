@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.IO;
 
 /// <summary>
 /// Manages the in game economy, things like player and store money, unlocked items, item prices, etc.
@@ -11,6 +12,16 @@ using System;
 public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
 {
     public static EconomyManager instance;
+
+    public static string GetSaveFolderPath(int saveSlot)
+    {
+        return SaveManager.GetSaveFolderPath(saveSlot) + "/economy/";
+    }
+
+    public static string GetSaveFilePath(int saveSlot)
+    {
+        return GetSaveFolderPath(saveSlot) + "economy.json";
+    }
 
     // StatsManager.UsesStats implementation
     private List<StatsManager.StatType> m_usedStatTypes = new List<StatsManager.StatType>()
@@ -45,6 +56,10 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
         bool GetAllowedDiscount();
     }
 
+    /// <summary>
+    /// Items which can be purchsed and info about them, such as unlock state, amount that can be bought, etc.
+    /// @todo make this saveable.
+    /// </summary>
     [Serializable]
     public class PurchasableItem
     {
@@ -52,6 +67,8 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
 
         public int minAmount = 1;
         public int maxAmount = 1;
+
+        public bool unlocked = false;
     }
 
     public string storeInventoryName = "store";
@@ -62,6 +79,11 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
 
     public int m_playerSilver = 0;
 
+    private class SaveData {
+        public List<PurchasableItem> purchasableItems = new List<PurchasableItem>();
+        public int m_playerSilver = 0;
+    }
+
     void Awake()
     {
         if (instance == null)
@@ -70,7 +92,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
             //do not destroy this object
             DontDestroyOnLoad(this);
 
-            //LoadMissions();
+            LoadEconomy(SaveManager.currentSaveSlot);
         }
         else
         {
@@ -101,5 +123,81 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     public void Spend(int _amount)
     {
         m_playerSilver -= _amount;
+    }
+
+    public void SaveEconomy(int saveSlot)
+    {
+        // if the save folder doesn't exist, create it
+        if (!Directory.Exists(GetSaveFolderPath(saveSlot)))
+        {
+            Directory.CreateDirectory(GetSaveFolderPath(saveSlot));
+        }
+
+        FileStream file = File.Create(GetSaveFilePath(saveSlot));
+
+        // make data
+        SaveData data = new SaveData();
+        foreach (PurchasableItem purchasableItem in purchasableItems)
+        {
+            //@todo make this actually saveable/serializable
+            data.purchasableItems.Add(purchasableItem);
+        }
+        data.m_playerSilver = m_playerSilver;
+
+        StreamWriter writer = new StreamWriter(file);
+
+        // save the data
+        writer.Write(JsonUtility.ToJson(data, true));
+
+        writer.Close();
+
+        file.Close();
+    }
+
+    public void LoadEconomy(int saveSlot)
+    {
+        // if save path doesn't exist, create it
+        if (!Directory.Exists(GetSaveFolderPath(saveSlot)))
+        {
+            Directory.CreateDirectory(GetSaveFolderPath(saveSlot));
+        }
+        // if save file doesn't exist, return
+        if (!File.Exists(GetSaveFilePath(saveSlot)))
+        {
+            Debug.Log("Save file does not exist.");
+            return;
+        }
+
+        // read the file
+        FileStream file = File.Open(GetSaveFilePath(saveSlot), FileMode.Open);
+
+        StreamReader reader = new StreamReader(file);
+
+        // load the data 
+        SaveData data = JsonUtility.FromJson<SaveData>(reader.ReadToEnd());
+
+        foreach (PurchasableItem purchasableItem in data.purchasableItems)
+        {
+            //@todo make this actually saveable/serializable
+            purchasableItems.Add(purchasableItem);
+        }
+
+        m_playerSilver = data.m_playerSilver;
+
+        reader.Close();
+
+        file.Close();
+    }
+
+    /// <summary>
+    /// Deletes the save at index
+    /// </summary>
+    /// <param name="saveSlot"></param>
+    public void DeleteEconomySave(int saveSlot)
+    {
+        if (File.Exists(GetSaveFilePath(saveSlot)))
+        {
+            File.Delete(GetSaveFilePath(saveSlot));
+        }
     }
 }

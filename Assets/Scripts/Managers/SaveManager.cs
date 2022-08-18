@@ -66,6 +66,12 @@ public class SaveManager : MonoBehaviour
 
         // save journal
         if (JournalManager.instance != null) JournalManager.instance.SaveJournal(saveSlot);
+
+        // save economy
+        if (EconomyManager.instance != null) EconomyManager.instance.SaveEconomy(saveSlot);
+
+        // save stats
+        if (StatsManager.instance != null) StatsManager.instance.SaveStats(saveSlot);
     }
 
     public static void LoadAll(int saveSlot)
@@ -73,14 +79,7 @@ public class SaveManager : MonoBehaviour
         // set current save slot
         SetSaveSlot(saveSlot);
 
-        // destroy mission manager
-        if (MissionManager.instance) Destroy(MissionManager.instance.gameObject);
-
-        // destroy inventory manager
-        if (InventoryManager.instance) Destroy(InventoryManager.instance.gameObject);
-
-        // destroy journal
-        if (JournalManager.instance) Destroy(JournalManager.instance.gameObject);
+        LevelController.DestroyManagers();
 
         LevelController.LoadTown(false);
     }
@@ -101,32 +100,46 @@ public class SaveManager : MonoBehaviour
                     inv.DeleteSaveFile(saveSlot);
                 }
             }
-
-            
         }
 
         // delete misison save file
         if (MissionManager.instance != null)
         {
             MissionManager.instance.DeleteMissionSave(saveSlot);
-
-            // destroy mission manager
-            Destroy(MissionManager.instance.gameObject);
         }
 
-        // destroy journal
-        Destroy(JournalManager.instance.gameObject);
+        // delete the economy save file
+        if (EconomyManager.instance != null)
+        {
+            EconomyManager.instance.DeleteEconomySave(saveSlot);
+        }
+
+        // delete stats save file
+        if (StatsManager.instance != null)
+        {
+            StatsManager.instance.DeleteStatsSave(saveSlot);
+        }
     }
 
+    /// <summary>
+    /// Deletes literally all save data at index.
+    /// </summary>
+    /// <param name="saveSlot"></param>
     public static void HardDeleteAll(int saveSlot){
-        // delete journal save file
-        if (JournalManager.instance != null)
-        {
-            JournalManager.instance.DeleteJournalSave(saveSlot);
+        // delete all inventories
+        if (InventoryManager.instance != null) InventoryManager.instance.DeleteInventories(saveSlot);
 
-            // destroy journal
-            Destroy(JournalManager.instance.gameObject);
-        }
+        // delete missions
+        if (MissionManager.instance != null) MissionManager.instance.DeleteMissionSave(saveSlot);
+
+        // delete journal
+        if (JournalManager.instance != null) JournalManager.instance.DeleteJournalSave(saveSlot);
+
+        // delete economy
+        if (EconomyManager.instance != null) EconomyManager.instance.DeleteEconomySave(saveSlot);
+
+        // delete stats
+        if (StatsManager.instance != null) StatsManager.instance.DeleteStatsSave(saveSlot);
     }
 
     public static void DeleteAllSaves(){

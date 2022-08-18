@@ -13,6 +13,8 @@ public class LevelController : MonoBehaviour
     {
         if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
 
+        DestroyManagers();
+
         SceneManager.LoadScene("Menu");
     }
 
@@ -58,16 +60,17 @@ public class LevelController : MonoBehaviour
     {
         SaveManager.SoftDeleteAll(SaveManager.currentSaveSlot);
 
-        // destroy mission manager
-        if (MissionManager.instance) Destroy(MissionManager.instance.gameObject);
-
-        // destroy inventory manager
-        if (InventoryManager.instance) Destroy(InventoryManager.instance.gameObject);
-
-        // destroy journal
-        if (JournalManager.instance) Destroy(JournalManager.instance.gameObject);
+        DestroyManagers();
 
         SceneManager.LoadScene("Scene_GameOver");
+    }
+
+    static public void DestroyManagers(){
+        if (MissionManager.instance) Destroy(MissionManager.instance.gameObject);
+        if (InventoryManager.instance) Destroy(InventoryManager.instance.gameObject);
+        if (JournalManager.instance) Destroy(JournalManager.instance.gameObject);
+        if (EconomyManager.instance) Destroy(EconomyManager.instance.gameObject);
+        if (StatsManager.instance) Destroy(StatsManager.instance.gameObject);
     }
 
     static public void ReloadScene()
