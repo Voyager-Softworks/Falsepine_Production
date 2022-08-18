@@ -128,7 +128,7 @@ public class InfoBox : MonoBehaviour
             modList.text = "";
             foreach (StatsManager.StatMod mod in mods)
             {
-                modList.text += StatsManager.StatType.DisplayName(mod.statType) + " " + (mod.modType == StatsManager.ModType.Multiplier ? "x" : (mod.value < 0 ? "" : "+")) + mod.value + "\n";
+                modList.text += mod.ToText() + "\n";
             }
         }
         else

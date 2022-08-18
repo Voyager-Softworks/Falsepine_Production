@@ -437,6 +437,7 @@ public class RangedWeapon : Item
         if (m_shootSound != null)
         {
             GameObject sound = Instantiate(m_shootSound, _origin, Quaternion.identity);
+            Destroy(sound, 2.0f);
         }
 
         //Trigger auditory event on all sensors in range:
@@ -453,6 +454,7 @@ public class RangedWeapon : Item
         {
             GameObject effect = Instantiate(m_shootEffect, _origin, Quaternion.identity);
             effect.transform.LookAt(_origin + _direction);
+            Destroy(effect, 2.0f);
         }
 
         m_clipAmmo--;
