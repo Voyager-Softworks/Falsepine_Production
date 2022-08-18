@@ -36033,6 +36033,36 @@ MonoBehaviour:
     v4value: {x: 0, y: 0, z: 0, w: 0}
     ovalue: {fileID: 0}
     output: 0
+  - name: FromOtherEnemy
+    GUID: 6d1bfbb0-e404-4ef8-9c0b-b126acba5576
+    paramReference: 
+    serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+      PublicKeyToken=b77a5c561934e089
+    svalue: 
+    ivalue: 0
+    fvalue: 0
+    bvalue: 0
+    cvalue: {r: 0, g: 0, b: 0, a: 0}
+    v2value: {x: 0, y: 0}
+    v3value: {x: 0, y: 0, z: 0}
+    v4value: {x: 0, y: 0, z: 0, w: 0}
+    ovalue: {fileID: 0}
+    output: 0
+  - name: Aware
+    GUID: b9f02ecb-bac9-40c3-ba94-f5a1228113eb
+    paramReference: 
+    serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+      PublicKeyToken=b77a5c561934e089
+    svalue: 
+    ivalue: 0
+    fvalue: 0
+    bvalue: 0
+    cvalue: {r: 0, g: 0, b: 0, a: 0}
+    v2value: {x: 0, y: 0}
+    v3value: {x: 0, y: 0, z: 0}
+    v4value: {x: 0, y: 0, z: 0, w: 0}
+    ovalue: {fileID: 0}
+    output: 0
   nodeTree:
     rootNode:
       GUID: 
@@ -36278,9 +36308,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6f027a942edfcaf98e9ac2361b68d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_hurtBoxes: []
-  m_hurtPlayerEffect: {fileID: 0}
-  m_indicatorPrefab: {fileID: 0}
+  m_hurtBoxes:
+  - {fileID: 8082339850277576217}
+  m_hurtPlayerEffect: {fileID: 7806886839550920633, guid: 5685b526b95f40145b6b7c9e297a5cf2, type: 3}
+  m_indicatorPrefab: {fileID: 1433027140202297374, guid: 26c187ca979e45de096fb29dd9aa23c8, type: 3}
   m_damage: 10
   m_attkNum: 1
 --- !u!114 &6735390497553997317
@@ -36339,6 +36370,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80ec02cfc6b2d63a2af49605ecf856e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  awarenessParameterName: Aware
+  fromOtherEnemyParameterName: FromOtherEnemy
 --- !u!1 &5359032759198430872
 GameObject:
   m_ObjectHideFlags: 0
