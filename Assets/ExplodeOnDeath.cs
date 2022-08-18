@@ -13,8 +13,8 @@ public class ExplodeOnDeath : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(GetComponent<Health_Base>())GetComponent<Health_Base>().Death += (ctx) => {Explode(ctx);};
-        
+        if (GetComponent<Health_Base>()) GetComponent<Health_Base>().Death += (ctx) => { Explode(ctx); };
+
     }
 
     void Explode(Health_Base.DeathContext context)
@@ -41,6 +41,6 @@ public class ExplodeOnDeath : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
