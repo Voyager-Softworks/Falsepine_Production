@@ -24,9 +24,13 @@ public class ExplodeOnDeath : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, m_radius);
         foreach (Collider collider in colliders)
         {
-            if (collider.gameObject.GetComponent<Health_Base>() != null)
+            if (collider.gameObject.GetComponentInChildren<Health_Base>() != null)
             {
-                collider.gameObject.GetComponent<Health_Base>().TakeDamage(new Health_Base.DamageStat(damage: m_damage, sourceObject: gameObject, origin: transform.position, hitPoint: collider.transform.position));
+                collider.gameObject.GetComponentInChildren<Health_Base>().TakeDamage(new Health_Base.DamageStat(damage: m_damage, sourceObject: gameObject, origin: transform.position, hitPoint: collider.transform.position));
+            }
+            else if (collider.gameObject.GetComponentInParent<Health_Base>() != null)
+            {
+                collider.gameObject.GetComponentInParent<Health_Base>().TakeDamage(new Health_Base.DamageStat(damage: m_damage, sourceObject: gameObject, origin: transform.position, hitPoint: collider.transform.position));
             }
         }
 
