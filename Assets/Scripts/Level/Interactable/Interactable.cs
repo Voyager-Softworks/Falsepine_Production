@@ -32,6 +32,9 @@ public class Interactable : MonoBehaviour
     public float interactDistance = 3.0f;
     public InteractEffect onInteractEffect = InteractEffect.NONE;
 
+    // interact c# delegate
+    public System.Action onInteract;
+
     private void OnEnable() {
         
         interactAction.Enable();
@@ -96,6 +99,8 @@ public class Interactable : MonoBehaviour
                 Destroy(gameObject);
                 break;
         }
+
+        onInteract.Invoke();
     }
 
     /// <summary>

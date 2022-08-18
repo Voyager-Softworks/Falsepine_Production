@@ -39,17 +39,17 @@ public class StatsManager : MonoBehaviour
         public string value;
 
         // Items
-        public static StatType RangedDamage = new StatType("RangedDamage");
-        public static StatType RangedInaccuracy = new StatType("RangedInaccuracy");
-        public static StatType RangedRange = new StatType("RangedRange");
-        public static StatType RangedAimSpeed = new StatType("RangedAimSpeed");
-        public static StatType ShotgunDamage = new StatType("ShotgunDamage");
-        public static StatType PistolDamage = new StatType("PistolDamage");
-        public static StatType RifleDamage = new StatType("RifleDamage");
+        public static StatType RangedDamage { get { return new StatType("RangedDamage"); } }
+        public static StatType RangedInaccuracy { get { return new StatType("RangedInaccuracy"); } }
+        public static StatType RangedRange { get { return new StatType("RangedRange"); } }
+        public static StatType RangedAimSpeed { get { return new StatType("RangedAimSpeed"); } }
+        public static StatType ShotgunDamage { get { return new StatType("ShotgunDamage"); } }
+        public static StatType PistolDamage { get { return new StatType("PistolDamage"); } }
+        public static StatType RifleDamage { get { return new StatType("RifleDamage"); } }
 
         // Economy
-        public static StatType StoreCost = new StatType("StoreCost");
-        public static StatType ItemCost = new StatType("ItemCost");
+        public static StatType StoreCost { get { return new StatType("StoreCost"); } }
+        public static StatType ItemCost { get { return new StatType("ItemCost"); } }
 
         public static String DisplayName(StatType type)
         {
@@ -95,6 +95,11 @@ public class StatsManager : MonoBehaviour
         [SerializeField] public StatType statType = null;
         [SerializeField] public ModType modType = ModType.Additive;
         [SerializeField] public float value = 0;
+
+        public string ToText(int _decimalPlaces = 2){
+            string text = StatsManager.StatType.DisplayName(statType) + " " + (modType == StatsManager.ModType.Multiplier ? "x" : (value < 0 ? "" : "+")) + value.ToString("F" + _decimalPlaces);
+            return text;
+        }
     }
 
     /// <summary>
@@ -106,184 +111,57 @@ public class StatsManager : MonoBehaviour
     }
 
     /// <summary>
-    /// A talisman modifies stats, and is kept for the whole run.
+    /// A talisman modifies stats, and is kept for the whole run. <br/>
+    /// Only mods ONE stat type.
     /// </summary>
     [Serializable]
-    public class Talisman : UnityEngine.Object, StatsManager.HasStatMods
+    public class Talisman : StatsManager.HasStatMods
     {
         // HasStatMods interface implementation
-        public List<StatsManager.StatMod> StatMods = new List<StatsManager.StatMod>();
+        public StatsManager.StatMod m_statMod = new StatsManager.StatMod();
         public List<StatsManager.StatMod> GetStatMods()
         {
-            return StatMods;
+            return new List<StatsManager.StatMod>() { m_statMod };
         }
+
+        public Sprite m_icon = null;
     }
 
-    //@todo remwork this to have random ranges for each possible stat mod
-    public List<StatMod> m_possibleTalismanMods = new List<StatMod>();
+    ////////// TALISMANS //////////
+    
+    /// <summary>
+    /// Stat mod range stores data to be used to create a random stat mod
+    /// </summary>    
+    [Serializable]
+    private class StatModRange
+    {
+        /// <summary>
+        /// Do not edit this value! Automatically set by the editor.
+        /// </summary>
+        [SerializeField][HideInInspector] public string m_name = "name";
+        [SerializeField] public StatType m_statType = null;
+        [SerializeField] public ModType m_modType = ModType.Additive;
+        [SerializeField] public float m_min = 0;
+        [SerializeField] public float m_max = 0;
+        [SerializeField] public Sprite m_icon = null;
+    }
+    [SerializeField] private List<StatModRange> m_possibleTalismanMods = new List<StatModRange>();
     public List<Talisman> m_activeTalismans = new List<Talisman>();
 
-#if UNITY_EDITOR
-    static public bool DrawStatMod(StatMod statMod, bool doHoriz = true)
+    public Talisman GetRandomTalisman()
     {
-        if (statMod == null)
-        {
-            return false;
-        }
-
-        if (doHoriz) EditorGUILayout.BeginHorizontal();
-
-        // get all static fields of the StatType class
-        FieldInfo[] fields = typeof(StatType).GetFields(BindingFlags.Public | BindingFlags.Static);
-        //remove any which arent of type StatType
-        fields = fields.Where(f => f.FieldType == typeof(StatType)).ToArray();
-
-        // create a list of strings to display in the dropdown
-        List<string> options = new List<string>();
-        foreach (FieldInfo field in fields)
-        {
-            options.Add(field.Name);
-        }
-
-        // get the index of the selected option
-        int selectedIndex = 0;
-        if (statMod.statType != null) selectedIndex = options.IndexOf(statMod.statType.value);
-        //check if index is within bounds
-        if (selectedIndex < 0 || selectedIndex >= options.Count)
-        {
-            // set the selected option
-            selectedIndex = 0;
-        }
-        // draw the dropdown
-        selectedIndex = EditorGUILayout.Popup(selectedIndex, options.ToArray());
-        string test = fields[selectedIndex].Name;
-        // get the selected option
-        statMod.statType = (StatType)fields[selectedIndex].GetValue(null);
-
-        statMod.modType = (ModType)EditorGUILayout.EnumPopup(statMod.modType);
-        statMod.value = EditorGUILayout.FloatField(statMod.value);
-
-        if (doHoriz) EditorGUILayout.EndHorizontal();
-
-        return false;
+        StatModRange range = m_possibleTalismanMods[UnityEngine.Random.Range(0, m_possibleTalismanMods.Count)];
+        Talisman talisman = new Talisman();
+        talisman.m_statMod.statType = range.m_statType;
+        talisman.m_statMod.modType = range.m_modType;
+        talisman.m_statMod.value = UnityEngine.Random.Range(range.m_min, range.m_max);
+        talisman.m_icon = range.m_icon;
+        return talisman;
     }
-    static public bool DrawStatModList(List<StatMod> statMods)
-    {
-        foreach (StatMod statMod in statMods)
-        {
-            EditorGUILayout.BeginHorizontal();
-            DrawStatMod(statMod, false);
-            if (GUILayout.Button("X"))
-            {
-                statMods.Remove(statMod);
-                return true;
-            }
-            EditorGUILayout.EndHorizontal();
-        }
-        // add a new stat mod
-        if (GUILayout.Button("Add Stat Mod"))
-        {
-            statMods.Add(new StatMod());
-            return true;
-        }
-
-        return false;
-    }
-
-    /// <summary>
-    /// A custom function that draws a list of stat mods given a target object
-    /// </summary>
-    /// <param name="_target"></param>
-    public static void StatTypeDropdown(StatsManager.UsesStats _target, out bool needToSave)
-    {
-        // target
-        StatsManager.UsesStats target = _target;
-
-        needToSave = false;
-
-        // used stat types, multi select dropdown (generic menu)
-        GUILayout.BeginHorizontal();
-        string usedStatTypes = "Used Stat Types: ";
-        for (int i = 0; i < _target.GetStatTypes().Count; i++)
-        {
-            usedStatTypes += _target.GetStatTypes()[i].value;
-            // if not last item, add comma and/or new line
-            if (i != _target.GetStatTypes().Count - 1)
-            {
-                usedStatTypes += ", ";
-
-                // every third item, add a new line
-                if (i % 3 == 2)
-                {
-                    usedStatTypes += "\n";
-                }
-            }
-        }
-        if (_target.GetStatTypes().Count <= 0)
-        {
-            usedStatTypes += "None";
-        }
-        //GUILayout.Label(new GUIContent(usedStatTypes, "The stat types used by this item"));
-        if (GUILayout.Button(new GUIContent(usedStatTypes, "Stat Types this item should use")))
-        {
-            GenericMenu menu = new GenericMenu();
-
-            needToSave = true;
-
-            // add all stat types
-            FieldInfo[] pi = typeof(StatsManager.StatType).GetFields();
-            foreach (FieldInfo field in pi)
-            {
-                StatsManager.StatType type = null;
-                // if field is not static, return
-                if (!field.IsStatic) continue;
-                type = (StatsManager.StatType)field.GetValue(null);
-                if (_target.GetStatTypes().Count() > 0)
-                {
-                    StatsManager.StatType firstTpe = _target.GetStatTypes()[0];
-                }
-
-                // check if it is used, by comparing the value of the field to the used stat types
-                bool isUsed = _target.GetStatTypes().Any(x => x.value == type.value);
-
-                menu.AddItem(new GUIContent(type.value), isUsed, () =>
-                {
-                    if (!isUsed)
-                    {
-                        _target.AddStatType(type);
-
-                        //save
-                        // if not in play mode, save (set dirty)
-                        if (!Application.isPlaying)
-                        {
-                            // save param is set earlier, this is only here if code needs to be changed back
-                        }
-                    }
-                    else
-                    {
-                        _target.RemoveStatType(type);
-
-                        //save
-                        // if not in play mode, save (set dirty)
-                        if (!Application.isPlaying)
-                        {
-                            // save param is set earlier, this is only here if code needs to be changed back
-                        }
-                    }
-                });
-            }
-
-            // show menu
-            menu.ShowAsContext();
-        }
-        GUILayout.EndHorizontal();
-    }
-#endif
 
     [SerializeField]
     static public List<StatMod> globalStatMods = new List<StatMod>()
     {
-
     };
 
     /// <summary>
@@ -325,6 +203,11 @@ public class StatsManager : MonoBehaviour
         List<StatMod> allStatMods = new List<StatMod>();
         allStatMods.AddRange(globalStatMods);
         allStatMods.AddRange(GetPlayerInvetoryStatMods());
+        // get talisman mods
+        foreach (Talisman talisman in instance.m_activeTalismans)
+        {
+            allStatMods.AddRange(talisman.GetStatMods());
+        }
         return allStatMods;
     }
 
@@ -525,4 +408,225 @@ public class StatsManager : MonoBehaviour
     {
 
     }
+
+#if UNITY_EDITOR
+    private void OnValidate() {
+        foreach(StatModRange statModRange in m_possibleTalismanMods)
+        {
+            statModRange.m_name = StatType.DisplayName(statModRange.m_statType) + " - " + statModRange.m_modType.ToString();
+        }
+    }
+
+    /// <summary>
+    /// A property drawer for the StatType class which acts like an enum! Very cool :)
+    /// </summary>
+    [CustomPropertyDrawer(typeof(StatType))]
+    public class StatTypeDrawer : PropertyDrawer
+    {
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            //EditorGUI.BeginProperty(position, GUIContent.none, property);
+
+            // get all static methods of the StatType class
+            MethodInfo[] methods = typeof(StatType).GetMethods(BindingFlags.Public | BindingFlags.Static);
+            //remove any which arent of type StatType
+            methods = methods.Where(f => f.ReturnType == typeof(StatType)).ToArray();
+            // create a list of strings to display in the dropdown
+            List<string> options = new List<string>();
+            foreach (MethodInfo field in methods)
+            {
+                options.Add(((StatType)field.Invoke(null, null)).value);
+            }
+
+            // get the property value
+            SerializedProperty value = property.FindPropertyRelative("value").Copy();
+            EditorGUI.BeginProperty(position, GUIContent.none, value);
+
+            // get the index of the selected option
+            int selectedIndex = -1;
+            selectedIndex = options.IndexOf(value.stringValue);
+            //check if index is within bounds
+            if (selectedIndex < 0 || selectedIndex >= options.Count)
+            {
+                // set the selected option
+                selectedIndex = 0;
+            }
+            // draw the dropdown
+            selectedIndex = EditorGUI.Popup(position, label.text, selectedIndex, options.ToArray());
+            string name = ((StatType)methods[selectedIndex].Invoke(null, null)).value;
+
+            value.stringValue = name;
+
+            EditorGUI.EndProperty();
+        }
+    }
+
+    /// <summary>
+    /// Used to draw a list of StatMods in the inspector. <br/>
+    /// Primarily used by the Item class.
+    /// </summary>
+    /// <param name="statMods"></param>
+    /// <returns></returns>
+    static public bool DrawStatModList(List<StatMod> statMods)
+    {
+        foreach (StatMod statMod in statMods)
+        {
+            EditorGUILayout.BeginHorizontal();
+            DrawStatMod(statMod, false);
+            if (GUILayout.Button("X"))
+            {
+                statMods.Remove(statMod);
+                return true;
+            }
+            EditorGUILayout.EndHorizontal();
+        }
+        // add a new stat mod
+        if (GUILayout.Button("Add Stat Mod"))
+        {
+            statMods.Add(new StatMod());
+            return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Used specifically for the DrawStatModList function!
+    /// </summary>
+    /// <param name="statMod"></param>
+    /// <param name="doHoriz"></param>
+    /// <returns></returns>
+    static private bool DrawStatMod(StatMod statMod, bool doHoriz = true)
+    {
+        if (statMod == null)
+        {
+            return false;
+        }
+
+        if (doHoriz) EditorGUILayout.BeginHorizontal();
+
+        // get all static fields of the StatType class
+        MethodInfo[] methods = typeof(StatType).GetMethods(BindingFlags.Public | BindingFlags.Static);
+        //remove any which arent of type StatType
+        methods = methods.Where(f => f.ReturnType == typeof(StatType)).ToArray();
+
+        // create a list of strings to display in the dropdown
+        List<string> options = new List<string>();
+        foreach (MethodInfo method in methods)
+        {
+            options.Add(((StatType)method.Invoke(null, null)).value);
+        }
+
+        // get the index of the selected option
+        int selectedIndex = 0;
+        if (statMod.statType != null) selectedIndex = options.IndexOf(statMod.statType.value);
+        //check if index is within bounds
+        if (selectedIndex < 0 || selectedIndex >= options.Count)
+        {
+            // set the selected option
+            selectedIndex = 0;
+        }
+        // draw the dropdown
+        selectedIndex = EditorGUILayout.Popup(selectedIndex, options.ToArray());
+        // get the selected option
+        statMod.statType = (StatType)methods[selectedIndex].Invoke(null, null);
+
+        statMod.modType = (ModType)EditorGUILayout.EnumPopup(statMod.modType);
+        statMod.value = EditorGUILayout.FloatField(statMod.value);
+
+        if (doHoriz) EditorGUILayout.EndHorizontal();
+
+        return false;
+    }
+
+    /// <summary>
+    /// A custom function that draws a custom popup and display for a list of statTypes. <br/>
+    /// Primarily used by the Item class.
+    /// </summary>
+    /// <param name="_target"></param>
+    public static void StatTypeListDropdown(StatsManager.UsesStats _target, out bool needToSave)
+    {
+        // target
+        StatsManager.UsesStats target = _target;
+
+        needToSave = false;
+
+        // used stat types, multi select dropdown (generic menu)
+        GUILayout.BeginHorizontal();
+        string usedStatTypes = "Used Stat Types: ";
+        for (int i = 0; i < _target.GetStatTypes().Count; i++)
+        {
+            usedStatTypes += _target.GetStatTypes()[i].value;
+            // if not last item, add comma and/or new line
+            if (i != _target.GetStatTypes().Count - 1)
+            {
+                usedStatTypes += ", ";
+
+                // every third item, add a new line
+                if (i % 3 == 2)
+                {
+                    usedStatTypes += "\n";
+                }
+            }
+        }
+        if (_target.GetStatTypes().Count <= 0)
+        {
+            usedStatTypes += "None";
+        }
+        //GUILayout.Label(new GUIContent(usedStatTypes, "The stat types used by this item"));
+        if (GUILayout.Button(new GUIContent(usedStatTypes, "Stat Types this item should use")))
+        {
+            GenericMenu menu = new GenericMenu();
+
+            needToSave = true;
+
+            // add all stat types
+            FieldInfo[] pi = typeof(StatsManager.StatType).GetFields();
+            foreach (FieldInfo field in pi)
+            {
+                StatsManager.StatType type = null;
+                // if field is not static, return
+                if (!field.IsStatic) continue;
+                type = (StatsManager.StatType)field.GetValue(null);
+                if (_target.GetStatTypes().Count() > 0)
+                {
+                    StatsManager.StatType firstTpe = _target.GetStatTypes()[0];
+                }
+
+                // check if it is used, by comparing the value of the field to the used stat types
+                bool isUsed = _target.GetStatTypes().Any(x => x.value == type.value);
+
+                menu.AddItem(new GUIContent(type.value), isUsed, () =>
+                {
+                    if (!isUsed)
+                    {
+                        _target.AddStatType(type);
+
+                        //save
+                        // if not in play mode, save (set dirty)
+                        if (!Application.isPlaying)
+                        {
+                            // save param is set earlier, this is only here if code needs to be changed back
+                        }
+                    }
+                    else
+                    {
+                        _target.RemoveStatType(type);
+
+                        //save
+                        // if not in play mode, save (set dirty)
+                        if (!Application.isPlaying)
+                        {
+                            // save param is set earlier, this is only here if code needs to be changed back
+                        }
+                    }
+                });
+            }
+
+            // show menu
+            menu.ShowAsContext();
+        }
+        GUILayout.EndHorizontal();
+    }
+#endif
 }

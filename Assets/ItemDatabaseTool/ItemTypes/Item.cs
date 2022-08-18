@@ -682,7 +682,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
             // bold text
             GUILayout.Label("Stats", CustomEditorStuff.center_bold_label);
             bool needToSave = false;
-            StatsManager.StatTypeDropdown(item, out needToSave);
+            StatsManager.StatTypeListDropdown(item, out needToSave);
             if (needToSave)
             {
                 EditorUtility.SetDirty(this);
