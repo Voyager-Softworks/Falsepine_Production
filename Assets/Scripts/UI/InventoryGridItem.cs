@@ -69,8 +69,10 @@ public class InventoryGridItem : MonoBehaviour
         if (mouseScreenPos.x >= topLeft.x && mouseScreenPos.x <= topRight.x &&
             mouseScreenPos.y <= topLeft.y && mouseScreenPos.y >= bottomLeft.y)
         {
+            //@todo change this to depend on the invetory pannel option to show cost.
+            bool showCost = linkedSlot.ownerInventory.id == "store";
             // display info box
-            if (ib) ib.Display(itemInSlot, 0.1f, 0.1f);
+            if (ib) ib.Display(itemInSlot, showCost, 0.1f, 0.1f);
         }
     }
 

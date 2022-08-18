@@ -47,8 +47,8 @@ public class JournalManager : ToggleableWindow
 
     private AudioSource _audioSource;
 
-    public List<JounralEntry> undiscoveredEntries = new List<JounralEntry>();
-    public List<JounralEntry> discoveredEntries = new List<JounralEntry>();
+    public List<JounralEntry> m_undiscoveredEntries = new List<JounralEntry>();
+    public List<JounralEntry> m_discoveredEntries = new List<JounralEntry>();
 
     /// <summary>
     /// Class used to save the journal entries
@@ -166,33 +166,66 @@ public class JournalManager : ToggleableWindow
     {
         if (entry == null) return;
 
-        if (undiscoveredEntries.Contains(entry))
+        if (m_undiscoveredEntries.Contains(entry))
         {
-            undiscoveredEntries.Remove(entry);
+            m_undiscoveredEntries.Remove(entry);
         }
 
-        discoveredEntries.Add(entry);
+        m_discoveredEntries.Add(entry);
     }
 
     /// <summary>
-    /// Discovers a random entry that matches the MonsterType? and EntryType? if given
+    /// Discovers a random entry that matches the filters passed in
     /// </summary>
+    /// <param name="_monster"></param>
+    /// <param name="_entryType"></param>
     public void DiscoverRandomEntry(MonsterInfo _monster = null, JounralEntry.EntryType? _entryType = null)
     {
+        JounralEntry toDiscover = GetRandomUndiscoveredEntry(_monster: _monster, _entryType: _entryType);
+        DiscoverEntry(toDiscover);
+    }
+
+    /// <summary>
+    /// Gets a random undisovered entry that matches the filters passed in
+    /// </summary>
+    /// <param name="_monster"></param>
+    /// <param name="_monsterType"></param>
+    /// <param name="_entryType"></param>
+    /// <returns></returns>
+    public JounralEntry GetRandomUndiscoveredEntry(MonsterInfo _monster = null, MonsterInfo.MonsterType? _monsterType = null, JounralEntry.EntryType? _entryType = null)
+    {
         // get valid entries
-        List<JounralEntry> undisLore = new List<JounralEntry>();
-        foreach (JounralEntry entry in undiscoveredEntries) {
-            if (_monster != null && entry.m_linkedMonster != _monster) continue;
-            if (_entryType != null && entry.m_entryType != _entryType) continue;
-            undisLore.Add(entry);
-        }
+        List<JounralEntry> undisLore = GetUndiscoveredEntries(_monster, _monsterType, _entryType);
 
         // if there is any, pick one at random and discover it
         if (undisLore.Count > 0)
         {
             int index = UnityEngine.Random.Range(0, undisLore.Count);
-            DiscoverEntry(undisLore[index]);
+            return undisLore[index];
         }
+
+        return null;
+    }
+
+    /// <summary>
+    /// Gets a list of undiscovered entries matching the filters passed in
+    /// </summary>
+    /// <param name="_monster"></param>
+    /// <param name="_monsterType"></param>
+    /// <param name="_entryType"></param>
+    /// <returns></returns>
+    public List<JounralEntry> GetUndiscoveredEntries(MonsterInfo _monster = null, MonsterInfo.MonsterType? _monsterType = null, JounralEntry.EntryType? _entryType = null)
+    {
+        List<JounralEntry> undisLore = new List<JounralEntry>();
+        foreach (JounralEntry entry in m_undiscoveredEntries)
+        {
+            if (_monster != null && entry.m_linkedMonster != _monster) continue;
+            if (_monsterType != null && entry.m_linkedMonster.m_type != _monsterType) continue;
+            if (_entryType != null && entry.m_entryType != _entryType) continue;
+            undisLore.Add(entry);
+        }
+
+        return undisLore;
     }
 
     /// <summary>
@@ -210,11 +243,11 @@ public class JournalManager : ToggleableWindow
 
         // make data
         SaveData data = new SaveData();
-        foreach (JounralEntry entry in undiscoveredEntries)
+        foreach (JounralEntry entry in m_undiscoveredEntries)
         {
             data.undiscoveredEntries.Add(new JounralEntry.SerializableJournalEntry(entry));
         }
-        foreach (JounralEntry entry in discoveredEntries)
+        foreach (JounralEntry entry in m_discoveredEntries)
         {
             data.discoveredEntries.Add(new JounralEntry.SerializableJournalEntry(entry));
         }
@@ -235,16 +268,15 @@ public class JournalManager : ToggleableWindow
     /// </summary>
     public void LoadJournal(int saveSlot)
     {
-        // if the save folder doesn't exist, create it
+        // if save path doesn't exist, create it
         if (!Directory.Exists(GetSaveFolderPath(saveSlot)))
         {
             Directory.CreateDirectory(GetSaveFolderPath(saveSlot));
         }
-
-        // if the file doesn't exist, create it
+        // if save file doesn't exist, return
         if (!File.Exists(GetSaveFilePath(saveSlot)))
         {
-            File.Create(GetSaveFilePath(saveSlot));
+            Debug.Log("Save file does not exist.");
             return;
         }
 
@@ -259,17 +291,17 @@ public class JournalManager : ToggleableWindow
         if (data == null) return;
 
         // clear the lists
-        undiscoveredEntries.Clear();
-        discoveredEntries.Clear();
+        m_undiscoveredEntries.Clear();
+        m_discoveredEntries.Clear();
 
         // add the data to the lists
         foreach (JounralEntry.SerializableJournalEntry entry in data.undiscoveredEntries)
         {
-            undiscoveredEntries.Add(entry.ToEntry());
+            m_undiscoveredEntries.Add(entry.ToEntry());
         }
         foreach (JounralEntry.SerializableJournalEntry entry in data.discoveredEntries)
         {
-            discoveredEntries.Add(entry.ToEntry());
+            m_discoveredEntries.Add(entry.ToEntry());
         }
 
         reader.Close();
@@ -355,9 +387,9 @@ public class JournalManager : ToggleableWindow
             // if an entry is not in discovered or undiscovered, add it to undiscovered
             foreach (JounralEntry entry in entries)
             {
-                if (!myScript.discoveredEntries.Contains(entry) && !myScript.undiscoveredEntries.Contains(entry))
+                if (!myScript.m_discoveredEntries.Contains(entry) && !myScript.m_undiscoveredEntries.Contains(entry))
                 {
-                    myScript.undiscoveredEntries.Add(entry);
+                    myScript.m_undiscoveredEntries.Add(entry);
                 }
             }
 

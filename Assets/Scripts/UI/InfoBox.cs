@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System;
 
 /// <summary>
 /// Called by other scripts to display information at the cursor
@@ -22,6 +23,12 @@ public class InfoBox : MonoBehaviour
     public Image icon;
     public TextMeshProUGUI description;
 
+    [Header("Economy Refs")]
+    public Image backgroundEconomy;
+    public TextMeshProUGUI titleEconomy;
+    public TextMeshProUGUI amountText;
+    public Image iconEconomy;
+
     [Header("Mods Refs")]
     public Image modBackground;
     public Image modIcon;
@@ -33,6 +40,7 @@ public class InfoBox : MonoBehaviour
     void Start()
     {
         DisableBox();
+        DisableEconomyBox();
         DisableModsBox();
     }
 
@@ -51,15 +59,9 @@ public class InfoBox : MonoBehaviour
             fullBrightTimer -= Time.deltaTime;
 
             // set opacity of all to 1
-            background.color = new Color(background.color.r, background.color.g, background.color.b, 1.0f);
-            title.color = new Color(title.color.r, title.color.g, title.color.b, 1.0f);
-            icon.color = new Color(icon.color.r, icon.color.g, icon.color.b, 1.0f);
-            description.color = new Color(description.color.r, description.color.g, description.color.b, 1.0f);
-
-            modBackground.color = new Color(modBackground.color.r, modBackground.color.g, modBackground.color.b, 1.0f);
-            modTitle.color = new Color(modTitle.color.r, modTitle.color.g, modTitle.color.b, 1.0f);
-            modList.color = new Color(modList.color.r, modList.color.g, modList.color.b, 1.0f);
-            modIcon.color = new Color(modIcon.color.r, modIcon.color.g, modIcon.color.b, 1.0f);
+            UpdateInfoOpacity(1.0f);
+            UpdateEconomyOpacity(1.0f);
+            UpdateModOpacity(1.0f);
 
             if (fullBrightTimer <= 0.0f)
             {
@@ -73,23 +75,41 @@ public class InfoBox : MonoBehaviour
 
             // fade opacity of all to 0 using timer
             float opacity = (fadeTimer / fadeTime);
-
-            background.color = new Color(background.color.r, background.color.g, background.color.b, opacity);
-            title.color = new Color(title.color.r, title.color.g, title.color.b, opacity);
-            icon.color = new Color(icon.color.r, icon.color.g, icon.color.b, opacity);
-            description.color = new Color(description.color.r, description.color.g, description.color.b, opacity);
-
-            modBackground.color = new Color(modBackground.color.r, modBackground.color.g, modBackground.color.b, opacity);
-            modTitle.color = new Color(modTitle.color.r, modTitle.color.g, modTitle.color.b, opacity);
-            modList.color = new Color(modList.color.r, modList.color.g, modList.color.b, opacity);
+            UpdateInfoOpacity(opacity);
+            UpdateEconomyOpacity(opacity);
+            UpdateModOpacity(opacity);
 
             if (fadeTimer <= 0.0f)
             {
                 fadeTimer = 0.0f;
                 DisableBox();
+                DisableEconomyBox();
                 DisableModsBox();
             }
         }
+    }
+
+    private void UpdateModOpacity(float opacity)
+    {
+        modBackground.color = new Color(modBackground.color.r, modBackground.color.g, modBackground.color.b, opacity);
+        modTitle.color = new Color(modTitle.color.r, modTitle.color.g, modTitle.color.b, opacity);
+        modList.color = new Color(modList.color.r, modList.color.g, modList.color.b, opacity);
+    }
+
+    private void UpdateEconomyOpacity(float opacity)
+    {
+        backgroundEconomy.color = new Color(backgroundEconomy.color.r, backgroundEconomy.color.g, backgroundEconomy.color.b, opacity);
+        titleEconomy.color = new Color(titleEconomy.color.r, titleEconomy.color.g, titleEconomy.color.b, opacity);
+        amountText.color = new Color(amountText.color.r, amountText.color.g, amountText.color.b, opacity);
+        iconEconomy.color = new Color(iconEconomy.color.r, iconEconomy.color.g, iconEconomy.color.b, opacity);
+    }
+
+    private void UpdateInfoOpacity(float opacity)
+    {
+        background.color = new Color(background.color.r, background.color.g, background.color.b, opacity);
+        title.color = new Color(title.color.r, title.color.g, title.color.b, opacity);
+        icon.color = new Color(icon.color.r, icon.color.g, icon.color.b, opacity);
+        description.color = new Color(description.color.r, description.color.g, description.color.b, opacity);
     }
 
     /// <summary>
@@ -137,16 +157,23 @@ public class InfoBox : MonoBehaviour
         }
     }
 
+    public void UpdateEconomy(EconomyManager.Purchasable purchasable)
+    {
+        EnableEconomyBox();
+        amountText.text = purchasable.GetPrice().ToString();
+    }
+
     /// <summary>
     /// Display an Item in the info box at cursor.
     /// </summary>
     /// <param name="item"></param>
     /// <param name="onTime"></param>
     /// <param name="offTime"></param>
-    public void Display(Item item, float onTime = 1, float offTime = 1)
+    public void Display(Item item, bool showCost = false, float onTime = 1, float offTime = 1)
     {
         if (!item) return;
         DisplayInfo(item.m_displayName, item.m_icon, item.m_description, onTime, offTime);
+        if (showCost) UpdateEconomy(item);
         UpdateMods(item.GetStatMods());
     }
 
@@ -169,6 +196,26 @@ public class InfoBox : MonoBehaviour
         title.enabled = true;
         icon.enabled = true;
         description.enabled = true;
+    }
+
+    /// <summary>
+    /// Enables the gold box
+    /// </summary>
+    public void EnableEconomyBox(){
+        backgroundEconomy.enabled = true;
+        titleEconomy.enabled = true;
+        amountText.enabled = true;
+        iconEconomy.enabled = true;
+    }
+
+    /// <summary>
+    /// Disables the gold box
+    /// </summary>
+    public void DisableEconomyBox(){
+        backgroundEconomy.enabled = false;
+        titleEconomy.enabled = false;
+        amountText.enabled = false;
+        iconEconomy.enabled = false;
     }
 
     /// <summary>

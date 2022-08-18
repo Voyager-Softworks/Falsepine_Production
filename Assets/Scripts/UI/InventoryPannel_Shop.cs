@@ -54,16 +54,16 @@ public class InventoryPannel_Shop : InventoryPannel
 
         itemToBuy = item;
 
-        // EconomyManager economyManager = EconomyManager.instance;
-        // if (economyManager == null) return;
+        EconomyManager economyManager = EconomyManager.instance;
+        if (economyManager == null) return;
 
-        // int price = item.GetPrice();
-        // if (economyManager.CanAfford(price)){
-        //     //transfer
-        //     if (InventoryManager.instance.CanMoveItem(sourceInventory, targetInventory, sourceIndex)){
-        //         economyManager.Spend(price);
-        //         InventoryManager.instance.TryMoveItem(sourceInventory, targetInventory, sourceIndex);
-        //     }
-        // }
+        int price = item.GetPrice();
+        if (economyManager.CanAfford(price)){
+            //transfer
+            if (InventoryManager.instance.CanMoveItem(sourceInventory, targetInventory, sourceIndex)){
+                economyManager.Spend(price);
+                InventoryManager.instance.TryMoveItem(sourceInventory, targetInventory, sourceIndex);
+            }
+        }
     }
 }

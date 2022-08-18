@@ -147,4 +147,16 @@ public class InventoryManager : MonoBehaviour
             inv.LoadInventory(saveSlot);
         }
     }
+
+    /// <summary>
+    /// Deletes all inventories at save index
+    /// </summary>
+    /// <param name="saveSlot"></param>
+    public void DeleteInventories(int saveSlot)
+    {
+        foreach (Inventory inv in inventories)
+        {
+            inv.DeleteSaveFile(saveSlot);
+        }
+    }
 }

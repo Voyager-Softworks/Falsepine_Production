@@ -22,7 +22,7 @@ public class JournalUpdater_Monster : JournalContentUpdater
         }
 
         // get discovered entries
-        List<JounralEntry> discoveredEntries = journalManager.discoveredEntries;
+        List<JounralEntry> discoveredEntries = journalManager.m_discoveredEntries;
 
         // clear current content
         contentList.Clear();
