@@ -16,7 +16,7 @@ public class AwarenessAgent : MonoBehaviour
     void Start()
     {
         FindObjectOfType<EnemyAwarenessManager>().onEnemyAware += OnEnemyAware;
-        GetComponent<NodeAI_Senses>().OnSensoryEvent += SensoryInput;
+        if (GetComponent<NodeAI_Senses>()) GetComponent<NodeAI_Senses>().OnSensoryEvent += SensoryInput;
     }
 
     void SensoryInput(SensoryEvent e)
