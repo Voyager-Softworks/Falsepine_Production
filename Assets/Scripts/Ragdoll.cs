@@ -12,7 +12,7 @@ public class Ragdoll : MonoBehaviour
     /// </summary>
     public void EnableRagdoll()
     {
-        var animator = GetComponent<Animator>();
+        var animator = GetComponentInChildren<Animator>();
         if (animator)
         {
             animator.enabled = false;
@@ -50,7 +50,7 @@ public class Ragdoll : MonoBehaviour
     /// </summary>
     public void DisableRagdoll()
     {
-        var animator = GetComponent<Animator>();
+        var animator = GetComponentInChildren<Animator>();
         if (animator)
         {
             animator.enabled = true;
