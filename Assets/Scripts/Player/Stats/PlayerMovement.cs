@@ -32,6 +32,8 @@ public class PlayerMovement : MonoBehaviour
     public float rollDelay = 1.5f; ///< The delay before the roll can be used again.
     private float rollDelayTimer = 0f; ///< The timer for the roll delay.
     public bool isRolling = false; ///< Whether or not the player is rolling.
+    public bool isVaulting = false; ///< Whether or not the player is vaulting.
+
     public AudioClip rollSound; ///< The sound to play when the player rolls.
     private PlayerHealth playerHealth; ///< The player health script for the player.
 
@@ -143,6 +145,7 @@ public class PlayerMovement : MonoBehaviour
         moveDir.Normalize();
 
         bool isAiming = false;
+        bool isReloading = false;
         PlayerInventoryInterface pii = GetComponent<PlayerInventoryInterface>();
         if (pii)
         {
@@ -150,6 +153,7 @@ public class PlayerMovement : MonoBehaviour
             if (rangedWeapon)
             {
                 isAiming = rangedWeapon.m_isAiming;
+                isReloading = rangedWeapon.m_reloadTimer > 0;
             }
         }
 
@@ -157,7 +161,7 @@ public class PlayerMovement : MonoBehaviour
         {
             moveDir *= walkSpeed;
         }
-        else if (sprintAction.ReadValue<float>() > 0.1f)
+        else if (sprintAction.ReadValue<float>() > 0.1f && !isReloading)
         {
             moveDir *= sprintSpeed;
         }
@@ -212,12 +216,12 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-            _animator.SetBool("Aiming", isAiming);
+            _animator.SetBool("Aiming", isAiming && !isRolling && !isVaulting);
             _animator.SetBool("Jogging", !isAiming && move.magnitude > 0.1f);
-            _animator.SetBool("Running", sprintAction.ReadValue<float>() > 0.1f);
+            _animator.SetBool("Running", sprintAction.ReadValue<float>() > 0.1f && move.magnitude > 0.1f);
 
             controller.Move(moveDir * Time.deltaTime);
-            if (isAiming)
+            if ((isAiming || isReloading) && (!isRolling && !isVaulting))
             {
                 //apply movement
                 //transform.position += (moveDir * speed * Time.deltaTime);
@@ -366,6 +370,7 @@ public class PlayerMovement : MonoBehaviour
     /// <returns></returns>
     IEnumerator VaultCoroutine()
     {
+        isVaulting = true;
         GetComponent<CapsuleCollider>().enabled = false;
         GetComponent<CharacterController>().enabled = false;
         Vector3 startPos = transform.position;
@@ -379,6 +384,7 @@ public class PlayerMovement : MonoBehaviour
         }
         GetComponent<CapsuleCollider>().enabled = true;
         GetComponent<CharacterController>().enabled = true;
+        isVaulting = false;
     }
 
 
