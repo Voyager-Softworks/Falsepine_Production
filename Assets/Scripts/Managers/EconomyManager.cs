@@ -21,6 +21,20 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     {
         return m_usedStatTypes;
     }
+    public void AddStatType(StatsManager.StatType statType)
+    {
+        if (!m_usedStatTypes.Contains(statType))
+        {
+            m_usedStatTypes.Add(statType);
+        }
+    }
+    public void RemoveStatType(StatsManager.StatType statType)
+    {
+        if (m_usedStatTypes.Contains(statType))
+        {
+            m_usedStatTypes.Remove(statType);
+        }
+    }
 
     /// <summary>
     /// Purchasable interface for things that can be purchased.

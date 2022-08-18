@@ -29,7 +29,7 @@ public class Interactable : MonoBehaviour
     public string interactText = "Interact";
 
     public Transform _transToCheck = null;
-    public float interactDistance = 1f;
+    public float interactDistance = 3.0f;
     public InteractEffect onInteractEffect = InteractEffect.NONE;
 
     private void OnEnable() {
