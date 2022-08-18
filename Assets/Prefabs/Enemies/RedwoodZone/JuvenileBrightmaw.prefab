@@ -26523,6 +26523,7 @@ GameObject:
   - component: {fileID: 5500555404458879736}
   - component: {fileID: 3054301619638982113}
   - component: {fileID: 8994625383711514972}
+  - component: {fileID: 9137540189382520579}
   m_Layer: 0
   m_Name: JuvenileBrightmaw
   m_TagString: Untagged
@@ -26889,7 +26890,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6f027a942edfcaf98e9ac2361b68d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_hurtBoxes: []
+  m_hurtBoxes:
+  - {fileID: 4413171421722420848}
   m_hurtPlayerEffect: {fileID: 0}
   m_indicatorPrefab: {fileID: 0}
   m_damage: 10
@@ -26920,7 +26922,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 6529405913941819585}
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 3054176042789441900}
   burrowSound: {fileID: 8300000, guid: b9bdd22e3942caf4d8e66cf594f076be, type: 3}
   burrowParticles: {fileID: 6448230735858609851}
   unburrowParticles: {fileID: 2211595047845265863}
@@ -26956,6 +26958,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   awarenessParameterName: Aware
   fromOtherEnemyParameterName: FromOtherEnemy
+--- !u!114 &9137540189382520579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6529405913941819586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e196a347754e74e0ca26934429658e04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eyesBone: {fileID: 24518149611499209}
+  maxHearingRange: 10
+  eyeDirection: 3
+  sightDistance: 10
+  sightAngle: 160
+  sightMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &6616845151341851582
 GameObject:
   m_ObjectHideFlags: 0
