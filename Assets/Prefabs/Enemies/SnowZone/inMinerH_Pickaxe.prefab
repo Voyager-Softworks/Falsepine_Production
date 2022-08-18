@@ -35873,6 +35873,7 @@ GameObject:
   - component: {fileID: 6735390497553997317}
   - component: {fileID: 2922373346786966056}
   - component: {fileID: 4759796305105106596}
+  - component: {fileID: 4298691993850916529}
   m_Layer: 0
   m_Name: inMinerH_Pickaxe
   m_TagString: Untagged
@@ -36025,6 +36026,36 @@ MonoBehaviour:
     svalue: 
     ivalue: 0
     fvalue: 5
+    bvalue: 0
+    cvalue: {r: 0, g: 0, b: 0, a: 0}
+    v2value: {x: 0, y: 0}
+    v3value: {x: 0, y: 0, z: 0}
+    v4value: {x: 0, y: 0, z: 0, w: 0}
+    ovalue: {fileID: 0}
+    output: 0
+  - name: FromOtherEnemy
+    GUID: 6d1bfbb0-e404-4ef8-9c0b-b126acba5576
+    paramReference: 
+    serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+      PublicKeyToken=b77a5c561934e089
+    svalue: 
+    ivalue: 0
+    fvalue: 0
+    bvalue: 0
+    cvalue: {r: 0, g: 0, b: 0, a: 0}
+    v2value: {x: 0, y: 0}
+    v3value: {x: 0, y: 0, z: 0}
+    v4value: {x: 0, y: 0, z: 0, w: 0}
+    ovalue: {fileID: 0}
+    output: 0
+  - name: Aware
+    GUID: b9f02ecb-bac9-40c3-ba94-f5a1228113eb
+    paramReference: 
+    serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+      PublicKeyToken=b77a5c561934e089
+    svalue: 
+    ivalue: 0
+    fvalue: 0
     bvalue: 0
     cvalue: {r: 0, g: 0, b: 0, a: 0}
     v2value: {x: 0, y: 0}
@@ -36277,12 +36308,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6f027a942edfcaf98e9ac2361b68d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HurtBoxes:
-  - {fileID: 8082339850277576217}
-  hurtPlayerEffect: {fileID: 906613630111261276, guid: 035c7f8b389e1f340903030517c35684, type: 3}
-  indicatorPrefab: {fileID: 0}
-  damage: 15
-  attkNum: 1
+  m_hurtBoxes: []
+  m_hurtPlayerEffect: {fileID: 0}
+  m_indicatorPrefab: {fileID: 0}
+  m_damage: 10
+  m_attkNum: 1
 --- !u!114 &6735390497553997317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36327,6 +36357,20 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 9c98ac6ce550c8e4e8e9df5a575fcfff, type: 3}
   footstepSounds2: []
   audioSource: {fileID: 2627735511346027364}
+--- !u!114 &4298691993850916529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5322116091583521027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ec02cfc6b2d63a2af49605ecf856e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  awarenessParameterName: Aware
+  fromOtherEnemyParameterName: FromOtherEnemy
 --- !u!1 &5359032759198430872
 GameObject:
   m_ObjectHideFlags: 0
