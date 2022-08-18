@@ -100,7 +100,7 @@ public class Interactable : MonoBehaviour
                 break;
         }
 
-        onInteract.Invoke();
+        onInteract?.Invoke();
     }
 
     /// <summary>
