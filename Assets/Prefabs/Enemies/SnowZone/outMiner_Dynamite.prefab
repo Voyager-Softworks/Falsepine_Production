@@ -37068,6 +37068,7 @@ GameObject:
   - component: {fileID: 6674051481700274022}
   - component: {fileID: 1937582644394401008}
   - component: {fileID: 1492668299765116137}
+  - component: {fileID: -2404310852511122599}
   m_Layer: 0
   m_Name: outMiner_Dynamite
   m_TagString: Untagged
@@ -37232,6 +37233,36 @@ MonoBehaviour:
     v4value: {x: 0, y: 0, z: 0, w: 0}
     ovalue: {fileID: 0}
     output: 0
+  - name: Aware
+    GUID: 498804f7-58ab-47fc-b3a5-5ab2dc79efd9
+    paramReference: 
+    serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+      PublicKeyToken=b77a5c561934e089
+    svalue: 
+    ivalue: 0
+    fvalue: 0
+    bvalue: 0
+    cvalue: {r: 0, g: 0, b: 0, a: 0}
+    v2value: {x: 0, y: 0}
+    v3value: {x: 0, y: 0, z: 0}
+    v4value: {x: 0, y: 0, z: 0, w: 0}
+    ovalue: {fileID: 0}
+    output: 0
+  - name: FromOtherEnemy
+    GUID: 2f145bf8-71fc-4f60-85ec-957e81dab64e
+    paramReference: 
+    serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+      PublicKeyToken=b77a5c561934e089
+    svalue: 
+    ivalue: 0
+    fvalue: 0
+    bvalue: 0
+    cvalue: {r: 0, g: 0, b: 0, a: 0}
+    v2value: {x: 0, y: 0}
+    v3value: {x: 0, y: 0, z: 0}
+    v4value: {x: 0, y: 0, z: 0, w: 0}
+    ovalue: {fileID: 0}
+    output: 0
   nodeTree:
     rootNode:
       GUID: 
@@ -37374,11 +37405,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6f027a942edfcaf98e9ac2361b68d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HurtBoxes: []
-  hurtPlayerEffect: {fileID: 906613630111261276, guid: 035c7f8b389e1f340903030517c35684, type: 3}
-  indicatorPrefab: {fileID: 1433027140202297374, guid: 26c187ca979e45de096fb29dd9aa23c8, type: 3}
-  damage: 10
-  attkNum: 1
+  m_hurtBoxes: []
+  m_hurtPlayerEffect: {fileID: 0}
+  m_indicatorPrefab: {fileID: 0}
+  m_damage: 10
+  m_attkNum: 1
 --- !u!82 &6674051481700274022
 AudioSource:
   m_ObjectHideFlags: 0
@@ -37506,6 +37537,21 @@ MonoBehaviour:
   m_explosion: {fileID: 5217526098193909690, guid: db3535c6c1e805c47922d6511b949fa0, type: 3}
   m_damage: 10
   m_radius: 5
+  m_fuseTime: 0
+--- !u!114 &-2404310852511122599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5787949076622009801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ec02cfc6b2d63a2af49605ecf856e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  awarenessParameterName: Aware
+  fromOtherEnemyParameterName: FromOtherEnemy
 --- !u!1 &5795495178836661880
 GameObject:
   m_ObjectHideFlags: 0

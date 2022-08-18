@@ -26522,6 +26522,7 @@ GameObject:
   - component: {fileID: 6023896829803659370}
   - component: {fileID: 5500555404458879736}
   - component: {fileID: 3054301619638982113}
+  - component: {fileID: 8994625383711514972}
   m_Layer: 0
   m_Name: JuvenileBrightmaw
   m_TagString: Untagged
@@ -26748,6 +26749,36 @@ MonoBehaviour:
     v4value: {x: 0, y: 0, z: 0, w: 0}
     ovalue: {fileID: 0}
     output: 0
+  - name: Aware
+    GUID: 4e3afe40-fda2-4d68-8539-11df06bc2f63
+    paramReference: 
+    serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+      PublicKeyToken=b77a5c561934e089
+    svalue: 
+    ivalue: 0
+    fvalue: 0
+    bvalue: 0
+    cvalue: {r: 0, g: 0, b: 0, a: 0}
+    v2value: {x: 0, y: 0}
+    v3value: {x: 0, y: 0, z: 0}
+    v4value: {x: 0, y: 0, z: 0, w: 0}
+    ovalue: {fileID: 0}
+    output: 0
+  - name: FromOtherEnemy
+    GUID: f93a9685-cee0-48bd-9378-e3a195cf3a12
+    paramReference: 
+    serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+      PublicKeyToken=b77a5c561934e089
+    svalue: 
+    ivalue: 0
+    fvalue: 0
+    bvalue: 0
+    cvalue: {r: 0, g: 0, b: 0, a: 0}
+    v2value: {x: 0, y: 0}
+    v3value: {x: 0, y: 0, z: 0}
+    v4value: {x: 0, y: 0, z: 0, w: 0}
+    ovalue: {fileID: 0}
+    output: 0
   nodeTree:
     rootNode:
       GUID: 
@@ -26858,12 +26889,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6f027a942edfcaf98e9ac2361b68d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HurtBoxes:
-  - {fileID: 4413171421722420848}
-  hurtPlayerEffect: {fileID: 0}
-  indicatorPrefab: {fileID: 0}
-  damage: 10
-  attkNum: 1
+  m_hurtBoxes: []
+  m_hurtPlayerEffect: {fileID: 0}
+  m_indicatorPrefab: {fileID: 0}
+  m_damage: 10
+  m_attkNum: 1
 --- !u!65 &6023896829803659370
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -26912,6 +26942,20 @@ MonoBehaviour:
   m_deathSound: {fileID: 0}
   m_hurtSound: {fileID: 0}
   m_bloodEffect: {fileID: 7806886839550920633, guid: 5685b526b95f40145b6b7c9e297a5cf2, type: 3}
+--- !u!114 &8994625383711514972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6529405913941819586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ec02cfc6b2d63a2af49605ecf856e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  awarenessParameterName: Aware
+  fromOtherEnemyParameterName: FromOtherEnemy
 --- !u!1 &6616845151341851582
 GameObject:
   m_ObjectHideFlags: 0
