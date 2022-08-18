@@ -217,10 +217,19 @@ public class PlayerInventoryInterface : MonoBehaviour
         {
             meleeAttackTimer -= Time.deltaTime;
         }
+        
+        if (meleeAttackTimer < 0.5f && GetMeleeLink().model.activeSelf)
+        {
+            // disable melee model
+            GetMeleeLink().model.SetActive(false);
+            // enable equiped wepaon model
+            SelectWeapon(selectedWeaponType);
+        }
     }
 
     /// <summary>
     ///  Attempts to melee attack.
+    ///  @todo move this to a separate script on the melee
     /// </summary>
     private void TryMeleeAttack()
     {
@@ -231,7 +240,11 @@ public class PlayerInventoryInterface : MonoBehaviour
         meleeAttackTimer = meleeAttackCooldown;
 
         // play melee attack clip
-        playerAnimator.SetTrigger("Melee");
+        playerAnimator.SetTrigger(GetMeleeLink().animatorBoolName);
+
+        // enable model
+        DisableAllWeaponModels();
+        GetMeleeLink().model.SetActive(true);
 
         // do sphere cast to find enemies in range
         Collider[] hitColliders = Physics.OverlapSphere(transform.position + transform.forward * meleeAttackRange, meleeAttackSize);
@@ -393,6 +406,18 @@ public class PlayerInventoryInterface : MonoBehaviour
             }
         }
         return "";
+    }
+
+    public WeaponModelLink GetMeleeLink(){
+        // find the link with "Melee" as the animator bool name
+        foreach (WeaponModelLink link in weaponModelLinks)
+        {
+            if (link.animatorBoolName == "Melee")
+            {
+                return link;
+            }
+        }
+        return null;
     }
 
     /// <summary>
