@@ -36,10 +36,10 @@ public class TownBuilding : ClickableObject
         base.Update();
 
         //if escape is pressed, close the panel
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
-        {
-            CloseUI();
-        }
+        // if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        // {
+        //     CloseUI();
+        // }
     }
 
     /// <summary>
