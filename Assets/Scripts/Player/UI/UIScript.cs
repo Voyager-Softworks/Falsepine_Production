@@ -23,6 +23,8 @@ public class UIScript : MonoBehaviour
     public GameObject secondaryWeaponIcon;
     public GameObject equipmentIcon;
 
+    public TextMeshProUGUI equipmentAmmoText;
+
     [HideInInspector] public float healthBarMaxWidth;
 
     [Header("Interact Text")]
@@ -132,6 +134,8 @@ public class UIScript : MonoBehaviour
                     equipmentIcon.SetActive(true);
                     equipmentIcon.GetComponent<Image>().sprite = equipment.m_icon;
 
+                    equipmentAmmoText.text = equipment.currentStackSize.ToString() + "/" + equipment.maxStackSize.ToString() + " " + equipment.m_displayName;
+
                     //if equipment count > 0 make white
                     if (equipment.currentStackSize > 0 && pii.selectedEquipment == equipment)
                     {
@@ -145,6 +149,7 @@ public class UIScript : MonoBehaviour
                 else
                 {
                     equipmentIcon.SetActive(false);
+                    equipmentAmmoText.text = "NO EQUIPMENT";
                 }
 
 

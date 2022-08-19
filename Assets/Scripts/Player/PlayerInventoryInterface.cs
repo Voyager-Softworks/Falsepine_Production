@@ -197,8 +197,10 @@ public class PlayerInventoryInterface : MonoBehaviour
             if (useEquipmentAction.triggered && m_equipmentDelayTimer <= 0.0f)
             {
                 Equipment equipment = selectedEquipment as Equipment;
-                if (equipment)
+                if (equipment && equipment.currentStackSize > 0)
                 {
+                    m_equipmentDelayTimer = m_equipmentDelay;
+
                     Vector3 spawnDirection = (transform.forward).normalized;
 
                     Transform throwPoint = GetWeaponFirepoint(selectedEquipment);
@@ -211,8 +213,16 @@ public class PlayerInventoryInterface : MonoBehaviour
                     // make player look at cursor
                     PlayerMovement playerMovement = GetComponent<PlayerMovement>();
                     playerMovement.SetLookDirection(playerMovement.GetMouseAimPlanePoint() - transform.position);
+
+                    equipment.currentStackSize -= 1;
                 }
             }
+        }
+
+        // update equipment delay timer
+        if (m_equipmentDelayTimer > 0.0f)
+        {
+            m_equipmentDelayTimer -= Time.deltaTime;
         }
 
         //update melee attack timer
@@ -512,6 +522,10 @@ public class PlayerInventoryInterface : MonoBehaviour
 
         // get selected equipment
         selectedEquipment = playerInventory.slots.ElementAtOrDefault(2)?.item;
+        if (selectedEquipment.currentStackSize <= 0)
+        {
+            selectedEquipment = null;
+        }
 
         // if selected equipment is null, return
         if (selectedEquipment == null) return;

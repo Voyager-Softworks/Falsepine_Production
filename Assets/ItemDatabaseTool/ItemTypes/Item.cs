@@ -88,7 +88,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
 
     [SerializeField] public bool mustMatchToStack = false;
     [SerializeField] private int m_currentStackSize = 1;
-        public int currentStackSize
+    public int currentStackSize
     {
         get { return m_currentStackSize; }
         set
@@ -322,8 +322,8 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
         item.m_price = this.m_price;
         item.m_allowedDiscount = this.m_allowedDiscount;
 
-        item.currentStackSize = this.m_currentStackSize;
         item.maxStackSize = this.m_maxStackSize;
+        item.currentStackSize = this.m_currentStackSize;
         item.mustMatchToStack = this.mustMatchToStack;
 
         if (item.name == "")

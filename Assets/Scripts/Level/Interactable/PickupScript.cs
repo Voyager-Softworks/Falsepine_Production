@@ -9,8 +9,8 @@ using UnityEngine;
 public class PickupScript : Interactable
 {
     [Header("Pickup Settings")]
-    public string itemToAdd;
-    public int amountToAdd;
+    public Item m_itemToAdd = null;
+    public int amountToAdd = 1;
 
     // Start is called before the first frame update
     override public void Start()
@@ -28,7 +28,9 @@ public class PickupScript : Interactable
     {
         base.DoInteract();
 
-        AddToInventory(itemToAdd, amountToAdd);
+        // add item to inventory
+        Inventory playerInv = InventoryManager.instance.GetInventory("player");
+        playerInv.TryAddItemToInventory(m_itemToAdd.id, amountToAdd);
     }
 
     /// <summary>
