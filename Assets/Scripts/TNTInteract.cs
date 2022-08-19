@@ -22,6 +22,25 @@ public class TNTInteract : Interactable
         base.Update();
     }
 
+    /// <summary>
+    /// Alerts the enemies in scene.
+    /// </summary>
+    private void AlertEnemies()
+    {
+        // get player gameobject
+        GameObject player = FindObjectOfType<PlayerHealth>()?.transform.root.gameObject;
+
+        if (player != null)
+        {
+            // send somatic event to all enemies
+            NodeAI.NodeAI_Senses[] senses = enemies.GetComponentsInChildren<NodeAI.NodeAI_Senses>();
+            foreach (NodeAI.NodeAI_Senses sense in senses)
+            {
+                sense.RegisterSensoryEvent(player, sense.gameObject, 20.0f, NodeAI.SensoryEvent.SenseType.SOMATIC);
+            }
+        }
+    }
+
     override public void DoInteract()
     {
         base.DoInteract();
@@ -37,18 +56,8 @@ public class TNTInteract : Interactable
             // enable
             enemies.SetActive(true);
 
-            // get player gameobject
-            GameObject player = FindObjectOfType<PlayerHealth>()?.transform.root.gameObject;
-
-            if (player != null)
-            {
-                // send somatic event to all enemies
-                NodeAI.NodeAI_Senses[] senses = enemies.GetComponentsInChildren<NodeAI.NodeAI_Senses>();
-                foreach (NodeAI.NodeAI_Senses sense in senses)
-                {
-                    sense.RegisterSensoryEvent(player, sense.gameObject, 20.0f, NodeAI.SensoryEvent.SenseType.SOMATIC);
-                }
-            }
+            // alert enemies after 0.5 seconds
+            Invoke("AlertEnemies", 0.5f);
         }
 
         // set condition to be complete
