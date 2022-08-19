@@ -31357,6 +31357,7 @@ GameObject:
   - component: {fileID: 6902923877470590226}
   - component: {fileID: 1489963381412324933}
   - component: {fileID: 6830447898024951036}
+  - component: {fileID: 1913974628732184556}
   m_Layer: 0
   m_Name: JuvenileBrightmawRanged
   m_TagString: Untagged
@@ -31797,6 +31798,33 @@ MonoBehaviour:
   sightMask:
     serializedVersion: 2
     m_Bits: 8
+--- !u!114 &1913974628732184556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6529405913941819586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c85814c1bf9e4781c97fb84066f86acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6529405913941819599}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: SetTrigger
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Death
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &6616845151341851582
 GameObject:
   m_ObjectHideFlags: 0
