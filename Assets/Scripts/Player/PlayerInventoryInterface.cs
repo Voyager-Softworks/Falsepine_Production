@@ -47,6 +47,9 @@ public class PlayerInventoryInterface : MonoBehaviour
     public Item selectedWeapon; ///< The currently selected weapon.
     public Item selectedEquipment; ///< The currently selected equipment.
 
+    public float m_equipmentDelay = 0.75f; ///< The delay between using an equipment and the next use.
+    private float m_equipmentDelayTimer = 0.0f; ///< The timer for the delay between using an equipment and the next use.
+
     [Header("Melee")]
     public float meleeAttackDamage = 20.0f; ///< The damage of the melee attack.
     public float meleeAttackRange = 2.0f; ///< The range of the melee attack.
@@ -191,7 +194,7 @@ public class PlayerInventoryInterface : MonoBehaviour
         {
             selectedEquipment.ManualUpdate(gameObject);
 
-            if (useEquipmentAction.triggered)
+            if (useEquipmentAction.triggered && m_equipmentDelayTimer <= 0.0f)
             {
                 Equipment equipment = selectedEquipment as Equipment;
                 if (equipment)
