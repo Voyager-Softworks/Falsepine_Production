@@ -7,6 +7,7 @@ using UnityEngine.AI;
 
 /// <summary>
 /// Manages the health of enemies.
+/// @todo seperate the give money command to new script
 /// </summary>
 public class EnemyHealth : Health_Base
 {
@@ -16,6 +17,8 @@ public class EnemyHealth : Health_Base
     private List<Material> m_materials = new List<Material>(); ///< The materials of the enemy.
 
     public GameObject m_bloodEffect; ///< The blood effect to show when the enemy is damaged.
+
+    public int m_silverReward = 3;
 
     // Start is called before the first frame update
     public override void Start()
@@ -123,5 +126,8 @@ public class EnemyHealth : Health_Base
         //stop audiosource
         AudioSource audioSource = GetComponent<AudioSource>();
         if (audioSource != null) audioSource.Stop();
+
+        // get econ manager, and give money
+        EconomyManager.instance.m_playerSilver += m_silverReward;
     }
 }

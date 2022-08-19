@@ -172,7 +172,7 @@ public class InfoBox : MonoBehaviour
     public void Display(Item item, bool showCost = false, float onTime = 1, float offTime = 1)
     {
         if (!item) return;
-        DisplayInfo(item.m_displayName, item.m_icon, item.m_description, onTime, offTime);
+        DisplayInfo(item.m_displayName, item.m_icon, "Count: " + item.currentStackSize + "/" + item.maxStackSize + "\n" + item.m_description, onTime, offTime);
         if (showCost) UpdateEconomy(item);
         UpdateMods(item.GetStatMods());
     }
