@@ -14000,6 +14000,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1680643231634700206}
+  - component: {fileID: 446608408504282596}
   m_Layer: 11
   m_Name: Player_Rig
   m_TagString: Untagged
@@ -14030,6 +14031,81 @@ Transform:
   m_Father: {fileID: 2708072153671794880}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -89.98021, y: 0, z: 0}
+--- !u!114 &446608408504282596
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6321146363008236088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9ac8d30c6a0d9642a11e5be4c440740, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Root: {fileID: 0}
+  m_Roots:
+  - {fileID: 2488262258202999541}
+  m_UpdateRate: 60
+  m_UpdateMode: 3
+  m_Damping: 0.2
+  m_DampingDistrib:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_Elasticity: 0.1
+  m_ElasticityDistrib:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_Stiffness: 0.1
+  m_StiffnessDistrib:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_Inert: 0
+  m_InertDistrib:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_Friction: 0
+  m_FrictionDistrib:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_Radius: 0
+  m_RadiusDistrib:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  m_EndLength: 0
+  m_EndOffset: {x: 0, y: 0, z: 0}
+  m_Gravity: {x: 0, y: 0, z: 0}
+  m_Force: {x: 0, y: 0, z: 0}
+  m_BlendWeight: 0.75
+  m_Colliders:
+  - {fileID: 8463434873676299776}
+  m_Exclusions:
+  - {fileID: 8083129854722461708}
+  - {fileID: 3330347781466493342}
+  - {fileID: 6688889128911649480}
+  m_FreezeAxis: 0
+  m_DistantDisable: 0
+  m_ReferenceObject: {fileID: 0}
+  m_DistanceToObject: 20
+  m_Multithread: 1
 --- !u!1 &6358199437885948836
 GameObject:
   m_ObjectHideFlags: 0
@@ -18389,6 +18465,7 @@ GameObject:
   - component: {fileID: 8083129854722461708}
   - component: {fileID: 2453449355270209102}
   - component: {fileID: 6218780400946635149}
+  - component: {fileID: 8463434873676299776}
   m_Layer: 11
   m_Name: Player_Spine01
   m_TagString: Untagged
@@ -18440,6 +18517,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8463434873676299776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8678523273170027369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baedd976e12657241bf7ff2d1c685342, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.25, z: 0}
+  m_Bound: 0
+  m_Radius: 0.25
+  m_Height: 1
+  m_Radius2: 0
 --- !u!1 &8703438102075298670
 GameObject:
   m_ObjectHideFlags: 0
