@@ -12,10 +12,19 @@ public class Ragdoll : MonoBehaviour
     /// </summary>
     public void EnableRagdoll()
     {
-        var animator = GetComponentInChildren<Animator>();
-        if (animator)
+        // get all animators
+        Animator[] animators = GetComponentsInChildren<Animator>();
+        foreach (Animator animator in animators)
         {
+            // disable animator
             animator.enabled = false;
+        }
+        // get all dynamic bones
+        DynamicBone[] dynamicBones = GetComponentsInChildren<DynamicBone>();
+        foreach (DynamicBone dynamicBone in dynamicBones)
+        {
+            // disable dynamic bone
+            dynamicBone.enabled = false;
         }
         var colliders = GetComponents<Collider>();
         foreach (var collider in colliders)
@@ -65,7 +74,14 @@ public class Ragdoll : MonoBehaviour
     void Start()
     {
         DisableRagdoll();
-        GetComponent<EnemyHealth>().Death += RagdollOnDeath;
+        if (GetComponent<EnemyHealth>()) GetComponent<EnemyHealth>().Death += RagdollOnDeath;
+        if (GetComponent<PlayerHealth>())
+        {
+            GetComponent<PlayerHealth>().OnDeath.AddListener(() =>
+            {
+                EnableRagdoll();
+            });
+        }
 
     }
 }

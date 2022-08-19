@@ -522,7 +522,7 @@ public class PlayerInventoryInterface : MonoBehaviour
 
         // get selected equipment
         selectedEquipment = playerInventory.slots.ElementAtOrDefault(2)?.item;
-        if (selectedEquipment.currentStackSize <= 0)
+        if (selectedEquipment && selectedEquipment.currentStackSize <= 0)
         {
             selectedEquipment = null;
         }
