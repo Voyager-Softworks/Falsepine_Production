@@ -41,14 +41,13 @@ public class TalismanChoice : ToggleableWindow
         
         // add the interactable event
         interactable.onInteract += OpenWindow;
+
+        AddListeners();
     }
 
     private void OnEnable()
     {
         m_closeButton.onClick.AddListener(CloseWindow);
-
-        RemoveAllListeners();
-        AddListeners();
     }
 
     private void OnDisable()
