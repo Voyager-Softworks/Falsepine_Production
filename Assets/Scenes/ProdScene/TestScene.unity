@@ -123,6 +123,22 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: 6853cfe9659371d198e9de8a8312b27a, type: 2}
+--- !u!1 &15696326
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3164308752536981575, guid: c4033bca21b797a48a52082bb43248aa, type: 3}
+  m_PrefabInstance: {fileID: 3164308753805302674}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1285098454}
+  m_Layer: 0
+  m_Name: 'Clue (Missing Prefab with guid: c4033bca21b797a48a52082bb43248aa)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &43511108
 GameObject:
   m_ObjectHideFlags: 0
@@ -2162,11 +2178,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1285098454 stripped
+--- !u!4 &1285098454
 Transform:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 3164308752536981572, guid: c4033bca21b797a48a52082bb43248aa, type: 3}
   m_PrefabInstance: {fileID: 3164308753805302674}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15696326}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2146660942}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1313005221 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5144128463880797413, guid: f078a1aa8663a6341967c2b46fb21d95, type: 3}
@@ -3477,14 +3502,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c53285463759f1b2db1127fd03b2d6be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boss: {fileID: 0}
-  arenaCentreTransforms: []
-  arenaRadiuses: []
-  wrongBaitSpawn: {fileID: 0}
-  baitedSound: {fileID: 0}
+  m_boss: {fileID: 0}
+  m_arenaCentreTransforms: []
+  m_arenaParticles: []
+  m_arenaRadiuses: []
+  m_wrongBaitSpawn: {fileID: 0}
+  m_baitedSound: {fileID: 0}
   bossMusic: {fileID: 0}
   bossMusicSecondPhase: {fileID: 0}
   fadeOutTime: 0
+  startTrigger: {fileID: 0}
+  room2: {fileID: 0}
+  room3: {fileID: 0}
   onBattleStart:
     m_PersistentCalls:
       m_Calls: []
@@ -4684,6 +4713,26 @@ PrefabInstance:
     - target: {fileID: 3157966760804992026, guid: 6b9a11b79482c8d4ca71c526c6ea791b, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3179007848484757177, guid: 6b9a11b79482c8d4ca71c526c6ea791b, type: 3}
+      propertyPath: canVault
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3179007848484757177, guid: 6b9a11b79482c8d4ca71c526c6ea791b, type: 3}
+      propertyPath: vaultingHit.x
+      value: -4.87
+      objectReference: {fileID: 0}
+    - target: {fileID: 3179007848484757177, guid: 6b9a11b79482c8d4ca71c526c6ea791b, type: 3}
+      propertyPath: vaultingHit.y
+      value: 1.4100001
+      objectReference: {fileID: 0}
+    - target: {fileID: 3179007848484757177, guid: 6b9a11b79482c8d4ca71c526c6ea791b, type: 3}
+      propertyPath: vaultingHit.z
+      value: 0.9074664
+      objectReference: {fileID: 0}
+    - target: {fileID: 3179007848484757177, guid: 6b9a11b79482c8d4ca71c526c6ea791b, type: 3}
+      propertyPath: layerMask.m_Bits
+      value: 30519
       objectReference: {fileID: 0}
     - target: {fileID: 3183189435699482190, guid: 6b9a11b79482c8d4ca71c526c6ea791b, type: 3}
       propertyPath: m_Layer
