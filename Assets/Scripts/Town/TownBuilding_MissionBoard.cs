@@ -30,6 +30,26 @@ public class TownBuilding_MissionBoard : TownBuilding
         public Mission.MissionSize currentPage = Mission.MissionSize.LESSER;
     }
 
+    /// <summary>
+    /// Gets the path to the save file for the mission board, at the save slot.
+    /// </summary>
+    /// <param name="_saveSlot"></param>
+    /// <returns></returns>
+    public static string GetSaveFolderPath(int _saveSlot)
+    {
+        return SaveManager.GetSaveFolderPath(_saveSlot) + "/missions/";
+    }
+
+    /// <summary>
+    /// Gets the save file path for the current save slot.
+    /// </summary>
+    /// <param name="_saveSlot"></param>
+    /// <returns></returns>
+    public static string GetSaveFilePath(int _saveSlot)
+    {
+        return GetSaveFolderPath(_saveSlot) + "/missionboard.dat";
+    }
+
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -55,12 +75,25 @@ public class TownBuilding_MissionBoard : TownBuilding
     /// </summary>
     /// <param name="_saveSlot"></param>
     public void SaveMissionBoard(int _saveSlot){
-        //save the missionboard current page
+        // if the save folder doesn't exist, create it
+        if (!Directory.Exists(GetSaveFolderPath(_saveSlot)))
+        {
+            Directory.CreateDirectory(GetSaveFolderPath(_saveSlot));
+        }
+
+        // This save is serialized, as it is not intended to be edited.
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(SaveManager.GetSaveFolderPath(_saveSlot) + "/missionboard.dat");
+
+        // make file
+        FileStream file = File.Create(GetSaveFilePath(_saveSlot));
+
+        // save page data
         MissionBoardData data = new MissionBoardData();
         data.currentPage = currentPage;
+
+        // serialize data
         bf.Serialize(file, data);
+        
         file.Close();
     }
 
@@ -68,14 +101,25 @@ public class TownBuilding_MissionBoard : TownBuilding
     /// Loads the state of the mission board.
     /// </summary>
     public void LoadMissionBoard(int _saveSlot){
-        if (File.Exists(SaveManager.GetSaveFolderPath(_saveSlot) + "/missionboard.dat"))
+        if (File.Exists(GetSaveFilePath(_saveSlot)))
         {
             BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(SaveManager.GetSaveFolderPath(_saveSlot) + "/missionboard.dat", FileMode.Open);
+            FileStream file = File.Open(GetSaveFilePath(_saveSlot), FileMode.Open);
             MissionBoardData data = (MissionBoardData)bf.Deserialize(file);
             file.Close();
 
             currentPage = data.currentPage;
+        }
+    }
+
+    /// <summary>
+    /// Deletes the save file for the current save slot.
+    /// </summary>
+    /// <param name="_saveSlot"></param>
+    public static void DeleteMissionBoardSave(int _saveSlot){
+        if (File.Exists(GetSaveFilePath(_saveSlot)))
+        {
+            File.Delete(GetSaveFilePath(_saveSlot));
         }
     }
 

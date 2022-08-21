@@ -108,6 +108,9 @@ public class SaveManager : MonoBehaviour
             MissionManager.instance.DeleteMissionSave(saveSlot);
         }
 
+        // delete the mission board save file
+        TownBuilding_MissionBoard.DeleteMissionBoardSave(saveSlot);
+
         // delete the economy save file
         if (EconomyManager.instance != null)
         {
@@ -126,19 +129,22 @@ public class SaveManager : MonoBehaviour
     /// </summary>
     /// <param name="saveSlot"></param>
     public static void HardDeleteAll(int saveSlot){
-        // delete all inventories
+        // delete all inventories save files
         if (InventoryManager.instance != null) InventoryManager.instance.DeleteInventories(saveSlot);
 
-        // delete missions
+        // delete missions save file
         if (MissionManager.instance != null) MissionManager.instance.DeleteMissionSave(saveSlot);
 
-        // delete journal
+        // delete mission board save file
+        TownBuilding_MissionBoard.DeleteMissionBoardSave(saveSlot);
+
+        // delete journal save file
         if (JournalManager.instance != null) JournalManager.instance.DeleteJournalSave(saveSlot);
 
-        // delete economy
+        // delete economy save file
         if (EconomyManager.instance != null) EconomyManager.instance.DeleteEconomySave(saveSlot);
 
-        // delete stats
+        // delete stats save file
         if (StatsManager.instance != null) StatsManager.instance.DeleteStatsSave(saveSlot);
     }
 
