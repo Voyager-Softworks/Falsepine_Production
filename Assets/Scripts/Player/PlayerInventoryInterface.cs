@@ -180,6 +180,13 @@ public class PlayerInventoryInterface : MonoBehaviour
             Debug.LogError("Player inventory not found!");
         }
 
+        // LevelController.GamePaused += () => {
+        //     DisableInput();
+        // };
+        // LevelController.GameUnpaused += () => {
+        //     EnableInput();
+        // };
+
         LoadInterface(SaveManager.currentSaveSlot);
 
         // select weapon
@@ -196,12 +203,12 @@ public class PlayerInventoryInterface : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        LevelController.GamePaused += () => {
+        if (LevelController.IsPaused || ToggleableTownWindow.AnyWindowOpen()) {
             DisableInput();
-        };
-        LevelController.GameUnpaused += () => {
+        }
+        else {
             EnableInput();
-        };
+        }
 
         // if swap weapon action is pressed, swap weapon
         if (swapWeaponAction.triggered)

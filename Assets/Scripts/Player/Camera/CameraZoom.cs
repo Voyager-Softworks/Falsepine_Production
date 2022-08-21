@@ -25,9 +25,39 @@ public class CameraZoom : MonoBehaviour
         zoomAction.Enable();
     }
 
+    private void OnEnable() {
+        EnableInput();
+    }
+    private void OnDisable() {
+        DisableInput();
+    }
+
+    /// <summary>
+    /// Enables the input for the zoom action.
+    /// </summary>
+    public void EnableInput()
+    {
+        zoomAction.Enable();
+    }
+    /// <summary>
+    /// Disables the input for the zoom action.
+    /// </summary>
+    public void DisableInput()
+    {
+        zoomAction.Disable();
+    }
+
     // Update is called once per frame
     void Update()
     {
+        // if any windows are open, don't zoom
+        if (ToggleableTownWindow.AnyWindowOpen()) {
+            DisableInput();
+        }
+        else {
+            EnableInput();
+        }
+
         Zoom();
     }
 

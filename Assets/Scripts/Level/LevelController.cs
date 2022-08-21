@@ -91,6 +91,9 @@ public class LevelController : MonoBehaviour
     private static Dictionary<MonoBehaviour, bool> m_scriptStates = new Dictionary<MonoBehaviour, bool>();
     private static List<MonoBehaviour> m_requesters = new List<MonoBehaviour>();
 
+    private static bool m_isPaused = false;
+    public static bool IsPaused { get { return m_isPaused; } }
+
     public static System.Action GamePaused;
     public static System.Action GameUnpaused;
 
@@ -151,6 +154,8 @@ public class LevelController : MonoBehaviour
     {
         Time.timeScale = 0;
 
+        m_isPaused = true;
+
         GamePaused?.Invoke();
     }
 
@@ -159,6 +164,8 @@ public class LevelController : MonoBehaviour
     /// </summary>
     public static void ForceUnpause(){
         Time.timeScale = 1;
+
+        m_isPaused = false;
 
         // clear requesters
         m_requesters.Clear();

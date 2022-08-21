@@ -68,12 +68,12 @@ public class PlayerMovement : MonoBehaviour
 
         rollAction.performed += ctx => { if (dynamicVaulting.canVault) StartVault(); else StartRoll(); };
 
-        LevelController.GamePaused += () => {
-            DisableInput();
-        };
-        LevelController.GameUnpaused += () => {
-            EnableInput();
-        };
+        // LevelController.GamePaused += () => {
+        //     DisableInput();
+        // };
+        // LevelController.GameUnpaused += () => {
+        //     EnableInput();
+        // };
 
         if (cam == null)
         {
@@ -126,6 +126,14 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (LevelController.IsPaused || ToggleableTownWindow.AnyWindowOpen()) {
+            DisableInput();
+        }
+        else {
+            EnableInput();
+        }
+
+
         if (cam == null || controller == null)
         {
             Debug.LogError("PlayerMovement: Missing camera or controller");
