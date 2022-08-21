@@ -227,6 +227,11 @@ public class Inventory : MonoBehaviour
         return _item;
     }
 
+    /// <summary>
+    /// Checks if it is possible to add a given item to the inventory.
+    /// </summary>
+    /// <param name="_item"></param>
+    /// <returns></returns>
     public bool CanAddItemToInventory(Item _item)
     {
         // if item is null, return
@@ -274,6 +279,11 @@ public class Inventory : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// Removes an item from the inventory by index.
+    /// </summary>
+    /// <param name="_index"></param>
+    /// <returns></returns>
     public Item RemoveItemFromInventory(int _index){
         if (_index < 0 || _index >= m_slots.Count) return null;
 
@@ -285,6 +295,9 @@ public class Inventory : MonoBehaviour
         return item;
     }
 
+    /// <summary>
+    /// Fill the ammo of every ranged weapon to max.
+    /// </summary>
     public void FillAmmo(){
         foreach (Inventory.InventorySlot slot in slots)
         {
@@ -295,6 +308,22 @@ public class Inventory : MonoBehaviour
                 RangedWeapon weapon = item as RangedWeapon;
                 weapon.m_clipAmmo = weapon.m_clipSize;
                 weapon.m_spareAmmo = weapon.m_maxSpareAmmo;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Fill the stacks of every item to max.
+    /// </summary>
+    public void FillStacks(){
+        foreach (Inventory.InventorySlot slot in slots)
+        {
+            Item item = slot.item;
+
+            // set item stack size to max
+            if (item != null)
+            {
+                item.currentStackSize = item.maxStackSize;
             }
         }
     }
