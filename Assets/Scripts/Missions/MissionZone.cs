@@ -306,12 +306,6 @@ public class MissionZone : ScriptableObject
         temp.AddRange(m_middleScenes);
         temp.Add(m_endScene);
 
-        // find Console
-        Console console = GameObject.FindObjectOfType<Console>();
-        if (console != null){
-            console.Log("Current scene: " + currentScenePath);
-        }
-
         // check if current scene is in list
         if (temp.Any(x => currentScenePath.Contains(x.scenePath))){
             // get index of current scene

@@ -489,7 +489,9 @@ public class Console : MonoBehaviour
             // list the scenes
             for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
             {
-                Log("- - " + SceneUtility.GetScenePathByBuildIndex(i));
+                // get scene name, trim path and extension
+                string sceneName = Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
+                Log("- - [" + i.ToString() + "] " + sceneName);
             }
             Log();
             return;
@@ -498,7 +500,10 @@ public class Console : MonoBehaviour
         // "current_scene"
         if (split.Length == 1 && split[0] == "current_scene")
         {
-            Log("- Current scene: " + SceneManager.GetActiveScene().name);
+            // get scene index in build settings
+            int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+
+            Log("- Current scene: [" + sceneIndex.ToString() + "] " + SceneManager.GetActiveScene().name);
             Log();
             return;
         }
@@ -579,6 +584,8 @@ public class Console : MonoBehaviour
         "kill_all",
         "heal_player",
         "quit",
+        "list_scenes",
+        "current_scene",
         "restart_scene",
         "scene sceneNumber",
         "scene sceneName",
