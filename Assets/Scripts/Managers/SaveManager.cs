@@ -173,6 +173,17 @@ public class SaveManager : MonoBehaviour
         {
             SaveManager.DeleteAllSaves();
         }
+
+        // Open save folder
+        [MenuItem("Save System/Open Save Folder")]
+        static void OpenSaveFolder()
+        {
+            string saveFolderPath = GetRootSaveFolder();
+            if (Directory.Exists(saveFolderPath))
+            {
+                System.Diagnostics.Process.Start(saveFolderPath);
+            }
+        }
     }
     #endif
 }

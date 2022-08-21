@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 using UnityEngine.InputSystem;
+using System.IO;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -93,9 +94,9 @@ public class PlayerInventoryInterface : MonoBehaviour
                 Gizmos.DrawLine(hit.originPoint, hit.hitPoint);
 
                 //draw damage dealt in text
-#if UNITY_EDITOR
+                #if UNITY_EDITOR
                 Handles.Label(hit.hitPoint, hit.damage.ToString());
-#endif
+                #endif
             }
         }
 
@@ -104,21 +105,91 @@ public class PlayerInventoryInterface : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position + (transform.forward * meleeAttackRange), meleeAttackSize);
     }
 
+    public static string GetSaveFolderPath(int _saveSlot)
+    {
+        return SaveManager.GetSaveFolderPath(_saveSlot) + "/inventories/";
+    }
+
+    public static string GetSaveFilePath(int saveSlot)
+    {
+        return GetSaveFolderPath(saveSlot) + "interface.json";
+    }
+
+    /// <summary>
+    /// Saves the interface to a file.
+    /// </summary>
+    /// <param name="_saveSlot"></param>
+    public void SaveInterface(int _saveSlot){
+        // if the save folder doesn't exist, create it
+        if (!Directory.Exists(GetSaveFolderPath(_saveSlot)))
+        {
+            Directory.CreateDirectory(GetSaveFolderPath(_saveSlot));
+        }
+
+        FileStream file = File.Create(GetSaveFilePath(_saveSlot));
+
+        // save the selected weapon type
+        int selectedWeaponTypeInt = (int)selectedWeaponType;
+
+        StreamWriter writer = new StreamWriter(file);
+
+        writer.WriteLine(selectedWeaponTypeInt);
+
+        writer.Close();
+
+        file.Close();
+    }
+
+    /// <summary>
+    /// Tries to laod the interface from the save file.
+    /// </summary>
+    /// <param name="_saveSlot"></param>
+    public void LoadInterface(int _saveSlot){
+        // if save path doesn't exist, create it
+        if (!Directory.Exists(GetSaveFolderPath(_saveSlot)))
+        {
+            Directory.CreateDirectory(GetSaveFolderPath(_saveSlot));
+        }
+        // if save file doesn't exist, return
+        if (!File.Exists(GetSaveFilePath(_saveSlot)))
+        {
+            Debug.Log("Save file does not exist.");
+            return;
+        }
+
+        FileStream file = File.Open(GetSaveFilePath(_saveSlot), FileMode.Open);
+
+        // read the selected weapon type
+        StreamReader reader = new StreamReader(file);
+        string line = reader.ReadLine();
+        int selectedWeaponTypeInt = int.Parse(line);
+        reader.Close();
+        file.Close();
+
+        // set the selected weapon type
+        selectedWeaponType = (SelectedWeaponType)selectedWeaponTypeInt;
+    }
 
     // Start is called before the first frame update
     void Start()
     {
+        // get player inventory
         playerInventory = InventoryManager.instance?.GetInventory(playerInventoryName);
+        if (playerInventory == null)
+        {
+            Debug.LogError("Player inventory not found!");
+        }
 
-        SwapWeapon();
+        LoadInterface(SaveManager.currentSaveSlot);
+
         // select weapon
         SelectWeapon(selectedWeaponType);
 
+        // ensure player has valid weapon selected
+        TrySelectValidWeapon();
+
         // select equipment
         SelectEquipment();
-
-        // aimLines.startColor = aimLineStartColor;
-        // aimLines.endColor = aimLineEndColor;
     }
 
 
@@ -455,7 +526,14 @@ public class PlayerInventoryInterface : MonoBehaviour
             SelectWeapon(SelectedWeaponType.Primary);
         }
 
-        // if selected weapon is null, try to select primary, secondary, then none
+        TrySelectValidWeapon();
+    }
+
+    /// <summary>
+    /// If selected weapon is null, try to select primary, secondary, then none
+    /// </summary>
+    private void TrySelectValidWeapon()
+    {
         if (selectedWeapon == null)
         {
             SelectWeapon(SelectedWeaponType.Primary);
@@ -480,6 +558,8 @@ public class PlayerInventoryInterface : MonoBehaviour
     public void SelectWeapon(SelectedWeaponType _type)
     {
         selectedWeaponType = _type;
+
+        SaveInterface(SaveManager.currentSaveSlot);
 
         // if inventory is null, return
         if (playerInventory == null) return;
