@@ -41,7 +41,7 @@ public class PauseMenu : ToggleableWindow
         PausePanel.SetActive(true);
 
         // pause the game
-        //Time.timeScale = 0;
+        LevelController.RequestPause(this);
     }
     public override void CloseWindow()
     {
@@ -49,7 +49,7 @@ public class PauseMenu : ToggleableWindow
         PausePanel.SetActive(false);
 
         // unpause the game
-        //Time.timeScale = 1;
+        LevelController.RequestUnpause(this);
     }
 
     /// <summary>

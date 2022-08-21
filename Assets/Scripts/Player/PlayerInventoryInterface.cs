@@ -196,6 +196,13 @@ public class PlayerInventoryInterface : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        LevelController.GamePaused += () => {
+            DisableInput();
+        };
+        LevelController.GameUnpaused += () => {
+            EnableInput();
+        };
+
         // if swap weapon action is pressed, swap weapon
         if (swapWeaponAction.triggered)
         {

@@ -88,7 +88,81 @@ public class LevelController : MonoBehaviour
         Application.Quit();
     }
 
-    // static public void LoadScene(int _index){
-    //     SceneManager.LoadScene(_index);
-    // }
+    private static Dictionary<MonoBehaviour, bool> m_scriptStates = new Dictionary<MonoBehaviour, bool>();
+    private static List<MonoBehaviour> m_requesters = new List<MonoBehaviour>();
+
+    public static System.Action GamePaused;
+    public static System.Action GameUnpaused;
+
+    /// <summary>
+    /// Adds a script to list of requesters, then pauses the game.
+    /// </summary>
+    /// <param name="_requester"></param>
+    public static void RequestPause(MonoBehaviour _requester)
+    {
+        if (!m_requesters.Contains(_requester))
+        {
+            m_requesters.Add(_requester);
+        }
+
+        CheckRequesters();
+
+        ForcePause();
+    }
+
+    /// <summary>
+    /// Removes a requester from the list of requesters, if no requesters are left, the game will be unpaused.
+    /// </summary>
+    /// <param name="_requester"></param>
+    public static void RequestUnpause(MonoBehaviour _requester)
+    {
+        if (m_requesters.Contains(_requester))
+        {
+            m_requesters.Remove(_requester);
+        }
+
+        CheckRequesters();
+    }
+
+    /// <summary>
+    /// Ensures that all requesters are still valid, if not, removes them from the list. <br/>
+    /// If no requesters are left, the game will be unpaused.
+    /// </summary>
+    public static void CheckRequesters(){
+        for (int i = 0; i < m_requesters.Count; i++)
+        {
+            // if null, disabled, or destroyed, remove from list
+            if (m_requesters[i] == null || !m_requesters[i].enabled || m_requesters[i].gameObject == null)
+            {
+                m_requesters.RemoveAt(i);
+            }
+        }
+
+        if (m_requesters.Count <= 0)
+        {
+            ForceUnpause();
+        }
+    }
+
+    /// <summary>
+    /// Sets time scale to 0, and calls GamePaused event.
+    /// </summary>
+    public static void ForcePause()
+    {
+        Time.timeScale = 0;
+
+        GamePaused?.Invoke();
+    }
+
+    /// <summary>
+    /// Sets time scale to 1, clears requesters, and calls GameUnpaused event.
+    /// </summary>
+    public static void ForceUnpause(){
+        Time.timeScale = 1;
+
+        // clear requesters
+        m_requesters.Clear();
+
+        GameUnpaused?.Invoke();
+    }
 }

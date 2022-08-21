@@ -63,15 +63,17 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        moveAction.Enable();
-        rollAction.Enable();
-        sprintAction.Enable();
-
-
         controller = GetComponent<CharacterController>();
         dynamicVaulting = GetComponent<DynamicVaulting>();
 
         rollAction.performed += ctx => { if (dynamicVaulting.canVault) StartVault(); else StartRoll(); };
+
+        LevelController.GamePaused += () => {
+            DisableInput();
+        };
+        LevelController.GameUnpaused += () => {
+            EnableInput();
+        };
 
         if (cam == null)
         {
@@ -93,29 +95,32 @@ public class PlayerMovement : MonoBehaviour
         camRight.Normalize();
     }
 
-    /// <summary>
-    ///  Disable input when the player is dead.
-    /// </summary>
-    private void OnDestroy()
-    {
+    private void OnEnable() {
+        EnableInput();
+    }
+
+    private void OnDisable() {
         DisableInput();
     }
 
     /// <summary>
-    /// Disable input.
+    /// Enables the input actions for the player movement.
     /// </summary>
-    private void OnDisable()
+    public void EnableInput()
     {
-        DisableInput();
+        moveAction.Enable();
+        rollAction.Enable();
+        sprintAction.Enable();
     }
 
     /// <summary>
-    ///  Disable input actions.
+    ///  Disable input actions for the player movement.
     /// </summary>
     public void DisableInput()
     {
         moveAction.Disable();
         rollAction.Disable();
+        sprintAction.Disable();
     }
 
     // Update is called once per frame

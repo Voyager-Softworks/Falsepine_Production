@@ -105,7 +105,8 @@ public class Console : MonoBehaviour
 
             consoleInput.text = "";
 
-            Time.timeScale = 1;
+            // unpause game
+            LevelController.RequestUnpause(this);
         }
         else
         {
@@ -114,7 +115,8 @@ public class Console : MonoBehaviour
 
             consoleInput.text = "";
 
-            Time.timeScale = 0;
+            // pause game
+            LevelController.RequestPause(this);
 
             StartTyping();
         }
