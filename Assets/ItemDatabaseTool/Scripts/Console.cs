@@ -17,7 +17,7 @@ using UnityEditor;
 /// Console class lets the user interact with the game's code in a more direct way.
 /// </summary>
 [Serializable]
-public class Console : MonoBehaviour
+public class Console : ToggleableWindow
 {
     public GameObject view;
     public GameObject input;
@@ -38,7 +38,7 @@ public class Console : MonoBehaviour
 
         // if ` is pressed, toggle console
         if (Keyboard.current.backquoteKey.wasPressedThisFrame){
-            ToggleConsole();
+            ToggleWindow();
         }
 
         // if enter is pressed, try send command
@@ -96,30 +96,42 @@ public class Console : MonoBehaviour
         }
     }
 
-    private void ToggleConsole()
+    public override bool IsOpen()
     {
-        if (view.activeSelf)
-        {
-            view.SetActive(false);
-            input.SetActive(false);
+        return view.activeSelf;
+    }
 
-            consoleInput.text = "";
+    public override void ToggleWindow()
+    {
+        base.ToggleWindow();
+    }
 
-            // unpause game
-            LevelController.RequestUnpause(this);
-        }
-        else
-        {
-            view.SetActive(true);
-            input.SetActive(true);
+    public override void OpenWindow()
+    {
+        base.OpenWindow();
 
-            consoleInput.text = "";
+        view.SetActive(true);
+        input.SetActive(true);
 
-            // pause game
-            LevelController.RequestPause(this);
+        consoleInput.text = "";
 
-            StartTyping();
-        }
+        // pause game
+        LevelController.RequestPause(this);
+
+        StartTyping();
+    }
+
+    public override void CloseWindow()
+    {
+        base.CloseWindow();
+
+        view.SetActive(false);
+        input.SetActive(false);
+
+        consoleInput.text = "";
+
+        // unpause game
+        LevelController.RequestUnpause(this);
     }
 
     /// <summary>
