@@ -62,11 +62,20 @@ public class EncircleTarget : NodeAI.ActionBase
                                                         agent.transform.position
                                                         );
 
+
         if (steeringVector.magnitude > 0.01f)
         {
-            NavMeshHit nhit;
-            NavMesh.SamplePosition(agent.transform.position + (steeringVector.normalized * GetProperty<float>("Encircle speed")), out nhit, 3.0f, NavMesh.AllAreas);
-            navAgent.SetDestination(nhit.position);
+            //Check if there is a wall in the way
+            if (Physics.Raycast(agent.transform.position, steeringVector, steeringVector.magnitude))
+            {
+                navAgent.SetDestination(targetPosition);
+            }
+            else
+            {
+                NavMeshHit nhit;
+                NavMesh.SamplePosition(agent.transform.position + (steeringVector.normalized * GetProperty<float>("Encircle speed")), out nhit, 3.0f, NavMesh.AllAreas);
+                navAgent.SetDestination(nhit.position);
+            }
         }
         else
         {

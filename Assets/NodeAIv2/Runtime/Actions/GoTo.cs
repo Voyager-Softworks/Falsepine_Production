@@ -32,6 +32,11 @@ namespace NodeAI
     {
         NavMeshAgent navAgent;
         float originalSpeed;
+
+        List<Vector3> lastPositions = new List<Vector3>();
+        int stuckFor = 0;
+
+
         public GoTo()
         {
             AddProperty<Transform>("Position", null);
@@ -44,14 +49,14 @@ namespace NodeAI
         {
             SetProperty<bool>("Interrupt", false);
             originalSpeed = navAgent?.speed ?? 0;
-            
+
         }
         public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
         {
-            if(navAgent == null)
+            if (navAgent == null)
             {
                 navAgent = agent.GetComponent<NavMeshAgent>();
-                if(navAgent == null)
+                if (navAgent == null)
                 {
                     Debug.LogError("No NavMeshAgent found on " + agent.gameObject.name);
                     state = NodeData.State.Failure;
@@ -59,35 +64,62 @@ namespace NodeAI
                 }
                 originalSpeed = navAgent.speed;
             }
-            if(GetProperty<bool>("Interrupt"))
+            if (GetProperty<bool>("Interrupt"))
             {
                 navAgent.isStopped = true;
                 state = NodeData.State.Failure;
                 return NodeData.State.Failure;
             }
-            if(navAgent.isOnNavMesh && GetProperty<Transform>("Position"))
+            if (navAgent.isOnNavMesh && GetProperty<Transform>("Position"))
             {
-                if(GetProperty<float>("Stopping distance") > 0)
+                if (GetProperty<float>("Stopping distance") > 0)
                 {
                     navAgent.stoppingDistance = GetProperty<float>("Stopping distance");
                 }
                 //navAgent.SetDestination(GetProperty<Transform>("Position").position);
-                if(Vector3.Distance(agent.transform.position, GetProperty<Transform>("Position").position) <= navAgent.stoppingDistance + 0.1f)
+                if (Vector3.Distance(agent.transform.position, GetProperty<Transform>("Position").position) <= navAgent.stoppingDistance + 0.1f)
                 {
                     navAgent.isStopped = true;
                     navAgent.speed = originalSpeed;
                     state = NodeData.State.Success;
                     return NodeData.State.Success;
                 }
-                if(navAgent.SetDestination(GetProperty<Transform>("Position").position))
+                if (navAgent.SetDestination(GetProperty<Transform>("Position").position))
                 {
                     navAgent.isStopped = false;
                     navAgent.speed = GetProperty<float>("Speed");
                     navAgent.acceleration = GetProperty<float>("Acceleration");
-                    if(GetProperty<float>("Stopping distance") > 0)
+                    if (GetProperty<float>("Stopping distance") > 0)
                     {
                         navAgent.stoppingDistance = GetProperty<float>("Stopping distance");
                     }
+                    // Check if the agent is stuck
+                    if (lastPositions.Count > 10)
+                    {
+                        lastPositions.RemoveAt(0);
+                    }
+                    lastPositions.Add(agent.transform.position);
+                    if (lastPositions.Count > 1)
+                    {
+                        if (Vector3.Distance(lastPositions[lastPositions.Count - 1], lastPositions[lastPositions.Count - 2]) < 0.1f)
+                        {
+                            stuckFor++;
+                        }
+                        else
+                        {
+                            stuckFor = 0;
+                        }
+                    }
+                    if (stuckFor > 10)
+                    {
+                        Debug.Log("Agent: " + agent.gameObject.name + " has become stuck!");
+                        stuckFor = 0;
+                        Vector3 destination = navAgent.destination;
+                        navAgent.ResetPath();
+                        navAgent.SetDestination(destination);
+                    }
+
+
                     state = NodeData.State.Running;
                     return NodeData.State.Running;
                 }
