@@ -19,7 +19,17 @@ public class BrightmawBurrow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        GetComponent<Health_Base>().Death += (ctx) =>
+        {
+            audioSource.Stop();
+            burrowParticles.Stop();
+            unburrowParticles.Stop();
+            agent.enabled = false;
+            foreach (var child in GetComponentsInChildren<Collider>())
+            {
+                child.enabled = false;
+            }
+        };
     }
 
     // Update is called once per frame
