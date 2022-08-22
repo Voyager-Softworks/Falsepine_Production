@@ -48,6 +48,7 @@ public class AttackData : ScriptableObject
         [SerializeReference]
         public GameObject AOEeffect; ///< The effect to play when the attack is performed.
         public Vector2 AOEspawnOffset; ///< The offset from the agent's position to spawn the effect.
+
         public Color AOEindicatorColor; ///< The color of the indicator.
         public float AOEindicatorDuration; ///< The amount of time for which the indicator should be visible.
 

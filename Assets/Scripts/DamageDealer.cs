@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
 using System;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 ///  Script that handles dealing damage to the player through melee, ranged, and AOE attacks.
@@ -15,6 +16,13 @@ public class DamageDealer : MonoBehaviour
     public GameObject m_hurtPlayerEffect; ///< Particle _effect spawned when the player is hurt
 
     public GameObject m_indicatorPrefab; ///< Indicator that shows where the attack will hit
+    public struct IndicatorMaterial
+    {
+        public Material m_material;
+        public string m_keyword;
+    }
+
+    public List<IndicatorMaterial> m_indicatorMaterials = new List<IndicatorMaterial>(); ///< Materials that can be used for the indicator
 
     public float m_damage = 10f; ///< Damage done by the attack
     public int m_attkNum = 1; ///< Number of Attacks
@@ -120,23 +128,28 @@ public class DamageDealer : MonoBehaviour
         yield return new WaitForSeconds(_delay - _indicatorDuration); //Wait until it is time to begin displaying the indicator
 
         Vector3 offsetVector = transform.forward * _offset.y + transform.right * _offset.x; //Get the _offset position
-
+        m_indicatorPrefab = GameObject.FindGameObjectWithTag("Indicator"); //Get the indicator prefab
         GameObject indicator = Instantiate(m_indicatorPrefab, transform.position + offsetVector + (_playerDirectionFunction() * (_translationSpeed * _translationDuration)) - Vector3.up, Quaternion.Euler(90, 0, 0)); //Instantiate the indicator
+        indicator.tag = "Untagged"; //Remove the tag from the indicator
         float t = 0.0f; //Create the timer
+
 
         //Set the properties of the decal projector
         DecalProjector decalProjector = indicator.GetComponent<DecalProjector>();
-        decalProjector.material = new Material(decalProjector.material); //Make a new instance of the material
+        Material oldMat = decalProjector.material;
+        decalProjector.material = new Material(oldMat); //Make a new instance of the material
         decalProjector.material.SetColor("_BaseColor", _attackColor);
 
         //Maths to get around Unity's strange storing of HDR colors
-        Color emissiveColor = decalProjector.material.GetColor("_EmissiveColor");
+        Color emissiveColor = oldMat.GetColor("_EmissiveColorHDR");
         var maxColComponent = emissiveColor.maxColorComponent;
         byte maxOverExposedColor = 191;
         var factor = maxOverExposedColor / maxColComponent;
         float intensity = Mathf.Log(255f / factor) / Mathf.Log(2f);
         Color newEmissiveColor = new Color(_attackColor.r * intensity, _attackColor.g * intensity, _attackColor.b * intensity, _attackColor.a);
         decalProjector.material.SetColor("_EmissiveColor", newEmissiveColor);
+        decalProjector.material.SetInt("_UseEmissiveIntensity", 1);
+        decalProjector.material.SetFloat("_EmissiveIntensity", oldMat.GetFloat("_EmissiveIntensity"));
 
 
         decalProjector.size = Vector3.zero;
