@@ -14,7 +14,7 @@ public class DynamicVaulting : MonoBehaviour
     public float maxVaultingHeight = 1f; ///< The maximum height to vault over.
     public float maxVaultingDepth = 1f; ///< The maximum depth to vault over.
     public float maxVaultingAngle = 45f; ///< The maximum angle to vault over.
-    public float maxVaultingDistance = 1f; ///< The maximum distance to vault over.
+    //public float maxVaultingDistance = 1f; ///< The maximum distance to vault over.
     public float verticalOffset = 0.5f; ///< The vertical offset to apply to the vaulting position.
 
     private Vector3[] sphereCastPositions; ///< The positions of the spheres to cast to check for obstacles.
@@ -24,6 +24,8 @@ public class DynamicVaulting : MonoBehaviour
     public Vector3 vaultingHit; ///< The hit of the vaulting raycast to check for obstacles.
 
     public bool canVault = false; ///< Whether or not the player can vault.
+
+    public AnimationCurve vaultingCurve, vaultingHeightCurve; ///< The curve to use to calculate the vaulting movement.
 
     /// <summary>
     ///  Gets the height of the vaulting position.
@@ -117,7 +119,7 @@ public class DynamicVaulting : MonoBehaviour
         vaultingHit.x = horizontalHit.x;
         vaultingHit.y = verticalHit.y;
         vaultingHit.z = horizontalHit.z;
-        if (Physics.OverlapSphere(vaultingHit + (transform.forward * (maxVaultingDepth + sphereCastRadius)), sphereCastRadius, layerMask).Length > 0)
+        if (Physics.OverlapSphere(vaultingHit + (transform.forward * (maxVaultingDepth + sphereCastRadius)), sphereCastRadius).Length > 0)
         {
             vaultingHit = Vector3.zero;
             horizontalHit = Vector3.zero;

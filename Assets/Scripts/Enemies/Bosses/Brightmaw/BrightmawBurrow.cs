@@ -47,6 +47,10 @@ public class BrightmawBurrow : MonoBehaviour
                 audioSource.time = Random.Range(0, audioSource.clip.length);
                 audioSource.Play();
                 burrowParticles.Play();
+                foreach (var child in GetComponentsInChildren<Collider>())
+                {
+                    child.enabled = false;
+                }
             }
             else
             {
@@ -54,6 +58,10 @@ public class BrightmawBurrow : MonoBehaviour
                 audioSource.loop = false;
                 audioSource.Stop();
                 unburrowParticles.Play();
+                foreach (var child in GetComponentsInChildren<Collider>())
+                {
+                    child.enabled = true;
+                }
             }
             burrowing = newBurrowVal;
         }

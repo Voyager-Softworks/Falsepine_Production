@@ -95,11 +95,13 @@ public class PlayerMovement : MonoBehaviour
         camRight.Normalize();
     }
 
-    private void OnEnable() {
+    private void OnEnable()
+    {
         EnableInput();
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         DisableInput();
     }
 
@@ -126,10 +128,12 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (LevelController.IsPaused || ToggleableTownWindow.AnyWindowOpen()) {
+        if (LevelController.IsPaused || ToggleableTownWindow.AnyWindowOpen())
+        {
             DisableInput();
         }
-        else {
+        else
+        {
             EnableInput();
         }
 
@@ -167,6 +171,14 @@ public class PlayerMovement : MonoBehaviour
             {
                 isAiming = rangedWeapon.m_isAiming;
                 isReloading = rangedWeapon.m_reloadTimer > 0;
+            }
+        }
+
+        if (dynamicVaulting.canVault && !isReloading && !isVaulting && !isAiming && !isRolling)
+        {
+            if (Vector3.Dot(moveDir, dynamicVaulting.GetVaultingDirection()) > 0.5f)
+            {
+                StartVault();
             }
         }
 
@@ -305,8 +317,7 @@ public class PlayerMovement : MonoBehaviour
     /// - Vaulting currently messes up enemy pathfinding: this needs to be fixed.
     public void StartVault()
     {
-        if (!dynamicVaulting.canVault) return;
-        rollDir = dynamicVaulting.GetVaultingDirection();
+        if (!dynamicVaulting.canVault || isRolling || isVaulting) return;
         _animator.SetFloat("VaultHeight", dynamicVaulting.GetVaultingHeight());
         _animator.SetTrigger("Vault");
 
@@ -314,7 +325,7 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetLayerWeight(2, 0);
 
 
-        StartCoroutine(VaultCoroutine());
+        StartCoroutine(VaultCoroutine(dynamicVaulting.GetVaultingDirection()));
 
     }
 
@@ -327,7 +338,7 @@ public class PlayerMovement : MonoBehaviour
         {
             return;
         }
-        if (isRolling)
+        if (isRolling || isVaulting)
         {
             return;
         }
@@ -381,18 +392,20 @@ public class PlayerMovement : MonoBehaviour
     ///  Coroutine for vaulting.
     /// </summary>
     /// <returns></returns>
-    IEnumerator VaultCoroutine()
+    IEnumerator VaultCoroutine(Vector3 dir)
     {
         isVaulting = true;
         GetComponent<CapsuleCollider>().enabled = false;
         GetComponent<CharacterController>().enabled = false;
+        float vaultHeight = dynamicVaulting.GetVaultingHeight();
         Vector3 startPos = transform.position;
-        Vector3 endPos = transform.position + (rollDir * 2.2f);
+        Vector3 endPos = transform.position + (dir * dynamicVaulting.maxVaultingDepth);  //transform.position + (rollDir * 2.2f);
         float t = 0;
         while (t < 1)
         {
+            isVaulting = true;
             t += Time.deltaTime / 0.7f;
-            transform.position = Vector3.Lerp(startPos, endPos, t);
+            transform.position = Vector3.Lerp(startPos, endPos, dynamicVaulting.vaultingCurve.Evaluate(t)) + ((dynamicVaulting.vaultingHeightCurve.Evaluate(t) * vaultHeight) * Vector3.up);
             yield return null;
         }
         GetComponent<CapsuleCollider>().enabled = true;
