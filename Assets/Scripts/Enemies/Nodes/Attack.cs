@@ -118,7 +118,11 @@ public class Attack : NodeAI.ActionBase  /// @todo Comment
         if (!initialized)
         {
             initialized = true;
+            float mult = Random.Range(0.9f, 1.1f);
+            float origAnimSpeed = animator.speed;
+            animator.speed = mult;
             animator.SetTrigger(attackData.animationTrigger);
+            audioSource.pitch = mult;
             audioSource.PlayOneShot(attackData.attackSound);
             foreach (AttackData.AttackPhase phase in attackData.attackPhases)
             {
@@ -152,6 +156,8 @@ public class Attack : NodeAI.ActionBase  /// @todo Comment
 
         if (GetProperty<bool>("Interrupted"))
         {
+            animator.speed = 1f;
+            audioSource.pitch = 1f;
             state = NodeData.State.Failure;
             return NodeData.State.Failure;
         }
@@ -159,6 +165,8 @@ public class Attack : NodeAI.ActionBase  /// @todo Comment
 
         if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9 && timeSinceInitialized >= 0.3f)
         {
+            animator.speed = 1f;
+            audioSource.pitch = 1f;
             animator.ResetTrigger(attackData.animationTrigger);
             state = NodeData.State.Success;
             //navAgent.isStopped = false;

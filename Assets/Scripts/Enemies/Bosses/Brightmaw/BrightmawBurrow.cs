@@ -43,6 +43,8 @@ public class BrightmawBurrow : MonoBehaviour
             {
                 audioSource.loop = true;
                 audioSource.clip = burrowSound;
+                audioSource.pitch = Random.Range(0.8f, 1.2f);
+                audioSource.time = Random.Range(0, audioSource.clip.length);
                 audioSource.Play();
                 burrowParticles.Play();
             }
