@@ -358,6 +358,16 @@ public class Inventory : MonoBehaviour
     }
 
     /// <summary>
+    /// Gets a slot by index
+    /// </summary>
+    /// <param name="_index"></param>
+    /// <returns></returns>
+    public InventorySlot GetSlot(int _index){
+        if (_index < 0 || _index >= m_slots.Count) return null;
+        return m_slots[_index];
+    }
+
+    /// <summary>
     /// Fill the stacks of every item to max.
     /// </summary>
     public void FillStacks(){
@@ -422,6 +432,7 @@ public class Inventory : MonoBehaviour
 
         List<string> fileNames = new List<string>();
 
+        // save each item to a new line
         foreach (InventorySlot slot in m_slots)
         {
             if (slot.item != null)
