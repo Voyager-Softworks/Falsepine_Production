@@ -16,7 +16,7 @@ public class BossArenaController : MonoBehaviour
     {
         get
         {
-            return m_arenaCentreTransforms[phase];
+            return m_arenaCentreTransforms[phase >= m_arenaCentreTransforms.Count ? m_arenaCentreTransforms.Count - 1 : phase];
         }
     }
 
