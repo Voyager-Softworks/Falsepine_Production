@@ -178,6 +178,8 @@ public class Inventory : MonoBehaviour
         set { m_slots = value; }
     }
 
+    [SerializeField] public bool m_infiniteSlots = false;
+
     public void SetSlotsOwner()
     {
         foreach (InventorySlot slot in slots)
@@ -208,13 +210,22 @@ public class Inventory : MonoBehaviour
             }
         }
 
-
         // loop through all slots and try to add item while not null
         for (int i = 0; i < m_slots.Count; i++)
         {
             InventorySlot slot = m_slots[i];
             
             _item = slot.TryAddItemToSlot(_item);
+        }
+
+        // if m_infiniteSlots, add a new slot
+        if (m_infiniteSlots)
+        {
+            while (_item != null)
+            {
+                AddSlot();
+                _item = m_slots[m_slots.Count - 1].TryAddItemToSlot(_item);
+            }
         }
 
         if (_item != null)
@@ -310,6 +321,40 @@ public class Inventory : MonoBehaviour
                 weapon.m_spareAmmo = weapon.m_maxSpareAmmo;
             }
         }
+    }
+
+    /// <summary>
+    /// Adds a slot with the given filter to the inventory.
+    /// </summary>
+    /// <param name="_filter"></param>
+    public void AddSlot(List<System.Type> _filter = null){
+        if (_filter == null)
+        {
+            _filter = new List<System.Type>();
+        }
+        // remove any types that do not derive from Item, or are Item
+        List<System.Type> filteredTypes = new List<System.Type>();
+        foreach (System.Type type in _filter)
+        {
+            if (type.IsSubclassOf(typeof(Item)) && type != typeof(Item))
+            {
+                filteredTypes.Add(type);
+            }
+        }
+
+        // remove any duplicates
+        filteredTypes = filteredTypes.Distinct().ToList();
+
+        // convert to string list
+        List<string> filteredStrings = new List<string>();
+        foreach (System.Type type in filteredTypes)
+        {
+            filteredStrings.Add(type.ToString());
+        }
+
+        InventorySlot slot = new InventorySlot();
+        slot.typeFilter = filteredStrings;
+        slots.Add(slot);
     }
 
     /// <summary>
@@ -664,6 +709,9 @@ public class Inventory : MonoBehaviour
 
             // space
             EditorGUILayout.Space();
+
+            // infinite slots
+            inventory.m_infiniteSlots = EditorGUILayout.Toggle(new GUIContent("Infinite Slots", "If true, the inventory will make new slots when adding items"), inventory.m_infiniteSlots);
 
             // horiz
             EditorGUILayout.BeginHorizontal();
