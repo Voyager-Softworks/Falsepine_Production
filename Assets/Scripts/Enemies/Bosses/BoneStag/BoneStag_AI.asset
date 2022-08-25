@@ -49,10 +49,10 @@ MonoBehaviour:
     parentGUID: 73b40e22-fbbf-4e03-8b67-785248a83074
     title: Selector
     childGUIDs:
-    - fcd4d430-6e21-4b09-8681-37dc42fcffda
     - 58508c02-72cb-464b-bb24-70cb776f8c8c
     - 62d658cf-ff6f-43f1-86ad-6a84d552704d
     - dab1bcd9-21d0-4b22-95c2-ee6890d0dd54
+    - fcd4d430-6e21-4b09-8681-37dc42fcffda
     - a0f32c3f-3c72-484e-9fcb-0274fc7ec490
     nodeType: 5
     position: {x: 2009, y: 2571}
@@ -2005,6 +2005,8 @@ MonoBehaviour:
     - 242f1793-11d9-4bdb-95c4-dd484e6f890f
     - ad1cac6a-154d-47b4-99a2-f832fb5ab1fd
     - 404ec0e7-e52f-41bd-9184-a3a1e9a49b8c
+    - 39eb916a-a49e-46c7-be9c-f6c89c41b225
+    - a364a1fc-ab06-4671-98c7-096e3d47f8a5
     nodeType: 4
     position: {x: 2234, y: -43}
     runtime: {fileID: 0}
@@ -2216,35 +2218,6 @@ MonoBehaviour:
       output: 0
     runtimeLogicType: NodeAI.Animation.SetAnimatorBool, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 404ec0e7-e52f-41bd-9184-a3a1e9a49b8c
-    parentGUID: cebd829d-b7dd-4e23-aded-7f06fadaf2dd
-    title: WaitUntilAnimationComplete
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 2419, y: 483}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: STATE NAME
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: PHASE2
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Animation.WaitUntilAnimationComplete, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     queryType: 
     noLogic: 0
     noQuery: 1
@@ -3726,6 +3699,93 @@ MonoBehaviour:
     queryType: 
     noLogic: 0
     noQuery: 1
+  - GUID: 404ec0e7-e52f-41bd-9184-a3a1e9a49b8c
+    parentGUID: cebd829d-b7dd-4e23-aded-7f06fadaf2dd
+    title: WaitUntilAnimationComplete
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 2423, y: 463}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: STATE NAME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: PHASE2
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Animation.WaitUntilAnimationComplete, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 39eb916a-a49e-46c7-be9c-f6c89c41b225
+    parentGUID: cebd829d-b7dd-4e23-aded-7f06fadaf2dd
+    title: SetInvulnerable
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 2427, y: 363}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: INVULNERABLE
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 1
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: SetInvulnerable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: a364a1fc-ab06-4671-98c7-096e3d47f8a5
+    parentGUID: cebd829d-b7dd-4e23-aded-7f06fadaf2dd
+    title: SetInvulnerable
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 2427, y: 566}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: INVULNERABLE
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: SetInvulnerable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
   exposedProperties:
   - name: BossStarted
     GUID: 0c992cf5-8e5f-46d4-90af-f936c548f37b
@@ -3988,4 +4048,6 @@ MonoBehaviour:
     - 40c12997-3b34-44fa-9041-07144a2ee32d
     - ad1cac6a-154d-47b4-99a2-f832fb5ab1fd
     - 404ec0e7-e52f-41bd-9184-a3a1e9a49b8c
+    - 39eb916a-a49e-46c7-be9c-f6c89c41b225
+    - a364a1fc-ab06-4671-98c7-096e3d47f8a5
   queries: []

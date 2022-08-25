@@ -20,7 +20,7 @@ namespace Boss.Bonestag
         {
             if (!GetProperty<bool>("IsSecondPhase"))
             {
-                if (agent.GetComponent<EnemyHealth>().m_currentHealth <= GetProperty<float>("Phase transition threshold"))
+                if (agent.GetComponent<Health_Base>().m_currentHealth <= GetProperty<float>("Phase transition threshold"))
                 {
                     SetProperty<bool>("IsSecondPhase", true);
                     agent.SetParameter("SecondPhase", true);
@@ -31,7 +31,7 @@ namespace Boss.Bonestag
             }
             state = NodeData.State.Failure;
             return NodeData.State.Failure;
-            
+
         }
 
 
