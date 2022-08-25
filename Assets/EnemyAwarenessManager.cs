@@ -13,7 +13,7 @@ public class EnemyAwarenessManager : MonoBehaviour
         public bool fromOtherEnemy;
     }
 
-    public System.Action<Context> onEnemyAware;
+    public System.Action<Context> onEnemyAware; ///< Delegate called when an enemy registers an awareness event.
 
     public void RegisterAwareness(GameObject self)
     {

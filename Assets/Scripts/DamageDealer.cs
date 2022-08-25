@@ -49,13 +49,17 @@ public class DamageDealer : MonoBehaviour
     /// <returns></returns>
     IEnumerator MeleeAttackCoroutine(float _dmg, float _delay, float _duration, float _stunDuration)
     {
-        yield return new WaitForSeconds(_delay);
+        yield return new WaitForSeconds(_delay); // Waitfor the duration of the delay.
+
+        //Enable hurtboxes
         foreach (Collider hurtBox in m_hurtBoxes)
         {
             hurtBox.enabled = true;
         }
         float timer = 0f;
         bool playerHit = false;
+
+        //For the duration of the attack, check for the player in hurtboxes, and hurt them once.
         while (timer < _duration && !playerHit)
         {
             timer += Time.deltaTime;
