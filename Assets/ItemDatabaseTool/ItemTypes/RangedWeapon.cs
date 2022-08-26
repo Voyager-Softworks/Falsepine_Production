@@ -263,6 +263,7 @@ public class RangedWeapon : Item
     /// Uses the aim zone to detect what to shoot and how much damage to deal<br/>
     /// @todo Replace trigger collider checking with layers?
     /// @todo split this function up.
+    /// @todo add managed for health script to keep track?
     /// </summary>
     /// <param name="_origin"></param>
     /// <param name="_direction"></param>
@@ -460,6 +461,15 @@ public class RangedWeapon : Item
         m_clipAmmo--;
     }
 
+    /// <summary>
+    /// @todo func head
+    /// </summary>
+    /// <param name="_point"></param>
+    /// <param name="_triangleA"></param>
+    /// <param name="_triangleB"></param>
+    /// <param name="_triangleC"></param>
+    /// <param name="intersection"></param>
+    /// <returns></returns>
     public static bool PointInTriangle(Vector3 _point, Vector3 _triangleA, Vector3 _triangleB, Vector3 _triangleC, out Vector3 intersection)
     {
         // set y to 0
@@ -501,6 +511,15 @@ public class RangedWeapon : Item
         return (u >= 0) && (v >= 0) && (u + v < 1);
     }
 
+    /// <summary>
+    /// @todo Func header
+    /// </summary>
+    /// <param name="a1"></param>
+    /// <param name="a2"></param>
+    /// <param name="b1"></param>
+    /// <param name="b2"></param>
+    /// <param name="intersection"></param>
+    /// <returns></returns>
     public static bool LinesIntersect(Vector3 a1, Vector3 a2, Vector3 b1, Vector3 b2, out Vector3 intersection) {
         // set y to 0
         a1.y = 0;
@@ -570,6 +589,7 @@ public class RangedWeapon : Item
         if (LinesIntersect(b3, b4, _triangleB, _triangleC, out intersection)) { intersections.Add(intersection); }
         if (LinesIntersect(b4, b1, _triangleB, _triangleC, out intersection)) { intersections.Add(intersection); }
 
+        //@todo check the brackets
         if (intersections.Count > 0) {
             return true;
         }
@@ -577,6 +597,11 @@ public class RangedWeapon : Item
         return false;
     }
 
+    /// <summary>
+    /// @todo func head
+    /// </summary>
+    /// <param name="_bounds"></param>
+    /// <returns></returns>
     public List<Vector3> GetCorners(Bounds _bounds){
         List<Vector3> corners = new List<Vector3>();
         corners.Add(_bounds.center + new Vector3(_bounds.extents.x, -_bounds.extents.y, _bounds.extents.z));

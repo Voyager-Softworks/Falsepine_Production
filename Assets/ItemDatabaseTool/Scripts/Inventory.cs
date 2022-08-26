@@ -129,6 +129,10 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Gets all of the items in this inventory.
+    /// </summary>
+    /// <returns></returns>
     public List<Item> GetItems()
     {
         List<Item> items = new List<Item>();
@@ -161,6 +165,9 @@ public class Inventory : MonoBehaviour
         return -1;
     }
 
+    /// <summary>
+    /// The unique ID of the inventory.
+    /// </summary>
     [SerializeField] public string id
     {
         get { return m_id; }
@@ -247,6 +254,9 @@ public class Inventory : MonoBehaviour
     {
         // if item is null, return
         if (_item == null) return false;
+
+        // if infinite slots, return true
+        if (m_infiniteSlots) return true;
 
         // loop through slots and try to add item to existing stack
         for (int i = 0; i < slots.Count; i++)
@@ -355,6 +365,15 @@ public class Inventory : MonoBehaviour
         InventorySlot slot = new InventorySlot();
         slot.typeFilter = filteredStrings;
         slots.Add(slot);
+    }
+
+    /// <summary>
+    /// Gets the amount of slots in this inventory.
+    /// </summary>
+    /// <returns></returns>
+    internal int GetSlotCount()
+    {
+        return m_slots.Count();
     }
 
     /// <summary>

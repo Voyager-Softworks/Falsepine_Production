@@ -29,12 +29,12 @@ public class InventoryPannel_Shop : InventoryPannel
         base.UpdateUI();
     }
 
-    protected override void LinkGridItems()
+    protected override void UpdateItemDisplays()
     {
-        base.LinkGridItems();
+        base.UpdateItemDisplays();
     }
 
-    public override void ItemClicked(InventoryGridItem gridItem)
+    public override void ItemClicked(ItemDisplay gridItem)
     {
         base.ItemClicked(gridItem);
     }
@@ -47,10 +47,10 @@ public class InventoryPannel_Shop : InventoryPannel
     /// <param name="sourceInventory"></param>
     /// <param name="targetInventory"></param>
     /// <param name="sourceIndex"></param>
-    protected override void PerformClickAction(InventoryGridItem gridItem, Inventory sourceInventory, Inventory targetInventory, int sourceIndex)
+    protected override void PerformClickAction(ItemDisplay _itemDisplay, Inventory _sourceInventory, Inventory _targetInventory, int _sourceIndex)
     {
-        Item item = gridItem.itemInSlot;
-        if (gridItem.itemInSlot == null) return;
+        Item item = _itemDisplay.m_linkedItem;
+        if (item == null) return;
 
         itemToBuy = item;
 
@@ -60,9 +60,9 @@ public class InventoryPannel_Shop : InventoryPannel
         int price = item.GetPrice();
         if (economyManager.CanAfford(price)){
             //transfer
-            if (InventoryManager.instance.CanMoveItem(sourceInventory, targetInventory, sourceIndex)){
+            if (InventoryManager.instance.CanMoveItem(_sourceInventory, _targetInventory, _sourceIndex)){
                 economyManager.Spend(price);
-                InventoryManager.instance.TryMoveItem(sourceInventory, targetInventory, sourceIndex);
+                InventoryManager.instance.TryMoveItem(_sourceInventory, _targetInventory, _sourceIndex);
             }
         }
     }

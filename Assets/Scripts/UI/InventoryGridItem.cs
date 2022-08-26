@@ -107,7 +107,7 @@ public class InventoryGridItem : MonoBehaviour
 
         InventoryPannel parentPannel = GetComponentInParent<InventoryPannel>();
         if (parentPannel == null) return;
-        parentPannel.ItemClicked(this);
+        //parentPannel.ItemClicked(this);
 
         OnClick.Invoke();
     }
