@@ -22,7 +22,11 @@ public class InventoryPannel : MonoBehaviour
     [SerializeField] public bool removeSpaces = false;
 
     [Header("UI")]
-    public List<InventoryCell> cells = new List<InventoryCell>();
+    public bool m_autoLink = true;
+    public List<ItemDisplay> m_itemDisplayInstances = new List<ItemDisplay>();
+    public GameObject m_contentPanel;
+
+    public GameObject m_itemDisplayPrefab;
 
     // Start is called before the first frame update
     public virtual void Start()
@@ -31,23 +35,17 @@ public class InventoryPannel : MonoBehaviour
         linkedInventory = InventoryManager.instance?.GetInventory(inventoryID);
 
         // if cells empty, get them
-        if (cells.Count == 0)
-        {
-            cells = GetComponentsInChildren<InventoryCell>().ToList();
-        }
+        // if (m_itemDisplayInstances.Count == 0)
+        // {
+        //     m_itemDisplayInstances = GetComponentsInChildren<InventoryCell>().ToList();
+        // }
 
-        LinkGridItems();
+        UpdateItemDisplays();
     }
 
     // Update is called once per frame
     public virtual void Update()
     {
-        // every 5 frames, update the UI
-        if (Time.frameCount % 5 == 0)
-        {
-            UpdateUI();
-        }
-
         // every 20 frames, try remove empty spaces
         if (Time.frameCount % 20 == 0)
         {
@@ -55,6 +53,12 @@ public class InventoryPannel : MonoBehaviour
             {
                 TryRemoveSpaces(linkedInventory);
             }
+        }
+
+        // every 5 frames, update the UI (after removing spaces)
+        if (Time.frameCount % 5 == 0)
+        {
+            UpdateItemDisplays();
         }
     }
 
@@ -64,37 +68,67 @@ public class InventoryPannel : MonoBehaviour
     public virtual void UpdateUI()
     {
         // update each cell
-        foreach (InventoryCell cell in cells)
+        // foreach (InventoryCell cell in m_itemDisplayInstances)
+        // {
+        //     cell.UpdateUI();
+        // }
+    }
+
+    /// <summary>
+    /// Links the item Displays to the linked inventory.
+    /// </summary>
+    protected virtual void UpdateItemDisplays()
+    {
+        // auto link the item displays
+        if (m_autoLink){
+            ReLinkItemDisplays();
+        }
+
+        // update the item displays
+        foreach (ItemDisplay itemDisplay in m_itemDisplayInstances)
         {
-            cell.UpdateUI();
+            itemDisplay.UpdateLinkedValues();
         }
     }
 
     /// <summary>
-    /// Links the items in the grid to actual items in the inventory.
+    /// Creates/Removes item displays as needed, and links them to the linked inventory.
     /// </summary>
-    protected virtual void LinkGridItems()
+    private void ReLinkItemDisplays()
     {
-        // get inventory, and a list of slots in it
-        Inventory inventory = InventoryManager.instance?.GetInventory(inventoryID);
-        List<Inventory.InventorySlot> slots = new List<Inventory.InventorySlot>();
-        if (inventory != null)
+        // clear the linked ID of each item display
+        foreach (ItemDisplay itemDisplay in m_itemDisplayInstances)
         {
-            slots = new List<Inventory.InventorySlot>(inventory.slots);
+            itemDisplay.m_linkedInventoryID = "";
         }
 
-        // link grid items to cells
-        foreach (InventoryCell cell in cells)
+        for (int i = 0; i < linkedInventory.GetSlotCount(); i++)
         {
-            InventoryGridItem gridItem = cell.gridItem;
-            if (gridItem != null)
+            Inventory.InventorySlot slot = linkedInventory.GetSlot(i);
+            if (slot.item == null) continue;
+            // get the item display at i if it exists, otherwise create a new one
+            ItemDisplay itemDisplay = null;
+            if (i < m_itemDisplayInstances.Count)
             {
-                gridItem.linkedSlot = slots.FirstOrDefault();
-                // if slot is not null, remove it from the list
-                if (gridItem.linkedSlot != null)
-                {
-                    slots.Remove(gridItem.linkedSlot);
-                }
+                itemDisplay = m_itemDisplayInstances[i];
+            }
+            else
+            {
+                itemDisplay = Instantiate(m_itemDisplayPrefab, m_contentPanel.transform).GetComponent<ItemDisplay>();
+                m_itemDisplayInstances.Add(itemDisplay);
+            }
+
+            itemDisplay.GetComponent<ItemDisplay>().m_linkedInventoryID = linkedInventory.id;
+            itemDisplay.GetComponent<ItemDisplay>().m_slotNumber = i;
+        }
+
+        // if item display doesnt have a linked inventory, remove it
+        for (int i = m_itemDisplayInstances.Count - 1; i >= 0; i--)
+        {
+            if (m_itemDisplayInstances[i].m_linkedInventoryID == "")
+            {
+                Destroy(m_itemDisplayInstances[i].gameObject);
+                m_itemDisplayInstances.RemoveAt(i);
             }
         }
     }
@@ -102,18 +136,18 @@ public class InventoryPannel : MonoBehaviour
     /// <summary>
     /// Called when an item is clicked in the inventory.
     /// </summary>
-    /// <param name="gridItem"></param>
-    public virtual void ItemClicked(InventoryGridItem gridItem)
+    /// <param name="_itemDisplay"></param>
+    public virtual void ItemClicked(ItemDisplay _itemDisplay)
     {
-        if (gridItem == null) return;
+        if (_itemDisplay == null) return;
 
         if (!sendingAllowed) return;
 
-        Inventory sourceInventory = gridItem.linkedSlot.ownerInventory;
+        Inventory sourceInventory = _itemDisplay.m_linkedInventory;
         if (sourceInventory == null) return;
 
         //get index of slot in source inventory
-        int sourceIndex = sourceInventory.GetItemIndex(gridItem.itemInSlot);
+        int sourceIndex = _itemDisplay.m_slotNumber;
         if (sourceIndex == -1) return;
 
         Inventory targetInventory = otherPannel?.linkedInventory;
@@ -121,7 +155,7 @@ public class InventoryPannel : MonoBehaviour
 
         if (!otherPannel.receivingAllowed) return;
 
-        PerformClickAction(gridItem, sourceInventory, targetInventory, sourceIndex);
+        PerformClickAction(_itemDisplay, sourceInventory, targetInventory, sourceIndex);
 
         if (removeSpaces)
         {
@@ -132,20 +166,20 @@ public class InventoryPannel : MonoBehaviour
     /// <summary>
     /// What should happen when an item is clicked
     /// </summary>
-    /// <param name="gridItem"></param>
-    /// <param name="sourceInventory"></param>
-    /// <param name="targetInventory"></param>
-    /// <param name="sourceIndex"></param>
-    protected virtual void PerformClickAction(InventoryGridItem gridItem, Inventory sourceInventory, Inventory targetInventory, int sourceIndex)
+    /// <param name="_itemDisplay"></param>
+    /// <param name="_sourceInventory"></param>
+    /// <param name="_targetInventory"></param>
+    /// <param name="_sourceIndex"></param>
+    protected virtual void PerformClickAction(ItemDisplay _itemDisplay, Inventory _sourceInventory, Inventory _targetInventory, int _sourceIndex)
     {
-        InventoryManager.instance.TryMoveItem(sourceInventory, targetInventory, sourceIndex);
+        InventoryManager.instance.TryMoveItem(_sourceInventory, _targetInventory, _sourceIndex);
     }
 
     /// <summary>
     /// Tries to remove empty spaces in the inventory.
     /// </summary>
-    /// <param name="sourceInventory"></param>
-    protected virtual void TryRemoveSpaces(Inventory sourceInventory)
+    /// <param name="_sourceInventory"></param>
+    protected virtual void TryRemoveSpaces(Inventory _sourceInventory)
     {
         // get inventory, and a list of slots in it
         Inventory inventory = InventoryManager.instance?.GetInventory(inventoryID);
@@ -162,12 +196,14 @@ public class InventoryPannel : MonoBehaviour
             if (item == null) continue;
 
             //get index of slot in source inventory
-            int sourceIndex = sourceInventory.GetItemIndex(item);
+            int sourceIndex = _sourceInventory.GetItemIndex(item);
             if (sourceIndex == -1) return;
 
-            sourceInventory.RemoveItemFromInventory(sourceIndex);
+            _sourceInventory.RemoveItemFromInventory(sourceIndex);
 
-            Item leftover = sourceInventory.TryAddItemToInventory(item);
+            Item leftover = _sourceInventory.TryAddItemToInventory(item);
         }
+
+        UpdateItemDisplays();
     }
 }
