@@ -23,6 +23,7 @@ public class InventoryPannel : MonoBehaviour
 
     [Header("UI")]
     public bool m_autoLink = true;
+    public bool m_showPrice = false;
     public List<ItemDisplay> m_itemDisplayInstances = new List<ItemDisplay>();
     public GameObject m_contentPanel;
 
@@ -120,6 +121,7 @@ public class InventoryPannel : MonoBehaviour
 
             itemDisplay.GetComponent<ItemDisplay>().m_linkedInventoryID = linkedInventory.id;
             itemDisplay.GetComponent<ItemDisplay>().m_slotNumber = i;
+            itemDisplay.GetComponent<ItemDisplay>().m_showPrice = m_showPrice;
         }
 
         // if item display doesnt have a linked inventory, remove it

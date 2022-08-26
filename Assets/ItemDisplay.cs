@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -13,6 +14,7 @@ using UnityEditor;
 /// <summary>
 /// A class that will replace the "GridItem" and "InventoryCell" classes, which will display the items in the inventory.
 /// @todo finish this class
+/// @todo add outline functionality
 /// </summary>
 public class ItemDisplay : MonoBehaviour
 {
@@ -60,18 +62,33 @@ public class ItemDisplay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if button is hovered over, show the footer
+        // if button is hovered over, enable outline
         Button b = GetComponentInChildren<Button>();
-        if (b != null)
+        // if (b != null)
+        // {
+        //     if (EventSystem.is
+        // }
+
+        // check if mouse is over this grid item
+        Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
+
+        Camera uiCamera = GetComponentInParent<TownBuilding>()?.uiCamera;
+
+        // get corners
+        Vector3[] corners = new Vector3[4];
+        GetComponent<RectTransform>().GetWorldCorners(corners);
+        Vector2 bottomLeft = uiCamera.WorldToScreenPoint(corners[0]);
+        Vector2 topLeft = uiCamera.WorldToScreenPoint(corners[1]);
+        Vector2 topRight = uiCamera.WorldToScreenPoint(corners[2]);
+        Vector2 bottomRight = uiCamera.WorldToScreenPoint(corners[3]);
+
+        // check if mouse is within the grid item's screen space
+        if (mouseScreenPos.x >= topLeft.x && mouseScreenPos.x <= topRight.x &&
+            mouseScreenPos.y <= topLeft.y && mouseScreenPos.y >= bottomLeft.y)
         {
-            if (b.navigation.())
-            {
-                m_footer.SetActive(true);
-            }
-            else
-            {
-                m_footer.SetActive(false);
-            }
+            InfoBox ib = FindObjectOfType<InfoBox>();
+            // display info box
+            if (ib) ib.Display(m_linkedItem, m_showPrice, 0.1f, 0.1f);
         }
     }
 
@@ -139,11 +156,8 @@ public class ItemDisplay : MonoBehaviour
         } else {
             m_typePanel.SetActive(true);
             m_costPanel.SetActive(false);
-            System.Type type = m_linkedItem.GetType();
-            bool isWeapon = type.IsSubclassOf(typeof(RangedWeapon));
-            Debug.Log("isWeapon: " + isWeapon);
-            if (isWeapon) { m_typeName.text = "Ranged"; }
-            else if (m_linkedItem.GetType().IsSubclassOf(typeof(Equipment))) { m_typeName.text = "Tool"; }
+            if (m_linkedItem.GetType().IsSubclassOf(typeof(RangedWeapon)) || m_linkedItem.GetType() == typeof(RangedWeapon)) { m_typeName.text = "Ranged"; }
+            else if (m_linkedItem.GetType().IsSubclassOf(typeof(Equipment)) || m_linkedItem.GetType() == typeof(Equipment)) { m_typeName.text = "Equipment"; }
             else m_typeName.text = "Item";
         }
     }
