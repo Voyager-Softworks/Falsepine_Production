@@ -17,31 +17,41 @@ public class InfoBox : MonoBehaviour
     public float fadeTime = 1.0f;
     private float fadeTimer = 0.0f;
 
-    [Header("Box Refs")]
-    public Image background;
-    public TextMeshProUGUI title;
-    public Image icon;
-    public TextMeshProUGUI description;
+    public bool m_showCost = false;
 
-    [Header("Economy Refs")]
-    public Image backgroundEconomy;
-    public TextMeshProUGUI titleEconomy;
-    public TextMeshProUGUI amountText;
-    public Image iconEconomy;
+    [Header("Box Refs")]
+    public Image m_backgroundImage;
+    public Image m_iconImage;
+    public TextMeshProUGUI m_titleText;
+    public TextMeshProUGUI m_descriptionText;
+
+    public TextMeshProUGUI m_costTypeText;
+    public Image m_costTypeImage;
+
+    [Header("Stats Refs")]
+    public GameObject m_statsPanel;
+    public Image m_statsImage;
+    public TextMeshProUGUI m_statsTitleText;
+    public TextMeshProUGUI m_statsDescriptionText;
 
     [Header("Mods Refs")]
-    public Image modBackground;
-    public Image modIcon;
-    public TextMeshProUGUI modTitle;
-    public TextMeshProUGUI modList;
+    public GameObject m_modsPanel;
+    public Image m_modsImage;
+    public TextMeshProUGUI m_modsTitleText;
+    public TextMeshProUGUI m_modsDescriptionText;
+
+    [Header("Prefabs")]
+    public Sprite m_priceIcon;
+    public Sprite m_typeIcon;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
         DisableBox();
-        DisableEconomyBox();
-        DisableModsBox();
+        //DisableEconomyBox();
+        //DisableModsBox();
     }
 
     // Update is called once per frame
@@ -83,33 +93,33 @@ public class InfoBox : MonoBehaviour
             {
                 fadeTimer = 0.0f;
                 DisableBox();
-                DisableEconomyBox();
-                DisableModsBox();
+                //DisableEconomyBox();
+                //DisableModsBox();
             }
         }
     }
 
     private void UpdateModOpacity(float opacity)
     {
-        modBackground.color = new Color(modBackground.color.r, modBackground.color.g, modBackground.color.b, opacity);
-        modTitle.color = new Color(modTitle.color.r, modTitle.color.g, modTitle.color.b, opacity);
-        modList.color = new Color(modList.color.r, modList.color.g, modList.color.b, opacity);
+        // modBackground.color = new Color(modBackground.color.r, modBackground.color.g, modBackground.color.b, opacity);
+        // modTitle.color = new Color(modTitle.color.r, modTitle.color.g, modTitle.color.b, opacity);
+        // modList.color = new Color(modList.color.r, modList.color.g, modList.color.b, opacity);
     }
 
     private void UpdateEconomyOpacity(float opacity)
     {
-        backgroundEconomy.color = new Color(backgroundEconomy.color.r, backgroundEconomy.color.g, backgroundEconomy.color.b, opacity);
-        titleEconomy.color = new Color(titleEconomy.color.r, titleEconomy.color.g, titleEconomy.color.b, opacity);
-        amountText.color = new Color(amountText.color.r, amountText.color.g, amountText.color.b, opacity);
-        iconEconomy.color = new Color(iconEconomy.color.r, iconEconomy.color.g, iconEconomy.color.b, opacity);
+        // backgroundEconomy.color = new Color(backgroundEconomy.color.r, backgroundEconomy.color.g, backgroundEconomy.color.b, opacity);
+        // titleEconomy.color = new Color(titleEconomy.color.r, titleEconomy.color.g, titleEconomy.color.b, opacity);
+        // amountText.color = new Color(amountText.color.r, amountText.color.g, amountText.color.b, opacity);
+        // iconEconomy.color = new Color(iconEconomy.color.r, iconEconomy.color.g, iconEconomy.color.b, opacity);
     }
 
     private void UpdateInfoOpacity(float opacity)
     {
-        background.color = new Color(background.color.r, background.color.g, background.color.b, opacity);
-        title.color = new Color(title.color.r, title.color.g, title.color.b, opacity);
-        icon.color = new Color(icon.color.r, icon.color.g, icon.color.b, opacity);
-        description.color = new Color(description.color.r, description.color.g, description.color.b, opacity);
+        m_backgroundImage.color = new Color(m_backgroundImage.color.r, m_backgroundImage.color.g, m_backgroundImage.color.b, opacity);
+        m_titleText.color = new Color(m_titleText.color.r, m_titleText.color.g, m_titleText.color.b, opacity);
+        m_iconImage.color = new Color(m_iconImage.color.r, m_iconImage.color.g, m_iconImage.color.b, opacity);
+        m_descriptionText.color = new Color(m_descriptionText.color.r, m_descriptionText.color.g, m_descriptionText.color.b, opacity);
     }
 
     /// <summary>
@@ -124,9 +134,9 @@ public class InfoBox : MonoBehaviour
     {
         EnableBox();
 
-        this.title.text = title;
-        this.icon.sprite = icon;
-        this.description.text = description;
+        this.m_titleText.text = title;
+        this.m_iconImage.sprite = icon;
+        this.m_descriptionText.text = description;
 
         fullBrightTime = onTime;
         fullBrightTimer = fullBrightTime;
@@ -143,24 +153,24 @@ public class InfoBox : MonoBehaviour
     {
         if (mods.Count > 0)
         {
-            EnableModsBox();
+            //EnableModsBox();
 
-            modList.text = "";
+            m_modsDescriptionText.text = "";
             foreach (StatsManager.StatMod mod in mods)
             {
-                modList.text += mod.ToText() + "\n";
+                m_modsDescriptionText.text += mod.ToText() + "\n";
             }
         }
         else
         {
-            DisableModsBox();
+            //DisableModsBox();
         }
     }
 
     public void UpdateEconomy(EconomyManager.Purchasable purchasable)
     {
-        EnableEconomyBox();
-        amountText.text = purchasable.GetPrice().ToString();
+        //EnableEconomyBox();
+        m_costTypeText.text = purchasable.GetPrice().ToString();
     }
 
     /// <summary>
@@ -182,60 +192,60 @@ public class InfoBox : MonoBehaviour
     /// </summary>
     private void DisableBox()
     {
-        background.enabled = false;
-        title.enabled = false;
-        icon.enabled = false;
-        description.enabled = false;
+        m_backgroundImage.enabled = false;
+        m_titleText.enabled = false;
+        m_iconImage.enabled = false;
+        m_descriptionText.enabled = false;
     }
     /// <summary>
     /// Shows the info box
     /// </summary>
     private void EnableBox()
     {
-        background.enabled = true;
-        title.enabled = true;
-        icon.enabled = true;
-        description.enabled = true;
+        m_backgroundImage.enabled = true;
+        m_titleText.enabled = true;
+        m_iconImage.enabled = true;
+        m_descriptionText.enabled = true;
     }
 
     /// <summary>
     /// Enables the gold box
     /// </summary>
-    public void EnableEconomyBox(){
-        backgroundEconomy.enabled = true;
-        titleEconomy.enabled = true;
-        amountText.enabled = true;
-        iconEconomy.enabled = true;
-    }
+    // public void EnableEconomyBox(){
+    //     backgroundEconomy.enabled = true;
+    //     titleEconomy.enabled = true;
+    //     amountText.enabled = true;
+    //     iconEconomy.enabled = true;
+    // }
 
     /// <summary>
     /// Disables the gold box
     /// </summary>
-    public void DisableEconomyBox(){
-        backgroundEconomy.enabled = false;
-        titleEconomy.enabled = false;
-        amountText.enabled = false;
-        iconEconomy.enabled = false;
-    }
+    // public void DisableEconomyBox(){
+    //     backgroundEconomy.enabled = false;
+    //     titleEconomy.enabled = false;
+    //     amountText.enabled = false;
+    //     iconEconomy.enabled = false;
+    // }
 
     /// <summary>
     /// Hides the modifier section of the info box
     /// </summary>
-    private void DisableModsBox()
-    {
-        modBackground.enabled = false;
-        modTitle.enabled = false;
-        modList.enabled = false;
-        modIcon.enabled = false;
-    }
+    // private void DisableModsBox()
+    // {
+    //     modBackground.enabled = false;
+    //     modTitle.enabled = false;
+    //     modList.enabled = false;
+    //     modIcon.enabled = false;
+    // }
     /// <summary>
     /// Shows the modifier section of the info box
     /// </summary>
-    private void EnableModsBox()
-    {
-        modBackground.enabled = true;
-        modTitle.enabled = true;
-        modList.enabled = true;
-        modIcon.enabled = true;
-    }
+    // private void EnableModsBox()
+    // {
+    //     modBackground.enabled = true;
+    //     modTitle.enabled = true;
+    //     modList.enabled = true;
+    //     modIcon.enabled = true;
+    // }
 }
