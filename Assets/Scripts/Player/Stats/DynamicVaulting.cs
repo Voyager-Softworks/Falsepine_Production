@@ -135,6 +135,10 @@ public class DynamicVaulting : MonoBehaviour
     /// </summary>
     private void OnDrawGizmos()
     {
+        if (sphereCastHits == null)
+        {
+            sphereCastHits = new RaycastHit[sphereCastCount];
+        }
         if (!Application.isPlaying) canVault = CalculateVaultData();
         for (int i = 0; i < sphereCastCount; i++)
         {

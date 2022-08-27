@@ -7,10 +7,32 @@ public class RollingBoulder : MonoBehaviour
     [SerializeField] Vector3 rollDirection;
     [SerializeField] float rollSpeed;
     [SerializeField] float rotationMultiplier;
+
+    [SerializeField] GameObject vfxObject;
+
+    public AnimationCurve initialPositionCurve = new AnimationCurve();
+
+    [SerializeField] Mesh[] boulderMeshes;
+
+    IEnumerator PopUpCoroutine()
+    {
+        Vector3 finalPosition = transform.position;
+        Vector3 initialPosition = finalPosition - Vector3.up;
+        float t = 0;
+        while (t < 0.5)
+        {
+            t += Time.deltaTime;
+            transform.position = Vector3.Lerp(initialPosition, finalPosition, initialPositionCurve.Evaluate(t * 2));
+            yield return null;
+        }
+
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-
+        GetComponent<MeshFilter>().mesh = boulderMeshes[Random.Range(0, boulderMeshes.Length)];
+        StartCoroutine(PopUpCoroutine());
     }
 
     public void Roll(Vector3 direction)
@@ -30,5 +52,7 @@ public class RollingBoulder : MonoBehaviour
 
         // Move the boulder
         transform.Translate(rollDirection * rollSpeed * Time.deltaTime, Space.World);
+
+        vfxObject.transform.rotation = Quaternion.LookRotation(rollDirection, Vector3.up);
     }
 }
