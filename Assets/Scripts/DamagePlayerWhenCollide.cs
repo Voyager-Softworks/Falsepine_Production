@@ -19,6 +19,7 @@ public class DamagePlayerWhenCollide : MonoBehaviour
     public GameObject destroyParticle;
     public float timeBeforeDetection = 0.5f;
     float timeBeforeDetectionTimer = 0f;
+    public LayerMask layerMask;
 
     public float radius = 0.5f; ///< The radius of the sphere.
 
@@ -38,7 +39,7 @@ public class DamagePlayerWhenCollide : MonoBehaviour
             if (!isActive) return;
             timeBeforeDetectionTimer += Time.deltaTime;
             if (timeBeforeDetectionTimer < timeBeforeDetection) return;
-            RaycastHit[] hits = Physics.SphereCastAll(transform.position, sphereCollider.radius * transform.localScale.magnitude, Vector3.down, 0.0f);
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position, sphereCollider.radius * transform.lossyScale.y, Vector3.down, 0.0f, layerMask);
             foreach (RaycastHit hit in hits)
             {
                 if (hit.collider.gameObject.tag == "Player")
@@ -46,11 +47,12 @@ public class DamagePlayerWhenCollide : MonoBehaviour
                     hit.collider.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
                     if (destroyOnCollision)
                     {
-                        Destroy(gameObject);
+
                         if (destroyParticle != null)
                         {
                             Instantiate(destroyParticle, transform.position, Quaternion.LookRotation(hit.normal));
                         }
+                        Destroy(gameObject);
                     }
                     else if (setInactiveOnCollision)
                     {
@@ -60,22 +62,24 @@ public class DamagePlayerWhenCollide : MonoBehaviour
                 }
                 else if (destroyOnGround)
                 {
-                    Destroy(gameObject);
+
                     if (destroyParticle != null)
                     {
-                        Instantiate(destroyParticle, transform.position, Quaternion.identity);
+                        Instantiate(destroyParticle, transform.position, Quaternion.LookRotation(hit.normal));
                     }
+                    Destroy(gameObject);
                 }
                 else if (destroyOnWall)
                 {
                     //Check the normal of the hit to see if it's a wall
                     if (hit.normal.y < 0.5f)
                     {
-                        Destroy(gameObject);
+
                         if (destroyParticle != null)
                         {
                             Instantiate(destroyParticle, transform.position, Quaternion.LookRotation(hit.normal));
                         }
+                        Destroy(gameObject);
                     }
                 }
             }
@@ -83,6 +87,8 @@ public class DamagePlayerWhenCollide : MonoBehaviour
 
 
     }
+
+
 
 
 
