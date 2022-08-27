@@ -17,7 +17,6 @@ public class InfoBox : MonoBehaviour
     public float fadeTime = 1.0f;
     private float fadeTimer = 0.0f;
 
-    public bool m_showCost = false;
 
     [Header("Box Refs")]
     public Image m_backgroundImage;
@@ -27,6 +26,10 @@ public class InfoBox : MonoBehaviour
 
     public TextMeshProUGUI m_costTypeText;
     public Image m_costTypeImage;
+
+    public Image m_dividerImage;
+
+    public GameObject m_statsModsPanel;
 
     [Header("Stats Refs")]
     public GameObject m_statsPanel;
@@ -69,9 +72,7 @@ public class InfoBox : MonoBehaviour
             fullBrightTimer -= Time.deltaTime;
 
             // set opacity of all to 1
-            UpdateInfoOpacity(1.0f);
-            UpdateEconomyOpacity(1.0f);
-            UpdateModOpacity(1.0f);
+            SetOpacity(1.0f);
 
             if (fullBrightTimer <= 0.0f)
             {
@@ -85,106 +86,154 @@ public class InfoBox : MonoBehaviour
 
             // fade opacity of all to 0 using timer
             float opacity = (fadeTimer / fadeTime);
-            UpdateInfoOpacity(opacity);
-            UpdateEconomyOpacity(opacity);
-            UpdateModOpacity(opacity);
+            SetOpacity(opacity);
 
             if (fadeTimer <= 0.0f)
             {
                 fadeTimer = 0.0f;
                 DisableBox();
-                //DisableEconomyBox();
-                //DisableModsBox();
             }
         }
     }
 
-    private void UpdateModOpacity(float opacity)
+    /// <summary>
+    /// Sets the opacity of all UI elements in the info box
+    /// </summary>
+    /// <param name="_opacity"></param>
+    private void SetOpacity(float _opacity)
     {
-        // modBackground.color = new Color(modBackground.color.r, modBackground.color.g, modBackground.color.b, opacity);
-        // modTitle.color = new Color(modTitle.color.r, modTitle.color.g, modTitle.color.b, opacity);
-        // modList.color = new Color(modList.color.r, modList.color.g, modList.color.b, opacity);
-    }
-
-    private void UpdateEconomyOpacity(float opacity)
-    {
-        // backgroundEconomy.color = new Color(backgroundEconomy.color.r, backgroundEconomy.color.g, backgroundEconomy.color.b, opacity);
-        // titleEconomy.color = new Color(titleEconomy.color.r, titleEconomy.color.g, titleEconomy.color.b, opacity);
-        // amountText.color = new Color(amountText.color.r, amountText.color.g, amountText.color.b, opacity);
-        // iconEconomy.color = new Color(iconEconomy.color.r, iconEconomy.color.g, iconEconomy.color.b, opacity);
-    }
-
-    private void UpdateInfoOpacity(float opacity)
-    {
-        m_backgroundImage.color = new Color(m_backgroundImage.color.r, m_backgroundImage.color.g, m_backgroundImage.color.b, opacity);
-        m_titleText.color = new Color(m_titleText.color.r, m_titleText.color.g, m_titleText.color.b, opacity);
-        m_iconImage.color = new Color(m_iconImage.color.r, m_iconImage.color.g, m_iconImage.color.b, opacity);
-        m_descriptionText.color = new Color(m_descriptionText.color.r, m_descriptionText.color.g, m_descriptionText.color.b, opacity);
+        // get all TextMeshProUGUI components and Image components, and set their opacity
+        TextMeshProUGUI[] textComponents = GetComponentsInChildren<TextMeshProUGUI>();
+        Image[] imageComponents = GetComponentsInChildren<Image>();
+        foreach (TextMeshProUGUI text in textComponents)
+        {
+            text.color = new Color(text.color.r, text.color.g, text.color.b, _opacity);
+        }
+        foreach (Image image in imageComponents)
+        {
+            image.color = new Color(image.color.r, image.color.g, image.color.b, _opacity);
+        }
     }
 
     /// <summary>
     /// Display some info in the info box at cursor.
     /// </summary>
-    /// <param name="title"></param>
-    /// <param name="icon"></param>
-    /// <param name="description"></param>
-    /// <param name="onTime"></param>
-    /// <param name="offTime"></param>
-    public void DisplayInfo(string title, Sprite icon, string description, float onTime = 1, float offTime = 1)
+    /// <param name="_title"></param>
+    /// <param name="_icon"></param>
+    /// <param name="_description"></param>
+    /// <param name="_onTime"></param>
+    /// <param name="_offTime"></param>
+    public void DisplayInfo(string _title, Sprite _icon, string _description, float _onTime = 1, float _offTime = 1)
     {
         EnableBox();
 
-        this.m_titleText.text = title;
-        this.m_iconImage.sprite = icon;
-        this.m_descriptionText.text = description;
+        this.m_titleText.text = _title;
+        this.m_iconImage.sprite = _icon;
+        this.m_descriptionText.text = _description;
 
-        fullBrightTime = onTime;
+        fullBrightTime = _onTime;
         fullBrightTimer = fullBrightTime;
 
-        fadeTime = offTime;
+        fadeTime = _offTime;
         fadeTimer = fadeTime;
+    }
+
+    /// <summary>
+    /// Display an Item in the info box at cursor.
+    /// </summary>
+    /// <param name="_item"></param>
+    /// <param name="_onTime"></param>
+    /// <param name="_offTime"></param>
+    public void Display(Item _item, bool _showCost = false, float _onTime = 1, float _offTime = 1)
+    {
+        if (!_item) return;
+
+        DisplayInfo(_item.m_displayName, _item.m_icon, "Count: " + _item.currentStackSize + "/" + _item.maxStackSize + "\n" + _item.m_description, _onTime, _offTime);
+        
+        if (_showCost) {
+            UpdateEconomy(_item);
+        }
+        else{
+            UpdateType(_item);
+        }
+
+        // stats and mods panel
+        m_dividerImage.gameObject.SetActive(true);
+        m_statsModsPanel.SetActive(true);
+        UpdateStats(_item);
+        UpdateMods(_item.GetStatMods());
+        // if the stats and mods panels are not active, disable the parent panel
+        if (!m_statsPanel.activeSelf && !m_modsPanel.activeSelf)
+        {
+            m_dividerImage.gameObject.SetActive(false);
+            m_statsModsPanel.SetActive(false);
+        }
+    }
+
+    /// <summary>
+    /// Update the stats based on the item type
+    /// @todo - add more types
+    /// </summary>
+    /// <param name="_item"></param>
+    private void UpdateStats(Item _item)
+    {
+        m_statsPanel.SetActive(false);
+        m_statsDescriptionText.text = "";
+        
+        if (!_item) return;
+
+        System.Type type = _item.GetType();
+
+        if (type.IsSubclassOf(typeof(RangedWeapon)) || type == typeof(RangedWeapon)){
+            m_statsPanel.SetActive(true);
+
+            RangedWeapon weapon = (RangedWeapon)_item;
+
+            // damage
+            float calcDamage = StatsManager.CalculateDamage(weapon, weapon.m_damage);
+            float damageDifference = calcDamage - weapon.m_damage;
+            string damageModString = damageDifference != 0 ? " (" + StatsManager.SignedFloatString(damageDifference) + ")" : "";
+            m_statsDescriptionText.text += "Damage: " + weapon.m_damage + damageModString + "\n";
+
+            // range
+            float calcRange = StatsManager.CalculateRange(weapon, weapon.m_range);
+            float rangeDifference = calcRange - weapon.m_range;
+            string rangeModString = rangeDifference != 0 ? " (" + StatsManager.SignedFloatString(rangeDifference) + ")" : "";
+            m_statsDescriptionText.text += "Range: " + weapon.m_range + rangeModString + "\n";
+        }
     }
 
     /// <summary>
     /// Updates the modifier section of the info box with current info
     /// </summary>
-    /// <param name="mods"></param>
-    public void UpdateMods(List<StatsManager.StatMod> mods)
+    /// <param name="_mods"></param>
+    public void UpdateMods(List<StatsManager.StatMod> _mods)
     {
-        if (mods.Count > 0)
+        if (_mods.Count > 0)
         {
-            //EnableModsBox();
+            m_modsPanel.SetActive(true);
 
             m_modsDescriptionText.text = "";
-            foreach (StatsManager.StatMod mod in mods)
+            foreach (StatsManager.StatMod mod in _mods)
             {
                 m_modsDescriptionText.text += mod.ToText() + "\n";
             }
         }
         else
         {
-            //DisableModsBox();
+            m_modsPanel.SetActive(false);
         }
     }
 
-    public void UpdateEconomy(EconomyManager.Purchasable purchasable)
+    public void UpdateEconomy(EconomyManager.Purchasable _purchasable)
     {
-        //EnableEconomyBox();
-        m_costTypeText.text = purchasable.GetPrice().ToString();
+        m_costTypeText.text = _purchasable.GetPrice().ToString();
+        m_costTypeImage.sprite = m_priceIcon;
     }
 
-    /// <summary>
-    /// Display an Item in the info box at cursor.
-    /// </summary>
-    /// <param name="item"></param>
-    /// <param name="onTime"></param>
-    /// <param name="offTime"></param>
-    public void Display(Item item, bool showCost = false, float onTime = 1, float offTime = 1)
-    {
-        if (!item) return;
-        DisplayInfo(item.m_displayName, item.m_icon, "Count: " + item.currentStackSize + "/" + item.maxStackSize + "\n" + item.m_description, onTime, offTime);
-        if (showCost) UpdateEconomy(item);
-        UpdateMods(item.GetStatMods());
+    public void UpdateType(Item _item){
+        m_costTypeText.text = _item.GetTypeDisplayName();
+        m_costTypeImage.sprite = m_typeIcon;
     }
 
     /// <summary>
@@ -192,60 +241,26 @@ public class InfoBox : MonoBehaviour
     /// </summary>
     private void DisableBox()
     {
+        // disable all children (excluding this)
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+        // disable the background
         m_backgroundImage.enabled = false;
-        m_titleText.enabled = false;
-        m_iconImage.enabled = false;
-        m_descriptionText.enabled = false;
     }
+
     /// <summary>
     /// Shows the info box
     /// </summary>
     private void EnableBox()
     {
+        // enable all children (excluding this)
+        foreach (Transform child in transform)
+        {
+            child.gameObject.SetActive(true);
+        }
+        // enable the background
         m_backgroundImage.enabled = true;
-        m_titleText.enabled = true;
-        m_iconImage.enabled = true;
-        m_descriptionText.enabled = true;
     }
-
-    /// <summary>
-    /// Enables the gold box
-    /// </summary>
-    // public void EnableEconomyBox(){
-    //     backgroundEconomy.enabled = true;
-    //     titleEconomy.enabled = true;
-    //     amountText.enabled = true;
-    //     iconEconomy.enabled = true;
-    // }
-
-    /// <summary>
-    /// Disables the gold box
-    /// </summary>
-    // public void DisableEconomyBox(){
-    //     backgroundEconomy.enabled = false;
-    //     titleEconomy.enabled = false;
-    //     amountText.enabled = false;
-    //     iconEconomy.enabled = false;
-    // }
-
-    /// <summary>
-    /// Hides the modifier section of the info box
-    /// </summary>
-    // private void DisableModsBox()
-    // {
-    //     modBackground.enabled = false;
-    //     modTitle.enabled = false;
-    //     modList.enabled = false;
-    //     modIcon.enabled = false;
-    // }
-    /// <summary>
-    /// Shows the modifier section of the info box
-    /// </summary>
-    // private void EnableModsBox()
-    // {
-    //     modBackground.enabled = true;
-    //     modTitle.enabled = true;
-    //     modList.enabled = true;
-    //     modIcon.enabled = true;
-    // }
 }
