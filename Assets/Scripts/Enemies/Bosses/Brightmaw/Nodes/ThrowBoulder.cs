@@ -109,6 +109,11 @@ namespace Boss.Brightmaw
                     }
                 }
             }
+            if (closest == null)
+            {
+                state = NodeData.State.Failure;
+                return NodeData.State.Failure;
+            }
             Vector3 moveToVector = (closest.transform.position - GetProperty<Transform>("Target").position);
             moveToVector.y = closest.transform.position.y;
             moveToVector.Normalize();
@@ -138,7 +143,7 @@ namespace Boss.Brightmaw
                 if (!reachedBoulder)
                 {
                     rotateTowards.RotateToObject(closest, 1.00f, 6.0f, 0.0f);
-                    agent.StartCoroutine(PullBoulderToHand(1.05f, 0.2f));
+                    agent.StartCoroutine(PullBoulderToHand(0.95f, 0.3f));
                     rotateTowards.RotateToObject(GetProperty<Transform>("Target").gameObject, 0.5f, 12.0f, 1.0f);
                     reachedBoulder = true;
                     animator.SetBool("Running", false);
@@ -168,6 +173,7 @@ namespace Boss.Brightmaw
                     closest.GetComponent<RollingBoulder>().Roll(throwVector);
                     closest.gameObject.tag = "Untagged";
                     closest.GetComponent<DamagePlayerWhenCollide>().isActive = true;
+                    closest = null;
                     state = NodeData.State.Success;
                     return NodeData.State.Success;
                 }
@@ -183,6 +189,7 @@ namespace Boss.Brightmaw
         public override void OnInit()
         {
             initialised = false;
+            boulders = null;
             reachedBoulder = false;
             throwTimer = 1.25f;
         }

@@ -18,7 +18,7 @@ using UnityEngine;
 namespace NodeAI
 {
     [System.Serializable]
-    public class NodeTree 
+    public class NodeTree
     {
         public NodeData rootNode;
         public Leaf rootLeaf;
@@ -28,7 +28,7 @@ namespace NodeAI
         {
             rootLeaf.PropogateExposedProperties(properties);
         }
-        
+
         public void DrawGizmos(NodeAI_Agent agent)
         {
             rootLeaf.DrawGizmos(agent);
@@ -45,8 +45,8 @@ namespace NodeAI
                 foreach (var property in properties)
                 {
                     List<NodeData.SerializableProperty> propertiesToChange = new List<NodeData.SerializableProperty>();
-                    if(!nodeData.noLogic) propertiesToChange.AddRange(nodeData.runtimeLogic.GetPropertiesWhereParamReference(property.GUID));
-                    if(!nodeData.noQuery) propertiesToChange.AddRange(nodeData.query.GetPropertiesWhereParamReference(property.GUID));
+                    if (!nodeData.noLogic) propertiesToChange.AddRange(nodeData.runtimeLogic.GetPropertiesWhereParamReference(property.GUID));
+                    if (!nodeData.noQuery) propertiesToChange.AddRange(nodeData.query.GetPropertiesWhereParamReference(property.GUID));
                     foreach (var propertyToChange in propertiesToChange)
                     {
                         propertyToChange.ivalue = property.ivalue;
@@ -66,11 +66,11 @@ namespace NodeAI
                 }
             }
 
-            
+
 
             public void DrawGizmos(NodeAI_Agent agent)
             {
-                if(!nodeData.noLogic)
+                if (nodeData != null && !nodeData.noLogic)
                 {
                     nodeData.runtimeLogic.DrawGizmos(agent);
                 }
@@ -79,7 +79,7 @@ namespace NodeAI
                     child.DrawGizmos(agent);
                 }
             }
-            
+
             public Leaf()
             {
                 children = new List<Leaf>();
@@ -107,7 +107,7 @@ namespace NodeAI
                 leaf.children.Sort((x, y) => x.nodeData.position.y.CompareTo(y.nodeData.position.y));
                 BuildTree(childLeaf);
             }
-            
+
         }
     }
 }
