@@ -18,6 +18,11 @@ using UnityEditor;
 public class Equipment : Item
 {
     // make sure to set variables as serialized fields in the inspector, so that they can be saved!
+
+    public override string GetTypeDisplayName(){
+        return "Tool";
+    }
+
     [SerializeField] public GameObject m_equipmentPrefab;
 
     /// <summary>

@@ -19,6 +19,10 @@ public class RangedWeapon : Item
 {
     // make sure to set variables as serialized fields in the inspector, so that they can be saved!
 
+    public override string GetTypeDisplayName(){
+        return "Ranged";
+    }
+
     // Shooting Performance:
     [SerializeField] public float m_damage = 0;
     [SerializeField] public float m_range = 0;

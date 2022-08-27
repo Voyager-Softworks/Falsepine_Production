@@ -164,6 +164,35 @@ public class StatsManager : MonoBehaviour
     {
     };
 
+    #region utility functions
+
+    /// <summary>
+    /// Converts a float into a signed string with specific DP.
+    /// </summary>
+    /// <param name="_value"></param>
+    /// <param name="_decimalPlaces"></param>
+    /// <returns></returns>
+    public static string SignedFloatString(float _value, int _decimalPlaces = 2)
+    {
+        string text = "";
+
+        // add sign
+        if (_value < 0)
+        {
+            text += "-";
+        }
+        else if (_value > 0)
+        {
+            text += "+";
+        }
+        // add value
+        text += Mathf.Abs(_value).ToString("F" + _decimalPlaces);
+
+        return text;
+    }
+
+    #endregion
+
     /// <summary>
     /// Gets the stat mods from the player inventory
     /// </summary>
@@ -234,6 +263,22 @@ public class StatsManager : MonoBehaviour
         float maxVal = float.MaxValue;
 
         return GenericStatCalc(_statUser, _baseDamage, usedStatTypes, additiveVal, multiplierVal, minVal, maxVal);
+    }
+
+    static public float CalculateRange(UsesStats _statUser, float _baseRange = 1.0f)
+    {
+        // list of stats to use in this function
+        List<StatType> usedStatTypes = new List<StatType>(){
+            StatType.RangedRange,
+        };
+
+        float additiveVal = 0.0f;
+        float multiplierVal = 1.0f;
+
+        float minVal = 0.0f;
+        float maxVal = float.MaxValue;
+
+        return GenericStatCalc(_statUser, _baseRange, usedStatTypes, additiveVal, multiplierVal, minVal, maxVal);
     }
 
     /// <summary>

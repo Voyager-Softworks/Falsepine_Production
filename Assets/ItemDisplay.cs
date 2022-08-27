@@ -156,9 +156,7 @@ public class ItemDisplay : MonoBehaviour
         } else {
             m_typePanel.SetActive(true);
             m_costPanel.SetActive(false);
-            if (m_linkedItem.GetType().IsSubclassOf(typeof(RangedWeapon)) || m_linkedItem.GetType() == typeof(RangedWeapon)) { m_typeName.text = "Ranged"; }
-            else if (m_linkedItem.GetType().IsSubclassOf(typeof(Equipment)) || m_linkedItem.GetType() == typeof(Equipment)) { m_typeName.text = "Equipment"; }
-            else m_typeName.text = "Item";
+            m_typeName.text = m_linkedItem.GetTypeDisplayName();
         }
     }
 
