@@ -160,11 +160,13 @@ namespace Boss.Brightmaw
                 {
                     Vector3 throwVector = (GetProperty<Transform>("Target").position - closest.transform.position);
                     throwVector.y += 0.5f;
-                    closest.GetComponent<Rigidbody>().AddForce(
-                        (throwVector).normalized *
-                        900.0f,
-                        ForceMode.Impulse
-                        );
+                    // closest.GetComponent<Rigidbody>().AddForce(
+                    //     (throwVector).normalized *
+                    //     900.0f,
+                    //     ForceMode.Impulse
+                    //     );
+                    closest.GetComponent<RollingBoulder>().Roll(throwVector);
+                    closest.gameObject.tag = "Untagged";
                     closest.GetComponent<DamagePlayerWhenCollide>().isActive = true;
                     state = NodeData.State.Success;
                     return NodeData.State.Success;

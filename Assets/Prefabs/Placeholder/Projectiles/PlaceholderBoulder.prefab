@@ -33,7 +33,7 @@ Transform:
   m_GameObject: {fileID: 8486265178988448668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.12, y: 0.47, z: -6.5}
-  m_LocalScale: {x: 0.002, y: 0.002, z: 0.0035}
+  m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -45,7 +45,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8486265178988448668}
-  m_Mesh: {fileID: 5524389456624283421, guid: 13d2149f109fbbb41921b5269bbabdd2, type: 3}
+  m_Mesh: {fileID: 5024072497517133983, guid: 54c3992c68c045b48ae6cf028978b3e7, type: 3}
 --- !u!23 &8486265178988448664
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: 5f14182dedecf8248b8ade7c6ca4f5c4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,10 +96,10 @@ BoxCollider:
   m_GameObject: {fileID: 8486265178988448668}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 800, y: 700, z: 500}
-  m_Center: {x: 0, y: 350, z: 0}
+  m_Size: {x: 55, y: 55, z: 55}
+  m_Center: {x: 0, y: 6, z: 0}
 --- !u!208 &8486265178988448666
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -128,7 +128,7 @@ Rigidbody:
   m_Drag: 1
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -145,8 +145,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 12
-  destroyOnCollision: 1
-  destroyOnGround: 1
+  destroyOnCollision: 0
+  destroyOnGround: 0
   tickRate: 0
   setInactiveOnCollision: 1
   isActive: 0
@@ -161,9 +161,9 @@ SphereCollider:
   m_GameObject: {fileID: 8486265178988448668}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Radius: 1.15
+  m_Radius: 37.3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5388611349707891236
 MonoBehaviour:
@@ -177,3 +177,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbabd4e93f3eb7165867845e8eac45ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rollDirection: {x: 0, y: 0, z: 0}
+  rollSpeed: 2.42
+  rotationMultiplier: 25
