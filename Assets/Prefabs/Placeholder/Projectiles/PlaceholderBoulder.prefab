@@ -4830,7 +4830,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1124224901684301800}
   m_LocalRotation: {x: 0.00000010095589, y: 0.00000008940697, z: -0.000000036799847, w: 1}
-  m_LocalPosition: {x: -0, y: -6.71, z: -0}
+  m_LocalPosition: {x: 0, y: -17.6, z: 0}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children: []
   m_Father: {fileID: 4165964149378564822}
@@ -24330,7 +24330,6 @@ GameObject:
   - component: {fileID: 8486265178988448665}
   - component: {fileID: 8486265178988448666}
   - component: {fileID: 8486265178988448667}
-  - component: {fileID: 8486265178988448645}
   - component: {fileID: 8486265178988448644}
   - component: {fileID: 5388611349707891236}
   - component: {fileID: 1978596372553920879}
@@ -24452,28 +24451,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &8486265178988448645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8486265178988448668}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 071ae0d8973f358d7a2d08164fc0fbcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 12
-  destroyOnCollision: 1
-  destroyOnGround: 0
-  destroyOnWall: 1
-  tickRate: 0
-  setInactiveOnCollision: 1
-  isActive: 0
-  destroyParticle: {fileID: 7166705850564558411, guid: 0633b0990494b4f4d9cf7cf6d037eb81, type: 3}
-  timeBeforeDetection: 0.25
-  radius: 0.5
 --- !u!135 &8486265178988448644
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -24503,6 +24480,8 @@ MonoBehaviour:
   rollSpeed: 2.42
   rotationMultiplier: 25
   vfxObject: {fileID: 1905201328764605250}
+  destroyParticle: {fileID: 7166705850564558411, guid: c427d6c7ba0b7511694fb669e578d660, type: 3}
+  damage: 10
   initialPositionCurve:
     serializedVersion: 2
     m_Curve:
