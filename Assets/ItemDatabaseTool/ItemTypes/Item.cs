@@ -81,6 +81,9 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
         }
     }
     
+    public virtual string GetTypeDisplayName(){
+        return "Item";
+    }
 
     [SerializeField] public string m_displayName = "";
     [SerializeField] public string m_description = "";
