@@ -172,7 +172,6 @@ namespace Boss.Brightmaw
                     //     );
                     closest.GetComponent<RollingBoulder>().Roll(throwVector);
                     closest.gameObject.tag = "Untagged";
-                    closest.GetComponent<DamagePlayerWhenCollide>().isActive = true;
                     closest = null;
                     state = NodeData.State.Success;
                     return NodeData.State.Success;
