@@ -495,12 +495,13 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
 
         Debug.Log("Loading " + itemType);
 
-        //deserialize item as type
+        // make scritableobject of same type
         ScriptableObject item = ScriptableObject.CreateInstance(itemType);
 
-        // cast to item type
+        // load data into item
         JsonUtility.FromJsonOverwrite(json, item);
 
+        // cast item to Item
         item = (Item)item;
 
         if (item && ((Item)item).name == "")

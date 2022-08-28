@@ -63,14 +63,55 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     [Serializable]
     public class PurchasableItem
     {
-        public Item item = null;
+        public Item m_item = null;
 
-        public int minAmount = 1;
-        public int maxAmount = 1;
+        public int m_minAmount = 1;
+        public int m_maxAmount = 1;
 
-        public bool unlocked = false;
+        public bool m_unlocked = false;
 
         public bool m_removeIfExists = false;
+
+        // serializable version of the PurchasableItem class.
+        [Serializable]
+        public class PurchasableItem_Serializable
+        {
+            public string itemJSON = "";
+            public string itemType = "";
+            public int minAmount = 1;
+            public int maxAmount = 1;
+            public bool unlocked = false;
+            public bool removeIfExists = false;
+
+            public PurchasableItem_Serializable(PurchasableItem _purchasable)
+            {
+                //serialize item
+                itemJSON = JsonUtility.ToJson(_purchasable.m_item, true);
+                itemType = _purchasable.m_item.GetType().Name;
+                this.minAmount = _purchasable.m_minAmount;
+                this.maxAmount = _purchasable.m_maxAmount;
+                this.unlocked = _purchasable.m_unlocked;
+                this.removeIfExists = _purchasable.m_removeIfExists;
+            }
+
+            public PurchasableItem ToPurchasableItem()
+            {
+                // make scritableobject of same type
+                ScriptableObject item = ScriptableObject.CreateInstance(itemType);
+
+                // load data into item
+                JsonUtility.FromJsonOverwrite(itemJSON, item);
+
+                // create purchasable item
+                PurchasableItem purchasableItem = new PurchasableItem();
+                purchasableItem.m_item = (Item)item; // ensure to cast item to Item
+                purchasableItem.m_minAmount = minAmount;
+                purchasableItem.m_maxAmount = maxAmount;
+                purchasableItem.m_unlocked = unlocked;
+                purchasableItem.m_removeIfExists = removeIfExists;
+                return purchasableItem;
+            }
+        }
     }
 
     public string storeInventoryName = "store";
@@ -82,7 +123,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     public int m_playerSilver = 0;
 
     private class SaveData {
-        public List<PurchasableItem> purchasableItems = new List<PurchasableItem>();
+        public List<PurchasableItem.PurchasableItem_Serializable> purchasableItems = new List<PurchasableItem.PurchasableItem_Serializable>();
         public int m_playerSilver = 0;
     }
 
@@ -139,10 +180,12 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
 
         // make data
         SaveData data = new SaveData();
-        foreach (PurchasableItem purchasableItem in purchasableItems)
+        
+        data.purchasableItems = new List<PurchasableItem.PurchasableItem_Serializable>();
+
+        foreach (PurchasableItem item in purchasableItems)
         {
-            //@todo make this actually saveable/serializable
-            data.purchasableItems.Add(purchasableItem);
+            data.purchasableItems.Add(new PurchasableItem.PurchasableItem_Serializable(item));
         }
         data.m_playerSilver = m_playerSilver;
 
@@ -178,12 +221,10 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
         // load the data 
         SaveData data = JsonUtility.FromJson<SaveData>(reader.ReadToEnd());
 
-        foreach (PurchasableItem purchasableItem in data.purchasableItems)
+        foreach (PurchasableItem.PurchasableItem_Serializable item in data.purchasableItems)
         {
-            //@todo make this actually saveable/serializable
-            purchasableItems.Add(purchasableItem);
+            purchasableItems.Add(item.ToPurchasableItem());
         }
-
         m_playerSilver = data.m_playerSilver;
 
         reader.Close();
