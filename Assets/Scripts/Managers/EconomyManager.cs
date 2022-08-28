@@ -69,6 +69,8 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
         public int maxAmount = 1;
 
         public bool unlocked = false;
+
+        public bool m_removeIfExists = false;
     }
 
     public string storeInventoryName = "store";

@@ -337,7 +337,8 @@ public class Inventory : MonoBehaviour
     /// Adds a slot with the given filter to the inventory.
     /// </summary>
     /// <param name="_filter"></param>
-    public void AddSlot(List<System.Type> _filter = null){
+    public void AddSlot(List<System.Type> _filter = null)
+    {
         if (_filter == null)
         {
             _filter = new List<System.Type>();
@@ -362,8 +363,31 @@ public class Inventory : MonoBehaviour
             filteredStrings.Add(type.ToString());
         }
 
+        AddSlot(filteredStrings);
+    }
+
+    private void AddSlot(List<string> _filters)
+    {
         InventorySlot slot = new InventorySlot();
-        slot.typeFilter = filteredStrings;
+
+        // convert Item.AllTypes to a list of strings
+        List<string> allTypes = new List<string>();
+        foreach (System.Type type in Item.AllTypes)
+        {
+            allTypes.Add(type.ToString());
+        }
+        // if any filters are NOT present in allTypes, then remove them
+        for (int i = _filters.Count - 1; i >= 0; i--)
+        {
+            if (allTypes.Contains(_filters[i]))
+            {
+                continue;
+            }
+            _filters.RemoveAt(i);
+        }
+
+        slot.typeFilter = new List<String>(_filters);
+        slot.ownerInventory = this;
         slots.Add(slot);
     }
 
@@ -449,38 +473,40 @@ public class Inventory : MonoBehaviour
             Directory.CreateDirectory(GetSaveFolderPath(saveSlot));
         }
 
-        List<string> fileNames = new List<string>();
+        List<string> slotsInfo = new List<string>();
 
         // save each item to a new line
         foreach (InventorySlot slot in m_slots)
         {
+            string itemFileName = "";
+
             if (slot.item != null)
             {
-                string fileName = slot.item.GetInstanceFileName(saveSlot);
-                Item.Save(Item.GetInstanceSavePath(saveSlot), fileName, slot.item);
+                itemFileName = slot.item.GetInstanceFileName(saveSlot);
+                Item.Save(Item.GetInstanceSavePath(saveSlot), itemFileName, slot.item);
+            }
 
-                fileNames.Add(fileName);
-            }
-            else if (slot.item == null)
-            {
-                fileNames.Add("");
-            }
+            // get the filter of this slot
+            List<string> filters = new List<string>(slot.typeFilter);
+            string filter = string.Join(",", filters.ToArray());
+
+            slotsInfo.Add(filter + ":" + itemFileName);
         }
 
         FileStream file = File.Create(GetSaveFilePath(saveSlot));
 
         //write to file
         StreamWriter writer = new StreamWriter(file);
-        for (int i = 0; i < fileNames.Count; i++)
+        for (int i = 0; i < slotsInfo.Count; i++)
         {
             //if not last item, write new line
-            if (i < fileNames.Count - 1)
+            if (i < slotsInfo.Count - 1)
             {
-                writer.WriteLine(fileNames[i]);
+                writer.WriteLine(slotsInfo[i]);
             }
             else
             {
-                writer.Write(fileNames[i]);
+                writer.Write(slotsInfo[i]);
             }
         }
 
@@ -508,20 +534,29 @@ public class Inventory : MonoBehaviour
         // get file name
         string file = System.IO.File.ReadAllText(GetSaveFilePath(saveSlot));
 
-        string[] fileNames = file.Split('\n');
+        string[] slotsInfo = file.Split('\n');
 
         // clear inventory
         ClearInventory();
+        slots = new List<InventorySlot>();
 
-        for (int i = 0; i < fileNames.Length; i++)
+        for (int i = 0; i < slotsInfo.Length; i++)
         {
-            string fileName = fileNames[i];
+            // split file name into filters and file name
+            string[] split = slotsInfo[i].Split(':');
+            string filters = split[0];
+            string fileName = split[1];
 
             // remove newline
             fileName = fileName.Replace("\n", "");
-
             // remove whitespace
             fileName = fileName.Trim();
+
+            // convert filters to list of strings
+            List<string> filterList = new List<string>(filters.Split(','));
+
+            // add slot to inventory
+            AddSlot(filterList);
 
             if (fileName == "") continue;
 

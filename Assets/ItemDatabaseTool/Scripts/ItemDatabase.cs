@@ -380,7 +380,6 @@ public class ItemDatabase
 
         // get all directories in the inventory folder
         string[] directories = Directory.GetDirectories(Inventory.GetInventoryFolder(saveSlot));
-
         foreach (string directory in directories)
         {
             List<string> files = Directory.GetFiles(directory, "inventory.json").ToList();
@@ -402,7 +401,17 @@ public class ItemDatabase
             if (!fileName.EndsWith(".json")) continue;
 
             // if file is in the inventory save files, continue
-            if (savedInstances.Contains(fileName)) continue;
+            bool isInInventory = false;
+            foreach (string savedInstance in savedInstances)
+            {
+                if (savedInstance.Contains(fileName)){
+                    isInInventory = true;
+                    break;
+                }
+            }
+            if (isInInventory) continue;
+
+            //if (savedInstances.Contains(fileName)) continue;
 
             bool inInventory = false;
             // if id and instance id exist in any inventory, continue
