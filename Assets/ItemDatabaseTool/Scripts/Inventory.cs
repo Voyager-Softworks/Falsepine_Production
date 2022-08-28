@@ -592,7 +592,7 @@ public class Inventory : MonoBehaviour
     }
 
     /// <summary>
-    /// Clears all items from the inventory.
+    /// Clears all items from the inventory, but leaves slots.
     /// </summary>
     public void ClearInventory()
     {
@@ -600,6 +600,14 @@ public class Inventory : MonoBehaviour
         {
             slot.item = null;
         }
+    }
+
+    /// <summary>
+    /// Resets the inventory to empty, including removing all slots.
+    /// </summary>
+    public void ResetInventory(){
+        ClearInventory();
+        slots = new List<InventorySlot>();
     }
 
     /// <summary>

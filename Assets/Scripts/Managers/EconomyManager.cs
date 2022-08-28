@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
+// scene manage
+using UnityEngine.SceneManagement;
+using System.Linq;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 /// <summary>
 /// Manages the in game economy, things like player and store money, unlocked items, item prices, etc.
@@ -118,9 +125,11 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     public string playerInventoryName = "player";
     public string homeInventoryName = "home";
 
-    public List<PurchasableItem> purchasableItems = new List<PurchasableItem>();
+    public List<PurchasableItem> m_purchasableItems = new List<PurchasableItem>();
 
     public int m_playerSilver = 0;
+
+    public int m_maxStoreItems = 10;
 
     private class SaveData {
         public List<PurchasableItem.PurchasableItem_Serializable> purchasableItems = new List<PurchasableItem.PurchasableItem_Serializable>();
@@ -136,6 +145,9 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
             DontDestroyOnLoad(this);
 
             LoadEconomy(SaveManager.currentSaveSlot);
+
+            // on scene load
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
@@ -144,9 +156,58 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
         }
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        RefillStoreInventory();
+    }
+
     public void RefillStoreInventory()
     {
+        // get store inv
+        Inventory storeInventory = InventoryManager.instance.GetInventory(storeInventoryName);
+        if (storeInventory == null){
+            Debug.LogError("Store inventory not found");
+            return;
+        }
 
+        // reset store inv
+        storeInventory.ResetInventory();
+
+        // refill store inv from purchasable items:
+
+        // randomize purchasable items in new list
+        List<PurchasableItem> tempPurchasableItems = new List<PurchasableItem>(m_purchasableItems);
+        tempPurchasableItems = tempPurchasableItems.OrderBy(x => Guid.NewGuid()).ToList();
+
+        // get up to maxStoreItems items from purchasable items
+        int itemsAdded = 0;
+        foreach (PurchasableItem purchasableItem in tempPurchasableItems)
+        {
+            // check if max items reached
+            if (itemsAdded >= m_maxStoreItems)
+            {
+                break;
+            }
+            //@todo make this section work lmao
+            // check if item exists in player, home, or bank
+            // if (InventoryManager.instance.GetInventory(playerInventoryName).ContainsItem(purchasableItem.m_item) ||
+            //     InventoryManager.instance.GetInventory(homeInventoryName).ContainsItem(purchasableItem.m_item) ||
+            //     InventoryManager.instance.GetInventory(storeInventoryName).ContainsItem(purchasableItem.m_item))
+            // {
+            //     continue;
+            // }
+            if (purchasableItem.m_unlocked)
+            {
+                // make new instance
+                int randAmount = UnityEngine.Random.Range(purchasableItem.m_minAmount, purchasableItem.m_maxAmount);
+                Item item = purchasableItem.m_item.CreateInstance();
+                item.currentStackSize = randAmount;
+
+                // add item to store inventory
+                storeInventory.TryAddItemToInventory(item);
+                itemsAdded++;
+            }
+        }
     }
 
     /// <summary>
@@ -183,7 +244,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
         
         data.purchasableItems = new List<PurchasableItem.PurchasableItem_Serializable>();
 
-        foreach (PurchasableItem item in purchasableItems)
+        foreach (PurchasableItem item in m_purchasableItems)
         {
             data.purchasableItems.Add(new PurchasableItem.PurchasableItem_Serializable(item));
         }
@@ -223,7 +284,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
 
         foreach (PurchasableItem.PurchasableItem_Serializable item in data.purchasableItems)
         {
-            purchasableItems.Add(item.ToPurchasableItem());
+            m_purchasableItems.Add(item.ToPurchasableItem());
         }
         m_playerSilver = data.m_playerSilver;
 
@@ -243,4 +304,23 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
             File.Delete(GetSaveFilePath(saveSlot));
         }
     }
+
+    #if UNITY_EDITOR
+    private void OnValidate() {
+        foreach (PurchasableItem purchasable in m_purchasableItems)
+        {
+            if (purchasable.m_item?.instanceID == "")
+            {
+                // if game is not running, return
+                //@todo add this check back in, remove to try create instances in editor
+                //if (!Application.isPlaying) return;
+
+                purchasable.m_item = purchasable.m_item.CreateInstance();
+
+                // set dirty
+                EditorUtility.SetDirty(this);
+            }
+        }
+    }
+    #endif
 }
