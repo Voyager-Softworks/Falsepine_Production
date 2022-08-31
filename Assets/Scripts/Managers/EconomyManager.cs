@@ -130,9 +130,10 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
 
     public int m_playerSilver = 0;
 
-    public int m_bankLevel = 0;
-
     public int m_maxStoreItems = 10;
+
+    
+    public int m_bankLevel = 0;
 
     private class SaveData {
         public List<PurchasableItem.PurchasableItem_Serializable> purchasableItems = new List<PurchasableItem.PurchasableItem_Serializable>();
@@ -183,9 +184,19 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     {
         int amount = 1;
 
+        // at level 10, unlock 1 slot
         if (m_bankLevel >= 10)
         {
             amount += 1;
+        }
+
+        // for each unique boss kill, unlock 1 slot
+        foreach (StatsManager.MonsterStat monster in StatsManager.instance.m_monsterStats)
+        {
+            if (monster.m_monster.m_type == MonsterInfo.MonsterType.Boss && monster.m_totalKilled >= 1)
+            {
+                amount += 1;
+            }
         }
 
         return amount;
@@ -199,7 +210,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
         UpdateBankSlotAmount();
     }
 
-    private void UpdateBankSlotAmount()
+    public void UpdateBankSlotAmount()
     {
         int unlockedSlots = GetUnlockedBankSlotAmount();
         // add slots to inventory until it reaches the unlocked amount

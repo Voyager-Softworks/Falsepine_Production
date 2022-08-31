@@ -136,6 +136,9 @@ public class InfoBox : MonoBehaviour
 
         fadeTime = _offTime;
         fadeTimer = fadeTime;
+
+        m_dividerImage.gameObject.SetActive(false);
+        m_statsModsPanel.SetActive(false);
     }
 
     /// <summary>

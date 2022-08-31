@@ -11,6 +11,8 @@ using UnityEngine.AI;
 /// </summary>
 public class EnemyHealth : Health_Base
 {
+    public MonsterInfo m_monsterType;
+
     protected NodeAI.NodeAI_Senses m_senses; ///< The senses of the enemy.
 
     private SkinnedMeshRenderer m_renderer; ///< The renderer of the enemy.
@@ -105,6 +107,9 @@ public class EnemyHealth : Health_Base
         GetComponent<DamageDealer>()?.CancelAttack();
 
         GetComponentInChildren<Animator>().SetBool("Dead", true);
+
+        // add kill
+        StatsManager.instance.AddKill(m_monsterType);
 
         // Disable agent
         NodeAI.NodeAI_Agent agent = GetComponent<NodeAI.NodeAI_Agent>();

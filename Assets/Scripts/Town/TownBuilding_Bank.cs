@@ -15,4 +15,12 @@ using System.IO;
 public class TownBuilding_Bank : TownBuilding
 {
     public Button m_upgradeButton;
+
+    public override void OpenUI()
+    {
+        base.OpenUI();
+
+        // update slots of bank
+        EconomyManager.instance.UpdateBankSlotAmount();
+    }
 }

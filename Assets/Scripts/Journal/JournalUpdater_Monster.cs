@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 /// <summary>
 /// Responsible for updating a journal page with the latest information.
@@ -8,6 +9,8 @@ using UnityEngine;
 public class JournalUpdater_Monster : JournalContentUpdater
 {
     public MonsterInfo m_monster = null;
+
+    public TextMeshProUGUI m_killCountText;
 
     public override void UpdateContent()
     {
@@ -37,5 +40,11 @@ public class JournalUpdater_Monster : JournalContentUpdater
         }
 
         base.UpdateContent();
+
+        // update kill count text
+        if (m_killCountText != null)
+        {
+            m_killCountText.text = "Kills: " + StatsManager.instance.GetKills(m_monster);
+        }
     }
 }
