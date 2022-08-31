@@ -14,7 +14,12 @@ public class Dynamite : MonoBehaviour
 
     public GameObject explosionPrefab;
 
-    
+    [Header("Screenshake: Explosion")]
+    public float m_screenshakeDuration = 0.5f;
+    public Vector3 m_screenshakeAmplitude = Vector3.one;
+    public float m_screenshakeFrequency = 1f;
+
+
 
     // Start is called before the first frame update
     void Awake()
@@ -54,7 +59,8 @@ public class Dynamite : MonoBehaviour
                 health.TakeDamage(new Health_Base.DamageStat(m_damage, gameObject, transform.position, collider.transform.position));
             }
         }
-        
+        FindObjectOfType<ScreenshakeManager>().AddShakeImpulse(m_screenshakeDuration, m_screenshakeAmplitude, m_screenshakeFrequency);
+
         // instantiate explosion
         GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
         Destroy(explosion, 2.0f);

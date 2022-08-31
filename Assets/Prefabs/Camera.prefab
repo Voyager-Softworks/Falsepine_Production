@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 618677240013558741}
   - component: {fileID: 618677240013558740}
   - component: {fileID: 1120948187}
+  - component: {fileID: 1724223618656869803}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -111,6 +112,71 @@ MonoBehaviour:
   maxZoom: 35
   zoomAmount: 10
   zoomSpeed: 5
+--- !u!114 &1724223618656869803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618677240013558742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8222ec011eb01f8e6b5bec4096cb2e28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  virtualCamera: {fileID: 618677240013558740}
+  shakeTimer: 0
+  currentShakeAmplitude: {x: 0, y: 0, z: 0}
+  currentShakeFrequency: 0
+  shakeAmplitudeOverTime:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.007862057
+      value: 1.0043026
+      inSlope: -0.08519069
+      outSlope: -0.08519069
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.11328195
+    - serializedVersion: 3
+      time: 1.005249
+      value: -0.0021629333
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  shakeFrequencyOverTime:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0.007862057
+      value: 1.0043026
+      inSlope: -0.08519069
+      outSlope: -0.08519069
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.11328195
+    - serializedVersion: 3
+      time: 1.005249
+      value: -0.0021629333
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  shakeDecreaseFactor: 1
 --- !u!1 &618677240459166728
 GameObject:
   m_ObjectHideFlags: 0

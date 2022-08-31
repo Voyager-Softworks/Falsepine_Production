@@ -13,6 +13,19 @@ public class RollingBoulder : MonoBehaviour
     [SerializeField] GameObject destroyParticle;
     [SerializeField] float damage = 10f;
 
+    [Header("Screenshake: Rolling")]
+    [SerializeField] float screenshakeDuration = 0.5f;
+    [SerializeField] Vector3 screenshakeAmplitude = Vector3.one;
+    [SerializeField] float screenshakeFrequency = 1f;
+
+    [Header("Screenshake: Impact")]
+    [SerializeField] float impactScreenshakeDuration = 0.5f;
+    [SerializeField] Vector3 impactScreenshakeAmplitude = Vector3.one;
+    [SerializeField] float impactScreenshakeFrequency = 1f;
+
+    ScreenshakeManager screenshakeManager;
+
+
     public AnimationCurve initialPositionCurve = new AnimationCurve();
 
     bool isRolling = false;
@@ -37,6 +50,7 @@ public class RollingBoulder : MonoBehaviour
     void Start()
     {
         GetComponent<MeshFilter>().mesh = boulderMeshes[Random.Range(0, boulderMeshes.Length)];
+        screenshakeManager = FindObjectOfType<ScreenshakeManager>();
 
         //Set random rotation on all axes
         transform.rotation = Quaternion.Euler(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360));
@@ -61,6 +75,7 @@ public class RollingBoulder : MonoBehaviour
         {
             return;
         }
+        screenshakeManager.AddShakeImpulse(screenshakeDuration, screenshakeAmplitude, screenshakeFrequency);
         Vector3 rollEuler = new Vector3(rollDirection.z * rollSpeed, rollDirection.y * rollSpeed, -rollDirection.x * rollSpeed);
         // Rotate the boulder
         transform.Rotate(rollEuler * rollSpeed * rotationMultiplier * Time.deltaTime, Space.World);
@@ -91,6 +106,7 @@ public class RollingBoulder : MonoBehaviour
             gameObject.GetComponent<Collider>().enabled = false;
             gameObject.GetComponentInChildren<VisualEffect>().Stop();
             isRolling = false;
+            screenshakeManager.AddShakeImpulse(impactScreenshakeDuration, impactScreenshakeAmplitude, impactScreenshakeFrequency);
             Destroy(gameObject, 10.0f);
         }
 

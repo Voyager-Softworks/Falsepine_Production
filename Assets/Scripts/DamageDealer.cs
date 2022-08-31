@@ -38,6 +38,32 @@ public class DamageDealer : MonoBehaviour
         };
     }
 
+    /// <summary>
+    ///  Adds a screen shake effect to the camera.
+    /// </summary>
+    /// <param name="duration"></param>
+    /// <param name="magnitude"></param>
+    /// <param name="frequency"></param>
+    /// <param name="delay"></param>
+    /// <returns></returns>
+    IEnumerator ScreenshakeCoroutine(float duration, Vector3 magnitude, float frequency, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        FindObjectOfType<ScreenshakeManager>().AddShakeImpulse(duration, magnitude, frequency);
+    }
+
+    /// <summary>
+    ///  Adds a screen shake effect to the camera.
+    /// </summary>
+    /// <param name="duration"></param>
+    /// <param name="magnitude"></param>
+    /// <param name="frequency"></param>
+    /// <param name="delay"></param>
+    public void Screenshake(float duration, Vector3 magnitude, float frequency, float delay)
+    {
+        StartCoroutine(ScreenshakeCoroutine(duration, magnitude, frequency, delay));
+    }
+
 
     /// <summary>
     ///  Coroutine to execute a melee attack on the player.
@@ -68,13 +94,14 @@ public class DamageDealer : MonoBehaviour
                 if (hurtBox.enabled)
                 {
                     RaycastHit[] hits = Physics.BoxCastAll(hurtBox.bounds.center, hurtBox.bounds.extents, hurtBox.transform.forward, hurtBox.transform.rotation, 0.5f);
+
                     foreach (RaycastHit hit in hits)
                     {
                         if (hit.collider.CompareTag("Player"))
                         {
                             hit.collider.GetComponent<PlayerHealth>().TakeDamage(_dmg);
                             hit.collider.GetComponent<PlayerHealth>().Stun(_stunDuration);
-                            Instantiate(m_hurtPlayerEffect, hit.point, Quaternion.identity);
+                            Instantiate(m_hurtPlayerEffect, hit.collider.transform.position, Quaternion.LookRotation(hit.collider.transform.position - hurtBox.ClosestPoint(hit.collider.transform.position)));
                             playerHit = true;
                             break;
                         }

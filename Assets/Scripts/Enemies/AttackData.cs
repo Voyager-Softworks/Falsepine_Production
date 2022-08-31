@@ -60,5 +60,10 @@ public class AttackData : ScriptableObject
         public float translationDuration; ///< The duration for which to move the agent towards the target.
         public float translationSpeed; ///< The speed at which to move the agent towards the target.
         public float translationDelay; ///< The delay between the start of the attack and the start of the translation.
+        [Header("Screen Shake ")]
+        public float screenShakeDuration; ///< The duration for which to shake the screen.
+        public Vector3 screenShakeAmplitude; ///< The amplitude of the screen shake.
+        public float screenShakeFrequency; ///< The frequency of the screen shake.
+        public float screenShakeDelay; ///< The delay between the start of the attack and the start of the screen shake.
     }
 }

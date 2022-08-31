@@ -10,6 +10,12 @@ public class ExplodeOnDeath : MonoBehaviour
 
     public float m_fuseTime = 0f;
 
+    [Header("Screenshake: Explosion")]
+    public float m_screenshakeDuration = 0.5f;
+    public Vector3 m_screenshakeAmplitude = Vector3.one;
+    public float m_screenshakeFrequency = 1f;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +39,7 @@ public class ExplodeOnDeath : MonoBehaviour
                 collider.gameObject.GetComponentInParent<Health_Base>().TakeDamage(new Health_Base.DamageStat(damage: m_damage, sourceObject: gameObject, origin: transform.position, hitPoint: collider.transform.position));
             }
         }
+        FindObjectOfType<ScreenshakeManager>().AddShakeImpulse(m_screenshakeDuration, m_screenshakeAmplitude, m_screenshakeFrequency);
 
     }
 
