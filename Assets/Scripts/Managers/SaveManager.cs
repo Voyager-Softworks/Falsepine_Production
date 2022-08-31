@@ -86,6 +86,8 @@ public class SaveManager : MonoBehaviour
 
     /// <summary>
     /// Deletes all inventories and missions, but keeps the journal.
+    /// @todo make sure that some parts of the economy and stats are kept!
+    /// Also, perhaps instead of deleting, we could keep the save file in a different folder "old saves"
     /// </summary>
     public static void SoftDeleteAll(int saveSlot)
     {
