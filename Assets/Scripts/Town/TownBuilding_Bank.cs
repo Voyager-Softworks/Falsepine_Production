@@ -14,5 +14,5 @@ using System.IO;
 /// </summary>
 public class TownBuilding_Bank : TownBuilding
 {
-    
+    public Button m_upgradeButton;
 }
