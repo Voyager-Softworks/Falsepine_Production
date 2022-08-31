@@ -24,6 +24,7 @@ public class InventoryPannel : MonoBehaviour
     [Header("UI")]
     public bool m_autoLink = true;
     public bool m_showPrice = false;
+    public bool m_showEmpty = false;
     public List<ItemDisplay> m_itemDisplayInstances = new List<ItemDisplay>();
     public GameObject m_contentPanel;
 
@@ -106,7 +107,7 @@ public class InventoryPannel : MonoBehaviour
         for (int i = 0; i < linkedInventory.GetSlotCount(); i++)
         {
             Inventory.InventorySlot slot = linkedInventory.GetSlot(i);
-            if (slot.item == null) continue;
+            if (!m_showEmpty && slot.item == null) continue;
             // get the item display at i if it exists, otherwise create a new one
             ItemDisplay itemDisplay = null;
             if (i < m_itemDisplayInstances.Count)
