@@ -158,7 +158,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        RefillStoreInventory();
+        //RefillStoreInventory();
     }
 
     public void RefillStoreInventory()
