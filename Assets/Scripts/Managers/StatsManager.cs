@@ -24,6 +24,7 @@ public class StatsManager : MonoBehaviour
 
 
     ////////// STATS //////////
+    #region Stats
 
     /// <summary>
     /// An ENUM replacement for the types
@@ -76,8 +77,10 @@ public class StatsManager : MonoBehaviour
         void AddStatType(StatType type);
         void RemoveStatType(StatType type);
     }
+    #endregion
 
     ////////// MODS //////////
+    #region Mods
 
     [Serializable]
     public enum ModType
@@ -126,8 +129,10 @@ public class StatsManager : MonoBehaviour
 
         public Sprite m_icon = null;
     }
+    #endregion
 
     ////////// TALISMANS //////////
+    #region Talisman
     
     /// <summary>
     /// Stat mod range stores data to be used to create a random stat mod
@@ -158,12 +163,9 @@ public class StatsManager : MonoBehaviour
         talisman.m_icon = range.m_icon;
         return talisman;
     }
+    #endregion
 
-    [SerializeField]
-    static public List<StatMod> globalStatMods = new List<StatMod>()
-    {
-    };
-
+    ////////// Utility //////////
     #region utility functions
 
     /// <summary>
@@ -192,6 +194,45 @@ public class StatsManager : MonoBehaviour
     }
 
     #endregion
+
+    ////////// Enemy Stats //////////
+    #region Enemy Stats
+    
+    [Serializable]
+    public class MonsterStat{
+        public MonsterInfo m_monster;
+        public int m_totalKilled = 0;
+    }
+    [SerializeField] public List<MonsterStat> m_monsterStats = new List<MonsterStat>();
+
+    public void AddKill(MonsterInfo _monster, int _amount = 1)
+    {
+        MonsterStat stats = m_monsterStats.Find(x => x.m_monster == _monster);
+        if (stats == null)
+        {
+            stats = new MonsterStat();
+            stats.m_monster = _monster;
+            m_monsterStats.Add(stats);
+        }
+        stats.m_totalKilled += _amount;
+    }
+
+    public int GetKills(MonsterInfo _monster)
+    {
+        MonsterStat stats = m_monsterStats.Find(x => x.m_monster == _monster);
+        if (stats == null)
+        {
+            return -1;
+        }
+        return stats.m_totalKilled;
+    }
+
+    #endregion
+
+    [SerializeField]
+    static public List<StatMod> globalStatMods = new List<StatMod>()
+    {
+    };
 
     /// <summary>
     /// Gets the stat mods from the player inventory
@@ -466,6 +507,46 @@ public class StatsManager : MonoBehaviour
     }
 
 #if UNITY_EDITOR
+    // custom editor for this class
+    [CustomEditor(typeof(StatsManager))]
+    public class StatsManagerEditor : Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            DrawDefaultInspector();
+            StatsManager statsManager = (StatsManager)target;
+
+            // add missing monsters button
+            if (GUILayout.Button("Add Missing Monsters"))
+            {
+                statsManager.AddAllMonsterInfo();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Adds all missing monster info to the list of monster stats
+    /// </summary>
+    public void AddAllMonsterInfo(){
+        // get all monster info scriptable objects in the resources
+        MonsterInfo[] monsterInfos = Resources.LoadAll<MonsterInfo>("");
+        // loop through all monster info
+        foreach (MonsterInfo monsterInfo in monsterInfos)
+        {
+            // if the monster info is not in the list of monster stats
+            if (!m_monsterStats.Any(x => x.m_monster == monsterInfo))
+            {
+                // make new monster stat
+                MonsterStat monsterStat = new MonsterStat();
+                monsterStat.m_monster = monsterInfo;
+
+                // add the monster info to the list
+                m_monsterStats.Add((monsterStat));
+            }
+            
+        }
+    } 
+
     private void OnValidate() {
         foreach(StatModRange statModRange in m_possibleTalismanMods)
         {
