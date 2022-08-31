@@ -124,16 +124,21 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     public string storeInventoryName = "store";
     public string playerInventoryName = "player";
     public string homeInventoryName = "home";
+    public string bankInventroyName = "bank";
 
     public List<PurchasableItem> m_purchasableItems = new List<PurchasableItem>();
 
     public int m_playerSilver = 0;
+
+    public int m_bankLevel = 0;
 
     public int m_maxStoreItems = 10;
 
     private class SaveData {
         public List<PurchasableItem.PurchasableItem_Serializable> purchasableItems = new List<PurchasableItem.PurchasableItem_Serializable>();
         public int m_playerSilver = 0;
+        public int m_bankLevel = 0;
+        public int m_maxStoreItems = 0;
     }
 
     void Awake()
@@ -158,7 +163,51 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        //RefillStoreInventory();
+        RefillStoreInventory();
+
+        TownBuilding_Bank bank = FindObjectOfType<TownBuilding_Bank>();
+        if (bank != null)
+        {
+            // bind upgrade button to upgrade function (remove all listeners first?)
+            bank.m_upgradeButton.onClick.RemoveAllListeners();
+            bank.m_upgradeButton.onClick.AddListener(() => { UpgradeBank(); });
+        }
+    }
+
+    /// <summary>
+    /// Gets the amount of slots theat the bank has unlocked.
+    /// @todo move this somewhere more responsible, perhaps a bank manager?
+    /// </summary>
+    /// <returns></returns>
+    public int GetUnlockedBankSlotAmount()
+    {
+        int amount = 1;
+
+        if (m_bankLevel >= 10)
+        {
+            amount += 1;
+        }
+
+        return amount;
+    }
+
+    public void UpgradeBank()
+    {
+        m_bankLevel++;
+
+        // update slot amount
+        UpdateBankSlotAmount();
+    }
+
+    private void UpdateBankSlotAmount()
+    {
+        int unlockedSlots = GetUnlockedBankSlotAmount();
+        // add slots to inventory until it reaches the unlocked amount
+        Inventory bankInv = InventoryManager.instance.GetInventory(bankInventroyName);
+        while (bankInv.GetSlotCount() < unlockedSlots)
+        {
+            bankInv.AddSlot();
+        }
     }
 
     public void RefillStoreInventory()
@@ -249,6 +298,8 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
             data.purchasableItems.Add(new PurchasableItem.PurchasableItem_Serializable(item));
         }
         data.m_playerSilver = m_playerSilver;
+        data.m_bankLevel = m_bankLevel;
+        data.m_maxStoreItems = m_maxStoreItems;
 
         StreamWriter writer = new StreamWriter(file);
 
@@ -287,6 +338,8 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
             m_purchasableItems.Add(item.ToPurchasableItem());
         }
         m_playerSilver = data.m_playerSilver;
+        m_bankLevel = data.m_bankLevel;
+        m_maxStoreItems = data.m_maxStoreItems;
 
         reader.Close();
 
