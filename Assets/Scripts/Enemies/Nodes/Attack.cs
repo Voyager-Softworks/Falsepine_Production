@@ -148,6 +148,7 @@ public class Attack : NodeAI.ActionBase  /// @todo Comment
                 }
                 rotateTowardsPlayer.RotateToPlayer(phase.turnDuration, phase.turnSpeed, phase.turnDelay);
                 rotateTowardsPlayer.MoveToPlayer(phase.translationDuration, phase.translationSpeed, phase.translationDelay);
+                agent.GetComponent<DamageDealer>().Screenshake(phase.screenShakeDuration, phase.screenShakeAmplitude, phase.screenShakeFrequency, phase.screenShakeDelay);
             }
             navAgent.isStopped = true;
             navAgent.SetDestination(agent.transform.position);
