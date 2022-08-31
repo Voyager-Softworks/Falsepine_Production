@@ -28,6 +28,8 @@ public class CameraDrag : MonoBehaviour
 
     private Vector3 m_targetPosition;
 
+    private bool m_returnToCent = false;
+
     private void Start() {
         center = transform.position;
         m_targetPosition = transform.position;
@@ -48,18 +50,31 @@ public class CameraDrag : MonoBehaviour
  
     void Update()
     {
-        if ((transform.position - center).magnitude > maxDistance)
-        {
-            // lerp to the max distance
-            transform.position = Vector3.Lerp(transform.position, center, Time.deltaTime);
+        if ((transform.position - center).magnitude > maxDistance + 10) {
+            m_returnToCent = true;
         }
 
-        CheckKeys();
+        if (m_returnToCent)
+        {
+            if ((transform.position - center).magnitude <= maxDistance){
+                m_returnToCent = false;
+            }
+            // lerp to the max distance
+            transform.position = Vector3.Slerp(transform.position, center, Time.deltaTime * 0.5f);
+            m_targetPosition = transform.position;
+            dragOrigin = Vector3.zero;
+            m_velocity = Vector3.zero;
+        }
+        else{
+            CheckKeys();
 
-        CheckDrag();
+            CheckDrag();
 
-        //lerp to update position
-        transform.position = m_targetPosition;
+            //lerp to update position
+            transform.position = m_targetPosition;
+        }
+
+        
     }
 
     /// <summary>
@@ -82,7 +97,7 @@ public class CameraDrag : MonoBehaviour
             return;
         }
 
-        if (!Mouse.current.rightButton.isPressed) return;
+        if (!Mouse.current.rightButton.isPressed || dragOrigin == Vector3.zero) return;
 
         // make a plane at dragOrigin, with normal pointing up
         Plane plane = new Plane(Vector3.up, dragOrigin);
@@ -99,14 +114,6 @@ public class CameraDrag : MonoBehaviour
             // set the target position to the difference
             m_targetPosition = Vector3.Lerp(m_targetPosition, transform.position + difference, Time.deltaTime * 20.0f);
         }
-
-
-        // Vector3 pos = Camera.main.ScreenToViewportPoint(Mouse.current.delta.ReadValue());
-        // Vector3 move = new Vector3(pos.x * dragSpeed, 0, pos.y * dragSpeed);
-        // //rotate move arounjd the y axis
-        // move = Quaternion.Euler(0, -45, 0) * -move;
-
-        // m_targetPosition = transform.position + move;
     }
 
     /// <summary>
