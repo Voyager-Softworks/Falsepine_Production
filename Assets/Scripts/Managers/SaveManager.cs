@@ -142,26 +142,64 @@ public class SaveManager : MonoBehaviour
     /// It also deletes all inventories and missions, but keeps the journal, parts of the economy, and parts of the stats.
     /// </summary>
     public static void GameOverRestart(){
-        // save, then move the economy and stats to the death save file
-        if (EconomyManager.instance != null) EconomyManager.instance.SaveEconomy(currentSaveSlot);
-        if (StatsManager.instance != null) StatsManager.instance.SaveStats(currentSaveSlot);
+        // save, then move the save files to the death save folder
+        SaveAll(currentSaveSlot);
 
-        string economySavePath = EconomyManager.GetSaveFilePath(currentSaveSlot);
-        string economySaveFileName = Path.GetFileName(economySavePath);
-        string statsSavePath = StatsManager.GetSaveFilePath(currentSaveSlot);
-        string statsSaveFileName = Path.GetFileName(statsSavePath);
+        // if death save folder doesn't exist, create it
+        if (!Directory.Exists(GetDeathSaveFolderPath(currentSaveSlot)))
+        {
+            Directory.CreateDirectory(GetDeathSaveFolderPath(currentSaveSlot));
+        }
 
-        string deathSaveFolder = GetDeathSaveFolderPath(currentSaveSlot) + "/death_" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+        // remove the string "_RECENT" from all death folders in GetDeathSaveFolderPath(currentSaveSlot)
+        string[] deathSaveFolders = Directory.GetDirectories(GetDeathSaveFolderPath(currentSaveSlot));
+        foreach (string deathFolder in deathSaveFolders)
+        {
+            string deathSaveFolderName = Path.GetFileName(deathFolder);
+            if (deathSaveFolderName.Contains("_RECENT"))
+            {
+                string newDeathSaveFolderName = deathSaveFolderName.Replace("_RECENT", "");
+                string newDeathSaveFolderPath = deathFolder.Replace(deathSaveFolderName, newDeathSaveFolderName);
+                Directory.Move(deathFolder, newDeathSaveFolderPath);
+            }
+        }
+
+        string deathSaveFolder = GetDeathSaveFolderPath(currentSaveSlot) + "/death_" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + "_RECENT";
         
-        // create the death save folder if it doesn't exist
+        // create the death save folder if it doesn't exist, if it does exist, delete it
         if (!Directory.Exists(deathSaveFolder))
         {
             Directory.CreateDirectory(deathSaveFolder);
         }
+        else
+        {
+            Directory.Delete(deathSaveFolder, true);
+            Directory.CreateDirectory(deathSaveFolder);
+        }
 
-        // move the economy and stats save files to the death save folder
-        File.Move(economySavePath, deathSaveFolder + "/" + economySaveFileName);
-        File.Move(statsSavePath, deathSaveFolder + "/" + statsSaveFileName);
+        // get all folders in the save folder
+        string[] folders = Directory.GetDirectories(GetSaveFolderPath(currentSaveSlot));
+
+        // move all folders to the death save folder (except for "deaths", "journal",)
+        //@todo, probably delete journal file too, then restore it after the game is restarted
+        foreach (string folder in folders)
+        {
+            string folderName = Path.GetFileName(folder);
+            if (folderName != "deaths" && folderName != "journal")
+            {
+                string newFolderPath = deathSaveFolder + "/" + folderName;
+                Directory.Move(folder, newFolderPath);
+            }
+        }
+
+        #if UNITY_EDITOR
+        // remove all .meta files in the root save folder (recursively)
+        string[] metaFiles = Directory.GetFiles(GetRootSaveFolder(), "*.meta", SearchOption.AllDirectories);
+        foreach (string metaFile in metaFiles)
+        {
+            File.Delete(metaFile);
+        }
+        #endif
     }
 
     /// <summary>
