@@ -162,6 +162,10 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
         }
     }
 
+    private void OnDisable() {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         RefillStoreInventory();

@@ -60,6 +60,10 @@ public class MissionManager : MonoBehaviour
         }
     }
 
+    private void OnDisable() {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
         // if instance is not this, return
