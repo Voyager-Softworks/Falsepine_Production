@@ -37,11 +37,21 @@ public class SaveManager : MonoBehaviour
     /// <summary>
     /// Gets the folder for the current save. ".../saves[saveSlot]"
     /// </summary>
-    /// <param name="saveSlot">the index of the save slot you want</param>
+    /// <param name="_saveSlot">the index of the save slot you want</param>
     /// <returns></returns>
-    public static string GetSaveFolderPath(int saveSlot)
+    public static string GetSaveFolderPath(int _saveSlot)
     {
-        return GetRootSaveFolder() + "/save" + saveSlot;
+        return GetRootSaveFolder() + "/save" + _saveSlot;
+    }
+
+    /// <summary>
+    /// Gets the death save folder for the current save. ".../saves[saveSlot]/deaths"
+    /// </summary>
+    /// <param name="_saveSlot"></param>
+    /// <returns></returns>
+    public static string GetDeathSaveFolderPath(int _saveSlot)
+    {
+        return GetSaveFolderPath(_saveSlot) + "/deaths";
     }
 
     /// <summary>
@@ -87,7 +97,7 @@ public class SaveManager : MonoBehaviour
     /// <summary>
     /// Deletes all inventories and missions, but keeps the journal.
     /// @todo make sure that some parts of the economy and stats are kept!
-    /// Also, perhaps instead of deleting, we could keep the save file in a different folder "old saves"
+    /// Also, perhaps instead of deleting, we could keep the save file in a different folder
     /// </summary>
     public static void SoftDeleteAll(int saveSlot)
     {
@@ -124,6 +134,34 @@ public class SaveManager : MonoBehaviour
         {
             StatsManager.instance.DeleteStatsSave(saveSlot);
         }
+    }
+
+    /// <summary>
+    /// This function is called when the game is over (player dies). <br/>
+    /// It saves the current game to a death save file, and then deletes the current save file. <br/>
+    /// It also deletes all inventories and missions, but keeps the journal, parts of the economy, and parts of the stats.
+    /// </summary>
+    public static void GameOverRestart(){
+        // save, then move the economy and stats to the death save file
+        if (EconomyManager.instance != null) EconomyManager.instance.SaveEconomy(currentSaveSlot);
+        if (StatsManager.instance != null) StatsManager.instance.SaveStats(currentSaveSlot);
+
+        string economySavePath = EconomyManager.GetSaveFilePath(currentSaveSlot);
+        string economySaveFileName = Path.GetFileName(economySavePath);
+        string statsSavePath = StatsManager.GetSaveFilePath(currentSaveSlot);
+        string statsSaveFileName = Path.GetFileName(statsSavePath);
+
+        string deathSaveFolder = GetDeathSaveFolderPath(currentSaveSlot) + "/death_" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss");
+        
+        // create the death save folder if it doesn't exist
+        if (!Directory.Exists(deathSaveFolder))
+        {
+            Directory.CreateDirectory(deathSaveFolder);
+        }
+
+        // move the economy and stats save files to the death save folder
+        File.Move(economySavePath, deathSaveFolder + "/" + economySaveFileName);
+        File.Move(statsSavePath, deathSaveFolder + "/" + statsSaveFileName);
     }
 
     /// <summary>
