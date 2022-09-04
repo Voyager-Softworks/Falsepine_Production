@@ -164,18 +164,18 @@ public class SaveManager : MonoBehaviour
     /// It saves the current game to a death save file, and then deletes the current save file. <br/>
     /// It also deletes all inventories and missions, but keeps the journal, parts of the economy, and parts of the stats.
     /// </summary>
-    public static void GameOverRestart(){
+    public static void GameOverRestart(int _saveSlot){
         // save, then move the save files to the death save folder
-        SaveAll(currentSaveSlot);
+        SaveAll(_saveSlot);
 
         // if death save folder doesn't exist, create it
-        if (!Directory.Exists(GetDeathSaveFolderPath(currentSaveSlot)))
+        if (!Directory.Exists(GetDeathSaveFolderPath(_saveSlot)))
         {
-            Directory.CreateDirectory(GetDeathSaveFolderPath(currentSaveSlot));
+            Directory.CreateDirectory(GetDeathSaveFolderPath(_saveSlot));
         }
 
-        // remove the string "_RECENT" from all death folders in GetDeathSaveFolderPath(currentSaveSlot)
-        string[] deathSaveFolders = Directory.GetDirectories(GetDeathSaveFolderPath(currentSaveSlot));
+        // remove the string "_RECENT" from all death folders in GetDeathSaveFolderPath(_saveSlot)
+        string[] deathSaveFolders = Directory.GetDirectories(GetDeathSaveFolderPath(_saveSlot));
         foreach (string deathFolder in deathSaveFolders)
         {
             string deathSaveFolderName = Path.GetFileName(deathFolder);
@@ -187,7 +187,7 @@ public class SaveManager : MonoBehaviour
             }
         }
 
-        string deathSaveFolder = GetDeathSaveFolderPath(currentSaveSlot) + "/death_" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + "_RECENT";
+        string deathSaveFolder = GetDeathSaveFolderPath(_saveSlot) + "/death_" + DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss") + "_RECENT";
         
         // create the death save folder if it doesn't exist, if it does exist, delete it
         if (!Directory.Exists(deathSaveFolder))
@@ -201,10 +201,9 @@ public class SaveManager : MonoBehaviour
         }
 
         // get all folders in the save folder
-        string[] folders = Directory.GetDirectories(GetSaveFolderPath(currentSaveSlot));
+        string[] folders = Directory.GetDirectories(GetSaveFolderPath(_saveSlot));
 
         // COPY all folders to the death save folder (except for "deaths", "journal",)
-        //@todo, probably delete journal file too, then restore it after the game is restarted
         foreach (string folder in folders)
         {
             string folderName = Path.GetFileName(folder);
@@ -212,9 +211,11 @@ public class SaveManager : MonoBehaviour
 
             string newFolder = deathSaveFolder + "/" + folderName;
 
-            // recursively copy the folder
-            //CopyFolder(folder, newFolder);
+            // copy the folders (including subfolders)
+            FileUtil.CopyFileOrDirectory(folder, newFolder);
         }
+
+        SoftDeleteAll(_saveSlot);
 
         #if UNITY_EDITOR
         // remove all .meta files in the root save folder (recursively)
