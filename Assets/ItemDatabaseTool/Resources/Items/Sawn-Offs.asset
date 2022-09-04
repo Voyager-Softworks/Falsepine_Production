@@ -9,21 +9,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f1b39523798ea8429e24987a0a00672, type: 3}
-  m_Name: rifle
+  m_Script: {fileID: 11500000, guid: ba57bbdaf289c954497da2fd471b2d2d, type: 3}
+  m_Name: Sawn-Offs
   m_EditorClassIdentifier: 
-  m_id: rifle
+  m_id: sawnoff
   m_instanceID: 
-  m_displayName: Rifle
-  m_description: Slow firing accurate rifle with .22 Long ammo
-  m_icon: {fileID: 21300000, guid: 4ae7612cd14224144b0a95c0e38713ef, type: 3}
+  m_displayName: Sawn-Off Shotgun
+  m_description: Powerful short range sidearm with a limited ammo supply
+  m_icon: {fileID: 21300000, guid: 7db25b2c984280b498a92d29594a430e, type: 3}
   mustMatchToStack: 0
   m_currentStackSize: 1
   m_maxStackSize: 1
-  m_tags: []
+  m_tags:
+  - m_name: test
+    m_payload: 1
   m_usedStatTypes:
+  - value: PistolDamage
   - value: RangedDamage
-  - value: RifleDamage
   - value: RangedInaccuracy
   - value: RangedRange
   - value: RangedAimSpeed
@@ -33,17 +35,17 @@ MonoBehaviour:
   m_allowedDiscount: 1
   m_resourceLinks:
   - fieldName: m_shootEffect
-    resourceName: VFX_RifleFlash
+    resourceName: VFX_RevolverFlash
   - fieldName: m_trailEffect
     resourceName: BulletTrail
   - fieldName: m_hitEffect
     resourceName: Blood
   - fieldName: m_shootSound
-    resourceName: SoundPrefab_Rifle_Shoot
+    resourceName: SoundPrefab_Revolver_Shoot
   - fieldName: m_emptySound
     resourceName: SoundPrefab_Rifle_Empty
   - fieldName: m_reloadSound
-    resourceName: SoundPrefab_Rifle_Reload
+    resourceName: SoundPrefab_Revolver_Reload
   - fieldName: m_equipSound
     resourceName: SoundPrefab_Primary_Equip
   - fieldName: m_startAimSound
@@ -51,34 +53,34 @@ MonoBehaviour:
   - fieldName: m_stopAimSound
     resourceName: SoundPrefab_Rifle_StopAim
   - fieldName: m_icon
-    resourceName: UI_icon-lever-action-rifle
-  m_damage: 10
-  m_range: 30
-  m_shootTime: 0.75
+    resourceName: UI_icon-revolver
+  m_damage: 15
+  m_range: 10
+  m_shootTime: 0.25
   m_shootTimer: 0
-  m_maxHitsPerShot: 1
+  m_maxHitsPerShot: 3
   m_isAutomnatic: 0
-  m_aimedInaccuracy: 1
-  m_unaimedInaccuracy: 15
+  m_aimedInaccuracy: 25
+  m_unaimedInaccuracy: 40
   m_aimTime: 0.75
   m_aimTimer: 0
-  m_horizFalloffMult: 0.25
+  m_horizFalloffMult: 0.75
   m_isAiming: 0
-  m_clipAmmo: 10
-  m_clipSize: 10
-  m_spareAmmo: 10
-  m_maxSpareAmmo: 25
+  m_clipAmmo: 2
+  m_clipSize: 2
+  m_spareAmmo: 8
+  m_maxSpareAmmo: 16
   m_unlimitedAmmo: 0
-  m_reloadTime: 3.5
+  m_reloadTime: 2
   m_reloadTimer: 0
   m_equipTime: 0.5
   m_equipTimer: 0
-  m_shootEffect: {fileID: 5586487229844373215, guid: 9ec763b62bf48354c8bc80f9d32bcffa, type: 3}
+  m_shootEffect: {fileID: 5586487229844373215, guid: 470c8a30854d18f43b40dcdebe3d2e24, type: 3}
   m_trailEffect: {fileID: 196249112708888911, guid: 37cc3d00cde6996459cb6afee37520b5, type: 3}
   m_hitEffect: {fileID: 906613630111261276, guid: 0ff01018754744643a1928026ea03465, type: 3}
-  m_shootSound: {fileID: 3107313251738698642, guid: 9beea14f7dc58f14897c79571d2b651f, type: 3}
+  m_shootSound: {fileID: 3107313251738698642, guid: 941884cfc71975c49801b89464c1ddab, type: 3}
   m_emptySound: {fileID: 3107313251738698642, guid: 46c07eb6372ac2f419b7f671eb997445, type: 3}
-  m_reloadSound: {fileID: 3107313251738698642, guid: b7c769fe74efa634e94d5437a4b892d6, type: 3}
+  m_reloadSound: {fileID: 3107313251738698642, guid: 21fb95841b2bca7498f59126c99ac9fe, type: 3}
   m_equipSound: {fileID: 3107313251738698642, guid: fde3a1b649bc9de44831031dfd08d287, type: 3}
   m_startAimSound: {fileID: 3107313251738698642, guid: 6b450768f0ea44540b008f407dc34d0f, type: 3}
   m_stopAimSound: {fileID: 3107313251738698642, guid: ad5028a4bfef130448abec7660fad5a3, type: 3}
