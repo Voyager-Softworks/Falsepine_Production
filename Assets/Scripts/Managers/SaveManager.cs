@@ -54,6 +54,29 @@ public class SaveManager : MonoBehaviour
         return GetSaveFolderPath(_saveSlot) + "/deaths";
     }
 
+    public static string GetRecentDeathFolderPath(int _saveSlot)
+    {
+        // Get the death folder
+        string deathFolder = GetDeathSaveFolderPath(_saveSlot);
+        if (!Directory.Exists(deathFolder))
+        {
+            // If the death folder doesn't exist, return null
+            return null;
+        }
+
+        // find the folder that contains the string "_RECENT"
+        string[] folders = Directory.GetDirectories(deathFolder);
+        foreach (string folder in folders)
+        {
+            if (folder.Contains("_RECENT"))
+            {
+                return folder;
+            }
+        }
+
+        return null;
+    }
+
     /// <summary>
     /// Sets the current save slot index
     /// </summary>
@@ -180,16 +203,17 @@ public class SaveManager : MonoBehaviour
         // get all folders in the save folder
         string[] folders = Directory.GetDirectories(GetSaveFolderPath(currentSaveSlot));
 
-        // move all folders to the death save folder (except for "deaths", "journal",)
+        // COPY all folders to the death save folder (except for "deaths", "journal",)
         //@todo, probably delete journal file too, then restore it after the game is restarted
         foreach (string folder in folders)
         {
             string folderName = Path.GetFileName(folder);
-            if (folderName != "deaths" && folderName != "journal")
-            {
-                string newFolderPath = deathSaveFolder + "/" + folderName;
-                Directory.Move(folder, newFolderPath);
-            }
+            if (folderName == "deaths") continue;
+
+            string newFolder = deathSaveFolder + "/" + folderName;
+
+            // recursively copy the folder
+            //CopyFolder(folder, newFolder);
         }
 
         #if UNITY_EDITOR

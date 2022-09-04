@@ -439,9 +439,19 @@ public class StatsManager : MonoBehaviour
         return SaveManager.GetSaveFolderPath(saveSlot) + "/stats/";
     }
 
+    public static string GetRecentDeathFolderPath(int saveSlot)
+    {
+        return SaveManager.GetRecentDeathFolderPath(saveSlot) + "/stats/";
+    }
+
     public static string GetSaveFilePath(int saveSlot)
     {
         return GetSaveFolderPath(saveSlot) + "stats.json";
+    }
+
+    public static string GetRecentDeathFilePath(int saveSlot)
+    {
+        return GetRecentDeathFolderPath(saveSlot) + "stats.json";
     }
 
     public void SaveStats(int saveSlot)

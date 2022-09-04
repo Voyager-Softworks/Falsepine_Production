@@ -25,9 +25,19 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
         return SaveManager.GetSaveFolderPath(saveSlot) + "/economy/";
     }
 
+    public static string GetRecentDeathFolderPath(int saveSlot)
+    {
+        return SaveManager.GetRecentDeathFolderPath(saveSlot) + "/economy/";
+    }
+
     public static string GetSaveFilePath(int saveSlot)
     {
         return GetSaveFolderPath(saveSlot) + "economy.json";
+    }
+
+    public static string GetRecentDeathFilePath(int saveSlot)
+    {
+        return GetRecentDeathFolderPath(saveSlot) + "economy.json";
     }
 
     // StatsManager.UsesStats implementation
@@ -206,6 +216,9 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
         return amount;
     }
 
+    /// <summary>
+    /// Increases the bank level by 1, and updates the slot amount.
+    /// </summary>
     public void UpgradeBank()
     {
         m_bankLevel++;
@@ -214,6 +227,9 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
         UpdateBankSlotAmount();
     }
 
+    /// <summary>
+    /// Adds slots to the bank based on the current bank level.
+    /// </summary>
     public void UpdateBankSlotAmount()
     {
         int unlockedSlots = GetUnlockedBankSlotAmount();
@@ -223,6 +239,21 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
         {
             bankInv.AddSlot();
         }
+    }
+
+    /// <summary>
+    /// Returns the percentage of silver the player will retain on death, based on the bank level.
+    /// </summary>
+    /// <returns></returns>
+    public float GetSilverRetainPercentage()
+    {
+        float maxPercent = 0.5f; // max percentage of silver retained
+        int levelMaxReached = 10; // level at which max percentage is reached
+
+        float percent = (float)m_bankLevel / (float)levelMaxReached;
+        percent = Mathf.Clamp(percent, 0, maxPercent);
+
+        return percent;
     }
 
     public void RefillStoreInventory()
@@ -307,7 +338,6 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
         SaveData data = new SaveData();
         
         data.purchasableItems = new List<PurchasableItem.PurchasableItem_Serializable>();
-
         foreach (PurchasableItem item in m_purchasableItems)
         {
             data.purchasableItems.Add(new PurchasableItem.PurchasableItem_Serializable(item));
@@ -326,28 +356,30 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
         file.Close();
     }
 
-    public void LoadEconomy(int saveSlot)
+    public void LoadEconomy(int _saveSlot)
     {
         // if save path doesn't exist, create it
-        if (!Directory.Exists(GetSaveFolderPath(saveSlot)))
+        if (!Directory.Exists(GetSaveFolderPath(_saveSlot)))
         {
-            Directory.CreateDirectory(GetSaveFolderPath(saveSlot));
+            Directory.CreateDirectory(GetSaveFolderPath(_saveSlot));
         }
         // if save file doesn't exist, return
-        if (!File.Exists(GetSaveFilePath(saveSlot)))
+        if (!File.Exists(GetSaveFilePath(_saveSlot)))
         {
             Debug.Log("Save file does not exist.");
+            RestoreFromLastDeath(_saveSlot);
             return;
         }
 
         // read the file
-        FileStream file = File.Open(GetSaveFilePath(saveSlot), FileMode.Open);
+        FileStream file = File.Open(GetSaveFilePath(_saveSlot), FileMode.Open);
 
         StreamReader reader = new StreamReader(file);
 
         // load the data 
         SaveData data = JsonUtility.FromJson<SaveData>(reader.ReadToEnd());
 
+        m_purchasableItems = new List<PurchasableItem>();
         foreach (PurchasableItem.PurchasableItem_Serializable item in data.purchasableItems)
         {
             m_purchasableItems.Add(item.ToPurchasableItem());
@@ -359,6 +391,49 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
         reader.Close();
 
         file.Close();
+    }
+
+    /// <summary>
+    /// Loads the economy from the most recent death. <br/>
+    /// Retians the bank level, purchasable items, and max store items, but only retains a portion of the player's silver.
+    /// </summary>
+    /// <param name="_saveSlot"></param>
+    public void RestoreFromLastDeath(int _saveSlot)
+    {
+        // if recent death path doesnt exist, return
+        if (!Directory.Exists(GetRecentDeathFolderPath(_saveSlot)))
+        {
+            Debug.Log("Recent death folder does not exist.");
+            return;
+        }
+
+        // if recent death file doesnt exist, return
+        if (!File.Exists(GetRecentDeathFilePath(_saveSlot)))
+        {
+            Debug.Log("Recent death file does not exist.");
+            return;
+        }
+
+        // read the file
+        FileStream file = File.Open(GetRecentDeathFilePath(_saveSlot), FileMode.Open);
+
+        StreamReader reader = new StreamReader(file);
+
+        // load the data
+        SaveData data = JsonUtility.FromJson<SaveData>(reader.ReadToEnd());
+
+        // retain bank level, purchasable items, and max store items
+        m_bankLevel = data.m_bankLevel;
+        m_maxStoreItems = data.m_maxStoreItems;
+        m_purchasableItems = new List<PurchasableItem>();
+        foreach (PurchasableItem.PurchasableItem_Serializable item in data.purchasableItems)
+        {
+            m_purchasableItems.Add(item.ToPurchasableItem());
+        }
+
+        // retain a portion of the player's silver
+        float percent = GetSilverRetainPercentage();
+        m_playerSilver = (int)(data.m_playerSilver * percent);
     }
 
     /// <summary>

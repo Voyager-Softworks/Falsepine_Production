@@ -125,7 +125,7 @@ public class PlayerHealth : MonoBehaviour
         FadeScript fadeScript = FindObjectOfType<FadeScript>();
         if (fadeScript)
         {
-            fadeScript.EndScreen();
+            fadeScript.EndScreen(false);
         }
 
         //disable player movement, shooting, inventory, etc.
