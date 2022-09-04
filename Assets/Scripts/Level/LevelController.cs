@@ -59,7 +59,7 @@ public class LevelController : MonoBehaviour
     static public void LoadGameOver()
     {
         //SaveManager.SoftDeleteAll(SaveManager.currentSaveSlot);
-        SaveManager.GameOverRestart();
+        SaveManager.GameOverRestart(SaveManager.currentSaveSlot);
 
         DestroyManagers();
 
