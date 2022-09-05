@@ -45,10 +45,10 @@ public class EnemyGroup : MonoBehaviour
                 Vector3 spawnPosition = transform.position + Random.insideUnitSphere * radius;
                 spawnPosition.y = transform.position.y;
                 GameObject enemy = Instantiate(groupMember.enemyPrefab, spawnPosition, Quaternion.identity);
-                enemy.GetComponent<NodeAI_Agent>().SetParameter<bool>("Aware", true);
                 spawnedEnemies.Add(enemy);
             }
         }
+        FindObjectOfType<EnemyAwarenessManager>().RegisterAwareness(gameObject);
     }
 
     /// <summary>
