@@ -66,6 +66,36 @@ public class StatsManager : MonoBehaviour
             }
             return displayName;
         }
+
+        // equality == override
+        public static bool operator ==(StatType a, StatType b)
+        {
+            return a.value == b.value;
+        }
+        // inequality != override
+        public static bool operator !=(StatType a, StatType b)
+        {
+            return a.value != b.value;
+        }
+        // Equals override
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            StatType p = obj as StatType;
+            if ((System.Object)p == null)
+            {
+                return false;
+            }
+            return (value == p.value);
+        }
+        // GetHashCode override
+        public override int GetHashCode()
+        {
+            return value.GetHashCode();
+        }
     }
 
     /// <summary>
@@ -580,9 +610,9 @@ public class StatsManager : MonoBehaviour
             methods = methods.Where(f => f.ReturnType == typeof(StatType)).ToArray();
             // create a list of strings to display in the dropdown
             List<string> options = new List<string>();
-            foreach (MethodInfo field in methods)
+            foreach (MethodInfo method in methods)
             {
-                options.Add(((StatType)field.Invoke(null, null)).value);
+                options.Add(((StatType)method.Invoke(null, null)).value);
             }
 
             // get the property value
@@ -727,14 +757,16 @@ public class StatsManager : MonoBehaviour
 
             needToSave = true;
 
-            // add all stat types
-            FieldInfo[] pi = typeof(StatsManager.StatType).GetFields();
-            foreach (FieldInfo field in pi)
+            // get all static methods of the StatType class
+            MethodInfo[] methods = typeof(StatType).GetMethods(BindingFlags.Public | BindingFlags.Static);
+            //remove any which arent of type StatType
+            methods = methods.Where(f => f.ReturnType == typeof(StatType)).ToArray();
+            foreach (MethodInfo method in methods)
             {
                 StatsManager.StatType type = null;
                 // if field is not static, return
-                if (!field.IsStatic) continue;
-                type = (StatsManager.StatType)field.GetValue(null);
+                if (!method.IsStatic) continue;
+                type = ((StatType)method.Invoke(null, null));
                 if (_target.GetStatTypes().Count() > 0)
                 {
                     StatsManager.StatType firstTpe = _target.GetStatTypes()[0];
