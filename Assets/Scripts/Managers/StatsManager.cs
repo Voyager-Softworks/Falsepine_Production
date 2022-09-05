@@ -528,6 +528,31 @@ public class StatsManager : MonoBehaviour
         JsonUtility.FromJsonOverwrite(json, this);
     }
 
+    public void RestoreFromLastDeath(int _saveSlot)
+    {
+        // if recent death path doesnt exist, return
+        if (!Directory.Exists(GetRecentDeathFolderPath(_saveSlot)))
+        {
+            Debug.Log("Recent death folder does not exist.");
+            return;
+        }
+
+        // if recent death file doesnt exist, return
+        if (!File.Exists(GetRecentDeathFilePath(_saveSlot)))
+        {
+            Debug.Log("Recent death file does not exist.");
+            return;
+        }
+
+        // read the file
+        FileStream file = File.Open(GetRecentDeathFilePath(_saveSlot), FileMode.Open);
+
+        StreamReader reader = new StreamReader(file);
+
+        // load the data
+        //SaveData data = JsonUtility.FromJson<SaveData>(reader.ReadToEnd());
+    }
+
     /// <summary>
     /// Deletes the save at index
     /// </summary>

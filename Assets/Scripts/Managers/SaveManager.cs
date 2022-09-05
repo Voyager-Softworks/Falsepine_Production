@@ -219,6 +219,7 @@ public class SaveManager : MonoBehaviour
 
         // load some manages from death
         EconomyManager.instance.RestoreFromLastDeath(_saveSlot);
+        StatsManager.instance.RestoreFromLastDeath(_saveSlot);
 
         #if UNITY_EDITOR
         // remove all .meta files in the root save folder (recursively)
