@@ -458,7 +458,7 @@ public class PlayerInventoryInterface : MonoBehaviour
         if (!weapon) return null;
         foreach (WeaponModelLink link in weaponModelLinks)
         {
-            if (link.weapon.id == weapon.id)
+            if (link.weapon && link.weapon.id == weapon.id)
             {
                 return link.model;
             }
@@ -478,7 +478,7 @@ public class PlayerInventoryInterface : MonoBehaviour
         if (!weapon) return null;
         foreach (WeaponModelLink link in weaponModelLinks)
         {
-            if (link.weapon.id == weapon.id)
+            if (link.weapon != null && link.weapon.id == weapon.id)
             {
                 return link.weaponFirepoint;
             }
@@ -498,7 +498,7 @@ public class PlayerInventoryInterface : MonoBehaviour
     {
         foreach (WeaponModelLink link in weaponModelLinks)
         {
-            if (link.weapon.id == weapon.id)
+            if (link.weapon != null && link.weapon.id == weapon.id)
             {
                 return link.animatorBoolName;
             }

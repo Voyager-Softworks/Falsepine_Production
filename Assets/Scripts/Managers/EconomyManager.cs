@@ -367,7 +367,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
         if (!File.Exists(GetSaveFilePath(_saveSlot)))
         {
             Debug.Log("Save file does not exist.");
-            RestoreFromLastDeath(_saveSlot);
+            //RestoreFromLastDeath(_saveSlot);
             return;
         }
 

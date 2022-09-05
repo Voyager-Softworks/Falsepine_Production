@@ -436,6 +436,26 @@ public class RangedWeapon : Item
                 Quaternion.FromToRotation(Vector3.up, shotInfo.hitPoint - shotInfo.originPoint)),
                 2.0f);
             }
+
+            //create trail effect
+            if (m_trailEffect != null)
+            {
+                GameObject trail = Instantiate(m_trailEffect, _origin, Quaternion.identity);
+                // LineRenderer lineRenderer = trail.GetComponent<LineRenderer>();
+                // if (lineRenderer != null)
+                // {
+                //     lineRenderer.SetPosition(0, _origin);
+                //     lineRenderer.SetPosition(1, (hit.distance > 0 ? hit.point : _origin + currentDirection * m_range));
+                // }
+                BulletTrail bulletTrail = trail.GetComponent<BulletTrail>();
+                if (bulletTrail != null)
+                {
+                    bulletTrail.SetPositions(
+                        shotInfo.originPoint,
+                        shotInfo.hitPoint
+                    );
+                }
+            }
         }
 
         // play shoot sound:

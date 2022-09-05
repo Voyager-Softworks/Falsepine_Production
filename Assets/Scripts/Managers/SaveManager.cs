@@ -217,6 +217,9 @@ public class SaveManager : MonoBehaviour
 
         SoftDeleteAll(_saveSlot);
 
+        // load some manages from death
+        EconomyManager.instance.RestoreFromLastDeath(_saveSlot);
+
         #if UNITY_EDITOR
         // remove all .meta files in the root save folder (recursively)
         string[] metaFiles = Directory.GetFiles(GetRootSaveFolder(), "*.meta", SearchOption.AllDirectories);
