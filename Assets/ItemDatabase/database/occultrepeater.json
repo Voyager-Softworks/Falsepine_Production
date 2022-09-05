@@ -1,9 +1,9 @@
 PrimaryRangedWeapon
 {
-    "m_id": "shotgun",
+    "m_id": "occultrepeater",
     "m_instanceID": "",
-    "m_displayName": "Shotgun",
-    "m_description": "Double barrel shotgun loaded with pellets",
+    "m_displayName": "Occult Repeater",
+    "m_description": "Rapid fire weapon modified through occult practices",
     "m_icon": {
         "instanceID": 11308
     },
@@ -13,10 +13,10 @@ PrimaryRangedWeapon
     "m_tags": [],
     "m_usedStatTypes": [
         {
-            "value": "RangedDamage"
+            "value": "PistolDamage"
         },
         {
-            "value": "ShotgunDamage"
+            "value": "RangedDamage"
         },
         {
             "value": "RangedInaccuracy"
@@ -32,12 +32,12 @@ PrimaryRangedWeapon
         }
     ],
     "m_statMods": [],
-    "m_price": 5,
+    "m_price": 10,
     "m_allowedDiscount": true,
     "m_resourceLinks": [
         {
             "fieldName": "m_shootEffect",
-            "resourceName": "VFX_ShotgunFlash"
+            "resourceName": "VFX_RevolverFlash"
         },
         {
             "fieldName": "m_trailEffect",
@@ -49,7 +49,7 @@ PrimaryRangedWeapon
         },
         {
             "fieldName": "m_shootSound",
-            "resourceName": "SoundPrefab_Shotgun_Shoot"
+            "resourceName": "SoundPrefab_Repeater_Shoot"
         },
         {
             "fieldName": "m_emptySound",
@@ -57,7 +57,7 @@ PrimaryRangedWeapon
         },
         {
             "fieldName": "m_reloadSound",
-            "resourceName": "SoundPrefab_Shotgun_Reload"
+            "resourceName": "SoundPrefab_Revolver_Reload"
         },
         {
             "fieldName": "m_equipSound",
@@ -76,29 +76,29 @@ PrimaryRangedWeapon
             "resourceName": "UI_icon-shotgun"
         }
     ],
-    "m_damage": 20.0,
-    "m_range": 15.0,
+    "m_damage": 1.0,
+    "m_range": 25.0,
     "m_shootTime": 0.25,
     "m_shootTimer": 0.0,
-    "m_maxHitsPerShot": 3,
-    "m_isAutomnatic": false,
-    "m_aimedInaccuracy": 20.0,
-    "m_unaimedInaccuracy": 30.0,
+    "m_maxHitsPerShot": 1,
+    "m_isAutomnatic": true,
+    "m_aimedInaccuracy": 6.0,
+    "m_unaimedInaccuracy": 15.0,
     "m_aimTime": 0.75,
     "m_aimTimer": 0.0,
-    "m_horizFalloffMult": 1.5,
+    "m_horizFalloffMult": 0.75,
     "m_isAiming": false,
-    "m_clipAmmo": 2,
-    "m_clipSize": 2,
-    "m_spareAmmo": 10,
-    "m_maxSpareAmmo": 20,
+    "m_clipAmmo": 40,
+    "m_clipSize": 40,
+    "m_spareAmmo": 120,
+    "m_maxSpareAmmo": 120,
     "m_unlimitedAmmo": false,
-    "m_reloadTime": 2.5,
+    "m_reloadTime": 3.5,
     "m_reloadTimer": 0.0,
     "m_equipTime": 0.5,
     "m_equipTimer": 0.0,
     "m_shootEffect": {
-        "instanceID": 11310
+        "instanceID": 12394
     },
     "m_trailEffect": {
         "instanceID": 11312
@@ -107,13 +107,13 @@ PrimaryRangedWeapon
         "instanceID": 11314
     },
     "m_shootSound": {
-        "instanceID": 11316
+        "instanceID": 12514
     },
     "m_emptySound": {
         "instanceID": 11318
     },
     "m_reloadSound": {
-        "instanceID": 11320
+        "instanceID": 12470
     },
     "m_equipSound": {
         "instanceID": 11322
