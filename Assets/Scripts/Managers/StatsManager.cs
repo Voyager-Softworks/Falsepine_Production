@@ -168,7 +168,7 @@ public class StatsManager : MonoBehaviour
     /// Stat mod range stores data to be used to create a random stat mod
     /// </summary>    
     [Serializable]
-    private class StatModRange
+    public class StatModRange
     {
         /// <summary>
         /// Do not edit this value! Automatically set by the editor.
@@ -185,12 +185,12 @@ public class StatsManager : MonoBehaviour
 
     public Talisman GetRandomTalisman()
     {
-        StatModRange range = m_possibleTalismanMods[UnityEngine.Random.Range(0, m_possibleTalismanMods.Count)];
+        StatModRange modRange = m_possibleTalismanMods[UnityEngine.Random.Range(0, m_possibleTalismanMods.Count)];
         Talisman talisman = new Talisman();
-        talisman.m_statMod.statType = range.m_statType;
-        talisman.m_statMod.modType = range.m_modType;
-        talisman.m_statMod.value = UnityEngine.Random.Range(range.m_min, range.m_max);
-        talisman.m_icon = range.m_icon;
+        talisman.m_statMod.statType = modRange.m_statType;
+        talisman.m_statMod.modType = modRange.m_modType;
+        talisman.m_statMod.value = UnityEngine.Random.Range(modRange.m_min, modRange.m_max);
+        talisman.m_icon = modRange.m_icon;
         return talisman;
     }
     #endregion
@@ -484,6 +484,17 @@ public class StatsManager : MonoBehaviour
         return GetRecentDeathFolderPath(saveSlot) + "stats.json";
     }
 
+    /// <summary>
+    /// Data calss for saving stats to file
+    /// </summary>
+    [Serializable]
+    public class SaveData{
+        public List<StatMod> globalStatMods = new List<StatMod>();
+        public List<StatModRange> possibleTalismanMods = new List<StatModRange>();
+        public List<Talisman> activeTalismans = new List<Talisman>();
+        public List<MonsterStat> monsterStats = new List<MonsterStat>();
+    }
+
     public void SaveStats(int saveSlot)
     {
         // if the save folder doesn't exist, create it
@@ -494,10 +505,28 @@ public class StatsManager : MonoBehaviour
 
         FileStream file = File.Create(GetSaveFilePath(saveSlot));
 
-        // write the json to the file
+        // make data
+        SaveData data = new SaveData();
+        
+        // add global stat mods
+        data.globalStatMods = new List<StatMod>(globalStatMods);
+        // add possible talisman mods
+        data.possibleTalismanMods = new List<StatModRange>(m_possibleTalismanMods);
+        // add active talismans
+        data.activeTalismans = new List<Talisman>(m_activeTalismans);
+        // add monster stats
+        data.monsterStats = new List<MonsterStat>(m_monsterStats);
+
+        // convert data to json
+        string json = JsonUtility.ToJson(data);
+
+        // write json to file
         StreamWriter writer = new StreamWriter(file);
-        writer.Write(JsonUtility.ToJson(this, true));
+
+        writer.Write(json);
+
         writer.Close();
+
         file.Close();
     }
 
@@ -520,14 +549,30 @@ public class StatsManager : MonoBehaviour
         FileStream file = File.Open(GetSaveFilePath(saveSlot), FileMode.Open);
 
         StreamReader reader = new StreamReader(file);
+
         string json = reader.ReadToEnd();
+
         reader.Close();
+
         file.Close();
 
-        // parse the json
-        JsonUtility.FromJsonOverwrite(json, this);
+        // convert json to data
+        SaveData data = JsonUtility.FromJson<SaveData>(json);
+
+        // load global stat mods
+        globalStatMods = new List<StatMod>(data.globalStatMods);
+        // load possible talisman mods
+        m_possibleTalismanMods = new List<StatModRange>(data.possibleTalismanMods);
+        // load active talismans
+        m_activeTalismans = new List<Talisman>(data.activeTalismans);
+        // load monster stats
+        m_monsterStats = new List<MonsterStat>(data.monsterStats);
     }
 
+    /// <summary>
+    /// Resotres some stats from the last death (only restores possible talisman mods and monster stats)
+    /// </summary>
+    /// <param name="_saveSlot"></param>
     public void RestoreFromLastDeath(int _saveSlot)
     {
         // if recent death path doesnt exist, return
@@ -549,8 +594,19 @@ public class StatsManager : MonoBehaviour
 
         StreamReader reader = new StreamReader(file);
 
-        // load the data
-        //SaveData data = JsonUtility.FromJson<SaveData>(reader.ReadToEnd());
+        string json = reader.ReadToEnd();
+
+        reader.Close();
+
+        file.Close();
+
+        // convert json to data
+        SaveData data = JsonUtility.FromJson<SaveData>(json);
+
+        // load possible talisman mods
+        m_possibleTalismanMods = new List<StatModRange>(data.possibleTalismanMods);
+        // load monster stats
+        m_monsterStats = new List<MonsterStat>(data.monsterStats);
     }
 
     /// <summary>
