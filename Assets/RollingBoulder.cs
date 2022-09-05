@@ -34,9 +34,9 @@ public class RollingBoulder : MonoBehaviour
 
     IEnumerator PopUpCoroutine()
     {
-        Vector3 finalPosition = transform.position;
+        Vector3 finalPosition = transform.position + (Vector3.up * 0.5f);
 
-        Vector3 initialPosition = finalPosition - Vector3.up;
+        Vector3 initialPosition = finalPosition - (Vector3.up * 4f);
         float t = 0;
         while (t < 0.5)
         {

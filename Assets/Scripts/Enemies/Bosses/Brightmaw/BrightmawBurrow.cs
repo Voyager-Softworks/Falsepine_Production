@@ -13,6 +13,8 @@ public class BrightmawBurrow : MonoBehaviour
     public AudioClip burrowSound;
     public ParticleSystem burrowParticles, unburrowParticles;
 
+    public bool isBoss = false;
+
 
     bool burrowing = false;
 
@@ -35,18 +37,24 @@ public class BrightmawBurrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         bool newBurrowVal = agent.GetParameter<bool>("Burrowing");
+        bool playFX = isBoss && agent.GetParameter<bool>("Stage3");
+        if (!isBoss) playFX = true;
 
         if (newBurrowVal != burrowing)
         {
             if (newBurrowVal)
             {
-                audioSource.loop = true;
-                audioSource.clip = burrowSound;
-                audioSource.pitch = Random.Range(0.8f, 1.2f);
-                audioSource.time = Random.Range(0, audioSource.clip.length);
-                audioSource.Play();
-                burrowParticles.Play();
+                if (playFX)
+                {
+                    audioSource.loop = true;
+                    audioSource.clip = burrowSound;
+                    audioSource.pitch = Random.Range(0.8f, 1.2f);
+                    audioSource.time = Random.Range(0, audioSource.clip.length);
+                    audioSource.Play();
+                    burrowParticles.Play();
+                }
                 foreach (var child in GetComponentsInChildren<Collider>())
                 {
                     child.enabled = false;

@@ -23,6 +23,7 @@ public class BossEnemyHealth : EnemyHealth
 
         m_senses = GetComponent<NodeAI.NodeAI_Senses>();
         if (m_uiScript == null) m_uiScript = FindObjectOfType<UIScript>();
+        m_uiScript.bossNameText.text = gameObject.name;
     }
 
     // Update is called once per frame
