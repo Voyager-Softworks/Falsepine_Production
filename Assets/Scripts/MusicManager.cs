@@ -2,8 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+///  This class is used to manage the music in the game.
+/// </summary>
 public class MusicManager : MonoBehaviour
 {
+    /// <summary>
+    ///  The audio channels that are used to play the music.
+    /// </summary>
     [System.Serializable]
     public class AudioChannel
     {
@@ -48,8 +54,11 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-    public string[] triggers;
+    public string[] triggers; ///< The triggers that can be used to trigger transitions.
 
+                              /// <summary>
+                              ///  Transitions between audio channels.
+                              /// </summary>
     [System.Serializable]
     public class AudioChannelTransition
     {
@@ -62,12 +71,9 @@ public class MusicManager : MonoBehaviour
         public bool autoTransitionOnTrackEnd;
     }
 
-    public List<AudioChannel> audioChannels;
-    public List<AudioChannelTransition> transitions;
+    public List<AudioChannel> audioChannels; ///< The current audio channels.
+    public List<AudioChannelTransition> transitions; ///< The current transitions.
 
-    [Header("Channel Blending Settings")]
-    public float blend = 0;
-    public bool blendingEnabled = true;
 
 
     // Start is called before the first frame update
@@ -94,6 +100,11 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    ///  Gets the audiosource of the channel with the given name.
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
     public AudioSource GetChannelSource(string name)
     {
         foreach (AudioChannel channel in audioChannels)
@@ -103,6 +114,10 @@ public class MusicManager : MonoBehaviour
         return null;
     }
 
+    /// <summary>
+    ///  Plays the channel with the given index.
+    /// </summary>
+    /// <param name="index"></param>
     public void Play(int index)
     {
         if (index < 0 || index >= audioChannels.Count) return;
@@ -111,6 +126,10 @@ public class MusicManager : MonoBehaviour
         audioChannels[index].paused = false;
     }
 
+    /// <summary>
+    ///  Plays the channel with the given name.
+    /// </summary>
+    /// <param name="name"></param>
     public void Play(string name)
     {
         foreach (AudioChannel channel in audioChannels)
@@ -125,6 +144,10 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    ///  Pauses the channel with the given index.
+    /// </summary>
+    /// <param name="index"></param>
     public void Pause(int index)
     {
         if (index < 0 || index >= audioChannels.Count) return;
@@ -133,6 +156,10 @@ public class MusicManager : MonoBehaviour
         audioChannels[index].paused = true;
     }
 
+    /// <summary>
+    ///  Pauses the channel with the given name.
+    /// </summary>
+    /// <param name="name"></param>
     public void Pause(string name)
     {
         foreach (AudioChannel channel in audioChannels)
@@ -147,6 +174,10 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    ///  Stops the channel with the given index.
+    /// </summary>
+    /// <param name="index"></param>
     public void Stop(int index)
     {
         if (index < 0 || index >= audioChannels.Count) return;
@@ -155,6 +186,10 @@ public class MusicManager : MonoBehaviour
         audioChannels[index].paused = false;
     }
 
+    /// <summary>
+    ///  Stops the channel with the given name.
+    /// </summary>
+    /// <param name="name"></param>
     public void Stop(string name)
     {
         foreach (AudioChannel channel in audioChannels)
@@ -169,12 +204,23 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    ///  Fades in the channel with the given index.
+    /// </summary>
+    /// <param name="index"></param>
+    /// <param name="time"></param>
+    /// <param name="normalizedTime"></param>
     public void FadeIn(int index, float time, float normalizedTime = 0.0f)
     {
         if (index < 0 || index >= audioChannels.Count) return;
         StartCoroutine(FadeInCoroutine(index, time, normalizedTime));
     }
 
+    /// <summary>
+    ///  Fades out the channel with the given index.
+    /// </summary>
+    /// <param name="index"></param>
+    /// <param name="time"></param>
     public void FadeOut(int index, float time)
     {
         if (index < 0 || index >= audioChannels.Count) return;

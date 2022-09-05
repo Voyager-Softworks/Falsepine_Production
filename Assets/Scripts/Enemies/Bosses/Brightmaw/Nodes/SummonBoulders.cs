@@ -52,7 +52,6 @@ namespace Boss.Brightmaw
                     direction.y = 0;
                     direction.Normalize();
                     boulder.transform.position += direction * Random.Range(GetProperty<float>("Min Radius"), GetProperty<float>("Max Radius"));
-                    boulder.GetComponent<Rigidbody>().velocity = Vector3.up * GetProperty<float>("Boulder Speed");
                     m_boulders.Add(boulder);
                 }
                 spawned = true;

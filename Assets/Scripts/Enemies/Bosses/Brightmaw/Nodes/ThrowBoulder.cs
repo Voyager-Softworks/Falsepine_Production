@@ -120,6 +120,11 @@ namespace Boss.Brightmaw
             moveToVector *= GetProperty<float>("Range") * 0.9f;
             moveToVector += closest.transform.position;
             NavMeshHit hit;
+            if (Vector3.Distance(agent.transform.position, GetProperty<Transform>("Target").position) < 9.0f)
+            {
+                state = NodeData.State.Failure;
+                return NodeData.State.Failure;
+            }
             if (NavMesh.SamplePosition(moveToVector, out hit, GetProperty<float>("Range"), NavMesh.AllAreas))
             {
                 moveToVector = hit.position;

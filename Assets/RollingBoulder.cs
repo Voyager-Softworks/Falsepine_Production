@@ -35,6 +35,7 @@ public class RollingBoulder : MonoBehaviour
     IEnumerator PopUpCoroutine()
     {
         Vector3 finalPosition = transform.position;
+
         Vector3 initialPosition = finalPosition - Vector3.up;
         float t = 0;
         while (t < 0.5)
@@ -91,7 +92,7 @@ public class RollingBoulder : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("IgnoreRaycast") || !isRolling) return;
+        if (other.gameObject.layer == LayerMask.NameToLayer("IgnoreRaycast") || !isRolling || other.gameObject.layer == LayerMask.NameToLayer("Floor")) return;
         if (other.gameObject.tag == "Player")
         {
             other.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
