@@ -607,6 +607,9 @@ public class StatsManager : MonoBehaviour
         m_possibleTalismanMods = new List<StatModRange>(data.possibleTalismanMods);
         // load monster stats
         m_monsterStats = new List<MonsterStat>(data.monsterStats);
+
+        // save
+        SaveStats(_saveSlot);
     }
 
     /// <summary>
