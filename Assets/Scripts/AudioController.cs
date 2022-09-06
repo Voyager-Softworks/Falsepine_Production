@@ -54,11 +54,11 @@ public class AudioController : MonoBehaviour
         }
     }
 
-    public string[] triggers; ///< The triggers that can be used to trigger transitions.
+    public string[] triggers = { }; ///< The triggers that can be used to trigger transitions.
 
-                              /// <summary>
-                              ///  Transitions between audio channels.
-                              /// </summary>
+                                    /// <summary>
+                                    ///  Transitions between audio channels.
+                                    /// </summary>
     [System.Serializable]
     public class AudioChannelTransition
     {
