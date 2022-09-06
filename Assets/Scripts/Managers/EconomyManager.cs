@@ -75,19 +75,19 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
 
     /// <summary>
     /// Items which can be purchsed and info about them, such as unlock state, amount that can be bought, etc.
-    /// @todo make this saveable.
+    /// @todo make this actually save items in file somehwere? Seems to be neccecary if we want to be safe.
     /// </summary>
     [Serializable]
     public class PurchasableItem
     {
-        public Item m_item = null;
+        [SerializeField] public Item m_item = null;
 
-        public int m_minAmount = 1;
-        public int m_maxAmount = 1;
+        [SerializeField] public int m_minAmount = 1;
+        [SerializeField] public int m_maxAmount = 1;
 
-        public bool m_unlocked = false;
+        [SerializeField] public bool m_unlocked = false;
 
-        public bool m_removeIfExists = false;
+        [SerializeField] public bool m_removeIfExists = false;
 
         // serializable version of the PurchasableItem class.
         [Serializable]
@@ -136,7 +136,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     public string homeInventoryName = "home";
     public string bankInventroyName = "bank";
 
-    public List<PurchasableItem> m_purchasableItems = new List<PurchasableItem>();
+    [SerializeField] public List<PurchasableItem> m_purchasableItems = new List<PurchasableItem>();
 
     public int m_playerSilver = 0;
 
@@ -434,6 +434,9 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
         // retain a portion of the player's silver
         float percent = GetSilverRetainPercentage();
         m_playerSilver = (int)(data.m_playerSilver * percent);
+
+        // save
+        SaveEconomy(_saveSlot);
     }
 
     /// <summary>
