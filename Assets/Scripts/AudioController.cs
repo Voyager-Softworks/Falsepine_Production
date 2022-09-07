@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 ///  This class is used to manage the music in the game.
 /// </summary>
-public class MusicManager : MonoBehaviour
+public class AudioController : MonoBehaviour
 {
     /// <summary>
     ///  The audio channels that are used to play the music.
@@ -54,11 +54,11 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-    public string[] triggers; ///< The triggers that can be used to trigger transitions.
+    public string[] triggers = { }; ///< The triggers that can be used to trigger transitions.
 
-                              /// <summary>
-                              ///  Transitions between audio channels.
-                              /// </summary>
+                                    /// <summary>
+                                    ///  Transitions between audio channels.
+                                    /// </summary>
     [System.Serializable]
     public class AudioChannelTransition
     {
@@ -307,6 +307,8 @@ public class MusicManager : MonoBehaviour
         {
             channel.time = channel.source.time;
             channel.timeNormalized = channel.time / channel.duration;
+            channel.playing = channel.source.isPlaying;
+            channel.paused = !channel.source.isPlaying;
 
             //Update source variables to match channel variables
             channel.source.volume = channel.volume;

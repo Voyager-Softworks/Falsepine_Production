@@ -7,10 +7,10 @@ using System;
 using System.Linq;
 using UnityEditor.Rendering;
 
-[CustomEditor(typeof(MusicManager))]
-public class MusicManager_Inspector : Editor
+[CustomEditor(typeof(AudioController))]
+public class AudioController_Inspector : Editor
 {
-    MusicManager musicManager;
+    AudioController musicManager;
     SerializedProperty audioChannels;
     ReorderableList audioChannelList;
 
@@ -21,7 +21,7 @@ public class MusicManager_Inspector : Editor
 
     private void OnEnable()
     {
-        musicManager = (MusicManager)target;
+        musicManager = (AudioController)target;
         audioChannels = serializedObject.FindProperty("audioChannels");
         audioChannelList = new ReorderableList(serializedObject, audioChannels, true, true, true, true);
         heights.Clear();

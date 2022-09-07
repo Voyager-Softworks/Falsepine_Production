@@ -6,6 +6,7 @@ using UnityEngine.Events;
 /// <summary>
 /// A base health class for all objects that can take damage.
 /// </summary>
+[RequireComponent(typeof(AudioController))]
 public class Health_Base : MonoBehaviour /// @todo Impliment this into players, enemies, destructable objects.
 {
 
@@ -70,13 +71,16 @@ public class Health_Base : MonoBehaviour /// @todo Impliment this into players, 
     public List<DamageStat> m_damageHistory = new List<DamageStat>(); ///< The damage history of the object.
 
     [Header("Sounds")]
-    public GameObject m_deathSound = null; ///< The sound to play when the object dies.
-    public GameObject m_hurtSound = null; ///< The sound to play when the object takes damage.
+    public string m_deathSoundName = "DeathSound"; ///< The sound to play when the object dies. Uses the audio controller component.
+    public string m_damageSoundname = "DamageSound"; ///< The sound to play when the object takes damage. Uses the audio controller component.
+    private AudioController m_audioController;
 
     public virtual void Start()
     {
         CheckMaxHealth();
         UpdateDeath();
+
+        m_audioController = GetComponent<AudioController>();
     }
 
     public virtual void Update()
@@ -174,9 +178,9 @@ public class Health_Base : MonoBehaviour /// @todo Impliment this into players, 
     /// </summary>
     public void PlayHurtSound()
     {
-        if (m_hurtSound == null) return;
+        if (m_audioController == null) return;
 
-        GameObject sound = Instantiate(m_hurtSound, transform.position, Quaternion.identity, transform);
+        m_audioController.Play(m_damageSoundname);
     }
 
     /// <summary>
@@ -184,9 +188,9 @@ public class Health_Base : MonoBehaviour /// @todo Impliment this into players, 
     /// </summary>
     public void PlayDeathSound()
     {
-        if (m_deathSound == null) return;
+        if (m_audioController == null) return;
 
-        GameObject sound = Instantiate(m_deathSound, transform.position, Quaternion.identity);
+        m_audioController.Play(m_deathSoundName);
     }
 
 }
