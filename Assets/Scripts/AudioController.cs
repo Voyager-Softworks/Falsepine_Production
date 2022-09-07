@@ -154,7 +154,7 @@ public class AudioController : MonoBehaviour ///< @todo comment
         {
             if (channel.name == name)
             {
-                channel.source.PlayOneShot(channel.source.clip);
+                channel.source.PlayOneShot(channel.clip);
                 channel.playing = true;
                 channel.paused = false;
                 return;
@@ -169,7 +169,7 @@ public class AudioController : MonoBehaviour ///< @todo comment
     public void PlayOnce(int index)
     {
         if (index < 0 || index >= audioChannels.Count) return;
-        audioChannels[index].source.PlayOneShot(audioChannels[index].source.clip);
+        audioChannels[index].source.PlayOneShot(audioChannels[index].clip);
         audioChannels[index].playing = true;
         audioChannels[index].paused = false;
     }
