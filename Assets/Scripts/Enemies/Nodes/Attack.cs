@@ -87,12 +87,6 @@ public class Attack : NodeAI.ActionBase  /// @todo Comment
         if (navAgent == null)
         {
             navAgent = agent.GetComponentInChildren<NavMeshAgent>();
-            if (navAgent == null)
-            {
-                Debug.LogError("No NavMeshAgent found on " + agent.gameObject.name);
-                state = NodeData.State.Failure;
-                return NodeData.State.Failure;
-            }
         }
         if (rotateTowardsPlayer == null)
         {
@@ -150,8 +144,8 @@ public class Attack : NodeAI.ActionBase  /// @todo Comment
                 rotateTowardsPlayer.MoveToPlayer(phase.translationDuration, phase.translationSpeed, phase.translationDelay);
                 agent.GetComponent<DamageDealer>().Screenshake(phase.screenShakeDuration, phase.screenShakeAmplitude, phase.screenShakeFrequency, phase.screenShakeDelay);
             }
-            navAgent.isStopped = true;
-            navAgent.SetDestination(agent.transform.position);
+            if (navAgent) navAgent.isStopped = true;
+            if (navAgent) navAgent.SetDestination(agent.transform.position);
 
         }
 
@@ -176,7 +170,7 @@ public class Attack : NodeAI.ActionBase  /// @todo Comment
         else
         {
             state = NodeData.State.Running;
-            navAgent.isStopped = true;
+            if (navAgent) navAgent.isStopped = true;
             return NodeData.State.Running;
         }
 

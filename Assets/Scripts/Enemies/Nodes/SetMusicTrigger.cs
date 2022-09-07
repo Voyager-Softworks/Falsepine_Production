@@ -16,7 +16,7 @@ namespace NodeAI.Audio
         {
             if (GetProperty<string>("Trigger") != "")
             {
-                AudioController musicManager = GameObject.FindObjectOfType<AudioController>();
+                AudioController musicManager = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<AudioController>();
                 if (musicManager != null)
                 {
                     musicManager.Trigger(GetProperty<string>("Trigger"));
