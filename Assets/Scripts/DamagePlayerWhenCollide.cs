@@ -86,7 +86,9 @@ public class DamagePlayerWhenCollide : MonoBehaviour
         }
 
 
+
     }
+
 
 
 
