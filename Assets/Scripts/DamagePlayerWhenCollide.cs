@@ -39,7 +39,7 @@ public class DamagePlayerWhenCollide : MonoBehaviour
             if (!isActive) return;
             timeBeforeDetectionTimer += Time.deltaTime;
             if (timeBeforeDetectionTimer < timeBeforeDetection) return;
-            RaycastHit[] hits = Physics.SphereCastAll(transform.position, sphereCollider.radius * transform.lossyScale.y, Vector3.down, 0.0f, layerMask);
+            RaycastHit[] hits = Physics.SphereCastAll(transform.position, sphereCollider.radius * transform.lossyScale.y, transform.forward, 0.0f, layerMask);
             foreach (RaycastHit hit in hits)
             {
                 if (hit.collider.gameObject.tag == "Player")
