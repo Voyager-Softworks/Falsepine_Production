@@ -180,7 +180,7 @@ public class Health_Base : MonoBehaviour /// @todo Impliment this into players, 
     {
         if (m_audioController == null) return;
 
-        m_audioController.Play(m_damageSoundname);
+        m_audioController.PlayOnce(m_damageSoundname);
     }
 
     /// <summary>

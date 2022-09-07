@@ -145,6 +145,36 @@ public class AudioController : MonoBehaviour ///< @todo comment
     }
 
     /// <summary>
+    ///  Plays the channel with the given name once.
+    /// </summary>
+    /// <param name="name"></param>
+    public void PlayOnce(string name)
+    {
+        foreach (AudioChannel channel in audioChannels)
+        {
+            if (channel.name == name)
+            {
+                channel.source.PlayOneShot(channel.source.clip);
+                channel.playing = true;
+                channel.paused = false;
+                return;
+            }
+        }
+    }
+
+    /// <summary>
+    ///  Plays the channel with the given index once.
+    /// </summary>
+    /// <param name="index"></param>
+    public void PlayOnce(int index)
+    {
+        if (index < 0 || index >= audioChannels.Count) return;
+        audioChannels[index].source.PlayOneShot(audioChannels[index].source.clip);
+        audioChannels[index].playing = true;
+        audioChannels[index].paused = false;
+    }
+
+    /// <summary>
     ///  Pauses the channel with the given index.
     /// </summary>
     /// <param name="index"></param>

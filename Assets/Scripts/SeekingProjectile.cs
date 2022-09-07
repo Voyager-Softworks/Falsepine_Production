@@ -8,8 +8,6 @@ public class SeekingProjectile : MonoBehaviour
     public float lifeTime;
     public float rotationSpeed;
     GameObject target;
-    Vector3 velocity;
-    Vector3 acceleration;
     bool expired = false;
 
     // Start is called before the first frame update
@@ -28,22 +26,19 @@ public class SeekingProjectile : MonoBehaviour
                 expired = true;
                 Destroy(gameObject, 20.0f);
             }
-            transform.position += velocity * Time.deltaTime;
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(velocity), rotationSpeed * Time.deltaTime);
+            transform.position += transform.forward * speed * Time.deltaTime;
             return;
         }
-        acceleration = Vector3.zero;
         if (target != null)
         {
             Vector3 desired = target.transform.position - transform.position;
             desired.Normalize();
             desired *= speed;
-            acceleration = desired - velocity;
+            transform.position += transform.forward * speed * Time.deltaTime;
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desired), rotationSpeed * Time.deltaTime);
+            lifeTime -= Time.deltaTime;
         }
-        velocity += acceleration * Time.deltaTime;
-        transform.position += velocity * Time.deltaTime;
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(velocity), rotationSpeed * Time.deltaTime);
-        lifeTime -= Time.deltaTime;
+
 
     }
 }

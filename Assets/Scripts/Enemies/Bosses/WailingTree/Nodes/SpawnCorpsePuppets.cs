@@ -27,15 +27,15 @@ namespace Boss.WailingTree
 
         public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
         {
-            if(init == false)
+            if (init == false)
             {
-                if(spawned.Count < GetProperty<int>("Spawn Count") && timer > GetProperty<float>("SpawnDelay"))
+                if (spawned.Count < GetProperty<int>("Spawn Count") && timer > GetProperty<float>("SpawnDelay"))
                 {
                     GameObject corpsePuppet = Instantiate(GetProperty<GameObject>("Corpse Puppet Prefab"), GetSpawnPosition(agent.transform.position), Quaternion.Euler(0, Random.Range(0, 360), 0));
                     spawned.Add(corpsePuppet);
                     timer = 0;
                 }
-                else if(spawned.Count >= GetProperty<int>("Spawn Count"))
+                else if (spawned.Count >= GetProperty<int>("Spawn Count"))
                 {
                     init = true;
                 }
@@ -43,29 +43,15 @@ namespace Boss.WailingTree
                 {
                     timer += Time.deltaTime;
                 }
+                state = NodeData.State.Running;
             }
             else
             {
-                foreach(GameObject corpsePuppet in spawned)
-                {
-                    if(corpsePuppet.GetComponent<EnemyHealth>().hasDied)
-                    {
-                        Destroy(corpsePuppet, 20.0f);
-                        spawned.Remove(corpsePuppet);
-                        break;
-                    }
-                    
-                }
-                if(spawned.Count == 0)
-                {
-                    state = NodeData.State.Success;
-                }
-                else
-                {
-                    state = NodeData.State.Running;
-                }
+
+                state = NodeData.State.Success;
+
             }
-            
+
             return state;
         }
 
@@ -88,7 +74,7 @@ namespace Boss.WailingTree
             // Draw angle lines
             Gizmos.color = Color.green;
             Vector3 old = agent.transform.position;
-            for (int i =  Mathf.FloorToInt(GetProperty<float>("Min Spawn Angle")); i < Mathf.CeilToInt(GetProperty<float>("Max Spawn Angle")); i++)
+            for (int i = Mathf.FloorToInt(GetProperty<float>("Min Spawn Angle")); i < Mathf.CeilToInt(GetProperty<float>("Max Spawn Angle")); i++)
             {
                 float angle = i * Mathf.Deg2Rad;
                 Vector3 pos = agent.transform.position + new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * GetProperty<float>("Spawn Radius");

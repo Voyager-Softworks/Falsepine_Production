@@ -839,6 +839,7 @@ GameObject:
   - component: {fileID: 3006298010195686699}
   - component: {fileID: 3006298010195686696}
   - component: {fileID: 3006298010195686697}
+  - component: {fileID: 8640239196966494087}
   m_Layer: 0
   m_Name: CorpsePuppet
   m_TagString: Untagged
@@ -874,7 +875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b31cddfd229080bbc8f108a7752a9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AI_Behaviour: {fileID: 11400000, guid: 9cd116409b7424bd6a7870ec86bea1db, type: 2}
+  AI_Behaviour: {fileID: 11400000, guid: c00871fd7c55c75a0bda110cea69808d, type: 2}
   faction: 
   inspectorProperties: []
   nodeTree:
@@ -958,11 +959,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382e18cd65ba3ee40981aca66eb43b48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_currentHealth: 10
-  m_maxHealth: 10
+  m_currentHealth: 1
+  m_maxHealth: 1
   m_disablePlayerCollision: 1
-  m_deathSound: {fileID: 0}
-  m_hurtSound: {fileID: 0}
+  m_deathSoundName: DeathSound
+  m_damageSoundname: DamageSound
+  m_monsterType: {fileID: 0}
   m_bloodEffect: {fileID: 7806886839550920633, guid: b299cee706c6a4242a9e050f66ebf1fe, type: 3}
   m_silverReward: 3
 --- !u!195 &3006298010195686709
@@ -1136,6 +1138,99 @@ CapsuleCollider:
   m_Height: 3.013471
   m_Direction: 1
   m_Center: {x: 0, y: 1.0067354, z: 0}
+--- !u!114 &8640239196966494087
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3006298010195686704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a119b25d52728621583e7f3194633c58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggers: []
+  audioChannels:
+  - name: DeathSound
+    volume: 1
+    pitch: 1
+    clip: {fileID: 8300000, guid: 45cea4621501f5b4cbdaef9bd4870856, type: 3}
+    loop: 0
+    playOnAwake: 0
+    SpatialBlend: 1
+    maxDistance: 300
+    minDistance: 1
+    distanceCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: -1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    source: {fileID: 0}
+    playing: 0
+    paused: 0
+    time: 0
+    timeNormalized: 0
+    duration: 0
+  - name: DamageSound
+    volume: 1
+    pitch: 1
+    clip: {fileID: 8300000, guid: ac85a45c00e074f4fa311e00aa44af7f, type: 3}
+    loop: 0
+    playOnAwake: 0
+    SpatialBlend: 1
+    maxDistance: 300
+    minDistance: 1
+    distanceCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: -1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    source: {fileID: 0}
+    playing: 0
+    paused: 0
+    time: 0
+    timeNormalized: 0
+    duration: 0
+  transitions: []
 --- !u!1 &3187578883100592380
 GameObject:
   m_ObjectHideFlags: 0
