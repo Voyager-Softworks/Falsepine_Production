@@ -35,7 +35,6 @@ public class MissionCardUI : MonoBehaviour
 
     [Header("Tracking")]
     public bool trackCurrentMission = false;
-    public Mission.MissionSize missionSize;
     public int missionIndex;
 
     
@@ -95,7 +94,7 @@ public class MissionCardUI : MonoBehaviour
         }
 
         //update the associated mission
-        associatedMission = MissionManager.instance.GetMission(missionSize, missionIndex);
+        associatedMission = MissionManager.instance.GetMission(missionIndex);
 
         if (trackCurrentMission){
             //get current mission from manager
@@ -119,7 +118,18 @@ public class MissionCardUI : MonoBehaviour
             ShowCard();
 
             missionTitle.text = "Mission Taken";
-            if (associatedMission.m_isCompleted){
+            switch (associatedMission.GetState()){
+                case MissionCondition.ConditionState.COMPLETE:
+                    missionDescription.text = "The mission is completed, turn it in.";
+                    break;
+                case MissionCondition.ConditionState.INCOMPLETE:
+                    missionDescription.text = "Check the journal.\nEmbark to start the mission.";
+                    break;
+                case MissionCondition.ConditionState.FAILED:
+                    missionDescription.text = "Mission Failed";
+                    break;
+            }
+            if (associatedMission.GetState() == MissionCondition.ConditionState.COMPLETE){
                 missionDescription.text = "The mission is completed, turn it in.";
             }
             else{

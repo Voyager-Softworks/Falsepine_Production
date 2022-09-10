@@ -162,9 +162,9 @@ public class TownBuilding_MissionBoard : TownBuilding
         int totalTurnedIn = 0;
         switch (_size){
             case Mission.MissionSize.LESSER:
-                for (int i = 0; i < MissionManager.instance.GetLesserMissions().Count; i++)
+                for (int i = 0; i < MissionManager.instance.GetMissions().Count; i++)
                 {
-                    if (MissionManager.instance.GetLesserMissions()[i].m_isCompleted && MissionManager.instance.GetLesserMissions()[i] != MissionManager.instance.GetCurrentMission())
+                    if (MissionManager.instance.GetMissions()[i].m_isCompleted && MissionManager.instance.GetMissions()[i] != MissionManager.instance.GetCurrentMission())
                     {
                         totalTurnedIn++;
                     }

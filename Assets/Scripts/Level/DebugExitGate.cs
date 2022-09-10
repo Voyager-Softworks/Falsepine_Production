@@ -15,7 +15,7 @@ public class DebugExitGate : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         switch (destination) {
             case Destination.Next:
-                MissionManager.instance?.LoadNextLesserScene();
+                MissionManager.instance?.LoadNextScene();
                 break;
             case Destination.Town:
                 LevelController.LoadTown();

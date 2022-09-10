@@ -1,0 +1,45 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using System;
+
+/// <summary>
+/// This class tracks kills for a specific enemy type, using the stats manager to track the kills.
+/// </summary>
+[Serializable]
+public class Kill_MissionCondition : MissionCondition
+{
+    public MonsterInfo m_monsterToKill = null;
+    public int m_initialCount = 0;
+    public int m_requiredKills = 1;
+
+    public override void UpdateState()
+    {
+        base.UpdateState();
+
+        // check if the player has killed enough enemies
+        if (StatsManager.instance.GetKills(m_monsterToKill) >= m_initialCount + m_requiredKills)
+        {
+            SetState(ConditionState.COMPLETE);
+        }
+    }
+
+    public override void BeginCondition()
+    {
+        base.BeginCondition();
+
+        // set initial count
+        m_initialCount = StatsManager.instance.GetKills(m_monsterToKill);
+    }
+
+    public override void EndCondition()
+    {
+        base.EndCondition();
+
+        // if not complete, set to failed
+        if (GetState() != ConditionState.COMPLETE)
+        {
+            SetState(ConditionState.FAILED);
+        }
+    }
+}
