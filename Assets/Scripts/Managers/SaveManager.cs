@@ -212,6 +212,7 @@ public class SaveManager : MonoBehaviour
             string newFolder = deathSaveFolder + "/" + folderName;
 
             // copy the folders (including subfolders)
+            //@todo use a build friendly way to copy folders
             FileUtil.CopyFileOrDirectory(folder, newFolder);
         }
 

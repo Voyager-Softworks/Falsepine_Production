@@ -9,18 +9,46 @@ using System;
 /// E.g. Kill 10 enemies (with shotguns), collect 5 items (without taking damage), etc.
 /// </summary>
 [Serializable]
-public class MissionCondition
+public class MissionCondition : ISerializationCallbackReceiver
 {
+    // constructor
+    public MissionCondition()
+    {
+        m_state = ConditionState.INCOMPLETE;
+
+        // set name to class name
+        m_name = GetType().Name;
+    }
+
     public enum ConditionState {
         INCOMPLETE,
         COMPLETE,
         FAILED
     };
-
-    [SerializeField] public string m_name = "New Mission Condition";
+    
+    [HideInInspector][SerializeField] public string m_name = "New Mission Condition";
     [SerializeField] protected ConditionState m_state = ConditionState.INCOMPLETE;
 
-    //public System.Action OnConditionChanged;
+    public virtual string GetDescription()
+    {
+        return "An empty mission condition, please choose a condition type from the dropdown menu.";
+    }
+
+    void OnValidate()
+    {
+        // update name
+        m_name = GetDescription();
+    }
+    void ISerializationCallbackReceiver.OnBeforeSerialize() => this.OnValidate();
+    void ISerializationCallbackReceiver.OnAfterDeserialize() { }
+
+    public virtual void Start()
+    {
+    }
+
+    public virtual void Update()
+    {
+    }
 
     public virtual ConditionState GetState(){
         UpdateState();

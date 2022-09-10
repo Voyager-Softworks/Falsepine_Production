@@ -150,7 +150,7 @@ public class MissionCardUI : MonoBehaviour
             //button
             button.SetActive(true);
             //if complete
-            if (associatedMission.m_isCompleted)
+            if (associatedMission.GetState() == MissionCondition.ConditionState.COMPLETE)
             {
                 buttonText.text = "Turn In";
             }
@@ -170,7 +170,7 @@ public class MissionCardUI : MonoBehaviour
             missionDescription.text = associatedMission.m_description;
 
             //update stamp
-            missionStamp.enabled = associatedMission.m_isCompleted;
+            missionStamp.enabled = associatedMission.GetState() == MissionCondition.ConditionState.COMPLETE;
 
             //update background image
             //backgroundImage.enabled = true;
@@ -179,7 +179,7 @@ public class MissionCardUI : MonoBehaviour
             //update button
 
             //if tracking current or completed, hide button
-            if ((trackCurrentMission) || associatedMission.m_isCompleted)
+            if ((trackCurrentMission) || associatedMission.GetState() == MissionCondition.ConditionState.COMPLETE)
             {
                 button.SetActive(false);
             }

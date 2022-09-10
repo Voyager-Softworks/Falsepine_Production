@@ -32,6 +32,7 @@ public class PlayerHealth : MonoBehaviour
 
     [Header("Events")]
     public UnityEvent OnDeath; ///< The event to call when the player dies.
+    public System.Action OnDamageTaken; ///< The event to call when the player takes damage.
 
     private Animator _animator; ///< The animator for the player.
 
@@ -94,6 +95,8 @@ public class PlayerHealth : MonoBehaviour
         {
             Die();
         }
+
+        OnDamageTaken?.Invoke();
     }
 
     /// <summary>

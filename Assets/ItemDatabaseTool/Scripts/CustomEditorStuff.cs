@@ -52,13 +52,14 @@ public class CustomEditorStuff
 }
 
 
-
+#endif
 /// <summary>
 /// ReadOnly attribute for serialized fields.
 /// </summary>
 public class ReadOnlyAttribute : PropertyAttribute
 {
 }
+#if UNITY_EDITOR
 [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
 public class ReadOnlyDrawer : PropertyDrawer
 {

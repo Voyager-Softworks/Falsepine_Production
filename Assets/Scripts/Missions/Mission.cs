@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 /// <summary>
 /// Mission class stores data about a specific mission. <br/>
 /// E.g. Snow Zone, size, type, title, description, and completion status.
@@ -16,7 +20,7 @@ public class Mission : ScriptableObject
     [TextArea(4, 10)]
     [SerializeField] public string m_description;
 
-    [SerializeField] public List<MissionCondition> m_conditions = new List<MissionCondition>();
+    [SerializeReference] public List<MissionCondition> m_conditions = new List<MissionCondition>();
 
     public MissionCondition.ConditionState GetState(){
         UpdateState();
@@ -59,7 +63,6 @@ public class Mission : ScriptableObject
         {
             return MissionCondition.ConditionState.INCOMPLETE;
         }
-
     }
 
     public void SetState(MissionCondition.ConditionState _state){
@@ -167,4 +170,27 @@ public class Mission : ScriptableObject
             return m;
         }
     }
+
+    // custom editor for mission
+#if UNITY_EDITOR
+    [CustomEditor(typeof(Mission))]
+    public class MissionEditor : Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+
+            Mission mission = (Mission)target;
+
+            // add condition button, which then displays a popup to select a condition type
+            if (GUILayout.Button("Add Condition"))
+            {
+                GenericMenu menu = new GenericMenu();
+                menu.AddItem(new GUIContent("Kill Enemy"), false, () => { mission.m_conditions.Add(new Kill_MissionCondition()); });
+                menu.AddItem(new GUIContent("No Damage"), false, () => { mission.m_conditions.Add(new NoDamage_MissionCondition()); });
+                menu.ShowAsContext();
+            }
+        }
+    }
+#endif
 }

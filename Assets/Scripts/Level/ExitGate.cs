@@ -104,7 +104,7 @@ public class ExitGate : MonoBehaviour
         // complete mission
         if (tryCompleteMission && MissionManager.instance?.GetCurrentMission() != null)
         {
-            MissionManager.instance.GetCurrentMission().SetCompleted(true);
+            MissionManager.instance.GetCurrentMission().SetState(MissionCondition.ConditionState.COMPLETE);
         }
     }
 

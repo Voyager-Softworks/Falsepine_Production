@@ -119,13 +119,30 @@ public class MissionManager : MonoBehaviour
         }
 
         UpdateAllMissionCards();
+
+        
+        // call start function on all conditions
+        if (GetCurrentMission()?.m_conditions.Count > 0)
+        {
+            foreach (MissionCondition condition in GetCurrentMission().m_conditions)
+            {
+                condition.Start();
+            }
+        }
     }
 
 
     // Update is called once per frame
     void Update()
     {
-
+        // call update function on all conditions
+        if (GetCurrentMission()?.m_conditions.Count > 0)
+        {
+            foreach (MissionCondition condition in GetCurrentMission().m_conditions)
+            {
+                condition.Update();
+            }
+        }
     }
 
     /// <summary>

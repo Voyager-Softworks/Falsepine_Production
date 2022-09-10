@@ -9,9 +9,13 @@ using System;
 [Serializable]
 public class Kill_MissionCondition : MissionCondition
 {
-    public MonsterInfo m_monsterToKill = null;
-    public int m_initialCount = 0;
-    public int m_requiredKills = 1;
+    [SerializeField] public MonsterInfo m_monsterToKill = null;
+    [ReadOnly][SerializeField] private int m_initialCount = 0;
+    [SerializeField] public int m_requiredKills = 1;
+
+    public override string GetDescription(){
+        return "Kill " + m_requiredKills + " " + m_monsterToKill?.m_name + "(s)";
+    }
 
     public override void UpdateState()
     {
@@ -27,6 +31,9 @@ public class Kill_MissionCondition : MissionCondition
     public override void BeginCondition()
     {
         base.BeginCondition();
+
+        // set to incomplete
+        SetState(ConditionState.INCOMPLETE);
 
         // set initial count
         m_initialCount = StatsManager.instance.GetKills(m_monsterToKill);

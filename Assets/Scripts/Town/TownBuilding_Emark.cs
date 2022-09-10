@@ -23,7 +23,7 @@ public class TownBuilding_Emark : TownBuilding
             worldText.text = "Contract Required!";
         }
         //if contract already completed, say so
-        else if (MissionManager.instance.GetCurrentMission().m_isCompleted){
+        else if (MissionManager.instance.GetCurrentMission().GetState() == MissionCondition.ConditionState.COMPLETE){
             worldText.text = "Turn in Contract!";
         }
         else{
