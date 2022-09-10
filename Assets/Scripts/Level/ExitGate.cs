@@ -104,7 +104,7 @@ public class ExitGate : MonoBehaviour
         // complete mission
         if (tryCompleteMission && MissionManager.instance?.GetCurrentMission() != null)
         {
-            MissionManager.instance.GetCurrentMission().SetCompleted(true);
+            MissionManager.instance.GetCurrentMission().SetState(MissionCondition.ConditionState.COMPLETE);
         }
     }
 
@@ -137,7 +137,7 @@ public class ExitGate : MonoBehaviour
         switch (m_destination)
         {
             case GateDestination.Next:
-                MissionManager.instance?.LoadNextLesserScene();
+                MissionManager.instance?.LoadNextScene();
                 break;
             case GateDestination.Town:
                 LevelController.LoadTown();

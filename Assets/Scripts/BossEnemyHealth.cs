@@ -61,7 +61,7 @@ public class BossEnemyHealth : EnemyHealth
         MissionManager mm = MissionManager.instance;
         if (mm != null && m_linkedMission != null && mm.GetCurrentMission() == m_linkedMission)
         {
-            mm.GetCurrentMission().SetCompleted(true);
+            mm.GetCurrentMission().SetState(MissionCondition.ConditionState.COMPLETE);
         }
 
         // fade to black and show complete scene

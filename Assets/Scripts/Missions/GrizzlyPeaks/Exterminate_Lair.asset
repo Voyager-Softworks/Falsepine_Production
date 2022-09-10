@@ -12,10 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56c089656aad97c49b15ade4c6d1891e, type: 3}
   m_Name: Exterminate_Lair
   m_EditorClassIdentifier: 
-  m_size: 0
-  m_type: 1
   m_title: Extermination
   m_description: "A lair has been located in Grizzly Peaks if left alone it could
     be a problem for the town. Hunters have been sent out however we have not heard
     back. \n\nInvestigate the area, locate the monster lair and destroy it."
-  m_isCompleted: 0
+  m_conditions:
+  - id: 0
+  - id: 1
+  references:
+    version: 1
+    00000000:
+      type: {class: Kill_MissionCondition, ns: , asm: Assembly-CSharp}
+      data:
+        m_name: Kill 1 Pickaxe Miner(s)
+        m_state: 0
+        m_monsterToKill: {fileID: 11400000, guid: ee1c8229e1cc8a743bc7e1c7c9ebf36a, type: 2}
+        m_initialCount: 0
+        m_requiredKills: 1
+    00000001:
+      type: {class: NoDamage_MissionCondition, ns: , asm: Assembly-CSharp}
+      data:
+        m_name: Don't take any damage
+        m_state: 0

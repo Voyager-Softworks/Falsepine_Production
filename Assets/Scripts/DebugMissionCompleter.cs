@@ -33,7 +33,7 @@ public class DebugMissionCompleter : MonoBehaviour
 
         if (MissionManager.instance != null && MissionManager.instance.GetCurrentMission() != null)
         {
-            MissionManager.instance.GetCurrentMission().SetCompleted(true);
+            MissionManager.instance.GetCurrentMission().SetState(MissionCondition.ConditionState.COMPLETE);
         }
     }
 

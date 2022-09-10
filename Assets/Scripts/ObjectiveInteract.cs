@@ -33,7 +33,7 @@ public class ObjectiveInteract : Interactable
             {
                 if (_mission == MissionManager.instance.GetCurrentMission())
                 {
-                    MissionManager.instance.GetCurrentMission().SetCompleted(true);
+                    MissionManager.instance.GetCurrentMission().SetState(MissionCondition.ConditionState.COMPLETE);
 
                     if (completeSound != null)
                     {

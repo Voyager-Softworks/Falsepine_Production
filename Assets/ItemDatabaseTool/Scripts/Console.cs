@@ -569,7 +569,7 @@ public class Console : ToggleableWindow
         // "complete_mission"
         if (split.Length == 1 && split[0] == "complete_mission")
         {
-            MissionManager.instance?.GetCurrentMission()?.SetCompleted(true);
+            MissionManager.instance?.GetCurrentMission()?.SetState(MissionCondition.ConditionState.COMPLETE);
 
             Log("- Mission completed");
 

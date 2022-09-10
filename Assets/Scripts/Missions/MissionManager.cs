@@ -111,21 +111,38 @@ public class MissionManager : MonoBehaviour
         }
         else
         {
-            // if there are no lesser or greater missions in the current zone, reset it
-            if (m_currentZone.m_lesserMissions.Count == 0 && m_currentZone.m_greaterMissions.Count == 0)
+            // if there are no missions in the current zone, reset it
+            if (m_currentZone.m_missions.Count == 0)
             {
                 m_currentZone.Reset();
             }
         }
 
         UpdateAllMissionCards();
+
+        
+        // call start function on all conditions
+        if (GetCurrentMission()?.m_conditions.Count > 0)
+        {
+            foreach (MissionCondition condition in GetCurrentMission().m_conditions)
+            {
+                condition.Start();
+            }
+        }
     }
 
 
     // Update is called once per frame
     void Update()
     {
-
+        // call update function on all conditions
+        if (GetCurrentMission()?.m_conditions.Count > 0)
+        {
+            foreach (MissionCondition condition in GetCurrentMission().m_conditions)
+            {
+                condition.Update();
+            }
+        }
     }
 
     /// <summary>
@@ -293,23 +310,16 @@ public class MissionManager : MonoBehaviour
     public void TryEmbark()
     {
         //load level 1 if valid
-        if (GetCurrentMission() != null && !GetCurrentMission().m_isCompleted)
+        if (GetCurrentMission() != null && GetCurrentMission().GetState() != MissionCondition.ConditionState.COMPLETE)
         {
-            if (GetCurrentMission().m_size == Mission.MissionSize.LESSER)
-            {
-                LoadFirstLesserScene();
-            }
-            else if (GetCurrentMission().m_size == Mission.MissionSize.GREATER)
-            {
-                LoadFirstGreaterScene();
-            }
+            LoadFirstScene();
         }
     }
 
     /// <summary>
     /// Loads the starting scene
     /// </summary>
-    public void LoadFirstLesserScene()
+    public void LoadFirstScene()
     {
         if (m_currentZone == null) return;
         if (m_currentZone.m_startScene == null) return;
@@ -320,25 +330,14 @@ public class MissionManager : MonoBehaviour
     /// <summary>
     /// Loads the next scene in the list
     /// </summary>
-    public void LoadNextLesserScene()
+    public void LoadNextScene()
     {
         if (m_currentZone == null) return;
 
-        string nextPath = m_currentZone.GetNextLesserScenePath();
+        string nextPath = m_currentZone.GetNextScenePath();
         if (nextPath == "") return;
 
         LevelController.LoadScene(nextPath);
-    }
-
-    /// <summary>
-    /// Loads the boss scene
-    /// </summary>
-    public void LoadFirstGreaterScene()
-    {
-        if (m_currentZone == null) return;
-        if (m_currentZone.m_startScene == null) return;
-
-        LevelController.LoadScene(m_currentZone.m_bossScene.scenePath);
     }
 
     /// <summary>
@@ -402,25 +401,14 @@ public class MissionManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Gets the lesser missions of the current zone
+    /// Gets the missions of the current zone
     /// </summary>
     /// <returns></returns>
-    public List<Mission> GetLesserMissions()
+    public List<Mission> GetMissions()
     {
         if (m_currentZone == null) return null;
 
-        return m_currentZone.m_lesserMissions;
-    }
-
-    /// <summary>
-    /// Gets the greater missions of the current zone
-    /// </summary>
-    /// <returns></returns>
-    public List<Mission> GetGreaterMissions()
-    {
-        if (m_currentZone == null) return null;
-
-        return m_currentZone.m_greaterMissions;
+        return m_currentZone.m_missions;
     }
 
     /// <summary>
@@ -440,17 +428,17 @@ public class MissionManager : MonoBehaviour
     /// <param name="_size"></param>
     /// <param name="_index"></param>
     /// <returns></returns>
-    public Mission GetMission(Mission.MissionSize _size, int _index)
+    public Mission GetMission(int _index)
     {
         if (m_currentZone == null) return null;
 
-        return m_currentZone.GetMission(_size, _index);
+        return m_currentZone.GetMission(_index);
     }
 
-    public int GetCurrentLesserSceneIndex()
+    public int GetCurrentSceneIndex()
     {
         if (m_currentZone == null) return -1;
 
-        return m_currentZone.GetCurrentLesserSceneIndex();
+        return m_currentZone.GetCurrentSceneIndex();
     }
 }

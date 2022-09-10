@@ -35,7 +35,6 @@ public class MissionCardUI : MonoBehaviour
 
     [Header("Tracking")]
     public bool trackCurrentMission = false;
-    public Mission.MissionSize missionSize;
     public int missionIndex;
 
     
@@ -95,7 +94,7 @@ public class MissionCardUI : MonoBehaviour
         }
 
         //update the associated mission
-        associatedMission = MissionManager.instance.GetMission(missionSize, missionIndex);
+        associatedMission = MissionManager.instance.GetMission(missionIndex);
 
         if (trackCurrentMission){
             //get current mission from manager
@@ -119,7 +118,18 @@ public class MissionCardUI : MonoBehaviour
             ShowCard();
 
             missionTitle.text = "Mission Taken";
-            if (associatedMission.m_isCompleted){
+            switch (associatedMission.GetState()){
+                case MissionCondition.ConditionState.COMPLETE:
+                    missionDescription.text = "The mission is completed, turn it in.";
+                    break;
+                case MissionCondition.ConditionState.INCOMPLETE:
+                    missionDescription.text = "Check the journal.\nEmbark to start the mission.";
+                    break;
+                case MissionCondition.ConditionState.FAILED:
+                    missionDescription.text = "Mission Failed";
+                    break;
+            }
+            if (associatedMission.GetState() == MissionCondition.ConditionState.COMPLETE){
                 missionDescription.text = "The mission is completed, turn it in.";
             }
             else{
@@ -140,7 +150,7 @@ public class MissionCardUI : MonoBehaviour
             //button
             button.SetActive(true);
             //if complete
-            if (associatedMission.m_isCompleted)
+            if (associatedMission.GetState() == MissionCondition.ConditionState.COMPLETE)
             {
                 buttonText.text = "Turn In";
             }
@@ -160,7 +170,7 @@ public class MissionCardUI : MonoBehaviour
             missionDescription.text = associatedMission.m_description;
 
             //update stamp
-            missionStamp.enabled = associatedMission.m_isCompleted;
+            missionStamp.enabled = associatedMission.GetState() == MissionCondition.ConditionState.COMPLETE;
 
             //update background image
             //backgroundImage.enabled = true;
@@ -169,7 +179,7 @@ public class MissionCardUI : MonoBehaviour
             //update button
 
             //if tracking current or completed, hide button
-            if ((trackCurrentMission) || associatedMission.m_isCompleted)
+            if ((trackCurrentMission) || associatedMission.GetState() == MissionCondition.ConditionState.COMPLETE)
             {
                 button.SetActive(false);
             }
