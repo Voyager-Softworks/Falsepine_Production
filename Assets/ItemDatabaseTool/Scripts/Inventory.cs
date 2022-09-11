@@ -544,6 +544,7 @@ public class Inventory : MonoBehaviour
         {
             // split file name into filters and file name
             string[] split = slotsInfo[i].Split(':');
+            if (split.Length < 2) continue;
             string filters = split[0];
             string fileName = split[1];
 

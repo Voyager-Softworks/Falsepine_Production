@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System;
 
 /// <summary>
@@ -13,9 +14,9 @@ public class NoDamage_MissionCondition : MissionCondition
         return "Don't take any damage";
     }
 
-    public override void Start()
+    public override void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
-        base.Start();
+        base.OnSceneLoaded(arg0, arg1);
 
         // find PlayerHealth and bind to its OnDamageTaken event
         PlayerHealth ph = GameObject.FindObjectOfType<PlayerHealth>();

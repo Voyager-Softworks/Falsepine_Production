@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System;
 
 /// <summary>
@@ -42,7 +43,7 @@ public class MissionCondition : ISerializationCallbackReceiver
     void ISerializationCallbackReceiver.OnBeforeSerialize() => this.OnValidate();
     void ISerializationCallbackReceiver.OnAfterDeserialize() { }
 
-    public virtual void Start()
+    public virtual void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
     }
 

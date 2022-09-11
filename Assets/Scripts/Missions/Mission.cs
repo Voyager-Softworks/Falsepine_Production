@@ -116,7 +116,20 @@ public class Mission : ScriptableObject
             return false;
         }
 
-        return a.m_title == b.m_title && a.m_description == b.m_description && a.m_conditions == b.m_conditions;
+        if (a.m_title == b.m_title && a.m_description == b.m_description){
+            // and all conditions are equal
+            if (a.m_conditions.Count == b.m_conditions.Count){
+                for (int i = 0; i < a.m_conditions.Count; i++)
+                {
+                    if (a.m_conditions[i] != b.m_conditions[i]){
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+
+        return false;
     }
     //inequality operator
     public static bool operator !=(Mission a, Mission b)
@@ -147,8 +160,7 @@ public class Mission : ScriptableObject
     {
         [SerializeField] public string m_title;
         [SerializeField] public string m_description;
-        [SerializeField] public bool m_isCompleted;
-        [SerializeField] public List<MissionCondition> m_conditions = new List<MissionCondition>();
+        [SerializeReference] public List<MissionCondition> m_conditions = new List<MissionCondition>();
 
         public Serializable_Mission(Mission _mission)
         {
@@ -158,7 +170,11 @@ public class Mission : ScriptableObject
             }
             m_title = _mission.m_title;
             m_description = _mission.m_description;
-            m_conditions = new List<MissionCondition>(_mission.m_conditions);
+            m_conditions = new List<MissionCondition>();
+            foreach (MissionCondition condition in _mission.m_conditions)
+            {
+                m_conditions.Add(condition);
+            }
         }
 
         public Mission ToMission()
@@ -166,7 +182,11 @@ public class Mission : ScriptableObject
             Mission m = new Mission();
             m.m_title = m_title;
             m.m_description = m_description;
-            m.m_conditions = new List<MissionCondition>(m_conditions);
+            m.m_conditions = new List<MissionCondition>();
+            foreach (MissionCondition condition in m_conditions)
+            {
+                m.m_conditions.Add(condition);
+            }
             return m;
         }
     }

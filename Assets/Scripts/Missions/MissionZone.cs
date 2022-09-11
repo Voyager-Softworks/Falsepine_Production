@@ -67,7 +67,7 @@ public class MissionZone : ScriptableObject
         tempPLM = m_possibleMissions.OrderBy(x => UnityEngine.Random.value).ToList();
 
         // add to missions
-        for (int i = 0; i < m_missionCount; i++)
+        for (int i = 0; i < m_missionCount && i < tempPLM.Count(); i++)
         {
             m_missions.Add(tempPLM[i]);
         }
@@ -158,6 +158,9 @@ public class MissionZone : ScriptableObject
 
         currentMission = _misison;
 
+        // begin mission
+        currentMission.BeginMission();
+
         //m_currentScenePath = "";
         return true;
     }
@@ -167,6 +170,8 @@ public class MissionZone : ScriptableObject
     /// </summary>
     /// <returns></returns>
     public bool TryReturnMission(){
+        // end mission
+        currentMission.EndMission();
         currentMission = null;
         return true;
     }

@@ -73,6 +73,15 @@ public class MissionManager : MonoBehaviour
         }
 
         SetUpMissionGroups();
+
+        // call start function on all conditions
+        if (GetCurrentMission()?.m_conditions.Count > 0)
+        {
+            foreach (MissionCondition condition in GetCurrentMission().m_conditions)
+            {
+                condition.OnSceneLoaded(arg0, arg1);
+            }
+        }
     }
 
     /// <summary>
@@ -119,16 +128,6 @@ public class MissionManager : MonoBehaviour
         }
 
         UpdateAllMissionCards();
-
-        
-        // call start function on all conditions
-        if (GetCurrentMission()?.m_conditions.Count > 0)
-        {
-            foreach (MissionCondition condition in GetCurrentMission().m_conditions)
-            {
-                condition.Start();
-            }
-        }
     }
 
 
