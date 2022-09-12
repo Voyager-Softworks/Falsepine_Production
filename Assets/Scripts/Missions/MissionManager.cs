@@ -77,12 +77,9 @@ public class MissionManager : MonoBehaviour
         SetUpMissionGroups();
 
         // call start function on all conditions
-        if (GetCurrentMission()?.m_conditions.Count > 0)
+        if (GetCurrentMission() != null)
         {
-            foreach (MissionCondition condition in GetCurrentMission().m_conditions)
-            {
-                condition.OnSceneLoaded(arg0, arg1);
-            }
+            GetCurrentMission().OnSceneLoaded(arg0, arg1);
         }
 
         // if this scene is the town scene, end the mission
@@ -143,12 +140,9 @@ public class MissionManager : MonoBehaviour
     void Update()
     {
         // call update function on all conditions
-        if (GetCurrentMission()?.m_conditions.Count > 0)
+        if (GetCurrentMission() != null)
         {
-            foreach (MissionCondition condition in GetCurrentMission().m_conditions)
-            {
-                condition.Update();
-            }
+            GetCurrentMission().Update();
         }
     }
 
@@ -377,7 +371,7 @@ public class MissionManager : MonoBehaviour
             MissionCardUI missionCardUI = missionCardUIList[i];
             if (missionCardUI == null) continue;
 
-            missionCardUI.UpdateCard();
+            missionCardUI.UpdateCardUI();
         }
     }
 

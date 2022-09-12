@@ -17,6 +17,13 @@ public class Kill_MissionCondition : MissionCondition
         return "Kill " + m_requiredKills + " " + m_monsterToKill?.m_name + "(s)";
     }
 
+    public override void Update()
+    {
+        base.Update();
+
+        UpdateState();
+    }
+
     public override void UpdateState()
     {
         base.UpdateState();

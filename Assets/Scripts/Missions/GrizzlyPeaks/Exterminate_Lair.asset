@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Exterminate_Lair
   m_EditorClassIdentifier: 
   m_title: Extermination
-  m_description: "A lair has been located in Grizzly Peaks if left alone it could
-    be a problem for the town. Hunters have been sent out however we have not heard
-    back. \n\nInvestigate the area, locate the monster lair and destroy it."
+  m_description: Kill 5 pickaxe miners without taking damage to impress the townsfolk
   m_conditions:
   - id: 0
   - id: 1
+  m_lockOnComplete: 1
+  m_isLockedComplete: 0
   references:
     version: 1
     00000000:
@@ -26,6 +26,7 @@ MonoBehaviour:
       data:
         m_name: Kill 1 Pickaxe Miner(s)
         m_state: 0
+        m_lockState: 0
         m_monsterToKill: {fileID: 11400000, guid: ee1c8229e1cc8a743bc7e1c7c9ebf36a, type: 2}
         m_initialCount: 0
         m_requiredKills: 1
@@ -34,3 +35,4 @@ MonoBehaviour:
       data:
         m_name: Don't take any damage
         m_state: 0
+        m_lockState: 0

@@ -52,13 +52,23 @@ public class MissionCardUI : MonoBehaviour
     }
 
     // Update is called once per frame
+    private int m_framesToWait = 0;
     void Update()
     {
-        
+        // every 20-30 frames, update the mission card
+        if (m_framesToWait <= 0)
+        {
+            UpdateCardUI();
+            m_framesToWait = UnityEngine.Random.Range(20, 30);
+        }
+        else
+        {
+            m_framesToWait--;
+        }
     }
 
     private void OnEnable() {
-        UpdateCard();
+        UpdateCardUI();
     }
 
     /// <summary>
@@ -91,7 +101,7 @@ public class MissionCardUI : MonoBehaviour
     /// <summary>
     /// Updates the cards UI
     /// </summary>
-    public void UpdateCard(){
+    public void UpdateCardUI(){
         if (MissionManager.instance == null)
         {
             Debug.Log("No MissionManager found in the scene");
@@ -165,12 +175,47 @@ public class MissionCardUI : MonoBehaviour
             ShowCard();
 
             //update text
-            missionTitle.text = associatedMission.m_title;
+            Color missionCol = Color.white;
+            switch (associatedMission.GetState()){
+                case MissionCondition.ConditionState.COMPLETE:
+                    missionCol = Color.green;
+                    break;
+                case MissionCondition.ConditionState.INCOMPLETE:
+                    missionCol = Color.white;
+                    break;
+                case MissionCondition.ConditionState.FAILED:
+                    missionCol = Color.red;
+                    break;
+            }
+            missionTitle.text = "<sprite=0 color=#" + ColorUtility.ToHtmlStringRGB(missionCol) + ">" + associatedMission.m_title;
             missionDescription.text = associatedMission.m_description;
+            // add conditions to description
+            if (associatedMission){
+                missionDescription.text += "\n\nConditions:";
+                foreach (MissionCondition condition in associatedMission.m_conditions)
+                {
+                    Color conditionCol = Color.white;
+                    switch (condition.GetState())
+                    {
+                        case MissionCondition.ConditionState.COMPLETE:
+                            conditionCol = Color.green;
+                            break;
+                        case MissionCondition.ConditionState.INCOMPLETE:
+                            conditionCol = Color.white;
+                            break;
+                        case MissionCondition.ConditionState.FAILED:
+                            conditionCol = Color.red;
+                            break;
+                    }
+
+                    // show condition, and coloured sprite to show state
+                    missionDescription.text += "\n" + "<sprite=0 color=#" + ColorUtility.ToHtmlStringRGB(conditionCol) + ">" + condition.GetDescription();
+                }
+            }
 
             //update stamp
-            missionStamp.enabled = true;
-            SetStamp();
+            //missionStamp.enabled = true;
+            //SetStamp();
 
             //update background image
             //backgroundImage.enabled = true;
@@ -245,7 +290,7 @@ public class MissionCardUI : MonoBehaviour
 
         backgroundImage.color = new Color(backgroundImage.color.r, backgroundImage.color.g, backgroundImage.color.b, 1.0f);
 
-        missionStamp.enabled = true;
+        //missionStamp.enabled = true;
         backgroundImage.enabled = true;
         dropShadow.enabled = true;
         button.SetActive(true);

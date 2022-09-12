@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -24,6 +25,20 @@ public class Mission : ScriptableObject
 
     [SerializeField] public bool m_lockOnComplete = true;
     [SerializeField] private bool m_isLockedComplete = false;
+
+    public void OnSceneLoaded(Scene arg0, LoadSceneMode arg1){
+        foreach (MissionCondition condition in m_conditions)
+        {
+            condition.OnSceneLoaded(arg0, arg1);
+        }
+    }
+
+    public void Update(){
+        foreach (MissionCondition condition in m_conditions)
+        {
+            condition.Update();
+        }
+    }
 
     public MissionCondition.ConditionState GetState(){
         if (m_lockOnComplete && m_isLockedComplete) return MissionCondition.ConditionState.COMPLETE;
