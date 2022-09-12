@@ -39,7 +39,8 @@ public class StatsManager : MonoBehaviour
 
         public string value;
 
-        // Items
+        // Damage + Items
+        public static StatType PlayerDamage { get { return new StatType("PlayerDamage"); } }
         public static StatType RangedDamage { get { return new StatType("RangedDamage"); } }
         public static StatType RangedInaccuracy { get { return new StatType("RangedInaccuracy"); } }
         public static StatType RangedRange { get { return new StatType("RangedRange"); } }
@@ -47,6 +48,9 @@ public class StatsManager : MonoBehaviour
         public static StatType ShotgunDamage { get { return new StatType("ShotgunDamage"); } }
         public static StatType PistolDamage { get { return new StatType("PistolDamage"); } }
         public static StatType RifleDamage { get { return new StatType("RifleDamage"); } }
+        public static StatType ExplosiveDamage { get { return new StatType("ExplosiveDamage"); } }
+        public static StatType TrapDamage { get { return new StatType("TrapDamage"); } }
+        public static StatType EnemyDamage { get { return new StatType("EnemyDamage"); } }
 
         // Economy
         public static StatType StoreCost { get { return new StatType("StoreCost"); } }
@@ -241,11 +245,11 @@ public class StatsManager : MonoBehaviour
     [Serializable]
     public class MonsterStat{
         public MonsterInfo m_monster;
-        public int m_totalKilled = 0;
+        public List<Health_Base.DamageStat> m_kills = new List<Health_Base.DamageStat>();
     }
     [SerializeField] public List<MonsterStat> m_monsterStats = new List<MonsterStat>();
 
-    public void AddKill(MonsterInfo _monster, int _amount = 1)
+    public void AddKill(MonsterInfo _monster, Health_Base.DamageStat _damageStat)
     {
         MonsterStat stats = m_monsterStats.Find(x => x.m_monster == _monster);
         if (stats == null)
@@ -254,7 +258,7 @@ public class StatsManager : MonoBehaviour
             stats.m_monster = _monster;
             m_monsterStats.Add(stats);
         }
-        stats.m_totalKilled += _amount;
+        stats.m_kills.Add(_damageStat);
     }
 
     public int GetKills(MonsterInfo _monster)
@@ -264,7 +268,7 @@ public class StatsManager : MonoBehaviour
         {
             return -1;
         }
-        return stats.m_totalKilled;
+        return stats.m_kills.Count;
     }
 
     #endregion
@@ -331,10 +335,14 @@ public class StatsManager : MonoBehaviour
     {
         // list of stats to use in this function
         List<StatType> usedStatTypes = new List<StatType>(){
+            StatType.PlayerDamage,
             StatType.RangedDamage,
             StatType.ShotgunDamage,
             StatType.PistolDamage,
             StatType.RifleDamage,
+            StatType.ExplosiveDamage,
+            StatType.TrapDamage,
+            StatType.EnemyDamage,
         };
 
         float additiveVal = 0.0f;
@@ -702,11 +710,13 @@ public class StatsManager : MonoBehaviour
             MethodInfo[] methods = typeof(StatType).GetMethods(BindingFlags.Public | BindingFlags.Static);
             //remove any which arent of type StatType
             methods = methods.Where(f => f.ReturnType == typeof(StatType)).ToArray();
+            // sort alphabetically
+            methods = methods.OrderBy(f => ((StatType)f.Invoke(null, null)).value).ToArray();
             // create a list of strings to display in the dropdown
-            List<string> options = new List<string>();
+            List<GUIContent> options = new List<GUIContent>();
             foreach (MethodInfo method in methods)
             {
-                options.Add(((StatType)method.Invoke(null, null)).value);
+                options.Add(new GUIContent(((StatType)method.Invoke(null, null)).value));
             }
 
             // get the property value
@@ -715,7 +725,14 @@ public class StatsManager : MonoBehaviour
 
             // get the index of the selected option
             int selectedIndex = -1;
-            selectedIndex = options.IndexOf(value.stringValue);
+            for (int i = 0; i < options.Count; i++)
+            {
+                if (options[i].text == value.stringValue)
+                {
+                    selectedIndex = i;
+                    break;
+                }
+            }
             //check if index is within bounds
             if (selectedIndex < 0 || selectedIndex >= options.Count)
             {
@@ -723,7 +740,7 @@ public class StatsManager : MonoBehaviour
                 selectedIndex = 0;
             }
             // draw the dropdown
-            selectedIndex = EditorGUI.Popup(position, label.text, selectedIndex, options.ToArray());
+            selectedIndex = EditorGUI.Popup(position, label, selectedIndex, options.ToArray());
             string name = ((StatType)methods[selectedIndex].Invoke(null, null)).value;
 
             value.stringValue = name;
@@ -855,6 +872,8 @@ public class StatsManager : MonoBehaviour
             MethodInfo[] methods = typeof(StatType).GetMethods(BindingFlags.Public | BindingFlags.Static);
             //remove any which arent of type StatType
             methods = methods.Where(f => f.ReturnType == typeof(StatType)).ToArray();
+            // sort alphabetically
+            methods = methods.OrderBy(f => ((StatType)f.Invoke(null, null)).value).ToArray();
             foreach (MethodInfo method in methods)
             {
                 StatsManager.StatType type = null;

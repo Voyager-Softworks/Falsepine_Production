@@ -35,13 +35,14 @@ public class Health_Base : MonoBehaviour /// @todo Impliment this into players, 
 
         public StatsManager.UsesStats m_sourceStats; ///< The stats of the object that dealt the damage. (used for kill tracking and whatnot)
 
-        public DamageStat(float damage, GameObject sourceObject, Vector3 origin, Vector3 hitPoint)
+        public DamageStat(float damage, GameObject sourceObject, Vector3 origin, Vector3 hitPoint, StatsManager.UsesStats sourceStats)
         {
             m_damage = damage;
             m_sourceObject = sourceObject;
             m_originPoint = origin;
             m_hitPoint = hitPoint;
             m_time = Time.time;
+            m_sourceStats = sourceStats;
         }
     }
 

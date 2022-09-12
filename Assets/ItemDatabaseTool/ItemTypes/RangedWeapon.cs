@@ -175,95 +175,6 @@ public class RangedWeapon : Item
     }
 
     /// <summary>
-    /// Shoots the weapon using raycasts. Uses wait timer.
-    /// </summary>
-    // private void RaycastShoot(Vector3 _origin, Vector3 _direction, GameObject _owner)
-    // {
-    //     m_shootTimer = m_shootTime;
-    //     UpdateWaitTimer(m_shootTime);
-
-    //     // shoot raycasts
-    //     for (int i = 0; i < m_maxHitsPerShot; i++)
-    //     {
-    //         float currentAimInaccuracy = CalcCurrentAimAngle();
-    //         float aimAngle = UnityEngine.Random.Range(-currentAimInaccuracy, currentAimInaccuracy);
-    //         Vector3 currentDirection = Quaternion.AngleAxis(aimAngle, Vector3.up) * _direction;
-
-    //         // create raycast
-    //         RaycastHit hit;
-    //         Ray ray = new Ray(_origin, currentDirection);
-
-    //         // shoot raycast
-    //         if (Physics.Raycast(ray, out hit, m_range))
-    //         {
-    //             // get hit object
-    //             GameObject hitObject = hit.collider.gameObject;
-
-    //             //if hit something, apply damage
-    //             Health_Base healthScript = hit.collider.GetComponentInChildren<Health_Base>();
-    //             if (!healthScript) healthScript = hit.collider.GetComponentInParent<Health_Base>();
-    //             if (healthScript != null)
-    //             {
-    //                 float calcdDamage = StatsManager.CalculateDamage(this, m_damage);
-    //                 Debug.Log("Original damage: " + m_damage + " | Calcd damage: " + calcdDamage);
-    //                 healthScript.TakeDamage(new Health_Base.DamageStat(calcdDamage, _owner, _origin, hit.point));
-    //                 if (m_hitEffect) Destroy(Instantiate(m_hitEffect, hit.point, Quaternion.FromToRotation(Vector3.up, hit.normal)), 2.0f);
-    //             }
-    //             hit.collider.GetComponentInChildren<NodeAI.NodeAI_Senses>()?.RegisterSensoryEvent(
-    //                                                                                             _owner,
-    //                                                                                             hit.collider.gameObject,
-    //                                                                                             20.0f,
-    //                                                                                             NodeAI.SensoryEvent.SenseType.SOMATIC
-    //                                                                                             );
-    //         }
-
-    //         // create trail effect
-    //         if (m_trailEffect != null)
-    //         {
-    //             GameObject trail = Instantiate(m_trailEffect, _origin, Quaternion.identity);
-    //             // LineRenderer lineRenderer = trail.GetComponent<LineRenderer>();
-    //             // if (lineRenderer != null)
-    //             // {
-    //             //     lineRenderer.SetPosition(0, _origin);
-    //             //     lineRenderer.SetPosition(1, (hit.distance > 0 ? hit.point : _origin + currentDirection * m_range));
-    //             // }
-    //             BulletTrail bulletTrail = trail.GetComponent<BulletTrail>();
-    //             if (bulletTrail != null)
-    //             {
-    //                 bulletTrail.SetPositions(
-    //                     _origin,
-    //                     (hit.distance > 0 ? hit.point : _origin + currentDirection * m_range)
-    //                 );
-    //             }
-    //         }
-    //     }
-
-    //     // play shoot sound:
-    //     if (m_shootSound != null)
-    //     {
-    //         GameObject sound = Instantiate(m_shootSound, _origin, Quaternion.identity);
-    //     }
-
-    //     //Trigger auditory event on all sensors in range:
-    //     foreach (NodeAI.NodeAI_Senses sensor in FindObjectsOfType<NodeAI.NodeAI_Senses>())
-    //     {
-    //         if (Vector3.Distance(sensor.gameObject.transform.position, _origin) < sensor.maxHearingRange)
-    //         {
-    //             sensor.RegisterSensoryEvent(_owner, sensor.gameObject, 10.0f, NodeAI.SensoryEvent.SenseType.AURAL);
-    //         }
-    //     }
-
-    //     // create shoot effect:
-    //     if (m_shootEffect != null)
-    //     {
-    //         GameObject effect = Instantiate(m_shootEffect, _origin, Quaternion.identity);
-    //         effect.transform.LookAt(_origin + _direction);
-    //     }
-
-    //     m_clipAmmo--;
-    // }
-
-    /// <summary>
     /// Uses the aim zone to detect what to shoot and how much damage to deal<br/>
     /// @todo Replace trigger collider checking with layers?
     /// @todo split this function up.
@@ -426,7 +337,7 @@ public class RangedWeapon : Item
 
             //Deal damage
             Debug.Log("Original damage: " + m_damage + " | Calcd damage: " + shotInfo.damage);
-            shotInfo.healthScriptHit.TakeDamage(new Health_Base.DamageStat(shotInfo.damage, _owner, _origin, shotInfo.hitPoint));
+            shotInfo.healthScriptHit.TakeDamage(new Health_Base.DamageStat(shotInfo.damage, _owner, _origin, shotInfo.hitPoint, this));
 
             // hit effect
             if (m_hitEffect != null)

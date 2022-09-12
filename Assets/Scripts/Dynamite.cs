@@ -19,7 +19,8 @@ public class Dynamite : MonoBehaviour
     public Vector3 m_screenshakeAmplitude = Vector3.one;
     public float m_screenshakeFrequency = 1f;
 
-
+    [Header("Stats")]
+    [SerializeField] public StatsProfile m_statsProfile;
 
     // Start is called before the first frame update
     void Awake()
@@ -56,7 +57,7 @@ public class Dynamite : MonoBehaviour
             if (health != null && !hitObjects.Contains(health))
             {
                 hitObjects.Add(health);
-                health.TakeDamage(new Health_Base.DamageStat(m_damage, gameObject, transform.position, collider.transform.position));
+                health.TakeDamage(new Health_Base.DamageStat(m_damage, gameObject, transform.position, collider.transform.position, m_statsProfile));
             }
         }
         FindObjectOfType<ScreenshakeManager>().AddShakeImpulse(m_screenshakeDuration, m_screenshakeAmplitude, m_screenshakeFrequency);

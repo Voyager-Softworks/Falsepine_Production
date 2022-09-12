@@ -360,7 +360,8 @@ public class PlayerInventoryInterface : MonoBehaviour
                 }
                 hitEnemies.Add(enemy);
 
-                Health_Base.DamageStat ds = new Health_Base.DamageStat(meleeAttackDamage, gameObject, transform.position, transform.position + transform.forward * meleeAttackRange);
+                //@todo make the stats portion of the damage stat exist
+                Health_Base.DamageStat ds = new Health_Base.DamageStat(meleeAttackDamage, gameObject, transform.position, transform.position + transform.forward * meleeAttackRange, null);
                 enemy.TakeDamage(ds);
 
                 RangedWeapon rangedWeapon = selectedWeapon as RangedWeapon;

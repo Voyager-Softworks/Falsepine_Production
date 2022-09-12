@@ -470,7 +470,7 @@ public class Console : ToggleableWindow
 
             // kill all of them
             foreach (EnemyHealth enemy in enemies){
-                enemy.TakeDamage(new Health_Base.DamageStat(enemy.m_currentHealth, this.gameObject, transform.position, enemy.transform.position));
+                enemy.TakeDamage(new Health_Base.DamageStat(enemy.m_currentHealth, this.gameObject, transform.position, enemy.transform.position, null));
             }
             Log("- All enemies killed");
             Log();
