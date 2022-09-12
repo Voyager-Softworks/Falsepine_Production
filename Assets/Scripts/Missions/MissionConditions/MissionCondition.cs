@@ -30,6 +30,8 @@ public class MissionCondition : ISerializationCallbackReceiver
     [HideInInspector][SerializeField] public string m_name = "New Mission Condition";
     [SerializeField] protected ConditionState m_state = ConditionState.INCOMPLETE;
 
+    [SerializeField] public bool m_lockState = false;
+
     public virtual string GetDescription()
     {
         return "An empty mission condition, please choose a condition type from the dropdown menu.";
@@ -58,6 +60,8 @@ public class MissionCondition : ISerializationCallbackReceiver
     }
 
     public virtual void SetState(ConditionState _state){
+        if (m_lockState) return;
+
         m_state = _state;
     }
 

@@ -21,8 +21,13 @@ public class MissionCardUI : MonoBehaviour
     public TextMeshProUGUI missionDescription;
     public Image backgroundImage;
     public GameObject takenGroup;
-    public Image missionStamp;
     public Image dropShadow;
+
+    [Header("Stamp")]
+    public Image missionStamp;
+    public Sprite missionStampComplete;
+    public Sprite missionStampFailed;
+    public Sprite missionStampIncomplete;
 
     [Header("Button")]
     public GameObject button;
@@ -129,12 +134,6 @@ public class MissionCardUI : MonoBehaviour
                     missionDescription.text = "Mission Failed";
                     break;
             }
-            if (associatedMission.GetState() == MissionCondition.ConditionState.COMPLETE){
-                missionDescription.text = "The mission is completed, turn it in.";
-            }
-            else{
-                missionDescription.text = "Check the journal.\nEmbark to complete the mission.";
-            }
 
             //set title and descript to be white
             missionTitle.color = Color.white;
@@ -156,12 +155,12 @@ public class MissionCardUI : MonoBehaviour
             }
             else
             {
-                // disable button
-                button.SetActive(false);
+                buttonText.text = "Cancel";
             }
             return;
         }
-        else {
+        else
+        {
             //otherwise show card
             ShowCard();
 
@@ -170,7 +169,8 @@ public class MissionCardUI : MonoBehaviour
             missionDescription.text = associatedMission.m_description;
 
             //update stamp
-            missionStamp.enabled = associatedMission.GetState() == MissionCondition.ConditionState.COMPLETE;
+            missionStamp.enabled = true;
+            SetStamp();
 
             //update background image
             //backgroundImage.enabled = true;
@@ -183,7 +183,8 @@ public class MissionCardUI : MonoBehaviour
             {
                 button.SetActive(false);
             }
-            else{
+            else
+            {
                 //else, show button and update text
                 if (MissionManager.instance.GetCurrentMission() != null)
                 {
@@ -194,6 +195,22 @@ public class MissionCardUI : MonoBehaviour
                     buttonText.text = "Accept";
                 }
             }
+        }
+    }
+
+    private void SetStamp()
+    {
+        switch (associatedMission.GetState())
+        {
+            case MissionCondition.ConditionState.COMPLETE:
+                missionStamp.sprite = missionStampComplete;
+                break;
+            case MissionCondition.ConditionState.INCOMPLETE:
+                missionStamp.sprite = missionStampIncomplete;
+                break;
+            case MissionCondition.ConditionState.FAILED:
+                missionStamp.sprite = missionStampFailed;
+                break;
         }
     }
 

@@ -55,14 +55,14 @@ public class PauseMenu : ToggleableWindow
     /// <summary>
     /// When restart button is clicked, reload the scene.
     /// </summary>
-    public void RestartClicked(){
-        LevelController.ReloadScene();
+    public void TownClicked(){
+        LevelController.LoadTown();
     }
 
     /// <summary>
-    /// When menu button is clicked, go to the main menu (without saving),
+    /// When menu button is clicked, go to the main menu
     /// </summary>
     public void MainMenuClicked(){
-        LevelController.LoadMenu(false);
+        LevelController.LoadMenu();
     }
 }

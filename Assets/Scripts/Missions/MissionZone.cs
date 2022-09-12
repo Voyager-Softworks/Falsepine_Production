@@ -158,9 +158,6 @@ public class MissionZone : ScriptableObject
 
         currentMission = _misison;
 
-        // begin mission
-        currentMission.BeginMission();
-
         //m_currentScenePath = "";
         return true;
     }
@@ -170,8 +167,6 @@ public class MissionZone : ScriptableObject
     /// </summary>
     /// <returns></returns>
     public bool TryReturnMission(){
-        // end mission
-        currentMission.EndMission();
         currentMission = null;
         return true;
     }

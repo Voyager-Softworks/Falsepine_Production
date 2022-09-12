@@ -22,7 +22,12 @@ public class Mission : ScriptableObject
 
     [SerializeReference] public List<MissionCondition> m_conditions = new List<MissionCondition>();
 
+    [SerializeField] public bool m_lockOnComplete = true;
+    [SerializeField] private bool m_isLockedComplete = false;
+
     public MissionCondition.ConditionState GetState(){
+        if (m_lockOnComplete && m_isLockedComplete) return MissionCondition.ConditionState.COMPLETE;
+
         UpdateState();
 
         // if all conditions are complete, return complete
@@ -53,6 +58,7 @@ public class Mission : ScriptableObject
 
         if (allComplete)
         {
+            LockMissionComplete();
             return MissionCondition.ConditionState.COMPLETE;
         }
         else if (anyFailed)
@@ -65,6 +71,19 @@ public class Mission : ScriptableObject
         }
     }
 
+    private void LockMissionComplete()
+    {
+        if (!m_lockOnComplete) return;
+
+        m_isLockedComplete = true;
+
+        //lock all conditions
+        foreach (MissionCondition condition in m_conditions)
+        {
+            condition.m_lockState = true;
+        }
+    }
+
     public void SetState(MissionCondition.ConditionState _state){
         foreach (MissionCondition condition in m_conditions)
         {
@@ -72,8 +91,10 @@ public class Mission : ScriptableObject
         }
     }
 
-    public void UpdateState()
+    private void UpdateState()
     {
+        if (m_lockOnComplete && m_isLockedComplete) return;
+
         foreach (MissionCondition condition in m_conditions)
         {
             condition.UpdateState();
@@ -82,6 +103,8 @@ public class Mission : ScriptableObject
 
     public void BeginMission()
     {
+        if (m_lockOnComplete && m_isLockedComplete) return;
+
         foreach (MissionCondition condition in m_conditions)
         {
             condition.BeginCondition();
@@ -100,6 +123,14 @@ public class Mission : ScriptableObject
     /// Resets the mission to not completed.
     /// </summary>
     public void Reset(){
+        m_isLockedComplete = false;
+
+        //unlock all conditions
+        foreach (MissionCondition condition in m_conditions)
+        {
+            condition.m_lockState = false;
+        }
+
         SetState(MissionCondition.ConditionState.INCOMPLETE);
     }
 

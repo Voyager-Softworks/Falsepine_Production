@@ -21,6 +21,8 @@ public class MissionManager : MonoBehaviour
     [SerializeField] public List<MissionZone> m_missionZones;
     [SerializeField] public MissionZone m_currentZone;
 
+    public Utilities.SceneField TownSceneReference;
+
     public static string GetSaveFolderPath(int saveSlot)
     {
         return SaveManager.GetSaveFolderPath(saveSlot) + "/missions/";
@@ -81,6 +83,12 @@ public class MissionManager : MonoBehaviour
             {
                 condition.OnSceneLoaded(arg0, arg1);
             }
+        }
+
+        // if this scene is the town scene, end the mission
+        if (arg0 == SceneManager.GetSceneByPath(TownSceneReference))
+        {
+            GetCurrentMission()?.EndMission();
         }
     }
 
@@ -311,6 +319,9 @@ public class MissionManager : MonoBehaviour
         //load level 1 if valid
         if (GetCurrentMission() != null && GetCurrentMission().GetState() != MissionCondition.ConditionState.COMPLETE)
         {
+            // begin mission
+            GetCurrentMission().BeginMission();
+
             LoadFirstScene();
         }
     }
