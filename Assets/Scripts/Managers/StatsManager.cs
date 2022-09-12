@@ -70,12 +70,22 @@ public class StatsManager : MonoBehaviour
         // equality == override
         public static bool operator ==(StatType a, StatType b)
         {
+            if (ReferenceEquals(a, b))
+            {
+                return true;
+            }
+
+            if (ReferenceEquals(a, null) || ReferenceEquals(b, null))
+            {
+                return false;
+            }
+
             return a.value == b.value;
         }
         // inequality != override
         public static bool operator !=(StatType a, StatType b)
         {
-            return a.value != b.value;
+            return !(a == b);
         }
         // Equals override
         public override bool Equals(object obj)

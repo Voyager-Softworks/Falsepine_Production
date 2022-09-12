@@ -468,5 +468,31 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
             }
         }
     }
+
+    //custom editor
+    [CustomEditor(typeof(EconomyManager))]
+    public class EconomyEditor : Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            EconomyManager economy = (EconomyManager)target;
+
+            // draw default inspector
+            DrawDefaultInspector();
+
+            // button to re-add all purchasable items items using their ID's
+            if (GUILayout.Button("Re-add all items"))
+            {
+                foreach (PurchasableItem purchasable in economy.m_purchasableItems)
+                {
+                    Item item = ItemDatabase.GetItem(purchasable.m_item.id);
+                    if (item != null)
+                    {
+                        purchasable.m_item = item;
+                    }
+                }
+            }
+        }
+    }
     #endif
 }
