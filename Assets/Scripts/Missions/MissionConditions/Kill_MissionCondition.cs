@@ -72,7 +72,8 @@ public class Kill_MissionCondition : MissionCondition
         // if using optional, filter by weapon, if no weapon, then stat
         if (m_useOptional){
             if (m_itemToKillWith != null){
-                relevantKills = relevantKills.Where(x => x.m_sourceStats as Item == m_itemToKillWith).ToList();
+                //only need to match ID's
+                relevantKills = relevantKills.Where(x => (x.m_sourceStats as Item).id == m_itemToKillWith.id).ToList();
             }
             else if (m_statToKillWith != null){
                 relevantKills = relevantKills.Where(x => x.m_sourceStats.GetStatTypes().Contains(m_statToKillWith)).ToList();
