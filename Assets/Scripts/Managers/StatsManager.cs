@@ -258,6 +258,13 @@ public class StatsManager : MonoBehaviour
             stats.m_monster = _monster;
             m_monsterStats.Add(stats);
         }
+
+        // if damage stat is null, make a new one
+        if (_damageStat == null)
+        {
+            _damageStat = new Health_Base.DamageStat(0, this.gameObject, Vector3.zero, Vector3.zero, null);
+        }
+
         stats.m_kills.Add(_damageStat);
     }
 
