@@ -141,7 +141,7 @@ public class MissionCardUI : MonoBehaviour
                     missionDescription.text = "Check the journal.\nEmbark to start the mission.";
                     break;
                 case MissionCondition.ConditionState.FAILED:
-                    missionDescription.text = "Mission Failed";
+                    missionDescription.text = "Mission Failed. \nCancel the mission to try again.";
                     break;
             }
 

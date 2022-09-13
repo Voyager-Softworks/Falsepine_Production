@@ -167,8 +167,16 @@ public class MissionZone : ScriptableObject
     /// </summary>
     /// <returns></returns>
     public bool TryReturnMission(){
-        currentMission = null;
-        return true;
+        // clear current mission
+        if (currentMission){
+            // if mission is failed, reset it
+            if (currentMission.GetState() == MissionCondition.ConditionState.FAILED){
+                currentMission.Reset();
+            }
+            currentMission = null;
+            return true;
+        }
+        return false;
     }
 
 
