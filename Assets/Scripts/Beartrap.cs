@@ -7,6 +7,9 @@ public class Beartrap : MonoBehaviour
 {
     public float m_damage = 5.0f;
 
+    [Header("Stats")]
+    [SerializeField] public StatsProfile m_statsProfile;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +29,7 @@ public class Beartrap : MonoBehaviour
             if (health == null) health = hitCollider.GetComponentInChildren<Health_Base>();
             if (health != null)
             {
-                health.TakeDamage(new Health_Base.DamageStat(m_damage, gameObject, transform.position, hitCollider.transform.position));
+                health.TakeDamage(new Health_Base.DamageStat(m_damage, gameObject, transform.position, hitCollider.transform.position, m_statsProfile));
             }
         }
     }

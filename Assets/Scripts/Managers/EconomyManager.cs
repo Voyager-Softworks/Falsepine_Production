@@ -207,7 +207,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
         // for each unique boss kill, unlock 1 slot
         foreach (StatsManager.MonsterStat monster in StatsManager.instance.m_monsterStats)
         {
-            if (monster.m_monster.m_type == MonsterInfo.MonsterType.Boss && monster.m_totalKilled >= 1)
+            if (monster.m_monster.m_type == MonsterInfo.MonsterType.Boss && monster.m_kills.Count() >= 1)
             {
                 amount += 1;
             }
@@ -465,6 +465,32 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
 
                 // set dirty
                 EditorUtility.SetDirty(this);
+            }
+        }
+    }
+
+    //custom editor
+    [CustomEditor(typeof(EconomyManager))]
+    public class EconomyEditor : Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            EconomyManager economy = (EconomyManager)target;
+
+            // draw default inspector
+            DrawDefaultInspector();
+
+            // button to re-add all purchasable items items using their ID's
+            if (GUILayout.Button("Re-add all items"))
+            {
+                foreach (PurchasableItem purchasable in economy.m_purchasableItems)
+                {
+                    Item item = ItemDatabase.GetItem(purchasable.m_item.id);
+                    if (item != null)
+                    {
+                        purchasable.m_item = item;
+                    }
+                }
             }
         }
     }

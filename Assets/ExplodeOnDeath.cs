@@ -15,6 +15,9 @@ public class ExplodeOnDeath : MonoBehaviour
     public Vector3 m_screenshakeAmplitude = Vector3.one;
     public float m_screenshakeFrequency = 1f;
 
+    [Header("Stats")]
+    [SerializeField] public StatsProfile m_statsProfile;
+
 
     // Start is called before the first frame update
     void Start()
@@ -32,11 +35,11 @@ public class ExplodeOnDeath : MonoBehaviour
         {
             if (collider.gameObject.GetComponentInChildren<Health_Base>() != null)
             {
-                collider.gameObject.GetComponentInChildren<Health_Base>().TakeDamage(new Health_Base.DamageStat(damage: m_damage, sourceObject: gameObject, origin: transform.position, hitPoint: collider.transform.position));
+                collider.gameObject.GetComponentInChildren<Health_Base>().TakeDamage(new Health_Base.DamageStat(damage: m_damage, sourceObject: gameObject, origin: transform.position, hitPoint: collider.transform.position, m_statsProfile));
             }
             else if (collider.gameObject.GetComponentInParent<Health_Base>() != null)
             {
-                collider.gameObject.GetComponentInParent<Health_Base>().TakeDamage(new Health_Base.DamageStat(damage: m_damage, sourceObject: gameObject, origin: transform.position, hitPoint: collider.transform.position));
+                collider.gameObject.GetComponentInParent<Health_Base>().TakeDamage(new Health_Base.DamageStat(damage: m_damage, sourceObject: gameObject, origin: transform.position, hitPoint: collider.transform.position, m_statsProfile));
             }
         }
         FindObjectOfType<ScreenshakeManager>().AddShakeImpulse(m_screenshakeDuration, m_screenshakeAmplitude, m_screenshakeFrequency);

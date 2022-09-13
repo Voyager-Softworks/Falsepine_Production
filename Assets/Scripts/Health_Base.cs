@@ -33,13 +33,16 @@ public class Health_Base : MonoBehaviour /// @todo Impliment this into players, 
         public Vector3 direction { get { return m_hitPoint - m_originPoint; } } ///< The direction the attack was moving in.
         public float m_time; ///< The time the damage was dealt.
 
-        public DamageStat(float damage, GameObject sourceObject, Vector3 origin, Vector3 hitPoint)
+        public StatsManager.UsesStats m_sourceStats; ///< The stats of the object that dealt the damage. (used for kill tracking and whatnot)
+
+        public DamageStat(float damage, GameObject sourceObject, Vector3 origin, Vector3 hitPoint, StatsManager.UsesStats sourceStats)
         {
             m_damage = damage;
             m_sourceObject = sourceObject;
             m_originPoint = origin;
             m_hitPoint = hitPoint;
             m_time = Time.time;
+            m_sourceStats = sourceStats;
         }
     }
 

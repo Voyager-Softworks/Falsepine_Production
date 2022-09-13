@@ -108,8 +108,10 @@ public class EnemyHealth : Health_Base
 
         GetComponentInChildren<Animator>().SetBool("Dead", true);
 
-        // add kill
-        StatsManager.instance.AddKill(m_monsterType);
+        // add kill:
+        // get last damage stat (if any)
+        DamageStat lastDamage = m_damageHistory.Count > 0 ? m_damageHistory[m_damageHistory.Count - 1] : null;
+        StatsManager.instance.AddKill(m_monsterType, lastDamage);
 
         // Disable agent
         NodeAI.NodeAI_Agent agent = GetComponent<NodeAI.NodeAI_Agent>();
