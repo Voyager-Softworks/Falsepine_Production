@@ -238,6 +238,33 @@ public class MissionManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Tries to set the current zone to the next one
+    /// </summary>
+    public void GoToNextZone()
+    {
+        // get current zone index
+        int index = m_missionZones.IndexOf(m_currentZone);
+
+        // if there is a next zone, set it to the current zone
+        if (index + 1 < m_missionZones.Count)
+        {
+            m_currentZone = m_missionZones[index + 1];
+            m_currentZone.Reset();
+        }
+        else
+        {
+            Debug.Log("No next zone");
+
+            // set to first zone
+            if (m_missionZones.Count > 0)
+            {
+                m_currentZone = m_missionZones[0];
+                m_currentZone.Reset();
+            }
+        }
+    }
+
+    /// <summary>
     /// Deletes the save file
     /// </summary>
     /// <param name="saveSlot"></param>
@@ -321,14 +348,14 @@ public class MissionManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Loads the starting scene
+    /// Loads the first scene from list
     /// </summary>
     public void LoadFirstScene()
     {
         if (m_currentZone == null) return;
-        if (m_currentZone.m_startScene == null) return;
+        if (m_currentZone.GetSceneList().Count <= 0) return;
 
-        LevelController.LoadScene(m_currentZone.m_startScene.scenePath);
+        LevelController.LoadScene(m_currentZone.GetSceneList()[0]);
     }
 
     /// <summary>
@@ -373,6 +400,20 @@ public class MissionManager : MonoBehaviour
 
             missionCardUI.UpdateCardUI();
         }
+    }
+
+    /// <summary>
+    /// Checks if the current zone's boss has been killed at least once
+    /// </summary>
+    /// <returns></returns>
+    public bool HasZoneBossDied(){
+        foreach (MonsterInfo monster in GetCurrentZone()?.m_zoneMonsters){
+            if (monster != null && monster.m_type == MonsterInfo.MonsterType.Boss && StatsManager.instance?.GetKills(monster) > 0)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     /// <summary>

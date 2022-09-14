@@ -87,7 +87,7 @@ public class MissionZone : ScriptableObject
         tempPMS = m_possibleMiddleScenes.OrderBy(x => UnityEngine.Random.value).ToList();
 
         // add to missions
-        for (int i = 0; i < m_middleSceneCount; i++)
+        for (int i = 0; i < m_middleSceneCount && i < tempPMS.Count(); i++)
         {
             m_middleScenes.Add(tempPMS[i]);
         }
@@ -241,7 +241,11 @@ public class MissionZone : ScriptableObject
         return temp[currentSceneIndex + 1].scenePath;
     }
 
-    private List<SceneField> GetSceneList()
+    /// <summary>
+    /// Gets a list of all scenes in order.
+    /// </summary>
+    /// <returns></returns>
+    public List<SceneField> GetSceneList()
     {
         List<Utilities.SceneField> temp = new List<Utilities.SceneField>();
         temp.Add(m_startScene);

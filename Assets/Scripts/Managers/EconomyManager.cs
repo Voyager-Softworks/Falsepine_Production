@@ -104,7 +104,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
             {
                 //serialize item
                 itemJSON = JsonUtility.ToJson(_purchasable.m_item, true);
-                itemType = _purchasable.m_item.GetType().Name;
+                itemType = _purchasable.m_item != null ? _purchasable.m_item.GetType().Name : "";
                 this.minAmount = _purchasable.m_minAmount;
                 this.maxAmount = _purchasable.m_maxAmount;
                 this.unlocked = _purchasable.m_unlocked;
@@ -291,7 +291,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
             // {
             //     continue;
             // }
-            if (purchasableItem.m_unlocked)
+            if (purchasableItem != null && purchasableItem.m_unlocked && purchasableItem.m_item != null)
             {
                 // make new instance
                 int randAmount = UnityEngine.Random.Range(purchasableItem.m_minAmount, purchasableItem.m_maxAmount);

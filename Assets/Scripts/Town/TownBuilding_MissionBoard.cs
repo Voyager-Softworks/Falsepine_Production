@@ -18,9 +18,9 @@ public class TownBuilding_MissionBoard : TownBuilding
     public int lessersNeeded = 3;
     public int greatersNeeded = 1;
 
-    public GameObject bossUnlockButton;
-    public GameObject bossIconLocked;
-    public GameObject bossIconUnlocked;
+    public GameObject unlockButton;
+    public GameObject iconLocked;
+    public GameObject iconUnlocked;
 
     /// <summary>
     /// Gets the path to the save file for the mission board, at the save slot.
@@ -121,9 +121,9 @@ public class TownBuilding_MissionBoard : TownBuilding
     private void UpdateUI()
     {
         if (MissionManager.instance == null) return;
-        if (bossUnlockButton == null) return;
+        if (unlockButton == null) return;
         
-        DrawLesserPage();
+        DrawPage();
     }
 
     /// <summary>
@@ -146,30 +146,44 @@ public class TownBuilding_MissionBoard : TownBuilding
     }
 
     /// <summary>
-    /// Draws the mission cards for the lesser missions.
+    /// Draws the mission cards for the missions.
     /// </summary>
-    public void DrawLesserPage(){
+    public void DrawPage(){
+
+        bool thisZoneBossKilled = MissionManager.instance.HasZoneBossDied();
 
         // update unlock button
-        bossUnlockButton.GetComponentInChildren<TextMeshProUGUI>().text = "Unlock Greater Missions (" + CountTurnedIn() + "/" + lessersNeeded + ")";
-        if (CountTurnedIn() < lessersNeeded) {
-            bossUnlockButton.GetComponentInChildren<Button>().interactable = false;
-            bossIconLocked.SetActive(true);
-            bossIconUnlocked.SetActive(false);
-            bossUnlockButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
+        if (!thisZoneBossKilled) {
+            unlockButton.GetComponentInChildren<Button>().interactable = false;
+            iconLocked.SetActive(true);
+            iconUnlocked.SetActive(false);
+            unlockButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
+            unlockButton.GetComponentInChildren<TextMeshProUGUI>().text = "Kill Boss First";
         }
         else {
-            bossUnlockButton.GetComponentInChildren<Button>().interactable = true;
-            bossIconUnlocked.SetActive(true);
-            bossIconLocked.SetActive(false);
-            bossUnlockButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
+            unlockButton.GetComponentInChildren<Button>().interactable = true;
+            iconUnlocked.SetActive(true);
+            iconLocked.SetActive(false);
+            unlockButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
+            unlockButton.GetComponentInChildren<TextMeshProUGUI>().text = "Go to Next Zone";
         }
 
         // update mission cards
         for (int i = 0; i < lesserMissionCardUIList.Count; i++)
         {
             lesserMissionCardUIList[i].gameObject.SetActive(true);
+        }
+    }
 
+    public void ButtonPressed(){
+        if (MissionManager.instance == null) return;
+        if (MissionManager.instance.GetCurrentZone() == null) return;
+        if (MissionManager.instance.GetCurrentZone().m_zoneMonsters == null) return;
+
+        bool thisZoneBossKilled = MissionManager.instance.HasZoneBossDied();
+
+        if (thisZoneBossKilled){
+            MissionManager.instance.GoToNextZone();
         }
     }
 }

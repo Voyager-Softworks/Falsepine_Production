@@ -55,7 +55,7 @@ public class BossEnemyHealth : EnemyHealth
     {
         base.Die();
 
-        m_indicator.SetActive(false);
+        if (m_indicator != null) m_indicator.SetActive(false);
 
         // try complete the linked mission, if it is the current mission
         MissionManager mm = MissionManager.instance;

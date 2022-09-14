@@ -12,8 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56c089656aad97c49b15ade4c6d1891e, type: 3}
   m_Name: KillBrightmaw
   m_EditorClassIdentifier: 
-  m_size: 1
-  m_type: 3
   m_title: Kill the Brightmaw
   m_description: Kill the brightmaw creature
-  m_isCompleted: 0
+  m_conditions:
+  - id: 0
+  m_lockOnComplete: 1
+  m_isLockedComplete: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: Kill_MissionCondition, ns: , asm: Assembly-CSharp}
+      data:
+        m_name: Kill 1 Bright Maw(s)
+        m_state: 0
+        m_lockState: 0
+        m_monsterToKill: {fileID: 11400000, guid: 25e00185e50f675488bbf5ceb0b6ae63, type: 2}
+        m_initialStats: []
+        m_initialKills: []
+        m_requiredKills: 1
+        m_useOptional: 0
+        m_statToKillWith:
+          value: EnemyDamage
+        m_itemToKillWith: {fileID: 0}
