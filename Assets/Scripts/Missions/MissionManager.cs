@@ -311,10 +311,10 @@ public class MissionManager : MonoBehaviour
     public void TryEmbark()
     {
         //load level 1 if valid
-        if (GetCurrentMission() != null && GetCurrentMission().GetState() != MissionCondition.ConditionState.COMPLETE)
+        if (GetCurrentMission() == null || GetCurrentMission().GetState() != MissionCondition.ConditionState.COMPLETE)
         {
-            // begin mission
-            GetCurrentMission().BeginMission();
+            // begin mission if it exists
+            GetCurrentMission()?.BeginMission();
 
             LoadFirstScene();
         }

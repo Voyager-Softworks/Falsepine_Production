@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System;
 
 /// <summary>
 /// A base health class for all objects that can take damage.
@@ -24,6 +25,7 @@ public class Health_Base : MonoBehaviour /// @todo Impliment this into players, 
     /// <summary>
     ///  A data object containing info about a damage dealt.
     /// </summary>
+    [Serializable]
     public class DamageStat
     {
         public float m_damage; ///< The amount of damage dealt.

@@ -207,7 +207,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
         // for each unique boss kill, unlock 1 slot
         foreach (StatsManager.MonsterStat monster in StatsManager.instance.m_monsterStats)
         {
-            if (monster.m_monster.m_type == MonsterInfo.MonsterType.Boss && monster.m_kills.Count() >= 1)
+            if (monster != null && monster.m_monster != null && monster.m_monster.m_type == MonsterInfo.MonsterType.Boss && monster.m_kills.Count() >= 1)
             {
                 amount += 1;
             }

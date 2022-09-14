@@ -19,11 +19,12 @@ public class TownBuilding_Emark : TownBuilding
     {
         if (MissionManager.instance == null) return;
         //if no contract, say so
-        if (MissionManager.instance.GetCurrentMission() == null){
-            worldText.text = "Contract Required!";
-        }
+        // if (MissionManager.instance.GetCurrentMission() == null){
+        //     worldText.text = "Contract Required!";
+        // }
+        
         //if contract already completed, say so
-        else if (MissionManager.instance.GetCurrentMission().GetState() == MissionCondition.ConditionState.COMPLETE){
+        if (MissionManager.instance.GetCurrentMission()?.GetState() == MissionCondition.ConditionState.COMPLETE){
             worldText.text = "Turn in Contract!";
         }
         else{

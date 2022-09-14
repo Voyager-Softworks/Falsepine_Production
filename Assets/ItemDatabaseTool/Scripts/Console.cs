@@ -522,6 +522,20 @@ public class Console : ToggleableWindow
             return;
         }
 
+        // "next_scene"
+        if (split.Length == 1 && split[0] == "next_scene")
+        {
+            if (MissionManager.instance != null){
+                MissionManager.instance?.LoadNextScene();
+
+                Log("- Next scene loading");
+            }
+            else{
+                Log("- MissionManager not found");
+            }
+            return;
+        }
+
         // "restart_scene"
         if (split.Length == 1 && split[0] == "restart_scene")
         {
@@ -601,6 +615,7 @@ public class Console : ToggleableWindow
         "list_scenes",
         "current_scene",
         "restart_scene",
+        "next_scene",
         "scene sceneNumber",
         "scene sceneName",
         "delete_mission_save",

@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using Utilities;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -47,10 +48,11 @@ public class MissionZone : ScriptableObject
 
     [Header("Scenes")]
     public Utilities.SceneField m_startScene;
-    public Utilities.SceneField m_endScene;
     public int m_middleSceneCount = 6;
     public List<Utilities.SceneField> m_possibleMiddleScenes;
     public List<Utilities.SceneField> m_middleScenes = new List<Utilities.SceneField>();
+    
+    public Utilities.SceneField m_preBossScene;
     public Utilities.SceneField m_bossScene;
 
     //public string m_currentScenePath = "";
@@ -209,11 +211,8 @@ public class MissionZone : ScriptableObject
     public int GetCurrentSceneIndex(){
         string currentScenePath = SceneManager.GetActiveScene().path;
 
-        // add start middle and end scenes to new list
-        List<Utilities.SceneField> temp = new List<Utilities.SceneField>();
-        temp.Add(m_startScene);
-        temp.AddRange(m_middleScenes);
-        temp.Add(m_endScene);
+        // get all scenes in order
+        List<Utilities.SceneField> temp = GetSceneList();
 
         // check if current scene is in list
         if (temp.Any(x => currentScenePath.Contains(x.scenePath))){
@@ -224,22 +223,34 @@ public class MissionZone : ScriptableObject
         return -1;
     }
 
-    public string GetNextScenePath(){
-        // add start middle and end scenes to new list
-        List<Utilities.SceneField> temp = new List<Utilities.SceneField>();
-        temp.Add(m_startScene);
-        temp.AddRange(m_middleScenes);
-        temp.Add(m_endScene);
+    public string GetNextScenePath()
+    {
+        // get all scenes in order
+        List<SceneField> temp = GetSceneList();
 
         int currentSceneIndex = GetCurrentSceneIndex();
-        if (currentSceneIndex == -1){
+        if (currentSceneIndex == -1)
+        {
             return "";
         }
         // if last, return ""
-        if (currentSceneIndex == temp.Count - 1){
+        if (currentSceneIndex == temp.Count - 1)
+        {
             return "";
         }
         return temp[currentSceneIndex + 1].scenePath;
+    }
+
+    private List<SceneField> GetSceneList()
+    {
+        List<Utilities.SceneField> temp = new List<Utilities.SceneField>();
+        temp.Add(m_startScene);
+        temp.AddRange(m_middleScenes);
+        temp.Add(m_preBossScene);
+        temp.Add(m_bossScene);
+        // remove any null or invalid scenes
+        temp.RemoveAll(x => x == null || x.scenePath == "");
+        return temp;
     }
 
     /// <summary>
@@ -369,7 +380,7 @@ public class MissionZone : ScriptableObject
 
             // Scenes:
             m_startScene = mz.m_startScene;
-            m_endScene = mz.m_endScene;
+            m_endScene = mz.m_preBossScene;
             m_bossScene = mz.m_bossScene;
             m_middleSceneCount = mz.m_middleSceneCount;
 
@@ -428,7 +439,7 @@ public class MissionZone : ScriptableObject
 
             // Scenes:
             mz.m_startScene = m_startScene;
-            mz.m_endScene = m_endScene;
+            mz.m_preBossScene = m_endScene;
             mz.m_bossScene = m_bossScene;
             mz.m_middleSceneCount = m_middleSceneCount;
 

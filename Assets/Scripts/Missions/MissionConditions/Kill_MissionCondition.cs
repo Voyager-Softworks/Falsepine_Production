@@ -73,7 +73,7 @@ public class Kill_MissionCondition : MissionCondition
         if (m_useOptional){
             if (m_itemToKillWith != null){
                 //only need to match ID's
-                relevantKills = relevantKills.Where(x => (x.m_sourceStats as Item).id == m_itemToKillWith.id).ToList();
+                relevantKills = relevantKills.Where(x => (x.m_sourceStats as Item)?.id == m_itemToKillWith.id).ToList();
             }
             else if (m_statToKillWith != null){
                 relevantKills = relevantKills.Where(x => x.m_sourceStats.GetStatTypes().Contains(m_statToKillWith)).ToList();
