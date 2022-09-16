@@ -50,7 +50,7 @@ public class ClickableObject : MonoBehaviour
                 // decrease x scale to 0 over 0.5 seconds
                 worldPanel.transform.localScale = Vector3.Lerp(worldPanel.transform.localScale, new Vector3(0, 1, 1), 15.0f * Time.deltaTime);
                 // then disable the panel
-                if (worldPanel.transform.localScale.x < 0.1f)
+                if (worldPanel.transform.localScale.x < 0.01f)
                 {
                     worldPanel.gameObject.SetActive(false);
                 }

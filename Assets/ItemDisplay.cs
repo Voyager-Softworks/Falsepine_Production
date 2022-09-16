@@ -77,10 +77,10 @@ public class ItemDisplay : MonoBehaviour
         // get corners
         Vector3[] corners = new Vector3[4];
         GetComponent<RectTransform>().GetWorldCorners(corners);
-        Vector2 bottomLeft = uiCamera.WorldToScreenPoint(corners[0]);
-        Vector2 topLeft = uiCamera.WorldToScreenPoint(corners[1]);
-        Vector2 topRight = uiCamera.WorldToScreenPoint(corners[2]);
-        Vector2 bottomRight = uiCamera.WorldToScreenPoint(corners[3]);
+        Vector2 bottomLeft = corners[0];
+        Vector2 topLeft = corners[1];
+        Vector2 topRight = corners[2];
+        Vector2 bottomRight = corners[3];
 
         // check if mouse is within the grid item's screen space
         if (mouseScreenPos.x >= topLeft.x && mouseScreenPos.x <= topRight.x &&
