@@ -72,7 +72,7 @@ public class ItemDisplay : MonoBehaviour
         // check if mouse is over this grid item
         Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
 
-        Camera uiCamera = GetComponentInParent<TownBuilding>()?.uiCamera;
+        Camera uiCamera = Camera.main;
 
         // get corners
         Vector3[] corners = new Vector3[4];
