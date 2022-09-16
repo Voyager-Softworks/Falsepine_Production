@@ -15,7 +15,7 @@ public class Speedrun_MissionCondition : MissionCondition
     private bool m_updateTimer = false;
 
     [Header("Optional")]
-    [Tooltip("If monster specified, timer will only start when enemy is first scene")]public MonsterInfo m_triggerMonster = null;
+    [Tooltip("If monster specified, timer will only tick when enemy is in the scene")]public MonsterInfo m_triggerMonster = null;
     [SerializeField, HideInInspector] private bool m_triggerMonsterSeen = true;
 
     public override string GetDescription(){
