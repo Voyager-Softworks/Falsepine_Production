@@ -25,10 +25,10 @@ public class TownBuilding_Emark : TownBuilding
         
         //if contract already completed, say so
         if (MissionManager.instance.GetCurrentMission()?.GetState() == MissionCondition.ConditionState.COMPLETE){
-            worldText.text = "Turn in Contract!";
+            //worldPanel.text = "Turn in Contract!";
         }
         else{
-            worldText.text = "Embark";
+            //worldPanel.text = "Embark";
         }
 
         base.Update();
