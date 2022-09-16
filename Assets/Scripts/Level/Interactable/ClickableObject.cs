@@ -17,7 +17,7 @@ public class ClickableObject : MonoBehaviour
     //collider to check for click
     public Collider[] colliders;
 
-    public TextMeshProUGUI worldText;
+    public GameObject worldPanel;
 
     //can the object be clicked on?
     public bool m_canBeClicked = true;
@@ -37,15 +37,23 @@ public class ClickableObject : MonoBehaviour
     // Update is called once per frame
     protected virtual void Update()
     {
-        if (worldText != null)
+        if (worldPanel != null)
         {
             if (CheckMouseOver())
             {
-                worldText.gameObject.SetActive(true);
+                worldPanel.gameObject.SetActive(true);
+                // increase x scale to 1 over 0.5 seconds
+                worldPanel.transform.localScale = Vector3.Lerp(worldPanel.transform.localScale, new Vector3(1, 1, 1), 10.0f * Time.deltaTime);
             }
             else
             {
-                worldText.gameObject.SetActive(false);
+                // decrease x scale to 0 over 0.5 seconds
+                worldPanel.transform.localScale = Vector3.Lerp(worldPanel.transform.localScale, new Vector3(0, 1, 1), 15.0f * Time.deltaTime);
+                // then disable the panel
+                if (worldPanel.transform.localScale.x < 0.1f)
+                {
+                    worldPanel.gameObject.SetActive(false);
+                }
             }
         }
 
