@@ -254,6 +254,7 @@ public class Mission : ScriptableObject
                 GenericMenu menu = new GenericMenu();
                 menu.AddItem(new GUIContent("Kill Enemy"), false, () => { mission.m_conditions.Add(new Kill_MissionCondition()); });
                 menu.AddItem(new GUIContent("No Damage"), false, () => { mission.m_conditions.Add(new NoDamage_MissionCondition()); });
+                menu.AddItem(new GUIContent("Speed Run"), false, () => { mission.m_conditions.Add(new Speedrun_MissionCondition()); });
                 menu.ShowAsContext();
             }
         }

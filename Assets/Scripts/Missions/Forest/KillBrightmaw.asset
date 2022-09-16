@@ -16,6 +16,7 @@ MonoBehaviour:
   m_description: Kill the brightmaw creature
   m_conditions:
   - id: 0
+  - id: 1
   m_lockOnComplete: 1
   m_isLockedComplete: 0
   references:
@@ -34,3 +35,10 @@ MonoBehaviour:
         m_statToKillWith:
           value: EnemyDamage
         m_itemToKillWith: {fileID: 0}
+    00000001:
+      type: {class: Speedrun_MissionCondition, ns: , asm: Assembly-CSharp}
+      data:
+        m_name: Spend less than 60 seconds in the expedition
+        m_state: 0
+        m_lockState: 0
+        m_timeLimit: 60
