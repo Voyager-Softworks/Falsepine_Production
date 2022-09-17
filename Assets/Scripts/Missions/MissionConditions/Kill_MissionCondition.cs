@@ -30,6 +30,11 @@ public class Kill_MissionCondition : MissionCondition
         return "Kill " + m_requiredKills + " " + m_monsterToKill?.m_name + "(s)";
     }
 
+    public override string GetShortDescription()
+    {
+        return "Kill monster(s)";
+    }
+
     public override void Update()
     {
         base.Update();

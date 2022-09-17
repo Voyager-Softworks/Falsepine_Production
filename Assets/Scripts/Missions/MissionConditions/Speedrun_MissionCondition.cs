@@ -26,6 +26,11 @@ public class Speedrun_MissionCondition : MissionCondition
         return desc;
     }
 
+    public override string GetShortDescription()
+    {
+        return "Time limit";
+    }
+
     public override void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
         base.OnSceneLoaded(arg0, arg1);
