@@ -209,7 +209,7 @@ public class MissionCardUI : MonoBehaviour
                     }
 
                     // show condition, and coloured sprite to show state
-                    missionDescription.text += "\n" + "<sprite=0 color=#" + ColorUtility.ToHtmlStringRGB(conditionCol) + ">" + condition.GetDescription();
+                    missionDescription.text += "\n" + "<sprite=0 color=#" + ColorUtility.ToHtmlStringRGB(conditionCol) + ">" + condition.GetShortDescription();
                 }
             }
 

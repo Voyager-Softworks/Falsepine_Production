@@ -50,12 +50,18 @@ public class JournalManager : ToggleableWindow
     public List<JounralEntry> m_undiscoveredEntries = new List<JounralEntry>();
     public List<JounralEntry> m_discoveredEntries = new List<JounralEntry>();
 
+    [Header("UI variables")]
+    public bool m_showHUDConditions = false;
+    public Button m_HUDButton;
+
     /// <summary>
     /// Class used to save the journal entries
     /// </summary> 
     private class SaveData{
         public List<JounralEntry.SerializableJournalEntry> undiscoveredEntries = new List<JounralEntry.SerializableJournalEntry>();
         public List<JounralEntry.SerializableJournalEntry> discoveredEntries = new List<JounralEntry.SerializableJournalEntry>();
+
+        public bool showHUDConditions = false;
     }
 
     public static string GetSaveFolderPath(int saveSlot)
@@ -86,6 +92,21 @@ public class JournalManager : ToggleableWindow
                     OpenContents(link.contents);
                     link.button.interactable = false;
                 });
+            }
+
+            // HUD button
+            if (m_HUDButton != null)
+            {
+                m_HUDButton.onClick.AddListener(() =>
+                {
+                    m_showHUDConditions = !m_showHUDConditions;
+
+                    // set color
+                    m_HUDButton.image.color = m_showHUDConditions ? Color.green : Color.white;
+                });
+
+                // set color
+                m_HUDButton.image.color = m_showHUDConditions ? Color.green : Color.white;
             }
         }
         else
@@ -251,6 +272,7 @@ public class JournalManager : ToggleableWindow
         {
             data.discoveredEntries.Add(new JounralEntry.SerializableJournalEntry(entry));
         }
+        data.showHUDConditions = m_showHUDConditions;
         
 
         StreamWriter writer = new StreamWriter(file);
@@ -303,6 +325,7 @@ public class JournalManager : ToggleableWindow
         {
             m_discoveredEntries.Add(entry.ToEntry());
         }
+        m_showHUDConditions = data.showHUDConditions;
 
         reader.Close();
         file.Close();

@@ -37,6 +37,11 @@ public class MissionCondition : ISerializationCallbackReceiver
         return "An empty mission condition, please choose a condition type from the dropdown menu.";
     }
 
+    public virtual string GetShortDescription()
+    {
+        return "An empty mission condition, please choose a condition type from the dropdown menu.";
+    }
+
     void OnValidate()
     {
         // update name

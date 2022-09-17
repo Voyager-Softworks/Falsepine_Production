@@ -25,6 +25,8 @@ public class UIScript : MonoBehaviour
 
     public TextMeshProUGUI equipmentAmmoText;
 
+    public TextMeshProUGUI m_conditionText;
+
     [HideInInspector] public float healthBarMaxWidth;
 
     [Header("Interact Text")]
@@ -154,6 +156,41 @@ public class UIScript : MonoBehaviour
 
 
             }
+        }
+
+        if (MissionManager.instance && JournalManager.instance && JournalManager.instance.m_showHUDConditions)
+        {
+            m_conditionText.transform.parent.gameObject.SetActive(true);
+            Mission mission = MissionManager.instance.GetCurrentMission();
+            if (mission != null && mission.m_conditions.Count > 0)
+            {
+                m_conditionText.text = "Conditions:";
+                foreach (MissionCondition condition in mission.m_conditions)
+                {
+                    Color conditionCol = Color.white;
+                    switch (condition.GetState())
+                    {
+                        case MissionCondition.ConditionState.COMPLETE:
+                            conditionCol = Color.green;
+                            break;
+                        case MissionCondition.ConditionState.INCOMPLETE:
+                            conditionCol = Color.white;
+                            break;
+                        case MissionCondition.ConditionState.FAILED:
+                            conditionCol = Color.red;
+                            break;
+                    }
+
+                    // show condition, and coloured sprite to show state
+                    m_conditionText.text += "\n" + "<sprite=0 color=#" + ColorUtility.ToHtmlStringRGB(conditionCol) + ">" + condition.GetShortDescription();
+                }
+            }
+            else{
+                m_conditionText.text = "No Mission Conditions";
+            }
+        }
+        else {
+            m_conditionText.transform.parent.gameObject.SetActive(false);
         }
     }
 }

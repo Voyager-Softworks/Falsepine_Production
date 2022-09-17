@@ -14,6 +14,11 @@ public class NoDamage_MissionCondition : MissionCondition
         return "Don't take any damage";
     }
 
+    public override string GetShortDescription()
+    {
+        return GetDescription();
+    }
+
     public override void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
     {
         base.OnSceneLoaded(arg0, arg1);

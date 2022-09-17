@@ -13,10 +13,13 @@ MonoBehaviour:
   m_Name: KillBrightmaw
   m_EditorClassIdentifier: 
   m_title: Kill the Brightmaw
-  m_description: Kill the brightmaw creature
+  m_description: Kill the brightmaw creature. How pesky that thing is, do it quickly
+    and dont let it hit hurt you. Then we will know you are a true hunter, and you
+    will be rewarded!
   m_conditions:
   - id: 0
   - id: 1
+  - id: 2
   m_lockOnComplete: 1
   m_isLockedComplete: 0
   references:
@@ -38,9 +41,17 @@ MonoBehaviour:
     00000001:
       type: {class: Speedrun_MissionCondition, ns: , asm: Assembly-CSharp}
       data:
-        m_name: Spend less than 60 seconds in the expedition after encountering a
-          Bright Maw
+        m_name: Spend less than 60 seconds in the expedition while fighting the Bright
+          Maw
         m_state: 0
         m_lockState: 0
         m_timeLimit: 60
+        m_timeElapsed: 0
         m_triggerMonster: {fileID: 11400000, guid: 25e00185e50f675488bbf5ceb0b6ae63, type: 2}
+        m_triggerMonsterSeen: 1
+    00000002:
+      type: {class: NoDamage_MissionCondition, ns: , asm: Assembly-CSharp}
+      data:
+        m_name: Don't take any damage
+        m_state: 0
+        m_lockState: 0
