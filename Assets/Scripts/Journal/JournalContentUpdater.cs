@@ -20,13 +20,13 @@ public class JournalContentUpdater : MonoBehaviour
     public List<JournalContent> contentList = new List<JournalContent>();
 
     // Start is called before the first frame update
-    protected void Start()
+    protected virtual void Start()
     {
 
     }
 
     // Update is called once per frame
-    protected void Update()
+    protected virtual void Update()
     {
 
     }
