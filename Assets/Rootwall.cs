@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.Rendering.HighDefinition;
 
 /// <summary>
 /// Class to manage rootwall collider behaviour
@@ -12,10 +13,38 @@ public class Rootwall : MonoBehaviour
     public float damage = 10f;
     public float duration = 2f;
     float timer = 0f;
+
+    DecalProjector decalProjector;
+
     // Start is called before the first frame update
     void Start()
     {
         SetSemisolid();
+        decalProjector = GetComponentInChildren<DecalProjector>();
+        StartCoroutine(IndicatorDecal());
+    }
+
+    IEnumerator IndicatorDecal()
+    {
+        decalProjector.enabled = true;
+        float t = 0f;
+        Vector3 endScale = new Vector3(45, 5, 1f);
+        Vector3 startScale = new Vector3(45, 0, 1f);
+        while (t < 1.0f)
+        {
+            t += Time.deltaTime;
+            decalProjector.size = Vector3.Lerp(startScale, endScale, t);
+            yield return null;
+        }
+        yield return new WaitForSeconds(1f);
+        t = 0f;
+        while (t < 0.5f)
+        {
+            t += Time.deltaTime;
+            decalProjector.fadeFactor = Mathf.Lerp(1, 0, t * 2);
+            yield return null;
+        }
+        decalProjector.enabled = false;
     }
 
     // Update is called once per frame
