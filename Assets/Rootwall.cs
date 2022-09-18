@@ -79,7 +79,7 @@ public class Rootwall : MonoBehaviour
             direction.Normalize();
             bool isRight = Vector3.Dot(direction, transform.right) > 0;
 
-            other.gameObject.GetComponent<CharacterController>().Move(isRight ? transform.right : -transform.right * 0.01f * Time.deltaTime);
+            other.gameObject.GetComponent<CharacterController>().Move(isRight ? transform.right : -transform.right * 0.005f * Time.deltaTime);
 
         }
     }
