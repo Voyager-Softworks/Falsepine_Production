@@ -11,6 +11,8 @@ public class AwarenessAgent : MonoBehaviour
     public string awarenessParameterName = "Aware";
     public string fromOtherEnemyParameterName = "FromOtherEnemy";
 
+    public float awarenessRadius = 10.0f;
+
     bool isAware = false;
     // Start is called before the first frame update
     void Start()
@@ -38,8 +40,12 @@ public class AwarenessAgent : MonoBehaviour
         isAware = true;
         if (context.fromOtherEnemy)
         {
-            GetComponent<NodeAI_Agent>().SetParameter(fromOtherEnemyParameterName, true);
-            GetComponent<NodeAI_Agent>().SetParameter(awarenessParameterName, true);
+            if (Vector3.Distance(transform.position, context.enemy.transform.position) < awarenessRadius)
+            {
+                GetComponent<NodeAI_Agent>().SetParameter(fromOtherEnemyParameterName, true);
+                GetComponent<NodeAI_Agent>().SetParameter(awarenessParameterName, true);
+            }
+
         }
         else
         {
@@ -48,5 +54,12 @@ public class AwarenessAgent : MonoBehaviour
             FindObjectOfType<EnemyAwarenessManager>().RegisterAwareness(gameObject);
         }
 
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, awarenessRadius);
+        Gizmos.color = Color.white;
     }
 }
