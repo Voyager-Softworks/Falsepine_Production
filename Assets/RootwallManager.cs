@@ -41,8 +41,9 @@ public class RootwallManager : MonoBehaviour
         {
             if (Time.time - spawnedTimes[i] > duration)
             {
-                Destroy(spawned[i], 10);
+                Destroy(spawned[i], 2);
                 spawned[i].GetComponentInChildren<Animator>().SetTrigger("Lower");
+                spawned[i].GetComponent<Rootwall>().SetSemisolid();
                 spawned.RemoveAt(i);
                 spawnedTimes.RemoveAt(i);
                 break;
@@ -63,7 +64,7 @@ public class RootwallManager : MonoBehaviour
         // Draw angle lines
         Gizmos.color = Color.green;
         Vector3 old = transform.position;
-        for (int i =  Mathf.FloorToInt(minSpawnAngle); i < Mathf.CeilToInt(maxSpawnAngle); i++)
+        for (int i = Mathf.FloorToInt(minSpawnAngle); i < Mathf.CeilToInt(maxSpawnAngle); i++)
         {
             float angle = i * Mathf.Deg2Rad;
             Vector3 pos = transform.position + new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * spawnRadius;
@@ -71,12 +72,12 @@ public class RootwallManager : MonoBehaviour
             old = pos;
         }
         Gizmos.DrawLine(old, transform.position);
-        if(rootwallMesh == null)
+        if (rootwallMesh == null)
         {
             rootwallMesh = rootwallPrefab.GetComponentInChildren<SkinnedMeshRenderer>().sharedMesh;
         }
-        
-        if(generateExampleRootwall)
+
+        if (generateExampleRootwall)
         {
             gizmoSpawnAngles = new List<float>();
             gizmoSpawnPositions = new List<Vector3>();
@@ -87,9 +88,9 @@ public class RootwallManager : MonoBehaviour
             }
             generateExampleRootwall = false;
         }
-        if(gizmoSpawnAngles != null)
+        if (gizmoSpawnAngles != null)
         {
-            Gizmos.color = new Color(8.0f/16.0f, 4.0f/16.0f, 1.0f/16.0f);
+            Gizmos.color = new Color(8.0f / 16.0f, 4.0f / 16.0f, 1.0f / 16.0f);
             for (int i = 0; i < gizmoSpawnAngles.Count; i++)
             {
                 Vector3 pos = gizmoSpawnPositions[i];
@@ -99,10 +100,10 @@ public class RootwallManager : MonoBehaviour
                 Gizmos.DrawWireMesh(rootwallMesh, pos - offset, Quaternion.Euler(0, angle, 0), rootwallPrefab.transform.localScale);
             }
         }
-        
-        
-        
-        
+
+
+
+
     }
 
     public Vector3 GetSpawnPosition()
