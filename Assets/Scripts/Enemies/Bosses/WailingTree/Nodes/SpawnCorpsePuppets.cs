@@ -16,12 +16,12 @@ namespace Boss.WailingTree
         public SpawnCorpsePuppets()
         {
             AddProperty<GameObject>("Corpse Puppet Prefab", null);
+            AddProperty<GameObject>("Screamer Prefab", null);
             AddProperty<float>("Spawn Radius", 10f);
-            AddProperty<float>("Min Spawn Angle", 0f);
-            AddProperty<float>("Max Spawn Angle", 360f);
             AddProperty<float>("SpawnDelay", 0.5f);
             AddProperty<float>("SpawnDelayJitter", 0.1f);
-            AddProperty<int>("Spawn Count", 10);
+            AddProperty<int>("Puppet Spawn Count", 3);
+            AddProperty<int>("Screamer Spawn Count", 1);
 
         }
 
@@ -29,15 +29,25 @@ namespace Boss.WailingTree
         {
             if (init == false)
             {
-                if (spawned.Count < GetProperty<int>("Spawn Count") && timer > GetProperty<float>("SpawnDelay"))
+                if (timer > GetProperty<float>("SpawnDelay"))
                 {
-                    GameObject corpsePuppet = Instantiate(GetProperty<GameObject>("Corpse Puppet Prefab"), GetSpawnPosition(agent.transform.position), Quaternion.Euler(0, Random.Range(0, 360), 0));
-                    spawned.Add(corpsePuppet);
+                    Transform spawnPoint = GameObject.FindWithTag("Player").transform;
+                    if (spawned.Count < GetProperty<int>("Puppet Spawn Count"))
+                    {
+                        GameObject corpsePuppet = Instantiate(GetProperty<GameObject>("Corpse Puppet Prefab"), GetSpawnPosition(spawnPoint.position), Quaternion.Euler(0, Random.Range(0, 360), 0));
+                        spawned.Add(corpsePuppet);
+                    }
+                    else if (spawned.Count < GetProperty<int>("Puppet Spawn Count") + GetProperty<int>("Screamer Spawn Count"))
+                    {
+                        GameObject screamer = Instantiate(GetProperty<GameObject>("Screamer Prefab"), GetSpawnPosition(spawnPoint.position), Quaternion.Euler(0, Random.Range(0, 360), 0));
+                        spawned.Add(screamer);
+                    }
+                    else
+                    {
+                        state = NodeData.State.Success;
+                        return state;
+                    }
                     timer = 0;
-                }
-                else if (spawned.Count >= GetProperty<int>("Spawn Count"))
-                {
-                    init = true;
                 }
                 else
                 {
@@ -58,7 +68,7 @@ namespace Boss.WailingTree
         Vector3 GetSpawnPosition(Vector3 origin)
         {
             Vector3 spawnPosition = origin;
-            float angle = Random.Range(GetProperty<float>("Min Spawn Angle"), GetProperty<float>("Max Spawn Angle")) * Mathf.Deg2Rad;
+            float angle = Random.Range(0, 360) * Mathf.Deg2Rad;
             spawnPosition += new Vector3(Mathf.Cos(angle), 0, Mathf.Sin(angle)) * Random.Range(5.0f, GetProperty<float>("Spawn Radius"));
             return spawnPosition;
         }
