@@ -22,6 +22,8 @@ public class EnemyHealth : Health_Base
 
     public int m_silverReward = 3;
 
+    Vector3 m_startScale;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -30,6 +32,8 @@ public class EnemyHealth : Health_Base
 
         m_renderer = GetComponentInChildren<SkinnedMeshRenderer>();
         m_materials.AddRange(m_renderer.materials);
+
+        m_startScale = transform.localScale;
     }
 
 
@@ -39,7 +43,7 @@ public class EnemyHealth : Health_Base
     /// <param name="duration">The amount of time the flash should last for.</param>
     IEnumerator DamageFlashCoroutine(float duration)
     {
-        Vector3 startScale = transform.localScale;
+        Vector3 startScale = m_startScale;
         Vector3 endScale = startScale * 1.03f;
 
         Color flashCol = new Color(1f, 0.6f, 0.6f, 1f);
