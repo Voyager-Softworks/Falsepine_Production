@@ -20,7 +20,7 @@ public class ScreamerRipple : MonoBehaviour
     void Start()
     {
         decalProjector = GetComponentInChildren<DecalProjector>();
-        decalProjector.size = new Vector3(range * 2, range * 2, 1f);
+        decalProjector.size = new Vector3(range * 3, range * 3, 1f);
     }
 
     // Update is called once per frame
