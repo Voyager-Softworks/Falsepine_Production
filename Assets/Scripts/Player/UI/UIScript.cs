@@ -15,13 +15,15 @@ public class UIScript : MonoBehaviour
     public CursorScript cursorScript;
 
     [Header("Game UI")]
-    public TextMeshProUGUI ammoText;
     public Image healthBG;
     public Image healthBar, healthBarDark;
 
     public GameObject primaryWeaponIcon;
     public GameObject secondaryWeaponIcon;
     
+    public TextMeshProUGUI ammoText_1;
+    public TextMeshProUGUI ammoText_2;
+
     public GameObject equipmentIcon_1;
     public GameObject equipmentIcon_2;
     public TextMeshProUGUI equipmentAmmoText_1;
@@ -72,12 +74,12 @@ public class UIScript : MonoBehaviour
             Item currentWeapon = pii.selectedWeapon;
 
             // update ammo text
-            if (currentWeapon != null && (RangedWeapon)currentWeapon && ammoText != null)
+            if (currentWeapon != null && (RangedWeapon)currentWeapon && ammoText_1 != null)
             {
                 string spareAmmoText = "";
                 if (((RangedWeapon)currentWeapon).m_unlimitedAmmo) spareAmmoText = "∞";
                 else spareAmmoText = ((RangedWeapon)currentWeapon).m_spareAmmo.ToString();
-                ammoText.text = ((RangedWeapon)currentWeapon).m_clipAmmo + "/" + spareAmmoText;
+                ammoText_1.text = ((RangedWeapon)currentWeapon).m_clipAmmo + "/" + spareAmmoText;
             }
 
             // get player inventory
@@ -90,6 +92,11 @@ public class UIScript : MonoBehaviour
                 {
                     primaryWeaponIcon.SetActive(true);
                     primaryWeaponIcon.GetComponent<Image>().sprite = primaryWeapon.m_icon;
+
+                    string spareAmmoText = "";
+                    if (((RangedWeapon)currentWeapon).m_unlimitedAmmo) spareAmmoText = "∞";
+                    else spareAmmoText = ((RangedWeapon)currentWeapon).m_spareAmmo.ToString();
+                    ammoText_1.text = ((RangedWeapon)currentWeapon).m_clipAmmo + "/" + spareAmmoText;
 
                     // enable/disable
                     if (currentWeapon && primaryWeapon.id == currentWeapon.id)
@@ -110,6 +117,11 @@ public class UIScript : MonoBehaviour
                     secondaryWeaponIcon.SetActive(true);
                     secondaryWeaponIcon.GetComponent<Image>().sprite = secondaryWeapon.m_icon;
 
+                    string spareAmmoText = "";
+                    if (((RangedWeapon)currentWeapon).m_unlimitedAmmo) spareAmmoText = "∞";
+                    else spareAmmoText = ((RangedWeapon)currentWeapon).m_spareAmmo.ToString();
+                    ammoText_2.text = ((RangedWeapon)currentWeapon).m_clipAmmo + "/" + spareAmmoText;
+
                     // enable/disable
                     if (currentWeapon && secondaryWeapon.id == currentWeapon.id)
                     {
@@ -123,7 +135,7 @@ public class UIScript : MonoBehaviour
                 }
 
 
-
+                // equipment 1
                 Equipment equipment = inventory.slots[2].item as Equipment;
                 if (equipment != null)
                 {
@@ -146,6 +158,31 @@ public class UIScript : MonoBehaviour
                 {
                     equipmentIcon_1.SetActive(false);
                     equipmentAmmoText_1.text = "NO EQUIPMENT";
+                }
+
+                // equipment 2
+                equipment = inventory.slots[3].item as Equipment;
+                if (equipment != null)
+                {
+                    equipmentIcon_2.SetActive(true);
+                    equipmentIcon_2.GetComponent<Image>().sprite = equipment.m_icon;
+
+                    equipmentAmmoText_2.text = equipment.currentStackSize.ToString() + "/" + equipment.maxStackSize.ToString() + " " + equipment.m_displayName;
+
+                    //if equipment count > 0 make white
+                    if (equipment.currentStackSize > 0 && pii.selectedEquipment == equipment)
+                    {
+                        equipmentIcon_2.GetComponent<Image>().color = Color.white;
+                    }
+                    else
+                    {
+                        equipmentIcon_2.GetComponent<Image>().color = Color.gray;
+                    }
+                }
+                else
+                {
+                    equipmentIcon_2.SetActive(false);
+                    equipmentAmmoText_2.text = "NO EQUIPMENT";
                 }
 
 
