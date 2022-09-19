@@ -69,6 +69,7 @@ public class PlayerHealth : MonoBehaviour
         if (uiScript == null) return;
 
         uiScript.healthBar.rectTransform.sizeDelta = new Vector2(uiScript.healthBarMaxWidth * (currentHealth / maxHealth), uiScript.healthBar.rectTransform.sizeDelta.y);
+        uiScript.healthBarDark.rectTransform.sizeDelta = Vector2.Lerp(uiScript.healthBarDark.rectTransform.sizeDelta, uiScript.healthBar.rectTransform.sizeDelta, Time.deltaTime * 2.0f);
     }
 
     /// <summary>

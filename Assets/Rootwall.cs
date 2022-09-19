@@ -24,6 +24,10 @@ public class Rootwall : MonoBehaviour
         StartCoroutine(IndicatorDecal());
     }
 
+    /// <summary>
+    ///  Handles the indicator decal
+    /// </summary>
+    /// <returns></returns>
     IEnumerator IndicatorDecal()
     {
         decalProjector.enabled = true;
