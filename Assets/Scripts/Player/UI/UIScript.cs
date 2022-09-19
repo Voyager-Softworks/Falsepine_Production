@@ -21,9 +21,11 @@ public class UIScript : MonoBehaviour
 
     public GameObject primaryWeaponIcon;
     public GameObject secondaryWeaponIcon;
-    public GameObject equipmentIcon;
-
-    public TextMeshProUGUI equipmentAmmoText;
+    
+    public GameObject equipmentIcon_1;
+    public GameObject equipmentIcon_2;
+    public TextMeshProUGUI equipmentAmmoText_1;
+    public TextMeshProUGUI equipmentAmmoText_2;
 
     public TextMeshProUGUI m_conditionText;
 
@@ -89,16 +91,12 @@ public class UIScript : MonoBehaviour
                     primaryWeaponIcon.SetActive(true);
                     primaryWeaponIcon.GetComponent<Image>().sprite = primaryWeapon.m_icon;
 
-                    // set col of icon
+                    // enable/disable
                     if (currentWeapon && primaryWeapon.id == currentWeapon.id)
                     {
-                        primaryWeaponIcon.GetComponent<Image>().color = Color.white;
+                        primaryWeaponIcon.transform.parent.gameObject.SetActive(true);
+                        secondaryWeaponIcon.transform.parent.gameObject.SetActive(false);
                     }
-                    else
-                    {
-                        primaryWeaponIcon.GetComponent<Image>().color = Color.gray;
-                    }
-
                 }
                 else
                 {
@@ -112,16 +110,12 @@ public class UIScript : MonoBehaviour
                     secondaryWeaponIcon.SetActive(true);
                     secondaryWeaponIcon.GetComponent<Image>().sprite = secondaryWeapon.m_icon;
 
-                    //set col of icon
+                    // enable/disable
                     if (currentWeapon && secondaryWeapon.id == currentWeapon.id)
                     {
-                        secondaryWeaponIcon.GetComponent<Image>().color = Color.white;
+                        primaryWeaponIcon.transform.parent.gameObject.SetActive(false);
+                        secondaryWeaponIcon.transform.parent.gameObject.SetActive(true);
                     }
-                    else
-                    {
-                        secondaryWeaponIcon.GetComponent<Image>().color = Color.gray;
-                    }
-
                 }
                 else
                 {
@@ -133,25 +127,25 @@ public class UIScript : MonoBehaviour
                 Equipment equipment = inventory.slots[2].item as Equipment;
                 if (equipment != null)
                 {
-                    equipmentIcon.SetActive(true);
-                    equipmentIcon.GetComponent<Image>().sprite = equipment.m_icon;
+                    equipmentIcon_1.SetActive(true);
+                    equipmentIcon_1.GetComponent<Image>().sprite = equipment.m_icon;
 
-                    equipmentAmmoText.text = equipment.currentStackSize.ToString() + "/" + equipment.maxStackSize.ToString() + " " + equipment.m_displayName;
+                    equipmentAmmoText_1.text = equipment.currentStackSize.ToString() + "/" + equipment.maxStackSize.ToString() + " " + equipment.m_displayName;
 
                     //if equipment count > 0 make white
                     if (equipment.currentStackSize > 0 && pii.selectedEquipment == equipment)
                     {
-                        equipmentIcon.GetComponent<Image>().color = Color.white;
+                        equipmentIcon_1.GetComponent<Image>().color = Color.white;
                     }
                     else
                     {
-                        equipmentIcon.GetComponent<Image>().color = Color.gray;
+                        equipmentIcon_1.GetComponent<Image>().color = Color.gray;
                     }
                 }
                 else
                 {
-                    equipmentIcon.SetActive(false);
-                    equipmentAmmoText.text = "NO EQUIPMENT";
+                    equipmentIcon_1.SetActive(false);
+                    equipmentAmmoText_1.text = "NO EQUIPMENT";
                 }
 
 
