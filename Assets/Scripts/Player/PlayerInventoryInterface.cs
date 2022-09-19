@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using UnityEngine.InputSystem;
 using System.IO;
+using UnityEngine.Serialization;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -27,7 +28,9 @@ public class PlayerInventoryInterface : MonoBehaviour
     public InputAction fireWeaponAction; ///< The action to fire the weapon.
     // aim weapon
     public InputAction aimWeaponAction; ///< The action to aim the weapon.
-    public InputAction useEquipmentAction; ///< The action to use an equipment.
+    [FormerlySerializedAs("useEquipmentAction")]
+    public InputAction useEquipmentAction_1; ///< The action to use an equipment.
+    public InputAction useEquipmentAction_2; ///< The action to use an equipment.
     // melee attack
     public InputAction meleeAttackAction; ///< The action to melee attack.
 
@@ -196,7 +199,7 @@ public class PlayerInventoryInterface : MonoBehaviour
         TrySelectValidWeapon();
 
         // select equipment
-        SelectEquipment();
+        SelectEquipment(1);
     }
 
 
@@ -271,15 +274,21 @@ public class PlayerInventoryInterface : MonoBehaviour
             UpdateAimZone();
         }
 
-        if (useEquipmentAction.triggered)
+        // use equipment_1
+        if (useEquipmentAction_1.triggered)
         {
-            SelectEquipment();
+            SelectEquipment(1);
+        }
+        // use equipment_2
+        if (useEquipmentAction_2.triggered)
+        {
+            SelectEquipment(2);
         }
         if (selectedEquipment)
         {
             selectedEquipment.ManualUpdate(gameObject);
 
-            if (useEquipmentAction.triggered && m_equipmentDelayTimer <= 0.0f)
+            if ((useEquipmentAction_1.triggered || useEquipmentAction_2.triggered) && m_equipmentDelayTimer <= 0.0f)
             {
                 Equipment equipment = selectedEquipment as Equipment;
                 if (equipment && equipment.currentStackSize > 0)
@@ -303,6 +312,9 @@ public class PlayerInventoryInterface : MonoBehaviour
                 }
             }
         }
+
+
+
 
         // update equipment delay timer
         if (m_equipmentDelayTimer > 0.0f)
@@ -610,13 +622,13 @@ public class PlayerInventoryInterface : MonoBehaviour
     /// <returns>
     /// The selected equipment is being returned.
     /// </returns>
-    public void SelectEquipment()
+    public void SelectEquipment(int _num)
     {
         // if inventory is null, return
         if (playerInventory == null) return;
 
         // get selected equipment
-        selectedEquipment = playerInventory.slots.ElementAtOrDefault(2)?.item;
+        selectedEquipment = playerInventory.slots.ElementAtOrDefault((_num == 1 ? 2 : 3))?.item;
         if (selectedEquipment && selectedEquipment.currentStackSize <= 0)
         {
             selectedEquipment = null;
@@ -681,7 +693,8 @@ public class PlayerInventoryInterface : MonoBehaviour
         reloadAction.Enable();
         fireWeaponAction.Enable();
         aimWeaponAction.Enable();
-        useEquipmentAction.Enable();
+        useEquipmentAction_1.Enable();
+        useEquipmentAction_2.Enable();
         meleeAttackAction.Enable();
     }
 
@@ -694,7 +707,8 @@ public class PlayerInventoryInterface : MonoBehaviour
         reloadAction.Disable();
         fireWeaponAction.Disable();
         aimWeaponAction.Disable();
-        useEquipmentAction.Disable();
+        useEquipmentAction_1.Disable();
+        useEquipmentAction_2.Disable();
         meleeAttackAction.Disable();
     }
 }
