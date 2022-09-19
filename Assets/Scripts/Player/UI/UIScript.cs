@@ -17,7 +17,7 @@ public class UIScript : MonoBehaviour
     [Header("Game UI")]
     public TextMeshProUGUI ammoText;
     public Image healthBG;
-    public Image healthBar;
+    public Image healthBar, healthBarDark;
 
     public GameObject primaryWeaponIcon;
     public GameObject secondaryWeaponIcon;
@@ -36,7 +36,7 @@ public class UIScript : MonoBehaviour
     [Header("Boss UI")]
     public GameObject bossUI;
     public Image bossHealthBG;
-    public Image bossHealthBar;
+    public Image bossHealthBar, bossHealthBarDark;
     [HideInInspector] public float bossHealthBarMaxWidth;
     public TextMeshProUGUI bossNameText;
 
@@ -185,11 +185,13 @@ public class UIScript : MonoBehaviour
                     m_conditionText.text += "\n" + "<sprite=0 color=#" + ColorUtility.ToHtmlStringRGB(conditionCol) + ">" + condition.GetShortDescription();
                 }
             }
-            else{
+            else
+            {
                 m_conditionText.text = "No Mission Conditions";
             }
         }
-        else {
+        else
+        {
             m_conditionText.transform.parent.gameObject.SetActive(false);
         }
     }
