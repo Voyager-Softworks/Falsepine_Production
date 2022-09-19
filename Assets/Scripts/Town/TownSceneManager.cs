@@ -15,6 +15,9 @@ public class TownSceneManager : MonoBehaviour
         //unlock and unhide cursor
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+
+        // set time scale to 1
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame

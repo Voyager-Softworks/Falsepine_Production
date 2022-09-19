@@ -18,6 +18,7 @@ public class Kill_MissionCondition : MissionCondition
     [HideInInspector, SerializeField] private List<StatsManager.MonsterStat> m_initialStats = new List<StatsManager.MonsterStat>();
     [HideInInspector, SerializeField] private List<Health_Base.DamageStat> m_initialKills = new List<Health_Base.DamageStat>();
     [SerializeField] public int m_requiredKills = 1;
+    private List<Health_Base.DamageStat> m_currentKills = new List<Health_Base.DamageStat>();
 
     [Header("Optional")]
     [Tooltip("If DISABLED, all kills count"), SerializeField] public bool m_useOptional = false;
@@ -27,7 +28,11 @@ public class Kill_MissionCondition : MissionCondition
     [Tooltip("Overrides the stat, monster must be die to this item"), SerializeField] public Item m_itemToKillWith = null;
 
     public override string GetDescription(){
-        return "Kill " + m_requiredKills + " " + m_monsterToKill?.m_name + "(s)";
+        string description = "Kill (" + m_currentKills.Count + "/" + m_requiredKills + ")";
+        if (m_monsterToKill != null) description += " " + m_monsterToKill.m_name + "(s)";
+        if (m_useOptional) description += " with " + (m_itemToKillWith != null ? m_itemToKillWith.m_displayName : StatsManager.StatType.DisplayName(m_statToKillWith));
+
+        return description;
     }
 
     public override string GetShortDescription()
@@ -48,22 +53,34 @@ public class Kill_MissionCondition : MissionCondition
         base.UpdateState();
 
         // check if the player has killed enough enemies:
+        UpdateCurrentKills();
 
+        // if enough kills, complete
+        if (m_currentKills.Count >= m_requiredKills){
+            SetState(MissionCondition.ConditionState.COMPLETE);
+        }
+    }
+
+    public void UpdateCurrentKills(){
         List<Health_Base.DamageStat> relevantKills = new List<Health_Base.DamageStat>();
 
         // if no enemy specified, use all kills in MonsterStats
-        if (m_monsterToKill == null){
+        if (m_monsterToKill == null)
+        {
             relevantKills = StatsManager.instance.m_monsterStats.SelectMany(x => x.m_kills).ToList();
         }
-        else{
+        else
+        {
             // find the relevant monster stat
             StatsManager.MonsterStat monsterStat = StatsManager.instance.m_monsterStats.Find(x => x.m_monster == m_monsterToKill);
 
             // if no stat found, no kills
-            if (monsterStat == null){
+            if (monsterStat == null)
+            {
                 relevantKills = new List<Health_Base.DamageStat>();
             }
-            else{
+            else
+            {
                 relevantKills = monsterStat.m_kills;
             }
         }
@@ -75,20 +92,20 @@ public class Kill_MissionCondition : MissionCondition
         }
 
         // if using optional, filter by weapon, if no weapon, then stat
-        if (m_useOptional){
-            if (m_itemToKillWith != null){
+        if (m_useOptional)
+        {
+            if (m_itemToKillWith != null)
+            {
                 //only need to match ID's
                 relevantKills = relevantKills.Where(x => (x.m_sourceStats as Item)?.id == m_itemToKillWith.id).ToList();
             }
-            else if (m_statToKillWith != null){
+            else if (m_statToKillWith != null)
+            {
                 relevantKills = relevantKills.Where(x => x.m_sourceStats.GetStatTypes().Contains(m_statToKillWith)).ToList();
             }
         }
 
-        // if enough kills, complete
-        if (relevantKills.Count >= m_requiredKills){
-            SetState(MissionCondition.ConditionState.COMPLETE);
-        }
+        m_currentKills = relevantKills;
     }
 
     public override void BeginCondition()
