@@ -17,6 +17,7 @@ MonoBehaviour:
   m_conditions:
   - id: 0
   - id: 1
+  - id: 2
   m_lockOnComplete: 1
   m_isLockedComplete: 0
   references:
@@ -24,7 +25,7 @@ MonoBehaviour:
     00000000:
       type: {class: Kill_MissionCondition, ns: , asm: Assembly-CSharp}
       data:
-        m_name: Kill (0/3) Pickaxe Miner(s) with Colt Revolver
+        m_name: Kill (0/3) Cursed Miner(s) with the Colt Revolver
         m_state: 0
         m_lockState: 0
         m_monsterToKill: {fileID: 11400000, guid: ee1c8229e1cc8a743bc7e1c7c9ebf36a, type: 2}
@@ -41,3 +42,13 @@ MonoBehaviour:
         m_name: Don't take any damage
         m_state: 0
         m_lockState: 0
+    00000002:
+      type: {class: Speedrun_MissionCondition, ns: , asm: Assembly-CSharp}
+      data:
+        m_name: Spend less than 60 seconds in the expedition
+        m_state: 0
+        m_lockState: 0
+        m_timeLimit: 60
+        m_timeElapsed: 0
+        m_triggerMonster: {fileID: 0}
+        m_triggerMonsterSeen: 1
