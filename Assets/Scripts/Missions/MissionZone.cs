@@ -55,6 +55,12 @@ public class MissionZone : ScriptableObject
     public Utilities.SceneField m_preBossScene;
     public Utilities.SceneField m_bossScene;
 
+    [Header("Journal Pickups")]
+    public int m_clueCount = 1;
+    public int m_loreCount = 1;
+    [ReadOnly] public List<int> m_clueSceneIndexes = new List<int>();
+    [ReadOnly] public List<int> m_loreSceneIndexes = new List<int>();
+
     //public string m_currentScenePath = "";
 
     /// <summary>
@@ -90,6 +96,24 @@ public class MissionZone : ScriptableObject
         for (int i = 0; i < m_middleSceneCount && i < tempPMS.Count(); i++)
         {
             m_middleScenes.Add(tempPMS[i]);
+        }
+
+        // randomise clue and lore scene indexes:
+        // clues
+        List<Utilities.SceneField> tempMS = new List<Utilities.SceneField>(m_middleScenes);
+        for (int i = 0; i < m_clueCount && i < tempMS.Count(); i++)
+        {
+            int index = UnityEngine.Random.Range(0, tempMS.Count());
+            m_clueSceneIndexes.Add(m_middleScenes.IndexOf(tempMS[index]));
+            tempMS.RemoveAt(index);
+        }
+        // lore
+        tempMS = new List<Utilities.SceneField>(m_middleScenes);
+        for (int i = 0; i < m_loreCount && i < tempMS.Count(); i++)
+        {
+            int index = UnityEngine.Random.Range(0, tempMS.Count());
+            m_loreSceneIndexes.Add(m_middleScenes.IndexOf(tempMS[index]));
+            tempMS.RemoveAt(index);
         }
     }
 
@@ -347,11 +371,19 @@ public class MissionZone : ScriptableObject
 
         // scenes
         [SerializeField] public Utilities.SceneField m_startScene;
-        [SerializeField] public Utilities.SceneField m_endScene;
+        [SerializeField] public Utilities.SceneField m_preBossScene;
         [SerializeField] public Utilities.SceneField m_bossScene;
         [SerializeField] public int m_middleSceneCount;
         [SerializeField] public List<Utilities.SceneField> m_possibleMiddleScenes;
         [SerializeField] public List<Utilities.SceneField> m_middleScenes;
+
+        // Journal Pickups
+        public int m_clueCount;
+        public int m_loreCount;
+        private List<int> m_clueSceneIndexes;
+        private List<int> m_loreSceneIndexes;
+
+
 
         public Serializable_MissionZone(MissionZone mz)
         {
@@ -384,7 +416,7 @@ public class MissionZone : ScriptableObject
 
             // Scenes:
             m_startScene = mz.m_startScene;
-            m_endScene = mz.m_preBossScene;
+            m_preBossScene = mz.m_preBossScene;
             m_bossScene = mz.m_bossScene;
             m_middleSceneCount = mz.m_middleSceneCount;
 
@@ -400,6 +432,22 @@ public class MissionZone : ScriptableObject
             foreach (Utilities.SceneField sf in mz.m_middleScenes)
             {
                 m_middleScenes.Add(sf);
+            }
+
+            // Journal Pickups:
+            m_clueCount = mz.m_clueCount;
+            m_loreCount = mz.m_loreCount;
+            m_clueSceneIndexes = new List<int>();
+            m_loreSceneIndexes = new List<int>();
+
+            // fill with data
+            foreach (int i in mz.m_clueSceneIndexes)
+            {
+                m_clueSceneIndexes.Add(i);
+            }
+            foreach (int i in mz.m_loreSceneIndexes)
+            {
+                m_loreSceneIndexes.Add(i);
             }
         }
 
@@ -443,7 +491,7 @@ public class MissionZone : ScriptableObject
 
             // Scenes:
             mz.m_startScene = m_startScene;
-            mz.m_preBossScene = m_endScene;
+            mz.m_preBossScene = m_preBossScene;
             mz.m_bossScene = m_bossScene;
             mz.m_middleSceneCount = m_middleSceneCount;
 
@@ -459,6 +507,22 @@ public class MissionZone : ScriptableObject
             foreach (Utilities.SceneField sf in m_middleScenes)
             {
                 mz.m_middleScenes.Add(sf);
+            }
+
+            // Journal Pickups:
+            mz.m_clueCount = m_clueCount;
+            mz.m_loreCount = m_loreCount;
+            mz.m_clueSceneIndexes = new List<int>();
+            mz.m_loreSceneIndexes = new List<int>();
+
+            // fill with data
+            foreach (int i in m_clueSceneIndexes)
+            {
+                mz.m_clueSceneIndexes.Add(i);
+            }
+            foreach (int i in m_loreSceneIndexes)
+            {
+                mz.m_loreSceneIndexes.Add(i);
             }
 
             return mz;
