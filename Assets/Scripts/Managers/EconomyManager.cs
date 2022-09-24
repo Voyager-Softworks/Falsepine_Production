@@ -319,9 +319,19 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     /// Spend the specified amount of money.
     /// </summary>
     /// <param name="_amount"></param>
-    public void Spend(int _amount)
+    public void SpendMoney(int _amount)
     {
         m_playerSilver -= _amount;
+    }
+
+    /// <summary>
+    /// Adds the specified amount of money.
+    /// @todo make some sort of UI display when money is added
+    /// </summary>
+    /// <param name="_amount"></param>
+    public void AddMoney(int _amount)
+    {
+        m_playerSilver += _amount;
     }
 
     public void SaveEconomy(int saveSlot)

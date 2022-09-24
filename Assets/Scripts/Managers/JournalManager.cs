@@ -181,18 +181,25 @@ public class JournalManager : ToggleableWindow
 
     /// <summary>
     /// Adds specific entry to the journal, and removes it from the undiscovered list (if it is there)
+    /// @todo make some sort of UI notification that a new entry has been added
     /// </summary>
     /// <param name="entry"></param>
-    public void DiscoverEntry(JounralEntry entry)
+    public bool DiscoverEntry(JounralEntry entry)
     {
-        if (entry == null) return;
+        if (entry == null) return false;
 
         if (m_undiscoveredEntries.Contains(entry))
         {
             m_undiscoveredEntries.Remove(entry);
         }
 
-        m_discoveredEntries.Add(entry);
+        if (!m_discoveredEntries.Contains(entry))
+        {
+            m_discoveredEntries.Add(entry);
+            return true;
+        }
+
+        return false;
     }
 
     /// <summary>
@@ -200,10 +207,10 @@ public class JournalManager : ToggleableWindow
     /// </summary>
     /// <param name="_monster"></param>
     /// <param name="_entryType"></param>
-    public void DiscoverRandomEntry(MonsterInfo _monster = null, JounralEntry.EntryType? _entryType = null)
+    public bool DiscoverRandomEntry(MonsterInfo _monster = null, JounralEntry.EntryType? _entryType = null)
     {
         JounralEntry toDiscover = GetRandomUndiscoveredEntry(_monster: _monster, _entryType: _entryType);
-        DiscoverEntry(toDiscover);
+        return DiscoverEntry(toDiscover);
     }
 
     /// <summary>

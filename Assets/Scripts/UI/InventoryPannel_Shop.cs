@@ -61,7 +61,7 @@ public class InventoryPannel_Shop : InventoryPannel
         if (economyManager.CanAfford(price)){
             //transfer
             if (InventoryManager.instance.CanMoveItem(_sourceInventory, _targetInventory, _sourceIndex)){
-                economyManager.Spend(price);
+                economyManager.SpendMoney(price);
                 InventoryManager.instance.TryMoveItem(_sourceInventory, _targetInventory, _sourceIndex);
             }
         }

@@ -111,7 +111,7 @@ public class EntryPurchasePanel : MonoBehaviour
         if (entry == null) return;
 
         if (EconomyManager.instance.CanAfford(m_price)){
-            EconomyManager.instance.Spend(m_price);
+            EconomyManager.instance.SpendMoney(m_price);
             JournalManager.instance.DiscoverEntry(entry);
             UpdateUI();
         }

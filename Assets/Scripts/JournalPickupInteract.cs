@@ -50,10 +50,17 @@ public class JournalPickupInteract : Interactable
         base.DoInteract();
         
         if (JournalManager.instance){
+            bool success = false;
             if (m_pickupType == PickupType.SpecificEntry){
-                JournalManager.instance.DiscoverEntry(m_linkedEntry);
+                success = JournalManager.instance.DiscoverEntry(m_linkedEntry);
             } else {
-                JournalManager.instance.DiscoverRandomEntry(GetMonsterInfo(), GetEntryType());
+                success = JournalManager.instance.DiscoverRandomEntry(GetMonsterInfo(), GetEntryType());
+            }
+
+            if (!success){
+                // add money
+                //@todo make this amount adjustable
+                EconomyManager.instance.AddMoney(10);
             }
         }
     }

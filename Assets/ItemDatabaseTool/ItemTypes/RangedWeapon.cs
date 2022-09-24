@@ -164,6 +164,9 @@ public class RangedWeapon : Item
                 return true;
             }
             else {
+                m_shootTimer = m_shootTime;
+                UpdateWaitTimer(m_shootTime);
+
                 // play empty sound:
                 if (m_emptySound != null)
                 {
