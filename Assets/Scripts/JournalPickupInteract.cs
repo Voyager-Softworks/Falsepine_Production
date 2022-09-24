@@ -69,7 +69,7 @@ public class JournalPickupInteract : Interactable
     /// Gets the entry type based on user selection in inspector.
     /// </summary>
     /// <returns></returns>
-    private JounralEntry.EntryType? GetEntryType(){
+    public JounralEntry.EntryType? GetEntryType(){
         switch (m_pickupType){
             case PickupType.SpecificEntry:
                 return m_linkedEntry.m_entryType;
