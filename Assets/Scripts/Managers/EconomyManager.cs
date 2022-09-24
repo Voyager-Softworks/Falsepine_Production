@@ -495,7 +495,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
             {
                 foreach (PurchasableItem purchasable in economy.m_purchasableItems)
                 {
-                    Item item = ItemDatabase.GetItem(purchasable.m_item.id);
+                    Item item = ItemDatabase.GetItem(purchasable.m_item.id).CreateInstance();
                     if (item != null)
                     {
                         purchasable.m_item = item;

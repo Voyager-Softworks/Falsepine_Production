@@ -87,6 +87,38 @@ public class MissionManager : MonoBehaviour
         {
             GetCurrentMission()?.EndMission();
         }
+
+        // disable/enable journal pickups based on MissionZone pickup indexes
+        CullJournalPickups();
+    }
+
+    private void CullJournalPickups()
+    {
+        if (m_currentZone != null)
+        {
+            // get the current middle scene from the mission zone
+            string currentScenePath = SceneManager.GetActiveScene().path;
+            Utilities.SceneField currentMiddleScene = m_currentZone.m_middleScenes.Find(x => currentScenePath.Contains(x.scenePath));
+            if (currentMiddleScene != null)
+            {
+                // get the index of the current middle scene
+                int currentMiddleSceneIndex = m_currentZone.m_middleScenes.IndexOf(currentMiddleScene);
+
+                foreach (JournalPickupInteract pickup in FindObjectsOfType<JournalPickupInteract>())
+                {
+                    // if current scene should have clue or lore, and the pickup is a clue or lore, enable it
+                    if ((m_currentZone.m_clueSceneIndexes.Contains(currentMiddleSceneIndex) && pickup.GetEntryType() == JounralEntry.EntryType.Clue) ||
+                        (m_currentZone.m_loreSceneIndexes.Contains(currentMiddleSceneIndex) && pickup.GetEntryType() == JounralEntry.EntryType.Lore))
+                    {
+                        pickup.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        pickup.gameObject.SetActive(false);
+                    }
+                }
+            }
+        }
     }
 
     /// <summary>
