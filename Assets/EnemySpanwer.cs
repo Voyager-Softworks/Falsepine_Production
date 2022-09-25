@@ -30,6 +30,21 @@ public class EnemySpanwer : MonoBehaviour
     [HideInInspector] public int minSpawn = 1;
     [HideInInspector] public int maxSpawn = 1;
 
+    private List<Vector3> debugFailedTries = new List<Vector3>();
+    private List<Vector3> debugPassedTries = new List<Vector3>();
+
+    private void OnDrawGizmos() {
+        // draw all debug tries
+        Gizmos.color = Color.red;
+        foreach (var pos in debugFailedTries) {
+            Gizmos.DrawSphere(pos, 0.1f);
+        }
+        Gizmos.color = Color.green;
+        foreach (var pos in debugPassedTries) {
+            Gizmos.DrawSphere(pos, 0.1f);
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -71,19 +86,33 @@ public class EnemySpanwer : MonoBehaviour
                 isValid = false;
             }
 
-            // check if can navmesh path to player
+            // check if can navmesh path to player:
+            // get player pos on navmesh
+            Vector3 playerPos = FindObjectOfType<PlayerMovement>().transform.position;
+            NavMeshHit playerHit;
+            if (NavMesh.SamplePosition(playerPos, out playerHit, 2.0f, NavMesh.AllAreas))
+            {
+                playerPos = playerHit.position;
+            }
+            else{
+                Debug.LogError("Player is not on navmesh", this);
+            }
+
             NavMeshPath path = new NavMeshPath();
-            NavMesh.CalculatePath(randomPos, FindObjectOfType<PlayerMovement>().transform.position, NavMesh.AllAreas, path);
+            NavMesh.CalculatePath(randomPos, playerPos, NavMesh.AllAreas, path);
             if (path.status != NavMeshPathStatus.PathComplete)
             {
+                Debug.LogError("Cannot path to player", this);
                 isValid = false;
             }
 
             if (isValid)
             {
+                debugPassedTries.Add(randomPos);
                 break;
             }
             else{
+                debugFailedTries.Add(randomPos);
                 if (i == maxTries - 1)
                 {
                     // log error and link the gameobject
@@ -153,6 +182,9 @@ public class EnemySpanwer : MonoBehaviour
     {
         // get random amount of enemies to spawn
         int amountToSpawn = Random.Range(minSpawn, maxSpawn + 1);
+
+        debugFailedTries.Clear();
+        debugPassedTries.Clear();
 
         // spawn enemies
         for (int i = 0; i < amountToSpawn; i++)
