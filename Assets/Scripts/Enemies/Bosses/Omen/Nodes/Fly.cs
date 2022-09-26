@@ -43,7 +43,11 @@ namespace Boss.Omen
                     return state;
                 }
             }
-            if (!init) animator.SetTrigger("Fly");
+            if (!init)
+            {
+                animator.SetTrigger("Fly");
+                init = true;
+            }
 
             Vector3 destination = GetProperty<Vector3>("Destination");
             float speed = GetProperty<float>("Speed");
