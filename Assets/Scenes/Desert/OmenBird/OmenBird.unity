@@ -4541,7 +4541,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182190142}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 106.7, y: 59.2, z: -264.5}
+  m_LocalPosition: {x: -1.06, y: 0, z: -74}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4945,7 +4945,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 30
+  m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1338887172
 PrefabInstance:
@@ -5949,11 +5949,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1632045819}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -766, y: 59.2, z: -628}
+  m_LocalPosition: {x: -1.06, y: 7.3, z: -241}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 29
+  m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1643646562
 PrefabInstance:
@@ -7981,6 +7981,8 @@ GameObject:
   - component: {fileID: 919132149054763629}
   - component: {fileID: 919132149054763628}
   - component: {fileID: 919132149054763632}
+  - component: {fileID: 919132149054763634}
+  - component: {fileID: 919132149054763633}
   m_Layer: 0
   m_Name: Omen
   m_TagString: Untagged
@@ -8153,7 +8155,7 @@ MonoBehaviour:
     v2value: {x: 0, y: 0}
     v3value: {x: 0, y: 0, z: 0}
     v4value: {x: 0, y: 0, z: 0, w: 0}
-    ovalue: {fileID: 1182190143}
+    ovalue: {fileID: 1632045820}
     output: 0
   - name: GoalB
     GUID: 9c2b85ee-b206-4b6a-8c0f-5f63a491500d
@@ -8168,7 +8170,7 @@ MonoBehaviour:
     v2value: {x: 0, y: 0}
     v3value: {x: 0, y: 0, z: 0}
     v4value: {x: 0, y: 0, z: 0, w: 0}
-    ovalue: {fileID: 1632045820}
+    ovalue: {fileID: 1182190143}
     output: 0
   - name: GoalC
     GUID: e6d995f9-9639-47da-98a9-1fa5abe016df
@@ -8222,7 +8224,7 @@ MonoBehaviour:
       PublicKeyToken=b77a5c561934e089
     svalue: 
     ivalue: 0
-    fvalue: 5
+    fvalue: 1
     bvalue: 0
     cvalue: {r: 0, g: 0, b: 0, a: 0}
     v2value: {x: 0, y: 0}
@@ -8252,7 +8254,7 @@ MonoBehaviour:
       PublicKeyToken=b77a5c561934e089
     svalue: 
     ivalue: 0
-    fvalue: 10
+    fvalue: 5
     bvalue: 0
     cvalue: {r: 0, g: 0, b: 0, a: 0}
     v2value: {x: 0, y: 0}
@@ -8311,6 +8313,35 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &919132149054763633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149054763627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e7db3457c7f67eed92cf8adf3ae262c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &919132149054763634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132149054763627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e6f027a942edfcaf98e9ac2361b68d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_hurtBoxes: []
+  m_hurtPlayerEffect: {fileID: 0}
+  m_indicatorPrefab: {fileID: 0}
+  m_damage: 10
+  m_attkNum: 1
 --- !u!1 &948261455842477981
 GameObject:
   m_ObjectHideFlags: 0
