@@ -2484,7 +2484,7 @@ Transform:
   - {fileID: 1363492751}
   - {fileID: 1414839154}
   m_Father: {fileID: 0}
-  m_RootOrder: 30
+  m_RootOrder: 33
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &246689031
 GameObject:
@@ -3844,7 +3844,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 235281106836629629, guid: b59ada406ed24ce4facdf05f833481fa, type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 235281106836629629, guid: b59ada406ed24ce4facdf05f833481fa, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4252,15 +4252,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
       propertyPath: possibleSpawns.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
       propertyPath: possibleSpawns.Array.data[0].name
       value: CorpsePuppet
       objectReference: {fileID: 0}
     - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
+      propertyPath: possibleSpawns.Array.data[1].name
+      value: CorpsePuppet_Screamer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
+      propertyPath: possibleSpawns.Array.data[2].name
+      value: Amalgam
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
       propertyPath: possibleSpawns.Array.data[0].chance
-      value: 1
+      value: 0.52631575
       objectReference: {fileID: 0}
     - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
       propertyPath: possibleSpawns.Array.data[0].prefab
@@ -4270,9 +4278,33 @@ PrefabInstance:
       propertyPath: possibleSpawns.Array.data[0].weight
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
+      propertyPath: possibleSpawns.Array.data[1].chance
+      value: 0.8421052
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
+      propertyPath: possibleSpawns.Array.data[1].prefab
+      value: 
+      objectReference: {fileID: 3006298010195686704, guid: 59e372f1ade5adc7ebc0e3a23b88c2a3, type: 3}
+    - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
+      propertyPath: possibleSpawns.Array.data[1].weight
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
+      propertyPath: possibleSpawns.Array.data[2].chance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
+      propertyPath: possibleSpawns.Array.data[2].prefab
+      value: 
+      objectReference: {fileID: 6285906180038082322, guid: 065c3f52b5af6acd4b1e23aa5381f789, type: 3}
+    - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
+      propertyPath: possibleSpawns.Array.data[2].weight
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 4268184262087355430, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
       propertyPath: m_RootOrder
-      value: 32
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 4268184262087355430, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4911,6 +4943,49 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 591909081}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &600840881
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 600840883}
+  - component: {fileID: 600840882}
+  m_Layer: 0
+  m_Name: EnemyAwarenessManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &600840882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 600840881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04904beb8afa77af6866714ffaf864e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &600840883
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 600840881}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 34
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &634752389
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7481,7 +7556,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &980419353
 PrefabInstance:
@@ -8566,7 +8641,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1119425704
 PrefabInstance:
@@ -11057,7 +11132,7 @@ Transform:
   - {fileID: 2095681437}
   - {fileID: 1943562182}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1387526213
 PrefabInstance:
@@ -11376,15 +11451,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
       propertyPath: possibleSpawns.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
       propertyPath: possibleSpawns.Array.data[0].name
       value: CorpsePuppet
       objectReference: {fileID: 0}
     - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
+      propertyPath: possibleSpawns.Array.data[1].name
+      value: CorpsePuppet_Screamer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
       propertyPath: possibleSpawns.Array.data[0].chance
-      value: 1
+      value: 0.7692308
       objectReference: {fileID: 0}
     - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
       propertyPath: possibleSpawns.Array.data[0].prefab
@@ -11394,9 +11473,21 @@ PrefabInstance:
       propertyPath: possibleSpawns.Array.data[0].weight
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
+      propertyPath: possibleSpawns.Array.data[1].chance
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
+      propertyPath: possibleSpawns.Array.data[1].prefab
+      value: 
+      objectReference: {fileID: 3006298010195686704, guid: 59e372f1ade5adc7ebc0e3a23b88c2a3, type: 3}
+    - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
+      propertyPath: possibleSpawns.Array.data[1].weight
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 4268184262087355430, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
       propertyPath: m_RootOrder
-      value: 33
+      value: 32
       objectReference: {fileID: 0}
     - target: {fileID: 4268184262087355430, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14841,15 +14932,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
       propertyPath: possibleSpawns.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
       propertyPath: possibleSpawns.Array.data[0].name
       value: CorpsePuppet
       objectReference: {fileID: 0}
     - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
+      propertyPath: possibleSpawns.Array.data[1].name
+      value: CorpsePuppet_Screamer
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
       propertyPath: possibleSpawns.Array.data[0].chance
-      value: 1
+      value: 0.58823526
       objectReference: {fileID: 0}
     - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
       propertyPath: possibleSpawns.Array.data[0].prefab
@@ -14859,9 +14954,21 @@ PrefabInstance:
       propertyPath: possibleSpawns.Array.data[0].weight
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
+      propertyPath: possibleSpawns.Array.data[1].chance
+      value: 0.41176468
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
+      propertyPath: possibleSpawns.Array.data[1].prefab
+      value: 
+      objectReference: {fileID: 3006298010195686704, guid: 59e372f1ade5adc7ebc0e3a23b88c2a3, type: 3}
+    - target: {fileID: 4268184262087355425, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
+      propertyPath: possibleSpawns.Array.data[1].weight
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 4268184262087355430, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
       propertyPath: m_RootOrder
-      value: 31
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4268184262087355430, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
       propertyPath: m_LocalPosition.x
