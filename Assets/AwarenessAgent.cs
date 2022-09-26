@@ -37,18 +37,20 @@ public class AwarenessAgent : MonoBehaviour
     void OnEnemyAware(EnemyAwarenessManager.Context context)
     {
         if (isAware) return;
-        isAware = true;
+
         if (context.fromOtherEnemy)
         {
             if (Vector3.Distance(transform.position, context.enemy.transform.position) < awarenessRadius)
             {
                 GetComponent<NodeAI_Agent>().SetParameter(fromOtherEnemyParameterName, true);
                 GetComponent<NodeAI_Agent>().SetParameter(awarenessParameterName, true);
+                isAware = true;
             }
 
         }
         else
         {
+            isAware = true;
             GetComponent<NodeAI_Agent>().SetParameter(awarenessParameterName, true);
             GetComponent<NodeAI_Agent>().SetParameter(fromOtherEnemyParameterName, false);
             FindObjectOfType<EnemyAwarenessManager>().RegisterAwareness(gameObject);
