@@ -280,7 +280,7 @@ namespace NodeAI
         /// <returns>The list of objects which the Agent can see.</returns>
         public GameObject[] GetVisibleObjects() ///< Returns all objects which the Agent can see.
         {
-            RaycastHit[] hits = Physics.SphereCastAll(eyesBone.position, sightDistance / 2, eyesForward, sightDistance / 2, sightMask);
+            RaycastHit[] hits = Physics.SphereCastAll(eyesBone.position, sightDistance, eyesForward, sightDistance / 2, sightMask);
             List<GameObject> visibleObjects = new List<GameObject>();
             foreach (RaycastHit hit in hits)
             {
@@ -293,7 +293,7 @@ namespace NodeAI
                     continue;
                 }
                 Vector3 dir = hit.transform.position - transform.position;
-                if (Vector3.Angle(eyesForward, dir) < sightAngle / 2)
+                if (Vector3.Angle(eyesForward, dir) < sightAngle)
                 {
                     //check line of sight
                     RaycastHit[] hits2 = Physics.RaycastAll(eyesBone.position, dir, dir.magnitude);
@@ -331,6 +331,10 @@ namespace NodeAI
             foreach (GameObject o in noticedObjects)
             {
                 Gizmos.color = Color.white;
+                if (o == null)
+                {
+                    continue;
+                }
                 Gizmos.DrawIcon(o.transform.position + (Vector3.up * 2.0f), "d_animationvisibilitytoggleon", true, Color.magenta);
             }
             if (sensoryEvents.Count > 0)
