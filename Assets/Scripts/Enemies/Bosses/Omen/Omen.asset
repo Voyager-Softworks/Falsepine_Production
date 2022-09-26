@@ -63,7 +63,6 @@ MonoBehaviour:
     title: Sequence
     childGUIDs:
     - 6026cdde-956a-4918-b867-26043b8c6c6a
-    - c735970e-ace7-4f57-a26f-aec04ea4a44e
     - 7ab60e64-e483-47e7-a91b-db82b6c90120
     nodeType: 4
     position: {x: 235, y: 0}
@@ -116,35 +115,6 @@ MonoBehaviour:
     runtimeLogicType: 
     queryType: 
     noLogic: 1
-    noQuery: 1
-  - GUID: c735970e-ace7-4f57-a26f-aec04ea4a44e
-    parentGUID: 3977f36d-eeb9-4720-9289-1cad3970936d
-    title: SetAnimatorTrigger
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 420, y: 110}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: NAME
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: TakeOff
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Animation.SetAnimatorTrigger, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    queryType: 
-    noLogic: 0
     noQuery: 1
   - GUID: 7ab60e64-e483-47e7-a91b-db82b6c90120
     parentGUID: 3977f36d-eeb9-4720-9289-1cad3970936d
@@ -823,8 +793,8 @@ MonoBehaviour:
     parentGUID: 2e2e443c-90fd-4441-b965-33d55f54445a
     title: Selector
     childGUIDs:
-    - 19e9c492-25c3-4403-9b88-ff00d7282e8b
     - 6368bb99-f47b-4c49-83a2-03a759bf1f10
+    - 19e9c492-25c3-4403-9b88-ff00d7282e8b
     nodeType: 5
     position: {x: 842, y: 1386}
     runtime: {fileID: 0}
@@ -969,19 +939,6 @@ MonoBehaviour:
       PublicKeyToken=null
     queryType: 
     noLogic: 0
-    noQuery: 1
-  - GUID: 76a468fa-6e6c-4323-8965-209e98f185bf
-    parentGUID: 3b73071a-e899-4e8f-8774-c690727d16f7
-    title: Hover Pos B
-    childGUIDs: []
-    nodeType: 7
-    position: {x: 100, y: 1401}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: 
-    queryType: 
-    noLogic: 1
     noQuery: 1
   - GUID: 4c4ba598-fc3f-4481-8ae8-75e906fc7d0e
     parentGUID: c7b078a8-0078-4a32-8b54-d961a470867c
@@ -3514,8 +3471,8 @@ MonoBehaviour:
       ovalue: {fileID: 0}
       output: 0
     - name: SPEED
-      GUID: null
-      paramReference: null
+      GUID: 15191866-122a-40fa-a9a8-e0b50efe0484
+      paramReference: 9afbe0cc-c2f0-402e-a830-ff6785cb6b85
       serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       svalue: 
@@ -3529,8 +3486,8 @@ MonoBehaviour:
       ovalue: {fileID: 0}
       output: 0
     - name: ANGULARSPEED
-      GUID: null
-      paramReference: null
+      GUID: 1f07cce5-af44-48ce-82d9-32b151255fc6
+      paramReference: 146e65bd-85c6-4492-8779-cf97e2b9eba5
       serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       svalue: 
@@ -3544,8 +3501,8 @@ MonoBehaviour:
       ovalue: {fileID: 0}
       output: 0
     - name: ACCELERATION
-      GUID: null
-      paramReference: null
+      GUID: 52bf8c65-764e-4f60-b171-fda8ee581671
+      paramReference: 34c041d3-aafa-4f9a-accd-5d5e082e0c59
       serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       svalue: 
@@ -3559,8 +3516,8 @@ MonoBehaviour:
       ovalue: {fileID: 0}
       output: 0
     - name: STOPPINGDISTANCE
-      GUID: null
-      paramReference: null
+      GUID: 9651d02c-3d51-4830-8ed1-b18f55232f7c
+      paramReference: 180bfb0f-849e-4f12-bd7d-c26d187d0e4f
       serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
       svalue: 
@@ -3578,50 +3535,6 @@ MonoBehaviour:
     queryType: 
     noLogic: 0
     noQuery: 1
-  - GUID: 69ff3445-11b7-417a-8dcf-15c58fe1a080
-    parentGUID: 
-    title: Position
-    childGUIDs: []
-    nodeType: 8
-    position: {x: 797, y: 2062}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: TRANSFORM
-      GUID: 9626c216-3b80-4196-a221-3cc8f4cc6302
-      paramReference: ed2fce0c-1388-47ed-a6dc-e05948a39522
-      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: POSITION
-      GUID: 141f043d-4aec-4e2f-aa5c-d889c11ada3c
-      paramReference: 
-      serializedTypename: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 1
-    runtimeLogicType: 
-    queryType: NodeAI.Utility.Transforms.Position, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    noLogic: 1
-    noQuery: 0
   - GUID: 9626c216-3b80-4196-a221-3cc8f4cc6302
     parentGUID: ed2fce0c-1388-47ed-a6dc-e05948a39522
     title: LandingPos
@@ -3859,8 +3772,8 @@ MonoBehaviour:
     parentGUID: e9ad41c0-174d-4bf0-a652-d2b189c842b5
     title: Sequence
     childGUIDs:
-    - 8aeb5842-1f68-4863-8e33-620e29a30aef
     - 9173b2f9-9027-43a2-a713-ff6e9e72ba58
+    - 8aeb5842-1f68-4863-8e33-620e29a30aef
     nodeType: 4
     position: {x: 1896, y: 1490}
     runtime: {fileID: 0}
@@ -4470,19 +4383,6 @@ MonoBehaviour:
       PublicKeyToken=null
     noLogic: 1
     noQuery: 0
-  - GUID: fa367857-d9c2-4501-8f45-396779f17485
-    parentGUID: 8f9b0115-b954-4366-9091-a0dbd00b4943
-    title: Stage 2
-    childGUIDs: []
-    nodeType: 7
-    position: {x: 861, y: 1974}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: 
-    queryType: 
-    noLogic: 1
-    noQuery: 1
   - GUID: b2e68419-4f44-4a31-b3f5-3142237d0076
     parentGUID: 
     title: And
@@ -4756,6 +4656,128 @@ MonoBehaviour:
     queryType: 
     noLogic: 1
     noQuery: 1
+  - GUID: 76a468fa-6e6c-4323-8965-209e98f185bf
+    parentGUID: 3b73071a-e899-4e8f-8774-c690727d16f7
+    title: Hover Pos B
+    childGUIDs: []
+    nodeType: 7
+    position: {x: -391, y: 1629}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: 
+    queryType: 
+    noLogic: 1
+    noQuery: 1
+  - GUID: fa367857-d9c2-4501-8f45-396779f17485
+    parentGUID: 8f9b0115-b954-4366-9091-a0dbd00b4943
+    title: Stage 2
+    childGUIDs: []
+    nodeType: 7
+    position: {x: 843, y: 1964}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: 
+    queryType: 
+    noLogic: 1
+    noQuery: 1
+  - GUID: 69ff3445-11b7-417a-8dcf-15c58fe1a080
+    parentGUID: 
+    title: Position
+    childGUIDs: []
+    nodeType: 8
+    position: {x: 801, y: 2030}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: TRANSFORM
+      GUID: 9626c216-3b80-4196-a221-3cc8f4cc6302
+      paramReference: ed2fce0c-1388-47ed-a6dc-e05948a39522
+      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: POSITION
+      GUID: 141f043d-4aec-4e2f-aa5c-d889c11ada3c
+      paramReference: 
+      serializedTypename: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 1
+    runtimeLogicType: 
+    queryType: NodeAI.Utility.Transforms.Position, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    noLogic: 1
+    noQuery: 0
+  - GUID: 15191866-122a-40fa-a9a8-e0b50efe0484
+    parentGUID: 9afbe0cc-c2f0-402e-a830-ff6785cb6b85
+    title: FlightSpeed
+    childGUIDs: []
+    nodeType: 7
+    position: {x: 935, y: 2100}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: 
+    queryType: 
+    noLogic: 1
+    noQuery: 1
+  - GUID: 52bf8c65-764e-4f60-b171-fda8ee581671
+    parentGUID: 34c041d3-aafa-4f9a-accd-5d5e082e0c59
+    title: FlightAcceleration
+    childGUIDs: []
+    nodeType: 7
+    position: {x: 900, y: 2156}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: 
+    queryType: 
+    noLogic: 1
+    noQuery: 1
+  - GUID: 1f07cce5-af44-48ce-82d9-32b151255fc6
+    parentGUID: 146e65bd-85c6-4492-8779-cf97e2b9eba5
+    title: FlightTurnSpeed
+    childGUIDs: []
+    nodeType: 7
+    position: {x: 795, y: 2100}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: 
+    queryType: 
+    noLogic: 1
+    noQuery: 1
+  - GUID: 9651d02c-3d51-4830-8ed1-b18f55232f7c
+    parentGUID: 180bfb0f-849e-4f12-bd7d-c26d187d0e4f
+    title: FlightStoppingDistance
+    childGUIDs: []
+    nodeType: 7
+    position: {x: 753, y: 2156}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: 
+    queryType: 
+    noLogic: 1
+    noQuery: 1
   exposedProperties:
   - name: Started
     GUID: 561a9890-5eb4-43cf-a485-03bafe0039dc
@@ -4929,7 +4951,7 @@ MonoBehaviour:
       PublicKeyToken=b77a5c561934e089
     svalue: 
     ivalue: 0
-    fvalue: 0
+    fvalue: 100
     bvalue: 0
     cvalue: {r: 0, g: 0, b: 0, a: 0}
     v2value: {x: 0, y: 0}
@@ -4944,7 +4966,7 @@ MonoBehaviour:
       PublicKeyToken=b77a5c561934e089
     svalue: 
     ivalue: 0
-    fvalue: 0
+    fvalue: 80
     bvalue: 0
     cvalue: {r: 0, g: 0, b: 0, a: 0}
     v2value: {x: 0, y: 0}
@@ -4959,7 +4981,7 @@ MonoBehaviour:
       PublicKeyToken=b77a5c561934e089
     svalue: 
     ivalue: 0
-    fvalue: 0
+    fvalue: 60
     bvalue: 0
     cvalue: {r: 0, g: 0, b: 0, a: 0}
     v2value: {x: 0, y: 0}
@@ -4974,7 +4996,7 @@ MonoBehaviour:
       PublicKeyToken=b77a5c561934e089
     svalue: 
     ivalue: 0
-    fvalue: 0
+    fvalue: 40
     bvalue: 0
     cvalue: {r: 0, g: 0, b: 0, a: 0}
     v2value: {x: 0, y: 0}
@@ -5034,7 +5056,7 @@ MonoBehaviour:
       PublicKeyToken=b77a5c561934e089
     svalue: 
     ivalue: 0
-    fvalue: 0
+    fvalue: 15
     bvalue: 0
     cvalue: {r: 0, g: 0, b: 0, a: 0}
     v2value: {x: 0, y: 0}
@@ -5091,6 +5113,10 @@ MonoBehaviour:
     - 0863507b-53a9-4667-959b-dafddda8762d
     - 7c1611a0-f3c7-42d3-b8f2-03144f252c16
     - fa367857-d9c2-4501-8f45-396779f17485
+    - 15191866-122a-40fa-a9a8-e0b50efe0484
+    - 52bf8c65-764e-4f60-b171-fda8ee581671
+    - 1f07cce5-af44-48ce-82d9-32b151255fc6
+    - 9651d02c-3d51-4830-8ed1-b18f55232f7c
   - title: Stage 2 Transition
     childGUIDs:
     - 4c4ba598-fc3f-4481-8ae8-75e906fc7d0e
