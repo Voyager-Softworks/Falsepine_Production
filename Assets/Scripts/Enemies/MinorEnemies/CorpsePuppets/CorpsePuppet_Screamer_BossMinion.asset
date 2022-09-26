@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9fe18a7553fa2eea7bdc407af41fe506, type: 3}
-  m_Name: CorpsePuppet
+  m_Name: CorpsePuppet_Screamer_BossMinion
   m_EditorClassIdentifier: 
   nodeData:
   - GUID: 7518709c-510a-4b7e-8fc6-5b4a37c2e71e
@@ -19,7 +19,7 @@ MonoBehaviour:
     childGUIDs:
     - 30640463-a169-4bf0-a467-3a4055aad30d
     nodeType: 0
-    position: {x: -305, y: 0}
+    position: {x: 0, y: 0}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -62,205 +62,32 @@ MonoBehaviour:
     parentGUID: 7518709c-510a-4b7e-8fc6-5b4a37c2e71e
     title: Sequence
     childGUIDs:
-    - d0b08677-abc9-4428-9335-f6ff10742454
-    - 7937dbb6-c2b3-496e-842d-f252c4d8d1ef
-    nodeType: 4
-    position: {x: -16, y: -52}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 7937dbb6-c2b3-496e-842d-f252c4d8d1ef
-    parentGUID: 30640463-a169-4bf0-a467-3a4055aad30d
-    title: Repeater
-    childGUIDs:
-    - 33409839-0d96-4e12-a443-ae951ff72618
-    nodeType: 3
-    position: {x: 137, y: 280}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: REPEATCOUNT
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 1
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: REPEATFOREVER
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 1
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Repeater, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 33409839-0d96-4e12-a443-ae951ff72618
-    parentGUID: 7937dbb6-c2b3-496e-842d-f252c4d8d1ef
-    title: Sequence
-    childGUIDs:
-    - f7580f18-7b18-4e37-9674-e5300701c3eb
-    - e34c3be9-873f-4d34-8c7e-33aac72087ee
-    nodeType: 4
-    position: {x: 372, y: 280}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: d0b08677-abc9-4428-9335-f6ff10742454
-    parentGUID: 30640463-a169-4bf0-a467-3a4055aad30d
-    title: WaitUntilAnimationComplete
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 287, y: -52}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: STATE NAME
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: BIRTH
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Animation.WaitUntilAnimationComplete, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: f7580f18-7b18-4e37-9674-e5300701c3eb
-    parentGUID: 33409839-0d96-4e12-a443-ae951ff72618
-    title: IfTrue
-    childGUIDs: []
-    nodeType: 2
-    position: {x: 527, y: 100}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: CONDITION
-      GUID: 13c592aa-73fe-4d4d-bd1e-695a6b464c8f
-      paramReference: 7fd29091-b273-4333-81bb-6da71fc50841
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.IfTrue, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 13c592aa-73fe-4d4d-bd1e-695a6b464c8f
-    parentGUID: 7fd29091-b273-4333-81bb-6da71fc50841
-    title: Aware
-    childGUIDs: []
-    nodeType: 7
-    position: {x: 402, y: 124}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: 
-    queryType: 
-    noLogic: 1
-    noQuery: 1
-  - GUID: e34c3be9-873f-4d34-8c7e-33aac72087ee
-    parentGUID: 33409839-0d96-4e12-a443-ae951ff72618
-    title: Repeater
-    childGUIDs:
     - 77485ff9-214c-4e5b-8012-3d994d11bcb6
-    nodeType: 3
-    position: {x: 556, y: 280}
+    - d0b08677-abc9-4428-9335-f6ff10742454
+    - b8e4be7e-f671-4c72-9a7d-1d600a9a964c
+    nodeType: 4
+    position: {x: 235, y: 0}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
-    properties:
-    - name: REPEATCOUNT
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 1
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: REPEATFOREVER
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 1
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Repeater, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+    properties: []
+    runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
     queryType: 
     noLogic: 0
     noQuery: 1
   - GUID: 77485ff9-214c-4e5b-8012-3d994d11bcb6
-    parentGUID: e34c3be9-873f-4d34-8c7e-33aac72087ee
+    parentGUID: 30640463-a169-4bf0-a467-3a4055aad30d
     title: Sequence
     childGUIDs:
     - d158c21b-76fc-4104-9de1-9fc89af020d2
     - ea675368-0899-4ba1-83bf-3b599b3a3ba4
     - cbfb371a-e42f-475a-9b26-7f6e59078531
     - 73e7c4de-a6d3-4704-bc4d-98da2e785fed
+    - fb5ba8d7-1a9e-4343-8130-d6978a26f318
+    - 7e9114d0-a4cb-4b5b-bd8a-bbbcf38a5c83
+    - 42413f8e-543b-46a3-809f-a41a3dcfbd97
     nodeType: 4
-    position: {x: 789, y: 280}
+    position: {x: 685, y: 164}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -274,7 +101,7 @@ MonoBehaviour:
     title: GetObjectTransform
     childGUIDs: []
     nodeType: 8
-    position: {x: 534, y: 447}
+    position: {x: 430, y: 331}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -313,12 +140,56 @@ MonoBehaviour:
       Culture=neutral, PublicKeyToken=null
     noLogic: 1
     noQuery: 0
+  - GUID: 9f86f3d1-da68-4d4c-944b-ab088617d1e8
+    parentGUID: 
+    title: FindWithTag
+    childGUIDs: []
+    nodeType: 8
+    position: {x: 141, y: 331}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: TAG
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: Player
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: RESULT
+      GUID: 1848fac8-584c-4f28-a19f-cd6f6ec9a800
+      paramReference: 
+      serializedTypename: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 1
+    runtimeLogicType: 
+    queryType: NodeAI.FindWithTag, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    noLogic: 1
+    noQuery: 0
   - GUID: d158c21b-76fc-4104-9de1-9fc89af020d2
     parentGUID: 77485ff9-214c-4e5b-8012-3d994d11bcb6
     title: GoTo
     childGUIDs: []
     nodeType: 1
-    position: {x: 989, y: 404}
+    position: {x: 885, y: 288}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -344,7 +215,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       svalue: 
       ivalue: 0
-      fvalue: 6
+      fvalue: 8
       bvalue: 0
       cvalue: {r: 0, g: 0, b: 0, a: 0}
       v2value: {x: 0, y: 0}
@@ -407,7 +278,7 @@ MonoBehaviour:
     title: SetAnimatorBool
     childGUIDs: []
     nodeType: 1
-    position: {x: 989, y: 269}
+    position: {x: 885, y: 153}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -451,7 +322,7 @@ MonoBehaviour:
     title: SetAnimatorBool
     childGUIDs: []
     nodeType: 1
-    position: {x: 989, y: 609}
+    position: {x: 885, y: 493}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -495,7 +366,7 @@ MonoBehaviour:
     title: Attack
     childGUIDs: []
     nodeType: 1
-    position: {x: 989, y: 745}
+    position: {x: 885, y: 629}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
@@ -512,7 +383,7 @@ MonoBehaviour:
       v2value: {x: 0, y: 0}
       v3value: {x: 0, y: 0, z: 0}
       v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 11400000, guid: a77c4add836a76777bf5d052df70a7a1, type: 2}
+      ovalue: {fileID: 11400000, guid: a1d85cff7e2b7823fbdda63a9748aaef, type: 2}
       output: 0
     - name: PROJECTILE SPAWN BONE
       GUID: null
@@ -549,21 +420,21 @@ MonoBehaviour:
     queryType: 
     noLogic: 0
     noQuery: 1
-  - GUID: 9f86f3d1-da68-4d4c-944b-ab088617d1e8
-    parentGUID: 
-    title: FindWithTag
+  - GUID: fb5ba8d7-1a9e-4343-8130-d6978a26f318
+    parentGUID: 77485ff9-214c-4e5b-8012-3d994d11bcb6
+    title: SetAnimatorTrigger
     childGUIDs: []
-    nodeType: 8
-    position: {x: 299, y: 447}
+    nodeType: 1
+    position: {x: 885, y: 777}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties:
-    - name: TAG
+    - name: NAME
       GUID: null
       paramReference: null
       serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
         PublicKeyToken=b77a5c561934e089
-      svalue: Player
+      svalue: Death
       ivalue: 0
       fvalue: 0
       bvalue: 0
@@ -573,10 +444,24 @@ MonoBehaviour:
       v4value: {x: 0, y: 0, z: 0, w: 0}
       ovalue: {fileID: 0}
       output: 0
-    - name: RESULT
-      GUID: 1848fac8-584c-4f28-a19f-cd6f6ec9a800
-      paramReference: 
-      serializedTypename: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+    runtimeLogicType: NodeAI.Animation.SetAnimatorTrigger, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 7e9114d0-a4cb-4b5b-bd8a-bbbcf38a5c83
+    parentGUID: 77485ff9-214c-4e5b-8012-3d994d11bcb6
+    title: PlaySound
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 885, y: 877}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: SOUND
+      GUID: null
+      paramReference: null
+      serializedTypename: UnityEngine.AudioClip, UnityEngine.AudioModule, Version=0.0.0.0,
         Culture=neutral, PublicKeyToken=null
       svalue: 
       ivalue: 0
@@ -586,29 +471,191 @@ MonoBehaviour:
       v2value: {x: 0, y: 0}
       v3value: {x: 0, y: 0, z: 0}
       v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 8300000, guid: 45cea4621501f5b4cbdaef9bd4870856, type: 3}
+      output: 0
+    - name: VOLUME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 1
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
       ovalue: {fileID: 0}
-      output: 1
-    runtimeLogicType: 
-    queryType: NodeAI.FindWithTag, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      output: 0
+    - name: PITCH
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 1
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: DELAY
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Audio.PlaySound, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-    noLogic: 1
-    noQuery: 0
-  exposedProperties:
-  - name: Aware
-    GUID: 7fd29091-b273-4333-81bb-6da71fc50841
-    paramReference: 
-    serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-      PublicKeyToken=b77a5c561934e089
-    svalue: 
-    ivalue: 0
-    fvalue: 0
-    bvalue: 0
-    cvalue: {r: 0, g: 0, b: 0, a: 0}
-    v2value: {x: 0, y: 0}
-    v3value: {x: 0, y: 0, z: 0}
-    v4value: {x: 0, y: 0, z: 0, w: 0}
-    ovalue: {fileID: 0}
-    output: 0
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 42413f8e-543b-46a3-809f-a41a3dcfbd97
+    parentGUID: 77485ff9-214c-4e5b-8012-3d994d11bcb6
+    title: DestroyAgent
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 885, y: 1049}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: WAIT TIME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 3
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: DestroyAgent, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: b8e4be7e-f671-4c72-9a7d-1d600a9a964c
+    parentGUID: 30640463-a169-4bf0-a467-3a4055aad30d
+    title: PlaySound
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 430, y: -268}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: SOUND
+      GUID: null
+      paramReference: null
+      serializedTypename: UnityEngine.AudioClip, UnityEngine.AudioModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 8300000, guid: 9f559adff5b0a0749ab3a607d34eb570, type: 3}
+      output: 0
+    - name: VOLUME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 1
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: PITCH
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 1
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: DELAY
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Audio.PlaySound, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: d0b08677-abc9-4428-9335-f6ff10742454
+    parentGUID: 30640463-a169-4bf0-a467-3a4055aad30d
+    title: WaitUntilAnimationComplete
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 430, y: -71}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: STATE NAME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: BIRTH
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Animation.WaitUntilAnimationComplete, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  exposedProperties: []
   nodeGroups: []
   queries:
   - {fileID: 0}

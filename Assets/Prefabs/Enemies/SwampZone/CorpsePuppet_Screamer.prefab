@@ -15645,6 +15645,8 @@ GameObject:
   - component: {fileID: 3006298010195686696}
   - component: {fileID: 3006298010195686697}
   - component: {fileID: 8640239196966494087}
+  - component: {fileID: 6576528451360417743}
+  - component: {fileID: 5662910385197106279}
   m_Layer: 0
   m_Name: CorpsePuppet_Screamer
   m_TagString: Untagged
@@ -15682,9 +15684,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b31cddfd229080bbc8f108a7752a9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AI_Behaviour: {fileID: 11400000, guid: 72cfb45c6c51277eca430c78910bde0a, type: 2}
+  AI_Behaviour: {fileID: 11400000, guid: 536c177a56bd9c0049bc7ca0d260b26e, type: 2}
   faction: 
-  inspectorProperties: []
+  inspectorProperties:
+  - name: Aware
+    GUID: 57557178-ae07-4a1a-9540-bb59d17bc08b
+    paramReference: 
+    serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+      PublicKeyToken=b77a5c561934e089
+    svalue: 
+    ivalue: 0
+    fvalue: 0
+    bvalue: 0
+    cvalue: {r: 0, g: 0, b: 0, a: 0}
+    v2value: {x: 0, y: 0}
+    v3value: {x: 0, y: 0, z: 0}
+    v4value: {x: 0, y: 0, z: 0, w: 0}
+    ovalue: {fileID: 0}
+    output: 0
   nodeTree:
     rootNode:
       GUID: 
@@ -16039,6 +16056,41 @@ MonoBehaviour:
     timeNormalized: 0
     duration: 0
   transitions: []
+--- !u!114 &6576528451360417743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3006298010195686704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ec02cfc6b2d63a2af49605ecf856e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  awarenessParameterName: Aware
+  fromOtherEnemyParameterName: FromOtherEnemy
+  awarenessRadius: 15
+--- !u!114 &5662910385197106279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3006298010195686704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e196a347754e74e0ca26934429658e04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eyesBone: {fileID: 2820899336570422814}
+  maxHearingRange: 10
+  eyeDirection: 0
+  sightDistance: 10
+  sightAngle: 90
+  sightMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &3187578883100592380
 GameObject:
   m_ObjectHideFlags: 0
