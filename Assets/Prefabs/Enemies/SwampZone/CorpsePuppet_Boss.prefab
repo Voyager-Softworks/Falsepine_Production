@@ -5861,10 +5861,8 @@ GameObject:
   - component: {fileID: 3006298010195686696}
   - component: {fileID: 3006298010195686697}
   - component: {fileID: 8640239196966494087}
-  - component: {fileID: -978764826475742025}
-  - component: {fileID: 2997769287477025197}
   m_Layer: 0
-  m_Name: CorpsePuppet
+  m_Name: CorpsePuppet_Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5900,24 +5898,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8b31cddfd229080bbc8f108a7752a9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AI_Behaviour: {fileID: 11400000, guid: 9cd116409b7424bd6a7870ec86bea1db, type: 2}
+  AI_Behaviour: {fileID: 11400000, guid: c00871fd7c55c75a0bda110cea69808d, type: 2}
   faction: 
-  inspectorProperties:
-  - name: Aware
-    GUID: 7fd29091-b273-4333-81bb-6da71fc50841
-    paramReference: 
-    serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-      PublicKeyToken=b77a5c561934e089
-    svalue: 
-    ivalue: 0
-    fvalue: 0
-    bvalue: 0
-    cvalue: {r: 0, g: 0, b: 0, a: 0}
-    v2value: {x: 0, y: 0}
-    v3value: {x: 0, y: 0, z: 0}
-    v4value: {x: 0, y: 0, z: 0, w: 0}
-    ovalue: {fileID: 0}
-    output: 0
+  inspectorProperties: []
   nodeTree:
     rootNode:
       GUID: 
@@ -6276,7 +6259,7 @@ MonoBehaviour:
     pitch: 1
     clip: {fileID: 8300000, guid: 9f559adff5b0a0749ab3a607d34eb570, type: 3}
     loop: 0
-    playOnAwake: 1
+    playOnAwake: 0
     SpatialBlend: 1
     maxDistance: 300
     minDistance: 1
@@ -6311,41 +6294,6 @@ MonoBehaviour:
     timeNormalized: 0
     duration: 0
   transitions: []
---- !u!114 &-978764826475742025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3006298010195686704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80ec02cfc6b2d63a2af49605ecf856e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  awarenessParameterName: Aware
-  fromOtherEnemyParameterName: FromOtherEnemy
-  awarenessRadius: 15
---- !u!114 &2997769287477025197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3006298010195686704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e196a347754e74e0ca26934429658e04, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  eyesBone: {fileID: 2820899336570422814}
-  maxHearingRange: 10
-  eyeDirection: 0
-  sightDistance: 10
-  sightAngle: 90
-  sightMask:
-    serializedVersion: 2
-    m_Bits: 8
 --- !u!1 &3187578883100592380
 GameObject:
   m_ObjectHideFlags: 0
