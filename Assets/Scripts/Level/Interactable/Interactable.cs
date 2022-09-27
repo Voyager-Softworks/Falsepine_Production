@@ -7,6 +7,10 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.Events;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 /// <summary>
 /// Base class for interactable objects, such as clues, pikcups, objectives, etc.
 /// </summary>
@@ -21,7 +25,8 @@ public class Interactable : MonoBehaviour
         NONE,
         DISABLE_INTERACT,
         DISABLE,
-        DESTROY
+        DESTROY,
+        REPLACE
     }
 
     [Header("Interact")]
@@ -31,6 +36,7 @@ public class Interactable : MonoBehaviour
     public Transform _transToCheck = null;
     public float interactDistance = 3.0f;
     public InteractEffect onInteractEffect = InteractEffect.NONE;
+    public GameObject replacementObject = null;
 
     // interact c# delegate
     public System.Action onInteract;
@@ -97,6 +103,15 @@ public class Interactable : MonoBehaviour
                 break;
             case InteractEffect.DESTROY:
                 Destroy(gameObject);
+                break;
+            case InteractEffect.REPLACE:
+                if (replacementObject != null)
+                {
+                    Instantiate(replacementObject, transform.position, transform.rotation);
+                    // scale match
+                    replacementObject.transform.localScale = transform.localScale;
+                    Destroy(gameObject);
+                }
                 break;
         }
 

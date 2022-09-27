@@ -81,6 +81,12 @@ public class AudioController : MonoBehaviour ///< @todo comment
     {
         foreach (AudioChannel channel in audioChannels)
         {
+            // if clip is null, skip this channel
+            if (channel.clip == null){
+                Debug.LogWarning("Audio Channel " + channel.name + " has no clip assigned!", this);
+                continue;
+            }
+
             channel.source = Instantiate<GameObject>(new GameObject(channel.name), transform).AddComponent<AudioSource>();
             channel.source.clip = channel.clip;
             channel.source.volume = channel.volume;
@@ -335,6 +341,12 @@ public class AudioController : MonoBehaviour ///< @todo comment
     {
         foreach (AudioChannel channel in audioChannels)
         {
+            // if clip is null, skip this channel
+            if (channel.clip == null){
+                Debug.LogWarning("Audio Channel " + channel.name + " has no clip assigned!", this);
+                continue;
+            }
+
             channel.time = channel.source.time;
             channel.timeNormalized = channel.time / channel.duration;
             channel.playing = channel.source.isPlaying;
