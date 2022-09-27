@@ -36,7 +36,10 @@ public class PropHealth : Health_Base
         // spawn broken prefab
         if (m_brokenPrefab != null)
         {
-            Destroy(gameObject);
+            // disable renderer, collider
+            GetComponent<Renderer>().enabled = false;
+            GetComponent<Collider>().enabled = false;
+            Destroy(gameObject, 5.0f);
 
             GameObject broken = Instantiate(m_brokenPrefab, transform.position, transform.rotation);
             broken.transform.parent = transform.parent;
