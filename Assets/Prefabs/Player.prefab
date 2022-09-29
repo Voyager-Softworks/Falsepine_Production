@@ -2449,6 +2449,36 @@ Transform:
   m_Father: {fileID: 2600867802361095212}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &657655422407060485
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 457997263740499334}
+  m_Layer: 3
+  m_Name: MacheteDamagePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &457997263740499334
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657655422407060485}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -10.4, y: 0, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8931354340027513573}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &660010534603739097
 GameObject:
   m_ObjectHideFlags: 0
@@ -13893,6 +13923,7 @@ MonoBehaviour:
   selectedWeaponType: 0
   selectedWeapon: {fileID: 0}
   selectedEquipment: {fileID: 0}
+  selectedMeleeWeapon: {fileID: 0}
   m_equipmentDelay: 0.75
   meleeAttackDamage: 10
   meleeAttackRange: 1.5
@@ -13919,9 +13950,9 @@ MonoBehaviour:
     model: {fileID: 0}
     weaponFirepoint: {fileID: 861255043}
     animatorBoolName: ThrowDynamite
-  - weapon: {fileID: 0}
+  - weapon: {fileID: 11400000, guid: 7d4105084d4d8da4a90aa43dc1e4e7c3, type: 2}
     model: {fileID: 8122624416993239135}
-    weaponFirepoint: {fileID: 8931354340027513573}
+    weaponFirepoint: {fileID: 457997263740499334}
     animatorBoolName: Melee
   - weapon: {fileID: 11400000, guid: 15f4965bfd4d72344ab6f5c279315c6f, type: 2}
     model: {fileID: 2034346801266874796}
@@ -71200,6 +71231,7 @@ Transform:
   m_LocalScale: {x: 0.05, y: 0.05, z: 0.05}
   m_Children:
   - {fileID: 1510097913327099513}
+  - {fileID: 457997263740499334}
   m_Father: {fileID: 1643627412226772412}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 1.062, y: 70.305, z: -5.8}

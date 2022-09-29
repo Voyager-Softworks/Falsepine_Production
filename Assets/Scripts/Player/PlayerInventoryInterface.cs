@@ -50,6 +50,7 @@ public class PlayerInventoryInterface : MonoBehaviour
     [SerializeField] public SelectedWeaponType selectedWeaponType = SelectedWeaponType.None; ///< The currently selected weapon type.
     public Item selectedWeapon; ///< The currently selected weapon.
     public Item selectedEquipment; ///< The currently selected equipment.
+    public Item selectedMeleeWeapon; ///< The currently selected melee weapon.
 
     public float m_equipmentDelay = 0.75f; ///< The delay between using an equipment and the next use.
     private float m_equipmentDelayTimer = 0.0f; ///< The timer for the delay between using an equipment and the next use.
@@ -200,6 +201,9 @@ public class PlayerInventoryInterface : MonoBehaviour
 
         // select equipment
         SelectEquipment(1);
+
+        // select melee weapon
+        SelectMeleeWeapon();
     }
 
 
@@ -253,11 +257,6 @@ public class PlayerInventoryInterface : MonoBehaviour
                 if (aimWeaponAction.ReadValue<float>() > 0)
                 {
                     rangedWeapon.TrySetAim(true, gameObject);
-
-                    if (meleeAttackAction.triggered)
-                    {
-                        TryMeleeAttack();
-                    }
                 }
                 else
                 {
@@ -313,80 +312,46 @@ public class PlayerInventoryInterface : MonoBehaviour
             }
         }
 
-
-
-
-        // update equipment delay timer
-        if (m_equipmentDelayTimer > 0.0f)
+        // melee
+        if (meleeAttackAction.triggered)
         {
-            m_equipmentDelayTimer -= Time.deltaTime;
-        }
+            SelectMeleeWeapon();
 
-        //update melee attack timer
-        if (meleeAttackTimer > 0.0f)
-        {
-            meleeAttackTimer -= Time.deltaTime;
-        }
-        
-        if (meleeAttackTimer < 0.5f && GetMeleeLink().model.activeSelf)
-        {
-            // disable melee model
-            GetMeleeLink().model.SetActive(false);
-            // enable equiped wepaon model
-            SelectWeapon(selectedWeaponType);
-        }
-    }
-
-    /// <summary>
-    ///  Attempts to melee attack.
-    ///  @todo move this to a separate script on the melee
-    /// </summary>
-    private void TryMeleeAttack()
-    {
-        if (meleeAttackTimer > 0.0f)
-        {
-            return;
-        }
-        meleeAttackTimer = meleeAttackCooldown;
-
-        // play melee attack clip
-        playerAnimator.SetTrigger(GetMeleeLink().animatorBoolName);
-
-        // enable model
-        DisableAllWeaponModels();
-        GetMeleeLink().model.SetActive(true);
-
-        // do sphere cast to find enemies in range
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position + transform.forward * meleeAttackRange, meleeAttackSize);
-        List<Health_Base> hitEnemies = new List<Health_Base>();
-        foreach (Collider hitCollider in hitColliders)
-        {
-            // if hit collider is an enemy, deal damage
-            Health_Base enemy = hitCollider.GetComponentInParent<Health_Base>();
-            if (enemy)
+            if (selectedMeleeWeapon)
             {
-                // check if already hit this enemy
-                if (hitEnemies.Contains(enemy))
+                selectedMeleeWeapon.ManualUpdate(gameObject);
+
+                Transform weaponTip = GetWeaponFirepoint(selectedMeleeWeapon);
+                Vector3 weaponTipPosition = weaponTip.position;
+
+                MeleeWeapon meleeWeapon = selectedMeleeWeapon as MeleeWeapon;
+                if (meleeWeapon.TryMelee(weaponTip, gameObject))
                 {
-                    continue;
+                    // enable model
+                    DisableAllWeaponModels();
+                    GameObject weaponModel = GetWeaponModel(selectedMeleeWeapon);
+                    if (weaponModel)
+                    {
+                        weaponModel.SetActive(true);
+                    }
+
+                    // set animator
+                    string animatorBoolName = GetWeaponAnimatorBoolName(selectedMeleeWeapon);
+                    if (playerAnimator && animatorBoolName != "")
+                    {
+                        DisableAllAnimatorWeapons();
+                        playerAnimator.SetBool(animatorBoolName, true);
+                    }
                 }
-                hitEnemies.Add(enemy);
+            }
+        }
 
-                //@todo make the stats portion of the damage stat exist
-                Health_Base.DamageStat ds = new Health_Base.DamageStat(meleeAttackDamage, gameObject, transform.position, transform.position + transform.forward * meleeAttackRange, null);
-                enemy.TakeDamage(ds);
-
-                RangedWeapon rangedWeapon = selectedWeapon as RangedWeapon;
-                if (rangedWeapon == null) continue;
-
-                // hit effect
-                if (rangedWeapon.m_hitEffect != null)
-                {
-                    Destroy(Instantiate(
-                    rangedWeapon.m_hitEffect, ds.m_hitPoint,
-                    Quaternion.FromToRotation(Vector3.up, ds.m_hitPoint - ds.m_originPoint)),
-                    2.0f);
-                }
+        if (selectedMeleeWeapon)
+        {
+            MeleeWeapon meleeWeapon = selectedMeleeWeapon as MeleeWeapon;
+            if (meleeWeapon != null)
+            {
+                selectedMeleeWeapon.ManualUpdate(gameObject);
             }
         }
     }
@@ -519,18 +484,6 @@ public class PlayerInventoryInterface : MonoBehaviour
         return "";
     }
 
-    public WeaponModelLink GetMeleeLink(){
-        // find the link with "Melee" as the animator bool name
-        foreach (WeaponModelLink link in weaponModelLinks)
-        {
-            if (link.animatorBoolName == "Melee")
-            {
-                return link;
-            }
-        }
-        return null;
-    }
-
     /// <summary>
     /// If the player has a primary weapon, select the secondary weapon. If the player has a secondary
     /// weapon, select the primary weapon. If the player has no weapons, select no weapon
@@ -636,6 +589,22 @@ public class PlayerInventoryInterface : MonoBehaviour
 
         // if selected equipment is null, return
         if (selectedEquipment == null) return;
+    }
+
+    public void SelectMeleeWeapon()
+    {
+        // if inventory is null, return
+        if (playerInventory == null) return;
+
+        // get selected equipment
+        selectedMeleeWeapon = playerInventory.slots.ElementAtOrDefault(4)?.item;
+        if (selectedMeleeWeapon && selectedMeleeWeapon.currentStackSize <= 0)
+        {
+            selectedMeleeWeapon = null;
+        }
+
+        // if selected equipment is null, return
+        if (selectedMeleeWeapon == null) return;
     }
 
 
