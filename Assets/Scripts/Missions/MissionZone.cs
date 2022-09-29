@@ -363,6 +363,9 @@ public class MissionZone : ScriptableObject
         [SerializeField] public string m_description;
         [SerializeField] public MissionZone.ZoneArea m_area;
 
+        // monster info
+        [SerializeField] public List<MonsterInfo.SerializableMonsterInfo> m_zoneMonsters;
+
         // missions
         [SerializeField] public List<Mission.Serializable_Mission> m_possibleMissions;
         [SerializeField] public int m_missionCount;
@@ -378,12 +381,10 @@ public class MissionZone : ScriptableObject
         [SerializeField] public List<Utilities.SceneField> m_middleScenes;
 
         // Journal Pickups
-        public int m_clueCount;
-        public int m_loreCount;
-        private List<int> m_clueSceneIndexes;
-        private List<int> m_loreSceneIndexes;
-
-
+        [SerializeField] public int m_clueCount;
+        [SerializeField] public int m_loreCount;
+        [SerializeField] public List<int> m_clueSceneIndexes;
+        [SerializeField] public List<int> m_loreSceneIndexes;
 
         public Serializable_MissionZone(MissionZone mz)
         {
@@ -391,6 +392,15 @@ public class MissionZone : ScriptableObject
             m_description = mz.m_description;
             m_area = mz.m_area;
 
+            // Monsters:
+            // make empty lists
+            m_zoneMonsters = new List<MonsterInfo.SerializableMonsterInfo>();
+
+            // fill with data
+            foreach (MonsterInfo m in mz.m_zoneMonsters)
+            {
+                m_zoneMonsters.Add(new MonsterInfo.SerializableMonsterInfo(m));
+            }
 
 
             // Missions:
@@ -434,6 +444,7 @@ public class MissionZone : ScriptableObject
                 m_middleScenes.Add(sf);
             }
 
+
             // Journal Pickups:
             m_clueCount = mz.m_clueCount;
             m_loreCount = mz.m_loreCount;
@@ -458,6 +469,18 @@ public class MissionZone : ScriptableObject
             mz.m_title = m_title;
             mz.m_description = m_description;
             mz.m_area = m_area;
+
+
+            // Monsters:
+            // make empty lists
+            mz.m_zoneMonsters = new List<MonsterInfo>();
+
+            // fill with data
+            foreach (MonsterInfo.SerializableMonsterInfo m in m_zoneMonsters)
+            {
+                mz.m_zoneMonsters.Add(m.ToMonsterInfo());
+            }
+
 
             // Missions:
             // set empty lists

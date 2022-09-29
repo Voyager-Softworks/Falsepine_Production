@@ -282,11 +282,17 @@ public class DatabaseWindow : EditorWindow {
         GUILayout.BeginHorizontal();
         //begind disabled group
         EditorGUI.BeginDisabledGroup(_item == selected);
+        // if instanceID is not empty set color to yellow
+        if (_item.instanceID != "")
+        {
+            GUI.backgroundColor = Color.yellow;
+        }
         if (GUILayout.Button(_item.id + (_item.instanceID != "" ? ":" + _item.instanceID : "")))
         {
             selected = _item;
             GUI.FocusControl(null);
         }
+        GUI.backgroundColor = Color.white;
         EditorGUI.EndDisabledGroup();
 
         GUI.backgroundColor = Color.red;

@@ -272,7 +272,7 @@ public class MissionCardUI : MonoBehaviour
         backgroundImage.color = new Color(backgroundImage.color.r, backgroundImage.color.g, backgroundImage.color.b, 0.5f);
 
         missionStamp.enabled = false;
-        dropShadow.enabled = false;
+        //dropShadow.enabled = false;
         takenGroup.SetActive(false);
         button.SetActive(false);
     }
@@ -292,7 +292,7 @@ public class MissionCardUI : MonoBehaviour
 
         //missionStamp.enabled = true;
         backgroundImage.enabled = true;
-        dropShadow.enabled = true;
+        //dropShadow.enabled = true;
         button.SetActive(true);
     }
 
@@ -305,7 +305,7 @@ public class MissionCardUI : MonoBehaviour
         missionDescription.enabled = false;
         missionStamp.enabled = false;
         backgroundImage.enabled = false;
-        dropShadow.enabled = false;
+        //dropShadow.enabled = false;
         takenGroup.SetActive(false);
         button.SetActive(false);
     }

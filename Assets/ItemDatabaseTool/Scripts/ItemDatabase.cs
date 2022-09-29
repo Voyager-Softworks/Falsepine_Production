@@ -265,7 +265,7 @@ public class ItemDatabase
 
         foreach (Item item in database)
         {
-            string fileName = item.id + ".json";
+            string fileName = item.id + (item.instanceID != "" ? "_" + item.instanceID : "") + ".json";
             Item.Save(GetDatabaseFoldersPath(), fileName, item);
         }
     }

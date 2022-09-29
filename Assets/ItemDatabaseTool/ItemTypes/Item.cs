@@ -562,7 +562,10 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
                 Item newItem = UnityEditor.AssetDatabase.LoadAssetAtPath<Item>(newPath);
 
                 // give the new item a new instance id
-                newItem.id = System.Guid.NewGuid().ToString();
+                newItem.m_instanceID = System.Guid.NewGuid().ToString();
+
+                // set dirty
+                UnityEditor.EditorUtility.SetDirty(newItem);
 
                 // set the new item's name
                 SetFileName(newItem);

@@ -602,7 +602,7 @@ public class Console : ToggleableWindow
         "list_inventories",
         "list_inventory inventoryID",
         "inspect inventoryID slotNumber",
-        "give inventoryID itemID amount?",
+        "give inventoryID itemID:instanceID? amount?",
         "remove inventoryID slotNumber",
         "clear inventoryID",
         "fill_ammo inventoryID",

@@ -17,8 +17,8 @@ public class MonsterInfo : ScriptableObject
         Minion
     }
 
-    public string m_name;
-    public MonsterType m_type;
+    [SerializeField] public string m_name;
+    [SerializeField] public MonsterType m_type;
 
     //@todo decide if zone is needed here
     // zone?
