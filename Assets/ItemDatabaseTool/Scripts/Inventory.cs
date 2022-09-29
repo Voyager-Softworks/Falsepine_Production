@@ -287,8 +287,8 @@ public class Inventory : MonoBehaviour
     /// <summary>
     /// Tries to add an item to the inventory by ID.
     /// </summary>
-    public bool TryAddItemToInventory(string _id, int _amount = 1){
-        Item item = ItemDatabase.GetItem(_id);
+    public bool TryAddItemToInventory(string _id, string _instanceID = "", int _amount = 1){
+        Item item = ItemDatabase.GetItem(_id, _instanceID);
         if (item == null) return false;
 
         item = item.CreateInstance();

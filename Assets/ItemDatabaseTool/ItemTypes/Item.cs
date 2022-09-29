@@ -297,9 +297,20 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
         //to lower
         m_id = m_id.ToLower();
         //replace non letters and numbers with ""
-        m_id = Regex.Replace(m_id, @"[^a-zA-Z0-9_]", "");
+        m_id = Regex.Replace(m_id, @"[^a-zA-Z0-9_-]", "");
         //replace space with _
         m_id = m_id.Replace(" ", "_");
+    }
+
+    public void ValidateInstanceID()
+    {
+        //correct id
+        //to lower
+        m_instanceID = m_instanceID.ToLower();
+        //replace non letters and numbers with ""
+        m_instanceID = Regex.Replace(m_instanceID, @"[^a-zA-Z0-9_-]", "");
+        //replace space with _
+        m_instanceID = m_instanceID.Replace(" ", "_");
     }
 
     /// <summary>
@@ -539,6 +550,23 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
             EditorGUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
             item.drawDefaultInspector = GUILayout.Toggle(item.drawDefaultInspector, "Default Inspector");
+            // create instance button
+            if (GUILayout.Button("Create New Instance"))
+            {
+                // find the item in the asset database and create a copy
+                string path = UnityEditor.AssetDatabase.GetAssetPath(item);
+                string newPath = path.Replace(".asset", " (Copy).asset");
+                UnityEditor.AssetDatabase.CopyAsset(path, newPath);
+
+                // get the new item
+                Item newItem = UnityEditor.AssetDatabase.LoadAssetAtPath<Item>(newPath);
+
+                // give the new item a new instance id
+                newItem.id = System.Guid.NewGuid().ToString();
+
+                // set the new item's name
+                SetFileName(newItem);
+            }
             GUILayout.FlexibleSpace();
             EditorGUILayout.EndHorizontal();
             if (item.drawDefaultInspector)
@@ -561,25 +589,25 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
             // update file name button
             if (GUILayout.Button(new GUIContent("Update File Name", "Updates the file name to match the item id"), GUILayout.Width(120)))
             {
-                item.ValidateID();
-                string itemID = item.id;
-
-                //update file name
-                string path = AssetDatabase.GetAssetPath(item);
-                string newPath = path.Replace(item.id, item.id);
-                AssetDatabase.RenameAsset(path, item.id);
-
-                //update item id
-                item.id = itemID;
-
-                // set dirty
-                EditorUtility.SetDirty(item);
+                SetFileName(item);
             }
             GUILayout.EndHorizontal();
+
+            // horiz
+            GUILayout.BeginHorizontal();
             // disabled varint id
-            EditorGUI.BeginDisabledGroup(true);
-            item.instanceID = EditorGUILayout.TextField("Instance ID: ", item.instanceID);
+            EditorGUI.BeginDisabledGroup(item.instanceID == "");
+            item.instanceID = EditorGUILayout.TextField(new GUIContent("Instance ID: ", " it something human readable e.g. 'legendary'"), item.instanceID);
             EditorGUI.EndDisabledGroup();
+            // generate instance id button
+            EditorGUI.BeginDisabledGroup(item.instanceID != "");
+            if (GUILayout.Button(new GUIContent("Convert>Instance", "Generates a new instance id for the item"), GUILayout.Width(120)))
+            {
+                item.instanceID = System.Guid.NewGuid().ToString();
+                EditorUtility.SetDirty(item);
+            }
+            EditorGUI.EndDisabledGroup();
+            GUILayout.EndHorizontal();
 
             item.m_displayName = EditorGUILayout.TextField("Display Name: ", item.m_displayName);
             item.m_description = EditorGUILayout.TextField("Description: ", item.m_description);
@@ -750,6 +778,26 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
                     EditorUtility.SetDirty(this);
                 }
             }
+        }
+        
+        /// <summary>
+        /// Updates the file name to match the item id and instance id
+        /// </summary>
+        /// <param name="item"></param>
+        private static void SetFileName(Item item)
+        {
+            item.ValidateID();
+            string itemID = item.id;
+
+            //update file name
+            string path = AssetDatabase.GetAssetPath(item);
+            AssetDatabase.RenameAsset(path, item.id + (item.m_instanceID != "" ? "_" + item.m_instanceID : ""));
+
+            //update item id
+            item.id = itemID;
+
+            // set dirty
+            EditorUtility.SetDirty(item);
         }
     }
     #endif
