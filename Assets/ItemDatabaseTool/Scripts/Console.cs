@@ -298,11 +298,13 @@ public class Console : ToggleableWindow
             }
         }
 
-        // "give inventoryID itemID amount?"
+        // "give inventoryID itemID:instanceID? amount?"
         if (split.Length >= 3 && split[0] == "give")
         {
             string inventoryID = split[1];
-            string itemID = split[2];
+            string itemIDWithInstanceID = split[2];
+            string itemID = itemIDWithInstanceID.Split(':')[0];
+            string instanceID = itemIDWithInstanceID.Split(':').Length > 1 ? itemIDWithInstanceID.Split(':')[1] : "";
             int amount = split.Length >= 4 ? int.Parse(split[3]) : 1;
 
             Inventory inventory = Inventory.allInventories.Find(x => x.id == inventoryID);
@@ -312,7 +314,7 @@ public class Console : ToggleableWindow
             }
 
             // give the item to the player
-            if (inventory.TryAddItemToInventory(itemID, amount)){
+            if (inventory.TryAddItemToInventory(itemID, instanceID, amount)){
                 Log("- " + inventoryID + " has received " + itemID);
             }
             else{

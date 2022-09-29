@@ -30,7 +30,7 @@ public class PickupScript : Interactable
 
         // add item to inventory
         Inventory playerInv = InventoryManager.instance.GetInventory("player");
-        playerInv.TryAddItemToInventory(m_itemToAdd.id, amountToAdd);
+        playerInv.TryAddItemToInventory(m_itemToAdd.id, m_itemToAdd.instanceID, amountToAdd);
     }
 
     /// <summary>

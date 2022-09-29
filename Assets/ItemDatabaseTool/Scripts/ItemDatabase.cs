@@ -34,14 +34,14 @@ public class ItemDatabase
     /// <summary>
     /// Gets an item by its id.
     /// </summary>
-    /// <param name="id">The id of the item.</param>
+    /// <param name="_id">The id of the item.</param>
     /// <returns>The item with the given id.</returns>
-    public static Item GetItem(string id)
+    public static Item GetItem(string _id, string _instanceID = "")
     {
-        Item item = database.Find(x => x.id == id);
+        Item item = database.Find(x => x.id == _id && x.instanceID == _instanceID);
         if (item == null)
         {
-            Debug.LogWarning("Item with id " + id + " not found.");
+            Debug.LogWarning("Item with id " + _id + " not found.\nTry using an instance id too.");
         }
         return item;
     }
@@ -520,8 +520,17 @@ public class ItemDatabase
 
         //correct duplicate IDs
         for (int i = 0; i < database.Count; i++) {
+            // compare i to j, edit i if needed
             for (int j = 0; j < database.Count; j++) {
                 if (database[i].id == database[j].id && i != j) {
+                    //DUPE FOUND
+
+                    // if it has a unique instance id, it is an instance, so we can keep it
+                    if (database[i].instanceID != database[j].instanceID)
+                    {
+                        continue;
+                    }
+
                     //check if last char is a number
                     if (char.IsNumber(database[i].id[database[i].id.Length - 1])) {
                         //go backwards and count numbers

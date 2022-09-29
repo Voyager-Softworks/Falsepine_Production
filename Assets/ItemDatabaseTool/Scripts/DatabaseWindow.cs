@@ -282,7 +282,7 @@ public class DatabaseWindow : EditorWindow {
         GUILayout.BeginHorizontal();
         //begind disabled group
         EditorGUI.BeginDisabledGroup(_item == selected);
-        if (GUILayout.Button(_item.id))
+        if (GUILayout.Button(_item.id + (_item.instanceID != "" ? ":" + _item.instanceID : "")))
         {
             selected = _item;
             GUI.FocusControl(null);
