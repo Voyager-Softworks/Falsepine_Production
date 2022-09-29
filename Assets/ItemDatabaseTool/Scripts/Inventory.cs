@@ -64,7 +64,7 @@ public class Inventory : MonoBehaviour
                     return;
                 }
 
-                if (m_item.instanceID == "")
+                if (m_item.instanceID != "" && ItemDatabase.GetItemsByInstanceID(m_item.instanceID).Count > 0)
                 {
                     // if game is not running, return
                     //@todo add this check back in, remove to try create instances in editor

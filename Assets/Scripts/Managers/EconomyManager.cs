@@ -465,7 +465,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     private void OnValidate() {
         foreach (PurchasableItem purchasable in m_purchasableItems)
         {
-            if (purchasable.m_item?.instanceID == "")
+            if (purchasable.m_item != null && purchasable.m_item.instanceID != "" && ItemDatabase.GetItemsByInstanceID(purchasable.m_item.instanceID).Count > 0)
             {
                 // if game is not running, return
                 //@todo add this check back in, remove to try create instances in editor

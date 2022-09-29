@@ -55,6 +55,16 @@ public class ItemDatabase
     }
 
     /// <summary>
+    /// Gets list of items in the database by instance id.
+    /// </summary>
+    /// <param name="_instanceID"></param>
+    /// <returns></returns>
+    public static List<Item> GetItemsByInstanceID(string _instanceID)
+    {
+        return database.Where(x => x.instanceID.ToLower().Contains(_instanceID.ToLower())).ToList();
+    }
+
+    /// <summary>
     /// get list of items in the database by name
     /// </summary>
     public static List<Item> GetItemsByName(string _name)
@@ -90,7 +100,7 @@ public class ItemDatabase
     /// <summary>
     /// get list of items in the database using optional search parameters using OR logic
     /// </summary>
-    public static List<Item> GetItemsByORFilter(string _id = "", string _name = "", string _description = "", string _type_s = "", System.Type _type_t = null)
+    public static List<Item> GetItemsByORFilter(string _id = "", string _instanceID = "", string _name = "", string _description = "", string _type_s = "", System.Type _type_t = null)
     {
         List<Item> items = new List<Item>();
 
@@ -100,6 +110,13 @@ public class ItemDatabase
             anyFilter = true;
 
             items = items.Union(GetItemsById(_id)).ToList();
+        }
+
+        if (_instanceID != "")
+        {
+            anyFilter = true;
+
+            items = items.Union(GetItemsByInstanceID(_instanceID)).ToList();
         }
 
         if (_name != "")

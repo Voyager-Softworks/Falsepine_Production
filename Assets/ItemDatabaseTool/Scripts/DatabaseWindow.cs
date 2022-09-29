@@ -183,7 +183,7 @@ public class DatabaseWindow : EditorWindow {
         // if search text is not empty, show ID/Name matches
         if (searchText.Length > 0)
         {
-            items = ItemDatabase.GetItemsByORFilter(_id: searchText, _name: searchText);
+            items = ItemDatabase.GetItemsByORFilter(_id: searchText, _instanceID: searchText, _name: searchText);
             items = items.Except(displayedItems).ToList();
             // add to displayed items
             displayedItems = displayedItems.Union(items).ToList();
