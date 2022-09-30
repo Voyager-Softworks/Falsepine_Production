@@ -1054,7 +1054,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 77585.375
+  m_Intensity: 77585
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1138,7 +1138,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 77585.375
+  m_Intensity: 77585
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -7420,11 +7420,246 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2043769627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2043769629}
+  - component: {fileID: 2043769628}
+  - component: {fileID: 2043769630}
+  m_Layer: 0
+  m_Name: LightningController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2043769628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2043769627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4966ac21c8a6541d189a5d5eb4bc6f6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lightningPrefab: {fileID: 6375073780292368817, guid: 47614d26ee8f2f3ae99030c1f0e43755, type: 3}
+  spawnRadius: 30.3
+  spawnDelay: 2.5
+  spawnDelayJitter: 1.2
+  stormIntensityMultiplier: 0.047
+  isStormActive: 0
+  stormAmbienceController: {fileID: 2043769630}
+  stormVolume: {fileID: 2081207962}
+  stormLight: {fileID: 246689032}
+  clearLightIntensity: 77585
+  stormLightIntensity: 10000
+--- !u!4 &2043769629
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2043769627}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.3, y: 0.753, z: -33.16}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 36
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2043769630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2043769627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a119b25d52728621583e7f3194633c58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggers: []
+  audioChannels:
+  - name: Wind
+    volume: 1
+    pitch: 1
+    clip: {fileID: 8300000, guid: e9da572a406838e44a0953ba687b089c, type: 3}
+    loop: 1
+    playOnAwake: 1
+    SpatialBlend: 0
+    maxDistance: 300
+    minDistance: 1
+    distanceCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: -1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    source: {fileID: 0}
+    playing: 0
+    paused: 0
+    time: 0
+    timeNormalized: 0
+    duration: 0
+  - name: Rain
+    volume: 1
+    pitch: 1
+    clip: {fileID: 8300000, guid: ecec44699bfcca94eae216dfd156a724, type: 3}
+    loop: 1
+    playOnAwake: 1
+    SpatialBlend: 0
+    maxDistance: 300
+    minDistance: 1
+    distanceCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: -1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    source: {fileID: 0}
+    playing: 0
+    paused: 0
+    time: 0
+    timeNormalized: 0
+    duration: 0
+  - name: Storm
+    volume: 1
+    pitch: 1
+    clip: {fileID: 8300000, guid: 545a650ffaf7b0c4d85de58c688e3227, type: 3}
+    loop: 1
+    playOnAwake: 1
+    SpatialBlend: 0
+    maxDistance: 300
+    minDistance: 1
+    distanceCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: -1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    source: {fileID: 0}
+    playing: 0
+    paused: 0
+    time: 0
+    timeNormalized: 0
+    duration: 0
+  transitions: []
 --- !u!4 &2077174793 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8951985558967710219, guid: ab7211b08c326cc47a76d1cac24df5dd, type: 3}
   m_PrefabInstance: {fileID: 653724131}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2081207961
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2081207963}
+  - component: {fileID: 2081207962}
+  m_Layer: 0
+  m_Name: StormVolume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2081207962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2081207961}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlobal: 1
+  priority: 1
+  blendDistance: 0
+  weight: 0
+  sharedProfile: {fileID: 11400000, guid: c48c953bfe9c37e368bb4db3d47b48a3, type: 2}
+--- !u!4 &2081207963
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2081207961}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 27.78644, y: 22.551048, z: -11.279056}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 37
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2117121570
 PrefabInstance:
   m_ObjectHideFlags: 0
