@@ -27,6 +27,8 @@ public class LightningController : MonoBehaviour
     public float clearLightIntensity = 77585f;
     public float stormLightIntensity = 50000f;
 
+    public DecalProjector wetnessDecalProjector;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,8 +45,20 @@ public class LightningController : MonoBehaviour
         stormAmbienceController.audioChannels[1].volume = (Mathf.Clamp(stormIntensity, 0.33f, 0.66f) - 0.33f) * 3.0f;
         stormAmbienceController.audioChannels[2].volume = (Mathf.Clamp(stormIntensity, 0.66f, 1.0f) - 0.66f) * 3.0f;
 
+        if (stormIntensity > 0.33f)
+        {
+            wetnessDecalProjector.fadeFactor = Mathf.Max(wetnessDecalProjector.fadeFactor, (Mathf.Clamp(stormIntensity, 0.33f, 0.66f) - 0.33f) * 3.0f);
+        }
+        else
+        {
+            if (wetnessDecalProjector.fadeFactor > 0.0f)
+            {
+                wetnessDecalProjector.fadeFactor = Mathf.Max(0.0f, wetnessDecalProjector.fadeFactor - (Time.deltaTime * 0.05f));
+            }
+        }
 
-        if (stormIntensityMultiplier > 0.66f)
+
+        if (stormIntensity > 0.66f)
         {
             if (spawnTimer <= 0.0f)
             {
