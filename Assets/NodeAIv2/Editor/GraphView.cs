@@ -49,15 +49,15 @@ namespace NodeAI
             this.AddManipulator(new SelectionDragger());
             this.AddManipulator(new RectangleSelector());
             this.AddManipulator(new SelectionDropper());
-            
+
             RegisterCallback<MouseDownEvent>(HandleMouseDownEvents);
             RegisterCallback<MouseOverEvent>(HandleMouseOverEvent);
             RegisterCallback<MouseLeaveEvent>(HandleMouseLeaveEvent);
             RegisterCallback<DragPerformEvent>(HandleDragEndEvent);
-            
+
 
             var g = new Group();
-            
+
 
             var grid = new GridBackground();
             Insert(0, grid);
@@ -68,16 +68,16 @@ namespace NodeAI
             blackboardSearchWindow.Init(this);
             querySearchWindow = ScriptableObject.CreateInstance<QuerySearchWindow>();
             querySearchWindow.Init(this);
-            
+
         }
-    
+
         /// <summary>
         /// Add the search window
         /// </summary>
         /// <param name="position"></param>
         private void AddSearchWindow(Vector2 position)
         {
-            
+
             UnityEditor.Experimental.GraphView.SearchWindow.Open(new SearchWindowContext(position), searchWindow);
 
         }
@@ -206,7 +206,7 @@ namespace NodeAI
         /// <param name="e"></param>
         private void HandleDragEndEvent(DragPerformEvent e)
         {
-            
+
             if (selection.First() is BlackboardField)
             {
                 var pill = selection.First() as BlackboardField;
@@ -223,28 +223,28 @@ namespace NodeAI
         {
             if (e.button == 1)
             {
-                
-                    var menu = new GenericMenu();
-                    if(selection.OfType<Node>().Count() > 0)
-                    {
-                        menu.AddItem(new GUIContent("Delete"), false, RemoveSelectedNodes);
-                    }
-                    if(selection.OfType<Edge>().Count() > 0)
-                    {
-                        menu.AddItem(new GUIContent("Delete"), false, RemoveSelectedEdges);
-                    }
-                    if(selection.Count() > 1)
-                    {
-                        menu.AddItem(new GUIContent("Group"), false, GroupNodes);
-                        menu.AddItem(new GUIContent("Delete All"), false, RemoveSelectedNodes);
-                    }
-                    if(selection.OfType<Group>().Count() > 0)
-                    {
-                        menu.AddItem(new GUIContent("Ungroup"), false, UngroupNodes);
-                    }
-                    menu.AddItem(new GUIContent("Add Query Node"), false, () => UnityEditor.Experimental.GraphView.SearchWindow.Open(new SearchWindowContext(e.mousePosition), querySearchWindow));
-                    menu.ShowAsContext();
-                
+
+                var menu = new GenericMenu();
+                if (selection.OfType<Node>().Count() > 0)
+                {
+                    menu.AddItem(new GUIContent("Delete"), false, RemoveSelectedNodes);
+                }
+                if (selection.OfType<Edge>().Count() > 0)
+                {
+                    menu.AddItem(new GUIContent("Delete"), false, RemoveSelectedEdges);
+                }
+                if (selection.Count() > 1)
+                {
+                    menu.AddItem(new GUIContent("Group"), false, GroupNodes);
+                    menu.AddItem(new GUIContent("Delete All"), false, RemoveSelectedNodes);
+                }
+                if (selection.OfType<Group>().Count() > 0)
+                {
+                    menu.AddItem(new GUIContent("Ungroup"), false, UngroupNodes);
+                }
+                menu.AddItem(new GUIContent("Add Query Node"), false, () => UnityEditor.Experimental.GraphView.SearchWindow.Open(new SearchWindowContext(e.mousePosition), querySearchWindow));
+                menu.ShowAsContext();
+
             }
         }
 
@@ -261,10 +261,10 @@ namespace NodeAI
             }
             else
             {
-                if(currHoveredNode != null)
+                if (currHoveredNode != null)
                 {
                     currHoveredNode.mainContainer.style.backgroundColor = Color.clear;
-                    if(currHoveredNode.outputPort != null && currHoveredNode.outputPort.connections.Count() > 0)
+                    if (currHoveredNode.outputPort != null && currHoveredNode.outputPort.connections.Count() > 0)
                         currHoveredNode.outputPort.connections.ToList().ForEach(c => c.input.node.mainContainer.style.backgroundColor = Color.clear);
                 }
                 currHoveredNode = null;
@@ -277,7 +277,7 @@ namespace NodeAI
         /// <param name="e"></param>
         private void HandleMouseLeaveEvent(MouseLeaveEvent e)
         {
-            if(currHoveredNode == e.target)
+            if (currHoveredNode == e.target)
             {
                 currHoveredNode.mainContainer.style.backgroundColor = Color.clear;
                 currHoveredNode = null;
@@ -348,7 +348,7 @@ namespace NodeAI
             };
             node.SetPosition(new Rect(position, new Vector2(200, 50)));
             NodeData.Property[] properties = query.GetProperties().ToArray();
-            foreach(NodeData.Property p in properties)
+            foreach (NodeData.Property p in properties)
             {
                 AddPropertyField(node, p, query);
             }
@@ -383,13 +383,13 @@ namespace NodeAI
 
             Button btn_newChild = new Button(() =>
             {
-                if(entryPointNode.outputPort.Query("connection").ToList().Count > 1) return;
+                if (entryPointNode.outputPort.Query("connection").ToList().Count > 1) return;
                 AddSearchWindow(entryPointNode.outputPort.GetPosition().position);
-                
+
             });
             entryPointNode.titleContainer.Add(btn_newChild);
 
-            
+
 
             entryPointNode.RefreshExpandedState();
             entryPointNode.RefreshPorts();
@@ -411,7 +411,7 @@ namespace NodeAI
             Node newNode = GenerateNode(type, name, logic);
             newNode.tooltip = logic.tooltip;
             newNode.styleSheets.Add(Resources.Load<StyleSheet>("NodeStyle"));
-            switch(type)
+            switch (type)
             {
                 case NodeData.Type.EntryPoint:
                     newNode.titleContainer.style.fontSize = 20;
@@ -445,17 +445,17 @@ namespace NodeAI
                     newNode.titleContainer.style.color = Color.black;
                     newNode.titleContainer.style.backgroundColor = Color.magenta * 0.65f;
                     break;
-                
-                
-            
+
+
+
             }
             newNode.titleContainer.style.fontSize = 30;
             newNode.titleContainer.style.unityFontStyleAndWeight = FontStyle.Bold;
             AddElement(newNode);
-            if(parent.outputPort.connections.Count() > 0)
+            if (parent.outputPort.connections.Count() > 0)
             {
                 Node lowest = (Node)parent.outputPort.connections.OrderBy(x => x.input.node.GetPosition().y).Last().input.node;
-                newNode.SetPosition(new Rect(new Vector2(parent.GetPosition().x + parent.GetPosition().width + 50,(lowest.GetPosition().yMax + 10)), new Vector2(200, 200)));
+                newNode.SetPosition(new Rect(new Vector2(parent.GetPosition().x + parent.GetPosition().width + 50, (lowest.GetPosition().yMax + 10)), new Vector2(200, 200)));
             }
             else
             {
@@ -469,7 +469,7 @@ namespace NodeAI
             newNode.RefreshPorts();
 
             return newNode;
-            
+
         }
 
         /// <summary>
@@ -480,13 +480,13 @@ namespace NodeAI
         public Node GenerateNode(NodeData data)
         {
             Node newNode = new Node();
-            if(data.nodeType == NodeData.Type.Parameter || data.nodeType == NodeData.Type.Query)
+            if (data.nodeType == NodeData.Type.Parameter || data.nodeType == NodeData.Type.Query)
                 newNode.title = data.title;
             else
                 newNode.title = data.runtimeLogic.GetType().Name;
             newNode.GUID = data.GUID;
             newNode.nodeType = data.nodeType;
-            if(!data.noLogic) newNode.tooltip = data.runtimeLogic.tooltip;
+            if (!data.noLogic) newNode.tooltip = data.runtimeLogic.tooltip;
             newNode.SetPosition(new Rect(data.position, new Vector2(1000, 200)));
             newNode.styleSheets.Add(Resources.Load<StyleSheet>("NodeStyle"));
             switch (data.nodeType)
@@ -494,12 +494,12 @@ namespace NodeAI
                 case NodeData.Type.Action:
                     newNode.inputPort = GeneratePort(newNode, Direction.Input);
                     newNode.inputPort.portName = "";
-                    
+
                     break;
                 case NodeData.Type.Condition:
                     newNode.inputPort = GeneratePort(newNode, Direction.Input);
                     newNode.inputPort.portName = "";
-                    
+
                     break;
                 case NodeData.Type.Decorator:
                     newNode.inputPort = GeneratePort(newNode, Direction.Input);
@@ -526,7 +526,7 @@ namespace NodeAI
                     newNode.outputPort.portName = "";
                     break;
                 case NodeData.Type.EntryPoint:
-                    newNode.outputPort = GeneratePort(newNode, Direction.Output );
+                    newNode.outputPort = GeneratePort(newNode, Direction.Output);
                     newNode.outputPort.portName = "";
                     break;
                 case NodeData.Type.Parameter:
@@ -534,18 +534,18 @@ namespace NodeAI
                     newNode.outputPort.portName = "Output";
                     newNode.outputPort.portType = exposedProperties.Find(x => x.GUID == data.parentGUID).type;
                     break;
-                
+
 
             }
 
-            if(newNode.inputPort != null)
+            if (newNode.inputPort != null)
                 newNode.inputPort.portColor = Color.magenta;
-                newNode.inputContainer.Add(newNode.inputPort);
-            if(newNode.outputPort != null)
+            newNode.inputContainer.Add(newNode.inputPort);
+            if (newNode.outputPort != null)
                 newNode.outputPort.portColor = newNode.nodeType == NodeData.Type.Parameter ? Color.green : Color.magenta;
-                newNode.outputContainer.Add(newNode.outputPort);
+            newNode.outputContainer.Add(newNode.outputPort);
 
-            switch(data.nodeType)
+            switch (data.nodeType)
             {
                 case NodeData.Type.EntryPoint:
                     newNode.titleContainer.style.color = Color.black;
@@ -583,31 +583,31 @@ namespace NodeAI
                     newNode.titleContainer.style.color = Color.black;
                     newNode.titleContainer.style.backgroundColor = Color.magenta * 0.65f;
                     break;
-                
-                
-            
+
+
+
             }
             newNode.titleContainer.style.fontSize = 30;
             newNode.titleContainer.style.unityFontStyleAndWeight = FontStyle.Bold;
             newNode.runtimeLogic = data.runtimeLogic;
             newNode.query = data.query;
-            if(newNode.runtimeLogic != null)
+            if (newNode.runtimeLogic != null)
             {
                 NodeData.Property[] properties = newNode.runtimeLogic.GetProperties().ToArray();
-                foreach(NodeData.Property p in properties)
+                foreach (NodeData.Property p in properties)
                 {
                     AddPropertyField(newNode, p, newNode.runtimeLogic);
                 }
             }
-            if(newNode.query != null)
+            if (newNode.query != null)
             {
                 NodeData.Property[] properties = newNode.query.GetProperties().ToArray();
-                foreach(NodeData.Property p in properties)
+                foreach (NodeData.Property p in properties)
                 {
                     AddPropertyField(newNode, p, newNode.query);
                 }
             }
-            if(!(newNode.nodeType == NodeData.Type.Action || newNode.nodeType == NodeData.Type.Condition || newNode.nodeType == NodeData.Type.Parameter || newNode.nodeType == NodeData.Type.Query))
+            if (!(newNode.nodeType == NodeData.Type.Action || newNode.nodeType == NodeData.Type.Condition || newNode.nodeType == NodeData.Type.Parameter || newNode.nodeType == NodeData.Type.Query))
             {
                 Button btn_newChild = new Button(() =>
                 {
@@ -620,7 +620,7 @@ namespace NodeAI
                 };
                 newNode.titleContainer.Add(btn_newChild);
             }
-            
+
             newNode.RefreshExpandedState();
             newNode.RefreshPorts();
 
@@ -715,11 +715,11 @@ namespace NodeAI
                     }
                     break;
             }
-            if(node.inputPort != null)
+            if (node.inputPort != null)
                 node.inputPort.portColor = Color.magenta;
-            if(node.outputPort != null)
+            if (node.outputPort != null)
                 node.outputPort.portColor = node.nodeType == NodeData.Type.Parameter ? Color.green : Color.magenta;
-            if(!(node.nodeType == NodeData.Type.Action || node.nodeType == NodeData.Type.Condition))
+            if (!(node.nodeType == NodeData.Type.Action || node.nodeType == NodeData.Type.Condition))
             {
                 Button btn_newChild = new Button(() =>
                 {
@@ -733,7 +733,7 @@ namespace NodeAI
                 node.titleContainer.Add(btn_newChild);
             }
             NodeData.Property[] properties = logic.GetProperties().ToArray();
-            foreach(NodeData.Property p in properties)
+            foreach (NodeData.Property p in properties)
             {
                 AddPropertyField(node, p, logic);
             }
@@ -744,6 +744,8 @@ namespace NodeAI
 
             return node;
         }
+
+
 
         /// <summary>
         /// Adds a Property Field to a Node
@@ -759,7 +761,7 @@ namespace NodeAI
             newPort.portColor = Color.green;
             Node paramNode = nodes.ToList().ConvertAll(x => x as Node).Find(x => x.GUID == property.GUID && x.nodeType == NodeData.Type.Parameter);
             Node queryNode = nodes.ToList().ConvertAll(x => x as Node).Find(x => x.nodeType == NodeData.Type.Query && x.query.GetProperties().Find(y => y.GUID == property.paramReference) != null);
-            if(property.type == typeof(bool))
+            if (property.type == typeof(bool))
             {
                 var boolField = new Toggle
                 {
@@ -773,7 +775,7 @@ namespace NodeAI
                 });
                 newPort.contentContainer.Add(boolField);
             }
-            else if(property.type == typeof(int))
+            else if (property.type == typeof(int))
             {
                 var intField = new IntegerField
                 {
@@ -787,7 +789,7 @@ namespace NodeAI
                 });
                 newPort.contentContainer.Add(intField);
             }
-            else if(property.type == typeof(float))
+            else if (property.type == typeof(float))
             {
                 var floatField = new FloatField
                 {
@@ -801,7 +803,7 @@ namespace NodeAI
                 });
                 newPort.contentContainer.Add(floatField);
             }
-            else if(property.type == typeof(string))
+            else if (property.type == typeof(string))
             {
                 var textField = new TextField
                 {
@@ -815,7 +817,7 @@ namespace NodeAI
                 });
                 newPort.contentContainer.Add(textField);
             }
-            else if(property.type == typeof(Vector2))
+            else if (property.type == typeof(Vector2))
             {
                 var vectorField = new Vector2Field
                 {
@@ -828,12 +830,12 @@ namespace NodeAI
                     logic.SetProperty<Vector2>(property.name, vectorField.value);
                 });
                 node.style.minWidth = 250;
-                
+
                 vectorField.style.width = 50;
                 vectorField.style.overflow = Overflow.Visible;
                 newPort.contentContainer.Add(vectorField);
             }
-            else if(property.type == typeof(Vector3))
+            else if (property.type == typeof(Vector3))
             {
                 var vectorField = new Vector3Field
                 {
@@ -846,13 +848,13 @@ namespace NodeAI
                     logic.SetProperty<Vector3>(property.name, vectorField.value);
                 });
                 node.style.minWidth = 250;
-                
+
                 vectorField.style.width = 50;
                 vectorField.style.overflow = Overflow.Visible;
-                
+
                 newPort.contentContainer.Add(vectorField);
             }
-            else if(property.type == typeof(Vector4))
+            else if (property.type == typeof(Vector4))
             {
                 var vectorField = new Vector4Field
                 {
@@ -865,12 +867,12 @@ namespace NodeAI
                     logic.SetProperty<Vector4>(property.name, vectorField.value);
                 });
                 node.style.minWidth = 300;
-                
+
                 vectorField.style.width = 50;
                 vectorField.style.overflow = Overflow.Visible;
                 newPort.contentContainer.Add(vectorField);
             }
-            else if(property.type == typeof(Color))
+            else if (property.type == typeof(Color))
             {
                 var colorField = new ColorField
                 {
@@ -898,33 +900,33 @@ namespace NodeAI
                     (property).ovalue = objField.value;
                     logic.SetProperty(property.name, objField.value, property.type);
                 });
-                
+
                 objField.style.maxWidth = 150;
                 newPort.contentContainer.Add(objField);
                 objField.allowSceneObjects = false;
-                
 
-                
+
+
             }
             node.inputContainer.Add(newPort);
             node.inputPorts.Add(newPort);
-            if(paramNode != null)
+            if (paramNode != null)
             {
                 var newEdge = paramNode.outputPort.ConnectTo(newPort);
                 AddElement(newEdge);
 
             }
-            else if(queryNode != null)
+            else if (queryNode != null)
             {
                 //var newEdge = queryNode.outputPorts[queryNode.query.GetProperties().FindIndex(x => x.GUID == property.paramReference)].ConnectTo(newPort);
-                
+
                 var ports = queryNode.outputPorts.Where(x => x.portName == queryNode.query.GetProperties().Find(y => y.GUID == property.paramReference).name).ToList();
-                if(ports.Count > 0)
+                if (ports.Count > 0)
                 {
                     var newEdge = ports[0].ConnectTo(newPort);
                     AddElement(newEdge);
                 }
-                
+
 
             }
         }
@@ -937,15 +939,15 @@ namespace NodeAI
         /// <param name="query"></param>
         void AddPropertyField(Node node, NodeData.SerializableProperty property, Query query)
         {
-            var newPort = GeneratePort(node,property.output ? Direction.Output : Direction.Input, property.output ? Port.Capacity.Multi : Port.Capacity.Single);
+            var newPort = GeneratePort(node, property.output ? Direction.Output : Direction.Input, property.output ? Port.Capacity.Multi : Port.Capacity.Single);
             newPort.portName = property.name;
             newPort.portType = property.type;
             newPort.portColor = Color.green;
             Node paramNode = nodes.ToList().ConvertAll(x => x as Node).Find(x => x.GUID == property.GUID);
             Node queryNode = nodes.ToList().ConvertAll(x => x as Node).Find(x => x.nodeType == NodeData.Type.Query && x.query.GetProperties().Find(y => y.GUID == property.paramReference) != null);
-            if(!property.output)
+            if (!property.output)
             {
-                if(property.type == typeof(bool))
+                if (property.type == typeof(bool))
                 {
                     var boolField = new Toggle
                     {
@@ -959,7 +961,7 @@ namespace NodeAI
                     });
                     newPort.contentContainer.Add(boolField);
                 }
-                else if(property.type == typeof(int))
+                else if (property.type == typeof(int))
                 {
                     var intField = new IntegerField
                     {
@@ -973,7 +975,7 @@ namespace NodeAI
                     });
                     newPort.contentContainer.Add(intField);
                 }
-                else if(property.type == typeof(float))
+                else if (property.type == typeof(float))
                 {
                     var floatField = new FloatField
                     {
@@ -987,7 +989,7 @@ namespace NodeAI
                     });
                     newPort.contentContainer.Add(floatField);
                 }
-                else if(property.type == typeof(string))
+                else if (property.type == typeof(string))
                 {
                     var textField = new TextField
                     {
@@ -1001,7 +1003,7 @@ namespace NodeAI
                     });
                     newPort.contentContainer.Add(textField);
                 }
-                else if(property.type == typeof(Vector2))
+                else if (property.type == typeof(Vector2))
                 {
                     var vectorField = new Vector2Field
                     {
@@ -1014,12 +1016,12 @@ namespace NodeAI
                         query.SetProperty<Vector2>(property.name, vectorField.value);
                     });
                     node.style.minWidth = 250;
-                    
+
                     vectorField.style.width = 50;
                     vectorField.style.overflow = Overflow.Visible;
                     newPort.contentContainer.Add(vectorField);
                 }
-                else if(property.type == typeof(Vector3))
+                else if (property.type == typeof(Vector3))
                 {
                     var vectorField = new Vector3Field
                     {
@@ -1032,13 +1034,13 @@ namespace NodeAI
                         query.SetProperty<Vector3>(property.name, vectorField.value);
                     });
                     node.style.minWidth = 250;
-                    
+
                     vectorField.style.width = 50;
                     vectorField.style.overflow = Overflow.Visible;
-                    
+
                     newPort.contentContainer.Add(vectorField);
                 }
-                else if(property.type == typeof(Vector4))
+                else if (property.type == typeof(Vector4))
                 {
                     var vectorField = new Vector4Field
                     {
@@ -1051,12 +1053,12 @@ namespace NodeAI
                         query.SetProperty<Vector4>(property.name, vectorField.value);
                     });
                     node.style.minWidth = 300;
-                    
+
                     vectorField.style.width = 50;
                     vectorField.style.overflow = Overflow.Visible;
                     newPort.contentContainer.Add(vectorField);
                 }
-                else if(property.type == typeof(Color))
+                else if (property.type == typeof(Color))
                 {
                     var colorField = new ColorField
                     {
@@ -1084,7 +1086,7 @@ namespace NodeAI
                         (property).ovalue = objField.value;
                         query.SetProperty(property.name, objField.value, property.type);
                     });
-                    
+
                     objField.style.maxWidth = 150;
                     newPort.contentContainer.Add(objField);
                     objField.allowSceneObjects = false;
@@ -1097,13 +1099,13 @@ namespace NodeAI
                 node.outputContainer.Add(newPort);
                 node.outputPorts.Add(newPort);
             }
-            if(paramNode != null && paramNode.outputPort != null && paramNode.nodeType == NodeData.Type.Parameter)
+            if (paramNode != null && paramNode.outputPort != null && paramNode.nodeType == NodeData.Type.Parameter)
             {
                 var newEdge = paramNode.outputPort.ConnectTo(newPort);
                 AddElement(newEdge);
 
             }
-            else if(queryNode != null)
+            else if (queryNode != null)
             {
                 // int index = queryNode.query.GetProperties().FindIndex(x => x.GUID == property.paramReference);
                 // if(index == -1) return;
@@ -1125,7 +1127,7 @@ namespace NodeAI
 
             ports.ForEach(port =>
             {
-                if (startPort!=port && startPort.node!=port.node && port.portType == startPort.portType && port.direction != startPort.direction)
+                if (startPort != port && startPort.node != port.node && port.portType == startPort.portType && port.direction != startPort.direction)
                 {
                     compatiblePorts.Add(port);
                 }
@@ -1140,7 +1142,7 @@ namespace NodeAI
         /// <param name="exposedProperty"></param>
         public void AddPropertyToBlackboard(NodeData.Property exposedProperty)
         {
-            if(exposedProperties == null)
+            if (exposedProperties == null)
             {
                 exposedProperties = new List<NodeData.Property>();
             }
@@ -1157,7 +1159,7 @@ namespace NodeAI
             exposedProperties.Add(p);
 
             var container = new VisualElement();
-            var blackboardField = new BlackboardField{ text = p.name, typeText = p.type.Name };
+            var blackboardField = new BlackboardField { text = p.name, typeText = p.type.Name };
 
             var delButton = new Button(() =>
             {
@@ -1184,11 +1186,11 @@ namespace NodeAI
                 text = "X"
             };
             blackboardField.Add(delButton);
-            
+
             container.Add(blackboardField);
-            
-            
-            
+
+
+
             //container.Add(newButton);
             blackboard.Add(container);
 

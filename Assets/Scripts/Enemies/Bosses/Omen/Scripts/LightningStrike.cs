@@ -13,6 +13,7 @@ public class LightningStrike : MonoBehaviour
     float delayTimer = 0.0f;
     float durationTimer = 0.0f;
     public DecalProjector decalProjector;
+    public DecalProjector scorchMarkProjector;
     Vector3 decalSizeInitial;
     Vector3 decalSizeFinal;
     bool hasDamaged = false;
@@ -23,6 +24,7 @@ public class LightningStrike : MonoBehaviour
         decalSizeInitial = new Vector3(0.0f, 0.0f, 2.0f);
         decalSizeFinal = new Vector3(damageRadius * 2, damageRadius * 2, 2.0f);
         decalProjector.size = decalSizeInitial;
+        scorchMarkProjector.enabled = false;
     }
 
     // Update is called once per frame
@@ -36,6 +38,7 @@ public class LightningStrike : MonoBehaviour
         else
         {
             decalProjector.enabled = false;
+            scorchMarkProjector.enabled = true;
             if (durationTimer < lightningDuration)
             {
                 durationTimer += Time.deltaTime;
@@ -55,7 +58,9 @@ public class LightningStrike : MonoBehaviour
             }
             else
             {
-                Destroy(gameObject, 3f);
+                scorchMarkProjector.fadeFactor = Mathf.Max(0.0f, scorchMarkProjector.fadeFactor - (Time.deltaTime * 0.05f));
+                Destroy(gameObject, 20f);
+
             }
         }
     }
