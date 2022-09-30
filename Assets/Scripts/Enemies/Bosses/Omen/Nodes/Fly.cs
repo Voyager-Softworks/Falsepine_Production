@@ -9,7 +9,9 @@ namespace Boss.Omen
     {
         RootMotionFlight flight; ///< The flight script.
         Animator animator; ///< The animator.
-
+        float flyStopDuration = 3f;
+        float flyStopTimer = 0.0f; ///< The timer for when to stop flying.
+        bool reachedDestination = false; ///< Whether the boss has reached its destination.
         bool init = false; ///< Whether or not the node has been initialized.
 
         public Fly()
@@ -54,21 +56,37 @@ namespace Boss.Omen
             float angularSpeed = GetProperty<float>("AngularSpeed");
             float acceleration = GetProperty<float>("Acceleration");
             float stoppingDistance = GetProperty<float>("StoppingDistance");
-
-            flight.SetDestination(destination);
-            flight.speed = speed;
-            flight.angularSpeed = angularSpeed;
-            flight.acceleration = acceleration;
-            flight.stoppingDistance = stoppingDistance;
-
-            if (Vector3.Distance(agent.transform.position, destination) <= stoppingDistance)
+            if (!reachedDestination)
             {
-                animator.SetTrigger("Hover");
-                state = NodeData.State.Success;
+                flight.SetDestination(destination);
+                flight.speed = speed;
+                flight.angularSpeed = angularSpeed;
+                flight.acceleration = acceleration;
+                flight.stoppingDistance = stoppingDistance;
+
+                if (Vector3.Distance(agent.transform.position, destination) <= stoppingDistance)
+                {
+                    animator.SetTrigger("Hover");
+                    reachedDestination = true;
+                    state = NodeData.State.Running;
+                }
+                else
+                {
+                    state = NodeData.State.Running;
+                }
             }
             else
             {
-                state = NodeData.State.Running;
+                if (flyStopTimer < flyStopDuration)
+                {
+                    flyStopTimer += Time.deltaTime;
+                    agent.transform.position = Vector3.Lerp(agent.transform.position, destination, flyStopTimer / flyStopDuration);
+                    state = NodeData.State.Running;
+                }
+                else
+                {
+                    state = NodeData.State.Success;
+                }
             }
             return state;
         }
@@ -76,6 +94,8 @@ namespace Boss.Omen
         public override void OnInit()
         {
             init = false;
+            reachedDestination = false;
+            flyStopTimer = 0.0f;
         }
 
     }
