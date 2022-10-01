@@ -4213,7 +4213,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 39
+  m_RootOrder: 40
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1034223436
 GameObject:
@@ -4561,6 +4561,10 @@ PrefabInstance:
     - target: {fileID: 1306030580, guid: 1be6a7b4e5283a9429d3f5c417270fbe, type: 3}
       propertyPath: m_fontColor.a
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1600409188372084212, guid: 1be6a7b4e5283a9429d3f5c417270fbe, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1984589356094766163, guid: 1be6a7b4e5283a9429d3f5c417270fbe, type: 3}
       propertyPath: m_AnchorMax.y
@@ -7579,10 +7583,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4966ac21c8a6541d189a5d5eb4bc6f6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bossEnemyHealth: {fileID: 919132149054763629}
   lightningPrefab: {fileID: 6375073780292368817, guid: 47614d26ee8f2f3ae99030c1f0e43755, type: 3}
-  spawnRadius: 30.3
-  spawnDelay: 2.5
-  spawnDelayJitter: 1.2
+  spawnRadius: 23.43
+  spawnDelay: 3
+  spawnDelayJitter: 0.7
   stormIntensityMultiplier: 0.047
   isStormActive: 0
   stormAmbienceController: {fileID: 2043769630}
@@ -7599,7 +7604,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2043769627}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3, y: 0.753, z: -33.16}
+  m_LocalPosition: {x: 0.3, y: 0.753, z: -22.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8575,7 +8580,7 @@ MonoBehaviour:
   m_monsterType: {fileID: 0}
   m_bloodEffect: {fileID: 0}
   m_silverReward: 3
-  m_endScreenOnDeath: 1
+  m_endScreenOnDeath: 0
   m_indicator: {fileID: 0}
   m_linkedMission: {fileID: 0}
 --- !u!114 &919132149054763630

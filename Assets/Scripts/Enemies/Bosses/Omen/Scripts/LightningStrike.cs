@@ -21,8 +21,8 @@ public class LightningStrike : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        decalSizeInitial = new Vector3(0.0f, 0.0f, 2.0f);
-        decalSizeFinal = new Vector3(damageRadius * 2, damageRadius * 2, 2.0f);
+        decalSizeInitial = new Vector3(0.0f, 0.0f, 6.0f);
+        decalSizeFinal = new Vector3(damageRadius * 2, damageRadius * 2, 6.0f);
         decalProjector.size = decalSizeInitial;
         scorchMarkProjector.enabled = false;
     }

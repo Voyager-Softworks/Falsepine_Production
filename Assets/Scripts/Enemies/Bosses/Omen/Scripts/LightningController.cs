@@ -6,6 +6,7 @@ using UnityEngine.Rendering.HighDefinition;
 
 public class LightningController : MonoBehaviour
 {
+    public BossEnemyHealth bossEnemyHealth;
     public GameObject lightningPrefab;
 
     public float spawnRadius = 10.0f;
@@ -37,6 +38,11 @@ public class LightningController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (bossEnemyHealth.m_currentHealth > 1.0f)
+            stormIntensityMultiplier = 1f - (bossEnemyHealth.m_currentHealth / bossEnemyHealth.m_maxHealth);
+        else
+            stormIntensityMultiplier = 0f;
+
         stormIntensity = Mathf.Lerp(stormIntensity, stormIntensityMultiplier, Time.deltaTime / 2.0f);
         stormLight.intensity = Mathf.Lerp(clearLightIntensity, stormLightIntensity, stormIntensity * 2.0f);
         stormVolume.weight = Mathf.Clamp(stormIntensity * 1.5f, 0.0f, 1.0f);
@@ -65,7 +71,7 @@ public class LightningController : MonoBehaviour
                 Vector3 spawnPosition = transform.position + Random.insideUnitSphere * spawnRadius;
                 spawnPosition.y = transform.position.y;
                 GameObject lightningStrike = Instantiate(lightningPrefab, spawnPosition, Quaternion.identity);
-                spawnTimer = (spawnDelay + Random.Range(-spawnDelayJitter, spawnDelayJitter)) * (1.0f - (Mathf.Clamp(stormIntensity, 0.66f, 1.0f) - 0.66f));
+                spawnTimer = (spawnDelay + Random.Range(-spawnDelayJitter, spawnDelayJitter)) * (1.0f - ((Mathf.Clamp(stormIntensity, 0.66f, 1.0f) - 0.66f) * 2f));
             }
             else
             {
