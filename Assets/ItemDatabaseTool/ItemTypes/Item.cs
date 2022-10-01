@@ -577,7 +577,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
             if (GUILayout.Button(new GUIContent("Load Data", "Loads data from file"), GUILayout.Width(120)))
             {
                 // ask user for file
-                string path = EditorUtility.OpenFilePanel("Load Item", Application.dataPath + "/Resources/Items/", "asset");
+                string path = EditorUtility.OpenFilePanel("Load Item", Application.dataPath + "/Resources/Items/", "json");
                 if (path.Length != 0)
                 {
                     LoadDataFromFile(item, path);
