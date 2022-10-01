@@ -91,44 +91,45 @@ namespace Boss.Omen
                         );
                 }
 
-            }
-            if (durationTimer < GetProperty<float>("Attack Duration"))
-            {
-                durationTimer += deltaTime;
-                if (!hasDamaged || GetProperty<bool>("Continuous"))
+            
+                if (durationTimer < GetProperty<float>("Attack Duration"))
                 {
-                    if (tickTimer < GetProperty<float>("Tick Rate"))
+                    durationTimer += deltaTime;
+                    if (!hasDamaged || GetProperty<bool>("Continuous"))
                     {
-                        tickTimer += deltaTime;
-                    }
-                    else
-                    {
-                        // Check for the player in a spherecast in the up direction of the bone
-                        RaycastHit hit;
-                        Vector3 breathDir = GetProperty<Transform>("Mouth Bone").up;
-                        breathDir.y = 0.0f;
-                        if (Physics.SphereCast(GetProperty<Transform>("Mouth Bone").position, 2.0f, GetProperty<bool>("Continuous") ? breathDir : agent.transform.forward, out hit, 100.0f))
+                        if (tickTimer < GetProperty<float>("Tick Rate"))
                         {
-                            if (hit.collider.gameObject.tag == "Player")
-                            {
-                                hit.collider.gameObject.GetComponent<PlayerHealth>().TakeDamage(GetProperty<float>("Attack Damage"));
-                                hasDamaged = true;
-                            }
+                            tickTimer += deltaTime;
                         }
-                        tickTimer = 0.0f;
+                        else
+                        {
+                            // Check for the player in a spherecast in the up direction of the bone
+                            RaycastHit hit;
+                            Vector3 breathDir = GetProperty<Transform>("Mouth Bone").up;
+                            breathDir.y = 0.0f;
+                            if (Physics.SphereCast(GetProperty<Transform>("Mouth Bone").position, 2.0f, GetProperty<bool>("Continuous") ? breathDir : agent.transform.forward, out hit, 100.0f))
+                            {
+                                if (hit.collider.gameObject.tag == "Player")
+                                {
+                                    hit.collider.gameObject.GetComponent<PlayerHealth>().TakeDamage(GetProperty<float>("Attack Damage"));
+                                    hasDamaged = true;
+                                }
+                            }
+                            tickTimer = 0.0f;
+                        }
                     }
+                    state = NodeData.State.Running;
+                    return NodeData.State.Running;
                 }
-                state = NodeData.State.Running;
-                return NodeData.State.Running;
-            }
-            else
-            {
+                else
+                {
 
-                GameObject.Destroy(sfx, 5f);
-                sfx = null;
+                    GameObject.Destroy(sfx, 5f);
+                    sfx = null;
 
-                state = NodeData.State.Success;
-                return NodeData.State.Success;
+                    state = NodeData.State.Success;
+                    return NodeData.State.Success;
+                }
             }
         }
         public override void OnInit()
