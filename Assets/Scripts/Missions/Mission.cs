@@ -16,10 +16,19 @@ using UnityEditor;
 [Serializable]
 public class Mission : ScriptableObject
 {
+    [Serializable]
+    public enum Difficulty
+    {
+        Easy,
+        Medium,
+        Hard
+    }
+
     [SerializeField] public string m_title;
 
     [TextArea(4, 10)]
     [SerializeField] public string m_description;
+    [SerializeField] public Difficulty m_difficulty;
 
     [SerializeReference] public List<MissionCondition> m_conditions = new List<MissionCondition>();
 
@@ -206,6 +215,7 @@ public class Mission : ScriptableObject
     {
         [SerializeField] public string m_title;
         [SerializeField] public string m_description;
+        [SerializeField] public Difficulty m_difficulty;
         [SerializeReference] public List<MissionCondition> m_conditions = new List<MissionCondition>();
 
         public Serializable_Mission(Mission _mission)
@@ -216,6 +226,7 @@ public class Mission : ScriptableObject
             }
             m_title = _mission.m_title;
             m_description = _mission.m_description;
+            m_difficulty = _mission.m_difficulty;
             m_conditions = new List<MissionCondition>();
             foreach (MissionCondition condition in _mission.m_conditions)
             {
@@ -228,6 +239,7 @@ public class Mission : ScriptableObject
             Mission m = new Mission();
             m.m_title = m_title;
             m.m_description = m_description;
+            m.m_difficulty = m_difficulty;
             m.m_conditions = new List<MissionCondition>();
             foreach (MissionCondition condition in m_conditions)
             {
