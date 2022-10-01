@@ -51,9 +51,9 @@ public class StatsManager : MonoBehaviour
         public static StatType ExplosiveDamage { get { return new StatType("ExplosiveDamage"); } }
         public static StatType TrapDamage { get { return new StatType("TrapDamage"); } }
         public static StatType EnemyDamage { get { return new StatType("EnemyDamage"); } }
+        public static StatType MeleeDamage { get { return new StatType("MeleeDamage"); } }
 
         // Economy
-        public static StatType StoreCost { get { return new StatType("StoreCost"); } }
         public static StatType ItemCost { get { return new StatType("ItemCost"); } }
 
         public static String DisplayName(StatType type)
@@ -69,6 +69,29 @@ public class StatsManager : MonoBehaviour
                 displayName += c;
             }
             return displayName;
+        }
+
+        public static StatType GetStatType(string _value){
+            // // get all static methods of the StatType class
+            // MethodInfo[] methods = typeof(StatType).GetMethods(BindingFlags.Public | BindingFlags.Static);
+            // //remove any which arent of type StatType
+            // methods = methods.Where(f => f.ReturnType == typeof(StatType)).ToArray();
+            // // sort alphabetically
+            // methods = methods.OrderBy(f => ((StatType)f.Invoke(null, null)).value).ToArray();
+
+            // // loop through all methods
+            // foreach (MethodInfo method in methods)
+            // {
+            //     // get the value of the method
+            //     StatType type = (StatType)method.Invoke(null, null);
+            //     // if the value matches the one we are looking for, return it
+            //     if (type.value == _value)
+            //     {
+            //         return type;
+            //     }
+            // }
+            // // if we get here, the type was not found
+            // return null;
         }
 
         // equality == override
@@ -350,6 +373,7 @@ public class StatsManager : MonoBehaviour
             StatType.ExplosiveDamage,
             StatType.TrapDamage,
             StatType.EnemyDamage,
+            StatType.MeleeDamage,
         };
 
         float additiveVal = 0.0f;
@@ -387,7 +411,6 @@ public class StatsManager : MonoBehaviour
     {
         // list of stats to use in this function
         List<StatType> usedStatTypes = new List<StatType>(){
-            StatType.StoreCost,
             StatType.ItemCost,
         };
 

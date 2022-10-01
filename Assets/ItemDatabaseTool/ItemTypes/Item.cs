@@ -138,13 +138,23 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
     {
         return m_usedStatTypes;
     }
+    /// <summary>
+    /// Adds a stat type to the list of used stat types if it isn't already in the list.
+    /// </summary>
+    /// <param name="statType"></param>
     public void AddStatType(StatsManager.StatType statType)
     {
+        if (statType == null) return;
+
         if (!m_usedStatTypes.Contains(statType))
         {
             m_usedStatTypes.Add(statType);
         }
     }
+    /// <summary>
+    /// Removes a stat type from the list of used stat types if it is in the list.
+    /// </summary>
+    /// <param name="statType"></param>
     public void RemoveStatType(StatsManager.StatType statType)
     {
         if (m_usedStatTypes.Contains(statType))
@@ -729,12 +739,46 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
             GUILayout.BeginVertical("box");
             // bold text
             GUILayout.Label("Stats", CustomEditorStuff.center_bold_label);
+
             bool needToSave = false;
             StatsManager.StatTypeListDropdown(item, out needToSave);
             if (needToSave)
             {
                 EditorUtility.SetDirty(this);
             }
+
+            // copy paste buttons
+            //horiz
+            GUILayout.BeginHorizontal();
+            //flex space
+            GUILayout.FlexibleSpace();
+            if (GUILayout.Button(new GUIContent("Copy Stats To Clipboard", "Copies the stats to the clipboard"), GUILayout.MaxWidth(200)))
+            {
+                string stats = "";
+                foreach (StatsManager.StatType stat in item.m_usedStatTypes)
+                {
+                    stats += stat.value + "\n";
+                }
+                EditorGUIUtility.systemCopyBuffer = stats;
+            }
+            if (GUILayout.Button(new GUIContent("Paste Stats From Clipboard", "Pastes the stats from the clipboard"), GUILayout.MaxWidth(200)))
+            {
+                string[] stats = EditorGUIUtility.systemCopyBuffer.Split('\n');
+                for (int i = 0; i < stats.Length; i++)
+                {
+                    if (i < item.m_usedStatTypes.Count)
+                    {
+                        //item.AddStatType(StatsManager.StatType.GetStatType(stats[i]));
+                    }
+                }
+                EditorUtility.SetDirty(this);
+            }
+
+            //flex space
+            GUILayout.FlexibleSpace();
+            //end horiz
+            GUILayout.EndHorizontal();
+
 
             // space
             GUILayout.Space(10);
