@@ -41,6 +41,14 @@ public class ExplodeOnDeath : MonoBehaviour
             {
                 collider.gameObject.GetComponentInParent<Health_Base>().TakeDamage(new Health_Base.DamageStat(damage: m_damage, sourceObject: gameObject, origin: transform.position, hitPoint: collider.transform.position, m_statsProfile));
             }
+            else if (collider.gameObject.GetComponentInChildren<PlayerHealth>() != null)
+            {
+                collider.gameObject.GetComponentInChildren<PlayerHealth>().TakeDamage(m_damage);
+            }
+            else if (collider.gameObject.GetComponentInParent<PlayerHealth>() != null)
+            {
+                collider.gameObject.GetComponentInParent<PlayerHealth>().TakeDamage(m_damage);
+            }
         }
         FindObjectOfType<ScreenshakeManager>().AddShakeImpulse(m_screenshakeDuration, m_screenshakeAmplitude, m_screenshakeFrequency);
 

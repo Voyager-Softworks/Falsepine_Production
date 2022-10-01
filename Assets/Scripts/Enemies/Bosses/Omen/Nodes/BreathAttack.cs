@@ -12,6 +12,7 @@ namespace Boss.Omen
         float delayTimer = 0.0f;
         float durationTimer = 0.0f;
         float tickTimer = 0.0f;
+        float lastTime = 0.0f;
 
         bool init = false;
         bool hasDamaged = false;
@@ -40,6 +41,8 @@ namespace Boss.Omen
 
         public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
         {
+            float deltaTime = Time.time - lastTime;
+            lastTime = Time.time;
             if (animator == null) animator = agent.GetComponent<Animator>();
             if (source == null) source = agent.GetComponent<AudioSource>();
             if (rotateTowardsPlayer == null) rotateTowardsPlayer = agent.GetComponent<RotateTowardsPlayer>();
@@ -65,7 +68,7 @@ namespace Boss.Omen
                     indicator.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
                 }
                 decalProjector.fadeFactor = (delayTimer / GetProperty<float>("Attack Start Delay"));
-                delayTimer += Time.deltaTime;
+                delayTimer += deltaTime;
                 state = NodeData.State.Running;
                 return NodeData.State.Running;
             }
@@ -91,12 +94,12 @@ namespace Boss.Omen
             }
             if (durationTimer < GetProperty<float>("Attack Duration"))
             {
-                durationTimer += Time.deltaTime;
+                durationTimer += deltaTime;
                 if (!hasDamaged || GetProperty<bool>("Continuous"))
                 {
                     if (tickTimer < GetProperty<float>("Tick Rate"))
                     {
-                        tickTimer += Time.deltaTime;
+                        tickTimer += deltaTime;
                     }
                     else
                     {
