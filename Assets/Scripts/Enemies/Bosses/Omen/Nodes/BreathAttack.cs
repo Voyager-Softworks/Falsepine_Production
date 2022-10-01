@@ -54,7 +54,7 @@ namespace Boss.Omen
                 hasDamaged = false;
                 animator.SetTrigger(GetProperty<string>("Animation Trigger"));
                 source.PlayOneShot(GetProperty<AudioClip>("Sound"));
-                rotateTowardsPlayer.RotateToPlayer(0.6f, 6f, 0.2f);
+                rotateTowardsPlayer.RotateToPlayer(0.6f, 12f, 0.2f);
                 init = true;
             }
 

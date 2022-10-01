@@ -49,8 +49,8 @@ public class RootMotionFlight : MonoBehaviour
         {
             ComputePhysics();
             float requiredDelta = targetPos.y - transform.position.y;
-            float deltaDot = Vector3.Dot(Vector3.up, targetPos - transform.position);
-            desiredPitch = Mathf.Clamp(deltaDot * 45, -45, 45);
+            float deltaDot = Vector3.Dot( targetPos - transform.position, Vector3.up);
+            desiredPitch = Mathf.Clamp(deltaDot * 90, -45, 45);
             desiredPitch *= 1f - Mathf.Clamp(Mathf.Abs(angularVelocity), 0, 1);
             if (Vector3.Distance(transform.position, targetPos) < stoppingDistance)
             {
