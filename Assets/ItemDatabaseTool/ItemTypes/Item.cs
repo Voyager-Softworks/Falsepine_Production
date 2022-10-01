@@ -573,6 +573,16 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
                 // set the new item's name
                 SetFileName(newItem);
             }
+            // load data from file
+            if (GUILayout.Button(new GUIContent("Load Data", "Loads data from file"), GUILayout.Width(120)))
+            {
+                // ask user for file
+                string path = EditorUtility.OpenFilePanel("Load Item", Application.dataPath + "/Resources/Items/", "asset");
+                if (path.Length != 0)
+                {
+                    LoadDataFromFile(item, path);
+                }
+            }
             GUILayout.FlexibleSpace();
             EditorGUILayout.EndHorizontal();
             if (item.drawDefaultInspector)
@@ -805,6 +815,22 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
 
             // set dirty
             EditorUtility.SetDirty(item);
+        }
+
+        private static void LoadDataFromFile(Item item, string _fullPath)
+        {
+            //read file
+            FileStream file = File.Open(_fullPath, FileMode.Open);
+            StreamReader reader = new StreamReader(file);
+            string itemType = reader.ReadLine();
+            string json = reader.ReadToEnd();
+            reader.Close();
+            file.Close();
+
+            Debug.Log("Loading " + itemType);
+
+            // load data into item
+            JsonUtility.FromJsonOverwrite(json, item);
         }
     }
     #endif
