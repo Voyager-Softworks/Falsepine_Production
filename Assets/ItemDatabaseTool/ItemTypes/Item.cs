@@ -546,6 +546,9 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
         {
             Item item = (Item)target;
 
+            // start recording stats
+            EditorGUI.BeginChangeCheck();
+
             // Draw default inspector option
             EditorGUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
@@ -728,9 +731,6 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
 
             GUILayout.Label("Stat Mods", CustomEditorStuff.center_bold_label);
 
-            // start recording stats
-            EditorGUI.BeginChangeCheck();
-
             // stat mods (used property field)
             EditorGUI.indentLevel++;
             // use DrawStatMod
@@ -753,6 +753,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
                 if (!Application.isPlaying)
                 {
                     EditorUtility.SetDirty(this);
+                    EditorUtility.SetDirty(item);
                 }
             }
 
@@ -781,6 +782,9 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
                     EditorUtility.SetDirty(this);
                 }
             }
+
+            // save this asset
+            AssetDatabase.SaveAssetIfDirty(AssetDatabase.GUIDFromAssetPath(AssetDatabase.GetAssetPath(item)));
         }
         
         /// <summary>
