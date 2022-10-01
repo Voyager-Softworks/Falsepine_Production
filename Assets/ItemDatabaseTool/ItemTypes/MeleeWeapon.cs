@@ -33,6 +33,8 @@ public class MeleeWeapon : Item
     [SerializeField] public float m_comboTimer = 0;
     [SerializeField] public bool m_shouldDoComboSwing = false;
 
+    private List<Health_Base> m_hitObjects = new List<Health_Base>();
+
     private Transform m_damageTrans;
 
     /// <summary>
@@ -93,9 +95,15 @@ public class MeleeWeapon : Item
                 Health_Base health = hitCollider.GetComponent<Health_Base>();
                 if (health != null)
                 {
-                    //update damage
-                    float calcdDamage = StatsManager.CalculateDamage(this, m_damage);
-                    health.TakeDamage(new Health_Base.DamageStat(calcdDamage, _owner, m_damageTrans.position, m_damageTrans.position, this));
+                    // if health is not already in list, add it and deal damage
+                    if (m_hitObjects.Contains(health) == false)
+                    {
+                        m_hitObjects.Add(health);
+
+                        //calc then deal damage
+                        float calcdDamage = StatsManager.CalculateDamage(this, m_damage);
+                        health.TakeDamage(new Health_Base.DamageStat(calcdDamage, _owner, m_damageTrans.position, m_damageTrans.position, this));
+                    }
                 }
             }
         }
@@ -127,6 +135,10 @@ public class MeleeWeapon : Item
         m_swingCooldownTimer = m_swingCooldown;
         m_comboTimer = m_comboTime;
         m_damageTimer = m_damageTime;
+
+        // reset hit objects:
+        m_hitObjects.Clear();
+
         UpdateComboSwing();
     }
 

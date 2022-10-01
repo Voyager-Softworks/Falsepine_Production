@@ -9,22 +9,19 @@ using UnityEngine.UI;
 /// </summary>
 public class EntryPurchasePanel : MonoBehaviour
 {
-    [System.Serializable]
-    public class EntryUIPurchaseUI{
-        public TextMeshProUGUI m_description;
-        public TextMeshProUGUI m_price;
-        public Button m_purchaseButton;
-        public Image m_lockedIcon;
-        public TextMeshProUGUI m_lockedText;
-    }
-
     [Header("UI")]
-    public List<EntryUIPurchaseUI> m_entryUIs = new List<EntryUIPurchaseUI>();
-    public Sprite m_lockedSprite;
-    public Sprite m_unlockedSprite;
+    public GameObject m_cluePurchaseUIPrefab;
+    public Transform m_contentParent;
+    public List<CluePurchaseUI> m_clueUIs = new List<CluePurchaseUI>();
+    public CluePurchaseUI m_selectedClue;
+    public Button m_purchaseButton;
+    public TextMeshProUGUI m_purchaseButtonText;
+    public TextMeshProUGUI m_purchaseButtonCostText;
+    public Image m_purchaseButtonSilverIcon;
 
     [Header("Entries")]
-    public int m_price = 10;
+    public int m_minPrice = 10;
+    public int m_maxPrice = 20;
     public int m_entryAmount = 3;
     public List<JounralEntry> m_journalEntries = new List<JounralEntry>();
 
@@ -35,26 +32,54 @@ public class EntryPurchasePanel : MonoBehaviour
         List<JounralEntry> validEntries = JournalManager.instance.GetUndiscoveredEntries(_monsterType: MonsterInfo.MonsterType.Minion);
 
         // add amount of entries to the list (if there are enough)
-        for (int i = 0; i < m_entryAmount && i < m_entryUIs.Count && validEntries.Count > 0; i++){
+        for (int i = 0; i < m_entryAmount && validEntries.Count > 0; i++){
             int randomIndex = Random.Range(0, validEntries.Count);
+            JounralEntry entry = validEntries[randomIndex];
             // add random entry to the list
-            m_journalEntries.Add(validEntries[randomIndex]);
+            m_journalEntries.Add(entry);
             // remove entry from the list
             validEntries.RemoveAt(randomIndex);
-        }
 
-        // link all buttons to the purchase function
-        for (int i = 0; i < m_entryUIs.Count; i++){
-            int index = i;
-            m_entryUIs[i].m_purchaseButton.onClick.AddListener(() =>
-            {
-                TryBuyEntry(index);
-            });
+            // create clue ui
+            CluePurchaseUI clueUI = Instantiate(m_cluePurchaseUIPrefab, m_contentParent).GetComponent<CluePurchaseUI>();
+            clueUI.m_linkedJournalEntry = entry;
+            clueUI.m_primaryText.text = entry.m_entryType.ToString();
+
+            // assign price
+            clueUI.m_price = Random.Range(m_minPrice, m_maxPrice);
+
+            // add clue ui to the list
+            m_clueUIs.Add(clueUI);
+
+            // listen for click
+            clueUI.OnClick += () => {
+                // deselect all
+                foreach (CluePurchaseUI ui in m_clueUIs){
+                    ui.m_isSelected = false;
+                }
+
+                // select this one
+                clueUI.m_isSelected = true;
+                m_selectedClue = clueUI;
+            };
         }
     }
 
     private void OnEnable()
     {
+        // bind purchase button
+        m_purchaseButton.onClick.AddListener(TryBuySelected);
+
+        
+        UpdateUI();
+    }
+
+    private void OnDisable() {
+        // unbind purchase button
+        m_purchaseButton.onClick.RemoveListener(TryBuySelected);
+    }
+
+    private void Update() {
         UpdateUI();
     }
 
@@ -63,42 +88,32 @@ public class EntryPurchasePanel : MonoBehaviour
     /// </summary>
     private void UpdateUI()
     {
-        // for each journalEntry, update the corresponding UI
-        for (int i = 0; i < m_entryUIs.Count; i++)
+        // for each journalEntry, update the UI
+        for (int i = 0; i < m_clueUIs.Count; i++)
         {
-            // get the UI
-            EntryUIPurchaseUI entryUI = m_entryUIs[i];
+            CluePurchaseUI clueUI = m_clueUIs[i];
+            clueUI.UpdateUI();
+        }
 
-            if (i > m_journalEntries.Count - 1){
-                entryUI.m_description.text = "No purchase available";
-                entryUI.m_purchaseButton.gameObject.SetActive(false);
-                entryUI.m_lockedIcon.sprite = m_lockedSprite;
-                entryUI.m_lockedText.text = "CLUE NOT AVALIABLE";
+        if (m_selectedClue != null){
+            // say Purchase
+            m_purchaseButtonText.text = "PURCHASE";
 
-                continue;
-            }
+            // set the price on the button
+            m_purchaseButtonCostText.text = m_selectedClue.m_price.ToString();
 
-            // get the entry
-            JounralEntry entry = m_journalEntries[i];
+            // enable the silver icon
+            m_purchaseButtonSilverIcon.gameObject.SetActive(true);
+        }
+        else{
+            // say Select Entry
+            m_purchaseButtonText.text = "SELECT ENTRY";
 
-            // check if this clue is already discovered (aka purchased)
-            bool beenDiscovered = JournalManager.instance.m_discoveredEntries.Contains(entry);
+            // set the price
+            m_purchaseButtonCostText.text = "0";
 
-            if (beenDiscovered)
-            {
-                entryUI.m_description.text = "Check the journal for more details \n" + entry.entryContent.text;
-                entryUI.m_purchaseButton.gameObject.SetActive(false);
-                entryUI.m_lockedIcon.sprite = m_unlockedSprite;
-                entryUI.m_lockedText.text = "CLUE DISCOVERED";
-            }
-            else
-            {
-                entryUI.m_description.text = entry.m_linkedMonster.m_name + " lore";
-                entryUI.m_price.text = m_price.ToString();
-                entryUI.m_purchaseButton.gameObject.SetActive(true);
-                entryUI.m_lockedIcon.sprite = m_lockedSprite;
-                entryUI.m_lockedText.text = "CLUE LOCKED";
-            }
+            // disable the silver icon
+            m_purchaseButtonSilverIcon.gameObject.SetActive(true);
         }
     }
 
@@ -106,13 +121,13 @@ public class EntryPurchasePanel : MonoBehaviour
     /// Tries to purchase an entry, if so, discovers it in the journal.
     /// </summary>
     /// <param name="entryIndex"></param>
-    public void TryBuyEntry(int entryIndex){
-        JounralEntry entry = m_journalEntries[entryIndex];
-        if (entry == null) return;
+    public void TryBuySelected(){
+        if (m_selectedClue == null) return;
+        if (m_selectedClue.m_linkedJournalEntry == null) return;
 
-        if (EconomyManager.instance.CanAfford(m_price)){
-            EconomyManager.instance.SpendMoney(m_price);
-            JournalManager.instance.DiscoverEntry(entry);
+        if (EconomyManager.instance.CanAfford(m_selectedClue.m_price)){
+            EconomyManager.instance.SpendMoney(m_selectedClue.m_price);
+            JournalManager.instance.DiscoverEntry(m_selectedClue.m_linkedJournalEntry);
             UpdateUI();
         }
     }
