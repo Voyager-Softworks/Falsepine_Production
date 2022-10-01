@@ -71,27 +71,36 @@ public class StatsManager : MonoBehaviour
             return displayName;
         }
 
-        public static StatType GetStatType(string _value){
-            // // get all static methods of the StatType class
-            // MethodInfo[] methods = typeof(StatType).GetMethods(BindingFlags.Public | BindingFlags.Static);
-            // //remove any which arent of type StatType
-            // methods = methods.Where(f => f.ReturnType == typeof(StatType)).ToArray();
-            // // sort alphabetically
-            // methods = methods.OrderBy(f => ((StatType)f.Invoke(null, null)).value).ToArray();
+        public static StatType StringToStatType(string _value)
+        {
+            MethodInfo[] methods = GetAllStatTypeMethods();
 
-            // // loop through all methods
-            // foreach (MethodInfo method in methods)
-            // {
-            //     // get the value of the method
-            //     StatType type = (StatType)method.Invoke(null, null);
-            //     // if the value matches the one we are looking for, return it
-            //     if (type.value == _value)
-            //     {
-            //         return type;
-            //     }
-            // }
-            // // if we get here, the type was not found
-            // return null;
+            // loop through all methods
+            foreach (MethodInfo method in methods)
+            {
+                // get the value of the method
+                StatType type = (StatType)method.Invoke(null, null);
+                // if the value matches the one we are looking for, return it
+                if (type.value == _value)
+                {
+                    return type;
+                }
+            }
+            // if we get here, the type was not found
+            return null;
+        }
+
+        public static MethodInfo[] GetAllStatTypeMethods()
+        {
+            // get all static methods of the StatType class
+            MethodInfo[] methods = typeof(StatType).GetMethods(BindingFlags.Public | BindingFlags.Static);
+            // remove any which arent of type StatType
+            methods = methods.Where(f => f.ReturnType == typeof(StatType)).ToArray();
+            // remove any which take parameters
+            methods = methods.Where(f => f.GetParameters().Length == 0).ToArray();
+            // sort alphabetically
+            methods = methods.OrderBy(f => ((StatType)f.Invoke(null, null)).value).ToArray();
+            return methods;
         }
 
         // equality == override
@@ -737,11 +746,7 @@ public class StatsManager : MonoBehaviour
             //EditorGUI.BeginProperty(position, GUIContent.none, property);
 
             // get all static methods of the StatType class
-            MethodInfo[] methods = typeof(StatType).GetMethods(BindingFlags.Public | BindingFlags.Static);
-            //remove any which arent of type StatType
-            methods = methods.Where(f => f.ReturnType == typeof(StatType)).ToArray();
-            // sort alphabetically
-            methods = methods.OrderBy(f => ((StatType)f.Invoke(null, null)).value).ToArray();
+            MethodInfo[] methods = StatType.GetAllStatTypeMethods();
             // create a list of strings to display in the dropdown
             List<GUIContent> options = new List<GUIContent>();
             foreach (MethodInfo method in methods)
@@ -824,9 +829,7 @@ public class StatsManager : MonoBehaviour
         if (doHoriz) EditorGUILayout.BeginHorizontal();
 
         // get all static fields of the StatType class
-        MethodInfo[] methods = typeof(StatType).GetMethods(BindingFlags.Public | BindingFlags.Static);
-        //remove any which arent of type StatType
-        methods = methods.Where(f => f.ReturnType == typeof(StatType)).ToArray();
+        MethodInfo[] methods = StatType.GetAllStatTypeMethods();
 
         // create a list of strings to display in the dropdown
         List<string> options = new List<string>();
@@ -899,11 +902,7 @@ public class StatsManager : MonoBehaviour
             needToSave = true;
 
             // get all static methods of the StatType class
-            MethodInfo[] methods = typeof(StatType).GetMethods(BindingFlags.Public | BindingFlags.Static);
-            //remove any which arent of type StatType
-            methods = methods.Where(f => f.ReturnType == typeof(StatType)).ToArray();
-            // sort alphabetically
-            methods = methods.OrderBy(f => ((StatType)f.Invoke(null, null)).value).ToArray();
+            MethodInfo[] methods = StatType.GetAllStatTypeMethods();
             foreach (MethodInfo method in methods)
             {
                 StatsManager.StatType type = null;

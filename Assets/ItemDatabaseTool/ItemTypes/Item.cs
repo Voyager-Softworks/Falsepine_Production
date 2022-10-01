@@ -766,12 +766,9 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
                 string[] stats = EditorGUIUtility.systemCopyBuffer.Split('\n');
                 for (int i = 0; i < stats.Length; i++)
                 {
-                    if (i < item.m_usedStatTypes.Count)
-                    {
-                        //item.AddStatType(StatsManager.StatType.GetStatType(stats[i]));
-                    }
+                    item.AddStatType(StatsManager.StatType.StringToStatType(stats[i]));
                 }
-                EditorUtility.SetDirty(this);
+                EditorUtility.SetDirty(item);
             }
 
             //flex space
