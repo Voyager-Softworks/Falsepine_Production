@@ -135,6 +135,7 @@ namespace Boss.Omen
         public override void OnInit()
         {
             init = false;
+            lastTime = Time.time;
         }
     }
 }
