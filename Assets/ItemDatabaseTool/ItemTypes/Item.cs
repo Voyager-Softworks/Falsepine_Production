@@ -546,6 +546,9 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
         {
             Item item = (Item)target;
 
+            // start recording stats
+            EditorGUI.BeginChangeCheck();
+
             // Draw default inspector option
             EditorGUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
@@ -569,6 +572,16 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
 
                 // set the new item's name
                 SetFileName(newItem);
+            }
+            // load data from file
+            if (GUILayout.Button(new GUIContent("Load Data", "Loads data from file"), GUILayout.Width(120)))
+            {
+                // ask user for file
+                string path = EditorUtility.OpenFilePanel("Load Item", Application.dataPath + "/Resources/Items/", "json");
+                if (path.Length != 0)
+                {
+                    LoadDataFromFile(item, path);
+                }
             }
             GUILayout.FlexibleSpace();
             EditorGUILayout.EndHorizontal();
@@ -728,9 +741,6 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
 
             GUILayout.Label("Stat Mods", CustomEditorStuff.center_bold_label);
 
-            // start recording stats
-            EditorGUI.BeginChangeCheck();
-
             // stat mods (used property field)
             EditorGUI.indentLevel++;
             // use DrawStatMod
@@ -753,6 +763,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
                 if (!Application.isPlaying)
                 {
                     EditorUtility.SetDirty(this);
+                    EditorUtility.SetDirty(item);
                 }
             }
 
@@ -781,6 +792,9 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
                     EditorUtility.SetDirty(this);
                 }
             }
+
+            // save this asset
+            AssetDatabase.SaveAssetIfDirty(AssetDatabase.GUIDFromAssetPath(AssetDatabase.GetAssetPath(item)));
         }
         
         /// <summary>
@@ -801,6 +815,22 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
 
             // set dirty
             EditorUtility.SetDirty(item);
+        }
+
+        private static void LoadDataFromFile(Item item, string _fullPath)
+        {
+            //read file
+            FileStream file = File.Open(_fullPath, FileMode.Open);
+            StreamReader reader = new StreamReader(file);
+            string itemType = reader.ReadLine();
+            string json = reader.ReadToEnd();
+            reader.Close();
+            file.Close();
+
+            Debug.Log("Loading " + itemType);
+
+            // load data into item
+            JsonUtility.FromJsonOverwrite(json, item);
         }
     }
     #endif
