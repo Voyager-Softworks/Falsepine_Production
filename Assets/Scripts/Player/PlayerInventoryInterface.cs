@@ -105,8 +105,22 @@ public class PlayerInventoryInterface : MonoBehaviour
         }
 
         // draw melee attack zone
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position + (transform.forward * meleeAttackRange), meleeAttackSize);
+        MeleeWeapon meleeWeapon = selectedMeleeWeapon as MeleeWeapon;
+        if (meleeWeapon)
+        {
+            Gizmos.color = Color.red;
+
+            Transform meleeWeaponTip = GetWeaponFirepoint(selectedMeleeWeapon);
+            Vector3 meleeWeaponTipPosition = meleeWeaponTip.position;
+            float rad = meleeWeapon.m_radius;
+            float height = meleeWeapon.m_height;
+
+            // draw spheres along the height at each radius
+            for (float i = -height/2.0f; i < height/2.0f; i+=rad)
+            {
+                Gizmos.DrawWireSphere(meleeWeaponTipPosition + new Vector3(0, i, 0), rad);
+            }
+        }
     }
 
     public static string GetSaveFolderPath(int _saveSlot)
@@ -321,11 +335,11 @@ public class PlayerInventoryInterface : MonoBehaviour
             {
                 selectedMeleeWeapon.ManualUpdate(gameObject);
 
-                Transform weaponTip = GetWeaponFirepoint(selectedMeleeWeapon);
-                Vector3 weaponTipPosition = weaponTip.position;
+                Transform meleeWeaponTip = GetWeaponFirepoint(selectedMeleeWeapon);
+                Vector3 meleeWeaponTipPosition = meleeWeaponTip.position;
 
                 MeleeWeapon meleeWeapon = selectedMeleeWeapon as MeleeWeapon;
-                if (meleeWeapon.TryMelee(weaponTip, gameObject))
+                if (meleeWeapon.TryMelee(meleeWeaponTip, gameObject))
                 {
                     // enable model
                     DisableAllWeaponModels();
