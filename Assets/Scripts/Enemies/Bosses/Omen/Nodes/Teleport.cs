@@ -12,8 +12,10 @@ public class Teleport : NodeAI.ActionBase
 
     public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
     {
+        
         agent.transform.position = GetProperty<Transform>("Destination").position;
         agent.transform.rotation = GetProperty<Transform>("Destination").rotation;
+        agent.GetComponent<Animator>().rootRotation = GetProperty<Transform>("Destination").rotation;
         state = NodeData.State.Success;
         return state;
     }

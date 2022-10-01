@@ -9,7 +9,7 @@ namespace Boss.Omen
     {
         RootMotionFlight flight; ///< The flight script.
         Animator animator; ///< The animator.
-        float flyStopDuration = 3f;
+        float flyStopDuration = 1.5f;
         float flyStopTimer = 0.0f; ///< The timer for when to stop flying.
         bool reachedDestination = false; ///< Whether the boss has reached its destination.
         bool init = false; ///< Whether or not the node has been initialized.

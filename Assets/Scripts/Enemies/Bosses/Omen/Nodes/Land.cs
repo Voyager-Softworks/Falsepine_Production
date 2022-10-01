@@ -9,6 +9,7 @@ namespace Boss.Omen
     {
         RootMotionFlight flight; ///< The flight script.
         Animator animator; ///< The animator.
+        AudioSource audioSource; ///< The audio source.
 
         bool init = false; ///< Whether or not the node has been initialized.
 
@@ -23,6 +24,7 @@ namespace Boss.Omen
         {
             AddProperty<Vector3>("Destination", Vector3.zero);
             AddProperty<Vector3>("Rotation", Vector3.zero);
+            AddProperty<AudioClip>("Sound Effect", null);
         }
 
         public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
@@ -37,9 +39,20 @@ namespace Boss.Omen
                     return state;
                 }
             }
+            if (audioSource == null)
+            {
+                audioSource = agent.GetComponentInChildren<AudioSource>();
+                if (audioSource == null)
+                {
+                    Debug.LogError("No AudioSource found on agent");
+                    state = NodeData.State.Failure;
+                    return state;
+                }
+            }
             if (!init)
             {
                 animator.SetTrigger("Land");
+                audioSource.PlayOneShot(GetProperty<AudioClip>("Sound Effect"));
                 timer = 0f;
                 init = true;
                 startPos = agent.transform.position;
@@ -53,16 +66,23 @@ namespace Boss.Omen
 
             timer += Time.time - oldTime;
             oldTime = Time.time;
-            time = animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
-
-            if (time >= 0.95f)
+            if(animator.GetCurrentAnimatorStateInfo(0).IsName("Landing"))
             {
-                time = 1f;
+                time = animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
+            }
+            else
+            {
+                time = 0f;
+            }
+
+            if (time >= 1f)
+            {
                 state = NodeData.State.Success;
             }
             else state = NodeData.State.Running;
-            agent.transform.position = Vector3.Lerp(startPos, destination, time);
-            agent.transform.rotation = Quaternion.Euler(Vector3.Lerp(startRot, rotation, time));
+            float scaledTime = Mathf.Clamp(time * 1.2f, 0f, 1f);
+            agent.transform.position = Vector3.Lerp(startPos, destination, scaledTime);
+            agent.transform.rotation = Quaternion.Euler(Vector3.Lerp(startRot, rotation, scaledTime));
             return state;
         }
 
