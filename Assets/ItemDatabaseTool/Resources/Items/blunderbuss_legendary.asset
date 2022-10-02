@@ -10,42 +10,42 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f1b39523798ea8429e24987a0a00672, type: 3}
-  m_Name: crossbow_8a8b1034-8dba-43b1-8037-c2fa59e316b3
+  m_Name: blunderbuss_legendary
   m_EditorClassIdentifier: 
-  m_id: crossbow
+  m_id: blunderbuss
   m_instanceID: legendary
-  m_displayName: Witch Hunter
-  m_description: A custom firing mechanic and multiple rails allows for a 3 shot
-    volley, they bolts however do take longer to load.
-  m_icon: {fileID: 21300000, guid: 42735a8625f68444db79336b7bbc3ded, type: 3}
+  m_displayName: Davy Jones
+  m_description: A unique twin barrelled hand cannon. The smaller barrels reduce
+    damage slightly in exchange for a double shot.
+  m_icon: {fileID: 21300000, guid: e587719342c08ea4790fc8e154a798a1, type: 3}
   mustMatchToStack: 0
   m_currentStackSize: 1
   m_maxStackSize: 1
   m_tags: []
   m_usedStatTypes:
   - value: PlayerDamage
-  - value: PistolDamage
   - value: RangedDamage
   - value: RangedInaccuracy
   - value: RangedRange
   - value: RangedAimSpeed
   - value: ItemCost
+  - value: ShotgunDamage
   m_statMods: []
-  m_price: 40
+  m_price: 50
   m_allowedDiscount: 1
   m_resourceLinks:
   - fieldName: m_shootEffect
-    resourceName: VFX_RevolverFlash
+    resourceName: VFX_BlunderBussFlash
   - fieldName: m_trailEffect
     resourceName: BulletTrail
   - fieldName: m_hitEffect
     resourceName: Blood
   - fieldName: m_shootSound
-    resourceName: SoundPrefab_Crossbow_Shoot
+    resourceName: SoundPrefab_Blunderbuss_Shoot
   - fieldName: m_emptySound
     resourceName: SoundPrefab_Rifle_Empty
   - fieldName: m_reloadSound
-    resourceName: SoundPrefab_Crossbow_Reload
+    resourceName: SoundPrefab_BlunderBuss_Reload
   - fieldName: m_equipSound
     resourceName: SoundPrefab_Primary_Equip
   - fieldName: m_startAimSound
@@ -53,34 +53,34 @@ MonoBehaviour:
   - fieldName: m_stopAimSound
     resourceName: SoundPrefab_Rifle_StopAim
   - fieldName: m_icon
-    resourceName: TEMP_UI_icon-Crossbow
+    resourceName: TEMP_UI_icon-handcannonMOD
   m_damage: 20
-  m_range: 35
-  m_shootTime: 0.1
+  m_range: 25
+  m_shootTime: 0.25
   m_shootTimer: 0
   m_maxHitsPerShot: 1
   m_isAutomnatic: 0
-  m_aimedInaccuracy: 2
-  m_unaimedInaccuracy: 10
-  m_aimTime: 0.5
+  m_aimedInaccuracy: 7
+  m_unaimedInaccuracy: 20
+  m_aimTime: 0.75
   m_aimTimer: 0
-  m_horizFalloffMult: 0.9
+  m_horizFalloffMult: 0.75
   m_isAiming: 0
-  m_clipAmmo: 3
-  m_clipSize: 3
-  m_spareAmmo: 21
-  m_maxSpareAmmo: 27
+  m_clipAmmo: 2
+  m_clipSize: 2
+  m_spareAmmo: 10
+  m_maxSpareAmmo: 10
   m_unlimitedAmmo: 0
-  m_reloadTime: 3
+  m_reloadTime: 2.5
   m_reloadTimer: 0
   m_equipTime: 0.5
   m_equipTimer: 0
-  m_shootEffect: {fileID: 5586487229844373215, guid: 470c8a30854d18f43b40dcdebe3d2e24, type: 3}
+  m_shootEffect: {fileID: 5586487229844373215, guid: e2d69edd38bece84c87f028063716c22, type: 3}
   m_trailEffect: {fileID: 196249112708888911, guid: 37cc3d00cde6996459cb6afee37520b5, type: 3}
   m_hitEffect: {fileID: 906613630111261276, guid: 0ff01018754744643a1928026ea03465, type: 3}
-  m_shootSound: {fileID: 3107313251738698642, guid: e1e8fca4371098c4bb650a3f0cb32a6d, type: 3}
+  m_shootSound: {fileID: 3107313251738698642, guid: a049fba92d5d6b745b711fb2f419f48c, type: 3}
   m_emptySound: {fileID: 3107313251738698642, guid: 46c07eb6372ac2f419b7f671eb997445, type: 3}
-  m_reloadSound: {fileID: 3107313251738698642, guid: b128e405ed92db54aad6ba10537332c7, type: 3}
+  m_reloadSound: {fileID: 3107313251738698642, guid: 1dabde2a51dc1324c872597810e4c8e8, type: 3}
   m_equipSound: {fileID: 3107313251738698642, guid: fde3a1b649bc9de44831031dfd08d287, type: 3}
   m_startAimSound: {fileID: 3107313251738698642, guid: 6b450768f0ea44540b008f407dc34d0f, type: 3}
   m_stopAimSound: {fileID: 3107313251738698642, guid: ad5028a4bfef130448abec7660fad5a3, type: 3}

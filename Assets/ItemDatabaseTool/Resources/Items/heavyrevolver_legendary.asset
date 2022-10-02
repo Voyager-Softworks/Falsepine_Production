@@ -10,42 +10,41 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba57bbdaf289c954497da2fd471b2d2d, type: 3}
-  m_Name: sawnoff_f03f99d7-904c-40d9-8409-e576eb4f6a38
+  m_Name: heavyrevolver_legendary
   m_EditorClassIdentifier: 
-  m_id: sawnoff
+  m_id: heavyrevolver
   m_instanceID: legendary
-  m_displayName: The Jury
-  m_description: A weapon with a stopping power boarding excessive. The weapon sports
-    4 barrels. More barrels makes for more shots and longer reloading.
-  m_icon: {fileID: 21300000, guid: 7954be4e31f83a240807b2ededf5f83a, type: 3}
+  m_displayName: Grave Robber
+  m_description: A specialized handgun, improving damage and increasing ammunition
+    reserves.
+  m_icon: {fileID: 21300000, guid: 5c25190dcc6cbc44eba55882a6c56a7b, type: 3}
   mustMatchToStack: 0
   m_currentStackSize: 1
   m_maxStackSize: 1
   m_tags: []
   m_usedStatTypes:
-  - value: PlayerDamage
+  - value: PistolDamage
   - value: RangedDamage
   - value: RangedInaccuracy
   - value: RangedRange
   - value: RangedAimSpeed
   - value: ItemCost
-  - value: ShotgunDamage
   m_statMods: []
-  m_price: 40
+  m_price: 30
   m_allowedDiscount: 1
   m_resourceLinks:
   - fieldName: m_shootEffect
-    resourceName: VFX_ShotgunFlash
+    resourceName: VFX_RevolverFlash
   - fieldName: m_trailEffect
     resourceName: BulletTrail
   - fieldName: m_hitEffect
     resourceName: Blood
   - fieldName: m_shootSound
-    resourceName: SoundPrefab_SawnOff_Shoot
+    resourceName: SoundPrefab_HeavyRevolver_Shoot
   - fieldName: m_emptySound
     resourceName: SoundPrefab_Rifle_Empty
   - fieldName: m_reloadSound
-    resourceName: SoundPrefab_SawnOff_Reload
+    resourceName: SoundPrefab_HeavyRevolver_Reload
   - fieldName: m_equipSound
     resourceName: SoundPrefab_Primary_Equip
   - fieldName: m_startAimSound
@@ -53,34 +52,34 @@ MonoBehaviour:
   - fieldName: m_stopAimSound
     resourceName: SoundPrefab_Rifle_StopAim
   - fieldName: m_icon
-    resourceName: TEMP_UI_icon-sawnoff
-  m_damage: 15
-  m_range: 10
-  m_shootTime: 0.2
+    resourceName: TEMP_UI_icon-revolverMOD
+  m_damage: 10
+  m_range: 25
+  m_shootTime: 0.25
   m_shootTimer: 0
-  m_maxHitsPerShot: 3
+  m_maxHitsPerShot: 1
   m_isAutomnatic: 0
-  m_aimedInaccuracy: 25
-  m_unaimedInaccuracy: 40
+  m_aimedInaccuracy: 6
+  m_unaimedInaccuracy: 15
   m_aimTime: 0.75
   m_aimTimer: 0
   m_horizFalloffMult: 0.75
   m_isAiming: 0
-  m_clipAmmo: 4
-  m_clipSize: 4
-  m_spareAmmo: 12
-  m_maxSpareAmmo: 20
+  m_clipAmmo: 6
+  m_clipSize: 6
+  m_spareAmmo: 42
+  m_maxSpareAmmo: 48
   m_unlimitedAmmo: 0
-  m_reloadTime: 3
+  m_reloadTime: 3.5
   m_reloadTimer: 0
   m_equipTime: 0.5
   m_equipTimer: 0
-  m_shootEffect: {fileID: 575913574724732684, guid: fd47899ebf82e664dadce636acf01dd8, type: 3}
+  m_shootEffect: {fileID: 5586487229844373215, guid: 470c8a30854d18f43b40dcdebe3d2e24, type: 3}
   m_trailEffect: {fileID: 196249112708888911, guid: 37cc3d00cde6996459cb6afee37520b5, type: 3}
   m_hitEffect: {fileID: 906613630111261276, guid: 0ff01018754744643a1928026ea03465, type: 3}
-  m_shootSound: {fileID: 3107313251738698642, guid: 21fb95841b2bca7498f59126c99ac9fe, type: 3}
+  m_shootSound: {fileID: 3107313251738698642, guid: 192265a383f7ae140b85f16d52b611e5, type: 3}
   m_emptySound: {fileID: 3107313251738698642, guid: 46c07eb6372ac2f419b7f671eb997445, type: 3}
-  m_reloadSound: {fileID: 3107313251738698642, guid: 941884cfc71975c49801b89464c1ddab, type: 3}
+  m_reloadSound: {fileID: 3107313251738698642, guid: b39d677694b915a459eb896f96e3e9e0, type: 3}
   m_equipSound: {fileID: 3107313251738698642, guid: fde3a1b649bc9de44831031dfd08d287, type: 3}
   m_startAimSound: {fileID: 3107313251738698642, guid: 6b450768f0ea44540b008f407dc34d0f, type: 3}
   m_stopAimSound: {fileID: 3107313251738698642, guid: ad5028a4bfef130448abec7660fad5a3, type: 3}
