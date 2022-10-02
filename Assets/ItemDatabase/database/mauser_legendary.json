@@ -1,11 +1,11 @@
 SecondaryRangedWeapon
 {
-    "m_id": "sawnoff",
-    "m_instanceID": "",
-    "m_displayName": "Sawn-Off Shotgun",
-    "m_description": "Powerful short range sidearm with a limited ammo supply",
+    "m_id": "mauser",
+    "m_instanceID": "legendary",
+    "m_displayName": "Buzzard",
+    "m_description": "A prototype weapon modifed by a Falsepine local. Fully automatic with an pagan spell to conjure ammunition, sadly magic bullets don't have quite the same impact.",
     "m_icon": {
-        "instanceID": 12262
+        "instanceID": 12230
     },
     "mustMatchToStack": false,
     "m_currentStackSize": 1,
@@ -14,6 +14,9 @@ SecondaryRangedWeapon
     "m_usedStatTypes": [
         {
             "value": "PlayerDamage"
+        },
+        {
+            "value": "PistolDamage"
         },
         {
             "value": "RangedDamage"
@@ -29,18 +32,15 @@ SecondaryRangedWeapon
         },
         {
             "value": "ItemCost"
-        },
-        {
-            "value": "ShotgunDamage"
         }
     ],
     "m_statMods": [],
-    "m_price": 5,
+    "m_price": 30,
     "m_allowedDiscount": true,
     "m_resourceLinks": [
         {
             "fieldName": "m_shootEffect",
-            "resourceName": "VFX_ShotgunFlash"
+            "resourceName": "VFX_RevolverFlash"
         },
         {
             "fieldName": "m_trailEffect",
@@ -52,7 +52,7 @@ SecondaryRangedWeapon
         },
         {
             "fieldName": "m_shootSound",
-            "resourceName": "SoundPrefab_SawnOff_Shoot"
+            "resourceName": "SoundPrefab_Mauser_Shoot"
         },
         {
             "fieldName": "m_emptySound",
@@ -60,7 +60,7 @@ SecondaryRangedWeapon
         },
         {
             "fieldName": "m_reloadSound",
-            "resourceName": "SoundPrefab_SawnOff_Reload"
+            "resourceName": "SoundPrefab_Mauser_Reload"
         },
         {
             "fieldName": "m_equipSound",
@@ -76,32 +76,32 @@ SecondaryRangedWeapon
         },
         {
             "fieldName": "m_icon",
-            "resourceName": "TEMP_UI_icon-sawnoff"
+            "resourceName": "TEMP_UI_icon-mauserMOD"
         }
     ],
-    "m_damage": 15.0,
-    "m_range": 10.0,
-    "m_shootTime": 0.25,
+    "m_damage": 1.0,
+    "m_range": 20.0,
+    "m_shootTime": 0.15000000596046449,
     "m_shootTimer": 0.0,
-    "m_maxHitsPerShot": 3,
-    "m_isAutomnatic": false,
-    "m_aimedInaccuracy": 25.0,
-    "m_unaimedInaccuracy": 40.0,
+    "m_maxHitsPerShot": 1,
+    "m_isAutomnatic": true,
+    "m_aimedInaccuracy": 6.0,
+    "m_unaimedInaccuracy": 16.0,
     "m_aimTime": 0.75,
     "m_aimTimer": 0.0,
     "m_horizFalloffMult": 0.75,
     "m_isAiming": false,
-    "m_clipAmmo": 2,
-    "m_clipSize": 2,
-    "m_spareAmmo": 8,
-    "m_maxSpareAmmo": 16,
-    "m_unlimitedAmmo": false,
-    "m_reloadTime": 2.0,
+    "m_clipAmmo": 14,
+    "m_clipSize": 14,
+    "m_spareAmmo": 999,
+    "m_maxSpareAmmo": 999,
+    "m_unlimitedAmmo": true,
+    "m_reloadTime": 1.75,
     "m_reloadTimer": 0.0,
     "m_equipTime": 0.5,
     "m_equipTimer": 0.0,
     "m_shootEffect": {
-        "instanceID": 12264
+        "instanceID": 11564
     },
     "m_trailEffect": {
         "instanceID": 11340
@@ -110,13 +110,13 @@ SecondaryRangedWeapon
         "instanceID": 11342
     },
     "m_shootSound": {
-        "instanceID": 12266
+        "instanceID": 12202
     },
     "m_emptySound": {
         "instanceID": 11346
     },
     "m_reloadSound": {
-        "instanceID": 12268
+        "instanceID": 12204
     },
     "m_equipSound": {
         "instanceID": 11350

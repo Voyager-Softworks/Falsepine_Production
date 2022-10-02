@@ -1,11 +1,11 @@
-SecondaryRangedWeapon
+PrimaryRangedWeapon
 {
-    "m_id": "sawnoff",
-    "m_instanceID": "",
-    "m_displayName": "Sawn-Off Shotgun",
-    "m_description": "Powerful short range sidearm with a limited ammo supply",
+    "m_id": "rifle",
+    "m_instanceID": "legendary",
+    "m_displayName": "Dustman",
+    "m_description": "With an advanced firing mechanism and better fitted stock, the Dustman offers a faster firing rate, better handling, and a piercing shot.",
     "m_icon": {
-        "instanceID": 12262
+        "instanceID": 12256
     },
     "mustMatchToStack": false,
     "m_currentStackSize": 1,
@@ -19,6 +19,9 @@ SecondaryRangedWeapon
             "value": "RangedDamage"
         },
         {
+            "value": "RifleDamage"
+        },
+        {
             "value": "RangedInaccuracy"
         },
         {
@@ -29,18 +32,15 @@ SecondaryRangedWeapon
         },
         {
             "value": "ItemCost"
-        },
-        {
-            "value": "ShotgunDamage"
         }
     ],
     "m_statMods": [],
-    "m_price": 5,
+    "m_price": 40,
     "m_allowedDiscount": true,
     "m_resourceLinks": [
         {
             "fieldName": "m_shootEffect",
-            "resourceName": "VFX_ShotgunFlash"
+            "resourceName": "VFX_RifleFlash"
         },
         {
             "fieldName": "m_trailEffect",
@@ -52,7 +52,7 @@ SecondaryRangedWeapon
         },
         {
             "fieldName": "m_shootSound",
-            "resourceName": "SoundPrefab_SawnOff_Shoot"
+            "resourceName": "SoundPrefab_Rifle_Shoot"
         },
         {
             "fieldName": "m_emptySound",
@@ -60,7 +60,7 @@ SecondaryRangedWeapon
         },
         {
             "fieldName": "m_reloadSound",
-            "resourceName": "SoundPrefab_SawnOff_Reload"
+            "resourceName": "SoundPrefab_Rifle_Reload"
         },
         {
             "fieldName": "m_equipSound",
@@ -76,32 +76,32 @@ SecondaryRangedWeapon
         },
         {
             "fieldName": "m_icon",
-            "resourceName": "TEMP_UI_icon-sawnoff"
+            "resourceName": "TEMP_UI_icon-repeaterMOD"
         }
     ],
-    "m_damage": 15.0,
-    "m_range": 10.0,
-    "m_shootTime": 0.25,
+    "m_damage": 12.0,
+    "m_range": 30.0,
+    "m_shootTime": 0.30000001192092898,
     "m_shootTimer": 0.0,
-    "m_maxHitsPerShot": 3,
+    "m_maxHitsPerShot": 2,
     "m_isAutomnatic": false,
-    "m_aimedInaccuracy": 25.0,
-    "m_unaimedInaccuracy": 40.0,
+    "m_aimedInaccuracy": 3.0,
+    "m_unaimedInaccuracy": 15.0,
     "m_aimTime": 0.75,
     "m_aimTimer": 0.0,
-    "m_horizFalloffMult": 0.75,
+    "m_horizFalloffMult": 0.5,
     "m_isAiming": false,
-    "m_clipAmmo": 2,
-    "m_clipSize": 2,
-    "m_spareAmmo": 8,
-    "m_maxSpareAmmo": 16,
+    "m_clipAmmo": 10,
+    "m_clipSize": 10,
+    "m_spareAmmo": 30,
+    "m_maxSpareAmmo": 40,
     "m_unlimitedAmmo": false,
-    "m_reloadTime": 2.0,
+    "m_reloadTime": 2.5,
     "m_reloadTimer": 0.0,
     "m_equipTime": 0.5,
     "m_equipTimer": 0.0,
     "m_shootEffect": {
-        "instanceID": 12264
+        "instanceID": 12074
     },
     "m_trailEffect": {
         "instanceID": 11340
@@ -110,13 +110,13 @@ SecondaryRangedWeapon
         "instanceID": 11342
     },
     "m_shootSound": {
-        "instanceID": 12266
+        "instanceID": 12076
     },
     "m_emptySound": {
         "instanceID": 11346
     },
     "m_reloadSound": {
-        "instanceID": 12268
+        "instanceID": 12078
     },
     "m_equipSound": {
         "instanceID": 11350
