@@ -86,12 +86,12 @@ namespace Boss.Omen
                     sfx = GameObject.Instantiate(
                         GetProperty<GameObject>("Particle Effect"),
                         GetProperty<Transform>("Mouth Bone").position,
-                        GetProperty<bool>("Continuous") ? Quaternion.LookRotation(breathDir) : Quaternion.LookRotation(agent.transform.forward),
+                        GetProperty<bool>("Continuous") ? Quaternion.LookRotation(Vector3.up) : Quaternion.LookRotation(agent.transform.forward),
                         GetProperty<bool>("Continuous") ? GetProperty<Transform>("Mouth Bone") : null
                         );
                 }
 
-            
+
                 if (durationTimer < GetProperty<float>("Attack Duration"))
                 {
                     durationTimer += deltaTime;
@@ -107,8 +107,11 @@ namespace Boss.Omen
                             RaycastHit hit;
                             Vector3 breathDir = GetProperty<Transform>("Mouth Bone").up;
                             breathDir.y = 0.0f;
-                            if (Physics.SphereCast(GetProperty<Transform>("Mouth Bone").position, 2.0f, GetProperty<bool>("Continuous") ? breathDir : agent.transform.forward, out hit, 100.0f))
+                            Vector3 breathPos = GetProperty<Transform>("Mouth Bone").position;
+                            breathPos.y = 0.0f;
+                            if (Physics.SphereCast(breathPos, 3.0f, GetProperty<bool>("Continuous") ? breathDir : agent.transform.forward, out hit, 100.0f, LayerMask.GetMask("Player")))
                             {
+                                Debug.Log("Hit: " + hit.collider.gameObject.name);
                                 if (hit.collider.gameObject.tag == "Player")
                                 {
                                     hit.collider.gameObject.GetComponent<PlayerHealth>().TakeDamage(GetProperty<float>("Attack Damage"));

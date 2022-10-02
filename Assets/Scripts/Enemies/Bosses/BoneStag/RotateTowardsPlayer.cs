@@ -23,6 +23,7 @@ public class RotateTowardsPlayer : MonoBehaviour
         Vector3 startPos = transform.position;
         Vector3 targetPos = GameObject.FindGameObjectWithTag("Player").transform.position;
         Vector3 direction = targetPos - startPos;
+        direction.y = 0f;
         float angle = Vector3.Angle(direction, transform.forward);
         while (elapsedTime < duration)
         {
@@ -52,7 +53,7 @@ public class RotateTowardsPlayer : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        
+
     }
     /// <summary>
     ///  Method to move towards the player.
@@ -85,5 +86,5 @@ public class RotateTowardsPlayer : MonoBehaviour
     {
         StartCoroutine(RotateToPlayerCoroutine(duration, speed, delay));
     }
-    
+
 }
