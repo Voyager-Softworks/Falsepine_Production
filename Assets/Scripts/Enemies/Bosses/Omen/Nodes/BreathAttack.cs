@@ -89,6 +89,7 @@ namespace Boss.Omen
                         GetProperty<bool>("Continuous") ? Quaternion.LookRotation(Vector3.up) : Quaternion.LookRotation(agent.transform.forward),
                         GetProperty<bool>("Continuous") ? GetProperty<Transform>("Mouth Bone") : null
                         );
+                    if (GetProperty<bool>("Continuous")) sfx.transform.localRotation = Quaternion.LookRotation(Vector3.up);
                 }
 
 
