@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
+using UnityEngine.VFX;
 
 public class LightningController : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class LightningController : MonoBehaviour
 
     public AudioController stormAmbienceController;
     public Volume stormVolume;
+
+    public VisualEffect rainEffect;
     public Light stormLight;
     public float clearLightIntensity = 77585f;
     public float stormLightIntensity = 50000f;
@@ -50,6 +53,8 @@ public class LightningController : MonoBehaviour
         stormAmbienceController.audioChannels[0].volume = Mathf.Clamp(stormIntensity, 0f, 0.33f) * 3.0f;
         stormAmbienceController.audioChannels[1].volume = (Mathf.Clamp(stormIntensity, 0.33f, 0.66f) - 0.33f) * 3.0f;
         stormAmbienceController.audioChannels[2].volume = (Mathf.Clamp(stormIntensity, 0.66f, 1.0f) - 0.66f) * 3.0f;
+
+        rainEffect.SetFloat("AmountMult", (Mathf.Clamp(stormIntensity, 0.33f, 0.66f) - 0.33f) * 3.0f);
 
         if (stormIntensity > 0.33f)
         {
