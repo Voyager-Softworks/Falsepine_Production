@@ -15,10 +15,10 @@ using UnityEditor;
 /// </summary>
 //Make sure to set the [Serializable] attribute on this class, so that it can be saved!
 [Serializable]
-public class [ITEM_TYPE] : Item
+public class Medkit : Equipment
 {
     public override string GetTypeDisplayName(){
-        return "[ITEM_TYPE]";
+        return "Medkit";
     }
 
     // make sure to set variables as serialized fields in the inspector, so that they can be saved!
@@ -30,7 +30,7 @@ public class [ITEM_TYPE] : Item
     public override Item CreateInstance()
     {
         // [REQUIRED] Create base item
-        [ITEM_TYPE] newItem = ([ITEM_TYPE])base.CreateInstance();
+        Medkit newItem = (Medkit)base.CreateInstance();
 
         // Setting unique values here:
         // example valye
@@ -47,22 +47,22 @@ public class [ITEM_TYPE] : Item
     
     //Custom editor for this class
     #if UNITY_EDITOR
-    [CustomEditor(typeof([ITEM_TYPE]))]
-    public class [ITEM_TYPE]Editor : ItemEditor
+    [CustomEditor(typeof(Medkit))]
+    public class MedkitEditor : ItemEditor
     {
         public override void OnInspectorGUI()
         {
             // [REQUIRED] draw base editor (Item in this case)
             base.OnInspectorGUI();
             // [REQUIRED] get the editor target
-            [ITEM_TYPE] item = ([ITEM_TYPE])target;
+            Medkit item = (Medkit)target;
 
-            // red box for [ITEM_TYPE] stats
+            // red box for Medkit stats
             GUI.backgroundColor = Color.red;
             GUILayout.BeginVertical("box");
             GUI.backgroundColor = Color.white;
             // bold center text
-            GUILayout.Label("[ITEM_TYPE] Stats", CustomEditorStuff.center_bold_label);
+            GUILayout.Label("Medkit Stats", CustomEditorStuff.center_bold_label);
 
             // Your custom values here
             item.m_exampleValue = EditorGUILayout.FloatField("Example Value: ", item.m_exampleValue);

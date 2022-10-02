@@ -242,6 +242,37 @@ public class DatabaseWindow : EditorWindow {
             }
         }
 
+        // if search text is not empty, show Type matches
+        if (searchText.Length > 0)
+        {
+            items = ItemDatabase.GetItemsByORFilter(_type_s: searchText);
+            items = items.Except(displayedItems).ToList();
+            // add to displayed items
+            displayedItems = displayedItems.Union(items).ToList();
+
+            if (items.Count > 0) {
+                // space
+                GUILayout.Space(10);
+
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Matching Type: " + items.Count, CustomEditorStuff.center_bold_label);
+                GUILayout.EndHorizontal();
+
+                foreach (Item _item in items)
+                {
+                    int listSize = items.Count;
+
+                    DrawItemButton(_item);
+
+                    // if deleting or adding
+                    if (listSize != items.Count)
+                    {
+                        break;
+                    }
+                }
+            }
+        }
+
         items = ItemDatabase.database.Except(displayedItems).ToList();
 
         // if search text is not empty, show rest

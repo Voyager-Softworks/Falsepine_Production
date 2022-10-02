@@ -94,7 +94,7 @@ public class ItemDatabase
     /// </summary>
     public static List<Item> GetItemsByType(string _type)
     {
-        return database.Where(x => x.GetType().Name == _type).ToList();
+        return database.Where(x => x.GetType().Name.ToLower().Contains(_type.ToLower())).ToList();
     }
 
     /// <summary>
