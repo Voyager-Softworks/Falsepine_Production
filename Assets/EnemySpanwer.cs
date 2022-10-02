@@ -90,7 +90,7 @@ public class EnemySpanwer : MonoBehaviour
             // get player pos on navmesh
             Vector3 playerPos = FindObjectOfType<PlayerMovement>().transform.position;
             NavMeshHit playerHit;
-            if (NavMesh.SamplePosition(playerPos, out playerHit, 2.0f, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(playerPos, out playerHit, 5.0f, NavMesh.AllAreas))
             {
                 playerPos = playerHit.position;
             }
