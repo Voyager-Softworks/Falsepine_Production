@@ -284,6 +284,9 @@ public class ItemDatabase
         {
             string fileName = item.id + (item.instanceID != "" ? "_" + item.instanceID : "") + ".json";
             Item.Save(GetDatabaseFoldersPath(), fileName, item);
+
+            // save this asset
+            AssetDatabase.SaveAssetIfDirty(AssetDatabase.GUIDFromAssetPath(AssetDatabase.GetAssetPath(item)));
         }
     }
 
