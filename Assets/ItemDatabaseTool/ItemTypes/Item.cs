@@ -623,11 +623,11 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
             GUILayout.BeginHorizontal();
             // disabled varint id
             EditorGUI.BeginDisabledGroup(item.instanceID == "");
-            item.instanceID = EditorGUILayout.TextField(new GUIContent("Instance ID: ", " it something human readable e.g. 'legendary'"), item.instanceID);
+            item.instanceID = EditorGUILayout.TextField(new GUIContent("Instance ID: ", " it something human readable e.g. 'legendary'\nSimply delete this ID to revert it to a normal item"), item.instanceID);
             EditorGUI.EndDisabledGroup();
             // generate instance id button
             EditorGUI.BeginDisabledGroup(item.instanceID != "");
-            if (GUILayout.Button(new GUIContent("Convert>Instance", "Generates a new instance id for the item"), GUILayout.Width(120)))
+            if (GUILayout.Button(new GUIContent("Convert>Instance", "Converts THIS item to an instance, by generating a new instance id for the item"), GUILayout.Width(120)))
             {
                 item.instanceID = System.Guid.NewGuid().ToString();
                 EditorUtility.SetDirty(item);
@@ -833,9 +833,6 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
                     EditorUtility.SetDirty(this);
                 }
             }
-
-            // save this asset
-            AssetDatabase.SaveAssetIfDirty(AssetDatabase.GUIDFromAssetPath(AssetDatabase.GetAssetPath(item)));
         }
         
         /// <summary>

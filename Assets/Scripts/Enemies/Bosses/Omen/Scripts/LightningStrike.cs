@@ -14,9 +14,11 @@ public class LightningStrike : MonoBehaviour
     float durationTimer = 0.0f;
     public DecalProjector decalProjector;
     public DecalProjector scorchMarkProjector;
+    public AudioSource boltSource;
     Vector3 decalSizeInitial;
     Vector3 decalSizeFinal;
     bool hasDamaged = false;
+    bool struck = false;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,7 @@ public class LightningStrike : MonoBehaviour
         decalSizeFinal = new Vector3(damageRadius * 2, damageRadius * 2, 6.0f);
         decalProjector.size = decalSizeInitial;
         scorchMarkProjector.enabled = false;
+        boltSource.pitch = Random.Range(0.5f, 1.1f);
     }
 
     // Update is called once per frame
@@ -37,6 +40,11 @@ public class LightningStrike : MonoBehaviour
         }
         else
         {
+            if (!struck)
+            {
+                boltSource.Play();
+                struck = true;
+            }
             decalProjector.enabled = false;
             scorchMarkProjector.enabled = true;
             if (durationTimer < lightningDuration)

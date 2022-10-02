@@ -48,6 +48,7 @@ public class RootMotionFlight : MonoBehaviour
         if (isMoving)
         {
             ComputePhysics();
+            CorrectFlightPath();
             float requiredDelta = targetPos.y - transform.position.y;
             float deltaDot = Vector3.Dot( targetPos - transform.position, Vector3.up);
             desiredPitch = Mathf.Clamp(deltaDot * 90, -45, 45);
@@ -94,6 +95,21 @@ public class RootMotionFlight : MonoBehaviour
         currentVelocity = Vector3.ClampMagnitude(currentVelocity, speed);
         angularVelocity = Mathf.Lerp(angularVelocity, desiredAngularVelocity, angularSpeed * Time.deltaTime);
     }
+
+    // Detect obstructions ahead and adjust desired velocity to avoid them
+    void CorrectFlightPath()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, transform.forward, out hit, 1f))
+        {
+            Vector3 hitNormal = hit.normal;
+            hitNormal.y = 0;
+            Vector3 correctedVelocity = Vector3.Cross(hitNormal, Vector3.up);
+            desiredVelocity = correctedVelocity * speed;
+        }
+    }
+
+
 
 
 
