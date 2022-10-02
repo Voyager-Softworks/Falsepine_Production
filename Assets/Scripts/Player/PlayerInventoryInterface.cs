@@ -68,7 +68,7 @@ public class PlayerInventoryInterface : MonoBehaviour
     /// </summary>
     public class WeaponModelLink
     {
-        public Item weapon; ///< The weapon.
+        public List<Item> weapons;
         public GameObject model; ///< The model of the weapon.
         public Transform weaponFirepoint; ///< The weapon's firepoint: the point where the weapon is fired from.
         public string animatorBoolName = ""; ///< The name of the animator bool to set when the weapon is fired.
@@ -450,7 +450,7 @@ public class PlayerInventoryInterface : MonoBehaviour
         if (!weapon) return null;
         foreach (WeaponModelLink link in weaponModelLinks)
         {
-            if (link.weapon && link.weapon.id == weapon.id)
+            if (link.weapons.Any(w => w.id == weapon.id))
             {
                 return link.model;
             }
@@ -470,7 +470,7 @@ public class PlayerInventoryInterface : MonoBehaviour
         if (!weapon) return null;
         foreach (WeaponModelLink link in weaponModelLinks)
         {
-            if (link.weapon != null && link.weapon.id == weapon.id)
+            if (link.weapons.Any(w => w.id == weapon.id))
             {
                 return link.weaponFirepoint;
             }
@@ -490,7 +490,7 @@ public class PlayerInventoryInterface : MonoBehaviour
     {
         foreach (WeaponModelLink link in weaponModelLinks)
         {
-            if (link.weapon != null && link.weapon.id == weapon.id)
+            if (link.weapons.Any(w => w.id == weapon.id))
             {
                 return link.animatorBoolName;
             }
@@ -694,4 +694,38 @@ public class PlayerInventoryInterface : MonoBehaviour
         useEquipmentAction_2.Disable();
         meleeAttackAction.Disable();
     }
+
+    // custom editor
+#if UNITY_EDITOR
+    [CustomEditor(typeof(PlayerInventoryInterface))]
+    public class PlayerWeaponControllerEditor : Editor
+    {
+        public override void OnInspectorGUI()
+        {
+            DrawDefaultInspector();
+
+            PlayerInventoryInterface myScript = (PlayerInventoryInterface)target;
+
+            // if (GUILayout.Button("Move Weapons"))
+            // {
+            //     // move all link.weapon into link.weapons
+            //     foreach (WeaponModelLink link in myScript.weaponModelLinks)
+            //     {
+            //         if (link.weapon != null)
+            //         {
+            //             // clear
+            //             link.weapons.Clear();
+            //             if (link.weapons.Contains(link.weapon) == false)
+            //             {
+            //                 link.weapons.Add(link.weapon);
+
+            //                 // set dirty
+            //                 EditorUtility.SetDirty(myScript);
+            //             }
+            //         }
+            //     }
+            // }
+        }
+    }
+#endif
 }

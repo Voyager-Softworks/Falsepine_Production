@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f1b39523798ea8429e24987a0a00672, type: 3}
+  m_Name: godgun
+  m_EditorClassIdentifier: 
+  m_id: godgun
+  m_instanceID: 
+  m_displayName: Dev weapon
+  m_description: (many damage)
+  m_icon: {fileID: 21300000, guid: 220612dd6711c294083c7bb42e4cc8fb, type: 3}
+  mustMatchToStack: 0
+  m_currentStackSize: 1
+  m_maxStackSize: 1
+  m_tags: []
+  m_usedStatTypes:
+  - value: PlayerDamage
+  - value: RangedDamage
+  - value: RangedInaccuracy
+  - value: RangedRange
+  - value: RangedAimSpeed
+  - value: ItemCost
+  - value: RifleDamage
+  m_statMods: []
+  m_price: 10
+  m_allowedDiscount: 1
+  m_resourceLinks:
+  - fieldName: m_shootEffect
+    resourceName: VFX_RepeaterFlash
+  - fieldName: m_trailEffect
+    resourceName: BulletTrail
+  - fieldName: m_hitEffect
+    resourceName: Blood
+  - fieldName: m_shootSound
+    resourceName: SoundPrefab_Repeater_Shoot
+  - fieldName: m_emptySound
+    resourceName: SoundPrefab_Rifle_Empty
+  - fieldName: m_reloadSound
+    resourceName: SoundPrefab_OccultRepeater_Reload
+  - fieldName: m_equipSound
+    resourceName: SoundPrefab_Primary_Equip
+  - fieldName: m_startAimSound
+    resourceName: SoundPrefab_Rifle_StartAim
+  - fieldName: m_stopAimSound
+    resourceName: SoundPrefab_Rifle_StopAim
+  - fieldName: m_icon
+    resourceName: TEMP_UI_icon-occultrepeater
+  m_damage: 20
+  m_range: 100
+  m_shootTime: 0.1
+  m_shootTimer: 0
+  m_maxHitsPerShot: 1
+  m_isAutomnatic: 1
+  m_aimedInaccuracy: 6
+  m_unaimedInaccuracy: 15
+  m_aimTime: 0.1
+  m_aimTimer: 0
+  m_horizFalloffMult: 0
+  m_isAiming: 0
+  m_clipAmmo: 100
+  m_clipSize: 100
+  m_spareAmmo: 1000
+  m_maxSpareAmmo: 1000
+  m_unlimitedAmmo: 1
+  m_reloadTime: 1
+  m_reloadTimer: 0
+  m_equipTime: 0.5
+  m_equipTimer: 0
+  m_shootEffect: {fileID: 5586487229844373215, guid: 1cea95d7b4e38b043b69c359f061f30c, type: 3}
+  m_trailEffect: {fileID: 196249112708888911, guid: 37cc3d00cde6996459cb6afee37520b5, type: 3}
+  m_hitEffect: {fileID: 906613630111261276, guid: 0ff01018754744643a1928026ea03465, type: 3}
+  m_shootSound: {fileID: 3107313251738698642, guid: b0ae18c568dbef34e8d6fc174c6e8d0d, type: 3}
+  m_emptySound: {fileID: 3107313251738698642, guid: 46c07eb6372ac2f419b7f671eb997445, type: 3}
+  m_reloadSound: {fileID: 3107313251738698642, guid: e34021d53003a994eb6833e4d55af32a, type: 3}
+  m_equipSound: {fileID: 3107313251738698642, guid: fde3a1b649bc9de44831031dfd08d287, type: 3}
+  m_startAimSound: {fileID: 3107313251738698642, guid: 6b450768f0ea44540b008f407dc34d0f, type: 3}
+  m_stopAimSound: {fileID: 3107313251738698642, guid: ad5028a4bfef130448abec7660fad5a3, type: 3}

@@ -833,9 +833,6 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
                     EditorUtility.SetDirty(this);
                 }
             }
-
-            // save this asset
-            AssetDatabase.SaveAssetIfDirty(AssetDatabase.GUIDFromAssetPath(AssetDatabase.GetAssetPath(item)));
         }
         
         /// <summary>

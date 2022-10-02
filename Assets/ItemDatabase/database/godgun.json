@@ -1,11 +1,11 @@
-SecondaryRangedWeapon
+PrimaryRangedWeapon
 {
-    "m_id": "mauser",
+    "m_id": "godgun",
     "m_instanceID": "",
-    "m_displayName": "Mauser",
-    "m_description": "Light fast-firing sidearm with a fast reload",
+    "m_displayName": "Dev weapon",
+    "m_description": "(many damage)",
     "m_icon": {
-        "instanceID": 11948
+        "instanceID": 11976
     },
     "mustMatchToStack": false,
     "m_currentStackSize": 1,
@@ -14,9 +14,6 @@ SecondaryRangedWeapon
     "m_usedStatTypes": [
         {
             "value": "PlayerDamage"
-        },
-        {
-            "value": "PistolDamage"
         },
         {
             "value": "RangedDamage"
@@ -32,15 +29,18 @@ SecondaryRangedWeapon
         },
         {
             "value": "ItemCost"
+        },
+        {
+            "value": "RifleDamage"
         }
     ],
     "m_statMods": [],
-    "m_price": 5,
+    "m_price": 10,
     "m_allowedDiscount": true,
     "m_resourceLinks": [
         {
             "fieldName": "m_shootEffect",
-            "resourceName": "VFX_RevolverFlash"
+            "resourceName": "VFX_RepeaterFlash"
         },
         {
             "fieldName": "m_trailEffect",
@@ -52,7 +52,7 @@ SecondaryRangedWeapon
         },
         {
             "fieldName": "m_shootSound",
-            "resourceName": "SoundPrefab_Mauser_Shoot"
+            "resourceName": "SoundPrefab_Repeater_Shoot"
         },
         {
             "fieldName": "m_emptySound",
@@ -60,7 +60,7 @@ SecondaryRangedWeapon
         },
         {
             "fieldName": "m_reloadSound",
-            "resourceName": "SoundPrefab_Mauser_Reload"
+            "resourceName": "SoundPrefab_OccultRepeater_Reload"
         },
         {
             "fieldName": "m_equipSound",
@@ -76,32 +76,32 @@ SecondaryRangedWeapon
         },
         {
             "fieldName": "m_icon",
-            "resourceName": "TEMP_UI_icon-mauser"
+            "resourceName": "TEMP_UI_icon-occultrepeater"
         }
     ],
-    "m_damage": 1.0,
-    "m_range": 25.0,
-    "m_shootTime": 0.25,
+    "m_damage": 20.0,
+    "m_range": 100.0,
+    "m_shootTime": 0.10000000149011612,
     "m_shootTimer": 0.0,
     "m_maxHitsPerShot": 1,
-    "m_isAutomnatic": false,
-    "m_aimedInaccuracy": 4.0,
-    "m_unaimedInaccuracy": 10.0,
-    "m_aimTime": 0.75,
+    "m_isAutomnatic": true,
+    "m_aimedInaccuracy": 6.0,
+    "m_unaimedInaccuracy": 15.0,
+    "m_aimTime": 0.10000000149011612,
     "m_aimTimer": 0.0,
-    "m_horizFalloffMult": 0.75,
+    "m_horizFalloffMult": 0.0,
     "m_isAiming": false,
-    "m_clipAmmo": 14,
-    "m_clipSize": 14,
-    "m_spareAmmo": 42,
-    "m_maxSpareAmmo": 56,
-    "m_unlimitedAmmo": false,
-    "m_reloadTime": 1.75,
+    "m_clipAmmo": 100,
+    "m_clipSize": 100,
+    "m_spareAmmo": 1000,
+    "m_maxSpareAmmo": 1000,
+    "m_unlimitedAmmo": true,
+    "m_reloadTime": 1.0,
     "m_reloadTimer": 0.0,
     "m_equipTime": 0.5,
     "m_equipTimer": 0.0,
     "m_shootEffect": {
-        "instanceID": 11454
+        "instanceID": 11978
     },
     "m_trailEffect": {
         "instanceID": 11246
@@ -110,13 +110,13 @@ SecondaryRangedWeapon
         "instanceID": 11248
     },
     "m_shootSound": {
-        "instanceID": 11950
+        "instanceID": 11980
     },
     "m_emptySound": {
         "instanceID": 11252
     },
     "m_reloadSound": {
-        "instanceID": 11952
+        "instanceID": 11982
     },
     "m_equipSound": {
         "instanceID": 11256
