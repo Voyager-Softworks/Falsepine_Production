@@ -121,7 +121,7 @@ public class Health_Base : MonoBehaviour /// @todo Impliment this into players, 
         bool weak = false;
         foreach (StatsManager.StatType weakness in m_weaknesses)
         {
-            if (_damageStat.m_sourceStats.GetStatTypes().Contains(weakness))
+            if (_damageStat.m_sourceStats != null && _damageStat.m_sourceStats.GetStatTypes().Contains(weakness))
             {
                 weak = true;
                 break;
