@@ -64,7 +64,9 @@ public class Dynamite : MonoBehaviour
 
         // instantiate explosion
         GameObject explosion = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-        Destroy(explosion, 2.0f);
+        // unparent explosion
+        explosion.transform.parent = null;
+        Destroy(explosion, 20.0f);
         Destroy(gameObject);
     }
 }

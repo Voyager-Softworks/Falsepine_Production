@@ -73,6 +73,8 @@ public class Health_Base : MonoBehaviour /// @todo Impliment this into players, 
 
     public bool m_disablePlayerCollision = true; ///< Whether or not the player should be able to collide with the object.
 
+    public List<StatsManager.StatType> m_weaknesses = new List<StatsManager.StatType>(); ///< The weaknesses of the object.
+
     public List<DamageStat> m_damageHistory = new List<DamageStat>(); ///< The damage history of the object.
 
     [Header("Sounds")]
@@ -114,6 +116,22 @@ public class Health_Base : MonoBehaviour /// @todo Impliment this into players, 
         if (m_isInvulnerable || m_hasDied) return;
 
         if (_damageStat == null) return;
+
+        // if weakness, 1.5x damage
+        bool weak = false;
+        foreach (StatsManager.StatType weakness in m_weaknesses)
+        {
+            if (_damageStat.m_sourceStats.GetStatTypes().Contains(weakness))
+            {
+                weak = true;
+                break;
+            }
+        }
+
+        if (weak)
+        {
+            _damageStat.m_damage *= 1.5f;
+        }
 
         // add to damage history
         m_damageHistory.Add(_damageStat);
