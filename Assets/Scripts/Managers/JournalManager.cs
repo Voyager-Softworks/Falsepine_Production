@@ -102,11 +102,21 @@ public class JournalManager : ToggleableWindow
                     m_showHUDConditions = !m_showHUDConditions;
 
                     // set color
-                    m_HUDButton.image.color = m_showHUDConditions ? Color.green : Color.white;
+                    //m_HUDButton.image.color = m_showHUDConditions ? Color.green : Color.white;
+
+                    // say Tracking
+                    if (m_showHUDConditions)
+                    {
+                        m_HUDButton.GetComponentInChildren<TextMeshProUGUI>().text = "Tracking";
+                    }
+                    else
+                    {
+                        m_HUDButton.GetComponentInChildren<TextMeshProUGUI>().text = "Track";
+                    }
                 });
 
-                // set color
-                m_HUDButton.image.color = m_showHUDConditions ? Color.green : Color.white;
+                // say Track
+                m_HUDButton.GetComponentInChildren<TextMeshProUGUI>().text = "Track";
             }
         }
         else
@@ -176,6 +186,14 @@ public class JournalManager : ToggleableWindow
         if (openJournalAction.WasPressedThisFrame())
         {
             ToggleWindow();
+        }
+
+        // hide hud button if no current mission
+        if (MissionManager.instance.GetCurrentMission() == null){
+            m_HUDButton.gameObject.SetActive(false);
+        }
+        else{
+            m_HUDButton.gameObject.SetActive(true);
         }
     }
 
