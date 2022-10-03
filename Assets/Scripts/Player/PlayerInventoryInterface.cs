@@ -251,7 +251,7 @@ public class PlayerInventoryInterface : MonoBehaviour
                 // if fire weapon action is pressed and is not auto and is not shooting, shoot weapon || if fire weapon action is current down and is auto, shoot weapon
                 if ((fireWeaponAction.triggered && !rangedWeapon.m_isAutomnatic) || (fireWeaponAction.ReadValue<float>() > 0 && rangedWeapon.m_isAutomnatic))
                 {
-                    if (rangedWeapon.TryShoot(weaponFirepointPosition, fireDirection, gameObject, m_aimZone))
+                    if (rangedWeapon.TryShoot(weaponFirepoint, fireDirection, gameObject, m_aimZone))
                     {
                         // play shoot animation
                         playerAnimator.SetTrigger("Shoot");
@@ -448,6 +448,15 @@ public class PlayerInventoryInterface : MonoBehaviour
     public GameObject GetWeaponModel(Item weapon)
     {
         if (!weapon) return null;
+        // check display name
+        foreach (WeaponModelLink link in weaponModelLinks)
+        {
+            if (link.weapons.Any(w => w.m_displayName == weapon.m_displayName))
+            {
+                return link.model;
+            }
+        }
+        // check ID if nothing
         foreach (WeaponModelLink link in weaponModelLinks)
         {
             if (link.weapons.Any(w => w.id == weapon.id))
@@ -468,6 +477,15 @@ public class PlayerInventoryInterface : MonoBehaviour
     public Transform GetWeaponFirepoint(Item weapon)
     {
         if (!weapon) return null;
+        // check display name
+        foreach (WeaponModelLink link in weaponModelLinks)
+        {
+            if (link.weapons.Any(w => w.m_displayName == weapon.m_displayName))
+            {
+                return link.weaponFirepoint;
+            }
+        }
+        // check ID if nothing
         foreach (WeaponModelLink link in weaponModelLinks)
         {
             if (link.weapons.Any(w => w.id == weapon.id))
@@ -488,6 +506,15 @@ public class PlayerInventoryInterface : MonoBehaviour
     /// </returns>
     public string GetWeaponAnimatorBoolName(Item weapon)
     {
+        // check display name
+        foreach (WeaponModelLink link in weaponModelLinks)
+        {
+            if (link.weapons.Any(w => w.m_displayName == weapon.m_displayName))
+            {
+                return link.animatorBoolName;
+            }
+        }
+        // check ID if nothing
         foreach (WeaponModelLink link in weaponModelLinks)
         {
             if (link.weapons.Any(w => w.id == weapon.id))
