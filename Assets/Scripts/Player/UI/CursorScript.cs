@@ -27,7 +27,7 @@ public class CursorScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         Cursor.visible = false;
         // if(Gamepad.current != null)
