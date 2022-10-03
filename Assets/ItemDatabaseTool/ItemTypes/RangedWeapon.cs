@@ -45,8 +45,10 @@ public class RangedWeapon : Item
     [SerializeField] public int m_spareAmmo = 0;
     [SerializeField] public int m_maxSpareAmmo = 0;
     [SerializeField] public bool m_unlimitedAmmo = false;
+    [SerializeField] public List<StatsManager.StatType> m_tempAmmoStats = new List<StatsManager.StatType>();
     
     // Reloading:
+    [SerializeField] public bool m_isReloading = false;
     [SerializeField] public float m_reloadTime = 0;
     [SerializeField] public float m_reloadTimer = 0;
     //[SerializeField] private float m_reloadAmount = 0;
@@ -81,9 +83,17 @@ public class RangedWeapon : Item
     }
     public List<ShotInfo> m_allShots = new List<ShotInfo>();
 
-
-
     private float m_waitTimer = 0;
+
+    public override List<StatsManager.StatType> GetStatTypes()
+    {
+        List<StatsManager.StatType> statTypes = base.GetStatTypes();
+
+        // union of ammo stats and base stats
+        statTypes = statTypes.Union(m_tempAmmoStats).ToList();
+
+        return statTypes;
+    }
 
     /// <summary>
     /// [REQUIRED] Used to create a copy of the item. Make sure to set any unique values here!
@@ -113,6 +123,7 @@ public class RangedWeapon : Item
         newItem.m_spareAmmo = m_spareAmmo;
         newItem.m_maxSpareAmmo = m_maxSpareAmmo;
         newItem.m_unlimitedAmmo = m_unlimitedAmmo;
+        newItem.m_tempAmmoStats = m_tempAmmoStats;
 
         // Reloading:
         newItem.m_reloadTime = m_reloadTime;
@@ -598,6 +609,9 @@ public class RangedWeapon : Item
         int ammoToReload = Mathf.Min(m_clipSize - m_clipAmmo, m_spareAmmo);
         m_spareAmmo = Mathf.Max(0, m_spareAmmo - ammoToReload);
         m_clipAmmo += ammoToReload;
+
+        // clear temp ammo:
+        m_tempAmmoStats.Clear();
     }
 
     /// <summary>
@@ -713,6 +727,10 @@ public class RangedWeapon : Item
             rangedWeapon.m_maxSpareAmmo = EditorGUILayout.IntField(new GUIContent("Max Spare Ammo", "The max amount of ammo in reserve the player can carry"), rangedWeapon.m_maxSpareAmmo);
             // unlimited ammo
             rangedWeapon.m_unlimitedAmmo = EditorGUILayout.Toggle(new GUIContent("Unlimited Ammo", "If this weapon has unlimited ammo"), rangedWeapon.m_unlimitedAmmo);
+            // // m_tempAmmoStats (list)
+            // SerializedProperty tempAmmoStats = serializedObject.FindProperty("m_tempAmmoStats");
+            // EditorGUILayout.PropertyField(tempAmmoStats, true);
+            // serializedObject.ApplyModifiedProperties();
 
             // reloading:
             GUILayout.Label("Reloading", CustomEditorStuff.center_bold_label);

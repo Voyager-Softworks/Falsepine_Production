@@ -19,7 +19,7 @@ public class Equipment : Item
 {
     public interface Useable
     {
-        bool TryUse();
+        bool TryUse(Item _item);
     }
 
     // make sure to set variables as serialized fields in the inspector, so that they can be saved!
@@ -66,7 +66,7 @@ public class Equipment : Item
             WasUsed();
         }
         if (newEquipment.GetComponent<Useable>() != null){
-            if (newEquipment.GetComponent<Useable>().TryUse()){
+            if (newEquipment.GetComponent<Useable>().TryUse(this)){
                 WasUsed();
             }
         }
