@@ -223,6 +223,12 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     {
         m_bankLevel++;
 
+        // if level over 10, set to 10
+        if (m_bankLevel > 10)
+        {
+            m_bankLevel = 10;
+        }
+
         // update slot amount
         UpdateBankSlotAmount();
     }
