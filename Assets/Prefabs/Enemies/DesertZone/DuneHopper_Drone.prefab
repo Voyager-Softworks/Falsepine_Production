@@ -1307,6 +1307,7 @@ GameObject:
   - component: {fileID: 5780602456873932640}
   - component: {fileID: 5780602456873932655}
   - component: {fileID: 5780602456873932654}
+  - component: {fileID: 60088914}
   m_Layer: 0
   m_Name: DuneHopper_Drone
   m_TagString: Untagged
@@ -1323,7 +1324,7 @@ Transform:
   m_GameObject: {fileID: 5780602456873932664}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -21.076715, y: 0.64586306, z: -5.6302695}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
   m_Children:
   - {fileID: 4191202129835346933}
   - {fileID: 5160528793260587710}
@@ -1571,7 +1572,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 10
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1624,6 +1625,19 @@ MonoBehaviour:
   speedParam: Speed
   angularSpeedParam: AngularSpeed
   useRootMotion: 1
+--- !u!65 &60088914
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5780602456873932664}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 0.5, z: 0.5}
+  m_Center: {x: 0, y: 0.75, z: -0.42}
 --- !u!1 &5927069774336202994
 GameObject:
   m_ObjectHideFlags: 0
