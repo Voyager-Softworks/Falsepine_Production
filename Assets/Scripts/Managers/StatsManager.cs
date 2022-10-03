@@ -52,6 +52,9 @@ public class StatsManager : MonoBehaviour
         public static StatType TrapDamage { get { return new StatType("TrapDamage"); } }
         public static StatType EnemyDamage { get { return new StatType("EnemyDamage"); } }
         public static StatType MeleeDamage { get { return new StatType("MeleeDamage"); } }
+        public static StatType PoisonDamage { get { return new StatType("PoisonDamage"); } }
+        public static StatType FireDamage { get { return new StatType("FireDamage"); } }
+        public static StatType SilverDamage { get { return new StatType("SilverDamage"); } }
 
         // Economy
         public static StatType ItemCost { get { return new StatType("ItemCost"); } }
@@ -383,6 +386,9 @@ public class StatsManager : MonoBehaviour
             StatType.TrapDamage,
             StatType.EnemyDamage,
             StatType.MeleeDamage,
+            StatType.PoisonDamage,
+            StatType.FireDamage,
+            StatType.SilverDamage,
         };
 
         float additiveVal = 0.0f;
