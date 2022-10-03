@@ -286,7 +286,9 @@ public class ItemDatabase
             Item.Save(GetDatabaseFoldersPath(), fileName, item);
 
             // save this asset
+            #if UNITY_EDITOR
             AssetDatabase.SaveAssetIfDirty(AssetDatabase.GUIDFromAssetPath(AssetDatabase.GetAssetPath(item)));
+            #endif
         }
     }
 
