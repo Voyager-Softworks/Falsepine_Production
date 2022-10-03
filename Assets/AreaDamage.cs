@@ -65,8 +65,11 @@ public class AreaDamage : MonoBehaviour
                     // add to hit list
                     hitObjects.Add(health);
 
+                    // calculate damage
+                    float calcDmg = StatsManager.CalculateDamage(m_statsProfile, m_damage);
+
                     // take damage
-                    health.TakeDamage(new Health_Base.DamageStat(m_damage, gameObject, collider.transform.position, transform.position, m_statsProfile));
+                    health.TakeDamage(new Health_Base.DamageStat(calcDmg, gameObject, collider.transform.position, transform.position, m_statsProfile));
                 }
             }
         }
