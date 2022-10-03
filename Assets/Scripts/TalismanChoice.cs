@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 [RequireComponent(typeof(Interactable))]
 public class TalismanChoice : ToggleableWindow
@@ -26,7 +27,14 @@ public class TalismanChoice : ToggleableWindow
         // make random talismans
         foreach (ChoiceLink link in m_choices)
         {
+            int tries = 100;
+            // ensure talisman is unique
             link.m_talisman = StatsManager.instance.GetRandomTalisman();
+            while (m_choices.Any<ChoiceLink>(x => x.m_talisman.m_statMod.statType == link.m_talisman.m_statMod.statType) && tries > 0)
+            {
+                link.m_talisman = StatsManager.instance.GetRandomTalisman();
+                tries--;
+            }
 
             link.m_button.GetComponentInChildren<TextMeshProUGUI>().text = link.m_talisman.m_statMod.ToText();
         }

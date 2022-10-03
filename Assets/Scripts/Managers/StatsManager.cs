@@ -386,6 +386,9 @@ public class StatsManager : MonoBehaviour
             StatType.TrapDamage,
             StatType.EnemyDamage,
             StatType.MeleeDamage,
+            StatType.PoisonDamage,
+            StatType.FireDamage,
+            StatType.SilverDamage,
         };
 
         float additiveVal = 0.0f;
