@@ -30749,6 +30749,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8113514615204635224}
+  - component: {fileID: 5283079217918575199}
+  - component: {fileID: 451187845133070684}
+  - component: {fileID: 1770064450101163354}
+  - component: {fileID: 2980981518228664705}
+  - component: {fileID: 4388527622188927514}
+  - component: {fileID: 1256734798184295882}
   m_Layer: 0
   m_Name: GrubSwarm
   m_TagString: Untagged
@@ -30774,6 +30780,227 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5283079217918575199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8113514615204635223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 071ae0d8973f358d7a2d08164fc0fbcb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 3
+  destroyOnCollision: 0
+  destroyOnGround: 0
+  destroyOnWall: 0
+  tickRate: 0.5
+  setInactiveOnCollision: 0
+  isActive: 1
+  destroyParticle: {fileID: 0}
+  timeBeforeDetection: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  radius: 1
+--- !u!135 &451187845133070684
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8113514615204635223}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.77
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1770064450101163354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8113514615204635223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a119b25d52728621583e7f3194633c58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggers: []
+  audioChannels:
+  - name: DeathSound
+    volume: 1
+    pitch: 1
+    clip: {fileID: 0}
+    loop: 0
+    playOnAwake: 0
+    SpatialBlend: 0
+    maxDistance: 300
+    minDistance: 1
+    distanceCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: -1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    source: {fileID: 0}
+    playing: 0
+    paused: 0
+    time: 0
+    timeNormalized: 0
+    duration: 0
+  - name: DamageSound
+    volume: 1
+    pitch: 1
+    clip: {fileID: 0}
+    loop: 0
+    playOnAwake: 0
+    SpatialBlend: 0
+    maxDistance: 300
+    minDistance: 1
+    distanceCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: -1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    source: {fileID: 0}
+    playing: 0
+    paused: 0
+    time: 0
+    timeNormalized: 0
+    duration: 0
+  transitions: []
+--- !u!114 &2980981518228664705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8113514615204635223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382e18cd65ba3ee40981aca66eb43b48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_currentHealth: 100
+  m_maxHealth: 100
+  m_disablePlayerCollision: 1
+  m_damageHistory: []
+  m_deathSoundName: DeathSound
+  m_damageSoundname: DamageSound
+  m_monsterType: {fileID: 0}
+  m_bloodEffect: {fileID: 0}
+  m_silverReward: 3
+--- !u!114 &4388527622188927514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8113514615204635223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8b31cddfd229080bbc8f108a7752a9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AI_Behaviour: {fileID: 11400000, guid: 29778ebf0196d1408b5b9219bbbfe73e, type: 2}
+  faction: 
+  inspectorProperties: []
+  nodeTree:
+    rootNode:
+      GUID: 
+      parentGUID: 
+      title: 
+      childGUIDs: []
+      nodeType: 0
+      position: {x: 0, y: 0}
+      runtime: {fileID: 0}
+      runtimequery: {fileID: 0}
+      properties: []
+      runtimeLogicType: 
+      queryType: 
+      noLogic: 0
+      noQuery: 0
+    rootLeaf:
+      nodeData:
+        GUID: 
+        parentGUID: 
+        title: 
+        childGUIDs: []
+        nodeType: 0
+        position: {x: 0, y: 0}
+        runtime: {fileID: 0}
+        runtimequery: {fileID: 0}
+        properties: []
+        runtimeLogicType: 
+        queryType: 
+        noLogic: 0
+        noQuery: 0
+      children: []
+    nodes: []
+--- !u!195 &1256734798184295882
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8113514615204635223}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 2
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 0
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &8113514615234561211
 GameObject:
   m_ObjectHideFlags: 0
