@@ -17,6 +17,11 @@ using UnityEditor;
 [Serializable]
 public class Equipment : Item
 {
+    public interface Useable
+    {
+        bool TryUse();
+    }
+
     // make sure to set variables as serialized fields in the inspector, so that they can be saved!
 
     public override string GetTypeDisplayName(){
@@ -24,6 +29,8 @@ public class Equipment : Item
     }
 
     [SerializeField] public GameObject m_equipmentPrefab;
+    [SerializeField] public float m_useDelay = 0.75f;
+    public float m_useDelayTimer = 0;
 
     /// <summary>
     /// [REQUIRED] Used to create a copy of the item. Make sure to set any unique values here!
@@ -36,6 +43,7 @@ public class Equipment : Item
         // Setting unique values here:
         // example valye
         newItem.m_equipmentPrefab = m_equipmentPrefab;
+        newItem.m_useDelay = m_useDelay;
 
         return newItem;
     }
@@ -44,14 +52,31 @@ public class Equipment : Item
     public override void ManualUpdate(GameObject _owner)
     {
         base.ManualUpdate(_owner);
+
+        // update all timers and ensure they are never negative:
+        m_useDelayTimer = Mathf.Max(0, m_useDelayTimer - Time.deltaTime);
     }
 
-    public void TossPrefab(Transform _throwTransform, Vector3 _direction, GameObject _owner)
+    public void UseEquipment(Transform _throwTransform, Vector3 _direction, GameObject _owner)
     {
         GameObject newEquipment = Instantiate(m_equipmentPrefab, _throwTransform.position, Quaternion.identity);
-        newEquipment.GetComponent<ItemThrow>()?.TossPrefab(_throwTransform, _direction, _owner);
+        if (newEquipment.GetComponent<ItemThrow>() != null){
+            newEquipment.GetComponent<ItemThrow>().TossPrefab(_throwTransform, _direction, _owner);
+            
+            WasUsed();
+        }
+        if (newEquipment.GetComponent<Useable>() != null){
+            if (newEquipment.GetComponent<Useable>().TryUse()){
+                WasUsed();
+            }
+        }
     }
 
+    private void WasUsed(){
+        currentStackSize -= 1;
+
+        m_useDelayTimer = m_useDelay;
+    }
     
     //Custom editor for this class
     #if UNITY_EDITOR
@@ -74,6 +99,7 @@ public class Equipment : Item
 
             // Your custom values here
             item.m_equipmentPrefab = (GameObject)EditorGUILayout.ObjectField("Equipment Prefab", item.m_equipmentPrefab, typeof(GameObject), false);
+            item.m_useDelay = EditorGUILayout.FloatField("Use Delay", item.m_useDelay);
 
             //end red box
             GUILayout.EndVertical();

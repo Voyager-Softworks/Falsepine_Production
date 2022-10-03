@@ -319,7 +319,8 @@ public class Inventory : MonoBehaviour
     /// <summary>
     /// Fill the ammo of every ranged weapon to max.
     /// </summary>
-    public void FillAmmo(){
+    public bool FillAmmo(){
+        bool didChange = false;
         foreach (Inventory.InventorySlot slot in slots)
         {
             Item item = slot.item;
@@ -327,10 +328,19 @@ public class Inventory : MonoBehaviour
             if (item != null && item as RangedWeapon != null)
             {
                 RangedWeapon weapon = item as RangedWeapon;
-                weapon.m_clipAmmo = weapon.m_clipSize;
-                weapon.m_spareAmmo = weapon.m_maxSpareAmmo;
+                if (weapon.m_clipAmmo < weapon.m_clipSize)
+                {
+                    weapon.m_clipAmmo = weapon.m_clipSize;
+                    didChange = true;
+                }
+                if (weapon.m_spareAmmo < weapon.m_clipSize)
+                {
+                    weapon.m_spareAmmo = weapon.m_clipSize;
+                    didChange = true;
+                }
             }
         }
+        return didChange;
     }
 
     /// <summary>
