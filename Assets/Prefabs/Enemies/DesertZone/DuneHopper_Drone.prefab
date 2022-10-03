@@ -1307,6 +1307,8 @@ GameObject:
   - component: {fileID: 5780602456873932640}
   - component: {fileID: 5780602456873932655}
   - component: {fileID: 5780602456873932654}
+  - component: {fileID: 9200489870830500083}
+  - component: {fileID: 8059934843617477028}
   m_Layer: 0
   m_Name: DuneHopper_Drone
   m_TagString: Untagged
@@ -1624,6 +1626,39 @@ MonoBehaviour:
   speedParam: Speed
   angularSpeedParam: AngularSpeed
   useRootMotion: 1
+--- !u!65 &9200489870830500083
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5780602456873932664}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.87, y: 2.06, z: 2.05}
+  m_Center: {x: 0, y: 0, z: -0.29}
+--- !u!114 &8059934843617477028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5780602456873932664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e196a347754e74e0ca26934429658e04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eyesBone: {fileID: 6690832623418665700}
+  maxHearingRange: 10
+  eyeDirection: 3
+  sightDistance: 12.83
+  sightAngle: 212.5
+  sightMask:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &5927069774336202994
 GameObject:
   m_ObjectHideFlags: 0
