@@ -153,14 +153,17 @@ public class RangedWeapon : Item
     /// <summary>
     /// Tries to shoot the weapon.
     /// </summary>
-    public bool TryShoot(Vector3 _origin, Vector3 _direction, GameObject _owner, AimZone _aimZone)
+    public bool TryShoot(Transform _originTransform, Vector3 _direction, GameObject _owner, AimZone _aimZone)
     {
         if (m_isAiming && m_shootTimer <= 0 && m_waitTimer <= 0)
         {
+            // get origin point:
+            Vector3 originPoint = _originTransform.position;
+
             if (m_clipAmmo > 0)
             {
                 //RaycastShoot(_origin, _direction, _owner);
-                AimZoneShoot(_origin, _direction, _owner, _aimZone);
+                AimZoneShoot(_originTransform, _direction, _owner, _aimZone);
                 return true;
             }
             else {
@@ -170,7 +173,7 @@ public class RangedWeapon : Item
                 // play empty sound:
                 if (m_emptySound != null)
                 {
-                    GameObject sound = Instantiate(m_emptySound, _origin, Quaternion.identity);
+                    GameObject sound = Instantiate(m_emptySound, originPoint, Quaternion.identity);
                 }
             }
         }
@@ -187,7 +190,10 @@ public class RangedWeapon : Item
     /// <param name="_direction"></param>
     /// <param name="_owner"></param>
     /// <param name="_aimZone"></param>
-    public void AimZoneShoot(Vector3 _origin, Vector3 _direction, GameObject _owner, AimZone _aimZone){
+    public void AimZoneShoot(Transform _originTransform, Vector3 _direction, GameObject _owner, AimZone _aimZone){
+
+        // get the origin point:
+        Vector3 originPoint = _originTransform.position;
 
         m_shootTimer = m_shootTime;
         UpdateWaitTimer(m_shootTime);
@@ -260,13 +266,13 @@ public class RangedWeapon : Item
                     int layerMask = -1;
                     // to hit position
                     Vector3 toPosition = Vector3.Lerp(corner, bounds.center, 0.5f);
-                    if (Physics.Raycast(_origin, toPosition - _origin, out hitInfo, m_range, layerMask, QueryTriggerInteraction.Ignore))
+                    if (Physics.Raycast(originPoint, toPosition - originPoint, out hitInfo, m_range, layerMask, QueryTriggerInteraction.Ignore))
                     {
                         
                         if (hitInfo.collider.GetComponentInParent<Health_Base>() == healthScript)
                         {
                             // update shotInfo
-                            shotInfo.originPoint = _origin;
+                            shotInfo.originPoint = originPoint;
                             shotInfo.hitPoint = hitInfo.point;
                             shotInfo.healthScriptHit = healthScript;
 
@@ -298,7 +304,7 @@ public class RangedWeapon : Item
         {
             if (Mathf.Abs(x.damage - y.damage) < 0.1f)
             {
-                return Vector3.Distance(x.hitPoint, _origin).CompareTo(Vector3.Distance(y.hitPoint, _origin));
+                return Vector3.Distance(x.hitPoint, originPoint).CompareTo(Vector3.Distance(y.hitPoint, originPoint));
             }
             return y.damage.CompareTo(x.damage);
         });
@@ -340,7 +346,7 @@ public class RangedWeapon : Item
 
             //Deal damage
             Debug.Log("Original damage: " + m_damage + " | Calcd damage: " + shotInfo.damage);
-            shotInfo.healthScriptHit.TakeDamage(new Health_Base.DamageStat(shotInfo.damage, _owner, _origin, shotInfo.hitPoint, this));
+            shotInfo.healthScriptHit.TakeDamage(new Health_Base.DamageStat(shotInfo.damage, _owner, originPoint, shotInfo.hitPoint, this));
 
             // hit effect
             if (m_hitEffect != null)
@@ -354,7 +360,7 @@ public class RangedWeapon : Item
             //create trail effect
             if (m_trailEffect != null)
             {
-                GameObject trail = Instantiate(m_trailEffect, _origin, Quaternion.identity);
+                GameObject trail = Instantiate(m_trailEffect, originPoint, Quaternion.identity);
                 // LineRenderer lineRenderer = trail.GetComponent<LineRenderer>();
                 // if (lineRenderer != null)
                 // {
@@ -375,14 +381,14 @@ public class RangedWeapon : Item
         // play shoot sound:
         if (m_shootSound != null)
         {
-            GameObject sound = Instantiate(m_shootSound, _origin, Quaternion.identity);
+            GameObject sound = Instantiate(m_shootSound, originPoint, Quaternion.identity);
             Destroy(sound, 2.0f);
         }
 
         //Trigger auditory event on all sensors in range:
         foreach (NodeAI.NodeAI_Senses sensor in FindObjectsOfType<NodeAI.NodeAI_Senses>())
         {
-            if (Vector3.Distance(sensor.gameObject.transform.position, _origin) < sensor.maxHearingRange)
+            if (Vector3.Distance(sensor.gameObject.transform.position, originPoint) < sensor.maxHearingRange)
             {
                 sensor.RegisterSensoryEvent(_owner, sensor.gameObject, 10.0f, NodeAI.SensoryEvent.SenseType.AURAL);
             }
@@ -391,8 +397,9 @@ public class RangedWeapon : Item
         // create shoot effect:
         if (m_shootEffect != null)
         {
-            GameObject effect = Instantiate(m_shootEffect, _origin, Quaternion.identity);
-            effect.transform.LookAt(_origin + _direction);
+            GameObject effect = Instantiate(m_shootEffect, originPoint, Quaternion.identity);
+            // look same direction as originTransform
+            effect.transform.rotation = _originTransform.rotation;
             Destroy(effect, 2.0f);
         }
 
