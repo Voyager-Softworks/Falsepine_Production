@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AmmoBoxEquipment : MonoBehaviour, Equipment.Useable
 {
-    public bool TryUse() {
+    public bool TryUse(Item _item) {
         // find player inventory
         Inventory inventory = InventoryManager.instance.GetInventory("player");
         

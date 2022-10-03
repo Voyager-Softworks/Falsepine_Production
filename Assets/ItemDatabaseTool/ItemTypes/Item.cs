@@ -134,7 +134,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
 
     // StatsManager.UsesStats interface implementation
     [SerializeField] public List<StatsManager.StatType> m_usedStatTypes = new List<StatsManager.StatType>();
-    public List<StatsManager.StatType> GetStatTypes()
+    public virtual List<StatsManager.StatType> GetStatTypes()
     {
         return m_usedStatTypes;
     }
