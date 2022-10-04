@@ -52,13 +52,6 @@ public class PlayerInventoryInterface : MonoBehaviour
     public Item selectedEquipment; ///< The currently selected equipment.
     public Item selectedMeleeWeapon; ///< The currently selected melee weapon.
 
-    [Header("Melee")]
-    public float meleeAttackDamage = 20.0f; ///< The damage of the melee attack.
-    public float meleeAttackRange = 2.0f; ///< The range of the melee attack.
-    public float meleeAttackSize = 2.0f; ///< The size of the melee attack.
-    public float meleeAttackCooldown = 0.5f; ///< The cooldown of the melee attack.
-    private float meleeAttackTimer = 0.0f; ///< The timer of the melee attack.
-
     [Serializable]
     /// <summary>
     ///  Wrapper class grouping abstract weapon data with the weapons model.
@@ -252,6 +245,8 @@ public class PlayerInventoryInterface : MonoBehaviour
                     {
                         // play shoot animation
                         playerAnimator.SetTrigger("Shoot");
+
+                        playerAnimator.SetLayerWeight(2, 1);
                     }
                 }
 
@@ -261,6 +256,8 @@ public class PlayerInventoryInterface : MonoBehaviour
                     if (rangedWeapon.TryReload(gameObject))
                     {
                         playerAnimator.SetTrigger("Reload");
+
+                        playerAnimator.SetLayerWeight(2, 1);
                     }
                 }
 
@@ -268,6 +265,8 @@ public class PlayerInventoryInterface : MonoBehaviour
                 if (aimWeaponAction.ReadValue<float>() > 0)
                 {
                     rangedWeapon.TrySetAim(true, gameObject);
+
+                    playerAnimator.SetLayerWeight(2, 1);
                 }
                 else
                 {
@@ -278,6 +277,8 @@ public class PlayerInventoryInterface : MonoBehaviour
                 if (swapWeaponAction.triggered)
                 {
                     rangedWeapon.TrySetAim(false, gameObject);
+
+                    playerAnimator.SetLayerWeight(2, 1);
                 }
             }
 
@@ -311,14 +312,17 @@ public class PlayerInventoryInterface : MonoBehaviour
                         throwPoint = transform;
                     }
 
-                    equipment.UseEquipment(throwPoint, spawnDirection, gameObject);
+                    if (equipment.UseEquipment(throwPoint, spawnDirection, gameObject)){
+                        string animatorName = GetWeaponAnimatorBoolName(selectedEquipment);
+                        if (animatorName != "") playerAnimator.SetTrigger(animatorName);
 
-                    string animatorName = GetWeaponAnimatorBoolName(selectedEquipment);
-                    if (animatorName != "") playerAnimator.SetTrigger(animatorName);
+                        // make player look at cursor
+                        PlayerMovement playerMovement = GetComponent<PlayerMovement>();
+                        playerMovement.SetLookDirection(playerMovement.GetMouseAimPlanePoint() - transform.position);
 
-                    // make player look at cursor
-                    PlayerMovement playerMovement = GetComponent<PlayerMovement>();
-                    playerMovement.SetLookDirection(playerMovement.GetMouseAimPlanePoint() - transform.position);
+                        playerAnimator.SetLayerWeight(1, 0);
+                        playerAnimator.SetLayerWeight(2, 0);
+                    }
                 }
             }
         }
@@ -348,10 +352,14 @@ public class PlayerInventoryInterface : MonoBehaviour
 
                     // set animator
                     string animatorBoolName = GetWeaponAnimatorBoolName(selectedMeleeWeapon);
+                    if (meleeWeapon.m_shouldDoComboSwing) {
+                        animatorBoolName += "_Combo";
+                    }
                     if (playerAnimator && animatorBoolName != "")
                     {
-                        DisableAllAnimatorWeapons();
+                        //DisableAllAnimatorWeapons();
                         playerAnimator.SetBool(animatorBoolName, true);
+                        playerAnimator.SetLayerWeight(2, 1);
                     }
                 }
             }
@@ -363,6 +371,15 @@ public class PlayerInventoryInterface : MonoBehaviour
             if (meleeWeapon != null)
             {
                 selectedMeleeWeapon.ManualUpdate(gameObject);
+            }
+
+            // after melee attack, select weapon (only once)
+            if (meleeWeapon.m_comboTimer <= (0 + meleeWeapon.m_comboTime/10.0f) && GetWeaponModel(selectedMeleeWeapon).activeSelf)
+            {
+                SelectWeapon(selectedWeaponType);
+            }
+            else if (meleeWeapon.m_comboTimer > 0){
+                playerAnimator.SetLayerWeight(2, 1);
             }
         }
 
@@ -603,6 +620,13 @@ public class PlayerInventoryInterface : MonoBehaviour
         if (weaponModel)
         {
             weaponModel.SetActive(true);
+
+            // play equip sound
+            RangedWeapon rangedWeapon = selectedWeapon as RangedWeapon;
+            if (rangedWeapon)
+            {
+                Instantiate(rangedWeapon.m_equipSound, weaponModel.transform.position, Quaternion.identity, null);
+            }
         }
     }
 
