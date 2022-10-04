@@ -157,6 +157,7 @@ MonoBehaviour:
     - e4343d12-6bf4-41fd-b04f-8d6d116c4e88
     - 2c12d7d1-7f92-4732-8e41-8f8fed331b9a
     - 73d52665-932a-4e5a-8c2f-4161db7090a7
+    - e1d4dd1c-4fd8-431e-bd56-00f5f67233b8
     nodeType: 4
     position: {x: 1018, y: 550}
     runtime: {fileID: 0}
@@ -3123,245 +3124,6 @@ MonoBehaviour:
     queryType: 
     noLogic: 1
     noQuery: 1
-  - GUID: db082722-d675-43bc-b7bf-5087beb216eb
-    parentGUID: c2d1d6a3-fbe8-4f31-b15b-25fed8b3d550
-    title: Sequence
-    childGUIDs:
-    - b4067a01-f6f6-41db-aa14-8d06db067232
-    - 5d516a8c-c47e-4bb1-93d2-28bc16e2e1dd
-    - 21846f6e-4c24-4427-aa46-e8b115748d46
-    nodeType: 4
-    position: {x: 1965, y: 5068}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: b4067a01-f6f6-41db-aa14-8d06db067232
-    parentGUID: db082722-d675-43bc-b7bf-5087beb216eb
-    title: SetAnimatorTrigger
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 2158, y: 5068}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: NAME
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: Fly
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Animation.SetAnimatorTrigger, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 5d516a8c-c47e-4bb1-93d2-28bc16e2e1dd
-    parentGUID: db082722-d675-43bc-b7bf-5087beb216eb
-    title: WaitUntilAnimationComplete
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 2158, y: 5168}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: STATE NAME
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: FlyIn
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Animation.WaitUntilAnimationComplete, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 21846f6e-4c24-4427-aa46-e8b115748d46
-    parentGUID: db082722-d675-43bc-b7bf-5087beb216eb
-    title: BreathAttack
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 2150, y: 5279}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: PARTICLE EFFECT
-      GUID: null
-      paramReference: null
-      serializedTypename: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 7770020081936182904, guid: 9155ec2e1ba5db44b8e031822f442113, type: 3}
-      output: 0
-    - name: INDICATOR
-      GUID: null
-      paramReference: null
-      serializedTypename: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 1774889345539922986, guid: ec5d226caa03cfef592981d12449aeb0, type: 3}
-      output: 0
-    - name: ANIMATION TRIGGER
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: LaserBeam
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: SOUND
-      GUID: null
-      paramReference: null
-      serializedTypename: UnityEngine.AudioClip, UnityEngine.AudioModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 8300000, guid: 806a61e91ff34ee4e9dfa5b0694764b6, type: 3}
-      output: 0
-    - name: ATTACK START DELAY
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 1.2
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: ATTACK DURATION
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 2.8
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: ATTACK DAMAGE
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 10
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: CONTINUOUS
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 1
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: TICK RATE
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0.1
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: MOUTH BONE
-      GUID: 3a751cc1-ae15-4b25-8c38-d80b50539fc1
-      paramReference: 4b0bd5bc-162b-4f2b-b485-72f12eaaee94
-      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: Boss.Omen.BreathAttack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
   - GUID: 3a751cc1-ae15-4b25-8c38-d80b50539fc1
     parentGUID: 4b0bd5bc-162b-4f2b-b485-72f12eaaee94
     title: MouthBone
@@ -3738,6 +3500,7 @@ MonoBehaviour:
     - 234e6167-32a9-4347-be61-3ae6cff865ed
     - 664d96b2-1593-4d97-95de-91cf82a1b47b
     - 9543d5b8-409c-4dac-ab86-4fe251134316
+    - 0ce46c10-44e9-4928-be1d-cd78904d89a4
     - d26f042e-1421-4abc-a415-6f25c5037752
     nodeType: 4
     position: {x: 2783, y: -348}
@@ -4101,7 +3864,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       svalue: 
       ivalue: 0
-      fvalue: 1.5
+      fvalue: 1.6
       bvalue: 0
       cvalue: {r: 0, g: 0, b: 0, a: 0}
       v2value: {x: 0, y: 0}
@@ -4171,35 +3934,6 @@ MonoBehaviour:
       output: 0
     runtimeLogicType: Boss.Omen.BreathAttack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: d26f042e-1421-4abc-a415-6f25c5037752
-    parentGUID: da74db18-9bf2-4169-857d-13a82510680e
-    title: WaitUntilAnimationComplete
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 2955, y: 581}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: STATE NAME
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: LaserBeam
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Animation.WaitUntilAnimationComplete, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     queryType: 
     noLogic: 0
     noQuery: 1
@@ -4631,7 +4365,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       svalue: 
       ivalue: 0
-      fvalue: 1
+      fvalue: 1.5
       bvalue: 0
       cvalue: {r: 0, g: 0, b: 0, a: 0}
       v2value: {x: 0, y: 0}
@@ -5022,7 +4756,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       svalue: 
       ivalue: 0
-      fvalue: 1
+      fvalue: 1.5
       bvalue: 0
       cvalue: {r: 0, g: 0, b: 0, a: 0}
       v2value: {x: 0, y: 0}
@@ -5051,7 +4785,7 @@ MonoBehaviour:
         PublicKeyToken=b77a5c561934e089
       svalue: 
       ivalue: 0
-      fvalue: 1
+      fvalue: 1.5
       bvalue: 0
       cvalue: {r: 0, g: 0, b: 0, a: 0}
       v2value: {x: 0, y: 0}
@@ -5754,6 +5488,392 @@ MonoBehaviour:
     queryType: 
     noLogic: 0
     noQuery: 1
+  - GUID: db082722-d675-43bc-b7bf-5087beb216eb
+    parentGUID: c2d1d6a3-fbe8-4f31-b15b-25fed8b3d550
+    title: Sequence
+    childGUIDs:
+    - b4067a01-f6f6-41db-aa14-8d06db067232
+    - 5d516a8c-c47e-4bb1-93d2-28bc16e2e1dd
+    - 21846f6e-4c24-4427-aa46-e8b115748d46
+    - 2811474d-c8b9-4dac-908c-f95967316ee2
+    - 8677e6bb-eb8a-4cbf-8e00-a885ab49e6b8
+    nodeType: 4
+    position: {x: 1965, y: 5068}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: b4067a01-f6f6-41db-aa14-8d06db067232
+    parentGUID: db082722-d675-43bc-b7bf-5087beb216eb
+    title: SetAnimatorTrigger
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 2150, y: 5007}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: NAME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: Fly
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Animation.SetAnimatorTrigger, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 5d516a8c-c47e-4bb1-93d2-28bc16e2e1dd
+    parentGUID: db082722-d675-43bc-b7bf-5087beb216eb
+    title: WaitUntilAnimationComplete
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 2150, y: 5107}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: STATE NAME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: FlyIn
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Animation.WaitUntilAnimationComplete, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 21846f6e-4c24-4427-aa46-e8b115748d46
+    parentGUID: db082722-d675-43bc-b7bf-5087beb216eb
+    title: BreathAttack
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 2150, y: 5307}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: PARTICLE EFFECT
+      GUID: null
+      paramReference: null
+      serializedTypename: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 7770020081936182904, guid: 9155ec2e1ba5db44b8e031822f442113, type: 3}
+      output: 0
+    - name: INDICATOR
+      GUID: null
+      paramReference: null
+      serializedTypename: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 1774889345539922986, guid: ec5d226caa03cfef592981d12449aeb0, type: 3}
+      output: 0
+    - name: ANIMATION TRIGGER
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: LaserBeam
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: SOUND
+      GUID: null
+      paramReference: null
+      serializedTypename: UnityEngine.AudioClip, UnityEngine.AudioModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 8300000, guid: 806a61e91ff34ee4e9dfa5b0694764b6, type: 3}
+      output: 0
+    - name: ATTACK START DELAY
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 1.2
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: ATTACK DURATION
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 1.6
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: ATTACK DAMAGE
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 10
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: CONTINUOUS
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 1
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: TICK RATE
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 0.1
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: MOUTH BONE
+      GUID: 3a751cc1-ae15-4b25-8c38-d80b50539fc1
+      paramReference: 4b0bd5bc-162b-4f2b-b485-72f12eaaee94
+      serializedTypename: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: Boss.Omen.BreathAttack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 2811474d-c8b9-4dac-908c-f95967316ee2
+    parentGUID: db082722-d675-43bc-b7bf-5087beb216eb
+    title: WaitUntilAnimationComplete
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 2150, y: 5634}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: STATE NAME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: LaserBeam
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Animation.WaitUntilAnimationComplete, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 8677e6bb-eb8a-4cbf-8e00-a885ab49e6b8
+    parentGUID: db082722-d675-43bc-b7bf-5087beb216eb
+    title: WaitFor
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 2150, y: 5207}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: TIME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 1
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.WaitFor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 0ce46c10-44e9-4928-be1d-cd78904d89a4
+    parentGUID: da74db18-9bf2-4169-857d-13a82510680e
+    title: WaitFor
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 2955, y: 578}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: TIME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 1
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.WaitFor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: d26f042e-1421-4abc-a415-6f25c5037752
+    parentGUID: da74db18-9bf2-4169-857d-13a82510680e
+    title: WaitUntilAnimationComplete
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 2955, y: 702}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: STATE NAME
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: LaserBeam
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.Animation.WaitUntilAnimationComplete, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: e1d4dd1c-4fd8-431e-bd56-00f5f67233b8
+    parentGUID: b197aade-01df-4267-8fb3-a4e084c36723
+    title: WaitFor
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 1203, y: 991}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: TIME
+      GUID: 76b5c940-7faf-4973-aed6-6a46a76224a7
+      paramReference: 
+      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: 
+      ivalue: 0
+      fvalue: 1.5
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    runtimeLogicType: NodeAI.WaitFor, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
   exposedProperties:
   - name: Started
     GUID: 561a9890-5eb4-43cf-a485-03bafe0039dc
@@ -6115,6 +6235,7 @@ MonoBehaviour:
     - 8a5307ff-7d4c-4646-8cc2-ab6ce242b64d
     - f26792f3-b667-4f1e-87fc-c02d0f0e0560
     - 73d52665-932a-4e5a-8c2f-4161db7090a7
+    - e1d4dd1c-4fd8-431e-bd56-00f5f67233b8
   - title: Stage 3 Transition
     childGUIDs:
     - 6368bb99-f47b-4c49-83a2-03a759bf1f10
@@ -6208,6 +6329,8 @@ MonoBehaviour:
     - 4f140d19-5ea4-4320-8b84-3452154af21e
     - b4067a01-f6f6-41db-aa14-8d06db067232
     - 5d516a8c-c47e-4bb1-93d2-28bc16e2e1dd
+    - 2811474d-c8b9-4dac-908c-f95967316ee2
+    - 8677e6bb-eb8a-4cbf-8e00-a885ab49e6b8
   - title: Takeoff
     childGUIDs:
     - 5f8453e3-4884-43d8-a84c-327038105b54
