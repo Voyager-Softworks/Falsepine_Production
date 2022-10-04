@@ -57,25 +57,41 @@ public class Equipment : Item
         m_useDelayTimer = Mathf.Max(0, m_useDelayTimer - Time.deltaTime);
     }
 
-    public void UseEquipment(Transform _throwTransform, Vector3 _direction, GameObject _owner)
+    public bool UseEquipment(Transform _throwTransform, Vector3 _direction, GameObject _owner)
     {
         GameObject newEquipment = Instantiate(m_equipmentPrefab, _throwTransform.position, Quaternion.identity);
         if (newEquipment.GetComponent<ItemThrow>() != null){
             newEquipment.GetComponent<ItemThrow>().TossPrefab(_throwTransform, _direction, _owner);
             
             WasUsed();
+
+            return true;
         }
+
         if (newEquipment.GetComponent<Useable>() != null){
             if (newEquipment.GetComponent<Useable>().TryUse(this)){
                 WasUsed();
+
+                return true;
             }
         }
+
+        return false;
     }
 
     private void WasUsed(){
         currentStackSize -= 1;
 
         m_useDelayTimer = m_useDelay;
+        
+        if (currentStackSize <= 0){
+            // remove item from inventory
+            Inventory inv = InventoryManager.instance.GetInventory("player");
+            int index = inv.GetItemIndex(this);
+            if (index != -1){
+                inv.RemoveItemFromInventory(index);
+            }
+        }
     }
     
     //Custom editor for this class
