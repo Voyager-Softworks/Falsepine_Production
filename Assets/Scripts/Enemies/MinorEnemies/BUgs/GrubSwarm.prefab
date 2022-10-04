@@ -3518,6 +3518,8 @@ GameObject:
   - component: {fileID: 5238059270518264245}
   - component: {fileID: 6703871224162249262}
   - component: {fileID: 8115223062763097598}
+  - component: {fileID: 6099576961212429480}
+  - component: {fileID: 5020166633746597801}
   m_Layer: 0
   m_Name: GrubSwarm
   m_TagString: Untagged
@@ -3694,8 +3696,8 @@ MonoBehaviour:
   m_damageHistory: []
   m_deathSoundName: DeathSound
   m_damageSoundname: DamageSound
-  m_monsterType: {fileID: 0}
-  m_bloodEffect: {fileID: 0}
+  m_monsterType: {fileID: 11400000, guid: 0a5776166c4047b469f7cc181eb8daa0, type: 2}
+  m_bloodEffect: {fileID: 7806886839550920633, guid: 5685b526b95f40145b6b7c9e297a5cf2, type: 3}
   m_silverReward: 3
 --- !u!114 &6703871224162249262
 MonoBehaviour:
@@ -3766,6 +3768,46 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &6099576961212429480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258544219889238627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 645ef54f940cfe7e1a678017c4982eb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnPrefab: {fileID: 7166705850564558411, guid: 52e11a67380a69443bc25946a7a888d7, type: 3}
+--- !u!114 &5020166633746597801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1258544219889238627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c85814c1bf9e4781c97fb84066f86acc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onDeath:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1258544219889238627}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1258544219965649934
 GameObject:
   m_ObjectHideFlags: 0
