@@ -29,6 +29,8 @@ public class PlayerMovement : MonoBehaviour
     public float rollSpeed = 10f; ///< The speed of the roll.
     public float rollTime = 1f; ///< The time the roll takes.
     private float rollTimer = 0f; ///< The timer for the roll.
+    public float rollInvincibilityTime = 0.35f; ///< The time the player is invincible after rolling.
+    private float rollInvincibilityTimer = 0f; ///< The timer for the invincibility after rolling.
     public float rollDelay = 1.5f; ///< The delay before the roll can be used again.
     private float rollDelayTimer = 0f; ///< The timer for the roll delay.
     public bool isRolling = false; ///< Whether or not the player is rolling.
@@ -207,13 +209,18 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        if (rollInvincibilityTimer > 0f)
+        {
+            rollInvincibilityTimer -= Time.deltaTime;
+
+            //make invulnerable
+            playerHealth.isInvulnerable = true;
+        }
+
         //roll
         if (rollTimer > 0)
         {
             rollTimer -= Time.deltaTime;
-
-            //make invulnerable
-            playerHealth.isInvulnerable = true;
             isRolling = true;
 
             //calc roll direction
@@ -381,6 +388,7 @@ public class PlayerMovement : MonoBehaviour
         //transform.rotation = Quaternion.LookRotation(rollDir);
 
         rollTimer = rollTime;
+        rollInvincibilityTimer = rollInvincibilityTime;
 
         _animator.SetTrigger("Dodge");
         _animator.SetLayerWeight(1, 0);
