@@ -75,6 +75,12 @@ public class MeleeWeapon : Item
         {
             DoDamage(_owner);
         }
+
+        // if combo timer reaches 0, reset combo
+        if (m_comboTimer <= 0)
+        {
+            m_shouldDoComboSwing = false;
+        }
     }
 
     /// <summary>
@@ -133,7 +139,6 @@ public class MeleeWeapon : Item
     public void DoMelee(Transform _damageTrans, GameObject _owner){
         // reset timers:
         m_swingCooldownTimer = m_swingCooldown;
-        m_comboTimer = m_comboTime;
         m_damageTimer = m_damageTime;
 
         // reset hit objects:
@@ -148,7 +153,7 @@ public class MeleeWeapon : Item
     /// <returns></returns>
     public bool CanCombo()
     {
-        return m_comboTimer <= 0;
+        return m_comboTimer > 0;
     }
 
     public void UpdateComboSwing()
@@ -157,6 +162,8 @@ public class MeleeWeapon : Item
         {
             m_shouldDoComboSwing = !m_shouldDoComboSwing;
         }
+        
+        m_comboTimer = m_comboTime;
     }
     
     //Custom editor for this class
