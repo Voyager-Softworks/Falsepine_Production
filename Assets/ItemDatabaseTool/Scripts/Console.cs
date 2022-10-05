@@ -412,6 +412,46 @@ public class Console : ToggleableWindow
             return;
         }
 
+        // "drink itemID:instanceID?"
+        if (split.Length >= 2 && split[0] == "drink")
+        {
+            string itemIDWithInstanceID = split[1];
+            string itemID = itemIDWithInstanceID.Split(':')[0];
+            string instanceID = itemIDWithInstanceID.Split(':').Length > 1 ? itemIDWithInstanceID.Split(':')[1] : "";
+
+            // getee the item
+            Item item = ItemDatabase.GetItem(itemID, instanceID);
+            if (!item){
+                Log("- Item not found");
+                return;
+            }
+
+            // cast to Drink
+            Drink drink = item as Drink;
+            if (!drink){
+                Log("- Item is not a drink");
+                return;
+            }
+
+            // consume the item
+            drink.Consume();
+            Log("- Consumed " + item.m_displayName);
+
+            Log();
+            return;
+        }
+
+        // "clear_drinks"
+        if (split.Length >= 1 && split[0] == "clear_drinks")
+        {
+            // clear all drinks
+            StatsManager.ClearDrinkMods();
+            Log("- Drinks cleared");
+
+            Log();
+            return;
+        }
+
         // "set_saveslot slotNumber"
         if (split.Length == 2 && split[0] == "set_saveslot")
         {
@@ -607,6 +647,8 @@ public class Console : ToggleableWindow
         "clear inventoryID",
         "fill_ammo inventoryID",
         "fill_stacks inventoryID",
+        "drink itemID:instanceID?",
+        "clear_drinks",
         "set_saveslot slotNumber",
         "get_saveslot",
         "save slotNumber",

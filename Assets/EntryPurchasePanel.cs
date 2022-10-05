@@ -96,24 +96,45 @@ public class EntryPurchasePanel : MonoBehaviour
         }
 
         if (m_selectedClue != null){
-            // say Purchase
-            m_purchaseButtonText.text = "PURCHASE";
+            bool beenDiscovered = JournalManager.instance.m_discoveredEntries.Contains(m_selectedClue.m_linkedJournalEntry);
+            if (!beenDiscovered){
+                m_purchaseButton.interactable = true;
 
-            // set the price on the button
-            m_purchaseButtonCostText.text = m_selectedClue.m_price.ToString();
+                // say Purchase
+                m_purchaseButtonText.text = "PURCHASE";
 
-            // enable the silver icon
-            m_purchaseButtonSilverIcon.gameObject.SetActive(true);
+                // set the price on the button
+                m_purchaseButtonCostText.text = m_selectedClue.m_price.ToString();
+
+                // enable the silver icon
+                m_purchaseButtonSilverIcon.gameObject.SetActive(true);
+            }
+            else{
+                m_purchaseButton.interactable = false;
+
+                // say Discover
+                m_purchaseButtonText.text = "UNLOCKED";
+
+                // set the price on the button
+                m_purchaseButtonCostText.text = "";
+
+                // disable the silver icon
+                m_purchaseButtonSilverIcon.gameObject.SetActive(false);
+            }
+
+            
         }
         else{
+            m_purchaseButton.interactable = false;
+
             // say Select Entry
             m_purchaseButtonText.text = "SELECT ENTRY";
 
             // set the price
-            m_purchaseButtonCostText.text = "0";
+            m_purchaseButtonCostText.text = "";
 
             // disable the silver icon
-            m_purchaseButtonSilverIcon.gameObject.SetActive(true);
+            m_purchaseButtonSilverIcon.gameObject.SetActive(false);
         }
     }
 
@@ -124,6 +145,10 @@ public class EntryPurchasePanel : MonoBehaviour
     public void TryBuySelected(){
         if (m_selectedClue == null) return;
         if (m_selectedClue.m_linkedJournalEntry == null) return;
+
+        // check if this clue is already discovered (aka purchased)
+        bool beenDiscovered = JournalManager.instance.m_discoveredEntries.Contains(m_selectedClue.m_linkedJournalEntry);
+        if (beenDiscovered) return;
 
         if (EconomyManager.instance.CanAfford(m_selectedClue.m_price)){
             EconomyManager.instance.SpendMoney(m_selectedClue.m_price);

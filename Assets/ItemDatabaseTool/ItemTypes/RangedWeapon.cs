@@ -277,7 +277,8 @@ public class RangedWeapon : Item
                     int layerMask = -1;
                     // to hit position
                     Vector3 toPosition = Vector3.Lerp(corner, bounds.center, 0.5f);
-                    if (Physics.Raycast(originPoint, toPosition - originPoint, out hitInfo, m_range, layerMask, QueryTriggerInteraction.Ignore))
+                    float calcedRange = StatsManager.CalculateRange(this, m_range);
+                    if (Physics.Raycast(originPoint, toPosition - originPoint, out hitInfo, calcedRange, layerMask, QueryTriggerInteraction.Ignore))
                     {
                         
                         if (hitInfo.collider.GetComponentInParent<Health_Base>() == healthScript)

@@ -22,12 +22,26 @@ public class JournalUpdater_Talismans : JournalContentUpdater
         // clear current content
         contentList.Clear();
 
-        // add new content that has the same boss type
+        // add new content
         foreach (StatsManager.Talisman talisman in talismans)
         {
             JournalContent content = new JournalContent();
             content.text = talisman.m_statMod.ToText();
             content.image = talisman.m_icon;
+            contentList.Add(content);
+        }
+
+        // get all drink mods
+        List<StatsManager.StatMod> drinkMods = StatsManager.drinkMods;
+
+        // add new content
+        foreach (StatsManager.StatMod drinkMod in drinkMods)
+        {
+            JournalContent content = new JournalContent();
+            content.text = drinkMod.ToText();
+            //content.image = drinkMod.m_icon;
+            // disable image for now
+            content.image = null;
             contentList.Add(content);
         }
 

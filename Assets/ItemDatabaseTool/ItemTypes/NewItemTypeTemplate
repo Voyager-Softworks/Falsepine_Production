@@ -41,7 +41,7 @@ public class [ITEM_TYPE] : Item
 
     public override void ManualUpdate(GameObject _owner)
     {
-
+        base.ManualUpdate(_owner);
     }
 
     
@@ -69,6 +69,12 @@ public class [ITEM_TYPE] : Item
 
             //end red box
             GUILayout.EndVertical();
+
+            // set dirty
+            if (GUI.changed)
+            {
+                EditorUtility.SetDirty(item);
+            }
         }
     }
     #endif
