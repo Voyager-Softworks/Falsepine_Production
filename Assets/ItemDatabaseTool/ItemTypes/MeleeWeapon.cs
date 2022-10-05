@@ -200,6 +200,11 @@ public class MeleeWeapon : Item
 
             //end red box
             GUILayout.EndVertical();
+
+            if (GUI.changed)
+            {
+                EditorUtility.SetDirty(item);
+            }
         }
     }
     #endif

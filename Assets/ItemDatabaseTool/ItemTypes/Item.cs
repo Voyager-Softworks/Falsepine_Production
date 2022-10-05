@@ -709,7 +709,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
                         // if not in play mode, save (set dirty)
                         if (!Application.isPlaying)
                         {
-                            EditorUtility.SetDirty(this);
+                            EditorUtility.SetDirty(item);
                         }
                         break;
                     }
@@ -726,7 +726,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
                     // if not in play mode, save (set dirty)
                     if (!Application.isPlaying)
                     {
-                        EditorUtility.SetDirty(this);
+                        EditorUtility.SetDirty(item);
                     }
                 }
                 GUILayout.EndVertical();
@@ -744,7 +744,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
             StatsManager.StatTypeListDropdown(item, out needToSave);
             if (needToSave)
             {
-                EditorUtility.SetDirty(this);
+                EditorUtility.SetDirty(item);
             }
 
             // copy paste buttons
@@ -791,7 +791,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
                 // if not in play mode, save (set dirty)
                 if (!Application.isPlaying)
                 {
-                    EditorUtility.SetDirty(this);
+                    EditorUtility.SetDirty(item);
                 }
             }
             EditorGUI.indentLevel--;
@@ -803,7 +803,6 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
                 // if not in play mode, save (set dirty)
                 if (!Application.isPlaying)
                 {
-                    EditorUtility.SetDirty(this);
                     EditorUtility.SetDirty(item);
                 }
             }
@@ -830,7 +829,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
                 // if not in play mode, save (set dirty)
                 if (!Application.isPlaying)
                 {
-                    EditorUtility.SetDirty(this);
+                    EditorUtility.SetDirty(item);
                 }
             }
         }

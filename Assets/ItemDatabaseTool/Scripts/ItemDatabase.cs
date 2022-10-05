@@ -287,6 +287,8 @@ public class ItemDatabase
 
             // save this asset
             #if UNITY_EDITOR
+            // set dirty
+            UnityEditor.EditorUtility.SetDirty(item);
             AssetDatabase.SaveAssetIfDirty(AssetDatabase.GUIDFromAssetPath(AssetDatabase.GetAssetPath(item)));
             #endif
         }
