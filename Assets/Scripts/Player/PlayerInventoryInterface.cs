@@ -444,8 +444,10 @@ public class PlayerInventoryInterface : MonoBehaviour
         float distFromBackLeftToAimPoint = Vector3.Distance(corners.backLeft, new Vector3(aimPoint.x, corners.backLeft.y, aimPoint.z));
         float distFromBackRightToAimPoint = Vector3.Distance(corners.backRight, new Vector3(aimPoint.x, corners.backRight.y, aimPoint.z));
 
-        corners.frontLeft = Quaternion.Euler(0, -currentAimAngle, 0) * (corners.backLeft + (m_aimZone.transform.forward * rangedWeapon.m_range) - corners.backLeft) + corners.backLeft;
-        corners.frontRight = Quaternion.Euler(0, currentAimAngle, 0) * (corners.backRight + (m_aimZone.transform.forward * rangedWeapon.m_range) - corners.backRight) + corners.backRight;
+        float calcedRange = StatsManager.CalculateRange(rangedWeapon, rangedWeapon.m_range);
+
+        corners.frontLeft = Quaternion.Euler(0, -currentAimAngle, 0) * (corners.backLeft + (m_aimZone.transform.forward * calcedRange) - corners.backLeft) + corners.backLeft;
+        corners.frontRight = Quaternion.Euler(0, currentAimAngle, 0) * (corners.backRight + (m_aimZone.transform.forward * calcedRange) - corners.backRight) + corners.backRight;
         corners.frontLeft.y = m_aimZone.transform.position.y;
         corners.frontRight.y = m_aimZone.transform.position.y;
 

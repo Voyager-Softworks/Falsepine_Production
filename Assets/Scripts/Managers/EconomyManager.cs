@@ -137,6 +137,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     public string bankInventroyName = "bank";
 
     [SerializeField] public List<PurchasableItem> m_purchasableItems = new List<PurchasableItem>();
+    [SerializeField] public List<Drink> m_purchasableDrinks = new List<Drink>();
 
     public int m_playerSilver = 0;
 
@@ -506,7 +507,26 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
                     {
                         purchasable.m_item = item;
                     }
+
+                    // set dirty
+                    EditorUtility.SetDirty(economy);
                 }
+            }
+
+            // add all drinks button
+            if (GUILayout.Button("Add all drinks"))
+            {
+                // get all Drink assets
+                List<Drink> drinks = AssetDatabase.FindAssets("t:Drink").Select(guid => AssetDatabase.LoadAssetAtPath<Drink>(AssetDatabase.GUIDToAssetPath(guid))).ToList();
+
+                economy.m_purchasableDrinks = new List<Drink>();
+                foreach (Drink drink in drinks)
+                {
+                    economy.m_purchasableDrinks.Add(drink);
+                }
+
+                // set dirty
+                EditorUtility.SetDirty(economy);
             }
         }
     }

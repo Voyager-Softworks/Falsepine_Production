@@ -18,6 +18,16 @@ public class TownSceneManager : MonoBehaviour
 
         // set time scale to 1
         Time.timeScale = 1;
+
+        // remove drinks
+        StatsManager.ClearDrinkMods();
+
+        // refill all ammo
+        Inventory inventory = InventoryManager.instance.GetInventory("player");
+        if (inventory)
+        {
+            inventory.FillAmmo();
+        }
     }
 
     // Update is called once per frame
