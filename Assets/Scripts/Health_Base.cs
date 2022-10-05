@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.Events;
 using System;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 /// <summary>
 /// A base health class for all objects that can take damage.
 /// </summary>
@@ -20,6 +24,29 @@ public class Health_Base : MonoBehaviour /// @todo Impliment this into players, 
             Gizmos.color = new Color(1, 0, 0, 0.3f);
             Gizmos.DrawWireCube(collider.bounds.center, collider.bounds.size);
         }
+
+        // draw the last 10 damage numbers
+        #if UNITY_EDITOR
+        if (m_damageHistory.Count > 0){
+            int count = 0;
+            for (int i = m_damageHistory.Count - 1; i >= 0; i--){
+                float val = m_damageHistory[i].m_damage;
+                Vector3 pos = m_damageHistory[i].m_hitPoint;
+                pos.y += 3;
+                Handles.color = Color.red;
+                // make new style
+                GUIStyle style = new GUIStyle();
+                style.normal.textColor = Color.red;
+                float timeSince = (Time.time - m_damageHistory[i].m_time);
+                // size between 20-0, based on time since (after 3 seconds, it will be 0)
+                style.fontSize = (int)Mathf.Lerp(20, 0, timeSince / 3.0f);
+                style.fontStyle = FontStyle.Bold;
+                Handles.Label(pos, val.ToString(), style);
+
+                count += 1;
+            }
+        }
+        #endif
     }
 
     /// <summary>
