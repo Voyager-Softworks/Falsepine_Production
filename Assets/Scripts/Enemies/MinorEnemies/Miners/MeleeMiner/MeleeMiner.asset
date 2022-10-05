@@ -350,7 +350,6 @@ MonoBehaviour:
     title: Selector
     childGUIDs:
     - 2b3042b4-3df2-48e9-847d-17b51261359e
-    - fb29ce27-b4da-4aa2-8ac4-c59e49632c6c
     nodeType: 5
     position: {x: 903, y: 1101}
     runtime: {fileID: 0}
@@ -1041,463 +1040,8 @@ MonoBehaviour:
     title: Sequence
     childGUIDs:
     - 90265fd9-35ff-4a9a-bcdd-618bbc876d74
-    - 3680cf4c-db85-474a-bc31-2eac3b3c3e05
     nodeType: 4
     position: {x: 1649, y: 1101}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 3680cf4c-db85-474a-bc31-2eac3b3c3e05
-    parentGUID: 2b3042b4-3df2-48e9-847d-17b51261359e
-    title: RequestAttack
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 1823, y: 1101}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: TARGET
-      GUID: 92aeb399-b5bd-4e51-8ee3-6e2c80726b1c
-      paramReference: af431163-4988-41ef-8722-6d76c055dc6d
-      serializedTypename: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: ATTACK COOLDOWN
-      GUID: 550a84fb-6dd4-495a-a006-e9cf5f4fe3a2
-      paramReference: f34a0f98-6338-4e4c-b68b-bd7ce59b4f62
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 1
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: RequestAttack, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 550a84fb-6dd4-495a-a006-e9cf5f4fe3a2
-    parentGUID: f34a0f98-6338-4e4c-b68b-bd7ce59b4f62
-    title: AttackCooldown
-    childGUIDs: []
-    nodeType: 7
-    position: {x: 1656, y: 1012}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: 
-    queryType: 
-    noLogic: 1
-    noQuery: 1
-  - GUID: 4e7e38a9-ca8f-4521-aa4f-f54d27937be2
-    parentGUID: 227726a5-c536-442c-af86-a610cd69387b
-    title: SetAnimatorBool
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 1478, y: 1680}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: NAME
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: Running
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: VALUE
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Animation.SetAnimatorBool, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 815fc068-b298-47d6-a9b7-adfb186ded9b
-    parentGUID: 227726a5-c536-442c-af86-a610cd69387b
-    title: EncircleTarget
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 1478, y: 1508}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: TARGET
-      GUID: 92aeb399-b5bd-4e51-8ee3-6e2c80726b1c
-      paramReference: af431163-4988-41ef-8722-6d76c055dc6d
-      serializedTypename: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: ENCIRCLE RADIUS
-      GUID: 3e22953f-61d4-42f2-b790-444e96892ef3
-      paramReference: d36bb4a9-1e0d-4ae3-91af-9276e39e0014
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 1
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: ENCIRCLE SPEED
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 1
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: ALLY AVOIDANCE RADIUS
-      GUID: 84977e4e-051f-441e-8bdb-7fe8a9639bd1
-      paramReference: 7aa4b4a4-d26b-422f-80f1-f45683c57da7
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 1
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: EncircleTarget, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 92aeb399-b5bd-4e51-8ee3-6e2c80726b1c
-    parentGUID: 
-    title: FindWithTag
-    childGUIDs: []
-    nodeType: 8
-    position: {x: 1459, y: 1993}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: TAG
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: Player
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: RESULT
-      GUID: af431163-4988-41ef-8722-6d76c055dc6d
-      paramReference: 
-      serializedTypename: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 1
-    runtimeLogicType: 
-    queryType: NodeAI.FindWithTag, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    noLogic: 1
-    noQuery: 0
-  - GUID: 62dba013-1fb7-4877-95b0-0359d435940a
-    parentGUID: 227726a5-c536-442c-af86-a610cd69387b
-    title: PlaySound
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 1478, y: 1810}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: SOUND
-      GUID: null
-      paramReference: null
-      serializedTypename: UnityEngine.AudioClip, UnityEngine.AudioModule, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: VOLUME
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 1
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: PITCH
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 1
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: DELAY
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Audio.PlaySound, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 3e22953f-61d4-42f2-b790-444e96892ef3
-    parentGUID: d36bb4a9-1e0d-4ae3-91af-9276e39e0014
-    title: EncircleRadius
-    childGUIDs: []
-    nodeType: 7
-    position: {x: 1210, y: 1566}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: 
-    queryType: 
-    noLogic: 1
-    noQuery: 1
-  - GUID: 84977e4e-051f-441e-8bdb-7fe8a9639bd1
-    parentGUID: 7aa4b4a4-d26b-422f-80f1-f45683c57da7
-    title: AllyAvoidanceRadius
-    childGUIDs: []
-    nodeType: 7
-    position: {x: 1172, y: 1650}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: 
-    queryType: 
-    noLogic: 1
-    noQuery: 1
-  - GUID: 8d82b472-dcb7-4ed7-a652-6ce4bbc113f4
-    parentGUID: 227726a5-c536-442c-af86-a610cd69387b
-    title: SetAnimatorBool
-    childGUIDs: []
-    nodeType: 1
-    position: {x: 1478, y: 1366}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: NAME
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: Running
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: VALUE
-      GUID: null
-      paramReference: null
-      serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 0
-      bvalue: 1
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.Animation.SetAnimatorBool, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 0e035db8-1055-4059-ba1d-4eeff837c4ab
-    parentGUID: fb29ce27-b4da-4aa2-8ac4-c59e49632c6c
-    title: CheckTagInRange
-    childGUIDs: []
-    nodeType: 2
-    position: {x: 1413, y: 1214}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties:
-    - name: TAG
-      GUID: null
-      paramReference: null
-      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: Player
-      ivalue: 0
-      fvalue: 0
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    - name: RANGE
-      GUID: 6c6bf8da-8f3a-4884-8de6-5dc415d52206
-      paramReference: d36bb4a9-1e0d-4ae3-91af-9276e39e0014
-      serializedTypename: System.Single, mscorlib, Version=4.0.0.0, Culture=neutral,
-        PublicKeyToken=b77a5c561934e089
-      svalue: 
-      ivalue: 0
-      fvalue: 1
-      bvalue: 0
-      cvalue: {r: 0, g: 0, b: 0, a: 0}
-      v2value: {x: 0, y: 0}
-      v3value: {x: 0, y: 0, z: 0}
-      v4value: {x: 0, y: 0, z: 0, w: 0}
-      ovalue: {fileID: 0}
-      output: 0
-    runtimeLogicType: NodeAI.CheckTagInRange, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 6c6bf8da-8f3a-4884-8de6-5dc415d52206
-    parentGUID: d36bb4a9-1e0d-4ae3-91af-9276e39e0014
-    title: EncircleRadius
-    childGUIDs: []
-    nodeType: 7
-    position: {x: 1278, y: 1149}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: 
-    queryType: 
-    noLogic: 1
-    noQuery: 1
-  - GUID: fb29ce27-b4da-4aa2-8ac4-c59e49632c6c
-    parentGUID: 72e932ec-a2d7-4a7a-9f14-00f05760f51e
-    title: Selector
-    childGUIDs:
-    - 0e035db8-1055-4059-ba1d-4eeff837c4ab
-    - 227726a5-c536-442c-af86-a610cd69387b
-    nodeType: 5
-    position: {x: 1246, y: 1238}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Selector, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
-  - GUID: 227726a5-c536-442c-af86-a610cd69387b
-    parentGUID: fb29ce27-b4da-4aa2-8ac4-c59e49632c6c
-    title: Sequence
-    childGUIDs:
-    - 4e7e38a9-ca8f-4521-aa4f-f54d27937be2
-    - 815fc068-b298-47d6-a9b7-adfb186ded9b
-    - 62dba013-1fb7-4877-95b0-0359d435940a
-    - 8d82b472-dcb7-4ed7-a652-6ce4bbc113f4
-    nodeType: 4
-    position: {x: 1325, y: 1352}
     runtime: {fileID: 0}
     runtimequery: {fileID: 0}
     properties: []
@@ -1856,6 +1400,50 @@ MonoBehaviour:
     queryType: 
     noLogic: 0
     noQuery: 1
+  - GUID: 92aeb399-b5bd-4e51-8ee3-6e2c80726b1c
+    parentGUID: 
+    title: FindWithTag
+    childGUIDs: []
+    nodeType: 8
+    position: {x: 1518, y: 1734}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: TAG
+      GUID: null
+      paramReference: null
+      serializedTypename: System.String, mscorlib, Version=4.0.0.0, Culture=neutral,
+        PublicKeyToken=b77a5c561934e089
+      svalue: Player
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: RESULT
+      GUID: af431163-4988-41ef-8722-6d76c055dc6d
+      paramReference: 
+      serializedTypename: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 1
+    runtimeLogicType: 
+    queryType: NodeAI.FindWithTag, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    noLogic: 1
+    noQuery: 0
   exposedProperties:
   - name: Ambush
     GUID: f66f7840-6f94-4123-a812-138305ec4c51
