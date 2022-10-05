@@ -24,7 +24,7 @@ public class DrinkPurchasePanel : MonoBehaviour
     void Start()
     {
         // get all valid drinks
-        List<Drink> validDrinks = EconomyManager.instance.m_purchasableDrinks;
+        List<Drink> validDrinks = new List<Drink>(EconomyManager.instance.m_purchasableDrinks);
 
         // add amount of entries to the list (if there are enough)
         for (int i = 0; i < m_drinkAmount && validDrinks.Count > 0; i++){
