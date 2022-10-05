@@ -112,6 +112,7 @@ MonoBehaviour:
   m_currentHealth: 1
   m_maxHealth: 1
   m_disablePlayerCollision: 1
+  m_weaknesses: []
   m_damageHistory: []
   m_deathSoundName: DeathSound
   m_damageSoundname: DamageSound
@@ -129,5 +130,44 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggers: []
-  audioChannels: []
+  audioChannels:
+  - name: Audio Channel 0
+    volume: 1
+    pitch: 1
+    clip: {fileID: 8300000, guid: 21336e8d55b22ff4eb74158cdbcb9494, type: 3}
+    loop: 0
+    playOnAwake: 0
+    SpatialBlend: 0
+    maxDistance: 300
+    minDistance: 1
+    distanceCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: -1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    source: {fileID: 0}
+    playing: 0
+    paused: 0
+    time: 0
+    timeNormalized: 0
+    duration: 0
   transitions: []
