@@ -335,7 +335,7 @@ public class Inventory : MonoBehaviour
                 }
                 if (weapon.m_spareAmmo < weapon.m_clipSize)
                 {
-                    weapon.m_spareAmmo = weapon.m_clipSize;
+                    weapon.m_spareAmmo = weapon.m_maxSpareAmmo;
                     didChange = true;
                 }
             }
