@@ -18,7 +18,11 @@ public class AudioController : MonoBehaviour ///< @todo comment
         public float volume;
         [Range(0, 1)]
         public float pitch;
+        public bool layered = false;
         public AudioClip clip;
+        public AudioClip[] layers;
+        public int timeSignature = 4;
+        public int beatsPerMinute = 120;
         public bool loop;
         public bool playOnAwake;
         [Range(0, 1)]
@@ -82,7 +86,8 @@ public class AudioController : MonoBehaviour ///< @todo comment
         foreach (AudioChannel channel in audioChannels)
         {
             // if clip is null, skip this channel
-            if (channel.clip == null){
+            if (channel.clip == null)
+            {
                 Debug.LogWarning("Audio Channel " + channel.name + " has no clip assigned!", this);
                 continue;
             }
@@ -342,7 +347,8 @@ public class AudioController : MonoBehaviour ///< @todo comment
         foreach (AudioChannel channel in audioChannels)
         {
             // if clip is null, skip this channel
-            if (channel.clip == null){
+            if (channel.clip == null)
+            {
                 Debug.LogWarning("Audio Channel " + channel.name + " has no clip assigned!", this);
                 continue;
             }
