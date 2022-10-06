@@ -290,6 +290,7 @@ public class MissionManager : MonoBehaviour
             // set to first zone
             if (m_missionZones.Count > 0)
             {
+                StatsManager.instance.ResetPreviousKills();
                 m_currentZone = m_missionZones[0];
                 m_currentZone.Reset();
             }
@@ -440,7 +441,7 @@ public class MissionManager : MonoBehaviour
     /// <returns></returns>
     public bool HasZoneBossDied(){
         foreach (MonsterInfo monster in GetCurrentZone()?.m_zoneMonsters){
-            if (monster != null && monster.m_type == MonsterInfo.MonsterType.Boss && StatsManager.instance?.GetKills(monster) > 0)
+            if (monster != null && monster.m_type == MonsterInfo.MonsterType.Boss && StatsManager.instance?.GetCurrentKills(monster) > 0)
             {
                 return true;
             }

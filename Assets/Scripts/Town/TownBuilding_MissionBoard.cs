@@ -185,5 +185,11 @@ public class TownBuilding_MissionBoard : TownBuilding
         if (thisZoneBossKilled){
             MissionManager.instance.GoToNextZone();
         }
+
+        ZoneNameUI[] zoneNameUIs = FindObjectsOfType<ZoneNameUI>();
+        for (int i = 0; i < zoneNameUIs.Length; i++)
+        {
+            zoneNameUIs[i].UpdateText();
+        }
     }
 }

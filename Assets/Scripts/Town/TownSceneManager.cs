@@ -28,6 +28,13 @@ public class TownSceneManager : MonoBehaviour
         {
             inventory.FillAmmo();
         }
+
+        // find and destroy all mission music
+        AudioControllerPersistance[] audioController = FindObjectsOfType<AudioControllerPersistance>();
+        foreach (AudioControllerPersistance a in audioController)
+        {
+            Destroy(a.gameObject);
+        }
     }
 
     // Update is called once per frame
