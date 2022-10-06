@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcd63797a216aad4489fc2c905ee90e2, type: 3}
+  m_Name: artifact_bag
+  m_EditorClassIdentifier: 
+  m_id: artifact_bag
+  m_instanceID: 
+  m_displayName: Whispering Bag
+  m_description: A small fabric bag, voices whisper warning you not to look inside.
+    Doubles shotgun damage, but reduces melee damage by 75%.
+  m_icon: {fileID: 21300000, guid: e502e67d9f71074478736e3bbc3dbaf3, type: 3}
+  mustMatchToStack: 0
+  m_currentStackSize: 1
+  m_maxStackSize: 1
+  m_tags: []
+  m_usedStatTypes: []
+  m_statMods:
+  - statType:
+      value: ShotgunDamage
+    modType: 1
+    value: 2
+  - statType:
+      value: MeleeDamage
+    modType: 1
+    value: 0.25
+  m_price: 100
+  m_allowedDiscount: 1
+  m_resourceLinks:
+  - fieldName: m_icon
+    resourceName: UI_icon-item
