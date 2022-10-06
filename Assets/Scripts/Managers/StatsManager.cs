@@ -320,7 +320,7 @@ public class StatsManager : MonoBehaviour
     {
     };
 
-    [SerializeField] static public List<StatMod> drinkMods = new List<StatMod>();
+    [SerializeField] static public List<Drink> activeDrinks = new List<Drink>();
 
     /// <summary>
     /// Gets the stat mods from the player inventory
@@ -359,8 +359,13 @@ public class StatsManager : MonoBehaviour
     public static List<StatMod> GetAllStatMods()
     {
         List<StatMod> allStatMods = new List<StatMod>();
+        // add global
         allStatMods.AddRange(globalStatMods);
-        allStatMods.AddRange(drinkMods);
+        // add drinks
+        foreach (Drink drink in activeDrinks)
+        {
+            allStatMods.AddRange(drink.GetStatMods());
+        }
         allStatMods.AddRange(GetPlayerInvetoryStatMods());
         // get talisman mods
         foreach (Talisman talisman in instance.m_activeTalismans)
@@ -542,7 +547,7 @@ public class StatsManager : MonoBehaviour
 
     static public void ClearDrinkMods()
     {
-        drinkMods.Clear();
+        activeDrinks.Clear();
     }
 
     public static string GetSaveFolderPath(int saveSlot)
@@ -571,7 +576,7 @@ public class StatsManager : MonoBehaviour
     [Serializable]
     public class SaveData{
         public List<StatMod> globalStatMods = new List<StatMod>();
-        public List<StatMod> drinkMods = new List<StatMod>();
+        public List<Drink> activeDrinks = new List<Drink>();
         public List<StatModRange> possibleTalismanMods = new List<StatModRange>();
         public List<Talisman> activeTalismans = new List<Talisman>();
         public List<MonsterStat> monsterStats = new List<MonsterStat>();
@@ -593,7 +598,7 @@ public class StatsManager : MonoBehaviour
         // add global stat mods
         data.globalStatMods = new List<StatMod>(globalStatMods);
         // add drink mods
-        data.drinkMods = new List<StatMod>(drinkMods);
+        data.activeDrinks = new List<Drink>(activeDrinks);
         // add possible talisman mods
         data.possibleTalismanMods = new List<StatModRange>(m_possibleTalismanMods);
         // add active talismans
@@ -646,7 +651,7 @@ public class StatsManager : MonoBehaviour
         // load global stat mods
         globalStatMods = new List<StatMod>(data.globalStatMods);
         // load drink mods
-        drinkMods = new List<StatMod>(data.drinkMods);
+        activeDrinks = new List<Drink>(data.activeDrinks);
         // load possible talisman mods
         m_possibleTalismanMods = new List<StatModRange>(data.possibleTalismanMods);
         // load active talismans

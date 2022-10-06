@@ -46,7 +46,7 @@ public class Drink : Item
 
     public void Consume(){
         // add mods to stats manager
-        StatsManager.drinkMods.AddRange(new List<StatsManager.StatMod>(this.GetStatMods()));
+        StatsManager.activeDrinks.Add(this);
     }
 
     
