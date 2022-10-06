@@ -10,14 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56c089656aad97c49b15ade4c6d1891e, type: 3}
-  m_Name: ExplodeJuveniles
+  m_Name: FireBrightmaw
   m_EditorClassIdentifier: 
-  m_title: Explosive Extermination
-  m_description: "A new invasive species are tearing up the Wildwoods, we've set
-    up explosives in the field however the critters killed the setup crew. Sheriff
-    can't afford to lose the manpower, so it's up to any hunters looking for coin.
-    \n\nKill (8) Juveniles with explosives - Red barrels / Dynamite."
-  m_difficulty: 0
+  m_title: Scorched Earth
+  m_description: 'We''ve heard from the visiting fauna expert that it''s likely once
+    the apex is killed, and younger specimens will cannibalize it to grow more quickly.
+    We''d rather leave nothing for them to feed on.
+
+
+    Kill the Brightmaw with
+    a Fire Bottle.'
+  m_difficulty: 1
   m_conditions:
   - id: 0
   m_lockOnComplete: 1
@@ -27,14 +30,14 @@ MonoBehaviour:
     00000000:
       type: {class: Kill_MissionCondition, ns: , asm: Assembly-CSharp}
       data:
-        m_name: Kill (0/8) Brightmaw Juvenile(s) with  Explosive Damage
+        m_name: Kill (0/1) Bright Maw with  Fire Damage
         m_state: 0
         m_lockState: 0
-        m_monsterToKill: {fileID: 11400000, guid: 08d1d535c2a4b794d9cf5ec614c2e278, type: 2}
+        m_monsterToKill: {fileID: 11400000, guid: 25e00185e50f675488bbf5ceb0b6ae63, type: 2}
         m_initialStats: []
         m_initialKills: []
-        m_requiredKills: 8
+        m_requiredKills: 1
         m_useOptional: 1
         m_statToKillWith:
-          value: ExplosiveDamage
+          value: FireDamage
         m_itemToKillWith: {fileID: 0}

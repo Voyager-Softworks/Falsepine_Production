@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56c089656aad97c49b15ade4c6d1891e, type: 3}
-  m_Name: KillBrightmaw
+  m_Name: PerfectBrightmaw
   m_EditorClassIdentifier: 
   m_title: Capable Hands!
   m_description: 'Hunt down the Brightmaw, the monster is attacking big game hunters,
@@ -23,7 +23,6 @@ MonoBehaviour:
   m_conditions:
   - id: 0
   - id: 1
-  - id: 2
   m_lockOnComplete: 1
   m_isLockedComplete: 0
   references:
@@ -43,17 +42,6 @@ MonoBehaviour:
           value: EnemyDamage
         m_itemToKillWith: {fileID: 0}
     00000001:
-      type: {class: Speedrun_MissionCondition, ns: , asm: Assembly-CSharp}
-      data:
-        m_name: Spend less than 60 seconds in the expedition while fighting the Bright
-          Maw
-        m_state: 0
-        m_lockState: 0
-        m_timeLimit: 60
-        m_timeElapsed: 0
-        m_triggerMonster: {fileID: 11400000, guid: 25e00185e50f675488bbf5ceb0b6ae63, type: 2}
-        m_triggerMonsterSeen: 1
-    00000002:
       type: {class: NoDamage_MissionCondition, ns: , asm: Assembly-CSharp}
       data:
         m_name: Don't take any damage
