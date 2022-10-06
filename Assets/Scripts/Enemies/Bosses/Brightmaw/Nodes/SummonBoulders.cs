@@ -11,6 +11,7 @@ namespace Boss.Brightmaw
     public class SummonBoulders : NodeAI.ActionBase
     {
         public List<GameObject> m_boulders = new List<GameObject>();
+        EnemyGroup m_enemyGroup;
         bool spawned = false;
         public SummonBoulders()
         {
@@ -43,6 +44,10 @@ namespace Boss.Brightmaw
         /// </returns>
         public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
         {
+            if (m_enemyGroup == null)
+            {
+                m_enemyGroup = FindObjectOfType<EnemyGroup>();
+            }
             if (!spawned)
             {
                 for (int i = 0; i < GetProperty<int>("Number of boulders"); i++)
@@ -52,6 +57,16 @@ namespace Boss.Brightmaw
                     direction.y = 0;
                     direction.Normalize();
                     boulder.transform.position += direction * Random.Range(GetProperty<float>("Min Radius"), GetProperty<float>("Max Radius"));
+
+                    Vector3 arenaCentre = m_enemyGroup.transform.position;
+                    float arenaRadius = m_enemyGroup.radius;
+
+                    //If the boulder is outside the arena, move it back in
+                    if (Vector3.Distance(boulder.transform.position, arenaCentre) > arenaRadius)
+                    {
+                        boulder.transform.position = arenaCentre + (boulder.transform.position - arenaCentre).normalized * arenaRadius;
+                    }
+
                     m_boulders.Add(boulder);
                 }
                 spawned = true;

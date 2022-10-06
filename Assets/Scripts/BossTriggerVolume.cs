@@ -16,7 +16,11 @@ public class BossTriggerVolume : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             audioControllerPersistance = FindObjectOfType<AudioControllerPersistance>();
-            audioControllerPersistance.StopBecauseOfBoss();
+            if (audioControllerPersistance != null)
+            {
+                audioControllerPersistance.StopBecauseOfBoss();
+            }
+
             agent.SetParameter<bool>(parameterName, true);
             GameObject.FindObjectOfType<UIScript>().bossUI.SetActive(true);
             onTrigger.Invoke();
