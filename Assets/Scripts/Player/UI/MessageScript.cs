@@ -18,14 +18,14 @@ public class MessageScript : MonoBehaviour
     public float fadeTime = 1.0f;
     private float fadeTimer = 0.0f;
 
-    public Image container;
-    public TextMeshProUGUI text;
+    public Image m_container;
+    public TextMeshProUGUI m_text;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (container == null) container = GetComponent<Image>();
-        if (text == null) text = GetComponentInChildren<TextMeshProUGUI>();
+        if (m_container == null) m_container = GetComponent<Image>();
+        if (m_text == null) m_text = GetComponentInChildren<TextMeshProUGUI>();
     }
 
     // Update is called once per frame
@@ -42,8 +42,8 @@ public class MessageScript : MonoBehaviour
                 fadeTimer += Time.deltaTime;
 
                 float alpha = 1.0f - (fadeTimer / fadeTime);
-                container.color = new Color(container.color.r, container.color.g, container.color.b, alpha);
-                text.color = new Color(text.color.r, text.color.g, text.color.b, alpha);
+                m_container.color = new Color(m_container.color.r, m_container.color.g, m_container.color.b, alpha);
+                m_text.color = new Color(m_text.color.r, m_text.color.g, m_text.color.b, alpha);
             }
             else
             {
@@ -52,11 +52,13 @@ public class MessageScript : MonoBehaviour
         }
     }
 
-    public void SetMessage(string _message)
+    public void SetMessage(string _message, string _icon = "", bool _before = false)
     {
-        if (text == null) text = GetComponentInChildren<TextMeshProUGUI>();
-        if (text == null) return;
+        if (m_text == null) m_text = GetComponentInChildren<TextMeshProUGUI>();
+        if (m_text == null) return;
 
-        text.text = _message;
+        string sprite = (string.IsNullOrEmpty(_icon) ? "" : " <sprite name=\"" + _icon + "\">");
+
+        m_text.text = (_before ? sprite + " " : "") + _message + (_before ? "" : " " + sprite);
     }
 }

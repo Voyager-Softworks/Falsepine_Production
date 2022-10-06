@@ -632,6 +632,61 @@ public class Console : ToggleableWindow
             return;
         }
 
+        // "message 'message Text' iconName?"
+        if (split.Length >= 2 && split[0] == "message")
+        {
+            // message may be multiple words, so we need to recombine them
+            string message = "";
+            int lastMessageIndex = split.Length - 2;
+            for (int i = 1; i < split.Length; i++)
+            {
+                // keep adding words until we find a ' or " at the end
+                if (split[i].EndsWith("'") || split[i].EndsWith("\""))
+                {
+                    message += split[i];
+                    lastMessageIndex = i;
+                    break;
+                }
+                else
+                {
+                    // if this is the last split, and it doesn't end with ' or ", then it's the icon
+                    if (i == split.Length - 1)
+                    {
+                        break;
+                    }
+                    else
+                    {
+                        message += split[i] + " ";
+                    }
+                }
+            }
+
+            // remove the ' and " from the message
+            message = message.Trim('\'');
+            message = message.Trim('\"');
+
+            // get the icon
+            string icon = "";
+            if (split.Length > lastMessageIndex + 1)
+            {
+                icon = split[lastMessageIndex + 1];
+            }
+
+            // get the message manager
+            MessageManager messageManager = GameObject.FindObjectOfType<MessageManager>(/* true */);
+            if (messageManager == null){
+                Log("- MessageManager not found");
+                return;
+            }
+
+            // show the message
+            messageManager.AddMessage(message, icon);
+
+            Log("- Message shown");
+
+            return;
+        }
+
         // command not found
         Log("- Command not found");
     }
@@ -664,6 +719,7 @@ public class Console : ToggleableWindow
         "scene sceneName",
         "delete_mission_save",
         "complete_mission",
+        "message 'message Text' iconName?",
     };
 
     /// <summary>
