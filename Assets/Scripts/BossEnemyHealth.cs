@@ -16,6 +16,8 @@ public class BossEnemyHealth : EnemyHealth
 
     private UIScript m_uiScript; ///< The UI script to use.
 
+    public List<Artifact> m_artifacts = new List<Artifact>(); ///< The artifacts to drop when the boss dies.
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -72,6 +74,20 @@ public class BossEnemyHealth : EnemyHealth
             if (fadeScript)
             {
                 fadeScript.EndScreen(true);
+            }
+        }
+
+        // add artifact to home inventory
+        if (m_artifacts.Count > 0)
+        {
+            Artifact artifact = m_artifacts[UnityEngine.Random.Range(0, m_artifacts.Count)];
+            if (artifact != null)
+            {
+                Inventory home = InventoryManager.instance.GetInventory("home");
+                if (home != null)
+                {
+                    home.TryAddItemToInventory(artifact.CreateInstance());
+                }
             }
         }
     }
