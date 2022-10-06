@@ -86,6 +86,18 @@ public class ItemDisplay : MonoBehaviour
         if (mouseScreenPos.x >= topLeft.x && mouseScreenPos.x <= topRight.x &&
             mouseScreenPos.y <= topLeft.y && mouseScreenPos.y >= bottomLeft.y)
         {
+            // find mask in parent
+            Mask mask = GetComponentInParent<Mask>();
+            // get bottom world corner of mask
+            Vector3[] maskCorners = new Vector3[4];
+            mask.GetComponent<RectTransform>().GetWorldCorners(maskCorners);
+            Vector2 maskBottomLeft = maskCorners[0];
+            // if mouse is below mask, skip
+            if (mouseScreenPos.y < maskBottomLeft.y)
+            {
+                return;
+            }
+
             InfoBox ib = FindObjectOfType<InfoBox>();
             // display info box
             if (ib) ib.Display(m_linkedItem, m_showPrice, 0.1f, 0.1f);

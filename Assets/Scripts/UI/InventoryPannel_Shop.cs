@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// Inventory pannel for the shop specifically.
@@ -10,12 +12,26 @@ using System;
 public class InventoryPannel_Shop : InventoryPannel
 {
 
-    public Item itemToBuy = null;
+    public ItemDisplay itemToBuy = null;
+    public Button buyButton;
+    public TextMeshProUGUI buyButtonText;
+    public TextMeshProUGUI buyButtonPriceText;
+    public Image buyButtonIcon;
+
+    public Sprite selectedSprite;
+    public Sprite unselectedSprite;
 
     // Start is called before the first frame update
     public override void Start()
     {
         base.Start();
+    }
+
+    private void OnEnable() {
+        // unbind buy button
+        buyButton.onClick.RemoveAllListeners();
+
+        UpdateBuyButton();
     }
 
     // Update is called once per frame
@@ -52,18 +68,57 @@ public class InventoryPannel_Shop : InventoryPannel
         Item item = _itemDisplay.m_linkedItem;
         if (item == null) return;
 
-        itemToBuy = item;
+        // unselected sprite
+        if (itemToBuy != null)
+        {
+            itemToBuy.m_backgroundImage.sprite = unselectedSprite;
+        }
+
+        itemToBuy = _itemDisplay;
+
+        // selected sprite
+        itemToBuy.m_backgroundImage.sprite = selectedSprite;
+
+        // unbind buy button
+        buyButton.onClick.RemoveAllListeners();
+        // bind buy button
+        buyButton.onClick.AddListener(() => TryBuyItem(_sourceInventory, _targetInventory, _sourceIndex));
+
+        UpdateBuyButton();
+    }
+
+    public void TryBuyItem(Inventory _sourceInventory, Inventory _targetInventory, int _sourceIndex){
+        if (itemToBuy == null) return;
 
         EconomyManager economyManager = EconomyManager.instance;
         if (economyManager == null) return;
 
-        int price = item.GetPrice();
+        int price = itemToBuy.m_linkedItem.GetPrice();
         if (economyManager.CanAfford(price)){
             //transfer
             if (InventoryManager.instance.CanMoveItem(_sourceInventory, _targetInventory, _sourceIndex)){
                 economyManager.SpendMoney(price);
                 InventoryManager.instance.TryMoveItem(_sourceInventory, _targetInventory, _sourceIndex);
             }
+
+            // unbind buy button
+            buyButton.onClick.RemoveAllListeners();
+            // unselect item
+            itemToBuy.m_backgroundImage.sprite = unselectedSprite;
+            itemToBuy = null;
+            UpdateBuyButton();
+        }
+    }
+
+    public void UpdateBuyButton(){
+        if (itemToBuy == null){
+            buyButton.interactable = false;
+            buyButtonText.text = "NO ITEM";
+            buyButtonPriceText.text = "0";
+        } else {
+            buyButton.interactable = true;
+            buyButtonText.text = "PURCHASE";
+            buyButtonPriceText.text = itemToBuy.m_linkedItem.GetPrice().ToString();
         }
     }
 }
