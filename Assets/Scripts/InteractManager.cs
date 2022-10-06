@@ -50,6 +50,7 @@ public class InteractManager : MonoBehaviour
     public float m_defaultFadeOutSpeed = 10.0f;
 
     private TextMeshProUGUI m_text = null;
+    private Image m_background = null;
 
     private List<TextRequest> m_textRequests = new List<TextRequest>();
 
@@ -77,6 +78,7 @@ public class InteractManager : MonoBehaviour
         UIScript ui = FindObjectOfType<UIScript>();
         if (ui != null) {
             m_text = ui.interactText;
+            m_background = ui.interactBackground;
         }
 
         m_playerTransform = GameObject.FindObjectOfType<PlayerMovement>()?.transform;
@@ -124,11 +126,15 @@ public class InteractManager : MonoBehaviour
             m_persistTimer -= Time.deltaTime;
 
             // fade in to full alpha
-            m_text.color = new Color(m_text.color.r, m_text.color.g, m_text.color.b, Mathf.Lerp(m_text.color.a, 1.0f, Time.deltaTime * m_fadeInSpeed));
+            float alpha = Mathf.Lerp(m_text.color.a, 1.0f, Time.deltaTime * m_fadeInSpeed);
+            m_text.color = new Color(m_text.color.r, m_text.color.g, m_text.color.b, alpha);
+            m_background.color = new Color(m_background.color.r, m_background.color.g, m_background.color.b, alpha);
         }
         else{
             // fade out to 0 alpha
-            m_text.color = new Color(m_text.color.r, m_text.color.g, m_text.color.b, Mathf.Lerp(m_text.color.a, 0.0f, Time.deltaTime * m_fadeOutSpeed));
+            float alpha = Mathf.Lerp(m_text.color.a, 0.0f, Time.deltaTime * m_fadeOutSpeed);
+            m_text.color = new Color(m_text.color.r, m_text.color.g, m_text.color.b, alpha);
+            m_background.color = new Color(m_background.color.r, m_background.color.g, m_background.color.b, alpha);
         }
     }
 

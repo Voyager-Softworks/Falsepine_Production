@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using NodeAI;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BossTriggerVolume : MonoBehaviour
 {
     public NodeAI_Agent agent;
     public string parameterName;
+    public UnityEvent onTrigger;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,6 +16,7 @@ public class BossTriggerVolume : MonoBehaviour
         {
             agent.SetParameter<bool>(parameterName, true);
             GameObject.FindObjectOfType<UIScript>().bossUI.SetActive(true);
+            onTrigger.Invoke();
             Destroy(gameObject);
         }
     }

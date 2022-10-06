@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2717.0176, g: 3791.373, b: 6019.449, a: 1}
+  m_IndirectSpecularColor: {r: 2717.5234, g: 3791.9941, b: 6020.297, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6044,7 +6044,7 @@ GameObject:
   - component: {fileID: 250420924}
   - component: {fileID: 250420923}
   m_Layer: 0
-  m_Name: Music
+  m_Name: BossMusic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6062,7 +6062,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a119b25d52728621583e7f3194633c58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggers: []
+  triggers:
+  - EndBattle
   audioChannels:
   - name: Intro
     volume: 0.5
@@ -6113,8 +6114,8 @@ MonoBehaviour:
     time: 0
     timeNormalized: 0
     duration: 0
-  - name: BossMusicLoop
-    volume: 0.3
+  - name: BossLoop
+    volume: 0.386
     lastVolume: 0
     pitch: 1
     layered: 1
@@ -6123,15 +6124,15 @@ MonoBehaviour:
     - {fileID: 8300000, guid: 5a42377aca19a444798f52478296f3df, type: 3}
     - {fileID: 8300000, guid: 5f5304c4b651e984782d35f12e6f2756, type: 3}
     - {fileID: 8300000, guid: 962cdf49cb3b658439d36edc384e8a0b, type: 3}
-    - {fileID: 8300000, guid: 656a478a7ab8e23439a8f5923d6f49e3, type: 3}
+    - {fileID: 8300000, guid: cbbd4924ff7e6644fac7125507981429, type: 3}
     timeSignature: 4
-    beatsPerMinute: 120
+    beatsPerMinute: 80
     layerIndex: 0
     currentLayer: 0
     longestLayerDuration: 0
     longestLayerIndex: 0
     loop: 1
-    playOnAwake: 1
+    playOnAwake: 0
     SpatialBlend: 0
     maxDistance: 300
     minDistance: 1
@@ -6215,7 +6216,23 @@ MonoBehaviour:
     time: 0
     timeNormalized: 0
     duration: 0
-  transitions: []
+  transitions:
+  - from: Intro
+    to: BossLoop
+    duration: 0
+    hasExitTime: 0
+    exitTime: 0
+    inheritNormalisedTime: 0
+    trigger: 
+    autoTransitionOnTrackEnd: 1
+  - from: BossLoop
+    to: End
+    duration: 0.3
+    hasExitTime: 0
+    exitTime: 0
+    inheritNormalisedTime: 0
+    trigger: EndBattle
+    autoTransitionOnTrackEnd: 0
 --- !u!4 &250420924
 Transform:
   m_ObjectHideFlags: 0
@@ -83787,6 +83804,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 919132149054763631}
   parameterName: Started
+  onTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 250420923}
+        m_TargetAssemblyTypeName: AudioController, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Intro
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &1702874051
 Transform:
   m_ObjectHideFlags: 0
@@ -120052,6 +120084,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -17.916683
       objectReference: {fileID: 0}
+    - target: {fileID: 2521559926156814879, guid: 8a42edac11376b6479f3d4d97c56f115, type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 250420923}
     - target: {fileID: 2541017468373595540, guid: 8a42edac11376b6479f3d4d97c56f115, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -9.349058
@@ -120581,6 +120617,18 @@ PrefabInstance:
       value: Omen
       objectReference: {fileID: 0}
     - target: {fileID: 5603951212662319398, guid: 8a42edac11376b6479f3d4d97c56f115, type: 3}
+      propertyPath: inspectorProperties.Array.size
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 5603951212662319398, guid: 8a42edac11376b6479f3d4d97c56f115, type: 3}
+      propertyPath: inspectorProperties.Array.data[23].GUID
+      value: 81e60f42-0cc3-4aa3-bcba-72d7b896b346
+      objectReference: {fileID: 0}
+    - target: {fileID: 5603951212662319398, guid: 8a42edac11376b6479f3d4d97c56f115, type: 3}
+      propertyPath: inspectorProperties.Array.data[23].name
+      value: AudioController
+      objectReference: {fileID: 0}
+    - target: {fileID: 5603951212662319398, guid: 8a42edac11376b6479f3d4d97c56f115, type: 3}
       propertyPath: inspectorProperties.Array.data[5].ovalue
       value: 
       objectReference: {fileID: 1182190143}
@@ -120616,6 +120664,15 @@ PrefabInstance:
       propertyPath: inspectorProperties.Array.data[22].ovalue
       value: 
       objectReference: {fileID: 184676031}
+    - target: {fileID: 5603951212662319398, guid: 8a42edac11376b6479f3d4d97c56f115, type: 3}
+      propertyPath: inspectorProperties.Array.data[23].ovalue
+      value: 
+      objectReference: {fileID: 250420922}
+    - target: {fileID: 5603951212662319398, guid: 8a42edac11376b6479f3d4d97c56f115, type: 3}
+      propertyPath: inspectorProperties.Array.data[23].serializedTypename
+      value: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      objectReference: {fileID: 0}
     - target: {fileID: 5726015378813397152, guid: 8a42edac11376b6479f3d4d97c56f115, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -43.530262
