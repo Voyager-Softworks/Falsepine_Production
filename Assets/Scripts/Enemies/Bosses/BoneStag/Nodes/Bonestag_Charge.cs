@@ -33,9 +33,10 @@ namespace Boss.Bonestag
             AddProperty<AudioClip>("ChargeSoundPhaseOne", null);
             AddProperty<AudioClip>("ChargeSoundPhaseTwo", null);
             AddProperty<GameObject>("DebrisPrefab", null);
+            AddProperty<bool>("Charge to far edge", false);
             initialized = false;
             tooltip = "Charge at the player";
-            
+
         }
         public override void OnInit()
         {
@@ -67,18 +68,22 @@ namespace Boss.Bonestag
                 }
             }
 
-            if(!initialized)
+            if (!initialized)
             {
                 agentTransform = agent.transform;
                 agentGameObject = agent.gameObject;
-                
-                if(arenaController == null)
+
+                if (arenaController == null)
                     arenaController = FindObjectOfType<BossArenaController>();
                 targetTransform = arenaController.ArenaCentre;
                 Vector3 playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
                 arenaEdgeGoalPosition = ComputeB(targetTransform.position, Vector3.up, arenaController.ArenaRadius, agent.transform.position, (playerPos - agentTransform.position).normalized);
+                if (GetProperty<bool>("Charge to far edge"))
+                {
+                    arenaEdgeGoalPosition = arenaController.ArenaCentre.position + ((arenaController.ArenaCentre.position - playerPos).normalized * arenaController.ArenaRadius);
+                }
                 NavMeshHit goalPosHit;
-                if(!NavMesh.FindClosestEdge(arenaEdgeGoalPosition, out goalPosHit, NavMesh.AllAreas))
+                if (!NavMesh.FindClosestEdge(arenaEdgeGoalPosition, out goalPosHit, NavMesh.AllAreas))
                 {
                     arenaEdgeGoalPosition.y = agentTransform.position.y;
                 }
@@ -87,31 +92,33 @@ namespace Boss.Bonestag
                     arenaEdgeGoalPosition = goalPosHit.position;
                 }
                 navAgent.SetDestination(arenaEdgeGoalPosition);
-                
-                
-                if(GetProperty<bool>("SecondPhase")) {
+
+
+                if (GetProperty<bool>("SecondPhase"))
+                {
                     agent.GetComponent<AudioSource>().PlayOneShot(chargeSoundPhaseTwo);
                     navAgent.speed = 70;
                 }
-                else {
+                else
+                {
                     agent.GetComponent<AudioSource>().PlayOneShot(chargeSoundPhaseOne);
                     navAgent.speed = 40;
                 }
 
-                navAgent.velocity =  (arenaEdgeGoalPosition - agent.transform.position).normalized * navAgent.speed;
-                
+                navAgent.velocity = (arenaEdgeGoalPosition - agent.transform.position).normalized * navAgent.speed;
+
                 navAgent.acceleration = 150;
                 navAgent.angularSpeed = 100000;
-                
+
                 navAgent.isStopped = false;
                 initialized = true;
             }
 
-            if(GetProperty<bool>("InBearTrap"))
+            if (GetProperty<bool>("InBearTrap"))
             {
                 navAgent.SetDestination(agent.transform.position);
                 navAgent.isStopped = true;
-                navAgent.velocity =  Vector3.zero;
+                navAgent.velocity = Vector3.zero;
                 //animator.SetTrigger("Trapped");
                 animator.SetBool("Charging", false);
                 state = NodeData.State.Failure;
@@ -120,19 +127,19 @@ namespace Boss.Bonestag
             else
             {
                 RaycastHit[] hits = Physics.SphereCastAll(agent.transform.position, 2.0f, agent.transform.forward, 2.0f);
-                foreach(RaycastHit hit in hits)
+                foreach (RaycastHit hit in hits)
                 {
-                    if(hit.collider.gameObject.tag == "DestructibleProp")
+                    if (hit.collider.gameObject.tag == "DestructibleProp")
                     {
                         Destroy(Instantiate(debrisPrefab, hit.point, Quaternion.identity), 5.0f);
                         Destroy(hit.collider.gameObject);
                     }
-                    else if(hit.collider.gameObject.tag == "Player" && !hasDamagedPlayer)
+                    else if (hit.collider.gameObject.tag == "Player" && !hasDamagedPlayer)
                     {
                         hit.collider.gameObject.GetComponent<PlayerHealth>().TakeDamage(chargeDamage);
                         hasDamagedPlayer = true;
                     }
-                    else if(hit.collider.gameObject.tag == "BearTrap")
+                    else if (hit.collider.gameObject.tag == "BearTrap")
                     {
                         animator.ResetTrigger("AttackingFinished");
                         SetProperty<bool>("InBearTrap", true);
@@ -149,7 +156,8 @@ namespace Boss.Bonestag
                         }
                         //disable interaction
                         Interactable interactable = trapRoot.GetComponent<Interactable>();
-                        if (interactable){
+                        if (interactable)
+                        {
                             //interactable._text.enabled = false;
                             interactable.enabled = false;
                         }
@@ -161,7 +169,7 @@ namespace Boss.Bonestag
                         }
                     }
                 }
-                if(Vector3.Distance(agent.transform.position, arenaEdgeGoalPosition) < 3.0f)
+                if (Vector3.Distance(agent.transform.position, arenaEdgeGoalPosition) < 3.0f)
                 {
                     agent.transform.position = RandomPointOnCircle(targetTransform.position, Vector3.up, arenaController.ArenaRadius);
                     agent.gameObject.GetComponent<RotateTowardsPlayer>().RotateToPlayer(0.5f, 10.0f, 0.0f);
@@ -185,23 +193,23 @@ namespace Boss.Bonestag
         public override void DrawGizmos(NodeAI_Agent agent)
         {
             Gizmos.color = Color.red;
-            if(arenaController != null) Gizmos.DrawWireSphere(arenaController.ArenaCentre.position, arenaController.ArenaRadius);
+            if (arenaController != null) Gizmos.DrawWireSphere(arenaController.ArenaCentre.position, arenaController.ArenaRadius);
         }
 
-        private Vector3 ComputeB( Vector3 circleCenter, Vector3 circleNormal, float circleRadius, Vector3 point, Vector3 direction )
+        private Vector3 ComputeB(Vector3 circleCenter, Vector3 circleNormal, float circleRadius, Vector3 point, Vector3 direction)
         {
-            float a = Vector3.SignedAngle( (circleCenter - point).normalized * circleRadius, direction, circleNormal );
+            float a = Vector3.SignedAngle((circleCenter - point).normalized * circleRadius, direction, circleNormal);
             float w = 0;
-            if ( a >= 0 ) w = 180 - 2 * a; // because w + a + a = 180;
-            else w = -( 180 + 2 * a );
+            if (a >= 0) w = 180 - 2 * a; // because w + a + a = 180;
+            else w = -(180 + 2 * a);
             Vector3 BO = Quaternion.AngleAxis(w, -circleNormal) * ((point - circleCenter).normalized * circleRadius);
             return circleCenter + BO;
         }
 
-        private Vector3 RandomPointOnCircle( Vector3 circleCenter, Vector3 circleNormal, float circleRadius )
+        private Vector3 RandomPointOnCircle(Vector3 circleCenter, Vector3 circleNormal, float circleRadius)
         {
-            float angle = Random.Range( 0, 360 );
-            Vector3 BO = Quaternion.AngleAxis( angle, -circleNormal ) * ((circleCenter - circleNormal * circleRadius).normalized * circleRadius);
+            float angle = Random.Range(0, 360);
+            Vector3 BO = Quaternion.AngleAxis(angle, -circleNormal) * ((circleCenter - circleNormal * circleRadius).normalized * circleRadius);
             return circleCenter + BO;
         }
     }

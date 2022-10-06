@@ -11,24 +11,25 @@ public class TouchTrigger : MonoBehaviour
     public string triggerName;
     bool triggered = false;
     public bool ignorePlayer = false;
+    public bool ignoreNonPlayer = false;
     public bool mustHaveHealth = false;
     public System.Action Triggered;
 
-    #if UNITY_EDITOR
+#if UNITY_EDITOR
     [ReadOnly]
-    #endif
+#endif
     public Collider hitCollider;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void OnTriggerEnter(Collider other)
@@ -51,13 +52,13 @@ public class TouchTrigger : MonoBehaviour
 
         // check conditions
         if ((mustHaveHealth && !hasHealth && !isPlayer) ||
-            (ignorePlayer && isPlayer))
+            (ignorePlayer && isPlayer) || (ignoreNonPlayer && !isPlayer))
         {
             return;
         }
 
         // enemy trap trigger
-        if(other.transform.root.GetComponentInChildren<NodeAI.NodeAI_Agent>() != null)
+        if (other.transform.root.GetComponentInChildren<NodeAI.NodeAI_Agent>() != null)
         {
             other.transform.root.GetComponentInChildren<NodeAI.NodeAI_Agent>().SetParameter<bool>(triggerName, true);
         }
