@@ -56,6 +56,12 @@ public class StatsManager : MonoBehaviour
         public static StatType FireDamage { get { return new StatType("FireDamage"); } }
         public static StatType SilverDamage { get { return new StatType("SilverDamage"); } }
 
+        // Health
+        public static StatType PlayerMaxHealth { get { return new StatType("PlayerMaxHealth"); } }
+        public static StatType EnemyMaxHealth { get { return new StatType("EnemyMaxHealth"); } }
+        public static StatType PlayerDamageTaken { get { return new StatType("PlayerDamageTaken"); } }
+        public static StatType EnemyDamageTaken { get { return new StatType("EnemyDamageTaken"); } }
+
         // Economy
         public static StatType ItemCost { get { return new StatType("ItemCost"); } }
 
