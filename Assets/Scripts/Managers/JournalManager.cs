@@ -168,13 +168,17 @@ public class JournalManager : ToggleableWindow
         _audioSource = GetComponent<AudioSource>();
     }
 
-    void OnEnable()
-    {
+    
+
+    protected override void OnEnable() {
+        base.OnEnable();
+
         openJournalAction.Enable();
     }
 
-    void OnDisable()
-    {
+    protected override void OnDisable() {
+        base.OnDisable();
+        
         openJournalAction.Disable();
     }
 
