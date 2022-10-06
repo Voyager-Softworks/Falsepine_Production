@@ -48,6 +48,7 @@ public class PlayerHealth : MonoBehaviour, StatsManager.UsesStats
     public List<StatsManager.StatType> m_usedStatTypes = new List<StatsManager.StatType>() { 
         StatsManager.StatType.PlayerMaxHealth,
         StatsManager.StatType.PlayerDamageTaken,
+        StatsManager.StatType.PlayerHealthSteal
     };
     public List<StatsManager.StatType> GetStatTypes(){
         return m_usedStatTypes;
