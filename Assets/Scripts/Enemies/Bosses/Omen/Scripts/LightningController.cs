@@ -42,7 +42,7 @@ public class LightningController : MonoBehaviour
     void Update()
     {
         if (bossEnemyHealth.m_currentHealth > 1.0f)
-            stormIntensityMultiplier = 1f - (bossEnemyHealth.m_currentHealth / bossEnemyHealth.m_maxHealth);
+            stormIntensityMultiplier = 1f - (bossEnemyHealth.m_currentHealth / bossEnemyHealth.calcedMaxHealth);
         else
             stormIntensityMultiplier = 0f;
 

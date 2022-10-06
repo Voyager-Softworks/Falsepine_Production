@@ -40,7 +40,7 @@ public class BossEnemyHealth : EnemyHealth
         if (m_uiScript == null) return;
 
         // sets the boss health bar size to represent the boss's health
-        m_uiScript.bossHealthBar.rectTransform.sizeDelta = new Vector2(m_uiScript.bossHealthBarMaxWidth * (m_currentHealth / m_maxHealth), m_uiScript.bossHealthBar.rectTransform.sizeDelta.y);
+        m_uiScript.bossHealthBar.rectTransform.sizeDelta = new Vector2(m_uiScript.bossHealthBarMaxWidth * (m_currentHealth / calcedMaxHealth), m_uiScript.bossHealthBar.rectTransform.sizeDelta.y);
         m_uiScript.bossHealthBarDark.rectTransform.sizeDelta = Vector2.Lerp(m_uiScript.bossHealthBarDark.rectTransform.sizeDelta, m_uiScript.bossHealthBar.rectTransform.sizeDelta, Time.deltaTime * 2f);
     }
 

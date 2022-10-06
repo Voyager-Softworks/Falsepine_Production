@@ -1432,7 +1432,11 @@ MonoBehaviour:
   - name: DamageSound
     volume: 1
     pitch: 1
+    layered: 0
     clip: {fileID: 8300000, guid: 022a44acf00cf2344a2d7687188d579c, type: 3}
+    layers: []
+    timeSignature: 4
+    beatsPerMinute: 120
     loop: 0
     playOnAwake: 0
     SpatialBlend: 0
@@ -1471,7 +1475,11 @@ MonoBehaviour:
   - name: DeathSound
     volume: 1
     pitch: 1
+    layered: 0
     clip: {fileID: 8300000, guid: 2e6565cdab19d4f41808c36d3f1253c5, type: 3}
+    layers: []
+    timeSignature: 4
+    beatsPerMinute: 120
     loop: 0
     playOnAwake: 0
     SpatialBlend: 0
@@ -1526,6 +1534,9 @@ MonoBehaviour:
   m_weaknesses:
   - value: PoisonDamage
   m_damageHistory: []
+  m_usedStatTypes:
+  - value: EnemyDamageTaken
+  - value: EnemyMaxHealth
   m_deathSoundName: DeathSound
   m_damageSoundname: DamageSound
   m_monsterType: {fileID: 11400000, guid: 0a5776166c4047b469f7cc181eb8daa0, type: 2}

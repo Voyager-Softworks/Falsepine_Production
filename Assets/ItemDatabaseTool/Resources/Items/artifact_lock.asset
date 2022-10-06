@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bcd63797a216aad4489fc2c905ee90e2, type: 3}
-  m_Name: Artifact
+  m_Name: artifact_lock
   m_EditorClassIdentifier: 
-  m_id: artifact_0
+  m_id: artifact_lock
   m_instanceID: 
-  m_displayName: Cool artifact
-  m_description: Does some things
-  m_icon: {fileID: 21300000, guid: 391b279f4b7d1d34298eb5e902d94e6b, type: 3}
+  m_displayName: Rusted Lock
+  m_description: A strange lock, rust has made it impossible to close. Decreases
+    explosive damage to you and enemies by 75%.
+  m_icon: {fileID: 21300000, guid: b291f07281e44734f8ad2fdbd395b753, type: 3}
   mustMatchToStack: 0
   m_currentStackSize: 1
   m_maxStackSize: 1
@@ -24,15 +25,11 @@ MonoBehaviour:
   m_usedStatTypes: []
   m_statMods:
   - statType:
-      value: MeleeDamage
+      value: ExplosiveDamage
     modType: 1
-    value: 3
-  - statType:
-      value: RangedRange
-    modType: 1
-    value: 0.5
+    value: 0.25
   m_price: 100
   m_allowedDiscount: 1
   m_resourceLinks:
   - fieldName: m_icon
-    resourceName: Bait_icon
+    resourceName: gateLock

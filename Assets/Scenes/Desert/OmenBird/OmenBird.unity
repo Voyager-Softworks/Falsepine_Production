@@ -6066,12 +6066,17 @@ MonoBehaviour:
   audioChannels:
   - name: Intro
     volume: 1
+    lastVolume: 0
     pitch: 1
     layered: 0
     clip: {fileID: 8300000, guid: 2e8161cc8f8464d4b897c11ee11994ba, type: 3}
     layers: []
     timeSignature: 4
     beatsPerMinute: 120
+    layerIndex: 0
+    currentLayer: 0
+    longestLayerDuration: 0
+    longestLayerIndex: 0
     loop: 0
     playOnAwake: 0
     SpatialBlend: 0
@@ -6102,19 +6107,29 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     source: {fileID: 0}
+    layerSources: []
     playing: 0
     paused: 0
     time: 0
     timeNormalized: 0
     duration: 0
-  - name: Layer1
-    volume: 0
+  - name: BossMusicLoop
+    volume: 1
+    lastVolume: 0
     pitch: 1
-    layered: 0
+    layered: 1
     clip: {fileID: 8300000, guid: 5a42377aca19a444798f52478296f3df, type: 3}
-    layers: []
+    layers:
+    - {fileID: 8300000, guid: 5a42377aca19a444798f52478296f3df, type: 3}
+    - {fileID: 8300000, guid: 5f5304c4b651e984782d35f12e6f2756, type: 3}
+    - {fileID: 8300000, guid: 962cdf49cb3b658439d36edc384e8a0b, type: 3}
+    - {fileID: 8300000, guid: 656a478a7ab8e23439a8f5923d6f49e3, type: 3}
     timeSignature: 4
     beatsPerMinute: 120
+    layerIndex: 0
+    currentLayer: 0
+    longestLayerDuration: 0
+    longestLayerIndex: 0
     loop: 1
     playOnAwake: 1
     SpatialBlend: 0
@@ -6145,135 +6160,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     source: {fileID: 0}
-    playing: 0
-    paused: 0
-    time: 0
-    timeNormalized: 0
-    duration: 0
-  - name: Layer2
-    volume: 0
-    pitch: 1
-    layered: 0
-    clip: {fileID: 8300000, guid: 5f5304c4b651e984782d35f12e6f2756, type: 3}
-    layers: []
-    timeSignature: 4
-    beatsPerMinute: 120
-    loop: 1
-    playOnAwake: 1
-    SpatialBlend: 0
-    maxDistance: 300
-    minDistance: 1
-    distanceCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: -1
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: -1
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    source: {fileID: 0}
-    playing: 0
-    paused: 0
-    time: 0
-    timeNormalized: 0
-    duration: 0
-  - name: Layer3
-    volume: 0
-    pitch: 1
-    layered: 0
-    clip: {fileID: 8300000, guid: 962cdf49cb3b658439d36edc384e8a0b, type: 3}
-    layers: []
-    timeSignature: 4
-    beatsPerMinute: 120
-    loop: 1
-    playOnAwake: 1
-    SpatialBlend: 0
-    maxDistance: 300
-    minDistance: 1
-    distanceCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: -1
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: -1
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    source: {fileID: 0}
-    playing: 0
-    paused: 0
-    time: 0
-    timeNormalized: 0
-    duration: 0
-  - name: Layer4
-    volume: 0
-    pitch: 1
-    layered: 0
-    clip: {fileID: 8300000, guid: 656a478a7ab8e23439a8f5923d6f49e3, type: 3}
-    layers: []
-    timeSignature: 4
-    beatsPerMinute: 120
-    loop: 1
-    playOnAwake: 1
-    SpatialBlend: 0
-    maxDistance: 300
-    minDistance: 1
-    distanceCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: -1
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: -1
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    source: {fileID: 0}
+    layerSources: []
     playing: 0
     paused: 0
     time: 0
@@ -6281,12 +6168,17 @@ MonoBehaviour:
     duration: 0
   - name: End
     volume: 1
+    lastVolume: 0
     pitch: 1
     layered: 0
     clip: {fileID: 8300000, guid: dec49793d88a2e94496197e745179562, type: 3}
     layers: []
     timeSignature: 4
     beatsPerMinute: 120
+    layerIndex: 0
+    currentLayer: 0
+    longestLayerDuration: 0
+    longestLayerIndex: 0
     loop: 0
     playOnAwake: 0
     SpatialBlend: 0
@@ -6317,6 +6209,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     source: {fileID: 0}
+    layerSources: []
     playing: 0
     paused: 0
     time: 0
@@ -109595,12 +109488,17 @@ MonoBehaviour:
   audioChannels:
   - name: Wind
     volume: 1
+    lastVolume: 0
     pitch: 1
     layered: 0
     clip: {fileID: 8300000, guid: e9da572a406838e44a0953ba687b089c, type: 3}
     layers: []
     timeSignature: 4
     beatsPerMinute: 120
+    layerIndex: 0
+    currentLayer: 0
+    longestLayerDuration: 0
+    longestLayerIndex: 0
     loop: 1
     playOnAwake: 1
     SpatialBlend: 0
@@ -109631,6 +109529,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     source: {fileID: 0}
+    layerSources: []
     playing: 0
     paused: 0
     time: 0
@@ -109638,12 +109537,17 @@ MonoBehaviour:
     duration: 0
   - name: Rain
     volume: 1
+    lastVolume: 0
     pitch: 1
     layered: 0
     clip: {fileID: 8300000, guid: ecec44699bfcca94eae216dfd156a724, type: 3}
     layers: []
     timeSignature: 4
     beatsPerMinute: 120
+    layerIndex: 0
+    currentLayer: 0
+    longestLayerDuration: 0
+    longestLayerIndex: 0
     loop: 1
     playOnAwake: 1
     SpatialBlend: 0
@@ -109674,6 +109578,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     source: {fileID: 0}
+    layerSources: []
     playing: 0
     paused: 0
     time: 0
@@ -109681,12 +109586,17 @@ MonoBehaviour:
     duration: 0
   - name: Storm
     volume: 1
+    lastVolume: 0
     pitch: 1
     layered: 0
     clip: {fileID: 8300000, guid: 545a650ffaf7b0c4d85de58c688e3227, type: 3}
     layers: []
     timeSignature: 4
     beatsPerMinute: 120
+    layerIndex: 0
+    currentLayer: 0
+    longestLayerDuration: 0
+    longestLayerIndex: 0
     loop: 1
     playOnAwake: 1
     SpatialBlend: 0
@@ -109717,6 +109627,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     source: {fileID: 0}
+    layerSources: []
     playing: 0
     paused: 0
     time: 0

@@ -32,16 +32,17 @@ public class JournalUpdater_Talismans : JournalContentUpdater
         }
 
         // get all drink mods
-        List<StatsManager.StatMod> drinkMods = StatsManager.drinkMods;
+        List<Drink> drinks = StatsManager.activeDrinks;
 
         // add new content
-        foreach (StatsManager.StatMod drinkMod in drinkMods)
+        foreach (Drink drink in drinks)
         {
             JournalContent content = new JournalContent();
-            content.text = drinkMod.ToText();
-            //content.image = drinkMod.m_icon;
-            // disable image for now
-            content.image = null;
+            content.text = drink.m_displayName.ToString();
+            foreach (StatsManager.StatMod mod in drink.GetStatMods()){
+                content.text += "\n" + mod.ToText();
+            }
+            content.image = drink.m_icon;
             contentList.Add(content);
         }
 

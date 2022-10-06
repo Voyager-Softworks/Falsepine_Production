@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe03799e1c32dd5459793de188b34c5f, type: 3}
-  m_Name: Drink
+  m_Name: drink_buckman
   m_EditorClassIdentifier: 
-  m_id: drink_0
+  m_id: drink_buckman
   m_instanceID: 
-  m_displayName: A drink
-  m_description: Changes stats
-  m_icon: {fileID: 0}
+  m_displayName: Buckman Rye
+  m_description: An imported Rye that has the paradoxical effect for sharpening the
+    senses while inebriated. Increases ranged damage by 15%, and incoming damage
+    by 20%.
+  m_icon: {fileID: 21300000, guid: e2c386541ab2dfa4a96d10cdabcd3af5, type: 3}
   mustMatchToStack: 0
   m_currentStackSize: 1
   m_maxStackSize: 1
@@ -26,12 +28,14 @@ MonoBehaviour:
   - statType:
       value: EnemyDamage
     modType: 1
-    value: 2
+    value: 1.2
   - statType:
-      value: PlayerDamage
+      value: RangedDamage
     modType: 1
-    value: 2
-  m_price: 10
+    value: 1.15
+  m_price: 20
   m_allowedDiscount: 1
-  m_resourceLinks: []
+  m_resourceLinks:
+  - fieldName: m_icon
+    resourceName: liveBait_icon
   m_exampleValue: 0
