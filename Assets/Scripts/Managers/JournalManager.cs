@@ -189,6 +189,13 @@ public class JournalManager : ToggleableWindow
 
         if (openJournalAction.WasPressedThisFrame())
         {
+            // get console window
+            Console consoleWindow = FindObjectOfType<Console>();
+            // if console is open, don't open journal
+            if (consoleWindow != null && consoleWindow.IsOpen())
+            {
+                return;
+            }
             ToggleWindow();
         }
 
@@ -218,6 +225,8 @@ public class JournalManager : ToggleableWindow
         if (!m_discoveredEntries.Contains(entry))
         {
             m_discoveredEntries.Add(entry);
+            // send message
+            MessageManager.instance.AddMessage("New Journal Entry\n" + entry.m_linkedMonster.m_name, "monster");
             return true;
         }
 
