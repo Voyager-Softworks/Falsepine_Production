@@ -44,6 +44,8 @@ public class UIScript : MonoBehaviour
     [HideInInspector] public float bossHealthBarMaxWidth;
     public TextMeshProUGUI bossNameText;
 
+    private PlayerInventoryInterface pii;
+
 
     public UnityEvent OnStart;
 
@@ -70,7 +72,7 @@ public class UIScript : MonoBehaviour
     {
         if (InventoryManager.instance)
         {
-            PlayerInventoryInterface pii = FindObjectOfType<PlayerInventoryInterface>();
+            if (pii == null) pii = FindObjectOfType<PlayerInventoryInterface>();
             Item currentWeapon = pii.selectedWeapon;
 
             // update ammo text
