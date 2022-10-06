@@ -19,6 +19,7 @@ public class MonsterInfo : ScriptableObject
 
     [SerializeField] public string m_name;
     [SerializeField] public MonsterType m_type;
+    [SerializeField] public Sprite m_monsterImage;
 
     //@todo decide if zone is needed here
     // zone?
