@@ -182,6 +182,11 @@ public class TalismanChoice : ToggleableWindow
             Instantiate(m_confirmEffect, transform.position, Quaternion.identity);
         }
 
+        // message
+        if (MessageManager.instance) {
+            MessageManager.instance.AddMessage("New Talisman", "talisman", false);
+        }
+
         CloseWindow();
     }
 

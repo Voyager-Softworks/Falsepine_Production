@@ -329,6 +329,10 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     public void SpendMoney(int _amount)
     {
         m_playerSilver -= _amount;
+
+        if (MessageManager.instance) {
+            MessageManager.instance.AddMessage("-" + _amount + " silver", "silver", true);
+        }
     }
 
     /// <summary>
@@ -339,6 +343,11 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     public void AddMoney(int _amount)
     {
         m_playerSilver += _amount;
+
+        // message
+        if (MessageManager.instance) {
+            MessageManager.instance.AddMessage("+" + _amount + " silver", "silver", true);
+        }
     }
 
     public void SaveEconomy(int saveSlot)

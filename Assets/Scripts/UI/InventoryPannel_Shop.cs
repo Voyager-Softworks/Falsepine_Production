@@ -99,6 +99,11 @@ public class InventoryPannel_Shop : InventoryPannel
             if (InventoryManager.instance.CanMoveItem(_sourceInventory, _targetInventory, _sourceIndex)){
                 economyManager.SpendMoney(price);
                 InventoryManager.instance.TryMoveItem(_sourceInventory, _targetInventory, _sourceIndex);
+
+                // message
+                if (MessageManager.instance) {
+                    MessageManager.instance.AddMessage("You bought a " + itemToBuy.m_linkedItem.m_displayName, "bag", true);
+                }
             }
 
             // unbind buy button

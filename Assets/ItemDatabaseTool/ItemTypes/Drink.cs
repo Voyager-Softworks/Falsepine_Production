@@ -47,6 +47,11 @@ public class Drink : Item
     public void Consume(){
         // add mods to stats manager
         StatsManager.activeDrinks.Add(this);
+
+        // message
+        if (MessageManager.instance) {
+            MessageManager.instance.AddMessage("You drank a " + m_displayName, "drink", true);
+        }
     }
 
     

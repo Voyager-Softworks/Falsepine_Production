@@ -20,6 +20,8 @@ public class MessageManager : MonoBehaviour
 
     public AudioClip m_messageSound;
 
+    [ReadOnly] public List<string> m_oldMessages = new List<string>();
+
     private void Awake() {
         if (instance == null)
         {
@@ -46,11 +48,13 @@ public class MessageManager : MonoBehaviour
         
     }
 
-    public void AddMessage(string _messsage, string _icon = ""){
+    public void AddMessage(string _messsage, string _icon = "", bool _doFade = false){
+        m_oldMessages.Add(_messsage);
+
         GameObject message = Instantiate(messagePrefab, m_contentPanel.transform);
         m_messages.Add(message);
 
-        message.GetComponentInChildren<MessageScript>().SetMessage(_messsage, _icon);
+        message.GetComponentInChildren<MessageScript>().SetMessage(_messsage, _icon, _doFade: _doFade);
 
         // force layout update for all children
         RectTransform[] children = m_contentPanel.GetComponentsInChildren<RectTransform>();

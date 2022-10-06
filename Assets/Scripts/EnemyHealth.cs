@@ -139,7 +139,7 @@ public class EnemyHealth : Health_Base
         if (audioSource != null) audioSource.Stop();
 
         // get econ manager, and give money
-        EconomyManager.instance.m_playerSilver += m_silverReward;
+        EconomyManager.instance.AddMoney(m_silverReward);
 
         // do health steal for player
         PlayerHealth playerHealth = lastDamage?.m_sourceObject.GetComponent<PlayerHealth>();

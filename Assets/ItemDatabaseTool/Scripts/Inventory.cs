@@ -333,13 +333,21 @@ public class Inventory : MonoBehaviour
                     weapon.m_clipAmmo = weapon.m_clipSize;
                     didChange = true;
                 }
-                if (weapon.m_spareAmmo < weapon.m_clipSize)
+                if (weapon.m_spareAmmo < weapon.m_maxSpareAmmo)
                 {
                     weapon.m_spareAmmo = weapon.m_maxSpareAmmo;
                     didChange = true;
                 }
             }
         }
+
+        if (didChange){
+            // message
+            if (MessageManager.instance) {
+                MessageManager.instance.AddMessage("Ammo Refilled", "ammo", true);
+            }
+        }
+
         return didChange;
     }
 

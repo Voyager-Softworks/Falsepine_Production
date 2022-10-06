@@ -86,9 +86,20 @@ public class BossEnemyHealth : EnemyHealth
                 Inventory home = InventoryManager.instance.GetInventory("home");
                 if (home != null)
                 {
-                    home.TryAddItemToInventory(artifact.CreateInstance());
+                    if (home.TryAddItemToInventory(artifact.CreateInstance()) == null){
+                        // message
+                        if (MessageManager.instance) {
+                            MessageManager.instance.AddMessage("You found a " + artifact.m_displayName + "!", "talisman");
+                        }
+                    }
                 }
             }
+        }
+
+        // message
+        if (MessageManager.instance)
+        {
+            MessageManager.instance.AddMessage("You defeated " + m_monsterType.m_name + "!", "journal", true);
         }
     }
 }
