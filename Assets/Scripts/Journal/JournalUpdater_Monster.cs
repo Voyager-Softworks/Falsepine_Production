@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 /// <summary>
 /// Responsible for updating a journal page with the latest information.
@@ -10,6 +11,8 @@ public class JournalUpdater_Monster : JournalContentUpdater
 {
     public MonsterInfo m_monster = null;
 
+    public Image m_monsterImage;
+    public TextMeshProUGUI m_monsterName;
     public TextMeshProUGUI m_killCountText;
 
     public override void UpdateContent()
@@ -40,6 +43,18 @@ public class JournalUpdater_Monster : JournalContentUpdater
         }
 
         base.UpdateContent();
+
+        // update image
+        m_monsterImage.sprite = m_monster.m_monsterImage;
+        // get all children of the image and set sprite to the same
+        Image[] children = m_monsterImage.GetComponentsInChildren<Image>();
+        foreach (Image child in children)
+        {
+            child.sprite = m_monster.m_monsterImage;
+        }
+
+        // update name
+        m_monsterName.text = m_monster.m_name;
 
         // update kill count text
         if (m_killCountText != null)
