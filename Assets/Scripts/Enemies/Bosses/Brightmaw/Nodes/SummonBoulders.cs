@@ -64,7 +64,7 @@ namespace Boss.Brightmaw
                     //If the boulder is outside the arena, move it back in
                     if (Vector3.Distance(boulder.transform.position, arenaCentre) > arenaRadius)
                     {
-                        boulder.transform.position = arenaCentre + (boulder.transform.position - arenaCentre).normalized * arenaRadius;
+                        boulder.transform.position = arenaCentre - (boulder.transform.position - arenaCentre).normalized * arenaRadius;
                     }
 
                     m_boulders.Add(boulder);
