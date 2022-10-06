@@ -11428,7 +11428,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6320944665090415811
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12273,7 +12273,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000015258789}
+  m_AnchoredPosition: {x: 0, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &8002776713642510365
@@ -12891,12 +12891,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1966728910164243164}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 150}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 166.5, y: -168}
+  m_SizeDelta: {x: 333, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4973118849640241698
 CanvasRenderer:
@@ -12926,10 +12926,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Talismans provide a buff that lasts until you die!
+  m_text: 'Here you can see the temporary effects on the player.
 
-    Any you collect,
-    will show here.'
+    Talismans persist
+    until you die, drinks only last for one expidition.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d4909a723f165cc46a9f81d8c5da0b34, type: 2}
   m_sharedMaterial: {fileID: 1981243289313481776, guid: d4909a723f165cc46a9f81d8c5da0b34, type: 2}
@@ -13274,13 +13274,13 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 447902561909564858}
+  m_Father: {fileID: 1966728910164243164}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 50}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 166.5, y: -25}
+  m_SizeDelta: {x: 333, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8249619909187914298
 CanvasRenderer:
@@ -13310,7 +13310,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: TALISMANS
+  m_text: EFFECTS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1fa4b3edb4c36cd4fa15838c8e2a0b9c, type: 2}
   m_sharedMaterial: {fileID: 3138107799243547728, guid: 1fa4b3edb4c36cd4fa15838c8e2a0b9c, type: 2}
@@ -14092,12 +14092,12 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 447902561909564858}
+  m_Father: {fileID: 1966728910164243164}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 166.9, y: 5.4001236}
+  m_AnchoredPosition: {x: 166.5, y: -71.5}
   m_SizeDelta: {x: 333, y: 3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2942821704163055729
@@ -17174,7 +17174,7 @@ RectTransform:
   m_Children:
   - {fileID: 7912171129128529881}
   m_Father: {fileID: 447902561909564858}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -18766,7 +18766,7 @@ GameObject:
   - component: {fileID: 8038525158252704602}
   - component: {fileID: 8787303548283748249}
   m_Layer: 5
-  m_Name: Talismans_Content
+  m_Name: Effects_Content
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18783,8 +18783,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 521546114222035132}
-  - {fileID: 4214468835063372755}
   - {fileID: 7655359152275468020}
   - {fileID: 1887378893950603459}
   m_Father: {fileID: 4773759486912437506}
@@ -20029,7 +20027,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0.000061035156}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -22074,7 +22072,7 @@ GameObject:
   - component: {fileID: 6757129734355136714}
   - component: {fileID: 4634399701793817209}
   m_Layer: 5
-  m_Name: TALISMANS_BUTTON
+  m_Name: EFFECTS_BUTTON
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25118,7 +25116,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Talismans
+  m_text: Effects
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1fa4b3edb4c36cd4fa15838c8e2a0b9c, type: 2}
   m_sharedMaterial: {fileID: 3138107799243547728, guid: 1fa4b3edb4c36cd4fa15838c8e2a0b9c, type: 2}
@@ -25680,7 +25678,7 @@ RectTransform:
   m_Children:
   - {fileID: 1966728910164243164}
   m_Father: {fileID: 447902561909564858}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -26009,7 +26007,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2127042672943247028}
   m_HandleRect: {fileID: 1690425750068990440}
   m_Direction: 2
-  m_Value: 1.0000006
+  m_Value: 1
   m_Size: 0.83292896
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -27993,6 +27991,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 521546114222035132}
+  - {fileID: 4214468835063372755}
   - {fileID: 7495453812073056152}
   m_Father: {fileID: 1887378893950603459}
   m_RootOrder: 0
@@ -28000,7 +28000,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0.000030517578}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 243}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6272627976166622495
 MonoBehaviour:

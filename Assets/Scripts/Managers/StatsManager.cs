@@ -74,7 +74,7 @@ public class StatsManager : MonoBehaviour
             string displayName = "";
             foreach (char c in type.value)
             {
-                if (char.IsUpper(c))
+                if (char.IsUpper(c) &&  type.value.First() != c)
                 {
                     displayName += " ";
                 }

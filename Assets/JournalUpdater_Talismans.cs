@@ -22,29 +22,62 @@ public class JournalUpdater_Talismans : JournalContentUpdater
         // clear current content
         contentList.Clear();
 
-        // add new content
-        foreach (StatsManager.Talisman talisman in talismans)
+        // Talisman content:
+        JournalContent talismanContent = new JournalContent();
+        talismanContent.text = "Talismans:";
+        talismanContent.bold = true;
+        talismanContent.image = null;
+        contentList.Add(talismanContent);
+        if (talismans.Count > 0)
+        {
+            foreach (StatsManager.Talisman talisman in talismans)
+            {
+                JournalContent content = new JournalContent();
+                content.text = talisman.m_statMod.ToText();
+                content.image = talisman.m_icon;
+                contentList.Add(content);
+            }
+        }
+        else
         {
             JournalContent content = new JournalContent();
-            content.text = talisman.m_statMod.ToText();
-            content.image = talisman.m_icon;
+            content.text = "No talismans!";
+            content.image = null;
             contentList.Add(content);
         }
+
 
         // get all drink mods
         List<Drink> drinks = StatsManager.activeDrinks;
 
-        // add new content
-        foreach (Drink drink in drinks)
+        // Drinks content:
+        JournalContent drinksContent = new JournalContent();
+        drinksContent.text = "Drinks:";
+        drinksContent.bold = true;
+        drinksContent.image = null;
+        contentList.Add(drinksContent);
+        if (drinks.Count > 0)
+        {
+            foreach (Drink drink in drinks)
+            {
+                JournalContent content = new JournalContent();
+                content.text = drink.m_displayName.ToString();
+                foreach (StatsManager.StatMod mod in drink.GetStatMods())
+                {
+                    content.text += "\n- " + mod.ToText();
+                }
+                content.image = drink.m_icon;
+                contentList.Add(content);
+            }
+        }
+        else
         {
             JournalContent content = new JournalContent();
-            content.text = drink.m_displayName.ToString();
-            foreach (StatsManager.StatMod mod in drink.GetStatMods()){
-                content.text += "\n" + mod.ToText();
-            }
-            content.image = drink.m_icon;
+            content.text = "No Drinks!";
+            content.image = null;
             contentList.Add(content);
         }
+
 
         base.UpdateContent();
     }
