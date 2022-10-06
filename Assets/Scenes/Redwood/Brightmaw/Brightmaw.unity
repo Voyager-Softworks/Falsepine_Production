@@ -3663,58 +3663,6 @@ MonoBehaviour:
     time: 0
     timeNormalized: 0
     duration: 0
-  - name: MinionLoop
-    volume: 0.518
-    lastVolume: 0
-    pitch: 1
-    layered: 0
-    clip: {fileID: 8300000, guid: fc17fec7abc13e54d9bc86c7397b3720, type: 3}
-    layers:
-    - {fileID: 8300000, guid: fde8faccd769d634f9553bfa5bef637c, type: 3}
-    - {fileID: 8300000, guid: fd71f02612817304184646c2e233675f, type: 3}
-    - {fileID: 8300000, guid: 84796bb5381db614ca5673372e1e0336, type: 3}
-    timeSignature: 4
-    beatsPerMinute: 80
-    layerIndex: 0
-    currentLayer: 0
-    longestLayerDuration: 0
-    longestLayerIndex: 0
-    loop: 1
-    playOnAwake: 0
-    SpatialBlend: 0
-    maxDistance: 300
-    minDistance: 1
-    distanceCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: -1
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: -1
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    source: {fileID: 0}
-    layerSources: []
-    playing: 0
-    paused: 0
-    time: 0
-    timeNormalized: 0
-    duration: 0
   transitions:
   - from: Intro
     to: Boss Music
@@ -3724,22 +3672,6 @@ MonoBehaviour:
     inheritNormalisedTime: 0
     trigger: 
     autoTransitionOnTrackEnd: 1
-  - from: Boss Music
-    to: MinionLoop
-    duration: 0.2
-    hasExitTime: 0
-    exitTime: 0
-    inheritNormalisedTime: 0
-    trigger: Minions
-    autoTransitionOnTrackEnd: 0
-  - from: MinionLoop
-    to: Boss Music
-    duration: 0.2
-    hasExitTime: 0
-    exitTime: 0
-    inheritNormalisedTime: 0
-    trigger: MinionsKilled
-    autoTransitionOnTrackEnd: 0
 --- !u!4 &414840833
 Transform:
   m_ObjectHideFlags: 0
