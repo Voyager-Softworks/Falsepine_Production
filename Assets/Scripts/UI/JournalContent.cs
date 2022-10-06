@@ -13,6 +13,7 @@ public class JournalContent
     [TextArea(3, 10)]
     public string text = "";
     public Sprite image = null;
+    public bool bold = false;
 
     // padding around the content
     //public float verticalPadding = 5;

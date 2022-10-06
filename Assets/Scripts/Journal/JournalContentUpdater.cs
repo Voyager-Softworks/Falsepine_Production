@@ -40,10 +40,14 @@ public class JournalContentUpdater : MonoBehaviour
     /// Adds thext into this content page.
     /// </summary>
     /// <param name="text"></param>
-    protected virtual void AddTextContentObject(string text)
+    protected virtual void AddTextContentObject(string text, bool bold = false)
     {
         GameObject textContent = Instantiate(textContentPrefab, contentParent.transform);
         textContent.GetComponent<TextMeshProUGUI>().text = text;
+        if (bold)
+        {
+            textContent.GetComponent<TextMeshProUGUI>().fontStyle = FontStyles.Bold;
+        }
 
         currentContentObjects.Add(textContent);
     }
@@ -73,7 +77,7 @@ public class JournalContentUpdater : MonoBehaviour
         {
             if (content.text != string.Empty)
             {
-                AddTextContentObject(content.text);
+                AddTextContentObject(content.text, content.bold);
             }
             if (content.image != null)
             {
