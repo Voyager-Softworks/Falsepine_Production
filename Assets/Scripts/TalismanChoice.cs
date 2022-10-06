@@ -9,6 +9,7 @@ using System.Linq;
 public class TalismanChoice : ToggleableWindow
 {
     public Button m_closeButton;
+    public Button m_confirmButton;
     public GameObject m_choicePanel;
 
     [System.Serializable]
@@ -19,6 +20,19 @@ public class TalismanChoice : ToggleableWindow
     }
 
     [SerializeField] public List<ChoiceLink> m_choices = new List<ChoiceLink>();
+
+    [ReadOnly] public ChoiceLink m_selectedChoice;
+
+    public Sprite m_selectedSprite;
+    public Sprite m_unselectedSprite;
+
+    public AudioClip m_confirmSound;
+    public GameObject m_confirmEffect;
+
+    private void Awake() {
+        // disable panel
+        m_choicePanel.SetActive(false);
+    }
     
 
     // Start is called before the first frame update
@@ -49,23 +63,27 @@ public class TalismanChoice : ToggleableWindow
         
         // add the interactable event
         interactable.onInteract += OpenWindow;
-
-        AddListeners();
     }
 
     protected override void OnEnable()
     {
         base.OnEnable();
 
+        AddListeners();
+
         m_closeButton.onClick.AddListener(CloseWindow);
+
+        m_confirmButton.onClick.AddListener(ConfirmChoice);
     }
 
     protected override void OnDisable() {
         base.OnDisable();
-
-        m_closeButton.onClick.RemoveListener(CloseWindow);
         
         RemoveAllListeners();
+
+        m_closeButton.onClick.RemoveListener(CloseWindow);
+
+        m_confirmButton.onClick.RemoveListener(ConfirmChoice);
     }
 
     private void AddListeners()
@@ -74,9 +92,28 @@ public class TalismanChoice : ToggleableWindow
         {
             link.m_button.onClick.AddListener(() =>
             {
-                ChooseTalisman(link.m_talisman);
+                ChoiceClicked(link);
             });
         }
+    }
+
+    private void ChoiceClicked(ChoiceLink link)
+    {
+        // deselect all
+        foreach (ChoiceLink choice in m_choices)
+        {
+            choice.m_button.interactable = true;
+
+            // set background image
+            choice.m_button.GetComponent<Image>().sprite = m_unselectedSprite;
+        }
+
+        // select this one
+        link.m_button.interactable = false;
+        m_selectedChoice = link;
+
+        // set background image
+        link.m_button.GetComponent<Image>().sprite = m_selectedSprite;
     }
 
     private void RemoveAllListeners()
@@ -85,7 +122,7 @@ public class TalismanChoice : ToggleableWindow
         {
             link.m_button.onClick.RemoveListener(() =>
             {
-                ChooseTalisman(link.m_talisman);
+                ChoiceClicked(link);
             });
         }
     }
@@ -105,7 +142,53 @@ public class TalismanChoice : ToggleableWindow
         // disable interactable
         GetComponent<Interactable>().DisableInteract();
 
+        // disable all colliders
+        foreach (Collider collider in GetComponentsInChildren<Collider>())
+        {
+            collider.enabled = false;
+        }
+
+        // disable all mesh renderers
+        foreach (MeshRenderer renderer in GetComponentsInChildren<MeshRenderer>())
+        {
+            renderer.enabled = false;
+        }
+
+        // stop all particle systems
+        foreach (ParticleSystem system in GetComponentsInChildren<ParticleSystem>())
+        {
+            system.Stop();
+        }
+
+        // turn off all lights
+        foreach (Light light in GetComponentsInChildren<Light>())
+        {
+            light.enabled = false;
+        }
+
+        // play sound
+        if (m_confirmSound != null)
+        {
+            AudioSource audioSource = GetComponent<AudioSource>();
+            if (audioSource != null)
+            {
+                audioSource.PlayOneShot(m_confirmSound);
+            }
+        }
+
+        // instantiate effect
+        if (m_confirmEffect != null)
+        {
+            Instantiate(m_confirmEffect, transform.position, Quaternion.identity);
+        }
+
         CloseWindow();
+    }
+
+    private void ConfirmChoice(){
+        if (m_selectedChoice == null) return;
+
+        ChooseTalisman(m_selectedChoice.m_talisman);
     }
 
     // ToggleableWindow overrides
