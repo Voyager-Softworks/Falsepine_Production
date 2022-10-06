@@ -174,6 +174,9 @@ public class Health_Base : MonoBehaviour, StatsManager.UsesStats /// @todo Impli
 
         if (_damageStat == null) return;
 
+        float calcedDamage = StatsManager.CalculateDamageTaken(this, _damageStat.m_damage);
+        _damageStat.m_damage = calcedDamage;
+
         // if weakness, 1.5x damage
         bool weak = false;
         foreach (StatsManager.StatType weakness in m_weaknesses)

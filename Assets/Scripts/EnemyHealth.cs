@@ -140,5 +140,13 @@ public class EnemyHealth : Health_Base
 
         // get econ manager, and give money
         EconomyManager.instance.m_playerSilver += m_silverReward;
+
+        // do health steal for player
+        PlayerHealth playerHealth = lastDamage?.m_sourceObject.GetComponent<PlayerHealth>();
+        if (playerHealth != null){
+            float healthAmount = StatsManager.CalculateHealthSteal(playerHealth, 0.0f);
+
+            playerHealth.Heal(healthAmount);
+        }
     }
 }
