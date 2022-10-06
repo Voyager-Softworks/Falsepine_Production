@@ -35,6 +35,7 @@ public class UIScript : MonoBehaviour
 
     [Header("Interact Text")]
     public TextMeshProUGUI interactText;
+    public Image interactBackground;
 
 
     [Header("Boss UI")]
