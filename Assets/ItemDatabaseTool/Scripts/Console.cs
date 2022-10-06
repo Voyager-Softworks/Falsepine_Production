@@ -523,7 +523,7 @@ public class Console : ToggleableWindow
         if (split.Length == 1 && split[0] == "heal_player")
         {
             PlayerHealth playerHealth = GameObject.FindObjectOfType<PlayerHealth>(/* true */);
-            playerHealth.Heal(playerHealth.maxHealth);
+            playerHealth.Heal(playerHealth.calcedMaxHealth);
             Log("- Player healed");
             Log();
             return;

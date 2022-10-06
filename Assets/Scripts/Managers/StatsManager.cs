@@ -58,9 +58,11 @@ public class StatsManager : MonoBehaviour
 
         // Health
         public static StatType PlayerMaxHealth { get { return new StatType("PlayerMaxHealth"); } }
-        public static StatType EnemyMaxHealth { get { return new StatType("EnemyMaxHealth"); } }
         public static StatType PlayerDamageTaken { get { return new StatType("PlayerDamageTaken"); } }
+        public static StatType EnemyMaxHealth { get { return new StatType("EnemyMaxHealth"); } }
         public static StatType EnemyDamageTaken { get { return new StatType("EnemyDamageTaken"); } }
+        public static StatType BossMaxHealth { get { return new StatType("BossMaxHealth"); } }
+        public static StatType BossDamageTaken { get { return new StatType("BossDamageTaken"); } }
 
         // Economy
         public static StatType ItemCost { get { return new StatType("ItemCost"); } }
@@ -428,6 +430,40 @@ public class StatsManager : MonoBehaviour
         float maxVal = float.MaxValue;
 
         return GenericStatCalc(_statUser, _baseRange, usedStatTypes, additiveVal, multiplierVal, minVal, maxVal);
+    }
+
+    static public float CalculateMaxHealth(UsesStats _statUser, float _baseHealth = 1.0f)
+    {
+        // list of stats to use in this function
+        List<StatType> usedStatTypes = new List<StatType>(){
+            StatType.PlayerMaxHealth,
+            StatType.EnemyMaxHealth,
+        };
+
+        float additiveVal = 0.0f;
+        float multiplierVal = 1.0f;
+
+        float minVal = 0.0f;
+        float maxVal = float.MaxValue;
+
+        return GenericStatCalc(_statUser, _baseHealth, usedStatTypes, additiveVal, multiplierVal, minVal, maxVal);
+    }
+
+    static public float CalculateDamageTaken(UsesStats _statUser, float _baseDamage = 1.0f)
+    {
+        // list of stats to use in this function
+        List<StatType> usedStatTypes = new List<StatType>(){
+            StatType.PlayerDamageTaken,
+            StatType.EnemyDamageTaken,
+        };
+
+        float additiveVal = 0.0f;
+        float multiplierVal = 1.0f;
+
+        float minVal = 0.0f;
+        float maxVal = float.MaxValue;
+
+        return GenericStatCalc(_statUser, _baseDamage, usedStatTypes, additiveVal, multiplierVal, minVal, maxVal);
     }
 
     /// <summary>
