@@ -77,7 +77,7 @@ namespace NodeAI
                     navAgent.stoppingDistance = GetProperty<float>("Stopping distance");
                 }
                 //navAgent.SetDestination(GetProperty<Transform>("Position").position);
-                if (Vector3.Distance(agent.transform.position, GetProperty<Transform>("Position").position) <= navAgent.stoppingDistance + 0.1f)
+                if (Vector3.Distance(agent.transform.position, GetProperty<Transform>("Position").position) <= navAgent.stoppingDistance + 0.5f)
                 {
                     navAgent.isStopped = true;
                     navAgent.speed = originalSpeed;
