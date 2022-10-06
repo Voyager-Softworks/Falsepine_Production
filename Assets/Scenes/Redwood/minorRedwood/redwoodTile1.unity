@@ -3551,148 +3551,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fe6854fda8233dd40a92f701320dcfe7, type: 3}
   m_PrefabInstance: {fileID: 413903058}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &414840831
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 414840833}
-  - component: {fileID: 414840832}
-  m_Layer: 0
-  m_Name: MusicManager
-  m_TagString: MusicManager
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &414840832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 414840831}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a119b25d52728621583e7f3194633c58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggers:
-  - StartBoss
-  - KillBoss
-  audioChannels:
-  - name: BG Music
-    volume: 0.269
-    pitch: 1
-    clip: {fileID: 8300000, guid: f3e9e7d3733bba94e948ff1d7c06171a, type: 3}
-    loop: 1
-    playOnAwake: 1
-    SpatialBlend: 0
-    maxDistance: 300
-    minDistance: 1
-    distanceCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: -1
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: -1
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    source: {fileID: 0}
-    playing: 0
-    paused: 0
-    time: 0
-    timeNormalized: 0
-    duration: 0
-  - name: Boss Music
-    volume: 0.253
-    pitch: 1
-    clip: {fileID: 8300000, guid: 6cecb5a4bd2fb53408313333a7b00d29, type: 3}
-    loop: 1
-    playOnAwake: 0
-    SpatialBlend: 0
-    maxDistance: 300
-    minDistance: 1
-    distanceCurve:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 1
-        inSlope: 0
-        outSlope: -1
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 1
-        value: 0
-        inSlope: -1
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    source: {fileID: 0}
-    playing: 0
-    paused: 0
-    time: 0
-    timeNormalized: 0
-    duration: 0
-  transitions:
-  - from: BG Music
-    to: Boss Music
-    duration: 1
-    hasExitTime: 0
-    exitTime: 0
-    inheritNormalisedTime: 0
-    trigger: StartBoss
-    autoTransitionOnTrackEnd: 0
-  - from: Boss Music
-    to: BG Music
-    duration: 1
-    hasExitTime: 0
-    exitTime: 0
-    inheritNormalisedTime: 0
-    trigger: KillBoss
-    autoTransitionOnTrackEnd: 0
---- !u!4 &414840833
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 414840831}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.4116561, y: 2.5309033, z: 3.7440434}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 28
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &416268418 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1841548392186140414, guid: 4093863731bc3ec46a43629b39886ed7, type: 3}
@@ -7265,7 +7123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4268184262087355430, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
       propertyPath: m_RootOrder
-      value: 32
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 4268184262087355430, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7808,7 +7666,7 @@ Transform:
   - {fileID: 378631724}
   - {fileID: 434415861}
   m_Father: {fileID: 0}
-  m_RootOrder: 29
+  m_RootOrder: 28
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &744560929 stripped
 Transform:
@@ -10893,43 +10751,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2185037712945443093, guid: 3ebd358ed10afe343adca5153f5180f5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.82
+      value: 4.1966305
       objectReference: {fileID: 0}
     - target: {fileID: 2185037712945443093, guid: 3ebd358ed10afe343adca5153f5180f5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.97
+      value: -3.07
       objectReference: {fileID: 0}
     - target: {fileID: 2185037712945443093, guid: 3ebd358ed10afe343adca5153f5180f5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -24.04
+      value: -26.14
       objectReference: {fileID: 0}
     - target: {fileID: 2185037712945443093, guid: 3ebd358ed10afe343adca5153f5180f5, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.08081967
+      value: 0.05306117
       objectReference: {fileID: 0}
     - target: {fileID: 2185037712945443093, guid: 3ebd358ed10afe343adca5153f5180f5, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.9750818
+      value: -0.057107616
       objectReference: {fileID: 0}
     - target: {fileID: 2185037712945443093, guid: 3ebd358ed10afe343adca5153f5180f5, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.20539334
+      value: 0.99305606
       objectReference: {fileID: 0}
     - target: {fileID: 2185037712945443093, guid: 3ebd358ed10afe343adca5153f5180f5, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.022300102
+      value: 0.08810719
       objectReference: {fileID: 0}
     - target: {fileID: 2185037712945443093, guid: 3ebd358ed10afe343adca5153f5180f5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -9.6
+      value: -10.431
       objectReference: {fileID: 0}
     - target: {fileID: 2185037712945443093, guid: 3ebd358ed10afe343adca5153f5180f5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -179.402
+      value: -185.562
       objectReference: {fileID: 0}
     - target: {fileID: 2185037712945443093, guid: 3ebd358ed10afe343adca5153f5180f5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 203.74
+      value: 353.926
       objectReference: {fileID: 0}
     - target: {fileID: 3721851263536565703, guid: 3ebd358ed10afe343adca5153f5180f5, type: 3}
       propertyPath: m_Name
@@ -12268,7 +12126,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4268184262087355430, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
       propertyPath: m_RootOrder
-      value: 31
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4268184262087355430, guid: c1eaa3860b25881428d2857109eb60c6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -13053,7 +12911,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 33
+  m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1431750988
 PrefabInstance:
@@ -13173,7 +13031,7 @@ Transform:
   m_Children:
   - {fileID: 1281573417}
   m_Father: {fileID: 0}
-  m_RootOrder: 30
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1465892659
 PrefabInstance:

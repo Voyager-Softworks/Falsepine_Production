@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// @deprecated maybe
+/// Does stuff on town scene load only
 /// </summary>
 public class TownSceneManager : MonoBehaviour
 {
