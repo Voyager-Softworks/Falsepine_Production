@@ -9,6 +9,7 @@ public class DrinkPurchaseUI : MonoBehaviour
     [Header("References")]
     public Button m_button;
     public Image m_background;
+    public Image m_icon;
     public TextMeshProUGUI m_primaryText;
     public TextMeshProUGUI m_secondaryText;
     public GameObject m_silverIcon;
@@ -58,6 +59,9 @@ public class DrinkPurchaseUI : MonoBehaviour
         // set background if m_isSelected
         m_background.sprite = m_isSelected ? m_selectedSprite : m_unselectedSprite;
 
+        // set icon
+        m_icon.sprite = m_linkedDrink.m_icon;
+
         // check if this drink is already active (aka purchased)
         bool allActive = IsAlreadyActive();
 
@@ -69,19 +73,12 @@ public class DrinkPurchaseUI : MonoBehaviour
 
     public bool IsAlreadyActive()
     {
-        bool allActive = true;
-        // check each mod
-        foreach (StatsManager.StatMod mod in m_linkedDrink.GetStatMods())
+        if (StatsManager.activeDrinks.Contains(m_linkedDrink))
         {
-            // if the mod is not active, set active to false
-            if (!StatsManager.drinkMods.Contains(mod))
-            {
-                allActive = false;
-                break;
-            }
+            return true;
         }
 
-        return allActive;
+        return false;
     }
 
     public void JournalButtonPressed(){
