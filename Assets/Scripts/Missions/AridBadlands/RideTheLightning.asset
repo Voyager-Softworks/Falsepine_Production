@@ -10,12 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56c089656aad97c49b15ade4c6d1891e, type: 3}
-  m_Name: KillOmen
+  m_Name: RideTheLightning
   m_EditorClassIdentifier: 
-  m_title: Kill the Brightmaw
-  m_description: Kill the brightmaw creature. How pesky that thing is, do it quickly
-    and dont let it hit hurt you. Then we will know you are a true hunter, and you
-    will be rewarded!
+  m_title: Ride the Lightning
+  m_description: 'Placeholder Text.
+
+
+    Kill the Omen within 90 seconds of encountering
+    it without taking damage.'
+  m_difficulty: 2
   m_conditions:
   - id: 0
   - id: 1
@@ -27,7 +30,7 @@ MonoBehaviour:
     00000000:
       type: {class: Kill_MissionCondition, ns: , asm: Assembly-CSharp}
       data:
-        m_name: Kill (0/1) Wailing Tree
+        m_name: Kill (0/1) Omen
         m_state: 0
         m_lockState: 0
         m_monsterToKill: {fileID: 11400000, guid: 17ecdbb239ded87469a740a6276c5f47, type: 2}
@@ -36,16 +39,15 @@ MonoBehaviour:
         m_requiredKills: 1
         m_useOptional: 0
         m_statToKillWith:
-          value: EnemyDamage
+          value: PlayerDamage
         m_itemToKillWith: {fileID: 0}
     00000001:
       type: {class: Speedrun_MissionCondition, ns: , asm: Assembly-CSharp}
       data:
-        m_name: Spend less than 60 seconds in the expedition while fighting the Wailing
-          Tree
+        m_name: Spend less than 90 seconds in the expedition while fighting the Omen
         m_state: 0
         m_lockState: 0
-        m_timeLimit: 60
+        m_timeLimit: 90
         m_timeElapsed: 0
         m_triggerMonster: {fileID: 11400000, guid: 17ecdbb239ded87469a740a6276c5f47, type: 2}
         m_triggerMonsterSeen: 1

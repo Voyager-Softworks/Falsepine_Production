@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56c089656aad97c49b15ade4c6d1891e, type: 3}
-  m_Name: KillWalingTree
+  m_Name: Weed Wacking
   m_EditorClassIdentifier: 
-  m_title: Purge the Unholy
+  m_title: Weed Wacking
   m_description: 'Placeholder Text.
 
 
-    Kill the Wailing Tree with a Fire Bottle.'
-  m_difficulty: 0
+    Kill (12) Corpse Puppets with an Axe (Non-Legendary).'
+  m_difficulty: 1
   m_conditions:
   - id: 0
   m_lockOnComplete: 1
@@ -27,14 +27,14 @@ MonoBehaviour:
     00000000:
       type: {class: Kill_MissionCondition, ns: , asm: Assembly-CSharp}
       data:
-        m_name: Kill (0/1) Wailing Tree with  Fire Damage
+        m_name: Kill (0/12) Corpse Puppet(s) with the Axe
         m_state: 0
         m_lockState: 0
-        m_monsterToKill: {fileID: 11400000, guid: 307a76038b166f84f8a8dfdb1752dedd, type: 2}
+        m_monsterToKill: {fileID: 11400000, guid: 2276afe60f38eef45a5eac4661ac392b, type: 2}
         m_initialStats: []
         m_initialKills: []
-        m_requiredKills: 1
+        m_requiredKills: 12
         m_useOptional: 1
         m_statToKillWith:
-          value: FireDamage
-        m_itemToKillWith: {fileID: 0}
+          value: MeleeDamage
+        m_itemToKillWith: {fileID: 11400000, guid: 4e20587061243e845954e8e8ec24d49d, type: 2}

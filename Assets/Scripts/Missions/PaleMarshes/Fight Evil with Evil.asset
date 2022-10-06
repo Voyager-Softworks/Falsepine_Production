@@ -10,14 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56c089656aad97c49b15ade4c6d1891e, type: 3}
-  m_Name: Exterminate_Lair
+  m_Name: Fight Evil with Evil
   m_EditorClassIdentifier: 
-  m_title: Extermination
-  m_description: Kill 5 pickaxe miners without taking damage to impress the townsfolk
+  m_title: Fight Evil with Evil
+  m_description: 'Placeholder Text.
+
+
+    Kill (14) Corpse Puppets with the Occult
+    Repeater (Non-Legendary) without taking damage.'
+  m_difficulty: 2
   m_conditions:
   - id: 0
   - id: 1
-  - id: 2
   m_lockOnComplete: 1
   m_isLockedComplete: 0
   references:
@@ -25,30 +29,20 @@ MonoBehaviour:
     00000000:
       type: {class: Kill_MissionCondition, ns: , asm: Assembly-CSharp}
       data:
-        m_name: Kill (0/3) Cursed Miner(s) with the Colt Revolver
+        m_name: Kill (0/14) Corpse Puppet(s) with the Occult Repeater
         m_state: 0
         m_lockState: 0
-        m_monsterToKill: {fileID: 11400000, guid: ee1c8229e1cc8a743bc7e1c7c9ebf36a, type: 2}
+        m_monsterToKill: {fileID: 11400000, guid: 2276afe60f38eef45a5eac4661ac392b, type: 2}
         m_initialStats: []
         m_initialKills: []
-        m_requiredKills: 3
+        m_requiredKills: 14
         m_useOptional: 1
         m_statToKillWith:
           value: PlayerDamage
-        m_itemToKillWith: {fileID: 11400000, guid: 45ca1854eb2eaaf4cab6fe068a595dac, type: 2}
+        m_itemToKillWith: {fileID: 11400000, guid: 16070815c439ddf43807d42434ead47a, type: 2}
     00000001:
       type: {class: NoDamage_MissionCondition, ns: , asm: Assembly-CSharp}
       data:
         m_name: Don't take any damage
         m_state: 0
         m_lockState: 0
-    00000002:
-      type: {class: Speedrun_MissionCondition, ns: , asm: Assembly-CSharp}
-      data:
-        m_name: Spend less than 60 seconds in the expedition
-        m_state: 0
-        m_lockState: 0
-        m_timeLimit: 60
-        m_timeElapsed: 0
-        m_triggerMonster: {fileID: 0}
-        m_triggerMonsterSeen: 1
