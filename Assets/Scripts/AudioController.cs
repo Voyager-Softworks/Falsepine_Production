@@ -156,14 +156,21 @@ public class AudioController : MonoBehaviour ///< @todo comment
         foreach (AudioChannel channel in audioChannels)
         {
             // if clip is null, skip this channel
-            if (channel.clip == null)
+            if (channel.clip == null && !channel.layered)
             {
                 Debug.LogWarning("Audio Channel " + channel.name + " has no clip assigned!", this);
                 continue;
             }
+            else if (channel.layered && (channel.layers == null || channel.layers.Length == 0))
+            {
+                Debug.LogWarning("Audio Channel " + channel.name + " has no Layers assigned!", this);
+                continue;
+            }
             if (!channel.layered)
             {
-                channel.source = Instantiate<GameObject>(new GameObject(channel.name), transform).AddComponent<AudioSource>();
+                GameObject newSource = new GameObject(channel.name + " Source");
+                newSource.transform.parent = transform;
+                channel.source = newSource.AddComponent<AudioSource>();
                 channel.source.clip = channel.clip;
                 channel.source.volume = channel.volume;
                 channel.source.pitch = channel.pitch;
@@ -178,11 +185,14 @@ public class AudioController : MonoBehaviour ///< @todo comment
             else
             {
                 channel.layerSources = new AudioSource[channel.layers.Length];
-                GameObject layerParent = Instantiate<GameObject>(new GameObject(channel.name), transform);
                 float longestLayerDuration = 0;
+                GameObject layerObject = new GameObject(channel.name);
+                layerObject.transform.parent = transform;
                 for (int i = 0; i < channel.layers.Length; i++)
                 {
-                    channel.layerSources[i] = Instantiate<GameObject>(new GameObject(channel.name + " Layer " + i), layerParent.transform).AddComponent<AudioSource>();
+                    GameObject newSource = new GameObject(channel.name + " Layer " + i);
+                    newSource.transform.parent = layerObject.transform;
+                    channel.layerSources[i] = newSource.AddComponent<AudioSource>();
                     channel.layerSources[i].clip = channel.layers[i];
                     channel.layerSources[i].volume = (i == 0) ? channel.volume : 0f;
                     channel.layerSources[i].pitch = channel.pitch;
@@ -203,6 +213,7 @@ public class AudioController : MonoBehaviour ///< @todo comment
             channel.time = 0;
             channel.timeNormalized = 0;
             channel.duration = !channel.layered ? channel.source.clip.length : channel.longestLayerDuration;
+            channel.lastVolume = channel.volume;
         }
     }
 
@@ -402,12 +413,12 @@ public class AudioController : MonoBehaviour ///< @todo comment
         while (t < time)
         {
             t += Time.deltaTime;
-            audioChannels[index].source.volume = Mathf.Lerp(startVolume, 0, t / time);
+            audioChannels[index].volume = Mathf.Lerp(startVolume, 0, t / time);
             yield return null;
         }
-        audioChannels[index].source.volume = 0;
-        if (reset) audioChannels[index].source.Stop();
-        else audioChannels[index].source.Pause();
+        audioChannels[index].volume = 0;
+        if (reset) audioChannels[index].Stop();
+        else audioChannels[index].Pause();
 
     }
 
@@ -454,9 +465,14 @@ public class AudioController : MonoBehaviour ///< @todo comment
         foreach (AudioChannel channel in audioChannels)
         {
             // if clip is null, skip this channel
-            if (channel.clip == null)
+            if (channel.clip == null && !channel.layered)
             {
                 Debug.LogWarning("Audio Channel " + channel.name + " has no clip assigned!", this);
+                continue;
+            }
+            else if (channel.layered && (channel.layers == null || channel.layers.Length == 0))
+            {
+                Debug.LogWarning("Audio Channel " + channel.name + " has no Layers assigned!", this);
                 continue;
             }
 
