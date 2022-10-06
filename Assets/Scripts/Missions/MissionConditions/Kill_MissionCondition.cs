@@ -101,7 +101,7 @@ public class Kill_MissionCondition : MissionCondition
             }
             else if (m_statToKillWith != null)
             {
-                relevantKills = relevantKills.Where(x => x.m_sourceStats.GetStatTypes().Contains(m_statToKillWith)).ToList();
+                relevantKills = relevantKills.Where(x => x.m_sourceStats != null && x.m_sourceStats.GetStatTypes().Contains(m_statToKillWith)).ToList();
             }
         }
 

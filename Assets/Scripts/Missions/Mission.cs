@@ -152,8 +152,9 @@ public class Mission : ScriptableObject
         //unlock all conditions
         foreach (MissionCondition condition in m_conditions)
         {
+            if (condition == null) continue;
             condition.m_lockState = false;
-        }
+        }   
 
         SetState(MissionCondition.ConditionState.INCOMPLETE);
     }

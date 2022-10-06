@@ -290,6 +290,7 @@ public class StatsManager : MonoBehaviour
     public class MonsterStat{
         public MonsterInfo m_monster;
         public List<Health_Base.DamageStat> m_kills = new List<Health_Base.DamageStat>();
+        [ReadOnly] public int m_previousKills = 0;
     }
     [SerializeField] public List<MonsterStat> m_monsterStats = new List<MonsterStat>();
 
@@ -320,6 +321,16 @@ public class StatsManager : MonoBehaviour
             return -1;
         }
         return stats.m_kills.Count;
+    }
+
+    public int GetCurrentKills(MonsterInfo _monster)
+    {
+        MonsterStat stats = m_monsterStats.Find(x => x.m_monster == _monster);
+        if (stats == null)
+        {
+            return -1;
+        }
+        return stats.m_kills.Count - stats.m_previousKills;
     }
 
     #endregion
@@ -757,9 +768,18 @@ public class StatsManager : MonoBehaviour
         m_possibleTalismanMods = new List<StatModRange>(data.possibleTalismanMods);
         // load monster stats
         m_monsterStats = new List<MonsterStat>(data.monsterStats);
+        ResetPreviousKills();
 
         // save
         SaveStats(_saveSlot);
+    }
+
+    public void ResetPreviousKills()
+    {
+        foreach (MonsterStat stat in m_monsterStats)
+        {
+            stat.m_previousKills = stat.m_kills.Count;
+        }
     }
 
     /// <summary>

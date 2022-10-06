@@ -40,7 +40,7 @@ public class MissionZone : ScriptableObject
     [Header("Missions")]
     public List<Mission> m_possibleMissions;
 
-    private int m_missionCount = 5;
+    private int m_missionCount = 3;
     public List<Mission> m_missions = new List<Mission>();
 
     public Mission currentMission;

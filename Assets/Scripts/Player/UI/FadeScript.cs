@@ -43,38 +43,41 @@ public class FadeScript : MonoBehaviour
     {
         if (fadeImage == null) return;
 
+        // fade delay
         if (fadeDelayTimer < fadeDelay)
         {
             fadeDelayTimer += Time.deltaTime;
         }
         else
         {
+            // fade
             if (currentColor != targetColor)
             {
                 fadeTimer += Time.deltaTime;
                 if (fadeTimer >= fadeTime)
                 {
                     currentColor = targetColor;
-                    fadeTimer = 0f;
-
-                    if (isStartFade)
-                    {
-                        isStartFade = false;
-                        isEndFade = false;
-                        OnStartFadeDone.Invoke();
-                    }
-                    else if (isEndFade)
-                    {
-                        isStartFade = false;
-                        isEndFade = false;
-                        OnEndFadeDone.Invoke();
-                    }
                 }
                 else
                 {
                     currentColor = Color.Lerp(startColor, targetColor, fadeTimer / fadeTime);
                 }
                 fadeImage.color = currentColor;
+            }
+        }
+
+        // ensure done event is called
+        if (fadeDelayTimer >= fadeDelay && fadeTimer >= fadeTime)
+        {
+            if (isStartFade)
+            {
+                isStartFade = false;
+                OnStartFadeDone.Invoke();
+            }
+            else if (isEndFade)
+            {
+                isEndFade = false;
+                OnEndFadeDone.Invoke();
             }
         }
     }
