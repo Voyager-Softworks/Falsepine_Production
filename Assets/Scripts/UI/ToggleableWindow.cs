@@ -2,16 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Linq;
 
 /// <summary>
 /// Class that manages toggleable windows in game, only allowing one at a time to be open.
 /// </summary>
 public class ToggleableWindow : MonoBehaviour
 {
+    static List<ToggleableWindow> windows = new List<ToggleableWindow>();
+
     public bool m_wasOpenedThisFrame = false;
     public bool m_wasClosedThisFrame = false;
 
     private static bool m_closedAllThisFrame = false;
+
+    protected virtual void OnEnable() {
+        windows.Add(this);
+    }
+
+    protected virtual void OnDisable() {
+        windows.Remove(this);
+    }
 
     public virtual void Update() {
         // if escape is pressed, toggle pause
@@ -70,7 +81,7 @@ public class ToggleableWindow : MonoBehaviour
     /// </summary>
     public static void CloseAllWindows(){
         // get all toggleable windows
-        ToggleableWindow[] windows = FindObjectsOfType<ToggleableWindow>();
+        windows = FindObjectsOfType<ToggleableWindow>().ToList();
         foreach(ToggleableWindow window in windows){
             if (window.m_wasOpenedThisFrame) continue;
             window.CloseWindow();
@@ -83,7 +94,6 @@ public class ToggleableWindow : MonoBehaviour
     /// <returns></returns>
     public static bool AnyWindowOpen(){
         // get all toggleable windows
-        ToggleableWindow[] windows = FindObjectsOfType<ToggleableWindow>();
         foreach(ToggleableWindow window in windows){
             if (window.IsOpen()){
                 return true;

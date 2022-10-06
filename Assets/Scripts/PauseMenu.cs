@@ -12,10 +12,14 @@ public class PauseMenu : ToggleableWindow
 
     public GameObject PausePanel;
 
-    private void OnEnable() {
+    protected override void OnEnable() {
+        base.OnEnable();
+
         pauseAction.Enable();
     }
-    private void OnDisable() {
+    protected override void OnDisable() {
+        base.OnDisable();
+        
         pauseAction.Disable();
     }
 

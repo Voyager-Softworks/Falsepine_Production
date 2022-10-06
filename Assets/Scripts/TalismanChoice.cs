@@ -53,13 +53,16 @@ public class TalismanChoice : ToggleableWindow
         AddListeners();
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
+
         m_closeButton.onClick.AddListener(CloseWindow);
     }
 
-    private void OnDisable()
-    {
+    protected override void OnDisable() {
+        base.OnDisable();
+
         m_closeButton.onClick.RemoveListener(CloseWindow);
         
         RemoveAllListeners();
