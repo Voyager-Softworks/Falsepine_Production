@@ -62,20 +62,42 @@ public class AudioController_Inspector : Editor
             //Make a foldout menu for each channel
             if (EditorGUI.Foldout(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), element.isExpanded, ""))
             {
-                height += EditorGUIUtility.singleLineHeight * 1.25f * 10;
                 element.isExpanded = true;
                 EditorGUI.indentLevel++;
-                EditorGUI.PropertyField(new Rect(rect.x, rect.y + EditorGUIUtility.singleLineHeight, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("name"));
-                EditorGUI.PropertyField(new Rect(rect.x, rect.y + EditorGUIUtility.singleLineHeight * 2, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("volume"));
-                EditorGUI.PropertyField(new Rect(rect.x, rect.y + EditorGUIUtility.singleLineHeight * 3, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("pitch"));
-                EditorGUI.PropertyField(new Rect(rect.x, rect.y + EditorGUIUtility.singleLineHeight * 4, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("clip"));
-                EditorGUI.PropertyField(new Rect(rect.x, rect.y + EditorGUIUtility.singleLineHeight * 5, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("loop"));
-                EditorGUI.PropertyField(new Rect(rect.x, rect.y + EditorGUIUtility.singleLineHeight * 6, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("playOnAwake"));
-                EditorGUI.PropertyField(new Rect(rect.x, rect.y + EditorGUIUtility.singleLineHeight * 7, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("SpatialBlend"));
-                EditorGUI.PropertyField(new Rect(rect.x, rect.y + EditorGUIUtility.singleLineHeight * 8, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("maxDistance"));
-                EditorGUI.PropertyField(new Rect(rect.x, rect.y + EditorGUIUtility.singleLineHeight * 9, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("minDistance"));
-                EditorGUI.PropertyField(new Rect(rect.x, rect.y + EditorGUIUtility.singleLineHeight * 10, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("distanceCurve"));
+                int y = 1;
+                EditorGUI.PropertyField(new Rect(rect.x, rect.y + EditorGUIUtility.singleLineHeight * y++, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("name"));
+                EditorGUI.PropertyField(new Rect(rect.x, rect.y + EditorGUIUtility.singleLineHeight * y++, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("volume"));
+                EditorGUI.PropertyField(new Rect(rect.x, rect.y + EditorGUIUtility.singleLineHeight * y++, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("pitch"));
+                EditorGUI.PropertyField(new Rect(rect.x, rect.y + EditorGUIUtility.singleLineHeight * y++, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("layered"));
+
+                if (element.FindPropertyRelative("layered").boolValue)
+                {
+
+                    // Make a list of all the audio clips in the audio channel
+                    EditorGUI.PropertyField(new Rect(rect.x, rect.y + EditorGUIUtility.singleLineHeight * y, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("layers"));
+                    y += Mathf.CeilToInt(EditorGUI.GetPropertyHeight(element.FindPropertyRelative("layers")) / EditorGUIUtility.singleLineHeight);
+                    EditorGUI.indentLevel++;
+                    EditorGUI.PropertyField(new Rect(rect.x, rect.y + EditorGUIUtility.singleLineHeight * y++, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("timeSignature"));
+                    EditorGUI.PropertyField(new Rect(rect.x, rect.y + EditorGUIUtility.singleLineHeight * y++, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("beatsPerMinute"));
+                    int newLayerIndex = EditorGUI.IntSlider(new Rect(rect.x, rect.y + EditorGUIUtility.singleLineHeight * y++, rect.width, EditorGUIUtility.singleLineHeight), "Layer Blend", element.FindPropertyRelative("layerIndex").intValue, 0, element.FindPropertyRelative("layers").arraySize - 1);
+                    if (newLayerIndex != element.FindPropertyRelative("layerIndex").intValue)
+                    {
+                        element.FindPropertyRelative("layerIndex").intValue = newLayerIndex;
+                    }
+                    EditorGUI.indentLevel--;
+                }
+                else
+                {
+                    EditorGUI.PropertyField(new Rect(rect.x, rect.y + EditorGUIUtility.singleLineHeight * y++, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("clip"));
+                }
+                EditorGUI.PropertyField(new Rect(rect.x, rect.y + EditorGUIUtility.singleLineHeight * y++, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("loop"));
+                EditorGUI.PropertyField(new Rect(rect.x, rect.y + EditorGUIUtility.singleLineHeight * y++, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("playOnAwake"));
+                EditorGUI.PropertyField(new Rect(rect.x, rect.y + EditorGUIUtility.singleLineHeight * y++, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("SpatialBlend"));
+                EditorGUI.PropertyField(new Rect(rect.x, rect.y + EditorGUIUtility.singleLineHeight * y++, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("maxDistance"));
+                EditorGUI.PropertyField(new Rect(rect.x, rect.y + EditorGUIUtility.singleLineHeight * y++, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("minDistance"));
+                EditorGUI.PropertyField(new Rect(rect.x, rect.y + EditorGUIUtility.singleLineHeight * y++, rect.width, EditorGUIUtility.singleLineHeight), element.FindPropertyRelative("distanceCurve"));
                 EditorGUI.indentLevel--;
+                height += EditorGUIUtility.singleLineHeight * y;
             }
             else
             {
