@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56c089656aad97c49b15ade4c6d1891e, type: 3}
-  m_Name: KillWalingTree
+  m_Name: Sacrifice
   m_EditorClassIdentifier: 
-  m_title: Purge the Unholy
-  m_description: 'Placeholder Text.
+  m_title: Sacrifice
+  m_description: 'Placeholder Text
 
 
-    Kill the Wailing Tree with a Fire Bottle.'
-  m_difficulty: 0
+    Kill (12) Draugr with the Bone Knife (Non-legendaray).'
+  m_difficulty: 1
   m_conditions:
   - id: 0
+  - id: 1
   m_lockOnComplete: 1
   m_isLockedComplete: 0
   references:
@@ -27,14 +28,16 @@ MonoBehaviour:
     00000000:
       type: {class: Kill_MissionCondition, ns: , asm: Assembly-CSharp}
       data:
-        m_name: Kill (0/1) Wailing Tree with  Fire Damage
+        m_name: Kill (0/12) Cursed Miner(s) with the Bone Knife
         m_state: 0
         m_lockState: 0
-        m_monsterToKill: {fileID: 11400000, guid: 307a76038b166f84f8a8dfdb1752dedd, type: 2}
+        m_monsterToKill: {fileID: 11400000, guid: ee1c8229e1cc8a743bc7e1c7c9ebf36a, type: 2}
         m_initialStats: []
         m_initialKills: []
-        m_requiredKills: 1
+        m_requiredKills: 12
         m_useOptional: 1
         m_statToKillWith:
-          value: FireDamage
-        m_itemToKillWith: {fileID: 0}
+          value: MeleeDamage
+        m_itemToKillWith: {fileID: 11400000, guid: 70e1666ebee6fd748be8ae49a4c9a679, type: 2}
+    00000001:
+      type: {class: , ns: , asm: }
