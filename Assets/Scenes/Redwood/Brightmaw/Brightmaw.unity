@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2717.5078, g: 3791.9844, b: 6020.3516, a: 1}
+  m_IndirectSpecularColor: {r: 2717.5234, g: 3791.9941, b: 6020.297, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3322,6 +3322,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 1866591194}
   parameterName: Started
+  onTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 414840832}
+        m_TargetAssemblyTypeName: AudioController, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Intro
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &397124902
 Transform:
   m_ObjectHideFlags: 0
@@ -3545,16 +3560,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a119b25d52728621583e7f3194633c58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  triggers:
-  - StartBoss
-  - KillBoss
+  triggers: []
   audioChannels:
-  - name: BG Music
-    volume: 0.269
+  - name: Intro
+    volume: 0.576
+    lastVolume: 0
     pitch: 1
-    clip: {fileID: 8300000, guid: 9c98ac6ce550c8e4e8e9df5a575fcfff, type: 3}
-    loop: 1
-    playOnAwake: 1
+    layered: 0
+    clip: {fileID: 8300000, guid: fbdcf2bf310884b48a59747d17fe0ad6, type: 3}
+    layers: []
+    timeSignature: 4
+    beatsPerMinute: 80
+    layerIndex: 0
+    currentLayer: 0
+    longestLayerDuration: 0
+    longestLayerIndex: 0
+    loop: 0
+    playOnAwake: 0
     SpatialBlend: 0
     maxDistance: 300
     minDistance: 1
@@ -3583,6 +3605,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     source: {fileID: 0}
+    layerSources: []
     playing: 0
     paused: 0
     time: 0
@@ -3590,8 +3613,20 @@ MonoBehaviour:
     duration: 0
   - name: Boss Music
     volume: 0.35
+    lastVolume: 0
     pitch: 1
+    layered: 1
     clip: {fileID: 8300000, guid: 6202366f3c8e4cc41bc56aa8052f1040, type: 3}
+    layers:
+    - {fileID: 8300000, guid: fde8faccd769d634f9553bfa5bef637c, type: 3}
+    - {fileID: 8300000, guid: fd71f02612817304184646c2e233675f, type: 3}
+    - {fileID: 8300000, guid: 84796bb5381db614ca5673372e1e0336, type: 3}
+    timeSignature: 4
+    beatsPerMinute: 80
+    layerIndex: 0
+    currentLayer: 0
+    longestLayerDuration: 0
+    longestLayerIndex: 0
     loop: 1
     playOnAwake: 0
     SpatialBlend: 0
@@ -3622,27 +3657,88 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     source: {fileID: 0}
+    layerSources: []
+    playing: 0
+    paused: 0
+    time: 0
+    timeNormalized: 0
+    duration: 0
+  - name: MinionLoop
+    volume: 0.518
+    lastVolume: 0
+    pitch: 1
+    layered: 0
+    clip: {fileID: 8300000, guid: fc17fec7abc13e54d9bc86c7397b3720, type: 3}
+    layers:
+    - {fileID: 8300000, guid: fde8faccd769d634f9553bfa5bef637c, type: 3}
+    - {fileID: 8300000, guid: fd71f02612817304184646c2e233675f, type: 3}
+    - {fileID: 8300000, guid: 84796bb5381db614ca5673372e1e0336, type: 3}
+    timeSignature: 4
+    beatsPerMinute: 80
+    layerIndex: 0
+    currentLayer: 0
+    longestLayerDuration: 0
+    longestLayerIndex: 0
+    loop: 1
+    playOnAwake: 0
+    SpatialBlend: 0
+    maxDistance: 300
+    minDistance: 1
+    distanceCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: -1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    source: {fileID: 0}
+    layerSources: []
     playing: 0
     paused: 0
     time: 0
     timeNormalized: 0
     duration: 0
   transitions:
-  - from: BG Music
+  - from: Intro
     to: Boss Music
-    duration: 1
+    duration: 0
     hasExitTime: 0
     exitTime: 0
     inheritNormalisedTime: 0
-    trigger: StartBoss
-    autoTransitionOnTrackEnd: 0
+    trigger: 
+    autoTransitionOnTrackEnd: 1
   - from: Boss Music
-    to: BG Music
-    duration: 1
+    to: MinionLoop
+    duration: 0.2
     hasExitTime: 0
     exitTime: 0
     inheritNormalisedTime: 0
-    trigger: KillBoss
+    trigger: Minions
+    autoTransitionOnTrackEnd: 0
+  - from: MinionLoop
+    to: Boss Music
+    duration: 0.2
+    hasExitTime: 0
+    exitTime: 0
+    inheritNormalisedTime: 0
+    trigger: MinionsKilled
     autoTransitionOnTrackEnd: 0
 --- !u!4 &414840833
 Transform:
@@ -8692,8 +8788,8 @@ MonoBehaviour:
     count: 3
   - enemyPrefab: {fileID: 6529405913941819586, guid: eb25353c5f3fda5a0aed15a4b56fb774, type: 3}
     count: 1
-  spawnDelay: 0.2
-  spawnDelayJitter: 0.1
+  spawnDelay: 0.6
+  spawnDelayJitter: 0.2
   radius: 17.75
 --- !u!1001 &771664088
 PrefabInstance:
@@ -19156,6 +19252,27 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3418869229441756464, guid: d3f09ac325b8c33f7b111e75554e78f5, type: 3}
+      propertyPath: inspectorProperties.Array.size
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418869229441756464, guid: d3f09ac325b8c33f7b111e75554e78f5, type: 3}
+      propertyPath: inspectorProperties.Array.data[10].GUID
+      value: c1cf7841-99b9-407e-8aca-b8df23c1cd42
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418869229441756464, guid: d3f09ac325b8c33f7b111e75554e78f5, type: 3}
+      propertyPath: inspectorProperties.Array.data[10].name
+      value: AudioController
+      objectReference: {fileID: 0}
+    - target: {fileID: 3418869229441756464, guid: d3f09ac325b8c33f7b111e75554e78f5, type: 3}
+      propertyPath: inspectorProperties.Array.data[10].ovalue
+      value: 
+      objectReference: {fileID: 414840831}
+    - target: {fileID: 3418869229441756464, guid: d3f09ac325b8c33f7b111e75554e78f5, type: 3}
+      propertyPath: inspectorProperties.Array.data[10].serializedTypename
+      value: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      objectReference: {fileID: 0}
     - target: {fileID: 3420552107619287773, guid: d3f09ac325b8c33f7b111e75554e78f5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 13.028079
@@ -19511,7 +19628,19 @@ PrefabInstance:
     - target: {fileID: 8225845327137289340, guid: d3f09ac325b8c33f7b111e75554e78f5, type: 3}
       propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 414840832}
+      objectReference: {fileID: 1989793592}
+    - target: {fileID: 8225845327137289340, guid: d3f09ac325b8c33f7b111e75554e78f5, type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 8225845327137289340, guid: d3f09ac325b8c33f7b111e75554e78f5, type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: AudioController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8225845327137289340, guid: d3f09ac325b8c33f7b111e75554e78f5, type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: DeathSound
+      objectReference: {fileID: 0}
     - target: {fileID: 8281318740372651375, guid: d3f09ac325b8c33f7b111e75554e78f5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 24.396912
@@ -19578,6 +19707,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3f09ac325b8c33f7b111e75554e78f5, type: 3}
+--- !u!114 &1989793592 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8768054689759416324, guid: d3f09ac325b8c33f7b111e75554e78f5, type: 3}
+  m_PrefabInstance: {fileID: 1989793591}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a119b25d52728621583e7f3194633c58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2005664140 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 68729fa5bde4c0e4caf7d0448229bed3, type: 3}

@@ -19,6 +19,11 @@ public class AudioControllerPersistance : MonoBehaviour
     private void Update()
     {
         int index = missionManager.GetCurrentSceneIndex();
+        if (index == -1)
+        {
+            missionManager = FindObjectOfType<MissionManager>();
+            return;
+        }
         if (index != currentSceneIndex)
         {
             currentSceneIndex = index;

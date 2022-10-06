@@ -7,8 +7,10 @@ namespace NodeAI.Audio
 {
     public class SetMusicTrigger : NodeAI.ActionBase
     {
+        AudioController audioController;
         public SetMusicTrigger()
         {
+            AddProperty<GameObject>("AudioController", null);
             AddProperty<string>("Trigger", "");
         }
 
@@ -16,10 +18,13 @@ namespace NodeAI.Audio
         {
             if (GetProperty<string>("Trigger") != "")
             {
-                AudioController musicManager = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<AudioController>();
-                if (musicManager != null)
+                if (audioController == null)
                 {
-                    musicManager.Trigger(GetProperty<string>("Trigger"));
+                    audioController = GetProperty<GameObject>("AudioController").GetComponent<AudioController>();
+                }
+                if (audioController != null)
+                {
+                    audioController.Trigger(GetProperty<string>("Trigger"));
                     state = NodeData.State.Success;
                     return NodeData.State.Success;
                 }
