@@ -12,10 +12,18 @@ using UnityEngine.Events;
 /// The health script for the player
 /// @todo Make this script more generic and not specific to the player. (i.e. make it a generic health script, then inherit it for the player)
 /// </summary>
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : MonoBehaviour, StatsManager.UsesStats
 {
     [Header("Stats")]
-    public float maxHealth = 100f; ///< The maximum health of the player.
+    [SerializeField] private float m_maxHealth = 100f; ///< The maximum health of the player.
+    public float calcedMaxHealth {
+        get { 
+            return StatsManager.CalculateMaxHealth(this, m_maxHealth);
+        }
+        set { 
+            m_maxHealth = value; 
+        }
+    }
     public float currentHealth = 100f; ///< The current health of the player.
     public bool isInvulnerable = false; ///< Whether or not the player is invulnerable.
     public bool isDead = false; ///< Whether or not the player is dead.
@@ -35,6 +43,30 @@ public class PlayerHealth : MonoBehaviour
     public System.Action OnDamageTaken; ///< The event to call when the player takes damage.
 
     private Animator _animator; ///< The animator for the player.
+
+    // StatsManager.UsesStats interface implementation
+    public List<StatsManager.StatType> m_usedStatTypes = new List<StatsManager.StatType>() { 
+        StatsManager.StatType.PlayerMaxHealth,
+        StatsManager.StatType.PlayerDamageTaken,
+    };
+    public List<StatsManager.StatType> GetStatTypes(){
+        return m_usedStatTypes;
+    }
+    public void AddStatType(StatsManager.StatType type){
+        if (type == null) return;
+
+        if (!m_usedStatTypes.Contains(type))
+        {
+            m_usedStatTypes.Add(type);
+        }
+    }
+    public void RemoveStatType(StatsManager.StatType type){
+        if (m_usedStatTypes.Contains(type))
+        {
+            m_usedStatTypes.Remove(type);
+        }
+    }
+
 
     // Start is called before the first frame update
     void Start()
@@ -68,7 +100,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (uiScript == null) return;
 
-        uiScript.healthBar.rectTransform.sizeDelta = new Vector2(uiScript.healthBarMaxWidth * (currentHealth / maxHealth), uiScript.healthBar.rectTransform.sizeDelta.y);
+        uiScript.healthBar.rectTransform.sizeDelta = new Vector2(uiScript.healthBarMaxWidth * (currentHealth / calcedMaxHealth), uiScript.healthBar.rectTransform.sizeDelta.y);
         uiScript.healthBarDark.rectTransform.sizeDelta = Vector2.Lerp(uiScript.healthBarDark.rectTransform.sizeDelta, uiScript.healthBar.rectTransform.sizeDelta, Time.deltaTime * 2.0f);
     }
 
@@ -85,13 +117,15 @@ public class PlayerHealth : MonoBehaviour
     {
         if (isInvulnerable || isDead) return;
 
+        float calcedDamage = StatsManager.CalculateDamageTaken(this, damage);
+
         if (_audioSource && hurtSound) _audioSource.PlayOneShot(hurtSound);
         if (_animator) _animator.SetTrigger("Injured");
         _animator?.SetLayerWeight(2, 1);
         VignetteScript vs = FindObjectOfType<VignetteScript>();
         if (vs) vs.StartVignette();
 
-        currentHealth -= damage;
+        currentHealth -= calcedDamage;
         if (currentHealth <= 0)
         {
             Die();
@@ -162,9 +196,9 @@ public class PlayerHealth : MonoBehaviour
     public void Heal(float heal)
     {
         currentHealth += heal;
-        if (currentHealth > maxHealth)
+        if (currentHealth > calcedMaxHealth)
         {
-            currentHealth = maxHealth;
+            currentHealth = calcedMaxHealth;
         }
     }
 

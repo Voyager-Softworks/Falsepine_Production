@@ -11284,6 +11284,11 @@ MonoBehaviour:
   m_weaknesses:
   - value: PoisonDamage
   m_damageHistory: []
+  m_usedStatTypes:
+  - value: EnemyDamageTaken
+  - value: EnemyMaxHealth
+  - value: BossDamageTaken
+  - value: BossMaxHealth
   m_deathSoundName: DeathSound
   m_damageSoundname: DamageSound
   m_monsterType: {fileID: 11400000, guid: 25e00185e50f675488bbf5ceb0b6ae63, type: 2}
@@ -11391,7 +11396,11 @@ MonoBehaviour:
   - name: DeathSound
     volume: 1
     pitch: 1
+    layered: 0
     clip: {fileID: 8300000, guid: aea7367dcd4eca742b238ce7cd55f9c9, type: 3}
+    layers: []
+    timeSignature: 4
+    beatsPerMinute: 120
     loop: 0
     playOnAwake: 0
     SpatialBlend: 1
@@ -11430,7 +11439,11 @@ MonoBehaviour:
   - name: DamageSound
     volume: 1
     pitch: 1
+    layered: 0
     clip: {fileID: 8300000, guid: 8f417a7868015ac4983a17c428a27303, type: 3}
+    layers: []
+    timeSignature: 4
+    beatsPerMinute: 120
     loop: 0
     playOnAwake: 0
     SpatialBlend: 1

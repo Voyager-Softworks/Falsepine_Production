@@ -10,7 +10,7 @@ public class MedkitEquipment : MonoBehaviour, Equipment.Useable
         // find player health
         PlayerHealth playerHealth = FindObjectOfType<PlayerHealth>();
 
-        if (playerHealth.currentHealth < playerHealth.maxHealth) {
+        if (playerHealth.currentHealth < playerHealth.calcedMaxHealth) {
             // heal player
             playerHealth.Heal(healAmount);
             return true;

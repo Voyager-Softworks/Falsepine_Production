@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using System;
+using UnityEngine.Serialization;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -12,7 +13,7 @@ using UnityEditor;
 /// A base health class for all objects that can take damage.
 /// </summary>
 [RequireComponent(typeof(AudioController))]
-public class Health_Base : MonoBehaviour /// @todo Impliment this into players, enemies, destructable objects.
+public class Health_Base : MonoBehaviour, StatsManager.UsesStats /// @todo Impliment this into players, enemies, destructable objects.
 {
 
     private void OnDrawGizmos()
@@ -92,7 +93,16 @@ public class Health_Base : MonoBehaviour /// @todo Impliment this into players, 
 
     [Header("Stats")]
     public float m_currentHealth = 100f; ///< The current health of the object.
-    public float m_maxHealth = 100f; ///< The maximum health of the object.
+    [SerializeField] private float m_maxHealth = 100f; ///< The maximum health of the object.
+    public float calcedMaxHealth {
+        get {
+            return StatsManager.CalculateMaxHealth(this, m_maxHealth);
+        }
+        set {
+            m_maxHealth = value;
+        }
+    }
+
     protected bool m_isInvulnerable = false; ///< Whether the object is invulnerable.
     public bool isInvulnerable { get { return m_isInvulnerable; } set { m_isInvulnerable = value; } } ///< Whether the object is invulnerable.
     protected bool m_hasDied = false; ///< Whether the object has died.
@@ -103,6 +113,26 @@ public class Health_Base : MonoBehaviour /// @todo Impliment this into players, 
     public List<StatsManager.StatType> m_weaknesses = new List<StatsManager.StatType>(); ///< The weaknesses of the object.
 
     public List<DamageStat> m_damageHistory = new List<DamageStat>(); ///< The damage history of the object.
+
+    // StatsManager.UsesStats interface implementation
+    public List<StatsManager.StatType> m_usedStatTypes = new List<StatsManager.StatType>();
+    public virtual List<StatsManager.StatType> GetStatTypes(){
+        return m_usedStatTypes;
+    }
+    public void AddStatType(StatsManager.StatType type){
+        if (type == null) return;
+
+        if (!m_usedStatTypes.Contains(type))
+        {
+            m_usedStatTypes.Add(type);
+        }
+    }
+    public void RemoveStatType(StatsManager.StatType type){
+        if (m_usedStatTypes.Contains(type))
+        {
+            m_usedStatTypes.Remove(type);
+        }
+    }
 
     [Header("Sounds")]
     public string m_deathSoundName = "DeathSound"; ///< The sound to play when the object dies. Uses the audio controller component.
@@ -217,9 +247,9 @@ public class Health_Base : MonoBehaviour /// @todo Impliment this into players, 
     /// </summary>
     protected void CheckMaxHealth()
     {
-        if (m_currentHealth > m_maxHealth)
+        if (m_currentHealth > calcedMaxHealth)
         {
-            m_currentHealth = m_maxHealth;
+            m_currentHealth = calcedMaxHealth;
         }
     }
 
