@@ -16,6 +16,14 @@ public class AudioControllerPersistance : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
+    private void Start()
+    {
+        if (FindObjectOfType<BossEnemyHealth>())
+        {
+            playInScene = false;
+        }
+    }
+
     private void Update()
     {
         int index = missionManager.GetCurrentSceneIndex();
