@@ -28,6 +28,10 @@ public class AudioControllerPersistance : MonoBehaviour
         {
             currentSceneIndex = index;
             if (index == 0) playInScene = true;
+            if (FindObjectOfType<BossEnemyHealth>())
+            {
+                playInScene = false;
+            }
             Debug.Log("Current Scene Index: " + index);
 
         }
@@ -55,7 +59,7 @@ public class AudioControllerPersistance : MonoBehaviour
 
     public void StopMusic()
     {
-        audioController.FadeOut(0, 0.5f);
+        audioController.FadeOut(0, 3.0f);
     }
 
     public void StopBecauseOfBoss()
