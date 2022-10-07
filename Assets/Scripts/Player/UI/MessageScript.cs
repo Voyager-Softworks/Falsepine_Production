@@ -8,8 +8,7 @@ using System;
 using UnityEngine.Events;
 
 /// <summary>
-/// @deprecated not used anymore. <br/>
-/// Class to manage old UI for the message popup.
+/// Class to manage UI for the message popup.
 /// </summary>
 public class MessageScript : MonoBehaviour
 {
@@ -66,6 +65,12 @@ public class MessageScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Sets the text of the message.
+    /// </summary>
+    /// <param name="_message"></param>
+    /// <param name="_icon"></param>
+    /// <param name="_doFade"></param>
     public void SetMessage(string _message, string _icon = "", bool _doFade = false)
     {
         if (m_text == null) m_text = GetComponentInChildren<TextMeshProUGUI>();
@@ -78,6 +83,9 @@ public class MessageScript : MonoBehaviour
         m_text.text = _message + sprite + (!_doFade ? " <sprite name=\"cross\">" : "");
     }
 
+    /// <summary>
+    /// Dismissses the message.
+    /// </summary>
     public void ButtonClicked(){
         if (!m_doFade)
         {

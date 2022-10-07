@@ -48,6 +48,12 @@ public class MessageManager : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// Makes new message instance appear on screen with text.
+    /// </summary>
+    /// <param name="_messsage"></param>
+    /// <param name="_icon"></param>
+    /// <param name="_doFade"></param>
     public void AddMessage(string _messsage, string _icon = "", bool _doFade = false){
         m_oldMessages.Add(_messsage);
 
