@@ -37478,10 +37478,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eyesBone: {fileID: 6616791012475704233}
-  maxHearingRange: 40
+  maxHearingRange: 15
   eyeDirection: 0
-  sightDistance: 30
-  sightAngle: 360
+  sightDistance: 10
+  sightAngle: 160
   sightMask:
     serializedVersion: 2
     m_Bits: 8
@@ -37778,12 +37778,17 @@ MonoBehaviour:
   audioChannels:
   - name: DeathSound
     volume: 1
+    lastVolume: 0
     pitch: 1
     layered: 0
     clip: {fileID: 8300000, guid: 3be713c99ff0c7342a3ae09fdc368275, type: 3}
     layers: []
     timeSignature: 4
     beatsPerMinute: 120
+    layerIndex: 0
+    currentLayer: 0
+    longestLayerDuration: 0
+    longestLayerIndex: 0
     loop: 0
     playOnAwake: 0
     SpatialBlend: 1
@@ -37814,6 +37819,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     source: {fileID: 0}
+    layerSources: []
     playing: 0
     paused: 0
     time: 0
@@ -37821,12 +37827,17 @@ MonoBehaviour:
     duration: 0
   - name: DamageSound
     volume: 1
+    lastVolume: 0
     pitch: 1
     layered: 0
     clip: {fileID: 8300000, guid: 0d61e269d9c4b174d9da65df4d53430f, type: 3}
     layers: []
     timeSignature: 4
     beatsPerMinute: 120
+    layerIndex: 0
+    currentLayer: 0
+    longestLayerDuration: 0
+    longestLayerIndex: 0
     loop: 0
     playOnAwake: 0
     SpatialBlend: 1
@@ -37857,6 +37868,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     source: {fileID: 0}
+    layerSources: []
     playing: 0
     paused: 0
     time: 0
