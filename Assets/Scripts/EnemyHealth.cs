@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.AI;
+using Unity.Mathematics;
 
 /// <summary>
 /// Manages the health of enemies.
@@ -90,7 +91,7 @@ public class EnemyHealth : Health_Base
         base.TakeDamage(_damage);
         GetComponent<NodeAI.NodeAI_Agent>().SetParameter("Health", m_currentHealth);
         GetComponentInChildren<Animator>()?.SetTrigger("Hit");
-        GetComponentInChildren<Animator>()?.SetFloat("PainNum", UnityEngine.Random.value);
+        GetComponentInChildren<Animator>()?.SetFloat("PainNum", (UnityEngine.Random.value < 0.5f ? UnityEngine.Random.Range(0f, 0.2f) : UnityEngine.Random.Range(0.8f, 1f)));
         StopCoroutine("DamageFlashCoroutine");
         StartCoroutine(DamageFlashCoroutine(0.25f));
 
@@ -143,7 +144,8 @@ public class EnemyHealth : Health_Base
 
         // do health steal for player
         PlayerHealth playerHealth = lastDamage?.m_sourceObject.GetComponent<PlayerHealth>();
-        if (playerHealth != null){
+        if (playerHealth != null)
+        {
             float healthAmount = StatsManager.CalculateHealthSteal(playerHealth, 0.0f);
 
             playerHealth.Heal(healthAmount);
