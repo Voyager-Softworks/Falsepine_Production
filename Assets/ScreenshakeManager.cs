@@ -21,6 +21,10 @@ public class ScreenshakeManager : MonoBehaviour
     void Start()
     {
         virtualCameraNoise = virtualCamera.GetCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
+        if (virtualCameraNoise == null)
+        {
+            virtualCameraNoise = virtualCamera.AddCinemachineComponent<Cinemachine.CinemachineBasicMultiChannelPerlin>();
+        }
     }
 
     // Update is called once per frame
