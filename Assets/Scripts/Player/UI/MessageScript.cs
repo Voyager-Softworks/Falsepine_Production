@@ -75,7 +75,7 @@ public class MessageScript : MonoBehaviour
 
         string sprite = (string.IsNullOrEmpty(_icon) ? "" : " <sprite name=\"" + _icon + "\">");
 
-        m_text.text = _message + sprite;
+        m_text.text = _message + sprite + (!_doFade ? " <sprite name=\"cross\">" : "");
     }
 
     public void ButtonClicked(){
