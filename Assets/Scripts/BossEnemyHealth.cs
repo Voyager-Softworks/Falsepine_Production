@@ -73,7 +73,7 @@ public class BossEnemyHealth : EnemyHealth
             FadeScript fadeScript = FindObjectOfType<FadeScript>();
             if (fadeScript)
             {
-                fadeScript.EndScreen(true);
+                fadeScript.EndScreen(true, 5f);
             }
         }
 
@@ -86,9 +86,11 @@ public class BossEnemyHealth : EnemyHealth
                 Inventory home = InventoryManager.instance.GetInventory("home");
                 if (home != null)
                 {
-                    if (home.TryAddItemToInventory(artifact.CreateInstance()) == null){
+                    if (home.TryAddItemToInventory(artifact.CreateInstance()) == null)
+                    {
                         // message
-                        if (MessageManager.instance) {
+                        if (MessageManager.instance)
+                        {
                             MessageManager.instance.AddMessage("You found a " + artifact.m_displayName + "!", "talisman");
                         }
                     }

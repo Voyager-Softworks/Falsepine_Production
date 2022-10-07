@@ -148,10 +148,10 @@ public class FadeScript : MonoBehaviour
     /// Fades from clear to black (used when ending the scene)
     /// </summary>
     /// <param name="_trueCompleteFalseOver"></param>
-    public void EndScreen(bool _trueCompleteFalseOver = true)
+    public void EndScreen(bool _trueCompleteFalseOver = true, float _delay = 0f)
     {
         isEndFade = true;
-        FadeFromClearToBlack(3.0f, 2.0f);
+        FadeFromClearToBlack(3.0f, 2.0f + _delay);
         m_trueCompleteFalseOver = _trueCompleteFalseOver;
     }
 }
