@@ -20063,7 +20063,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 10
   m_Materials:
-  - {fileID: 2100000, guid: 9aab45d775f112b4d918f42fa4971cf7, type: 2}
+  - {fileID: 2100000, guid: 19b0584675204ba46834f86b185a7c82, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -31760,8 +31760,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382e18cd65ba3ee40981aca66eb43b48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_currentHealth: 45
-  m_maxHealth: 45
+  m_currentHealth: 27
+  m_maxHealth: 27
   m_disablePlayerCollision: 1
   m_weaknesses:
   - value: PoisonDamage
@@ -31802,9 +31802,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   eyesBone: {fileID: 24518149611499209}
-  maxHearingRange: 25
+  maxHearingRange: 20
   eyeDirection: 3
-  sightDistance: 20
+  sightDistance: 15
   sightAngle: 360
   sightMask:
     serializedVersion: 2
@@ -31852,12 +31852,17 @@ MonoBehaviour:
   audioChannels:
   - name: DeathSound
     volume: 1
+    lastVolume: 0
     pitch: 1
     layered: 0
     clip: {fileID: 8300000, guid: 5031e98759e1b2d4591707dc15d6a1a3, type: 3}
     layers: []
     timeSignature: 4
     beatsPerMinute: 120
+    layerIndex: 0
+    currentLayer: 0
+    longestLayerDuration: 0
+    longestLayerIndex: 0
     loop: 0
     playOnAwake: 0
     SpatialBlend: 1
@@ -31888,6 +31893,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     source: {fileID: 0}
+    layerSources: []
     playing: 0
     paused: 0
     time: 0
@@ -31895,12 +31901,17 @@ MonoBehaviour:
     duration: 0
   - name: DamageSound
     volume: 1
+    lastVolume: 0
     pitch: 1
     layered: 0
     clip: {fileID: 8300000, guid: 6955f7a9a4e8c394fbd860e149cf5fb7, type: 3}
     layers: []
     timeSignature: 4
     beatsPerMinute: 120
+    layerIndex: 0
+    currentLayer: 0
+    longestLayerDuration: 0
+    longestLayerIndex: 0
     loop: 0
     playOnAwake: 0
     SpatialBlend: 1
@@ -31931,6 +31942,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     source: {fileID: 0}
+    layerSources: []
     playing: 0
     paused: 0
     time: 0
