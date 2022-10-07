@@ -529,6 +529,27 @@ public class Console : ToggleableWindow
             return;
         }
 
+        // "give_money amount"
+        if (split.Length == 2 && split[0] == "give_money")
+        {
+            string give = split[0];
+            string amount = split[1];
+            int amountInt = 0;
+            try { amountInt = int.Parse(amount); }
+            catch { Log("- Invalid amount"); return; }
+
+            if (EconomyManager.instance != null){
+                EconomyManager.instance.AddMoney(amountInt);
+                Log("- Gave " + amountInt + " money");
+            }
+            else{
+                Log("- EconomyManager not found");
+            }
+
+            Log();
+            return;
+        }
+
         // "quit"
         if (split.Length == 1 && split[0] == "quit")
         {
@@ -710,6 +731,7 @@ public class Console : ToggleableWindow
         "load slotNumber",
         "kill_all",
         "heal_player",
+        "give_money amount",
         "quit",
         "list_scenes",
         "current_scene",
