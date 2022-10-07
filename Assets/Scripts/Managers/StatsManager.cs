@@ -770,6 +770,8 @@ public class StatsManager : MonoBehaviour
         m_monsterStats = new List<MonsterStat>(data.monsterStats);
         ResetPreviousKills();
 
+        m_activeTalismans.Clear();
+
         // save
         SaveStats(_saveSlot);
     }
