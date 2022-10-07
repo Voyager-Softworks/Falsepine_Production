@@ -75,6 +75,9 @@ public class PlayerHealth : MonoBehaviour, StatsManager.UsesStats
         if (uiScript == null) uiScript = FindObjectOfType<UIScript>();
         if (_audioSource == null) _audioSource = GetComponent<AudioSource>();
         if (_animator == null) _animator = GetComponentInChildren<Animator>();
+
+        // currentHealth set
+        currentHealth = calcedMaxHealth;
     }
 
     // Update is called once per frame

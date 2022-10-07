@@ -114,6 +114,7 @@ MonoBehaviour:
   m_disablePlayerCollision: 1
   m_weaknesses: []
   m_damageHistory: []
+  m_usedStatTypes: []
   m_deathSoundName: DeathSound
   m_damageSoundname: DamageSound
   m_brokenPrefab: {fileID: 5507332315710938451, guid: 208c558e277ad8b4bb05c74d50ea777c, type: 3}
@@ -132,9 +133,18 @@ MonoBehaviour:
   triggers: []
   audioChannels:
   - name: DeathSound
-    volume: 0.3
-    pitch: 0.3
+    volume: 1
+    lastVolume: 0
+    pitch: 1
+    layered: 0
     clip: {fileID: 8300000, guid: 4ba5f05397f6f4940aedda822a700326, type: 3}
+    layers: []
+    timeSignature: 4
+    beatsPerMinute: 80
+    layerIndex: 0
+    currentLayer: 0
+    longestLayerDuration: 0
+    longestLayerIndex: 0
     loop: 0
     playOnAwake: 0
     SpatialBlend: 1
@@ -165,15 +175,25 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     source: {fileID: 0}
+    layerSources: []
     playing: 0
     paused: 0
     time: 0
     timeNormalized: 0
     duration: 0
   - name: DamageSound
-    volume: 1
+    volume: 0.5
+    lastVolume: 0
     pitch: 1
-    clip: {fileID: 0}
+    layered: 0
+    clip: {fileID: 8300000, guid: 4ba5f05397f6f4940aedda822a700326, type: 3}
+    layers: []
+    timeSignature: 4
+    beatsPerMinute: 80
+    layerIndex: 0
+    currentLayer: 0
+    longestLayerDuration: 0
+    longestLayerIndex: 0
     loop: 0
     playOnAwake: 0
     SpatialBlend: 1
@@ -204,6 +224,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     source: {fileID: 0}
+    layerSources: []
     playing: 0
     paused: 0
     time: 0
