@@ -1431,12 +1431,17 @@ MonoBehaviour:
   audioChannels:
   - name: DamageSound
     volume: 1
+    lastVolume: 0
     pitch: 1
     layered: 0
     clip: {fileID: 8300000, guid: 022a44acf00cf2344a2d7687188d579c, type: 3}
     layers: []
     timeSignature: 4
     beatsPerMinute: 120
+    layerIndex: 0
+    currentLayer: 0
+    longestLayerDuration: 0
+    longestLayerIndex: 0
     loop: 0
     playOnAwake: 0
     SpatialBlend: 0
@@ -1467,6 +1472,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     source: {fileID: 0}
+    layerSources: []
     playing: 0
     paused: 0
     time: 0
@@ -1474,12 +1480,17 @@ MonoBehaviour:
     duration: 0
   - name: DeathSound
     volume: 1
+    lastVolume: 0
     pitch: 1
     layered: 0
     clip: {fileID: 8300000, guid: 2e6565cdab19d4f41808c36d3f1253c5, type: 3}
     layers: []
     timeSignature: 4
     beatsPerMinute: 120
+    layerIndex: 0
+    currentLayer: 0
+    longestLayerDuration: 0
+    longestLayerIndex: 0
     loop: 0
     playOnAwake: 0
     SpatialBlend: 0
@@ -1510,6 +1521,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     source: {fileID: 0}
+    layerSources: []
     playing: 0
     paused: 0
     time: 0
@@ -1528,8 +1540,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382e18cd65ba3ee40981aca66eb43b48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_currentHealth: 100
-  m_maxHealth: 100
+  m_currentHealth: 50
+  m_maxHealth: 50
   m_disablePlayerCollision: 1
   m_weaknesses:
   - value: PoisonDamage
