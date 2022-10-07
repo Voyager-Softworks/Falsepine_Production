@@ -75,7 +75,7 @@ public class CluePurchaseUI : MonoBehaviour
         m_lockedIcon.SetActive(!beenDiscovered);
 
         // show correct text and silver icon (if needed)
-        m_primaryText.text = m_linkedJournalEntry.m_entryType.ToString();
+        m_primaryText.text = m_linkedJournalEntry.m_linkedMonster.m_name + " " + m_linkedJournalEntry.m_entryType.ToString();
         m_secondaryText.text = beenDiscovered ? "Unlocked" : m_price.ToString();
         m_silverIcon.SetActive(!beenDiscovered);
 
