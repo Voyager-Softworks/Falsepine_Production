@@ -21,7 +21,7 @@ namespace Boss.Bonestag
         BossArenaController arenaController; ///< The arena controller of the character.
         Vector3 arenaEdgeGoalPosition; ///< The position of the arena edge goal.
         public float chargeSpeed = 40f; ///< The speed of the character when charging.
-        public float chargeDamage = 15f; ///< The damage of the character when charging.
+        public float chargeDamage = 10f; ///< The damage of the character when charging.
         public GameObject debrisPrefab; ///< The prefab of the debris to spawn.
         bool hasDamagedPlayer = false; ///< Whether or not the character has damaged the player.
 
