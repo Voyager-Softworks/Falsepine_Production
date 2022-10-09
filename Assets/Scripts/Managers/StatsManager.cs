@@ -527,7 +527,7 @@ public class StatsManager : MonoBehaviour
     /// <param name="_minVal"></param>
     /// <param name="_maxVal"></param>
     /// <returns></returns>
-    private static float GenericStatCalc(UsesStats _statUser, float _baseVal, List<StatType> _usedStatTypes, float _additiveVal = 0.0f, float _multiplierVal = 1.0f, float _minVal = 0.0f, float _maxVal = float.MaxValue)
+    public static float GenericStatCalc(UsesStats _statUser, float _baseVal, List<StatType> _usedStatTypes, float _additiveVal = 0.0f, float _multiplierVal = 1.0f, float _minVal = 0.0f, float _maxVal = float.MaxValue)
     {
         float baseVal = _baseVal;
         float additiveVal = _additiveVal;
