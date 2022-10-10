@@ -6,6 +6,9 @@ using NodeAI;
 namespace Boss.Primaeval
 {
 
+    /// <summary>
+    /// 
+    /// </summary>  @todo comment
     public class SpawnVileBarrier : NodeAI.ActionBase
     {
         public PrimaevalSpellManager spellManager;

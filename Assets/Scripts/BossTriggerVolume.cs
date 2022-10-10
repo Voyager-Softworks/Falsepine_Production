@@ -4,6 +4,9 @@ using NodeAI;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// 
+/// </summary>  @todo comment
 public class BossTriggerVolume : MonoBehaviour
 {
     public NodeAI_Agent agent;

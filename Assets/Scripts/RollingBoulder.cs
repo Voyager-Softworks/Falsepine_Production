@@ -3,35 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
+/// <summary>
+///  Manages the rolling boulders spawned by <see cref="SummonBoulders"/>, after they are rolled by the boss using <see cref="ThrowBoulder"/>
+/// </summary> 
 public class RollingBoulder : MonoBehaviour
 {
-    [SerializeField] Vector3 rollDirection;
-    [SerializeField] float rollSpeed;
-    [SerializeField] float rotationMultiplier;
+    [SerializeField] Vector3 rollDirection; // The direction the boulder will roll in
+    [SerializeField] float rollSpeed; // The speed at which the boulder will roll
+    [SerializeField] float rotationMultiplier; // The multiplier for the rotation of the boulder
 
-    [SerializeField] GameObject vfxObject;
-    [SerializeField] GameObject destroyParticle;
-    [SerializeField] float damage = 10f;
+    [SerializeField] GameObject vfxObject; // The visual effect object that will be spawned when the boulder hits the ground
+    [SerializeField] GameObject destroyParticle; // The particle effect that will be spawned when the boulder is destroyed
+    [SerializeField] float damage = 10f; // The amount of damage the boulder will deal to the player
 
     [Header("Screenshake: Rolling")]
-    [SerializeField] float screenshakeDuration = 0.5f;
-    [SerializeField] Vector3 screenshakeAmplitude = Vector3.one;
-    [SerializeField] float screenshakeFrequency = 1f;
+    [SerializeField] float screenshakeDuration = 0.5f; // The duration of the screenshake
+    [SerializeField] Vector3 screenshakeAmplitude = Vector3.one; // The amplitude of the screenshake
+    [SerializeField] float screenshakeFrequency = 1f; // The frequency of the screenshake
 
     [Header("Screenshake: Impact")]
-    [SerializeField] float impactScreenshakeDuration = 0.5f;
-    [SerializeField] Vector3 impactScreenshakeAmplitude = Vector3.one;
-    [SerializeField] float impactScreenshakeFrequency = 1f;
+    [SerializeField] float impactScreenshakeDuration = 0.5f; // The duration of the screenshake
+    [SerializeField] Vector3 impactScreenshakeAmplitude = Vector3.one; // The amplitude of the screenshake
+    [SerializeField] float impactScreenshakeFrequency = 1f; // The frequency of the screenshake
 
-    ScreenshakeManager screenshakeManager;
+    ScreenshakeManager screenshakeManager; // The screenshake manager
 
 
-    public AnimationCurve initialPositionCurve = new AnimationCurve();
+    public AnimationCurve initialPositionCurve = new AnimationCurve(); // The curve that will be used to determine the initial position of the boulder
 
-    bool isRolling = false;
+    bool isRolling = false; // Whether the boulder is rolling or not
 
-    [SerializeField] Mesh[] boulderMeshes;
+    [SerializeField] Mesh[] boulderMeshes; // The meshes that will be used for the boulder
 
+    /// <summary>
+    ///  Called when the boulder is spawned
+    /// </summary>
+    /// <returns></returns>
     IEnumerator PopUpCoroutine()
     {
         Vector3 finalPosition = transform.position + (Vector3.up * 0.5f);
@@ -60,6 +67,10 @@ public class RollingBoulder : MonoBehaviour
         StartCoroutine(PopUpCoroutine());
     }
 
+    /// <summary>
+    ///  Method to roll the boulder in a given direction
+    /// </summary>
+    /// <param name="direction"></param>
     public void Roll(Vector3 direction)
     {
         rollDirection = direction.normalized;
@@ -90,13 +101,20 @@ public class RollingBoulder : MonoBehaviour
 
     }
 
+    /// <summary>
+    ///  Called when the boulder hits something
+    /// </summary>
+    /// <param name="other"></param>
     void OnTriggerEnter(Collider other)
     {
+        // Check if the boulder hit the ground
         if (other.gameObject.layer == LayerMask.NameToLayer("IgnoreRaycast") || !isRolling || other.gameObject.layer == LayerMask.NameToLayer("Floor")) return;
+        // Check if the boulder hit the player
         if (other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
+            other.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage); // Deal damage to the player
         }
+        // Check if the boulder hit a surface which is a wall as found by its surface normal
         if ((other.ClosestPoint(transform.position) - transform.position).y >= 0.0f)
         {
             if (destroyParticle != null)

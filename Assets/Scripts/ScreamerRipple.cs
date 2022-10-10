@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
 
+/// <summary>
+///  
+/// </summary>  @todo comment
 public class ScreamerRipple : MonoBehaviour
 {
     public float range = 7.5f;

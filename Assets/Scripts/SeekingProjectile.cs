@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 
+/// </summary>  @todo comment
 public class SeekingProjectile : MonoBehaviour
 {
     public float speed;

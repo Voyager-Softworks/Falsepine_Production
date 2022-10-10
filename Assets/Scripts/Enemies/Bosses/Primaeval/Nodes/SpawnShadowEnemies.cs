@@ -6,6 +6,9 @@ using NodeAI;
 namespace Boss.Primaeval
 {
 
+    /// <summary>
+    /// 
+    /// </summary>  @todo comment
     public class SpawnShadowEnemies : NodeAI.ActionBase
     {
         public PrimaevalSpellManager spellManager;
