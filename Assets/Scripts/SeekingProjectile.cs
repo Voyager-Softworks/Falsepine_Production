@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 
-/// </summary>  @todo comment
+/// Projectile which seeks the player
+/// </summary>  
 public class SeekingProjectile : MonoBehaviour
 {
-    public float speed;
-    public float lifeTime;
-    public float rotationSpeed;
-    GameObject target;
-    bool expired = false;
+    public float speed; // Speed of the projectile
+    public float lifeTime; // How long the projectile will live
+    public float rotationSpeed; // How fast the projectile will rotate
+    GameObject target; // The target to seek
+    bool expired = false; // Whether the projectile has expired
 
     // Start is called before the first frame update
     void Start()
     {
-        target = GameObject.FindGameObjectWithTag("Player");
+        target = GameObject.FindGameObjectWithTag("Player"); // Find the player
     }
 
     // Update is called once per frame
