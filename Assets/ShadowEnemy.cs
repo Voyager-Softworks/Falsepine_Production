@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using NodeAI;
+using System.Linq;
 
 public class ShadowEnemy : MonoBehaviour
 {
@@ -25,8 +26,9 @@ public class ShadowEnemy : MonoBehaviour
         {
             timedOut = true;
             StartCoroutine(DissolveOut());
-            Destroy(gameObject, 6.0f);
+            Destroy(gameObject, 8.0f);
             GetComponent<NodeAI_Agent>().enabled = false;
+            GetComponentsInChildren<AudioSource>().ToList().ForEach(a => a.Stop());
         }
     }
 
@@ -39,6 +41,7 @@ public class ShadowEnemy : MonoBehaviour
             foreach (var mat in mats)
             {
                 mat.SetFloat("_Threshhold", t);
+                mat.SetFloat("_Fade", t / 0.6f);
             }
 
             yield return null;
@@ -50,12 +53,18 @@ public class ShadowEnemy : MonoBehaviour
         float t = 0.6f;
         while (t > 0.0f)
         {
-            t -= Time.deltaTime * 0.1f;
+            t -= Time.deltaTime * 0.2f;
             foreach (var mat in mats)
             {
                 mat.SetFloat("_Threshhold", t);
+                mat.SetFloat("_Fade", t / 0.6f);
             }
             yield return null;
+        }
+        foreach (var mat in mats)
+        {
+            mat.SetFloat("_Threshhold", 0.0f);
+            mat.SetFloat("_Fade", 0.0f);
         }
     }
 }
