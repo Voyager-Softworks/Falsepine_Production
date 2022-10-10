@@ -167,7 +167,7 @@ public class ItemDisplay : MonoBehaviour
         if (m_showPrice) {
             m_typePanel.SetActive(false);
             m_costPanel.SetActive(true);
-            m_costAmount.text = m_linkedItem.m_price.ToString();
+            m_costAmount.text = m_linkedItem.GetPrice().ToString();
         } else {
             m_typePanel.SetActive(true);
             m_costPanel.SetActive(false);

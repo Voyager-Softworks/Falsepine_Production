@@ -273,14 +273,15 @@ public class PlayerMovement : MonoBehaviour
                 _animator.SetFloat("MoveForward", forwardMag);
                 //calc the direction to look
                 Vector3 lookDir;
-                if (Gamepad.current != null)
-                {
-                    lookDir = GetGamepadAimPoint() - transform.position;
-                }
-                else
-                {
-                    lookDir = GetMouseAimPlanePoint() - transform.position;
-                }
+                // if (Gamepad.current != null)
+                // {
+                //     lookDir = GetGamepadAimPoint() - transform.position;
+                // }
+                // else
+                // {
+                //     lookDir = GetMouseAimPlanePoint() - transform.position;
+                // }
+                lookDir = GetMouseAimPlanePoint() - transform.position;
 
 
                 // Look at the look direction

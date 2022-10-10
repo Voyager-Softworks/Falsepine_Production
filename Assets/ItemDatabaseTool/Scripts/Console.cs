@@ -441,6 +441,49 @@ public class Console : ToggleableWindow
             return;
         }
 
+        // "talisman statType modType value"
+        if (split.Length >= 4 && split[0] == "talisman")
+        {
+            string statType = split[1];
+            string modType = split[2];
+            float value = float.Parse(split[3]);
+
+            // create stat mod
+            StatsManager.StatMod mod = new StatsManager.StatMod();
+
+            // StatType is not an enum! it's a class with static fields
+            StatsManager.StatType statTypeEnum = StatsManager.StatType.StringToStatType(statType);
+            if (statTypeEnum == null){
+                Log("- Invalid stat type");
+                return;
+            }
+            mod.statType = statTypeEnum;
+
+            // ModType is an enum
+            StatsManager.ModType modTypeEnum = StatsManager.ModType.Additive;
+            try { modTypeEnum = (StatsManager.ModType)Enum.Parse(typeof(StatsManager.ModType), modType, true); }
+            catch { 
+                // check for + or *
+                if (modType == "+") modTypeEnum = StatsManager.ModType.Additive;
+                else if (modType == "*") modTypeEnum = StatsManager.ModType.Multiplier;
+                else { Log("- Invalid mod type"); return; }
+            }
+            mod.modType = modTypeEnum;
+
+            mod.value = value;
+
+            // create talisman
+            StatsManager.Talisman talisman = new StatsManager.Talisman();
+            talisman.m_statMod = mod;
+
+            // add to active talismans
+            StatsManager.instance.m_activeTalismans.Add(talisman);
+
+            Log("- Talisman added");
+            Log();
+            return;
+        }
+
         // "clear_drinks"
         if (split.Length >= 1 && split[0] == "clear_drinks")
         {
@@ -500,6 +543,20 @@ public class Console : ToggleableWindow
             catch { Log("- Invalid slot number"); return; }
             SaveManager.LoadAll(slot);
             Log("- Loaded");
+            Log();
+            return;
+        }
+
+        // "delete slotNumber"
+        if (split.Length == 2 && split[0] == "delete")
+        {
+            string delete = split[0];
+            string slotNumber = split[1];
+            int slot = 0;
+            try { slot = int.Parse(slotNumber); }
+            catch { Log("- Invalid slot number"); return; }
+            SaveManager.HardDeleteAll(slot);
+            Log("- Deleted");
             Log();
             return;
         }
@@ -633,16 +690,6 @@ public class Console : ToggleableWindow
             return;
         }
 
-        // "delete_mission_save"
-        if (split.Length == 1 && split[0] == "delete_mission_save")
-        {
-            MissionManager.instance?.DeleteMissionSave(SaveManager.currentSaveSlot);
-
-            Log("- Mission save deleted");
-
-            return;
-        }
-
         // "complete_mission"
         if (split.Length == 1 && split[0] == "complete_mission")
         {
@@ -724,11 +771,13 @@ public class Console : ToggleableWindow
         "fill_ammo inventoryID",
         "fill_stacks inventoryID",
         "drink itemID:instanceID?",
+        "talisman statType modType value",
         "clear_drinks",
         "set_saveslot slotNumber",
         "get_saveslot",
         "save slotNumber",
         "load slotNumber",
+        "delete slotNumber",
         "kill_all",
         "heal_player",
         "give_money amount",
@@ -739,7 +788,6 @@ public class Console : ToggleableWindow
         "next_scene",
         "scene sceneNumber",
         "scene sceneName",
-        "delete_mission_save",
         "complete_mission",
         "message 'message Text' iconName?",
     };

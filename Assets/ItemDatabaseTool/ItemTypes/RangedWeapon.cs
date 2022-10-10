@@ -153,8 +153,9 @@ public class RangedWeapon : Item
 
         // update all timers and ensure they are never negative:
         m_shootTimer = Mathf.Max(0, m_shootTimer - Time.deltaTime);
-        if (!m_isAiming) m_aimTimer = Mathf.Max(0, m_aimTimer - Time.deltaTime);
-        else m_aimTimer = Mathf.Min(m_aimTime, m_aimTimer + Time.deltaTime);
+        float calcedAimTime = StatsManager.CalculateRangedAimTime(this, m_aimTime);
+        if (m_isAiming) m_aimTimer = Mathf.Min(calcedAimTime, m_aimTimer + Time.deltaTime);
+        else m_aimTimer = 0;
         m_reloadTimer = Mathf.Max(0, m_reloadTimer - Time.deltaTime);
         m_equipTimer = Mathf.Max(0, m_equipTimer - Time.deltaTime);
 
@@ -652,7 +653,16 @@ public class RangedWeapon : Item
     public float CalcCurrentAimAngle()
     {
         // calculate new direction using inaccuracy
-        return Mathf.Lerp(m_unaimedInaccuracy, m_aimedInaccuracy, m_aimTimer / m_aimTime);
+        float calcedAimTime = StatsManager.CalculateRangedAimTime(this, m_aimTime);
+        float val = Mathf.Lerp(m_unaimedInaccuracy, m_aimedInaccuracy, m_aimTimer / calcedAimTime);
+        // if NaN or infinite, set 0
+        if (float.IsNaN(val) || float.IsInfinity(val))
+        {
+            val = 0;
+        }
+        // ensure value is between m_unaimedInaccuracy and m_aimedInaccuracy
+        val = Mathf.Clamp(val, Mathf.Min(m_unaimedInaccuracy, m_aimedInaccuracy), Mathf.Max(m_unaimedInaccuracy, m_aimedInaccuracy));
+        return val;
     }
 
     
