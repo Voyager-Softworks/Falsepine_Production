@@ -175,7 +175,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
     public bool m_allowedDiscount = true;
     public int GetPrice()
     {
-        return m_price;
+        return StatsManager.CalculateCost(this, m_price);
     }
     public bool GetAllowedDiscount()
     {

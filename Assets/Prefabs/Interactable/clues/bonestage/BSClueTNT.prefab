@@ -1,5 +1,61 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &12548189264671081
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 317164302676151484}
+  - component: {fileID: 6349608406232391655}
+  m_Layer: 0
+  m_Name: bloodSpray (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &317164302676151484
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12548189264671081}
+  m_LocalRotation: {x: 0.4172305, y: -0.3689425, z: 0.5665298, w: 0.6073255}
+  m_LocalPosition: {x: -15.5, y: 201.25188, z: 77}
+  m_LocalScale: {x: 142.63063, y: 142.63063, z: 142.63065}
+  m_Children: []
+  m_Father: {fileID: 8278864079088469866}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 67.642, y: 3.709, z: 88.505}
+--- !u!114 &6349608406232391655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12548189264671081}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f19d9143a39eb3b46bc4563e9889cfbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 2
+  m_Material: {fileID: 2100000, guid: b3a7168a7ed00b54db53e5c93137f46d, type: 2}
+  m_DrawDistance: 1000
+  m_FadeScale: 0.9
+  m_StartAngleFade: 180
+  m_EndAngleFade: 180
+  m_UVScale: {x: 1, y: 1}
+  m_UVBias: {x: 0, y: 0}
+  m_AffectsTransparency: 0
+  m_DecalLayerMask: 1
+  m_Offset: {x: 0, y: 0, z: 0.435}
+  m_Size: {x: 1, y: 1, z: 0.87}
+  m_FadeFactor: 1
 --- !u!1 &2990622276331130107
 GameObject:
   m_ObjectHideFlags: 0
@@ -253,13 +309,14 @@ Transform:
   m_GameObject: {fileID: 8278864079088469867}
   m_LocalRotation: {x: 0, y: 0.23018561, z: 0, w: 0.9731468}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.0070111165, y: 0.0070111165, z: 0.0070111165}
+  m_LocalScale: {x: 0.009328992, y: 0.009328992, z: 0.009328992}
   m_Children:
   - {fileID: 2990622277934928729}
   - {fileID: 2990622277671952801}
   - {fileID: 2990622276331130108}
   - {fileID: 2990622276557342027}
   - {fileID: 2857604990514642447}
+  - {fileID: 317164302676151484}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 26.616, z: 0}
@@ -345,6 +402,7 @@ MonoBehaviour:
   _transToCheck: {fileID: 0}
   interactDistance: 3
   onInteractEffect: 1
+  replacementObject: {fileID: 0}
   m_pickupType: 0
   m_linkedEntry: {fileID: 11400000, guid: 676e1fa40c2b8624a804e1f11df782ec, type: 2}
   m_specificMonster: 1
