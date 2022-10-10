@@ -435,8 +435,6 @@ public class PlayerInventoryInterface : MonoBehaviour
         Vector3 aimPoint = playerMovement.GetMouseAimPlanePoint();
 
         float currentAimAngle = rangedWeapon.CalcCurrentAimAngle();
-        // if nan or inf, set to 0
-        if (float.IsNaN(currentAimAngle) || float.IsInfinity(currentAimAngle)) currentAimAngle = 0;
 
         corners.backLeft = m_aimZone.transform.position + m_aimZone.transform.right * -0.0f + m_aimZone.transform.forward * 0.1f;
         corners.backRight = m_aimZone.transform.position + m_aimZone.transform.right * 0.0f + m_aimZone.transform.forward * 0.1f;

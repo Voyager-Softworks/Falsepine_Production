@@ -10,6 +10,7 @@ using System.Reflection;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using System.IO;
+using UnityEngine.Serialization;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -44,7 +45,7 @@ public class StatsManager : MonoBehaviour
         public static StatType RangedDamage { get { return new StatType("RangedDamage"); } }
         public static StatType RangedInaccuracy { get { return new StatType("RangedInaccuracy"); } }
         public static StatType RangedRange { get { return new StatType("RangedRange"); } }
-        public static StatType RangedAimSpeed { get { return new StatType("RangedAimSpeed"); } }
+        public static StatType RangedAimTime { get { return new StatType("RangedAimTime"); } }
         public static StatType ShotgunDamage { get { return new StatType("ShotgunDamage"); } }
         public static StatType PistolDamage { get { return new StatType("PistolDamage"); } }
         public static StatType RifleDamage { get { return new StatType("RifleDamage"); } }
@@ -67,6 +68,7 @@ public class StatsManager : MonoBehaviour
 
         // Economy
         public static StatType ItemCost { get { return new StatType("ItemCost"); } }
+        public static StatType MoneyGain { get { return new StatType("MoneyGain"); } }
 
         public static String DisplayName(StatType type)
         {
@@ -83,7 +85,7 @@ public class StatsManager : MonoBehaviour
             return displayName;
         }
 
-        public static StatType StringToStatType(string _value)
+        public static StatType StringToStatType(string _value, bool _caseSensitive = false)
         {
             MethodInfo[] methods = GetAllStatTypeMethods();
 
@@ -93,9 +95,19 @@ public class StatsManager : MonoBehaviour
                 // get the value of the method
                 StatType type = (StatType)method.Invoke(null, null);
                 // if the value matches the one we are looking for, return it
-                if (type.value == _value)
+                if (_caseSensitive)
                 {
-                    return type;
+                    if (type.value == _value)
+                    {
+                        return type;
+                    }
+                }
+                else
+                {
+                    if (type.value.ToLower() == _value.ToLower())
+                    {
+                        return type;
+                    }
                 }
             }
             // if we get here, the type was not found
@@ -444,6 +456,22 @@ public class StatsManager : MonoBehaviour
         return GenericStatCalc(_statUser, _baseRange, usedStatTypes, additiveVal, multiplierVal, minVal, maxVal);
     }
 
+    static public float CalculateRangedAimTime(UsesStats _statUser, float _baseAimTime = 1.0f)
+    {
+        // list of stats to use in this function
+        List<StatType> usedStatTypes = new List<StatType>(){
+            StatType.RangedAimTime,
+        };
+
+        float additiveVal = 0.0f;
+        float multiplierVal = 1.0f;
+
+        float minVal = 0.0f;
+        float maxVal = float.MaxValue;
+
+        return GenericStatCalc(_statUser, _baseAimTime, usedStatTypes, additiveVal, multiplierVal, minVal, maxVal);
+    }
+
     static public float CalculateMaxHealth(UsesStats _statUser, float _baseHealth = 1.0f)
     {
         // list of stats to use in this function
@@ -500,7 +528,7 @@ public class StatsManager : MonoBehaviour
     /// <param name="_statUser"></param>
     /// <param name="_basePrice"></param>
     /// <returns></returns>
-    static public int CalculatePrice(UsesStats _statUser, int _basePrice = 1)
+    static public int CalculateCost(UsesStats _statUser, int _basePrice = 1)
     {
         // list of stats to use in this function
         List<StatType> usedStatTypes = new List<StatType>(){
@@ -514,6 +542,22 @@ public class StatsManager : MonoBehaviour
         float maxVal = float.MaxValue;
 
         return (int)GenericStatCalc(_statUser, _basePrice, usedStatTypes, additiveVal, multiplierVal, minVal, maxVal);
+    }
+
+    static public int CalculateMoneyGain(UsesStats _statUser, int _baseMoneyGain = 1)
+    {
+        // list of stats to use in this function
+        List<StatType> usedStatTypes = new List<StatType>(){
+            StatType.MoneyGain,
+        };
+
+        float additiveVal = 0.0f;
+        float multiplierVal = 1.0f;
+
+        float minVal = 0.0f;
+        float maxVal = float.MaxValue;
+
+        return (int)GenericStatCalc(_statUser, _baseMoneyGain, usedStatTypes, additiveVal, multiplierVal, minVal, maxVal);
     }
 
     /// <summary>

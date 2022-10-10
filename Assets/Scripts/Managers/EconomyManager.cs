@@ -342,11 +342,15 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     /// <param name="_amount"></param>
     public void AddMoney(int _amount)
     {
-        m_playerSilver += _amount;
+        int calcedAmount = StatsManager.CalculateMoneyGain(this, _amount);
+
+        m_playerSilver += calcedAmount;
 
         // message
         if (MessageManager.instance) {
-            MessageManager.instance.AddMessage("+" + _amount + " silver", "silver", true);
+            if (calcedAmount != 0){
+                MessageManager.instance.AddMessage("+" + calcedAmount + " silver", "silver", true);
+            }
         }
     }
 
