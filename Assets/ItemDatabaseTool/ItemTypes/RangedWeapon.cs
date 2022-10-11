@@ -228,10 +228,11 @@ public class RangedWeapon : Item
             if (healthScript.hasDied) continue;
             // get bounds of healthScript object
             Collider col = healthScript.GetComponent<Collider>();
+            // if no collider, skip
+            if (col == null) continue;
             // make collider not trigger
             bool isTrigger = col.isTrigger;
             col.isTrigger = false;
-            if (col == null) continue;
             Bounds? tempBounds = col.bounds;
             if (tempBounds == null) continue;
             Bounds bounds = (Bounds)tempBounds;
