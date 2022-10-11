@@ -38,6 +38,7 @@ public class Attack : NodeAI.ActionBase  /// @todo Comment
     AttackData attackData;
     bool initialized = false;
     float timeSinceInitialized = 0;
+    float lastTime = 0f;
 
     /* This is the constructor for the Attack class. It is adding properties to the Attack class. */
     public Attack()
@@ -112,6 +113,7 @@ public class Attack : NodeAI.ActionBase  /// @todo Comment
         if (!initialized)
         {
             initialized = true;
+            lastTime = Time.time;
             float mult = Random.Range(0.9f, 1.1f);
             float origAnimSpeed = animator.speed;
             animator.speed = mult;
@@ -153,16 +155,19 @@ public class Attack : NodeAI.ActionBase  /// @todo Comment
         {
             animator.speed = 1f;
             audioSource.pitch = 1f;
+            agent.GetComponent<DamageDealer>().CancelAttack();
             state = NodeData.State.Failure;
             return NodeData.State.Failure;
         }
-        timeSinceInitialized += Time.deltaTime;
+        timeSinceInitialized += Time.time - lastTime;
+        lastTime = Time.time;
 
-        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9 && timeSinceInitialized >= 0.3f)
+        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95 && timeSinceInitialized >= attackData.attackPhases[0].attackDelay + attackData.attackPhases[0].attackDuration)
         {
             animator.speed = 1f;
             audioSource.pitch = 1f;
             animator.ResetTrigger(attackData.animationTrigger);
+            audioSource.Stop();
             state = NodeData.State.Success;
             //navAgent.isStopped = false;
             return NodeData.State.Success;
