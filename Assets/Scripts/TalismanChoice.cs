@@ -185,6 +185,8 @@ public class TalismanChoice : ToggleableWindow
         // message
         if (MessageManager.instance) {
             MessageManager.instance.AddMessage("New Talisman", "talisman", false);
+            // notify
+            NotificationManager.instance?.AddIcon("talisman", transform.position + Vector3.up * 2f);
         }
 
         CloseWindow();

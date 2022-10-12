@@ -93,6 +93,8 @@ public class BossEnemyHealth : EnemyHealth
                         {
                             MessageManager.instance.AddMessage("You found a " + artifact.m_displayName + "!", "talisman");
                         }
+                        // notify
+                        NotificationManager.instance?.AddIcon("talisman", transform.position + Vector3.up * 2f);
                     }
                 }
             }
@@ -102,6 +104,8 @@ public class BossEnemyHealth : EnemyHealth
         if (MessageManager.instance)
         {
             MessageManager.instance.AddMessage("You defeated " + m_monsterType.m_name + "!", "journal", true);
+            // notify
+            NotificationManager.instance?.AddIcon("ammo", transform.position + Vector3.up * 2f);
         }
     }
 }

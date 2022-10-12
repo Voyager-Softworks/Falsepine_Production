@@ -9,6 +9,15 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class LevelController : MonoBehaviour
 {
+    static public void LoadScene(string sceneName, bool _doSave = true)
+    {
+        // Disabled here, as the async scene loader is now responsible for saving
+        //if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
+
+        //SceneManager.LoadScene(sceneName);
+        FindObjectOfType<AsyncSceneLoader>().LoadScene(sceneName, _doSave);
+    }
+
     static public void LoadMenu(bool _doSave = true)
     {
         if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
@@ -37,14 +46,6 @@ public class LevelController : MonoBehaviour
         if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
 
         SceneManager.LoadScene("BoneStag");
-    }
-
-    static public void LoadScene(string sceneName, bool _doSave = true)
-    {
-        //if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
-
-        //SceneManager.LoadScene(sceneName);
-        FindObjectOfType<AsyncSceneLoader>().LoadScene(sceneName, _doSave);
     }
 
     static public void LoadComplete(bool _doSave = true)

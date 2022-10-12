@@ -35,6 +35,15 @@ public class TownSceneManager : MonoBehaviour
         {
             Destroy(a.gameObject);
         }
+
+        // if any missions are not complete or failed, reset them
+        foreach (Mission m in MissionManager.instance.GetMissions())
+        {
+            if (m.GetState() != MissionCondition.ConditionState.COMPLETE && m.GetState() != MissionCondition.ConditionState.FAILED)
+            {
+                m.Reset();
+            }
+        }
     }
 
     // Update is called once per frame

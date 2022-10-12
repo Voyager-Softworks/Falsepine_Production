@@ -5,13 +5,13 @@ using UnityEngine.SceneManagement;
 using System;
 
 /// <summary>
-/// This class tracks damage taken event
+/// This class tracks primary used event
 /// </summary>
 [Serializable]
-public class NoDamage_MissionCondition : MissionCondition
+public class NoPrimaryUsed_MissionCondition : MissionCondition
 {
     public override string GetDescription(){
-        return "Don't take any damage";
+        return "Don't fire your primary weapon";
     }
 
     public override string GetShortDescription()
@@ -23,11 +23,11 @@ public class NoDamage_MissionCondition : MissionCondition
     {
         base.OnSceneLoaded(arg0, arg1);
 
-        // find PlayerHealth and bind to its OnDamageTaken event
-        PlayerHealth ph = GameObject.FindObjectOfType<PlayerHealth>();
-        if (ph != null)
+        // find PlayerInventoryInterface and bind to its OnPrimaryUsed event
+        PlayerInventoryInterface pi = GameObject.FindObjectOfType<PlayerInventoryInterface>();
+        if (pi != null)
         {
-            ph.OnDamageTaken += () => { SetState(ConditionState.FAILED); };
+            pi.OnPrimaryUsed += () => { SetState(ConditionState.FAILED); };
         }
     }
 
@@ -41,13 +41,13 @@ public class NoDamage_MissionCondition : MissionCondition
 }
 
 /// <summary>
-/// This class tracks melee used event
+/// This class tracks secondary used event
 /// </summary>
 [Serializable]
-public class NoMeleeUsed_MissionCondition : MissionCondition
+public class NoSecondaryUsed_MissionCondition : MissionCondition
 {
     public override string GetDescription(){
-        return "Don't use melee";
+        return "Don't fire your secondary weapon";
     }
 
     public override string GetShortDescription()
@@ -59,11 +59,11 @@ public class NoMeleeUsed_MissionCondition : MissionCondition
     {
         base.OnSceneLoaded(arg0, arg1);
 
-        // find PlayerInventoryInterface and bind to its OnMeleeUsed event
+        // find PlayerInventoryInterface and bind to its OnSecondaryUsed event
         PlayerInventoryInterface pi = GameObject.FindObjectOfType<PlayerInventoryInterface>();
         if (pi != null)
         {
-            pi.OnMeleeUsed += () => { SetState(ConditionState.FAILED); };
+            pi.OnSecondaryUsed += () => { SetState(ConditionState.FAILED); };
         }
     }
 
@@ -77,13 +77,13 @@ public class NoMeleeUsed_MissionCondition : MissionCondition
 }
 
 /// <summary>
-/// This class tracks reload event
+/// This class tracks equipment used event
 /// </summary>
 [Serializable]
-public class NoReload_MissionCondition : MissionCondition
+public class NoEquipmentUsed_MissionCondition : MissionCondition
 {
     public override string GetDescription(){
-        return "Don't reload";
+        return "Don't use any equipment";
     }
 
     public override string GetShortDescription()
@@ -95,11 +95,11 @@ public class NoReload_MissionCondition : MissionCondition
     {
         base.OnSceneLoaded(arg0, arg1);
 
-        // find PlayerInventoryInterface and bind to its OnReload event
+        // find PlayerInventoryInterface and bind to its OnEquipmentUsed event
         PlayerInventoryInterface pi = GameObject.FindObjectOfType<PlayerInventoryInterface>();
         if (pi != null)
         {
-            pi.OnReload += () => { SetState(ConditionState.FAILED); };
+            pi.OnEquipmentUsed += () => { SetState(ConditionState.FAILED); };
         }
     }
 

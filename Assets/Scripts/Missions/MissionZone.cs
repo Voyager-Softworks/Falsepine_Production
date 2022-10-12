@@ -188,6 +188,8 @@ public class MissionZone : ScriptableObject
         if (MessageManager.instance)
         {
             MessageManager.instance.AddMessage("Bounty Accepted: " + currentMission.m_title, "journal", true);
+            // notify
+            NotificationManager.instance?.AddIconAtPlayer("journal");
         }
 
         //m_currentScenePath = "";
