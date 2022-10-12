@@ -62,6 +62,12 @@ public class MessageManager : MonoBehaviour
 
         message.GetComponentInChildren<MessageScript>().SetMessage(_messsage, _icon, _doFade: _doFade);
 
+        NotificationManager nm = FindObjectOfType<NotificationManager>();
+        if (nm != null)
+        {
+            nm.AddIcon(_icon);
+        }
+
         // force layout update for all children
         RectTransform[] children = m_contentPanel.GetComponentsInChildren<RectTransform>();
         foreach (RectTransform child in children)

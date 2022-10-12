@@ -114,7 +114,8 @@ public class Attack : NodeAI.ActionBase  /// @todo Comment
         {
             initialized = true;
             lastTime = Time.time;
-            float mult = Random.Range(0.9f, 1.1f);
+
+            float mult = Random.Range(0.9f, 1.0f);
             float origAnimSpeed = animator.speed;
             animator.speed = mult;
             animator.SetTrigger(attackData.animationTrigger);
