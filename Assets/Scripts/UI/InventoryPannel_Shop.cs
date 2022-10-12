@@ -104,6 +104,8 @@ public class InventoryPannel_Shop : InventoryPannel
                 if (MessageManager.instance) {
                     MessageManager.instance.AddMessage("You bought a " + itemToBuy.m_linkedItem.m_displayName, "bag", true);
                 }
+                // notify
+                NotificationManager.instance?.AddIconAtPlayer("bag");
             }
 
             // unbind buy button

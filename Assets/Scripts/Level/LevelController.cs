@@ -9,6 +9,15 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class LevelController : MonoBehaviour
 {
+    static public void LoadScene(string sceneName, bool _doSave = true)
+    {
+        // Disabled here, as the async scene loader is now responsible for saving
+        //if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
+
+        //SceneManager.LoadScene(sceneName);
+        FindObjectOfType<AsyncSceneLoader>().LoadScene(sceneName, _doSave);
+    }
+
     static public void LoadMenu(bool _doSave = true)
     {
         if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
@@ -39,13 +48,6 @@ public class LevelController : MonoBehaviour
         SceneManager.LoadScene("BoneStag");
     }
 
-    static public void LoadScene(string sceneName, bool _doSave = true)
-    {
-        if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
-
-        SceneManager.LoadScene(sceneName);
-    }
-
     static public void LoadComplete(bool _doSave = true)
     {
         if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
@@ -66,7 +68,8 @@ public class LevelController : MonoBehaviour
         SceneManager.LoadScene("Scene_GameOver");
     }
 
-    static public void DestroyManagers(){
+    static public void DestroyManagers()
+    {
         if (MissionManager.instance) Destroy(MissionManager.instance.gameObject);
         if (InventoryManager.instance) Destroy(InventoryManager.instance.gameObject);
         if (JournalManager.instance) Destroy(JournalManager.instance.gameObject);
@@ -132,7 +135,8 @@ public class LevelController : MonoBehaviour
     /// Ensures that all requesters are still valid, if not, removes them from the list. <br/>
     /// If no requesters are left, the game will be unpaused.
     /// </summary>
-    public static void CheckRequesters(){
+    public static void CheckRequesters()
+    {
         for (int i = 0; i < m_requesters.Count; i++)
         {
             // if null, disabled, or destroyed, remove from list
@@ -163,7 +167,8 @@ public class LevelController : MonoBehaviour
     /// <summary>
     /// Sets time scale to 1, clears requesters, and calls GameUnpaused event.
     /// </summary>
-    public static void ForceUnpause(){
+    public static void ForceUnpause()
+    {
         Time.timeScale = 1;
 
         m_isPaused = false;

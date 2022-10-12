@@ -54,19 +54,13 @@ public class MessageManager : MonoBehaviour
     /// <param name="_messsage"></param>
     /// <param name="_icon"></param>
     /// <param name="_doFade"></param>
-    public void AddMessage(string _messsage, string _icon = "", bool _doFade = false){
+    public void AddMessage(string _messsage, string _icon = "", bool _doFade = false) {
         m_oldMessages.Add(_messsage);
 
         GameObject message = Instantiate(messagePrefab, m_contentPanel.transform);
         m_messages.Add(message);
 
         message.GetComponentInChildren<MessageScript>().SetMessage(_messsage, _icon, _doFade: _doFade);
-
-        NotificationManager nm = FindObjectOfType<NotificationManager>();
-        if (nm != null)
-        {
-            nm.AddIcon(_icon);
-        }
 
         // force layout update for all children
         RectTransform[] children = m_contentPanel.GetComponentsInChildren<RectTransform>();

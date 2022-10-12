@@ -2,49 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class FloatingTextPopup : MonoBehaviour
 {
-    private TextMeshProUGUI m_text;
-    private RectTransform m_transform;
+    [Header("References")]
+    public TextMeshProUGUI m_text;
+    public Image m_image;
+    public Image m_background;
+    private float m_textAlpha;
+    private float m_backgroundAlpha;
+    private float m_imageAlpha;
+
+    [Header("Fade")]
     public float m_startFadeDelay = 5.0f;
-    private float m_startFadeDelayTimer = 0f;
+    [ReadOnly] public float m_startFadeDelayTimer = 0f;
     public float m_fadeTime = 1.0f;
     [ReadOnly] public float m_fadeTimer = 0.0f;
     public bool m_doFade = true;
-    // public bool m_doMove = true;
 
-    // [Tooltip("How far up the text should go relative to its current size")] 
-    // private float m_currentXVelocity = 0.0f;
-    // private float m_desiredXVelocity = 0.0f;
-    // public float m_xMoveSpeed = 1.0f;
-    // public float m_currentYVelocity = 0.0f;
-    // public float m_desiredYVelocity = 0.0f;
-    // public float m_yMoveSpeed = 5.0f;
+    [Header("Movement")]
+    public float m_targetMoveSpeed = 1.0f;
+    private float m_moveSpeed = 0f;
+    public float m_accelTime = 1.0f;
+    [ReadOnly] public float m_accelTimer = 0.0f;
 
     // Start is called before the first frame update
     void Start()
     {
-        m_text = GetComponent<TextMeshProUGUI>();
-        m_transform = GetComponent<RectTransform>();
-
-        //Destroy(gameObject, m_startFadeDelay + m_fadeTime);  
-
-        //m_desiredXVelocity = Random.Range(-m_xMoveSpeed, m_xMoveSpeed);
-        //m_desiredYVelocity = Random.Range(m_yMoveSpeed, m_yMoveSpeed * 2);
+        m_textAlpha = m_text.color.a;
+        m_backgroundAlpha = m_background.color.a;
+        m_imageAlpha = m_image.color.a;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // move up proportional to size if should
-        // if (m_doMove)
-        // {
-        //     m_currentXVelocity = Mathf.Lerp(m_currentXVelocity, m_desiredXVelocity, Time.deltaTime);
-        //     m_currentYVelocity = Mathf.Lerp(m_currentYVelocity, m_desiredYVelocity, Time.deltaTime);
+        // accelerate
+        m_accelTimer += Time.deltaTime;
+        m_moveSpeed = Mathf.Lerp(0f, m_targetMoveSpeed, m_accelTimer / m_accelTime);
 
-        //     m_transform.localPosition += new Vector3(m_currentXVelocity * Time.deltaTime, m_currentYVelocity * Time.deltaTime, 0.0f);
-        // }
+        // move
+        transform.position += new Vector3(0f, m_moveSpeed * Time.deltaTime, 0f);
 
         // fade out if should
         if (m_doFade)
@@ -62,7 +61,7 @@ public class FloatingTextPopup : MonoBehaviour
                     m_fadeTimer += Time.deltaTime;
 
                     float alpha = 1.0f - (m_fadeTimer / m_fadeTime);
-                    m_text.color = new Color(m_text.color.r, m_text.color.g, m_text.color.b, alpha);
+                    SetRelativeOpacity(alpha);
                 }
                 else
                 {
@@ -70,5 +69,29 @@ public class FloatingTextPopup : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SetIcon(string _icon){
+        string sprite = (string.IsNullOrEmpty(_icon) ? "" : " <sprite name=\"" + _icon + "\">");
+        m_text.text = sprite;
+    }
+
+    public void SetAbsoluteOpacity(float alpha)
+    {
+        m_text.color = new Color(m_text.color.r, m_text.color.g, m_text.color.b, alpha);
+        m_image.color = new Color(m_image.color.r, m_image.color.g, m_image.color.b, alpha);
+        m_background.color = new Color(m_background.color.r, m_background.color.g, m_background.color.b, alpha);
+    }
+    
+    public void SetRelativeOpacity(float alpha)
+    {
+        m_text.color = new Color(m_text.color.r, m_text.color.g, m_text.color.b, m_textAlpha * alpha);
+        m_image.color = new Color(m_image.color.r, m_image.color.g, m_image.color.b, m_imageAlpha * alpha);
+        m_background.color = new Color(m_background.color.r, m_background.color.g, m_background.color.b, m_backgroundAlpha * alpha);
+    }
+
+    public void ResetTimers(){
+        m_startFadeDelayTimer = 0f;
+        m_fadeTimer = 0.0f;
     }
 }
