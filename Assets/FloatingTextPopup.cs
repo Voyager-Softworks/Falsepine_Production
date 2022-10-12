@@ -8,7 +8,7 @@ public class FloatingTextPopup : MonoBehaviour
     private TextMeshProUGUI m_text;
     private RectTransform m_transform;
     public float m_startFadeDelay = 5.0f;
-    private float m_startFadeDelayTimer = 0f;
+    [ReadOnly] public float m_startFadeDelayTimer = 0f;
     public float m_fadeTime = 1.0f;
     [ReadOnly] public float m_fadeTimer = 0.0f;
     public bool m_doFade = true;
@@ -62,7 +62,7 @@ public class FloatingTextPopup : MonoBehaviour
                     m_fadeTimer += Time.deltaTime;
 
                     float alpha = 1.0f - (m_fadeTimer / m_fadeTime);
-                    m_text.color = new Color(m_text.color.r, m_text.color.g, m_text.color.b, alpha);
+                    SetOpacity(alpha);
                 }
                 else
                 {
@@ -70,5 +70,15 @@ public class FloatingTextPopup : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void SetOpacity(float alpha)
+    {
+        m_text.color = new Color(m_text.color.r, m_text.color.g, m_text.color.b, alpha);
+    }
+
+    public void ResetTimers(){
+        m_startFadeDelayTimer = 0f;
+        m_fadeTimer = 0.0f;
     }
 }

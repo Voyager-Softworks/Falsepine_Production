@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class NotificationManager : MonoBehaviour
 {
@@ -22,19 +23,31 @@ public class NotificationManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // set the opacity of this image to opacity of most recent notif
+        if (m_notifs.Count > 0 && m_notifs[m_notifs.Count - 1].text != null) {
+            Notif mostRecentNotif = m_notifs[m_notifs.Count - 1];
+            float opacity = mostRecentNotif.text.color.a;
+            Image image = GetComponent<Image>();
+            image.color = new Color(image.color.r, image.color.g, image.color.b, opacity);
+        }
+        else{
+            Image image = GetComponent<Image>();
+            image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
+        }
     }
 
     public void AddIcon(string _icon = "journal", int _amount = 1){
         // check if message is same as last message, if so, increment count and update text
         // if not, create new message
 
-        if (m_notifs.Count > 0 && m_notifs[m_notifs.Count - 1].icon == _icon && m_notifs[m_notifs.Count - 1].text != null && m_notifs[m_notifs.Count - 1].text.GetComponent<FloatingTextPopup>().m_fadeTimer <= 0.0f)
+        if (m_notifs.Count > 0 && m_notifs[m_notifs.Count - 1].icon == _icon && m_notifs[m_notifs.Count - 1].text != null)
         {
             m_notifs[m_notifs.Count - 1].count++;
             // m_notifs[m_notifs.Count - 1].text.text = "<sprite name=\"" + _icon + "\"> " + m_notifs[m_notifs.Count - 1].count;
             // reset fade timer
-            m_notifs[m_notifs.Count - 1].text.GetComponent<FloatingTextPopup>().m_fadeTimer = 0.0f;
+            m_notifs[m_notifs.Count - 1].text.GetComponent<FloatingTextPopup>().ResetTimers();
+            m_notifs[m_notifs.Count - 1].text.GetComponent<FloatingTextPopup>().SetOpacity(1.0f);
+            // set opacity to 1
         }
         else
         {
@@ -42,7 +55,7 @@ public class NotificationManager : MonoBehaviour
             Notif newNotif = new Notif();
             newNotif.icon = _icon;
             newNotif.text = notif.GetComponentInChildren<TextMeshProUGUI>();
-            newNotif.text.text = "<sprite name=\"" + _icon + "\" color=#808080> ";
+            newNotif.text.text = "<sprite name=\"" + _icon + "\"> ";
             m_notifs.Add(newNotif);
         }
 
