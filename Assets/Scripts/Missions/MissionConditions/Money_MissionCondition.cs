@@ -19,14 +19,14 @@ public class Money_MissionCondition : MissionCondition
     private int m_currentMoney = 0;
 
     public override string GetDescription(){
-        string description = "Earn " + m_requiredMoney + " silver";
+        string description = "Earn " + + m_currentMoney + "/" + m_requiredMoney + " silver";
 
         return description;
     }
 
     public override string GetShortDescription()
     {
-        return "Earn " + + m_currentMoney + "/" + m_requiredMoney + " silver";
+        return "Earn " + m_requiredMoney + " silver";
     }
 
     public override void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
