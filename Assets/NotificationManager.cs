@@ -40,16 +40,20 @@ public class NotificationManager : MonoBehaviour
         // check if message is same as last message, if so, increment count and update text
         // if not, create new message
 
-        if (m_notifs.Count > 0 && m_notifs[m_notifs.Count - 1].icon == _icon && m_notifs[m_notifs.Count - 1].text != null)
-        {
-            m_notifs[m_notifs.Count - 1].count++;
-            // m_notifs[m_notifs.Count - 1].text.text = "<sprite name=\"" + _icon + "\"> " + m_notifs[m_notifs.Count - 1].count;
-            // reset fade timer
-            m_notifs[m_notifs.Count - 1].text.GetComponent<FloatingTextPopup>().ResetTimers();
-            m_notifs[m_notifs.Count - 1].text.GetComponent<FloatingTextPopup>().SetOpacity(1.0f);
-            // set opacity to 1
+        // todo: make it so that it checks all messages, not just the last one
+        bool found = false;
+        foreach (Notif notif in m_notifs) {
+            if (notif.icon == _icon && notif.text != null) {
+                notif.count++;
+                // m_notifs[m_notifs.Count - 1].text.text = "<sprite name=\"" + _icon + "\"> " + m_notifs[m_notifs.Count - 1].count;
+                // reset fade timer
+                notif.text.GetComponent<FloatingTextPopup>().ResetTimers();
+                notif.text.GetComponent<FloatingTextPopup>().SetOpacity(1.0f);
+                found = true;
+                return;
+            }
         }
-        else
+        if (!found)
         {
             GameObject notif = Instantiate(m_notifPrefab, transform);
             Notif newNotif = new Notif();
