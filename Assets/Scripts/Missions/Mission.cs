@@ -268,6 +268,11 @@ public class Mission : ScriptableObject
                 menu.AddItem(new GUIContent("Kill Enemy"), false, () => { mission.m_conditions.Add(new Kill_MissionCondition()); });
                 menu.AddItem(new GUIContent("No Damage"), false, () => { mission.m_conditions.Add(new NoDamage_MissionCondition()); });
                 menu.AddItem(new GUIContent("Speed Run"), false, () => { mission.m_conditions.Add(new Speedrun_MissionCondition()); });
+                menu.AddItem(new GUIContent("No Primary"), false, () => { mission.m_conditions.Add(new NoPrimaryUsed_MissionCondition()); });
+                menu.AddItem(new GUIContent("No Secondary"), false, () => { mission.m_conditions.Add(new NoSecondaryUsed_MissionCondition()); });
+                menu.AddItem(new GUIContent("No Equipment"), false, () => { mission.m_conditions.Add(new NoEquipmentUsed_MissionCondition()); });
+                menu.AddItem(new GUIContent("No Reload"), false, () => { mission.m_conditions.Add(new NoReload_MissionCondition()); });
+                menu.AddItem(new GUIContent("Earn Money"), false, () => { mission.m_conditions.Add(new Money_MissionCondition()); });
                 menu.ShowAsContext();
             }
         }

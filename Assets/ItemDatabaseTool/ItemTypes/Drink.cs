@@ -49,9 +49,9 @@ public class Drink : Item
         StatsManager.activeDrinks.Add(this);
 
         // message
-        if (MessageManager.instance) {
-            MessageManager.instance.AddMessage("You drank a " + m_displayName, "drink", true);
-        }
+        MessageManager.instance?.AddMessage("You drank a " + m_displayName, "drink", true);
+        // notify
+        NotificationManager.instance?.AddIconAtPlayer("drink");
     }
 
     

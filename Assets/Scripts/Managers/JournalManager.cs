@@ -226,7 +226,9 @@ public class JournalManager : ToggleableWindow
         {
             m_discoveredEntries.Add(entry);
             // send message
-            MessageManager.instance.AddMessage("New Journal Entry\n" + entry.m_linkedMonster.m_name, "monster");
+            MessageManager.instance?.AddMessage("New Journal Entry\n" + entry.m_linkedMonster.m_name, "monster");
+            // notify
+            NotificationManager.instance?.AddIconAtPlayer("monster");
             return true;
         }
 

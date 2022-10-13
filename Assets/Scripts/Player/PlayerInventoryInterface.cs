@@ -72,6 +72,13 @@ public class PlayerInventoryInterface : MonoBehaviour
 
     public Animator playerAnimator; ///< The player's animator.
 
+    [Header("Events")]
+    public System.Action OnPrimaryUsed; ///< The event to call when the primary weapon is used.
+    public System.Action OnSecondaryUsed; ///< The event to call when the secondary weapon is used.
+    public System.Action OnEquipmentUsed; ///< The event to call when the equipment is used.
+    public System.Action OnMeleeUsed; ///< The event to call when the melee weapon is used.
+    public System.Action OnReload; ///< The event to call when the player reloads.
+
     /// <summary>
     ///  Draw Gizmos.
     /// </summary>
@@ -247,6 +254,16 @@ public class PlayerInventoryInterface : MonoBehaviour
                         playerAnimator.SetTrigger("Shoot");
 
                         playerAnimator.SetLayerWeight(2, 1);
+
+                        // event (primary or secondary)
+                        if (selectedWeaponType == SelectedWeaponType.Primary)
+                        {
+                            OnPrimaryUsed?.Invoke();
+                        }
+                        else if (selectedWeaponType == SelectedWeaponType.Secondary)
+                        {
+                            OnSecondaryUsed?.Invoke();
+                        }
                     }
                 }
 
@@ -258,6 +275,9 @@ public class PlayerInventoryInterface : MonoBehaviour
                         playerAnimator.SetTrigger("Reload");
 
                         playerAnimator.SetLayerWeight(2, 1);
+
+                        // event
+                        OnReload?.Invoke();
                     }
                 }
 
@@ -322,6 +342,9 @@ public class PlayerInventoryInterface : MonoBehaviour
 
                         playerAnimator.SetLayerWeight(1, 0);
                         playerAnimator.SetLayerWeight(2, 0);
+
+                        // event
+                        OnEquipmentUsed?.Invoke();
                     }
                 }
             }
@@ -361,6 +384,9 @@ public class PlayerInventoryInterface : MonoBehaviour
                         playerAnimator.SetBool(animatorBoolName, true);
                         playerAnimator.SetLayerWeight(2, 1);
                     }
+
+                    // event
+                    OnMeleeUsed?.Invoke();
                 }
             }
         }

@@ -346,6 +346,8 @@ public class Inventory : MonoBehaviour
             if (MessageManager.instance) {
                 MessageManager.instance.AddMessage("Ammo Refilled", "ammo", true);
             }
+            // notify
+            NotificationManager.instance?.AddIconAtPlayer("ammo");
         }
 
         return didChange;

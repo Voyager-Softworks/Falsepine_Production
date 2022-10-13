@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using System;
 
 /// <summary>
-/// This class tracks kills for a specific enemy type, using the stats manager to track the kills.
+/// This class tracks damage taken event
 /// </summary>
 [Serializable]
 public class NoDamage_MissionCondition : MissionCondition
@@ -28,6 +28,78 @@ public class NoDamage_MissionCondition : MissionCondition
         if (ph != null)
         {
             ph.OnDamageTaken += () => { SetState(ConditionState.FAILED); };
+        }
+    }
+
+    public override void BeginCondition()
+    {
+        base.BeginCondition();
+
+        // set to complete
+        SetState(ConditionState.COMPLETE);
+    }
+}
+
+/// <summary>
+/// This class tracks melee used event
+/// </summary>
+[Serializable]
+public class NoMeleeUsed_MissionCondition : MissionCondition
+{
+    public override string GetDescription(){
+        return "Don't use melee";
+    }
+
+    public override string GetShortDescription()
+    {
+        return GetDescription();
+    }
+
+    public override void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        base.OnSceneLoaded(arg0, arg1);
+
+        // find PlayerInventoryInterface and bind to its OnMeleeUsed event
+        PlayerInventoryInterface pi = GameObject.FindObjectOfType<PlayerInventoryInterface>();
+        if (pi != null)
+        {
+            pi.OnMeleeUsed += () => { SetState(ConditionState.FAILED); };
+        }
+    }
+
+    public override void BeginCondition()
+    {
+        base.BeginCondition();
+
+        // set to complete
+        SetState(ConditionState.COMPLETE);
+    }
+}
+
+/// <summary>
+/// This class tracks reload event
+/// </summary>
+[Serializable]
+public class NoReload_MissionCondition : MissionCondition
+{
+    public override string GetDescription(){
+        return "Don't reload";
+    }
+
+    public override string GetShortDescription()
+    {
+        return GetDescription();
+    }
+
+    public override void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        base.OnSceneLoaded(arg0, arg1);
+
+        // find PlayerInventoryInterface and bind to its OnReload event
+        PlayerInventoryInterface pi = GameObject.FindObjectOfType<PlayerInventoryInterface>();
+        if (pi != null)
+        {
+            pi.OnReload += () => { SetState(ConditionState.FAILED); };
         }
     }
 
