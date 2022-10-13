@@ -146,6 +146,9 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     
     public int m_bankLevel = 0;
 
+    [Header("Events")]
+    public System.Action<int> OnPlayerSilverAdded;
+
     private class SaveData {
         public List<PurchasableItem.PurchasableItem_Serializable> purchasableItems = new List<PurchasableItem.PurchasableItem_Serializable>();
         public int m_playerSilver = 0;
@@ -352,6 +355,9 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
                 MessageManager.instance.AddMessage("+" + calcedAmount + " silver", "silver", true);
             }
         }
+
+        // event
+        OnPlayerSilverAdded?.Invoke(calcedAmount);
     }
 
     public void SaveEconomy(int saveSlot)

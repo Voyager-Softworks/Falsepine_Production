@@ -741,7 +741,7 @@ public class Console : ToggleableWindow
             }
 
             // get the message manager
-            MessageManager messageManager = GameObject.FindObjectOfType<MessageManager>(/* true */);
+            MessageManager messageManager = GameObject.FindObjectOfType<MessageManager>();
             if (messageManager == null){
                 Log("- MessageManager not found");
                 return;
@@ -749,6 +749,8 @@ public class Console : ToggleableWindow
 
             // show the message
             messageManager.AddMessage(message, icon);
+            // notify
+            NotificationManager.instance?.AddIconAtPlayer(icon);
 
             Log("- Message shown");
 
