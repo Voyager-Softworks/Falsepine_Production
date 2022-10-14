@@ -15,13 +15,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace NodeAI
 {
     /// <summary>
     ///  This class is used to parse the Namespaces of types into a tree that can be used to create a Search Window.
     /// </summary>
-    public class NamespaceParser 
+    public class NamespaceParser
     {
         public class NamespaceEntry
         {
@@ -29,7 +30,7 @@ namespace NodeAI
             public List<System.Type> Classes;
             public List<NamespaceEntry> Subnamespaces;
         }
-        
+
         /// <summary>
         ///  Parses the namespace and returns a tree.
         /// </summary>
@@ -44,7 +45,7 @@ namespace NodeAI
 
             foreach (var type in types)
             {
-                
+
                 string[] parts = type.Namespace.Split('.');
                 NamespaceEntry current = tree;
                 foreach (var part in parts)
@@ -69,7 +70,7 @@ namespace NodeAI
                         current = newNamespace;
                     }
                 }
-                
+
                 //place the type in the correct namespace
                 current.Classes.Add(type);
             }
@@ -81,6 +82,20 @@ namespace NodeAI
 
             return tree;
         }
-        
+
+        public static System.Type[] GetParameterisableTypes()
+        {
+            var types = System.AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(s => s.GetTypes())
+                .Where(p => p.IsClass && p.GetCustomAttributes(typeof(NodeAI.Parameterisable), false).Length > 0)
+                .ToArray();
+
+            return types;
+        }
+
     }
+
+
+
+
 }
