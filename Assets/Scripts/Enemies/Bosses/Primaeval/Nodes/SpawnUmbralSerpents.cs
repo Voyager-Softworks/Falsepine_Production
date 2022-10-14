@@ -19,7 +19,7 @@ namespace Boss.Primaeval
 
         public override NodeData.State Eval(NodeAI_Agent agent, NodeTree.Leaf current)
         {
-            if (spellManager == null) spellManager = agent.GetComponent<PrimaevalSpellManager>();
+            if (spellManager == null) spellManager = FindObjectOfType<PrimaevalSpellManager>();
             if (spellManager != null)
             {
                 spellManager.SpawnUmbralSerpents();
