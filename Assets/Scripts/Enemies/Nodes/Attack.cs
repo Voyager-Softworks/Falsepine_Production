@@ -168,7 +168,7 @@ public class Attack : NodeAI.ActionBase  /// @todo Comment
             animator.speed = 1f;
             audioSource.pitch = 1f;
             animator.ResetTrigger(attackData.animationTrigger);
-            audioSource.Stop();
+            //audioSource.Stop();
             state = NodeData.State.Success;
             //navAgent.isStopped = false;
             return NodeData.State.Success;
