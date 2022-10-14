@@ -22,7 +22,8 @@ namespace Boss.Primaeval
         public List<GameObject> shadowEnemies; //The list of shadow enemies that can be spawned
         public int shadowSpawnCount = 4; //The number of shadow enemies to spawn
         public GameObject umbralSerpentsPrefab; //The prefab for the umbral serpents
-        public int umbralSerpentsSpawnCount = 2; //The number of umbral serpents to spawn
+        public float umbralSerpentSpawnDelay = 0.5f; //The delay between spawning each umbral serpent
+        public float umbralSerpentsSpawnDuration = 3.5f; //The duration of the umbral serpents' spawn
         public GameObject vileBarrierPrefab; //The prefab for the vile barrier
 
         public float vileBarrierDuration = 3.0f;
@@ -77,16 +78,20 @@ namespace Boss.Primaeval
         public void SpawnUmbralSerpents()
         {
             if (player == null) player = GameObject.FindGameObjectWithTag("Player").transform; //Get the player's transform if it hasn't been gotten yet
-            for (int i = 0; i < umbralSerpentsSpawnCount; i++)
+            StartCoroutine(SpawnUmbralSerpentsCoroutine());
+        }
+
+        IEnumerator SpawnUmbralSerpentsCoroutine()
+        {
+            float time = 0.0f;
+            while (time < umbralSerpentsSpawnDuration)
             {
                 Vector3 spawnPos = Random.insideUnitSphere * maxSpawnRadius; //Get a random position within the maximum spawn radius
                 spawnPos.y = 0.0f; //Set the y position to 0
                 spawnPos += transform.position; //Add the boss's position to the spawn position
-                if (Vector3.Distance(spawnPos, playerPos) < playerSpawnRadius) //If the spawn position is too close to the player
-                {
-                    spawnPos = (spawnPos - playerPos).normalized * playerSpawnRadius; //Move the spawn position away from the player
-                }
-                GameObject umbralSerpents = Instantiate(umbralSerpentsPrefab, spawnPos, Quaternion.identity);
+                GameObject umbralSerpent = Instantiate(umbralSerpentsPrefab, spawnPos, Quaternion.identity);
+                time += umbralSerpentSpawnDelay;
+                yield return new WaitForSeconds(umbralSerpentSpawnDelay);
             }
         }
 
@@ -99,12 +104,38 @@ namespace Boss.Primaeval
             Vector3 spawnDir = (playerPos - boss.position).normalized; //Get the direction from the boss to the player
             Vector3 spawnPos = boss.position; //Set the spawn position to the boss's position
             GameObject vileBarrier = Instantiate(vileBarrierPrefab, spawnPos, Quaternion.LookRotation(spawnDir)); //Spawn the vile barrier
+            StartCoroutine(VileBarrierCoroutine(vileBarrier));
         }
 
-        // IEnumerator VileBarrierCoroutine(GameObject barrier)
-        // {
-        //     // Start a timer for the duration
-
-        // }
+        IEnumerator VileBarrierCoroutine(GameObject barrier)
+        {
+            // Start a timer for the duration
+            float timer = 0.0f;
+            while (timer < vileBarrierDuration)
+            {
+                timer += Time.deltaTime;
+                yield return null;
+            }
+            // Get the materials
+            Material[] mats = barrier.GetComponentInChildren<SkinnedMeshRenderer>().materials;
+            // Start a timer for the fade
+            float t = 0.6f; // The time variable.
+            while (t > 0.0f)
+            {
+                t -= Time.deltaTime * 0.2f; // Decrement the time variable.
+                foreach (var mat in mats)
+                {
+                    mat.SetFloat("_Threshhold", t); // Set the dissolve threshold of the material.
+                    mat.SetFloat("_Fade", t / 0.6f); // Set the fade of the material.
+                }
+                yield return null;
+            }
+            foreach (var mat in mats)
+            {
+                mat.SetFloat("_Threshhold", 0.0f); // Set the dissolve threshold of the material.
+                mat.SetFloat("_Fade", 0.0f); // Set the fade of the material.
+            }
+            Destroy(barrier);
+        }
     }
 }
