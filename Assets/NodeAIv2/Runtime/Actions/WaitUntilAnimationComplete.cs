@@ -39,7 +39,7 @@ namespace NodeAI.Animation
                     return NodeData.State.Failure;
                 }
             }
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName(GetProperty<string>("State Name")) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1f)
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName(GetProperty<string>("State Name")) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f)
             {
                 state = NodeData.State.Success;
                 return NodeData.State.Success;

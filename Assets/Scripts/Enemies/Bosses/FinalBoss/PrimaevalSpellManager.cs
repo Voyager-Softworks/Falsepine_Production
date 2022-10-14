@@ -25,6 +25,8 @@ namespace Boss.Primaeval
         public int umbralSerpentsSpawnCount = 2; //The number of umbral serpents to spawn
         public GameObject vileBarrierPrefab; //The prefab for the vile barrier
 
+        public float vileBarrierDuration = 3.0f;
+
 
         // Start is called before the first frame update
         void Start()
@@ -98,5 +100,11 @@ namespace Boss.Primaeval
             Vector3 spawnPos = boss.position; //Set the spawn position to the boss's position
             GameObject vileBarrier = Instantiate(vileBarrierPrefab, spawnPos, Quaternion.LookRotation(spawnDir)); //Spawn the vile barrier
         }
+
+        // IEnumerator VileBarrierCoroutine(GameObject barrier)
+        // {
+        //     // Start a timer for the duration
+
+        // }
     }
 }
