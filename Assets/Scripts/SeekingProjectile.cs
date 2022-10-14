@@ -10,6 +10,7 @@ public class SeekingProjectile : MonoBehaviour
     public float speed; // Speed of the projectile
     public float lifeTime; // How long the projectile will live
     public float rotationSpeed; // How fast the projectile will rotate
+    public float startDelay; // How long the projectile will wait before moving
     GameObject target; // The target to seek
     bool expired = false; // Whether the projectile has expired
 
@@ -22,6 +23,11 @@ public class SeekingProjectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (startDelay > 0.0f) // If the projectile is still waiting
+        {
+            startDelay -= Time.deltaTime; // Decrement the start delay
+            return; // Return
+        }
         if (lifeTime <= 0)
         {
             if (!expired)
