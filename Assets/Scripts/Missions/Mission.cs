@@ -250,6 +250,20 @@ public class Mission : ScriptableObject
         }
     }
 
+    public void GetReward()
+    {
+        MissionManager mm = MissionManager.instance;
+        if (mm == null) return;
+
+        LootPool pool = mm.GetLootPool(m_difficulty);
+        if (pool == null) return;
+
+        LootDrop drop = pool.GetRandomDrop();
+        if (drop == null) return;
+
+        drop.PerformDrop();
+    }
+
     // custom editor for mission
 #if UNITY_EDITOR
     [CustomEditor(typeof(Mission))]
