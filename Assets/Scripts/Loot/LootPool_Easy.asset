@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06be974bcb8c6ad45aab2b6a8768559d, type: 3}
+  m_Name: LootPool_Easy
+  m_EditorClassIdentifier: 
+  m_lootDrops:
+  - id: 0
+  - id: 1
+  references:
+    version: 1
+    00000000:
+      type: {class: LootDrop_Item, ns: , asm: Assembly-CSharp}
+      data:
+        m_name: LootDrop_Item
+        m_weight: 1
+        m_chance: 0.5
+        m_item: {fileID: 11400000, guid: 4e20587061243e845954e8e8ec24d49d, type: 2}
+    00000001:
+      type: {class: LootDrop_Money, ns: , asm: Assembly-CSharp}
+      data:
+        m_name: LootDrop_Money
+        m_weight: 1
+        m_chance: 0.5
+        m_minAmount: 10
+        m_maxAmount: 20
