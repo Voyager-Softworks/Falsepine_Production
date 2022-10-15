@@ -128,7 +128,7 @@ public class InfoBox : MonoBehaviour
         EnableBox();
 
         this.m_titleText.text = _title;
-        this.m_iconImage.sprite = _icon;
+        this.m_iconImage.sprite = _icon ?? null;
         this.m_descriptionText.text = _description;
 
         fullBrightTime = _onTime;

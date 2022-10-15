@@ -44,6 +44,12 @@ public class TownSceneManager : MonoBehaviour
                 m.Reset();
             }
         }
+
+        // if this is the final scene, embark
+        if (MissionManager.instance && MissionManager.instance.GetZoneIndex(MissionManager.instance.GetCurrentZone()) >= MissionManager.instance.m_missionZones.Count - 1)
+        {
+            MissionManager.instance.TryEmbark();
+        }
     }
 
     // Update is called once per frame
