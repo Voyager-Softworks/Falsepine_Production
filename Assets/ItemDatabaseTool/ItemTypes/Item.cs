@@ -429,13 +429,49 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
         List<FieldInfo> fields = new List<FieldInfo>(this.GetType().GetFields());
         foreach (FieldInfo field in fields)
         {
+            // Prefabs:
             if (field.FieldType == typeof(GameObject))
             {
+                string newRoot = "Assets/Resources/";
+
                 GameObject prefab = (GameObject)field.GetValue(this);
                 if (prefab != null)
                 {
+                    // AutoSounds
+                    if (prefab.GetComponent<AutoSound>() != null)
+                    {
+                        newRoot += "AutoSounds/";
+                    }
+
+                    // check if root folder exists
+                    if (!Directory.Exists(newRoot))
+                    {
+                        Directory.CreateDirectory(newRoot);
+                    }
+
                     // move prefab to resources folder
-                    UnityEditor.AssetDatabase.MoveAsset(UnityEditor.AssetDatabase.GetAssetPath(prefab), "Assets/Resources/" + prefab.name + ".prefab");
+                    UnityEditor.AssetDatabase.MoveAsset(UnityEditor.AssetDatabase.GetAssetPath(prefab), newRoot + prefab.name + ".prefab");
+
+                    continue;
+                }
+            }
+
+            // Sprites: 
+            if (field.FieldType == typeof(Sprite))
+            {
+                Sprite sprite = (Sprite)field.GetValue(this);
+                if (sprite != null)
+                {
+                    string newRoot = "Assets/Resources/Icons/";
+
+                    // check if root folder exists
+                    if (!Directory.Exists(newRoot))
+                    {
+                        Directory.CreateDirectory(newRoot);
+                    }
+
+                    // move sprite to resources folder
+                    UnityEditor.AssetDatabase.MoveAsset(UnityEditor.AssetDatabase.GetAssetPath(sprite), newRoot + sprite.name + ".png");
                 }
             }
         }
@@ -444,15 +480,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
         fields = new List<FieldInfo>(this.GetType().GetFields());
         foreach (FieldInfo field in fields)
         {
-            if (field.FieldType == typeof(Sprite))
-            {
-                Sprite sprite = (Sprite)field.GetValue(this);
-                if (sprite != null)
-                {
-                    // move sprite to resources folder
-                    UnityEditor.AssetDatabase.MoveAsset(UnityEditor.AssetDatabase.GetAssetPath(sprite), "Assets/Resources/" + sprite.name + ".png");
-                }
-            }
+            
         }
         #endif
     }

@@ -115,6 +115,14 @@ public class DatabaseWindow : EditorWindow {
             ItemDatabase.Refresh();
         }
         GUILayout.EndHorizontal();
+        // move prefabs to resources
+        if (GUILayout.Button(new GUIContent("Move Prefabs to Resources", "Moves all prefabs on items to the resrouces folder"), GUILayout.Width(200)))
+        {
+            foreach (Item item in ItemDatabase.database)
+            {
+                item.MovePrefabsToResourceFolder();
+            }
+        }
 
         //space
         GUILayout.Space(10);
