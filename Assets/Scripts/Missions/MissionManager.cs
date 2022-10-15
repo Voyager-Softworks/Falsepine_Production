@@ -285,6 +285,7 @@ public class MissionManager : MonoBehaviour
         // if there is a next zone, set it to the current zone
         if (index + 1 < m_missionZones.Count)
         {
+            TryReturnMission();
             m_currentZone = m_missionZones[index + 1];
             m_currentZone.Reset();
         }
@@ -410,7 +411,7 @@ public class MissionManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Try to return the mission
+    /// Try to return the current mission
     /// </summary>
     public void TryReturnMission()
     {

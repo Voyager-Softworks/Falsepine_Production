@@ -157,7 +157,7 @@ public class ItemDisplay : MonoBehaviour
 
         // otherwise update with relevant values
         m_itemIcon.enabled = true;
-        m_itemIcon.sprite = m_linkedItem.m_icon;
+        m_itemIcon.sprite = (m_linkedItem.m_icon != null) ? m_linkedItem.m_icon : null;
         m_itemName.text = m_linkedItem.m_displayName;
         if (m_linkedItem.GetStatMods().Count > 0) {
             m_modifierIcon.enabled = true;
