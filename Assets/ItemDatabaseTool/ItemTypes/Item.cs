@@ -358,6 +358,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
         return item;
     }
 
+    #if UNITY_EDITOR
     public void PrefabsToResourceList(){
         m_resourceLinks.Clear();
         //m_resources.Clear();
@@ -376,7 +377,10 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
                     // add resource link
                     FieldResourceLink link = new FieldResourceLink();
                     link.fieldName = field.Name;
-                    link.path = prefab.name;
+                    link.path = AssetDatabase.GetAssetPath(prefab);
+                    // get path to texture (remove path before "Resources" and remove extension)
+                    link.path = link.path.Substring(link.path.IndexOf("Resources") + 10);
+                    link.path = link.path.Substring(0, link.path.LastIndexOf("."));
                     link.resourceType = typeof(GameObject);
                     m_resourceLinks.Add(link);
                 }
@@ -397,7 +401,10 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
                     // add resource link
                     FieldResourceLink link = new FieldResourceLink();
                     link.fieldName = field.Name;
+                    // get path to texture (remove path before "Resources" and remove extension)
                     link.path = AssetDatabase.GetAssetPath(sprite);
+                    link.path = link.path.Substring(link.path.IndexOf("Resources") + 10);
+                    link.path = link.path.Substring(0, link.path.LastIndexOf("."));
                     link.resourceType = typeof(Sprite);
                     m_resourceLinks.Add(link);
                 }
@@ -405,6 +412,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
         }
 
     }
+    #endif
 
     public void ResourceListToPrefabs(){
         foreach (FieldResourceLink link in m_resourceLinks)
