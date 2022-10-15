@@ -186,7 +186,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
     [Serializable]
     public class FieldResourceLink{
         [SerializeField] public string fieldName = "";
-        [SerializeField] public string resourceName = "";
+        [SerializeField] public string path = "";
         [SerializeField] public Type resourceType = typeof(Item);
     }
     [SerializeField] public List<FieldResourceLink> m_resourceLinks = new List<FieldResourceLink>();
@@ -376,7 +376,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
                     // add resource link
                     FieldResourceLink link = new FieldResourceLink();
                     link.fieldName = field.Name;
-                    link.resourceName = prefab.name;
+                    link.path = prefab.name;
                     link.resourceType = typeof(GameObject);
                     m_resourceLinks.Add(link);
                 }
@@ -397,7 +397,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
                     // add resource link
                     FieldResourceLink link = new FieldResourceLink();
                     link.fieldName = field.Name;
-                    link.resourceName = sprite.name;
+                    link.path = AssetDatabase.GetAssetPath(sprite);
                     link.resourceType = typeof(Sprite);
                     m_resourceLinks.Add(link);
                 }
@@ -411,7 +411,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
         {
             FieldInfo field = this.GetType().GetField(link.fieldName);
 
-            UnityEngine.Object value = Resources.Load(link.resourceName, field.FieldType);
+            UnityEngine.Object value = Resources.Load(link.path, field.FieldType);
 
             if (value != null)
             {   
@@ -429,15 +429,15 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
         List<FieldInfo> fields = new List<FieldInfo>(this.GetType().GetFields());
         foreach (FieldInfo field in fields)
         {
+            string newRoot = "Assets/Resources/";
+
             // Prefabs:
             if (field.FieldType == typeof(GameObject))
             {
-                string newRoot = "Assets/Resources/";
-
                 GameObject prefab = (GameObject)field.GetValue(this);
                 if (prefab != null)
                 {
-                    // AutoSounds
+                    // AutoSound:
                     if (prefab.GetComponent<AutoSound>() != null)
                     {
                         newRoot += "AutoSounds/";
@@ -462,7 +462,11 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
                 Sprite sprite = (Sprite)field.GetValue(this);
                 if (sprite != null)
                 {
-                    string newRoot = "Assets/Resources/Icons/";
+                    // Icon:
+                    if (field.Name == "m_icon")
+                    {
+                        newRoot += "Icons/";
+                    }
 
                     // check if root folder exists
                     if (!Directory.Exists(newRoot))
@@ -472,6 +476,8 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
 
                     // move sprite to resources folder
                     UnityEditor.AssetDatabase.MoveAsset(UnityEditor.AssetDatabase.GetAssetPath(sprite), newRoot + sprite.name + ".png");
+
+                    continue;
                 }
             }
         }
@@ -499,7 +505,9 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
 
         FileStream file = File.Create(_path + _fileName);
 
+        #if UNITY_EDITOR
         _item.PrefabsToResourceList();
+        #endif
 
         //serialize item
         string json = JsonUtility.ToJson(_item, true);
