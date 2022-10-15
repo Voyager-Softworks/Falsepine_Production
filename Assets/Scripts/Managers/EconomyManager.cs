@@ -333,9 +333,10 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     {
         m_playerSilver -= _amount;
 
-        if (MessageManager.instance) {
-            MessageManager.instance.AddMessage("-" + _amount + " silver", "silver", true);
-        }
+        // messages are disabled for now as they are not very important
+        // if (MessageManager.instance) {
+        //     MessageManager.instance.AddMessage("-" + _amount + " silver", "silver", true);
+        // }
     }
 
     /// <summary>
@@ -350,11 +351,11 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
         m_playerSilver += calcedAmount;
 
         // message
-        if (MessageManager.instance) {
-            if (calcedAmount != 0){
-                MessageManager.instance.AddMessage("+" + calcedAmount + " silver", "silver", true);
-            }
-        }
+        // if (MessageManager.instance) {
+        //     if (calcedAmount != 0){
+        //         MessageManager.instance.AddMessage("+" + calcedAmount + " silver", "silver", true);
+        //     }
+        // }
 
         // event
         OnPlayerSilverAdded?.Invoke(calcedAmount);
