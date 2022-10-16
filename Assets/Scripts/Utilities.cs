@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 
 #if UNITY_EDITOR
@@ -47,6 +48,10 @@ namespace Utilities
         public static implicit operator string(SceneField sceneField)
         {
             return sceneField.scenePath;
+        }
+
+        public bool Equals(Scene _scene){
+            return _scene.path.Contains(m_scenePath);
         }
     }
 
