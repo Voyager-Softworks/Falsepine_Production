@@ -37034,7 +37034,7 @@ MonoBehaviour:
     svalue: 
     ivalue: 0
     fvalue: 0
-    bvalue: 1
+    bvalue: 0
     cvalue: {r: 0, g: 0, b: 0, a: 0}
     v2value: {x: 0, y: 0}
     v3value: {x: 0, y: 0, z: 0}
@@ -37048,7 +37048,7 @@ MonoBehaviour:
       PublicKeyToken=b77a5c561934e089
     svalue: 
     ivalue: 0
-    fvalue: 5
+    fvalue: 3
     bvalue: 0
     cvalue: {r: 0, g: 0, b: 0, a: 0}
     v2value: {x: 0, y: 0}
@@ -37063,7 +37063,7 @@ MonoBehaviour:
       PublicKeyToken=b77a5c561934e089
     svalue: 
     ivalue: 0
-    fvalue: 7
+    fvalue: 6
     bvalue: 0
     cvalue: {r: 0, g: 0, b: 0, a: 0}
     v2value: {x: 0, y: 0}
@@ -37078,7 +37078,7 @@ MonoBehaviour:
       PublicKeyToken=b77a5c561934e089
     svalue: 
     ivalue: 0
-    fvalue: 6
+    fvalue: 5
     bvalue: 0
     cvalue: {r: 0, g: 0, b: 0, a: 0}
     v2value: {x: 0, y: 0}
@@ -37138,7 +37138,7 @@ MonoBehaviour:
       PublicKeyToken=b77a5c561934e089
     svalue: 
     ivalue: 0
-    fvalue: 5
+    fvalue: 3
     bvalue: 0
     cvalue: {r: 0, g: 0, b: 0, a: 0}
     v2value: {x: 0, y: 0}
@@ -37146,7 +37146,7 @@ MonoBehaviour:
     v4value: {x: 0, y: 0, z: 0, w: 0}
     ovalue: {fileID: 0}
     output: 0
-  - name: FromOtherEnemy
+  - name: TriggeredByScream
     GUID: 6d1bfbb0-e404-4ef8-9c0b-b126acba5576
     paramReference: 
     serializedTypename: System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral,
@@ -37510,12 +37510,17 @@ MonoBehaviour:
   audioChannels:
   - name: DeathSound
     volume: 1
+    lastVolume: 0
     pitch: 1
     layered: 0
     clip: {fileID: 8300000, guid: 3be713c99ff0c7342a3ae09fdc368275, type: 3}
     layers: []
     timeSignature: 4
     beatsPerMinute: 120
+    layerIndex: 0
+    currentLayer: 0
+    longestLayerDuration: 0
+    longestLayerIndex: 0
     loop: 0
     playOnAwake: 0
     SpatialBlend: 1
@@ -37546,6 +37551,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     source: {fileID: 0}
+    layerSources: []
     playing: 0
     paused: 0
     time: 0
@@ -37553,12 +37559,17 @@ MonoBehaviour:
     duration: 0
   - name: DamageSound
     volume: 1
+    lastVolume: 0
     pitch: 1
     layered: 0
     clip: {fileID: 8300000, guid: 0d61e269d9c4b174d9da65df4d53430f, type: 3}
     layers: []
     timeSignature: 4
     beatsPerMinute: 120
+    layerIndex: 0
+    currentLayer: 0
+    longestLayerDuration: 0
+    longestLayerIndex: 0
     loop: 0
     playOnAwake: 0
     SpatialBlend: 1
@@ -37589,6 +37600,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     source: {fileID: 0}
+    layerSources: []
     playing: 0
     paused: 0
     time: 0
