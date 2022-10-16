@@ -27,12 +27,13 @@ public class RootMotionAgent : MonoBehaviour
     public Animator animator; ///< The animator.
     public string speedParam = "Speed"; ///< The speed parameter.
     public string angularSpeedParam = "AngularSpeed"; ///< The angular speed parameter.
+    float currentSpeed; ///< The current speed.
     public bool useRootMotion = true; ///< Whether to use root motion.
-    
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -41,9 +42,10 @@ public class RootMotionAgent : MonoBehaviour
         navAgent.updatePosition = true;
         navAgent.updateRotation = true;
         var localVelocity = transform.InverseTransformDirection(navAgent.velocity);
-        animator.SetFloat(speedParam, localVelocity.z);
+        currentSpeed = Mathf.Lerp(currentSpeed, localVelocity.z, Time.deltaTime * 5.0f);
+        animator.SetFloat(speedParam, currentSpeed);
         animator.SetFloat(angularSpeedParam, localVelocity.x);
-        float direction = Vector3.Angle(transform.forward, navAgent.desiredVelocity) * Mathf.Sign(Vector3.Dot(navAgent.desiredVelocity, transform.right)); 
+        float direction = Vector3.Angle(transform.forward, navAgent.desiredVelocity) * Mathf.Sign(Vector3.Dot(navAgent.desiredVelocity, transform.right));
 
     }
 
@@ -55,7 +57,8 @@ public class RootMotionAgent : MonoBehaviour
         return dot;
     }
 
-    void OnAnimatorMove() {
+    void OnAnimatorMove()
+    {
         Vector3 position = animator.rootPosition;
         position.y = navAgent.nextPosition.y;
         transform.position = position;
