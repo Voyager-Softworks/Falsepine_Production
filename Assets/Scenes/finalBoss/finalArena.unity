@@ -4767,7 +4767,7 @@ MonoBehaviour:
     lastVolume: 0
     pitch: 1
     layered: 0
-    clip: {fileID: 8300000, guid: f74a7aa4e9269534f8023b32715f829e, type: 3}
+    clip: {fileID: 8300000, guid: 10b06aaa96f55b04f8d3faf3c4e80052, type: 3}
     layers: []
     timeSignature: 0
     beatsPerMinute: 0
@@ -4775,8 +4775,8 @@ MonoBehaviour:
     currentLayer: 0
     longestLayerDuration: 0
     longestLayerIndex: 0
-    loop: 0
-    playOnAwake: 1
+    loop: 1
+    playOnAwake: 0
     SpatialBlend: 0
     maxDistance: 300
     minDistance: 1
@@ -7953,19 +7953,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1433027140202297368, guid: 26c187ca979e45de096fb29dd9aa23c8, type: 3}
       propertyPath: m_RootOrder
-      value: 33
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 1433027140202297368, guid: 26c187ca979e45de096fb29dd9aa23c8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -353.9
+      value: -71.7
       objectReference: {fileID: 0}
     - target: {fileID: 1433027140202297368, guid: 26c187ca979e45de096fb29dd9aa23c8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.78
       objectReference: {fileID: 0}
     - target: {fileID: 1433027140202297368, guid: 26c187ca979e45de096fb29dd9aa23c8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -19.9
       objectReference: {fileID: 0}
     - target: {fileID: 1433027140202297368, guid: 26c187ca979e45de096fb29dd9aa23c8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7995,6 +7995,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1433027140202297369, guid: 26c187ca979e45de096fb29dd9aa23c8, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 0710f5ebedc76d9b4b3d3c9a25e5ba9c, type: 2}
     - target: {fileID: 1433027140202297374, guid: 26c187ca979e45de096fb29dd9aa23c8, type: 3}
       propertyPath: m_Name
       value: IndicatorEffect
@@ -8452,14 +8456,6 @@ PrefabInstance:
     - target: {fileID: 997080027, guid: 6b9a11b79482c8d4ca71c526c6ea791b, type: 3}
       propertyPath: m_Layer
       value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1244257067, guid: 6b9a11b79482c8d4ca71c526c6ea791b, type: 3}
-      propertyPath: m_maxHealth
-      value: 99999
-      objectReference: {fileID: 0}
-    - target: {fileID: 1244257067, guid: 6b9a11b79482c8d4ca71c526c6ea791b, type: 3}
-      propertyPath: currentHealth
-      value: 99999
       objectReference: {fileID: 0}
     - target: {fileID: 1244257067, guid: 6b9a11b79482c8d4ca71c526c6ea791b, type: 3}
       propertyPath: OnDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -14431,7 +14427,19 @@ MonoBehaviour:
   parameterName: Started
   onTrigger:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 320912290}
+        m_TargetAssemblyTypeName: AudioController, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &775571107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16916,7 +16924,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 34
+  m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 134.954, z: 0}
 --- !u!1001 &882811409
 PrefabInstance:
@@ -18019,7 +18027,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8110179762227311022, guid: 2c0588e1c1941e0d491f22408a1b27da, type: 3}
       propertyPath: m_RootOrder
-      value: 31
+      value: 33
       objectReference: {fileID: 0}
     - target: {fileID: 8110179762227311022, guid: 2c0588e1c1941e0d491f22408a1b27da, type: 3}
       propertyPath: m_LocalPosition.x
@@ -28654,7 +28662,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 32
+  m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: -124.675, z: 0}
 --- !u!1001 &1667768002
 PrefabInstance:
@@ -33883,7 +33891,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5441529047784762019, guid: 5982a101c5802dc169c5d815fe3a0924, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.64
+      value: -53.9
       objectReference: {fileID: 0}
     - target: {fileID: 5441529047784762019, guid: 5982a101c5802dc169c5d815fe3a0924, type: 3}
       propertyPath: m_LocalPosition.y
@@ -33919,6 +33927,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5441529047784762019, guid: 5982a101c5802dc169c5d815fe3a0924, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5441529047784762024, guid: 5982a101c5802dc169c5d815fe3a0924, type: 3}
+      propertyPath: inspectorProperties.Array.data[0].bvalue
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5441529047784762024, guid: 5982a101c5802dc169c5d815fe3a0924, type: 3}
