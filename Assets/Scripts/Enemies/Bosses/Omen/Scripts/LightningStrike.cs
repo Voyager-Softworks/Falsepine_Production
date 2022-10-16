@@ -28,6 +28,7 @@ public class LightningStrike : MonoBehaviour
         decalProjector.size = decalSizeInitial;
         scorchMarkProjector.enabled = false;
         boltSource.pitch = Random.Range(0.5f, 1.1f);
+        transform.localRotation = Quaternion.Euler(0.0f, Random.Range(0.0f, 360.0f), 0.0f); //Random Y rotation
     }
 
     // Update is called once per frame
