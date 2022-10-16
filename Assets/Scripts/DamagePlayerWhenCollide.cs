@@ -20,6 +20,7 @@ public class DamagePlayerWhenCollide : MonoBehaviour
     public float timeBeforeDetection = 0.5f;
     float timeBeforeDetectionTimer = 0f;
     public LayerMask layerMask;
+    public float maxDuration = 10f;
 
     public float radius = 0.5f; ///< The radius of the sphere.
 

@@ -31,7 +31,6 @@ public class ShadowEnemy : MonoBehaviour
         {
             timedOut = true; // Set the timed out flag to true.
             StartCoroutine(DissolveOut()); // Start the dissolve out coroutine.
-            Destroy(gameObject, 8.0f); // Destroy the shadow enemy after 8 seconds.
             GetComponent<NodeAI_Agent>().enabled = false; // Disable the shadow enemy's NodeAI agent.
             GetComponentsInChildren<AudioSource>().ToList().ForEach(a => a.Stop()); // Stop all audio sources.
         }
@@ -79,5 +78,6 @@ public class ShadowEnemy : MonoBehaviour
             mat.SetFloat("_Threshhold", 0.0f); // Set the dissolve threshold of the material.
             mat.SetFloat("_Fade", 0.0f); // Set the fade of the material.
         }
+        Destroy(gameObject); // Destroy the shadow enemy.
     }
 }
