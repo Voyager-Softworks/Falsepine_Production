@@ -48,6 +48,8 @@ public class EncircleTarget : NodeAI.ActionBase
                 return NodeData.State.Failure;
             }
         }
+        navAgent.speed = GetProperty<float>("Encircle speed");
+
         // Encircle the target while avoiding allies
         Vector3 targetPosition = GetProperty<GameObject>("Target").transform.position;
 
