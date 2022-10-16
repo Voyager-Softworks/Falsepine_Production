@@ -182,15 +182,19 @@ public class MissionZone : ScriptableObject
             return false;
         }
 
+        if (currentMission != null){
+            TryReturnMission();
+        }
+
         currentMission = _misison;
 
         // message
         if (MessageManager.instance)
         {
-            MessageManager.instance.AddMessage("Bounty Accepted: " + currentMission.m_title, "journal", true);
-            // notify
-            NotificationManager.instance?.AddIconAtPlayer("journal");
+            MessageManager.instance.AddMessage("Mission Accepted: " + currentMission.m_title, "journal", true);
         }
+        // notify
+        NotificationManager.instance?.AddIconAtPlayer("journal");
 
         //m_currentScenePath = "";
         return true;
@@ -203,8 +207,18 @@ public class MissionZone : ScriptableObject
     public bool TryReturnMission(){
         // clear current mission
         if (currentMission){
-            // if mission is not complete, reset it
-            if (currentMission.GetState() != MissionCondition.ConditionState.COMPLETE){
+            // if mission is complete get reward, otherwise reset
+            if (currentMission.GetState() == MissionCondition.ConditionState.COMPLETE){
+                // get reward
+                currentMission.GetReward();
+
+                // message
+                MessageManager.instance?.AddMessage("Mission Complete: " + currentMission.m_title + "!", "journal");
+                // notify
+                NotificationManager.instance?.AddIconAtPlayer("journal");
+            }
+            else{
+                // reset
                 currentMission.Reset();
             }
             currentMission = null;

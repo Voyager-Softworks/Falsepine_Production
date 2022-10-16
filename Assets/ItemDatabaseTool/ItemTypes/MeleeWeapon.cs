@@ -33,6 +33,12 @@ public class MeleeWeapon : Item
     [SerializeField] public float m_comboTimer = 0;
     [SerializeField] public bool m_shouldDoComboSwing = false;
 
+    // Sounds:
+    [SerializeField] public GameObject m_swingSound = null;
+    [SerializeField] public GameObject m_hitSolidSound = null;
+    [SerializeField] public GameObject m_hitFleshSound = null;
+
+
     private List<Health_Base> m_hitObjects = new List<Health_Base>();
 
     private Transform m_damageTrans;
@@ -56,6 +62,11 @@ public class MeleeWeapon : Item
         newItem.m_comboTime = m_comboTime;
         newItem.m_comboTimer = m_comboTimer;
         newItem.m_shouldDoComboSwing = m_shouldDoComboSwing;
+        
+        // sounds:
+        newItem.m_swingSound = m_swingSound;
+        newItem.m_hitSolidSound = m_hitSolidSound;
+        newItem.m_hitFleshSound = m_hitFleshSound;
 
         return newItem;
     }
@@ -109,6 +120,22 @@ public class MeleeWeapon : Item
                         //calc then deal damage
                         float calcdDamage = StatsManager.CalculateDamage(this, m_damage);
                         health.TakeDamage(new Health_Base.DamageStat(calcdDamage, _owner, m_damageTrans.position, m_damageTrans.position, this));
+
+                        // play respective hit sound
+                        if (health as EnemyHealth != null)
+                        {
+                            if (m_hitFleshSound != null)
+                            {
+                                Instantiate(m_hitFleshSound, m_damageTrans.position, m_damageTrans.rotation);
+                            }
+                        }
+                        else
+                        {
+                            if (m_hitSolidSound != null)
+                            {
+                                Instantiate(m_hitSolidSound, m_damageTrans.position, m_damageTrans.rotation);
+                            }
+                        }
                     }
                 }
             }
@@ -145,6 +172,13 @@ public class MeleeWeapon : Item
         m_hitObjects.Clear();
 
         UpdateComboSwing();
+
+        // play swing sound:
+        if (m_swingSound != null)
+        {
+            GameObject swingSound = Instantiate(m_swingSound, _damageTrans.position, _damageTrans.rotation);
+            swingSound.transform.parent = _damageTrans;
+        }
     }
 
     /// <summary>
@@ -197,6 +231,15 @@ public class MeleeWeapon : Item
             {
                 item.m_comboTime = item.m_swingCooldown;
             }
+
+            // sounds:
+            GUILayout.Label("Sounds", CustomEditorStuff.center_bold_label);
+            // shoot sound
+            item.m_swingSound = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Swing Sound", "The sound to play when swinging the weapon."), item.m_swingSound, typeof(GameObject), false);
+            // solid hit sound
+            item.m_hitSolidSound = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Hit Solid Sound", "The sound to play when hitting a solid object."), item.m_hitSolidSound, typeof(GameObject), false);
+            // flesh hit sound
+            item.m_hitFleshSound = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Hit Flesh Sound", "The sound to play when hitting a flesh object."), item.m_hitFleshSound, typeof(GameObject), false);
 
             //end red box
             GUILayout.EndVertical();

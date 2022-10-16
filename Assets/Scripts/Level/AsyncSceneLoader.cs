@@ -34,6 +34,12 @@ public class AsyncSceneLoader : MonoBehaviour
             loadingScreen.SetActive(true);
             isSceneLoading = true;
             StartCoroutine(LoadSceneAsync(sceneName));
+
+            // close all toggle windows
+            ToggleableWindow.CloseAllWindows();
+
+            // ensure time is 1s
+            Time.timeScale = 1f;
         }
     }
 

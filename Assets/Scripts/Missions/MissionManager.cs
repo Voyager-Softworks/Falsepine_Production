@@ -23,6 +23,11 @@ public class MissionManager : MonoBehaviour
 
     public Utilities.SceneField TownSceneReference;
 
+    [Header("Loot Drops")]
+    public LootPool m_easyLootPool;
+    public LootPool m_mediumLootPool;
+    public LootPool m_hardLootPool;
+
     public static string GetSaveFolderPath(int saveSlot)
     {
         return SaveManager.GetSaveFolderPath(saveSlot) + "/missions/";
@@ -280,6 +285,7 @@ public class MissionManager : MonoBehaviour
         // if there is a next zone, set it to the current zone
         if (index + 1 < m_missionZones.Count)
         {
+            TryReturnMission();
             m_currentZone = m_missionZones[index + 1];
             m_currentZone.Reset();
         }
@@ -405,7 +411,7 @@ public class MissionManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Try to return the mission
+    /// Try to return the current mission
     /// </summary>
     public void TryReturnMission()
     {
@@ -414,6 +420,22 @@ public class MissionManager : MonoBehaviour
         if (m_currentZone.TryReturnMission())
         {
             UpdateAllMissionCards();
+        }
+    }
+
+    public LootPool GetLootPool(Mission.Difficulty _difficulty)
+    {
+        switch (_difficulty)
+        {
+            case Mission.Difficulty.Easy:
+                return m_easyLootPool;
+            case Mission.Difficulty.Medium:
+                return m_mediumLootPool;
+            case Mission.Difficulty.Hard:
+                return m_hardLootPool;
+            default:
+                Debug.LogError("Invalid difficulty for loot pool", this);
+                return null;
         }
     }
 

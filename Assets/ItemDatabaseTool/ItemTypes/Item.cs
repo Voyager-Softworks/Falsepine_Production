@@ -186,7 +186,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
     [Serializable]
     public class FieldResourceLink{
         [SerializeField] public string fieldName = "";
-        [SerializeField] public string resourceName = "";
+        [SerializeField] public string path = "";
         [SerializeField] public Type resourceType = typeof(Item);
     }
     [SerializeField] public List<FieldResourceLink> m_resourceLinks = new List<FieldResourceLink>();
@@ -358,6 +358,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
         return item;
     }
 
+    #if UNITY_EDITOR
     public void PrefabsToResourceList(){
         m_resourceLinks.Clear();
         //m_resources.Clear();
@@ -376,7 +377,10 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
                     // add resource link
                     FieldResourceLink link = new FieldResourceLink();
                     link.fieldName = field.Name;
-                    link.resourceName = prefab.name;
+                    link.path = AssetDatabase.GetAssetPath(prefab);
+                    // get path to texture (remove path before "Resources" and remove extension)
+                    link.path = link.path.Substring(link.path.IndexOf("Resources") + 10);
+                    link.path = link.path.Substring(0, link.path.LastIndexOf("."));
                     link.resourceType = typeof(GameObject);
                     m_resourceLinks.Add(link);
                 }
@@ -397,7 +401,10 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
                     // add resource link
                     FieldResourceLink link = new FieldResourceLink();
                     link.fieldName = field.Name;
-                    link.resourceName = sprite.name;
+                    // get path to texture (remove path before "Resources" and remove extension)
+                    link.path = AssetDatabase.GetAssetPath(sprite);
+                    link.path = link.path.Substring(link.path.IndexOf("Resources") + 10);
+                    link.path = link.path.Substring(0, link.path.LastIndexOf("."));
                     link.resourceType = typeof(Sprite);
                     m_resourceLinks.Add(link);
                 }
@@ -405,13 +412,14 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
         }
 
     }
+    #endif
 
     public void ResourceListToPrefabs(){
         foreach (FieldResourceLink link in m_resourceLinks)
         {
             FieldInfo field = this.GetType().GetField(link.fieldName);
 
-            UnityEngine.Object value = Resources.Load(link.resourceName, field.FieldType);
+            UnityEngine.Object value = Resources.Load(link.path, field.FieldType);
 
             if (value != null)
             {   
@@ -429,13 +437,55 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
         List<FieldInfo> fields = new List<FieldInfo>(this.GetType().GetFields());
         foreach (FieldInfo field in fields)
         {
+            string newRoot = "Assets/Resources/";
+
+            // Prefabs:
             if (field.FieldType == typeof(GameObject))
             {
                 GameObject prefab = (GameObject)field.GetValue(this);
                 if (prefab != null)
                 {
+                    // AutoSound:
+                    if (prefab.GetComponent<AutoSound>() != null)
+                    {
+                        newRoot += "AutoSounds/";
+                    }
+
+                    // check if root folder exists
+                    if (!Directory.Exists(newRoot))
+                    {
+                        Directory.CreateDirectory(newRoot);
+                    }
+
                     // move prefab to resources folder
-                    UnityEditor.AssetDatabase.MoveAsset(UnityEditor.AssetDatabase.GetAssetPath(prefab), "Assets/Resources/" + prefab.name + ".prefab");
+                    UnityEditor.AssetDatabase.MoveAsset(UnityEditor.AssetDatabase.GetAssetPath(prefab), newRoot + prefab.name + ".prefab");
+
+                    continue;
+                }
+            }
+
+            // Sprites: 
+            if (field.FieldType == typeof(Sprite))
+            {
+                Sprite sprite = (Sprite)field.GetValue(this);
+                if (sprite != null)
+                {
+                    // Icon:
+                    if (field.Name == "m_icon")
+                    {
+                        newRoot += "Icons/";
+                    }
+
+                    // check if root folder exists
+                    if (!Directory.Exists(newRoot))
+                    {
+                        Directory.CreateDirectory(newRoot);
+                    }
+
+                    // move sprite to resources folder
+                    UnityEditor.AssetDatabase.MoveAsset(UnityEditor.AssetDatabase.GetAssetPath(sprite), newRoot + sprite.name + ".png");
+
+                    continue;
                 }
             }
         }
@@ -444,15 +494,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
         fields = new List<FieldInfo>(this.GetType().GetFields());
         foreach (FieldInfo field in fields)
         {
-            if (field.FieldType == typeof(Sprite))
-            {
-                Sprite sprite = (Sprite)field.GetValue(this);
-                if (sprite != null)
-                {
-                    // move sprite to resources folder
-                    UnityEditor.AssetDatabase.MoveAsset(UnityEditor.AssetDatabase.GetAssetPath(sprite), "Assets/Resources/" + sprite.name + ".png");
-                }
-            }
+            
         }
         #endif
     }
@@ -471,7 +513,9 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
 
         FileStream file = File.Create(_path + _fileName);
 
+        #if UNITY_EDITOR
         _item.PrefabsToResourceList();
+        #endif
 
         //serialize item
         string json = JsonUtility.ToJson(_item, true);
