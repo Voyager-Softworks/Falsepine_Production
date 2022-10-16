@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class CampUIManager : MonoBehaviour
 {
@@ -10,10 +11,14 @@ public class CampUIManager : MonoBehaviour
     public Sprite m_unselectedSprite;
 
     [Header("UI Elements")]
+    [Header("Tabs")]
     public Button m_loadoutButton;
     public Button m_missionsButton;
     public GameObject m_loadoutPanel;
     public GameObject m_missionsPanel;
+    [Header("Embark")]
+    public Button m_embarkButton;
+    public Utilities.SceneField m_finalScene;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +29,15 @@ public class CampUIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // if scene is last m_finalScene, disable embark button
+        if (m_finalScene.Equals(SceneManager.GetActiveScene()))
+        {
+            m_embarkButton.interactable = false;
+        }
+        else
+        {
+            m_embarkButton.interactable = true;
+        }
     }
 
     private void OnEnable() {
@@ -39,12 +52,14 @@ public class CampUIManager : MonoBehaviour
     {
         m_loadoutButton.onClick.AddListener(LoadoutButtonPressed);
         m_missionsButton.onClick.AddListener(MissionsButtonPressed);
+        m_embarkButton.onClick.AddListener(EmbarkButtonPressed);
     }
 
     public void UnbindButtons()
     {
         m_loadoutButton.onClick.RemoveAllListeners();
         m_missionsButton.onClick.RemoveAllListeners();
+        m_embarkButton.onClick.RemoveAllListeners();
     }
 
     public void LoadoutButtonPressed()
@@ -61,5 +76,14 @@ public class CampUIManager : MonoBehaviour
         m_missionsPanel.SetActive(true);
         m_loadoutButton.image.sprite = m_unselectedSprite;
         m_missionsButton.image.sprite = m_selectedSprite;
+    }
+
+    public void EmbarkButtonPressed()
+    {
+        //load first level
+        if (MissionManager.instance != null)
+        {
+            MissionManager.instance.TryEmbark();
+        }
     }
 }
