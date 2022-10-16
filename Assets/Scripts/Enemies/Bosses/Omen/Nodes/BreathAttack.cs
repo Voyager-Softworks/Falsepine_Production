@@ -22,6 +22,7 @@ namespace Boss.Omen
         GameObject sfx = null;
         AudioSource source = null;
         RotateTowardsPlayer rotateTowardsPlayer = null;
+        ScreenshakeManager screenshakeManager = null;
 
         public BreathAttack()
         {
@@ -46,6 +47,7 @@ namespace Boss.Omen
             if (animator == null) animator = agent.GetComponent<Animator>();
             if (source == null) source = agent.GetComponent<AudioSource>();
             if (rotateTowardsPlayer == null) rotateTowardsPlayer = agent.GetComponent<RotateTowardsPlayer>();
+            if (screenshakeManager == null) screenshakeManager = FindObjectOfType<ScreenshakeManager>();
             if (!init)
             {
                 delayTimer = 0.0f;
@@ -81,6 +83,7 @@ namespace Boss.Omen
                 }
                 if (sfx == null)
                 {
+                    screenshakeManager.AddShakeImpulse(GetProperty<float>("Attack Duration") + 1f, new Vector3(5, 5, 5), 20f);
                     Vector3 breathDir = GetProperty<Transform>("Mouth Bone").up;
                     breathDir.y = 0.0f;
                     sfx = GameObject.Instantiate(

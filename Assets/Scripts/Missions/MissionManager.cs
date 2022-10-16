@@ -490,6 +490,15 @@ public class MissionManager : MonoBehaviour
     }
 
     /// <summary>
+    /// Gets the index of the current zone
+    /// </summary>
+    /// <returns></returns>
+    public int GetCurrentZoneIndex()
+    {
+        return m_missionZones.IndexOf(GetCurrentZone());
+    }
+
+    /// <summary>
     /// Gets the zone of index
     /// </summary>
     /// <param name="_index"></param>

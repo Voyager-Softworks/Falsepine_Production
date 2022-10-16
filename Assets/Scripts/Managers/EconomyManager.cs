@@ -143,8 +143,14 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
 
     public int m_maxStoreItems = 10;
 
-    
+    [Header("Bank")]
     public int m_bankLevel = 0;
+    public int m_maxBankLevel = 10;
+    public int m_bankUpgradeCost {
+        get {
+            return (int)(4.0f * m_bankLevel + 30.0f);
+        }
+    }
 
     [Header("Events")]
     public System.Action<int> OnPlayerSilverAdded;
@@ -183,14 +189,6 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         RefillStoreInventory();
-
-        TownBuilding_Bank bank = FindObjectOfType<TownBuilding_Bank>();
-        if (bank != null)
-        {
-            // bind upgrade button to upgrade function (remove all listeners first?)
-            bank.m_upgradeButton.onClick.RemoveAllListeners();
-            bank.m_upgradeButton.onClick.AddListener(() => { UpgradeBank(); });
-        }
     }
 
     /// <summary>
@@ -202,8 +200,8 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     {
         int amount = 1;
 
-        // at level 10, unlock 1 slot
-        if (m_bankLevel >= 10)
+        // at max level unlock a slot
+        if (m_bankLevel >= m_maxBankLevel)
         {
             amount += 1;
         }
@@ -223,18 +221,26 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     /// <summary>
     /// Increases the bank level by 1, and updates the slot amount.
     /// </summary>
-    public void UpgradeBank()
+    public void TryUpgradeBank()
     {
-        m_bankLevel++;
-
-        // if level over 10, set to 10
-        if (m_bankLevel > 10)
+        // if we can afford it
+        int cost = m_bankUpgradeCost;
+        if (CanAfford(cost))
         {
-            m_bankLevel = 10;
-        }
+            // spend the money
+            SpendMoney(cost);
 
-        // update slot amount
-        UpdateBankSlotAmount();
+            m_bankLevel++;
+
+            // if level over 10, set to 10
+            if (m_bankLevel > m_maxBankLevel)
+            {
+                m_bankLevel = m_maxBankLevel;
+            }
+
+            // update slot amount
+            UpdateBankSlotAmount();
+        }
     }
 
     /// <summary>
