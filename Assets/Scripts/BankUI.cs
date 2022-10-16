@@ -67,6 +67,11 @@ public class BankUI : MonoBehaviour
 
     public void UpgradeButtonPressed()
     {
-        EconomyManager.instance.TryUpgradeBank();
+        if (EconomyManager.instance.TryUpgradeBank()){
+            UIAudioManager.instance?.purchase.Play();
+        }
+        else{
+            UIAudioManager.instance?.error.Play();
+        }
     }
 }

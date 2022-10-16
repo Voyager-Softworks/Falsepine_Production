@@ -221,7 +221,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     /// <summary>
     /// Increases the bank level by 1, and updates the slot amount.
     /// </summary>
-    public void TryUpgradeBank()
+    public bool TryUpgradeBank()
     {
         // if we can afford it
         int cost = m_bankUpgradeCost;
@@ -240,7 +240,11 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
 
             // update slot amount
             UpdateBankSlotAmount();
+
+            return true;
         }
+
+        return false;
     }
 
     /// <summary>
