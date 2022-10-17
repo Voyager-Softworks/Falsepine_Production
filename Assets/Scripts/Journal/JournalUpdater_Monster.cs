@@ -20,6 +20,9 @@ public class JournalUpdater_Monster : JournalContentUpdater
     public TextMeshProUGUI m_killCountText;
     public TextMeshProUGUI m_introText;
 
+    [Header("Refs")]
+    public Sprite m_undiscoveredSprite;
+
     public override void UpdateContent()
     {
         // refresh the content list:
@@ -55,13 +58,21 @@ public class JournalUpdater_Monster : JournalContentUpdater
 
         base.UpdateContent();
 
-        // update image
-        m_monsterImage.sprite = m_monster.m_monsterImage;
+
+        // update image:
+        Sprite monsterSprite = m_undiscoveredSprite;
+        // if no kills, disable image
+        if (StatsManager.instance.GetKills(m_monster) > 0)
+        {
+            monsterSprite = m_monster.m_monsterImage;
+        }
+
+        m_monsterImage.sprite = monsterSprite;
         // get all children of the image and set sprite to the same
         Image[] children = m_monsterImage.GetComponentsInChildren<Image>();
         foreach (Image child in children)
         {
-            child.sprite = m_monster.m_monsterImage;
+            child.sprite = monsterSprite;
         }
 
         // update name
