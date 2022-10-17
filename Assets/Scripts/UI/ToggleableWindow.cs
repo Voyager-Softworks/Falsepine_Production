@@ -63,6 +63,9 @@ public class ToggleableWindow : MonoBehaviour
     /// </summary>
     public virtual void CloseWindow(){
         m_wasClosedThisFrame = true;
+        if (IsOpen()){
+            UIAudioManager.instance?.closeUI.Play();
+        }
     }
 
     /// <summary>

@@ -175,7 +175,10 @@ public class InventoryPannel : MonoBehaviour
     /// <param name="_sourceIndex"></param>
     protected virtual void PerformClickAction(ItemDisplay _itemDisplay, Inventory _sourceInventory, Inventory _targetInventory, int _sourceIndex)
     {
-        InventoryManager.instance.TryMoveItem(_sourceInventory, _targetInventory, _sourceIndex);
+        if (InventoryManager.instance.TryMoveItem(_sourceInventory, _targetInventory, _sourceIndex)){
+            // sound
+            UIAudioManager.instance?.equipSound.Play();
+        }
     }
 
     /// <summary>

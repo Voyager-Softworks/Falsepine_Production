@@ -106,6 +106,9 @@ public class InventoryPannel_Shop : InventoryPannel
                 }
                 // notify
                 NotificationManager.instance?.AddIconAtPlayer("bag");
+
+                // sound
+                UIAudioManager.instance?.buySound.Play();
             }
 
             // unbind buy button
@@ -114,6 +117,10 @@ public class InventoryPannel_Shop : InventoryPannel
             itemToBuy.m_backgroundImage.sprite = unselectedSprite;
             itemToBuy = null;
             UpdateBuyButton();
+        }
+        else{
+            // sound
+            UIAudioManager.instance?.errorSound.Play();
         }
     }
 

@@ -11,6 +11,10 @@ public class AutoSound : MonoBehaviour
     public bool playOnStart = true;
     public bool destroyOnEnd = true;
     private bool hasPlayed = false;
+    public float minVolume = 0.9f;
+    public float maxVolume = 1.0f;
+    public float minPitch = 0.9f;
+    public float maxPitch = 1.1f;
 
     public AudioClip[] clips;
 
@@ -42,6 +46,8 @@ public class AutoSound : MonoBehaviour
         hasPlayed = true;
 
         audioSource.clip = clips[UnityEngine.Random.Range(0, clips.Length)];
+        audioSource.volume = UnityEngine.Random.Range(minVolume, maxVolume);
+        audioSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
         audioSource.Play();
     }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
+using UnityEngine.Serialization;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -19,10 +20,10 @@ public class UIAudioManager : MonoBehaviour
     {
         [ReadOnly] public string name;
         public List<AudioClip> clips = new List<AudioClip>();
-        public float minVolume = 1.0f;
+        public float minVolume = 0.9f;
         public float maxVolume = 1.0f;
-        public float minPitch = 1.0f;
-        public float maxPitch = 1.0f;
+        public float minPitch = 0.9f;
+        public float maxPitch = 1.1f;
 
         public void Play(){
             if (UIAudioManager.instance == null) return;
@@ -34,22 +35,36 @@ public class UIAudioManager : MonoBehaviour
             autoSound.clips = new List<AudioClip>(clips).ToArray();
             autoSound.playOnStart = true;
             autoSound.destroyOnEnd = true;
-            autoSound.audioSource.volume = Random.Range(minVolume, maxVolume);
-            autoSound.audioSource.pitch = Random.Range(minPitch, maxPitch);
+            autoSound.minVolume = minVolume;
+            autoSound.maxVolume = maxVolume;
+            autoSound.minPitch = minPitch;
+            autoSound.maxPitch = maxPitch;
         }
     }
 
-    public UISound buttonClick;
-    public UISound purchase;
-    public UISound error;
-    public UISound upgrade;
 
-    public enum SoundType
-    {
-        ButtonClick,
-        Purchase,
-        Error
-    }
+    
+    public UISound closeUI;
+    public UISound buttonSound;
+    public UISound buySound;
+    public UISound equipSound;
+    public UISound unequipSound;
+    public UISound upgradeSound;
+    public UISound placeBankSound;
+    public UISound embarkSound;
+    public UISound unlockZoneSound;
+    public UISound acceptSound;
+    public UISound completeSound;
+    public UISound errorSound;
+
+    //public UISound shopOpen;
+
+    // public enum SoundType
+    // {
+    //     ButtonClick,
+    //     Purchase,
+    //     Error
+    // }
 
     public GameObject m_autoSoundPrefab;
 
@@ -67,23 +82,23 @@ public class UIAudioManager : MonoBehaviour
         }
     }
 
-    public static void PlaySound(SoundType soundType){
-        if (instance == null) return;
-        switch (soundType)
-        {
-            case SoundType.ButtonClick:
-                instance.buttonClick.Play();
-                break;
-            case SoundType.Purchase:
-                instance.purchase.Play();
-                break;
-            case SoundType.Error:
-                instance.error.Play();
-                break;
-            default:
-                break;
-        }
-    }
+    // public static void PlaySound(SoundType soundType){
+    //     if (instance == null) return;
+    //     switch (soundType)
+    //     {
+    //         case SoundType.ButtonClick:
+    //             instance.buttonSound.Play();
+    //             break;
+    //         case SoundType.Purchase:
+    //             instance.buySound.Play();
+    //             break;
+    //         case SoundType.Error:
+    //             instance.errorSound.Play();
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    // }
 
     public static void PlaySound(UISound sound){
         if (instance == null) return;

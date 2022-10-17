@@ -10,28 +10,28 @@ using UnityEditor;
 public class UIAudioRequester : MonoBehaviour
 {
     // store a specific field in the UIAudioManager
-    [SerializeField] public UIAudioManager.SoundType sound;
-    private Button button;
+    // [SerializeField] public UIAudioManager.SoundType sound;
+    // private Button button;
 
-    private void Awake() {
-        button = GetComponent<Button>();
-    }
+    // private void Awake() {
+    //     button = GetComponent<Button>();
+    // }
 
-    private void OnEnable() {
-        if (button != null)
-        {
-            button.onClick.AddListener(PlaySound);
-        }
-    }
+    // private void OnEnable() {
+    //     if (button != null)
+    //     {
+    //         button.onClick.AddListener(PlaySound);
+    //     }
+    // }
 
-    private void OnDisable() {
-        if (button != null)
-        {
-            button.onClick.RemoveListener(PlaySound);
-        }
-    }
+    // private void OnDisable() {
+    //     if (button != null)
+    //     {
+    //         button.onClick.RemoveListener(PlaySound);
+    //     }
+    // }
 
-    private void PlaySound() {
-        UIAudioManager.PlaySound(sound);
-    }
+    // private void PlaySound() {
+    //     UIAudioManager.PlaySound(sound);
+    // }
 }
