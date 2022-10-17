@@ -50,7 +50,7 @@ public class JournalUpdater_Monster : JournalContentUpdater
         if (discoveredEntries.Count > 0)
         {
             // update UI
-            m_introText.enabled = false;
+            m_introText.gameObject.SetActive(false);
         }
 
         base.UpdateContent();
@@ -81,28 +81,4 @@ public class JournalUpdater_Monster : JournalContentUpdater
             m_killCountText.text += "\n" + "Knowledge: +" + discoveredLore + "% dmg";
         }
     }
-
-    // custom button for editor
-    #if UNITY_EDITOR
-    [MenuItem("Dev/Select intro")]
-    public static void SelectIntro()
-    {
-        JournalUpdater_Monster[] updaters = FindObjectsOfType<JournalUpdater_Monster>();
-        foreach (JournalUpdater_Monster updater in updaters)
-        {
-            // find child with name "Intro"
-            foreach (Transform child in updater.transform)
-            {
-                if (child.name == "Intro")
-                {
-                    Selection.activeGameObject = child.gameObject;
-                    return;
-                }
-            }
-
-            // set dirty
-            EditorUtility.SetDirty(updater);
-        }
-    }
-    #endif
 }
