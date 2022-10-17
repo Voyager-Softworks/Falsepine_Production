@@ -324,18 +324,25 @@ public class RangedWeapon : Item
         });
 
         // split hitList by EnemyHealth and PropHealth
-        List<ShotInfo> enemyHitList = new List<ShotInfo>();
+        List<ShotInfo> priorityList = new List<ShotInfo>();
         List<ShotInfo> propHitList = new List<ShotInfo>();
         List<ShotInfo> remainingHitList = new List<ShotInfo>();
         foreach (ShotInfo shotInfo in hitList)
         {
             if (shotInfo.healthScriptHit.GetComponent<EnemyHealth>() != null)
             {
-                enemyHitList.Add(shotInfo);
+                priorityList.Add(shotInfo);
             }
             else if (shotInfo.healthScriptHit.GetComponent<PropHealth>() != null)
             {
-                propHitList.Add(shotInfo);
+                if (shotInfo.healthScriptHit.GetComponent<ExplodeOnDeath>() != null)
+                {
+                    priorityList.Add(shotInfo);
+                }
+                else
+                {
+                    propHitList.Add(shotInfo);
+                }
             }
             else
             {
@@ -345,7 +352,7 @@ public class RangedWeapon : Item
 
         // try shoot enemies, then props, then anything else
         hitList.Clear();
-        hitList.AddRange(enemyHitList);
+        hitList.AddRange(priorityList);
         hitList.AddRange(propHitList);
         hitList.AddRange(remainingHitList);
 

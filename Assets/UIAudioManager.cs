@@ -42,6 +42,7 @@ public class UIAudioManager : MonoBehaviour
     public UISound buttonClick;
     public UISound purchase;
     public UISound error;
+    public UISound upgrade;
 
     public enum SoundType
     {
@@ -82,6 +83,11 @@ public class UIAudioManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public static void PlaySound(UISound sound){
+        if (instance == null) return;
+        sound.Play();
     }
 
     private void OnValidate() {
