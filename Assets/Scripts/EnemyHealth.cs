@@ -88,6 +88,16 @@ public class EnemyHealth : Health_Base
     {
         if (m_hasDied) return;
 
+        // count all lore of this enemy
+        int discoveredLore = 0;
+        foreach (JounralEntry entry in JournalManager.instance.m_discoveredEntries){
+            if (entry.m_entryType == JounralEntry.EntryType.Lore && entry.m_linkedMonster == m_monsterType){
+                discoveredLore++;
+            }
+        }
+        // increase damage by lore discovered (1 percent per lore)
+        _damage.m_damage = (_damage.m_damage * (1 + (discoveredLore * 0.01f)));
+
         base.TakeDamage(_damage);
         GetComponent<NodeAI.NodeAI_Agent>().SetParameter("Health", m_currentHealth);
         GetComponentInChildren<Animator>()?.SetTrigger("Hit");
