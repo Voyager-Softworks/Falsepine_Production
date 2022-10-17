@@ -4,6 +4,10 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 /// <summary>
 /// Responsible for updating a journal page with the latest information.
 /// </summary>
@@ -14,6 +18,7 @@ public class JournalUpdater_Monster : JournalContentUpdater
     public Image m_monsterImage;
     public TextMeshProUGUI m_monsterName;
     public TextMeshProUGUI m_killCountText;
+    public TextMeshProUGUI m_introText;
 
     public override void UpdateContent()
     {
@@ -42,6 +47,12 @@ public class JournalUpdater_Monster : JournalContentUpdater
             }
         }
 
+        if (discoveredEntries.Count > 0)
+        {
+            // update UI
+            m_introText.gameObject.SetActive(false);
+        }
+
         base.UpdateContent();
 
         // update image
@@ -60,6 +71,14 @@ public class JournalUpdater_Monster : JournalContentUpdater
         if (m_killCountText != null)
         {
             m_killCountText.text = "Kills: " + StatsManager.instance.GetKills(m_monster);
+
+            int discoveredLore = 0;
+            foreach (JounralEntry entry in JournalManager.instance.m_discoveredEntries){
+                if (entry.m_entryType == JounralEntry.EntryType.Lore && entry.m_linkedMonster == m_monster){
+                    discoveredLore++;
+                }
+            }
+            m_killCountText.text += "\n" + "Knowledge: +" + discoveredLore + "% dmg";
         }
     }
 }
