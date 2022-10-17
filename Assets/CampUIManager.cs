@@ -23,7 +23,7 @@ public class CampUIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        LoadoutButtonPressed();
+        OpenLoadout();
     }
 
     // Update is called once per frame
@@ -64,6 +64,12 @@ public class CampUIManager : MonoBehaviour
 
     public void LoadoutButtonPressed()
     {
+        OpenLoadout();
+        UIAudioManager.instance?.buttonClick.Play();
+    }
+
+    private void OpenLoadout()
+    {
         m_loadoutPanel.SetActive(true);
         m_missionsPanel.SetActive(false);
         m_loadoutButton.image.sprite = m_selectedSprite;
@@ -71,6 +77,12 @@ public class CampUIManager : MonoBehaviour
     }
 
     public void MissionsButtonPressed()
+    {
+        OpenMissions();
+        UIAudioManager.instance?.buttonClick.Play();
+    }
+
+    private void OpenMissions()
     {
         m_loadoutPanel.SetActive(false);
         m_missionsPanel.SetActive(true);
