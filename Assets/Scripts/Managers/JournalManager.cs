@@ -142,6 +142,10 @@ public class JournalManager : ToggleableWindow
         if (scrollRect == null) return;
         //scroll to the top
         scrollRect.verticalNormalizedPosition = 1;
+
+        
+        // sound
+        UIAudioManager.instance?.buttonSound.Play();
     }
 
     /// <summary>

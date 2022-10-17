@@ -65,7 +65,7 @@ public class CampUIManager : MonoBehaviour
     public void LoadoutButtonPressed()
     {
         OpenLoadout();
-        UIAudioManager.instance?.buttonClick.Play();
+        UIAudioManager.instance?.buttonSound.Play();
     }
 
     private void OpenLoadout()
@@ -79,7 +79,7 @@ public class CampUIManager : MonoBehaviour
     public void MissionsButtonPressed()
     {
         OpenMissions();
-        UIAudioManager.instance?.buttonClick.Play();
+        UIAudioManager.instance?.buttonSound.Play();
     }
 
     private void OpenMissions()

@@ -109,7 +109,7 @@ public class InventoryManager : MonoBehaviour
     /// <param name="source"></param>
     /// <param name="target"></param>
     /// <param name="index"></param>
-    public void TryMoveItem(Inventory source, Inventory target, int index)
+    public bool TryMoveItem(Inventory source, Inventory target, int index)
     {
         Item item = source.slots[index].item;
         if (target.CanAddItemToInventory(item))
@@ -120,7 +120,11 @@ public class InventoryManager : MonoBehaviour
             {
                 source.TryAddItemToInventory(leftover);
             }
+
+            return true;
         }
+
+        return false;
     }
 
     /// <summary>
