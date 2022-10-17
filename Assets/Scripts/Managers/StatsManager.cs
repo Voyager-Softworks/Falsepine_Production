@@ -323,6 +323,12 @@ public class StatsManager : MonoBehaviour
         }
 
         stats.m_kills.Add(_damageStat);
+
+        // every 20 kills, add a random clue for this enemy (up to 100 kills, must be lesser enemy)
+        if (_monster != null && _monster.m_type == MonsterInfo.MonsterType.Minion && stats.m_kills.Count % 20 == 0 && stats.m_kills.Count <= 100)
+        {
+            JournalManager.instance.DiscoverRandomEntry(_monster, JounralEntry.EntryType.Clue);
+        }
     }
 
     public int GetKills(MonsterInfo _monster)
