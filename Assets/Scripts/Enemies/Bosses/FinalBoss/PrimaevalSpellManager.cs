@@ -91,6 +91,7 @@ namespace Boss.Primaeval
                 spawnPos += transform.position; //Add the boss's position to the spawn position
                 GameObject umbralSerpent = Instantiate(umbralSerpentsPrefab, spawnPos, Quaternion.identity);
                 time += umbralSerpentSpawnDelay;
+                Destroy(umbralSerpent, 8f);
                 yield return new WaitForSeconds(umbralSerpentSpawnDelay);
             }
         }

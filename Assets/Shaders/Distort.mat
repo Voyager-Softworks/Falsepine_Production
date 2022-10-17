@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-8021605591411232774
+--- !u!114 &-3955727334443420916
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20,9 +20,9 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: RootwallShadow
-  m_Shader: {fileID: -6465566751694194690, guid: 8eb70377bd8492dbf812ab68c9d4d94c, type: 3}
-  m_ShaderKeywords: _ALPHATEST_ON _DOUBLESIDED_ON _SURFACE_TYPE_TRANSPARENT
+  m_Name: Distort
+  m_Shader: {fileID: -6465566751694194690, guid: 8776df68563687af0ae5485141400f1c, type: 3}
+  m_ShaderKeywords: _DOUBLESIDED_ON _SURFACE_TYPE_TRANSPARENT
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 1
@@ -39,14 +39,6 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - Texture2D_8ba794e417864751bdab07a9bb6fae8e:
-        m_Texture: {fileID: 2800000, guid: bf1141b3ed5114244a4bb6940855a27e, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - Texture2D_dce24cf45eb84a158482c5963465c3b2:
-        m_Texture: {fileID: 2800000, guid: d1fe19d5dfa67f74296be1c6ea978ab1, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -140,14 +132,21 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_fdfb3a59a3484efa97c93fbca14d817d: 0.55
+    - Vector1_103d2ee535ca4f28a911bed8d8c17a99: 6.2
+    - Vector1_1a747b6165084d8699ce281fbc43e2aa: 4
+    - Vector1_1b617340c1564019b825493df59f97de: 0.1
+    - Vector1_409a35248aef44459c4695287cb57db4: 35.3
+    - Vector1_8c4d613eb9b64691950f9a60cf002d8a: 200
+    - Vector1_988f4951b87545b987b4ebfcce130024: 5.42
+    - Vector1_c3b369c4cad54de3934eb4f6524ff3fa: 8.11
+    - Vector1_ce0bff01b1be48ceba2f0cb04d230aa9: 3.3
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
     - _AddPrecomputedVelocity: 0
     - _AlbedoAffectEmissive: 0
     - _AlphaCutoff: 0.5
-    - _AlphaCutoffEnable: 1
+    - _AlphaCutoffEnable: 0
     - _AlphaCutoffPostpass: 0.5
     - _AlphaCutoffPrepass: 0.5
     - _AlphaCutoffShadow: 0.5
@@ -235,7 +234,6 @@ Material:
     - _TexWorldScale: 1
     - _TexWorldScaleEmissive: 1
     - _Thickness: 1
-    - _Threshhold: 0.6
     - _TransmissionEnable: 1
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
@@ -249,12 +247,11 @@ Material:
     - _UVEmissive: 0
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
-    - _ZTestDepthEqualForOpaque: 4
-    - _ZTestGBuffer: 3
-    - _ZTestTransparent: 4
+    - _ZTestDepthEqualForOpaque: 2
+    - _ZTestGBuffer: 4
+    - _ZTestTransparent: 2
     - _ZWrite: 0
     m_Colors:
-    - Color_cf0d6ee751274467ac6c6f8e165e4b29: {r: 0, g: 0.09411765, b: 0.43137255, a: 1}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
