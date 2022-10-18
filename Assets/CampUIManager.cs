@@ -95,6 +95,11 @@ public class CampUIManager : MonoBehaviour
         //load first level
         if (MissionManager.instance != null)
         {
+            if (MissionManager.instance.GetCurrentMission() != null && MissionManager.instance.GetCurrentMission().GetState() == MissionCondition.ConditionState.COMPLETE){
+                // try return mission
+                MissionManager.instance.TryReturnMission();
+            }
+
             MissionManager.instance.TryEmbark();
         }
     }

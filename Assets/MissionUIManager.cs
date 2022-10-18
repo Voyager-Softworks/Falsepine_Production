@@ -86,6 +86,8 @@ public class MissionUIManager : MonoBehaviour
 
         if (thisZoneBossKilled){
             MissionManager.instance.GoToNextZone();
+            // sound
+            UIAudioManager.instance?.unlockZoneSound.Play();
         }
 
         ZoneNameUI[] zoneNameUIs = FindObjectsOfType<ZoneNameUI>();

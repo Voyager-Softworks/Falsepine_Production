@@ -70,8 +70,11 @@ public class JournalPickupInteract : Interactable
     /// </summary>
     /// <returns></returns>
     public JounralEntry.EntryType? GetEntryType(){
+        
+
         switch (m_pickupType){
             case PickupType.SpecificEntry:
+                if (m_linkedEntry == null) return null;
                 return m_linkedEntry.m_entryType;
             case PickupType.RandomLore:
                 return JounralEntry.EntryType.Lore;

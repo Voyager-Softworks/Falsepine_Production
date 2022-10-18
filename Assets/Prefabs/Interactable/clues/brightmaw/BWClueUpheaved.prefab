@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 6043353503072783890}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.1900002, y: 1.19, z: 1.1900002}
   m_Children:
   - {fileID: 6860165130812492091}
   - {fileID: 1106424955465779581}
@@ -72,6 +72,7 @@ MonoBehaviour:
   _transToCheck: {fileID: 0}
   interactDistance: 4
   onInteractEffect: 1
+  replacementObject: {fileID: 0}
   m_pickupType: 0
   m_linkedEntry: {fileID: 11400000, guid: 8a0e19a007b85794bb9287543c7850ff, type: 2}
   m_specificMonster: 0
@@ -88,7 +89,6 @@ GameObject:
   - component: {fileID: 6860165130812492091}
   - component: {fileID: 7537873778959091358}
   - component: {fileID: 5728331380300345940}
-  - component: {fileID: 6088835335967069063}
   - component: {fileID: 6088835335967069062}
   m_Layer: 0
   m_Name: dirtUpheaved
@@ -160,44 +160,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &6088835335967069063
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6088835335967069057}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9cc7632a9223f48429c98e218e9c2fbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interactAction:
-    m_Name: Interact
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: cfe2809b-05f5-404d-8df2-a63b5a1b2e07
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: e240a00c-bea1-405a-98f3-6f2352575d0a
-      m_Path: <Keyboard>/e
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Interact
-      m_Flags: 0
-    m_Flags: 0
-  interactText: Interact
-  _transToCheck: {fileID: 0}
-  interactDistance: 3
-  onInteractEffect: 0
-  m_pickupType: 0
-  m_linkedEntry: {fileID: 0}
-  m_specificMonster: 0
-  m_monster: {fileID: 0}
-  m_currentZoneBoss: 0
 --- !u!65 &6088835335967069062
 BoxCollider:
   m_ObjectHideFlags: 0
