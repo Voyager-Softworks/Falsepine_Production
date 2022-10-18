@@ -1,0 +1,45 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+
+
+uniform RWTexture2D<float4> Water;
+uniform RWTexture2D<float4> Water_Old;
+
+uniform RWTexture2D<float4> Collision_Tex;
+uniform RWTexture2D<float4> Collision_Tex_Old;
+
+uniform float a;
+uniform float amplitude;
+
+[numthreads(8,8,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+    float4 water = Water[id.xy];
+    float4 water_old = Water_Old[id.xy];
+
+    float4 z = a * (Water[id.xy + int2(1,0)] 
+                    + Water[id.xy + int2(-1,0)] 
+                    + Water[id.xy + int2(0,1)] 
+                    + Water[id.xy + int2(0,-1)])
+                + (2.0 - 4.0 * a) * Water[id.xy]
+                - Water_Old[id.xy];
+
+    float new_pos = z.r;
+    float new_neg = z.g;
+
+    float collision_old = Collision_Tex_Old[id.xy].r;
+    float collision_new = Collision_Tex[id.xy].r;
+
+    if(collision_new > 0.0 && collision_old == 0.0)
+    {
+        new_pos = amplitude * collision_new;
+    }
+    else if(collision_new == 0.0 && collision_old > 0.0)
+    {
+        new_neg = amplitude * collision_old;
+    }
+
+    Water[id.xy] = float4(new_pos, new_neg, 0.0, 1.0);
+
+}
+
