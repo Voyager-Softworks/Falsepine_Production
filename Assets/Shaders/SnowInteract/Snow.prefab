@@ -91,6 +91,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7688164379133229030}
   - component: {fileID: 41080025}
+  - component: {fileID: 6504256970983878670}
   m_Layer: 0
   m_Name: Snow
   m_TagString: Untagged
@@ -126,6 +127,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fad94ea6e2d34fc45b6de8700f08bb87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6504256970983878670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7688164379133229025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c3e881aad59a2e95a8ec3832c14e822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  computeShader: {fileID: 7200000, guid: e7d6f326fde723a20a8123b4cdfeaaf9, type: 3}
+  currState: {fileID: 0}
+  nextState: {fileID: 0}
+  deformation: {fileID: 0}
+  resolution: {x: 512, y: 512}
+  deformationCamera: {fileID: 0}
 --- !u!1 &7688164379369526084
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,7 +205,7 @@ Camera:
   field of view: 60
   orthographic: 1
   orthographic size: 40
-  m_Depth: 0
+  m_Depth: 100
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4096
@@ -265,7 +284,7 @@ MonoBehaviour:
   clearDepth: 1
   volumeLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 0
   volumeAnchorOverride: {fileID: 0}
   antialiasing: 0
   SMAAQuality: 2
