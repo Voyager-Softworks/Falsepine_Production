@@ -111,15 +111,33 @@ public class MissionManager : MonoBehaviour
 
                 foreach (JournalPickupInteract pickup in FindObjectsOfType<JournalPickupInteract>())
                 {
+                    // look for money replacement money
+                    Transform parent = pickup.transform.parent;
+                    MoneyPickup moneyPickup = null;
+                    if (parent != null)
+                    {
+                        moneyPickup = parent.GetComponentInChildren<MoneyPickup>();
+                    }
+
                     // if current scene should have clue or lore, and the pickup is a clue or lore, enable it
                     if ((m_currentZone.m_clueSceneIndexes.Contains(currentMiddleSceneIndex) && pickup.GetEntryType() == JounralEntry.EntryType.Clue) ||
                         (m_currentZone.m_loreSceneIndexes.Contains(currentMiddleSceneIndex) && pickup.GetEntryType() == JounralEntry.EntryType.Lore))
                     {
                         pickup.gameObject.SetActive(true);
+                        
+                        if (moneyPickup != null)
+                        {
+                            moneyPickup.gameObject.SetActive(false);
+                        }
                     }
                     else
                     {
                         pickup.gameObject.SetActive(false);
+
+                        if (moneyPickup != null)
+                        {
+                            moneyPickup.gameObject.SetActive(true);
+                        }
                     }
                 }
             }
@@ -368,6 +386,9 @@ public class MissionManager : MonoBehaviour
         if (m_currentZone.TryStartMission(mission))
         {
             UpdateAllMissionCards();
+
+            // sound
+            UIAudioManager.instance?.acceptSound.Play();
         }
     }
 
@@ -376,14 +397,13 @@ public class MissionManager : MonoBehaviour
     /// </summary>
     public void TryEmbark()
     {
-        //load level 1 if valid
-        if (GetCurrentMission() == null || GetCurrentMission().GetState() != MissionCondition.ConditionState.COMPLETE)
-        {
-            // begin mission if it exists
-            GetCurrentMission()?.BeginMission();
+        // begin mission if it exists
+        GetCurrentMission()?.BeginMission();
 
-            LoadFirstScene();
-        }
+        LoadFirstScene();
+
+        // sound
+        UIAudioManager.instance?.embarkSound.Play();
     }
 
     /// <summary>

@@ -216,6 +216,8 @@ public class MissionZone : ScriptableObject
                 MessageManager.instance?.AddMessage("Mission Complete: " + currentMission.m_title + "!", "journal");
                 // notify
                 NotificationManager.instance?.AddIconAtPlayer("journal");
+                // sound
+                UIAudioManager.instance?.completeSound.Play();
             }
             else{
                 // reset
