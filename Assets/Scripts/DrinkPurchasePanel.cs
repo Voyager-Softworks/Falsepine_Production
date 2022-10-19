@@ -48,6 +48,12 @@ public class DrinkPurchasePanel : MonoBehaviour
 
             // listen for click
             drinkUI.OnClick += () => {
+                // if not selected, play sound
+                if (!drinkUI.m_isSelected){
+                    // sound
+                    UIAudioManager.instance?.buttonSound.Play();
+                }
+
                 // deselect all
                 foreach (DrinkPurchaseUI ui in m_drinkUIs){
                     ui.m_isSelected = false;
@@ -150,6 +156,13 @@ public class DrinkPurchasePanel : MonoBehaviour
             EconomyManager.instance.SpendMoney(m_selectedDrink.m_price);
             m_selectedDrink.m_linkedDrink.Consume();
             UpdateUI();
+
+            // sound
+            UIAudioManager.instance?.buySound.Play();
+        }
+        else{
+            // sound
+            UIAudioManager.instance?.errorSound.Play();
         }
     }
 }

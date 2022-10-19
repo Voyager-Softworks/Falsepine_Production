@@ -1414,31 +1414,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3413991661545428707}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6125102019353955417}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1657528467349652339}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1332956889637176976
 GameObject:
   m_ObjectHideFlags: 0
@@ -1961,31 +1937,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1602163640099220601}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6125102019353955417}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1657528467349652339}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1657528467349652339
 GameObject:
   m_ObjectHideFlags: 0
@@ -2067,7 +2019,7 @@ MonoBehaviour:
   m_purchaseButtonText: {fileID: 1869723038836090271}
   m_purchaseButtonCostText: {fileID: 3321276393530280611}
   m_purchaseButtonSilverIcon: {fileID: 1858166719575383560}
-  m_drinkAmount: 3
+  m_drinkAmount: 9
   m_drinksEntries: []
 --- !u!1 &1712474759295302257
 GameObject:
@@ -3834,6 +3786,7 @@ GameObject:
   - component: {fileID: 2766063110200998189}
   - component: {fileID: 2766063110200998190}
   - component: {fileID: 2766063110200998191}
+  - component: {fileID: 1700224524}
   m_Layer: 5
   m_Name: Saloon_UI
   m_TagString: Untagged
@@ -3925,6 +3878,24 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1700224524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2766063110200998192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca877b5a6ffb2a548959173f6e2472ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_selectedSprite: {fileID: 21300000, guid: ff5f42bb10f4dac4a8e4b564b226abf8, type: 3}
+  m_unselectedSprite: {fileID: 21300000, guid: 402a7a81ce125e345a91964e2b7e8b1a, type: 3}
+  m_drinksButton: {fileID: 4663125002179068004}
+  m_cluesButton: {fileID: 1372016328613803091}
+  m_drinksPanel: {fileID: 1657528467349652339}
+  m_cluesPanel: {fileID: 6125102019353955417}
 --- !u!1 &3274116828011417233
 GameObject:
   m_ObjectHideFlags: 0
@@ -6684,7 +6655,7 @@ MonoBehaviour:
   m_purchaseButtonSilverIcon: {fileID: 1858166719575383560}
   m_minPrice: 10
   m_maxPrice: 20
-  m_entryAmount: 3
+  m_entryAmount: 9
   m_journalEntries: []
 --- !u!114 &6292865709927497079
 MonoBehaviour:

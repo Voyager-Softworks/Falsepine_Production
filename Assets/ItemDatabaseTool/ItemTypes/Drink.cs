@@ -52,6 +52,8 @@ public class Drink : Item
         MessageManager.instance?.AddMessage("You drank a " + m_displayName, "drink", true);
         // notify
         NotificationManager.instance?.AddIconAtPlayer("drink");
+        // sound
+        UIAudioManager.instance?.drinkSound.Play();
     }
 
     
