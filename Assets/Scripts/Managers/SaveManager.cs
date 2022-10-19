@@ -212,7 +212,6 @@ public class SaveManager : MonoBehaviour
             string newFolder = deathSaveFolder + "/" + folderName;
 
             // copy the folders (including subfolders)
-            //@todo use a build friendly way to copy folders
             Copy(folder, newFolder);
         }
 
@@ -230,6 +229,40 @@ public class SaveManager : MonoBehaviour
             File.Delete(metaFile);
         }
         #endif
+    }
+
+    public static void CompleteSave(int _saveSlot){
+        // end the current game
+        GameOverRestart(_saveSlot);
+
+        // add "_complete" to the save folder name
+        string currentPath = GetSaveFolderPath(_saveSlot);
+        string newPath = currentPath + "_complete";
+
+        //make new folder if it doesn't exist
+        if (!Directory.Exists(newPath))
+        {
+            Directory.CreateDirectory(newPath);
+        }
+        else {
+            Directory.Delete(newPath, true);
+            Directory.CreateDirectory(newPath);
+        }
+
+        // copy all folders the current save folder to the new folder
+        string[] folders = Directory.GetDirectories(currentPath);
+        foreach (string folder in folders)
+        {
+            string folderName = Path.GetFileName(folder);
+            string newFolder = newPath + "/" + folderName;
+
+            // copy the folders (including subfolders)
+            //@todo use a build friendly way to copy folders
+            Copy(folder, newFolder);
+        }
+
+        // delete the current save folder
+        Directory.Delete(currentPath, true);
     }
 
     /// <summary>
@@ -258,7 +291,8 @@ public class SaveManager : MonoBehaviour
         foreach (FileInfo fi in source.GetFiles())
         {
             //Console.WriteLine(@"Copying {0}\{1}", target.FullName, fi.Name);
-            fi.CopyTo(Path.Combine(target.FullName, fi.Name), true);
+            string dest = Path.Combine(target.FullName, fi.Name);
+            fi.CopyTo(dest, true);
         }
 
         // Copy each subdirectory using recursion.

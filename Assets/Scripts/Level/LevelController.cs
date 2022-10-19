@@ -48,11 +48,16 @@ public class LevelController : MonoBehaviour
         SceneManager.LoadScene("BoneStag");
     }
 
-    static public void LoadComplete(bool _doSave = true)
+    static public void LoadMissionComplete(bool _doSave = true)
     {
         if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
 
-        SceneManager.LoadScene("Scene_Complete");
+        SceneManager.LoadScene("Scene_MissonComplete");
+    }
+
+    static public void LoadGameComplete(bool _doSave = true)
+    {
+        SceneManager.LoadScene("Scene_GameComplete");
     }
 
     /// <summary>
@@ -75,6 +80,7 @@ public class LevelController : MonoBehaviour
         if (JournalManager.instance) Destroy(JournalManager.instance.gameObject);
         if (EconomyManager.instance) Destroy(EconomyManager.instance.gameObject);
         if (StatsManager.instance) Destroy(StatsManager.instance.gameObject);
+        if (MessageManager.instance) Destroy(MessageManager.instance.gameObject);
     }
 
     static public void ReloadScene()

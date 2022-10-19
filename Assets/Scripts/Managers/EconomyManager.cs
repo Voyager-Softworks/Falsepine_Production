@@ -489,6 +489,9 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
 
         // save
         SaveEconomy(_saveSlot);
+
+        reader.Close();
+        file.Close();
     }
 
     /// <summary>
