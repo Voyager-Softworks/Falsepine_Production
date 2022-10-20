@@ -207,7 +207,8 @@ public class InfoBox : MonoBehaviour
         if (!_item) return;
 
         DisplayMain(
-            _item.name, _item.m_icon, 
+            _item.m_displayName, 
+            _item.m_icon, 
             "Count: " + _item.currentStackSize + "/" + _item.maxStackSize + "\n" + _item.m_description, 
             _showCost ? _item.GetPrice().ToString() : _item.GetTypeDisplayName(), 
             _showCost ? m_priceIcon : m_typeIcon, 
@@ -216,7 +217,7 @@ public class InfoBox : MonoBehaviour
         );
 
         // stats and mods panel
-        DisplayStatsLeft(_item);
+        //DisplayStatsLeft(_item);
         DisplayModsRight(_item.GetStatMods());
     }
 
@@ -274,13 +275,15 @@ public class InfoBox : MonoBehaviour
     {
         if (_mods.Count > 0)
         {
-            m_rightPanel.SetActive(true);
+            m_leftPanel.SetActive(true);
 
-            m_rightDescriptionText.text = "";
+            string newDesc = "";
             foreach (StatsManager.StatMod mod in _mods)
             {
-                m_rightDescriptionText.text += mod.ToText() + "\n";
+                newDesc += mod.ToText() + "\n";
             }
+
+            DisplayRight("Modse", m_modifierIcon, newDesc);
         }
     }
 
