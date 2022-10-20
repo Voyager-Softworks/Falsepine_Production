@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
 {
 
     [Header("Movement")]
+    public bool m_disableGamepadMovement = true;
     public Animator _animator; ///< The animator for the player.
     CharacterController controller; ///< The character controller for the player.
     DynamicVaulting dynamicVaulting; ///< The dynamic vaulting script for the player.
@@ -100,6 +101,15 @@ public class PlayerMovement : MonoBehaviour
     private void OnEnable()
     {
         EnableInput();
+
+        // disable Gamepad input
+        if (m_disableGamepadMovement){
+            Gamepad[] gamepads = Gamepad.all.ToArray();
+            for (int i = 0; i < gamepads.Length; i++)
+            {
+                InputSystem.DisableDevice(gamepads[i]); 
+            }
+        }
     }
 
     private void OnDisable()
