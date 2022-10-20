@@ -430,6 +430,26 @@ public class MissionManager : MonoBehaviour
         LevelController.LoadScene(nextPath);
     }
 
+    public void LoadCinematicScene()
+    {
+        if (m_currentZone == null) return;
+
+        string cinematicPath = m_currentZone.m_cinematicScene?.scenePath;
+        if (cinematicPath == "") return;
+
+        LevelController.LoadScene(cinematicPath);
+    }
+
+    public void LoadBossScene()
+    {
+        if (m_currentZone == null) return;
+
+        string bossPath = m_currentZone.m_bossScene?.scenePath;
+        if (bossPath == "") return;
+
+        LevelController.LoadScene(bossPath);
+    }
+
     /// <summary>
     /// Try to return the current mission
     /// </summary>
@@ -527,6 +547,15 @@ public class MissionManager : MonoBehaviour
     {
         if (_index < 0 || _index >= m_missionZones.Count) return null;
         return m_missionZones[_index];
+    }
+
+    public MissionZone GetZone(MissionZone.ZoneArea _area)
+    {
+        foreach (MissionZone zone in m_missionZones)
+        {
+            if (zone.m_area == _area) return zone;
+        }
+        return null;
     }
 
     /// <summary>

@@ -50,6 +50,8 @@ public class LootDrop_Item : LootDrop
                 MessageManager.instance?.AddMessage("Reward: " + m_item.m_displayName, "bag");
                 // notify
                 NotificationManager.instance?.AddIconAtPlayer("bag");
+                // sound
+                UIAudioManager.instance?.equipSound.Play();
             }
         }
     }

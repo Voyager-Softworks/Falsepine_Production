@@ -27,7 +27,7 @@ public class MissionZone : ScriptableObject
         DESERT,
         REDWOOD,
         SWAMP,
-        FOREST
+        TOWN
     }
 
     public string m_title;
@@ -54,6 +54,8 @@ public class MissionZone : ScriptableObject
     
     public Utilities.SceneField m_preBossScene;
     public Utilities.SceneField m_bossScene;
+    public Utilities.SceneField m_cinematicScene;
+    [ReadOnly] public bool m_doCinematic = true;
 
     [Header("Journal Pickups")]
     public int m_clueCount = 1;
@@ -296,6 +298,7 @@ public class MissionZone : ScriptableObject
     public List<SceneField> GetSceneList()
     {
         List<Utilities.SceneField> temp = new List<Utilities.SceneField>();
+        if (m_doCinematic) { temp.Add(m_cinematicScene); }
         temp.Add(m_startScene);
         temp.AddRange(m_middleScenes);
         temp.Add(m_preBossScene);
@@ -403,6 +406,8 @@ public class MissionZone : ScriptableObject
         [SerializeField] public int m_middleSceneCount;
         [SerializeField] public List<Utilities.SceneField> m_possibleMiddleScenes;
         [SerializeField] public List<Utilities.SceneField> m_middleScenes;
+        [SerializeField] public Utilities.SceneField m_cinematicScene;
+        [SerializeField] public bool m_doCinematic;
 
         // Journal Pickups
         [SerializeField] public int m_clueCount;
@@ -467,6 +472,10 @@ public class MissionZone : ScriptableObject
             {
                 m_middleScenes.Add(sf);
             }
+
+            // Cinematic
+            m_cinematicScene = mz.m_cinematicScene;
+            m_doCinematic = mz.m_doCinematic;
 
 
             // Journal Pickups:
@@ -555,6 +564,10 @@ public class MissionZone : ScriptableObject
             {
                 mz.m_middleScenes.Add(sf);
             }
+
+            // Cinematic
+            mz.m_cinematicScene = m_cinematicScene;
+            mz.m_doCinematic = m_doCinematic;
 
             // Journal Pickups:
             mz.m_clueCount = m_clueCount;

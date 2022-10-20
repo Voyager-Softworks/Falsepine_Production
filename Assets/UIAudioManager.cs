@@ -25,7 +25,7 @@ public class UIAudioManager : MonoBehaviour
         public float minPitch = 0.9f;
         public float maxPitch = 1.1f;
 
-        public void Play(){
+        public void Play(float _volumeMulti = 1.0f){
             if (UIAudioManager.instance == null) return;
             if (UIAudioManager.instance.m_autoSoundPrefab == null) return;
             if (clips.Count == 0) return;
@@ -35,8 +35,8 @@ public class UIAudioManager : MonoBehaviour
             autoSound.clips = new List<AudioClip>(clips).ToArray();
             autoSound.playOnStart = true;
             autoSound.destroyOnEnd = true;
-            autoSound.minVolume = minVolume;
-            autoSound.maxVolume = maxVolume;
+            autoSound.minVolume = minVolume * _volumeMulti;
+            autoSound.maxVolume = maxVolume * _volumeMulti;
             autoSound.minPitch = minPitch;
             autoSound.maxPitch = maxPitch;
         }
@@ -47,6 +47,7 @@ public class UIAudioManager : MonoBehaviour
     public UISound closeUI;
     public UISound buttonSound;
     public UISound buySound;
+    public UISound moneySound;
     public UISound equipSound;
     public UISound unequipSound;
     public UISound upgradeSound;
@@ -56,6 +57,8 @@ public class UIAudioManager : MonoBehaviour
     public UISound acceptSound;
     public UISound completeSound;
     public UISound errorSound;
+    public UISound entryDiscoveredSound;
+    public UISound drinkSound;
 
     //public UISound shopOpen;
 

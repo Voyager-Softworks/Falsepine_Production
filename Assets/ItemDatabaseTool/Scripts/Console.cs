@@ -656,6 +656,20 @@ public class Console : ToggleableWindow
             return;
         }
 
+        // "boss_scene"
+        if (split.Length == 1 && split[0] == "boss_scene")
+        {
+            if (MissionManager.instance != null){
+                MissionManager.instance?.LoadBossScene();
+
+                Log("- Boss scene loading");
+            }
+            else{
+                Log("- MissionManager not found");
+            }
+            return;
+        }
+
         // "restart_scene"
         if (split.Length == 1 && split[0] == "restart_scene")
         {
@@ -697,6 +711,20 @@ public class Console : ToggleableWindow
 
             Log("- Mission completed");
 
+            return;
+        }
+
+        // "next_zone"
+        if (split.Length == 1 && split[0] == "next_zone")
+        {
+            if (MissionManager.instance != null){
+                MissionManager.instance?.GoToNextZone();
+
+                Log("- Zone changed");
+            }
+            else{
+                Log("- MissionManager not found");
+            }
             return;
         }
 
@@ -788,9 +816,11 @@ public class Console : ToggleableWindow
         "current_scene",
         "restart_scene",
         "next_scene",
+        "boss_scene",
         "scene sceneNumber",
         "scene sceneName",
         "complete_mission",
+        "next_zone",
         "message 'message Text' iconName?",
     };
 

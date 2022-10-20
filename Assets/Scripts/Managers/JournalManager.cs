@@ -233,6 +233,8 @@ public class JournalManager : ToggleableWindow
             MessageManager.instance?.AddMessage("New Journal Entry\n" + entry.m_linkedMonster.m_name, "monster");
             // notify
             NotificationManager.instance?.AddIconAtPlayer("monster");
+            // sound
+            UIAudioManager.instance?.entryDiscoveredSound.Play();
             return true;
         }
 

@@ -421,7 +421,7 @@ RectTransform:
   m_Children:
   - {fileID: 3031239703192413000}
   m_Father: {fileID: 3094697866281410181}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
@@ -905,6 +905,9 @@ MonoBehaviour:
   m_finalScene:
     m_sceneAsset: {fileID: 102900000, guid: 6d60b65588ba4fd4aa4fb7c5a1e63348, type: 3}
     m_scenePath: Scenes/finalBoss/finalArena
+  unlockButton: {fileID: 5371729500961419831}
+  iconLocked: {fileID: 4096452047423289188}
+  iconUnlocked: {fileID: 7055893807956690169}
 --- !u!1 &3319461714066571790
 GameObject:
   m_ObjectHideFlags: 0
@@ -1248,7 +1251,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.2, y: -2.9}
+  m_AnchoredPosition: {x: 0.19999695, y: -2.8999996}
   m_SizeDelta: {x: 28.9, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8928951141777280181
@@ -1482,7 +1485,7 @@ GameObject:
   - component: {fileID: 2478298519666198026}
   - component: {fileID: 5371729500961419831}
   m_Layer: 5
-  m_Name: Final Bounty Button
+  m_Name: Unlock Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1495,21 +1498,21 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4742835155886459058}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3911417166036529860}
   - {fileID: 8742826081237877979}
   - {fileID: 2161561502474717254}
-  m_Father: {fileID: 6754819949799305277}
-  m_RootOrder: 3
+  m_Father: {fileID: 3094697866281410181}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -267.2}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -340, y: 50}
   m_SizeDelta: {x: 264, y: 56}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 1, y: 0}
 --- !u!222 &164666702452545245
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1531,7 +1534,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1863,6 +1866,7 @@ RectTransform:
   - {fileID: 7973646979125696633}
   - {fileID: 1688432313442385538}
   - {fileID: 6754819949799305277}
+  - {fileID: 1967346954898624486}
   - {fileID: 1208213817134701963}
   m_Father: {fileID: 2766063110200998188}
   m_RootOrder: 0
@@ -1943,7 +1947,6 @@ RectTransform:
   - {fileID: 4153781740119614805}
   - {fileID: 1769113003451448662}
   - {fileID: 1715658889576129719}
-  - {fileID: 1967346954898624486}
   - {fileID: 3526388632552512319}
   m_Father: {fileID: 3094697866281410181}
   m_RootOrder: 7
@@ -2007,9 +2010,6 @@ MonoBehaviour:
   - {fileID: 6082834737944678614}
   - {fileID: 8449462550524020949}
   - {fileID: 8791199237353312564}
-  unlockButton: {fileID: 4742835155886459058}
-  iconLocked: {fileID: 4096452047423289188}
-  iconUnlocked: {fileID: 7055893807956690169}
 --- !u!1 &6749878292655086778
 GameObject:
   m_ObjectHideFlags: 0
@@ -2575,15 +2575,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 225623049431352709, guid: db986e35ef02536499fe0384ac214725, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 225623049431352709, guid: db986e35ef02536499fe0384ac214725, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 225623049431352709, guid: db986e35ef02536499fe0384ac214725, type: 3}
       propertyPath: m_SizeDelta.x
-      value: -15
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 242100182732430458, guid: db986e35ef02536499fe0384ac214725, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2695,11 +2695,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3792686399690676783, guid: db986e35ef02536499fe0384ac214725, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3792686399690676783, guid: db986e35ef02536499fe0384ac214725, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3792686399690676783, guid: db986e35ef02536499fe0384ac214725, type: 3}
       propertyPath: m_AnchorMin.y
@@ -2945,7 +2945,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7912722889416708875, guid: 8b6eb6472469fb04f9af3d95960a248c, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7912722889416708875, guid: 8b6eb6472469fb04f9af3d95960a248c, type: 3}
       propertyPath: m_AnchorMax.x

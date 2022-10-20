@@ -354,7 +354,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     /// @todo make some sort of UI display when money is added
     /// </summary>
     /// <param name="_amount"></param>
-    public void AddMoney(int _amount)
+    public void AddMoney(int _amount, bool _doSound = true)
     {
         int calcedAmount = StatsManager.CalculateMoneyGain(this, _amount);
 
@@ -369,6 +369,11 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
 
         // event
         OnPlayerSilverAdded?.Invoke(calcedAmount);
+
+        // sound
+        if (_doSound){
+            UIAudioManager.instance?.moneySound.Play();
+        }
     }
 
     public void SaveEconomy(int saveSlot)
@@ -484,6 +489,9 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
 
         // save
         SaveEconomy(_saveSlot);
+
+        reader.Close();
+        file.Close();
     }
 
     /// <summary>

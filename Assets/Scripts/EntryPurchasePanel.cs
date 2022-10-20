@@ -53,6 +53,12 @@ public class EntryPurchasePanel : MonoBehaviour
 
             // listen for click
             clueUI.OnClick += () => {
+                // if not selected, play sound
+                if (!clueUI.m_isSelected){
+                    // sound
+                    UIAudioManager.instance?.buttonSound.Play();
+                }
+
                 // deselect all
                 foreach (CluePurchaseUI ui in m_clueUIs){
                     ui.m_isSelected = false;
@@ -154,6 +160,12 @@ public class EntryPurchasePanel : MonoBehaviour
             EconomyManager.instance.SpendMoney(m_selectedClue.m_price);
             JournalManager.instance.DiscoverEntry(m_selectedClue.m_linkedJournalEntry);
             UpdateUI();
+            // sound
+            UIAudioManager.instance?.buySound.Play();
+        }
+        else{
+            // sound
+            UIAudioManager.instance?.errorSound.Play();
         }
     }
 }
