@@ -18,7 +18,7 @@ public class InfoBox : MonoBehaviour
     private float fadeTimer = 0.0f;
 
 
-    [Header("Box Refs")]
+    [Header("Main Refs")]
     public Image m_backgroundImage;
     public Image m_iconImage;
     public TextMeshProUGUI m_titleText;
@@ -29,30 +29,32 @@ public class InfoBox : MonoBehaviour
 
     public Image m_dividerImage;
 
-    public GameObject m_statsModsPanel;
+    public GameObject m_bottomPanel;
 
-    [Header("Stats Refs")]
-    public GameObject m_statsPanel;
-    public Image m_statsImage;
-    public TextMeshProUGUI m_statsTitleText;
-    public TextMeshProUGUI m_statsDescriptionText;
+    [Header("Left Refs")]
+    public GameObject m_leftPanel;
+    public Image m_leftImage;
+    public TextMeshProUGUI m_leftTitleText;
+    public TextMeshProUGUI m_leftDescriptionText;
 
-    [Header("Mods Refs")]
-    public GameObject m_modsPanel;
-    public Image m_modsImage;
-    public TextMeshProUGUI m_modsTitleText;
-    public TextMeshProUGUI m_modsDescriptionText;
+    [Header("Right Refs")]
+    public GameObject m_rightPanel;
+    public Image m_rightImage;
+    public TextMeshProUGUI m_rightTitleText;
+    public TextMeshProUGUI m_rightDescriptionText;
 
     [Header("Prefabs")]
     public Sprite m_priceIcon;
     public Sprite m_typeIcon;
+    public Sprite m_statsIcon;
+    public Sprite m_modifierIcon;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
-        DisableBox();
+        DisableAll();
         //DisableEconomyBox();
         //DisableModsBox();
     }
@@ -91,7 +93,7 @@ public class InfoBox : MonoBehaviour
             if (fadeTimer <= 0.0f)
             {
                 fadeTimer = 0.0f;
-                DisableBox();
+                DisableAll();
             }
         }
     }
@@ -116,20 +118,26 @@ public class InfoBox : MonoBehaviour
     }
 
     /// <summary>
-    /// Display some info in the info box at cursor.
+    /// Enables and displays the main info box <br/>
+    /// ALWAYS call this before left or right info box
     /// </summary>
     /// <param name="_title"></param>
     /// <param name="_icon"></param>
     /// <param name="_description"></param>
+    /// <param name="_costType"></param>
+    /// <param name="_costIcon"></param>
     /// <param name="_onTime"></param>
     /// <param name="_offTime"></param>
-    public void DisplayInfo(string _title, Sprite _icon, string _description, float _onTime = 1, float _offTime = 1)
+    public void DisplayMain(string _title, Sprite _icon, string _description, string _costType, Sprite _costIcon, float _onTime = 1, float _offTime = 1)
     {
-        EnableBox();
+        EnableAll();
 
         this.m_titleText.text = _title;
         this.m_iconImage.sprite = _icon ?? null;
         this.m_descriptionText.text = _description;
+
+        this.m_costTypeText.text = _costType;
+        this.m_costTypeImage.sprite = _costIcon ?? null;
 
         fullBrightTime = _onTime;
         fullBrightTimer = fullBrightTime;
@@ -137,8 +145,52 @@ public class InfoBox : MonoBehaviour
         fadeTime = _offTime;
         fadeTimer = fadeTime;
 
+        // set bottom to disabled by default, must call left or right to enable
         m_dividerImage.gameObject.SetActive(false);
-        m_statsModsPanel.SetActive(false);
+        m_bottomPanel.SetActive(false);
+        m_leftPanel.SetActive(false);
+        m_rightPanel.SetActive(false);
+    }
+
+    /// <summary>
+    /// Enables and displays the left portion of the info box <br/>
+    /// ALWAYS call DisplayMain before this
+    /// </summary>
+    /// <param name="_title"></param>
+    /// <param name="_icon"></param>
+    /// <param name="_description"></param>
+    /// <param name="_onTime"></param>
+    /// <param name="_offTime"></param>
+    public void DisplayLeft(string _title, Sprite _icon, string _description)
+    {
+        m_dividerImage.gameObject.SetActive(true);
+        m_bottomPanel.SetActive(true);
+        m_leftPanel.SetActive(true);
+
+        this.m_leftTitleText.text = _title;
+        this.m_leftImage.sprite = _icon ?? null;
+        this.m_leftDescriptionText.text = _description;
+
+    }
+
+    /// <summary>
+    /// Enables and displays the right portion of the info box <br/>
+    /// ALWAYS call DisplayMain before this
+    /// </summary>
+    /// <param name="_title"></param>
+    /// <param name="_icon"></param>
+    /// <param name="_description"></param>
+    /// <param name="_onTime"></param>
+    /// <param name="_offTime"></param>
+    public void DisplayRight(string _title, Sprite _icon, string _description)
+    {
+        m_dividerImage.gameObject.SetActive(true);
+        m_bottomPanel.SetActive(true);
+        m_rightPanel.SetActive(true);
+
+        this.m_rightTitleText.text = _title;
+        this.m_rightImage.sprite = _icon ?? null;
+        this.m_rightDescriptionText.text = _description;
     }
 
     /// <summary>
@@ -151,26 +203,19 @@ public class InfoBox : MonoBehaviour
     {
         if (!_item) return;
 
-        DisplayInfo(_item.m_displayName, _item.m_icon, "Count: " + _item.currentStackSize + "/" + _item.maxStackSize + "\n" + _item.m_description, _onTime, _offTime);
-        
-        if (_showCost) {
-            UpdateEconomy(_item);
-        }
-        else{
-            UpdateType(_item);
-        }
+        DisplayMain(
+            _item.m_displayName, 
+            _item.m_icon, 
+            "Count: " + _item.currentStackSize + "/" + _item.maxStackSize + "\n" + _item.m_description, 
+            _showCost ? _item.GetPrice().ToString() : _item.GetTypeDisplayName(), 
+            _showCost ? m_priceIcon : m_typeIcon, 
+            _onTime, 
+            _offTime
+        );
 
         // stats and mods panel
-        m_dividerImage.gameObject.SetActive(true);
-        m_statsModsPanel.SetActive(true);
-        UpdateStats(_item);
-        UpdateMods(_item.GetStatMods());
-        // if the stats and mods panels are not active, disable the parent panel
-        if (!m_statsPanel.activeSelf && !m_modsPanel.activeSelf)
-        {
-            m_dividerImage.gameObject.SetActive(false);
-            m_statsModsPanel.SetActive(false);
-        }
+        DisplayStatsLeft(_item);
+        DisplayModsRight(_item.GetStatMods());
     }
 
     /// <summary>
@@ -178,31 +223,43 @@ public class InfoBox : MonoBehaviour
     /// @todo - add more types
     /// </summary>
     /// <param name="_item"></param>
-    private void UpdateStats(Item _item)
+    private void DisplayStatsLeft(Item _item)
     {
-        m_statsPanel.SetActive(false);
-        m_statsDescriptionText.text = "";
-        
         if (!_item) return;
 
         System.Type type = _item.GetType();
 
         if (type.IsSubclassOf(typeof(RangedWeapon)) || type == typeof(RangedWeapon)){
-            m_statsPanel.SetActive(true);
 
             RangedWeapon weapon = (RangedWeapon)_item;
+
+            string newDesc = "";
 
             // damage
             float calcDamage = StatsManager.CalculateDamage(weapon, weapon.m_damage);
             float damageDifference = calcDamage - weapon.m_damage;
             string damageModString = damageDifference != 0 ? " (" + StatsManager.SignedFloatString(damageDifference) + ")" : "";
-            m_statsDescriptionText.text += "Damage: " + weapon.m_damage + damageModString + "\n";
+            newDesc += "Damage: " + weapon.m_damage + damageModString + "\n";
 
             // range
             float calcRange = StatsManager.CalculateRange(weapon, weapon.m_range);
             float rangeDifference = calcRange - weapon.m_range;
             string rangeModString = rangeDifference != 0 ? " (" + StatsManager.SignedFloatString(rangeDifference) + ")" : "";
-            m_statsDescriptionText.text += "Range: " + weapon.m_range + rangeModString + "\n";
+            newDesc += "Range: " + weapon.m_range + rangeModString + "\n";
+
+            // Clip
+            //float calcAmmo = StatsManager.CalculateAmmo(weapon, weapon.m_ammo);
+            //float ammoDifference = calcAmmo - weapon.m_ammo;
+            //string ammoModString = ammoDifference != 0 ? " (" + StatsManager.SignedFloatString(ammoDifference) + ")" : "";
+            newDesc += "Clip Size: " + weapon.m_clipAmmo + "/" + weapon.m_clipSize + "\n";
+
+            // spare
+            //float calcSpare = StatsManager.CalculateSpare(weapon, weapon.m_spare);
+            //float spareDifference = calcSpare - weapon.m_spare;
+            //string spareModString = spareDifference != 0 ? " (" + StatsManager.SignedFloatString(spareDifference) + ")" : "";
+            newDesc += "Spare Ammo: " + weapon.m_spareAmmo + "/" + weapon.m_maxSpareAmmo + "\n";
+
+            DisplayLeft("Stats", m_statsIcon, newDesc);
         }
     }
 
@@ -210,21 +267,17 @@ public class InfoBox : MonoBehaviour
     /// Updates the modifier section of the info box with current info
     /// </summary>
     /// <param name="_mods"></param>
-    public void UpdateMods(List<StatsManager.StatMod> _mods)
+    public void DisplayModsRight(List<StatsManager.StatMod> _mods)
     {
         if (_mods.Count > 0)
         {
-            m_modsPanel.SetActive(true);
-
-            m_modsDescriptionText.text = "";
+            string newDesc = "";
             foreach (StatsManager.StatMod mod in _mods)
             {
-                m_modsDescriptionText.text += mod.ToText() + "\n";
+                newDesc += mod.ToText() + "\n";
             }
-        }
-        else
-        {
-            m_modsPanel.SetActive(false);
+
+            DisplayRight("Modifiers", m_modifierIcon, newDesc);
         }
     }
 
@@ -242,7 +295,7 @@ public class InfoBox : MonoBehaviour
     /// <summary>
     /// Hides the info box
     /// </summary>
-    private void DisableBox()
+    private void DisableAll()
     {
         // disable all children (excluding this)
         foreach (Transform child in transform)
@@ -256,7 +309,7 @@ public class InfoBox : MonoBehaviour
     /// <summary>
     /// Shows the info box
     /// </summary>
-    private void EnableBox()
+    private void EnableAll()
     {
         // enable all children (excluding this)
         foreach (Transform child in transform)

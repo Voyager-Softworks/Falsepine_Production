@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class DrinkPurchaseUI : MonoBehaviour
 {
@@ -51,7 +52,42 @@ public class DrinkPurchaseUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        // check if mouse is over this grid item
+        Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
+
+        Camera uiCamera = Camera.main;
+
+        // get corners
+        Vector3[] corners = new Vector3[4];
+        GetComponent<RectTransform>().GetWorldCorners(corners);
+        Vector2 bottomLeft = corners[0];
+        Vector2 topLeft = corners[1];
+        Vector2 topRight = corners[2];
+        Vector2 bottomRight = corners[3];
+
+        // check if mouse is within the grid item's screen space
+        if (mouseScreenPos.x >= topLeft.x && mouseScreenPos.x <= topRight.x &&
+            mouseScreenPos.y <= topLeft.y && mouseScreenPos.y >= bottomLeft.y)
+        {
+            // find mask in parent
+            Mask mask = GetComponentInParent<Mask>();
+            if (mask != null){
+                // get bottom world corner of mask
+                Vector3[] maskCorners = new Vector3[4];
+                mask.GetComponent<RectTransform>().GetWorldCorners(maskCorners);
+                Vector2 maskBottomLeft = maskCorners[0];
+                // if mouse is below mask, skip
+                if (mouseScreenPos.y < maskBottomLeft.y)
+                {
+                    return;
+                }
+            }
+            
+
+            InfoBox ib = FindObjectOfType<InfoBox>();
+            // display info box
+            if (ib) ib.Display(m_linkedDrink, true, 0.1f, 0.1f);
+        }
     }
 
     public void UpdateUI()

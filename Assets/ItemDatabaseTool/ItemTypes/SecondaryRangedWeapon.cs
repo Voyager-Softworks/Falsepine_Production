@@ -19,9 +19,9 @@ public class SecondaryRangedWeapon : RangedWeapon
 {
     // make sure to set variables as serialized fields in the inspector, so that they can be saved!
 
-    // public override string GetTypeDisplayName(){
-    //     return "Secondary Ranged";
-    // }
+    public override string GetTypeDisplayName(){
+        return "Secondary";
+    }
 
     /// <summary>
     /// [REQUIRED] Used to create a copy of the item. Make sure to set any unique values here!
