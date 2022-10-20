@@ -16,13 +16,13 @@ public class DamagePopup : MonoBehaviour
     public float m_lowerDamageValue = 10;
     public float m_upperDamageValue = 40;
 
-    [Header("Fading")]
-    private float m_textAlpha;
+    [Header("Fade")]
     public float m_startFadeDelay = 1.0f;
     [ReadOnly] public float m_startFadeDelayTimer = 0f;
     public float m_fadeTime = 1.0f;
     [ReadOnly] public float m_fadeTimer = 0.0f;
     public bool m_doFade = true;
+    private float m_textAlpha;
 
     [Header("Movement")]
     public float m_initialMoveSpeed = 3.0f;
