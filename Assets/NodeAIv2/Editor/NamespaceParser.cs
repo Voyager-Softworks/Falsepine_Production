@@ -83,6 +83,11 @@ namespace NodeAI
             return tree;
         }
 
+
+        /// <summary>
+        ///  Returns a list of all the types that have the NodeAI.Parameterisable attribute.
+        /// </summary>
+        /// <returns></returns>
         public static System.Type[] GetParameterisableTypes()
         {
             var types = System.AppDomain.CurrentDomain.GetAssemblies()
