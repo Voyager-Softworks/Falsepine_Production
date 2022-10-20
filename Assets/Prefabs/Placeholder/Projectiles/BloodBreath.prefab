@@ -4948,14 +4948,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 071ae0d8973f358d7a2d08164fc0fbcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0.5
+  damage: 5
   destroyOnCollision: 0
-  destroyOnGround: 0
-  tickRate: 0.01
+  destroyOnGround: 1
+  destroyOnWall: 1
+  tickRate: 0.1
   setInactiveOnCollision: 0
   isActive: 1
   destroyParticle: {fileID: 0}
-  timeBeforeDetection: 0.5
+  timeBeforeDetection: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 8
+  maxDuration: 10
+  radius: 0.5
 --- !u!1 &7265390439456813995
 GameObject:
   m_ObjectHideFlags: 0
