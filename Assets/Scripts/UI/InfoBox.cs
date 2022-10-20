@@ -54,7 +54,7 @@ public class InfoBox : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DisableBox();
+        DisableAll();
         //DisableEconomyBox();
         //DisableModsBox();
     }
@@ -93,7 +93,7 @@ public class InfoBox : MonoBehaviour
             if (fadeTimer <= 0.0f)
             {
                 fadeTimer = 0.0f;
-                DisableBox();
+                DisableAll();
             }
         }
     }
@@ -130,7 +130,7 @@ public class InfoBox : MonoBehaviour
     /// <param name="_offTime"></param>
     public void DisplayMain(string _title, Sprite _icon, string _description, string _costType, Sprite _costIcon, float _onTime = 1, float _offTime = 1)
     {
-        EnableBox();
+        EnableAll();
 
         this.m_titleText.text = _title;
         this.m_iconImage.sprite = _icon ?? null;
@@ -163,15 +163,14 @@ public class InfoBox : MonoBehaviour
     /// <param name="_offTime"></param>
     public void DisplayLeft(string _title, Sprite _icon, string _description)
     {
-        EnableBox();
+        m_dividerImage.gameObject.SetActive(true);
+        m_bottomPanel.SetActive(true);
+        m_leftPanel.SetActive(true);
 
         this.m_leftTitleText.text = _title;
         this.m_leftImage.sprite = _icon ?? null;
         this.m_leftDescriptionText.text = _description;
 
-        m_dividerImage.gameObject.SetActive(true);
-        m_bottomPanel.SetActive(true);
-        m_leftPanel.SetActive(true);
     }
 
     /// <summary>
@@ -185,15 +184,13 @@ public class InfoBox : MonoBehaviour
     /// <param name="_offTime"></param>
     public void DisplayRight(string _title, Sprite _icon, string _description)
     {
-        EnableBox();
+        m_dividerImage.gameObject.SetActive(true);
+        m_bottomPanel.SetActive(true);
+        m_rightPanel.SetActive(true);
 
         this.m_rightTitleText.text = _title;
         this.m_rightImage.sprite = _icon ?? null;
         this.m_rightDescriptionText.text = _description;
-
-        m_dividerImage.gameObject.SetActive(true);
-        m_bottomPanel.SetActive(true);
-        m_rightPanel.SetActive(true);
     }
 
     /// <summary>
@@ -217,7 +214,7 @@ public class InfoBox : MonoBehaviour
         );
 
         // stats and mods panel
-        //DisplayStatsLeft(_item);
+        DisplayStatsLeft(_item);
         DisplayModsRight(_item.GetStatMods());
     }
 
@@ -233,7 +230,6 @@ public class InfoBox : MonoBehaviour
         System.Type type = _item.GetType();
 
         if (type.IsSubclassOf(typeof(RangedWeapon)) || type == typeof(RangedWeapon)){
-            m_leftPanel.SetActive(true);
 
             RangedWeapon weapon = (RangedWeapon)_item;
 
@@ -263,7 +259,7 @@ public class InfoBox : MonoBehaviour
             //string spareModString = spareDifference != 0 ? " (" + StatsManager.SignedFloatString(spareDifference) + ")" : "";
             newDesc += "Spare Ammo: " + weapon.m_spareAmmo + "/" + weapon.m_maxSpareAmmo + "\n";
 
-            DisplayLeft("Stats", m_statsIcon, m_leftDescriptionText.text);
+            DisplayLeft("Stats", m_statsIcon, newDesc);
         }
     }
 
@@ -275,15 +271,13 @@ public class InfoBox : MonoBehaviour
     {
         if (_mods.Count > 0)
         {
-            m_leftPanel.SetActive(true);
-
             string newDesc = "";
             foreach (StatsManager.StatMod mod in _mods)
             {
                 newDesc += mod.ToText() + "\n";
             }
 
-            DisplayRight("Modse", m_modifierIcon, newDesc);
+            DisplayRight("Modifiers", m_modifierIcon, newDesc);
         }
     }
 
@@ -301,7 +295,7 @@ public class InfoBox : MonoBehaviour
     /// <summary>
     /// Hides the info box
     /// </summary>
-    private void DisableBox()
+    private void DisableAll()
     {
         // disable all children (excluding this)
         foreach (Transform child in transform)
@@ -315,7 +309,7 @@ public class InfoBox : MonoBehaviour
     /// <summary>
     /// Shows the info box
     /// </summary>
-    private void EnableBox()
+    private void EnableAll()
     {
         // enable all children (excluding this)
         foreach (Transform child in transform)
