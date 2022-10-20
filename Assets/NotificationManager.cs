@@ -25,6 +25,7 @@ public class NotificationManager : MonoBehaviour
     }
     public List<Notif> m_notifs = new List<Notif>();
     public GameObject m_notifPrefab;
+    public GameObject m_damagePopupPrefab;
 
     // Start is called before the first frame update
     void Start()

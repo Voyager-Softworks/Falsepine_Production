@@ -139,6 +139,9 @@ public class Health_Base : MonoBehaviour, StatsManager.UsesStats /// @todo Impli
     public string m_damageSoundname = "DamageSound"; ///< The sound to play when the object takes damage. Uses the audio controller component.
     private AudioController m_audioController;
 
+    [Header("UI")]
+    public bool m_useDamagePopup = true; ///< Whether or not to use damage popups.
+
     public virtual void Start()
     {
         CheckMaxHealth();
@@ -204,6 +207,13 @@ public class Health_Base : MonoBehaviour, StatsManager.UsesStats /// @todo Impli
         UpdateDeath();
 
         PlayHurtSound();
+
+        // show damage popup
+        if (m_useDamagePopup && NotificationManager.instance && NotificationManager.instance.m_damagePopupPrefab)
+        {
+            GameObject damagePopup = Instantiate(NotificationManager.instance.m_damagePopupPrefab, _damageStat.m_hitPoint, Quaternion.identity);
+            damagePopup.GetComponent<DamagePopup>().ShowPopup(_damageStat);
+        }
     }
 
     /// <summary>
