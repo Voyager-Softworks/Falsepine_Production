@@ -25,8 +25,9 @@ public class DamagePopup : MonoBehaviour
     public bool m_doFade = true;
 
     [Header("Movement")]
-    public float m_moveSpeed = 3.0f;
-    public float m_upSpeed = 3.0f;
+    public float m_initialMoveSpeed = 3.0f;
+    public float m_initialUpSpeed = 3.0f;
+    public float m_gravity = -9.8f;
 
 
     private void Awake() {
@@ -71,6 +72,12 @@ public class DamagePopup : MonoBehaviour
             }
         }
     }
+
+    private void FixedUpdate() {
+        // gravity
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.AddForce(Vector3.up * m_gravity * rb.mass);
+    }
     
     public void SetRelativeOpacity(float alpha)
     {
@@ -101,9 +108,9 @@ public class DamagePopup : MonoBehaviour
         // force
         Rigidbody rb = GetComponent<Rigidbody>();
         // set velocity to direction of damage
-        Vector3 vel = _damageStat.direction.normalized * m_moveSpeed;
+        Vector3 vel = _damageStat.direction.normalized * m_initialMoveSpeed;
         // set upwards velocity
-        vel.y = m_upSpeed;
+        vel.y = m_initialUpSpeed;
         rb.velocity = vel;
     }
 }
