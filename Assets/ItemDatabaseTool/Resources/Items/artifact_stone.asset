@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcd63797a216aad4489fc2c905ee90e2, type: 3}
+  m_Name: artifact_stone
+  m_EditorClassIdentifier: 
+  m_id: artifact_stone
+  m_instanceID: 
+  m_displayName: Stone of Ruin
+  m_description: A jagged red stone set into an old world coin. It's light reveals
+    the glint of treasure, for a price. Increases silver found by 40%, Increases
+    damage taken by 40%.
+  m_icon: {fileID: 21300000, guid: cbf3c8b1bc6f7904e82403633c423bc3, type: 3}
+  mustMatchToStack: 0
+  m_currentStackSize: 1
+  m_maxStackSize: 1
+  m_tags: []
+  m_usedStatTypes: []
+  m_statMods:
+  - statType:
+      value: MoneyGain
+    modType: 1
+    value: 1.4
+  - statType:
+      value: PlayerDamageTaken
+    modType: 1
+    value: 1.4
+  m_price: 100
+  m_allowedDiscount: 1
+  m_resourceLinks:
+  - fieldName: m_icon
+    path: /Artefact_CircleRed
