@@ -357,6 +357,9 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     public void AddMoney(int _amount, bool _doSound = true)
     {
         int calcedAmount = StatsManager.CalculateMoneyGain(this, _amount);
+        if (calcedAmount <= 0) {
+            return;
+        }
 
         m_playerSilver += calcedAmount;
 
