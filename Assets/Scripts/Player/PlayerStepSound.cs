@@ -11,6 +11,12 @@ public class PlayerStepSound : MonoBehaviour
 
     private AudioSource _audioSource;
 
+    public GameObject _stepDecal;
+
+    [Header("Refs")]
+    public Transform _leftFoot;
+    public Transform _rightFoot;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,12 +29,31 @@ public class PlayerStepSound : MonoBehaviour
         
     }
 
-    public void PlayStepSound()
+    public void PlayStepSound(bool left)
     {
         if (_audioSource)
         {
             AudioClip clip = stepSounds[Random.Range(0, stepSounds.Count)];
             _audioSource.PlayOneShot(clip);
         }
+
+        if (_stepDecal)
+        {
+            GameObject decal = Instantiate(_stepDecal, left ? _leftFoot.position : _rightFoot.position, Quaternion.identity);
+            decal.transform.forward = transform.forward;
+
+            // dont point upwards at all
+            decal.transform.forward = Vector3.ProjectOnPlane(decal.transform.forward, Vector3.up);
+        }
+    }
+
+    public void PlayStepSoundLeft()
+    {
+        PlayStepSound(true);
+    }
+
+    public void PlayStepSoundRight()
+    {
+        PlayStepSound(false);
     }
 }

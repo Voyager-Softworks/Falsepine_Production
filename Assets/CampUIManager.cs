@@ -36,7 +36,7 @@ public class CampUIManager : MonoBehaviour
     void Update()
     {
         // if scene is last m_finalScene, disable embark button
-        if (m_finalScene.Equals(SceneManager.GetActiveScene()))
+        if (m_finalScene.EqualsPath(SceneManager.GetActiveScene()))
         {
             m_embarkButton.interactable = false;
         }

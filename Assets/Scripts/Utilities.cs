@@ -50,7 +50,7 @@ namespace Utilities
             return sceneField.scenePath;
         }
 
-        public bool Equals(Scene _scene){
+        public bool EqualsPath(Scene _scene){
             return _scene.path.Contains(m_scenePath);
         }
     }
