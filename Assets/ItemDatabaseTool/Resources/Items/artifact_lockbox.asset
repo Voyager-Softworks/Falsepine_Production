@@ -10,14 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bcd63797a216aad4489fc2c905ee90e2, type: 3}
-  m_Name: artifact_amulet
+  m_Name: artifact_lockbox
   m_EditorClassIdentifier: 
-  m_id: artifact_amulet
+  m_id: artifact_lockbox
   m_instanceID: 
-  m_displayName: Hungering Amulet
-  m_description: A small pagan amulet. A baleful emptiness can be felt within. Attacks
-    restore missing health, Halves maximum health.
-  m_icon: {fileID: 21300000, guid: 31f6d58b6edbc7945b3246157ee1876d, type: 3}
+  m_displayName: Warped Lockbox
+  m_description: A small black damaged lockbox. Occasionally it shudders but does
+    not open, perhaps that is for the best. Doubles maximum health. Doubles boss
+    maximum health.
+  m_icon: {fileID: 21300000, guid: 9ef23adbf227c1445b774af3ccb6715d, type: 3}
   mustMatchToStack: 0
   m_currentStackSize: 1
   m_maxStackSize: 1
@@ -27,13 +28,13 @@ MonoBehaviour:
   - statType:
       value: PlayerMaxHealth
     modType: 1
-    value: 0.5
+    value: 2
   - statType:
-      value: PlayerHealthSteal
-    modType: 0
-    value: 1.5
+      value: BossDamageTaken
+    modType: 1
+    value: 0.5
   m_price: 100
   m_allowedDiscount: 1
   m_resourceLinks:
   - fieldName: m_icon
-    path: /Talisman_SkullBlue
+    path: /Icon_Bank

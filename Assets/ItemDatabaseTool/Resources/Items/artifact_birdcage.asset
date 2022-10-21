@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bcd63797a216aad4489fc2c905ee90e2, type: 3}
-  m_Name: artifact_book
+  m_Name: artifact_birdcage
   m_EditorClassIdentifier: 
-  m_id: artifact_book
+  m_id: artifact_birdcage
   m_instanceID: 
-  m_displayName: Sexton's Ledger
-  m_description: A humble looking book, names catalogued within change with each
-    reading. Reduces Silver found by 70%, Increases Silver Damage dealt by 40%
-  m_icon: {fileID: 21300000, guid: 1c00286c78f762b49a20872544191ec2, type: 3}
+  m_displayName: Empty Birdcage
+  m_description: An empty mining cage, you hear the canary, but see nothing. Doubles
+    Pistol Damage, Increases Poison damage by 50%, Health reduced by 80%.
+  m_icon: {fileID: 21300000, guid: d05cf91c1c302ec4da8f6f32f2264e5b, type: 3}
   mustMatchToStack: 0
   m_currentStackSize: 1
   m_maxStackSize: 1
@@ -25,15 +25,19 @@ MonoBehaviour:
   m_usedStatTypes: []
   m_statMods:
   - statType:
-      value: MoneyGain
+      value: PistolDamage
     modType: 1
-    value: 0.3
+    value: 2
   - statType:
-      value: SilverDamage
+      value: PlayerMaxHealth
     modType: 1
-    value: 1.4
+    value: 0.2
+  - statType:
+      value: PoisonDamage
+    modType: 1
+    value: 1.5
   m_price: 100
   m_allowedDiscount: 1
   m_resourceLinks:
   - fieldName: m_icon
-    path: /UI Super Old/Placeholder_journalIcon
+    path: /UI Super Old/liveBait_icon

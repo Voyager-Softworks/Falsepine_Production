@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bcd63797a216aad4489fc2c905ee90e2, type: 3}
-  m_Name: artifact_bag_a6f6d387-9105-43dd-b4f4-0a5f72c4c959
+  m_Name: artifact_hungeringamulet
   m_EditorClassIdentifier: 
-  m_id: artifact_bag_1
+  m_id: artifact_hungeringamulet
   m_instanceID: 
-  m_displayName: Whispering Bag
-  m_description: A small fabric bag, voices whisper warning you not to look inside.
-    Doubles shotgun damage, but reduces melee damage by 75%.
-  m_icon: {fileID: 21300000, guid: e502e67d9f71074478736e3bbc3dbaf3, type: 3}
+  m_displayName: Hungering Amulet
+  m_description: A small pagan amulet. A baleful emptiness can be felt within. Attacks
+    restore missing health, Halves maximum health.
+  m_icon: {fileID: 21300000, guid: 31f6d58b6edbc7945b3246157ee1876d, type: 3}
   mustMatchToStack: 0
   m_currentStackSize: 1
   m_maxStackSize: 1
@@ -25,15 +25,15 @@ MonoBehaviour:
   m_usedStatTypes: []
   m_statMods:
   - statType:
-      value: ShotgunDamage
+      value: PlayerMaxHealth
     modType: 1
-    value: 2
+    value: 0.5
   - statType:
-      value: MeleeDamage
-    modType: 1
-    value: 0.25
+      value: PlayerHealthSteal
+    modType: 0
+    value: 1.5
   m_price: 100
   m_allowedDiscount: 1
   m_resourceLinks:
   - fieldName: m_icon
-    path: Icons/UI_icon-item
+    path: /Talisman_SkullBlue
