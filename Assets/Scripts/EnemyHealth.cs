@@ -16,7 +16,6 @@ public class EnemyHealth : Health_Base
 
     protected NodeAI.NodeAI_Senses m_senses; ///< The senses of the enemy.
 
-    private SkinnedMeshRenderer m_renderer; ///< The renderer of the enemy.
     private List<Material> m_materials = new List<Material>(); ///< The materials of the enemy.
 
     public GameObject m_bloodEffect; ///< The blood effect to show when the enemy is damaged.
@@ -31,7 +30,7 @@ public class EnemyHealth : Health_Base
         base.Start();
         m_senses = GetComponent<NodeAI.NodeAI_Senses>();
 
-        m_renderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        Renderer m_renderer = GetComponentInChildren<Renderer>();
         m_materials.AddRange(m_renderer.materials);
 
         m_startScale = transform.localScale;
@@ -99,7 +98,7 @@ public class EnemyHealth : Health_Base
         _damage.m_damage = (_damage.m_damage * (1 + (discoveredLore * 0.01f)));
 
         base.TakeDamage(_damage);
-        GetComponent<NodeAI.NodeAI_Agent>().SetParameter("Health", m_currentHealth);
+        GetComponent<NodeAI.NodeAI_Agent>()?.SetParameter("Health", m_currentHealth);
         GetComponentInChildren<Animator>()?.SetTrigger("Hit");
         GetComponentInChildren<Animator>()?.SetFloat("PainNum", (UnityEngine.Random.value < 0.5f ? UnityEngine.Random.Range(0f, 0.2f) : UnityEngine.Random.Range(0.8f, 1f)));
         StopCoroutine("DamageFlashCoroutine");
