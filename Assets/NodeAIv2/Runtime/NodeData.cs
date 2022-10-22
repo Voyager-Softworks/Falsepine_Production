@@ -25,7 +25,7 @@ namespace NodeAI
     /// It is used both as part of serialisation and at runtime in order to determine AI Agent behaviour.
     /// </remarks>
     [System.Serializable]
-    public class NodeData 
+    public class NodeData
     {
         /// <summary>
         ///  The Unique ID of the node.
@@ -51,22 +51,22 @@ namespace NodeAI
         /// The position of the node in the node graph editor window.
         /// </summary>
         public Vector2 position;
-        
+
         /// <summary>
         ///  Contains all possible types of node.
         /// </summary>
         public enum Type
-            {
-                EntryPoint, ///< The entry point of the node graph.
-                Action, ///< An action node.
-                Condition, ///< A condition node.
-                Decorator, ///< A decorator node.
-                Sequence, ///< A sequence node.
-                Selector, ///< A selector node.
-                Parallel, ///< A parallel node.
-                Parameter, ///< A parameter node.
-                Query ///< A query node.
-            }
+        {
+            EntryPoint, ///< The entry point of the node graph.
+            Action, ///< An action node.
+            Condition, ///< A condition node.
+            Decorator, ///< A decorator node.
+            Sequence, ///< A sequence node.
+            Selector, ///< A selector node.
+            Parallel, ///< A parallel node.
+            Parameter, ///< A parameter node.
+            Query ///< A query node.
+        }
 
         /// <summary>
         /// Possible states of the node.
@@ -105,7 +105,7 @@ namespace NodeAI
         /// </summary>
         [SerializeField]
         private List<SerializableProperty> properties;
-        
+
         [SerializeField]
         private string runtimeLogicType;
         [SerializeField]
@@ -120,12 +120,12 @@ namespace NodeAI
         /// </summary>
         public void Reset()
         {
-            if(!noLogic)
+            if (!noLogic)
             {
                 runtime = (RuntimeBase)ScriptableObject.CreateInstance(System.Type.GetType(runtimeLogicType));
                 runtime.RepopulateProperties(properties == null ? new List<SerializableProperty>() : properties);
             }
-            else if(!noQuery)
+            else if (!noQuery)
             {
                 runtimequery = (Query)ScriptableObject.CreateInstance(System.Type.GetType(queryType));
                 runtimequery.RepopulateProperties(properties == null ? new List<SerializableProperty>() : properties);
@@ -143,7 +143,7 @@ namespace NodeAI
                 if (runtime == null && !noLogic)
                 {
                     runtime = (RuntimeBase)ScriptableObject.CreateInstance(System.Type.GetType(runtimeLogicType));
-                    runtime.RepopulateProperties(properties == null ? new List<SerializableProperty>() : properties);
+                    runtime.RepopulateProperties(properties ?? new List<SerializableProperty>());
                 }
                 return runtime;
             }
@@ -151,7 +151,7 @@ namespace NodeAI
             {
                 noLogic = (value == null);
                 runtime = value;
-                if(!noLogic)
+                if (!noLogic)
                 {
                     properties = runtime.GetProperties().ConvertAll(x => (SerializableProperty)x);
                     runtimeLogicType = runtime.GetType().AssemblyQualifiedName;
@@ -184,7 +184,7 @@ namespace NodeAI
                 }
             }
         }
-        
+
         /// <summary>
         /// The property class is used to store and access data in a node both in code and in the editor.
         /// </summary>
@@ -213,7 +213,7 @@ namespace NodeAI
                 this.type = type;
                 GUID = System.Guid.NewGuid().ToString();
             }
-            
+
             [SerializeField]
             public string name; ///< The name of the property.
 
@@ -242,7 +242,7 @@ namespace NodeAI
                 value = default(T);
             }
             public T Value => (T)this.value;
-            
+
         }
         /// <summary>
         ///  An adapted version of the Property class which is made to work with Unity Serialization.
@@ -253,8 +253,8 @@ namespace NodeAI
         [System.Serializable]
         public class SerializableProperty
         {
-            public SerializableProperty(){ GUID = System.Guid.NewGuid().ToString(); } ///< Constructor for the SerializableProperty class.
-            
+            public SerializableProperty() { GUID = System.Guid.NewGuid().ToString(); } ///< Constructor for the SerializableProperty class.
+
             public SerializableProperty(SerializableProperty copy) ///< Copy constructor for the SerializableProperty class.
             {
                 name = copy.name;
@@ -292,36 +292,36 @@ namespace NodeAI
                 serializableProperty.paramReference = property.paramReference;
                 serializableProperty.serializedTypename = property.type.AssemblyQualifiedName;
                 serializableProperty.output = property.output;
-                switch(property.type.Name)
-                    {
-                        case "Int32":
-                            serializableProperty.ivalue = (int)(object)property.value;
-                            break;
-                        case "Single":
-                            serializableProperty.fvalue = (float)(object)property.value;
-                            break;
-                        case "Boolean":
-                            serializableProperty.bvalue = (bool)(object)property.value;
-                            break;
-                        case "String":
-                            serializableProperty.svalue = (string)(object)property.value;
-                            break;
-                        case "Vector2":
-                            serializableProperty.v2value = (Vector2)(object)property.value;
-                            break;
-                        case "Vector3":
-                            serializableProperty.v3value = (Vector3)(object)property.value;
-                            break;
-                        case "Vector4":
-                            serializableProperty.v4value = (Vector4)(object)property.value;
-                            break;
-                        case "Color":
-                            serializableProperty.cvalue = (Color)(object)property.value;
-                            break;
-                        default:
-                            serializableProperty.ovalue = (UnityEngine.Object)property.value;
-                            break;
-                    }
+                switch (property.type.Name)
+                {
+                    case "Int32":
+                        serializableProperty.ivalue = (int)(object)property.value;
+                        break;
+                    case "Single":
+                        serializableProperty.fvalue = (float)(object)property.value;
+                        break;
+                    case "Boolean":
+                        serializableProperty.bvalue = (bool)(object)property.value;
+                        break;
+                    case "String":
+                        serializableProperty.svalue = (string)(object)property.value;
+                        break;
+                    case "Vector2":
+                        serializableProperty.v2value = (Vector2)(object)property.value;
+                        break;
+                    case "Vector3":
+                        serializableProperty.v3value = (Vector3)(object)property.value;
+                        break;
+                    case "Vector4":
+                        serializableProperty.v4value = (Vector4)(object)property.value;
+                        break;
+                    case "Color":
+                        serializableProperty.cvalue = (Color)(object)property.value;
+                        break;
+                    default:
+                        serializableProperty.ovalue = (UnityEngine.Object)property.value;
+                        break;
+                }
                 return serializableProperty;
             }
 
@@ -333,36 +333,36 @@ namespace NodeAI
                 property.type = System.Type.GetType(serializableProperty.serializedTypename);
                 property.paramReference = serializableProperty.paramReference;
                 property.output = serializableProperty.output;
-                switch(property.type.Name)
-                    {
-                        case "Int32":
-                            property.value = serializableProperty.ivalue;
-                            break;
-                        case "Single":
-                            property.value = serializableProperty.fvalue;
-                            break;
-                        case "Boolean":
-                            property.value = serializableProperty.bvalue;
-                            break;
-                        case "String":
-                            property.value = serializableProperty.svalue;
-                            break;
-                        case "Vector2":
-                            property.value = serializableProperty.v2value;
-                            break;
-                        case "Vector3":
-                            property.value = serializableProperty.v3value;
-                            break;
-                        case "Vector4":
-                            property.value = serializableProperty.v4value;
-                            break;
-                        case "Color":
-                            property.value = serializableProperty.cvalue;
-                            break;
-                        default:
-                            property.value = serializableProperty.ovalue;
-                            break;
-                    }
+                switch (property.type.Name)
+                {
+                    case "Int32":
+                        property.value = serializableProperty.ivalue;
+                        break;
+                    case "Single":
+                        property.value = serializableProperty.fvalue;
+                        break;
+                    case "Boolean":
+                        property.value = serializableProperty.bvalue;
+                        break;
+                    case "String":
+                        property.value = serializableProperty.svalue;
+                        break;
+                    case "Vector2":
+                        property.value = serializableProperty.v2value;
+                        break;
+                    case "Vector3":
+                        property.value = serializableProperty.v3value;
+                        break;
+                    case "Vector4":
+                        property.value = serializableProperty.v4value;
+                        break;
+                    case "Color":
+                        property.value = serializableProperty.cvalue;
+                        break;
+                    default:
+                        property.value = serializableProperty.ovalue;
+                        break;
+                }
                 return property;
             }
             public string name; ///< The name of the property.
@@ -379,7 +379,7 @@ namespace NodeAI
             public Vector2 v2value; ///< The vector2 value of the property.
             public Vector3 v3value; ///< The vector3 value of the property.
             public Vector4 v4value; ///< The vector4 value of the property.
-            [SerializeReference]public UnityEngine.Object ovalue; ///< The object reference value of the property.
+            [SerializeReference] public UnityEngine.Object ovalue; ///< The object reference value of the property.
             public bool output = false; ///< Whether the property is an output property.
         }
         /// <summary>
@@ -393,7 +393,7 @@ namespace NodeAI
             [SerializeField]
             public List<string> childGUIDs; ///< The GUIDs of the nodes in the group.
         }
-        
+
     }
 
 

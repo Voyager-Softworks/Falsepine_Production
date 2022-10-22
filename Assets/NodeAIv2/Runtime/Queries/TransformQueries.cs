@@ -80,5 +80,75 @@ namespace NodeAI.Utility.Transforms
         }
     }
 
+    public class Forward : NodeAI.Query
+    {
+        public Forward()
+        {
+            AddProperty<UnityEngine.Transform>("Transform", null, false);
+            AddProperty<UnityEngine.Vector3>("Forward", UnityEngine.Vector3.forward, true);
+        }
+
+        public override void GetNewValues(NodeAI_Agent agent)
+        {
+            if (GetProperty<UnityEngine.Transform>("Transform") == null)
+            {
+                SetProperty<UnityEngine.Vector3>("Forward", UnityEngine.Vector3.forward);
+                return;
+            }
+            SetProperty<UnityEngine.Vector3>("Forward", GetProperty<UnityEngine.Transform>("Transform").forward);
+        }
+    }
+
+    public class Right : NodeAI.Query
+    {
+        public Right()
+        {
+            AddProperty<UnityEngine.Transform>("Transform", null, false);
+            AddProperty<UnityEngine.Vector3>("Right", UnityEngine.Vector3.right, true);
+        }
+
+        public override void GetNewValues(NodeAI_Agent agent)
+        {
+            if (GetProperty<UnityEngine.Transform>("Transform") == null)
+            {
+                SetProperty<UnityEngine.Vector3>("Right", UnityEngine.Vector3.right);
+                return;
+            }
+            SetProperty<UnityEngine.Vector3>("Right", GetProperty<UnityEngine.Transform>("Transform").right);
+        }
+    }
+
+    public class Up : NodeAI.Query
+    {
+        public Up()
+        {
+            AddProperty<UnityEngine.Transform>("Transform", null, false);
+            AddProperty<UnityEngine.Vector3>("Up", UnityEngine.Vector3.up, true);
+        }
+
+        public override void GetNewValues(NodeAI_Agent agent)
+        {
+            if (GetProperty<UnityEngine.Transform>("Transform") == null)
+            {
+                SetProperty<UnityEngine.Vector3>("Up", UnityEngine.Vector3.up);
+                return;
+            }
+            SetProperty<UnityEngine.Vector3>("Up", GetProperty<UnityEngine.Transform>("Transform").up);
+        }
+    }
+
+    public class ThisTransform : NodeAI.Query
+    {
+        public ThisTransform()
+        {
+            AddProperty<UnityEngine.Transform>("Transform", null, true);
+        }
+
+        public override void GetNewValues(NodeAI_Agent agent)
+        {
+            SetProperty<UnityEngine.Transform>("Transform", agent.transform);
+        }
+    }
+
 
 }
