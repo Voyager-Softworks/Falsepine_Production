@@ -268,33 +268,12 @@ MonoBehaviour:
     queryType: 
     noLogic: 0
     noQuery: 1
-  - GUID: cebd829d-b7dd-4e23-aded-7f06fadaf2dd
-    parentGUID: 41a906d5-d6db-4acb-b9a0-0037c22d957a
-    title: Sequence
-    childGUIDs:
-    - ad1cac6a-154d-47b4-99a2-f832fb5ab1fd
-    - 9217c40a-df04-4457-b331-970c57b4297c
-    - 31de75a1-ef3c-4dd8-9ee5-d5ea6125a6e9
-    - 404ec0e7-e52f-41bd-9184-a3a1e9a49b8c
-    - 39eb916a-a49e-46c7-be9c-f6c89c41b225
-    - a364a1fc-ab06-4671-98c7-096e3d47f8a5
-    - ecc5b93e-961d-406e-8107-03a326a82a01
-    nodeType: 4
-    position: {x: 1269, y: 1928}
-    runtime: {fileID: 0}
-    runtimequery: {fileID: 0}
-    properties: []
-    runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    queryType: 
-    noLogic: 0
-    noQuery: 1
   - GUID: 41a906d5-d6db-4acb-b9a0-0037c22d957a
     parentGUID: e8611c77-c04c-453b-bbff-bc4409e14f2e
     title: Sequence
     childGUIDs:
-    - cebd829d-b7dd-4e23-aded-7f06fadaf2dd
     - d5f9c369-127e-4281-9efa-ab0dc1b9cdbe
+    - cebd829d-b7dd-4e23-aded-7f06fadaf2dd
     nodeType: 4
     position: {x: 1072, y: 1761}
     runtime: {fileID: 0}
@@ -3921,6 +3900,85 @@ MonoBehaviour:
     queryType: 
     noLogic: 0
     noQuery: 1
+  - GUID: cebd829d-b7dd-4e23-aded-7f06fadaf2dd
+    parentGUID: 41a906d5-d6db-4acb-b9a0-0037c22d957a
+    title: Sequence
+    childGUIDs:
+    - ad1cac6a-154d-47b4-99a2-f832fb5ab1fd
+    - 9217c40a-df04-4457-b331-970c57b4297c
+    - 31de75a1-ef3c-4dd8-9ee5-d5ea6125a6e9
+    - 404ec0e7-e52f-41bd-9184-a3a1e9a49b8c
+    - 39eb916a-a49e-46c7-be9c-f6c89c41b225
+    - a364a1fc-ab06-4671-98c7-096e3d47f8a5
+    - ecc5b93e-961d-406e-8107-03a326a82a01
+    - 70a17cea-6dbe-41ad-98d7-8138c6122f90
+    nodeType: 4
+    position: {x: 1269, y: 1928}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: NodeAI.Sequence, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: 70a17cea-6dbe-41ad-98d7-8138c6122f90
+    parentGUID: cebd829d-b7dd-4e23-aded-7f06fadaf2dd
+    title: CloakBegone
+    childGUIDs: []
+    nodeType: 1
+    position: {x: 1475, y: 2745}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties:
+    - name: CLOAK
+      GUID: cf5d3652-bb5e-4404-9d5a-cb7ab5483361
+      paramReference: 9bdd07e4-19bc-4bce-8b8c-365ffbc74b25
+      serializedTypename: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 0}
+      output: 0
+    - name: INVIS MATERIAL
+      GUID: null
+      paramReference: null
+      serializedTypename: UnityEngine.Material, UnityEngine.CoreModule, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      svalue: 
+      ivalue: 0
+      fvalue: 0
+      bvalue: 0
+      cvalue: {r: 0, g: 0, b: 0, a: 0}
+      v2value: {x: 0, y: 0}
+      v3value: {x: 0, y: 0, z: 0}
+      v4value: {x: 0, y: 0, z: 0, w: 0}
+      ovalue: {fileID: 2100000, guid: 109190f39401863f39cda1add88e376f, type: 2}
+      output: 0
+    runtimeLogicType: Boss.Bonestag.CloakBegone, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    queryType: 
+    noLogic: 0
+    noQuery: 1
+  - GUID: cf5d3652-bb5e-4404-9d5a-cb7ab5483361
+    parentGUID: 9bdd07e4-19bc-4bce-8b8c-365ffbc74b25
+    title: Cloak
+    childGUIDs: []
+    nodeType: 7
+    position: {x: 1310, y: 2689}
+    runtime: {fileID: 0}
+    runtimequery: {fileID: 0}
+    properties: []
+    runtimeLogicType: 
+    queryType: 
+    noLogic: 1
+    noQuery: 1
   exposedProperties:
   - name: Started
     GUID: 0c992cf5-8e5f-46d4-90af-f936c548f37b
@@ -4102,6 +4160,21 @@ MonoBehaviour:
     v4value: {x: 0, y: 0, z: 0, w: 0}
     ovalue: {fileID: 0}
     output: 0
+  - name: Cloak
+    GUID: 9bdd07e4-19bc-4bce-8b8c-365ffbc74b25
+    paramReference: 
+    serializedTypename: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    svalue: 
+    ivalue: 0
+    fvalue: 0
+    bvalue: 0
+    cvalue: {r: 0, g: 0, b: 0, a: 0}
+    v2value: {x: 0, y: 0}
+    v3value: {x: 0, y: 0, z: 0}
+    v4value: {x: 0, y: 0, z: 0, w: 0}
+    ovalue: {fileID: 0}
+    output: 0
   nodeGroups:
   - title: Group
     childGUIDs:
@@ -4133,6 +4206,8 @@ MonoBehaviour:
     - a364a1fc-ab06-4671-98c7-096e3d47f8a5
     - d5f9c369-127e-4281-9efa-ab0dc1b9cdbe
     - ecc5b93e-961d-406e-8107-03a326a82a01
+    - 70a17cea-6dbe-41ad-98d7-8138c6122f90
+    - cf5d3652-bb5e-4404-9d5a-cb7ab5483361
   queries:
   - {fileID: 0}
   - {fileID: 0}
