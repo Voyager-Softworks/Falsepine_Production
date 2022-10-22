@@ -63,5 +63,11 @@ public class RootMotionAgent : MonoBehaviour
         position.y = navAgent.nextPosition.y;
         transform.position = position;
         navAgent.nextPosition = transform.position;
+
+        // rotation
+        if (useRootMotion)
+        {
+            transform.rotation = animator.rootRotation;
+        }
     }
 }

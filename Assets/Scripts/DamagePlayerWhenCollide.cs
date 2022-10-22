@@ -21,6 +21,7 @@ public class DamagePlayerWhenCollide : MonoBehaviour
     float timeBeforeDetectionTimer = 0f;
     public LayerMask layerMask;
     public float maxDuration = 10f;
+    float durationTimer = 0f;
 
     public float radius = 0.5f; ///< The radius of the sphere.
 
@@ -33,6 +34,12 @@ public class DamagePlayerWhenCollide : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        durationTimer += Time.deltaTime;
+        if (durationTimer > maxDuration)
+        {
+            isActive = false;
+            return;
+        }
         tickTimer += Time.deltaTime;
         if (tickTimer >= tickRate)
         {
@@ -40,6 +47,7 @@ public class DamagePlayerWhenCollide : MonoBehaviour
             if (!isActive) return;
             timeBeforeDetectionTimer += Time.deltaTime;
             if (timeBeforeDetectionTimer < timeBeforeDetection) return;
+
             RaycastHit[] hits = Physics.SphereCastAll(transform.position, sphereCollider.radius * transform.lossyScale.y, transform.forward, 0.0f, layerMask);
             foreach (RaycastHit hit in hits)
             {
