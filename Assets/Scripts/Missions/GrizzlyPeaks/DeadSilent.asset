@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56c089656aad97c49b15ade4c6d1891e, type: 3}
+  m_Name: DeadSilent
+  m_EditorClassIdentifier: 
+  m_title: Dead Silent
+  m_description: 'The Afflicted frequently perform pagan worship at dusk. This gives
+    us time to pick off some of the stranglers while they''re doing whatever it is
+    they do. Loud noises won''t do though, any gunfire will alert them, and our lads
+    will get overrun. This is a timely matter as well, so we''re paying top dollar
+    for hunters to clear out a bunch as quickly and quietly as possible.
+
+
+    Kill
+    (20) Afflicted in under 4 minutes using a Crossbow (Non-Legendary), without firing
+    your sidearm.'
+  m_difficulty: 2
+  m_conditions:
+  - id: 0
+  - id: 1
+  - id: 2
+  m_lockOnComplete: 1
+  m_isLockedComplete: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: Kill_MissionCondition, ns: , asm: Assembly-CSharp}
+      data:
+        m_name: Kill (0/20) Afflicted(s) with the Crossbow
+        m_state: 0
+        m_lockState: 0
+        m_monsterToKill: {fileID: 11400000, guid: ee1c8229e1cc8a743bc7e1c7c9ebf36a, type: 2}
+        m_initialStats: []
+        m_initialKills: []
+        m_requiredKills: 20
+        m_useOptional: 1
+        m_statToKillWith:
+          value: PlayerDamage
+        m_itemToKillWith: {fileID: 11400000, guid: 29f0e56bf43d45d4c9e7f0ff6ab7e999, type: 2}
+    00000001:
+      type: {class: Speedrun_MissionCondition, ns: , asm: Assembly-CSharp}
+      data:
+        m_name: Spend less than 240 seconds in the expedition
+        m_state: 0
+        m_lockState: 0
+        m_timeLimit: 240
+        m_timeElapsed: 0
+        m_triggerMonster: {fileID: 0}
+        m_triggerMonsterSeen: 1
+    00000002:
+      type: {class: NoSecondaryUsed_MissionCondition, ns: , asm: Assembly-CSharp}
+      data:
+        m_name: Don't fire your secondary weapon
+        m_state: 0
+        m_lockState: 0

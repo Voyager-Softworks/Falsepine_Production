@@ -10,20 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56c089656aad97c49b15ade4c6d1891e, type: 3}
-  m_Name: Sacrifice
+  m_Name: FalsepinesFinest
   m_EditorClassIdentifier: 
-  m_title: Sacrifice
-  m_description: 'This illness that''s taken over the folks in the Grizzly Peaks
-    seems to elude science. Some folk reckon you gotta fight fire with fire. So I
-    hate to say it, but we''re looking for someone to test the theory. Cut down some
-    of the afflicted with a weapon made from bone, theres a decent payout for anyone
-    mad enough to get that close.
+  m_title: Falsepine's Finest
+  m_description: 'Falsepine prides herself on having a community who are dedicated,
+    resiliant, and fuckin efficient. We got a reporter here whos lookin to put us
+    on the map. Give him something to write about and collect your reward!
 
 
-    Kill (12) Afflicted with the Bone Knife (Non-legendaray).'
+    Kill
+    (6) Afflicted without reloading or taking damage.'
   m_difficulty: 1
   m_conditions:
   - id: 0
+  - id: 1
+  - id: 2
   m_lockOnComplete: 1
   m_isLockedComplete: 0
   references:
@@ -31,14 +32,26 @@ MonoBehaviour:
     00000000:
       type: {class: Kill_MissionCondition, ns: , asm: Assembly-CSharp}
       data:
-        m_name: Kill (0/12) Afflicted(s) with the Bone Knife
+        m_name: Kill (0/6) Afflicted(s)
         m_state: 0
         m_lockState: 0
         m_monsterToKill: {fileID: 11400000, guid: ee1c8229e1cc8a743bc7e1c7c9ebf36a, type: 2}
         m_initialStats: []
         m_initialKills: []
-        m_requiredKills: 12
-        m_useOptional: 1
+        m_requiredKills: 6
+        m_useOptional: 0
         m_statToKillWith:
           value: MeleeDamage
         m_itemToKillWith: {fileID: 11400000, guid: 70e1666ebee6fd748be8ae49a4c9a679, type: 2}
+    00000001:
+      type: {class: NoReload_MissionCondition, ns: , asm: Assembly-CSharp}
+      data:
+        m_name: Don't reload
+        m_state: 0
+        m_lockState: 0
+    00000002:
+      type: {class: NoDamage_MissionCondition, ns: , asm: Assembly-CSharp}
+      data:
+        m_name: Don't take any damage
+        m_state: 0
+        m_lockState: 0

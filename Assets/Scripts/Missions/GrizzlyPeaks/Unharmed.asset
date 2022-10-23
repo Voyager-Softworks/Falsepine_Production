@@ -10,18 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56c089656aad97c49b15ade4c6d1891e, type: 3}
-  m_Name: Sacrifice
+  m_Name: Unharmed
   m_EditorClassIdentifier: 
-  m_title: Sacrifice
-  m_description: 'This illness that''s taken over the folks in the Grizzly Peaks
-    seems to elude science. Some folk reckon you gotta fight fire with fire. So I
-    hate to say it, but we''re looking for someone to test the theory. Cut down some
-    of the afflicted with a weapon made from bone, theres a decent payout for anyone
-    mad enough to get that close.
+  m_title: Dead or Alive
+  m_description: 'We have some academics who are looking to study the afflicted,
+    which can be tricky when they''re cut up by gunfire or blown up. Get us some
+    specimens with minimal injuries. A nice little payout for anyone willing.
 
 
-    Kill (12) Afflicted with the Bone Knife (Non-legendaray).'
-  m_difficulty: 1
+    Kill
+    (4) Afflicted with Bear Traps.'
+  m_difficulty: 0
   m_conditions:
   - id: 0
   m_lockOnComplete: 1
@@ -31,14 +30,14 @@ MonoBehaviour:
     00000000:
       type: {class: Kill_MissionCondition, ns: , asm: Assembly-CSharp}
       data:
-        m_name: Kill (0/12) Afflicted(s) with the Bone Knife
+        m_name: Kill (0/4) Afflicted(s) with the Beartrap
         m_state: 0
         m_lockState: 0
         m_monsterToKill: {fileID: 11400000, guid: ee1c8229e1cc8a743bc7e1c7c9ebf36a, type: 2}
         m_initialStats: []
         m_initialKills: []
-        m_requiredKills: 12
+        m_requiredKills: 4
         m_useOptional: 1
         m_statToKillWith:
-          value: MeleeDamage
-        m_itemToKillWith: {fileID: 11400000, guid: 70e1666ebee6fd748be8ae49a4c9a679, type: 2}
+          value: TrapDamage
+        m_itemToKillWith: {fileID: 11400000, guid: 4786e1bf720d89548ae147b21d9b6798, type: 2}
