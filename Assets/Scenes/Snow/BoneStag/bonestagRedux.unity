@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0121310055, g: 0.008564093, b: 0.007927982, a: 1}
+  m_IndirectSpecularColor: {r: 0.012130959, g: 0.008564102, b: 0.007927889, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4460,6 +4460,219 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4108835259309374878, guid: fb2f2b8668a790a43a00e6748a527d93, type: 3}
   m_PrefabInstance: {fileID: 1987136114}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &328213025
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 328213027}
+  - component: {fileID: 328213026}
+  m_Layer: 0
+  m_Name: BossMusic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &328213026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328213025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a119b25d52728621583e7f3194633c58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggers:
+  - End
+  - Stage2
+  audioChannels:
+  - name: BossMusic
+    volume: 0.3
+    lastVolume: 0
+    pitch: 1
+    layered: 0
+    clip: {fileID: 8300000, guid: a4147e68bd26bb44ea1a7377420ad5c3, type: 3}
+    layers:
+    - {fileID: 8300000, guid: a4147e68bd26bb44ea1a7377420ad5c3, type: 3}
+    - {fileID: 8300000, guid: be200d91c5639d34f8c7d765e78a9610, type: 3}
+    timeSignature: 4
+    beatsPerMinute: 80
+    layerIndex: 0
+    currentLayer: 0
+    longestLayerDuration: 0
+    longestLayerIndex: 0
+    loop: 1
+    playOnAwake: 0
+    SpatialBlend: 0
+    maxDistance: 300
+    minDistance: 1
+    distanceCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: -1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    source: {fileID: 0}
+    layerSources: []
+    playing: 0
+    paused: 0
+    time: 0
+    timeNormalized: 0
+    duration: 0
+  - name: BossMusic2
+    volume: 0.3
+    lastVolume: 0
+    pitch: 1
+    layered: 0
+    clip: {fileID: 8300000, guid: be200d91c5639d34f8c7d765e78a9610, type: 3}
+    layers: []
+    timeSignature: 0
+    beatsPerMinute: 0
+    layerIndex: 0
+    currentLayer: 0
+    longestLayerDuration: 0
+    longestLayerIndex: 0
+    loop: 1
+    playOnAwake: 0
+    SpatialBlend: 0
+    maxDistance: 300
+    minDistance: 1
+    distanceCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: -1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    source: {fileID: 0}
+    layerSources: []
+    playing: 0
+    paused: 0
+    time: 0
+    timeNormalized: 0
+    duration: 0
+  - name: End
+    volume: 0.3
+    lastVolume: 0
+    pitch: 1
+    layered: 0
+    clip: {fileID: 8300000, guid: 97d428106b1cc604bae6f22d336f8776, type: 3}
+    layers: []
+    timeSignature: 0
+    beatsPerMinute: 0
+    layerIndex: 0
+    currentLayer: 0
+    longestLayerDuration: 0
+    longestLayerIndex: 0
+    loop: 0
+    playOnAwake: 0
+    SpatialBlend: 0
+    maxDistance: 300
+    minDistance: 1
+    distanceCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 1
+        inSlope: 0
+        outSlope: -1
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: -1
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    source: {fileID: 0}
+    layerSources: []
+    playing: 0
+    paused: 0
+    time: 0
+    timeNormalized: 0
+    duration: 0
+  transitions:
+  - from: BossMusic2
+    to: End
+    duration: 1
+    hasExitTime: 0
+    exitTime: 0
+    inheritNormalisedTime: 0
+    trigger: End
+    autoTransitionOnTrackEnd: 0
+  - from: BossMusic
+    to: BossMusic2
+    duration: 1
+    hasExitTime: 0
+    exitTime: 0
+    inheritNormalisedTime: 0
+    trigger: Stage2
+    autoTransitionOnTrackEnd: 0
+--- !u!4 &328213027
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 328213025}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.956945, y: 15.622622, z: 67.18535}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 34
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &328908606
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11175,6 +11388,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 28.130695
       objectReference: {fileID: 0}
+    - target: {fileID: 2185438064380854222, guid: 004ee1ef85bda374bbc44b305d762cfd, type: 3}
+      propertyPath: onDeath.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 328213026}
     - target: {fileID: 2265585320215522946, guid: 004ee1ef85bda374bbc44b305d762cfd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -66.17169
@@ -11393,7 +11610,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3906221961975269412, guid: 004ee1ef85bda374bbc44b305d762cfd, type: 3}
       propertyPath: inspectorProperties.Array.size
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 3906221961975269412, guid: 004ee1ef85bda374bbc44b305d762cfd, type: 3}
       propertyPath: inspectorProperties.Array.data[10].GUID
@@ -11420,6 +11637,14 @@ PrefabInstance:
       value: Cloak
       objectReference: {fileID: 0}
     - target: {fileID: 3906221961975269412, guid: 004ee1ef85bda374bbc44b305d762cfd, type: 3}
+      propertyPath: inspectorProperties.Array.data[13].GUID
+      value: ad1aa5c4-b822-4ef7-83ed-52c5b5a47a38
+      objectReference: {fileID: 0}
+    - target: {fileID: 3906221961975269412, guid: 004ee1ef85bda374bbc44b305d762cfd, type: 3}
+      propertyPath: inspectorProperties.Array.data[13].name
+      value: Boss Music
+      objectReference: {fileID: 0}
+    - target: {fileID: 3906221961975269412, guid: 004ee1ef85bda374bbc44b305d762cfd, type: 3}
       propertyPath: inspectorProperties.Array.data[6].fvalue
       value: 500
       objectReference: {fileID: 0}
@@ -11438,7 +11663,7 @@ PrefabInstance:
     - target: {fileID: 3906221961975269412, guid: 004ee1ef85bda374bbc44b305d762cfd, type: 3}
       propertyPath: inspectorProperties.Array.data[13].ovalue
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 328213025}
     - target: {fileID: 3906221961975269412, guid: 004ee1ef85bda374bbc44b305d762cfd, type: 3}
       propertyPath: inspectorProperties.Array.data[14].ovalue
       value: 
@@ -11457,6 +11682,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3906221961975269412, guid: 004ee1ef85bda374bbc44b305d762cfd, type: 3}
       propertyPath: inspectorProperties.Array.data[12].serializedTypename
+      value: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
+        PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 3906221961975269412, guid: 004ee1ef85bda374bbc44b305d762cfd, type: 3}
+      propertyPath: inspectorProperties.Array.data[13].serializedTypename
       value: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
       objectReference: {fileID: 0}
@@ -12015,14 +12245,6 @@ PrefabInstance:
     - target: {fileID: 7486006438803978755, guid: 004ee1ef85bda374bbc44b305d762cfd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 17.038755
-      objectReference: {fileID: 0}
-    - target: {fileID: 7675273446768421799, guid: 004ee1ef85bda374bbc44b305d762cfd, type: 3}
-      propertyPath: m_Volume
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7675273446768421799, guid: 004ee1ef85bda374bbc44b305d762cfd, type: 3}
-      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7678280209082926623, guid: 004ee1ef85bda374bbc44b305d762cfd, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -13574,7 +13796,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &841009091
 AudioSource:
   m_ObjectHideFlags: 0
@@ -23781,7 +24003,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1484995755}
   - component: {fileID: 1484995754}
-  - component: {fileID: 1484995753}
   - component: {fileID: 1484995756}
   m_Layer: 0
   m_Name: BossBattleStartTrigger
@@ -23790,23 +24011,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1484995753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1484995752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a55bdb3bdeb45df01b0c7ffecc13ce13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerName: 
-  ignorePlayer: 0
-  ignoreNonPlayer: 1
-  mustHaveHealth: 0
-  hitCollider: {fileID: 0}
 --- !u!65 &1484995754
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -23855,6 +24059,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 328213026}
+        m_TargetAssemblyTypeName: AudioController, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
