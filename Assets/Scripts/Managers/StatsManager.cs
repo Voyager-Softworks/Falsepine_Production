@@ -872,6 +872,9 @@ public class StatsManager : MonoBehaviour
 
         m_activeTalismans.Clear();
 
+        // heal
+        m_playerCurrentHealth = m_calcedPlayerMaxHealth;
+
         // save
         SaveStats(_saveSlot);
     }
