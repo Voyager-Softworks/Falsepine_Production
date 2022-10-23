@@ -33,6 +33,7 @@ public class AttackData : ScriptableObject
     {
         [Header("General")]
         public AttackType attackType; ///< The type of attack.
+        public bool friendlyFire = false; ///< Whether or not the attack can hit friendly units.
         public float attackRange; ///< The range of the attack.
         public float attackDelay; ///< The delay between the start of the attack and the actual attack hitting.
         public float attackDuration; ///< The duration for which to check for a hit.
