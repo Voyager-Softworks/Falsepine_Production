@@ -404,6 +404,11 @@ public class MissionManager : MonoBehaviour
 
         // sound
         UIAudioManager.instance?.embarkSound.Play();
+
+        // heal
+        if (StatsManager.instance){
+            StatsManager.instance.m_playerCurrentHealth = StatsManager.instance.m_calcedPlayerMaxHealth;
+        }
     }
 
     /// <summary>
@@ -564,7 +569,7 @@ public class MissionManager : MonoBehaviour
     /// <returns></returns>
     public List<Mission> GetMissions()
     {
-        if (m_currentZone == null) return null;
+        if (m_currentZone == null) return new List<Mission>();
 
         return m_currentZone.m_missions;
     }

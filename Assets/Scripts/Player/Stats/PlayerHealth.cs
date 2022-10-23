@@ -6,6 +6,7 @@ using TMPro;
 using UnityEngine.UI;
 using System;
 using UnityEngine.Events;
+using System.IO;
 
 
 /// <summary>
@@ -15,16 +16,35 @@ using UnityEngine.Events;
 public class PlayerHealth : MonoBehaviour, StatsManager.UsesStats
 {
     [Header("Stats")]
-    [SerializeField] private float m_maxHealth = 100f; ///< The maximum health of the player.
-    public float calcedMaxHealth {
-        get { 
-            return StatsManager.CalculateMaxHealth(this, m_maxHealth);
+    [ReadOnly] public string note = "Stats are store in stats manager";
+    public float currentHealth {
+        get {
+            if (StatsManager.instance != null) {
+                return StatsManager.instance.m_playerCurrentHealth;
+            } else {
+                return -1.0f;
+            }
         }
-        set { 
-            m_maxHealth = value; 
+        set {
+            if (StatsManager.instance != null) {
+                StatsManager.instance.m_playerCurrentHealth = value;
+            }
         }
     }
-    public float currentHealth = 100f; ///< The current health of the player.
+    public float calcedMaxHealth {
+        get {
+            if (StatsManager.instance != null) {
+                return StatsManager.instance.m_calcedPlayerMaxHealth;
+            } else {
+                return -1.0f;
+            }
+        }
+        set {
+            if (StatsManager.instance != null) {
+                StatsManager.instance.m_calcedPlayerMaxHealth = value;
+            }
+        }
+    }
     public bool isInvulnerable = false; ///< Whether or not the player is invulnerable.
     public bool isDead = false; ///< Whether or not the player is dead.
     public bool isStunned = false; ///< Whether or not the player is stunned.
@@ -75,9 +95,6 @@ public class PlayerHealth : MonoBehaviour, StatsManager.UsesStats
         if (uiScript == null) uiScript = FindObjectOfType<UIScript>();
         if (_audioSource == null) _audioSource = GetComponent<AudioSource>();
         if (_animator == null) _animator = GetComponentInChildren<Animator>();
-
-        // currentHealth set
-        currentHealth = calcedMaxHealth;
     }
 
     // Update is called once per frame

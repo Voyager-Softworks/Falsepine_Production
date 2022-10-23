@@ -177,6 +177,29 @@ public class StatsManager : MonoBehaviour
         void AddStatType(StatType type);
         void RemoveStatType(StatType type);
     }
+
+    // a simple class that has a constructor from a list of stats to a UsesStats class
+    private class TempStatUser : UsesStats
+    {
+        public List<StatType> stats = new List<StatType>();
+        public List<StatType> GetStatTypes()
+        {
+            return stats;
+        }
+        public void AddStatType(StatType type)
+        {
+            stats.Add(type);
+        }
+        public void RemoveStatType(StatType type)
+        {
+            stats.Remove(type);
+        }
+
+        public TempStatUser(List<StatType> _stats)
+        {
+            stats = _stats;
+        }
+    }
     #endregion
 
     ////////// MODS //////////
@@ -359,6 +382,21 @@ public class StatsManager : MonoBehaviour
     };
 
     [SerializeField] static public List<Drink> activeDrinks = new List<Drink>();
+
+    public float m_playerCurrentHealth = 100;
+    public float m_playerMaxHealth = 100;
+    public float m_calcedPlayerMaxHealth {
+        get {
+            // make a temp stat user
+            TempStatUser tempUser = new TempStatUser(new List<StatType>() {
+                StatType.PlayerMaxHealth
+            });
+            return StatsManager.CalculateMaxHealth(tempUser, m_playerMaxHealth);
+        }
+        set { 
+            m_playerMaxHealth = value; 
+        }
+    }
 
     /// <summary>
     /// Gets the stat mods from the player inventory
@@ -700,6 +738,10 @@ public class StatsManager : MonoBehaviour
         public List<StatModRange> possibleTalismanMods = new List<StatModRange>();
         public List<Talisman> activeTalismans = new List<Talisman>();
         public List<MonsterStat> monsterStats = new List<MonsterStat>();
+
+        // health
+        public float m_playerCurrentHealth = 100.0f;
+        public float m_playerMaxHealth = 100.0f;
     }
 
     public void SaveStats(int saveSlot)
@@ -725,6 +767,10 @@ public class StatsManager : MonoBehaviour
         data.activeTalismans = new List<Talisman>(m_activeTalismans);
         // add monster stats
         data.monsterStats = new List<MonsterStat>(m_monsterStats);
+
+        // add health
+        data.m_playerCurrentHealth = m_playerCurrentHealth;
+        data.m_playerMaxHealth = m_playerMaxHealth;
 
         // convert data to json
         string json = JsonUtility.ToJson(data);
@@ -778,6 +824,10 @@ public class StatsManager : MonoBehaviour
         m_activeTalismans = new List<Talisman>(data.activeTalismans);
         // load monster stats
         m_monsterStats = new List<MonsterStat>(data.monsterStats);
+
+        // load health
+        m_playerCurrentHealth = data.m_playerCurrentHealth;
+        m_playerMaxHealth = data.m_playerMaxHealth;
     }
 
     /// <summary>
