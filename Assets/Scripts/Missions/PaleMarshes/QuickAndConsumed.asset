@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56c089656aad97c49b15ade4c6d1891e, type: 3}
-  m_Name: Fight Evil with Evil
+  m_Name: QuickAndConsumed
   m_EditorClassIdentifier: 
-  m_title: Fight Evil with Evil
-  m_description: 'We''re not entirely sure what''s most effective against the entity
-    in the swamp. But we know that if you throw enough lead at something, it goes
-    down. Lookin to have our point proven.
+  m_title: The Quick and the Consumed
+  m_description: 'Wanting to hire folk with good reflexes, our lads are getting snatched
+    up by these things and we need someone to teach em when to duck! There''s good
+    pay for a good learnin, just don''t fuck it up, we don''t need more deadmen out
+    there.
 
 
-    Kill (14) Corpse Puppets with the
-    Occult Repeater (Non-Legendary) without taking damage.'
+    Kill (12) Corpse Puppets with a Melee weapon without taking damage.'
   m_difficulty: 2
   m_conditions:
   - id: 0
@@ -31,17 +31,17 @@ MonoBehaviour:
     00000000:
       type: {class: Kill_MissionCondition, ns: , asm: Assembly-CSharp}
       data:
-        m_name: Kill (0/14) Corpse Puppet(s) with the Occult Repeater
+        m_name: Kill (0/12) Corpse Puppet(s) with Melee Damage
         m_state: 0
         m_lockState: 0
         m_monsterToKill: {fileID: 11400000, guid: 2276afe60f38eef45a5eac4661ac392b, type: 2}
         m_initialStats: []
         m_initialKills: []
-        m_requiredKills: 14
+        m_requiredKills: 12
         m_useOptional: 1
         m_statToKillWith:
-          value: PlayerDamage
-        m_itemToKillWith: {fileID: 11400000, guid: 16070815c439ddf43807d42434ead47a, type: 2}
+          value: MeleeDamage
+        m_itemToKillWith: {fileID: 0}
     00000001:
       type: {class: NoDamage_MissionCondition, ns: , asm: Assembly-CSharp}
       data:

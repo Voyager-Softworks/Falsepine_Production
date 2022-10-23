@@ -10,17 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56c089656aad97c49b15ade4c6d1891e, type: 3}
-  m_Name: KillWalingTree
+  m_Name: RootCause
   m_EditorClassIdentifier: 
-  m_title: Burn it Down
-  m_description: 'The Bayou makes lightin up the place and burning it all down impossible.
-    So we''re guna need someone to burn this out at the source. Wood may be damp
-    but it''ll do the job eventually. Pickup yer firebombs are the store and get
-    to burning.
+  m_title: The Root Cause
+  m_description: 'No one in town can be sure that the nightmare growing in the Pale
+    Bayou will stay dead once dealt with, so we need a sample. Learned types are
+    eager to study the tree and assess the occult presence within, in order to ensure
+    it won''t come back. Anyone crazy enough to get a sample from the tree itself
+    will be walking away with heavy pockets.
 
 
-    Kill the Wailing Tree with a Fire Bottle.'
-  m_difficulty: 0
+    Finish off the Wailing Tree with
+    a melee weapon.'
+  m_difficulty: 2
   m_conditions:
   - id: 0
   m_lockOnComplete: 1
@@ -30,7 +32,7 @@ MonoBehaviour:
     00000000:
       type: {class: Kill_MissionCondition, ns: , asm: Assembly-CSharp}
       data:
-        m_name: Kill (0/1) Wailing Tree with Fire Damage
+        m_name: Kill (0/1) Wailing Tree with Melee Damage
         m_state: 0
         m_lockState: 0
         m_monsterToKill: {fileID: 11400000, guid: 307a76038b166f84f8a8dfdb1752dedd, type: 2}
@@ -39,5 +41,5 @@ MonoBehaviour:
         m_requiredKills: 1
         m_useOptional: 1
         m_statToKillWith:
-          value: FireDamage
+          value: MeleeDamage
         m_itemToKillWith: {fileID: 0}
