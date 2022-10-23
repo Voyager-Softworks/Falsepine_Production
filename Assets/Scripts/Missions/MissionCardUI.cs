@@ -187,7 +187,16 @@ public class MissionCardUI : MonoBehaviour
                     missionCol = Color.red;
                     break;
             }
-            missionTitle.text = "<sprite=0 color=#" + ColorUtility.ToHtmlStringRGB(missionCol) + ">" + associatedMission.m_title;
+
+            string difficultySprite = "<sprite color=#FF0000 name=\"monster\">";
+            string difficultyString = "";
+            // add difficulty sprite to description based on difficulty
+            for (int i = (int)associatedMission.m_difficulty; i >= 0; i--){
+                difficultyString += difficultySprite;
+            }
+
+            missionTitle.text = associatedMission.m_title + "\n" + "<sprite=0 color=#" + ColorUtility.ToHtmlStringRGB(missionCol) + "> " + difficultyString;
+
             missionDescription.text = associatedMission.m_description;
             // add conditions to description
             if (associatedMission){
