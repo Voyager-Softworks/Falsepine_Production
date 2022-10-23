@@ -50,6 +50,11 @@ public class TownSceneManager : MonoBehaviour
         {
             MissionManager.instance.TryEmbark();
         }
+
+        // heal
+        if (StatsManager.instance){
+            StatsManager.instance.m_playerCurrentHealth = StatsManager.instance.m_calcedPlayerMaxHealth;
+        }
     }
 
     // Update is called once per frame

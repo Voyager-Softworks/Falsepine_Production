@@ -114,8 +114,8 @@ public class DrinkPurchasePanel : MonoBehaviour
             else{
                 m_purchaseButton.interactable = false;
 
-                // say Activate
-                m_purchaseButtonText.text = "ACTIVATE";
+                // say Active
+                m_purchaseButtonText.text = "ACTIVE";
 
                 // set the price on the button
                 m_purchaseButtonCostText.text = "";

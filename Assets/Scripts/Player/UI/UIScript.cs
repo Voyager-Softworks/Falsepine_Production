@@ -43,7 +43,6 @@ public class UIScript : MonoBehaviour
     public Image bossHealthBG;
     public Image bossHealthBar, bossHealthBarDark;
     [HideInInspector] public float bossHealthBarMaxWidth;
-    public TextMeshProUGUI bossNameText;
 
     private PlayerInventoryInterface pii;
 
