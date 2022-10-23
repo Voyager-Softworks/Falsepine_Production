@@ -397,6 +397,11 @@ public class MissionManager : MonoBehaviour
     /// </summary>
     public void TryEmbark()
     {
+        // heal
+        if (StatsManager.instance){
+            StatsManager.instance.m_playerCurrentHealth = StatsManager.instance.m_calcedPlayerMaxHealth;
+        }
+
         // begin mission if it exists
         GetCurrentMission()?.BeginMission();
 
@@ -404,11 +409,6 @@ public class MissionManager : MonoBehaviour
 
         // sound
         UIAudioManager.instance?.embarkSound.Play();
-
-        // heal
-        if (StatsManager.instance){
-            StatsManager.instance.m_playerCurrentHealth = StatsManager.instance.m_calcedPlayerMaxHealth;
-        }
     }
 
     /// <summary>
