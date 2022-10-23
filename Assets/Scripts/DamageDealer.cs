@@ -16,6 +16,8 @@ public class DamageDealer : MonoBehaviour
     public GameObject m_hurtPlayerEffect; ///< Particle _effect spawned when the player is hurt
 
     public GameObject m_indicatorPrefab; ///< Indicator that shows where the attack will hit
+
+    List<GameObject> m_indicators = new List<GameObject>(); ///< List of indicators currently in scene
     public struct IndicatorMaterial
     {
         public Material m_material;
@@ -161,6 +163,7 @@ public class DamageDealer : MonoBehaviour
         Vector3 offsetVector = transform.forward * _offset.y + transform.right * _offset.x; //Get the _offset position
         m_indicatorPrefab = GameObject.FindGameObjectWithTag("Indicator"); //Get the indicator prefab
         GameObject indicator = Instantiate(m_indicatorPrefab, transform.position + offsetVector + (_playerDirectionFunction() * (_translationSpeed * _translationDuration)) - Vector3.up, Quaternion.Euler(90, 0, 0)); //Instantiate the indicator
+        m_indicators.Add(indicator); //Add the indicator to the list of indicators
         indicator.tag = "Untagged"; //Remove the tag from the indicator
         float t = 0.0f; //Create the timer
 
@@ -199,6 +202,7 @@ public class DamageDealer : MonoBehaviour
             decalProjector.size = Vector3.Lerp(startSize, endSize, t / _indicatorDuration);
             yield return null;
         }
+        m_indicators.Remove(indicator);
         Destroy(indicator);
 
     }
@@ -327,6 +331,12 @@ public class DamageDealer : MonoBehaviour
     public void CancelAttack()
     {
         StopAllCoroutines();
+        // Destroy all indicators
+        foreach (GameObject indicator in m_indicators)
+        {
+            Destroy(indicator);
+        }
+        m_indicators.Clear();
     }
 
 
