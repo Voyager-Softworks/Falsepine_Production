@@ -18,6 +18,7 @@ public class MissionCardUI : MonoBehaviour
 
     [Header("Main")]
     public TextMeshProUGUI missionTitle;
+    public TextMeshProUGUI missionDifficulty;
     public TextMeshProUGUI missionDescription;
     public Image backgroundImage;
     public GameObject takenGroup;
@@ -133,6 +134,7 @@ public class MissionCardUI : MonoBehaviour
             ShowCard();
 
             missionTitle.text = "Mission Taken";
+            missionDifficulty.text = "";
             switch (associatedMission.GetState()){
                 case MissionCondition.ConditionState.COMPLETE:
                     missionDescription.text = "The mission is completed, turn it in.";
@@ -188,14 +190,15 @@ public class MissionCardUI : MonoBehaviour
                     break;
             }
 
+            missionTitle.text = "<sprite=0 color=#" + ColorUtility.ToHtmlStringRGB(missionCol) + "> " + associatedMission.m_title;
+
             string difficultySprite = "<sprite color=#FF0000 name=\"monster\">";
             string difficultyString = "";
             // add difficulty sprite to description based on difficulty
             for (int i = (int)associatedMission.m_difficulty; i >= 0; i--){
                 difficultyString += difficultySprite;
             }
-
-            missionTitle.text = associatedMission.m_title + "\n" + "<sprite=0 color=#" + ColorUtility.ToHtmlStringRGB(missionCol) + "> " + difficultyString;
+            missionDifficulty.text = difficultyString;
 
             missionDescription.text = associatedMission.m_description;
             // add conditions to description
@@ -276,6 +279,7 @@ public class MissionCardUI : MonoBehaviour
         ShowCard();
 
         missionTitle.text = "No Bounty Selected";
+        missionDifficulty.text = "";
         missionDescription.text = "Accept a Bounty from the bounty board in town.";
 
         backgroundImage.color = new Color(backgroundImage.color.r, backgroundImage.color.g, backgroundImage.color.b, 0.5f);
@@ -292,6 +296,7 @@ public class MissionCardUI : MonoBehaviour
     private void ShowCard()
     {
         missionTitle.enabled = true;
+        missionDifficulty.enabled = true;
         missionDescription.enabled = true;
         //set title and descript to be black
         missionTitle.color = Color.black;
@@ -311,6 +316,7 @@ public class MissionCardUI : MonoBehaviour
     private void HideCard()
     {
         missionTitle.enabled = false;
+        missionDifficulty.enabled = false;
         missionDescription.enabled = false;
         missionStamp.enabled = false;
         backgroundImage.enabled = false;
