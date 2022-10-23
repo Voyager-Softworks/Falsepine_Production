@@ -12,6 +12,7 @@ public class DamageDealer : MonoBehaviour
 {
 
     public List<Collider> m_hurtBoxes = new List<Collider>(); ///< Colliders used to detect when the player is hit by an attack
+    public StatsProfile m_statsProfile; ///< The stats profile of the enemy that is dealing damage.
 
     public GameObject m_hurtPlayerEffect; ///< Particle _effect spawned when the player is hurt
 
@@ -127,7 +128,7 @@ public class DamageDealer : MonoBehaviour
     /// <param name="_effect">The _effect to spawn when the player is hit.</param>
     /// <param name="_stunDuration">The length of time to stun the player for if they are hit.</param>
     /// <returns></returns>
-    IEnumerator AOEAttackCoroutine(float _dmg, float _delay, float _radius, GameObject _effect, Vector2 _offset, float _stunDuration)
+    IEnumerator AOEAttackCoroutine(float _dmg, float _delay, float _radius, GameObject _effect, Vector2 _offset, float _stunDuration, bool _friendlyFire)
     {
         yield return new WaitForSeconds(_delay);
         Vector3 offsetVector = transform.forward * _offset.y + transform.right * _offset.x;
@@ -140,6 +141,12 @@ public class DamageDealer : MonoBehaviour
                 hit.collider.GetComponent<PlayerHealth>().TakeDamage(_dmg);
                 hit.collider.GetComponent<PlayerHealth>().Stun(_stunDuration);
                 Instantiate(m_hurtPlayerEffect, hit.point, Quaternion.identity);
+                break;
+            }
+            else if (hit.collider.gameObject.GetComponent<EnemyHealth>() && _friendlyFire)
+            {
+                Health_Base.DamageStat dmg = new Health_Base.DamageStat(_dmg, this.gameObject, this.transform.position, hit.point, m_statsProfile);
+                hit.collider.GetComponent<EnemyHealth>().TakeDamage(dmg);
                 break;
             }
         }
@@ -274,9 +281,9 @@ public class DamageDealer : MonoBehaviour
     /// <param name="_radius">The _radius of the AOE attack.</param>
     /// <param name="_effect">The _effect to spawn when the player is hit.</param>
     /// <param name="_stunDuration">The length of time to stun the player for if they are hit.</param>
-    public void AOEAttack(float _dmg, float _delay, float _radius, GameObject _effect, Vector2 _offset, float _stunDuration)
+    public void AOEAttack(float _dmg, float _delay, float _radius, GameObject _effect, Vector2 _offset, float _stunDuration, bool _friendlyFire = false)
     {
-        StartCoroutine(AOEAttackCoroutine(_dmg, _delay, _radius, _effect, _offset, _stunDuration));
+        StartCoroutine(AOEAttackCoroutine(_dmg, _delay, _radius, _effect, _offset, _stunDuration, _friendlyFire));
     }
 
     /// <summary>
