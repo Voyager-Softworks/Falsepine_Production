@@ -29,7 +29,7 @@ public class EntryPurchasePanel : MonoBehaviour
     void Start()
     {
         // get all valid entires
-        List<JounralEntry> validEntries = JournalManager.instance.GetUndiscoveredEntries(_monsterType: MonsterInfo.MonsterType.Minion);
+        List<JounralEntry> validEntries = JournalManager.instance.GetUndiscoveredEntries(_monsterType: MonsterInfo.MonsterType.Minion, _entryType: JounralEntry.EntryType.Lore);
 
         // add amount of entries to the list (if there are enough)
         for (int i = 0; i < m_entryAmount && validEntries.Count > 0; i++){
