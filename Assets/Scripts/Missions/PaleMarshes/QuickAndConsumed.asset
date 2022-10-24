@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56c089656aad97c49b15ade4c6d1891e, type: 3}
+  m_Name: QuickAndConsumed
+  m_EditorClassIdentifier: 
+  m_title: The Quick and the Consumed
+  m_description: 'Wanting to hire folk with good reflexes, our lads are getting snatched
+    up by these things and we need someone to teach em when to duck! There''s good
+    pay for a good learnin, just don''t fuck it up, we don''t need more deadmen out
+    there.
+
+
+    Kill (12) Corpse Puppets with a Melee weapon without taking damage.'
+  m_difficulty: 2
+  m_conditions:
+  - id: 0
+  - id: 1
+  m_lockOnComplete: 1
+  m_isLockedComplete: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: Kill_MissionCondition, ns: , asm: Assembly-CSharp}
+      data:
+        m_name: Kill (0/12) Corpse Puppet(s) with Melee Damage
+        m_state: 0
+        m_lockState: 0
+        m_monsterToKill: {fileID: 11400000, guid: 2276afe60f38eef45a5eac4661ac392b, type: 2}
+        m_initialStats: []
+        m_initialKills: []
+        m_requiredKills: 12
+        m_useOptional: 1
+        m_statToKillWith:
+          value: MeleeDamage
+        m_itemToKillWith: {fileID: 0}
+    00000001:
+      type: {class: NoDamage_MissionCondition, ns: , asm: Assembly-CSharp}
+      data:
+        m_name: Don't take any damage
+        m_state: 0
+        m_lockState: 0

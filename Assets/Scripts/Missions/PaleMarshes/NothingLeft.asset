@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56c089656aad97c49b15ade4c6d1891e, type: 3}
+  m_Name: NothingLeft
+  m_EditorClassIdentifier: 
+  m_title: Nothing Left
+  m_description: 'Many of the Sheriff''s men bring lever-actions to hit the roots
+    at range. Issue is, it''s not always enough. Sometimes there''s too many or some
+    bigger fuckers start spittin the spirits of the dead at us! As a result, buckshot
+    is being considered. But it''s effectivity needs to be confirmed. Any lost souls
+    lookin for a quick buck?
+
+
+    Kill (6) Corpse Puppets with a shotgun or sawn-off
+    without reloading.'
+  m_difficulty: 1
+  m_conditions:
+  - id: 0
+  - id: 1
+  m_lockOnComplete: 1
+  m_isLockedComplete: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: Kill_MissionCondition, ns: , asm: Assembly-CSharp}
+      data:
+        m_name: Kill (0/6) Corpse Puppet(s) with Shotgun Damage
+        m_state: 0
+        m_lockState: 0
+        m_monsterToKill: {fileID: 11400000, guid: 2276afe60f38eef45a5eac4661ac392b, type: 2}
+        m_initialStats: []
+        m_initialKills: []
+        m_requiredKills: 6
+        m_useOptional: 1
+        m_statToKillWith:
+          value: ShotgunDamage
+        m_itemToKillWith: {fileID: 0}
+    00000001:
+      type: {class: NoReload_MissionCondition, ns: , asm: Assembly-CSharp}
+      data:
+        m_name: Don't reload
+        m_state: 0
+        m_lockState: 0

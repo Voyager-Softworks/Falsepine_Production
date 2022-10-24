@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56c089656aad97c49b15ade4c6d1891e, type: 3}
+  m_Name: ANewMaster
+  m_EditorClassIdentifier: 
+  m_title: A New Master
+  m_description: 'With their revered monster gone, looks like the afflicted have
+    found a new awful thing to worship! We can''t let them become established in
+    the Bayou, bring silver, Sheriff wants this issue nipped in the bud. Reward will
+    be waiting for whoevers out that way.
+
+
+    Kill (8) Afflicted with Silver Ammunition.'
+  m_difficulty: 0
+  m_conditions:
+  - id: 0
+  m_lockOnComplete: 1
+  m_isLockedComplete: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: Kill_MissionCondition, ns: , asm: Assembly-CSharp}
+      data:
+        m_name: Kill (0/8) Afflicted(s) with Silver Damage
+        m_state: 0
+        m_lockState: 0
+        m_monsterToKill: {fileID: 11400000, guid: ee1c8229e1cc8a743bc7e1c7c9ebf36a, type: 2}
+        m_initialStats: []
+        m_initialKills: []
+        m_requiredKills: 8
+        m_useOptional: 1
+        m_statToKillWith:
+          value: SilverDamage
+        m_itemToKillWith: {fileID: 0}

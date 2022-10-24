@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56c089656aad97c49b15ade4c6d1891e, type: 3}
+  m_Name: ATimelyMatter
+  m_EditorClassIdentifier: 
+  m_title: A Timely Matter
+  m_description: 'Whatever that thing is in the snow, it''s got a wall of madness
+    between us and it. Lookin for a hunter whos willing to go in for the kill while
+    the Sheriffs lads cause a distraction. Setting off a few crates of red should
+    help keep the worshipers attention elsewhere, but time is of the essence.
+
+
+    Kill
+    the Bone Stag in under 5 minutes of the expedition starting.'
+  m_difficulty: 0
+  m_conditions:
+  - id: 0
+  - id: 1
+  m_lockOnComplete: 1
+  m_isLockedComplete: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: Kill_MissionCondition, ns: , asm: Assembly-CSharp}
+      data:
+        m_name: Kill (0/1) Bone Stag
+        m_state: 0
+        m_lockState: 0
+        m_monsterToKill: {fileID: 11400000, guid: 55f65f669c57c27449721cdd87fecd01, type: 2}
+        m_initialStats: []
+        m_initialKills: []
+        m_requiredKills: 1
+        m_useOptional: 0
+        m_statToKillWith:
+          value: MeleeDamage
+        m_itemToKillWith: {fileID: 11400000, guid: 70e1666ebee6fd748be8ae49a4c9a679, type: 2}
+    00000001:
+      type: {class: Speedrun_MissionCondition, ns: , asm: Assembly-CSharp}
+      data:
+        m_name: Spend less than 300 seconds in the expedition
+        m_state: 0
+        m_lockState: 0
+        m_timeLimit: 300
+        m_timeElapsed: 0
+        m_triggerMonster: {fileID: 0}
+        m_triggerMonsterSeen: 1
