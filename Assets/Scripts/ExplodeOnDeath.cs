@@ -36,6 +36,11 @@ public class ExplodeOnDeath : MonoBehaviour
     /// <param name="context"></param>
     void Explode(Health_Base.DeathContext context)
     {
+        // Stop all playing audio.
+        foreach (AudioSource audioSource in GetComponentsInChildren<AudioSource>())
+        {
+            audioSource.Stop();
+        }
         var explosion = Instantiate(m_explosion, transform.position, Quaternion.identity); // Instantiate the explosion prefab.
         Destroy(explosion, 5f); // Destroy the explosion after 5 seconds.
         Collider[] colliders = Physics.OverlapSphere(transform.position, m_radius); // Get all colliders within the explosion radius.
