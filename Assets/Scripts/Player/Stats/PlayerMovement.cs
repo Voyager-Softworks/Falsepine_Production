@@ -182,7 +182,7 @@ public class PlayerMovement : MonoBehaviour
             if (rangedWeapon)
             {
                 isAiming = rangedWeapon.m_isAiming;
-                isReloading = rangedWeapon.m_reloadTimer > 0;
+                isReloading = rangedWeapon.m_isReloading;
             }
         }
 

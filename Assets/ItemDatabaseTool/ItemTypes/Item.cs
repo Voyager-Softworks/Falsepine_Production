@@ -418,6 +418,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
         foreach (FieldResourceLink link in m_resourceLinks)
         {
             FieldInfo field = this.GetType().GetField(link.fieldName);
+            if (field == null) continue;
 
             UnityEngine.Object value = Resources.Load(link.path, field.FieldType);
 

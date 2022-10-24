@@ -62,6 +62,10 @@ public class PlayerInventoryInterface : MonoBehaviour
         public GameObject model; ///< The model of the weapon.
         public Transform weaponFirepoint; ///< The weapon's firepoint: the point where the weapon is fired from.
         public string animatorBoolName = ""; ///< The name of the animator bool to set when the weapon is fired.
+
+        public AnimationClip startReloadClip; ///< The animation clip to play when the weapon is reloaded.
+        public AnimationClip singleReloadClip; ///< The animation clip to play when the weapon is reloaded.
+        public AnimationClip endReloadClip; ///< The animation clip to play when the weapon is reloaded.
     }
 
 
@@ -248,10 +252,15 @@ public class PlayerInventoryInterface : MonoBehaviour
                 // if fire weapon action is pressed and is not auto and is not shooting, shoot weapon || if fire weapon action is current down and is auto, shoot weapon
                 if ((fireWeaponAction.triggered && !rangedWeapon.m_isAutomnatic) || (fireWeaponAction.ReadValue<float>() > 0 && rangedWeapon.m_isAutomnatic))
                 {
+                    // DoReload false
+                    playerAnimator.SetBool("DoReload", false);
+
                     if (rangedWeapon.TryShoot(weaponFirepoint, fireDirection, gameObject, m_aimZone))
                     {
                         // play shoot animation
                         playerAnimator.SetTrigger("Shoot");
+                        // DoReload false
+                        playerAnimator.SetBool("DoReload", false);
 
                         playerAnimator.SetLayerWeight(2, 1);
 
@@ -270,15 +279,28 @@ public class PlayerInventoryInterface : MonoBehaviour
                 // if reload action is pressed, reload weapon
                 if (reloadAction.triggered)
                 {
-                    if (rangedWeapon.TryReload(gameObject))
+                    if (rangedWeapon.TryStartReload(gameObject))
                     {
+                        // Reload anim
                         playerAnimator.SetTrigger("Reload");
+                        playerAnimator.SetBool("DoReload", true);
 
                         playerAnimator.SetLayerWeight(2, 1);
 
                         // event
                         OnReload?.Invoke();
                     }
+                }
+
+                // if weapon is still reloading, play reload animation
+                if (rangedWeapon.m_clipAmmo >= rangedWeapon.m_clipSize || rangedWeapon.m_spareAmmo <= 0)
+                {
+                    playerAnimator.SetBool("DoReload", false);
+                }
+
+                if (rangedWeapon.m_isReloading && !playerAnimator.GetBool("DoReload"))
+                {
+                    rangedWeapon.TryEndReload(gameObject);
                 }
 
                 // if aim weapon action is down, aim weapon
@@ -427,7 +449,7 @@ public class PlayerInventoryInterface : MonoBehaviour
             PlayerMovement playerMovement = GetComponent<PlayerMovement>();
             if (!playerMovement) return;
 
-            if (!rangedWeapon.m_isAiming || rangedWeapon.m_reloadTimer > 0 || playerMovement.isRolling)
+            if (!rangedWeapon.m_isAiming || rangedWeapon.m_isReloading || playerMovement.isRolling)
             {
                 m_aimZone.Hide();
             }
@@ -478,6 +500,32 @@ public class PlayerInventoryInterface : MonoBehaviour
         return corners;
     }
 
+    /// <summary>
+    /// Gets the weapon model link of the given item
+    /// </summary>
+    /// <param name="weapon"></param>
+    /// <returns></returns>
+    public WeaponModelLink GetLink(Item weapon)
+    {
+        if (!weapon) return null;
+        // check display name
+        foreach (WeaponModelLink link in weaponModelLinks)
+        {
+            if (link.weapons.Any(w => w.m_displayName == weapon.m_displayName))
+            {
+                return link;
+            }
+        }
+        // check ID if nothing
+        foreach (WeaponModelLink link in weaponModelLinks)
+        {
+            if (link.weapons.Any(w => w.id == weapon.id))
+            {
+                return link;
+            }
+        }
+        return null;
+    }
 
     /// <summary>
     /// If the weapon exists, return the weapon model.
