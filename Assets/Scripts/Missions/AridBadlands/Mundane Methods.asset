@@ -10,16 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 56c089656aad97c49b15ade4c6d1891e, type: 3}
-  m_Name: Stay Back
+  m_Name: Mundane Methods
   m_EditorClassIdentifier: 
-  m_title: Stay Back!
-  m_description: 'Placeholder Text.
+  m_title: Mundane Methods
+  m_description: 'The Attacks on our imports have put a choke on specific goods.
+    We need the bastard dealt with soon, prefereably without expending the equipment
+    we have left. One thing we ain''t short on is cash, bounties open to all.
 
 
-    Kill (8) Plague Beetles with a Mauser (Non-Legendary).'
+    Kill
+    the Omen without any consumables.'
   m_difficulty: 1
   m_conditions:
   - id: 0
+  - id: 1
   m_lockOnComplete: 1
   m_isLockedComplete: 0
   references:
@@ -27,14 +31,20 @@ MonoBehaviour:
     00000000:
       type: {class: Kill_MissionCondition, ns: , asm: Assembly-CSharp}
       data:
-        m_name: Kill (0/8) Desert Bugs(s) with the Mauser
+        m_name: Kill (0/1) Omen
         m_state: 0
         m_lockState: 0
-        m_monsterToKill: {fileID: 11400000, guid: 0a5776166c4047b469f7cc181eb8daa0, type: 2}
+        m_monsterToKill: {fileID: 11400000, guid: 17ecdbb239ded87469a740a6276c5f47, type: 2}
         m_initialStats: []
         m_initialKills: []
-        m_requiredKills: 8
-        m_useOptional: 1
+        m_requiredKills: 1
+        m_useOptional: 0
         m_statToKillWith:
           value: PistolDamage
         m_itemToKillWith: {fileID: 11400000, guid: a5f088dfc20dc0040ad152415bf0fc95, type: 2}
+    00000001:
+      type: {class: NoEquipmentUsed_MissionCondition, ns: , asm: Assembly-CSharp}
+      data:
+        m_name: Don't use any equipment
+        m_state: 0
+        m_lockState: 0
