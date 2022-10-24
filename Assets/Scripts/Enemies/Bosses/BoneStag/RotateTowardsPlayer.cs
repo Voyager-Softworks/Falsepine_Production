@@ -21,12 +21,12 @@ public class RotateTowardsPlayer : MonoBehaviour
         yield return new WaitForSeconds(delay);
         float elapsedTime = 0;
         Vector3 startPos = transform.position;
-        Vector3 targetPos = GameObject.FindGameObjectWithTag("Player").transform.position;
-        Vector3 direction = targetPos - startPos;
-        direction.y = 0f;
-        float angle = Vector3.Angle(direction, transform.forward);
         while (elapsedTime < duration)
         {
+            Vector3 targetPos = GameObject.FindGameObjectWithTag("Player").transform.position;
+            Vector3 direction = targetPos - startPos;
+            direction.y = 0f;
+            float angle = Vector3.Angle(direction, transform.forward);
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), speed * Time.deltaTime);
             elapsedTime += Time.deltaTime;
             yield return null;
