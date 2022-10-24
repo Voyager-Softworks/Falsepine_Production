@@ -51,7 +51,7 @@ public class JournalManager : ToggleableWindow
     public List<JounralEntry> m_discoveredEntries = new List<JounralEntry>();
 
     [Header("UI variables")]
-    public bool m_showHUDConditions = false;
+    public bool m_showHUDConditions = true;
     public Button m_HUDButton;
 
     /// <summary>
