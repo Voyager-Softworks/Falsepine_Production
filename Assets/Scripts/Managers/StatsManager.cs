@@ -329,6 +329,9 @@ public class StatsManager : MonoBehaviour
     }
     [SerializeField] public List<MonsterStat> m_monsterStats = new List<MonsterStat>();
 
+    public int m_killsForClue = 20;
+    public int m_maxCluesFromKills = 5;
+
     public void AddKill(MonsterInfo _monster, Health_Base.DamageStat _damageStat)
     {
         MonsterStat stats = m_monsterStats.Find(x => x.m_monster == _monster);
@@ -348,7 +351,7 @@ public class StatsManager : MonoBehaviour
         stats.m_kills.Add(_damageStat);
 
         // every 20 kills, add a random clue for this enemy (up to 100 kills, must be lesser enemy)
-        if (_monster != null && _monster.m_type == MonsterInfo.MonsterType.Minion && stats.m_kills.Count % 20 == 0 && stats.m_kills.Count <= 100)
+        if (_monster != null && _monster.m_type == MonsterInfo.MonsterType.Minion && stats.m_kills.Count % m_killsForClue == 0 && stats.m_kills.Count <= m_killsForClue * m_maxCluesFromKills)
         {
             JournalManager.instance.DiscoverRandomEntry(_monster, JounralEntry.EntryType.Clue);
         }

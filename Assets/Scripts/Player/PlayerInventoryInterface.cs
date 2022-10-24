@@ -298,10 +298,10 @@ public class PlayerInventoryInterface : MonoBehaviour
                     playerAnimator.SetBool("DoReload", false);
                 }
 
-                if (rangedWeapon.m_isReloading && !playerAnimator.GetBool("DoReload"))
-                {
-                    rangedWeapon.TryEndReload(gameObject);
-                }
+                // if (rangedWeapon.m_isReloading && !playerAnimator.GetBool("DoReload"))
+                // {
+                //     rangedWeapon.TryEndReload(gameObject);
+                // }
 
                 // if aim weapon action is down, aim weapon
                 if (aimWeaponAction.ReadValue<float>() > 0)

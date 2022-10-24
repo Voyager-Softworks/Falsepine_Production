@@ -48,8 +48,11 @@ public class RangedWeapon : Item
     [SerializeField] public List<StatsManager.StatType> m_tempAmmoStats = new List<StatsManager.StatType>();
     
     // Reloading:
+    [SerializeField] public bool m_splitReload = false;
     [SerializeField] public bool m_isReloading = false;
     [SerializeField] private int m_reloadAmount = 1;
+    [SerializeField] public float m_reloadTime = 0;
+    [SerializeField] private float m_reloadTimer = 0;
 
     // Other:
     [SerializeField] public float m_equipTime = 0;
@@ -61,6 +64,7 @@ public class RangedWeapon : Item
     // Sounds:
     [SerializeField] public GameObject m_shootSound = null;
     [SerializeField] public GameObject m_emptySound = null;
+    [SerializeField] public GameObject m_reloadSound = null;
     [SerializeField] public GameObject m_startReloadSound = null;
     [SerializeField] public GameObject m_singleReloadSound = null;
     [SerializeField] public GameObject m_endReloadSound = null;
@@ -126,7 +130,9 @@ public class RangedWeapon : Item
         newItem.m_tempAmmoStats = m_tempAmmoStats;
 
         // Reloading:
+        newItem.m_splitReload = m_splitReload;
         newItem.m_reloadAmount = m_reloadAmount;
+        newItem.m_reloadTime = m_reloadTime;
 
         // Other:
         newItem.m_equipTime = m_equipTime;
@@ -137,6 +143,7 @@ public class RangedWeapon : Item
         // Sounds:
         newItem.m_shootSound = m_shootSound;
         newItem.m_emptySound = m_emptySound;
+        newItem.m_reloadSound = m_reloadSound;
         newItem.m_startReloadSound = m_startReloadSound;
         newItem.m_singleReloadSound = m_singleReloadSound;
         newItem.m_endReloadSound = m_endReloadSound;
@@ -161,6 +168,11 @@ public class RangedWeapon : Item
         m_equipTimer = Mathf.Max(0, m_equipTimer - Time.deltaTime);
 
         m_waitTimer = Mathf.Max(0, m_waitTimer - Time.deltaTime);
+
+        m_reloadTimer = Mathf.Max(0, m_reloadTimer - Time.deltaTime);
+        if (m_isReloading && m_reloadTimer <= 0){
+            TryEndReload(_owner);
+        }
     }
 
     /// <summary>
@@ -592,11 +604,22 @@ public class RangedWeapon : Item
             if (m_clipAmmo < m_clipSize && (m_spareAmmo > 0 || m_unlimitedAmmo))
             {
                 m_isReloading = true;
+                m_reloadTimer = m_reloadTime;
 
-                // play reload sound:
-                if (m_startReloadSound != null)
-                {
-                    GameObject sound = Instantiate(m_startReloadSound, _owner.transform.position, Quaternion.identity, _owner.transform);
+                if (m_splitReload){
+                    // play reload sound:
+                    if (m_startReloadSound != null)
+                    {
+                        GameObject sound = Instantiate(m_startReloadSound, _owner.transform.position, Quaternion.identity, _owner.transform);
+                    }
+                }
+                else{
+                    // play reload sound:
+                    if (m_reloadSound != null)
+                    {
+                        GameObject sound = Instantiate(m_reloadSound, _owner.transform.position, Quaternion.identity, _owner.transform);
+                    }
+                    TryReload(_owner);
                 }
 
                 //Reload(_owner);
@@ -612,6 +635,7 @@ public class RangedWeapon : Item
     public void TryReload(GameObject _owner)
     {
         m_isReloading = true;
+        m_reloadTimer = m_reloadTime;
 
         // play reload sound:
         if (m_singleReloadSound != null)
@@ -774,8 +798,14 @@ public class RangedWeapon : Item
 
             // reloading:
             GUILayout.Label("Reloading", CustomEditorStuff.center_bold_label);
+            // split Reload
+            rangedWeapon.m_splitReload = EditorGUILayout.Toggle(new GUIContent("Split Reload", "If the reload is split into multiple parts"), rangedWeapon.m_splitReload);
             // reload amount
             rangedWeapon.m_reloadAmount = EditorGUILayout.IntField(new GUIContent("Reload Amount", "The amount of ammo to reload"), rangedWeapon.m_reloadAmount);
+            //EditorGUI.BeginDisabledGroup(rangedWeapon.m_splitReload);
+            // reload time
+            rangedWeapon.m_reloadTime = EditorGUILayout.FloatField(new GUIContent("Reload Time", "The time it takes to reload"), rangedWeapon.m_reloadTime);
+            //EditorGUI.EndDisabledGroup();
 
             // other:
             GUILayout.Label("Other", CustomEditorStuff.center_bold_label);
@@ -794,12 +824,20 @@ public class RangedWeapon : Item
             rangedWeapon.m_shootSound = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Shoot Sound", "The sound to play when shooting"), rangedWeapon.m_shootSound, typeof(GameObject), false);
             // empty sound
             rangedWeapon.m_emptySound = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Empty Sound", "The sound to play when out of ammo"), rangedWeapon.m_emptySound, typeof(GameObject), false);
+            //disabled group
+            EditorGUI.BeginDisabledGroup(rangedWeapon.m_splitReload);
+            // reload sound
+            rangedWeapon.m_reloadSound = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Reload Sound", "The sound to play when reloading"), rangedWeapon.m_reloadSound, typeof(GameObject), false);
+            EditorGUI.EndDisabledGroup();
+            //disabled group
+            EditorGUI.BeginDisabledGroup(!rangedWeapon.m_splitReload);
             // start reload sound
             rangedWeapon.m_startReloadSound = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Start Reload Sound", "The sound to play when starting to reload"), rangedWeapon.m_startReloadSound, typeof(GameObject), false);
             // single reload sound
             rangedWeapon.m_singleReloadSound = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Single Reload Sound", "The sound to play when reloading"), rangedWeapon.m_singleReloadSound, typeof(GameObject), false);
             // end reload sound
             rangedWeapon.m_endReloadSound = (GameObject)EditorGUILayout.ObjectField(new GUIContent("End Reload Sound", "The sound to play when ending reload"), rangedWeapon.m_endReloadSound, typeof(GameObject), false);
+            EditorGUI.EndDisabledGroup();
             // equip sound
             rangedWeapon.m_equipSound = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Equip Sound", "The sound to play when equipping"), rangedWeapon.m_equipSound, typeof(GameObject), false);
             // start aim sound
