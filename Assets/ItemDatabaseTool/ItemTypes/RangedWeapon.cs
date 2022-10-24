@@ -170,6 +170,16 @@ public class RangedWeapon : Item
         m_waitTimer = Mathf.Max(0, m_waitTimer - Time.deltaTime);
 
         m_reloadTimer = Mathf.Max(0, m_reloadTimer - Time.deltaTime);
+        // if current state is Reload_Start, Reload_Middle, or Reload_End, then keep resetting timer
+        if (m_isReloading && m_splitReload){
+            Animator anim = _owner.GetComponentInChildren<Animator>();
+            if (anim){
+                if (anim.GetCurrentAnimatorStateInfo(2).IsName("Reload_Start") || anim.GetCurrentAnimatorStateInfo(2).IsName("Reload_Middle") || anim.GetCurrentAnimatorStateInfo(2).IsName("Reload_End")){
+                    m_reloadTimer = m_reloadTime;
+                }
+            }
+        }
+        // if timer is up but is still reloading, then stop reloading
         if (m_isReloading && m_reloadTimer <= 0){
             TryEndReload(_owner);
         }

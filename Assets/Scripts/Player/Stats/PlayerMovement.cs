@@ -186,11 +186,14 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (dynamicVaulting.canVault && !isReloading && !isVaulting && !isAiming && !isRolling)
+        if (dynamicVaulting.canVault && !isVaulting && !isAiming && !isRolling)
         {
             if (Vector3.Dot(moveDir, dynamicVaulting.GetVaultingDirection()) > 0.5f)
             {
                 StartVault();
+
+                // DoReload false
+                _animator.SetBool("DoReload", false);
             }
         }
 
