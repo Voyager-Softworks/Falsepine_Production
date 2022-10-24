@@ -50,7 +50,7 @@ public class ExplodeOnDeath : MonoBehaviour
             float calcDmg = StatsManager.CalculateDamage(m_statsProfile, m_damage);
 
             // Scale damage by distance
-            calcDmg *= (1f - (Vector3.Distance(collider.transform.position, transform.position) / m_radius));
+            calcDmg *= (1f - Mathf.Pow((Vector3.Distance(collider.transform.position, transform.position) / m_radius), 3f));
 
             if (collider.gameObject.GetComponentInChildren<Health_Base>() != null)
             {
