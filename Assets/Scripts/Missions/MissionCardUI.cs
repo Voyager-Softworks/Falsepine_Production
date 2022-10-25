@@ -26,10 +26,9 @@ public class MissionCardUI : MonoBehaviour
     public Image dropShadow;
 
     [Header("Stamp")]
-    public Image missionStamp;
-    public Sprite missionStampComplete;
-    public Sprite missionStampFailed;
-    public Sprite missionStampIncomplete;
+    public Image missionStampComplete;
+    public Image missionStampFailed;
+    //public Sprite missionStampIncomplete;
 
     [Header("Button")]
     public GameObject button;
@@ -152,9 +151,6 @@ public class MissionCardUI : MonoBehaviour
             missionTitle.color = Color.white;
             missionDescription.color = Color.white;
 
-            //hide stamp
-            missionStamp.enabled = false;
-
             //hide background image
             //backgroundImage.enabled = false;
             takenGroup.SetActive(true);
@@ -208,7 +204,8 @@ public class MissionCardUI : MonoBehaviour
 
             missionComplete.text = missionCompleteText;
 
-            string difficultySprite = "<sprite color=#FF0000 name=\"monster\">";
+            // color=#FF0000
+            string difficultySprite = "<sprite name=\"badge\">";
             string difficultyString = "";
             // add difficulty sprite to description based on difficulty
             for (int i = (int)associatedMission.m_difficulty; i >= 0; i--){
@@ -243,7 +240,7 @@ public class MissionCardUI : MonoBehaviour
 
             //update stamp
             //missionStamp.enabled = true;
-            //SetStamp();
+            SetStamp();
 
             //update background image
             //backgroundImage.enabled = true;
@@ -273,16 +270,16 @@ public class MissionCardUI : MonoBehaviour
 
     private void SetStamp()
     {
+        missionStampComplete.enabled = false;
+        missionStampFailed.enabled = false;
+
         switch (associatedMission.GetState())
         {
             case MissionCondition.ConditionState.COMPLETE:
-                missionStamp.sprite = missionStampComplete;
-                break;
-            case MissionCondition.ConditionState.INCOMPLETE:
-                missionStamp.sprite = missionStampIncomplete;
+                missionStampComplete.enabled = true;
                 break;
             case MissionCondition.ConditionState.FAILED:
-                missionStamp.sprite = missionStampFailed;
+                missionStampFailed.enabled = true;
                 break;
         }
     }
@@ -300,7 +297,6 @@ public class MissionCardUI : MonoBehaviour
 
         backgroundImage.color = new Color(backgroundImage.color.r, backgroundImage.color.g, backgroundImage.color.b, 0.5f);
 
-        missionStamp.enabled = false;
         //dropShadow.enabled = false;
         takenGroup.SetActive(false);
         button.SetActive(false);
@@ -334,7 +330,6 @@ public class MissionCardUI : MonoBehaviour
         missionTitle.enabled = false;
         missionDifficulty.enabled = false;
         missionDescription.enabled = false;
-        missionStamp.enabled = false;
         backgroundImage.enabled = false;
         //dropShadow.enabled = false;
         takenGroup.SetActive(false);
