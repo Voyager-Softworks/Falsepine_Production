@@ -46,6 +46,15 @@ public class JournalUpdater_Monster : JournalContentUpdater
         {
             if (entry.m_linkedMonster == m_monster)
             {
+                // make title content
+                if (!string.IsNullOrEmpty(entry.m_title)){
+                    JournalContent titleContent = new JournalContent();
+                    titleContent.text = entry.m_title;
+                    titleContent.bold = true;
+                    titleContent.image = null;
+                    contentList.Add(titleContent);
+                }
+                // add all other content
                 contentList.Add(entry.entryContent);
             }
         }

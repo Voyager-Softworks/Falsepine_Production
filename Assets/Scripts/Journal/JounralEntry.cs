@@ -19,7 +19,7 @@ public class JounralEntry : ScriptableObject
     public EntryType m_entryType = EntryType.Lore;
 
     public MonsterInfo m_linkedMonster;
-
+    public string m_title = "Title";
     public JournalContent entryContent;
 
     // Start is called before the first frame update
@@ -47,7 +47,7 @@ public class JounralEntry : ScriptableObject
             return false;
         }
 
-        return lhs.m_entryType == rhs.m_entryType && lhs.m_linkedMonster == rhs.m_linkedMonster && lhs.entryContent == rhs.entryContent;
+        return lhs.m_entryType == rhs.m_entryType && lhs.m_linkedMonster == rhs.m_linkedMonster && lhs.m_title == rhs.m_title && lhs.entryContent == rhs.entryContent;
     }
     //inequality operator
     public static bool operator !=(JounralEntry lhs, JounralEntry rhs)
@@ -75,12 +75,14 @@ public class JounralEntry : ScriptableObject
     {
         public EntryType m_entryType;
         public MonsterInfo.SerializableMonsterInfo m_linkedMonster;
+        public string m_title;
         public JournalContent m_entryContent;
 
         public SerializableJournalEntry(JounralEntry entry)
         {
             m_entryType = entry.m_entryType;
             m_linkedMonster = new MonsterInfo.SerializableMonsterInfo(entry.m_linkedMonster);
+            m_title = entry.m_title;
             m_entryContent = entry.entryContent;
         }
 
@@ -89,6 +91,7 @@ public class JounralEntry : ScriptableObject
             JounralEntry entry = ScriptableObject.CreateInstance<JounralEntry>();
             entry.m_entryType = m_entryType;
             entry.m_linkedMonster = m_linkedMonster.ToMonsterInfo();
+            entry.m_title = m_title;
             entry.entryContent = m_entryContent;
             return entry;
         }
