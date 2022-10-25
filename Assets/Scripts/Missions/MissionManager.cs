@@ -99,6 +99,26 @@ public class MissionManager : MonoBehaviour
 
     private void CullJournalPickups()
     {
+        // if already found a specific pickup, try replace with money
+        foreach (JournalPickupInteract pickup in FindObjectsOfType<JournalPickupInteract>()){
+            // if not specific, or if specific and not found, continue
+            if (pickup.m_pickupType != JournalPickupInteract.PickupType.SpecificEntry || pickup.m_linkedEntry == null){
+                continue;
+            }
+
+            // look for money replacement money
+            Transform parent = pickup.transform.parent;
+            MoneyPickup moneyPickup = null;
+            if (parent != null)
+            {
+                moneyPickup = parent.GetComponentInChildren<MoneyPickup>();
+            }
+
+            if (pickup.m_linkedEntry && JournalManager.instance.m_discoveredEntries.Contains(pickup.m_linkedEntry)){
+                SetPickupState(pickup, moneyPickup, false);
+            }
+        }
+
         if (m_currentZone != null)
         {
             // get the current middle scene from the mission zone
@@ -123,24 +143,24 @@ public class MissionManager : MonoBehaviour
                     if ((m_currentZone.m_clueSceneIndexes.Contains(currentMiddleSceneIndex) && pickup.GetEntryType() == JounralEntry.EntryType.Clue) ||
                         (m_currentZone.m_loreSceneIndexes.Contains(currentMiddleSceneIndex) && pickup.GetEntryType() == JounralEntry.EntryType.Lore))
                     {
-                        pickup.gameObject.SetActive(true);
-                        
-                        if (moneyPickup != null)
-                        {
-                            moneyPickup.gameObject.SetActive(false);
-                        }
+                        SetPickupState(pickup, moneyPickup, true);
                     }
                     else
                     {
-                        pickup.gameObject.SetActive(false);
-
-                        if (moneyPickup != null)
-                        {
-                            moneyPickup.gameObject.SetActive(true);
-                        }
+                        SetPickupState(pickup, moneyPickup, false);
                     }
                 }
             }
+        }
+    }
+
+    private static void SetPickupState(JournalPickupInteract pickup, MoneyPickup moneyPickup, bool _pickupEnabled)
+    {
+        pickup.gameObject.SetActive(_pickupEnabled);
+
+        if (moneyPickup != null)
+        {
+            moneyPickup.gameObject.SetActive(!_pickupEnabled);
         }
     }
 
