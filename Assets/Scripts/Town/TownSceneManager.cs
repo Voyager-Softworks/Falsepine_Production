@@ -45,7 +45,7 @@ public class TownSceneManager : MonoBehaviour
             }
         }
 
-        // if this is the final scene, embark
+        // if this is the final zone, embark
         if (MissionManager.instance && MissionManager.instance.GetZoneIndex(MissionManager.instance.GetCurrentZone()) >= MissionManager.instance.m_missionZones.Count - 1)
         {
             MissionManager.instance.TryEmbark();
