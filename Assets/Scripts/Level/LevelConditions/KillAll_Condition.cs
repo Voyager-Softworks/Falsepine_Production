@@ -8,6 +8,8 @@ using System.Linq;
 /// </summary>
 public class KillAll_Condition : LevelCondition
 {
+    public List<EnemyHealth> m_exclusions;
+
     protected override void UpdateCondition()
     {
         m_isComplete = true;
@@ -17,6 +19,8 @@ public class KillAll_Condition : LevelCondition
         // check that all of them are dead, if not, set false, break
         foreach (EnemyHealth enemy in enemies)
         {
+            if (m_exclusions.Contains(enemy)) continue;
+
             if (!enemy.hasDied)
             {
                 m_isComplete = false;
