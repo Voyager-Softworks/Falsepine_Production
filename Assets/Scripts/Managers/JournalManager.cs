@@ -104,25 +104,30 @@ public class JournalManager : ToggleableWindow
                     // set color
                     //m_HUDButton.image.color = m_showHUDConditions ? Color.green : Color.white;
 
-                    // say Tracking
-                    if (m_showHUDConditions)
-                    {
-                        m_HUDButton.GetComponentInChildren<TextMeshProUGUI>().text = "Tracking";
-                    }
-                    else
-                    {
-                        m_HUDButton.GetComponentInChildren<TextMeshProUGUI>().text = "Track";
-                    }
+                    // update Tracking button
+                    UpdateTrackingButton();
                 });
 
-                // say Track
-                m_HUDButton.GetComponentInChildren<TextMeshProUGUI>().text = "Track";
+                // update tracking button
+                UpdateTrackingButton();
             }
         }
         else
         {
             Destroy(this);
             Destroy(gameObject);
+        }
+    }
+
+    private void UpdateTrackingButton()
+    {
+        if (m_showHUDConditions)
+        {
+            m_HUDButton.GetComponentInChildren<TextMeshProUGUI>().text = "Tracking";
+        }
+        else
+        {
+            m_HUDButton.GetComponentInChildren<TextMeshProUGUI>().text = "Track";
         }
     }
 

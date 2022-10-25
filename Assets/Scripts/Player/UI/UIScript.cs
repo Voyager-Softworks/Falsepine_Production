@@ -213,7 +213,7 @@ public class UIScript : MonoBehaviour
                     }
 
                     // show condition, and coloured sprite to show state
-                    m_conditionText.text += "\n" + "<sprite=0 color=#" + ColorUtility.ToHtmlStringRGB(conditionCol) + ">" + condition.GetShortDescription();
+                    m_conditionText.text += "\n" + "<sprite=0 color=#" + ColorUtility.ToHtmlStringRGB(conditionCol) + ">" + condition.GetDescription();
                 }
             }
             else

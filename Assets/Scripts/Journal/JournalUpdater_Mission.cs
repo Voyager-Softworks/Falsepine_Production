@@ -9,7 +9,7 @@ using TMPro;
 public class JournalUpdater_Mission : JournalContentUpdater
 {
     public MissionCardUI m_missionCardUI;
-    public TextMeshProUGUI m_conditionText;
+    //public TextMeshProUGUI m_conditionText;
 
     protected override void Update() {
         UpdateContent();
@@ -20,27 +20,27 @@ public class JournalUpdater_Mission : JournalContentUpdater
         base.UpdateContent();
 
         // add conditions to description
-        if (m_missionCardUI.associatedMission){
-            m_conditionText.text = "";
-            foreach (MissionCondition condition in m_missionCardUI.associatedMission.m_conditions)
-            {
-                Color conditionCol = Color.white;
-                switch (condition.GetState())
-                {
-                    case MissionCondition.ConditionState.COMPLETE:
-                        conditionCol = Color.green;
-                        break;
-                    case MissionCondition.ConditionState.INCOMPLETE:
-                        conditionCol = Color.white;
-                        break;
-                    case MissionCondition.ConditionState.FAILED:
-                        conditionCol = Color.red;
-                        break;
-                }
+        // if (m_missionCardUI.associatedMission){
+        //     m_conditionText.text = "";
+        //     foreach (MissionCondition condition in m_missionCardUI.associatedMission.m_conditions)
+        //     {
+        //         Color conditionCol = Color.white;
+        //         switch (condition.GetState())
+        //         {
+        //             case MissionCondition.ConditionState.COMPLETE:
+        //                 conditionCol = Color.green;
+        //                 break;
+        //             case MissionCondition.ConditionState.INCOMPLETE:
+        //                 conditionCol = Color.white;
+        //                 break;
+        //             case MissionCondition.ConditionState.FAILED:
+        //                 conditionCol = Color.red;
+        //                 break;
+        //         }
 
-                // show condition, and coloured sprite to show state
-                m_conditionText.text += (m_conditionText.text == "" ? "" : "\n") + "<sprite=0 color=#" + ColorUtility.ToHtmlStringRGB(conditionCol) + ">" + condition.GetDescription();
-            }
-        }
+        //         // show condition, and coloured sprite to show state
+        //         m_conditionText.text += (m_conditionText.text == "" ? "" : "\n") + "<sprite=0 color=#" + ColorUtility.ToHtmlStringRGB(conditionCol) + ">" + condition.GetDescription();
+        //     }
+        // }
     }
 }
