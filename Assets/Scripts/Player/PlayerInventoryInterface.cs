@@ -238,6 +238,10 @@ public class PlayerInventoryInterface : MonoBehaviour
             SwapWeapon();
         }
 
+        if (selectedWeapon == null){
+            TrySelectValidWeapon(false);
+        }
+
         if (selectedWeapon)
         {
             // if the currwen weapon is not in the inventory, select a valid weapon
@@ -648,7 +652,7 @@ public class PlayerInventoryInterface : MonoBehaviour
     /// <summary>
     /// If selected weapon is null, try to select primary, secondary, then none
     /// </summary>
-    private void TrySelectValidWeapon()
+    private void TrySelectValidWeapon(bool _allowNone = true)
     {
         if (selectedWeapon == null)
         {
@@ -656,7 +660,7 @@ public class PlayerInventoryInterface : MonoBehaviour
             if (selectedWeapon == null)
             {
                 SelectWeapon(SelectedWeaponType.Secondary);
-                if (selectedWeapon == null)
+                if (selectedWeapon == null && _allowNone)
                 {
                     SelectWeapon(SelectedWeaponType.None);
                 }
@@ -697,9 +701,11 @@ public class PlayerInventoryInterface : MonoBehaviour
         // get selected weapon
         selectedWeapon = playerInventory.slots.ElementAtOrDefault(weaponIndex)?.item;
 
-        // if selected weapon is null, return
+        // if selected weapon is null and none, return
         if (selectedWeapon == null) {
-            DisableAllWeaponModels();
+            if (weaponIndex == -1){
+                DisableAllWeaponModels();
+            }
             return;
         }
 

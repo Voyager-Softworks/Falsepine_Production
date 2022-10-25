@@ -47,12 +47,14 @@ public class JournalManager : ToggleableWindow
 
     private AudioSource _audioSource;
 
+    [Header("Entries")]
     public List<JounralEntry> m_undiscoveredEntries = new List<JounralEntry>();
     public List<JounralEntry> m_discoveredEntries = new List<JounralEntry>();
 
     [Header("UI variables")]
     public bool m_showHUDConditions = true;
     public Button m_HUDButton;
+    public bool m_showTutorial = true;
 
     /// <summary>
     /// Class used to save the journal entries
@@ -62,6 +64,7 @@ public class JournalManager : ToggleableWindow
         public List<JounralEntry.SerializableJournalEntry> discoveredEntries = new List<JounralEntry.SerializableJournalEntry>();
 
         public bool showHUDConditions = false;
+        public bool showTutorial = false;
     }
 
     public static string GetSaveFolderPath(int saveSlot)
@@ -324,6 +327,7 @@ public class JournalManager : ToggleableWindow
             data.discoveredEntries.Add(new JounralEntry.SerializableJournalEntry(entry));
         }
         data.showHUDConditions = m_showHUDConditions;
+        data.showTutorial = m_showTutorial;
         
 
         StreamWriter writer = new StreamWriter(file);
@@ -377,6 +381,7 @@ public class JournalManager : ToggleableWindow
             m_discoveredEntries.Add(entry.ToEntry());
         }
         m_showHUDConditions = data.showHUDConditions;
+        m_showTutorial = data.showTutorial;
 
         reader.Close();
         file.Close();
