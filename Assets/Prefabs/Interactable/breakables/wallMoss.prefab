@@ -109,13 +109,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3385ecf52ebacee43b1c64cc48aac6ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_currentHealth: 1
-  m_maxHealth: 1
+  m_currentHealth: 10
+  m_maxHealth: 10
   m_disablePlayerCollision: 1
   m_weaknesses: []
   m_damageHistory: []
+  m_usedStatTypes: []
   m_deathSoundName: DeathSound
   m_damageSoundname: DamageSound
+  m_useDamagePopup: 1
   m_brokenPrefab: {fileID: 6400861332931179733, guid: 637c377d2c102cf4f96c31d59b2f7aa3, type: 3}
 --- !u!114 &8393586926130725875
 MonoBehaviour:
@@ -133,8 +135,17 @@ MonoBehaviour:
   audioChannels:
   - name: Audio Channel 0
     volume: 1
+    lastVolume: 0
     pitch: 1
+    layered: 0
     clip: {fileID: 8300000, guid: 21336e8d55b22ff4eb74158cdbcb9494, type: 3}
+    layers: []
+    timeSignature: 4
+    beatsPerMinute: 80
+    layerIndex: 0
+    currentLayer: 0
+    longestLayerDuration: 0
+    longestLayerIndex: 0
     loop: 0
     playOnAwake: 0
     SpatialBlend: 0
@@ -165,6 +176,7 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
     source: {fileID: 0}
+    layerSources: []
     playing: 0
     paused: 0
     time: 0

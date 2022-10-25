@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6219333976778469706}
   - component: {fileID: 1392450027192347232}
   - component: {fileID: 3704504363452662165}
+  - component: {fileID: 8393586926130725875}
   m_Layer: 0
   m_Name: wallStoneSNOW
   m_TagString: Untagged
@@ -108,9 +109,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3385ecf52ebacee43b1c64cc48aac6ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_currentHealth: 1
-  m_maxHealth: 1
+  m_currentHealth: 10
+  m_maxHealth: 10
   m_disablePlayerCollision: 1
-  m_deathSound: {fileID: 3107313251738698642, guid: f66c463f5df69844dbf3eb8be9790347, type: 3}
-  m_hurtSound: {fileID: 0}
+  m_weaknesses: []
+  m_damageHistory: []
+  m_usedStatTypes: []
+  m_deathSoundName: DeathSound
+  m_damageSoundname: DamageSound
+  m_useDamagePopup: 1
   m_brokenPrefab: {fileID: 6400861332931179733, guid: c495af376ee019d49ab0428c31a41696, type: 3}
+--- !u!114 &8393586926130725875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5570811163509936287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a119b25d52728621583e7f3194633c58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggers: []
+  audioChannels: []
+  transitions: []

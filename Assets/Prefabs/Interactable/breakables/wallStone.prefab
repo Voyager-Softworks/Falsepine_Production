@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3704504363452662165}
   - component: {fileID: 8393586926130725875}
   m_Layer: 0
-  m_Name: wallDesert
+  m_Name: wallStone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 5cf3e01b85ef0f742b6c7e3daf398d43, type: 2}
+  - {fileID: 2100000, guid: a8c559820933c9e44bc96c8fd6ab3e17, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -109,13 +109,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3385ecf52ebacee43b1c64cc48aac6ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_currentHealth: 1
-  m_maxHealth: 1
+  m_currentHealth: 10
+  m_maxHealth: 10
   m_disablePlayerCollision: 1
+  m_weaknesses: []
   m_damageHistory: []
+  m_usedStatTypes: []
   m_deathSoundName: DeathSound
   m_damageSoundname: DamageSound
-  m_brokenPrefab: {fileID: 6400861332931179733, guid: 43088c521103b6e41b4d1d33123628eb, type: 3}
+  m_useDamagePopup: 1
+  m_brokenPrefab: {fileID: 6400861332931179733, guid: ba6e53c2e3d5fe04d9197cc50d2340e6, type: 3}
 --- !u!114 &8393586926130725875
 MonoBehaviour:
   m_ObjectHideFlags: 0
