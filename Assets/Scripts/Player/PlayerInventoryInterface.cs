@@ -240,7 +240,13 @@ public class PlayerInventoryInterface : MonoBehaviour
 
         if (selectedWeapon)
         {
-            selectedWeapon.ManualUpdate(gameObject);
+            // if the currwen weapon is not in the inventory, select a valid weapon
+            if (playerInventory.GetItemIndex(selectedWeapon) == -1)
+            {
+                SwapWeapon();
+            }
+
+            selectedWeapon?.ManualUpdate(gameObject);
 
             Transform weaponFirepoint = GetWeaponFirepoint(selectedWeapon);
             Vector3 weaponFirepointPosition = weaponFirepoint.position;
@@ -674,11 +680,28 @@ public class PlayerInventoryInterface : MonoBehaviour
         // if inventory is null, return
         if (playerInventory == null) return;
 
+        int weaponIndex = -1;
+        switch (selectedWeaponType)
+        {
+            case SelectedWeaponType.Primary:
+                weaponIndex = 0;
+                break;
+            case SelectedWeaponType.Secondary:
+                weaponIndex = 1;
+                break;
+            case SelectedWeaponType.None:
+                weaponIndex = -1;
+                break;
+        }
+
         // get selected weapon
-        selectedWeapon = playerInventory.slots.ElementAtOrDefault((int)selectedWeaponType)?.item;
+        selectedWeapon = playerInventory.slots.ElementAtOrDefault(weaponIndex)?.item;
 
         // if selected weapon is null, return
-        if (selectedWeapon == null) return;
+        if (selectedWeapon == null) {
+            DisableAllWeaponModels();
+            return;
+        }
 
         // set animator
         string animatorBoolName = GetWeaponAnimatorBoolName(selectedWeapon);
