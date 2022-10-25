@@ -19,6 +19,7 @@ public class MissionCardUI : MonoBehaviour
     [Header("Main")]
     public TextMeshProUGUI missionTitle;
     public TextMeshProUGUI missionDifficulty;
+    public TextMeshProUGUI missionComplete;
     public TextMeshProUGUI missionDescription;
     public Image backgroundImage;
     public GameObject takenGroup;
@@ -190,7 +191,22 @@ public class MissionCardUI : MonoBehaviour
                     break;
             }
 
-            missionTitle.text = "<sprite=0 color=#" + ColorUtility.ToHtmlStringRGB(missionCol) + "> " + associatedMission.m_title;
+            string missionCompleteText = "";
+            switch (associatedMission.GetState()){
+                case MissionCondition.ConditionState.COMPLETE:
+                    missionCompleteText = "Complete";
+                    break;
+                case MissionCondition.ConditionState.INCOMPLETE:
+                    missionCompleteText = "Incomplete";
+                    break;
+                case MissionCondition.ConditionState.FAILED:
+                    missionCompleteText = "Failed";
+                    break;
+            }
+
+            missionTitle.text = associatedMission.m_title;
+
+            missionComplete.text = missionCompleteText;
 
             string difficultySprite = "<sprite color=#FF0000 name=\"monster\">";
             string difficultyString = "";
