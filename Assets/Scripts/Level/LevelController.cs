@@ -34,6 +34,13 @@ public class LevelController : MonoBehaviour
         SceneManager.LoadScene("TownScene");
     }
 
+    static public void LoadTutorial(bool _doSave = true)
+    {
+        if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
+
+        SceneManager.LoadScene("TutorialScene");
+    }
+
     static public void LoadSnow(bool _doSave = true)
     {
         if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);

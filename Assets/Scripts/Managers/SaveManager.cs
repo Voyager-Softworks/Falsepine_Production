@@ -221,6 +221,9 @@ public class SaveManager : MonoBehaviour
         EconomyManager.instance.RestoreFromLastDeath(_saveSlot);
         StatsManager.instance.RestoreFromLastDeath(_saveSlot);
 
+        // Reset turorial
+        JournalManager.instance.m_showTutorial = true;
+
         #if UNITY_EDITOR
         // remove all .meta files in the root save folder (recursively)
         string[] metaFiles = Directory.GetFiles(GetRootSaveFolder(), "*.meta", SearchOption.AllDirectories);
