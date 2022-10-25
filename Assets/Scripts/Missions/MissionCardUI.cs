@@ -137,13 +137,19 @@ public class MissionCardUI : MonoBehaviour
             missionDifficulty.text = "";
             switch (associatedMission.GetState()){
                 case MissionCondition.ConditionState.COMPLETE:
-                    missionDescription.text = "The mission is completed, turn it in.";
+                    missionDescription.text = "Mission Completed.";
+                    // center the text vertically and horizontally
+                    missionDescription.alignment = TextAlignmentOptions.Center;
                     break;
                 case MissionCondition.ConditionState.INCOMPLETE:
-                    missionDescription.text = "Check the journal.\nEmbark to start the mission.";
+                    missionDescription.text = "Check Journal.";
+                    // center the text vertically and horizontally
+                    missionDescription.alignment = TextAlignmentOptions.Center;
                     break;
                 case MissionCondition.ConditionState.FAILED:
-                    missionDescription.text = "Mission Failed. \nCancel the mission to try again.";
+                    missionDescription.text = "Mission Failed.";
+                    // center the text vertically and horizontally
+                    missionDescription.alignment = TextAlignmentOptions.Center;
                     break;
             }
 
@@ -214,6 +220,8 @@ public class MissionCardUI : MonoBehaviour
             missionDifficulty.text = difficultyString;
 
             missionDescription.text = associatedMission.m_description;
+            // top left align the text
+            missionDescription.alignment = TextAlignmentOptions.TopLeft;
             // add conditions to description
             if (associatedMission){
                 missionDescription.text += "\n\nConditions:";
@@ -291,11 +299,14 @@ public class MissionCardUI : MonoBehaviour
     {
         ShowCard();
 
-        missionTitle.text = "No Bounty Selected";
+        missionTitle.text = "No Mission Selected";
         missionDifficulty.text = "";
-        missionDescription.text = "Accept a Bounty from the bounty board in town.";
+        missionDescription.text = "Accept a Mission from the Mission board in town.";
 
         backgroundImage.color = new Color(backgroundImage.color.r, backgroundImage.color.g, backgroundImage.color.b, 0.5f);
+
+        missionStampComplete.enabled = false;
+        missionStampFailed.enabled = false;
 
         //dropShadow.enabled = false;
         takenGroup.SetActive(false);
@@ -331,6 +342,8 @@ public class MissionCardUI : MonoBehaviour
         missionDifficulty.enabled = false;
         missionDescription.enabled = false;
         backgroundImage.enabled = false;
+        missionStampComplete.enabled = false;
+        missionStampFailed.enabled = false;
         //dropShadow.enabled = false;
         takenGroup.SetActive(false);
         button.SetActive(false);
