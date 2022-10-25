@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ZoneCinematicManager : MonoBehaviour
 {
@@ -9,10 +10,12 @@ public class ZoneCinematicManager : MonoBehaviour
     public Animator m_animator;
     [Tooltip("If no animator is given, the timer will be used instead")] public float m_fallbackTime = 5.0f;
     private float m_fallbackTimer = 0.0f;
+    private bool m_isEnding = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        m_isEnding = false;
     }
 
     // Update is called once per frame
@@ -33,10 +36,18 @@ public class ZoneCinematicManager : MonoBehaviour
                 OnCinematicEnd();
             }
         }
+
+        // if escape is pressed, skip cinematic
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            OnCinematicEnd();
+        }
     }
 
     public void OnCinematicEnd()
     {
+        if (m_isEnding) return;
+        m_isEnding = true;
         MissionManager.instance.LoadNextScene();
 
         if (m_disableCinematic)

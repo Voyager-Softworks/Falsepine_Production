@@ -44,7 +44,7 @@ public class TalismanChoice : ToggleableWindow
             int tries = 100;
             // ensure talisman is unique
             link.m_talisman = StatsManager.instance.GetRandomTalisman();
-            while (m_choices.Any<ChoiceLink>(x => x.m_talisman.m_statMod.statType == link.m_talisman.m_statMod.statType) && tries > 0)
+            while (m_choices.Any<ChoiceLink>(x => x.m_talisman.m_statMod.statType.value == link.m_talisman.m_statMod.statType.value) && tries > 0)
             {
                 link.m_talisman = StatsManager.instance.GetRandomTalisman();
                 tries--;

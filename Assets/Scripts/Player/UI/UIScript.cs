@@ -75,15 +75,6 @@ public class UIScript : MonoBehaviour
             if (pii == null) pii = FindObjectOfType<PlayerInventoryInterface>();
             Item currentWeapon = pii.selectedWeapon;
 
-            // update ammo text
-            if (currentWeapon != null && (RangedWeapon)currentWeapon && ammoText_1 != null)
-            {
-                string spareAmmoText = "";
-                if (((RangedWeapon)currentWeapon).m_unlimitedAmmo) spareAmmoText = "∞";
-                else spareAmmoText = ((RangedWeapon)currentWeapon).m_spareAmmo.ToString();
-                ammoText_1.text = ((RangedWeapon)currentWeapon).m_clipAmmo + "/" + spareAmmoText;
-            }
-
             // get player inventory
             Inventory inventory = InventoryManager.instance.GetInventory("player");
             if (inventory != null)
@@ -96,9 +87,9 @@ public class UIScript : MonoBehaviour
                     primaryWeaponIcon.GetComponent<Image>().sprite = primaryWeapon.m_icon;
 
                     string spareAmmoText = "";
-                    if (((RangedWeapon)currentWeapon).m_unlimitedAmmo) spareAmmoText = "∞";
-                    else spareAmmoText = ((RangedWeapon)currentWeapon).m_spareAmmo.ToString();
-                    ammoText_1.text = ((RangedWeapon)currentWeapon).m_clipAmmo + "/" + spareAmmoText;
+                    if (primaryWeapon.m_unlimitedAmmo) spareAmmoText = "∞";
+                    else spareAmmoText = primaryWeapon.m_spareAmmo.ToString();
+                    ammoText_1.text = primaryWeapon.m_clipAmmo + "/" + spareAmmoText;
 
                     // enable/disable
                     if (currentWeapon && primaryWeapon.id == currentWeapon.id)
@@ -109,6 +100,7 @@ public class UIScript : MonoBehaviour
                 }
                 else
                 {
+                    primaryWeaponIcon.transform.parent.gameObject.SetActive(false);
                     primaryWeaponIcon.SetActive(false);
                 }
 
@@ -120,9 +112,9 @@ public class UIScript : MonoBehaviour
                     secondaryWeaponIcon.GetComponent<Image>().sprite = secondaryWeapon.m_icon;
 
                     string spareAmmoText = "";
-                    if (((RangedWeapon)currentWeapon).m_unlimitedAmmo) spareAmmoText = "∞";
-                    else spareAmmoText = ((RangedWeapon)currentWeapon).m_spareAmmo.ToString();
-                    ammoText_2.text = ((RangedWeapon)currentWeapon).m_clipAmmo + "/" + spareAmmoText;
+                    if (secondaryWeapon.m_unlimitedAmmo) spareAmmoText = "∞";
+                    else spareAmmoText = secondaryWeapon.m_spareAmmo.ToString();
+                    ammoText_2.text = secondaryWeapon.m_clipAmmo + "/" + spareAmmoText;
 
                     // enable/disable
                     if (currentWeapon && secondaryWeapon.id == currentWeapon.id)
@@ -133,7 +125,15 @@ public class UIScript : MonoBehaviour
                 }
                 else
                 {
+                    secondaryWeaponIcon.transform.parent.gameObject.SetActive(false);
                     secondaryWeaponIcon.SetActive(false);
+                }
+
+                // if primary and secondary icon parent are disabled, enable the secondary icon parent
+                if (!primaryWeaponIcon.transform.parent.gameObject.activeSelf && !secondaryWeaponIcon.transform.parent.gameObject.activeSelf)
+                {
+                    secondaryWeaponIcon.transform.parent.gameObject.SetActive(true);
+                    ammoText_2.text = "No Weapon";
                 }
 
 
@@ -186,8 +186,6 @@ public class UIScript : MonoBehaviour
                     equipmentIcon_2.SetActive(false);
                     equipmentAmmoText_2.text = "NO EQUIPMENT";
                 }
-
-
             }
         }
 
