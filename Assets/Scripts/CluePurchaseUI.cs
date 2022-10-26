@@ -71,8 +71,18 @@ public class CluePurchaseUI : MonoBehaviour
         bool beenDiscovered = JournalManager.instance.m_discoveredEntries.Contains(m_linkedJournalEntry);
 
         // show correct icons
-        m_unlockedIcon.SetActive(beenDiscovered);
-        m_lockedIcon.SetActive(!beenDiscovered);
+        m_unlockedIcon.SetActive(true);
+        //m_lockedIcon.SetActive(!beenDiscovered);
+        // if image exists, set image to monster image
+        Sprite monsterImage = m_linkedJournalEntry?.m_linkedMonster?.m_monsterImage;
+        if (monsterImage != null)
+        {
+            Image[] images = m_unlockedIcon.GetComponentsInChildren<Image>();
+            foreach (Image image in images)
+            {
+                image.sprite = monsterImage;
+            }
+        }
 
         // show correct text and silver icon (if needed)
         m_primaryText.text = m_linkedJournalEntry.m_linkedMonster.m_name + " " + m_linkedJournalEntry.m_entryType.ToString();
