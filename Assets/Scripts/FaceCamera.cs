@@ -20,7 +20,8 @@ public class FaceCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(mainCamera.transform);
+        //transform.LookAt(mainCamera.transform);
+        transform.rotation = Quaternion.LookRotation(-mainCamera.transform.forward, Vector3.up);
         if (flipX)
         {
             transform.Rotate(0, 180, 0);
