@@ -886,6 +886,20 @@ public class Inventory : MonoBehaviour
                 EditorUtility.SetDirty(inventory);
             }
 
+            // convert items to instances
+            // if (GUILayout.Button("Convert Items to Instances"))
+            // {
+            //     for (int i = 0; i < inventory.m_slots.Count; i++)
+            //     {
+            //         if (inventory.m_slots[i].item)
+            //         {
+            //             Item item = inventory.m_slots[i].item;
+            //             inventory.m_slots[i].item = item.CreateInstance();
+            //         }
+            //     }
+            //     EditorUtility.SetDirty(inventory);
+            // }
+
             // show total inventory count
             EditorGUILayout.LabelField("Total Inventory Count: " + allInventories.Count());
 
