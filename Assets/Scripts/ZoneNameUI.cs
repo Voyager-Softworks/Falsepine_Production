@@ -22,6 +22,6 @@ public class ZoneNameUI : MonoBehaviour
         TextMeshProUGUI text = GetComponent<TextMeshProUGUI>();
         if (text == null) return;
 
-        text.text = MissionManager.instance.GetCurrentZone().m_title;
+        text.text = "Current Zone: " + MissionManager.instance.GetCurrentZone().m_title;
     }
 }
