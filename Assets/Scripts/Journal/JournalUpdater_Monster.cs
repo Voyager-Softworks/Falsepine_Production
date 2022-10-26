@@ -18,10 +18,31 @@ public class JournalUpdater_Monster : JournalContentUpdater
     public Image m_monsterImage;
     public TextMeshProUGUI m_monsterName;
     public TextMeshProUGUI m_killCountText;
-    public TextMeshProUGUI m_introText;
+    public JounralEntry.EntryType m_entryType = JounralEntry.EntryType.Clue;
+    public Button m_leftButton;
+    public Button m_rightButton;
+    public TextMeshProUGUI m_tabText;
+    public GameObject m_clueTab;
+    public TextMeshProUGUI m_clueIntroText;
+    public GameObject m_loreTab;
+    public TextMeshProUGUI m_loreIntroText;
 
     [Header("Refs")]
     public Sprite m_undiscoveredSprite;
+
+    protected override void OnEnable() {
+        base.OnEnable();
+
+        m_leftButton.onClick.AddListener(OnLeftButtonPressed);
+        m_rightButton.onClick.AddListener(OnRightButtonPressed);
+    }
+
+    protected override void OnDisable() {
+        base.OnDisable();
+
+        m_leftButton.onClick.RemoveListener(OnLeftButtonPressed);
+        m_rightButton.onClick.RemoveListener(OnRightButtonPressed);
+    }
 
     public override void UpdateContent()
     {
@@ -42,9 +63,10 @@ public class JournalUpdater_Monster : JournalContentUpdater
         contentList.Clear();
 
         // add new content that has the same boss type
+        int count = 0;
         foreach (JounralEntry entry in discoveredEntries)
         {
-            if (entry.m_linkedMonster == m_monster)
+            if (entry.m_linkedMonster == m_monster && entry.m_entryType == m_entryType)
             {
                 // make title content
                 if (!string.IsNullOrEmpty(entry.m_title)){
@@ -56,14 +78,19 @@ public class JournalUpdater_Monster : JournalContentUpdater
                 }
                 // add all other content
                 contentList.Add(entry.entryContent);
+
+                count++;
             }
         }
 
-        if (discoveredEntries.Count > 0)
-        {
-            // update UI
-            m_introText.gameObject.SetActive(false);
-        }
+        // update tab text
+        m_tabText.text = m_entryType.ToString();
+
+        // Enable/disable tabs and intros
+        m_clueTab.SetActive(m_entryType == JounralEntry.EntryType.Clue);
+        m_loreTab.SetActive(m_entryType == JounralEntry.EntryType.Lore);
+        m_clueIntroText.gameObject.SetActive(count <= 0 && m_entryType == JounralEntry.EntryType.Clue);
+        m_loreIntroText.gameObject.SetActive(count <= 0 && m_entryType == JounralEntry.EntryType.Lore);
 
         base.UpdateContent();
 
@@ -98,7 +125,51 @@ public class JournalUpdater_Monster : JournalContentUpdater
                     discoveredLore++;
                 }
             }
-            m_killCountText.text += "\n" + "Knowledge: +" + discoveredLore + "% dmg";
+            m_killCountText.text += " - " + "Knowledge: +" + discoveredLore + "% dmg";
         }
     }
+
+
+    // Note: 2 functions if we add more stuff
+
+    /// <summary>
+    /// Goes to the next tab
+    /// </summary>
+    public void OnRightButtonPressed(){
+        // swap to next entry type
+        if (m_entryType == JounralEntry.EntryType.Lore){
+            m_entryType = JounralEntry.EntryType.Clue;
+        }
+        else{
+            m_entryType = JounralEntry.EntryType.Lore;
+        }
+        UpdateContent();
+    }
+
+    /// <summary>
+    /// Goes to prev tab
+    /// </summary>
+    public void OnLeftButtonPressed(){
+        // swap to previous entry type
+        if (m_entryType == JounralEntry.EntryType.Lore){
+            m_entryType = JounralEntry.EntryType.Clue;
+        }
+        else{
+            m_entryType = JounralEntry.EntryType.Lore;
+        }
+        UpdateContent();
+    }
+
+    #if UNITY_EDITOR
+    private void OnValidate() {
+        // set name of the object to the monster name
+        if (m_monster != null){
+            // remove spaces
+            string name = m_monster.m_name.Replace(" ", "") + "_Content";
+            if (gameObject.name != name){
+                gameObject.name = name;
+            }
+        }
+    }
+    #endif
 }

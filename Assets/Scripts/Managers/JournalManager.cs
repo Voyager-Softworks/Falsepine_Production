@@ -477,31 +477,31 @@ public class JournalManager : ToggleableWindow
         }
 
         // binds the intro text to the intro text field
-        public void SelectIntros()
-        {
-            JournalManager myScript = (JournalManager)target;
+        // public void SelectIntros()
+        // {
+        //     JournalManager myScript = (JournalManager)target;
 
-            JournalUpdater_Monster[] updaters = myScript.GetComponentsInChildren<JournalUpdater_Monster>(true);
-            foreach (JournalUpdater_Monster updater in updaters)
-            {
-                // find child with name "Intro"
-                TextMeshProUGUI[] texts = updater.GetComponentsInChildren<TextMeshProUGUI>(true);
-                foreach (TextMeshProUGUI text in texts)
-                {
-                    if (text.name == "Intro")
-                    {
-                        updater.m_introText = text;
-                        continue;
-                    }
-                }
+        //     JournalUpdater_Monster[] updaters = myScript.GetComponentsInChildren<JournalUpdater_Monster>(true);
+        //     foreach (JournalUpdater_Monster updater in updaters)
+        //     {
+        //         // find child with name "Intro"
+        //         TextMeshProUGUI[] texts = updater.GetComponentsInChildren<TextMeshProUGUI>(true);
+        //         foreach (TextMeshProUGUI text in texts)
+        //         {
+        //             if (text.name == "Intro")
+        //             {
+        //                 updater.m_introText = text;
+        //                 continue;
+        //             }
+        //         }
 
-                // set dirty
-                EditorUtility.SetDirty(updater);
-            }
+        //         // set dirty
+        //         EditorUtility.SetDirty(updater);
+        //     }
 
-            // set dirty
-            EditorUtility.SetDirty(myScript);
-        }
+        //     // set dirty
+        //     EditorUtility.SetDirty(myScript);
+        // }
     }
     #endif
 }
