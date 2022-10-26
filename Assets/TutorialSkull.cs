@@ -125,6 +125,7 @@ public class TutorialSkull : MonoBehaviour
         textTimer = 0.0f;
         lineTimer = 0.0f;
         isTalking = false;
+        currText = tutorialText[currLine];
         ClearText();
     }
 
