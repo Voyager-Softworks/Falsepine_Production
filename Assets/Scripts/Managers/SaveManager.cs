@@ -223,6 +223,7 @@ public class SaveManager : MonoBehaviour
 
         // Reset turorial
         JournalManager.instance.m_showTutorial = true;
+        JournalManager.instance.SaveJournal(_saveSlot);
 
         #if UNITY_EDITOR
         // remove all .meta files in the root save folder (recursively)
