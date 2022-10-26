@@ -71,8 +71,16 @@ public class Equipment : Item
         if (newEquipment.GetComponent<Useable>() != null){
             if (newEquipment.GetComponent<Useable>().TryUse(this)){
                 WasUsed();
+                // set parent to owner
+                newEquipment.transform.SetParent(_owner.transform);
+
+                // Destroy timer
+                Destroy(newEquipment, 15f);
 
                 return true;
+            }
+            else {
+                Destroy(newEquipment);
             }
         }
 
