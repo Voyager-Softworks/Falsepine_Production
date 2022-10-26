@@ -18,6 +18,7 @@ public class EntryPurchasePanel : MonoBehaviour
     public TextMeshProUGUI m_purchaseButtonText;
     public TextMeshProUGUI m_purchaseButtonCostText;
     public Image m_purchaseButtonSilverIcon;
+    public GameObject m_noteText;
 
     [Header("Entries")]
     public int m_minPrice = 10;
@@ -30,6 +31,12 @@ public class EntryPurchasePanel : MonoBehaviour
     {
         // get all valid entires
         List<JounralEntry> validEntries = JournalManager.instance.GetUndiscoveredEntries(_monsterType: MonsterInfo.MonsterType.Minion, _entryType: JounralEntry.EntryType.Lore);
+        // remove any entries of monsters that have not been killed yet
+        for (int i = validEntries.Count - 1; i >= 0; i--) {
+            if (StatsManager.instance.GetKills(validEntries[i].m_linkedMonster) <= 0) {
+                validEntries.RemoveAt(i);
+            }
+        }
 
         // add amount of entries to the list (if there are enough)
         for (int i = 0; i < m_entryAmount && validEntries.Count > 0; i++){
@@ -69,6 +76,9 @@ public class EntryPurchasePanel : MonoBehaviour
                 m_selectedClue = clueUI;
             };
         }
+
+        // if there are no entries, enable note text, otherwise disable it
+        m_noteText.SetActive(m_clueUIs.Count <= 0);
     }
 
     private void OnEnable()
