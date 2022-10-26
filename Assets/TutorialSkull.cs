@@ -84,8 +84,22 @@ public class TutorialSkull : MonoBehaviour
                 textTimer = 0.0f;
                 if (currText.Length > 0)
                 {
-                    text.text += currText[0];
-                    currText = currText.Remove(0, 1);
+                    // Check if the next character is the start of a tag (e.g. <color=red>)
+                    if (currText[0] == '<')
+                    {
+                        // Find the end of the tag
+                        int tagEnd = currText.IndexOf('>') + 1;
+                        // Add the whole tag to the text
+                        text.text += currText.Substring(0, tagEnd);
+                        // Remove the tag from the current text
+                        currText = currText.Substring(tagEnd);
+                    }
+                    else
+                    {
+                        // If it's not a tag, just add one character
+                        text.text += currText[0];
+                        currText = currText.Substring(1);
+                    }
                 }
                 else
                 {
@@ -97,6 +111,8 @@ public class TutorialSkull : MonoBehaviour
                         {
                             currText = tutorialText[currLine];
                             // Add a newline to the text
+                            text.text += "\n";
+                            text.text += "—";
                             text.text += "\n";
                         }
                         else
