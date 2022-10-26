@@ -64,17 +64,20 @@ public class MonsterInfo : ScriptableObject
     {
         public string m_name;
         public MonsterType m_type;
+        public Sprite m_monsterImage;
 
         public SerializableMonsterInfo(MonsterInfo monster)
         {
             m_name = monster.m_name;
             m_type = monster.m_type;
+            m_monsterImage = monster.m_monsterImage;
         }
         public MonsterInfo ToMonsterInfo()
         {
             MonsterInfo monster = ScriptableObject.CreateInstance<MonsterInfo>();
             monster.m_name = m_name;
             monster.m_type = m_type;
+            monster.m_monsterImage = m_monsterImage;
             return monster;
         }
     }
