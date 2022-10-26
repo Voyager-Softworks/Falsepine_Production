@@ -36,6 +36,11 @@ public class JournalContentUpdater : MonoBehaviour
         UpdateContent();
     }
 
+    protected virtual void OnDisable()
+    {
+        
+    }
+
     /// <summary>
     /// Adds thext into this content page.
     /// </summary>
