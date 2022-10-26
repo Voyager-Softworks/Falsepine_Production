@@ -27,13 +27,14 @@ public class TutorialSkull : MonoBehaviour
     float startTalkingTimer = 0.0f;
     bool playerInRange = false;
 
-
+    Quaternion initRot;
 
     // Start is called before the first frame update
     void Start()
     {
         currText = tutorialText[currLine];
         text.text = "";
+        initRot = transform.rotation;
     }
 
     // Update is called once per frame
@@ -57,6 +58,7 @@ public class TutorialSkull : MonoBehaviour
         else if (!playerInRange)
         {
             playerInRange = Vector3.Distance(transform.position, player.position) < triggerDistance;
+            transform.rotation = Quaternion.Lerp(transform.rotation, initRot, Time.deltaTime * 2.0f);
             if (playerInRange)
             {
                 startTalkingTimer = 0.0f;
@@ -66,6 +68,7 @@ public class TutorialSkull : MonoBehaviour
         if (playerInRange)
         {
             playerInRange = Vector3.Distance(transform.position, player.position) < triggerDistance;
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(player.position - transform.position), Time.deltaTime * 2.0f);
             if (!playerInRange)
             {
                 isTalking = false;
