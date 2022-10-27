@@ -33,6 +33,12 @@ public class FinalMissionEmbark : MonoBehaviour
     public void ReplaceButton()
     {
         embarkButton.onClick.RemoveAllListeners();
-        embarkButton.onClick.AddListener(() => { LevelController.LoadScene(finalMissionScene.scenePath, true); });
+        embarkButton.onClick.AddListener(() => {
+            // go to next zone
+            MissionManager.instance.GoToNextZone();
+            // save missions
+            MissionManager.instance.SaveMissions(SaveManager.currentSaveSlot);
+            LevelController.LoadScene(finalMissionScene.scenePath, true); 
+        });
     }
 }
