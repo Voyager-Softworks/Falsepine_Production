@@ -8,7 +8,7 @@ using Unity.Mathematics;
 
 /// <summary>
 /// Manages the health of enemies.
-/// @todo seperate the give money command to new script
+/// @todo seperate the give money command to new script?
 /// </summary>
 public class EnemyHealth : Health_Base
 {

@@ -9,6 +9,8 @@ public class Dynamite : MonoBehaviour
     public float m_fuseTime = 3.0f;
     private float m_fuseTimer = 0.0f;
 
+    public bool m_explodeOnImpact = false;
+
     public float m_damage = 50.0f;
     public float m_explosionRadius = 5.0f;
 
@@ -68,5 +70,9 @@ public class Dynamite : MonoBehaviour
         explosion.transform.parent = null;
         Destroy(explosion, 20.0f);
         Destroy(gameObject);
+    }
+
+    private void OnCollisionEnter(Collision other) {
+        if (m_explodeOnImpact) Explode();
     }
 }

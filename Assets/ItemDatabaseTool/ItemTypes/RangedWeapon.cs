@@ -217,9 +217,6 @@ public class RangedWeapon : Item
 
     /// <summary>
     /// Uses the aim zone to detect what to shoot and how much damage to deal<br/>
-    /// @todo Replace trigger collider checking with layers?
-    /// @todo split this function up.
-    /// @todo add managed for health script to keep track?
     /// </summary>
     /// <param name="_origin"></param>
     /// <param name="_direction"></param>
@@ -451,7 +448,7 @@ public class RangedWeapon : Item
     }
 
     /// <summary>
-    /// @todo func head
+    /// Checks if a point is within a triangle
     /// </summary>
     /// <param name="_point"></param>
     /// <param name="_triangleA"></param>
@@ -501,7 +498,7 @@ public class RangedWeapon : Item
     }
 
     /// <summary>
-    /// @todo Func header
+    /// Checks if two lines intersect, and where
     /// </summary>
     /// <param name="a1"></param>
     /// <param name="a2"></param>
@@ -578,7 +575,6 @@ public class RangedWeapon : Item
         if (LinesIntersect(b3, b4, _triangleB, _triangleC, out intersection)) { intersections.Add(intersection); }
         if (LinesIntersect(b4, b1, _triangleB, _triangleC, out intersection)) { intersections.Add(intersection); }
 
-        //@todo check the brackets
         if (intersections.Count > 0) {
             return true;
         }
@@ -587,7 +583,7 @@ public class RangedWeapon : Item
     }
 
     /// <summary>
-    /// @todo func head
+    /// Gets a list of corners of the given bounds.
     /// </summary>
     /// <param name="_bounds"></param>
     /// <returns></returns>
