@@ -74,6 +74,11 @@ public class ItemThrow : MonoBehaviour
         {
             m_isThrown = true;
 
+            if (m_inventoryInterface != null && m_inventoryInterface.m_currentlyThrowingItem == this)
+            {
+                m_inventoryInterface.m_currentlyThrowingItem = null;
+            }
+
             // enable rigidbody and collider
             GetComponent<Rigidbody>().isKinematic = false;
             GetComponent<Collider>().enabled = true;
@@ -125,9 +130,6 @@ public class ItemThrow : MonoBehaviour
                 // set velocity
                 GetComponent<Rigidbody>().velocity = horizontalVelocity + Vector3.up * initialVelocity;
             }
-
-            // m_throwVelocity = m_owner.transform.forward.normalized * m_throwForce;
-            // GetComponent<Rigidbody>().velocity = m_throwVelocity;
             
             //random rotation
             if (m_randomTorque) GetComponent<Rigidbody>().angularVelocity = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)) * 20.0f;
