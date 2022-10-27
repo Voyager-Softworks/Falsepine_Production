@@ -5,6 +5,9 @@ using NodeAI;
 
 namespace Boss.Omen
 {
+    /// <summary>
+    ///  Node to handle Omen landing from flight
+    /// </summary>
     public class Land : NodeAI.ActionBase
     {
         RootMotionFlight flight; ///< The flight script.
@@ -66,7 +69,7 @@ namespace Boss.Omen
 
             timer += Time.time - oldTime;
             oldTime = Time.time;
-            if(animator.GetCurrentAnimatorStateInfo(0).IsName("Landing"))
+            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Landing"))
             {
                 time = animator.GetCurrentAnimatorStateInfo(0).normalizedTime;
             }

@@ -5,6 +5,9 @@ using NodeAI;
 
 namespace Boss.Omen
 {
+    /// <summary>
+    ///  Node to handle Omen's flight AI
+    /// </summary>
     public class Fly : NodeAI.ActionBase
     {
         RootMotionFlight flight; ///< The flight script.
