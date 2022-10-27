@@ -5,6 +5,9 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.VFX;
 
+/// <summary>
+///  Controls weather effects and lightning bolt hazard spawning for the Omen boss fight.
+/// </summary>
 public class LightningController : MonoBehaviour
 {
     public BossEnemyHealth bossEnemyHealth;
