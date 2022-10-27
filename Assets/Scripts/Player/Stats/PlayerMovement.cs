@@ -175,6 +175,7 @@ public class PlayerMovement : MonoBehaviour
 
         bool isAiming = false;
         bool isReloading = false;
+        bool isThrowing = false;
         PlayerInventoryInterface pii = GetComponent<PlayerInventoryInterface>();
         if (pii)
         {
@@ -183,6 +184,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 isAiming = rangedWeapon.m_isAiming;
                 isReloading = rangedWeapon.m_isReloading;
+            }
+
+            if (pii.m_currentlyThrowingItem != null){
+                isThrowing = true;
             }
         }
 
@@ -266,7 +271,7 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("Running", sprintAction.ReadValue<float>() > 0.1f && move.magnitude > 0.1f);
 
             controller.Move(moveDir * Time.deltaTime);
-            if ((isAiming || isReloading) && (!isRolling && !isVaulting))
+            if ((isAiming || isReloading || isThrowing) && (!isRolling && !isVaulting))
             {
                 //apply movement
                 //transform.position += (moveDir * speed * Time.deltaTime);

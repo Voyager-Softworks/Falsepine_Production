@@ -7,11 +7,7 @@ using UnityEngine;
 ///</summary>
 public class ItemThrow : MonoBehaviour
 {
-    public float m_throwDelay = 0.5f;
-    private float m_throwTimer = 0.0f;
-    public float m_throwForce = 10.0f;
     public bool m_randomTorque = true;
-    private Vector3 m_throwVelocity = Vector3.zero;
     private Transform m_throwTransform;
     public Quaternion m_throwRotation;
     public bool m_forceUpright = false;
@@ -52,15 +48,15 @@ public class ItemThrow : MonoBehaviour
     {
 
         // while the timer is greater than 0, lerp to transform position
-        if (m_throwTimer > 0.0f)
+        if (!m_isThrown)
         {
-            m_throwTimer -= Time.deltaTime;
             transform.position = m_throwTransform.position; //Vector3.Lerp(transform.position, m_throwTransform.position, Time.deltaTime * 20.0f);
             transform.rotation = Quaternion.Lerp(transform.rotation, m_throwTransform.rotation * m_throwRotation, Time.deltaTime * 20.0f);
 
             // lerp scale
             transform.localScale = Vector3.Lerp(transform.localScale, m_realScale, Time.deltaTime * 1.0f);
 
+            // find and bind player inventory interface
             if (m_inventoryInterface == null)
             {
                 m_inventoryInterface = m_owner.GetComponent<PlayerInventoryInterface>();
@@ -69,70 +65,6 @@ public class ItemThrow : MonoBehaviour
             {
                 m_inventoryInterface.m_currentlyThrowingItem = this;
             }
-        }
-        else if (!m_isThrown)
-        {
-            m_isThrown = true;
-
-            if (m_inventoryInterface != null && m_inventoryInterface.m_currentlyThrowingItem == this)
-            {
-                m_inventoryInterface.m_currentlyThrowingItem = null;
-            }
-
-            // enable rigidbody and collider
-            GetComponent<Rigidbody>().isKinematic = false;
-            GetComponent<Collider>().enabled = true;
-
-            // set scale
-            //transform.localScale = m_realScale;
-
-            // throw the item AT the mouse
-            PlayerMovement pm = FindObjectOfType<PlayerMovement>();
-            if (pm != null)
-            {
-                // get mouse pos
-                Vector3 mousePos = pm.GetMouseAimPlanePoint();
-
-                // get start position
-                Vector3 startPos = m_throwTransform.position;
-
-                // get horizontal distance (excluding y)
-                Vector3 horizontalDistance = new Vector3(mousePos.x - startPos.x, 0, mousePos.z - startPos.z);
-                // clamp
-                horizontalDistance = Vector3.ClampMagnitude(horizontalDistance, m_maxThrowDistance);
-
-                // get initial vertical velocity (scale by distance, 0-1)
-                float initialVelocity = m_upVelocity * (horizontalDistance.magnitude / m_maxThrowDistance);
-
-                // get acceleration due to gravity
-                float gravity = -Physics.gravity.y;
-
-                // calculate time to reach apex
-                float timeToApex = initialVelocity / gravity;
-
-                // height of apex
-                float apexHeight = startPos.y + initialVelocity * timeToApex - 0.5f * gravity * timeToApex * timeToApex;
-                
-                // calc fall distance
-                float fallDistance = apexHeight - mousePos.y;
-                // ensure never below 0 for next equation
-                fallDistance = Mathf.Max(0, fallDistance);
-
-                // calculate time from apex to mouse height
-                float timeToMouse = Mathf.Sqrt(2 * (fallDistance) / gravity);
-
-                // calculate total time
-                float totalTime = timeToApex + timeToMouse;
-
-                // calculate horizontal velocity to reach mouse
-                Vector3 horizontalVelocity = horizontalDistance / totalTime;
-
-                // set velocity
-                GetComponent<Rigidbody>().velocity = horizontalVelocity + Vector3.up * initialVelocity;
-            }
-            
-            //random rotation
-            if (m_randomTorque) GetComponent<Rigidbody>().angularVelocity = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)) * 20.0f;
         }
 
         if (m_isThrown)
@@ -147,17 +79,91 @@ public class ItemThrow : MonoBehaviour
         }
     }
 
+    public void DoThrow()
+    {
+        m_isThrown = true;
+
+        // unbine from player inventory interface
+        if (m_inventoryInterface != null)
+        {
+            m_inventoryInterface.m_currentlyThrowingItem = null;
+        }
+
+        // enable rigidbody and collider
+        GetComponent<Rigidbody>().isKinematic = false;
+        GetComponent<Collider>().enabled = true;
+
+        // set scale
+        //transform.localScale = m_realScale;
+
+        // throw the item AT the mouse
+        PlayerMovement pm = FindObjectOfType<PlayerMovement>();
+        if (pm != null)
+        {
+            // get mouse pos
+            Vector3 mousePos = pm.GetMouseAimPlanePoint();
+
+            // get start position
+            Vector3 startPos = m_throwTransform.position;
+
+            // get horizontal distance (excluding y)
+            Vector3 horizontalDistance = new Vector3(mousePos.x - startPos.x, 0, mousePos.z - startPos.z);
+            // clamp
+            horizontalDistance = Vector3.ClampMagnitude(horizontalDistance, m_maxThrowDistance);
+
+            // get initial vertical velocity (scale by distance, 0-1)
+            float initialVelocity = m_upVelocity * (horizontalDistance.magnitude / m_maxThrowDistance);
+
+            // get acceleration due to gravity
+            float gravity = -Physics.gravity.y;
+
+            // calculate time to reach apex
+            float timeToApex = initialVelocity / gravity;
+
+            // height of apex
+            float apexHeight = startPos.y + initialVelocity * timeToApex - 0.5f * gravity * timeToApex * timeToApex;
+
+            // calc fall distance
+            float fallDistance = apexHeight - mousePos.y;
+            // ensure never below 0 for next equation
+            fallDistance = Mathf.Max(0, fallDistance);
+
+            // calculate time from apex to mouse height
+            float timeToMouse = Mathf.Sqrt(2 * (fallDistance) / gravity);
+
+            // calculate total time
+            float totalTime = timeToApex + timeToMouse;
+
+            // calculate horizontal velocity to reach mouse
+            Vector3 horizontalVelocity = horizontalDistance / totalTime;
+
+            // set velocity
+            GetComponent<Rigidbody>().velocity = horizontalVelocity + Vector3.up * initialVelocity;
+        }
+
+        //random rotation
+        if (m_randomTorque) GetComponent<Rigidbody>().angularVelocity = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)) * 20.0f;
+    }
+
     /// <summary>
     /// Tells the item to start the throw sequence.
     /// </summary>
     /// <param name="_throwTransform"></param>
     /// <param name="_direction"></param>
     /// <param name="_owner"></param>
-    public void TossPrefab(Transform _throwTransform, Vector3 _direction, GameObject _owner)
+    public void StartThrow(Transform _throwTransform, Vector3 _direction, GameObject _owner)
     {
-        m_throwTimer = m_throwDelay;
         m_throwTransform = _throwTransform;
-        m_throwVelocity = _direction.normalized * m_throwForce;
         m_owner = _owner;
+
+        // find and bind player inventory interface
+        if (m_inventoryInterface == null)
+        {
+            m_inventoryInterface = m_owner.GetComponent<PlayerInventoryInterface>();
+        }
+        if (m_inventoryInterface != null)
+        {
+            m_inventoryInterface.m_currentlyThrowingItem = this;
+        }
     }
 }
