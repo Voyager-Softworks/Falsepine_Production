@@ -10013,7 +10013,7 @@ Transform:
   m_GameObject: {fileID: 6435021927744988329}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.005, y: 0.005, z: 0.005}
+  m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
   m_Children:
   - {fileID: 2391826494899495135}
   - {fileID: 5522956246200556642}
@@ -10180,9 +10180,9 @@ Rigidbody:
   m_AngularDrag: 0.05
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &117921606036483539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10201,6 +10201,8 @@ MonoBehaviour:
   m_throwRotation: {x: 0.70710677, y: 0, z: 0, w: 0.70710677}
   m_forceUpright: 0
   m_startScale: 1
+  m_upVelocity: 8
+  m_maxThrowDistance: 15
 --- !u!136 &8209275036861129535
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -10208,13 +10210,13 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6435021927744988329}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3196fc98d76259f44a9c10c3e5457df8, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 8.634112
-  m_Height: 150.118
+  m_Radius: 3.9641266
+  m_Height: 24.872787
   m_Direction: 1
-  m_Center: {x: 1.6749246, y: 74.08396, z: -1.6395426}
+  m_Center: {x: -0.84869766, y: 12.436394, z: -0.004343033}
 --- !u!114 &8217125437888822038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10228,6 +10230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_fuseTime: 3
+  m_explodeOnImpact: 1
   m_damage: 0
   m_explosionRadius: 5
   explosionPrefab: {fileID: 7667393505971189217, guid: 844af160aef9b764697c73842263cfd3, type: 3}

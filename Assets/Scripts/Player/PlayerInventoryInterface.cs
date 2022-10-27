@@ -33,6 +33,7 @@ public class PlayerInventoryInterface : MonoBehaviour
     public InputAction useEquipmentAction_2; ///< The action to use an equipment.
     // melee attack
     public InputAction meleeAttackAction; ///< The action to melee attack.
+    [ReadOnly] public ItemThrow m_currentlyThrowingItem; ///< The item that is currently being thrown.
 
     [Header("Inventory")]
     public string playerInventoryName = "player"; ///< The name of the player's inventory.
@@ -368,13 +369,6 @@ public class PlayerInventoryInterface : MonoBehaviour
                         string animatorName = GetWeaponAnimatorBoolName(selectedEquipment);
                         if (animatorName != "") playerAnimator.SetTrigger(animatorName);
 
-                        // make player look at cursor
-                        PlayerMovement playerMovement = GetComponent<PlayerMovement>();
-                        playerMovement.SetLookDirection(playerMovement.GetMouseAimPlanePoint() - transform.position);
-
-                        playerAnimator.SetLayerWeight(1, 0);
-                        playerAnimator.SetLayerWeight(2, 0);
-
                         // event
                         OnEquipmentUsed?.Invoke();
                     }
@@ -441,6 +435,16 @@ public class PlayerInventoryInterface : MonoBehaviour
             }
         }
 
+        if (m_currentlyThrowingItem != null)
+        {
+            // make player look at cursor
+            PlayerMovement playerMovement = GetComponent<PlayerMovement>();
+            playerMovement.SetLookDirection(playerMovement.GetMouseAimPlanePoint() - transform.position);
+
+            //@todo make blending work with throwing
+            // playerAnimator.SetLayerWeight(1, 0);
+            // playerAnimator.SetLayerWeight(2, 0);
+        }
     }
 
     /// <summary>

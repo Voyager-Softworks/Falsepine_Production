@@ -12,6 +12,8 @@ public class PropHealth : Health_Base
 {
     public GameObject m_brokenPrefab = null;
 
+    public int m_silverReward = 1;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -32,6 +34,11 @@ public class PropHealth : Health_Base
     public override void Die()
     {
         base.Die();
+
+        // get econ manager, and give money
+        EconomyManager.instance.AddMoney(m_silverReward);
+        // notify
+        if (m_silverReward > 0) NotificationManager.instance?.AddIcon("silver", transform.position + Vector3.up * 2f);
 
         // spawn broken prefab
         if (m_brokenPrefab != null)

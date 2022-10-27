@@ -20,7 +20,13 @@ public class ItemThrow : MonoBehaviour
     public float m_startScale = 0.0f;
     private Vector3 m_realScale = Vector3.zero;
 
+    [Header("Throw Stats")]
+    public float m_upVelocity = 2.0f;
+    public float m_maxThrowDistance = 15.0f;
+
     GameObject m_owner;
+
+    private PlayerInventoryInterface m_inventoryInterface;
 
     // Start is called before the first frame update
     void Awake()
@@ -32,6 +38,13 @@ public class ItemThrow : MonoBehaviour
         // set scale
         m_realScale = transform.localScale;
         transform.localScale = m_realScale * m_startScale;
+    }
+
+    private void OnDisable() {
+        if (m_inventoryInterface != null && m_inventoryInterface.m_currentlyThrowingItem == this)
+        {
+            m_inventoryInterface.m_currentlyThrowingItem = null;
+        }
     }
 
     // Update is called once per frame
@@ -47,10 +60,24 @@ public class ItemThrow : MonoBehaviour
 
             // lerp scale
             transform.localScale = Vector3.Lerp(transform.localScale, m_realScale, Time.deltaTime * 1.0f);
+
+            if (m_inventoryInterface == null)
+            {
+                m_inventoryInterface = m_owner.GetComponent<PlayerInventoryInterface>();
+            }
+            if (m_inventoryInterface != null)
+            {
+                m_inventoryInterface.m_currentlyThrowingItem = this;
+            }
         }
         else if (!m_isThrown)
         {
             m_isThrown = true;
+
+            if (m_inventoryInterface != null && m_inventoryInterface.m_currentlyThrowingItem == this)
+            {
+                m_inventoryInterface.m_currentlyThrowingItem = null;
+            }
 
             // enable rigidbody and collider
             GetComponent<Rigidbody>().isKinematic = false;
@@ -59,9 +86,51 @@ public class ItemThrow : MonoBehaviour
             // set scale
             //transform.localScale = m_realScale;
 
-            // throw the item
-            m_throwVelocity = m_owner.transform.forward.normalized * m_throwForce;
-            GetComponent<Rigidbody>().velocity = m_throwVelocity;
+            // throw the item AT the mouse
+            PlayerMovement pm = FindObjectOfType<PlayerMovement>();
+            if (pm != null)
+            {
+                // get mouse pos
+                Vector3 mousePos = pm.GetMouseAimPlanePoint();
+
+                // get start position
+                Vector3 startPos = m_throwTransform.position;
+
+                // get horizontal distance (excluding y)
+                Vector3 horizontalDistance = new Vector3(mousePos.x - startPos.x, 0, mousePos.z - startPos.z);
+                // clamp
+                horizontalDistance = Vector3.ClampMagnitude(horizontalDistance, m_maxThrowDistance);
+
+                // get initial vertical velocity (scale by distance, 0-1)
+                float initialVelocity = m_upVelocity * (horizontalDistance.magnitude / m_maxThrowDistance);
+
+                // get acceleration due to gravity
+                float gravity = -Physics.gravity.y;
+
+                // calculate time to reach apex
+                float timeToApex = initialVelocity / gravity;
+
+                // height of apex
+                float apexHeight = startPos.y + initialVelocity * timeToApex - 0.5f * gravity * timeToApex * timeToApex;
+                
+                // calc fall distance
+                float fallDistance = apexHeight - mousePos.y;
+                // ensure never below 0 for next equation
+                fallDistance = Mathf.Max(0, fallDistance);
+
+                // calculate time from apex to mouse height
+                float timeToMouse = Mathf.Sqrt(2 * (fallDistance) / gravity);
+
+                // calculate total time
+                float totalTime = timeToApex + timeToMouse;
+
+                // calculate horizontal velocity to reach mouse
+                Vector3 horizontalVelocity = horizontalDistance / totalTime;
+
+                // set velocity
+                GetComponent<Rigidbody>().velocity = horizontalVelocity + Vector3.up * initialVelocity;
+            }
+            
             //random rotation
             if (m_randomTorque) GetComponent<Rigidbody>().angularVelocity = new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 1.0f)) * 20.0f;
         }
