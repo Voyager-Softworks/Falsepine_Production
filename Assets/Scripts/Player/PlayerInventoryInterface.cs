@@ -315,7 +315,7 @@ public class PlayerInventoryInterface : MonoBehaviour
                 // }
 
                 // if aim weapon action is down, aim weapon
-                if (aimWeaponAction.ReadValue<float>() > 0)
+                if (aimWeaponAction.ReadValue<float>() > 0 && m_currentlyThrowingItem == null)
                 {
                     rangedWeapon.TrySetAim(true, gameObject);
 
@@ -355,7 +355,7 @@ public class PlayerInventoryInterface : MonoBehaviour
             if ((useEquipmentAction_1.triggered || useEquipmentAction_2.triggered))
             {
                 Equipment equipment = selectedEquipment as Equipment;
-                if (equipment && equipment.currentStackSize > 0 && equipment.m_useDelayTimer <= 0)
+                if (equipment && equipment.currentStackSize > 0 && equipment.m_useDelayTimer <= 0 && m_currentlyThrowingItem == null)
                 {
                     Vector3 spawnDirection = (transform.forward).normalized;
 
@@ -368,6 +368,12 @@ public class PlayerInventoryInterface : MonoBehaviour
                     if (equipment.UseEquipment(throwPoint, spawnDirection, gameObject)){
                         string animatorName = GetWeaponAnimatorBoolName(selectedEquipment);
                         if (animatorName != "") playerAnimator.SetTrigger(animatorName);
+
+                        if (m_currentlyThrowingItem != null)
+                        {
+                            // set animator bool to true
+                            playerAnimator.SetBool("Throw", true);
+                        }
 
                         // event
                         OnEquipmentUsed?.Invoke();
@@ -435,15 +441,42 @@ public class PlayerInventoryInterface : MonoBehaviour
             }
         }
 
+
         if (m_currentlyThrowingItem != null)
         {
+            playerAnimator.SetLayerWeight(2, 1);
+
+            // if throw key is held down
+            if (useEquipmentAction_1.ReadValue<float>() > 0 || useEquipmentAction_2.ReadValue<float>() > 0)
+            {
+                // set animator bool to true
+                playerAnimator.SetBool("Throw", true);
+            }
+            else{
+                playerAnimator.SetBool("Throw", false);
+            }
+
             // make player look at cursor
             PlayerMovement playerMovement = GetComponent<PlayerMovement>();
             playerMovement.SetLookDirection(playerMovement.GetMouseAimPlanePoint() - transform.position);
 
-            //@todo make blending work with throwing
-            // playerAnimator.SetLayerWeight(1, 0);
-            // playerAnimator.SetLayerWeight(2, 0);
+            // if animator is not playing throw animation, throw item
+            if (playerAnimator.GetBool("Throw") == false && !playerAnimator.GetCurrentAnimatorStateInfo(2).IsName("ThrowReady") && !playerAnimator.GetCurrentAnimatorStateInfo(2).IsName("DoThrow"))
+            {
+                ThrowLetGo();
+            }
+        }
+        else{
+            playerAnimator.SetBool("Throw", false);
+        }
+    }
+
+    public void ThrowLetGo(){
+        if (m_currentlyThrowingItem != null)
+        {
+            m_currentlyThrowingItem.DoThrow();
+            // ensure it is unbound
+            m_currentlyThrowingItem = null;
         }
     }
 

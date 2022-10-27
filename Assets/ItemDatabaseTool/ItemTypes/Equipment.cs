@@ -61,7 +61,7 @@ public class Equipment : Item
     {
         GameObject newEquipment = Instantiate(m_equipmentPrefab, _throwTransform.position, Quaternion.identity);
         if (newEquipment.GetComponent<ItemThrow>() != null){
-            newEquipment.GetComponent<ItemThrow>().TossPrefab(_throwTransform, _direction, _owner);
+            newEquipment.GetComponent<ItemThrow>().StartThrow(_throwTransform, _direction, _owner);
             
             WasUsed();
 

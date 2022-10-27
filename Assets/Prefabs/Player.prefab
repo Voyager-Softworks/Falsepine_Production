@@ -19233,6 +19233,7 @@ MonoBehaviour:
       m_Action: Melee Attack
       m_Flags: 0
     m_Flags: 0
+  m_currentlyThrowingItem: {fileID: 0}
   playerInventoryName: player
   playerInventory: {fileID: 0}
   selectedWeaponType: 0
@@ -19265,19 +19266,12 @@ MonoBehaviour:
     singleReloadClip: {fileID: 0}
     endReloadClip: {fileID: 0}
   - weapons:
-    - {fileID: 11400000, guid: 4786e1bf720d89548ae147b21d9b6798, type: 2}
-    model: {fileID: 0}
-    weaponFirepoint: {fileID: 712825273}
-    animatorBoolName: PlaceBeartrap
-    startReloadClip: {fileID: 0}
-    singleReloadClip: {fileID: 0}
-    endReloadClip: {fileID: 0}
-  - weapons:
     - {fileID: 11400000, guid: 3541ada567cf1e14db489713c7fc2c37, type: 2}
     - {fileID: 11400000, guid: 0d6739c34c660d948b5c0059b0cd5ff3, type: 2}
+    - {fileID: 11400000, guid: 4786e1bf720d89548ae147b21d9b6798, type: 2}
     model: {fileID: 0}
     weaponFirepoint: {fileID: 861255043}
-    animatorBoolName: ThrowDynamite
+    animatorBoolName: Throw
     startReloadClip: {fileID: 0}
     singleReloadClip: {fileID: 0}
     endReloadClip: {fileID: 0}
@@ -19293,7 +19287,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 15f4965bfd4d72344ab6f5c279315c6f, type: 2}
     model: {fileID: 2034346801266874796}
     weaponFirepoint: {fileID: 1495155160548675576}
-    animatorBoolName: Shotgun
+    animatorBoolName: Blunderbuss
     startReloadClip: {fileID: 0}
     singleReloadClip: {fileID: 0}
     endReloadClip: {fileID: 0}
@@ -19301,7 +19295,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: fc459b68da0cfc44ea8065571f120553, type: 2}
     model: {fileID: 5831858470235396285}
     weaponFirepoint: {fileID: 833186557785139087}
-    animatorBoolName: Shotgun
+    animatorBoolName: BoltActionRifle
     startReloadClip: {fileID: 0}
     singleReloadClip: {fileID: 0}
     endReloadClip: {fileID: 0}
@@ -19310,14 +19304,14 @@ MonoBehaviour:
     model: {fileID: 8809377938460392540}
     weaponFirepoint: {fileID: 6061962476011325026}
     animatorBoolName: Revolver
-    startReloadClip: {fileID: 0}
-    singleReloadClip: {fileID: 0}
-    endReloadClip: {fileID: 0}
+    startReloadClip: {fileID: -504215033389889571, guid: a725797baa1769141ab32458bda3bbad, type: 3}
+    singleReloadClip: {fileID: -4331743070258118299, guid: a725797baa1769141ab32458bda3bbad, type: 3}
+    endReloadClip: {fileID: -1602574840640094046, guid: a725797baa1769141ab32458bda3bbad, type: 3}
   - weapons:
     - {fileID: 11400000, guid: 29f0e56bf43d45d4c9e7f0ff6ab7e999, type: 2}
     model: {fileID: 3633219363040869008}
     weaponFirepoint: {fileID: 2768830837983057861}
-    animatorBoolName: Rifle
+    animatorBoolName: Crossbow
     startReloadClip: {fileID: 0}
     singleReloadClip: {fileID: 0}
     endReloadClip: {fileID: 0}
@@ -19341,7 +19335,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: a5f088dfc20dc0040ad152415bf0fc95, type: 2}
     model: {fileID: 5779861669958317207}
     weaponFirepoint: {fileID: 4237875988505067745}
-    animatorBoolName: Revolver
+    animatorBoolName: Mauser
     startReloadClip: {fileID: 0}
     singleReloadClip: {fileID: 0}
     endReloadClip: {fileID: 0}
@@ -19350,7 +19344,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 990f1605b3b846948bae6f21b422e86d, type: 2}
     model: {fileID: 1233304143479798179}
     weaponFirepoint: {fileID: 1073829199047143902}
-    animatorBoolName: Shotgun
+    animatorBoolName: OccultRepeater
     startReloadClip: {fileID: 0}
     singleReloadClip: {fileID: 0}
     endReloadClip: {fileID: 0}
@@ -19358,7 +19352,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 0beb7ef8e5a6030429f26eacf60580a7, type: 2}
     model: {fileID: 7760722764415715895}
     weaponFirepoint: {fileID: 4686722470608331136}
-    animatorBoolName: Revolver
+    animatorBoolName: Sawnoff
     startReloadClip: {fileID: 0}
     singleReloadClip: {fileID: 0}
     endReloadClip: {fileID: 0}
@@ -19406,7 +19400,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 21d389d9686f12e4aa9e3e452918b421, type: 2}
     model: {fileID: 4783241093439540232}
     weaponFirepoint: {fileID: 7068891118282349644}
-    animatorBoolName: Rifle
+    animatorBoolName: OccultRepeater
     startReloadClip: {fileID: 0}
     singleReloadClip: {fileID: 0}
     endReloadClip: {fileID: 0}
@@ -19414,7 +19408,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 15f4965bfd4d72344ab6f5c279315c6f, type: 2}
     model: {fileID: 2050977165717873370}
     weaponFirepoint: {fileID: 836409192255886035}
-    animatorBoolName: Shotgun
+    animatorBoolName: Blunderbuss
     startReloadClip: {fileID: 0}
     singleReloadClip: {fileID: 0}
     endReloadClip: {fileID: 0}
@@ -19462,7 +19456,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: fc459b68da0cfc44ea8065571f120553, type: 2}
     model: {fileID: 4094269419658879488}
     weaponFirepoint: {fileID: 5507263015909829996}
-    animatorBoolName: Rifle
+    animatorBoolName: BoltActionRifle
     startReloadClip: {fileID: 0}
     singleReloadClip: {fileID: 0}
     endReloadClip: {fileID: 0}
@@ -19470,7 +19464,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 0f51d69c53b9e0143bfd38102285b550, type: 2}
     model: {fileID: 7655348818419633681}
     weaponFirepoint: {fileID: 8292878750456778353}
-    animatorBoolName: Revolver
+    animatorBoolName: Mauser
     startReloadClip: {fileID: 0}
     singleReloadClip: {fileID: 0}
     endReloadClip: {fileID: 0}
@@ -19478,7 +19472,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: efb67fc37ee446f44b8dfc4b05e39d1d, type: 2}
     model: {fileID: 6428333008500360693}
     weaponFirepoint: {fileID: 2879432210571013274}
-    animatorBoolName: Revolver
+    animatorBoolName: Sawnoff
     startReloadClip: {fileID: 0}
     singleReloadClip: {fileID: 0}
     endReloadClip: {fileID: 0}
@@ -19486,7 +19480,7 @@ MonoBehaviour:
     - {fileID: 11400000, guid: 147fd9ef6ffcc7b47a7d0cd78114a616, type: 2}
     model: {fileID: 4255515883761888079}
     weaponFirepoint: {fileID: 2768830837983057861}
-    animatorBoolName: Rifle
+    animatorBoolName: Crossbow
     startReloadClip: {fileID: 0}
     singleReloadClip: {fileID: 0}
     endReloadClip: {fileID: 0}
