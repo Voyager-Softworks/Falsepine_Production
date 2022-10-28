@@ -752,6 +752,7 @@ public class PlayerInventoryInterface : MonoBehaviour
         {
             DisableAllAnimatorWeapons();
             playerAnimator.SetBool(animatorBoolName, true);
+            playerAnimator.SetFloat(animatorBoolName+"_f", 1);
         }
 
         // enable weapon model
@@ -838,6 +839,7 @@ public class PlayerInventoryInterface : MonoBehaviour
             if (animatorBoolName != "")
             {
                 playerAnimator.SetBool(animatorBoolName, false);
+                playerAnimator.SetFloat(animatorBoolName+"_f", 0);
             }
         }
     }
