@@ -329,9 +329,9 @@ public class PlayerInventoryInterface : MonoBehaviour
                 // stop aiming
                 if (swapWeaponAction.triggered)
                 {
-                    //rangedWeapon.TrySetAim(false, gameObject);
+                    rangedWeapon.TrySetAim(false, gameObject);
 
-                    //playerAnimator.SetLayerWeight(2, 1);
+                    playerAnimator.SetLayerWeight(2, 1);
                 }
             }
 
