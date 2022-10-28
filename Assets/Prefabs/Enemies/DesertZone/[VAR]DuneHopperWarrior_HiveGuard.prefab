@@ -1186,7 +1186,7 @@ Transform:
   m_GameObject: {fileID: 3670415227463469989}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1.6}
   m_Children:
   - {fileID: 2029123297751762194}
   - {fileID: 6490122437248124148}
@@ -1414,8 +1414,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382e18cd65ba3ee40981aca66eb43b48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_currentHealth: 60
-  m_maxHealth: 60
+  m_currentHealth: 65
+  m_maxHealth: 65
   m_disablePlayerCollision: 1
   m_weaknesses:
   - value: PoisonDamage
@@ -1428,7 +1428,7 @@ MonoBehaviour:
   m_useDamagePopup: 1
   m_monsterType: {fileID: 11400000, guid: 0a5776166c4047b469f7cc181eb8daa0, type: 2}
   m_bloodEffect: {fileID: 7806886839550920633, guid: 3f1e9330dd38e134593c334e247666da, type: 3}
-  m_silverReward: 3
+  m_silverReward: 5
 --- !u!114 &3670415227463470009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1517,7 +1517,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 0.5
+  m_Speed: 3
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -1556,9 +1556,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 74b543295028d384ca2de2bfe83ceb08, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1567,7 +1567,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 100
+  MaxDistance: 50
   Pan2D: 0
   rolloffMode: 1
   BypassEffects: 0
