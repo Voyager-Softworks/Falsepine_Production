@@ -314,6 +314,9 @@ public class PlayerInventoryInterface : MonoBehaviour
                 //     rangedWeapon.TryEndReload(gameObject);
                 // }
 
+                // check if animator is in the Roll_Tree
+                bool isRolling = playerAnimator.GetCurrentAnimatorStateInfo(2).IsName("Roll_Tree");
+
                 // if aim weapon action is down, aim weapon
                 if (aimWeaponAction.ReadValue<float>() > 0 && m_currentlyThrowingItem == null)
                 {

@@ -315,10 +315,6 @@ public class PlayerMovement : MonoBehaviour
                     transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(new Vector3(moveDir.x, 0.0f, moveDir.z)), Time.deltaTime * 10f);
             }
 
-
-
-
-
             lastMoveDir = moveDir;
         }
     }
