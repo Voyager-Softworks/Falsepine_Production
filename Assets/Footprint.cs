@@ -13,11 +13,16 @@ public class Footprint : MonoBehaviour
     public bool m_doFade = true;
 
     private DecalProjector m_decalProjector;
+    public DecalProjector decalProjector { 
+        get { 
+            if (m_decalProjector == null) m_decalProjector = GetComponentInChildren<DecalProjector>();
+            return m_decalProjector;
+        } 
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        m_decalProjector = GetComponentInChildren<DecalProjector>();
     }
 
     // Update is called once per frame
@@ -51,6 +56,6 @@ public class Footprint : MonoBehaviour
 
     public void SetOpacity(float alpha)
     {
-        m_decalProjector.fadeFactor = alpha;
+        decalProjector.fadeFactor = alpha;
     }
 }

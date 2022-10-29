@@ -44,6 +44,13 @@ public class PlayerStepSound : MonoBehaviour
 
             // dont point upwards at all
             decal.transform.forward = Vector3.ProjectOnPlane(decal.transform.forward, Vector3.up);
+
+            // flip decal if on right foot
+            if (!left)
+            {
+                Footprint footprint = decal.GetComponent<Footprint>();
+                footprint.decalProjector.uvScale = new Vector2(-1, 1);
+            }
         }
     }
 
