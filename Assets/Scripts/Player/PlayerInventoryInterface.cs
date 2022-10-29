@@ -340,6 +340,10 @@ public class PlayerInventoryInterface : MonoBehaviour
 
             UpdateAimZone();
         }
+        else{
+            // set NoWeapon_f to 1
+            playerAnimator.SetFloat("NoWeapon_f", 1);
+        }
 
         // use equipment_1
         if (useEquipmentAction_1.triggered)

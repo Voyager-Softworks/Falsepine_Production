@@ -38,7 +38,7 @@ public class FinalMissionEmbark : MonoBehaviour
             MissionManager.instance.GoToNextZone();
             // save missions
             MissionManager.instance.SaveMissions(SaveManager.currentSaveSlot);
-            LevelController.LoadScene(finalMissionScene.scenePath, true); 
+            MissionManager.instance.TryEmbark();
         });
     }
 }

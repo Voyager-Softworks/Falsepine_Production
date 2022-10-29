@@ -423,6 +423,11 @@ public class JournalManager : ToggleableWindow
     }
     public override void OpenWindow()
     {
+        // if tutorial popup is open, return
+        if (FindObjectOfType<TutorialPopup>() && FindObjectOfType<TutorialPopup>().gameObject.activeSelf) {
+            return;
+        }
+
         base.OpenWindow();
         journalPanel.SetActive(true);
     }

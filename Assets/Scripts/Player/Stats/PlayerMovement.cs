@@ -270,8 +270,18 @@ public class PlayerMovement : MonoBehaviour
             _animator.SetBool("Jogging", !isAiming && move.magnitude > 0.1f);
             _animator.SetBool("Running", sprintAction.ReadValue<float>() > 0.1f && move.magnitude > 0.1f);
 
+            bool isMeleeAttacking = false;
+            if (pii)
+            {
+                MeleeWeapon meleeWeapon = pii.selectedMeleeWeapon as MeleeWeapon;
+                if (meleeWeapon)
+                {
+                    isMeleeAttacking = meleeWeapon.m_comboTimer > 0;
+                }
+            }
+
             controller.Move(moveDir * Time.deltaTime);
-            if ((isAiming || isReloading || isThrowing) && (!isRolling && !isVaulting))
+            if ((isAiming || isReloading || isThrowing || isMeleeAttacking) && (!isRolling && !isVaulting))
             {
                 //apply movement
                 //transform.position += (moveDir * speed * Time.deltaTime);

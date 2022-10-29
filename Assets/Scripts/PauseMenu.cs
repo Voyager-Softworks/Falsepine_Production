@@ -41,6 +41,11 @@ public class PauseMenu : ToggleableWindow
     {
         if (m_wasClosedThisFrame) return;
 
+        // if tutorial popup is open, return
+        if (FindObjectOfType<TutorialPopup>() && FindObjectOfType<TutorialPopup>().gameObject.activeSelf) {
+            return;
+        }
+
         base.OpenWindow();
         PausePanel.SetActive(true);
 

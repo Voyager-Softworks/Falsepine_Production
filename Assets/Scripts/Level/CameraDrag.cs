@@ -30,9 +30,13 @@ public class CameraDrag : MonoBehaviour
 
     private bool m_returnToCent = false;
 
+    private TutorialPopup m_tutorialPopup;
+
     private void Start() {
         center = transform.position;
         m_targetPosition = transform.position;
+
+        m_tutorialPopup = FindObjectOfType<TutorialPopup>();
     }
 
     private void OnEnable() {
@@ -50,6 +54,11 @@ public class CameraDrag : MonoBehaviour
  
     void Update()
     {
+        // if tutorial popup is open, return
+        if (m_tutorialPopup && m_tutorialPopup.gameObject.activeSelf) {
+            return;
+        }
+
         if ((transform.position - center).magnitude > maxDistance + 10) {
             m_returnToCent = true;
         }
