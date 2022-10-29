@@ -6,11 +6,13 @@ using UnityEngine.Rendering.HighDefinition;
 public class Footprint : MonoBehaviour
 {
     [Header("Fade")]
+    public float m_startAlpha = 1f;
     public float m_startFadeDelay = 1.0f;
     [ReadOnly] public float m_startFadeDelayTimer = 0f;
     public float m_fadeTime = 1.0f;
     [ReadOnly] public float m_fadeTimer = 0.0f;
     public bool m_doFade = true;
+    public bool m_left = false;
 
     private DecalProjector m_decalProjector;
     public DecalProjector decalProjector { 
@@ -23,6 +25,13 @@ public class Footprint : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // flip decal if other foot
+        if (m_left)
+        {
+            decalProjector.uvScale = new Vector2(1, -1);
+        }
+
+        SetOpacity(m_startAlpha);
     }
 
     // Update is called once per frame
@@ -43,7 +52,7 @@ public class Footprint : MonoBehaviour
                 {
                     m_fadeTimer += Time.deltaTime;
 
-                    float alpha = 1.0f - (m_fadeTimer / m_fadeTime);
+                    float alpha = m_startAlpha * (1.0f - (m_fadeTimer / m_fadeTime));
                     SetOpacity(alpha);
                 }
                 else
