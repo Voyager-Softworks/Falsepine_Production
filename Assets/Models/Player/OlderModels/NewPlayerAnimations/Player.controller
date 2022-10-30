@@ -223,7 +223,7 @@ BlendTree:
     m_DirectBlendParameter: Mauser_f
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -5555680101614505844, guid: 3f526be34f93fd04d891df63c89679c4, type: 3}
+    m_Motion: {fileID: 1573939689626935890, guid: e0e2b0e1008fc7145b2f6364ed71d0f4, type: 3}
     m_Threshold: 0.1875
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -231,7 +231,7 @@ BlendTree:
     m_DirectBlendParameter: Rifle_f
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -5555680101614505844, guid: 3f526be34f93fd04d891df63c89679c4, type: 3}
+    m_Motion: {fileID: 1573939689626935890, guid: e0e2b0e1008fc7145b2f6364ed71d0f4, type: 3}
     m_Threshold: 0.25
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -239,7 +239,7 @@ BlendTree:
     m_DirectBlendParameter: BoltActionRifle_f
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -5555680101614505844, guid: 3f526be34f93fd04d891df63c89679c4, type: 3}
+    m_Motion: {fileID: 1573939689626935890, guid: e0e2b0e1008fc7145b2f6364ed71d0f4, type: 3}
     m_Threshold: 0.3125
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -247,7 +247,7 @@ BlendTree:
     m_DirectBlendParameter: OccultRepeater_f
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -5555680101614505844, guid: 3f526be34f93fd04d891df63c89679c4, type: 3}
+    m_Motion: {fileID: 1573939689626935890, guid: e0e2b0e1008fc7145b2f6364ed71d0f4, type: 3}
     m_Threshold: 0.375
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -255,7 +255,7 @@ BlendTree:
     m_DirectBlendParameter: Shotgun_f
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -5555680101614505844, guid: 3f526be34f93fd04d891df63c89679c4, type: 3}
+    m_Motion: {fileID: 1573939689626935890, guid: e0e2b0e1008fc7145b2f6364ed71d0f4, type: 3}
     m_Threshold: 0.4375
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -263,7 +263,7 @@ BlendTree:
     m_DirectBlendParameter: Blunderbuss_f
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: -5555680101614505844, guid: 3f526be34f93fd04d891df63c89679c4, type: 3}
+    m_Motion: {fileID: 1573939689626935890, guid: e0e2b0e1008fc7145b2f6364ed71d0f4, type: 3}
     m_Threshold: 0.5
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -1024,9 +1024,6 @@ AnimatorStateMachine:
   - {fileID: 3287101740460641920}
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 1562942159070476559}
-    second:
-    - {fileID: 4756571445504594784}
   - first: {fileID: 1674045860926489329}
     second:
     - {fileID: 6115962697398447567}
@@ -1034,14 +1031,17 @@ AnimatorStateMachine:
   - first: {fileID: -4547240125745737681}
     second:
     - {fileID: -873455677846292803}
-    - {fileID: -2376836262600086975}
+    - {fileID: 0}
   - first: {fileID: -8890820667564793745}
     second:
-    - {fileID: 8129384875087268861}
-    - {fileID: 5013811248676524556}
+    - {fileID: 0}
+    - {fileID: 0}
   - first: {fileID: 5910326519606577}
     second:
     - {fileID: -7907621965387234407}
+  - first: {fileID: 1562942159070476559}
+    second:
+    - {fileID: 4756571445504594784}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 420, y: -200, z: 0}
   m_EntryPosition: {x: -150, y: 140, z: 0}
@@ -1573,7 +1573,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 1912733814026708391, guid: c84a24373a0bec4409726be8f82cded0, type: 3}
+  m_Motion: {fileID: 1912733814026708391, guid: 52812760cec877643b814b7e4c5311bf, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -2396,7 +2396,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: -7555725105580044653, guid: c84a24373a0bec4409726be8f82cded0, type: 3}
+  m_Motion: {fileID: -7555725105580044653, guid: 52812760cec877643b814b7e4c5311bf, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -5296,17 +5296,14 @@ AnimatorStateMachine:
   - first: {fileID: 1471072520732718988}
     second:
     - {fileID: -2439613614075938700}
-  - first: {fileID: 6520233913349266591}
-    second:
-    - {fileID: -8258136922453048323}
-  - first: {fileID: 1471072520732718988}
-    second:
-    - {fileID: -7601881948192194097}
   - first: {fileID: -3903278155084775317}
     second: []
   - first: {fileID: -427811223205350776}
     second:
     - {fileID: 5778541669305314496}
+  - first: {fileID: 6520233913349266591}
+    second:
+    - {fileID: -8258136922453048323}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: -20, y: -100, z: 0}
   m_EntryPosition: {x: -340, y: 260, z: 0}
