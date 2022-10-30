@@ -226,20 +226,31 @@ public class PlayerInventoryInterface : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (LevelController.IsPaused || ToggleableTownWindow.AnyWindowOpen()) {
+        if (LevelController.IsPaused || ToggleableTownWindow.AnyWindowOpen())
+        {
             DisableInput();
         }
-        else {
+        else
+        {
             EnableInput();
         }
 
+        RangedWeaponChecks();
+        EquipmentChecks();
+        MeleeChecks();
+        ThrowChecks();
+    }
+
+    private void RangedWeaponChecks()
+    {
         // if swap weapon action is pressed, swap weapon
         if (swapWeaponAction.triggered)
         {
             SwapWeapon();
         }
 
-        if (selectedWeapon == null){
+        if (selectedWeapon == null)
+        {
             TrySelectValidWeapon(false);
         }
 
@@ -249,6 +260,12 @@ public class PlayerInventoryInterface : MonoBehaviour
             if (playerInventory.GetItemIndex(selectedWeapon) == -1)
             {
                 SwapWeapon();
+
+                // if there is still no weapon or the weapon is not in the inventory, return
+                if (selectedWeapon == null || playerInventory.GetItemIndex(selectedWeapon) == -1)
+                {
+                    return;
+                }
             }
 
             selectedWeapon?.ManualUpdate(gameObject);
@@ -340,11 +357,15 @@ public class PlayerInventoryInterface : MonoBehaviour
 
             UpdateAimZone();
         }
-        else{
+        else
+        {
             // set NoWeapon_f to 1
             playerAnimator.SetFloat("NoWeapon_f", 1);
         }
+    }
 
+    private void EquipmentChecks()
+    {
         // use equipment_1
         if (useEquipmentAction_1.triggered)
         {
@@ -372,7 +393,8 @@ public class PlayerInventoryInterface : MonoBehaviour
                         throwPoint = transform;
                     }
 
-                    if (equipment.UseEquipment(throwPoint, spawnDirection, gameObject)){
+                    if (equipment.UseEquipment(throwPoint, spawnDirection, gameObject))
+                    {
                         string animatorName = GetWeaponAnimatorBoolName(selectedEquipment);
                         if (animatorName != "") playerAnimator.SetTrigger(animatorName);
 
@@ -387,6 +409,15 @@ public class PlayerInventoryInterface : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    private void MeleeChecks()
+    {
+        // if the current melee weapon is null or not in the inventory, ensure all melee models are disabled
+        if (playerInventory.GetItemIndex(selectedMeleeWeapon) == -1 || selectedMeleeWeapon == null)
+        {
+            DisableAllMeleeModels();
         }
 
         // melee
@@ -405,7 +436,7 @@ public class PlayerInventoryInterface : MonoBehaviour
                 if (meleeWeapon.TryMelee(meleeWeaponTip, gameObject))
                 {
                     // enable model
-                    DisableAllWeaponModels();
+                    DisableAllModels();
                     GameObject weaponModel = GetWeaponModel(selectedMeleeWeapon);
                     if (weaponModel)
                     {
@@ -414,7 +445,8 @@ public class PlayerInventoryInterface : MonoBehaviour
 
                     // set animator
                     string animatorBoolName = GetWeaponAnimatorBoolName(selectedMeleeWeapon);
-                    if (meleeWeapon.m_shouldDoComboSwing) {
+                    if (meleeWeapon.m_shouldDoComboSwing)
+                    {
                         animatorBoolName += "_Combo";
                     }
                     if (playerAnimator && animatorBoolName != "")
@@ -439,16 +471,19 @@ public class PlayerInventoryInterface : MonoBehaviour
             }
 
             // after melee attack, select weapon (only once)
-            if (meleeWeapon.m_comboTimer <= (0 + meleeWeapon.m_comboTime/10.0f) && GetWeaponModel(selectedMeleeWeapon).activeSelf)
+            if (meleeWeapon.m_comboTimer <= (0 + meleeWeapon.m_comboTime / 10.0f) && GetWeaponModel(selectedMeleeWeapon).activeSelf)
             {
                 SelectWeapon(selectedWeaponType);
             }
-            else if (meleeWeapon.m_comboTimer > 0){
+            else if (meleeWeapon.m_comboTimer > 0)
+            {
                 playerAnimator.SetLayerWeight(2, 1);
             }
         }
+    }
 
-
+    private void ThrowChecks()
+    {
         if (m_currentlyThrowingItem != null)
         {
             playerAnimator.SetLayerWeight(2, 1);
@@ -459,7 +494,8 @@ public class PlayerInventoryInterface : MonoBehaviour
                 // set animator bool to true
                 playerAnimator.SetBool("Throw", true);
             }
-            else{
+            else
+            {
                 playerAnimator.SetBool("Throw", false);
             }
 
@@ -473,7 +509,8 @@ public class PlayerInventoryInterface : MonoBehaviour
                 ThrowLetGo();
             }
         }
-        else{
+        else
+        {
             playerAnimator.SetBool("Throw", false);
         }
     }
@@ -748,7 +785,7 @@ public class PlayerInventoryInterface : MonoBehaviour
         // if selected weapon is null and none, return
         if (selectedWeapon == null) {
             if (weaponIndex == -1){
-                DisableAllWeaponModels();
+                DisableAllModels();
             }
             return;
         }
@@ -762,8 +799,11 @@ public class PlayerInventoryInterface : MonoBehaviour
             playerAnimator.SetFloat(animatorBoolName+"_f", 1);
         }
 
+        // set NoWeapon_f to 0
+        playerAnimator.SetFloat("NoWeapon_f", 0);
+
         // enable weapon model
-        DisableAllWeaponModels();
+        DisableAllModels();
         GameObject weaponModel = GetWeaponModel(selectedWeapon);
         if (weaponModel)
         {
@@ -822,13 +862,26 @@ public class PlayerInventoryInterface : MonoBehaviour
     /// <summary>
     /// Disable all weapon models
     /// </summary>
-    public void DisableAllWeaponModels()
+    public void DisableAllModels()
     {
         foreach (WeaponModelLink link in weaponModelLinks)
         {
             if (link.model)
             {
                 link.model.SetActive(false);
+            }
+        }
+    }
+
+    public void DisableAllMeleeModels(){
+        foreach (WeaponModelLink link in weaponModelLinks)
+        {
+            if (link.weapons.Any(w => w is MeleeWeapon))
+            {
+                if (link.model)
+                {
+                    link.model.SetActive(false);
+                }
             }
         }
     }
