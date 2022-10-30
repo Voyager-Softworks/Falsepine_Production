@@ -74,13 +74,16 @@ public class StatsManager : MonoBehaviour
         {
             //add a space before each capital letter
             string displayName = "";
+            int i = 0;
             foreach (char c in type.value)
             {
-                if (char.IsUpper(c) &&  type.value.First() != c)
+                if (char.IsUpper(c) && i != 0)
                 {
                     displayName += " ";
                 }
                 displayName += c;
+
+                i++;
             }
             return displayName;
         }
@@ -112,6 +115,16 @@ public class StatsManager : MonoBehaviour
             }
             // if we get here, the type was not found
             return null;
+        }
+
+        // CompareTo method required for sorting
+        public int CompareTo(StatType other)
+        {
+            if (other == null)
+            {
+                return 1;
+            }
+            return value.CompareTo(other.value);
         }
 
         public static MethodInfo[] GetAllStatTypeMethods()
@@ -644,9 +657,9 @@ public class StatsManager : MonoBehaviour
     /// </summary>
     /// <param name="_statUser"></param>
     /// <param name="additiveVal"></param>
-    /// <param name="dmultiplierVal"></param>
+    /// <param name="multiplierVal"></param>
     /// <param name="_usedStatTypes"></param>
-    private static void CalcMods(UsesStats _statUser, ref float additiveVal, ref float dmultiplierVal, List<StatType> _usedStatTypes)
+    private static void CalcMods(UsesStats _statUser, ref float additiveVal, ref float multiplierVal, List<StatType> _usedStatTypes)
     {
         // get all stat mods
         List<StatMod> statMods = GetAllStatMods();
@@ -671,7 +684,7 @@ public class StatsManager : MonoBehaviour
                         // if mod is multiplier
                         else if (statMod.modType == ModType.Multiplier)
                         {
-                            dmultiplierVal *= statMod.value;
+                            multiplierVal *= statMod.value;
                         }
                     }
                 }
