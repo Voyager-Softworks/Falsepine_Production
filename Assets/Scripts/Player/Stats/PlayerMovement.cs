@@ -52,6 +52,8 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 camForward; ///< The forward direction of the camera.
     Vector3 camRight; ///< The right direction of the camera.
+    
+    [HideInInspector] public UIScript uiScript;
 
     /// <summary>
     ///  Plays a footstep sound.
@@ -82,6 +84,8 @@ public class PlayerMovement : MonoBehaviour
         {
             cam = Camera.main;
         }
+
+        uiScript = FindObjectOfType<UIScript>();
 
         playerHealth = GetComponent<PlayerHealth>();
 
@@ -160,6 +164,30 @@ public class PlayerMovement : MonoBehaviour
         Shader.SetGlobalVector("WorldCutPos", transform.position);
 
         Move();
+
+        UpdateUI();
+    }
+
+    public void UpdateUI()
+    {
+        if (uiScript == null) return;
+
+        Vector2 actualSize = new Vector2(uiScript.staminaBarMaxWidth * (1.0f - rollDelayTimer / rollDelay), uiScript.staminaBar.rectTransform.sizeDelta.y);
+
+        uiScript.staminaBar.rectTransform.sizeDelta = actualSize;
+
+        // fade out stamina bar when not rolling and stamina is full
+        if (rollDelayTimer <= 0)
+        {
+            uiScript.staminaBG.color = Color.Lerp(uiScript.staminaBG.color, new Color(uiScript.staminaBG.color.r, uiScript.staminaBG.color.g, uiScript.staminaBG.color.b, 0), Time.deltaTime * 10);
+            uiScript.staminaBar.color = Color.Lerp(uiScript.staminaBar.color, new Color(uiScript.staminaBar.color.r, uiScript.staminaBar.color.g, uiScript.staminaBar.color.b, 0), Time.deltaTime * 10);
+            uiScript.staminaBarDark.color = Color.Lerp(uiScript.staminaBarDark.color, new Color(uiScript.staminaBarDark.color.r, uiScript.staminaBarDark.color.g, uiScript.staminaBarDark.color.b, 0), Time.deltaTime * 10);
+        }
+        else{
+            uiScript.staminaBG.color = Color.Lerp(uiScript.staminaBG.color, new Color(uiScript.staminaBG.color.r, uiScript.staminaBG.color.g, uiScript.staminaBG.color.b, 1), Time.deltaTime * 20);
+            uiScript.staminaBar.color = Color.Lerp(uiScript.staminaBar.color, new Color(uiScript.staminaBar.color.r, uiScript.staminaBar.color.g, uiScript.staminaBar.color.b, 1), Time.deltaTime * 20);
+            uiScript.staminaBarDark.color = Color.Lerp(uiScript.staminaBarDark.color, new Color(uiScript.staminaBarDark.color.r, uiScript.staminaBarDark.color.g, uiScript.staminaBarDark.color.b, 1), Time.deltaTime * 20);
+        }
     }
 
     /// <summary>

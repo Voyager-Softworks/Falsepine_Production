@@ -14,10 +14,18 @@ public class UIScript : MonoBehaviour
 {
     public CursorScript cursorScript;
 
-    [Header("Game UI")]
+    
+
+    [Header("Player Stats")]
     public Image healthBG;
     public Image healthBar, healthBarDark;
+    [HideInInspector] public float healthBarMaxWidth;
 
+    public Image staminaBG;
+    public Image staminaBar, staminaBarDark;
+    [HideInInspector] public float staminaBarMaxWidth;
+
+    [Header("Game UI")]
     public GameObject primaryWeaponIcon;
     public GameObject secondaryWeaponIcon;
     
@@ -30,8 +38,6 @@ public class UIScript : MonoBehaviour
     public TextMeshProUGUI equipmentAmmoText_2;
 
     public TextMeshProUGUI m_conditionText;
-
-    [HideInInspector] public float healthBarMaxWidth;
 
     [Header("Interact Text")]
     public TextMeshProUGUI interactText;
@@ -55,6 +61,7 @@ public class UIScript : MonoBehaviour
         if (cursorScript == null) cursorScript = FindObjectOfType<CursorScript>();
 
         if (healthBar != null) healthBarMaxWidth = healthBar.rectTransform.sizeDelta.x;
+        if (staminaBar != null) staminaBarMaxWidth = staminaBar.rectTransform.sizeDelta.x;
         if (bossHealthBar != null) bossHealthBarMaxWidth = bossHealthBar.rectTransform.sizeDelta.x;
 
         OnStart.Invoke();
