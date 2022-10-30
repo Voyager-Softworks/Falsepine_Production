@@ -339,6 +339,27 @@ public class StatsManager : MonoBehaviour
         public MonsterInfo m_monster;
         public List<Health_Base.DamageStat> m_kills = new List<Health_Base.DamageStat>();
         [ReadOnly] public int m_previousKills = 0;
+
+        [Serializable]
+        public class SerializableMonsterStat{
+            public MonsterInfo.SerializableMonsterInfo m_monster;
+            public List<Health_Base.DamageStat> m_kills = new List<Health_Base.DamageStat>();
+            [ReadOnly] public int m_previousKills = 0;
+
+            public SerializableMonsterStat(MonsterStat _monsterStat){
+                m_monster = new MonsterInfo.SerializableMonsterInfo(_monsterStat.m_monster);
+                m_kills = _monsterStat.m_kills;
+                m_previousKills = _monsterStat.m_previousKills;
+            }
+
+            public MonsterStat ToMonsterStat(){
+                MonsterStat monsterStat = new MonsterStat();
+                monsterStat.m_monster = m_monster.ToMonsterInfo();
+                monsterStat.m_kills = m_kills;
+                monsterStat.m_previousKills = m_previousKills;
+                return monsterStat;
+            }
+        }
     }
     [SerializeField] public List<MonsterStat> m_monsterStats = new List<MonsterStat>();
 
@@ -753,7 +774,7 @@ public class StatsManager : MonoBehaviour
         public List<Drink> activeDrinks = new List<Drink>();
         public List<StatModRange> possibleTalismanMods = new List<StatModRange>();
         public List<Talisman> activeTalismans = new List<Talisman>();
-        public List<MonsterStat> monsterStats = new List<MonsterStat>();
+        public List<MonsterStat.SerializableMonsterStat> monsterStats = new List<MonsterStat.SerializableMonsterStat>();
 
         // health
         public float m_playerCurrentHealth = 100.0f;
@@ -782,7 +803,12 @@ public class StatsManager : MonoBehaviour
         // add active talismans
         data.activeTalismans = new List<Talisman>(m_activeTalismans);
         // add monster stats
-        data.monsterStats = new List<MonsterStat>(m_monsterStats);
+        data.monsterStats = new List<MonsterStat.SerializableMonsterStat>();
+        foreach (MonsterStat monsterStat in m_monsterStats)
+        {
+            MonsterStat.SerializableMonsterStat serializableMonsterStat = new MonsterStat.SerializableMonsterStat(monsterStat);
+            data.monsterStats.Add(serializableMonsterStat);
+        }
 
         // add health
         data.m_playerCurrentHealth = m_playerCurrentHealth;
@@ -839,7 +865,12 @@ public class StatsManager : MonoBehaviour
         // load active talismans
         m_activeTalismans = new List<Talisman>(data.activeTalismans);
         // load monster stats
-        m_monsterStats = new List<MonsterStat>(data.monsterStats);
+        m_monsterStats = new List<MonsterStat>();
+        foreach (MonsterStat.SerializableMonsterStat serializableMonsterStat in data.monsterStats)
+        {
+            MonsterStat monsterStat = serializableMonsterStat.ToMonsterStat();
+            m_monsterStats.Add(monsterStat);
+        }
 
         // load health
         m_playerCurrentHealth = data.m_playerCurrentHealth;
@@ -883,7 +914,12 @@ public class StatsManager : MonoBehaviour
         // load possible talisman mods
         m_possibleTalismanMods = new List<StatModRange>(data.possibleTalismanMods);
         // load monster stats
-        m_monsterStats = new List<MonsterStat>(data.monsterStats);
+        m_monsterStats = new List<MonsterStat>();
+        foreach (MonsterStat.SerializableMonsterStat serializableMonsterStat in data.monsterStats)
+        {
+            MonsterStat monsterStat = serializableMonsterStat.ToMonsterStat();
+            m_monsterStats.Add(monsterStat);
+        }
         ResetPreviousKills();
 
         m_activeTalismans.Clear();

@@ -63,7 +63,10 @@ public class Health_Base : MonoBehaviour, StatsManager.UsesStats /// @todo Impli
         public Vector3 direction { get { return m_hitPoint - m_originPoint; } } ///< The direction the attack was moving in.
         public float m_time; ///< The time the damage was dealt.
 
-        public StatsManager.UsesStats m_sourceStats; ///< The stats of the object that dealt the damage. (used for kill tracking and whatnot)
+        public List<StatsManager.StatType> m_sourceStatsTypes; ///< The stats of the object that dealt the damage. (used for kill tracking and whatnot)
+        public string m_itemID; ///< The ID of the item that dealt the damage. (used for kill tracking and whatnot)
+        public string m_itemDisplayName; ///< The display name of the item that dealt the damage. (used for kill tracking and whatnot)
+
 
         public DamageStat(float damage, GameObject sourceObject, Vector3 origin, Vector3 hitPoint, StatsManager.UsesStats sourceStats)
         {
@@ -72,7 +75,12 @@ public class Health_Base : MonoBehaviour, StatsManager.UsesStats /// @todo Impli
             m_originPoint = origin;
             m_hitPoint = hitPoint;
             m_time = Time.time;
-            m_sourceStats = sourceStats;
+            m_sourceStatsTypes = new List<StatsManager.StatType>(sourceStats.GetStatTypes());
+            if (sourceStats is Item item)
+            {
+                m_itemID = item.id;
+                m_itemDisplayName = item.m_displayName;
+            }
         }
     }
 
@@ -184,7 +192,7 @@ public class Health_Base : MonoBehaviour, StatsManager.UsesStats /// @todo Impli
         bool weak = false;
         foreach (StatsManager.StatType weakness in m_weaknesses)
         {
-            if (_damageStat.m_sourceStats != null && _damageStat.m_sourceStats.GetStatTypes().Contains(weakness))
+            if (_damageStat.m_sourceStatsTypes.Contains(weakness))
             {
                 weak = true;
                 break;
