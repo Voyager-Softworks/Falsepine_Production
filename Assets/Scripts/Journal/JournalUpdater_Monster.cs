@@ -117,7 +117,7 @@ public class JournalUpdater_Monster : JournalContentUpdater
         // update kill count text
         if (m_killCountText != null)
         {
-            m_killCountText.text = "Kills: " + StatsManager.instance.GetKills(m_monster);
+            m_killCountText.text = "Kills: " + Mathf.Max(0,StatsManager.instance.GetKills(m_monster));
 
             int discoveredLore = 0;
             foreach (JounralEntry entry in JournalManager.instance.m_discoveredEntries){
