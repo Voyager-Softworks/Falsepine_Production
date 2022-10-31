@@ -72,7 +72,7 @@ public class MissionCondition : ISerializationCallbackReceiver
 
     public virtual void UpdateState()
     {
-        
+        if (m_lockState) return;
     }
 
     public virtual void BeginCondition()
@@ -83,6 +83,12 @@ public class MissionCondition : ISerializationCallbackReceiver
     public virtual void EndCondition()
     {
         
+    }
+
+    public virtual void ResetCondition()
+    {
+        SetState(ConditionState.INCOMPLETE);
+        m_lockState = false;
     }
 
     // equality operator ==

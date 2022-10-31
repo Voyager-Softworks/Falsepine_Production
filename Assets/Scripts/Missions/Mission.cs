@@ -33,7 +33,9 @@ public class Mission : ScriptableObject
     [SerializeReference] public List<MissionCondition> m_conditions = new List<MissionCondition>();
 
     [SerializeField] public bool m_lockOnComplete = true;
+    [SerializeField] public bool m_lockOnFail = true;
     [SerializeField] private bool m_isLockedComplete = false;
+    [SerializeField] private bool m_isLockedFail = false;
 
     public void OnSceneLoaded(Scene arg0, LoadSceneMode arg1){
         foreach (MissionCondition condition in m_conditions)
@@ -47,10 +49,13 @@ public class Mission : ScriptableObject
         {
             condition.Update();
         }
+
+        GetState();
     }
 
     public MissionCondition.ConditionState GetState(){
         if (m_lockOnComplete && m_isLockedComplete) return MissionCondition.ConditionState.COMPLETE;
+        if (m_lockOnFail && m_isLockedFail) return MissionCondition.ConditionState.FAILED;
 
         UpdateState();
 
@@ -87,6 +92,7 @@ public class Mission : ScriptableObject
         }
         else if (anyFailed)
         {
+            LockMissionFail();
             return MissionCondition.ConditionState.FAILED;
         }
         else
@@ -108,6 +114,19 @@ public class Mission : ScriptableObject
         }
     }
 
+    private void LockMissionFail()
+    {
+        if (!m_lockOnFail) return;
+
+        m_isLockedFail = true;
+
+        //lock all conditions
+        foreach (MissionCondition condition in m_conditions)
+        {
+            condition.m_lockState = true;
+        }
+    }
+
     public void SetState(MissionCondition.ConditionState _state){
         foreach (MissionCondition condition in m_conditions)
         {
@@ -118,6 +137,7 @@ public class Mission : ScriptableObject
     private void UpdateState()
     {
         if (m_lockOnComplete && m_isLockedComplete) return;
+        if (m_lockOnFail && m_isLockedFail) return;
 
         foreach (MissionCondition condition in m_conditions)
         {
@@ -128,6 +148,7 @@ public class Mission : ScriptableObject
     public void BeginMission()
     {
         if (m_lockOnComplete && m_isLockedComplete) return;
+        if (m_lockOnFail && m_isLockedFail) return;
 
         foreach (MissionCondition condition in m_conditions)
         {
@@ -148,12 +169,13 @@ public class Mission : ScriptableObject
     /// </summary>
     public void Reset(){
         m_isLockedComplete = false;
+        m_isLockedFail = false;
 
         //unlock all conditions
         foreach (MissionCondition condition in m_conditions)
         {
             if (condition == null) continue;
-            condition.m_lockState = false;
+            condition.ResetCondition();
         }   
 
         SetState(MissionCondition.ConditionState.INCOMPLETE);

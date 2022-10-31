@@ -35,7 +35,7 @@ public class CursorScript : MonoBehaviour
         bool isMouseOnly = false;
         foreach (Utilities.SceneField scene in mouseOnlyScenes)
         {
-            if (scene.EqualsPath(SceneManager.GetActiveScene()))
+            if (scene.EqualsScene(SceneManager.GetActiveScene()))
             {
                 isMouseOnly = true;
                 break;
