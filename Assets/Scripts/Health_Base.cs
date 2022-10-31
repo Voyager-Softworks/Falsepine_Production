@@ -85,17 +85,17 @@ public class Health_Base : MonoBehaviour, StatsManager.UsesStats /// @todo Impli
             }
         }
 
-        // public DamageStat(float damage, GameObject sourceObject, Vector3 origin, Vector3 hitPoint, Item item)
-        // {
-        //     m_damage = damage;
-        //     m_sourceObject = sourceObject;
-        //     m_originPoint = origin;
-        //     m_hitPoint = hitPoint;
-        //     m_time = Time.time;
-        //     m_sourceStatsTypes = new List<StatsManager.StatType>(item.GetStatTypes());
-        //     m_itemID = item.id;
-        //     m_itemDisplayName = item.m_displayName;
-        // }
+        public DamageStat(float damage, GameObject sourceObject, Vector3 origin, Vector3 hitPoint, Item item)
+        {
+            m_damage = damage;
+            m_sourceObject = sourceObject;
+            m_originPoint = origin;
+            m_hitPoint = hitPoint;
+            m_time = Time.time;
+            m_sourceStatsTypes = new List<StatsManager.StatType>(item.GetStatTypes());
+            m_itemID = item.id;
+            m_itemDisplayName = item.m_displayName;
+        }
 
         public DamageStat(float damage, GameObject sourceObject, Vector3 origin, Vector3 hitPoint, StatsManager.UsesStats sourceStats, Item item)
         {
