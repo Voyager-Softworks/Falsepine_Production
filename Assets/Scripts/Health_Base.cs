@@ -16,6 +16,8 @@ using UnityEditor;
 public class Health_Base : MonoBehaviour, StatsManager.UsesStats /// @todo Impliment this into players, enemies, destructable objects.
 {
 
+    public static List<Health_Base> allHealths = new List<Health_Base>();
+
     private void OnDrawGizmos()
     {
         // draw the bounding box
@@ -180,6 +182,26 @@ public class Health_Base : MonoBehaviour, StatsManager.UsesStats /// @todo Impli
         UpdateDeath();
 
         m_audioController = GetComponent<AudioController>();
+    }
+
+    protected virtual void OnEnable() {
+        AddHealthScript();
+    }
+
+    protected virtual void OnDisable() {
+        RemoveHealthScript();
+    }
+
+    private void AddHealthScript() {
+        if (!allHealths.Contains(this)) {
+            allHealths.Add(this);
+        }
+    }
+
+    private void RemoveHealthScript() {
+        if (allHealths.Contains(this)) {
+            allHealths.Remove(this);
+        }
     }
 
     public virtual void Update()

@@ -231,7 +231,7 @@ public class RangedWeapon : Item
         UpdateWaitTimer(m_shootTime);
 
         // get all objects with healthScript in the scene
-        List<Health_Base> healthScripts = FindObjectsOfType<Health_Base>().ToList();
+        List<Health_Base> healthScripts = new List<Health_Base>(Health_Base.allHealths);
         // sort by distance from the aimQuad
         Vector3 aimQuadPos = _aimZone.transform.position;
         healthScripts.Sort((x, y) => Vector3.Distance(x.transform.position, aimQuadPos).CompareTo(Vector3.Distance(y.transform.position, aimQuadPos)));

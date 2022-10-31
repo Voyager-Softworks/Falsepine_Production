@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     private float rollInvincibilityTimer = 0f; ///< The timer for the invincibility after rolling.
     public float rollDelay = 1.5f; ///< The delay before the roll can be used again.
     private float rollDelayTimer = 0f; ///< The timer for the roll delay.
+    private float postRollDelay = 0.25f; ///< The delay after the roll before the player is considered to not be rolling.
     public bool isRolling = false; ///< Whether or not the player is rolling.
     public bool isVaulting = false; ///< Whether or not the player is vaulting.
 
@@ -230,7 +231,7 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if (isAiming)
+        if (isAiming && !isRolling)
         {
             moveDir *= walkSpeed;
         }
@@ -290,7 +291,12 @@ public class PlayerMovement : MonoBehaviour
 
             //make vulnerable
             playerHealth.isInvulnerable = false;
-            isRolling = false;
+
+            // few sec after roll, set to false
+            if (rollDelayTimer <= rollDelay - postRollDelay)
+            {
+                isRolling = false;
+            }
 
 
 
