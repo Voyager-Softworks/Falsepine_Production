@@ -52,15 +52,27 @@ public class Dynamite : MonoBehaviour
         // do damage check
         Collider[] colliders = Physics.OverlapSphere(transform.position, m_explosionRadius);
         List<Health_Base> hitObjects = new List<Health_Base>();
+        List<PlayerHealth> hitPlayers = new List<PlayerHealth>();
         foreach (Collider collider in colliders)
         {
+            float calcedDamage = StatsManager.CalculateDamage(m_statsProfile, m_damage);
+
             // get health from parent and children
             Health_Base health = collider.transform.GetComponentInParent<Health_Base>();
             if (health == null) health = collider.transform.GetComponentInChildren<Health_Base>();
             if (health != null && !hitObjects.Contains(health))
             {
                 hitObjects.Add(health);
-                health.TakeDamage(new Health_Base.DamageStat(m_damage, gameObject, transform.position, collider.transform.position, m_statsProfile, m_linkedItem));
+                health.TakeDamage(new Health_Base.DamageStat(calcedDamage, gameObject, transform.position, collider.transform.position, m_statsProfile, m_linkedItem));
+            }
+
+            // get player health from parent and children
+            PlayerHealth playerHealth = collider.transform.GetComponentInParent<PlayerHealth>();
+            if (playerHealth == null) playerHealth = collider.transform.GetComponentInChildren<PlayerHealth>();
+            if (playerHealth != null && !hitPlayers.Contains(playerHealth))
+            {
+                hitPlayers.Add(playerHealth);
+                playerHealth.TakeDamage(calcedDamage);
             }
         }
         FindObjectOfType<ScreenshakeManager>().AddShakeImpulse(m_screenshakeDuration, m_screenshakeAmplitude, m_screenshakeFrequency);
