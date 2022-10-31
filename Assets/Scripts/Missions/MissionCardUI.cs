@@ -157,6 +157,9 @@ public class MissionCardUI : MonoBehaviour
             missionTitle.color = Color.white;
             missionDescription.color = Color.white;
 
+            // udpate stamp
+            SetStamp();
+
             //hide background image
             //backgroundImage.enabled = false;
             takenGroup.SetActive(true);
