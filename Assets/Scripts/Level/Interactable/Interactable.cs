@@ -41,8 +41,17 @@ public class Interactable : MonoBehaviour
     // interact c# delegate
     public System.Action onInteract;
 
+    private InteractManager m_interactManager = null;
+    private InteractManager interactManager {
+        get {
+            if (m_interactManager == null) {
+                m_interactManager = FindObjectOfType<InteractManager>();
+            }
+            return m_interactManager;
+        }
+    }
+
     private void OnEnable() {
-        
         interactAction.Enable();
     }
 
@@ -126,11 +135,10 @@ public class Interactable : MonoBehaviour
         this.enabled = false;
 
         // get UI script
-        InteractManager bt = FindObjectOfType<InteractManager>();
-        if (bt == null) return;
+        if (interactManager == null) return;
 
         // remove request
-        bt.RemoveRequest(new InteractManager.TextRequest(interactText, this, interactDistance));
+        interactManager.RemoveRequest(new InteractManager.TextRequest(interactText, this, interactDistance));
     }
 
     /// <summary>
@@ -141,11 +149,10 @@ public class Interactable : MonoBehaviour
         if (Vector3.Distance(transform.position, _transToCheck.position) <= interactDistance)
         {
             // get UI script
-            InteractManager bt = FindObjectOfType<InteractManager>();
-            if (bt == null) return;
+            if (interactManager == null) return;
 
             // send request
-            bt.RequestBottomText(new InteractManager.TextRequest(interactText, this, interactDistance));
+            interactManager.RequestBottomText(new InteractManager.TextRequest(interactText, this, interactDistance));
         }
     }
 }

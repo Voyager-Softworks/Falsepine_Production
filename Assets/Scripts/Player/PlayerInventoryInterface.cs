@@ -328,6 +328,10 @@ public class PlayerInventoryInterface : MonoBehaviour
 
                 // check if animator is in the Roll_Tree
                 bool isRolling = playerAnimator.GetCurrentAnimatorStateInfo(2).IsName("Roll_Tree");
+                if (isRolling)
+                {
+                    playerAnimator.SetLayerWeight(2, 0);
+                }
 
                 // if aim weapon action is down, aim weapon
                 bool isMelee = false;

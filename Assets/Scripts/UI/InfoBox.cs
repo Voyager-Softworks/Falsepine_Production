@@ -229,6 +229,7 @@ public class InfoBox : MonoBehaviour
 
         System.Type type = _item.GetType();
 
+        // RangedWeapon
         if (type.IsSubclassOf(typeof(RangedWeapon)) || type == typeof(RangedWeapon)){
 
             RangedWeapon weapon = (RangedWeapon)_item;
@@ -239,13 +240,17 @@ public class InfoBox : MonoBehaviour
             float calcDamage = StatsManager.CalculateDamage(weapon, weapon.m_damage);
             float damageDifference = calcDamage - weapon.m_damage;
             string damageModString = damageDifference != 0 ? " (" + StatsManager.SignedFloatString(damageDifference) + ")" : "";
-            newDesc += "Damage: " + weapon.m_damage + damageModString + "\n";
+            // red for negative, green for positive, none for 0
+            string calcWithColor = damageDifference > 0 ? "<color=\"green\">" + calcDamage + "</color>" : damageDifference < 0 ? "<color=\"red\">" + calcDamage + "</color>" : calcDamage.ToString();
+            newDesc += "Damage: " + calcWithColor + damageModString + "\n";
 
             // range
             float calcRange = StatsManager.CalculateRange(weapon, weapon.m_range);
             float rangeDifference = calcRange - weapon.m_range;
             string rangeModString = rangeDifference != 0 ? " (" + StatsManager.SignedFloatString(rangeDifference) + ")" : "";
-            newDesc += "Range: " + weapon.m_range + rangeModString + "\n";
+            // red for negative, green for positive, none for 0
+            calcWithColor = rangeDifference > 0 ? "<color=\"green\">" + calcRange + "</color>" : rangeDifference < 0 ? "<color=\"red\">" + calcRange + "</color>" : calcRange.ToString();
+            newDesc += "Range: " + calcWithColor + rangeModString + "\n";
 
             // Clip
             //float calcAmmo = StatsManager.CalculateAmmo(weapon, weapon.m_ammo);
@@ -258,6 +263,111 @@ public class InfoBox : MonoBehaviour
             //float spareDifference = calcSpare - weapon.m_spare;
             //string spareModString = spareDifference != 0 ? " (" + StatsManager.SignedFloatString(spareDifference) + ")" : "";
             newDesc += "Spare Ammo: " + weapon.m_spareAmmo + "/" + weapon.m_maxSpareAmmo + "\n";
+
+            DisplayLeft("Stats", m_statsIcon, newDesc);
+        }
+
+        // melee
+        else if (type.IsSubclassOf(typeof(MeleeWeapon)) || type == typeof(MeleeWeapon)){
+
+            MeleeWeapon weapon = (MeleeWeapon)_item;
+
+            string newDesc = "";
+
+            // damage
+            float calcDamage = StatsManager.CalculateDamage(weapon, weapon.m_damage);
+            float damageDifference = calcDamage - weapon.m_damage;
+            string damageModString = damageDifference != 0 ? " (" + StatsManager.SignedFloatString(damageDifference) + ")" : "";
+            // red for negative, green for positive, none for 0
+            string calcWithColor = damageDifference > 0 ? "<color=\"green\">" + calcDamage + "</color>" : damageDifference < 0 ? "<color=\"red\">" + calcDamage + "</color>" : calcDamage.ToString();
+            newDesc += "Damage: " + calcWithColor + damageModString + "\n";
+
+            // cooldown
+            //float calcCooldown = StatsManager.CalculateCooldown(weapon, weapon.m_swingCooldown);
+            //float cooldownDifference = calcCooldown - weapon.m_swingCooldown;
+            //string cooldownModString = cooldownDifference != 0 ? " (" + StatsManager.SignedFloatString(cooldownDifference) + ")" : "";
+            newDesc += "Cooldown: " + weapon.m_swingCooldown + "\n";
+
+            DisplayLeft("Stats", m_statsIcon, newDesc);
+        }
+
+        // Equipment
+        if (type.IsSubclassOf(typeof(Equipment)) || type == typeof(Equipment)){
+
+            Equipment equipment = (Equipment)_item;
+
+            // get prefab
+            GameObject prefab = equipment.m_equipmentPrefab;
+            if (!prefab) return;
+
+            string newDesc = "";
+
+            // medkit
+            if (prefab.GetComponentInChildren<MedkitEquipment>()){
+                MedkitEquipment medkit = prefab.GetComponentInChildren<MedkitEquipment>();
+                
+                // health
+                // float calcHeal = StatsManager.CalculateHeal(medkit, medkit.m_heal);
+                newDesc += "Heal Amount: " + medkit.healAmount + "\n";
+            }
+            // dynamite
+            else if (prefab.GetComponentInChildren<Dynamite>()){
+                Dynamite dynamite = prefab.GetComponentInChildren<Dynamite>();
+
+                // explosion prefab
+                GameObject explosionPrefab = dynamite.explosionPrefab;
+                if (explosionPrefab != null && explosionPrefab.GetComponentInChildren<AreaDamage>()){
+                    AreaDamage areaDamage = explosionPrefab.GetComponentInChildren<AreaDamage>();
+
+                    // DPS
+                    float calcDPS = StatsManager.CalculateDamage(areaDamage.m_statsProfile, areaDamage.m_damage) /areaDamage.m_damageDelay;
+                    float damageDifference = calcDPS - (areaDamage.m_damage /areaDamage.m_damageDelay);
+                    string damageModString = damageDifference != 0 ? " (" + StatsManager.SignedFloatString(damageDifference) + ")" : "";
+                    // red for negative, green for positive, none for 0
+                    string calcWithColor = damageDifference > 0 ? "<color=\"green\">" + calcDPS + "</color>" : damageDifference < 0 ? "<color=\"red\">" + calcDPS + "</color>" : calcDPS.ToString();
+                    newDesc += "DPS: " + calcWithColor + damageModString + "\n";
+
+                    // radius
+                    // float calcRadius = StatsManager.CalculateRadius(areaDamage.m_statsProfile, areaDamage.m_radius);
+                    newDesc += "Radius: " + areaDamage.m_radius + "\n";
+
+                    // delay
+                    // float calcDelay = StatsManager.CalculateDelay(areaDamage.m_statsProfile, areaDamage.m_damageDelay);
+                    newDesc += "Duration: " + areaDamage.m_time + "\n";
+                }
+                else{
+
+                    // damage
+                    float calcDamage = StatsManager.CalculateDamage(dynamite.m_statsProfile, dynamite.m_damage);
+                    float damageDifference = calcDamage - dynamite.m_damage;
+                    string damageModString = damageDifference != 0 ? " (" + StatsManager.SignedFloatString(damageDifference) + ")" : "";
+                    // red for negative, green for positive, none for 0
+                    string calcWithColor = damageDifference > 0 ? "<color=\"green\">" + calcDamage + "</color>" : damageDifference < 0 ? "<color=\"red\">" + calcDamage + "</color>" : calcDamage.ToString();
+                    newDesc += "Damage: " + calcWithColor + damageModString + "\n";
+
+                    // radius
+                    // float calcRadius = StatsManager.CalculateRadius(dynamite.m_statsProfile, dynamite.m_radius);
+                    newDesc += "Radius: " + dynamite.m_explosionRadius + "\n";
+                }
+
+                
+                newDesc += "Fuse Time: " + dynamite.m_fuseTime + "\n";
+            }
+            // beartrap
+            else if (prefab.GetComponentInChildren<Beartrap>()){
+                Beartrap beartrap = prefab.GetComponentInChildren<Beartrap>();
+
+                // damage
+                float calcDamage = StatsManager.CalculateDamage(beartrap.m_statsProfile, beartrap.m_damage);
+                float damageDifference = calcDamage - beartrap.m_damage;
+                string damageModString = damageDifference != 0 ? " (" + StatsManager.SignedFloatString(damageDifference) + ")" : "";
+                // red for negative, green for positive, none for 0
+                string calcWithColor = damageDifference > 0 ? "<color=\"green\">" + calcDamage + "</color>" : damageDifference < 0 ? "<color=\"red\">" + calcDamage + "</color>" : calcDamage.ToString();
+                newDesc += "Damage: " + calcWithColor + damageModString + "\n";
+            }
+            else {
+                return;
+            }
 
             DisplayLeft("Stats", m_statsIcon, newDesc);
         }
