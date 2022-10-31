@@ -50,6 +50,8 @@ public class Kill_MissionCondition : MissionCondition
 
     public override void UpdateState()
     {
+        if (m_lockState) return;
+
         base.UpdateState();
 
         // check if the player has killed enough enemies:
@@ -62,12 +64,14 @@ public class Kill_MissionCondition : MissionCondition
     }
 
     public void UpdateCurrentKills(){
+        if (m_lockState) return;
+
         List<Health_Base.DamageStat> relevantKills = new List<Health_Base.DamageStat>();
 
         // if no enemy specified, use all kills in MonsterStats
         if (m_monsterToKill == null)
         {
-            relevantKills = StatsManager.instance.m_monsterStats.SelectMany(x => x.m_kills).ToList();
+            relevantKills = new List<Health_Base.DamageStat>(StatsManager.instance.m_monsterStats.SelectMany(x => x.m_kills).ToList());
         }
         else
         {
@@ -81,7 +85,7 @@ public class Kill_MissionCondition : MissionCondition
             }
             else
             {
-                relevantKills = monsterStat.m_kills;
+                relevantKills = new List<Health_Base.DamageStat>(monsterStat.m_kills);
             }
         }
 
@@ -134,6 +138,21 @@ public class Kill_MissionCondition : MissionCondition
         if (GetState() != ConditionState.COMPLETE)
         {
             SetState(ConditionState.FAILED);
+        }
+    }
+
+    public override void ResetCondition()
+    {
+        base.ResetCondition();
+
+        // reset initial stats
+        m_initialStats = new List<StatsManager.MonsterStat>(StatsManager.instance.m_monsterStats);
+
+        // reset initial kills
+        m_initialKills = new List<Health_Base.DamageStat>();
+        foreach (StatsManager.MonsterStat monster in m_initialStats)
+        {
+            m_initialKills.AddRange(monster.m_kills);
         }
     }
 }

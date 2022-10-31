@@ -206,7 +206,7 @@ public class InfoBox : MonoBehaviour
         DisplayMain(
             _item.m_displayName, 
             _item.m_icon, 
-            "Count: " + _item.currentStackSize + "/" + _item.maxStackSize + "\n" + _item.m_description, 
+            "Count: " + _item.currentStackSize + "/" + _item.maxStackSize + ", " + _item.GetTypeDisplayName() + "\n" + _item.m_description, 
             _showCost ? _item.GetPrice().ToString() : _item.GetTypeDisplayName(), 
             _showCost ? m_priceIcon : m_typeIcon, 
             _onTime, 
