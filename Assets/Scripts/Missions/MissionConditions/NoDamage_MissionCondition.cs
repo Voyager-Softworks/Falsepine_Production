@@ -38,6 +38,11 @@ public class NoDamage_MissionCondition : MissionCondition
         // set to complete
         SetState(ConditionState.COMPLETE);
     }
+
+    public override void ResetCondition()
+    {
+        base.ResetCondition();
+    }
 }
 
 /// <summary>
@@ -74,6 +79,11 @@ public class NoMeleeUsed_MissionCondition : MissionCondition
         // set to complete
         SetState(ConditionState.COMPLETE);
     }
+
+    public override void ResetCondition()
+    {
+        base.ResetCondition();
+    }
 }
 
 /// <summary>
@@ -109,5 +119,10 @@ public class NoReload_MissionCondition : MissionCondition
 
         // set to complete
         SetState(ConditionState.COMPLETE);
+    }
+
+    public override void ResetCondition()
+    {
+        base.ResetCondition();
     }
 }

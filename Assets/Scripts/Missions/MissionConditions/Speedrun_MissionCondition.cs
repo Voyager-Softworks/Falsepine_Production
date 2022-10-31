@@ -42,7 +42,8 @@ public class Speedrun_MissionCondition : MissionCondition
         m_updateTimer = false;
         foreach (Utilities.SceneField scene in MissionManager.instance.GetCurrentZone().GetSceneList())
         {
-            if (arg0.path.Contains(scene.scenePath))
+            // and is not cinematics
+            if (scene.EqualsScene(arg0) && !MissionManager.instance.GetCurrentZone().m_cinematicScene.EqualsScene(arg0))
             {
                 m_updateTimer = true;
                 break;
@@ -74,12 +75,21 @@ public class Speedrun_MissionCondition : MissionCondition
         SetState(ConditionState.COMPLETE);
     }
 
+    public override void ResetCondition()
+    {
+        base.ResetCondition();
+
+        m_timeElapsed = 0f;
+        m_triggerMonsterSeen = true;
+        m_updateTimer = false;
+    }
+
     public override void Update()
     {
         base.Update();
 
         // update timer
-        if (m_updateTimer && m_triggerMonsterSeen && !m_lockState)
+        if (m_updateTimer && (m_triggerMonster == null || m_triggerMonsterSeen) && !m_lockState)
         {
             m_timeElapsed += Time.deltaTime;
             if (m_timeElapsed >= m_timeLimit)
