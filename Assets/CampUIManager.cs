@@ -125,7 +125,11 @@ public class CampUIManager : MonoBehaviour
                 MissionManager.instance.TryReturnMission();
             }
 
-            MissionManager.instance.TryEmbark();
+            EmbarkPopup popup = FindObjectOfType<EmbarkPopup>();
+            if (popup != null)
+            {
+                popup.OpenWindow();
+            }
         }
     }
 
