@@ -53,23 +53,35 @@ public class AreaDamage : MonoBehaviour
             Collider[] colliders = Physics.OverlapSphere(transform.position, m_radius);
 
             List<Health_Base> hitObjects = new List<Health_Base>();
+            List<PlayerHealth> hitPlayers = new List<PlayerHealth>();
             // loop through colliders
             foreach (Collider collider in colliders)
             {
+                // calculate damage
+                float calcDmg = StatsManager.CalculateDamage(m_statsProfile, m_damage);
+
                 // get health component in parents and children
                 Health_Base health = collider.GetComponentInParent<Health_Base>() ?? collider.GetComponentInChildren<Health_Base>();
-
                 // if health is not null and not already hit
                 if (health != null && !hitObjects.Contains(health))
                 {
                     // add to hit list
                     hitObjects.Add(health);
 
-                    // calculate damage
-                    float calcDmg = StatsManager.CalculateDamage(m_statsProfile, m_damage);
-
                     // take damage
                     health.TakeDamage(new Health_Base.DamageStat(calcDmg, gameObject, collider.transform.position, transform.position, m_statsProfile));
+                }
+
+                // get player health component in parents and children
+                PlayerHealth playerHealth = collider.GetComponentInParent<PlayerHealth>() ?? collider.GetComponentInChildren<PlayerHealth>();
+                // if player health is not null and not already hit
+                if (playerHealth != null && !hitPlayers.Contains(playerHealth))
+                {
+                    // add to hit list
+                    hitPlayers.Add(playerHealth);
+
+                    // take damage
+                    playerHealth.TakeDamage(calcDmg);
                 }
             }
         }

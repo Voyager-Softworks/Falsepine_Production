@@ -409,6 +409,11 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
+        // stop reloading
+        if (FindObjectOfType<PlayerInventoryInterface>() is PlayerInventoryInterface pii)
+        {
+            pii.TryEndReload();
+        }
 
         isRolling = true;
         rollDelayTimer = rollDelay;

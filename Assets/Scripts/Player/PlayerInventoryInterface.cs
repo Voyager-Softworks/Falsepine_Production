@@ -326,18 +326,25 @@ public class PlayerInventoryInterface : MonoBehaviour
                     playerAnimator.SetBool("DoReload", false);
                 }
 
-                // if (rangedWeapon.m_isReloading && !playerAnimator.GetBool("DoReload"))
-                // {
-                //     rangedWeapon.TryEndReload(gameObject);
-                // }
-
                 // check if animator is in the Roll_Tree
                 bool isRolling = playerAnimator.GetCurrentAnimatorStateInfo(2).IsName("Roll_Tree");
 
                 // if aim weapon action is down, aim weapon
-                if (aimWeaponAction.ReadValue<float>() > 0 && m_currentlyThrowingItem == null)
+                bool isMelee = false;
+                if (selectedMeleeWeapon is MeleeWeapon meleeWeapon)
+                {
+                    isMelee = meleeWeapon.m_comboTimer > 0;
+                }
+                if (aimWeaponAction.ReadValue<float>() > 0 && m_currentlyThrowingItem == null && !isMelee)
                 {
                     rangedWeapon.TrySetAim(true, gameObject);
+
+                    // select weapon if model is not active
+                    GameObject model = GetWeaponModel(selectedWeapon);
+                    if (!model.activeSelf)
+                    {
+                        SelectWeapon(selectedWeaponType);
+                    }
 
                     playerAnimator.SetLayerWeight(2, 1);
                 }
@@ -421,7 +428,7 @@ public class PlayerInventoryInterface : MonoBehaviour
         }
 
         // melee
-        if (meleeAttackAction.triggered)
+        if (meleeAttackAction.triggered || (fireWeaponAction.triggered && aimWeaponAction.ReadValue<float>() <= 0))
         {
             SelectMeleeWeapon();
 
@@ -435,6 +442,9 @@ public class PlayerInventoryInterface : MonoBehaviour
                 MeleeWeapon meleeWeapon = selectedMeleeWeapon as MeleeWeapon;
                 if (meleeWeapon.TryMelee(meleeWeaponTip, gameObject))
                 {
+                    // stop reloading
+                    TryEndReload();
+
                     // enable model
                     DisableAllModels();
                     GameObject weaponModel = GetWeaponModel(selectedMeleeWeapon);
@@ -471,14 +481,27 @@ public class PlayerInventoryInterface : MonoBehaviour
             }
 
             // after melee attack, select weapon (only once)
-            if (meleeWeapon.m_comboTimer <= (0 + meleeWeapon.m_comboTime / 10.0f) && GetWeaponModel(selectedMeleeWeapon).activeSelf)
+            if (meleeWeapon.m_comboTimer <= Mathf.Max(0,meleeWeapon.m_comboTime - 0.65f) && GetWeaponModel(selectedMeleeWeapon).activeSelf)
             {
-                SelectWeapon(selectedWeaponType);
+                //SelectWeapon(selectedWeaponType);
             }
             else if (meleeWeapon.m_comboTimer > 0)
             {
                 playerAnimator.SetLayerWeight(2, 1);
             }
+        }
+    }
+
+    /// <summary>
+    /// Tries to end the reload of the gun
+    /// </summary>
+    public void TryEndReload()
+    {
+        if (selectedWeapon is RangedWeapon rangedWeapon)
+        {
+            // DoReload false
+            playerAnimator.SetBool("DoReload", false);
+            rangedWeapon.TryEndReload(gameObject);
         }
     }
 
@@ -493,6 +516,9 @@ public class PlayerInventoryInterface : MonoBehaviour
             {
                 // set animator bool to true
                 playerAnimator.SetBool("Throw", true);
+
+                // stop reloading
+                TryEndReload();
             }
             else
             {
