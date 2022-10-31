@@ -149,6 +149,12 @@ public class PlayerHealth : MonoBehaviour, StatsManager.UsesStats
         VignetteScript vs = FindObjectOfType<VignetteScript>();
         if (vs) vs.StartVignette();
 
+        // stop reloading
+        if (FindObjectOfType<PlayerInventoryInterface>() is PlayerInventoryInterface pii)
+        {
+            pii.TryEndReload();
+        }
+
         currentHealth -= calcedDamage;
         if (currentHealth <= 0)
         {

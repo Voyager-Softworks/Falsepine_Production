@@ -19,9 +19,12 @@ public class Speedrun_MissionCondition : MissionCondition
     [SerializeField, HideInInspector] private bool m_triggerMonsterSeen = true;
 
     public override string GetDescription(){
-        string desc = "Spend less than " + (m_timeLimit - m_timeElapsed).ToString("0") + " seconds in the expedition";
+        string desc = "Spend less than " + (m_timeLimit - m_timeElapsed).ToString("0") + " seconds";
         if (m_triggerMonster != null){
-            desc += " while fighting " + (m_triggerMonster.m_type == MonsterInfo.MonsterType.Boss ? "the " : "a ") + m_triggerMonster.m_name;
+            desc += " fighting " + (m_triggerMonster.m_type == MonsterInfo.MonsterType.Boss ? "the " : "a ") + m_triggerMonster.m_name;
+        }
+        else{
+            desc += " in the expedition";
         }
         return desc;
     }

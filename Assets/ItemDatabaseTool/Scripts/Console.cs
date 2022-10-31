@@ -17,7 +17,7 @@ using UnityEditor;
 /// Console class lets the user interact with the game's code in a more direct way.
 /// </summary>
 [Serializable]
-public class Console : ToggleableWindow
+public class Console : ToggleableWindow, StatsManager.UsesStats
 {
     public GameObject view;
     public GameObject input;
@@ -27,6 +27,27 @@ public class Console : ToggleableWindow
 
     private List<string> commandHistory = new List<string>();
     private int upIndex = 0;
+
+    // StatsManager.UsesStats interface implementation
+    public List<StatsManager.StatType> m_usedStatTypes = new List<StatsManager.StatType>();
+    public virtual List<StatsManager.StatType> GetStatTypes(){
+        return m_usedStatTypes;
+    }
+    public void AddStatType(StatsManager.StatType type){
+        if (type == null) return;
+
+        if (!m_usedStatTypes.Contains(type))
+        {
+            m_usedStatTypes.Add(type);
+        }
+    }
+    public void RemoveStatType(StatsManager.StatType type){
+        if (m_usedStatTypes.Contains(type))
+        {
+            m_usedStatTypes.Remove(type);
+        }
+    }
+    
 
     // Update is called once per frame
     void Update()
@@ -569,7 +590,7 @@ public class Console : ToggleableWindow
 
             // kill all of them
             foreach (EnemyHealth enemy in enemies){
-                enemy.TakeDamage(new Health_Base.DamageStat(enemy.m_currentHealth, this.gameObject, transform.position, enemy.transform.position, null));
+                enemy.TakeDamage(new Health_Base.DamageStat(enemy.m_currentHealth, this.gameObject, transform.position, enemy.transform.position, this));
             }
             Log("- All enemies killed");
             Log();
