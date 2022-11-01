@@ -65,11 +65,7 @@ public class PlayerHealth : MonoBehaviour, StatsManager.UsesStats
     private Animator _animator; ///< The animator for the player.
 
     // StatsManager.UsesStats interface implementation
-    public List<StatsManager.StatType> m_usedStatTypes = new List<StatsManager.StatType>() { 
-        StatsManager.StatType.PlayerMaxHealth,
-        StatsManager.StatType.PlayerDamageTaken,
-        StatsManager.StatType.PlayerHealthSteal
-    };
+    public List<StatsManager.StatType> m_usedStatTypes = new List<StatsManager.StatType>() {};
     public List<StatsManager.StatType> GetStatTypes(){
         return m_usedStatTypes;
     }
@@ -222,10 +218,12 @@ public class PlayerHealth : MonoBehaviour, StatsManager.UsesStats
     /// This function takes in a float value and adds it to the current health. If the current health is
     /// greater than the max health, then the current health is set to the max health
     /// </summary>
-    /// <param name="heal">The amount of health to heal the player by.</param>
-    public void Heal(float heal)
+    /// <param name="_amount">The amount of health to heal the player by.</param>
+    public void Heal(float _amount)
     {
-        currentHealth += heal;
+        float calcedHealAmount = StatsManager.CalculateHealAmount(this, _amount);
+
+        currentHealth += calcedHealAmount;
         if (currentHealth > calcedMaxHealth)
         {
             currentHealth = calcedMaxHealth;

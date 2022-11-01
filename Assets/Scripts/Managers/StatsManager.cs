@@ -62,6 +62,7 @@ public class StatsManager : MonoBehaviour
         public static StatType PlayerMaxHealth { get { return new StatType("PlayerMaxHealth"); } }
         public static StatType PlayerDamageTaken { get { return new StatType("PlayerDamageTaken"); } }
         public static StatType PlayerHealthSteal { get { return new StatType("PlayerHealthSteal"); } }
+        public static StatType PlayerHealAmount { get { return new StatType("PlayerHealAmount"); } }
         public static StatType EnemyMaxHealth { get { return new StatType("EnemyMaxHealth"); } }
         public static StatType EnemyDamageTaken { get { return new StatType("EnemyDamageTaken"); } }
         public static StatType BossMaxHealth { get { return new StatType("BossMaxHealth"); } }
@@ -585,6 +586,23 @@ public class StatsManager : MonoBehaviour
         float maxVal = float.MaxValue;
 
         return GenericStatCalc(_statUser, _baseHealth, usedStatTypes, additiveVal, multiplierVal, minVal, maxVal);
+    }
+
+    static public float CalculateHealAmount(UsesStats _statUser, float _baseHealAmount = 1.0f)
+    {
+        // list of stats to use in this function
+        List<StatType> usedStatTypes = new List<StatType>(){
+            StatType.PlayerHealAmount,
+            //StatType.EnemyHealAmount,
+        };
+
+        float additiveVal = 0.0f;
+        float multiplierVal = 1.0f;
+
+        float minVal = 0.0f;
+        float maxVal = float.MaxValue;
+
+        return GenericStatCalc(_statUser, _baseHealAmount, usedStatTypes, additiveVal, multiplierVal, minVal, maxVal);
     }
 
     static public float CalculateDamageTaken(UsesStats _statUser, float _baseDamage = 1.0f)
