@@ -9,6 +9,7 @@ public class EmbarkPopup : ToggleableWindow
     public GameObject m_panel;
     public Button embarkButton;
     public Button cancelButton;
+    public Button exitButton;
 
     private void Start() {
         CloseWindow();
@@ -19,6 +20,7 @@ public class EmbarkPopup : ToggleableWindow
 
         embarkButton.onClick.AddListener(OnEmbarkButtonClicked);
         cancelButton.onClick.AddListener(OnCancelButtonClicked);
+        exitButton.onClick.AddListener(OnCancelButtonClicked);
     }
 
     protected override void OnDisable() {
@@ -26,6 +28,7 @@ public class EmbarkPopup : ToggleableWindow
         
         embarkButton.onClick.RemoveListener(OnEmbarkButtonClicked);
         cancelButton.onClick.RemoveListener(OnCancelButtonClicked);
+        exitButton.onClick.RemoveListener(OnCancelButtonClicked);
     }
 
     private void OnEmbarkButtonClicked() {
