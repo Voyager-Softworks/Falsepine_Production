@@ -261,7 +261,7 @@ public class InfoBox : MonoBehaviour
             string maxSpareModString = maxSpareDifference != 0 ? " (" + StatsManager.SignedFloatString(maxSpareDifference) + ")" : "";
             // red for negative, green for positive, none for 0
             calcWithColor = maxSpareDifference > 0 ? "<color=\"green\">" + calcMaxSpare + "</color>" : maxSpareDifference < 0 ? "<color=\"red\">" + calcMaxSpare + "</color>" : calcMaxSpare.ToString();
-            newDesc += "Spare Ammo: " + weapon.m_spareAmmo + "/" + calcWithColor + "\n";
+            newDesc += "Spare Ammo: " + weapon.m_spareAmmo + "/" + calcWithColor + maxSpareModString + "\n";
 
             DisplayLeft("Stats", m_statsIcon, newDesc);
         }
