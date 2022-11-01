@@ -44,6 +44,11 @@ public class RangedWeapon : Item
     [SerializeField] public int m_clipSize = 0;
     [SerializeField] public int m_spareAmmo = 0;
     [SerializeField] public int m_maxSpareAmmo = 0;
+    public int CalcedMaxSpareAmmo{
+        get{
+            return StatsManager.CalculateMaxSpareAmmo(this, m_maxSpareAmmo);
+        }
+    }
     [SerializeField] public bool m_unlimitedAmmo = false;
     [SerializeField] public List<StatsManager.StatType> m_tempAmmoStats = new List<StatsManager.StatType>();
     
