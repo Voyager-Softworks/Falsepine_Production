@@ -202,7 +202,7 @@ public class UIScript : MonoBehaviour
             Mission mission = MissionManager.instance.GetCurrentMission();
             if (mission != null && mission.m_conditions.Count > 0)
             {
-                m_conditionText.text = "Conditions:";
+                m_conditionText.text = "<size=110%>Conditions:";
                 foreach (MissionCondition condition in mission.m_conditions)
                 {
                     Color conditionCol = Color.white;
@@ -220,12 +220,12 @@ public class UIScript : MonoBehaviour
                     }
 
                     // show condition, and coloured sprite to show state
-                    m_conditionText.text += "\n" + "<sprite=0 color=#" + ColorUtility.ToHtmlStringRGB(conditionCol) + ">" + condition.GetDescription();
+                    m_conditionText.text += "\n" + "<size=90%><sprite=0 color=#" + ColorUtility.ToHtmlStringRGB(conditionCol) + ">" + condition.GetDescription();
                 }
             }
             else
             {
-                m_conditionText.text = "No Mission Conditions";
+                m_conditionText.text = "<size=90%>No Mission Conditions";
             }
         }
         else
