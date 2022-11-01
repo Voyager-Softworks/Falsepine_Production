@@ -17,6 +17,7 @@ public class EnemyHealth : Health_Base
     protected NodeAI.NodeAI_Senses m_senses; ///< The senses of the enemy.
 
     private List<Material> m_materials = new List<Material>(); ///< The materials of the enemy.
+    private List<Color> m_colors = new List<Color>(); ///< The colors of the enemy.
 
     public GameObject m_bloodEffect; ///< The blood effect to show when the enemy is damaged.
 
@@ -31,7 +32,13 @@ public class EnemyHealth : Health_Base
         m_senses = GetComponent<NodeAI.NodeAI_Senses>();
 
         Renderer m_renderer = GetComponentInChildren<Renderer>();
+        m_materials.Clear();    ///< Clear the materials list.
         m_materials.AddRange(m_renderer.materials);
+        m_colors.Clear();       ///< Clear the colors list.
+        foreach (Material material in m_materials)
+        {
+            m_colors.Add(material.color);
+        }
 
         m_startScale = transform.localScale;
     }
@@ -59,7 +66,7 @@ public class EnemyHealth : Health_Base
         {
             for (int i = 0; i < m_materials.Count; i++)
             {
-                m_materials[i].SetColor("_BaseColor", Color.Lerp(flashCol, Color.white, elapsedTime / duration));
+                m_materials[i].SetColor("_BaseColor", Color.Lerp(flashCol, m_colors[i], elapsedTime / duration));
             }
             transform.localScale = Vector3.Lerp(endScale, startScale, elapsedTime / duration);
             elapsedTime += Time.deltaTime;
@@ -89,8 +96,10 @@ public class EnemyHealth : Health_Base
 
         // count all lore of this enemy
         int discoveredLore = 0;
-        foreach (JounralEntry entry in JournalManager.instance.m_discoveredEntries){
-            if (entry.m_entryType == JounralEntry.EntryType.Lore && entry.m_linkedMonster == m_monsterType){
+        foreach (JounralEntry entry in JournalManager.instance.m_discoveredEntries)
+        {
+            if (entry.m_entryType == JounralEntry.EntryType.Lore && entry.m_linkedMonster == m_monsterType)
+            {
                 discoveredLore++;
             }
         }
