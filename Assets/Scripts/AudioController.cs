@@ -479,6 +479,7 @@ public class AudioController : MonoBehaviour ///< @todo comment
             if (channel.layered)
             {
                 channel.time = channel.layerSources[channel.longestLayerIndex].time;
+                channel.source.time = channel.time;
             }
             else
             {

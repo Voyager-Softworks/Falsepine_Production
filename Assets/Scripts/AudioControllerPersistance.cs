@@ -17,6 +17,10 @@ public class AudioControllerPersistance : MonoBehaviour
         audioController = GetComponent<AudioController>();
         missionManager = FindObjectOfType<MissionManager>();
         DontDestroyOnLoad(gameObject);
+        if (FindObjectOfType<BossEnemyHealth>())
+        {
+            playInScene = false;
+        }
     }
 
     private void Start()

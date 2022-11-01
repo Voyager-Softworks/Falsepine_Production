@@ -37,7 +37,7 @@ public class EnemyHealth : Health_Base
         m_colors.Clear();       ///< Clear the colors list.
         foreach (Material material in m_materials)
         {
-            m_colors.Add(material.color);
+            m_colors.Add(material.GetColor("_BaseColor"));
         }
 
         m_startScale = transform.localScale;
