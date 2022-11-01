@@ -50,6 +50,7 @@ public class TalismanChoice : ToggleableWindow
                 tries--;
             }
 
+            link.m_button.GetComponentsInChildren<Image>()[1].sprite = link.m_talisman.m_icon;
             link.m_button.GetComponentInChildren<TextMeshProUGUI>().text = link.m_talisman.m_statMod.ToText();
         }
 
