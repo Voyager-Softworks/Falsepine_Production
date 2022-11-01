@@ -37,7 +37,8 @@ public class Money_MissionCondition : MissionCondition
         EconomyManager em = GameObject.FindObjectOfType<EconomyManager>();
         if (em != null)
         {
-            em.OnPlayerSilverAdded += (int amount) => { 
+            em.OnPlayerSilverAdded += (int amount) => {
+                if (m_lockState) return;
                 m_currentMoney += amount; 
                 UpdateState(); 
             };
@@ -51,6 +52,8 @@ public class Money_MissionCondition : MissionCondition
 
     public override void UpdateState()
     {
+        if (m_lockState) return;
+
         base.UpdateState();
 
         // if enough money, complete
@@ -65,6 +68,14 @@ public class Money_MissionCondition : MissionCondition
 
         // set to incomplete
         SetState(ConditionState.INCOMPLETE);
+
+        // reset money
+        m_currentMoney = 0;
+    }
+
+    public override void ResetCondition()
+    {
+        base.ResetCondition();
 
         // reset money
         m_currentMoney = 0;

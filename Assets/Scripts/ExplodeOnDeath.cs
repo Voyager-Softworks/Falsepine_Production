@@ -43,30 +43,33 @@ public class ExplodeOnDeath : MonoBehaviour
         }
         var explosion = Instantiate(m_explosion, transform.position, Quaternion.identity); // Instantiate the explosion prefab.
         Destroy(explosion, 5f); // Destroy the explosion after 5 seconds.
-        Collider[] colliders = Physics.OverlapSphere(transform.position, m_radius); // Get all colliders within the explosion radius.
+        // do damage check
+        Collider[] colliders = Physics.OverlapSphere(transform.position, m_radius);
+        List<Health_Base> hitObjects = new List<Health_Base>();
+        List<PlayerHealth> hitPlayers = new List<PlayerHealth>();
         foreach (Collider collider in colliders)
         {
-            // calc damage
-            float calcDmg = StatsManager.CalculateDamage(m_statsProfile, m_damage);
+            float calcedDamage = StatsManager.CalculateDamage(m_statsProfile, m_damage);
 
             // Scale damage by distance
-            calcDmg *= (1f - Mathf.Pow((Vector3.Distance(collider.transform.position, transform.position) / m_radius), 3f));
+            calcedDamage *= (1f - Mathf.Pow((Vector3.Distance(collider.transform.position, transform.position) / m_radius), 3f));
 
-            if (collider.gameObject.GetComponentInChildren<Health_Base>() != null)
+            // get health from parent and children
+            Health_Base health = collider.transform.GetComponentInParent<Health_Base>();
+            if (health == null) health = collider.transform.GetComponentInChildren<Health_Base>();
+            if (health != null && !hitObjects.Contains(health))
             {
-                collider.gameObject.GetComponentInChildren<Health_Base>().TakeDamage(new Health_Base.DamageStat(damage: calcDmg, sourceObject: gameObject, origin: transform.position, hitPoint: collider.transform.position, m_statsProfile));
+                hitObjects.Add(health);
+                health.TakeDamage(new Health_Base.DamageStat(calcedDamage, gameObject, transform.position, collider.transform.position, m_statsProfile));
             }
-            else if (collider.gameObject.GetComponentInParent<Health_Base>() != null)
+
+            // get player health from parent and children
+            PlayerHealth playerHealth = collider.transform.GetComponentInParent<PlayerHealth>();
+            if (playerHealth == null) playerHealth = collider.transform.GetComponentInChildren<PlayerHealth>();
+            if (playerHealth != null && !hitPlayers.Contains(playerHealth))
             {
-                collider.gameObject.GetComponentInParent<Health_Base>().TakeDamage(new Health_Base.DamageStat(damage: calcDmg, sourceObject: gameObject, origin: transform.position, hitPoint: collider.transform.position, m_statsProfile));
-            }
-            else if (collider.gameObject.GetComponentInChildren<PlayerHealth>() != null)
-            {
-                collider.gameObject.GetComponentInChildren<PlayerHealth>().TakeDamage(calcDmg);
-            }
-            else if (collider.gameObject.GetComponentInParent<PlayerHealth>() != null)
-            {
-                collider.gameObject.GetComponentInParent<PlayerHealth>().TakeDamage(calcDmg);
+                hitPlayers.Add(playerHealth);
+                playerHealth.TakeDamage(calcedDamage);
             }
         }
         FindObjectOfType<ScreenshakeManager>().AddShakeImpulse(m_screenshakeDuration, m_screenshakeAmplitude, m_screenshakeFrequency); // Add a screenshake.

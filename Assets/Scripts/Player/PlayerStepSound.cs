@@ -38,6 +38,7 @@ public class PlayerStepSound : MonoBehaviour
 
     private void MakeDecal()
     {
+        if (m_makeDecal == false) return;
         m_makeDecal = false;
 
         // get the position of the correct foot

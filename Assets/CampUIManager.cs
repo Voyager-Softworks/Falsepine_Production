@@ -36,7 +36,7 @@ public class CampUIManager : MonoBehaviour
     void Update()
     {
         // if scene is last m_finalScene, disable embark button
-        if (m_finalScene.EqualsPath(SceneManager.GetActiveScene()))
+        if (m_finalScene.EqualsScene(SceneManager.GetActiveScene()))
         {
             m_embarkButton.interactable = false;
         }
@@ -125,7 +125,11 @@ public class CampUIManager : MonoBehaviour
                 MissionManager.instance.TryReturnMission();
             }
 
-            MissionManager.instance.TryEmbark();
+            EmbarkPopup popup = FindObjectOfType<EmbarkPopup>();
+            if (popup != null)
+            {
+                popup.OpenWindow();
+            }
         }
     }
 
