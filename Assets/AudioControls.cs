@@ -62,22 +62,22 @@ public class AudioControls : MonoBehaviour
         if (masterSlider)
         {
             masterSlider.onValueChanged.AddListener(SetMasterVolume);
-            masterSlider.value = PlayerPrefs.GetFloat(masterVolume, 0);
+            masterSlider.value = PlayerPrefs.GetFloat(masterVolume, 1);
         }
         if (musicSlider)
         {
             musicSlider.onValueChanged.AddListener(SetMusicVolume);
-            musicSlider.value = PlayerPrefs.GetFloat(musicVolume, 0);
+            musicSlider.value = PlayerPrefs.GetFloat(musicVolume, 1);
         }
         if (sfxSlider)
         {
             sfxSlider.onValueChanged.AddListener(SetSFXVolume);
-            sfxSlider.value = PlayerPrefs.GetFloat(sfxVolume, 0);
+            sfxSlider.value = PlayerPrefs.GetFloat(sfxVolume, 1);
         }
         if (ambienceSlider)
         {
             ambienceSlider.onValueChanged.AddListener(SetAmbienceVolume);
-            ambienceSlider.value = PlayerPrefs.GetFloat(ambienceVolume, 0);
+            ambienceSlider.value = PlayerPrefs.GetFloat(ambienceVolume, 1);
         }
     }
 
