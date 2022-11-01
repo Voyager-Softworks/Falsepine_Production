@@ -26,6 +26,11 @@ public class Ragdoll : MonoBehaviour
             // disable dynamic bone
             dynamicBone.enabled = false;
         }
+        foreach (var collider in GetComponentsInChildren<Collider>())
+        {
+            // enable collider
+            collider.enabled = true;
+        }
         var colliders = GetComponents<Collider>();
         foreach (var collider in colliders)
         {
@@ -59,6 +64,15 @@ public class Ragdoll : MonoBehaviour
     /// </summary>
     public void DisableRagdoll()
     {
+        foreach (var collider in GetComponentsInChildren<Collider>())
+        {
+            collider.enabled = false;
+        }
+        var colliders = GetComponents<Collider>();
+        foreach (var collider in colliders)
+        {
+            collider.enabled = true;
+        }
         var animator = GetComponentInChildren<Animator>();
         if (animator)
         {
