@@ -790,8 +790,6 @@ public class PlayerInventoryInterface : MonoBehaviour
     {
         selectedWeaponType = _type;
 
-        SaveInterface(SaveManager.currentSaveSlot);
-
         // if inventory is null, return
         if (playerInventory == null) return;
 
@@ -946,6 +944,8 @@ public class PlayerInventoryInterface : MonoBehaviour
     private void OnDisable()
     {
         DisableInput();
+
+        SaveInterface(SaveManager.currentSaveSlot);
     }
 
     /// <summary>
