@@ -16,8 +16,8 @@ MonoBehaviour:
   m_instanceID: 
   m_displayName: Warped Lockbox
   m_description: A small black damaged lockbox. Occasionally it shudders but does
-    not open, perhaps that is for the best. Doubles maximum health. Bosses take half
-    damage
+    not open, perhaps that is for the best. Halves spare ammunition, increases damage
+    and health by 25%.
   m_icon: {fileID: 21300000, guid: 9ef23adbf227c1445b774af3ccb6715d, type: 3}
   mustMatchToStack: 0
   m_currentStackSize: 1
@@ -26,13 +26,17 @@ MonoBehaviour:
   m_usedStatTypes: []
   m_statMods:
   - statType:
-      value: PlayerMaxHealth
-    modType: 1
-    value: 2
-  - statType:
-      value: BossDamageTaken
+      value: SpareAmmo
     modType: 1
     value: 0.5
+  - statType:
+      value: PlayerDamage
+    modType: 1
+    value: 1.25
+  - statType:
+      value: PlayerMaxHealth
+    modType: 1
+    value: 1.25
   m_price: 100
   m_allowedDiscount: 1
   m_resourceLinks:
