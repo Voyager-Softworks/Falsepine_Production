@@ -530,7 +530,7 @@ public class AudioController : MonoBehaviour ///< @todo comment
                 {
                     if (i <= channel.currentLayer)
                     {
-                        channel.layerSources[i].volume = Mathf.Lerp(channel.layerSources[i].volume, channel.volume * (1 - ((channel.currentLayer) * 0.16f)), Time.deltaTime * 4f);
+                        channel.layerSources[i].volume = Mathf.Lerp(channel.layerSources[i].volume, channel.volume * (1 - ((channel.currentLayer) * 0.10f)), Time.deltaTime * 4f);
                     }
                     else
                     {
