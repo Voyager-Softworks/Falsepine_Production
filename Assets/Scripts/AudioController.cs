@@ -479,7 +479,10 @@ public class AudioController : MonoBehaviour ///< @todo comment
             if (channel.layered)
             {
                 channel.time = channel.layerSources[channel.longestLayerIndex].time;
-                channel.source.time = channel.time;
+                foreach (AudioSource source in channel.layerSources)
+                {
+                    source.time = channel.time % source.clip.length;
+                }
             }
             else
             {

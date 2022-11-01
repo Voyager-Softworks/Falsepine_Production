@@ -50,7 +50,7 @@ public class AudioControllerPersistance : MonoBehaviour
             Debug.Log("Current Scene Index: " + index);
 
         }
-        audioController.audioChannels[0].layerIndex = Mathf.Clamp(missionManager.GetCurrentSceneIndex(), 0, 2);
+        audioController.audioChannels[0].layerIndex = Mathf.Clamp(missionManager.GetCurrentSceneIndex(), 0, 3);
         if (playInScene)
         {
             if (!audioController.audioChannels[0].playing && !audioController.audioChannels[1].playing)
