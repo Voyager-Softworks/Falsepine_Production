@@ -8,6 +8,7 @@ using System.Linq;
 using UnityEditor.Rendering;
 
 [CustomEditor(typeof(AudioController))]
+[CanEditMultipleObjects]
 public class AudioController_Inspector : Editor
 {
     AudioController musicManager;
@@ -183,6 +184,8 @@ public class AudioController_Inspector : Editor
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
+
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("audioMixerGroup"));
         audioChannelList.DoLayoutList();
 
         EditorGUILayout.Space();

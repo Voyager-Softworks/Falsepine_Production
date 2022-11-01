@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 /// <summary>
 ///  This class is used to manage the music in the game.
 /// </summary>
 public class AudioController : MonoBehaviour ///< @todo comment
 {
+    public AudioMixerGroup audioMixerGroup;
+
+
     /// <summary>
     ///  The audio channels that are used to play the music.
     /// </summary>
@@ -171,6 +175,7 @@ public class AudioController : MonoBehaviour ///< @todo comment
                 GameObject newSource = new GameObject(channel.name + " Source");
                 newSource.transform.parent = transform;
                 channel.source = newSource.AddComponent<AudioSource>();
+                channel.source.outputAudioMixerGroup = audioMixerGroup;
                 channel.source.clip = channel.clip;
                 channel.source.volume = channel.volume;
                 channel.source.pitch = channel.pitch;
@@ -193,6 +198,7 @@ public class AudioController : MonoBehaviour ///< @todo comment
                     GameObject newSource = new GameObject(channel.name + " Layer " + i);
                     newSource.transform.parent = layerObject.transform;
                     channel.layerSources[i] = newSource.AddComponent<AudioSource>();
+                    channel.layerSources[i].outputAudioMixerGroup = audioMixerGroup;
                     channel.layerSources[i].clip = channel.layers[i];
                     channel.layerSources[i].volume = (i == 0) ? channel.volume : 0f;
                     channel.layerSources[i].pitch = channel.pitch;
