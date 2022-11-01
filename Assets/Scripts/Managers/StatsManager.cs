@@ -49,6 +49,7 @@ public class StatsManager : MonoBehaviour
         public static StatType ShotgunDamage { get { return new StatType("ShotgunDamage"); } }
         public static StatType PistolDamage { get { return new StatType("PistolDamage"); } }
         public static StatType RifleDamage { get { return new StatType("RifleDamage"); } }
+        public static StatType SpecialDamage { get { return new StatType("SpecialDamage"); } }
         public static StatType ExplosiveDamage { get { return new StatType("ExplosiveDamage"); } }
         public static StatType TrapDamage { get { return new StatType("TrapDamage"); } }
         public static StatType EnemyDamage { get { return new StatType("EnemyDamage"); } }
@@ -505,6 +506,7 @@ public class StatsManager : MonoBehaviour
             StatType.ShotgunDamage,
             StatType.PistolDamage,
             StatType.RifleDamage,
+            StatType.SpecialDamage,
             StatType.ExplosiveDamage,
             StatType.TrapDamage,
             StatType.EnemyDamage,
