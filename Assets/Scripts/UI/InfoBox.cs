@@ -253,16 +253,15 @@ public class InfoBox : MonoBehaviour
             newDesc += "Range: " + calcWithColor + rangeModString + "\n";
 
             // Clip
-            //float calcAmmo = StatsManager.CalculateAmmo(weapon, weapon.m_ammo);
-            //float ammoDifference = calcAmmo - weapon.m_ammo;
-            //string ammoModString = ammoDifference != 0 ? " (" + StatsManager.SignedFloatString(ammoDifference) + ")" : "";
             newDesc += "Clip Size: " + weapon.m_clipAmmo + "/" + weapon.m_clipSize + "\n";
 
-            // spare
-            //float calcSpare = StatsManager.CalculateSpare(weapon, weapon.m_spare);
-            //float spareDifference = calcSpare - weapon.m_spare;
-            //string spareModString = spareDifference != 0 ? " (" + StatsManager.SignedFloatString(spareDifference) + ")" : "";
-            newDesc += "Spare Ammo: " + weapon.m_spareAmmo + "/" + weapon.m_maxSpareAmmo + "\n";
+            // max spare ammo
+            int calcMaxSpare = weapon.CalcedMaxSpareAmmo;
+            float maxSpareDifference = calcMaxSpare - weapon.m_maxSpareAmmo;
+            string maxSpareModString = maxSpareDifference != 0 ? " (" + StatsManager.SignedFloatString(maxSpareDifference) + ")" : "";
+            // red for negative, green for positive, none for 0
+            calcWithColor = maxSpareDifference > 0 ? "<color=\"green\">" + calcMaxSpare + "</color>" : maxSpareDifference < 0 ? "<color=\"red\">" + calcMaxSpare + "</color>" : calcMaxSpare.ToString();
+            newDesc += "Spare Ammo: " + weapon.m_spareAmmo + "/" + calcWithColor + "\n";
 
             DisplayLeft("Stats", m_statsIcon, newDesc);
         }

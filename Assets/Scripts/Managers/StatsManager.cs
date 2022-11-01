@@ -56,6 +56,7 @@ public class StatsManager : MonoBehaviour
         public static StatType PoisonDamage { get { return new StatType("PoisonDamage"); } }
         public static StatType FireDamage { get { return new StatType("FireDamage"); } }
         public static StatType SilverDamage { get { return new StatType("SilverDamage"); } }
+        public static StatType SpareAmmo { get { return new StatType("SpareAmmo"); } }
 
         // Health
         public static StatType PlayerMaxHealth { get { return new StatType("PlayerMaxHealth"); } }
@@ -553,6 +554,22 @@ public class StatsManager : MonoBehaviour
         return GenericStatCalc(_statUser, _baseAimTime, usedStatTypes, additiveVal, multiplierVal, minVal, maxVal);
     }
 
+    static public int CalculateMaxSpareAmmo(UsesStats _statUser, float _baseSpareAmmo = 1.0f)
+    {
+        // list of stats to use in this function
+        List<StatType> usedStatTypes = new List<StatType>(){
+            StatType.SpareAmmo,
+        };
+
+        float additiveVal = 0.0f;
+        float multiplierVal = 1.0f;
+
+        float minVal = 0.0f;
+        float maxVal = float.MaxValue;
+
+        return (int)GenericStatCalc(_statUser, _baseSpareAmmo, usedStatTypes, additiveVal, multiplierVal, minVal, maxVal);
+    }
+
     static public float CalculateMaxHealth(UsesStats _statUser, float _baseHealth = 1.0f)
     {
         // list of stats to use in this function
@@ -603,12 +620,6 @@ public class StatsManager : MonoBehaviour
         return GenericStatCalc(_statUser, _baseHealthSteal, usedStatTypes, additiveVal, multiplierVal, minVal, maxVal);
     }
 
-    /// <summary>
-    /// Uses economy stats to calculate cost
-    /// </summary>
-    /// <param name="_statUser"></param>
-    /// <param name="_basePrice"></param>
-    /// <returns></returns>
     static public int CalculateCost(UsesStats _statUser, int _basePrice = 1)
     {
         // list of stats to use in this function

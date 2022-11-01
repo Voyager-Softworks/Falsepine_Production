@@ -80,7 +80,13 @@ public class Console : ToggleableWindow, StatsManager.UsesStats
             {
                 string command = commands[i];
                 if (command == "") continue;
-                TrySendCommand(command);
+
+                try {
+                    TrySendCommand(command);
+                }
+                catch (Exception e){
+                    Log("Error: " + e.Message);
+                }
             }
 
             //TrySendCommand(text);
@@ -462,6 +468,20 @@ public class Console : ToggleableWindow, StatsManager.UsesStats
             return;
         }
 
+        // "list_stattypes"
+        if (split.Length >= 1 && split[0] == "list_stattypes")
+        {
+            // get all fields of item
+            MethodInfo[] methods = StatsManager.StatType.GetAllStatTypeMethods();
+            foreach (MethodInfo method in methods)
+            {
+                Log("- " + ((StatsManager.StatType)method.Invoke(null, null)).value);
+            }
+
+            Log();
+            return;
+        }
+
         // "talisman statType modType value"
         if (split.Length >= 4 && split[0] == "talisman")
         {
@@ -822,6 +842,7 @@ public class Console : ToggleableWindow, StatsManager.UsesStats
         "fill_ammo inventoryID",
         "fill_stacks inventoryID",
         "drink itemID:instanceID?",
+        "list_stattypes",
         "talisman statType modType value",
         "clear_drinks",
         "set_saveslot slotNumber",
