@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using System;
+using UnityEngine.UI;
 
 /// <summary>
 /// Class used to display a specific inventory UI, as well as manage the rules around its interaction.
@@ -30,6 +31,16 @@ public class InventoryPannel : MonoBehaviour
 
     public GameObject m_itemDisplayPrefab;
 
+    [System.Serializable]
+    public class SortButton
+    {
+        public Button button;
+        public string sortType;
+    }
+
+    public List<SortButton> m_sortButtons = new List<SortButton>();
+    public SortButton m_selectedSortButton = null;
+
     // Start is called before the first frame update
     public virtual void Start()
     {
@@ -41,6 +52,42 @@ public class InventoryPannel : MonoBehaviour
         // {
         //     m_itemDisplayInstances = GetComponentsInChildren<InventoryCell>().ToList();
         // }
+
+        UpdateItemDisplays();
+    }
+
+    protected virtual void OnEnable() {
+        // bind sort buttons
+        foreach (var button in m_sortButtons)
+        {
+            button.button.onClick.AddListener(() => SortButtonClicked(button));
+        }
+    }
+
+    protected virtual void OnDisable() {
+        // unbind sort buttons
+        foreach (var button in m_sortButtons)
+        {
+            button.button.onClick.RemoveAllListeners();
+        }
+    }
+
+    protected virtual void SortButtonClicked(SortButton button)
+    {
+        if (m_selectedSortButton != null && m_selectedSortButton.button != null)
+        {
+            // set color to normal
+            m_selectedSortButton.button.GetComponentInChildren<Image>().color = Color.white;
+        }
+
+        if (m_selectedSortButton == button){
+            m_selectedSortButton = null;
+        }
+        else{
+            // set color to green
+            button.button.GetComponentInChildren<Image>().color = Color.green;
+            m_selectedSortButton = button;
+        }
 
         UpdateItemDisplays();
     }
@@ -104,9 +151,34 @@ public class InventoryPannel : MonoBehaviour
             itemDisplay.m_linkedInventoryID = "";
         }
 
-        for (int i = 0; i < linkedInventory.GetSlotCount(); i++)
+        List<Inventory.InventorySlot> slots = new List<Inventory.InventorySlot>(linkedInventory.slots);
+
+        // if selected sort button, filter the slots
+        if (m_selectedSortButton != null)
         {
-            Inventory.InventorySlot slot = linkedInventory.GetSlot(i);
+            for (int i = slots.Count - 1; i >= 0; i--)
+            {
+                Item item = slots[i].item;
+                if (item == null)
+                {
+                    slots.RemoveAt(i);
+                    continue;
+                }
+
+                // only keep those that matche the sort type
+                if (item.GetType().Name.ToLower().Contains(m_selectedSortButton.sortType.ToLower()))
+                {
+                    continue;
+                }
+                else {
+                    slots.RemoveAt(i);
+                }
+            }
+        }
+
+        for (int i = 0; i < slots.Count(); i++)
+        {
+            Inventory.InventorySlot slot = slots[i];
             if (!m_showEmpty && slot.item == null) continue;
             // get the item display at i if it exists, otherwise create a new one
             ItemDisplay itemDisplay = null;
@@ -121,7 +193,7 @@ public class InventoryPannel : MonoBehaviour
             }
 
             itemDisplay.GetComponent<ItemDisplay>().m_linkedInventoryID = linkedInventory.id;
-            itemDisplay.GetComponent<ItemDisplay>().m_slotNumber = i;
+            itemDisplay.GetComponent<ItemDisplay>().m_slotNumber = linkedInventory.GetItemIndex(slot.item);
             itemDisplay.GetComponent<ItemDisplay>().m_showPrice = m_showPrice;
         }
 
@@ -163,6 +235,11 @@ public class InventoryPannel : MonoBehaviour
         if (removeSpaces)
         {
             TryRemoveSpaces(sourceInventory);
+        }
+
+        // auto link the item displays
+        if (m_autoLink){
+            ReLinkItemDisplays();
         }
     }
 

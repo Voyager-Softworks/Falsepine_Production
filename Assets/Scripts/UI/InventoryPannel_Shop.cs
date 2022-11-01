@@ -27,7 +27,9 @@ public class InventoryPannel_Shop : InventoryPannel
         base.Start();
     }
 
-    private void OnEnable() {
+    protected override void OnEnable() {
+        base.OnEnable();
+
         // unbind buy button
         buyButton.onClick.RemoveAllListeners();
 
