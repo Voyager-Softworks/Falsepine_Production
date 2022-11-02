@@ -27,7 +27,8 @@ public class MissionZone : ScriptableObject
         DESERT,
         REDWOOD,
         SWAMP,
-        TOWN
+        PRIME,
+        AUTUMN
     }
 
     public string m_title;
