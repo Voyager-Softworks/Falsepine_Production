@@ -30,7 +30,7 @@ public class Kill_MissionCondition : MissionCondition
     public override string GetDescription(){
         string description = "Kill (" + m_currentKills.Count + "/" + m_requiredKills + ")";
         if (m_monsterToKill != null) description += " " + m_monsterToKill.m_name + (m_requiredKills > 1 ? "(s)" : "");
-        if (m_useOptional) description += " with " + (m_itemToKillWith != null ? "the " + m_itemToKillWith.m_displayName : StatsManager.StatType.DisplayName(m_statToKillWith));
+        if (m_useOptional) description += " with " + (m_itemToKillWith != null ? "the " + m_itemToKillWith.m_displayName : m_statToKillWith.DisplayName());
 
         return description;
     }

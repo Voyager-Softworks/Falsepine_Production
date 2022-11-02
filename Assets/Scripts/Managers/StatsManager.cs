@@ -33,19 +33,63 @@ public class StatsManager : MonoBehaviour
     [Serializable]
     public class StatType
     {
-        private StatType(string _value)
+        private StatType(string _value, string _displayName = "")
         {
-            value = _value;
+            this.value = _value;
+            this.displayName = _displayName;
+            if (this.displayName == "")
+            {
+                string newDisplayName = GenerateDisplayName();
+
+                this.displayName = newDisplayName;
+            }
+        }
+
+        private string GenerateDisplayName()
+        {
+            //add a space before each capital letter
+            string newDisplayName = "";
+            int i = 0;
+            foreach (char c in this.value)
+            {
+                if (char.IsUpper(c) && i != 0)
+                {
+                    newDisplayName += " ";
+                }
+                newDisplayName += c;
+
+                i++;
+            }
+
+            return newDisplayName;
         }
 
         public string value;
 
+        // Display name was NOT serialized, so it needs to be private and retrieved from this static class
+        private string displayName;
+        public String DisplayName()
+        {
+            // get the same statType from the static class, and return its display name
+            StatType newInstance = StringToStatType(this.value);
+            if (newInstance != null) {
+                return newInstance.displayName;
+            }
+            else {
+                Debug.LogError("StatType " + this.value + " not found in the static class!");
+
+                // generate a new display name
+                this.displayName = GenerateDisplayName();
+                return this.displayName;
+            }
+        }
+
         // Damage + Items
-        public static StatType PlayerDamage { get { return new StatType("PlayerDamage"); } }
+        public static StatType PlayerDamage { get { return new StatType("PlayerDamage", "Hunter Damage"); } }
         public static StatType RangedDamage { get { return new StatType("RangedDamage"); } }
-        public static StatType RangedInaccuracy { get { return new StatType("RangedInaccuracy"); } }
-        public static StatType RangedRange { get { return new StatType("RangedRange"); } }
-        public static StatType RangedAimTime { get { return new StatType("RangedAimTime"); } }
+        public static StatType RangedInaccuracy { get { return new StatType("RangedInaccuracy", "Aim Inaccuracy"); } }
+        public static StatType RangedRange { get { return new StatType("RangedRange", "Range"); } }
+        public static StatType RangedAimTime { get { return new StatType("RangedAimTime", "Aim Time"); } }
         public static StatType ShotgunDamage { get { return new StatType("ShotgunDamage"); } }
         public static StatType PistolDamage { get { return new StatType("PistolDamage"); } }
         public static StatType RifleDamage { get { return new StatType("RifleDamage"); } }
@@ -60,36 +104,18 @@ public class StatsManager : MonoBehaviour
         public static StatType SpareAmmo { get { return new StatType("SpareAmmo"); } }
 
         // Health
-        public static StatType PlayerMaxHealth { get { return new StatType("PlayerMaxHealth"); } }
-        public static StatType PlayerDamageTaken { get { return new StatType("PlayerDamageTaken"); } }
-        public static StatType PlayerHealthSteal { get { return new StatType("PlayerHealthSteal"); } }
-        public static StatType PlayerHealAmount { get { return new StatType("PlayerHealAmount"); } }
-        public static StatType EnemyMaxHealth { get { return new StatType("EnemyMaxHealth"); } }
-        public static StatType EnemyDamageTaken { get { return new StatType("EnemyDamageTaken"); } }
-        public static StatType BossMaxHealth { get { return new StatType("BossMaxHealth"); } }
+        public static StatType PlayerMaxHealth { get { return new StatType("PlayerMaxHealth", "Max Health"); } }
+        public static StatType PlayerDamageTaken { get { return new StatType("PlayerDamageTaken", "Damage Taken"); } }
+        public static StatType PlayerHealthSteal { get { return new StatType("PlayerHealthSteal", "Health Steal"); } }
+        public static StatType PlayerHealAmount { get { return new StatType("PlayerHealAmount", "Heal Amount"); } }
+        public static StatType EnemyMaxHealth { get { return new StatType("EnemyMaxHealth", "Creature Health"); } }
+        public static StatType EnemyDamageTaken { get { return new StatType("EnemyDamageTaken", "Creature Health"); } }
+        public static StatType BossMaxHealth { get { return new StatType("BossMaxHealth", "Boss Health"); } }
         public static StatType BossDamageTaken { get { return new StatType("BossDamageTaken"); } }
 
         // Economy
         public static StatType ItemCost { get { return new StatType("ItemCost"); } }
         public static StatType MoneyGain { get { return new StatType("MoneyGain"); } }
-
-        public static String DisplayName(StatType type)
-        {
-            //add a space before each capital letter
-            string displayName = "";
-            int i = 0;
-            foreach (char c in type.value)
-            {
-                if (char.IsUpper(c) && i != 0)
-                {
-                    displayName += " ";
-                }
-                displayName += c;
-
-                i++;
-            }
-            return displayName;
-        }
 
         public static StatType StringToStatType(string _value, bool _caseSensitive = false)
         {
@@ -239,7 +265,7 @@ public class StatsManager : MonoBehaviour
         [SerializeField] public float value = 0;
 
         public string ToText(int _decimalPlaces = 2){
-            string text = StatsManager.StatType.DisplayName(statType) + " " + (modType == StatsManager.ModType.Multiplier ? "x" : (value < 0 ? "" : "+")) + value.ToString("F" + _decimalPlaces);
+            string text = statType.DisplayName() + " " + (modType == StatsManager.ModType.Multiplier ? "x" : (value < 0 ? "" : "+")) + value.ToString("F" + _decimalPlaces);
             return text;
         }
     }
@@ -539,6 +565,22 @@ public class StatsManager : MonoBehaviour
         float maxVal = float.MaxValue;
 
         return GenericStatCalc(_statUser, _baseRange, usedStatTypes, additiveVal, multiplierVal, minVal, maxVal);
+    }
+
+    static public float CalculateInaccuracy(UsesStats _statUser, float _baseInaccuracy = 1.0f)
+    {
+        // list of stats to use in this function
+        List<StatType> usedStatTypes = new List<StatType>(){
+            StatType.RangedInaccuracy,
+        };
+
+        float additiveVal = 0.0f;
+        float multiplierVal = 1.0f;
+
+        float minVal = 1.0f;
+        float maxVal = 40.0f;
+
+        return GenericStatCalc(_statUser, _baseInaccuracy, usedStatTypes, additiveVal, multiplierVal, minVal, maxVal);
     }
 
     static public float CalculateRangedAimTime(UsesStats _statUser, float _baseAimTime = 1.0f)
@@ -1032,7 +1074,7 @@ public class StatsManager : MonoBehaviour
     private void OnValidate() {
         foreach(StatModRange statModRange in m_possibleTalismanMods)
         {
-            statModRange.m_name = StatType.DisplayName(statModRange.m_statType) + " - " + statModRange.m_modType.ToString();
+            statModRange.m_name = statModRange.m_statType.DisplayName() + " - " + statModRange.m_modType.ToString();
         }
     }
 

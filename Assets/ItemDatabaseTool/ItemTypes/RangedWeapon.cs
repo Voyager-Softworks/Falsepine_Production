@@ -33,7 +33,17 @@ public class RangedWeapon : Item
 
     // Aiming:
     [SerializeField] public float m_aimedInaccuracy = 0;
+    public float calcedAimedInaccuracy {
+        get {
+            return StatsManager.CalculateInaccuracy(this, m_aimedInaccuracy);
+        }
+    }
     [SerializeField] public float m_unaimedInaccuracy = 0;
+    public float calcedUnaimedInaccuracy {
+        get {
+            return StatsManager.CalculateInaccuracy(this, m_unaimedInaccuracy);
+        }
+    }
     [SerializeField] public float m_aimTime = 0;
     [SerializeField] private float m_aimTimer = 0;
     [SerializeField] public float m_horizFalloffMult = 0;
@@ -718,14 +728,14 @@ public class RangedWeapon : Item
     {
         // calculate new direction using inaccuracy
         float calcedAimTime = StatsManager.CalculateRangedAimTime(this, m_aimTime);
-        float val = Mathf.Lerp(m_unaimedInaccuracy, m_aimedInaccuracy, m_aimTimer / calcedAimTime);
+        float val = Mathf.Lerp(calcedUnaimedInaccuracy, calcedAimedInaccuracy, m_aimTimer / calcedAimTime);
         // if NaN or infinite, set 0
         if (float.IsNaN(val) || float.IsInfinity(val))
         {
             val = 0;
         }
         // ensure value is between m_unaimedInaccuracy and m_aimedInaccuracy
-        val = Mathf.Clamp(val, Mathf.Min(m_unaimedInaccuracy, m_aimedInaccuracy), Mathf.Max(m_unaimedInaccuracy, m_aimedInaccuracy));
+        val = Mathf.Clamp(val, Mathf.Min(calcedUnaimedInaccuracy, calcedAimedInaccuracy), Mathf.Max(calcedUnaimedInaccuracy, calcedAimedInaccuracy));
         return val;
     }
 
