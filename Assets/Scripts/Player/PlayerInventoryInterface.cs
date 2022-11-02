@@ -285,6 +285,15 @@ public class PlayerInventoryInterface : MonoBehaviour
 
                     if (rangedWeapon.TryShoot(weaponFirepoint, fireDirection, gameObject, m_aimZone))
                     {
+                        // play particle under parent
+                        if (weaponFirepoint != null && weaponFirepoint.parent.GetComponentInChildren<ParticleSystem>() is ParticleSystem particle)
+                        {
+                            // auto duration
+                            // ParticleSystem.MainModule main = particle.main;
+                            // main.duration = rangedWeapon.m_shootTime + 0.1f;
+                            particle.Play();
+                        }
+
                         // play shoot animation
                         playerAnimator.SetTrigger("Shoot");
                         // DoReload false
@@ -309,6 +318,13 @@ public class PlayerInventoryInterface : MonoBehaviour
                 {
                     if (rangedWeapon.TryStartReload(gameObject))
                     {
+                        // select weapon if model is not active
+                        GameObject model = GetWeaponModel(selectedWeapon);
+                        if (!model.activeSelf)
+                        {
+                            SelectWeapon(selectedWeaponType);
+                        }
+
                         // Reload anim
                         playerAnimator.SetTrigger("Reload");
                         playerAnimator.SetBool("DoReload", true);
