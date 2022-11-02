@@ -138,7 +138,7 @@ public class JournalManager : ToggleableWindow
     /// Opens a specific contents panel
     /// </summary>
     /// <param name="contents"></param>
-    private void OpenContents(GameObject contents)
+    public void OpenContents(GameObject contents)
     {
         DisableAllContents();
 
