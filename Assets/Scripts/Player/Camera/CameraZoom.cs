@@ -10,7 +10,8 @@ using UnityEngine.InputSystem;
 public class CameraZoom : MonoBehaviour
 {
     public InputAction zoomAction;
-    CinemachineVirtualCamera cam;
+    CinemachineVirtualCamera cinemachineCam;
+    Camera cam;
     public float currentZoom = 10f;
     public float minZoom = 9.0f;
     public float maxZoom = 9.0f;
@@ -20,7 +21,8 @@ public class CameraZoom : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cam = GetComponent<CinemachineVirtualCamera>();
+        cinemachineCam = GetComponent<CinemachineVirtualCamera>();
+        cam = GetComponent<Camera>();
 
         zoomAction.Enable();
     }
@@ -66,7 +68,7 @@ public class CameraZoom : MonoBehaviour
     /// </summary>
     void Zoom()
     {
-        if (cam == null) return;
+        if (cinemachineCam == null && cam == null) return;
 
         if (zoomAction.ReadValue<float>() > 0.0f)
         {
@@ -80,10 +82,20 @@ public class CameraZoom : MonoBehaviour
         currentZoom = Mathf.Clamp(currentZoom, minZoom, maxZoom);
 
         //if ortho set size
-        cam.m_Lens.OrthographicSize = Mathf.Lerp(cam.m_Lens.OrthographicSize, currentZoom, Time.deltaTime * zoomSpeed);
+        if (cinemachineCam != null){
+            cinemachineCam.m_Lens.OrthographicSize = Mathf.Lerp(cinemachineCam.m_Lens.OrthographicSize, currentZoom, Time.deltaTime * zoomSpeed);
+        }
+        else{
+            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, currentZoom, Time.deltaTime * zoomSpeed);
+        }
 
         //if perspective set fov
-        cam.m_Lens.FieldOfView = Mathf.Lerp(cam.m_Lens.FieldOfView, currentZoom, Time.deltaTime * zoomSpeed);
+        if (cinemachineCam != null){
+            cinemachineCam.m_Lens.FieldOfView = Mathf.Lerp(cinemachineCam.m_Lens.FieldOfView, currentZoom, Time.deltaTime * zoomSpeed);
+        }
+        else{
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, currentZoom, Time.deltaTime * zoomSpeed);
+        }
 
     }
 }
