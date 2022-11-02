@@ -26,6 +26,10 @@ public class EntryPurchasePanel : MonoBehaviour
     public int m_entryAmount = 3;
     public List<JounralEntry> m_journalEntries = new List<JounralEntry>();
 
+    [Header("Double CLick")]
+    public float m_clickTime = 0.5f;
+    public float m_clickTimer = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,6 +64,8 @@ public class EntryPurchasePanel : MonoBehaviour
 
             // listen for click
             clueUI.OnClick += () => {
+                Debug.Log("Clicked");
+
                 // if not selected, play sound
                 if (!clueUI.m_isSelected){
                     // sound
@@ -70,6 +76,15 @@ public class EntryPurchasePanel : MonoBehaviour
                 foreach (CluePurchaseUI ui in m_clueUIs){
                     ui.m_isSelected = false;
                 }
+
+                // if already selected, and timer is not 0, double click
+                if (m_selectedClue == clueUI && m_clickTimer > 0f){
+                    // double click
+                    TryBuySelected();
+                }
+                // start timer
+                m_clickTimer = m_clickTime;
+
 
                 // select this one
                 clueUI.m_isSelected = true;
@@ -97,6 +112,9 @@ public class EntryPurchasePanel : MonoBehaviour
 
     private void Update() {
         UpdateUI();
+
+        // count down time
+        m_clickTimer = Mathf.Max(0f, m_clickTimer - Time.deltaTime);
     }
 
     /// <summary>

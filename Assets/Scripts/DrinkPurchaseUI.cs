@@ -42,11 +42,8 @@ public class DrinkPurchaseUI : MonoBehaviour
     }
 
     private void OnDisable() {
-        // unbind button to the click function
-        m_button.onClick.RemoveListener(() =>
-        {
-            OnClick?.Invoke();
-        });
+        // remove all listeners
+        m_button.onClick.RemoveAllListeners();
     }
 
     // Update is called once per frame

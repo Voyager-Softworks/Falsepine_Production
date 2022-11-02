@@ -41,6 +41,13 @@ public class InventoryPannel : MonoBehaviour
     public List<SortButton> m_sortButtons = new List<SortButton>();
     public SortButton m_selectedSortButton = null;
 
+    
+
+    [Header("Double CLick")]
+    public float m_clickTime = 0.5f;
+    public float m_clickTimer = 0f;
+
+
     // Start is called before the first frame update
     public virtual void Start()
     {
