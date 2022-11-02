@@ -25,7 +25,7 @@ public class ExitGate : MonoBehaviour
 
     public float m_checkInterval = 1.5f;
     private float m_checkTimer = 0.0f;
-    private bool m_unlocked = false;
+    public bool m_unlocked = false;
 
     private bool m_isLoading = false;
 

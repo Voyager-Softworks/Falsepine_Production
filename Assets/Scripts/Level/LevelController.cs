@@ -36,9 +36,16 @@ public class LevelController : MonoBehaviour
 
     static public void LoadTutorial(bool _doSave = true)
     {
-        if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
+        if (FindObjectOfType<AsyncSceneLoader>() is AsyncSceneLoader loader)
+        {
+            loader.LoadScene("TutorialScene", _doSave);
+        }
+        else
+        {
+            if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
 
-        SceneManager.LoadScene("TutorialScene");
+            SceneManager.LoadScene("TutorialScene");
+        }
     }
 
     static public void LoadSnow(bool _doSave = true)
@@ -62,9 +69,25 @@ public class LevelController : MonoBehaviour
         SceneManager.LoadScene("Scene_MissonComplete");
     }
 
+    static public void LoadCredits(bool _doSave = true)
+    {
+        if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
+
+        SceneManager.LoadScene("credits");
+    }
+
     static public void LoadGameComplete(bool _doSave = true)
     {
-        SceneManager.LoadScene("Scene_GameComplete");
+        if (FindObjectOfType<AsyncSceneLoader>() is AsyncSceneLoader loader)
+        {
+            loader.LoadScene("Scene_GameComplete", _doSave);
+        }
+        else
+        {
+            if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
+
+            SceneManager.LoadScene("Scene_GameComplete");
+        }
     }
 
     /// <summary>
