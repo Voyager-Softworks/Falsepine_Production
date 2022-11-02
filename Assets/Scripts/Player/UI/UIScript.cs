@@ -243,21 +243,25 @@ public class UIScript : MonoBehaviour
                 foreach (MissionCondition condition in mission.m_conditions)
                 {
                     Color conditionCol = Color.white;
+                    string spriteName = "tick";
                     switch (condition.GetState())
                     {
                         case MissionCondition.ConditionState.COMPLETE:
                             conditionCol = Color.green;
+                            spriteName = "tick";
                             break;
                         case MissionCondition.ConditionState.INCOMPLETE:
                             conditionCol = Color.white;
+                            spriteName = "circle";
                             break;
                         case MissionCondition.ConditionState.FAILED:
                             conditionCol = Color.red;
+                            spriteName = "x";
                             break;
                     }
 
                     // show condition, and coloured sprite to show state
-                    m_conditionText.text += "\n" + "<size=90%><sprite=0 color=#" + ColorUtility.ToHtmlStringRGB(conditionCol) + ">" + condition.GetDescription();
+                    m_conditionText.text += "\n" + "<size=90%><sprite name=\"" + spriteName + "\" color=#" + ColorUtility.ToHtmlStringRGB(conditionCol) + ">" + condition.GetDescription();
                 }
             }
             else
