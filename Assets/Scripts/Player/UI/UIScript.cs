@@ -37,7 +37,21 @@ public class UIScript : MonoBehaviour
     public TextMeshProUGUI equipmentAmmoText_1;
     public TextMeshProUGUI equipmentAmmoText_2;
 
+    public Image weaponEffectIcon_1;
+    public Image weaponEffectIcon_2;
+
     public TextMeshProUGUI m_conditionText;
+
+
+    [Serializable]
+    public class EffectImage
+    {
+        public StatsManager.StatType statType;
+        public Sprite image;
+    }
+    
+    [Header("Effects")]
+    public List<EffectImage> effectImages;
 
     [Header("Interact Text")]
     public TextMeshProUGUI interactText;
@@ -86,7 +100,7 @@ public class UIScript : MonoBehaviour
             Inventory inventory = InventoryManager.instance.GetInventory("player");
             if (inventory != null)
             {
-                //set icon
+                //set primary icon
                 RangedWeapon primaryWeapon = inventory.slots[0].item as RangedWeapon;
                 if (primaryWeapon != null)
                 {
@@ -97,6 +111,16 @@ public class UIScript : MonoBehaviour
                     if (primaryWeapon.m_unlimitedAmmo) spareAmmoText = "∞";
                     else spareAmmoText = primaryWeapon.m_spareAmmo.ToString();
                     ammoText_1.text = primaryWeapon.m_clipAmmo + "/" + spareAmmoText;
+
+                    // set weapon effect icon
+                    if (primaryWeapon.m_tempAmmoStats.Count > 0)
+                    {
+                        weaponEffectIcon_1.transform.parent.gameObject.SetActive(true);
+                        weaponEffectIcon_1.sprite = effectImages.Find(x => x.statType == primaryWeapon.m_tempAmmoStats[0]).image;
+                    }
+                    else {
+                        weaponEffectIcon_1.transform.parent.gameObject.SetActive(false);
+                    }
 
                     // enable/disable
                     if (currentWeapon && primaryWeapon.id == currentWeapon.id)
@@ -111,7 +135,7 @@ public class UIScript : MonoBehaviour
                     primaryWeaponIcon.SetActive(false);
                 }
 
-                //set icon
+                //set seconday icon
                 RangedWeapon secondaryWeapon = inventory.slots[1].item as RangedWeapon;
                 if (secondaryWeapon != null)
                 {
@@ -122,6 +146,16 @@ public class UIScript : MonoBehaviour
                     if (secondaryWeapon.m_unlimitedAmmo) spareAmmoText = "∞";
                     else spareAmmoText = secondaryWeapon.m_spareAmmo.ToString();
                     ammoText_2.text = secondaryWeapon.m_clipAmmo + "/" + spareAmmoText;
+
+                    // set weapon effect icon
+                    if (secondaryWeapon.m_tempAmmoStats.Count > 0)
+                    {
+                        weaponEffectIcon_2.transform.parent.gameObject.SetActive(true);
+                        weaponEffectIcon_2.sprite = effectImages.Find(x => x.statType == secondaryWeapon.m_tempAmmoStats[0]).image;
+                    }
+                    else {
+                        weaponEffectIcon_2.transform.parent.gameObject.SetActive(false);
+                    }
 
                     // enable/disable
                     if (currentWeapon && secondaryWeapon.id == currentWeapon.id)
