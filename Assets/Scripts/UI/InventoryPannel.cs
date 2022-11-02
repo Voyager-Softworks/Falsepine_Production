@@ -41,6 +41,9 @@ public class InventoryPannel : MonoBehaviour
     public List<SortButton> m_sortButtons = new List<SortButton>();
     public SortButton m_selectedSortButton = null;
 
+    public Sprite m_selectedSprite;
+    public Sprite m_unselectedSprite;
+
     
 
     [Header("Double CLick")]
@@ -83,17 +86,17 @@ public class InventoryPannel : MonoBehaviour
     {
         if (m_selectedSortButton != null && m_selectedSortButton.button != null)
         {
-            // set color to normal
-            //m_selectedSortButton.button.GetComponentInChildren<Image>().color = Color.white;
+            // update sprite
+            m_selectedSortButton.button.image.sprite = m_unselectedSprite;
         }
 
         if (m_selectedSortButton == button){
             m_selectedSortButton = null;
         }
         else{
-            // set color to green
-            //button.button.GetComponentInChildren<Image>().color = Color.green;
             m_selectedSortButton = button;
+            // update sprite
+            m_selectedSortButton.button.image.sprite = m_selectedSprite;
         }
 
         UpdateItemDisplays();
