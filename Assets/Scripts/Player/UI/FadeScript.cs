@@ -92,7 +92,7 @@ public class FadeScript : MonoBehaviour
             // if the final boss is dead, go to the game complete screen
             if (MissionManager.instance.GetCurrentZoneIndex() >= MissionManager.instance.m_missionZones.Count - 1 && MissionManager.instance.HasZoneBossDied())
             {
-                LevelController.LoadGameComplete();
+                LevelController.LoadCredits();
             }
             else{
                 LevelController.LoadMissionComplete();
