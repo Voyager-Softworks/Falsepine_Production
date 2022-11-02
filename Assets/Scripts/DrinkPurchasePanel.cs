@@ -98,14 +98,27 @@ public class DrinkPurchasePanel : MonoBehaviour
 
         if (m_selectedDrink != null){
             bool isActive = m_selectedDrink.IsAlreadyActive();
+            // count already active drinks
+            int activeDrinks = StatsManager.activeDrinks.Count;
+            if (activeDrinks >= 1){
+                // if there is already an active drink, disable the button
+                m_purchaseButton.interactable = false;
+                m_purchaseButtonText.text = "Already Drunk!";
 
-            if (!isActive){
+                // set the price on the button
+                m_purchaseButtonCostText.transform.gameObject.SetActive(false);
+
+                // disable the silver icon
+                m_purchaseButtonSilverIcon.gameObject.SetActive(false);
+            }
+            else if (!isActive){
                 m_purchaseButton.interactable = true;
 
                 // say Purchase
                 m_purchaseButtonText.text = "PURCHASE";
 
                 // set the price on the button
+                m_purchaseButtonCostText.transform.gameObject.SetActive(true);
                 m_purchaseButtonCostText.text = m_selectedDrink.m_price.ToString();
 
                 // enable the silver icon
@@ -118,7 +131,7 @@ public class DrinkPurchasePanel : MonoBehaviour
                 m_purchaseButtonText.text = "ACTIVE";
 
                 // set the price on the button
-                m_purchaseButtonCostText.text = "";
+                m_purchaseButtonCostText.transform.gameObject.SetActive(false);
 
                 // disable the silver icon
                 m_purchaseButtonSilverIcon.gameObject.SetActive(false);
@@ -132,7 +145,7 @@ public class DrinkPurchasePanel : MonoBehaviour
             m_purchaseButtonText.text = "SELECT DRINK";
 
             // set the price
-            m_purchaseButtonCostText.text = "";
+            m_purchaseButtonCostText.transform.gameObject.SetActive(false);
 
             // disable the silver icon
             m_purchaseButtonSilverIcon.gameObject.SetActive(false);
