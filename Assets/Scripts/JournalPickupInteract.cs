@@ -63,6 +63,12 @@ public class JournalPickupInteract : Interactable
                 EconomyManager.instance.AddMoney(10);
             }
         }
+
+        // stop any audiosource that might be playing
+        AudioSource[] sources = GetComponentsInChildren<AudioSource>();
+        foreach (AudioSource source in sources){
+            source.Stop();
+        }
     }
 
     /// <summary>
@@ -70,8 +76,6 @@ public class JournalPickupInteract : Interactable
     /// </summary>
     /// <returns></returns>
     public JounralEntry.EntryType? GetEntryType(){
-        
-
         switch (m_pickupType){
             case PickupType.SpecificEntry:
                 if (m_linkedEntry == null) return null;
