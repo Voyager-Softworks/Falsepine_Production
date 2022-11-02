@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 camForward; ///< The forward direction of the camera.
     Vector3 camRight; ///< The right direction of the camera.
-    
+
     [HideInInspector] public UIScript uiScript;
 
     /// <summary>
@@ -108,11 +108,12 @@ public class PlayerMovement : MonoBehaviour
         EnableInput();
 
         // disable Gamepad input
-        if (m_disableGamepadMovement){
+        if (m_disableGamepadMovement)
+        {
             Gamepad[] gamepads = Gamepad.all.ToArray();
             for (int i = 0; i < gamepads.Length; i++)
             {
-                InputSystem.DisableDevice(gamepads[i]); 
+                InputSystem.DisableDevice(gamepads[i]);
             }
         }
     }
@@ -184,7 +185,8 @@ public class PlayerMovement : MonoBehaviour
             uiScript.staminaBar.color = Color.Lerp(uiScript.staminaBar.color, new Color(uiScript.staminaBar.color.r, uiScript.staminaBar.color.g, uiScript.staminaBar.color.b, 0), Time.deltaTime * 10);
             uiScript.staminaBarDark.color = Color.Lerp(uiScript.staminaBarDark.color, new Color(uiScript.staminaBarDark.color.r, uiScript.staminaBarDark.color.g, uiScript.staminaBarDark.color.b, 0), Time.deltaTime * 10);
         }
-        else{
+        else
+        {
             uiScript.staminaBG.color = Color.Lerp(uiScript.staminaBG.color, new Color(uiScript.staminaBG.color.r, uiScript.staminaBG.color.g, uiScript.staminaBG.color.b, 1), Time.deltaTime * 20);
             uiScript.staminaBar.color = Color.Lerp(uiScript.staminaBar.color, new Color(uiScript.staminaBar.color.r, uiScript.staminaBar.color.g, uiScript.staminaBar.color.b, 1), Time.deltaTime * 20);
             uiScript.staminaBarDark.color = Color.Lerp(uiScript.staminaBarDark.color, new Color(uiScript.staminaBarDark.color.r, uiScript.staminaBarDark.color.g, uiScript.staminaBarDark.color.b, 1), Time.deltaTime * 20);
@@ -215,7 +217,8 @@ public class PlayerMovement : MonoBehaviour
                 isReloading = rangedWeapon.m_isReloading;
             }
 
-            if (pii.m_currentlyThrowingItem != null){
+            if (pii.m_currentlyThrowingItem != null)
+            {
                 isThrowing = true;
             }
         }
@@ -383,6 +386,10 @@ public class PlayerMovement : MonoBehaviour
     /// - Vaulting currently messes up enemy pathfinding: this needs to be fixed.
     public void StartVault()
     {
+        if (rollDelayTimer > 0)
+        {
+            return;
+        }
         if (!dynamicVaulting.canVault || isRolling || isVaulting) return;
         _animator.SetFloat("VaultHeight", dynamicVaulting.GetVaultingHeight());
         _animator.SetTrigger("Vault");
@@ -483,6 +490,7 @@ public class PlayerMovement : MonoBehaviour
         GetComponent<CapsuleCollider>().enabled = true;
         GetComponent<CharacterController>().enabled = true;
         isVaulting = false;
+        rollDelayTimer = rollDelay;
     }
 
 
