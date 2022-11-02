@@ -46,14 +46,8 @@ public class CluePurchaseUI : MonoBehaviour
     }
 
     private void OnDisable() {
-        // unbind button to the click function
-        m_button.onClick.RemoveListener(() =>
-        {
-            OnClick?.Invoke();
-        });
-
-        // unbind journal button to JournalButtonPressed
-        m_jounralButton.onClick.RemoveListener(JournalButtonPressed);
+        // remove all listeners
+        m_button.onClick.RemoveAllListeners();
     }
 
     // Update is called once per frame
@@ -97,7 +91,27 @@ public class CluePurchaseUI : MonoBehaviour
     public void JournalButtonPressed(){
         // open the journal
         JournalManager.instance.OpenWindow();
-        // select the entry
-        //JournalManager.instance.
+
+        // find the monster in the journal
+        JournalUpdater_Monster[] updaters = JournalManager.instance.GetComponentsInChildren<JournalUpdater_Monster>(true);
+        foreach (JournalUpdater_Monster updater in updaters)
+        {
+            if (updater.m_monster == m_linkedJournalEntry.m_linkedMonster)
+            {
+                // find the content link JournalManager.instance.contentsLinks
+                foreach (JournalManager.ContentsLink link in JournalManager.instance.contentsLinks)
+                {
+                    if (link.contents == updater.gameObject)
+                    {
+                        // open the contentupdater
+                        updater.m_entryType = m_linkedJournalEntry.m_entryType;
+                        JournalManager.instance.OpenContents(link.contents);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+
     }
 }
