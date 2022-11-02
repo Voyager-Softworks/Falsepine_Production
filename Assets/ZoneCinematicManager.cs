@@ -12,6 +12,9 @@ public class ZoneCinematicManager : MonoBehaviour
     private float m_fallbackTimer = 0.0f;
     private bool m_isEnding = false;
 
+    [Header("Credits")]
+    public bool m_isCredits = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,6 +51,12 @@ public class ZoneCinematicManager : MonoBehaviour
     {
         if (m_isEnding) return;
         m_isEnding = true;
+
+        if (m_isCredits){
+            LevelController.LoadGameComplete();
+            return;
+        }
+
         MissionManager.instance.LoadNextScene();
 
         if (m_disableCinematic)

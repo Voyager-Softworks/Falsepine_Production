@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using TMPro;
 
 /// <summary>
 /// Manages opening and closing the "pause" menu.
@@ -12,11 +14,22 @@ public class PauseMenu : ToggleableWindow
 
     public GameObject PausePanel;
 
+    public Button TownButton;
+    public Button MenuButton;
+
+    private ExitGate exitGate;
+
     protected override void OnEnable() {
         base.OnEnable();
 
         pauseAction.Enable();
+
+        // exit gate
+        if (exitGate == null){
+            exitGate = FindObjectOfType<ExitGate>();
+        }
     }
+
     protected override void OnDisable() {
         base.OnDisable();
         
@@ -31,6 +44,31 @@ public class PauseMenu : ToggleableWindow
         }
 
         base.Update();
+
+        // if exitGate is unlocked, allow town and menu buttons
+        if (exitGate != null) {
+            TownButton.interactable = exitGate.m_unlocked == true;
+            MenuButton.interactable = exitGate.m_unlocked == true;
+
+            
+            // if mouse is over town or menu button, and exitGate is locked, change text to "Enemies remain"
+            Vector2 mousePos = Mouse.current.position.ReadValue();
+            if (exitGate.m_unlocked == false) {
+                if (TownButton.GetComponent<RectTransform>().rect.Contains(TownButton.transform.InverseTransformPoint(mousePos))) {
+                    TownButton.GetComponentInChildren<TextMeshProUGUI>().text = "Enemies remain";
+                }
+                else {
+                    TownButton.GetComponentInChildren<TextMeshProUGUI>().text = "Return to Town";
+                }
+                
+                if (MenuButton.GetComponent<RectTransform>().rect.Contains(MenuButton.transform.InverseTransformPoint(mousePos))) {
+                    MenuButton.GetComponentInChildren<TextMeshProUGUI>().text = "Enemies remain";
+                } else {
+                    
+                    MenuButton.GetComponentInChildren<TextMeshProUGUI>().text = "Main Menu";
+                }
+            }
+        }
     }
 
     public override bool IsOpen()
