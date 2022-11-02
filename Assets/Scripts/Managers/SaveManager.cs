@@ -77,6 +77,66 @@ public class SaveManager : MonoBehaviour
         return null;
     }
 
+    public static MissionZone.ZoneArea? GetRecentZone(int _saveSlot)
+    {
+        // get the save folder
+        string saveFolder = GetSaveFolderPath(_saveSlot);
+        if (!Directory.Exists(saveFolder))
+        {
+            // if the save folder doesn't exist, return null
+            return null;
+        }
+
+        // get the "recentZone.json" file
+        string recentZoneFile = saveFolder + "/recentZone.json";
+
+        // if the file doesn't exist, return null
+        if (!File.Exists(recentZoneFile))
+        {
+            return null;
+        }
+
+        // read the file
+        string json = File.ReadAllText(recentZoneFile);
+
+        // parse the json
+        MissionZone.ZoneArea zone = JsonUtility.FromJson<MissionZone.ZoneArea>(json);
+
+        return zone;
+    }
+
+    public static void SaveRecentZone(int _saveSlot, MissionZone.ZoneArea? _zone)
+    {
+        // if the save folder doesn't exist, create it
+        string saveFolder = GetSaveFolderPath(_saveSlot);
+        if (!Directory.Exists(saveFolder))
+        {
+            Directory.CreateDirectory(saveFolder);
+        }
+
+        string recentZoneFile = saveFolder + "/recentZone.json";
+
+        // if null, delete the file
+        if (_zone == null)
+        {
+            if (File.Exists(recentZoneFile))
+            {
+                File.Delete(recentZoneFile);
+            }
+            return;
+        }
+
+        FileStream file = File.Create(recentZoneFile);
+
+        string json = JsonUtility.ToJson(_zone);
+        
+        StreamWriter writer = new StreamWriter(file);
+        writer.Write(json);
+        writer.Close();
+
+        file.Close();
+    }
+
     /// <summary>
     /// Sets the current save slot index
     /// </summary>
@@ -95,7 +155,11 @@ public class SaveManager : MonoBehaviour
         if (InventoryManager.instance != null) InventoryManager.instance.SaveInventories(saveSlot);
 
         // save missions
-        if (MissionManager.instance != null) MissionManager.instance.SaveMissions(saveSlot);
+        if (MissionManager.instance != null)
+        {
+            MissionManager.instance.SaveMissions(saveSlot);
+            SaveRecentZone(saveSlot, MissionManager.instance.GetCurrentZone()?.m_area);
+        }
 
         // save journal
         if (JournalManager.instance != null) JournalManager.instance.SaveJournal(saveSlot);
