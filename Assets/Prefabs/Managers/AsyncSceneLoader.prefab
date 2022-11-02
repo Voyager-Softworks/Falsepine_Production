@@ -85,7 +85,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2038857788228788117}
   - component: {fileID: 2038857788228788123}
-  - component: {fileID: 2038857788228788122}
+  - component: {fileID: 1449369519285719085}
+  - component: {fileID: 4906584469213355683}
   m_Layer: 5
   m_Name: Loading Icon
   m_TagString: Untagged
@@ -120,7 +121,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2038857788228788116}
   m_CullTransparentMesh: 1
---- !u!114 &2038857788228788122
+--- !u!95 &1449369519285719085
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2038857788228788116}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2b91d576a28926a46946d6bd62149ee7, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4906584469213355683
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -129,7 +149,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2038857788228788116}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -140,13 +160,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 9f44fc3dac83ece458da888002658032, type: 3}
-  m_UVRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
+  m_Sprite: {fileID: 8961836850334082660, guid: a553d01ceac442746a19820e364e7486, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &2038857788691238145
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86c5614e74bcda3f69af766355ef05f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadingIcon: {fileID: 2038857788228788122}
+  loadingIcon: {fileID: 0}
   loadingScreen: {fileID: 2038857789151536355}
 --- !u!1 &2038857789096325501
 GameObject:
@@ -279,7 +302,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2038857789096325474
 RectTransform:
   m_ObjectHideFlags: 0
@@ -329,8 +352,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Loading...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: d4909a723f165cc46a9f81d8c5da0b34, type: 2}
-  m_sharedMaterial: {fileID: 1981243289313481776, guid: d4909a723f165cc46a9f81d8c5da0b34, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9d61760dcdbd2d4489598df079937c46, type: 2}
+  m_sharedMaterial: {fileID: -5040988445451577081, guid: 9d61760dcdbd2d4489598df079937c46, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -390,7 +413,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -59.954025, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
