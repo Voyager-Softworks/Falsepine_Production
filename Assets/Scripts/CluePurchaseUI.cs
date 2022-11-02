@@ -46,14 +46,8 @@ public class CluePurchaseUI : MonoBehaviour
     }
 
     private void OnDisable() {
-        // unbind button to the click function
-        m_button.onClick.RemoveListener(() =>
-        {
-            OnClick?.Invoke();
-        });
-
-        // unbind journal button to JournalButtonPressed
-        m_jounralButton.onClick.RemoveListener(JournalButtonPressed);
+        // remove all listeners
+        m_button.onClick.RemoveAllListeners();
     }
 
     // Update is called once per frame

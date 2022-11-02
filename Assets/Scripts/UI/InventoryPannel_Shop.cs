@@ -21,6 +21,10 @@ public class InventoryPannel_Shop : InventoryPannel
     public Sprite selectedSprite;
     public Sprite unselectedSprite;
 
+    [Header("Double CLick")]
+    public float m_clickTime = 0.5f;
+    public float m_clickTimer = 0f;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -40,6 +44,9 @@ public class InventoryPannel_Shop : InventoryPannel
     public override void Update()
     {
         base.Update();
+
+        // count down time
+        m_clickTimer = Mathf.Max(0f, m_clickTimer - Time.deltaTime);
     }
 
     public override void UpdateUI()
@@ -75,6 +82,14 @@ public class InventoryPannel_Shop : InventoryPannel
         {
             itemToBuy.m_backgroundImage.sprite = unselectedSprite;
         }
+
+        // if already selected, and timer is not 0, double click
+        if (itemToBuy == _itemDisplay && m_clickTimer > 0f){
+            // double click
+            TryBuyItem(_sourceInventory, _targetInventory, _sourceIndex);
+        }
+        // start timer
+        m_clickTimer = m_clickTime;
 
         itemToBuy = _itemDisplay;
 

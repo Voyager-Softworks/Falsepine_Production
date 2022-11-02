@@ -20,6 +20,10 @@ public class DrinkPurchasePanel : MonoBehaviour
     public int m_drinkAmount = 3;
     public List<Drink> m_drinksEntries = new List<Drink>();
 
+    [Header("Double CLick")]
+    public float m_clickTime = 0.5f;
+    public float m_clickTimer = 0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -59,6 +63,14 @@ public class DrinkPurchasePanel : MonoBehaviour
                     ui.m_isSelected = false;
                 }
 
+                // if already selected, and timer is not 0, double click
+                if (m_selectedDrink == drinkUI && m_clickTimer > 0f){
+                    // double click
+                    TryBuySelected();
+                }
+                // start timer
+                m_clickTimer = m_clickTime;
+
                 // select this one
                 drinkUI.m_isSelected = true;
                 m_selectedDrink = drinkUI;
@@ -82,6 +94,9 @@ public class DrinkPurchasePanel : MonoBehaviour
 
     private void Update() {
         UpdateUI();
+
+        // count down time
+        m_clickTimer = Mathf.Max(0f, m_clickTimer - Time.deltaTime);
     }
 
     /// <summary>
