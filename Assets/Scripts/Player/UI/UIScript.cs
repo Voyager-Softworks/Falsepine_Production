@@ -175,6 +175,9 @@ public class UIScript : MonoBehaviour
                 {
                     secondaryWeaponIcon.transform.parent.gameObject.SetActive(true);
                     ammoText_2.text = "No Weapon";
+
+                    // disable weapon effect icon
+                    weaponEffectIcon_2.transform.parent.gameObject.SetActive(false);
                 }
 
 
