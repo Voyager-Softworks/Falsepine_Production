@@ -85,6 +85,19 @@ public class MeleeWeapon : Item
         if (m_damageTimer > 0)
         {
             DoDamage(_owner);
+            // enable trail under parent
+            if (m_damageTrans != null && m_damageTrans.parent.GetComponentInChildren<TrailRenderer>() is TrailRenderer trail)
+            {
+                trail.enabled = true;
+            }
+        }
+        else
+        {
+            // disable trail under parent
+            if (m_damageTrans != null && m_damageTrans.parent.GetComponentInChildren<TrailRenderer>() is TrailRenderer trail)
+            {
+                trail.enabled = false;
+            }
         }
 
         // if combo timer reaches 0, reset combo
