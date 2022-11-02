@@ -77,7 +77,7 @@ public class InventoryPannel : MonoBehaviour
         if (m_selectedSortButton != null && m_selectedSortButton.button != null)
         {
             // set color to normal
-            m_selectedSortButton.button.GetComponentInChildren<Image>().color = Color.white;
+            //m_selectedSortButton.button.GetComponentInChildren<Image>().color = Color.white;
         }
 
         if (m_selectedSortButton == button){
@@ -85,7 +85,7 @@ public class InventoryPannel : MonoBehaviour
         }
         else{
             // set color to green
-            button.button.GetComponentInChildren<Image>().color = Color.green;
+            //button.button.GetComponentInChildren<Image>().color = Color.green;
             m_selectedSortButton = button;
         }
 
