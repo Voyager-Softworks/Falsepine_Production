@@ -21,10 +21,6 @@ public class InventoryPannel_Shop : InventoryPannel
     public Sprite selectedSprite;
     public Sprite unselectedSprite;
 
-    [Header("Double CLick")]
-    public float m_clickTime = 0.5f;
-    public float m_clickTimer = 0f;
-
     // Start is called before the first frame update
     public override void Start()
     {
