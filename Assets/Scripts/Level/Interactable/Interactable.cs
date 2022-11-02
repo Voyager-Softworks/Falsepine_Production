@@ -32,6 +32,21 @@ public class Interactable : MonoBehaviour
     [Header("Interact")]
     public InputAction interactAction;
     public string interactText = "Interact";
+    public string interactTextWithSprite{
+        get {
+            // remove any text between and including []
+            string text = interactText;
+            int startIndex = text.IndexOf('[');
+            if (startIndex != -1){
+                int endIndex = text.IndexOf(']', startIndex);
+                if (endIndex != -1){
+                    text = text.Remove(startIndex, endIndex - startIndex + 1);
+                }
+            }
+
+            return "<sprite name=\"Btn_E\"> " + text;
+        }
+    }
 
     public Transform _transToCheck = null;
     public float interactDistance = 3.0f;
@@ -138,7 +153,7 @@ public class Interactable : MonoBehaviour
         if (interactManager == null) return;
 
         // remove request
-        interactManager.RemoveRequest(new InteractManager.TextRequest(interactText, this, interactDistance));
+        interactManager.RemoveRequest(new InteractManager.TextRequest(interactTextWithSprite, this, interactDistance));
     }
 
     /// <summary>
@@ -152,7 +167,7 @@ public class Interactable : MonoBehaviour
             if (interactManager == null) return;
 
             // send request
-            interactManager.RequestBottomText(new InteractManager.TextRequest(interactText, this, interactDistance));
+            interactManager.RequestBottomText(new InteractManager.TextRequest(interactTextWithSprite, this, interactDistance));
         }
     }
 }
