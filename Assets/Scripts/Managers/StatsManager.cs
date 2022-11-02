@@ -33,18 +33,41 @@ public class StatsManager : MonoBehaviour
     [Serializable]
     public class StatType
     {
-        private StatType(string _value)
+        private StatType(string _value, string _displayName = "")
         {
-            value = _value;
+            this.value = _value;
+            if (_displayName == "")
+            {
+                //add a space before each capital letter
+                string newDisplayName = "";
+                int i = 0;
+                foreach (char c in _value)
+                {
+                    if (char.IsUpper(c) && i != 0)
+                    {
+                        newDisplayName += " ";
+                    }
+                    newDisplayName += c;
+
+                    i++;
+                }
+
+                this.displayName = newDisplayName;
+            }
+            else
+            {
+                this.displayName = _displayName;
+            }
         }
 
         public string value;
+        public string displayName;
 
         // Damage + Items
         public static StatType PlayerDamage { get { return new StatType("PlayerDamage"); } }
         public static StatType RangedDamage { get { return new StatType("RangedDamage"); } }
         public static StatType RangedInaccuracy { get { return new StatType("RangedInaccuracy"); } }
-        public static StatType RangedRange { get { return new StatType("RangedRange"); } }
+        public static StatType RangedRange { get { return new StatType("RangedRange", "Range"); } }
         public static StatType RangedAimTime { get { return new StatType("RangedAimTime"); } }
         public static StatType ShotgunDamage { get { return new StatType("ShotgunDamage"); } }
         public static StatType PistolDamage { get { return new StatType("PistolDamage"); } }
@@ -73,21 +96,8 @@ public class StatsManager : MonoBehaviour
         public static StatType ItemCost { get { return new StatType("ItemCost"); } }
         public static StatType MoneyGain { get { return new StatType("MoneyGain"); } }
 
-        public static String DisplayName(StatType type)
+        public String DisplayName()
         {
-            //add a space before each capital letter
-            string displayName = "";
-            int i = 0;
-            foreach (char c in type.value)
-            {
-                if (char.IsUpper(c) && i != 0)
-                {
-                    displayName += " ";
-                }
-                displayName += c;
-
-                i++;
-            }
             return displayName;
         }
 
@@ -239,7 +249,7 @@ public class StatsManager : MonoBehaviour
         [SerializeField] public float value = 0;
 
         public string ToText(int _decimalPlaces = 2){
-            string text = StatsManager.StatType.DisplayName(statType) + " " + (modType == StatsManager.ModType.Multiplier ? "x" : (value < 0 ? "" : "+")) + value.ToString("F" + _decimalPlaces);
+            string text = statType.DisplayName() + " " + (modType == StatsManager.ModType.Multiplier ? "x" : (value < 0 ? "" : "+")) + value.ToString("F" + _decimalPlaces);
             return text;
         }
     }
@@ -1032,7 +1042,7 @@ public class StatsManager : MonoBehaviour
     private void OnValidate() {
         foreach(StatModRange statModRange in m_possibleTalismanMods)
         {
-            statModRange.m_name = StatType.DisplayName(statModRange.m_statType) + " - " + statModRange.m_modType.ToString();
+            statModRange.m_name = statModRange.m_statType.DisplayName() + " - " + statModRange.m_modType.ToString();
         }
     }
 
