@@ -120,6 +120,7 @@ public class EntryPurchasePanel : MonoBehaviour
                 m_purchaseButtonText.text = "PURCHASE";
 
                 // set the price on the button
+                m_purchaseButtonCostText.transform.gameObject.SetActive(true);
                 m_purchaseButtonCostText.text = m_selectedClue.m_price.ToString();
 
                 // enable the silver icon
@@ -132,7 +133,7 @@ public class EntryPurchasePanel : MonoBehaviour
                 m_purchaseButtonText.text = "UNLOCKED";
 
                 // set the price on the button
-                m_purchaseButtonCostText.text = "";
+                m_purchaseButtonCostText.transform.gameObject.SetActive(false);
 
                 // disable the silver icon
                 m_purchaseButtonSilverIcon.gameObject.SetActive(false);
@@ -146,8 +147,8 @@ public class EntryPurchasePanel : MonoBehaviour
             // say Select Entry
             m_purchaseButtonText.text = "SELECT ENTRY";
 
-            // set the price
-            m_purchaseButtonCostText.text = "";
+            // set the price on the button
+            m_purchaseButtonCostText.transform.gameObject.SetActive(false);
 
             // disable the silver icon
             m_purchaseButtonSilverIcon.gameObject.SetActive(false);
