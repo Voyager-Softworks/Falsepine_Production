@@ -41,10 +41,12 @@ public class Interactable : MonoBehaviour
                 int endIndex = text.IndexOf(']', startIndex);
                 if (endIndex != -1){
                     text = text.Remove(startIndex, endIndex - startIndex + 1);
+
+                    return "<sprite name=\"Btn_E\"> " + text;
                 }
             }
 
-            return "<sprite name=\"Btn_E\"> " + text;
+            return interactText;
         }
     }
 

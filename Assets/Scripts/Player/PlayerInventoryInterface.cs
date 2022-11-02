@@ -77,6 +77,8 @@ public class PlayerInventoryInterface : MonoBehaviour
 
     public Animator playerAnimator; ///< The player's animator.
 
+    public PlayerHealth playerHealth; ///< The player's health.
+
     [Header("Events")]
     public System.Action OnPrimaryUsed; ///< The event to call when the primary weapon is used.
     public System.Action OnSecondaryUsed; ///< The event to call when the secondary weapon is used.
@@ -233,6 +235,12 @@ public class PlayerInventoryInterface : MonoBehaviour
         else
         {
             EnableInput();
+        }
+
+        // if dead, return
+        if (playerHealth.isDead)
+        {
+            return;
         }
 
         RangedWeaponChecks();
