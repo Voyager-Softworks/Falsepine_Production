@@ -826,6 +826,22 @@ public class Console : ToggleableWindow, StatsManager.UsesStats
             return;
         }
 
+        // "discover_all"
+        if (split.Length == 1 && split[0] == "discover_all")
+        {
+            if (JournalManager.instance != null){
+                for (int i = JournalManager.instance.m_undiscoveredEntries.Count() - 1; i >= 0; i--)
+                {
+                    JournalManager.instance.DiscoverEntry(JournalManager.instance.m_undiscoveredEntries[i]);
+                }
+
+                Log("- All discovered");
+            }
+            else{
+                Log("- JournalManager not found");
+            }
+        }
+
         // command not found
         Log("- Command not found");
     }
@@ -864,6 +880,7 @@ public class Console : ToggleableWindow, StatsManager.UsesStats
         "complete_mission",
         "next_zone",
         "message 'message Text' iconName?",
+        "discover_all"
     };
 
     /// <summary>
