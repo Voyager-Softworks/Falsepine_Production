@@ -20,10 +20,10 @@ public class FadeScript : MonoBehaviour
     public Color targetColor = Color.clear;
 
     public float fadeTime = 0.5f;
-    private float fadeTimer = 0f;
+    [ReadOnly] public float fadeTimer = 0f;
 
     public float fadeDelay = 0.5f;
-    private float fadeDelayTimer = 0f;
+    [ReadOnly] public float fadeDelayTimer = 0f;
 
     bool isStartFade = false;
     bool isEndFade = false;
