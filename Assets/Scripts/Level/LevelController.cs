@@ -11,11 +11,16 @@ public class LevelController : MonoBehaviour
 {
     static public void LoadScene(string sceneName, bool _doSave = true)
     {
-        // Disabled here, as the async scene loader is now responsible for saving
-        //if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
+        if (FindObjectOfType<AsyncSceneLoader>() is AsyncSceneLoader loader)
+        {
+            loader.LoadScene(sceneName, _doSave);
+        }
+        else
+        {
+            if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
 
-        //SceneManager.LoadScene(sceneName);
-        FindObjectOfType<AsyncSceneLoader>().LoadScene(sceneName, _doSave);
+            SceneManager.LoadScene(sceneName);
+        }
     }
 
     static public void LoadMenu(bool _doSave = true)
@@ -29,9 +34,16 @@ public class LevelController : MonoBehaviour
 
     static public void LoadTown(bool _doSave = true)
     {
-        if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
+        if (FindObjectOfType<AsyncSceneLoader>() is AsyncSceneLoader loader)
+        {
+            loader.LoadScene("TownScene", _doSave);
+        }
+        else
+        {
+            if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
 
-        SceneManager.LoadScene("TownScene");
+            SceneManager.LoadScene("TownScene");
+        }
     }
 
     static public void LoadTutorial(bool _doSave = true)
@@ -48,32 +60,32 @@ public class LevelController : MonoBehaviour
         }
     }
 
-    static public void LoadSnow(bool _doSave = true)
-    {
-        if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
-
-        SceneManager.LoadScene("SnowLevel");
-    }
-
-    static public void LoadSnowBoss(bool _doSave = true)
-    {
-        if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
-
-        SceneManager.LoadScene("BoneStag");
-    }
-
     static public void LoadMissionComplete(bool _doSave = true)
     {
-        if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
+        if (FindObjectOfType<AsyncSceneLoader>() is AsyncSceneLoader loader)
+        {
+            loader.LoadScene("Scene_MissonComplete", _doSave);
+        }
+        else
+        {
+            if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
 
-        SceneManager.LoadScene("Scene_MissonComplete");
+            SceneManager.LoadScene("Scene_MissonComplete");
+        }
     }
 
     static public void LoadCredits(bool _doSave = true)
     {
-        if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
+        if (FindObjectOfType<AsyncSceneLoader>() is AsyncSceneLoader loader)
+        {
+            loader.LoadScene("credits", _doSave);
+        }
+        else
+        {
+            if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
 
-        SceneManager.LoadScene("credits");
+            SceneManager.LoadScene("credits");
+        }
     }
 
     static public void LoadGameComplete(bool _doSave = true)
