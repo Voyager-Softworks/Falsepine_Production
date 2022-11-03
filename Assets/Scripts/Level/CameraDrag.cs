@@ -58,6 +58,10 @@ public class CameraDrag : MonoBehaviour
         if (m_tutorialPopup && m_tutorialPopup.gameObject.activeSelf) {
             return;
         }
+        // if toggleable windows are open, return
+        if (ToggleableTownWindow.AnyWindowOpen()){
+            return;
+        }
 
         if ((transform.position - center).magnitude > maxDistance + 10) {
             m_returnToCent = true;

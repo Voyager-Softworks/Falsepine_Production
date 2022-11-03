@@ -427,6 +427,10 @@ public class JournalManager : ToggleableWindow
         if (FindObjectOfType<TutorialPopup>() && FindObjectOfType<TutorialPopup>().gameObject.activeSelf) {
             return;
         }
+        // if toggleable windows are open, return
+        if (ToggleableTownWindow.AnyWindowOpen()){
+            return;
+        }
 
         base.OpenWindow();
         journalPanel.SetActive(true);

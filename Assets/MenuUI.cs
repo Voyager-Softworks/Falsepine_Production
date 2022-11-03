@@ -39,6 +39,11 @@ public class MenuUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // if time scale is not 1, set it to 1
+        if (Time.timeScale != 1.0f) {
+            Time.timeScale = 1.0f;
+        }
+
         // update timer
         m_newGameTimer = Mathf.Max(0.0f, m_newGameTimer - Time.deltaTime);
         if (m_newGameTimer <= 0.0f) {
