@@ -214,7 +214,7 @@ public class MissionCardUI : MonoBehaviour
             missionComplete.text = missionCompleteText;
 
             // color=#FF0000
-            string difficultySprite = "<sprite name=\"badge\">";
+            string difficultySprite = "<sprite color=\"#6F2121\" name=\"star\">";
             string difficultyString = "";
             // add difficulty sprite to description based on difficulty
             for (int i = (int)associatedMission.m_difficulty; i >= 0; i--){
