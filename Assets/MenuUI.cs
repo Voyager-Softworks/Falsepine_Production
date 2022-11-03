@@ -8,8 +8,13 @@ using UnityEngine.InputSystem;
 public class MenuUI : MonoBehaviour
 {
     public Button playButton;
+    public Image playButtonImage;
+
     public Button deleteSaveButton;
+    public Image deleteSaveButtonImage;
+
     public Button quitButton;
+    public Image quitButtonImage;
 
     
     private bool m_deleteCheck = false;
@@ -39,6 +44,27 @@ public class MenuUI : MonoBehaviour
                 m_deleteCheck = false;
             }
             deleteSaveButton.GetComponentInChildren<TextMeshProUGUI>().text = "Delete Save";
+        }
+
+        // if mouse is over any buttons, enable the last image
+        Vector2 mousePos = Mouse.current.position.ReadValue();
+        
+        if (playButton.GetComponent<RectTransform>().rect.Contains(playButton.transform.InverseTransformPoint(mousePos))){
+            playButtonImage.enabled = true;
+        } else {
+            playButtonImage.enabled = false;
+        }
+
+        if (deleteSaveButton.GetComponent<RectTransform>().rect.Contains(deleteSaveButton.transform.InverseTransformPoint(mousePos))){
+            deleteSaveButtonImage.enabled = true;
+        } else {
+            deleteSaveButtonImage.enabled = false;
+        }
+
+        if (quitButton.GetComponent<RectTransform>().rect.Contains(quitButton.transform.InverseTransformPoint(mousePos))){
+            quitButtonImage.enabled = true;
+        } else {
+            quitButtonImage.enabled = false;
         }
     }
 

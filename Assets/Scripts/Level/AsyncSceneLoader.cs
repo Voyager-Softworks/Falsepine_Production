@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 public class AsyncSceneLoader : MonoBehaviour
 {
     bool isSceneLoading = false;
-    public RawImage loadingIcon;
+    public Image loadingIcon;
     public GameObject loadingScreen;
 
 
@@ -23,7 +23,7 @@ public class AsyncSceneLoader : MonoBehaviour
     {
         if (isSceneLoading)
         {
-            loadingIcon.color = new Color(1, 1, 1, (Mathf.Sin(Time.time * 3) + 1f) / 2f);
+            loadingIcon.color = new Color(1, 1, 1, (((Mathf.Sin(Time.time * 3) + 1f) / 2f) * 0.75f) + 0.25f);
         }
     }
 
@@ -59,7 +59,7 @@ public class AsyncSceneLoader : MonoBehaviour
             });
             while (!tcs.Task.IsCompleted)
             {
-
+                loadingIcon.color = new Color(1, 1, 1, (((Mathf.Sin(Time.time * 3) + 1f) / 2f) * 0.75f) + 0.25f);
                 yield return null;
             }
         }
@@ -67,6 +67,7 @@ public class AsyncSceneLoader : MonoBehaviour
 
         while (!asyncLoad.isDone)
         {
+            loadingIcon.color = new Color(1, 1, 1, (((Mathf.Sin(Time.time * 3) + 1f) / 2f) * 0.75f) + 0.25f);
             yield return null;
         }
         loadingScreen.SetActive(false);
