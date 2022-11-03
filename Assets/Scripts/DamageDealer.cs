@@ -169,7 +169,7 @@ public class DamageDealer : MonoBehaviour
 
         Vector3 offsetVector = transform.forward * _offset.y + transform.right * _offset.x; //Get the _offset position
         m_indicatorPrefab = GameObject.FindGameObjectWithTag("Indicator"); //Get the indicator prefab
-        GameObject indicator = Instantiate(m_indicatorPrefab, transform.position + offsetVector + (_playerDirectionFunction() * (_translationSpeed * _translationDuration)) - Vector3.up, Quaternion.Euler(90, 0, 0)); //Instantiate the indicator
+        GameObject indicator = Instantiate(m_indicatorPrefab, transform.position + offsetVector + (_playerDirectionFunction() * (_translationSpeed * _translationDuration)), Quaternion.Euler(90, 0, 0)); //Instantiate the indicator
         m_indicators.Add(indicator); //Add the indicator to the list of indicators
         indicator.tag = "Untagged"; //Remove the tag from the indicator
         float t = 0.0f; //Create the timer
@@ -201,9 +201,8 @@ public class DamageDealer : MonoBehaviour
         while (t < _indicatorDuration)
         {
             Vector3 groundPos = transform.position;
-            groundPos.y = 0.0f;
             offsetVector = transform.forward * _offset.y + transform.right * _offset.x;
-            indicator.transform.position = (groundPos + offsetVector) + (transform.forward * _translationSpeed * _translationDuration * (1 - ((t + (_delay - _indicatorDuration)) / _delay))) + (Vector3.up);
+            indicator.transform.position = (groundPos + offsetVector) + (transform.forward * _translationSpeed * _translationDuration * (1 - ((t + (_delay - _indicatorDuration)) / _delay))) + (Vector3.up * 2f);
 
             t += Time.deltaTime;
             decalProjector.size = Vector3.Lerp(startSize, endSize, t / _indicatorDuration);
