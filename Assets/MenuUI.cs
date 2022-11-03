@@ -21,6 +21,9 @@ public class MenuUI : MonoBehaviour
     private float m_newGameResetTime = 2.0f;
     private float m_newGameTimer = 0.0f;
 
+    public float m_fadeTime = 0.5f;
+    private float m_fadeTimer = 0.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,23 +51,29 @@ public class MenuUI : MonoBehaviour
 
         // if mouse is over any buttons, enable the last image
         Vector2 mousePos = Mouse.current.position.ReadValue();
-        
+
         if (playButton.GetComponent<RectTransform>().rect.Contains(playButton.transform.InverseTransformPoint(mousePos))){
             playButtonImage.enabled = true;
+            playButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
         } else {
             playButtonImage.enabled = false;
+            playButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
         }
 
         if (deleteSaveButton.GetComponent<RectTransform>().rect.Contains(deleteSaveButton.transform.InverseTransformPoint(mousePos))){
             deleteSaveButtonImage.enabled = true;
+            deleteSaveButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
         } else {
             deleteSaveButtonImage.enabled = false;
+            deleteSaveButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
         }
 
         if (quitButton.GetComponent<RectTransform>().rect.Contains(quitButton.transform.InverseTransformPoint(mousePos))){
             quitButtonImage.enabled = true;
+            quitButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
         } else {
             quitButtonImage.enabled = false;
+            quitButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
         }
     }
 
