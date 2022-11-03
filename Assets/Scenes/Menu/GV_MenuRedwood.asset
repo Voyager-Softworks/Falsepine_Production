@@ -278,6 +278,58 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
   m_SelectedCurve: 0
+--- !u!114 &-3607617763014571160
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c1be1b6c95cd2e41b27903b9270817f, type: 3}
+  m_Name: Vignette
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  mode:
+    m_OverrideState: 1
+    m_Value: 0
+  color:
+    m_OverrideState: 0
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
+    hdr: 0
+    showAlpha: 0
+    showEyeDropper: 1
+  center:
+    m_OverrideState: 0
+    m_Value: {x: 0.5, y: 0.5}
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0.238
+    min: 0
+    max: 1
+  smoothness:
+    m_OverrideState: 1
+    m_Value: 0.409
+    min: 0.01
+    max: 1
+  roundness:
+    m_OverrideState: 1
+    m_Value: 0.991
+    min: 0
+    max: 1
+  rounded:
+    m_OverrideState: 0
+    m_Value: 0
+  mask:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
+  opacity:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+    max: 1
 --- !u!114 &-2738378830594985873
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -396,6 +448,7 @@ MonoBehaviour:
   - {fileID: -4542321022237669275}
   - {fileID: -2738378830594985873}
   - {fileID: 663686204920014258}
+  - {fileID: -3607617763014571160}
 --- !u!114 &663686204920014258
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -676,7 +729,7 @@ MonoBehaviour:
     m_Value: 1
   albedo:
     m_OverrideState: 1
-    m_Value: {r: 0.47472408, g: 0.7924528, b: 0.6979929, a: 1}
+    m_Value: {r: 0.4199893, g: 0.735849, b: 0.57546836, a: 1}
     hdr: 0
     showAlpha: 1
     showEyeDropper: 1
@@ -865,60 +918,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaa3b8214f75b354e9ba2caadd022259, type: 3}
   m_Name: DepthOfField
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   m_AdvancedMode: 0
   quality:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 3
   focusMode:
     m_OverrideState: 1
     m_Value: 2
   focusDistance:
     m_OverrideState: 1
-    m_Value: 51.35
+    m_Value: 6.3
     min: 0.1
   nearFocusStart:
-    m_OverrideState: 0
-    m_Value: 29.1
+    m_OverrideState: 1
+    m_Value: 0
     min: 0
   nearFocusEnd:
-    m_OverrideState: 0
-    m_Value: 21.47
+    m_OverrideState: 1
+    m_Value: 0
     min: 0
   farFocusStart:
     m_OverrideState: 1
-    m_Value: 52
+    m_Value: 14.1
     min: 0
   farFocusEnd:
     m_OverrideState: 1
-    m_Value: 75
+    m_Value: 16.1
     min: 0
   m_NearSampleCount:
     m_OverrideState: 1
-    m_Value: 5
+    m_Value: 3
     min: 3
     max: 8
   m_NearMaxBlur:
     m_OverrideState: 1
-    m_Value: 4
+    m_Value: 1
     min: 0
     max: 8
   m_FarSampleCount:
     m_OverrideState: 1
-    m_Value: 7
+    m_Value: 5
     min: 3
     max: 16
   m_FarMaxBlur:
     m_OverrideState: 1
-    m_Value: 8
+    m_Value: 1
     min: 0
     max: 16
   m_HighQualityFiltering:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   m_Resolution:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 4
   m_PhysicallyBased:
     m_OverrideState: 1
     m_Value: 0
