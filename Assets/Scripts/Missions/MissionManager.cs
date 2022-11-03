@@ -162,6 +162,14 @@ public class MissionManager : MonoBehaviour
         {
             moneyPickup.gameObject.SetActive(!_pickupEnabled);
         }
+
+        if (_pickupEnabled == false){
+        // stop any audiosource that might be playing
+        AudioSource[] sources = pickup.gameObject.GetComponentsInChildren<AudioSource>();
+        foreach (AudioSource source in sources){
+            source.Stop();
+        }
+        }
     }
 
     /// <summary>
