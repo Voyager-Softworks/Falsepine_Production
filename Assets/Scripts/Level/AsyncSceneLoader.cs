@@ -33,7 +33,7 @@ public class AsyncSceneLoader : MonoBehaviour
         {
             loadingScreen.SetActive(true);
             isSceneLoading = true;
-            StartCoroutine(LoadSceneAsync(sceneName));
+            StartCoroutine(LoadSceneAsync(sceneName, save));
 
             // close all toggle windows
             ToggleableWindow.CloseAllWindows();
@@ -49,19 +49,25 @@ public class AsyncSceneLoader : MonoBehaviour
         //if (save) SaveManager.SaveAll(SaveManager.currentSaveSlot);
         if (save)
         {
-            var tcs = new TaskCompletionSource<bool>();
-            Task.Run(() =>
-            {
-                Debug.Log("Saving Asynchronously...");
-                SaveManager.SaveAll(SaveManager.currentSaveSlot);
-                Debug.Log("Saved!");
-                tcs.SetResult(true);
-            });
-            while (!tcs.Task.IsCompleted)
-            {
-                loadingIcon.color = new Color(1, 1, 1, (((Mathf.Sin(Time.time * 3) + 1f) / 2f) * 0.75f) + 0.25f);
-                yield return null;
-            }
+            // log seconds to save
+            float startTime = Time.realtimeSinceStartup;
+            Debug.Log("Saving Asynchronously...");
+            SaveManager.SaveAll(SaveManager.currentSaveSlot);
+            Debug.Log("Saved! " + (Time.realtimeSinceStartup - startTime) + " seconds");
+
+            // var tcs = new TaskCompletionSource<bool>();
+            // Task.Run(() =>
+            // {
+            //     Debug.Log("Saving Asynchronously...");
+            //     SaveManager.SaveAll(SaveManager.currentSaveSlot);
+            //     Debug.Log("Saved!");
+            //     tcs.SetResult(true);
+            // });
+            // while (!tcs.Task.IsCompleted)
+            // {
+            //     loadingIcon.color = new Color(1, 1, 1, (((Mathf.Sin(Time.time * 3) + 1f) / 2f) * 0.75f) + 0.25f);
+            //     yield return null;
+            // }
         }
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
 
