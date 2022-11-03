@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,11 +27,14 @@ public class FinalMissionEmbark : MonoBehaviour
         // if this is almost the final zone, replace button
         if (mm.GetZoneIndex(mm.GetCurrentZone()) >= mm.m_missionZones.Count - 2)
         {
-            ReplaceButton();
+            ReplaceLoadFinal();
+        }
+        else{
+            ReplaceLoadTown();
         }
     }
 
-    public void ReplaceButton()
+    public void ReplaceLoadFinal()
     {
         embarkButton.onClick.RemoveAllListeners();
         embarkButton.onClick.AddListener(() => {
@@ -39,6 +43,14 @@ public class FinalMissionEmbark : MonoBehaviour
             // save missions
             MissionManager.instance.SaveMissions(SaveManager.currentSaveSlot);
             MissionManager.instance.TryEmbark();
+        });
+    }
+
+    private void ReplaceLoadTown()
+    {
+        embarkButton.onClick.RemoveAllListeners();
+        embarkButton.onClick.AddListener(() => {
+            LevelController.LoadTown();
         });
     }
 }

@@ -164,7 +164,7 @@ public class InventoryPannel : MonoBehaviour
         List<Inventory.InventorySlot> slots = new List<Inventory.InventorySlot>(linkedInventory.slots);
 
         // if selected sort button, filter the slots
-        if (m_selectedSortButton != null)
+        if (m_selectedSortButton.button != null)
         {
             for (int i = slots.Count - 1; i >= 0; i--)
             {
