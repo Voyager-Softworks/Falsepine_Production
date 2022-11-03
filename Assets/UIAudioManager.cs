@@ -45,6 +45,7 @@ public class UIAudioManager : MonoBehaviour
 
     
     public UISound closeUI;
+    public UISound openJournal;
     public UISound buttonSound;
     public UISound buySound;
     public UISound moneySound;

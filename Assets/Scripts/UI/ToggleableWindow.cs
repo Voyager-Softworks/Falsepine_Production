@@ -56,6 +56,7 @@ public class ToggleableWindow : MonoBehaviour
     public virtual void OpenWindow(){
         CloseAllWindows();
         m_wasOpenedThisFrame = true;
+        UIAudioManager.instance?.openJournal.Play();
     }
 
     /// <summary>
