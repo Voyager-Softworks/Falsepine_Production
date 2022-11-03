@@ -17,6 +17,10 @@ public class PauseMenu : ToggleableWindow
     public Button TownButton;
     public Button MenuButton;
 
+    [Header("Windows")]
+    public GameObject AudioSettingsWindow;
+    public GameObject VideoSettingsWindow;
+
     private ExitGate exitGate;
 
     protected override void OnEnable() {
@@ -83,6 +87,10 @@ public class PauseMenu : ToggleableWindow
         if (FindObjectOfType<TutorialPopup>() && FindObjectOfType<TutorialPopup>().gameObject.activeSelf) {
             return;
         }
+        // if toggleable windows are open, return
+        if (ToggleableTownWindow.AnyWindowOpen()){
+            return;
+        }
 
         base.OpenWindow();
         PausePanel.SetActive(true);
@@ -94,6 +102,9 @@ public class PauseMenu : ToggleableWindow
     {
         base.CloseWindow();
         PausePanel.SetActive(false);
+
+        AudioSettingsWindow.SetActive(false);
+        VideoSettingsWindow.SetActive(false);
 
         // unpause the game
         LevelController.RequestUnpause(this);
