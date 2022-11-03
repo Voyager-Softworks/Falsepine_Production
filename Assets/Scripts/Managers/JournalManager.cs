@@ -428,9 +428,9 @@ public class JournalManager : ToggleableWindow
             return;
         }
         // if toggleable windows are open, return
-        if (ToggleableTownWindow.AnyWindowOpen()){
-            return;
-        }
+        // if (ToggleableTownWindow.AnyWindowOpen()){
+        //     return;
+        // }
 
         base.OpenWindow();
         journalPanel.SetActive(true);
