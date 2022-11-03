@@ -57,6 +57,9 @@ public class PlayerStepSound : MonoBehaviour
         decal.transform.position += decal.transform.forward * m_decalOffset.z;
         decal.transform.position += decal.transform.right * m_decalOffset.x;
         decal.transform.position += decal.transform.up * m_decalOffset.y;
+
+        Footprint footprint = decal.GetComponent<Footprint>();
+        footprint.m_left = m_leftDecal;
     }
 
     public void PlayStepSound(bool left)
