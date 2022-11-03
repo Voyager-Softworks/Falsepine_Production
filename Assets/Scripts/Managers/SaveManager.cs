@@ -121,7 +121,7 @@ public class SaveManager : MonoBehaviour
         {
             if (File.Exists(recentZoneFile))
             {
-                File.Delete(recentZoneFile);
+                //File.Delete(recentZoneFile);
             }
             return;
         }
