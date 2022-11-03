@@ -43,6 +43,15 @@ public class BossEnemyHealth : EnemyHealth
         // sets the boss health bar size to represent the boss's health
         m_uiScript.bossHealthBar.rectTransform.sizeDelta = new Vector2(m_uiScript.bossHealthBarMaxWidth * (m_currentHealth / calcedMaxHealth), m_uiScript.bossHealthBar.rectTransform.sizeDelta.y);
         m_uiScript.bossHealthBarDark.rectTransform.sizeDelta = Vector2.Lerp(m_uiScript.bossHealthBarDark.rectTransform.sizeDelta, m_uiScript.bossHealthBar.rectTransform.sizeDelta, Time.deltaTime * 2f);
+
+        if (m_isInvulnerable)
+        {
+            m_uiScript.bossHealthBar.sprite = m_uiScript.bossHealthTexInvuln;
+        }
+        else
+        {
+            m_uiScript.bossHealthBar.sprite = m_uiScript.bossHealthTex;
+        }
     }
 
     public override void TakeDamage(Health_Base.DamageStat _damage)
