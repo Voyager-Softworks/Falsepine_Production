@@ -231,20 +231,20 @@ public class MissionCardUI : MonoBehaviour
                 foreach (MissionCondition condition in associatedMission.m_conditions)
                 {
                     Color conditionCol = Color.white;
-                    string spriteName = "tick";
+                    string spriteName = "cond";
                     switch (condition.GetState())
                     {
                         case MissionCondition.ConditionState.COMPLETE:
                             conditionCol = Color.green;
-                            spriteName = "tick";
+                            //spriteName = "tick";
                             break;
                         case MissionCondition.ConditionState.INCOMPLETE:
                             conditionCol = Color.white;
-                            spriteName = "circle";
+                            //spriteName = "circle";
                             break;
                         case MissionCondition.ConditionState.FAILED:
                             conditionCol = Color.red;
-                            spriteName = "x";
+                            //spriteName = "x";
                             break;
                     }
 
