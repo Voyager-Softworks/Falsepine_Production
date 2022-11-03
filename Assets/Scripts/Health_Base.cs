@@ -29,10 +29,12 @@ public class Health_Base : MonoBehaviour, StatsManager.UsesStats /// @todo Impli
         }
 
         // draw the last 10 damage numbers
-        #if UNITY_EDITOR
-        if (m_damageHistory.Count > 0){
+#if UNITY_EDITOR
+        if (m_damageHistory.Count > 0)
+        {
             int count = 0;
-            for (int i = m_damageHistory.Count - 1; i >= 0; i--){
+            for (int i = m_damageHistory.Count - 1; i >= 0; i--)
+            {
                 float val = m_damageHistory[i].m_damage;
                 Vector3 pos = m_damageHistory[i].m_hitPoint;
                 pos.y += 3;
@@ -49,7 +51,7 @@ public class Health_Base : MonoBehaviour, StatsManager.UsesStats /// @todo Impli
                 count += 1;
             }
         }
-        #endif
+#endif
     }
 
     /// <summary>
@@ -128,11 +130,14 @@ public class Health_Base : MonoBehaviour, StatsManager.UsesStats /// @todo Impli
     [Header("Stats")]
     public float m_currentHealth = 100f; ///< The current health of the object.
     [SerializeField] private float m_maxHealth = 100f; ///< The maximum health of the object.
-    public float calcedMaxHealth {
-        get {
+    public float calcedMaxHealth
+    {
+        get
+        {
             return StatsManager.CalculateMaxHealth(this, m_maxHealth);
         }
-        set {
+        set
+        {
             m_maxHealth = value;
         }
     }
@@ -150,10 +155,12 @@ public class Health_Base : MonoBehaviour, StatsManager.UsesStats /// @todo Impli
 
     // StatsManager.UsesStats interface implementation
     public List<StatsManager.StatType> m_usedStatTypes = new List<StatsManager.StatType>();
-    public virtual List<StatsManager.StatType> GetStatTypes(){
+    public virtual List<StatsManager.StatType> GetStatTypes()
+    {
         return m_usedStatTypes;
     }
-    public void AddStatType(StatsManager.StatType type){
+    public void AddStatType(StatsManager.StatType type)
+    {
         if (type == null) return;
 
         if (!m_usedStatTypes.Contains(type))
@@ -161,7 +168,8 @@ public class Health_Base : MonoBehaviour, StatsManager.UsesStats /// @todo Impli
             m_usedStatTypes.Add(type);
         }
     }
-    public void RemoveStatType(StatsManager.StatType type){
+    public void RemoveStatType(StatsManager.StatType type)
+    {
         if (m_usedStatTypes.Contains(type))
         {
             m_usedStatTypes.Remove(type);
@@ -184,22 +192,28 @@ public class Health_Base : MonoBehaviour, StatsManager.UsesStats /// @todo Impli
         m_audioController = GetComponent<AudioController>();
     }
 
-    protected virtual void OnEnable() {
+    protected virtual void OnEnable()
+    {
         AddHealthScript();
     }
 
-    protected virtual void OnDisable() {
+    protected virtual void OnDisable()
+    {
         RemoveHealthScript();
     }
 
-    private void AddHealthScript() {
-        if (!allHealths.Contains(this)) {
+    private void AddHealthScript()
+    {
+        if (!allHealths.Contains(this))
+        {
             allHealths.Add(this);
         }
     }
 
-    private void RemoveHealthScript() {
-        if (allHealths.Contains(this)) {
+    private void RemoveHealthScript()
+    {
+        if (allHealths.Contains(this))
+        {
             allHealths.Remove(this);
         }
     }

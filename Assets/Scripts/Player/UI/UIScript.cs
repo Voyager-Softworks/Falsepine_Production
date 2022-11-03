@@ -14,7 +14,7 @@ public class UIScript : MonoBehaviour
 {
     public CursorScript cursorScript;
 
-    
+
 
     [Header("Player Stats")]
     public Image healthBG;
@@ -28,7 +28,7 @@ public class UIScript : MonoBehaviour
     [Header("Game UI")]
     public GameObject primaryWeaponIcon;
     public GameObject secondaryWeaponIcon;
-    
+
     public TextMeshProUGUI ammoText_1;
     public TextMeshProUGUI ammoText_2;
 
@@ -49,7 +49,7 @@ public class UIScript : MonoBehaviour
         public StatsManager.StatType statType;
         public Sprite image;
     }
-    
+
     [Header("Effects")]
     public List<EffectImage> effectImages;
 
@@ -62,6 +62,7 @@ public class UIScript : MonoBehaviour
     public GameObject bossUI;
     public Image bossHealthBG;
     public Image bossHealthBar, bossHealthBarDark;
+    public Sprite bossHealthTex, bossHealthTexInvuln;
     [HideInInspector] public float bossHealthBarMaxWidth;
 
     private PlayerInventoryInterface pii;
@@ -118,7 +119,8 @@ public class UIScript : MonoBehaviour
                         weaponEffectIcon_1.transform.parent.gameObject.SetActive(true);
                         weaponEffectIcon_1.sprite = effectImages.Find(x => x.statType == primaryWeapon.m_tempAmmoStats[0]).image;
                     }
-                    else {
+                    else
+                    {
                         weaponEffectIcon_1.transform.parent.gameObject.SetActive(false);
                     }
 
@@ -153,7 +155,8 @@ public class UIScript : MonoBehaviour
                         weaponEffectIcon_2.transform.parent.gameObject.SetActive(true);
                         weaponEffectIcon_2.sprite = effectImages.Find(x => x.statType == secondaryWeapon.m_tempAmmoStats[0]).image;
                     }
-                    else {
+                    else
+                    {
                         weaponEffectIcon_2.transform.parent.gameObject.SetActive(false);
                     }
 
