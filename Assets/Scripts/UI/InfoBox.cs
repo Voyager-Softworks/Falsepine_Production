@@ -249,7 +249,7 @@ public class InfoBox : MonoBehaviour
     /// <param name="_item"></param>
     /// <param name="_onTime"></param>
     /// <param name="_offTime"></param>
-    public void Display(Item _item, bool _showCost = false, float _onTime = 1, float _offTime = 1)
+    public void Display(Item _item, bool _showCost = false, float _onTime = 0.1f, float _offTime = 0.1f)
     {
         if (!_item) return;
 

@@ -103,7 +103,7 @@ public class ItemDisplay : MonoBehaviour
 
             InfoBox ib = FindObjectOfType<InfoBox>();
             // display info box
-            if (ib) ib.Display(m_linkedItem, m_showPrice, 0.1f, 0.1f);
+            if (ib) ib.Display(m_linkedItem, m_showPrice);
         }
     }
 

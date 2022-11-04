@@ -83,7 +83,7 @@ public class DrinkPurchaseUI : MonoBehaviour
 
             InfoBox ib = FindObjectOfType<InfoBox>();
             // display info box
-            if (ib) ib.Display(m_linkedDrink, true, 0.1f, 0.1f);
+            if (ib) ib.Display(m_linkedDrink, true);
         }
     }
 
