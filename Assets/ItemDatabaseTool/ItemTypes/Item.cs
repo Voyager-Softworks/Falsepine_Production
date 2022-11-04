@@ -87,7 +87,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
 
     [SerializeField] public string m_displayName = "";
     [SerializeField] public string m_description = "";
-    [SerializeField] public Sprite m_icon = null;
+    [SerializeReference] public Sprite m_icon = null;
 
     [SerializeField] public bool mustMatchToStack = false;
     [SerializeField] private int m_currentStackSize = 1;
@@ -359,6 +359,13 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
     }
 
     #if UNITY_EDITOR
+
+    // list of valid types (GameObject, Sprite)
+    List<Type> validResourceTypes = new List<Type>() {
+        typeof(GameObject),
+        typeof(Sprite)
+    };
+
     public void PrefabsToResourceList(){
         m_resourceLinks.Clear();
         //m_resources.Clear();
@@ -367,51 +374,44 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
         List<FieldInfo> fields = new List<FieldInfo>(this.GetType().GetFields());
         foreach (FieldInfo field in fields)
         {
-            if (field.FieldType == typeof(GameObject))
-            {
-                GameObject prefab = (GameObject)field.GetValue(this);
-                if (prefab != null)
-                {
-                    //m_resources.Add(prefab.name);
-
-                    // add resource link
-                    FieldResourceLink link = new FieldResourceLink();
-                    link.fieldName = field.Name;
-                    link.path = AssetDatabase.GetAssetPath(prefab);
-                    // get path to texture (remove path before "Resources" and remove extension)
-                    link.path = link.path.Substring(link.path.IndexOf("Resources") + 10);
-                    link.path = link.path.Substring(0, link.path.LastIndexOf("."));
-                    link.resourceType = typeof(GameObject);
-                    m_resourceLinks.Add(link);
-                }
-            }
+            AddResourceToList(field);
         }
-
-        // get all sprite varibles from item
-        fields = new List<FieldInfo>(this.GetType().GetFields());
-        foreach (FieldInfo field in fields)
-        {
-            if (field.FieldType == typeof(Sprite))
-            {
-                Sprite sprite = (Sprite)field.GetValue(this);
-                if (sprite != null)
-                {
-                    //m_resources.Add(sprite.name);
-
-                    // add resource link
-                    FieldResourceLink link = new FieldResourceLink();
-                    link.fieldName = field.Name;
-                    // get path to texture (remove path before "Resources" and remove extension)
-                    link.path = AssetDatabase.GetAssetPath(sprite);
-                    link.path = link.path.Substring(link.path.IndexOf("Resources") + 10);
-                    link.path = link.path.Substring(0, link.path.LastIndexOf("."));
-                    link.resourceType = typeof(Sprite);
-                    m_resourceLinks.Add(link);
-                }
-            }
-        }
-
     }
+
+    // generic method to add a field to the list without knowing the type
+    public void AddResourceToList(FieldInfo field)
+    {
+
+        // TRY get obj from field
+        UnityEngine.Object obj = null;
+        try
+        {
+            obj = (UnityEngine.Object)field.GetValue(this);
+        }
+        catch (Exception e)
+        {
+            Debug.LogWarning("Could not get value from field: " + field.Name + " in item: " + this.id + " - " + e.Message);
+        }
+
+        // check if type is valid
+        if (!validResourceTypes.Contains(field.FieldType))
+        {
+            return;
+        }
+
+        // get path to texture (remove path before "Resources" and remove extension)
+        string path = AssetDatabase.GetAssetPath(obj);
+        path = path.Substring(path.IndexOf("Resources") + 10);
+        path = path.Substring(0, path.LastIndexOf("."));
+
+        // add resource link
+        FieldResourceLink link = new FieldResourceLink();
+        link.fieldName = field.Name;
+        link.path = path;
+        link.resourceType = obj.GetType();
+        m_resourceLinks.Add(link);
+    }
+
     #endif
 
     public void ResourceListToPrefabs(){
@@ -420,14 +420,24 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
             FieldInfo field = this.GetType().GetField(link.fieldName);
             if (field == null) continue;
 
-            UnityEngine.Object value = Resources.Load(link.path, field.FieldType);
+            LoadResourceIntoField(link.path, field);
+        }
+    }
 
-            if (value != null)
-            {   
-                if (field != null)
-                {
-                    field.SetValue(this, value);
-                }
+    public void LoadResourceIntoField(string path, FieldInfo field){
+        // check if type is valid
+        if (!validResourceTypes.Contains(field.FieldType))
+        {
+            return;
+        }
+
+        UnityEngine.Object value = Resources.Load(path, field.FieldType);
+
+        if (value != null)
+        {   
+            if (field != null)
+            {
+                field.SetValue(this, value);
             }
         }
     }
