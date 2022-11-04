@@ -87,7 +87,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
 
     [SerializeField] public string m_displayName = "";
     [SerializeField] public string m_description = "";
-    [SerializeReference] public Sprite m_icon = null;
+    [SerializeField] public Sprite m_icon = null;
 
     [SerializeField] public bool mustMatchToStack = false;
     [SerializeField] private int m_currentStackSize = 1;
@@ -186,8 +186,7 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
     [Serializable]
     public class FieldResourceLink{
         [SerializeField] public string fieldName = "";
-        [SerializeField] public string path = "";
-        [SerializeField] public Type resourceType = typeof(Item);
+        [SerializeField] public string resourcePath = "";
     }
     [SerializeField] public List<FieldResourceLink> m_resourceLinks = new List<FieldResourceLink>();
 
@@ -381,7 +380,6 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
     // generic method to add a field to the list without knowing the type
     public void AddResourceToList(FieldInfo field)
     {
-
         // TRY get obj from field
         UnityEngine.Object obj = null;
         try
@@ -390,7 +388,15 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
         }
         catch (Exception e)
         {
-            Debug.LogWarning("Could not get value from field: " + field.Name + " in item: " + this.id + " - " + e.Message);
+            // this is expected if the field is not a UnityEngine.Object
+
+            //Debug.LogWarning("Could not get value from field: " + field.Name + " in item: " + this.id + " - " + e.Message);
+        }
+
+        // if obj is null, skip
+        if (obj == null)
+        {
+            return;
         }
 
         // check if type is valid
@@ -401,14 +407,20 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
 
         // get path to texture (remove path before "Resources" and remove extension)
         string path = AssetDatabase.GetAssetPath(obj);
-        path = path.Substring(path.IndexOf("Resources") + 10);
+        // check if Resource folder is in path
+        int index = path.IndexOf("Resources");
+        if (index == -1)
+        {
+            Debug.LogError("Resource " + obj.name + " is not in a Resources folder. Check Item " + this.id);
+            return;
+        }
+        path = path.Substring(index + 10);
         path = path.Substring(0, path.LastIndexOf("."));
 
         // add resource link
         FieldResourceLink link = new FieldResourceLink();
         link.fieldName = field.Name;
-        link.path = path;
-        link.resourceType = obj.GetType();
+        link.resourcePath = path;
         m_resourceLinks.Add(link);
     }
 
@@ -420,18 +432,18 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
             FieldInfo field = this.GetType().GetField(link.fieldName);
             if (field == null) continue;
 
-            LoadResourceIntoField(link.path, field);
+            LoadResourceIntoField(field, link.resourcePath);
         }
     }
 
-    public void LoadResourceIntoField(string path, FieldInfo field){
+    public void LoadResourceIntoField(FieldInfo field, string resourcePath){
         // check if type is valid
         if (!validResourceTypes.Contains(field.FieldType))
         {
             return;
         }
 
-        UnityEngine.Object value = Resources.Load(path, field.FieldType);
+        UnityEngine.Object value = Resources.Load(resourcePath, field.FieldType);
 
         if (value != null)
         {   
