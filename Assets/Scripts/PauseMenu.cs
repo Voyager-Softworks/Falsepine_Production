@@ -72,6 +72,10 @@ public class PauseMenu : ToggleableWindow
                     MenuButton.GetComponentInChildren<TextMeshProUGUI>().text = "Main Menu";
                 }
             }
+            else{
+                TownButton.GetComponentInChildren<TextMeshProUGUI>().text = "Return to Town";
+                MenuButton.GetComponentInChildren<TextMeshProUGUI>().text = "Main Menu";
+            }
         }
     }
 
