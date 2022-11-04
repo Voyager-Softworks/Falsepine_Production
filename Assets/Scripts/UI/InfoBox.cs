@@ -65,8 +65,14 @@ public class InfoBox : MonoBehaviour
         // set to mouse position
         Vector3 mousePos = Mouse.current.position.ReadValue();
         transform.position = mousePos;
-        // move upward
-        transform.position += new Vector3(0, 20.0f, 0);
+
+        // set anchor to bottom left
+        GetComponent<RectTransform>().pivot = new Vector2(0, 0);
+
+        // move 20 units away from cursor in direction of anchor (e.g. 0,0 = up 20, right 20, 1,1 = down 20, left 20)
+        Vector2 anchor = GetComponent<RectTransform>().pivot;
+        Vector2 relativeAnchor = new Vector2(0.5f - anchor.x, 0.5f - anchor.y);
+        transform.position = mousePos + (Vector3)(relativeAnchor * 20.0f);
 
 
         if (fullBrightTimer > 0.0f)
@@ -96,6 +102,50 @@ public class InfoBox : MonoBehaviour
                 DisableAll();
             }
         }
+
+        // keep on screen:
+        // get right most point
+        float right = transform.position.x + GetComponent<RectTransform>().rect.xMax * transform.lossyScale.x;
+        // get left most point
+        float left = transform.position.x + GetComponent<RectTransform>().rect.xMin * transform.lossyScale.x;
+        // get top most point
+        float top = transform.position.y + GetComponent<RectTransform>().rect.yMax * transform.lossyScale.y;
+        // get bottom most point
+        float bottom = transform.position.y + GetComponent<RectTransform>().rect.yMin * transform.lossyScale.y;
+
+
+        // get screen width
+        float screenWidth = Screen.width;
+        // get screen height
+        float screenHeight = Screen.height;
+
+        // if right most point is off screen, set anchor to right
+        if (right > screenWidth)
+        {
+            GetComponent<RectTransform>().pivot = new Vector2(1.0f, GetComponent<RectTransform>().pivot.y);
+        }
+        // if left most point is off screen, set anchor to left
+        else if (left < 0)
+        {
+            GetComponent<RectTransform>().pivot = new Vector2(0.0f, GetComponent<RectTransform>().pivot.y);
+        }
+
+        // if top most point is off screen, set anchor to top
+        if (top > screenHeight)
+        {
+            GetComponent<RectTransform>().pivot = new Vector2(GetComponent<RectTransform>().pivot.x, 1.0f);
+        }
+        // if bottom most point is off screen, set anchor to bottom
+        else if (bottom < 0)
+        {
+            GetComponent<RectTransform>().pivot = new Vector2(GetComponent<RectTransform>().pivot.x, 0.0f);
+        }
+
+        // move 20 units away from cursor in direction of anchor (e.g. 0,0 = up 20, right 20, 1,1 = down 20, left 20)
+        anchor = GetComponent<RectTransform>().pivot;
+        relativeAnchor = new Vector2(0.5f - anchor.x, 0.5f - anchor.y);
+        transform.position = mousePos + (Vector3)(relativeAnchor * 20.0f);
+
     }
 
     /// <summary>
