@@ -18,8 +18,11 @@ public class MessageScript : MonoBehaviour
     private float m_fadeTimer = 0.0f;
     public bool m_doFade = false;
 
+    [Header("References")]
     public Image m_container;
     public TextMeshProUGUI m_text;
+    public Button m_journalButton;
+    [ReadOnly] public JounralEntry m_linkedJournalEntry;
 
     // Start is called before the first frame update
     void Start()
@@ -31,11 +34,17 @@ public class MessageScript : MonoBehaviour
     private void OnEnable() {
         // bind button
         GetComponent<Button>().onClick.AddListener(ButtonClicked);
+
+        // bind journal button
+        m_journalButton.onClick.AddListener(JournalButtonPressed);
     }
 
     private void OnDisable() {
         // unbind button
-        GetComponent<Button>().onClick.RemoveListener(ButtonClicked);
+        GetComponent<Button>().onClick.RemoveAllListeners();
+
+        // unbind journal button
+        m_journalButton.onClick.RemoveAllListeners();
     }
 
     // Update is called once per frame
@@ -71,7 +80,7 @@ public class MessageScript : MonoBehaviour
     /// <param name="_message"></param>
     /// <param name="_icon"></param>
     /// <param name="_doFade"></param>
-    public void SetMessage(string _message, string _icon = "", bool _doFade = false)
+    public void SetMessage(string _message, string _icon = "", bool _doFade = false, JounralEntry _linkedJournalEntry = null)
     {
         if (m_text == null) m_text = GetComponentInChildren<TextMeshProUGUI>();
         if (m_text == null) return;
@@ -81,6 +90,16 @@ public class MessageScript : MonoBehaviour
         string sprite = (string.IsNullOrEmpty(_icon) ? "" : " <sprite name=\"" + _icon + "\">");
 
         m_text.text = _message + sprite + (!_doFade ? " <sprite name=\"cross\">" : "");
+
+        m_linkedJournalEntry = _linkedJournalEntry;
+        if (m_linkedJournalEntry != null)
+        {
+            m_journalButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            m_journalButton.gameObject.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -95,6 +114,16 @@ public class MessageScript : MonoBehaviour
         }
         else{
             Destroy(gameObject);
+        }
+    }
+
+    /// <summary>
+    /// Opens the journal entry.
+    /// </summary>
+    public void JournalButtonPressed(){
+        if (m_linkedJournalEntry != null)
+        {
+            JournalManager.instance?.OpenToEntry(m_linkedJournalEntry);
         }
     }
 }

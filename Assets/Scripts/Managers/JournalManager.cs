@@ -156,6 +156,33 @@ public class JournalManager : ToggleableWindow
         UIAudioManager.instance?.buttonSound.Play();
     }
 
+    public void OpenToEntry(JounralEntry _entry)
+    {   
+        // find the monster in the journal
+        JournalUpdater_Monster[] updaters = GetComponentsInChildren<JournalUpdater_Monster>(true);
+        foreach (JournalUpdater_Monster updater in updaters)
+        {
+            if (updater.m_monster == _entry.m_linkedMonster)
+            {
+                // find the content link JournalManager.instance.contentsLinks
+                foreach (JournalManager.ContentsLink link in JournalManager.instance.contentsLinks)
+                {
+                    if (link.contents == updater.gameObject)
+                    {
+                        // open the journal
+                        JournalManager.instance.OpenWindow();
+
+                        // open the contentupdater
+                        updater.m_entryType = _entry.m_entryType;
+                        JournalManager.instance.OpenContents(link.contents);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+    }
+
     /// <summary>
     /// Closes all contents panels
     /// </summary>
@@ -238,7 +265,7 @@ public class JournalManager : ToggleableWindow
         {
             m_discoveredEntries.Add(entry);
             // send message
-            MessageManager.instance?.AddMessage("New Journal Entry\n" + entry.m_linkedMonster.m_name, "monster");
+            MessageManager.instance?.AddMessage("New Journal Entry\n" + entry.m_linkedMonster.m_name, "monster", _linkedJournalEntry: entry);
             // notify
             NotificationManager.instance?.AddIconAtPlayer("monster");
             // sound
