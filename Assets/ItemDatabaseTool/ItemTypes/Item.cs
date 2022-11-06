@@ -357,13 +357,12 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
         return item;
     }
 
-    #if UNITY_EDITOR
-
     // list of valid types (GameObject, Sprite)
     List<Type> validResourceTypes = new List<Type>() {
         typeof(GameObject),
         typeof(Sprite)
     };
+    #if UNITY_EDITOR
 
     public void PrefabsToResourceList(){
         m_resourceLinks.Clear();
