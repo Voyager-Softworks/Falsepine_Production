@@ -38,18 +38,14 @@ public class TalismanChoice : ToggleableWindow
     // Start is called before the first frame update
     void Start()
     {
-        // make random talismans
-        foreach (ChoiceLink link in m_choices)
-        {
-            int tries = 100;
-            // ensure talisman is unique
-            link.m_talisman = StatsManager.instance.GetRandomTalisman();
-            while (m_choices.Any<ChoiceLink>(x => x.m_talisman.m_statMod.statType.value == link.m_talisman.m_statMod.statType.value) && tries > 0)
-            {
-                link.m_talisman = StatsManager.instance.GetRandomTalisman();
-                tries--;
-            }
 
+        List<StatsManager.Talisman> talismans = StatsManager.instance?.GetRandomTalismans(m_choices.Count());
+
+        // make random talismans
+        for (int i = 0; i < m_choices.Count(); i++)
+        {
+            ChoiceLink link = m_choices[i];
+            link.m_talisman = talismans[i];
             link.m_button.GetComponentsInChildren<Image>()[1].sprite = link.m_talisman.m_icon;
             link.m_button.GetComponentInChildren<TextMeshProUGUI>().text = link.m_talisman.m_statMod.ToText();
         }
@@ -131,14 +127,54 @@ public class TalismanChoice : ToggleableWindow
     // Update is called once per frame
     void Update()
     {
-        
+        // check max talisman count
+        if (MissionManager.instance != null){
+            MissionZone zone = MissionManager.instance.GetCurrentZone();
+            if (zone != null){
+                if (zone.m_currentZoneTalismans >= zone.m_talismansPerZone){
+                    DisableTalisman();
+                }
+            }
+        }
     }
 
-    private void ChooseTalisman(StatsManager.Talisman talisman) {
+    private void ChooseTalisman(StatsManager.Talisman talisman)
+    {
         if (StatsManager.instance == null) return;
         if (talisman == null) return;
 
         StatsManager.instance.m_activeTalismans.Add(talisman);
+
+        MissionManager.instance.GetCurrentZone().m_currentZoneTalismans += 1;
+
+        // play sound
+        if (m_confirmSound != null)
+        {
+            AudioSource audioSource = GetComponent<AudioSource>();
+            if (audioSource != null)
+            {
+                audioSource.PlayOneShot(m_confirmSound);
+            }
+        }
+
+        // message
+        if (MessageManager.instance)
+        {
+            MessageManager.instance.AddMessage("New Talisman", "talisman", false);
+            // notify
+            NotificationManager.instance?.AddIcon("talisman", transform.position + Vector3.up * 2f);
+        }
+
+        DisableTalisman();
+
+        CloseWindow();
+    }
+
+    public void DisableTalisman()
+    {
+        if (GetComponent<Interactable>() == null || GetComponent<Interactable>().enabled == false){
+            return;
+        }
 
         // disable interactable
         GetComponent<Interactable>().DisableInteract();
@@ -167,30 +203,11 @@ public class TalismanChoice : ToggleableWindow
             light.enabled = false;
         }
 
-        // play sound
-        if (m_confirmSound != null)
-        {
-            AudioSource audioSource = GetComponent<AudioSource>();
-            if (audioSource != null)
-            {
-                audioSource.PlayOneShot(m_confirmSound);
-            }
-        }
-
         // instantiate effect
         if (m_confirmEffect != null)
         {
-            Instantiate(m_confirmEffect, transform.position, Quaternion.identity);
+            Destroy(Instantiate(m_confirmEffect, transform.position, Quaternion.identity), 5f);
         }
-
-        // message
-        if (MessageManager.instance) {
-            MessageManager.instance.AddMessage("New Talisman", "talisman", false);
-            // notify
-            NotificationManager.instance?.AddIcon("talisman", transform.position + Vector3.up * 2f);
-        }
-
-        CloseWindow();
     }
 
     private void ConfirmChoice(){

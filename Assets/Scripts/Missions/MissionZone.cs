@@ -63,6 +63,10 @@ public class MissionZone : ScriptableObject
     public int m_loreCount = 1;
     [ReadOnly] public List<int> m_clueSceneIndexes = new List<int>();
     [ReadOnly] public List<int> m_loreSceneIndexes = new List<int>();
+    
+    [Header("Talisman Pickups")]
+    public int m_talismansPerZone = 3;
+    public int m_currentZoneTalismans = 0;
 
     //public string m_currentScenePath = "";
 

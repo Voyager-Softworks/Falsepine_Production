@@ -338,6 +338,7 @@ public class MissionManager : MonoBehaviour
         else
         {
             Debug.Log("No next zone");
+            Debug.Log("LOOPING!");
 
             // set to first zone
             if (m_missionZones.Count > 0)
@@ -345,6 +346,12 @@ public class MissionManager : MonoBehaviour
                 StatsManager.instance.ResetPreviousKills();
                 m_currentZone = m_missionZones[0];
                 m_currentZone.Reset();
+
+                // infinite talismans
+                foreach (MissionZone zone in m_missionZones)
+                {
+                    zone.m_talismansPerZone = int.MaxValue;
+                }
             }
         }
     }

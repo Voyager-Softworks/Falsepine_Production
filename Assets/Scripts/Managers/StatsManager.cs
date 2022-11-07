@@ -318,15 +318,47 @@ public class StatsManager : MonoBehaviour
     [SerializeField] private List<StatModRange> m_possibleTalismanMods = new List<StatModRange>();
     public List<Talisman> m_activeTalismans = new List<Talisman>();
 
-    public Talisman GetRandomTalisman()
+    public List<Talisman> GetRandomTalismans(int _num = 1)
     {
-        StatModRange modRange = m_possibleTalismanMods[UnityEngine.Random.Range(0, m_possibleTalismanMods.Count)];
-        Talisman talisman = new Talisman();
-        talisman.m_statMod.statType = modRange.m_statType;
-        talisman.m_statMod.modType = modRange.m_modType;
-        talisman.m_statMod.value = UnityEngine.Random.Range(modRange.m_min, modRange.m_max);
-        talisman.m_icon = modRange.m_icon;
-        return talisman;
+        // create temp list of possible talismans
+        List<StatModRange> tempPossible = new List<StatModRange>();
+        // for each possible talisman mod
+        foreach (StatModRange t in m_possibleTalismanMods){
+            // if the stat type is not already in the list
+            if (tempPossible.Find(f => f.m_statType == t.m_statType) == null){
+                // add it
+                tempPossible.Add(t);
+            }
+        }
+
+        // create list of talismans to return
+        List<Talisman> talismans = new List<Talisman>();
+
+        // for each talisman to create
+        for (int i = 0; i < _num; i++){
+            // if there are no more possible talismans
+            if (tempPossible.Count == 0){
+                // break
+                break;
+            }
+            // get a random talisman
+            StatModRange mod = tempPossible[UnityEngine.Random.Range(0, tempPossible.Count)];
+            // create a new talisman
+            Talisman talisman = new Talisman();
+            // set the stat mod
+            talisman.m_statMod.statType = mod.m_statType;
+            talisman.m_statMod.modType = mod.m_modType;
+            talisman.m_statMod.value = UnityEngine.Random.Range(mod.m_min, mod.m_max);
+            // set the icon
+            talisman.m_icon = mod.m_icon;
+            // add the talisman to the list
+            talismans.Add(talisman);
+            // remove the talisman from the list of possible talismans
+            tempPossible.Remove(mod);
+        }
+
+        // return the list of talismans
+        return talismans;
     }
     #endregion
 
