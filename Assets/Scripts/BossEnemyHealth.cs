@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.AI;
+using UnityEngine.SocialPlatforms.Impl;
+using Achievements;
 
 /// <summary>
 /// Manages the health of boss enemies.
@@ -17,6 +19,8 @@ public class BossEnemyHealth : EnemyHealth
     private UIScript m_uiScript; ///< The UI script to use.
 
     public List<Artifact> m_artifacts = new List<Artifact>(); ///< The artifacts to drop when the boss dies.
+
+    public AchievementsManager.Achievement m_achievement; ///< The achievement to unlock when the boss dies.
 
     // Start is called before the first frame update
     public override void Start()
@@ -65,7 +69,10 @@ public class BossEnemyHealth : EnemyHealth
     public override void Die()
     {
         base.Die();
-
+        if (FindObjectOfType<AchievementsManager>() is AchievementsManager manager)
+        {
+            manager.UnlockAchievement(m_achievement);
+        }
         if (m_indicator != null) m_indicator.SetActive(false);
 
         // try complete the linked mission, if it is the current mission

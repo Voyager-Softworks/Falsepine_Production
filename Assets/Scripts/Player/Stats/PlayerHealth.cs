@@ -7,6 +7,8 @@ using UnityEngine.UI;
 using System;
 using UnityEngine.Events;
 using System.IO;
+using Achievements;
+using UnityEngine.SceneManagement;
 
 
 /// <summary>
@@ -17,30 +19,44 @@ public class PlayerHealth : MonoBehaviour, StatsManager.UsesStats
 {
     [Header("Stats")]
     [ReadOnly] public string note = "Stats are store in stats manager";
-    public float currentHealth {
-        get {
-            if (StatsManager.instance != null) {
+    public float currentHealth
+    {
+        get
+        {
+            if (StatsManager.instance != null)
+            {
                 return StatsManager.instance.m_playerCurrentHealth;
-            } else {
+            }
+            else
+            {
                 return -1.0f;
             }
         }
-        set {
-            if (StatsManager.instance != null) {
+        set
+        {
+            if (StatsManager.instance != null)
+            {
                 StatsManager.instance.m_playerCurrentHealth = value;
             }
         }
     }
-    public float calcedMaxHealth {
-        get {
-            if (StatsManager.instance != null) {
+    public float calcedMaxHealth
+    {
+        get
+        {
+            if (StatsManager.instance != null)
+            {
                 return StatsManager.instance.m_calcedPlayerMaxHealth;
-            } else {
+            }
+            else
+            {
                 return -1.0f;
             }
         }
-        set {
-            if (StatsManager.instance != null) {
+        set
+        {
+            if (StatsManager.instance != null)
+            {
                 StatsManager.instance.m_calcedPlayerMaxHealth = value;
             }
         }
@@ -65,11 +81,13 @@ public class PlayerHealth : MonoBehaviour, StatsManager.UsesStats
     private Animator _animator; ///< The animator for the player.
 
     // StatsManager.UsesStats interface implementation
-    public List<StatsManager.StatType> m_usedStatTypes = new List<StatsManager.StatType>() {};
-    public List<StatsManager.StatType> GetStatTypes(){
+    public List<StatsManager.StatType> m_usedStatTypes = new List<StatsManager.StatType>() { };
+    public List<StatsManager.StatType> GetStatTypes()
+    {
         return m_usedStatTypes;
     }
-    public void AddStatType(StatsManager.StatType type){
+    public void AddStatType(StatsManager.StatType type)
+    {
         if (type == null) return;
 
         if (!m_usedStatTypes.Contains(type))
@@ -77,7 +95,8 @@ public class PlayerHealth : MonoBehaviour, StatsManager.UsesStats
             m_usedStatTypes.Add(type);
         }
     }
-    public void RemoveStatType(StatsManager.StatType type){
+    public void RemoveStatType(StatsManager.StatType type)
+    {
         if (m_usedStatTypes.Contains(type))
         {
             m_usedStatTypes.Remove(type);
@@ -183,7 +202,15 @@ public class PlayerHealth : MonoBehaviour, StatsManager.UsesStats
 
         isDead = true;
         currentHealth = 0;
-
+        if (FindObjectOfType<AchievementsManager>() is AchievementsManager am)
+        {
+            am.UnlockAchievement(AchievementsManager.Achievement.Die);
+            int deathCount = PlayerPrefs.GetInt("DeathCount", 0);
+            deathCount++;
+            PlayerPrefs.SetInt("DeathCount", deathCount);
+            if (deathCount >= 50) am.UnlockAchievement(AchievementsManager.Achievement.DieXFifty);
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "TutorialScene") am.UnlockAchievement(AchievementsManager.Achievement.DieInTutorial);
+        }
         if (_audioSource && deathSound) _audioSource.PlayOneShot(deathSound);
 
         FadeScript fadeScript = FindObjectOfType<FadeScript>();

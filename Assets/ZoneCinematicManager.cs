@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Achievements;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -51,8 +52,29 @@ public class ZoneCinematicManager : MonoBehaviour
     {
         if (m_isEnding) return;
         m_isEnding = true;
-
-        if (m_isCredits){
+        if (FindObjectOfType<AchievementsManager>() is AchievementsManager am)
+        {
+            switch (zoneArea)
+            {
+                case MissionZone.ZoneArea.SNOW:
+                    am.UnlockAchievement(AchievementsManager.Achievement.DiscoverBonestag);
+                    break;
+                case MissionZone.ZoneArea.DESERT:
+                    am.UnlockAchievement(AchievementsManager.Achievement.DiscoverOmen);
+                    break;
+                case MissionZone.ZoneArea.REDWOOD:
+                    am.UnlockAchievement(AchievementsManager.Achievement.DiscoverBrightmaw);
+                    break;
+                case MissionZone.ZoneArea.SWAMP:
+                    am.UnlockAchievement(AchievementsManager.Achievement.DiscoverWailingTree);
+                    break;
+                case MissionZone.ZoneArea.PRIME:
+                    am.UnlockAchievement(AchievementsManager.Achievement.DiscoverPrimaeval);
+                    break;
+            }
+        }
+        if (m_isCredits)
+        {
             LevelController.LoadGameComplete();
             return;
         }
