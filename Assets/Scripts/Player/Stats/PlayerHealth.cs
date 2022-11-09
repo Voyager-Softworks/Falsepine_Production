@@ -62,6 +62,7 @@ public class PlayerHealth : MonoBehaviour, StatsManager.UsesStats
         }
     }
     public bool isInvulnerable = false; ///< Whether or not the player is invulnerable.
+    public bool godMode = false; ///< Whether or not the player is in god mode (permanent invulnerability).
     public bool isDead = false; ///< Whether or not the player is dead.
     public bool isStunned = false; ///< Whether or not the player is stunned.
     float stunTimer = 0f; ///< The timer for the stun.
@@ -154,7 +155,7 @@ public class PlayerHealth : MonoBehaviour, StatsManager.UsesStats
     /// </returns>
     public void TakeDamage(float damage)
     {
-        if (isInvulnerable || isDead) return;
+        if (godMode || isInvulnerable || isDead) return;
 
         float calcedDamage = StatsManager.CalculateDamageTaken(this, damage);
 
@@ -198,7 +199,7 @@ public class PlayerHealth : MonoBehaviour, StatsManager.UsesStats
     /// </returns>
     public void Die()
     {
-        if (isDead) return;
+        if (isDead || godMode) return;
 
         isDead = true;
         currentHealth = 0;

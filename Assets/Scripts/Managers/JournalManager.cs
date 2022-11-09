@@ -114,11 +114,22 @@ public class JournalManager : ToggleableWindow
                 // update tracking button
                 UpdateTrackingButton();
             }
+
+            // update all content
+            UpdateAllContent();
         }
         else
         {
             Destroy(this);
             Destroy(gameObject);
+        }
+    }
+
+    private void UpdateAllContent()
+    {
+        foreach (ContentsLink link in contentsLinks)
+        {
+            link.contents.GetComponent<JournalContentUpdater>()?.UpdateContent();
         }
     }
 
@@ -461,6 +472,9 @@ public class JournalManager : ToggleableWindow
 
         base.OpenWindow();
         journalPanel.SetActive(true);
+
+        // update all content
+        UpdateAllContent();
     }
     public override void CloseWindow()
     {

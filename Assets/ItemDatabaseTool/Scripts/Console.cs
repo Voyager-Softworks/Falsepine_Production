@@ -617,6 +617,25 @@ public class Console : ToggleableWindow, StatsManager.UsesStats
             return;
         }
 
+        // "god"
+        if (split.Length == 1 && split[0] == "god")
+        {
+            // find and toggle PlayerHealth godmode
+            PlayerHealth playerHealth = GameObject.FindObjectOfType<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.godMode = !playerHealth.godMode;
+                Log("- God mode " + (playerHealth.godMode ? "enabled" : "disabled"));
+            }
+            else
+            {
+                Log("- PlayerHealth not found");
+            }
+
+            Log();
+            return;
+        }
+
         // "heal_player"
         if (split.Length == 1 && split[0] == "heal_player")
         {
@@ -840,6 +859,9 @@ public class Console : ToggleableWindow, StatsManager.UsesStats
             else{
                 Log("- JournalManager not found");
             }
+
+            Log();
+            return;
         }
 
         // command not found
@@ -867,6 +889,7 @@ public class Console : ToggleableWindow, StatsManager.UsesStats
         "load slotNumber",
         "delete slotNumber",
         "kill_all",
+        "god",
         "heal_player",
         "give_money amount",
         "quit",
@@ -880,7 +903,7 @@ public class Console : ToggleableWindow, StatsManager.UsesStats
         "complete_mission",
         "next_zone",
         "message 'message Text' iconName?",
-        "discover_all"
+        "discover_all",
     };
 
     /// <summary>
