@@ -59,7 +59,7 @@ public class ClickableObject : MonoBehaviour
 
         if (m_canBeClicked && colliders != null)
         {
-            if (Mouse.current.leftButton.isPressed && CheckMouseOver())
+            if (Mouse.current.leftButton.wasPressedThisFrame && CheckMouseOver())
             {
                 OnClick();
             }
