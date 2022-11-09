@@ -19,6 +19,7 @@ public class MyRoots : MonoBehaviour
 
     void GiveRootsAchievement()
     {
+        Debug.Log("Aurrrrgghhh my ROOOOTS!!!!");
         if (FindObjectOfType<AchievementsManager>() is AchievementsManager am)
         {
             am.UnlockAchievement(AchievementsManager.Achievement.DefeatPossessedDummy);
