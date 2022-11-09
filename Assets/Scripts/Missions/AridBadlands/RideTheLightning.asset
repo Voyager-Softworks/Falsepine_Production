@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: RideTheLightning
   m_EditorClassIdentifier: 
   m_title: Ride the Lightning
-  m_description: 'Placeholder Text.
+  m_description: 'Some pagan we caught reckons that whatever is roaming the Badlands
+    can''t be killed outright, it''ll rebirth itself or some shit unless it deems
+    it''s kill "worthy". Sounds like horseshit to us but there no harm in coverin
+    all your bases. Any madman who can flawlessly put the thing down can find a sizeable
+    reward waiting for em.
 
 
     Kill the Omen within 90 seconds of encountering
@@ -24,7 +28,9 @@ MonoBehaviour:
   - id: 1
   - id: 2
   m_lockOnComplete: 1
+  m_lockOnFail: 1
   m_isLockedComplete: 0
+  m_isLockedFail: 0
   references:
     version: 1
     00000000:
@@ -44,7 +50,7 @@ MonoBehaviour:
     00000001:
       type: {class: Speedrun_MissionCondition, ns: , asm: Assembly-CSharp}
       data:
-        m_name: Spend less than 90 seconds in the expedition while fighting the Omen
+        m_name: Spend less than 90 seconds fighting the Omen
         m_state: 0
         m_lockState: 0
         m_timeLimit: 90

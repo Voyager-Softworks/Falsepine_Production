@@ -13,7 +13,11 @@ MonoBehaviour:
   m_Name: Stay Back
   m_EditorClassIdentifier: 
   m_title: Stay Back!
-  m_description: 'Placeholder Text.
+  m_description: 'We''ve had interest from out of town in the Plague Beetles. Specifically
+    their shells, we''re not sure what they want them for but that''s not our concern.
+    High caliber gunfire will damage the shells, so we need someone to take a few
+    down with low calibers. It''s definitely the wrong tool for the job, so there
+    will be heafty compensation.
 
 
     Kill (8) Plague Beetles with a Mauser (Non-Legendary).'
@@ -21,13 +25,15 @@ MonoBehaviour:
   m_conditions:
   - id: 0
   m_lockOnComplete: 1
+  m_lockOnFail: 1
   m_isLockedComplete: 0
+  m_isLockedFail: 0
   references:
     version: 1
     00000000:
       type: {class: Kill_MissionCondition, ns: , asm: Assembly-CSharp}
       data:
-        m_name: Kill (0/8) Desert Bugs(s) with the Mauser
+        m_name: Kill (0/8) Plague Beetle(s) with the Mauser
         m_state: 0
         m_lockState: 0
         m_monsterToKill: {fileID: 11400000, guid: 0a5776166c4047b469f7cc181eb8daa0, type: 2}
