@@ -111,8 +111,25 @@ public class JournalUpdater_Monster : JournalContentUpdater
             child.sprite = monsterSprite;
         }
 
-        // update name
-        m_monsterName.text = m_monster.m_name;
+        // update name (if no kills "???"), also update the respective content link button
+        string monsterName = "???";
+        if (StatsManager.instance.GetKills(m_monster) > 0)
+        {
+            monsterName = m_monster.m_name;
+        }
+        m_monsterName.text = monsterName;
+        JournalManager.ContentsLink link = new JournalManager.ContentsLink();
+        // find the link that shares this gameobject
+        foreach (JournalManager.ContentsLink l in journalManager.contentsLinks)
+        {
+            if (l.contents == gameObject)
+            {
+                link = l;
+                break;
+            }
+        }
+        link.button.GetComponentInChildren<TextMeshProUGUI>().text = monsterName;
+
 
         // update kill count text
         if (m_killCountText != null)
