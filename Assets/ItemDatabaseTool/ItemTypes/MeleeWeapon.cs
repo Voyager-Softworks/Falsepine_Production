@@ -166,6 +166,9 @@ public class MeleeWeapon : Item
         if (m_swingCooldownTimer <= 0)
         {
             DoMelee(_damageTrans, _owner);
+
+            // unlock achievement:
+            Achievements.AchievementsManager.instance?.UnlockAchievement(this.m_unlockAchievement);
             return true;
         }
         return false;

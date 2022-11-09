@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Linq;
 using TMPro;
 using UnityEngine.SceneManagement;
+using Achievements;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -182,6 +183,8 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
         return m_allowedDiscount;
     }
 
+    public AchievementsManager.Achievement m_unlockAchievement = AchievementsManager.Achievement.None;
+
 
     [Serializable]
     public class FieldResourceLink{
@@ -344,6 +347,8 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
 
         item.m_price = this.m_price;
         item.m_allowedDiscount = this.m_allowedDiscount;
+
+        item.m_unlockAchievement = this.m_unlockAchievement;
 
         item.maxStackSize = this.m_maxStackSize;
         item.currentStackSize = this.m_currentStackSize;
@@ -886,6 +891,25 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
             }
 
             //end green box
+            GUILayout.EndVertical();
+
+        
+            // purple background
+            GUI.backgroundColor = new Color(0.5f, 0, 0.5f);
+            // achievements box
+            GUILayout.BeginVertical("box");
+            // reset background color
+            GUI.backgroundColor = Color.white;
+
+            // bold text
+            GUILayout.Label("Achievements", CustomEditorStuff.center_bold_label);
+
+            // achievements list
+            EditorGUI.indentLevel++;
+            // enum for unlock achievement
+            item.m_unlockAchievement = (AchievementsManager.Achievement)EditorGUILayout.EnumPopup(new GUIContent("Unlock Achievement: ", "The achievement to unlock when this item is used"), item.m_unlockAchievement);
+            
+            // end achievements box
             GUILayout.EndVertical();
 
 

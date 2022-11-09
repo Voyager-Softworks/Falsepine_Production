@@ -214,6 +214,9 @@ public class RangedWeapon : Item
             {
                 //RaycastShoot(_origin, _direction, _owner);
                 AimZoneShoot(_originTransform, _direction, _owner, _aimZone);
+
+                // unlock achievement:
+                Achievements.AchievementsManager.instance?.UnlockAchievement(this.m_unlockAchievement);
                 return true;
             }
             else {
