@@ -232,10 +232,13 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
 
             m_bankLevel++;
 
-            // if level over 10, set to 10
-            if (m_bankLevel > m_maxBankLevel)
+            // if level equal or over max, set to max lvl
+            if (m_bankLevel >= m_maxBankLevel)
             {
                 m_bankLevel = m_maxBankLevel;
+
+                // unlock achievement
+                Achievements.AchievementsManager.instance.UnlockAchievement(Achievements.AchievementsManager.Achievement.FullyUpgradeBank);
             }
 
             // update slot amount
