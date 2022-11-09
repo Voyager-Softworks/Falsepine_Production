@@ -54,6 +54,9 @@ public class Drink : Item
         NotificationManager.instance?.AddIconAtPlayer("drink");
         // sound
         UIAudioManager.instance?.drinkSound.Play();
+
+        // unclock achievement
+        Achievements.AchievementsManager.instance.UnlockAchievement(this.m_unlockAchievement);
     }
 
     
