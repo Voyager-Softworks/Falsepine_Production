@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Camera))]
 public class FreeFlyCamera : MonoBehaviour
@@ -45,17 +46,17 @@ public class FreeFlyCamera : MonoBehaviour
     [Tooltip("Speed of the quick camera movement when holding the 'Left Shift' key")]
     private float _boostedSpeed = 50f;
 
-    [SerializeField]
-    [Tooltip("Boost speed")]
-    private KeyCode _boostSpeed = KeyCode.LeftShift;
+    // [SerializeField]
+    // [Tooltip("Boost speed")]
+    // private KeyCode _boostSpeed = KeyCode.LeftShift;
 
-    [SerializeField]
-    [Tooltip("Move up")]
-    private KeyCode _moveUp = KeyCode.E;
+    // [SerializeField]
+    // [Tooltip("Move up")]
+    // private KeyCode _moveUp = KeyCode.E;
 
-    [SerializeField]
-    [Tooltip("Move down")]
-    private KeyCode _moveDown = KeyCode.Q;
+    // [SerializeField]
+    // [Tooltip("Move down")]
+    // private KeyCode _moveDown = KeyCode.Q;
 
     [Space]
 
@@ -69,9 +70,9 @@ public class FreeFlyCamera : MonoBehaviour
 
     [Space]
 
-    [SerializeField]
-    [Tooltip("This keypress will move the camera to initialization position")]
-    private KeyCode _initPositonButton = KeyCode.R;
+    // [SerializeField]
+    // [Tooltip("This keypress will move the camera to initialization position")]
+    // private KeyCode _initPositonButton = KeyCode.R;
 
     #endregion UI
 
@@ -107,12 +108,14 @@ public class FreeFlyCamera : MonoBehaviour
     // Apply requested cursor state
     private void SetCursorState()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        // escape unlock
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             Cursor.lockState = _wantedMode = CursorLockMode.None;
         }
 
-        if (Input.GetMouseButtonDown(0))
+        // left click lock
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             _wantedMode = CursorLockMode.Locked;
         }
@@ -147,10 +150,23 @@ public class FreeFlyCamera : MonoBehaviour
         if (Cursor.visible)
             return;
 
-        // Translation
-        if (_enableTranslation)
+        
+
+        // zoom with shift+scroll
+        if (Keyboard.current.leftShiftKey.isPressed)
         {
-            transform.Translate(Vector3.forward * Input.mouseScrollDelta.y * Time.deltaTime * _translationSpeed);
+            float scroll = Mouse.current.scroll.ReadValue().y;
+            // set fov
+            Camera camera = GetComponent<Camera>();
+            camera.fieldOfView -= scroll * Time.deltaTime;
+            // clamp fov
+            camera.fieldOfView = Mathf.Clamp(camera.fieldOfView, 1, 179);
+        }
+        // Translation with scroll wheel
+        else if (_enableTranslation)
+        {
+            float scroll = Mouse.current.scroll.ReadValue().y;
+            transform.Translate(Vector3.forward * scroll * Time.deltaTime * _translationSpeed);
         }
 
         // Movement
@@ -159,25 +175,28 @@ public class FreeFlyCamera : MonoBehaviour
             Vector3 deltaPosition = Vector3.zero;
             float currentSpeed = _movementSpeed;
 
-            if (Input.GetKey(_boostSpeed))
+            // shift boost:
+            if (Keyboard.current.leftShiftKey.isPressed)
                 currentSpeed = _boostedSpeed;
 
-            if (Input.GetKey(KeyCode.W))
+            // swad:
+            if (Keyboard.current.wKey.isPressed)
                 deltaPosition += transform.forward;
 
-            if (Input.GetKey(KeyCode.S))
+            if (Keyboard.current.sKey.isPressed)
                 deltaPosition -= transform.forward;
 
-            if (Input.GetKey(KeyCode.A))
+            if (Keyboard.current.aKey.isPressed)
                 deltaPosition -= transform.right;
 
-            if (Input.GetKey(KeyCode.D))
+            if (Keyboard.current.dKey.isPressed)
                 deltaPosition += transform.right;
 
-            if (Input.GetKey(_moveUp))
+            // e up q down:
+            if (Keyboard.current.eKey.isPressed)
                 deltaPosition += transform.up;
 
-            if (Input.GetKey(_moveDown))
+            if (Keyboard.current.qKey.isPressed)
                 deltaPosition -= transform.up;
 
             // Calc acceleration
@@ -190,21 +209,23 @@ public class FreeFlyCamera : MonoBehaviour
         if (_enableRotation)
         {
             // Pitch
+            float pitch = Mouse.current.delta.ReadValue().y * _mouseSense;
             transform.rotation *= Quaternion.AngleAxis(
-                -Input.GetAxis("Mouse Y") * _mouseSense,
+                -pitch,
                 Vector3.right
             );
 
-            // Paw
+            // Yaw
+            float yaw = Mouse.current.delta.ReadValue().x * _mouseSense;
             transform.rotation = Quaternion.Euler(
                 transform.eulerAngles.x,
-                transform.eulerAngles.y + Input.GetAxis("Mouse X") * _mouseSense,
+                transform.eulerAngles.y + yaw,
                 transform.eulerAngles.z
             );
         }
 
-        // Return to init position
-        if (Input.GetKeyDown(_initPositonButton))
+        // Return to init position r 
+        if (Keyboard.current.rKey.wasPressedThisFrame)
         {
             transform.position = _initPosition;
             transform.eulerAngles = _initRotation;
