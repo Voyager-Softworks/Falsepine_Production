@@ -840,6 +840,28 @@ public class Console : ToggleableWindow, StatsManager.UsesStats
             else{
                 Log("- JournalManager not found");
             }
+
+            Log();
+            return;
+        }
+
+        // "god"
+        if (split.Length == 1 && split[0] == "god")
+        {
+            // find and toggle PlayerHealth godmode
+            PlayerHealth playerHealth = GameObject.FindObjectOfType<PlayerHealth>();
+            if (playerHealth != null)
+            {
+                playerHealth.godMode = !playerHealth.godMode;
+                Log("- God mode " + (playerHealth.godMode ? "enabled" : "disabled"));
+            }
+            else
+            {
+                Log("- PlayerHealth not found");
+            }
+
+            Log();
+            return;
         }
 
         // command not found
@@ -880,7 +902,8 @@ public class Console : ToggleableWindow, StatsManager.UsesStats
         "complete_mission",
         "next_zone",
         "message 'message Text' iconName?",
-        "discover_all"
+        "discover_all",
+        "god"
     };
 
     /// <summary>
