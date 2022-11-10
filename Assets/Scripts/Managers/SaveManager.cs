@@ -406,6 +406,9 @@ public class SaveManager : MonoBehaviour
             Directory.Delete(saveFolderPath, true);
         }
 
+        // delete all player prefs
+        PlayerPrefs.DeleteAll();
+
         //create new save folder
         Directory.CreateDirectory(saveFolderPath);
     }
@@ -417,7 +420,7 @@ public class SaveManager : MonoBehaviour
     {
         // Menu item to delete saves
         [MenuItem("Save System/Delete All Saves")]
-        static void DellSaves()
+        static void DeleteAllSaves()
         {
             SaveManager.DeleteAllSaves();
         }

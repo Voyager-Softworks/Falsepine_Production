@@ -11,6 +11,7 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using System.IO;
 using UnityEngine.Serialization;
+using Achievements;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -496,11 +497,92 @@ public class StatsManager : MonoBehaviour
         }
     }
 
+    public List<Item> m_normalAchievementItems = new List<Item>();
+    public List<Item> m_legendaryAchievementItems = new List<Item>(); 
+
+    /// <summary>
+    /// Marks an item as used for the achievement system.
+    /// </summary>
+    /// <param name="_item">The item to store in player prefs</param>
+    public void AchievementItemOwned(Item _item)
+    {
+        if (_item == null) {
+            return;
+        }
+
+        string key = "AchievementOwnedItem_" + _item.m_displayName;
+
+        // if the item is already used, return
+        if (PlayerPrefs.GetInt(key, 0) == 1)
+        {
+            return;
+        }
+
+        // otherwise, save the item as used
+        if (PlayerPrefs.GetInt(key, 0) == 0)
+        {
+            PlayerPrefs.SetInt(key, 1);
+            PlayerPrefs.Save();
+        }
+
+        // check if all normal items have been used
+        bool allNormalUsed = true;
+        foreach (Item item in m_normalAchievementItems)
+        {
+            string normalKey = "AchievementOwnedItem_" + item.m_displayName;
+            if (PlayerPrefs.GetInt(normalKey, 0) == 0)
+            {
+                allNormalUsed = false;
+                break;
+            }
+        }
+        if (allNormalUsed)
+        {
+            // unlock the achievement
+            AchievementsManager.instance?.UnlockAchievement(AchievementsManager.Achievement.BuyAllWeapons);
+        }
+
+        // check if all legendary items have been used
+        bool allLegendaryUsed = true;
+        foreach (Item item in m_legendaryAchievementItems)
+        {
+            string legendaryKey = "AchievementOwnedItem_" + item.m_displayName;
+            if (PlayerPrefs.GetInt(legendaryKey, 0) == 0)
+            {
+                allLegendaryUsed = false;
+                break;
+            }
+        }
+        if (allLegendaryUsed)
+        {
+            // unlock the achievement
+            AchievementsManager.instance?.UnlockAchievement(AchievementsManager.Achievement.PurchaseAllWeapons);
+        }
+    }
+
+    /// <summary>
+    /// Deletes all of the player prefs relating to the item ownership achievements
+    /// </summary> 
+    public void ClearOwnedItems()
+    {
+        foreach (Item item in m_normalAchievementItems)
+        {
+            string key = "AchievementOwnedItem_" + item.m_displayName;
+            PlayerPrefs.DeleteKey(key);
+        }
+        foreach (Item item in m_legendaryAchievementItems)
+        {
+            string key = "AchievementOwnedItem_" + item.m_displayName;
+            PlayerPrefs.DeleteKey(key);
+        }
+        PlayerPrefs.Save();
+    }
+
     /// <summary>
     /// Gets the stat mods from the player inventory
     /// </summary>
     /// <returns></returns>
-    public static List<StatMod> GetPlayerInvetoryStatMods()
+    public static List<StatMod> GetPlayerInventoryStatMods()
     {
         //empty list
         List<StatMod> statMods = new List<StatMod>();
@@ -540,7 +622,7 @@ public class StatsManager : MonoBehaviour
         {
             allStatMods.AddRange(drink.GetStatMods());
         }
-        allStatMods.AddRange(GetPlayerInvetoryStatMods());
+        allStatMods.AddRange(GetPlayerInventoryStatMods());
         // get talisman mods
         foreach (Talisman talisman in instance.m_activeTalismans)
         {
@@ -548,6 +630,8 @@ public class StatsManager : MonoBehaviour
         }
         return allStatMods;
     }
+
+#region Calculations
 
     /// <summary>
     /// Uses damage stats to calculate damage
@@ -817,6 +901,8 @@ public class StatsManager : MonoBehaviour
             }
         }
     }
+
+#endregion
 
     private void Awake()
     {

@@ -51,6 +51,45 @@ public class InventoryManager : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+
+    }
+
+    /// <summary>
+    /// Checks the home and player inventories for owned items, and tries to give achievements for them
+    /// </summary>
+    private void CheckItemOwnAchievements()
+    {
+        // check if the home and player cumulatively contain all legendary items, if so, unlock the achievement
+        Inventory home = GetInventory("home");
+        Inventory player = GetInventory("player");
+
+        // combine all slots into one list
+        List<Inventory.InventorySlot> allSlots = new List<Inventory.InventorySlot>();
+        allSlots.AddRange(home.slots);
+        allSlots.AddRange(player.slots);
+
+        // combine all items from slots into one list
+        List<Item> allItems = new List<Item>();
+        foreach (Inventory.InventorySlot slot in allSlots)
+        {
+            if (slot.item != null)
+            {
+                allItems.Add(slot.item);
+            }
+        }
+
+        // try set item as owned 
+        foreach (Item item in allItems)
+        {
+            if (item != null)
+            {
+                StatsManager.instance.AchievementItemOwned(item);
+            }
+        }
+    }
+
     /// <summary>
     /// Adds inventory to the list of inventories
     /// </summary>
@@ -97,6 +136,8 @@ public class InventoryManager : MonoBehaviour
 
     public void SaveInventories(int saveSlot)
     {
+        CheckItemOwnAchievements();
+
         foreach (Inventory inv in inventories)
         {
             inv.SaveInventory(saveSlot);
@@ -120,6 +161,8 @@ public class InventoryManager : MonoBehaviour
             {
                 source.TryAddItemToInventory(leftover);
             }
+
+            CheckItemOwnAchievements();
 
             return true;
         }
@@ -146,6 +189,8 @@ public class InventoryManager : MonoBehaviour
     /// <param name="saveSlot"></param>
     public void LoadInventories(int saveSlot)
     {
+        CheckItemOwnAchievements();
+
         foreach (Inventory inv in inventories)
         {
             inv.LoadInventory(saveSlot);
