@@ -22,7 +22,12 @@ public class PauseMenu : ToggleableWindow
     public GameObject VideoSettingsWindow;
     public GameObject AimZoneSettingsWindow;
 
+    [Header("Buttons")]
+    public Button AimZoneSettingsButton;
+
     private ExitGate exitGate;
+
+    private AimZone aimZone;
 
     protected override void OnEnable() {
         base.OnEnable();
@@ -32,6 +37,11 @@ public class PauseMenu : ToggleableWindow
         // exit gate
         if (exitGate == null){
             exitGate = FindObjectOfType<ExitGate>();
+        }
+
+        // aim zone
+        if (aimZone == null){
+            aimZone = FindObjectOfType<AimZone>();
         }
     }
 
@@ -77,6 +87,22 @@ public class PauseMenu : ToggleableWindow
                 TownButton.GetComponentInChildren<TextMeshProUGUI>().text = "Return to Town";
                 MenuButton.GetComponentInChildren<TextMeshProUGUI>().text = "Main Menu";
             }
+        }
+
+        // if no aimzone, disable aimzone settings button
+        if (aimZone == null) {
+            AimZoneSettingsButton.interactable = false;
+            // if mouse is within button, change text to "Embark First"
+            Vector2 mousePos = Mouse.current.position.ReadValue();
+            if (AimZoneSettingsButton.GetComponent<RectTransform>().rect.Contains(AimZoneSettingsButton.transform.InverseTransformPoint(mousePos))) {
+                AimZoneSettingsButton.GetComponentInChildren<TextMeshProUGUI>().text = "Embark First";
+            } else {
+                AimZoneSettingsButton.GetComponentInChildren<TextMeshProUGUI>().text = "Aim Zone";
+            }
+        }
+        else{
+            AimZoneSettingsButton.interactable = true;
+            AimZoneSettingsButton.GetComponentInChildren<TextMeshProUGUI>().text = "Aim Zone";
         }
     }
 

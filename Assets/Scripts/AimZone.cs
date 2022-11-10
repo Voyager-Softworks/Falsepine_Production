@@ -452,19 +452,23 @@ public class AimZone : MonoBehaviour
 
     public void LoadRed()
     {
-        m_ZoneColor.r = PlayerPrefs.GetFloat("AimZoneRed", 1.0f);
+        float red = PlayerPrefs.GetFloat("AimZoneRed", 1.0f);
+        SetColorFromSettings(new Color(red, m_ZoneColor.g, m_ZoneColor.b, m_ZoneColor.a));
     }
     public void LoadGreen()
     {
-        m_ZoneColor.g = PlayerPrefs.GetFloat("AimZoneGreen", 0.0f);
+        float green = PlayerPrefs.GetFloat("AimZoneGreen", 0.0f);
+        SetColorFromSettings(new Color(m_ZoneColor.r, green, m_ZoneColor.b, m_ZoneColor.a));
     }
     public void LoadBlue()
     {
-        m_ZoneColor.b = PlayerPrefs.GetFloat("AimZoneBlue", 0.0f);
+        float blue = PlayerPrefs.GetFloat("AimZoneBlue", 0.0f);
+        SetColorFromSettings(new Color(m_ZoneColor.r, m_ZoneColor.g, blue, m_ZoneColor.a));
     }
     public void LoadAlpha()
     {
-        m_ZoneColor.a = PlayerPrefs.GetFloat("AimZoneAlpha", 0.5f);
+        float alpha = PlayerPrefs.GetFloat("AimZoneAlpha", 0.5f);
+        SetColorFromSettings(new Color(m_ZoneColor.r, m_ZoneColor.g, m_ZoneColor.b, alpha));
     }
     public void LoadColors()
     {
