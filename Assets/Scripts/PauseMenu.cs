@@ -20,6 +20,7 @@ public class PauseMenu : ToggleableWindow
     [Header("Windows")]
     public GameObject AudioSettingsWindow;
     public GameObject VideoSettingsWindow;
+    public GameObject AimZoneSettingsWindow;
 
     private ExitGate exitGate;
 
@@ -109,6 +110,7 @@ public class PauseMenu : ToggleableWindow
 
         AudioSettingsWindow.SetActive(false);
         VideoSettingsWindow.SetActive(false);
+        AimZoneSettingsWindow.SetActive(false);
 
         // unpause the game
         LevelController.RequestUnpause(this);

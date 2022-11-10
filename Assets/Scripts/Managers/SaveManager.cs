@@ -408,6 +408,7 @@ public class SaveManager : MonoBehaviour
 
         // delete all player prefs
         PlayerPrefs.DeleteAll();
+        PlayerPrefs.Save();
 
         //create new save folder
         Directory.CreateDirectory(saveFolderPath);

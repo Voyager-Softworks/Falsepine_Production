@@ -94,11 +94,13 @@ public class JournalUpdater_Monster : JournalContentUpdater
 
         base.UpdateContent();
 
+        int monsterKills = StatsManager.instance.GetKills(m_monster);
+        int monsterJournalEntries = JournalManager.instance?.m_discoveredEntries.FindAll(x => x.m_linkedMonster == m_monster).Count ?? 0;
 
         // update image:
         Sprite monsterSprite = m_undiscoveredSprite;
-        // if no kills, disable image
-        if (StatsManager.instance.GetKills(m_monster) > 0)
+        // if kills or entry, show real image
+        if (monsterKills > 0 || monsterJournalEntries > 0)
         {
             monsterSprite = m_monster.m_monsterImage;
         }
@@ -113,7 +115,7 @@ public class JournalUpdater_Monster : JournalContentUpdater
 
         // update name (if no kills "???"), also update the respective content link button
         string monsterName = "???";
-        if (StatsManager.instance.GetKills(m_monster) > 0)
+        if (monsterKills > 0 || monsterJournalEntries > 0)
         {
             monsterName = m_monster.m_name;
         }

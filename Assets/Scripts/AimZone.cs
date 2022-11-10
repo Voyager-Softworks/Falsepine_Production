@@ -126,13 +126,14 @@ public class AimZone : MonoBehaviour
         //get mesh
         m_mesh = m_meshFilter.mesh;
 
-        SetZoneColors(m_ZoneColor);
+        UpdateZoneColors(m_ZoneColor);
 
         //hide aim zone
         Hide();
         //MatchSnowHeight();
 
-
+        // load colors
+        LoadColors();
     }
 
     private void OnEnable()
@@ -210,7 +211,7 @@ public class AimZone : MonoBehaviour
     /// <param name="_frColor"></param>
     /// <param name="_brColor"></param>
     /// <param name="_blColor"></param>
-    public void SetZoneColors(Color _flColor, Color _frColor, Color _brColor, Color _blColor)
+    public void UpdateZoneColors(Color _flColor, Color _frColor, Color _brColor, Color _blColor)
     {
         Color[] colors = new Color[4];
         colors[0] = _flColor;
@@ -224,9 +225,9 @@ public class AimZone : MonoBehaviour
     /// Sets the colour of the aim zone overall
     /// </summary>
     /// <param name="_color"></param>
-    public void SetZoneColors(Color _color)
+    public void UpdateZoneColors(Color _color)
     {
-        SetZoneColors(_color, _color, _color, _color);
+        UpdateZoneColors(_color, _color, _color, _color);
     }
 
     /// <summary>
@@ -238,7 +239,7 @@ public class AimZone : MonoBehaviour
     /// <param name="_midEnd"></param>
     /// <param name="_rightStart"></param>
     /// <param name="_rightEnd"></param>
-    public void SetLineColors(Color _leftStart, Color _leftEnd, Color _midStart, Color _midEnd, Color _rightStart, Color _rightEnd)
+    public void UpdateLineColors(Color _leftStart, Color _leftEnd, Color _midStart, Color _midEnd, Color _rightStart, Color _rightEnd)
     {
         m_midLine.startColor = _midStart;
         m_midLine.endColor = _midEnd;
@@ -248,6 +249,22 @@ public class AimZone : MonoBehaviour
 
         m_rightLine.startColor = _rightStart;
         m_rightLine.endColor = _rightEnd;
+    }
+
+    /// <summary>
+    /// Sets all of the colours of the lines
+    /// </summary>
+    /// <param name="_color"></param>
+    public void UpdateLineColors(Color _color, bool _endAlpha = false)
+    {
+        // make end colours
+        Color endColor = _color;
+        if (_endAlpha)
+        {
+            endColor.a = 0;
+        }
+
+        UpdateLineColors(_color, endColor, _color, endColor, _color, endColor);
     }
 
     /// <summary>
@@ -331,8 +348,8 @@ public class AimZone : MonoBehaviour
         m_midLine.SetPositions(new Vector3[] { (m_bl + m_br) / 2.0f, (m_fl + m_fr) / 2.0f });
         m_rightLine.SetPositions(new Vector3[] { m_br, m_fr });
 
-        SetZoneColors(m_ZoneColor);
-        SetLineColors(m_leftStartColor, m_leftEndColor, m_midStartColor, m_midEndColor, m_rightStartColor, m_rightEndColor);
+        UpdateZoneColors(m_ZoneColor);
+        UpdateLineColors(m_leftStartColor, m_leftEndColor, m_midStartColor, m_midEndColor, m_rightStartColor, m_rightEndColor);
     }
 
     /// <summary>
@@ -429,5 +446,76 @@ public class AimZone : MonoBehaviour
         m_leftLine.enabled = true;
         m_midLine.enabled = true;
         m_rightLine.enabled = true;
+    }
+
+    
+
+    public void LoadRed()
+    {
+        m_ZoneColor.r = PlayerPrefs.GetFloat("AimZoneRed", 1.0f);
+    }
+    public void LoadGreen()
+    {
+        m_ZoneColor.g = PlayerPrefs.GetFloat("AimZoneGreen", 0.0f);
+    }
+    public void LoadBlue()
+    {
+        m_ZoneColor.b = PlayerPrefs.GetFloat("AimZoneBlue", 0.0f);
+    }
+    public void LoadAlpha()
+    {
+        m_ZoneColor.a = PlayerPrefs.GetFloat("AimZoneAlpha", 0.5f);
+    }
+    public void LoadColors()
+    {
+        LoadRed();
+        LoadGreen();
+        LoadBlue();
+        LoadAlpha();
+
+        AimZoneSettings settings = GameObject.FindObjectOfType<AimZoneSettings>(true);
+        if (settings != null)
+        {
+            settings.SetSliders(m_ZoneColor);
+        }
+    }
+
+    public void SaveRed()
+    {
+        PlayerPrefs.SetFloat("AimZoneRed", m_ZoneColor.r);
+    }
+    public void SaveGreen()
+    {
+        PlayerPrefs.SetFloat("AimZoneGreen", m_ZoneColor.g);
+    }
+    public void SaveBlue()
+    {
+        PlayerPrefs.SetFloat("AimZoneBlue", m_ZoneColor.b);
+    }
+    public void SaveAlpha()
+    {
+        PlayerPrefs.SetFloat("AimZoneAlpha", m_ZoneColor.a);
+    }
+    public void SaveColors()
+    {
+        SaveRed();
+        SaveGreen();
+        SaveBlue();
+        SaveAlpha();
+    }
+
+    public void SetColorFromSettings(Color _color)
+    {
+        Color endColor = new Color(_color.r, _color.g, _color.b, 0.0f);
+
+        m_ZoneColor = _color;
+        m_leftStartColor = _color;
+        m_midStartColor = _color;
+        m_rightStartColor = _color;
+        m_leftEndColor = endColor;
+        m_midEndColor = endColor;
+        m_rightEndColor = endColor;
+
+        SaveColors();
     }
 }
