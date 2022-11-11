@@ -281,6 +281,28 @@ public class JournalManager : ToggleableWindow
             NotificationManager.instance?.AddIconAtPlayer("monster");
             // sound
             UIAudioManager.instance?.entryDiscoveredSound.Play();
+
+            // if all entries for this monster are discovered, unlock achievement
+            bool allFound = true;
+            foreach (JounralEntry _entry in m_undiscoveredEntries)
+            {
+                if (_entry.m_linkedMonster == entry.m_linkedMonster)
+                {
+                    allFound = false;
+                    break;
+                }
+            }
+            if (allFound)
+            {
+                Achievements.AchievementsManager.instance?.UnlockAchievement(entry.m_linkedMonster.m_entryAchievement);
+            }
+
+            // if all entries are discovered, unlock achievement
+            if (m_undiscoveredEntries.Count == 0)
+            {
+                Achievements.AchievementsManager.instance?.UnlockAchievement(Achievements.AchievementsManager.Achievement.AllLoreCompleted);
+            }
+
             return true;
         }
 

@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using UnityEngine.SceneManagement;
 using Utilities;
+using Achievements;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -215,18 +216,12 @@ public class MissionZone : ScriptableObject
         // clear current mission
         if (currentMission){
             // if mission is complete get reward, otherwise reset
-            if (currentMission.GetState() == MissionCondition.ConditionState.COMPLETE){
-                // get reward
-                currentMission.GetReward();
-
-                // message
-                MessageManager.instance?.AddMessage("Mission Complete: " + currentMission.m_title + "!", "journal");
-                // notify
-                NotificationManager.instance?.AddIconAtPlayer("journal");
-                // sound
-                UIAudioManager.instance?.completeSound.Play();
+            if (currentMission.GetState() == MissionCondition.ConditionState.COMPLETE)
+            {
+                OnMissionComplete();
             }
-            else{
+            else
+            {
                 // reset
                 currentMission.Reset();
             }
@@ -234,6 +229,36 @@ public class MissionZone : ScriptableObject
             return true;
         }
         return false;
+    }
+
+    /// <summary>
+    /// When a mission is complete, and it is returned, this is called.
+    /// </summary>
+    private void OnMissionComplete()
+    {
+        // get reward
+        currentMission.GetReward();
+
+        // message
+        MessageManager.instance?.AddMessage("Mission Complete: " + currentMission.m_title + "!", "journal");
+        // notify
+        NotificationManager.instance?.AddIconAtPlayer("journal");
+        // sound
+        UIAudioManager.instance?.completeSound.Play();
+
+        // achievement based on difficulty
+        switch (currentMission.m_difficulty)
+        {
+            case Mission.Difficulty.Easy:
+                AchievementsManager.instance?.UnlockAchievement(AchievementsManager.Achievement.CompleteEasyBounty);
+                break;
+            case Mission.Difficulty.Medium:
+                AchievementsManager.instance?.UnlockAchievement(AchievementsManager.Achievement.CompleteMediumBounty);
+                break;
+            case Mission.Difficulty.Hard:
+                AchievementsManager.instance?.UnlockAchievement(AchievementsManager.Achievement.CompleteHardBounty);
+                break;
+        }
     }
 
 

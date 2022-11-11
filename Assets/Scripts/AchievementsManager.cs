@@ -58,7 +58,6 @@ namespace Achievements
             CollectOmen = 45,
             CollectPrimaeval = 46,
             None = 99,
-
         }
 
         private class Achievement_t

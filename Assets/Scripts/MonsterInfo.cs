@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Achievements;
 
 /// <summary>
 /// Monster info scriptable object.
@@ -20,6 +21,7 @@ public class MonsterInfo : ScriptableObject
     [SerializeField] public string m_name;
     [SerializeField] public MonsterType m_type;
     [SerializeField] public Sprite m_monsterImage;
+    [SerializeField] public AchievementsManager.Achievement m_entryAchievement = AchievementsManager.Achievement.None;
 
     //@todo decide if zone is needed here
     // zone?
@@ -65,12 +67,14 @@ public class MonsterInfo : ScriptableObject
         public string m_name;
         public MonsterType m_type;
         public Sprite m_monsterImage;
+        public AchievementsManager.Achievement m_entryAchievement;
 
         public SerializableMonsterInfo(MonsterInfo monster)
         {
             m_name = monster.m_name;
             m_type = monster.m_type;
             m_monsterImage = monster.m_monsterImage;
+            m_entryAchievement = monster.m_entryAchievement;
         }
         public MonsterInfo ToMonsterInfo()
         {
@@ -78,6 +82,7 @@ public class MonsterInfo : ScriptableObject
             monster.m_name = m_name;
             monster.m_type = m_type;
             monster.m_monsterImage = m_monsterImage;
+            monster.m_entryAchievement = m_entryAchievement;
             return monster;
         }
     }
