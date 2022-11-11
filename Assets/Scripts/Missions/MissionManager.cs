@@ -460,14 +460,15 @@ public class MissionManager : MonoBehaviour
     /// <summary>
     /// Loads the next scene in the list
     /// </summary>
-    public void LoadNextScene()
+    public bool LoadNextScene()
     {
-        if (m_currentZone == null) return;
+        if (m_currentZone == null) return false;
 
         string nextPath = m_currentZone.GetNextScenePath();
-        if (nextPath == "") return;
+        if (nextPath == "") return false;
 
         LevelController.LoadScene(nextPath);
+        return true;
     }
 
     public void LoadCinematicScene()

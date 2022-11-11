@@ -15,15 +15,17 @@ public class InteractManager : MonoBehaviour
     [Serializable]
     public class TextRequest{
         public string m_text;
-        public Interactable m_requester;
+        public MonoBehaviour m_requester;
+        public Transform m_checkPosition;
         public float m_interactDistance = 1f;
         public float? m_persistTime = null;
         public float? m_fadeInSpeed = null;
         public float? m_fadeOutSpeed = null;
 
-        public TextRequest(string _text, Interactable _requester, float _interactDistance, float? _persistTime = null, float? _fadeInSpeed = null, float? _fadeOutSpeed = null){
+        public TextRequest(string _text, MonoBehaviour _requester, Transform _checkPosition, float _interactDistance, float? _persistTime = null, float? _fadeInSpeed = null, float? _fadeOutSpeed = null){
             this.m_text = _text;
             this.m_requester = _requester;
+            this.m_checkPosition = _checkPosition;
             this.m_interactDistance = _interactDistance;
             this.m_persistTime = _persistTime;
             this.m_fadeInSpeed = _fadeInSpeed;
@@ -89,7 +91,10 @@ public class InteractManager : MonoBehaviour
     {
         // remove any text requests that are too far away or invalid
         for (int i = 0; i < m_textRequests.Count; i++){
-            if (m_textRequests[i].m_requester == null || Vector3.Distance(m_playerTransform.position, m_textRequests[i].m_requester.transform.position) > m_textRequests[i].m_interactDistance){
+            if (
+                m_textRequests[i].m_requester == null || 
+                Vector3.Distance(m_playerTransform.position, m_textRequests[i].m_checkPosition.transform.position) > m_textRequests[i].m_interactDistance
+            ){
                 m_textRequests.RemoveAt(i);
                 i--;
             }
@@ -108,7 +113,7 @@ public class InteractManager : MonoBehaviour
         for (int i = 0; i < m_textRequests.Count; i++){
             if (m_interactedThisFrame) break;
             
-            Interactable requester = m_textRequests[i].m_requester;
+            Interactable requester = m_textRequests[i].m_requester as Interactable;
             if (requester == null) continue;
             m_interactedThisFrame = requester.CheckActionPressed();
         }
