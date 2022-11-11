@@ -148,7 +148,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     public int m_maxBankLevel = 10;
     public int m_bankUpgradeCost {
         get {
-            return (int)(4.0f * m_bankLevel + 30.0f);
+            return (int)(4.0f * m_bankLevel + 45.0f);
         }
     }
 
