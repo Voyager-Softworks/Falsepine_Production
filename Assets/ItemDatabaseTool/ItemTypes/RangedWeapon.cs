@@ -403,9 +403,49 @@ public class RangedWeapon : Item
             //add to allShots
             m_allShots.Add(shotInfo);
 
-            //Deal damage
-            Debug.Log("Original damage: " + m_damage + " | Calcd damage: " + shotInfo.damage);
-            shotInfo.healthScriptHit.TakeDamage(new Health_Base.DamageStat(shotInfo.damage, _owner, originPoint, shotInfo.hitPoint, this));
+            // check if player has Splash Damage
+            if (StatsManager.GetAllStatMods().Any(x => x.statType == StatsManager.StatType.SplashDamage)){
+
+                // calculate radius
+                float minRadius = 1.0f;
+                float dmgRadStart = 10.0f;
+                float maxRadius = 5.0f;
+                float dmgRadEnd = 40.0f;
+                float radius = Mathf.Lerp(minRadius, maxRadius, Mathf.InverseLerp(dmgRadStart, dmgRadEnd, shotInfo.damage));
+
+                // calculate damage
+                float splashDamage = StatsManager.CalculateSplashDamage(this, m_damage);
+
+                // do damage check
+                Collider[] colliders = Physics.OverlapSphere(shotInfo.hitPoint, radius);
+                List<Health_Base> hitObjects = new List<Health_Base>();
+                List<PlayerHealth> hitPlayers = new List<PlayerHealth>();
+                foreach (Collider collider in colliders)
+                {
+                    List<StatsManager.StatType> statsList = new List<StatsManager.StatType>(this.GetStatTypes());
+
+                    // get health from parent and children
+                    Health_Base health = collider.transform.GetComponentInParent<Health_Base>();
+                    if (health == null) health = collider.transform.GetComponentInChildren<Health_Base>();
+                    if (health != null && !hitObjects.Contains(health))
+                    {
+                        hitObjects.Add(health);
+                        health.TakeDamage(new Health_Base.DamageStat(shotInfo.damage, _owner, originPoint, shotInfo.hitPoint, this));
+                    }
+
+                    // get player health from parent and children
+                    PlayerHealth playerHealth = collider.transform.GetComponentInParent<PlayerHealth>();
+                    if (playerHealth == null) playerHealth = collider.transform.GetComponentInChildren<PlayerHealth>();
+                    if (playerHealth != null && !hitPlayers.Contains(playerHealth))
+                    {
+                        hitPlayers.Add(playerHealth);
+                        playerHealth.TakeDamage(shotInfo.damage);
+                    }
+                }
+            }
+            else{
+                shotInfo.healthScriptHit.TakeDamage(new Health_Base.DamageStat(shotInfo.damage, _owner, originPoint, shotInfo.hitPoint, this));
+            }
 
             // hit effect
             if (m_hitEffect != null)

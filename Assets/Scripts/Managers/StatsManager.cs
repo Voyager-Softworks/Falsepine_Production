@@ -103,6 +103,7 @@ public class StatsManager : MonoBehaviour
         public static StatType FireDamage { get { return new StatType("FireDamage"); } }
         public static StatType SilverDamage { get { return new StatType("SilverDamage"); } }
         public static StatType SpareAmmo { get { return new StatType("SpareAmmo"); } }
+        public static StatType SplashDamage { get { return new StatType("SplashDamage"); } }
 
         // Health
         public static StatType PlayerMaxHealth { get { return new StatType("PlayerMaxHealth", "Max Health"); } }
@@ -656,6 +657,7 @@ public class StatsManager : MonoBehaviour
             StatType.PoisonDamage,
             StatType.FireDamage,
             StatType.SilverDamage,
+            StatType.SplashDamage,
         };
 
         float additiveVal = 0.0f;
@@ -665,6 +667,34 @@ public class StatsManager : MonoBehaviour
         float maxVal = float.MaxValue;
 
         return GenericStatCalc(_statUser, _baseDamage, usedStatTypes, additiveVal, multiplierVal, minVal, maxVal);
+    }
+
+    static public float CalculateSplashDamage(UsesStats _statUser, float _baseDamage = 1.0f)
+    {
+        // list of stats to use in this function
+        List<StatType> usedStatTypes = new List<StatType>(){
+            StatType.SplashDamage,
+        };
+
+        float damage = _baseDamage;
+
+        float additiveVal = 0.0f;
+        float multiplierVal = 1.0f;
+
+        float minVal = 0.0f;
+        float maxVal = float.MaxValue;
+
+        CalcMods(_statUser, ref additiveVal, ref multiplierVal, usedStatTypes);
+        
+        // multiply damage
+        damage *= multiplierVal;
+        // add damage
+        damage += additiveVal;
+
+        // clamp damage
+        damage = Mathf.Clamp(damage, minVal, maxVal);
+
+        return damage;
     }
 
     static public float CalculateRange(UsesStats _statUser, float _baseRange = 1.0f)

@@ -131,7 +131,9 @@ public class AimZone : MonoBehaviour
         //hide aim zone
         Hide();
         //MatchSnowHeight();
+    }
 
+    private void Start() {
         // load colors
         LoadColors();
     }
@@ -453,22 +455,22 @@ public class AimZone : MonoBehaviour
     public void LoadRed()
     {
         float red = PlayerPrefs.GetFloat("AimZoneRed", 1.0f);
-        SetColorFromSettings(new Color(red, m_ZoneColor.g, m_ZoneColor.b, m_ZoneColor.a));
+        SetColorFromSettings(new Color(red, m_ZoneColor.g, m_ZoneColor.b, m_ZoneColor.a), false);
     }
     public void LoadGreen()
     {
         float green = PlayerPrefs.GetFloat("AimZoneGreen", 0.0f);
-        SetColorFromSettings(new Color(m_ZoneColor.r, green, m_ZoneColor.b, m_ZoneColor.a));
+        SetColorFromSettings(new Color(m_ZoneColor.r, green, m_ZoneColor.b, m_ZoneColor.a), false);
     }
     public void LoadBlue()
     {
         float blue = PlayerPrefs.GetFloat("AimZoneBlue", 0.0f);
-        SetColorFromSettings(new Color(m_ZoneColor.r, m_ZoneColor.g, blue, m_ZoneColor.a));
+        SetColorFromSettings(new Color(m_ZoneColor.r, m_ZoneColor.g, blue, m_ZoneColor.a), false);
     }
     public void LoadAlpha()
     {
         float alpha = PlayerPrefs.GetFloat("AimZoneAlpha", 0.5f);
-        SetColorFromSettings(new Color(m_ZoneColor.r, m_ZoneColor.g, m_ZoneColor.b, alpha));
+        SetColorFromSettings(new Color(m_ZoneColor.r, m_ZoneColor.g, m_ZoneColor.b, alpha), false);
     }
     public void LoadColors()
     {
@@ -508,7 +510,7 @@ public class AimZone : MonoBehaviour
         SaveAlpha();
     }
 
-    public void SetColorFromSettings(Color _color)
+    public void SetColorFromSettings(Color _color, bool _doSave = true)
     {
         Color endColor = new Color(_color.r, _color.g, _color.b, 0.0f);
 
@@ -520,6 +522,6 @@ public class AimZone : MonoBehaviour
         m_midEndColor = endColor;
         m_rightEndColor = endColor;
 
-        SaveColors();
+        if (_doSave) SaveColors();
     }
 }
