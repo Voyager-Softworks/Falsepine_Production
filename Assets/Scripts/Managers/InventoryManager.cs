@@ -88,6 +88,16 @@ public class InventoryManager : MonoBehaviour
                 StatsManager.instance.AchievementItemOwned(item);
             }
         }
+
+        // if the items contain the words "judge", "jury", and "executioner", unlock the achievement
+        if (
+            allItems.Any(item => item.m_displayName.ToLower().Contains("judge")) && 
+            allItems.Any(item => item.m_displayName.ToLower().Contains("jury")) && 
+            allItems.Any(item => item.m_displayName.ToLower().Contains("executioner"))
+        )
+        {
+            Achievements.AchievementsManager.instance?.UnlockAchievement(Achievements.AchievementsManager.Achievement.JudgeJuryExecutioner);
+        }
     }
 
     /// <summary>
