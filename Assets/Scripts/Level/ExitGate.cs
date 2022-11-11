@@ -137,7 +137,9 @@ public class ExitGate : MonoBehaviour
         switch (m_destination)
         {
             case GateDestination.Next:
-                MissionManager.instance?.LoadNextScene();
+                if (MissionManager.instance?.LoadNextScene() == false){
+                    LevelController.LoadTown();
+                }
                 break;
             case GateDestination.Town:
                 LevelController.LoadTown();

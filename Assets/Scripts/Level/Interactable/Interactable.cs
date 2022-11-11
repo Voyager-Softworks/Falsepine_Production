@@ -155,7 +155,7 @@ public class Interactable : MonoBehaviour
         if (interactManager == null) return;
 
         // remove request
-        interactManager.RemoveRequest(new InteractManager.TextRequest(interactTextWithSprite, this, interactDistance));
+        interactManager.RemoveRequest(new InteractManager.TextRequest(interactTextWithSprite, this, transform, interactDistance));
     }
 
     /// <summary>
@@ -169,7 +169,7 @@ public class Interactable : MonoBehaviour
             if (interactManager == null) return;
 
             // send request
-            interactManager.RequestBottomText(new InteractManager.TextRequest(interactTextWithSprite, this, interactDistance));
+            interactManager.RequestBottomText(new InteractManager.TextRequest(interactTextWithSprite, this, transform, interactDistance));
         }
     }
 }
