@@ -75,6 +75,7 @@ public class RangedWeapon : Item
     [SerializeField] public GameObject m_shootEffect = null;
     [SerializeField] public GameObject m_trailEffect = null;
     [SerializeField] public GameObject m_hitEffect = null;
+    [SerializeField] public GameObject m_splashEffect = null;
 
     // Sounds:
     [SerializeField] public GameObject m_shootSound = null;
@@ -154,6 +155,7 @@ public class RangedWeapon : Item
         newItem.m_shootEffect = m_shootEffect;
         newItem.m_hitEffect = m_hitEffect;
         newItem.m_trailEffect = m_trailEffect;
+        newItem.m_splashEffect = m_splashEffect;
 
         // Sounds:
         newItem.m_shootSound = m_shootSound;
@@ -407,14 +409,27 @@ public class RangedWeapon : Item
             if (StatsManager.GetAllStatMods().Any(x => x.statType == StatsManager.StatType.SplashDamage)){
 
                 // calculate radius
-                float minRadius = 1.0f;
-                float dmgRadStart = 10.0f;
+                float minRadius = 5.0f;
+                float dmgRadStart = 15.0f;
                 float maxRadius = 5.0f;
                 float dmgRadEnd = 40.0f;
                 float radius = Mathf.Lerp(minRadius, maxRadius, Mathf.InverseLerp(dmgRadStart, dmgRadEnd, shotInfo.damage));
 
                 // calculate damage
                 float splashDamage = StatsManager.CalculateSplashDamage(this, m_damage);
+
+                // splash effect
+                if (m_splashEffect != null)
+                {
+                    GameObject splashEffect = Instantiate(
+                        m_splashEffect, 
+                        shotInfo.hitPoint,
+                        Quaternion.FromToRotation(Vector3.up, shotInfo.hitPoint - shotInfo.originPoint)
+                    );
+                    // multiply current local scale by radius
+                    splashEffect.transform.localScale *= radius;
+                    Destroy(splashEffect, 2.0f);
+                }
 
                 // do damage check
                 Collider[] colliders = Physics.OverlapSphere(shotInfo.hitPoint, radius);
@@ -430,7 +445,16 @@ public class RangedWeapon : Item
                     if (health != null && !hitObjects.Contains(health))
                     {
                         hitObjects.Add(health);
-                        health.TakeDamage(new Health_Base.DamageStat(shotInfo.damage, _owner, originPoint, shotInfo.hitPoint, this));
+                        health.TakeDamage(new Health_Base.DamageStat(shotInfo.damage, _owner, originPoint, health.transform.position, this));
+
+                        // hit effect
+                        if (m_hitEffect != null)
+                        {
+                            Destroy(Instantiate(
+                            m_hitEffect, health.transform.position,
+                            Quaternion.FromToRotation(Vector3.up, health.transform.position - shotInfo.originPoint)),
+                            2.0f);
+                        }
                     }
 
                     // get player health from parent and children
@@ -445,15 +469,15 @@ public class RangedWeapon : Item
             }
             else{
                 shotInfo.healthScriptHit.TakeDamage(new Health_Base.DamageStat(shotInfo.damage, _owner, originPoint, shotInfo.hitPoint, this));
-            }
 
-            // hit effect
-            if (m_hitEffect != null)
-            {
-                Destroy(Instantiate(
-                m_hitEffect, shotInfo.hitPoint,
-                Quaternion.FromToRotation(Vector3.up, shotInfo.hitPoint - shotInfo.originPoint)),
-                2.0f);
+                // hit effect
+                if (m_hitEffect != null)
+                {
+                    Destroy(Instantiate(
+                    m_hitEffect, shotInfo.hitPoint,
+                    Quaternion.FromToRotation(Vector3.up, shotInfo.hitPoint - shotInfo.originPoint)),
+                    2.0f);
+                }
             }
 
             //create trail effect
@@ -881,6 +905,8 @@ public class RangedWeapon : Item
             rangedWeapon.m_trailEffect = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Trail Effect", "The effect to play when shooting"), rangedWeapon.m_trailEffect, typeof(GameObject), false);
             // hit effect
             rangedWeapon.m_hitEffect = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Hit Effect", "The effect to play when hitting"), rangedWeapon.m_hitEffect, typeof(GameObject), false);
+            // splash effect
+            rangedWeapon.m_splashEffect = (GameObject)EditorGUILayout.ObjectField(new GUIContent("Splash Effect", "The effect to play when splash damage is dealt"), rangedWeapon.m_splashEffect, typeof(GameObject), false);
 
             // sounds:
             GUILayout.Label("Sounds", CustomEditorStuff.center_bold_label);
