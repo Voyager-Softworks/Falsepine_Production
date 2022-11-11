@@ -410,7 +410,7 @@ public class RangedWeapon : Item
 
                 // calculate radius
                 float minRadius = 5.0f;
-                float dmgRadStart = 10.0f;
+                float dmgRadStart = 15.0f;
                 float maxRadius = 5.0f;
                 float dmgRadEnd = 40.0f;
                 float radius = Mathf.Lerp(minRadius, maxRadius, Mathf.InverseLerp(dmgRadStart, dmgRadEnd, shotInfo.damage));
@@ -421,10 +421,14 @@ public class RangedWeapon : Item
                 // splash effect
                 if (m_splashEffect != null)
                 {
-                    Destroy(Instantiate(
-                    m_splashEffect, shotInfo.hitPoint,
-                    Quaternion.FromToRotation(Vector3.up, shotInfo.hitPoint - shotInfo.originPoint)),
-                    2.0f);
+                    GameObject splashEffect = Instantiate(
+                        m_splashEffect, 
+                        shotInfo.hitPoint,
+                        Quaternion.FromToRotation(Vector3.up, shotInfo.hitPoint - shotInfo.originPoint)
+                    );
+                    // multiply current local scale by radius
+                    splashEffect.transform.localScale *= radius;
+                    Destroy(splashEffect, 2.0f);
                 }
 
                 // do damage check
@@ -442,6 +446,15 @@ public class RangedWeapon : Item
                     {
                         hitObjects.Add(health);
                         health.TakeDamage(new Health_Base.DamageStat(shotInfo.damage, _owner, originPoint, health.transform.position, this));
+
+                        // hit effect
+                        if (m_hitEffect != null)
+                        {
+                            Destroy(Instantiate(
+                            m_hitEffect, health.transform.position,
+                            Quaternion.FromToRotation(Vector3.up, health.transform.position - shotInfo.originPoint)),
+                            2.0f);
+                        }
                     }
 
                     // get player health from parent and children
@@ -451,15 +464,6 @@ public class RangedWeapon : Item
                     {
                         hitPlayers.Add(playerHealth);
                         playerHealth.TakeDamage(shotInfo.damage);
-                    }
-
-                    // hit effect
-                    if (m_hitEffect != null)
-                    {
-                        Destroy(Instantiate(
-                        m_hitEffect, health.transform.position,
-                        Quaternion.FromToRotation(Vector3.up, health.transform.position - shotInfo.originPoint)),
-                        2.0f);
                     }
                 }
             }
