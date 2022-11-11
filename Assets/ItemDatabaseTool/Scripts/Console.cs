@@ -57,11 +57,11 @@ public class Console : ToggleableWindow, StatsManager.UsesStats
            
         }
 
-        // if ` is pressed, toggle console
-        if (Keyboard.current.backquoteKey.wasPressedThisFrame){
+        // if ` and c and o and n are pressed, toggle console
+        if (Keyboard.current.backquoteKey.wasPressedThisFrame && Keyboard.current.cKey.isPressed && Keyboard.current.oKey.isPressed && Keyboard.current.nKey.isPressed){
             ToggleWindow();
         }
-
+        
         // if enter is pressed, try send command
         if (Keyboard.current.enterKey.wasPressedThisFrame)
         {

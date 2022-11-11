@@ -146,6 +146,8 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     [Header("Bank")]
     public int m_bankLevel = 0;
     public int m_maxBankLevel = 10;
+    public float maxPercent = 0.5f; // max percentage of silver retained
+    public int maxPercentLevel = 10; // level at which max percentage is reached
     public int m_bankUpgradeCost {
         get {
             return (int)(5.0f * m_bankLevel + 35.0f);
@@ -270,10 +272,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
     /// <returns></returns>
     public float GetSilverRetainPercentage()
     {
-        float maxPercent = 0.5f; // max percentage of silver retained
-        int levelMaxReached = 10; // level at which max percentage is reached
-
-        float percent = (float)m_bankLevel / (float)levelMaxReached;
+        float percent = ((float)m_bankLevel / (float)maxPercentLevel) * maxPercent;
         percent = Mathf.Clamp(percent, 0, maxPercent);
 
         return percent;
