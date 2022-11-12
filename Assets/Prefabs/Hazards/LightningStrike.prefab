@@ -54,7 +54,7 @@ MonoBehaviour:
   m_AffectsTransparency: 1
   m_DecalLayerMask: 1
   m_Offset: {x: 0, y: 0, z: 0.5}
-  m_Size: {x: 10, y: 10, z: 1}
+  m_Size: {x: 14, y: 14, z: 1}
   m_FadeFactor: 1
 --- !u!1 &3717771039060015691
 GameObject:
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_AffectsTransparency: 1
   m_DecalLayerMask: 1
   m_Offset: {x: 0, y: 0, z: 0.5}
-  m_Size: {x: 5, y: 5, z: 1}
+  m_Size: {x: 7, y: 7, z: 1}
   m_FadeFactor: 1
 --- !u!1 &6375073780292368817
 GameObject:
@@ -162,8 +162,8 @@ MonoBehaviour:
   effect: {fileID: 2844409746042238685}
   lightningDuration: 0.5
   lightningDelay: 1
-  damageRadius: 5
-  damage: 10
+  damageRadius: 7
+  damage: 20
   decalProjector: {fileID: 925333287202179756}
   scorchMarkProjector: {fileID: 7031090945191032813}
   boltSource: {fileID: 5672793337869582432}
@@ -270,13 +270,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6375073780292368819}
     m_Modifications:
+    - target: {fileID: 8869566038221620394, guid: 9d4cccd49f1ee074495dc5141de5a243, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151754540094208982, guid: 9d4cccd49f1ee074495dc5141de5a243, type: 3}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151754540094208982, guid: 9d4cccd49f1ee074495dc5141de5a243, type: 3}
+      propertyPath: InitialModule.startLifetime.minScalar
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 9151754540800941728, guid: 9d4cccd49f1ee074495dc5141de5a243, type: 3}
       propertyPath: m_Name
       value: VFX_SkyBolt
       objectReference: {fileID: 0}
     - target: {fileID: 9151754540800941728, guid: 9d4cccd49f1ee074495dc5141de5a243, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9151754540800941730, guid: 9d4cccd49f1ee074495dc5141de5a243, type: 3}
       propertyPath: m_Enabled
