@@ -61,9 +61,8 @@ public class Console : ToggleableWindow, StatsManager.UsesStats
         if (Keyboard.current.backquoteKey.wasPressedThisFrame && Keyboard.current.cKey.isPressed && Keyboard.current.oKey.isPressed && Keyboard.current.nKey.isPressed){
             ToggleWindow();
         }
-
         // if ` is pressed, and its open, close it
-        if (Keyboard.current.backquoteKey.wasPressedThisFrame && IsOpen()){
+        else if (Keyboard.current.backquoteKey.wasPressedThisFrame && IsOpen()){
             CloseWindow();
         }
         
