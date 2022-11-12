@@ -19,18 +19,23 @@ MonoBehaviour:
     will be rewarded handsomely.
 
 
-    Kill the Brightmaw with only melee weapons.'
+    Kill the Brightmaw without a primary or secondary
+    weapon.'
   m_difficulty: 2
   m_conditions:
   - id: 0
+  - id: 1
+  - id: 2
   m_lockOnComplete: 1
+  m_lockOnFail: 1
   m_isLockedComplete: 0
+  m_isLockedFail: 0
   references:
     version: 1
     00000000:
       type: {class: Kill_MissionCondition, ns: , asm: Assembly-CSharp}
       data:
-        m_name: Kill (0/1) Bright Maw with  Melee Damage
+        m_name: Kill (0/1) Bright Maw with Melee Damage
         m_state: 0
         m_lockState: 0
         m_monsterToKill: {fileID: 11400000, guid: 25e00185e50f675488bbf5ceb0b6ae63, type: 2}
@@ -41,3 +46,15 @@ MonoBehaviour:
         m_statToKillWith:
           value: MeleeDamage
         m_itemToKillWith: {fileID: 0}
+    00000001:
+      type: {class: NoPrimaryUsed_MissionCondition, ns: , asm: Assembly-CSharp}
+      data:
+        m_name: Don't fire your primary weapon
+        m_state: 0
+        m_lockState: 0
+    00000002:
+      type: {class: NoSecondaryUsed_MissionCondition, ns: , asm: Assembly-CSharp}
+      data:
+        m_name: Don't fire your secondary weapon
+        m_state: 0
+        m_lockState: 0
