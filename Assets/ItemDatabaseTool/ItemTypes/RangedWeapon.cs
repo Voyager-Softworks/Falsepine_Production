@@ -409,9 +409,9 @@ public class RangedWeapon : Item
             if (StatsManager.GetAllStatMods().Any(x => x.statType == StatsManager.StatType.SplashDamage)){
 
                 // calculate radius
-                float minRadius = 5.0f;
-                float dmgRadStart = 15.0f;
-                float maxRadius = 5.0f;
+                float minRadius = 2.5f;
+                float dmgRadStart = 9.0f;
+                float maxRadius = 6.0f;
                 float dmgRadEnd = 40.0f;
                 float radius = Mathf.Lerp(minRadius, maxRadius, Mathf.InverseLerp(dmgRadStart, dmgRadEnd, shotInfo.damage));
 
