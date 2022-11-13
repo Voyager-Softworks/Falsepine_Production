@@ -36,6 +36,7 @@ public class Mission : ScriptableObject
     [SerializeField] public bool m_lockOnFail = true;
     [SerializeField] private bool m_isLockedComplete = false;
     [SerializeField] private bool m_isLockedFail = false;
+    [SerializeField] private bool m_isLockedNotCurrent = false;
 
     public void OnSceneLoaded(Scene arg0, LoadSceneMode arg1){
         foreach (MissionCondition condition in m_conditions)
@@ -56,6 +57,18 @@ public class Mission : ScriptableObject
     public MissionCondition.ConditionState GetState(){
         if (m_lockOnComplete && m_isLockedComplete) return MissionCondition.ConditionState.COMPLETE;
         if (m_lockOnFail && m_isLockedFail) return MissionCondition.ConditionState.FAILED;
+        
+        // if not current mission, lock state
+        if (m_isLockedNotCurrent)
+        {
+            return MissionCondition.ConditionState.INCOMPLETE;
+        }
+        else if (MissionManager.instance?.GetCurrentMission() != this){
+            LockMissionNotCurrent();
+            return MissionCondition.ConditionState.INCOMPLETE;
+        }
+
+        
 
         UpdateState();
 
@@ -124,6 +137,28 @@ public class Mission : ScriptableObject
         foreach (MissionCondition condition in m_conditions)
         {
             condition.m_lockState = true;
+        }
+    }
+
+    public void LockMissionNotCurrent()
+    {
+        m_isLockedNotCurrent = true;
+
+        //lock all conditions
+        foreach (MissionCondition condition in m_conditions)
+        {
+            condition.m_lockState = true;
+        }
+    }
+
+    public void UnlockMissionNotCurrent()
+    {
+        m_isLockedNotCurrent = false;
+
+        //lock all conditions
+        foreach (MissionCondition condition in m_conditions)
+        {
+            condition.m_lockState = false;
         }
     }
 
