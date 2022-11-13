@@ -164,5 +164,18 @@ public class FadeScript : MonoBehaviour
         isEndFade = true;
         FadeFromClearToBlack(3.0f, 2.0f + _delay);
         m_trueCompleteFalseOver = _trueCompleteFalseOver;
+
+        // start a coroutine to ensure the next scene loads
+        StartCoroutine(EndScreenCoroutine(_time: 7.0f + _delay));
+    }
+
+    /// <summary>
+    /// Coroutine to ensure the next scene loads
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator EndScreenCoroutine(float _time)
+    {
+        yield return new WaitForSeconds(_time);
+        GotoDestination();
     }
 }
