@@ -196,6 +196,8 @@ public class MissionZone : ScriptableObject
 
         currentMission = _misison;
 
+        currentMission.UnlockMissionNotCurrent();
+
         // message
         if (MessageManager.instance)
         {
