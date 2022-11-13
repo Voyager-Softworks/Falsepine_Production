@@ -56,6 +56,12 @@ public class PlayerMovement : MonoBehaviour
 
     [HideInInspector] public UIScript uiScript;
 
+    [Header("AutoWalk")]
+    private Vector3 startPos = Vector3.zero;
+    public float walkDistance = 10.0f;
+    public float autoWalkSpeed = 3.0f;
+    public bool doAutoWalk = true;
+
     /// <summary>
     ///  Plays a footstep sound.
     /// </summary>
@@ -63,6 +69,19 @@ public class PlayerMovement : MonoBehaviour
     {
         int random = Random.Range(0, footstepSounds.Length);
         audioSource.PlayOneShot(footstepSounds[random]);
+    }
+
+    private void OnDrawGizmos() {
+        // draw a line from the player showing the walk distance and direction
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(transform.position, transform.position + transform.forward * walkDistance);
+
+        // draw a line backwards to the nearest collider
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, -transform.forward, out hit, 10.0f)) {
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position, hit.point);
+        }
     }
 
 
@@ -101,6 +120,8 @@ public class PlayerMovement : MonoBehaviour
         camRight = cam.transform.right;
         camRight.y = 0;
         camRight.Normalize();
+
+        startPos = transform.position;
     }
 
     private void OnEnable()
@@ -146,6 +167,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (doAutoWalk && AutoWalk()){
+            return;
+        }
+
         if (LevelController.IsPaused || ToggleableTownWindow.AnyWindowOpen())
         {
             DisableInput();
@@ -168,6 +193,54 @@ public class PlayerMovement : MonoBehaviour
         Move();
 
         UpdateUI();
+    }
+
+    /// <summary>
+    /// Auto walks into position for the level.
+    /// </summary>
+    /// <returns></returns>
+    private bool AutoWalk()
+    {
+        // if far enough away from back pos, stop
+        if (Vector3.Distance(transform.position, startPos) >= walkDistance){
+            doAutoWalk = false;
+            return false;
+        }
+
+        // if any input is pressed, stop auto walk
+        if (moveAction.ReadValue<Vector2>().magnitude > 0.1f){
+            doAutoWalk = false;
+            return false;
+        }
+
+        // auto walk into scene
+        _animator.SetBool("Aiming", false);
+        _animator.SetBool("Jogging", false);
+        _animator.SetBool("Running", false);
+
+        //apply movement
+        //transform.position += (moveDir * speed * Time.deltaTime);
+        _animator.SetLayerWeight(1, Mathf.Lerp(_animator.GetLayerWeight(1), 1, Time.deltaTime * 10f));
+        _animator.SetLayerWeight(2, Mathf.Lerp(_animator.GetLayerWeight(2), 1, Time.deltaTime * 10f));
+
+        Vector3 moveDir = transform.forward * autoWalkSpeed;
+        moveDir.y = -2.0f;
+
+        animVelocity = Vector3.Lerp(animVelocity, moveDir, Time.deltaTime * 10f);
+        
+        //calc signed magnitude of movement for right and forward
+        float rightMag = Vector3.Dot(transform.right, animVelocity.normalized);
+        float forwardMag = Vector3.Dot(transform.forward, animVelocity.normalized);
+        _animator.SetFloat("MoveSide", rightMag);
+        _animator.SetFloat("MoveForward", forwardMag);
+        
+        //set the look direction
+        SetLookDirection(transform.forward);
+
+        // move
+        controller.Move(moveDir * Time.deltaTime);
+
+        return true;
     }
 
     public void UpdateUI()
