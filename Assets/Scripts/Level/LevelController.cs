@@ -25,11 +25,18 @@ public class LevelController : MonoBehaviour
 
     static public void LoadMenu(bool _doSave = true)
     {
-        if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
+        if (FindObjectOfType<AsyncSceneLoader>() is AsyncSceneLoader loader)
+        {
+            loader.LoadScene("Menu", _doSave, true);
+        }
+        else
+        {
+            if (_doSave) SaveManager.SaveAll(SaveManager.currentSaveSlot);
 
-        DestroyManagers();
+            DestroyManagers();
 
-        SceneManager.LoadScene("Menu");
+            SceneManager.LoadScene("Menu");
+        }
     }
 
     static public void LoadTown(bool _doSave = true)
