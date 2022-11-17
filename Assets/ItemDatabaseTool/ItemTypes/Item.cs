@@ -540,8 +540,19 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
 
         FileStream file = File.Create(_path + _fileName);
 
+        // only store the true values of the item if this is in engine, otherwise we will need to steal the values from the database
         #if UNITY_EDITOR
         _item.PrefabsToResourceList();
+        #else
+        // get item from database
+        List<Item> possibleItems = ItemDatabase.GetItemsByName(_item.m_displayName);
+        // find item that matches the display name exactly
+        Item itemFromDatabase = possibleItems.Find(x => x.m_displayName == _item.m_displayName);
+        if (itemFromDatabase != null)
+        {
+            // copy resource links from database item
+            _item.m_resourceLinks = itemFromDatabase.m_resourceLinks;
+        }
         #endif
 
         //serialize item
