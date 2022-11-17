@@ -734,6 +734,30 @@ public class Console : ToggleableWindow, StatsManager.UsesStats
             return;
         }
 
+        // "preboss_scene"
+        if (split.Length == 1 && split[0] == "preboss_scene")
+        {
+            if (MissionManager.instance != null){
+                // get index of boss scene
+                int bossSceneIndex = MissionManager.instance.GetCurrentZone().GetSceneList().FindIndex(x => x == MissionManager.instance.GetCurrentZone().m_bossScene);
+                if (bossSceneIndex == -1){
+                    Log("- Boss scene not found");
+                    return;
+                }
+
+                // get preboss scene
+                Utilities.SceneField prebossScene = MissionManager.instance.GetCurrentZone().GetSceneList()[bossSceneIndex - 1];
+
+                LevelController.LoadScene(prebossScene.scenePath);
+
+                Log("- Preboss scene loading");
+            }
+            else{
+                Log("- MissionManager not found");
+            }
+            return;
+        }
+
         // "restart_scene"
         if (split.Length == 1 && split[0] == "restart_scene")
         {
