@@ -1,4 +1,4 @@
-using System;
+ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -118,7 +118,7 @@ public class BossEnemyHealth : EnemyHealth
         // message
         if (MessageManager.instance)
         {
-            MessageManager.instance.AddMessage("\nUnlock the next zone at camp", "exclaim", _doFade: false);
+            MessageManager.instance.AddMessage("\nNew hunt unlocked at camp", _doFade: false);
             // notify
             NotificationManager.instance?.AddIcon("monster", transform.position + Vector3.up * 2f);
         }
