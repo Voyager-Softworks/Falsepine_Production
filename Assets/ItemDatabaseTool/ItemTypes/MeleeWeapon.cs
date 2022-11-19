@@ -132,7 +132,7 @@ public class MeleeWeapon : Item
 
                         //calc then deal damage
                         float calcdDamage = StatsManager.CalculateDamage(this, m_damage);
-                        health.TakeDamage(new Health_Base.DamageStat(calcdDamage, _owner, m_damageTrans.position, m_damageTrans.position, this));
+                        health.TakeDamage(new Health_Base.DamageStat(calcdDamage, _owner, _owner.transform.position, m_damageTrans.position, this));
 
                         // play respective hit sound
                         if (health as EnemyHealth != null)

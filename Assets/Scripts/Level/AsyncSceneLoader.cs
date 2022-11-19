@@ -27,13 +27,13 @@ public class AsyncSceneLoader : MonoBehaviour
         }
     }
 
-    public void LoadScene(string sceneName, bool save = false)
+    public void LoadScene(string sceneName, bool save = false, bool destroyManagers = false)
     {
         if (!isSceneLoading)
         {
             loadingScreen.SetActive(true);
             isSceneLoading = true;
-            StartCoroutine(LoadSceneAsync(sceneName, save));
+            StartCoroutine(LoadSceneAsync(sceneName, save, destroyManagers));
 
             // close all toggle windows
             ToggleableWindow.CloseAllWindows();
@@ -43,7 +43,7 @@ public class AsyncSceneLoader : MonoBehaviour
         }
     }
 
-    IEnumerator LoadSceneAsync(string sceneName, bool save = false)
+    IEnumerator LoadSceneAsync(string sceneName, bool save = false, bool destroyManagers = false)
     {
         yield return new WaitForSeconds(1);
         //if (save) SaveManager.SaveAll(SaveManager.currentSaveSlot);
@@ -78,5 +78,9 @@ public class AsyncSceneLoader : MonoBehaviour
         }
         loadingScreen.SetActive(false);
         isSceneLoading = false;
+
+        if (destroyManagers){
+            LevelController.DestroyManagers();
+        }
     }
 }

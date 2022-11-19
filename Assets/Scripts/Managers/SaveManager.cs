@@ -169,6 +169,8 @@ public class SaveManager : MonoBehaviour
 
         // save stats
         if (StatsManager.instance != null) StatsManager.instance.SaveStats(saveSlot);
+
+        ItemDatabase.CleanUpFiles(saveSlot);
     }
 
     public static void LoadAll(int saveSlot)

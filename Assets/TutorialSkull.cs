@@ -38,6 +38,7 @@ public class TutorialSkull : MonoBehaviour
         currText = tutorialText[currLine]; // Set current text
         text.text = ""; // Set text to empty
         initRot = transform.rotation; // Set initial rotation
+        text.isOverlay = true; // Set text to overlay
     }
 
     // Update is called once per frame

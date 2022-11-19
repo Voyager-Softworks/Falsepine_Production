@@ -1,4 +1,4 @@
-using System;
+ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -118,9 +118,9 @@ public class BossEnemyHealth : EnemyHealth
         // message
         if (MessageManager.instance)
         {
-            MessageManager.instance.AddMessage("You defeated " + m_monsterType.m_name + "!", "journal", true);
+            MessageManager.instance.AddMessage("\nNew hunt unlocked at camp", _doFade: false);
             // notify
-            NotificationManager.instance?.AddIcon("ammo", transform.position + Vector3.up * 2f);
+            NotificationManager.instance?.AddIcon("monster", transform.position + Vector3.up * 2f);
         }
     }
 }
