@@ -551,9 +551,10 @@ public class Item : ScriptableObject, StatsManager.UsesStats, StatsManager.HasSt
         if (itemFromDatabase != null)
         {
             // copy resource links from database item
-            _item.m_resourceLinks = itemFromDatabase.m_resourceLinks;
+            _item.m_resourceLinks = new List<FieldResourceLink>(itemFromDatabase.m_resourceLinks);
         }
         #endif
+        
 
         //serialize item
         string json = JsonUtility.ToJson(_item, true);
