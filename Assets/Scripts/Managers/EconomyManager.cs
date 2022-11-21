@@ -122,6 +122,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
                 // create purchasable item
                 PurchasableItem purchasableItem = new PurchasableItem();
                 purchasableItem.m_item = (Item)item; // ensure to cast item to Item
+                if (purchasableItem.m_item != null) purchasableItem.m_item.ResourceListToPrefabs();
                 purchasableItem.m_minAmount = minAmount;
                 purchasableItem.m_maxAmount = maxAmount;
                 purchasableItem.m_unlocked = unlocked;
