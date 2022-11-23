@@ -113,7 +113,7 @@ public class StatsManager : MonoBehaviour
         public static StatType EnemyMaxHealth { get { return new StatType("EnemyMaxHealth", "Creature Health"); } }
         public static StatType EnemyDamageTaken { get { return new StatType("EnemyDamageTaken", "Creature Health"); } }
         public static StatType BossMaxHealth { get { return new StatType("BossMaxHealth", "Boss Health"); } }
-        public static StatType BossDamageTaken { get { return new StatType("BossDamageTaken"); } }
+        public static StatType BossDamageTaken { get { return new StatType("BossDamageTaken", "Boss Vulnerability"); } }
 
         // Economy
         public static StatType ItemCost { get { return new StatType("ItemCost"); } }
