@@ -352,6 +352,20 @@ public class MissionManager : MonoBehaviour
                 {
                     zone.m_talismansPerZone = int.MaxValue;
                 }
+
+                // make enemies deal 25% more damage, and have 50% more health:
+                // dmg
+                StatsManager.StatMod damageMod = new StatsManager.StatMod();
+                damageMod.statType = StatsManager.StatType.EnemyDamage;
+                damageMod.modType = StatsManager.ModType.Multiplier;
+                damageMod.value = 1.25f;
+                StatsManager.globalStatMods.Add(damageMod);
+                // health
+                StatsManager.StatMod healthMod = new StatsManager.StatMod();
+                healthMod.statType = StatsManager.StatType.EnemyMaxHealth;
+                healthMod.modType = StatsManager.ModType.Multiplier;
+                healthMod.value = 1.5f;
+                StatsManager.globalStatMods.Add(healthMod);
             }
         }
     }

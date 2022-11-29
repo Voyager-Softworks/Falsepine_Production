@@ -201,6 +201,8 @@ public class Health_Base : MonoBehaviour, StatsManager.UsesStats /// @todo Impli
 
     public virtual void Start()
     {
+        // set the current health to the max health
+        m_currentHealth = calcedMaxHealth;
         CheckMaxHealth();
         UpdateDeath();
 
