@@ -253,6 +253,7 @@ public class InventoryPannel : MonoBehaviour
         }
     }
 
+    private bool swapedE1 = false;
     /// <summary>
     /// What should happen when an item is clicked
     /// </summary>
@@ -265,6 +266,62 @@ public class InventoryPannel : MonoBehaviour
         if (InventoryManager.instance.TryMoveItem(_sourceInventory, _targetInventory, _sourceIndex)){
             // sound
             UIAudioManager.instance?.equipSound.Play();
+        }
+
+        // @TODO: Make this more dynamic and NOT hard coded
+        // if the target inventory is the player inventory, try swap out primary/seconday/eqiupment(2)/melee/artifact
+        else if (_targetInventory.id == "player"){
+            // if the weapon is a primary weapon, and there is something in the primary slot, swap it out
+            if (_itemDisplay.m_linkedItem is PrimaryRangedWeapon){
+                if (InventoryManager.instance.TryMoveItem(_targetInventory, _sourceInventory, 0)){
+                    if (InventoryManager.instance.TryMoveItem(_sourceInventory, _targetInventory, _sourceIndex)){
+                        // sound
+                        UIAudioManager.instance?.equipSound.Play();
+                    }
+                }
+            }
+
+            // if the weapon is a secondary weapon, and there is something in the secondary slot, swap it out
+            else if (_itemDisplay.m_linkedItem is SecondaryRangedWeapon){
+                if (InventoryManager.instance.TryMoveItem(_targetInventory, _sourceInventory, 1)){
+                    if (InventoryManager.instance.TryMoveItem(_sourceInventory, _targetInventory, _sourceIndex)){
+                        // sound
+                        UIAudioManager.instance?.equipSound.Play();
+                    }
+                }
+            }
+
+            // if the weapon is a equipment, and there is something in the equipment slot (both slots!), swap it out
+            else if (_itemDisplay.m_linkedItem is Equipment){
+                // ensure to alternate between the two slots with swapedE1
+                if (InventoryManager.instance.TryMoveItem(_targetInventory, _sourceInventory, (swapedE1 ? 2 : 3))){
+                        if (InventoryManager.instance.TryMoveItem(_sourceInventory, _targetInventory, _sourceIndex)){
+                            // sound
+                            UIAudioManager.instance?.equipSound.Play();
+                            swapedE1 = !swapedE1;
+                        }
+                    }
+            }
+
+            // if the weapon is a melee weapon, and there is something in the melee slot, swap it out
+            else if (_itemDisplay.m_linkedItem is MeleeWeapon){
+                if (InventoryManager.instance.TryMoveItem(_targetInventory, _sourceInventory, 4)){
+                    if (InventoryManager.instance.TryMoveItem(_sourceInventory, _targetInventory, _sourceIndex)){
+                        // sound
+                        UIAudioManager.instance?.equipSound.Play();
+                    }
+                }
+            }
+
+            // if the weapon is a artifact, and there is something in the artifact slot, swap it out
+            else if (_itemDisplay.m_linkedItem is Artifact){
+                if (InventoryManager.instance.TryMoveItem(_targetInventory, _sourceInventory, 5)){
+                    if (InventoryManager.instance.TryMoveItem(_sourceInventory, _targetInventory, _sourceIndex)){
+                        // sound
+                        UIAudioManager.instance?.equipSound.Play();
+                    }
+                }
+            }
         }
     }
 
