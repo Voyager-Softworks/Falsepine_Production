@@ -243,6 +243,8 @@ public class PlayerInventoryInterface : MonoBehaviour
             return;
         }
 
+        // if 3 is pressed, 
+
         RangedWeaponChecks();
         EquipmentChecks();
         MeleeChecks();
@@ -255,6 +257,18 @@ public class PlayerInventoryInterface : MonoBehaviour
         if (swapWeaponAction.triggered)
         {
             SwapWeapon();
+        }
+
+        // if 1 is pressed, select primary weapon
+        if (Keyboard.current.digit1Key.wasPressedThisFrame)
+        {
+            SelectWeapon(SelectedWeaponType.Primary);
+        }
+
+        // if 2 is pressed, select secondary weapon
+        if (Keyboard.current.digit2Key.wasPressedThisFrame)
+        {
+            SelectWeapon(SelectedWeaponType.Secondary);
         }
 
         if (selectedWeapon == null)
@@ -402,12 +416,12 @@ public class PlayerInventoryInterface : MonoBehaviour
     private void EquipmentChecks()
     {
         // use equipment_1
-        if (useEquipmentAction_1.triggered)
+        if (useEquipmentAction_1.triggered || Keyboard.current.digit3Key.wasPressedThisFrame)
         {
             SelectEquipment(1);
         }
         // use equipment_2
-        if (useEquipmentAction_2.triggered)
+        if (useEquipmentAction_2.triggered || Keyboard.current.digit4Key.wasPressedThisFrame)
         {
             SelectEquipment(2);
         }
@@ -415,7 +429,7 @@ public class PlayerInventoryInterface : MonoBehaviour
         {
             selectedEquipment.ManualUpdate(gameObject);
 
-            if ((useEquipmentAction_1.triggered || useEquipmentAction_2.triggered))
+            if ((useEquipmentAction_1.triggered || useEquipmentAction_2.triggered || Keyboard.current.digit3Key.wasPressedThisFrame || Keyboard.current.digit4Key.wasPressedThisFrame))
             {
                 Equipment equipment = selectedEquipment as Equipment;
                 if (equipment && equipment.currentStackSize > 0 && equipment.m_useDelayTimer <= 0 && m_currentlyThrowingItem == null)
@@ -540,7 +554,7 @@ public class PlayerInventoryInterface : MonoBehaviour
             playerAnimator.SetLayerWeight(2, 1);
 
             // if throw key is held down
-            if (useEquipmentAction_1.ReadValue<float>() > 0 || useEquipmentAction_2.ReadValue<float>() > 0)
+            if (useEquipmentAction_1.ReadValue<float>() > 0 || useEquipmentAction_2.ReadValue<float>() > 0 || Keyboard.current.digit3Key.isPressed || Keyboard.current.digit4Key.isPressed)
             {
                 // set animator bool to true
                 playerAnimator.SetBool("Throw", true);

@@ -62,6 +62,8 @@ public class PlayerMovement : MonoBehaviour
     public float autoWalkSpeed = 3.0f;
     public bool doAutoWalk = true;
 
+    private bool m_ignoringEnemyCollisions = false;
+
     /// <summary>
     ///  Plays a footstep sound.
     /// </summary>
@@ -359,6 +361,8 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            IgnoreEnemyCollision(false);
+
             rollTimer = 0;
             if (rollDelayTimer > 0)
             {
@@ -437,6 +441,40 @@ public class PlayerMovement : MonoBehaviour
 
             lastMoveDir = moveDir;
         }
+    }
+
+    /// <summary>
+    /// Changes how the player colliders interact with enemy colliders
+    /// </summary>
+    private void IgnoreEnemyCollision(bool _ignore = true)
+    {
+        if (m_ignoringEnemyCollisions == _ignore) return;
+
+        // change collision with enemies:
+        // get all colliders in children
+        List<Collider> playerColliders = new List<Collider>();
+        playerColliders.AddRange(GetComponentsInChildren<Collider>());
+
+        // get all enemy colliders
+        List<Collider> enemyColliders = new List<Collider>();
+        foreach (Health_Base enemy in Health_Base.allHealths)
+        {
+            if (enemy as EnemyHealth == null) continue;
+
+            // add all children colliders
+            playerColliders.AddRange(enemy.GetComponentsInChildren<Collider>());
+        }
+
+        // change collisions
+        foreach (Collider playerCollider in playerColliders)
+        {
+            foreach (Collider enemyCollider in enemyColliders)
+            {
+                Physics.IgnoreCollision(playerCollider, enemyCollider, _ignore);
+            }
+        }
+
+        m_ignoringEnemyCollisions = _ignore;
     }
 
     /// <summary>
@@ -530,6 +568,9 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //transform.rotation = Quaternion.LookRotation(rollDir);
+
+        
+        IgnoreEnemyCollision(true);
 
         rollTimer = rollTime;
         rollInvincibilityTimer = rollInvincibilityTime;
