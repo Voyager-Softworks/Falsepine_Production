@@ -195,13 +195,6 @@ public class PlayerMovement : MonoBehaviour
         Move();
 
         UpdateUI();
-
-        // if character controller is colliding with a prop, debug log
-        if (controller.collisionFlags == CollisionFlags.CollidedSides)
-        {
-            Debug.Log("Collided with prop");
-        }
-
     }
 
     /// <summary>
