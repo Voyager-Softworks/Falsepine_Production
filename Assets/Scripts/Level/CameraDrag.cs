@@ -15,16 +15,21 @@ public class CameraDrag : MonoBehaviour
     public InputAction m_vertInput;
     public InputAction m_boostInput;
 
-    public float m_keySpeed = 2.0f;
+    [Header("Movement")]
+    public float m_keySpeed = 40.0f;
     public float m_boostMulti = 2.0f;
     public Vector3 m_velocity = Vector3.zero;
 
 
-    public float dragSpeed = 2;
+    public float dragSpeed = 40.0f;
     private Vector3 dragOrigin;
 
     public Vector3 center = new Vector3(0, 0, 0);
     public float maxDistance = 10;
+
+    [Header("Edge Scrolling")]
+    public float m_edgeScrollSpeed = 40.0f;
+    public float m_edgeScrollPercent = 0.1f;
 
     private Vector3 m_targetPosition;
 
@@ -83,11 +88,11 @@ public class CameraDrag : MonoBehaviour
 
             CheckDrag();
 
+            CheckMouseEdgeScroll();
+
             //lerp to update position
             transform.position = m_targetPosition;
         }
-
-        
     }
 
     /// <summary>
@@ -157,6 +162,61 @@ public class CameraDrag : MonoBehaviour
         m_velocity = Vector3.Lerp(m_velocity, move, Time.deltaTime * 10.0f);
         
         m_targetPosition = transform.position + m_velocity;
+    }
+
+    /// <summary>
+    /// If mouse is near edge of screen, move camera in that direction (if not dragging or using keys)
+    /// </summary>
+    private void CheckMouseEdgeScroll()
+    {
+        // check if dragging or using keys
+        if (Mouse.current.rightButton.isPressed || m_horizInput.ReadValue<float>() != 0 || m_vertInput.ReadValue<float>() != 0) return;
+
+        // get pos
+        Vector3 currentMousePos = Mouse.current.position.ReadValue();
+
+        // check if mouse is off screen, if so, return
+        if (currentMousePos.x < 0 || currentMousePos.x > Screen.width || currentMousePos.y < 0 || currentMousePos.y > Screen.height) return;
+
+        // check if window is not focused, if so, return
+        if (!Application.isFocused) return;
+
+        // vars
+        Vector3 xMove = Vector3.zero;
+        Vector3 zMove = Vector3.zero;
+        float multi = 1;
+
+        // check if mouse is near edge of screen
+        if (currentMousePos.x < Screen.width * m_edgeScrollPercent)
+        {
+            xMove = -transform.right * m_edgeScrollSpeed * Time.deltaTime;
+        }
+        else if (currentMousePos.x > Screen.width * (1 - m_edgeScrollPercent))
+        {
+            xMove = transform.right * m_edgeScrollSpeed * Time.deltaTime;
+        }
+        if (currentMousePos.y < Screen.height * m_edgeScrollPercent)
+        {
+            zMove = -transform.forward * m_edgeScrollSpeed * Time.deltaTime;
+        }
+        else if (currentMousePos.y > Screen.height * (1 - m_edgeScrollPercent))
+        {
+            zMove = transform.forward * m_edgeScrollSpeed * Time.deltaTime;
+        }
+
+        // boost
+        if (m_boostInput.ReadValue<float>() != 0)
+        {
+            multi = m_boostMulti;
+        }
+
+        // set y to 0
+        xMove.y = 0;
+        zMove.y = 0;
+
+        // set target position
+        Vector3 move = (xMove + zMove).normalized * Mathf.Max(xMove.magnitude, zMove.magnitude) * multi;
+        m_velocity = Vector3.Lerp(m_velocity, move, Time.deltaTime * 10.0f);
     }
 
 }

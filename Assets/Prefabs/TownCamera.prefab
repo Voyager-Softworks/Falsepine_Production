@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8374498478448252562}
   - component: {fileID: 8374498478448252561}
   - component: {fileID: 8374498478448252560}
+  - component: {fileID: 8374498480046805718}
   m_Layer: 0
   m_Name: TownCamera
   m_TagString: MainCamera
@@ -60,7 +61,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 25
+  field of view: 30
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -301,6 +302,42 @@ MonoBehaviour:
   dragSpeed: 40
   center: {x: 0, y: 0, z: 0}
   maxDistance: 50
+  m_edgeScrollSpeed: 60
+  m_edgeScrollPercent: 0.075
+--- !u!114 &8374498480046805718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8374498478448252567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d9686decaef06b4092711834f3bb254, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zoomAction:
+    m_Name: Zoom
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 7d0eb695-50a2-404c-aafb-58c982579b55
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 79b356df-57ae-4b81-b9d1-a6477a19bd67
+      m_Path: <Mouse>/scroll/y
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Zoom
+      m_Flags: 0
+    m_Flags: 0
+  currentZoom: 30
+  minZoom: 10
+  maxZoom: 40
+  zoomAmount: 10
+  zoomSpeed: 5
 --- !u!1 &8374498478594383173
 GameObject:
   m_ObjectHideFlags: 0
