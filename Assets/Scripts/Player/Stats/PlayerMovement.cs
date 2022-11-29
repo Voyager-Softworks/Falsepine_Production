@@ -195,6 +195,13 @@ public class PlayerMovement : MonoBehaviour
         Move();
 
         UpdateUI();
+
+        // if character controller is colliding with a prop, debug log
+        if (controller.collisionFlags == CollisionFlags.CollidedSides)
+        {
+            Debug.Log("Collided with prop");
+        }
+
     }
 
     /// <summary>
@@ -764,5 +771,28 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    private void OnControllerColliderHit(ControllerColliderHit hit) {
+        // if rolling, break props
+        if (!isRolling) return;
 
+        // get prophealth from parents and children
+        PropHealth prop = hit.gameObject.GetComponentInParent<PropHealth>() ?? hit.gameObject.GetComponentInChildren<PropHealth>();
+        // if not found, return
+        if (prop == null) return;
+
+        // ignore explosive props
+        if (prop.GetComponent<ExplodeOnDeath>() != null) return;
+
+        // check distance to prop
+        if (Vector3.Distance(prop.transform.position, transform.position) > 4f) return;
+
+        // deal damage equal to full health
+        prop.TakeDamage(new Health_Base.DamageStat(
+            prop.m_currentHealth, 
+            gameObject, 
+            transform.position, 
+            prop.transform.position,
+            new List<StatsManager.StatType>() { StatsManager.StatType.PlayerDamage}
+            ));
+    }
 }
