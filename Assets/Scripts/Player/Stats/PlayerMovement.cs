@@ -462,7 +462,7 @@ public class PlayerMovement : MonoBehaviour
             if (enemy as EnemyHealth == null) continue;
 
             // add all children colliders
-            playerColliders.AddRange(enemy.GetComponentsInChildren<Collider>());
+            enemyColliders.AddRange(enemy.GetComponentsInChildren<Collider>());
         }
 
         // change collisions
