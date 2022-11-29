@@ -114,7 +114,11 @@ public class UIScript : MonoBehaviour
                     string spareAmmoText = "";
                     if (primaryWeapon.m_unlimitedAmmo) spareAmmoText = "∞";
                     else spareAmmoText = primaryWeapon.m_spareAmmo.ToString();
-                    ammoText_1.text = primaryWeapon.m_clipAmmo + "/" + spareAmmoText;
+                    // colour the clip text if the value is 0
+                    if (primaryWeapon.m_clipAmmo <= 0) ammoText_1.color = Color.red;
+                    else ammoText_1.color = Color.white;
+                    // add "RELOAD!" if the clip is empty and the player has spare ammo, or "EMPTY!" if the player has no spare ammo
+                    ammoText_1.text = primaryWeapon.m_clipAmmo + "/" + spareAmmoText /* + (primaryWeapon.m_clipAmmo <= 0 && primaryWeapon.m_spareAmmo > 0 ? " RELOAD!" : primaryWeapon.m_clipAmmo <= 0 && primaryWeapon.m_spareAmmo <= 0 ? " EMPTY!" : "") */;
 
                     // set weapon effect icon
                     if (primaryWeapon.m_tempAmmoStats.Count > 0)
@@ -152,7 +156,11 @@ public class UIScript : MonoBehaviour
                     string spareAmmoText = "";
                     if (secondaryWeapon.m_unlimitedAmmo) spareAmmoText = "∞";
                     else spareAmmoText = secondaryWeapon.m_spareAmmo.ToString();
-                    ammoText_2.text = secondaryWeapon.m_clipAmmo + "/" + spareAmmoText;
+                    // colour the clip text if the value is 0
+                    if (secondaryWeapon.m_clipAmmo <= 0) ammoText_2.color = Color.red;
+                    else ammoText_2.color = Color.white;
+                    // add "RELOAD!" if the clip is empty and the player has spare ammo, or "EMPTY!" if the player has no spare ammo
+                    ammoText_2.text = secondaryWeapon.m_clipAmmo + "/" + spareAmmoText /* + (secondaryWeapon.m_clipAmmo <= 0 && secondaryWeapon.m_spareAmmo > 0 ? " RELOAD!" : (secondaryWeapon.m_clipAmmo <= 0 && secondaryWeapon.m_spareAmmo <= 0 ? " EMPTY!" : "")) */;
 
                     // set weapon effect icon
                     if (secondaryWeapon.m_tempAmmoStats.Count > 0)

@@ -506,6 +506,24 @@ public class RangedWeapon : Item
         {
             GameObject sound = Instantiate(m_shootSound, originPoint, Quaternion.identity);
             Destroy(sound, 2.0f);
+
+            // if ammo is last round, set the pitch of the sound to 1.5x (and not single shot)
+            if (m_clipAmmo <= 1 && m_clipSize > 2)
+            {
+                AutoSound auto = sound.GetComponent<AutoSound>();
+                if (auto != null)
+                {
+                    auto.minPitch *= 1.3f;
+                    auto.maxPitch *= 1.3f;
+                }
+
+                // play empty sound
+                if (m_emptySound != null)
+                {
+                    GameObject emptySound = Instantiate(m_emptySound, originPoint, Quaternion.identity);
+                    Destroy(emptySound, 2.0f);
+                }
+            }
         }
 
         //Trigger auditory event on all sensors in range:
