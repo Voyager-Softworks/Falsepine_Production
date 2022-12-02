@@ -18,17 +18,32 @@ public class ScreamerRipple : MonoBehaviour
     float timer = 0f; //The timer for the ripple
     bool doDamage = true; //Whether or not to do damage
 
+    [Header("AOE persist settings")]
+    public float persistTime = 5.0f; //The time to persist after creature is dead
+    private float persistTimer = 0.0f; //The timer for persisting
+    private bool hasStopped = false; //Whether or not the ripple has stopped
+    private EnemyHealth enemyHealth;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         decalProjector = GetComponentInChildren<DecalProjector>(); //Get the decal projector component
-        decalProjector.size = new Vector3(range * 3, range * 3, 1f); //Set the size of the decal projector
+        if (decalProjector != null)
+        {
+            decalProjector.size = new Vector3(range * 3, range * 3, 1f); //Set the size of the decal projector
+        }
+
+        enemyHealth = GetComponentInParent<EnemyHealth>(); //Get the enemy health component
+        persistTimer = persistTime; //Set the persist timer
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (hasStopped) return;
+
         timer += Time.deltaTime; //Increment the timer
         if (timer > duration)
         {
@@ -53,6 +68,27 @@ public class ScreamerRipple : MonoBehaviour
             }
         }
         float t = timer / duration; //Get the time as a percentage
-        decalProjector.fadeFactor = opacityCurve.Evaluate(t); //Set the fade factor of the decal projector
+        if (decalProjector != null && opacityCurve != null)
+        {
+            decalProjector.fadeFactor = opacityCurve.Evaluate(t); //Set the fade factor of the decal projector
+        }
+
+
+        // death check
+        if (enemyHealth != null && enemyHealth.hasDied)
+        {
+            persistTimer -= Time.deltaTime;
+            if (persistTimer <= 0.0f)
+            {
+                // stop all particles
+                ParticleSystem[] particleSystems = GetComponentsInChildren<ParticleSystem>();
+                foreach (ParticleSystem particleSystem in particleSystems)
+                {
+                    particleSystem.Stop();
+                }
+
+                hasStopped = true;
+            }
+        }
     }
 }
