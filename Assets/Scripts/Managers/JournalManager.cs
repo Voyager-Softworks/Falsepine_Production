@@ -479,6 +479,8 @@ public class JournalManager : ToggleableWindow
     // Toggleable Window overrides
     public override bool IsOpen()
     {
+        if (journalPanel == null) return false;
+
         return journalPanel.activeSelf;
     }
     public override void OpenWindow()

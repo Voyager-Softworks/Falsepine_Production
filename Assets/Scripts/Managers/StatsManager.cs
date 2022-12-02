@@ -1082,7 +1082,7 @@ public class StatsManager : MonoBehaviour
         // load drink mods
         activeDrinks = new List<Drink>(data.activeDrinks);
         // load possible talisman mods
-        m_possibleTalismanMods = new List<StatModRange>(data.possibleTalismanMods);
+        //m_possibleTalismanMods = new List<StatModRange>(data.possibleTalismanMods);
         // load active talismans
         m_activeTalismans = new List<Talisman>(data.activeTalismans);
         // load monster stats
@@ -1133,7 +1133,8 @@ public class StatsManager : MonoBehaviour
         SaveData data = JsonUtility.FromJson<SaveData>(json);
 
         // load possible talisman mods
-        m_possibleTalismanMods = new List<StatModRange>(data.possibleTalismanMods);
+        //m_possibleTalismanMods = new List<StatModRange>(data.possibleTalismanMods);
+        
         // load monster stats
         m_monsterStats = new List<MonsterStat>();
         foreach (MonsterStat.SerializableMonsterStat serializableMonsterStat in data.monsterStats)
