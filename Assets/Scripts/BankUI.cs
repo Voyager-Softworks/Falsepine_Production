@@ -12,6 +12,7 @@ public class BankUI : MonoBehaviour
     public Button m_upgradeButton;
     public TextMeshProUGUI m_upgradeText;
     public TextMeshProUGUI m_upgradeCostText;
+    public Image m_silverImage;
 
     // Start is called before the first frame update
     void Start()
@@ -44,7 +45,9 @@ public class BankUI : MonoBehaviour
             m_upgradeButton.interactable = false;
             // update text
             m_upgradeText.text = "MAX LEVEL";
-            m_upgradeCostText.text = "";
+            // disable cost text and image
+            m_upgradeCostText.gameObject.SetActive(false);
+            m_silverImage.gameObject.SetActive(false);
         }
         else
         {
@@ -52,6 +55,9 @@ public class BankUI : MonoBehaviour
             // update text
             m_upgradeText.text = "UPGRADE";
             m_upgradeCostText.text = EconomyManager.instance.m_bankUpgradeCost.ToString();
+            // enable cost text and image
+            m_upgradeCostText.gameObject.SetActive(true);
+            m_silverImage.gameObject.SetActive(true);
         }
     }
 
