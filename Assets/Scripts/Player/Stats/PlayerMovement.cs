@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
 {
 
     [Header("Movement")]
-    public bool m_disableGamepadMovement = true;
+    public bool m_disableGamepadMovement = false;
     public Animator _animator; ///< The animator for the player.
     CharacterController controller; ///< The character controller for the player.
     DynamicVaulting dynamicVaulting; ///< The dynamic vaulting script for the player.
@@ -73,14 +73,16 @@ public class PlayerMovement : MonoBehaviour
         audioSource.PlayOneShot(footstepSounds[random]);
     }
 
-    private void OnDrawGizmos() {
+    private void OnDrawGizmos()
+    {
         // draw a line from the player showing the walk distance and direction
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position, transform.position + transform.forward * walkDistance);
 
         // draw a line backwards to the nearest collider
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, -transform.forward, out hit, 10.0f)) {
+        if (Physics.Raycast(transform.position, -transform.forward, out hit, 10.0f))
+        {
             Gizmos.color = Color.green;
             Gizmos.DrawLine(transform.position, hit.point);
         }
@@ -169,7 +171,8 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (doAutoWalk && AutoWalk()){
+        if (doAutoWalk && AutoWalk())
+        {
             return;
         }
 
@@ -204,13 +207,15 @@ public class PlayerMovement : MonoBehaviour
     private bool AutoWalk()
     {
         // if far enough away from back pos, stop
-        if (Vector3.Distance(transform.position, startPos) >= walkDistance){
+        if (Vector3.Distance(transform.position, startPos) >= walkDistance)
+        {
             doAutoWalk = false;
             return false;
         }
 
         // if any input is pressed, stop auto walk
-        if (moveAction.ReadValue<Vector2>().magnitude > 0.1f){
+        if (moveAction.ReadValue<Vector2>().magnitude > 0.1f)
+        {
             doAutoWalk = false;
             return false;
         }
@@ -229,13 +234,13 @@ public class PlayerMovement : MonoBehaviour
         moveDir.y = -2.0f;
 
         animVelocity = Vector3.Lerp(animVelocity, moveDir, Time.deltaTime * 10f);
-        
+
         //calc signed magnitude of movement for right and forward
         float rightMag = Vector3.Dot(transform.right, animVelocity.normalized);
         float forwardMag = Vector3.Dot(transform.forward, animVelocity.normalized);
         _animator.SetFloat("MoveSide", rightMag);
         _animator.SetFloat("MoveForward", forwardMag);
-        
+
         //set the look direction
         SetLookDirection(transform.forward);
 
@@ -415,15 +420,15 @@ public class PlayerMovement : MonoBehaviour
                 _animator.SetFloat("MoveForward", forwardMag);
                 //calc the direction to look
                 Vector3 lookDir;
-                // if (Gamepad.current != null)
-                // {
-                //     lookDir = GetGamepadAimPoint() - transform.position;
-                // }
-                // else
-                // {
-                //     lookDir = GetMouseAimPlanePoint() - transform.position;
-                // }
-                lookDir = GetMouseAimPlanePoint() - transform.position;
+                if (Gamepad.current != null)
+                {
+                    lookDir = GetGamepadAimPoint() - transform.position;
+                }
+                else
+                {
+                    lookDir = GetMouseAimPlanePoint() - transform.position;
+                }
+                //lookDir = GetMouseAimPlanePoint() - transform.position;
 
 
                 // Look at the look direction
@@ -569,7 +574,7 @@ public class PlayerMovement : MonoBehaviour
 
         //transform.rotation = Quaternion.LookRotation(rollDir);
 
-        
+
         IgnoreEnemyCollision(true);
 
         rollTimer = rollTime;
@@ -631,7 +636,11 @@ public class PlayerMovement : MonoBehaviour
         //find where ray intersects on the plane at gun height
         Plane playerPlane = new Plane(Vector3.up, firePoint);
         float rayDistance;
-        if (playerPlane.Raycast(ray, out rayDistance))
+        if (Gamepad.current != null && Gamepad.current.rightStick.ReadValue().magnitude > 0.1f)
+        {
+            mousePlanePoint = GetGamepadAimPoint();
+        }
+        else if (playerPlane.Raycast(ray, out rayDistance))
         {
             //get mouse hit pos
             Vector3 hitPoint = ray.GetPoint(rayDistance);
@@ -764,7 +773,8 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit) {
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
         // if rolling, break props
         if (!isRolling) return;
 
@@ -781,11 +791,11 @@ public class PlayerMovement : MonoBehaviour
 
         // deal damage equal to full health
         prop.TakeDamage(new Health_Base.DamageStat(
-            prop.m_currentHealth, 
-            gameObject, 
-            transform.position, 
+            prop.m_currentHealth,
+            gameObject,
+            transform.position,
             prop.transform.position,
-            new List<StatsManager.StatType>() { StatsManager.StatType.PlayerDamage}
+            new List<StatsManager.StatType>() { StatsManager.StatType.PlayerDamage }
             ));
     }
 }
