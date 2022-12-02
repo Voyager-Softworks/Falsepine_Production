@@ -491,7 +491,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
 
         // retain a portion of the player's silver (min 50)
         float percent = GetSilverRetainPercentage();
-        m_playerSilver = Mathf.Max((int)(data.m_playerSilver * percent), 50);
+        m_playerSilver = Mathf.Max((int)(data.m_playerSilver * percent), 70);
 
         // save
         SaveEconomy(_saveSlot);
