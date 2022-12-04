@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class MenuUI : MonoBehaviour
 {
@@ -54,31 +55,9 @@ public class MenuUI : MonoBehaviour
             deleteSaveButton.GetComponentInChildren<TextMeshProUGUI>().text = "Delete Save";
         }
 
-        // if mouse is over any buttons, enable the last image
-        Vector2 mousePos = Mouse.current.position.ReadValue();
-
-        if (playButton.GetComponent<RectTransform>().rect.Contains(playButton.transform.InverseTransformPoint(mousePos))){
-            playButtonImage.enabled = true;
-            playButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
-        } else {
-            playButtonImage.enabled = false;
-            playButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
-        }
-
-        if (deleteSaveButton.GetComponent<RectTransform>().rect.Contains(deleteSaveButton.transform.InverseTransformPoint(mousePos))){
-            deleteSaveButtonImage.enabled = true;
-            deleteSaveButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
-        } else {
-            deleteSaveButtonImage.enabled = false;
-            deleteSaveButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
-        }
-
-        if (quitButton.GetComponent<RectTransform>().rect.Contains(quitButton.transform.InverseTransformPoint(mousePos))){
-            quitButtonImage.enabled = true;
-            quitButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.red;
-        } else {
-            quitButtonImage.enabled = false;
-            quitButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.white;
+        // if nothing is selected, select play button
+        if (EventSystem.current.currentSelectedGameObject == null) {
+            EventSystem.current.SetSelectedGameObject(playButton.gameObject);
         }
     }
 

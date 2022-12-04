@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class BrightnessControls : MonoBehaviour
 {
@@ -44,5 +45,13 @@ public class BrightnessControls : MonoBehaviour
     void Update()
     {
 
+    }
+
+    private void OnEnable() {
+        EventSystem.current.SetSelectedGameObject(brightnessSlider.gameObject);
+    }
+
+    private void OnDisable() {
+        EventSystem.current.SetSelectedGameObject(null);
     }
 }
