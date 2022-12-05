@@ -29,18 +29,13 @@ public class CustomInputManager : MonoBehaviour
     }
 
     private static void OnInputEvent(InputEventPtr eventPtr, InputDevice device) {
+        // if not play mode, ignore
+        if (Application.isPlaying == false) {
+            return;
+        }
+
         if (gamepadCursorAllowed && device is Gamepad) {
             lastInputWasGamepad = true;
-
-            // // move cursor based on gamepad input
-            // Vector2 move = Gamepad.current.rightStick.ReadValue();
-
-            // if (move.magnitude > 0.1f) {
-            //     Vector3 pos = Mouse.current.position.ReadValue();
-            //     pos.x += move.x * 100;
-            //     pos.y += move.y * 100;
-            //     Mouse.current.WarpCursorPosition(pos);
-            // }
         } 
         else {
             // if gamepad was last input, remove currently selected object

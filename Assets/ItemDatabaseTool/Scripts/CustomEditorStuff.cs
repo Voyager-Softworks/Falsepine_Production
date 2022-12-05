@@ -49,24 +49,30 @@ public class CustomEditorStuff
         }
     }
 
+
     // open all scenes in build list, find InputSystemUIInputModule, set ActionAsset to the asset "CustomInputActionAsset" in Assets/, and save scene
     [MenuItem("Dev/Set InputSystemUIInputModule ActionAsset")]
     public static void SetInputSystemUIInputModuleActionAsset()
     {
         // get all scenes in build list
-        string[] scenes = AssetDatabase.FindAssets("t:Scene", new string[] { "Assets/Scenes" });
+        List<string> scenes = new List<string>();
+        foreach(EditorBuildSettingsScene scene in EditorBuildSettings.scenes)
+        {
+            if(scene.enabled) {
+                scenes.Add(scene.path);
+            }
+        }
         foreach (string scene in scenes)
         {
-            string path = AssetDatabase.GUIDToAssetPath(scene);
-            SceneAsset sa = AssetDatabase.LoadAssetAtPath<SceneAsset>(path);
-            if (sa == null){
-                Debug.LogError("Could not load scene at path: " + path);
-                continue;
-            }
+            string path = scene;
             // open scene
             EditorSceneManager.OpenScene(path);
             // find InputSystemUIInputModule under EventSystem object
             UnityEngine.EventSystems.EventSystem es = GameObject.FindObjectOfType<UnityEngine.EventSystems.EventSystem>();
+            if (es == null){
+                Debug.LogError("Could not find EventSystem in scene: " + path);
+                continue;
+            }
             UnityEngine.InputSystem.UI.InputSystemUIInputModule inputModule = es.GetComponent<UnityEngine.InputSystem.UI.InputSystemUIInputModule>();
             if (inputModule == null){
                 Debug.LogError("Could not find InputSystemUIInputModule in scene: " + path);
