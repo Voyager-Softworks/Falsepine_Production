@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
+using UnityEngine.EventSystems;
 
 public class TutorialPopup : MonoBehaviour
 {
@@ -26,6 +27,9 @@ public class TutorialPopup : MonoBehaviour
     private void OnEnable() {
         acceptButton.onClick.AddListener(OnAcceptTutorial);
         declineButton.onClick.AddListener(OnDeclineTutorial);
+
+        // select accept button
+        EventSystem.current.SetSelectedGameObject(acceptButton.gameObject);
     }
 
     private void OnDisable() {

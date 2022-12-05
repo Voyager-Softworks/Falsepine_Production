@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 /// <summary>
 /// Manages opening and closing the "pause" menu.
@@ -14,16 +15,19 @@ public class PauseMenu : ToggleableWindow
 
     public GameObject PausePanel;
 
-    public Button TownButton;
-    public Button MenuButton;
-
     [Header("Windows")]
+    public GameObject BaseButtons;
     public GameObject AudioSettingsWindow;
     public GameObject VideoSettingsWindow;
+    public GameObject ControlsWindow;
     public GameObject AimZoneSettingsWindow;
+    private List<GameObject> windows = new List<GameObject>(){};
 
     [Header("Buttons")]
+    public Button ResumeButton;
     public Button AimZoneSettingsButton;
+    public Button TownButton;
+    public Button MenuButton;
 
     private ExitGate exitGate;
 
@@ -43,6 +47,13 @@ public class PauseMenu : ToggleableWindow
         if (aimZone == null){
             aimZone = FindObjectOfType<AimZone>();
         }
+
+        // add windows to list
+        windows.Clear();
+        windows.Add(AudioSettingsWindow);
+        windows.Add(VideoSettingsWindow);
+        windows.Add(ControlsWindow);
+        windows.Add(AimZoneSettingsWindow);
     }
 
     protected override void OnDisable() {
@@ -104,6 +115,23 @@ public class PauseMenu : ToggleableWindow
             AimZoneSettingsButton.interactable = true;
             AimZoneSettingsButton.GetComponentInChildren<TextMeshProUGUI>().text = "Aim Zone";
         }
+
+        // if none of the windows are open, enable the base buttons
+        if (windows.TrueForAll(window => window.activeSelf == false)) {
+            BaseButtons.SetActive(true);
+        }
+        else{
+            BaseButtons.SetActive(false);
+        }
+
+        // if gamepad in use, and currently selected object is not a child of this, select button
+        if (
+            CustomInputManager.LastInputWasGamepad && 
+            (EventSystem.current.currentSelectedGameObject == null || EventSystem.current.currentSelectedGameObject.activeInHierarchy == false || EventSystem.current.currentSelectedGameObject.transform.IsChildOf(transform) == false) &&
+            IsOpen()
+        ) {
+            EventSystem.current.SetSelectedGameObject(ResumeButton.gameObject);
+        }
     }
 
     public override bool IsOpen()
@@ -136,6 +164,7 @@ public class PauseMenu : ToggleableWindow
 
         AudioSettingsWindow.SetActive(false);
         VideoSettingsWindow.SetActive(false);
+        ControlsWindow.SetActive(false);
         AimZoneSettingsWindow.SetActive(false);
 
         // unpause the game

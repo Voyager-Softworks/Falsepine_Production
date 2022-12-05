@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem.LowLevel;
 
 /// <summary>
 /// Manages the display of the custom cursor.
@@ -71,9 +72,29 @@ public class CursorScript : MonoBehaviour
                 return;
             }
 
-
             //get mouse pos
             Vector2 mousePos = Mouse.current.position.ReadValue();
+
+            if (CustomInputManager.GamepadCursorAllowed && CustomInputManager.LastInputWasGamepad){
+                // move cursor based on gamepad input
+                Vector2 move = Gamepad.current.rightStick.ReadValue();
+
+                // if left trigger is pressed, move cursor slower
+                if (Gamepad.current.leftTrigger.ReadValue() > 0.1f) {
+                    move *= 0.25f;
+                }
+
+                if (move.magnitude > 0.1f) {
+                    float gamepadCursorSpeed = PlayerPrefs.GetFloat("gamepadCursorSpeed", 25f);
+                    gamepadCursorSpeed = Mathf.Lerp(10, 100, gamepadCursorSpeed);
+                    mousePos.x += move.x * gamepadCursorSpeed;
+                    mousePos.y += move.y * gamepadCursorSpeed;
+                    Mouse.current.WarpCursorPosition(mousePos);
+
+                    InputState.Change(Mouse.current.position, mousePos);
+                }
+            }
+
             //set cursor pos
             cursorImage.transform.position = mousePos;
         }
