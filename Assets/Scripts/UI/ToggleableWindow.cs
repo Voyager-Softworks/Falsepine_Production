@@ -105,4 +105,24 @@ public class ToggleableWindow : MonoBehaviour
         }
         return false;
     }
+
+    public static bool AnyOpenedThisFrame(){
+        // get all toggleable windows
+        foreach(ToggleableWindow window in windows){
+            if (window.m_wasOpenedThisFrame){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static bool AnyClosedThisFrame(){
+        // get all toggleable windows
+        foreach(ToggleableWindow window in windows){
+            if (window.m_wasClosedThisFrame){
+                return true;
+            }
+        }
+        return false;
+    }
 }
