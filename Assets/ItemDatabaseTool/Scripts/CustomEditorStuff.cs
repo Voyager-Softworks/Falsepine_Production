@@ -85,6 +85,13 @@ public class CustomEditorStuff
         }
     }
 
+    // delete all player prefs
+    [MenuItem("Dev/Delete All Player Prefs")]
+    public static void DeleteAllPlayerPrefs()
+    {
+        PlayerPrefs.DeleteAll();
+    }
+
 }
 
 

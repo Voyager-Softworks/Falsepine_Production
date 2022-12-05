@@ -41,7 +41,7 @@ public class TutorialPopup : MonoBehaviour
     void Update()
     {
         // if escape is pressed, close window
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        if (Keyboard.current.escapeKey.wasPressedThisFrame || Gamepad.current.buttonEast.wasPressedThisFrame)
         {
             OnDeclineTutorial();
         }

@@ -26,7 +26,7 @@ public class ToggleableWindow : MonoBehaviour
 
     public virtual void Update() {
         // if escape is pressed, toggle pause
-        if (Keyboard.current.escapeKey.wasPressedThisFrame && !m_closedAllThisFrame)
+        if ((Keyboard.current.escapeKey.wasPressedThisFrame || Gamepad.current.buttonEast.wasPressedThisFrame) && !m_closedAllThisFrame)
         {
             if (ToggleableWindow.AnyWindowOpen()){
                 ToggleableWindow.CloseAllWindows();

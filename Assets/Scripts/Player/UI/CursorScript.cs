@@ -85,8 +85,8 @@ public class CursorScript : MonoBehaviour
                 }
 
                 if (move.magnitude > 0.1f) {
-                    float gamepadCursorSpeed = PlayerPrefs.GetFloat("gamepadCursorSpeed", 25f);
-                    gamepadCursorSpeed = Mathf.Lerp(10, 100, gamepadCursorSpeed);
+                    float gamepadCursorSpeed = PlayerPrefs.GetFloat("gamepadCursorSpeed", 0.25f);
+                    gamepadCursorSpeed = Mathf.Lerp(5, 50, gamepadCursorSpeed);
                     mousePos.x += move.x * gamepadCursorSpeed;
                     mousePos.y += move.y * gamepadCursorSpeed;
                     Mouse.current.WarpCursorPosition(mousePos);

@@ -42,7 +42,7 @@ public class ZoneCinematicManager : MonoBehaviour
         }
 
         // if escape is pressed, skip cinematic
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        if (Keyboard.current.escapeKey.wasPressedThisFrame || Gamepad.current.buttonEast.wasPressedThisFrame)
         {
             OnCinematicEnd();
         }

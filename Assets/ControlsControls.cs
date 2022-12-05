@@ -23,7 +23,7 @@ public class ControlsControls : MonoBehaviour
         gamepadCursorSpeedSlider.onValueChanged.AddListener(OnGamepadCursorSpeedSliderChanged);
 
         controllerToggle.isOn = CustomInputManager.GamepadCursorAllowed;
-        gamepadCursorSpeedSlider.value = PlayerPrefs.GetFloat("gamepadCursorSpeed", 25.0f);
+        gamepadCursorSpeedSlider.value = PlayerPrefs.GetFloat("gamepadCursorSpeed", 0.25f);
     }
 
     private void OnDisable() {
