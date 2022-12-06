@@ -1144,7 +1144,10 @@ public class StatsManager : MonoBehaviour
         }
         ResetPreviousKills();
 
+        // clear talismans, drinks, and global stat mods
         m_activeTalismans.Clear();
+        activeDrinks.Clear();
+        globalStatMods.Clear();
 
         // heal
         m_playerCurrentHealth = m_calcedPlayerMaxHealth;
