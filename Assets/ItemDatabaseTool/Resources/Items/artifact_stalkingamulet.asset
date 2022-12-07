@@ -16,7 +16,8 @@ MonoBehaviour:
   m_instanceID: 
   m_displayName: 'Stalking Amulet '
   m_description: A peculiar amulet that you keep finding on your person. Increases
-    all Trap, Fire, Explosive, and enemy damage by 50%.
+    all Trap, Fire, and Explosive by 50%, increases enemy damage by 30%, and lowers
+    maximum ammunition by 30%..
   m_icon: {fileID: 21300000, guid: eb3b48f9cd5bc8d449af8e29b4971f15, type: 3}
   mustMatchToStack: 0
   m_currentStackSize: 1
@@ -37,9 +38,13 @@ MonoBehaviour:
     modType: 1
     value: 1.5
   - statType:
-      value: EnemyDamage
+      value: SpareAmmo
     modType: 1
-    value: 1.5
+    value: 0.7
+  - statType:
+      value: PlayerDamageTaken
+    modType: 0
+    value: 1.3
   m_price: 100
   m_allowedDiscount: 1
   m_unlockAchievement: 99

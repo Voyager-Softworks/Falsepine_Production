@@ -3,9 +3,9 @@ Artifact
     "m_id": "artifact_stalkingamulet",
     "m_instanceID": "",
     "m_displayName": "Stalking Amulet ",
-    "m_description": "A peculiar amulet that you keep finding on your person. Increases all Trap, Fire, Explosive, and enemy damage by 50%.",
+    "m_description": "A peculiar amulet that you keep finding on your person. Increases all Trap, Fire, and Explosive by 50%, increases enemy damage by 30%, and lowers maximum ammunition by 30%..",
     "m_icon": {
-        "instanceID": 12522
+        "instanceID": 12544
     },
     "mustMatchToStack": false,
     "m_currentStackSize": 1,
@@ -36,10 +36,17 @@ Artifact
         },
         {
             "statType": {
-                "value": "EnemyDamage"
+                "value": "SpareAmmo"
             },
             "modType": 1,
-            "value": 1.5
+            "value": 0.699999988079071
+        },
+        {
+            "statType": {
+                "value": "PlayerDamageTaken"
+            },
+            "modType": 0,
+            "value": 1.2999999523162842
         }
     ],
     "m_price": 100,
