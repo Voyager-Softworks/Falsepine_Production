@@ -58,13 +58,18 @@ public class CursorScript : MonoBehaviour
         }
 
         Cursor.visible = false;
-        // if(Gamepad.current != null)
-        // {
-        //     cursorImage.enabled = false;
-        // }
-        // else
+        // hide cursor if gamepad was last used and it is the aim cursor
+        if (CustomInputManager.LastInputWasGamepad && cursorImage.sprite == aimCursor)
         {
-            cursorImage.enabled = true;
+            cursorImage.enabled = false;
+
+            // set cursor pos to center of screen
+            Vector2 mousePos = new Vector2(Screen.width / 2, Screen.height / 2);
+            InputState.Change(Mouse.current.position, mousePos);
+        }
+        else {
+            
+                cursorImage.enabled = true;
 
             if (cursorImage == null || aimCursor == null || mouseCursor == null)
             {

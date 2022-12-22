@@ -17,9 +17,12 @@ public class ExitGate : MonoBehaviour
         //Previous,
         Town,
         //Boss,
+        Specific
     }
 
     public GateDestination m_destination;
+
+    public Utilities.SceneField m_specificSceneToLoad;
 
     public List<LevelCondition> m_conditions;
 
@@ -143,6 +146,14 @@ public class ExitGate : MonoBehaviour
                 break;
             case GateDestination.Town:
                 LevelController.LoadTown();
+                break;
+            case GateDestination.Specific:
+                if (m_specificSceneToLoad != null && m_specificSceneToLoad.scenePath != ""){
+                    LevelController.LoadScene(m_specificSceneToLoad);
+                }
+                else{
+                    LevelController.LoadTown();
+                }
                 break;
         }
     }

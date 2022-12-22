@@ -30,24 +30,42 @@ public class Interactable : MonoBehaviour
     }
 
     [Header("Interact")]
-    public InputAction interactAction;
+    //public InputAction interactAction;
+    // DISABLED due to using E / South Button for all interactables
     public string interactText = "Interact";
     public string interactTextWithSprite{
-        get {
-            // remove any text between and including []
-            string text = interactText;
-            int startIndex = text.IndexOf('[');
-            if (startIndex != -1){
-                int endIndex = text.IndexOf(']', startIndex);
-                if (endIndex != -1){
-                    text = text.Remove(startIndex, endIndex - startIndex + 1);
+        get
+        {
+            // remove any text between and including [], <>, or {}
+            string text = RemoveButtonsFromText("[", "]", interactText);
+            text = RemoveButtonsFromText("<", ">", text);
+            text = RemoveButtonsFromText("{", "}", text);
 
-                    return "<sprite name=\"Btn_E\"> " + text;
-                }
+            string newText = "";
+            if (!CustomInputManager.LastInputWasGamepad){
+                newText = "<sprite name=\"Btn_E\"> " + text;
+            }
+            else{
+                newText = "<sprite name=\"Btn_South\"> " + text;
             }
 
-            return interactText;
+            return newText;
         }
+    }
+
+    private static string RemoveButtonsFromText(string startOffender, string endOffender, string text)
+    {
+        int startIndex = text.IndexOf(startOffender);
+        if (startIndex != -1)
+        {
+            int endIndex = text.IndexOf(endOffender, startIndex);
+            if (endIndex != -1)
+            {
+                text = text.Remove(startIndex, endIndex - startIndex + 1);
+            }
+        }
+
+        return text;
     }
 
     public Transform _transToCheck = null;
@@ -69,11 +87,11 @@ public class Interactable : MonoBehaviour
     }
 
     private void OnEnable() {
-        interactAction.Enable();
+        //interactAction.Enable();
     }
 
     private void OnDisable() {
-        interactAction.Disable();
+        //interactAction.Disable();
     }
 
     // Start is called before the first frame update
@@ -97,7 +115,8 @@ public class Interactable : MonoBehaviour
     /// <returns></returns>
     public bool CheckActionPressed()
     {
-        if (interactAction.triggered)
+        // E or South button is pressed
+        if (Keyboard.current.eKey.wasPressedThisFrame || (CustomInputManager.LastInputWasGamepad && Gamepad.current.buttonSouth.wasPressedThisFrame))
         {
             if (Vector3.Distance(transform.position, _transToCheck.position) <= interactDistance)
             {
