@@ -237,7 +237,7 @@ public class JournalManager : ToggleableWindow
     {   
         base.Update();
 
-        if (openJournalAction.WasPressedThisFrame())
+        if (openJournalAction.WasPressedThisFrame() || (CustomInputManager.LastInputWasGamepad && Gamepad.current.dpad.up.wasPressedThisFrame))
         {
             // get console window
             Console consoleWindow = FindObjectOfType<Console>();

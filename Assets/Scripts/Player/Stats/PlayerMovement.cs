@@ -420,7 +420,7 @@ public class PlayerMovement : MonoBehaviour
                 _animator.SetFloat("MoveForward", forwardMag);
                 //calc the direction to look
                 Vector3 lookDir;
-                if (Gamepad.current != null)
+                if (CustomInputManager.LastInputWasGamepad)
                 {
                     lookDir = GetGamepadAimPoint() - transform.position;
                 }
@@ -618,6 +618,7 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     /// <returns>
     /// A Vector3 of the mouse position on the plane at the height of the weapon firepoint.
+    /// @deprecated This function is deprecated, use GetMouseAimPlanePoint() instead.
     /// </returns>
     public Vector3 GetMouseWeaponPlanePoint()
     {

@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
 using UnityEngine.EventSystems;
+using System;
 
 public class CustomInputManager : MonoBehaviour
 {
@@ -53,6 +54,25 @@ public class CustomInputManager : MonoBehaviour
         gamepadCursorAllowed = allowed;
         if (!gamepadCursorAllowed){
             lastInputWasGamepad = false;
+        }
+
+        // enable/disable all gamepads
+        Gamepad[] gamepads = Gamepad.all.ToArray();
+        for (int i = 0; i < gamepads.Length; i++)
+        {
+            if (allowed)
+            {
+                InputSystem.EnableDevice(gamepads[i]);
+            }
+            else
+            {
+                InputSystem.DisableDevice(gamepads[i]);
+            }
+        }
+
+        // if gamepad has been disabled, but no mouse or keyboard exists, enable gamepad
+        if (!allowed && (Mouse.current == null || Keyboard.current == null)) {
+            SetControllerInputAllowed(true);
         }
     }
 }
