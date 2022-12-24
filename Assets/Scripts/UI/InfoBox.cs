@@ -261,10 +261,42 @@ public class InfoBox : MonoBehaviour
     {
         if (!_item) return;
 
+        // get used item stats
+        string stats = "Type: ";
+        // list of stats to use in this function
+        List<StatsManager.StatType> usedStatTypes = new List<StatsManager.StatType>(){
+            StatsManager.StatType.ShotgunDamage,
+            StatsManager.StatType.PistolDamage,
+            StatsManager.StatType.RifleDamage,
+            StatsManager.StatType.SpecialDamage,
+            StatsManager.StatType.ExplosiveDamage,
+            StatsManager.StatType.TrapDamage,
+            StatsManager.StatType.MeleeDamage,
+            StatsManager.StatType.PoisonDamage,
+            StatsManager.StatType.FireDamage,
+            StatsManager.StatType.SilverDamage,
+        };
+        foreach (StatsManager.StatType type in _item.GetStatTypes())
+        {
+            if (usedStatTypes.Contains(type)){
+                stats += type.DisplayName() + " | ";
+            }
+        }
+        // if none, empty
+        if (stats == "Type: ")
+        {
+            stats = "";
+        }
+        else{
+            stats = stats.TrimEnd(' ', '|');
+        }
+
+
+
         DisplayMain(
             _item.m_displayName, 
             _item.m_icon, 
-            "Count: " + _item.currentStackSize + "/" + _item.maxStackSize + ", " + _item.GetTypeDisplayName() + "\n" + _item.m_description, 
+            "Count: " + _item.currentStackSize + "/" + _item.maxStackSize + ", " + _item.GetTypeDisplayName() + (stats != "" ? "\n" + stats : "" ) + "\n" + _item.m_description  , 
             _showCost ? _item.GetPrice().ToString() : _item.GetTypeDisplayName(), 
             _showCost ? m_priceIcon : m_typeIcon, 
             _onTime, 
