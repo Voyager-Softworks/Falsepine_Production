@@ -295,7 +295,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
 
         // randomize purchasable items in new list
         List<PurchasableItem> tempPurchasableItems = new List<PurchasableItem>(m_purchasableItems);
-        tempPurchasableItems = tempPurchasableItems.OrderBy(x => Guid.NewGuid()).ToList();
+        //tempPurchasableItems = tempPurchasableItems.OrderBy(x => Guid.NewGuid()).ToList();
 
         // get up to maxStoreItems items from purchasable items
         int itemsAdded = 0;

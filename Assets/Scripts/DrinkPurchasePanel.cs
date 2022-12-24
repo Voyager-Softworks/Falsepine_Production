@@ -32,7 +32,8 @@ public class DrinkPurchasePanel : MonoBehaviour
 
         // add amount of entries to the list (if there are enough)
         for (int i = 0; i < m_drinkAmount && validDrinks.Count > 0; i++){
-            int randomIndex = Random.Range(0, validDrinks.Count);
+            //int randomIndex = Random.Range(0, validDrinks.Count);
+            int randomIndex = 0;
             Drink drink = validDrinks[randomIndex];
             // add random entry to the list
             m_drinksEntries.Add(drink);
