@@ -34,6 +34,8 @@ public class PlayerInventoryInterface : MonoBehaviour
     // melee attack
     public InputAction meleeAttackAction; ///< The action to melee attack.
     [ReadOnly] public ItemThrow m_currentlyThrowingItem; ///< The item that is currently being thrown.
+    [ReadOnly] public float throwHoldTime = 0.0f; ///< The time the player has been holding the throw button.
+    public float throwHoldTimeMax = 1.0f; ///< The time it takes to throw the item the maximum distance.
 
     [Header("Inventory")]
     public string playerInventoryName = "player"; ///< The name of the player's inventory.
@@ -78,6 +80,8 @@ public class PlayerInventoryInterface : MonoBehaviour
     public Animator playerAnimator; ///< The player's animator.
 
     public PlayerHealth playerHealth; ///< The player's health.
+
+    public GameObject throwLight; ///< The light that is shown when the player is throwing an item.
 
     [Header("Events")]
     public System.Action OnPrimaryUsed; ///< The event to call when the primary weapon is used.
@@ -559,6 +563,14 @@ public class PlayerInventoryInterface : MonoBehaviour
                 // set animator bool to true
                 playerAnimator.SetBool("Throw", true);
 
+                // update timer
+                throwHoldTime += Time.deltaTime;
+
+                throwLight.SetActive(true);
+                float y = throwLight.transform.position.y;
+                throwLight.transform.position = GetThrowPoint(m_currentlyThrowingItem.GetComponentInChildren<ItemThrow>());
+                throwLight.transform.position = new Vector3(throwLight.transform.position.x, y, throwLight.transform.position.z);
+
                 // stop reloading
                 TryEndReload();
             }
@@ -580,12 +592,60 @@ public class PlayerInventoryInterface : MonoBehaviour
         else
         {
             playerAnimator.SetBool("Throw", false);
+
+            // reset timer
+            throwHoldTime = 0;
+
+            throwLight.SetActive(false);
         }
+    }
+
+    public Vector3 GetThrowPoint(ItemThrow _itemThrow){
+        if (_itemThrow == null) return Vector3.zero;
+
+        PlayerMovement pm = FindObjectOfType<PlayerMovement>();
+        // get mouse pos
+        Vector3 aimPos = Vector3.zero;
+        if (CustomInputManager.LastInputWasGamepad){
+            Vector3 gamepadAimPos = pm.GetGamepadAimPoint();
+            // in terms of vector from player position
+            Vector3 aimDirection = gamepadAimPos - transform.position;
+
+            float distancePercent = 1.0f;
+
+            PlayerInventoryInterface pii = FindObjectOfType<PlayerInventoryInterface>();
+            if (pii != null)
+            {
+                // if the player is aiming at the inventory, throw at the inventory
+                distancePercent = pii.throwHoldTime / pii.throwHoldTimeMax;
+                // clamp to 0-1
+                distancePercent = Mathf.Clamp01(distancePercent);
+            }
+
+            // scale to m_maxThrowDistance
+            aimPos = transform.position + aimDirection.normalized * _itemThrow.m_maxThrowDistance * distancePercent;
+        }
+        else{
+            aimPos = pm.GetMouseAimPlanePoint();
+            // in terms of vector from player position
+            Vector3 aimDirection = aimPos - transform.position;
+            // clamp to m_maxThrowDistance
+            aimPos = transform.position + Vector3.ClampMagnitude(aimDirection, _itemThrow.m_maxThrowDistance);
+        }
+
+        return aimPos;
     }
 
     public void ThrowLetGo(){
         if (m_currentlyThrowingItem != null)
         {
+            // throw light
+            throwLight.SetActive(true);
+            float y = throwLight.transform.position.y;
+            throwLight.transform.position = GetThrowPoint(m_currentlyThrowingItem.GetComponentInChildren<ItemThrow>());
+            throwLight.transform.position = new Vector3(throwLight.transform.position.x, y, throwLight.transform.position.z);
+
+
             m_currentlyThrowingItem.DoThrow();
             // ensure it is unbound
             m_currentlyThrowingItem = null;

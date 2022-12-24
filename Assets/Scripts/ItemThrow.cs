@@ -101,13 +101,18 @@ public class ItemThrow : MonoBehaviour
         if (pm != null)
         {
             // get mouse pos
-            Vector3 mousePos = pm.GetMouseAimPlanePoint();
+            Vector3 aimPos = Vector3.zero;
+            PlayerInventoryInterface pii = FindObjectOfType<PlayerInventoryInterface>();
+            if (pii != null)
+            {
+                aimPos = pii.GetThrowPoint(this);
+            }
 
             // get start position
             Vector3 startPos = m_throwTransform.position;
 
             // get horizontal distance (excluding y)
-            Vector3 horizontalDistance = new Vector3(mousePos.x - startPos.x, 0, mousePos.z - startPos.z);
+            Vector3 horizontalDistance = new Vector3(aimPos.x - startPos.x, 0, aimPos.z - startPos.z);
             // clamp
             horizontalDistance = Vector3.ClampMagnitude(horizontalDistance, m_maxThrowDistance);
 
@@ -124,7 +129,7 @@ public class ItemThrow : MonoBehaviour
             float apexHeight = startPos.y + initialVelocity * timeToApex - 0.5f * gravity * timeToApex * timeToApex;
 
             // calc fall distance
-            float fallDistance = apexHeight - mousePos.y;
+            float fallDistance = apexHeight - aimPos.y;
             // ensure never below 0 for next equation
             fallDistance = Mathf.Max(0, fallDistance);
 

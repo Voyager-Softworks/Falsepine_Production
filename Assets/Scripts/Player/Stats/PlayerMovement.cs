@@ -318,7 +318,7 @@ public class PlayerMovement : MonoBehaviour
         {
             moveDir *= walkSpeed;
         }
-        else if (sprintAction.ReadValue<float>() > 0.1f && !isReloading)
+        else if ((sprintAction.ReadValue<float>() > 0.1f || CustomInputManager.LastInputWasGamepad) && !isReloading)
         {
             moveDir *= sprintSpeed;
         }
@@ -387,7 +387,7 @@ public class PlayerMovement : MonoBehaviour
 
             _animator.SetBool("Aiming", isAiming && !isRolling && !isVaulting);
             _animator.SetBool("Jogging", !isAiming && move.magnitude > 0.1f);
-            _animator.SetBool("Running", sprintAction.ReadValue<float>() > 0.1f && move.magnitude > 0.1f);
+            _animator.SetBool("Running", (sprintAction.ReadValue<float>() > 0.1f || CustomInputManager.LastInputWasGamepad) && move.magnitude > 0.1f);
 
             bool isMeleeAttacking = false;
             if (pii)
@@ -763,15 +763,18 @@ public class PlayerMovement : MonoBehaviour
     /// @deprecated Gamepad Input is no longer maintained and is currently not supported. It may be added back in the future.
     public Vector3 GetGamepadAimPoint()
     {
+        PlayerInventoryInterface pii = GetComponent<PlayerInventoryInterface>();
+        if (!pii) return Vector3.zero;
+        GameObject _aimZone = pii.m_aimZone?.gameObject;
+
         //Get the right stick value
         Vector2 rightStick = Gamepad.current.rightStick.ReadValue();
         //Get the direction of the right stick
         Vector3 rightStickDir = rightStick.x * camRight + rightStick.y * camForward;
 
         Vector3 aimPoint = rightStickDir * 10f + transform.position;
-        aimPoint.y = shootPoint.position.y;
+        aimPoint.y = _aimZone.transform.position.y;
         return aimPoint;
-
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
