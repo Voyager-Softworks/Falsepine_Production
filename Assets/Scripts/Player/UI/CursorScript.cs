@@ -83,6 +83,7 @@ public class CursorScript : MonoBehaviour
             if (CustomInputManager.GamepadCursorAllowed && CustomInputManager.LastInputWasGamepad){
                 // move cursor based on gamepad input
                 Vector2 move = Gamepad.current.rightStick.ReadValue();
+                move += Gamepad.current.leftStick.ReadValue();
 
                 // if left trigger is pressed, move cursor slower
                 if (Gamepad.current.leftTrigger.ReadValue() > 0.1f) {
