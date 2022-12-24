@@ -281,18 +281,14 @@ public class UIScript : MonoBehaviour
 
     private void InfoBoxCheck(Item _item, RectTransform _transform)
     {
-        // info box only if journal is open
-        if (JournalManager.instance.IsOpen())
+        // get mouse position
+        Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
+        // convert mouse pos to local pos
+        Vector2 localPos = _transform.InverseTransformPoint(mouseScreenPos);
+        // show info box if mouse is over icon
+        if (_transform.rect.Contains(localPos))
         {
-            // get mouse position
-            Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
-            // convert mouse pos to local pos
-            Vector2 localPos = _transform.InverseTransformPoint(mouseScreenPos);
-            // show info box if mouse is over icon
-            if (_transform.rect.Contains(localPos))
-            {
-                infoBox.Display(_item);
-            }
+            infoBox.Display(_item);
         }
     }
 }

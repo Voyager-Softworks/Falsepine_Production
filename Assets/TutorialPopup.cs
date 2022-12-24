@@ -74,6 +74,26 @@ public class TutorialPopup : MonoBehaviour
 
         Debug.Log("Tutorial Declined");
 
+        // move all items from home inventory to player inventory
+        Inventory homeInventory = InventoryManager.instance.GetInventory("home");
+        Inventory playerInventory = InventoryManager.instance.GetInventory("player");
+        if (homeInventory != null && playerInventory != null)
+        {
+            for (int i = homeInventory.slots.Count - 1; i >= 0; i--)
+            {
+                InventoryManager.instance.TryMoveItem(InventoryManager.instance.GetInventory("home"), InventoryManager.instance.GetInventory("player"), i);
+            }
+        }
+
+        // give player the silver
+        EconomyManager.instance.AddMoney(20);
+
+        MessageManager.instance.AddMessage("Tutorial items granted!", "silver");
+
+        // sound
+        UIAudioManager.instance?.equipSound.Play();
+
+
         JournalManager.instance.m_showTutorial = false;
 
         gameObject.SetActive(false);
