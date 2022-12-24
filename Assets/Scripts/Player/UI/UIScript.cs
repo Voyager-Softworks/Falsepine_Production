@@ -19,6 +19,7 @@ public class UIScript : MonoBehaviour
     [Header("Player Stats")]
     public Image healthBG;
     public Image healthBar, healthBarDark;
+    public TextMeshProUGUI healthText;
     [HideInInspector] public float healthBarMaxWidth;
 
     public Image staminaBG;

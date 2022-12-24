@@ -81,6 +81,10 @@ public class PlayerHealth : MonoBehaviour, StatsManager.UsesStats
 
     private Animator _animator; ///< The animator for the player.
 
+    private InfoBox infoBox;
+    
+    public Sprite healthIcon;
+
     // StatsManager.UsesStats interface implementation
     public List<StatsManager.StatType> m_usedStatTypes = new List<StatsManager.StatType>() { };
     public List<StatsManager.StatType> GetStatTypes()
@@ -142,6 +146,20 @@ public class PlayerHealth : MonoBehaviour, StatsManager.UsesStats
 
         uiScript.healthBar.rectTransform.sizeDelta = new Vector2(uiScript.healthBarMaxWidth * (currentHealth / calcedMaxHealth), uiScript.healthBar.rectTransform.sizeDelta.y);
         uiScript.healthBarDark.rectTransform.sizeDelta = Vector2.Lerp(uiScript.healthBarDark.rectTransform.sizeDelta, uiScript.healthBar.rectTransform.sizeDelta, Time.deltaTime * 2.0f);
+
+        uiScript.healthText.text = currentHealth.ToString("0") + "/" + calcedMaxHealth.ToString("0");
+
+        // health bar infobox
+        // get mouse position
+        Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
+        // convert mouse pos to local pos
+        Vector2 localPos = uiScript.healthBG.rectTransform.InverseTransformPoint(mouseScreenPos);
+        // show info box if mouse is over icon
+        if (uiScript.healthBG.rectTransform.rect.Contains(localPos))
+        {
+            if (infoBox == null) infoBox = FindObjectOfType<InfoBox>();
+            infoBox.DisplayMain("Player Health", healthIcon, "Health: " + currentHealth.ToString("0") + "/" + calcedMaxHealth + "\nYou heal 20% of your max health when you move to the next room.", "", null);
+        }
     }
 
     /// <summary>

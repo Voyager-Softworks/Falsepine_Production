@@ -178,7 +178,7 @@ public class InfoBox : MonoBehaviour
     /// <param name="_costIcon"></param>
     /// <param name="_onTime"></param>
     /// <param name="_offTime"></param>
-    public void DisplayMain(string _title, Sprite _icon, string _description, string _costType, Sprite _costIcon, float _onTime = 1, float _offTime = 1)
+    public void DisplayMain(string _title, Sprite _icon, string _description, string _costType, Sprite _costIcon, float _onTime = 0.1f, float _offTime = 0.1f)
     {
         EnableAll();
 
@@ -188,6 +188,14 @@ public class InfoBox : MonoBehaviour
 
         this.m_costTypeText.text = _costType;
         this.m_costTypeImage.sprite = _costIcon ?? null;
+        if (_costIcon == null)
+        {
+            this.m_costTypeImage.enabled = false;
+        }
+        else
+        {
+            this.m_costTypeImage.enabled = true;
+        }
 
         fullBrightTime = _onTime;
         fullBrightTimer = fullBrightTime;
@@ -291,7 +299,7 @@ public class InfoBox : MonoBehaviour
             float damageDifference = calcDamage - weapon.m_damage;
             string damageModString = damageDifference != 0 ? " (" + StatsManager.SignedFloatString(damageDifference) + ")" : "";
             // red for negative, green for positive, none for 0
-            string calcWithColor = damageDifference > 0 ? "<color=\"green\">" + calcDamage + "</color>" : damageDifference < 0 ? "<color=\"red\">" + calcDamage + "</color>" : calcDamage.ToString();
+            string calcWithColor = damageDifference > 0 ? "<color=\"green\">" + calcDamage.ToString("0.#") + "</color>" : damageDifference < 0 ? "<color=\"red\">" + calcDamage.ToString("0.#") + "</color>" : calcDamage.ToString("0.#");
             newDesc += "Damage: " + calcWithColor + damageModString + "\n";
 
             // range
@@ -299,7 +307,7 @@ public class InfoBox : MonoBehaviour
             float rangeDifference = calcRange - weapon.m_range;
             string rangeModString = rangeDifference != 0 ? " (" + StatsManager.SignedFloatString(rangeDifference) + ")" : "";
             // red for negative, green for positive, none for 0
-            calcWithColor = rangeDifference > 0 ? "<color=\"green\">" + calcRange + "</color>" : rangeDifference < 0 ? "<color=\"red\">" + calcRange + "</color>" : calcRange.ToString();
+            calcWithColor = rangeDifference > 0 ? "<color=\"green\">" + calcRange.ToString("0.#") + "</color>" : rangeDifference < 0 ? "<color=\"red\">" + calcRange.ToString("0.#") + "</color>" : calcRange.ToString("0.#");
             newDesc += "Range: " + calcWithColor + rangeModString + "\n";
 
             // Clip
@@ -328,7 +336,7 @@ public class InfoBox : MonoBehaviour
             float damageDifference = calcDamage - weapon.m_damage;
             string damageModString = damageDifference != 0 ? " (" + StatsManager.SignedFloatString(damageDifference) + ")" : "";
             // red for negative, green for positive, none for 0
-            string calcWithColor = damageDifference > 0 ? "<color=\"green\">" + calcDamage + "</color>" : damageDifference < 0 ? "<color=\"red\">" + calcDamage + "</color>" : calcDamage.ToString();
+            string calcWithColor = damageDifference > 0 ? "<color=\"green\">" + calcDamage.ToString("0.#") + "</color>" : damageDifference < 0 ? "<color=\"red\">" + calcDamage.ToString("0.#") + "</color>" : calcDamage.ToString("0.#");
             newDesc += "Damage: " + calcWithColor + damageModString + "\n";
 
             // cooldown
@@ -357,7 +365,7 @@ public class InfoBox : MonoBehaviour
                 
                 // health
                 // float calcHeal = StatsManager.CalculateHeal(medkit, medkit.m_heal);
-                newDesc += "Heal Amount: " + medkit.healAmount + "\n";
+                newDesc += "Heal Amount: " + medkit.healAmount.ToString("0.#") + "\n";
             }
             // dynamite
             else if (prefab.GetComponentInChildren<Dynamite>()){
@@ -373,16 +381,16 @@ public class InfoBox : MonoBehaviour
                     float damageDifference = calcDPS - (areaDamage.m_damage /areaDamage.m_damageDelay);
                     string damageModString = damageDifference != 0 ? " (" + StatsManager.SignedFloatString(damageDifference) + ")" : "";
                     // red for negative, green for positive, none for 0
-                    string calcWithColor = damageDifference > 0 ? "<color=\"green\">" + calcDPS + "</color>" : damageDifference < 0 ? "<color=\"red\">" + calcDPS + "</color>" : calcDPS.ToString();
+                    string calcWithColor = damageDifference > 0 ? "<color=\"green\">" + calcDPS.ToString("0.#") + "</color>" : damageDifference < 0 ? "<color=\"red\">" + calcDPS.ToString("0.#") + "</color>" : calcDPS.ToString("0.#");
                     newDesc += "DPS: " + calcWithColor + damageModString + "\n";
 
                     // radius
                     // float calcRadius = StatsManager.CalculateRadius(areaDamage.m_statsProfile, areaDamage.m_radius);
-                    newDesc += "Radius: " + areaDamage.m_radius + "\n";
+                    newDesc += "Radius: " + areaDamage.m_radius.ToString("0.#") + "\n";
 
                     // delay
                     // float calcDelay = StatsManager.CalculateDelay(areaDamage.m_statsProfile, areaDamage.m_damageDelay);
-                    newDesc += "Duration: " + areaDamage.m_time + "\n";
+                    newDesc += "Duration: " + areaDamage.m_time.ToString("0.#") + "\n";
                 }
                 else{
 
@@ -391,16 +399,16 @@ public class InfoBox : MonoBehaviour
                     float damageDifference = calcDamage - dynamite.m_damage;
                     string damageModString = damageDifference != 0 ? " (" + StatsManager.SignedFloatString(damageDifference) + ")" : "";
                     // red for negative, green for positive, none for 0
-                    string calcWithColor = damageDifference > 0 ? "<color=\"green\">" + calcDamage + "</color>" : damageDifference < 0 ? "<color=\"red\">" + calcDamage + "</color>" : calcDamage.ToString();
+                    string calcWithColor = damageDifference > 0 ? "<color=\"green\">" + calcDamage.ToString("0.#") + "</color>" : damageDifference < 0 ? "<color=\"red\">" + calcDamage.ToString("0.#") + "</color>" : calcDamage.ToString("0.#");
                     newDesc += "Damage: " + calcWithColor + damageModString + "\n";
 
                     // radius
                     // float calcRadius = StatsManager.CalculateRadius(dynamite.m_statsProfile, dynamite.m_radius);
-                    newDesc += "Radius: " + dynamite.m_explosionRadius + "\n";
+                    newDesc += "Radius: " + dynamite.m_explosionRadius.ToString("0.#") + "\n";
                 }
 
                 
-                newDesc += "Fuse Time: " + dynamite.m_fuseTime + "\n";
+                newDesc += "Fuse Time: " + dynamite.m_fuseTime.ToString("0.#") + "\n";
             }
             // beartrap
             else if (prefab.GetComponentInChildren<Beartrap>()){
@@ -411,7 +419,7 @@ public class InfoBox : MonoBehaviour
                 float damageDifference = calcDamage - beartrap.m_damage;
                 string damageModString = damageDifference != 0 ? " (" + StatsManager.SignedFloatString(damageDifference) + ")" : "";
                 // red for negative, green for positive, none for 0
-                string calcWithColor = damageDifference > 0 ? "<color=\"green\">" + calcDamage + "</color>" : damageDifference < 0 ? "<color=\"red\">" + calcDamage + "</color>" : calcDamage.ToString();
+                string calcWithColor = damageDifference > 0 ? "<color=\"green\">" + calcDamage.ToString("0.#") + "</color>" : damageDifference < 0 ? "<color=\"red\">" + calcDamage.ToString("0.#") + "</color>" : calcDamage.ToString("0.#");
                 newDesc += "Damage: " + calcWithColor + damageModString + "\n";
             }
             else {
