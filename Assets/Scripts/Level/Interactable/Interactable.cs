@@ -77,7 +77,7 @@ public class Interactable : MonoBehaviour
     public System.Action onInteract;
 
     private InteractManager m_interactManager = null;
-    private InteractManager interactManager {
+    protected InteractManager interactManager {
         get {
             if (m_interactManager == null) {
                 m_interactManager = FindObjectOfType<InteractManager>();

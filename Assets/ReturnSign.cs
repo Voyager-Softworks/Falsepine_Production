@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
-public class ReturnSign : MonoBehaviour
+public class ReturnSign : Interactable
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [Header("Return Sign")]
+    public ReturnPopup m_returnPopup;
 
-    // Update is called once per frame
-    void Update()
+    override public void DoInteract()
     {
-        
+        base.DoInteract();
+
+        m_returnPopup.OpenWindow();
     }
 }
