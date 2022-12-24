@@ -64,6 +64,9 @@ public class PlayerMovement : MonoBehaviour
 
     private bool m_ignoringEnemyCollisions = false;
 
+    [Header("Aiming")]
+    public float gamepadAimSmoothing = 0.1f;
+
     /// <summary>
     ///  Plays a footstep sound.
     /// </summary>
@@ -756,6 +759,7 @@ public class PlayerMovement : MonoBehaviour
         return lineStart + lineDir * t;
     }
 
+    private Vector3 oldGamepadAimPoint = Vector3.zero;
     /// <summary>
     ///  Gets the aim point using Gamepad input.
     /// </summary>
@@ -774,6 +778,11 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 aimPoint = rightStickDir * 10f + transform.position;
         aimPoint.y = _aimZone.transform.position.y;
+
+        // lerp from old aim point to new aim point
+        aimPoint = Vector3.Lerp(oldGamepadAimPoint, aimPoint, Time.deltaTime * 1.0f/gamepadAimSmoothing);
+        oldGamepadAimPoint = aimPoint;
+
         return aimPoint;
     }
 
