@@ -7,17 +7,32 @@ using System;
 
 public class DisplayModeSetting : MonoBehaviour
 {
-    public TMP_Dropdown dropdown;
+    public TMP_Dropdown modeDropdown;
     public Slider fpsSlider;
     public TextMeshProUGUI fpsText;
+    public TMP_Dropdown qualityDropdown;
 
-    private void Start() {
+    private void Awake()
+    {
+        Init();
+    }
+
+    public void Init()
+    {
         // get value from player prefs
         int value = PlayerPrefs.GetInt("DisplayMode", 0);
         // set value
-        dropdown.value = value;
+        modeDropdown.value = value;
         // set display mode
         SetDisplayMode(value);
+
+        // get value from player prefs
+        int quality = PlayerPrefs.GetInt("Quality", 0);
+        // set value
+        qualityDropdown.value = quality;
+        // set quality
+        QualitySettings.SetQualityLevel(quality);
+
 
         // set fps
         fpsSlider.value = PlayerPrefs.GetInt("FPS", 60);
@@ -27,24 +42,36 @@ public class DisplayModeSetting : MonoBehaviour
 
     private void OnEnable() {
         // bind event
-        dropdown.onValueChanged.AddListener(OnDropdownChanged);
-        fpsSlider.onValueChanged.AddListener(OnSliderChanged);
+        modeDropdown.onValueChanged.AddListener(OnModeDropdownChanged);
+        fpsSlider.onValueChanged.AddListener(OnFPSSliderChanged);
+        qualityDropdown.onValueChanged.AddListener(OnQualityDropdownChanged);
     }
 
     private void OnDisable() {
         // unbind event
-        dropdown.onValueChanged.RemoveListener(OnDropdownChanged);
-        fpsSlider.onValueChanged.RemoveListener(OnSliderChanged);
+        modeDropdown.onValueChanged.RemoveListener(OnModeDropdownChanged);
+        fpsSlider.onValueChanged.RemoveListener(OnFPSSliderChanged);
+        qualityDropdown.onValueChanged.RemoveListener(OnQualityDropdownChanged);
     }
 
-    private void OnDropdownChanged(int value) {
+    private void OnModeDropdownChanged(int value) {
         // set and save value
         SetDisplayMode(value);
     }
 
-    private void OnSliderChanged(float value) {
+    private void OnFPSSliderChanged(float value) {
         // set and save value
         SetFPS((int)value);
+    }
+
+    
+    private void OnQualityDropdownChanged(int arg0)
+    {
+        // set quality
+        QualitySettings.SetQualityLevel(arg0);
+        // save value to player prefs
+        PlayerPrefs.SetInt("Quality", arg0);
+        PlayerPrefs.Save();
     }
 
     public void SetFPS(int value)

@@ -25,10 +25,27 @@ public class MenuUI : MonoBehaviour
     public float m_fadeTime = 0.5f;
     private float m_fadeTimer = 0.0f;
 
+    [Header("Close on start")]
+    public List<GameObject> closeOnStart;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        foreach (GameObject obj in closeOnStart) {
+            // if AudioControls call Init()
+            if (obj.GetComponent<AudioControls>() != null) {
+                obj.GetComponent<AudioControls>().Init();
+            }
+            // if BrightnessControls call Init()
+            if (obj.GetComponent<BrightnessControls>() != null) {
+                obj.GetComponent<BrightnessControls>().Init();
+            }
+            // if DisplayModeSetting call Init()
+            if (obj.GetComponent<DisplayModeSetting>() != null) {
+                obj.GetComponent<DisplayModeSetting>().Init();
+            }
+            obj.SetActive(false);
+        }
     }
 
     private void OnEnable() {

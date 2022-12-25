@@ -58,31 +58,37 @@ public class AudioControls : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
+    {
+        Init();
+    }
+
+    public void Init()
     {
         if (masterSlider)
         {
             masterSlider.onValueChanged.AddListener(SetMasterVolume);
             masterSlider.value = PlayerPrefs.GetFloat(masterVolume, 1);
+            SetMasterVolume(PlayerPrefs.GetFloat(masterVolume, 1));
         }
         if (musicSlider)
         {
             musicSlider.onValueChanged.AddListener(SetMusicVolume);
             musicSlider.value = PlayerPrefs.GetFloat(musicVolume, 1);
+            SetMusicVolume(PlayerPrefs.GetFloat(musicVolume, 1));
         }
         if (sfxSlider)
         {
             sfxSlider.onValueChanged.AddListener(SetSFXVolume);
             sfxSlider.value = PlayerPrefs.GetFloat(sfxVolume, 1);
+            SetSFXVolume(PlayerPrefs.GetFloat(sfxVolume, 1));
         }
         if (ambienceSlider)
         {
             ambienceSlider.onValueChanged.AddListener(SetAmbienceVolume);
             ambienceSlider.value = PlayerPrefs.GetFloat(ambienceVolume, 1);
+            SetAmbienceVolume(PlayerPrefs.GetFloat(ambienceVolume, 1));
         }
-
-        // close the window
-        gameObject.SetActive(false);
     }
 
     // Update is called once per frame

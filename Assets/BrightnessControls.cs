@@ -30,7 +30,12 @@ public class BrightnessControls : MonoBehaviour
         }
     }
     // Start is called before the first frame update
-    void Start()
+    void Awake()
+    {
+        Init();
+    }
+
+    public void Init()
     {
         if (PlayerPrefs.HasKey("Brightness"))
         {
@@ -39,9 +44,6 @@ public class BrightnessControls : MonoBehaviour
             SetBrightness(currentBrightness);
         }
         brightnessSlider.onValueChanged.AddListener(delegate { SetBrightness(brightnessSlider.value); });
-
-        // close window
-        gameObject.SetActive(false);
     }
 
     // Update is called once per frame
