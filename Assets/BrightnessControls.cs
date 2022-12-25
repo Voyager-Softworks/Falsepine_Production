@@ -39,6 +39,9 @@ public class BrightnessControls : MonoBehaviour
             SetBrightness(currentBrightness);
         }
         brightnessSlider.onValueChanged.AddListener(delegate { SetBrightness(brightnessSlider.value); });
+
+        // close window
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -48,10 +51,8 @@ public class BrightnessControls : MonoBehaviour
     }
 
     private void OnEnable() {
-        EventSystem.current.SetSelectedGameObject(brightnessSlider.gameObject);
     }
 
     private void OnDisable() {
-        EventSystem.current.SetSelectedGameObject(null);
     }
 }

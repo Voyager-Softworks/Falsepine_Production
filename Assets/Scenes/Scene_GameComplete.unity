@@ -562,6 +562,81 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 68729fa5bde4c0e4caf7d0448229bed3, type: 3}
   m_PrefabInstance: {fileID: 204457911}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &249468920
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 249468921}
+  - component: {fileID: 249468923}
+  - component: {fileID: 249468922}
+  m_Layer: 5
+  m_Name: CursorImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &249468921
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249468920}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1848082242}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 21, y: 21}
+  m_Pivot: {x: 0, y: 1}
+--- !u!114 &249468922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249468920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 0
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 0
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 270faa664cad5f64eb72b3c5a690a9b3, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &249468923
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249468920}
+  m_CullTransparentMesh: 1
 --- !u!4 &277582201 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5cf4c876a0aa2314ba07ef0eb5705464, type: 3}
@@ -4302,6 +4377,7 @@ GameObject:
   - component: {fileID: 1848082239}
   - component: {fileID: 1848082243}
   - component: {fileID: 1848082244}
+  - component: {fileID: 1848082245}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -4389,6 +4465,7 @@ RectTransform:
   - {fileID: 1878924705}
   - {fileID: 1838317342}
   - {fileID: 2062718338}
+  - {fileID: 249468921}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4421,6 +4498,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ee212285812bca4cb0af9931d8bb89d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1848082245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848082238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 193bbb5b57075a041b93e13863f57498, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorImage: {fileID: 249468922}
+  aimCursor: {fileID: 21300000, guid: 86415745eb2a8f4499b8a8a451a6a4e5, type: 3}
+  mouseCursor: {fileID: 21300000, guid: 270faa664cad5f64eb72b3c5a690a9b3, type: 3}
+  setOnStart: 1
+  mouseOnlyScenes:
+  - m_sceneAsset: {fileID: 102900000, guid: 3c6ccffcf12d500419c12d5a7aa305c7, type: 3}
+    m_scenePath: Scenes/TownScene/TownScene
+  - m_sceneAsset: {fileID: 102900000, guid: 9be32c6565e95e74aa1a95bb7ee1e759, type: 3}
+    m_scenePath: Scenes/Menu
+  - m_sceneAsset: {fileID: 102900000, guid: bd19c719a068fa346925c0d28d701f3b, type: 3}
+    m_scenePath: Scenes/Scene_GameComplete
+  - m_sceneAsset: {fileID: 102900000, guid: 7d137063b3f679945b62c54d34fc6b3d, type: 3}
+    m_scenePath: Scenes/Scene_GameOver
+  - m_sceneAsset: {fileID: 102900000, guid: 48e34c28db6a1f44d90bc42f4fe8bb9e, type: 3}
+    m_scenePath: Scenes/Scene_MissonComplete
 --- !u!1 &1878924704
 GameObject:
   m_ObjectHideFlags: 0

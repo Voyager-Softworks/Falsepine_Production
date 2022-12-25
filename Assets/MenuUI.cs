@@ -54,11 +54,6 @@ public class MenuUI : MonoBehaviour
             }
             deleteSaveButton.GetComponentInChildren<TextMeshProUGUI>().text = "Delete Save";
         }
-
-        // if nothing is selected, select play button
-        if (EventSystem.current.currentSelectedGameObject == null) {
-            EventSystem.current.SetSelectedGameObject(playButton.gameObject);
-        }
     }
 
     void PlayGame() {

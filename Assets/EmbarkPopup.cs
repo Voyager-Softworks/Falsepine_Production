@@ -18,15 +18,6 @@ public class EmbarkPopup : ToggleableWindow
 
     public override void Update() {
         base.Update();
-
-        // if gamepad in use, and currently selected object is not a child of this, select button
-        if (
-            CustomInputManager.LastInputWasGamepad && 
-            (EventSystem.current.currentSelectedGameObject == null || EventSystem.current.currentSelectedGameObject.activeInHierarchy == false || EventSystem.current.currentSelectedGameObject.transform.IsChildOf(transform) == false) &&
-            IsOpen()
-        ) {
-            EventSystem.current.SetSelectedGameObject(embarkButton.gameObject);
-        }
     }
 
     protected override void OnEnable() {

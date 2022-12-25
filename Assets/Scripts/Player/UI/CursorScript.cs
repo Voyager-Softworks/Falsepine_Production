@@ -18,6 +18,7 @@ public class CursorScript : MonoBehaviour
     public bool setOnStart = true;
 
     public List<Utilities.SceneField> mouseOnlyScenes;
+    public bool mouseOnly = false;
 
     // Start is called before the first frame update
     void Start()
@@ -34,14 +35,20 @@ public class CursorScript : MonoBehaviour
     void LateUpdate()
     {
         bool isMouseOnly = false;
-        foreach (Utilities.SceneField scene in mouseOnlyScenes)
-        {
-            if (scene.EqualsScene(SceneManager.GetActiveScene()))
+        if (mouseOnly){
+            isMouseOnly = true;
+        }
+        else{
+            foreach (Utilities.SceneField scene in mouseOnlyScenes)
             {
-                isMouseOnly = true;
-                break;
+                if (scene.EqualsScene(SceneManager.GetActiveScene()))
+                {
+                    isMouseOnly = true;
+                    break;
+                }
             }
         }
+        
 
         // if any menu is open, set to mouse cursor
         if (ToggleableWindow.AnyWindowOpen() || isMouseOnly)

@@ -27,9 +27,6 @@ public class TutorialPopup : MonoBehaviour
     private void OnEnable() {
         acceptButton.onClick.AddListener(OnAcceptTutorial);
         declineButton.onClick.AddListener(OnDeclineTutorial);
-
-        // select accept button
-        EventSystem.current.SetSelectedGameObject(acceptButton.gameObject);
     }
 
     private void OnDisable() {
@@ -88,7 +85,7 @@ public class TutorialPopup : MonoBehaviour
         // give player the silver
         EconomyManager.instance.AddMoney(20);
 
-        MessageManager.instance.AddMessage("Tutorial items granted!", "silver");
+        MessageManager.instance.AddMessage("Tutorial items granted!", "silver", true);
 
         // sound
         UIAudioManager.instance?.equipSound.Play();

@@ -8,25 +8,54 @@ using System;
 public class DisplayModeSetting : MonoBehaviour
 {
     public TMP_Dropdown dropdown;
+    public Slider fpsSlider;
+    public TextMeshProUGUI fpsText;
 
-    private void Awake() {
+    private void Start() {
         // get value from player prefs
         int value = PlayerPrefs.GetInt("DisplayMode", 0);
+        // set value
+        dropdown.value = value;
+        // set display mode
+        SetDisplayMode(value);
+
+        // set fps
+        fpsSlider.value = PlayerPrefs.GetInt("FPS", 60);
+        fpsText.text = "FPS: " + fpsSlider.value.ToString();
+        SetFPS((int)fpsSlider.value);
     }
 
     private void OnEnable() {
         // bind event
-        dropdown.onValueChanged.AddListener(OnValueChanged);
+        dropdown.onValueChanged.AddListener(OnDropdownChanged);
+        fpsSlider.onValueChanged.AddListener(OnSliderChanged);
     }
 
     private void OnDisable() {
         // unbind event
-        dropdown.onValueChanged.RemoveListener(OnValueChanged);
+        dropdown.onValueChanged.RemoveListener(OnDropdownChanged);
+        fpsSlider.onValueChanged.RemoveListener(OnSliderChanged);
     }
 
-    private void OnValueChanged(int value) {
+    private void OnDropdownChanged(int value) {
         // set and save value
         SetDisplayMode(value);
+    }
+
+    private void OnSliderChanged(float value) {
+        // set and save value
+        SetFPS((int)value);
+    }
+
+    public void SetFPS(int value)
+    {
+        // set fps
+        Application.targetFrameRate = value;
+        // save value to player prefs
+        PlayerPrefs.SetInt("FPS", value);
+        PlayerPrefs.Save();
+
+        fpsText.text = "FPS: " + value.ToString();
     }
 
     public void SetDisplayMode(int value)

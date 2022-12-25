@@ -80,17 +80,14 @@ public class AudioControls : MonoBehaviour
             ambienceSlider.onValueChanged.AddListener(SetAmbienceVolume);
             ambienceSlider.value = PlayerPrefs.GetFloat(ambienceVolume, 1);
         }
+
+        // close the window
+        gameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        // if gamepad in use, and currently selected object is not a child of this, select button
-        if (
-            CustomInputManager.LastInputWasGamepad && 
-            (EventSystem.current.currentSelectedGameObject == null || EventSystem.current.currentSelectedGameObject.activeInHierarchy == false || EventSystem.current.currentSelectedGameObject.transform.IsChildOf(transform) == false)
-        ) {
-            EventSystem.current.SetSelectedGameObject(masterSlider.gameObject);
-        }
+        
     }
 }

@@ -396,8 +396,12 @@ public class InfoBox : MonoBehaviour
                 MedkitEquipment medkit = prefab.GetComponentInChildren<MedkitEquipment>();
                 
                 // health
-                // float calcHeal = StatsManager.CalculateHeal(medkit, medkit.m_heal);
-                newDesc += "Heal Amount: " + medkit.healAmount.ToString("0.#") + "\n";
+                float calcHeal = StatsManager.CalculateHealAmount(equipment, medkit.healAmount);
+                float healDifference = calcHeal - medkit.healAmount;
+                string healModString = healDifference != 0 ? " (" + StatsManager.SignedFloatString(healDifference) + ")" : "";
+                // red for negative, green for positive, none for 0
+                string calcWithColor = healDifference > 0 ? "<color=\"green\">" + calcHeal.ToString("0.#") + "</color>" : healDifference < 0 ? "<color=\"red\">" + calcHeal.ToString("0.#") + "</color>" : calcHeal.ToString("0.#");
+                newDesc += "Heal Amount: " + calcWithColor + healModString + "\n";
             }
             // dynamite
             else if (prefab.GetComponentInChildren<Dynamite>()){

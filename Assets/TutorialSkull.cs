@@ -8,6 +8,7 @@ using TMPro;
 /// </summary>
 public class TutorialSkull : MonoBehaviour
 {
+    [TextArea(3, 10)]
     public string[] tutorialText;
     string currText;
 
