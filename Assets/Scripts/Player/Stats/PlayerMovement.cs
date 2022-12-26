@@ -767,6 +767,8 @@ public class PlayerMovement : MonoBehaviour
     /// @deprecated Gamepad Input is no longer maintained and is currently not supported. It may be added back in the future.
     public Vector3 GetGamepadAimPoint()
     {
+        if (Gamepad.current == null) return Vector3.zero;
+
         PlayerInventoryInterface pii = GetComponent<PlayerInventoryInterface>();
         if (!pii) return Vector3.zero;
         GameObject _aimZone = pii.m_aimZone?.gameObject;

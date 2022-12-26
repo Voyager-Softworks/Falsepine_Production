@@ -60,7 +60,7 @@ public class ClickableObject : MonoBehaviour
         if (m_canBeClicked && colliders != null)
         {
             if (
-                (Mouse.current.leftButton.wasPressedThisFrame || Gamepad.current.rightTrigger.wasPressedThisFrame || Gamepad.current.buttonSouth.wasPressedThisFrame) && 
+                (Mouse.current.leftButton.wasPressedThisFrame || (CustomInputManager.LastInputWasGamepad && (Gamepad.current.rightTrigger.wasPressedThisFrame || Gamepad.current.buttonSouth.wasPressedThisFrame))) && 
                 CheckMouseOver()
             )
             {

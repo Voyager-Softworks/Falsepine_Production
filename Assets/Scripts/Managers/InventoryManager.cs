@@ -85,7 +85,7 @@ public class InventoryManager : MonoBehaviour
         {
             if (item != null)
             {
-                StatsManager.instance.AchievementItemOwned(item);
+                StatsManager.instance?.AchievementItemOwned(item);
             }
         }
 

@@ -32,10 +32,6 @@ public class JournalManager : ToggleableWindow
 
     public static JournalManager instance;
 
-    [Header("Keys")]
-    public InputAction openJournalAction;
-    public InputAction closeAction;
-
     [Header("Sounds")]
     public AudioClip openJournalSound;
     public AudioClip addInfoSound;
@@ -85,43 +81,49 @@ public class JournalManager : ToggleableWindow
             //do not destroy this object
             DontDestroyOnLoad(this);
 
-            LoadJournal(SaveManager.currentSaveSlot);
-
-            //add listeners to the buttons
-            foreach (ContentsLink link in contentsLinks)
-            {
-                link.button?.onClick.AddListener(() =>
-                {
-                    OpenContents(link.contents);
-                    link.button.interactable = false;
-                });
-            }
-
-            // HUD button
-            if (m_HUDButton != null)
-            {
-                m_HUDButton.onClick.AddListener(() =>
-                {
-                    m_showHUDConditions = !m_showHUDConditions;
-
-                    // set color
-                    //m_HUDButton.image.color = m_showHUDConditions ? Color.green : Color.white;
-
-                    // update Tracking button
-                    UpdateTrackingButton();
-                });
-
-                // update tracking button
-                UpdateTrackingButton();
-            }
-
-            // update all content
-            UpdateAllContent();
+            //LoadJournal(SaveManager.currentSaveSlot);
         }
         else
         {
             Destroy(this);
             Destroy(gameObject);
+        }
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        _audioSource = GetComponent<AudioSource>();
+
+        // update all content
+        UpdateAllContent();
+
+        //add listeners to the buttons
+        foreach (ContentsLink link in contentsLinks)
+        {
+            link.button?.onClick.AddListener(() =>
+            {
+                OpenContents(link.contents);
+                link.button.interactable = false;
+            });
+        }
+
+        // HUD button
+        if (m_HUDButton != null)
+        {
+            m_HUDButton.onClick.AddListener(() =>
+            {
+                m_showHUDConditions = !m_showHUDConditions;
+
+                // set color
+                //m_HUDButton.image.color = m_showHUDConditions ? Color.green : Color.white;
+
+                // update Tracking button
+                UpdateTrackingButton();
+            });
+
+            // update tracking button
+            UpdateTrackingButton();
         }
     }
 
@@ -212,24 +214,14 @@ public class JournalManager : ToggleableWindow
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        _audioSource = GetComponent<AudioSource>();
-    }
-
     
 
     protected override void OnEnable() {
         base.OnEnable();
-
-        openJournalAction.Enable();
     }
 
     protected override void OnDisable() {
         base.OnDisable();
-        
-        openJournalAction.Disable();
     }
 
     // Update is called once per frame
@@ -237,7 +229,7 @@ public class JournalManager : ToggleableWindow
     {   
         base.Update();
 
-        if (openJournalAction.WasPressedThisFrame() || (CustomInputManager.LastInputWasGamepad && Gamepad.current.dpad.up.wasPressedThisFrame))
+        if (Keyboard.current.jKey.wasPressedThisFrame || (CustomInputManager.LastInputWasGamepad && Gamepad.current.dpad.up.wasPressedThisFrame))
         {
             // get console window
             Console consoleWindow = FindObjectOfType<Console>();
