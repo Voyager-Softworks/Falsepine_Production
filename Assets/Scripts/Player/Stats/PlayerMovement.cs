@@ -775,6 +775,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 rightStick = Gamepad.current.rightStick.ReadValue();
         //Get the direction of the right stick
         Vector3 rightStickDir = rightStick.x * camRight + rightStick.y * camForward;
+        rightStickDir.y = 0f;
 
         Vector3 aimPoint = rightStickDir * 10f + transform.position;
         aimPoint.y = _aimZone.transform.position.y;

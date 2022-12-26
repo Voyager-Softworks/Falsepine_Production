@@ -568,7 +568,7 @@ public class PlayerInventoryInterface : MonoBehaviour
 
                 throwLight.SetActive(true);
                 float y = throwLight.transform.position.y;
-                throwLight.transform.position = GetThrowPoint(m_currentlyThrowingItem.GetComponentInChildren<ItemThrow>());
+                throwLight.transform.position = GetThrowPoint(m_currentlyThrowingItem);
                 throwLight.transform.position = new Vector3(throwLight.transform.position.x, y, throwLight.transform.position.z);
 
                 // stop reloading
@@ -581,7 +581,12 @@ public class PlayerInventoryInterface : MonoBehaviour
 
             // make player look at cursor
             PlayerMovement playerMovement = GetComponent<PlayerMovement>();
-            playerMovement.SetLookDirection(playerMovement.GetMouseAimPlanePoint() - transform.position);
+            if (CustomInputManager.LastInputWasGamepad){
+                playerMovement.SetLookDirection(playerMovement.GetGamepadAimPoint() - transform.position);
+            }
+            else{
+                playerMovement.SetLookDirection(playerMovement.GetMouseAimPlanePoint() - transform.position);
+            }
 
             // if animator is not playing throw animation, throw item
             if (playerAnimator.GetBool("Throw") == false && !playerAnimator.GetCurrentAnimatorStateInfo(2).IsName("ThrowReady") && !playerAnimator.GetCurrentAnimatorStateInfo(2).IsName("DoThrow"))
