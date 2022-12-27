@@ -142,7 +142,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
 
     public int m_playerSilver = 0;
 
-    public int m_maxStoreItems = 10;
+    public int m_maxStoreItems = 50;
 
     [Header("Bank")]
     public int m_bankLevel = 0;
@@ -162,7 +162,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
         public List<PurchasableItem.PurchasableItem_Serializable> purchasableItems = new List<PurchasableItem.PurchasableItem_Serializable>();
         public int m_playerSilver = 0;
         public int m_bankLevel = 0;
-        public int m_maxStoreItems = 0;
+        // public int m_maxStoreItems = 0;
     }
 
     void Awake()
@@ -402,7 +402,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
         }
         data.m_playerSilver = m_playerSilver;
         data.m_bankLevel = m_bankLevel;
-        data.m_maxStoreItems = m_maxStoreItems;
+        // data.m_maxStoreItems = m_maxStoreItems;
 
         StreamWriter writer = new StreamWriter(file);
 
@@ -444,7 +444,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
         }
         m_playerSilver = data.m_playerSilver;
         m_bankLevel = data.m_bankLevel;
-        m_maxStoreItems = data.m_maxStoreItems;
+        // m_maxStoreItems = data.m_maxStoreItems;
 
         reader.Close();
 
@@ -482,7 +482,7 @@ public class EconomyManager : MonoBehaviour, StatsManager.UsesStats
 
         // retain bank level, purchasable items, and max store items
         m_bankLevel = data.m_bankLevel;
-        m_maxStoreItems = data.m_maxStoreItems;
+        // m_maxStoreItems = data.m_maxStoreItems;
         m_purchasableItems = new List<PurchasableItem>();
         foreach (PurchasableItem.PurchasableItem_Serializable item in data.purchasableItems)
         {
